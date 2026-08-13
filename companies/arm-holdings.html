@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARM Holdings plc — Investment Case Dashboard</title>
+<style>
+  :root{
+    --bg:#0a0f1c; --panel:#111a2e; --panel2:#0e1626; --border:#1f2b45;
+    --text:#e7ecf5; --muted:#8fa0c0; --muted2:#647394;
+    --teal:#2dd4bf; --amber:#f5a623; --red:#ef4a5f; --green:#33c17a; --blue:#5b8def; --purple:#9d7bea;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--text);
+    font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  .page{ max-width:1080px; margin:0 auto; padding:40px 36px; border-bottom:1px dashed var(--border);}
+  @media print{ .page{ page-break-after:always; border-bottom:none; } }
+  .kicker{ color:var(--teal); letter-spacing:2.5px; font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:6px;}
+  h1{ font-size:34px; margin:0 0 4px 0; font-weight:800; letter-spacing:-0.5px;}
+  h2{ font-size:20px; margin:0 0 18px 0; font-weight:700; display:flex; align-items:center; gap:10px;}
+  h2 .num{ background:var(--teal); color:#04241f; width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .sub{ color:var(--muted); font-size:14px; margin-bottom:28px;}
+  .grid{ display:grid; gap:16px;}
+  .grid-4{ grid-template-columns:repeat(4,1fr);}
+  .grid-3{ grid-template-columns:repeat(3,1fr);}
+  .grid-2{ grid-template-columns:repeat(2,1fr);}
+  .card{ background:linear-gradient(180deg,var(--panel),var(--panel2)); border:1px solid var(--border); border-radius:14px; padding:18px 20px;}
+  .stat-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:600;}
+  .stat-value{ font-size:26px; font-weight:800;}
+  .stat-sub{ font-size:12px; color:var(--muted2); margin-top:4px;}
+  .pill{ display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700;}
+  .pill-amber{ background:rgba(245,166,35,.15); color:var(--amber); border:1px solid rgba(245,166,35,.4);}
+  .pill-gray{ background:rgba(143,160,192,.15); color:var(--muted); border:1px solid rgba(143,160,192,.35);}
+  .header-row{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; flex-wrap:wrap; gap:16px;}
+  .price-box{ text-align:right;}
+  .price{ font-size:38px; font-weight:800;}
+  .ticker-tag{ background:var(--panel); border:1px solid var(--border); padding:4px 12px; border-radius:8px; font-size:12px; color:var(--muted); font-weight:700; letter-spacing:1px;}
+  .score-wrap{ display:flex; gap:28px; align-items:center;}
+  .score-ring{ position:relative; width:150px; height:150px; flex:0 0 150px;}
+  .score-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .score-num{ font-size:32px; font-weight:800;}
+  .score-txt{ font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;}
+  .legend-dot{ width:10px; height:10px; border-radius:3px; display:inline-block; margin-right:8px; flex:0 0 10px;}
+  .legend-item{ display:flex; align-items:center; font-size:13px; color:var(--muted); margin-bottom:8px;}
+  .chart-box{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:18px;}
+  .chart-title{ font-size:13px; font-weight:700; margin-bottom:2px;}
+  .chart-note{ font-size:11px; color:var(--muted2); margin-bottom:14px;}
+  .legend-row{ display:flex; gap:20px; flex-wrap:wrap; margin-bottom:10px;}
+  .legend-row span{ display:inline-flex; align-items:center; font-size:12px; color:var(--muted);}
+  table{ width:100%; border-collapse:collapse; font-size:13px;}
+  th{ text-align:left; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px; padding:8px 10px; border-bottom:1px solid var(--border);}
+  td{ padding:9px 10px; border-bottom:1px solid var(--border);}
+  tr:last-child td{ border-bottom:none;}
+  .flag-box{ border-left:3px solid var(--amber); background:rgba(245,166,35,.08); padding:14px 18px; border-radius:0 10px 10px 0; margin-top:14px; font-size:13px; line-height:1.55;}
+  .flag-box b{ color:var(--amber);}
+  .callout{ background:linear-gradient(135deg,rgba(91,141,239,.14),rgba(45,212,191,.10)); border:1px solid rgba(91,141,239,.35); border-radius:14px; padding:20px 22px; margin-bottom:20px;}
+  .callout h3{ margin:0 0 8px 0; font-size:15px; color:var(--blue);}
+  .callout p{ margin:0; font-size:13px; color:var(--muted); line-height:1.6;}
+  .footer{ font-size:11px; color:var(--muted2); text-align:center; padding:24px; line-height:1.7;}
+  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .thesis{ font-size:15px; line-height:1.65; margin:18px 0 6px 0;}
+  .crit-table td.status{ font-weight:700;}
+  .status-met{ color:var(--green);}
+  .status-not{ color:var(--red);}
+  .status-mix{ color:var(--amber);}
+  .status-na{ color:var(--muted2);}
+  .foundershare{ display:flex; align-items:center; gap:18px;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="header-row">
+    <div>
+      <div class="kicker">Investment Case · Semiconductor IP / AI Compute Architecture</div>
+      <h1>Arm Holdings plc</h1>
+      <span class="ticker-tag">NASDAQ: ARM</span>
+      <div class="badge-row">
+        <span class="pill pill-gray">FY ends Mar 31</span>
+        <span class="pill pill-gray">IPO Sept 2023</span>
+        <span class="pill pill-amber">SoftBank ~87% owned</span>
+      </div>
+    </div>
+    <div class="price-box">
+      <div class="price">$274.58</div>
+      <div class="stat-sub">Close Aug 5, 2026 · Mkt cap ≈ $294B</div>
+    </div>
+  </div>
+
+  <div class="grid grid-4">
+    <div class="card"><div class="stat-label">Revenue (FY26)</div><div class="stat-value">$4.92B</div><div class="stat-sub">+22.8% YoY</div></div>
+    <div class="card"><div class="stat-label">Operating Margin (FY26)</div><div class="stat-value">18.3%</div><div class="stat-sub">below 20% screen bar</div></div>
+    <div class="card"><div class="stat-label">ROIC vs WACC</div><div class="stat-value" style="color:var(--red)">14.2% / 25.9%</div><div class="stat-sub">Return earned on capital in the business vs. what that capital costs — value is only created when ROIC &gt; WACC. Here it isn't (yet). Both are third-party derived estimates, not filed figures — indicative only.</div></div>
+    <div class="card"><div class="stat-label">Net Cash</div><div class="stat-value" style="color:var(--green)">$3.4B</div><div class="stat-sub">0.43x debt/EBITDA</div></div>
+  </div>
+
+  <div class="chart-box" style="margin-top:20px;">
+    <div class="score-wrap">
+      <div class="score-ring"><svg viewBox="0 0 150 150" style="width:150px;height:150px;">
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#33c17a" stroke-width="27.0" stroke-dasharray="193.21 386.42" stroke-dashoffset="96.60" transform="rotate(-90 75.0 75.0)"/>
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#ef4a5f" stroke-width="27.0" stroke-dasharray="161.01 386.42" stroke-dashoffset="-96.60" transform="rotate(-90 75.0 75.0)"/>
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#647394" stroke-width="27.0" stroke-dasharray="32.20 386.42" stroke-dashoffset="-257.61" transform="rotate(-90 75.0 75.0)"/>
+</svg><div class="score-center"><div class="score-num">6/11</div><div class="score-txt">Criteria Met</div></div></div>
+      <div style="flex:1;">
+        <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Met — 6 (revenue CAGR, FCF CAGR, market share, net cash, FCF conversion, capex intensity)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>Not met — 5 (EBIT CAGR, EBIT margin, ROIC/WACC, share count, insider ownership)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--muted2)"></span>N/A — 1 (entry multiple — insufficient trading history)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Market concentration score: <b style="color:var(--amber); margin-left:4px;">2 / 5</b> — dominant today, but RISC-V is a funded, structural challenger</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="thesis">Arm is the near-monopoly architecture licensor behind 99% of smartphone CPUs, now pushing into AI datacenter compute (Neoverse, CSS, and its first in-house chip, the Arm AGI CPU, due H2 2026). Q1 FY2027 delivered record revenue on accelerating royalty growth from AI infrastructure. The model's own numbers say: real growth and cash generation, but profitability hasn't caught up yet, ROIC still trails its unusually high cost of capital, and the business is majority-controlled by an external parent (SoftBank) rather than founder-aligned management.</p>
+
+  <div class="flag-box"><b>Correction from earlier screen:</b> the revenue 5Y CAGR previously quoted (12.7%) used a 5-year divisor over what is actually a 4-year span (FY22→FY26). Recalculated correctly it's <b>16.2%</b> — above the 15% bar, flipping criterion #1 to Met. EBIT and FCF CAGRs are also restated below on the correct 4-year basis.</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <h2><span class="num">2</span>Five-Year Annual Financials (FY2022–FY2026)</h2>
+  <div class="sub">All figures in USD millions, fiscal year ending March 31. CAGR computed FY22→FY26 (4-year span).</div>
+
+  <div class="chart-box">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow — Annual</div>
+    <div class="chart-note">FY2024 EBIT dip driven by a one-off spike in stock-based compensation around the IPO, not a demand problem.</div>
+    <div class="legend-row"><span><span class="legend-dot" style="background:var(--teal)"></span>Revenue</span><span><span class="legend-dot" style="background:var(--blue)"></span>EBIT</span><span><span class="legend-dot" style="background:var(--amber)"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="242.0" x2="940" y2="242.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="246.0" fill="#8fa0c0" font-size="11" text-anchor="end">$0M</text>
+<line x1="70" y1="196.4" x2="940" y2="196.4" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="200.4" fill="#8fa0c0" font-size="11" text-anchor="end">$1,000M</text>
+<line x1="70" y1="150.8" x2="940" y2="150.8" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="154.8" fill="#8fa0c0" font-size="11" text-anchor="end">$2,000M</text>
+<line x1="70" y1="105.2" x2="940" y2="105.2" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="109.2" fill="#8fa0c0" font-size="11" text-anchor="end">$3,000M</text>
+<line x1="70" y1="59.6" x2="940" y2="59.6" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="63.6" fill="#8fa0c0" font-size="11" text-anchor="end">$4,000M</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">$5,000M</text>
+<text x="157.0" y="262" fill="#8fa0c0" font-size="12" text-anchor="middle">FY22</text>
+<text x="331.0" y="262" fill="#8fa0c0" font-size="12" text-anchor="middle">FY23</text>
+<text x="505.0" y="262" fill="#8fa0c0" font-size="12" text-anchor="middle">FY24</text>
+<text x="679.0" y="262" fill="#8fa0c0" font-size="12" text-anchor="middle">FY25</text>
+<text x="853.0" y="262" fill="#8fa0c0" font-size="12" text-anchor="middle">FY26</text>
+<rect x="94.4" y="118.7" width="38.8" height="123.3" rx="4" fill="#2dd4bf"/>
+<rect x="136.1" y="213.1" width="38.8" height="28.9" rx="4" fill="#5b8def"/>
+<rect x="177.9" y="222.7" width="38.8" height="19.3" rx="4" fill="#f5a623"/>
+<rect x="268.4" y="119.8" width="38.8" height="122.2" rx="4" fill="#2dd4bf"/>
+<rect x="310.1" y="211.4" width="38.8" height="30.6" rx="4" fill="#5b8def"/>
+<rect x="351.9" y="211.2" width="38.8" height="30.8" rx="4" fill="#f5a623"/>
+<rect x="442.4" y="94.6" width="38.8" height="147.4" rx="4" fill="#2dd4bf"/>
+<rect x="484.1" y="236.9" width="38.8" height="5.1" rx="4" fill="#5b8def"/>
+<rect x="525.9" y="196.5" width="38.8" height="45.5" rx="4" fill="#f5a623"/>
+<rect x="616.4" y="59.3" width="38.8" height="182.7" rx="4" fill="#2dd4bf"/>
+<rect x="658.1" y="204.1" width="38.8" height="37.9" rx="4" fill="#5b8def"/>
+<rect x="699.9" y="233.9" width="38.8" height="8.1" rx="4" fill="#f5a623"/>
+<rect x="790.4" y="17.6" width="38.8" height="224.4" rx="4" fill="#2dd4bf"/>
+<rect x="832.1" y="201.0" width="38.8" height="41.0" rx="4" fill="#5b8def"/>
+<rect x="873.9" y="197.4" width="38.8" height="44.6" rx="4" fill="#f5a623"/>
+</svg>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card"><div class="stat-label">Revenue CAGR</div><div class="stat-value" style="color:var(--green)">+16.2%</div><div class="stat-sub">$2,703M → $4,920M</div></div>
+    <div class="card"><div class="stat-label">EBIT CAGR</div><div class="stat-value" style="color:var(--red)">+9.2%</div><div class="stat-sub">$633M → $900M</div></div>
+    <div class="card"><div class="stat-label">FCF CAGR</div><div class="stat-value" style="color:var(--green)">+23.3%</div><div class="stat-sub">$424M → $979M</div></div>
+  </div>
+
+  <div class="chart-box" style="margin-top:18px;">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-note">20% screen threshold shown as dashed reference line — FY26 sits just below it.</div>
+    <svg viewBox="0 0 960 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="202.0" x2="940" y2="202.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="206.0" fill="#8fa0c0" font-size="11" text-anchor="end">0%</text>
+<line x1="70" y1="164.4" x2="940" y2="164.4" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="168.4" fill="#8fa0c0" font-size="11" text-anchor="end">5%</text>
+<line x1="70" y1="126.8" x2="940" y2="126.8" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="130.8" fill="#8fa0c0" font-size="11" text-anchor="end">10%</text>
+<line x1="70" y1="89.2" x2="940" y2="89.2" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="93.2" fill="#8fa0c0" font-size="11" text-anchor="end">15%</text>
+<line x1="70" y1="51.6" x2="940" y2="51.6" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="55.6" fill="#8fa0c0" font-size="11" text-anchor="end">20%</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">25%</text>
+<text x="157.0" y="218" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 157.0 218)">FY22</text>
+<text x="331.0" y="218" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 331.0 218)">FY23</text>
+<text x="505.0" y="218" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 505.0 218)">FY24</text>
+<text x="679.0" y="218" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 679.0 218)">FY25</text>
+<text x="853.0" y="218" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 853.0 218)">FY26</text>
+<line x1="70" y1="51.6" x2="940" y2="51.6" stroke="#647394" stroke-width="1.5" stroke-dasharray="6 6"/>
+<text x="936" y="45.6" fill="#647394" font-size="11" text-anchor="end">20% screen threshold</text>
+<polygon points="157.0,202.0 157.0,26.0 331.0,14.0 505.0,176.4 679.0,46.3 853.0,64.4 853.0,202.0" fill="#2dd4bf" opacity="0.13"/>
+<polyline points="157.0,26.0 331.0,14.0 505.0,176.4 679.0,46.3 853.0,64.4" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="157.0" cy="26.0" r="4" fill="#2dd4bf" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="331.0" cy="14.0" r="4" fill="#2dd4bf" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="505.0" cy="176.4" r="4" fill="#2dd4bf" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="679.0" cy="46.3" r="4" fill="#2dd4bf" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="853.0" cy="64.4" r="4" fill="#2dd4bf" stroke="#111a2e" stroke-width="1.5"/>
+</svg>
+  </div>
+
+  <table>
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT</th><th>Op. Margin</th><th>Free Cash Flow</th><th>Net Income</th></tr>
+    <tr><td>FY2022</td><td>$2,703M</td><td>$633M</td><td>23.4%</td><td>$424M</td><td>$549M</td></tr>
+    <tr><td>FY2023</td><td>$2,679M</td><td>$671M</td><td>25.0%</td><td>$675M</td><td>$524M</td></tr>
+    <tr><td>FY2024</td><td>$3,233M</td><td>$111M</td><td>3.4%</td><td>$998M</td><td>$306M</td></tr>
+    <tr><td>FY2025</td><td>$4,007M</td><td>$831M</td><td>20.7%</td><td>$178M</td><td>$792M</td></tr>
+    <tr><td>FY2026</td><td>$4,920M</td><td>$900M</td><td>18.3%</td><td>$979M</td><td>$904M</td></tr>
+  </table>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <h2><span class="num">3</span>Quarterly Development — Latest Results</h2>
+  <div class="sub">Last 8 fiscal quarters through Q1 FY2027 (quarter ended June 30, 2026, reported July 29, 2026).</div>
+
+  <div class="callout">
+    <h3>Q1 FY2027 Headlines</h3>
+    <p>Record quarterly revenue of <b>$1,289M</b>, +22% YoY. Royalty revenue +22% to $715M (data-center royalties more than doubled); licensing +23% to $574M on Armv9/CSS adoption. Net income $270M ($0.25 GAAP EPS, $0.45 adj.). Guidance: Q2 FY27 revenue $1.38B ±$50M. Management reiterated a ~$25B revenue target by FY2031.</p>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Revenue Mix — License vs. Royalty (quarterly)</div>
+    <div class="chart-note">Royalty = recurring, tied to chip shipments already using Arm IP. License = new design-win bookings, lumpier.</div>
+    <div class="legend-row"><span><span class="legend-dot" style="background:var(--blue)"></span>License &amp; Other</span><span><span class="legend-dot" style="background:var(--teal)"></span>Royalty</span></div>
+    <svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="242.0" x2="940" y2="242.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="246.0" fill="#8fa0c0" font-size="11" text-anchor="end">$0M</text>
+<line x1="70" y1="166.0" x2="940" y2="166.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="170.0" fill="#8fa0c0" font-size="11" text-anchor="end">$500M</text>
+<line x1="70" y1="90.0" x2="940" y2="90.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="94.0" fill="#8fa0c0" font-size="11" text-anchor="end">$1,000M</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">$1,500M</text>
+<text x="124.4" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 124.4 258)">Q2 FY25</text>
+<text x="233.1" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 233.1 258)">Q3 FY25</text>
+<text x="341.9" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 341.9 258)">Q4 FY25</text>
+<text x="450.6" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 450.6 258)">Q1 FY26</text>
+<text x="559.4" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 559.4 258)">Q2 FY26</text>
+<text x="668.1" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 668.1 258)">Q3 FY26</text>
+<text x="776.9" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 776.9 258)">Q4 FY26</text>
+<text x="885.6" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 885.6 258)">Q1 FY27</text>
+<rect x="91.8" y="191.8" width="65.2" height="50.2" rx="3" fill="#5b8def"/>
+<rect x="91.8" y="113.7" width="65.2" height="78.1" rx="3" fill="#2dd4bf"/>
+<rect x="200.5" y="180.7" width="65.2" height="61.3" rx="3" fill="#5b8def"/>
+<rect x="200.5" y="92.6" width="65.2" height="88.2" rx="3" fill="#2dd4bf"/>
+<rect x="309.2" y="145.6" width="65.2" height="96.4" rx="3" fill="#5b8def"/>
+<rect x="309.2" y="53.4" width="65.2" height="92.3" rx="3" fill="#2dd4bf"/>
+<rect x="418.0" y="170.9" width="65.2" height="71.1" rx="3" fill="#5b8def"/>
+<rect x="418.0" y="81.9" width="65.2" height="88.9" rx="3" fill="#2dd4bf"/>
+<rect x="526.8" y="163.7" width="65.2" height="78.3" rx="3" fill="#5b8def"/>
+<rect x="526.8" y="69.5" width="65.2" height="94.2" rx="3" fill="#2dd4bf"/>
+<rect x="635.5" y="165.2" width="65.2" height="76.8" rx="3" fill="#5b8def"/>
+<rect x="635.5" y="53.2" width="65.2" height="112.0" rx="3" fill="#2dd4bf"/>
+<rect x="744.2" y="117.5" width="65.2" height="124.5" rx="3" fill="#5b8def"/>
+<rect x="744.2" y="15.5" width="65.2" height="102.0" rx="3" fill="#2dd4bf"/>
+<rect x="853.0" y="154.8" width="65.2" height="87.2" rx="3" fill="#5b8def"/>
+<rect x="853.0" y="46.1" width="65.2" height="108.7" rx="3" fill="#2dd4bf"/>
+</svg>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Revenue YoY Growth % — with trendline</div>
+    <div class="legend-row"><span><span class="legend-dot" style="background:var(--green)"></span>YoY growth</span><span><span class="legend-dot" style="background:var(--muted2)"></span>Linear trend (dashed)</span></div>
+    <svg viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="222.0" x2="940" y2="222.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="226.0" fill="#8fa0c0" font-size="11" text-anchor="end">0%</text>
+<line x1="70" y1="170.0" x2="940" y2="170.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="174.0" fill="#8fa0c0" font-size="11" text-anchor="end">10%</text>
+<line x1="70" y1="118.0" x2="940" y2="118.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="122.0" fill="#8fa0c0" font-size="11" text-anchor="end">20%</text>
+<line x1="70" y1="66.0" x2="940" y2="66.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="70.0" fill="#8fa0c0" font-size="11" text-anchor="end">30%</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">40%</text>
+<text x="124.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 124.4 238)">Q2 FY25</text>
+<text x="233.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 233.1 238)">Q3 FY25</text>
+<text x="341.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 341.9 238)">Q4 FY25</text>
+<text x="450.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 450.6 238)">Q1 FY26</text>
+<text x="559.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 559.4 238)">Q2 FY26</text>
+<text x="668.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 668.1 238)">Q3 FY26</text>
+<text x="776.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 776.9 238)">Q4 FY26</text>
+<text x="885.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 885.6 238)">Q1 FY27</text>
+<polygon points="124.4,222.0 124.4,197.6 233.1,121.6 341.9,46.8 450.6,159.1 559.4,42.6 668.1,85.2 776.9,117.5 885.6,105.5 885.6,222.0" fill="#33c17a" opacity="0.13"/>
+<polyline points="124.4,197.6 233.1,121.6 341.9,46.8 450.6,159.1 559.4,42.6 668.1,85.2 776.9,117.5 885.6,105.5" fill="none" stroke="#33c17a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="124.4" cy="197.6" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="233.1" cy="121.6" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="341.9" cy="46.8" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="450.6" cy="159.1" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="559.4" cy="42.6" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="668.1" cy="85.2" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="776.9" cy="117.5" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="885.6" cy="105.5" r="4" fill="#33c17a" stroke="#111a2e" stroke-width="1.5"/>
+<polyline points="124.4,137.2 233.1,129.3 341.9,121.4 450.6,113.5 559.4,105.5 668.1,97.6 776.9,89.7 885.6,81.7" fill="none" stroke="#647394" stroke-width="2" stroke-dasharray="7 5" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Operating Margin % (quarterly) — with trendline</div>
+    <div class="legend-row"><span><span class="legend-dot" style="background:var(--amber)"></span>Operating margin</span><span><span class="legend-dot" style="background:var(--muted2)"></span>Linear trend (dashed)</span></div>
+    <svg viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="222.0" x2="940" y2="222.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="226.0" fill="#8fa0c0" font-size="11" text-anchor="end">0%</text>
+<line x1="70" y1="170.0" x2="940" y2="170.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="174.0" fill="#8fa0c0" font-size="11" text-anchor="end">10%</text>
+<line x1="70" y1="118.0" x2="940" y2="118.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="122.0" fill="#8fa0c0" font-size="11" text-anchor="end">20%</text>
+<line x1="70" y1="66.0" x2="940" y2="66.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="70.0" fill="#8fa0c0" font-size="11" text-anchor="end">30%</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">40%</text>
+<text x="124.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 124.4 238)">Q2 FY25</text>
+<text x="233.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 233.1 238)">Q3 FY25</text>
+<text x="341.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 341.9 238)">Q4 FY25</text>
+<text x="450.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 450.6 238)">Q1 FY26</text>
+<text x="559.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 559.4 238)">Q2 FY26</text>
+<text x="668.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 668.1 238)">Q3 FY26</text>
+<text x="776.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 776.9 238)">Q4 FY26</text>
+<text x="885.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 885.6 238)">Q1 FY27</text>
+<polygon points="124.4,222.0 124.4,182.6 233.1,129.4 341.9,50.2 450.6,165.7 559.4,147.3 668.1,144.5 776.9,69.1 885.6,185.3 885.6,222.0" fill="#f5a623" opacity="0.13"/>
+<polyline points="124.4,182.6 233.1,129.4 341.9,50.2 450.6,165.7 559.4,147.3 668.1,144.5 776.9,69.1 885.6,185.3" fill="none" stroke="#f5a623" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="124.4" cy="182.6" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="233.1" cy="129.4" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="341.9" cy="50.2" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="450.6" cy="165.7" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="559.4" cy="147.3" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="668.1" cy="144.5" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="776.9" cy="69.1" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="885.6" cy="185.3" r="4" fill="#f5a623" stroke="#111a2e" stroke-width="1.5"/>
+<polyline points="124.4,135.0 233.1,134.8 341.9,134.6 450.6,134.4 559.4,134.2 668.1,133.9 776.9,133.7 885.6,133.5" fill="none" stroke="#647394" stroke-width="2" stroke-dasharray="7 5" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+  </div>
+
+  <div class="flag-box"><b>Pattern to note:</b> operating margin swings hard quarter to quarter (7–33%) on stock-based comp and R&amp;D timing — Q4 is consistently the strongest margin quarter, Q1 consistently the weakest. Don't read one quarter's margin as a trend; look at the 4-quarter pattern.</div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <h2><span class="num">4</span>Valuation, Balance Sheet &amp; Ownership</h2>
+  <div class="sub">Entry-multiple criterion is marked N/A on the model — under 3 years of public trading history means there's no reliable "own average" to compare against yet. Shown here for context only, not as a pass/fail.</div>
+
+  <div class="chart-box">
+    <div class="chart-title">Trailing P/E &amp; P/FCF — Quarterly, at quarter-end close</div>
+    <div class="chart-note">No stable baseline exists pre-IPO. Current multiples are elevated in absolute terms regardless of trend.</div>
+    <div class="legend-row"><span><span class="legend-dot" style="background:var(--purple)"></span>P/E (trailing)</span><span><span class="legend-dot" style="background:var(--blue)"></span>P/FCF</span><span><span class="legend-dot" style="background:var(--purple)"></span>P/E trend (dashed)</span></div>
+    <svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="242.0" x2="940" y2="242.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="246.0" fill="#8fa0c0" font-size="11" text-anchor="end">0x</text>
+<line x1="70" y1="185.0" x2="940" y2="185.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="189.0" fill="#8fa0c0" font-size="11" text-anchor="end">200x</text>
+<line x1="70" y1="128.0" x2="940" y2="128.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="132.0" fill="#8fa0c0" font-size="11" text-anchor="end">400x</text>
+<line x1="70" y1="71.0" x2="940" y2="71.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="75.0" fill="#8fa0c0" font-size="11" text-anchor="end">600x</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">800x</text>
+<text x="124.4" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 124.4 258)">Q2 FY25</text>
+<text x="233.1" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 233.1 258)">Q3 FY25</text>
+<text x="341.9" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 341.9 258)">Q4 FY25</text>
+<text x="450.6" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 450.6 258)">Q1 FY26</text>
+<text x="559.4" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 559.4 258)">Q2 FY26</text>
+<text x="668.1" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 668.1 258)">Q3 FY26</text>
+<text x="776.9" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 776.9 258)">Q4 FY26</text>
+<text x="885.6" y="258" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 885.6 258)">Q1 FY27</text>
+<polyline points="124.4,174.1 233.1,195.7 341.9,201.4 450.6,172.2 559.4,190.3 668.1,200.5 776.9,191.3 885.6,137.8" fill="none" stroke="#9d7bea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="124.4" cy="174.1" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="233.1" cy="195.7" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="341.9" cy="201.4" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="450.6" cy="172.2" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="559.4" cy="190.3" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="668.1" cy="200.5" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="776.9" cy="191.3" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="885.6" cy="137.8" r="4" fill="#9d7bea" stroke="#111a2e" stroke-width="1.5"/>
+<polyline points="124.4,168.0 233.1,185.0 341.9,61.3 450.6,169.7 559.4,204.8 668.1,208.1 776.9,195.1 885.6,170.3" fill="none" stroke="#5b8def" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="124.4" cy="168.0" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="233.1" cy="185.0" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="341.9" cy="61.3" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="450.6" cy="169.7" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="559.4" cy="204.8" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="668.1" cy="208.1" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="776.9" cy="195.1" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<circle cx="885.6" cy="170.3" r="4" fill="#5b8def" stroke="#111a2e" stroke-width="1.5"/>
+<polyline points="124.4,193.8 233.1,190.7 341.9,187.6 450.6,184.5 559.4,181.4 668.1,178.2 776.9,175.1 885.6,172.0" fill="none" stroke="#9d7bea" stroke-width="2" stroke-dasharray="7 5" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Net Cash Position (quarterly, $M) — with trendline</div>
+    <svg viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+<line x1="70" y1="222.0" x2="940" y2="222.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="226.0" fill="#8fa0c0" font-size="11" text-anchor="end">$0M</text>
+<line x1="70" y1="170.0" x2="940" y2="170.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="174.0" fill="#8fa0c0" font-size="11" text-anchor="end">$1,000M</text>
+<line x1="70" y1="118.0" x2="940" y2="118.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="122.0" fill="#8fa0c0" font-size="11" text-anchor="end">$2,000M</text>
+<line x1="70" y1="66.0" x2="940" y2="66.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="70.0" fill="#8fa0c0" font-size="11" text-anchor="end">$3,000M</text>
+<line x1="70" y1="14.0" x2="940" y2="14.0" stroke="#1f2b45" stroke-width="1"/>
+<text x="62" y="18.0" fill="#8fa0c0" font-size="11" text-anchor="end">$4,000M</text>
+<text x="124.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 124.4 238)">Q2 FY25</text>
+<text x="233.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 233.1 238)">Q3 FY25</text>
+<text x="341.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 341.9 238)">Q4 FY25</text>
+<text x="450.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 450.6 238)">Q1 FY26</text>
+<text x="559.4" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 559.4 238)">Q2 FY26</text>
+<text x="668.1" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 668.1 238)">Q3 FY26</text>
+<text x="776.9" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 776.9 238)">Q4 FY26</text>
+<text x="885.6" y="238" fill="#8fa0c0" font-size="11" text-anchor="end" transform="rotate(-38 885.6 238)">Q1 FY27</text>
+<rect x="91.8" y="112.8" width="65.2" height="109.2" rx="4" fill="#33c17a"/>
+<rect x="200.5" y="96.7" width="65.2" height="125.3" rx="4" fill="#33c17a"/>
+<rect x="309.2" y="93.1" width="65.2" height="128.9" rx="4" fill="#33c17a"/>
+<rect x="418.0" y="90.4" width="65.2" height="131.6" rx="4" fill="#33c17a"/>
+<rect x="526.8" y="73.9" width="65.2" height="148.1" rx="4" fill="#33c17a"/>
+<rect x="635.5" y="60.5" width="65.2" height="161.5" rx="4" fill="#33c17a"/>
+<rect x="744.2" y="57.2" width="65.2" height="164.8" rx="4" fill="#33c17a"/>
+<rect x="853.0" y="44.0" width="65.2" height="178.0" rx="4" fill="#33c17a"/>
+<polyline points="124.4,111.6 233.1,102.2 341.9,92.7 450.6,83.3 559.4,73.8 668.1,64.4 776.9,55.0 885.6,45.5" fill="none" stroke="#2dd4bf" stroke-width="2.5" stroke-dasharray="7 5"/>
+</svg>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="foundershare">
+      <div style="width:150px; height:150px; flex:0 0 150px;"><svg viewBox="0 0 150 150" style="width:150px;height:150px;">
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#9d7bea" stroke-width="27.0" stroke-dasharray="336.18 386.42" stroke-dashoffset="96.60" transform="rotate(-90 75.0 75.0)"/>
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#5b8def" stroke-width="27.0" stroke-dasharray="50.00 386.42" stroke-dashoffset="-239.58" transform="rotate(-90 75.0 75.0)"/>
+<circle cx="75.0" cy="75.0" r="61.5" fill="none" stroke="#647394" stroke-width="27.0" stroke-dasharray="0.23 386.42" stroke-dashoffset="-289.58" transform="rotate(-90 75.0 75.0)"/>
+</svg></div>
+      <div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span>SoftBank Group ≈ 87%</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Institutions / public float ≈ 13%</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--muted2)"></span>Company insiders ≈ 0.06%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flag-box"><b>Governance note:</b> this isn't founder-alignment like a Zuckerberg or Demant-Foundation situation — SoftBank is an external corporate parent whose own capital priorities (funding other AI bets) may not always run parallel to minority shareholders'. Free float is only ~13% of shares, which also means thinner liquidity and more volatile price discovery than the market cap suggests.</div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page">
+  <h2><span class="num">5</span>13-Criterion Scorecard &amp; Key Risks</h2>
+  <div class="sub">Market concentration (#6) shown near the top per your model's ordering — it isn't pass/fail, it's a 1–5 context score.</div>
+
+  <table class="crit-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>ARM</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>≥15%</td><td>16.2%</td><td class="status status-met">Met</td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY22-26)</td><td>≥15%</td><td>9.2%</td><td class="status status-not">Not met</td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>≥20%</td><td>18.3%</td><td class="status status-not">Not met</td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>≥15%</td><td>23.3%</td><td class="status status-met">Met</td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>99% smartphone CPU</td><td class="status status-met">Met</td></tr>
+    <tr><td>6</td><td>Market concentration</td><td>1 (mono) – 5 (open)</td><td>2 — RISC-V rising</td><td class="status status-mix">Score: 2</td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC ≥15%, clears WACC</td><td>14.2% vs 25.9%</td><td class="status status-not">Not met</td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash, 0.43x</td><td class="status status-met">Met</td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>≥80%</td><td>109% (volatile)</td><td class="status status-met">Met</td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>&lt;3yrs public history</td><td class="status status-na">N/A</td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>+0.66% YoY</td><td class="status status-not">Not met</td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.06% (SoftBank ≠ insider)</td><td class="status status-not">Not met</td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>11.1%, rising</td><td class="status status-met">Met</td></tr>
+  </table>
+
+  <div class="grid grid-2" style="margin-top:22px;">
+    <div class="card">
+      <div class="stat-label" style="color:var(--green)">What's working</div>
+      <div style="font-size:13px; line-height:1.7; margin-top:8px;">Real, accelerating growth (royalties +22%, data-center royalties &gt;2x); near-monopoly in mobile; net cash balance sheet; FCF conversion recovering; low capex relative to peers.</div>
+    </div>
+    <div class="card">
+      <div class="stat-label" style="color:var(--red)">What to watch</div>
+      <div style="font-size:13px; line-height:1.7; margin-top:8px;">ROIC still below its own cost of capital; RISC-V at 25% global processor share and growing ~30%/yr, including from Arm's own licensees (Qualcomm); SoftBank control with thin 13% float; margin volatility quarter to quarter; no real valuation history to anchor against.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Data as of Aug 5, 2026. Sources: stockanalysis.com (financials, quarterly statements, valuation ratios), Arm Newsroom Q1 FYE27 results release, SEC 6-K/20-F filings, RISC-V/Qualcomm-Ventana coverage.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of ROIC, WACC and valuation averages) and function as indicators only, not as verified facts or a basis for investment decisions.<br>
+    This is a data summary generated for personal research, not financial advice — Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</section>
+
+</body>
+</html>
