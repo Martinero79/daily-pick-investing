@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const titleEl = document.getElementById("view-title");
     const openEl = document.getElementById("open-new-tab");
     if (c) {
-      document.title = c.name + " — Not a Financial Advisor";
+      document.title = c.name + " — Not Your Financial Advisor";
       if (titleEl) titleEl.textContent = c.name;
       if (openEl) openEl.href = c.file;
       frame.src = c.file;
