@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meta Platforms Investment Dashboard</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.eyebrow { color:#2dd4bf; font-size:9.5px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:27px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:10.5px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:34px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:11px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:21px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:9.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:8.3px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:11px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:11.3px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:10.3px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:17px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:10.3px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:12px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:9.1px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:9.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:20px; font-weight:700; }
+.cagr-card .sub { font-size:9.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:9.8px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:8.6px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:9.6px; }
+.status-pill { font-weight:700; font-size:9px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:10.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:9.8px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:8.2px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:12px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:10.3px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:11px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Social Media / Digital Advertising + AI Infrastructure</div>
+  <h1>Meta Platforms, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: META</span>
+    <span class="badge">FY = Calendar Year (Jan&ndash;Dec)</span>
+    <span class="badge">Founded 2004 &middot; HQ Menlo Park, CA</span>
+    <span class="badge warn">Zuckerberg: ~61% of votes on ~13% economic stake (dual-class shares)</span>
+  </div>
+  <div class="price">$599.12</div>
+  <div class="price-sub">Close Aug 11, 2026 &middot; Mkt cap &asymp; $1.53T &middot; 52-wk range $520.26&ndash;$796.25</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Alphabet/Google (Search &amp; YouTube, the other dominant digital ad platform) &middot; Amazon (fast-growing retail media ads) &middot; TikTok/ByteDance (attention share, especially with younger users)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$228.2B</div>
+      <div class="sub" style="color:#34d399;">+27.7% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (TTM)</div>
+      <div class="val">38.1%</div>
+      <div class="sub">vs 41.4% FY25 &mdash; AI-infra depreciation &amp; Q2'26 charges biting</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green">~30% / ~9.5%</div>
+      <div class="note">Return earned on capital in the business vs. what that capital costs &mdash; value is created when ROIC &gt; WACC. Spread is wide either way, but both figures are third-party derived estimates that vary a lot by provider (ROIC cited 29&ndash;37%, WACC 9&ndash;14%) &mdash; indicative only.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (Debt)</div>
+      <div class="val red">-$22.1B</div>
+      <div class="sub">0.20x TTM EBITDA &middot; flipped from +$28.8B net cash at FY24-end</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 46.98,181.10 L71.52,153.41 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M46.98,181.10 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 71.52,153.41 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 8 (EBIT CAGR, EBIT margin, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 5 (revenue CAGR, FCF CAGR, FCF conversion, capex intensity, market concentration)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; Meta, Google &amp; Amazon ~62% of global digital ad spend combined; TikTok and retail media rising fast; scores of 3&ndash;5 count as not met above</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Meta is, at its core, the highest-margin advertising business in the world wrapped around a second, far riskier bet. The Family of Apps segment (Facebook, Instagram, WhatsApp, Messenger &mdash; 3.60 billion daily active people) throws off well over $100B a year in operating profit, and that cash is funding two things at once: a Reality Labs division that has now lost roughly $88B cumulatively since 2020 ($4.62B in Q2 2026 alone, on just $431M of quarterly revenue), and an AI/data-center capex program that has exploded from $18.7B in 2021 to a guided $125&ndash;145B in 2026. Zuckerberg controls ~61% of the vote on roughly a 13% economic stake via Class B super-voting shares, so capital-allocation calls of this size &mdash; including whether Reality Labs and the AI buildout ever earn their cost of capital &mdash; ultimately rest with one person. The ads business itself is executing exceptionally well (Meta is on track to overtake Google as the single largest digital ad platform globally in 2026), but the capex ramp is now large enough to have flipped a decade of net cash into net debt and to be actively dragging on free cash flow growth &mdash; that tension is the center of this case.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported Jul 29, 2026) and spot price as of Aug 11, 2026. The stock trades ~25% below its 52-week high of $796.25, largely on capex-guidance shock (raised twice this year, most recently to $125&ndash;145B) and a Q2 margin miss driven by $2.40B in legal charges and $1.18B in severance from an 8,000-role cut &mdash; treat both as identifiable one-offs layered on top of the structural capex story, not as a separate new problem.
+  </div>
+
+  <div class="bignum-corner">8/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions, fiscal year = calendar year (Jan&ndash;Dec). CAGR computed FY21&rarr;FY25 (4-year span).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FY22 dip reflects the 2022 ad-market slowdown, Reels investment cycle and rising Reality Labs losses; FY25 shows revenue and EBIT reaccelerating even as FCF growth stalls &mdash; capex is now large enough to show up here.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0M</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$58B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$116B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$175B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$233B</text><rect x="75.6" y="128.7" width="22.5" height="111.3" rx="2" fill="#2dd4bf"/><rect x="113.7" y="195.9" width="22.5" height="44.1" rx="2" fill="#60a5fa"/><rect x="151.9" y="203.2" width="22.5" height="36.8" rx="2" fill="#fbbf24"/><text x="138.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="231.6" y="129.9" width="22.5" height="110.1" rx="2" fill="#2dd4bf"/><rect x="269.7" y="212.7" width="22.5" height="27.3" rx="2" fill="#60a5fa"/><rect x="307.9" y="221.8" width="22.5" height="18.2" rx="2" fill="#fbbf24"/><text x="294.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="387.6" y="112.6" width="22.5" height="127.4" rx="2" fill="#2dd4bf"/><rect x="425.7" y="195.9" width="22.5" height="44.1" rx="2" fill="#60a5fa"/><rect x="463.9" y="198.4" width="22.5" height="41.6" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="543.6" y="84.7" width="22.5" height="155.3" rx="2" fill="#2dd4bf"/><rect x="581.7" y="174.5" width="22.5" height="65.5" rx="2" fill="#60a5fa"/><rect x="619.9" y="188.9" width="22.5" height="51.1" rx="2" fill="#fbbf24"/><text x="606.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="699.6" y="50.2" width="22.5" height="189.8" rx="2" fill="#2dd4bf"/><rect x="737.7" y="161.4" width="22.5" height="78.6" rx="2" fill="#60a5fa"/><rect x="775.9" y="196.5" width="22.5" height="43.5" rx="2" fill="#fbbf24"/><text x="762.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+14.3%</div><div class="sub">$117,929M &rarr; $200,966M &mdash; just under the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#34d399;">+15.5%</div><div class="sub">$46,753M &rarr; $83,276M</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+4.3%</div><div class="sub">$38,993M &rarr; $46,109M &mdash; capex has outrun FCF growth</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">FY22 trough tied to the ad-market slowdown and the subsequent "Year of Efficiency" cost reset; margin has structurally re-based near 41&ndash;42%, though quarterly data (page 3) shows renewed pressure from AI-infrastructure depreciation and one-off charges in 2026.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">38%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50%</text><path d="M50.0,220.0 L50.0,61.4 L247.5,120.7 L445.0,81.4 L642.5,51.3 L840.0,54.2 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,61.4 L247.5,120.7 L445.0,81.4 L642.5,51.3 L840.0,54.2" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="61.4" r="3" fill="#2dd4bf"/><circle cx="247.5" cy="120.7" r="3" fill="#2dd4bf"/><circle cx="445.0" cy="81.4" r="3" fill="#2dd4bf"/><circle cx="642.5" cy="51.3" r="3" fill="#2dd4bf"/><circle cx="840.0" cy="54.2" r="3" fill="#2dd4bf"/><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="135.0" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT</th><th>Op. Margin</th><th>Free Cash Flow</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>$117,929M</td><td>$46,753M</td><td>39.7%</td><td>$38,993M</td><td>$39,370M</td></tr>
+    <tr><td>FY2022</td><td>$116,609M</td><td>$28,944M</td><td>24.8%</td><td>$19,289M</td><td>$23,200M</td></tr>
+    <tr><td>FY2023</td><td>$134,902M</td><td>$46,751M</td><td>34.7%</td><td>$44,068M</td><td>$39,098M</td></tr>
+    <tr><td>FY2024</td><td>$164,501M</td><td>$69,380M</td><td>42.2%</td><td>$54,072M</td><td>$62,360M</td></tr>
+    <tr><td>FY2025</td><td>$200,966M</td><td>$83,276M</td><td>41.4%</td><td>$46,109M</td><td>$60,458M</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Family of Apps vs. Reality Labs</div></div>
+  <div class="sec-sub">Last 8 fiscal quarters through Q2 2026 (quarter ended Jun 30, 2026, reported Jul 29, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">$60.8B</b>, +28% YoY, ahead of consensus. Family daily active people (DAP) 3.60B, +3% YoY. GAAP operating income fell 8% YoY to $18.8B (margin 30.9%, down from 43.0% a year earlier) &mdash; driven by $2.40B of legal charges, $1.18B of severance tied to an 8,000-role headcount reduction, and rising depreciation/data-center costs. Reality Labs posted a $4.62B operating loss on just $431M of segment revenue. Next earnings expected late Oct 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Family of Apps Operating Income vs. Reality Labs Operating Loss (quarterly, $M)</div>
+    <div class="chart-sub">The core ads business (blue, above the line) runs 4&ndash;7x larger than the Reality Labs loss (red, below the line) it funds every quarter &mdash; Meta can easily afford this bet financially, but the loss has been a one-way, growing line for six straight years with no disclosed profitability path.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#3b82f6;"></span>Family of Apps operating income</span>
+      <span><span class="dot" style="background:#f87171;"></span>Reality Labs operating loss</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="205.0" x2="840" y2="205.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="209.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="60" y1="147.4" x2="840" y2="147.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="151.4" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="60" y1="89.8" x2="840" y2="89.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="93.8" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="60" y1="32.3" x2="840" y2="32.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="36.3" text-anchor="end" font-size="11" fill="#64748b">$30B</text><rect x="88.8" y="79.6" width="40" height="125.4" rx="2" fill="#3b82f6"/><rect x="88.8" y="205.0" width="40" height="25.5" rx="2" fill="#f87171"/><text x="108.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q3'24</text><rect x="186.2" y="41.9" width="40" height="163.1" rx="2" fill="#3b82f6"/><rect x="186.2" y="205.0" width="40" height="28.6" rx="2" fill="#f87171"/><text x="206.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q4'24</text><rect x="283.8" y="79.7" width="40" height="125.3" rx="2" fill="#3b82f6"/><rect x="283.8" y="205.0" width="40" height="24.2" rx="2" fill="#f87171"/><text x="303.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'25</text><rect x="381.2" y="61.2" width="40" height="143.8" rx="2" fill="#3b82f6"/><rect x="381.2" y="205.0" width="40" height="26.1" rx="2" fill="#f87171"/><text x="401.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q2'25</text><rect x="478.8" y="61.4" width="40" height="143.6" rx="2" fill="#3b82f6"/><rect x="478.8" y="205.0" width="40" height="25.3" rx="2" fill="#f87171"/><text x="498.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q3'25</text><rect x="576.2" y="27.9" width="40" height="177.1" rx="2" fill="#3b82f6"/><rect x="576.2" y="205.0" width="40" height="34.7" rx="2" fill="#f87171"/><text x="596.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q4'25</text><rect x="673.8" y="49.1" width="40" height="155.9" rx="2" fill="#3b82f6"/><rect x="673.8" y="205.0" width="40" height="24.2" rx="2" fill="#f87171"/><text x="693.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'26</text><rect x="771.2" y="70.3" width="40" height="134.7" rx="2" fill="#3b82f6"/><rect x="771.2" y="205.0" width="40" height="26.6" rx="2" fill="#f87171"/><text x="791.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q2'26</text><line x1="60" y1="205" x2="840" y2="205" stroke="#334155" stroke-width="1.5"/></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue YoY Growth % &mdash; with trendline</div>
+    <div class="chart-sub">Growth has actually accelerated through 2025&ndash;2026 (16% &rarr; 33%) as the AI-driven ad-targeting stack (Advantage+) improves conversion &mdash; the opposite of a slowing-core-business story.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#34d399;"></span>YoY growth</span>
+      <span><span class="dot" style="background:#64748b;"></span>Linear trend (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 215" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="183.0" x2="840" y2="183.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="141.2" x2="840" y2="141.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="145.2" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="99.5" x2="840" y2="99.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="103.5" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="57.8" x2="840" y2="57.8" stroke="#1e293b" stroke-width="1"/><text x="42" y="61.8" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="16.0" x2="840" y2="16.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="20.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,183.0 L50.0,104.2 L162.9,96.9 L275.7,115.9 L388.6,92.8 L501.4,73.4 L614.3,83.7 L727.1,44.9 L840.0,66.3 L840.0,183.0 Z" fill="#34d399" opacity="0.15"/><path d="M50.0,104.2 L162.9,96.9 L275.7,115.9 L388.6,92.8 L501.4,73.4 L614.3,83.7 L727.1,44.9 L840.0,66.3" fill="none" stroke="#34d399" stroke-width="2.5"/><circle cx="50.0" cy="104.2" r="3" fill="#34d399"/><circle cx="162.9" cy="96.9" r="3" fill="#34d399"/><circle cx="275.7" cy="115.9" r="3" fill="#34d399"/><circle cx="388.6" cy="92.8" r="3" fill="#34d399"/><circle cx="501.4" cy="73.4" r="3" fill="#34d399"/><circle cx="614.3" cy="83.7" r="3" fill="#34d399"/><circle cx="727.1" cy="44.9" r="3" fill="#34d399"/><circle cx="840.0" cy="66.3" r="3" fill="#34d399"/><line x1="50.0" y1="111.5" x2="840.0" y2="58.0" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="50.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3'24</text><text x="162.9" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'24</text><text x="275.7" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'25</text><text x="388.6" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'25</text><text x="501.4" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3'25</text><text x="614.3" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'25</text><text x="727.1" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'26</text><text x="840.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin % (quarterly) &mdash; with trendline</div>
+    <div class="chart-sub">Margin held a 40&ndash;48% band through most of the window before the Q2 2026 drop to 30.9% on legal/severance charges plus rising AI-infra depreciation &mdash; worth watching whether this is a one-off or the new run-rate as capex converts to depreciation.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#fbbf24;"></span>Operating margin</span>
+      <span><span class="dot" style="background:#64748b;"></span>Linear trend (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 215" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="183.0" x2="840" y2="183.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="141.2" x2="840" y2="141.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="145.2" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="99.5" x2="840" y2="99.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="103.5" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="57.8" x2="840" y2="57.8" stroke="#1e293b" stroke-width="1"/><text x="42" y="61.8" text-anchor="end" font-size="11" fill="#64748b">45%</text><line x1="50" y1="16.0" x2="840" y2="16.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="20.0" text-anchor="end" font-size="11" fill="#64748b">60%</text><path d="M50.0,183.0 L50.0,64.0 L162.9,48.6 L275.7,67.5 L388.6,63.3 L501.4,71.5 L614.3,68.0 L727.1,69.9 L840.0,97.1 L840.0,183.0 Z" fill="#fbbf24" opacity="0.15"/><path d="M50.0,64.0 L162.9,48.6 L275.7,67.5 L388.6,63.3 L501.4,71.5 L614.3,68.0 L727.1,69.9 L840.0,97.1" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.0" cy="64.0" r="3" fill="#fbbf24"/><circle cx="162.9" cy="48.6" r="3" fill="#fbbf24"/><circle cx="275.7" cy="67.5" r="3" fill="#fbbf24"/><circle cx="388.6" cy="63.3" r="3" fill="#fbbf24"/><circle cx="501.4" cy="71.5" r="3" fill="#fbbf24"/><circle cx="614.3" cy="68.0" r="3" fill="#fbbf24"/><circle cx="727.1" cy="69.9" r="3" fill="#fbbf24"/><circle cx="840.0" cy="97.1" r="3" fill="#fbbf24"/><line x1="50.0" y1="54.2" x2="840.0" y2="83.2" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="50.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3'24</text><text x="162.9" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'24</text><text x="275.7" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'25</text><text x="388.6" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'25</text><text x="501.4" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3'25</text><text x="614.3" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'25</text><text x="727.1" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'26</text><text x="840.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Reality Labs drag, in context:</b> cumulative Reality Labs operating losses now total roughly $88B since 2020 &mdash; larger than the market cap of most S&amp;P 500 companies &mdash; with no profitability timeline disclosed. Meanwhile FY2026 capex guidance has been raised twice, from $115&ndash;135B to $125&ndash;145B, funded partly by a $25B investment-grade bond sale in May 2026. Neither is a near-term solvency risk given the scale of Family of Apps cash generation, but both represent capital-allocation calls made essentially unilaterally under one founder-controlled vote.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Net cash/debt figures reflect the AI-capex-driven debt issuance that flipped Meta from a net-cash to a net-debt balance sheet during FY2025&ndash;26.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Annual, at fiscal year-end / current</div>
+    <div class="chart-sub">Current TTM P/E (22.6x) sits just below the FY21&ndash;25 average of 23.0x &mdash; the stock is not obviously expensive relative to its own history despite the AI-capex narrative, though forward multiples depend heavily on whether the capex converts into earnings.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>P/E (trailing)</span>
+      <span><span class="dot" style="background:#64748b;"></span>5yr average (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">16x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">24x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">32x</text><path d="M50.0,67.3 L208.0,132.4 L366.0,71.2 L524.0,66.6 L682.0,44.4 L840.0,78.9" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="67.3" r="3" fill="#a78bfa"/><circle cx="208.0" cy="132.4" r="3" fill="#a78bfa"/><circle cx="366.0" cy="71.2" r="3" fill="#a78bfa"/><circle cx="524.0" cy="66.6" r="3" fill="#a78bfa"/><circle cx="682.0" cy="44.4" r="3" fill="#a78bfa"/><circle cx="840.0" cy="78.9" r="3" fill="#a78bfa"/><line x1="50" y1="76.4" x2="840" y2="76.4" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="835" y="70.4" text-anchor="end" font-size="10" fill="#94a3b8">5yr avg 23.0x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Cash (Debt) Position &mdash; Annual, $M</div>
+    <div class="chart-sub">Net cash of ~$34B in FY21 eroded steadily and flipped to net debt in FY25, widening to roughly -$22B by mid-2026 as Meta issues debt (including a $25B bond sale in May 2026) to help fund $125&ndash;145B of 2026 capex.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Net cash</span>
+      <span><span class="dot" style="background:#f87171;"></span>Net debt</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$40B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">-$20B</text><rect x="95.0" y="36.2" width="60" height="93.8" rx="2" fill="#2dd4bf"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="225.0" y="91.1" width="60" height="38.9" rx="2" fill="#2dd4bf"/><text x="255.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="355.0" y="52.5" width="60" height="77.5" rx="2" fill="#2dd4bf"/><text x="385.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="485.0" y="50.9" width="60" height="79.1" rx="2" fill="#2dd4bf"/><text x="515.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="615.0" y="130.0" width="60" height="6.3" rx="2" fill="#f87171"/><text x="645.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="745.0" y="130.0" width="60" height="60.7" rx="2" fill="#f87171"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Now</text><line x1="60" y1="130" x2="840" y2="130" stroke="#334155" stroke-width="1.5"/></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure &mdash; Voting Power</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 49.44,183.20 L73.03,154.69 A58,58 0 1 0 110.00,52.00 Z" fill="#fbbf24"/><path d="M49.44,183.20 A95,95 0 0 1 64.23,26.75 L82.06,59.17 A58,58 0 0 0 73.03,154.69 Z" fill="#a78bfa"/><path d="M64.23,26.75 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 82.06,59.17 Z" fill="#64748b"/><text x="110.0" y="106.0" text-anchor="middle" font-size="26" font-weight="700" fill="#f1f5f9">61%</text><text x="110.0" y="128.0" text-anchor="middle" font-size="9.5" fill="#94a3b8" letter-spacing="0.5">ZUCKERBERG VOTES</text></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#fbbf24;"></span>Zuckerberg (Class B, 10 votes/share) &asymp; 61% of votes</div>
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutional investors (Class A) &asymp; 31% of votes</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public/retail &amp; other holders (Class A) &asymp; 8% of votes</div>
+        <div style="font-size:9.5px; color:#7c8aa5; margin-top:2px;">By economic (share-count) ownership, Zuckerberg holds only ~13% of shares outstanding &mdash; the 61% voting figure comes entirely from Class B shares carrying 10 votes each vs. 1 vote for Class A. He holds ~99.7% of all outstanding Class B shares.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> unlike a widely-held mega-cap, Meta is functionally controlled by one person. Zuckerberg cannot be outvoted on director elections, executive pay, or major capital decisions &mdash; including the Reality Labs bet and the AI capex ramp &mdash; regardless of what the other ~87% of economic owners think. This is a real, durable governance risk, not a technicality &mdash; even though it has arguably enabled decisive, long-horizon capital allocation (the Reels pivot, the current AI buildout) that a more consensus-driven board might have resisted or delayed.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Meta</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>14.3%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY21-25)</td><td>&ge;15%</td><td>15.5%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>41.4% (FY25)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>4.3%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Projected #1 global digital ad platform in 2026, overtaking Google</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; Meta/Google/Amazon ~62% combined; TikTok, retail media rising</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>~30% vs ~9.5% (est.)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net debt, 0.20x (rising fast from net cash)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>55% (FY25)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 22.6x vs ~23.0x 5yr avg</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>~-8% since FY21 (buybacks slowing as cash shifts to capex)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Zuckerberg ~61% voting / ~13% economic</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>39% of TTM revenue, guided toward ~50%+ in FY26</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The ads engine is firing on all cylinders &mdash; revenue growth has reaccelerated into the high-20s%, AI-driven ad targeting (Advantage+) is lifting conversion, and Meta is on track to become the single largest digital ad platform globally in 2026. EBIT growth, margin, ROIC and market position all clear the bar; the entry multiple is roughly in line with its own history despite the AI narrative; share count keeps shrinking; and a single, deeply invested founder-CEO still runs the show.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Capex intensity has roughly doubled as a share of revenue since 2021 and is guided toward ~50%+ of revenue in 2026 (twice-raised guidance, now $125&ndash;145B), funded partly by newly issued debt that flipped a decade of net cash into net debt. FCF conversion and FCF CAGR both miss badly as a direct result. Reality Labs has burned ~$88B since 2020 with no disclosed profitability path. And because Zuckerberg holds ~61% of the vote on ~13% of the economic interest, none of this capital allocation can be overridden by other shareholders &mdash; the AI bet succeeding or failing is essentially a wager on one person's judgment.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 11&ndash;12, 2026. Sources: stockanalysis.com (financials, quarterly statements, valuation ratios, segment KPIs), Meta Q2 2026 earnings release &amp; press materials (investor.atmeta.com), CNBC quarterly Reality Labs reporting, SEC 10-K/10-Q and proxy (DEF 14A) filings, eMarketer digital ad market-share estimates, Datacenter Dynamics/Fortune capex-guidance reporting.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of ROIC, WACC and valuation averages) and function as indicators only, not as verified facts or a basis for investment decisions. Several figures (pre-2025 Reality Labs quarterly losses, individual-app MAU estimates, ROIC/WACC, market-concentration score) vary across sources and are flagged as estimates.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+</body>
+</html>

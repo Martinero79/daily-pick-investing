@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Microsoft Corp. (MSFT) — Investment Case Dashboard</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.eyebrow { color:#2dd4bf; font-size:9.5px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:27px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:10.5px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:34px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:11px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:21px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:9.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:8.3px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:11px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:11.3px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:10.3px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:17px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:10.3px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:12px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:9.1px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:9.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:20px; font-weight:700; }
+.cagr-card .sub { font-size:9.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:9.8px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:8.6px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:9.6px; }
+.status-pill { font-weight:700; font-size:9px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:10.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:9.8px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:8.2px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:12px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:10.3px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:11px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER / SUMMARY -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Personal Portfolio Research</div>
+  <h1>Microsoft Corporation</h1>
+  <div class="badges">
+    <div class="badge">NASDAQ: MSFT</div>
+    <div class="badge">Cloud Infrastructure · Enterprise Software · AI</div>
+    <div class="badge">FY ends June 30 (FY26 = Jul'25–Jun'26)</div>
+    <div class="badge">Founded 1975 · HQ Redmond, WA</div>
+    <div class="badge warn">AI capex supercycle — FCF conversion falling</div>
+  </div>
+  <div class="price">$503.81</div>
+  <div class="price-sub">Market cap ≈ $3.74T · 52-week range $349 – $555 · price as of Aug 11, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Amazon / AWS (#1 cloud infrastructure) &middot; Google / Alphabet (Google Cloud &amp; Workspace, direct Office rival) &middot; Oracle (fast-growing OCI, increasingly aggressive in AI-training capacity)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY26)</div>
+      <div class="val green">$331.8B</div>
+      <div class="sub">+18% YoY · Azure the growth engine</div>
+      <div class="note">5-yr revenue CAGR ≈14.6% (FY21→FY26)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin</div>
+      <div class="val green">46.8%</div>
+      <div class="sub">FY26, up from 41.6% in FY21</div>
+      <div class="note">Scale + Copilot/AI mix offsetting rising depreciation</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green">~24% vs ~9%</div>
+      <div class="sub">≈+15pt spread — still compounding</div>
+      <div class="note">Analyst estimate (not disclosed); spread is narrowing as the capital base scales</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash / (Debt)</div>
+      <div class="val red">≈ –$30B</div>
+      <div class="sub">≈0.15x EBITDA · flipped from net cash in FY26</div>
+      <div class="note">First net-debt year in over a decade, funding the AI datacenter buildout</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="130" height="130" viewBox="0 0 130 130">
+      <circle cx="65" cy="65" r="54" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="65" cy="65" r="54" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="208.8 339.3" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+      <circle cx="65" cy="65" r="54" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="26.1 339.3" stroke-dashoffset="-208.8" transform="rotate(-90 65 65)"/>
+      <circle cx="65" cy="65" r="54" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="104.4 339.3" stroke-dashoffset="-234.9" transform="rotate(-90 65 65)"/>
+      <text x="65" y="61" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/13</text>
+      <text x="65" y="76" text-anchor="middle" font-size="8" fill="#7c8aa5">criteria met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 met</b> — growth quality, margins, ROIC, balance-sheet safety, market position, valuation vs history, share count, market concentration (score &asymp;2/5 &mdash; scores of 1&ndash;2 count as met)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span><b>1 borderline</b> — 5-yr revenue CAGR (14.6%, just under the 15% bar)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> — FCF CAGR, FCF conversion, insider ownership, capex intensity</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Microsoft is the clearest "picks-and-shovels-plus-application-layer" way to own the AI cycle: Azure is the #2 cloud
+    platform and is compounding at 40%+ growth on a base that just crossed $100B in annual revenue, OpenAI has committed
+    to $250B of Azure consumption through 2030, and Copilot is starting to monetize across the Microsoft 365 and GitHub
+    installed base (30M+ paid Copilot seats). Operating margins keep expanding even as the company scales, and the
+    franchise moats (Windows, Office/M365, Azure switching costs) remain intact. The honest tension is capital intensity:
+    capex jumped from ~23% of revenue in FY25 to ~35% in FY26, free cash flow actually <i>declined</i> in dollar terms
+    even as operating income rose 21%, and the balance sheet flipped from comfortably net-cash to net-debt for the first
+    time in over a decade. None of this threatens solvency — leverage is still trivial relative to EBITDA — but it does
+    mean the "asset-light software compounder" version of the Microsoft story no longer fully applies, and near-term
+    free cash flow will likely stay depressed while the AI infrastructure build continues. At ~28x trailing earnings
+    (below the 5–10yr average of ~31x), the valuation is not demanding for the growth on offer, but it is pricing in
+    continued Azure/Copilot execution, not a margin of safety.
+  </div>
+
+  <div class="callout">
+    <b>Watch item:</b> FY26 capex (cash purchases of property & equipment) was ~$116B, about 35% of revenue, and
+    management has guided to ~$175B of calendar-2026 capital spending (including finance leases) — nearly triple the
+    FY24 level. FCF/EBIT conversion has fallen from ~56% (FY25) to ~43% (FY26). If Azure/AI demand growth ever
+    disappoints relative to this spend, margin and FCF downside could be sharp — this is the single biggest swing
+    factor in the thesis.
+  </div>
+
+  <div class="bignum-corner">MSFT</div>
+</div>
+
+<!-- PAGE 2: FIVE-YEAR FINANCIALS -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Microsoft Corp.</div>
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">Fiscal years ended June 30 · Figures in USD billions unless noted · FY26 net income includes a $5.0B non-operating gain on the OpenAI investment</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. Operating Income</div>
+    <div class="chart-sub">Revenue nearly doubled FY22→FY26 while operating income grew faster still, on Azure/AI mix and cost discipline</div>
+    <div class="legend-row">
+      <div><span class="dot" style="background:#2dd4bf;"></span>Revenue</div>
+      <div><span class="dot" style="background:#3b82f6;"></span>Operating Income</div>
+    </div>
+    <svg viewBox="0 0 700 190">
+      <line x1="30" y1="170" x2="680" y2="170" stroke="#263049" stroke-width="1"/>
+      <!-- FY22 -->
+      <rect x="36" y="86.4" width="30" height="83.6" fill="#2dd4bf"/>
+      <rect x="70" y="134.8" width="30" height="35.2" fill="#3b82f6"/>
+      <text x="68" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">FY22</text>
+      <!-- FY23 -->
+      <rect x="176" y="80.6" width="30" height="89.4" fill="#2dd4bf"/>
+      <rect x="210" y="132.7" width="30" height="37.3" fill="#3b82f6"/>
+      <text x="208" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">FY23</text>
+      <!-- FY24 -->
+      <rect x="316" y="66.6" width="30" height="103.4" fill="#2dd4bf"/>
+      <rect x="350" y="123.9" width="30" height="46.1" fill="#3b82f6"/>
+      <text x="348" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">FY24</text>
+      <!-- FY25 -->
+      <rect x="456" y="51.1" width="30" height="118.9" fill="#2dd4bf"/>
+      <rect x="490" y="115.8" width="30" height="54.2" fill="#3b82f6"/>
+      <text x="488" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">FY25</text>
+      <!-- FY26 -->
+      <rect x="596" y="30.0" width="30" height="140.0" fill="#2dd4bf"/>
+      <rect x="630" y="104.5" width="30" height="65.5" fill="#3b82f6"/>
+      <text x="628" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">FY26</text>
+      <text x="30" y="82" font-size="8.5" fill="#64748b">$332B</text>
+      <text x="30" y="140" font-size="8.5" fill="#64748b">$155B</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR</div>
+      <div class="val" style="color:#fbbf24;">14.6%</div>
+      <div class="sub">FY21→FY26, just under the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR</div>
+      <div class="val" style="color:#34d399;">17.3%</div>
+      <div class="sub">Margin expansion adds to top-line growth</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR</div>
+      <div class="val" style="color:#f87171;">3.6%</div>
+      <div class="sub">Capex surge is eating almost all incremental cash</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR</div>
+      <div class="val" style="color:#34d399;">16.9%</div>
+      <div class="sub">Flattered by FY26 OpenAI investment gain</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">GAAP operating margin, FY22–FY26 — expanding despite heavier depreciation from AI infrastructure</div>
+    <svg viewBox="0 0 700 130">
+      <line x1="30" y1="20" x2="30" y2="115" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="115" x2="680" y2="115" stroke="#263049" stroke-width="1"/>
+      <polyline points="70,93.75 210,97.5 350,62.5 490,50 630,35" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="70" cy="93.75" r="3.5" fill="#2dd4bf"/>
+      <circle cx="210" cy="97.5" r="3.5" fill="#2dd4bf"/>
+      <circle cx="350" cy="62.5" r="3.5" fill="#2dd4bf"/>
+      <circle cx="490" cy="50" r="3.5" fill="#2dd4bf"/>
+      <circle cx="630" cy="35" r="3.5" fill="#2dd4bf"/>
+      <text x="70" y="126" text-anchor="middle" font-size="9" fill="#94a3b8">FY22 · 42.1%</text>
+      <text x="210" y="126" text-anchor="middle" font-size="9" fill="#94a3b8">FY23 · 41.8%</text>
+      <text x="350" y="126" text-anchor="middle" font-size="9" fill="#94a3b8">FY24 · 44.6%</text>
+      <text x="490" y="126" text-anchor="middle" font-size="9" fill="#94a3b8">FY25 · 45.6%</text>
+      <text x="630" y="126" text-anchor="middle" font-size="9" fill="#94a3b8">FY26 · 46.8%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (Jun 30)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY22</td><td>$198.3B</td><td>$83.4B</td><td>42.1%</td><td>$72.7B</td><td>$65.1B</td><td>78.0%</td></tr>
+    <tr><td>FY23</td><td>$211.9B</td><td>$88.5B</td><td>41.8%</td><td>$72.4B</td><td>$59.5B</td><td>67.2%</td></tr>
+    <tr><td>FY24</td><td>$245.1B</td><td>$109.4B</td><td>44.6%</td><td>$88.1B</td><td>$74.1B</td><td>67.7%</td></tr>
+    <tr><td>FY25</td><td>$281.7B</td><td>$128.5B</td><td>45.6%</td><td>$101.8B</td><td>$71.6B</td><td>55.7%</td></tr>
+    <tr><td>FY26</td><td>$331.8B</td><td>$155.2B</td><td>46.8%</td><td>$133.7B</td><td>$67.0B</td><td>43.2%</td></tr>
+  </table>
+  <div class="bignum-corner">MSFT</div>
+</div>
+
+<!-- PAGE 3: QUARTERLY MOMENTUM -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Microsoft Corp.</div>
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Momentum & Segment Mix</div></div>
+  <div class="sec-sub">Last 8 fiscal quarters (FY25 Q1 → FY26 Q4) · Segments per Microsoft's reported structure: Productivity & Business Processes, Intelligent Cloud, More Personal Computing</div>
+
+  <div class="headline-box">
+    <div class="title">Azure is the story</div>
+    <p>Azure & other cloud services revenue grew 43% YoY in Q4 FY26, and full-year Azure revenue surpassed $100B for the
+    first time (+41% for the year). Microsoft 365 Copilot paid seats reached 30M+ (from 20M the prior quarter), and
+    OpenAI's committed Azure spend is $250B through 2030 — together these are re-accelerating Intelligent Cloud even as
+    More Personal Computing (Windows/Devices/Gaming) growth has gone roughly flat.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue by Segment</div>
+    <div class="chart-sub">Intelligent Cloud (driven by Azure) has overtaken More Personal Computing and is closing in on Productivity & Business Processes</div>
+    <div class="legend-row">
+      <div><span class="dot" style="background:#2dd4bf;"></span>Productivity & Business Processes</div>
+      <div><span class="dot" style="background:#3b82f6;"></span>Intelligent Cloud</div>
+      <div><span class="dot" style="background:#94a3b8;"></span>More Personal Computing</div>
+    </div>
+    <svg viewBox="0 0 700 190">
+      <line x1="16" y1="170" x2="684" y2="170" stroke="#263049" stroke-width="1"/>
+      <!-- Q1 FY25 -->
+      <rect x="16" y="125.94" width="55" height="44.06" fill="#2dd4bf"/>
+      <rect x="16" y="88.46" width="55" height="37.48" fill="#3b82f6"/>
+      <rect x="16" y="71.62" width="55" height="19.76" fill="#94a3b8"/>
+      <text x="43.75" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q1</text>
+      <!-- Q2 FY25 -->
+      <rect x="103.75" y="125.84" width="55" height="44.16" fill="#2dd4bf"/>
+      <rect x="103.75" y="87.52" width="55" height="38.32" fill="#3b82f6"/>
+      <rect x="103.75" y="65.54" width="55" height="21.98" fill="#94a3b8"/>
+      <text x="131.25" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q2</text>
+      <!-- Q3 FY25 -->
+      <rect x="191.25" y="125.08" width="55" height="44.92" fill="#2dd4bf"/>
+      <rect x="191.25" y="84.95" width="55" height="40.13" fill="#3b82f6"/>
+      <rect x="191.25" y="64.89" width="55" height="20.06" fill="#94a3b8"/>
+      <text x="218.75" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q3</text>
+      <!-- Q4 FY25 -->
+      <rect x="278.75" y="120.33" width="55" height="49.67" fill="#2dd4bf"/>
+      <rect x="278.75" y="75.51" width="55" height="44.82" fill="#3b82f6"/>
+      <rect x="278.75" y="55.33" width="55" height="20.18" fill="#94a3b8"/>
+      <text x="306.25" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q4</text>
+      <!-- Q1 FY26 -->
+      <rect x="366.25" y="120.47" width="55" height="49.53" fill="#2dd4bf"/>
+      <rect x="366.25" y="74.12" width="55" height="46.35" fill="#3b82f6"/>
+      <rect x="366.25" y="53.49" width="55" height="20.63" fill="#94a3b8"/>
+      <text x="393.75" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q1</text>
+      <!-- Q2 FY26 -->
+      <rect x="453.75" y="118.83" width="55" height="51.17" fill="#2dd4bf"/>
+      <rect x="453.75" y="69.47" width="55" height="49.36" fill="#3b82f6"/>
+      <rect x="453.75" y="48.09" width="55" height="21.38" fill="#94a3b8"/>
+      <text x="481.25" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q2</text>
+      <!-- Q3 FY26 -->
+      <rect x="541.25" y="117.48" width="55" height="52.52" fill="#2dd4bf"/>
+      <rect x="541.25" y="65.46" width="55" height="52.02" fill="#3b82f6"/>
+      <rect x="541.25" y="45.67" width="55" height="19.79" fill="#94a3b8"/>
+      <text x="568.75" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q3</text>
+      <!-- Q4 FY26 -->
+      <rect x="628.75" y="113.30" width="55" height="56.70" fill="#2dd4bf"/>
+      <rect x="628.75" y="54.35" width="55" height="58.95" fill="#3b82f6"/>
+      <rect x="628.75" y="35.00" width="55" height="19.35" fill="#94a3b8"/>
+      <text x="656.25" y="184" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q4</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Revenue Growth vs. Azure Growth (YoY)</div>
+    <div class="chart-sub">Azure & other cloud services growth (33% → 43% over the period) is running far ahead of total company growth (12–18%), and re-accelerated through FY26 on AI demand</div>
+    <div class="legend-row">
+      <div><span class="dot" style="background:#94a3b8;"></span>Total revenue YoY%</div>
+      <div><span class="dot" style="background:#f59e0b;"></span>Azure & other cloud services YoY%</div>
+    </div>
+    <svg viewBox="0 0 700 150">
+      <line x1="16" y1="130" x2="684" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="43.75,90.89 131.25,99.93 218.75,97.51 306.25,85.76 393.75,85.02 481.25,89.18 568.75,85.27 656.25,86.76" fill="none" stroke="#94a3b8" stroke-width="2"/>
+      <polyline points="43.75,49.33 131.25,54.22 218.75,49.33 306.25,34.67 393.75,32.22 481.25,34.67 568.75,32.22 656.25,24.89" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+      <circle cx="656.25" cy="24.89" r="3.5" fill="#f59e0b"/>
+      <circle cx="656.25" cy="86.76" r="3.5" fill="#94a3b8"/>
+      <text x="43.75" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q1</text>
+      <text x="131.25" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q2</text>
+      <text x="218.75" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q3</text>
+      <text x="306.25" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q4</text>
+      <text x="393.75" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q1</text>
+      <text x="481.25" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q2</text>
+      <text x="568.75" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q3</text>
+      <text x="656.25" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q4</text>
+      <text x="670" y="20" text-anchor="end" font-size="9" fill="#f59e0b" font-weight="700">Azure 43%</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Margin</div>
+    <div class="chart-sub">Margin dipped in Q4 FY25/FY26 on holiday seasonality and AI infra ramp, but stayed in a healthy 45–49% band</div>
+    <svg viewBox="0 0 700 130">
+      <line x1="16" y1="115" x2="684" y2="115" stroke="#263049" stroke-width="1"/>
+      <polyline points="43.75,78.57 131.25,95.71 218.75,91.43 306.25,102.86 393.75,45.71 481.25,71.43 568.75,82.86 656.25,100" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <text x="43.75" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q1</text>
+      <text x="131.25" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q2</text>
+      <text x="218.75" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q3</text>
+      <text x="306.25" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F25Q4</text>
+      <text x="393.75" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q1</text>
+      <text x="481.25" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q2</text>
+      <text x="568.75" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q3</text>
+      <text x="656.25" y="126" text-anchor="middle" font-size="8" fill="#94a3b8">F26Q4</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>AI monetization is showing up in the numbers:</b> Intelligent Cloud revenue grew from $24.1B (Q1 FY25) to
+    $39.3B (Q4 FY26) — up 63% in six quarters — while Productivity & Business Processes operating income grew steadily
+    on Copilot attach and Dynamics 365. More Personal Computing (Windows OEM, Devices, Gaming, Search) is the laggard,
+    roughly flat to slightly down, underscoring that the growth story is now almost entirely cloud/AI-led.
+  </div>
+  <div class="bignum-corner">MSFT</div>
+</div>
+
+<!-- PAGE 4: VALUATION / BALANCE SHEET / OWNERSHIP -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Microsoft Corp.</div>
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet & Ownership</div></div>
+  <div class="sec-sub">Trailing P/E vs. own history · net cash/debt trend · shareholder base</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E: Today vs. Own Trading History</div>
+    <div class="chart-sub">At ~28x trailing earnings, MSFT trades at a modest discount to its 3/5/10-year average multiples</div>
+    <svg viewBox="0 0 700 160">
+      <line x1="20" y1="140" x2="680" y2="140" stroke="#263049" stroke-width="1"/>
+      <rect x="52.5" y="43.7" width="70" height="96.3" fill="#2dd4bf"/>
+      <text x="87.5" y="36" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">28.1x</text>
+      <text x="87.5" y="153" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <rect x="227.5" y="30.8" width="70" height="109.2" fill="#3b82f6"/>
+      <text x="262.5" y="23" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">31.9x</text>
+      <text x="262.5" y="153" text-anchor="middle" font-size="9" fill="#94a3b8">3-yr avg</text>
+      <rect x="402.5" y="32.8" width="70" height="107.2" fill="#3b82f6"/>
+      <text x="437.5" y="25" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">31.3x</text>
+      <text x="437.5" y="153" text-anchor="middle" font-size="9" fill="#94a3b8">5-yr avg</text>
+      <rect x="577.5" y="33.8" width="70" height="106.2" fill="#3b82f6"/>
+      <text x="612.5" y="26" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">31.0x</text>
+      <text x="612.5" y="153" text-anchor="middle" font-size="9" fill="#94a3b8">10-yr avg</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Cash / (Net Debt) Trend</div>
+    <div class="chart-sub">FY22–FY26, USD billions — MSFT ran a comfortable net-cash balance sheet for years; FY26 flipped to net debt as bond issuance helped fund the AI capex ramp (figures approximate; total-debt definitions vary by data source)</div>
+    <svg viewBox="0 0 700 190">
+      <line x1="16" y1="100" x2="684" y2="100" stroke="#3a4664" stroke-width="1.5"/>
+      <rect x="40" y="33.95" width="60" height="66.05" fill="#34d399"/>
+      <text x="70" y="27" text-anchor="middle" font-size="10" fill="#34d399" font-weight="700">+$57.8B</text>
+      <text x="70" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">FY22</text>
+      <rect x="180" y="20.8" width="60" height="79.2" fill="#34d399"/>
+      <text x="210" y="14" text-anchor="middle" font-size="10" fill="#34d399" font-weight="700">+$69.3B</text>
+      <text x="210" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">FY23</text>
+      <rect x="320" y="82.2" width="60" height="17.8" fill="#34d399"/>
+      <text x="350" y="76" text-anchor="middle" font-size="10" fill="#34d399" font-weight="700">+$15.6B</text>
+      <text x="350" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">FY24</text>
+      <rect x="460" y="68.63" width="60" height="31.37" fill="#34d399"/>
+      <text x="490" y="62" text-anchor="middle" font-size="10" fill="#34d399" font-weight="700">+$27.4B</text>
+      <text x="490" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">FY25</text>
+      <rect x="600" y="100" width="60" height="34.4" fill="#f87171"/>
+      <text x="630" y="147" text-anchor="middle" font-size="10" fill="#f87171" font-weight="700">–$30.1B</text>
+      <text x="630" y="165" text-anchor="middle" font-size="9" fill="#94a3b8">FY26</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card" style="flex:1; margin-bottom:0;">
+      <div class="chart-title">Shareholder Base</div>
+      <div class="chart-sub">No controlling founder or family stake — a professionally governed mega-cap, similar in structure to ASML</div>
+      <div class="ownership-row">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#1a2236" stroke-width="16"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#3b82f6" stroke-width="16" stroke-dasharray="208.1 289.0" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#fbbf24" stroke-width="16" stroke-dasharray="17.3 289.0" stroke-dashoffset="-208.1" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#64748b" stroke-width="16" stroke-dasharray="63.6 289.0" stroke-dashoffset="-225.4" transform="rotate(-90 60 60)"/>
+          <text x="60" y="56" text-anchor="middle" font-size="16" font-weight="700" fill="#f8fafc">72%</text>
+          <text x="60" y="70" text-anchor="middle" font-size="7.5" fill="#7c8aa5">institutional</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>Institutional ≈72% (Vanguard largest at ~9.7%)</div>
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders/officers ≈6% (mostly ex-CEO S. Ballmer, ~4.5%)</div>
+          <div><span class="dot" style="background:#64748b;"></span>Public float / other ≈22%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout gray">
+    <b>Governance read:</b> Microsoft has a single class of common stock (one share, one vote) and no founder or family
+    control block — Bill Gates has sold down to a small residual stake and Steve Ballmer's ~4.5% is a legacy personal
+    holding, not a governance lever. This is a professionally managed, board-governed company, not a founder-controlled
+    one — a structural difference from names like Meta or Arm in this portfolio, and closer to ASML's governance model.
+    Capital return remains active: $22.3B of buybacks in FY26 (up from $13.0B in FY25) plus a quarterly dividend of
+    $0.91/share (raised from $0.83 in Sept 2025, ≈0.7% yield), funded alongside — not instead of — the AI capex ramp.
+  </div>
+  <div class="bignum-corner">MSFT</div>
+</div>
+
+<!-- PAGE 5: SCORECARD -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Microsoft Corp.</div>
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">13-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against the same framework used across this portfolio · honest pass/fail, not a recommendation</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Reading</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) ≥15%</td><td>14.6% (FY21→FY26)</td><td><span class="status-pill status-score">BORDERLINE</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) ≥15%</td><td>17.3%</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin (latest FY) ≥20%</td><td>46.8% (FY26)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) ≥15%</td><td>3.6% — capex is absorbing nearly all incremental cash</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share — #1 or #2 in category</td><td>Azure #2 in cloud infrastructure, 21% share (behind AWS 28%, ahead of GCP 14%)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=competitive) — 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score ≈2 — cloud infra is a 3-player oligopoly (~63% combined share); Windows/Office remain near-monopolies</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs. WACC</td><td>Est. ROIC ≈24% vs. WACC ≈9% — wide spread, though narrowing as capital base scales</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>≈0.15x (net debt ≈$30B vs. EBITDA ≈$200B) — trivial leverage despite the flip to net debt</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) ≥80%</td><td>43% (FY26), down from 78% (FY22) — capex-driven</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>~28.1x trailing P/E vs. ~31x 5/10-yr average — modest discount to history</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend — flat/declining</td><td>≈7.43–7.46B shares, roughly flat; buybacks (+FY26 acceleration) offsetting SBC dilution</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership — meaningful</td><td>≈6% insider, no founder/family control block, single share class — professionally governed like ASML, not founder-controlled</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity — low/asset-light</td><td>FY26 capex ≈35% of revenue (from ≈23% in FY25); CY26 guide ≈$175B — the opposite of asset-light</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's working</div>
+      <p>Azure is #2 in cloud and growing 40%+ with AI as an accelerant, not a headwind; the OpenAI partnership
+      (equity stake + $250B committed Azure spend through 2030) is a structural demand anchor few peers can match;
+      Copilot is starting to monetize across a massive installed base (30M+ paid seats); operating margins keep
+      expanding despite the investment cycle; the balance sheet, while now net-debt, carries essentially no leverage
+      risk relative to earnings power; and the valuation is not stretched relative to Microsoft's own history.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to watch</div>
+      <p>Free cash flow has stalled and conversion has roughly halved in four years as capex outruns operating cash
+      flow growth — the market is trusting that this spend converts to durable Azure/AI revenue, and any sign of
+      overbuild or slowing AI monetization would hit the thesis hard. Governance is a legitimate (not a flaw, just a
+      fact) difference from founder-led names in this portfolio — no aligned controlling owner. Depreciation from the
+      AI buildout will be a growing drag on reported margins in coming years even if the cash spend itself moderates.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Microsoft FY2025 10-K and FY2026 quarterly/annual earnings releases (SEC EDGAR, investor.microsoft.com) ·
+    stockanalysis.com · macrotrends.net · Synergy Research Group (cloud infrastructure market share, Q1 2026) ·
+    GuruFocus, WallStreetZen, financecharts.com (ownership, EBITDA, balance sheet series) — cross-checked across at
+    least two sources where possible. ROIC/WACC are analyst estimates, not company-disclosed figures. Net debt figures
+    for FY22–FY24 use approximate long-term debt series that may not be perfectly consistent in methodology with the
+    FY25–FY26 figures; directionally reliable, not precise to the decimal. Capex figures use "purchases of property
+    and equipment" (cash flow statement) unless noted; management's calendar-year capex guidance additionally includes
+    finance leases and is not directly comparable. <br/>
+    This dashboard is personal investment research compiled for portfolio tracking purposes only. It is not
+    investment advice, was built with AI assistance, may contain errors or stale data, and should not be relied upon
+    for investment decisions without independent verification. Data believed accurate as of August 12, 2026.
+  </div>
+  <div class="bignum-corner">MSFT</div>
+</div>
+
+</body>
+</html>

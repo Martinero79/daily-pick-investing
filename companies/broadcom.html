@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Broadcom Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .eyebrow { color:#2dd4bf; font-size:9.5px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:27px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:10.5px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:34px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:11px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:21px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:9.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:8.3px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:11px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:11.3px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:10.3px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:17px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:10.3px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:12px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:9.1px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:9.5px; color:#94a3b8; flex-wrap:wrap; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:9px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:20px; font-weight:700; }
+  .cagr-card .sub { font-size:9.5px; color:#7c8aa5; margin-top:3px; }
+  table.datatable { width:100%; border-collapse:collapse; font-size:9.8px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:8.6px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+  .criteria-table th, .criteria-table td { font-size:9.6px; }
+  .status-pill { font-weight:700; font-size:9px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:10.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:9.8px; color:#cbd5e1; line-height:1.55; margin:0; }
+  .footer-note { font-size:8.2px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:12px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:10.3px; color:#cfe0f5; line-height:1.6; margin:0; }
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:11px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Semiconductors + Enterprise Infrastructure Software</div>
+  <h1>Broadcom Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: AVGO</span>
+    <span class="badge">FY ends late Oct / early Nov (non-calendar)</span>
+    <span class="badge">Founded 1961 (Avago/HP semiconductor lineage) &middot; HQ Palo Alto, CA</span>
+    <span class="badge warn">VMware acquired Nov 2023 &mdash; structural break in the financials, not organic growth</span>
+  </div>
+  <div class="price">$416.08</div>
+  <div class="price-sub">Close Aug 11, 2026 &middot; Mkt cap &asymp; $1.98T &middot; 52-wk range $281.87&ndash;$495.00 (+36.4% 52-wk change)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Marvell Technology (closest direct rival in custom AI ASIC design &mdash; together the two control &asymp;95% of that market) &middot; NVIDIA (AI accelerators; Broadcom leads in AI networking/Ethernet switching) &middot; Intel (custom ASICs &amp; broader semiconductors)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$63.9B</div>
+      <div class="sub" style="color:#34d399;">+23.9% YoY</div>
+      <div class="note">FY2025 is the first full year lapping a full year of VMware &mdash; growth rate is not purely organic. See p.2.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">39.9%</div>
+      <div class="sub">GAAP; recovering from a 26.1% FY2024 trough caused by VMware deal costs</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green">24.2% / 12.1%</div>
+      <div class="note">Return earned on capital in the business vs. what that capital costs &mdash; value is created when ROIC &gt; WACC. Here it clears comfortably. Both are third-party derived estimates, not filed figures &mdash; indicative only.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">1.09x</div>
+      <div class="sub">TTM &mdash; down from &asymp;2.8x in FY2024, right after the VMware deal closed</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 21.16,143.78 L55.76,130.62 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M21.16,143.78 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 55.76,130.62 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 9 (revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (market concentration, entry multiple, share count trend, insider ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration detail: <b style="color:#fbbf24;">3 / 5</b> &mdash; dominant in custom-ASIC design and enterprise virtualization niches, but a genuinely diversified conglomerate facing real competition in each vertical</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Broadcom is two overlapping stories bolted together by the November 2023 VMware acquisition: a semiconductor franchise that is now the leading merchant designer of custom AI accelerators for hyperscalers (Google, Meta, OpenAI, Anthropic, and reportedly Apple and ByteDance), and an enterprise infrastructure-software business built around VMware's virtualization stack that behaves more like a subscription cash cow than a semiconductor line. The headline five-year growth numbers &mdash; a 23%+ revenue CAGR, 30%+ EBIT CAGR &mdash; are real cash flows, but they are not purely organic: FY2024 revenue jumped 44% and GAAP operating margin briefly collapsed to 26.1% simply because VMware was consolidated for the first time and its acquisition costs hit the income statement; the recovery to 39.9% in FY2025 mostly reflects those one-time costs rolling off, not a sudden efficiency breakthrough. What is organic and re-accelerating is AI semiconductor revenue, up 143% year-over-year last quarter on a &gt;$73B backlog and multi-year hyperscaler supply deals, while infrastructure-software growth has cooled to single digits and is drawing real customer pushback over pricing. The balance sheet has healed fast &mdash; net debt/EBITDA fell from roughly 2.8x right after the deal closed to about 1.1x today &mdash; but the stock has re-rated even faster, with P/S near 27x versus a &asymp;21x trailing eight-quarter average and P/FCF near 60x versus a &asymp;31x five-year average. Nine of thirteen screening criteria are met; the misses cluster exactly where you'd expect for a story this well covered: a rich entry valuation, thin insider ownership, and a share count that is still net dilutive from the all-stock portion of the VMware deal.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (quarter ended May 3, 2026, reported June 3, 2026) and spot price as of market close Aug 11, 2026. Quarterly segment splits (Semiconductor Solutions vs. Infrastructure Software) are rounded to the nearest &asymp;$10&ndash;50M based on company press-release disclosures and back-solved to sum exactly to reported total revenue; treat sub-$50M precision as indicative, not exact. Broadcom's fiscal year runs roughly December&ndash;November (FY2025 ended Nov 2, 2025) &mdash; all quarter labels in this document are fiscal, not calendar.
+  </div>
+
+  <div class="bignum-corner">9/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions, fiscal year ending late Oct/early Nov. CAGR computed FY21&rarr;FY25 (4-year span across 5 data points).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FY2024 revenue jumps 44% overnight because VMware (acquired Nov 2023) is consolidated for a full year for the first time &mdash; this is a structural addition, not organic growth. GAAP EBIT actually fell that year (deal-related intangible amortization, retention stock comp, restructuring) before snapping back in FY2025 as those costs normalized.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$17.5B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$35B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$52.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$70B</text><rect x="96" y="153.69" width="24" height="86.31" rx="2" fill="#2dd4bf"/><rect x="126" y="213.22" width="24" height="26.78" rx="2" fill="#60a5fa"/><rect x="156" y="198.13" width="24" height="41.87" rx="2" fill="#fbbf24"/><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="252" y="135.61" width="24" height="104.39" rx="2" fill="#2dd4bf"/><rect x="282" y="195.29" width="24" height="44.71" rx="2" fill="#60a5fa"/><rect x="312" y="188.73" width="24" height="51.27" rx="2" fill="#fbbf24"/><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="408" y="127.43" width="24" height="112.57" rx="2" fill="#2dd4bf"/><rect x="438" y="189.06" width="24" height="50.94" rx="2" fill="#60a5fa"/><rect x="468" y="184.58" width="24" height="55.42" rx="2" fill="#fbbf24"/><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="564" y="77.91" width="24" height="162.09" rx="2" fill="#2dd4bf"/><rect x="594" y="197.69" width="24" height="42.31" rx="2" fill="#60a5fa"/><rect x="624" y="178.98" width="24" height="61.02" rx="2" fill="#fbbf24"/><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="720" y="39.21" width="24" height="200.79" rx="2" fill="#2dd4bf"/><rect x="750" y="159.91" width="24" height="80.09" rx="2" fill="#60a5fa"/><rect x="780" y="155.41" width="24" height="84.59" rx="2" fill="#fbbf24"/><text x="762" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+23.5%</div><div class="sub">$27,450M &rarr; $63,887M</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#34d399;">+31.5%</div><div class="sub">$8,519M &rarr; $25,484M</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+19.2%</div><div class="sub">$13,321M &rarr; $26,914M</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">The FY2024 dip to 26.1% and FY2025 recovery to 39.9% are both VMware-driven &mdash; acquisition costs suppressed the trough, their roll-off drove the rebound. 20% screen threshold shown as dashed reference; Broadcom has cleared it every year in this window regardless.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">12.5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">37.5%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50%</text><path d="M50.0,220.0 L50.0,95.88 L247.5,48.64 L445.0,39.0 L642.5,115.6 L840.0,60.44 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,95.88 L247.5,48.64 L445.0,39.0 L642.5,115.6 L840.0,60.44" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="95.88" r="3" fill="#2dd4bf"/><circle cx="247.5" cy="48.64" r="3" fill="#2dd4bf"/><circle cx="445.0" cy="39.0" r="3" fill="#2dd4bf"/><circle cx="642.5" cy="115.6" r="3" fill="#2dd4bf"/><circle cx="840.0" cy="60.44" r="3" fill="#2dd4bf"/><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="135" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT</th><th>Op. Margin</th><th>Free Cash Flow</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>$27,450M</td><td>$8,519M</td><td>31.0%</td><td>$13,321M</td><td>$6,437M</td></tr>
+    <tr><td>FY2022</td><td>$33,203M</td><td>$14,225M</td><td>42.8%</td><td>$16,312M</td><td>$11,223M</td></tr>
+    <tr><td>FY2023</td><td>$35,819M</td><td>$16,207M</td><td>45.3%</td><td>$17,633M</td><td>$14,082M</td></tr>
+    <tr><td>FY2024</td><td>$51,574M</td><td>$13,463M</td><td>26.1%</td><td>$19,414M</td><td>$5,895M</td></tr>
+    <tr><td>FY2025</td><td>$63,887M</td><td>$25,484M</td><td>39.9%</td><td>$26,914M</td><td>$23,126M</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Last 8 fiscal quarters through Q2 FY2026 (quarter ended May 3, 2026, reported June 3, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 FY2026 Headlines</div>
+    <p>Record quarterly revenue of <b style="color:#f8fafc;">$22.19B</b>, +47.9% YoY. Semiconductor Solutions revenue $15.01B (+79% YoY, record), driven by AI semiconductor revenue of $10.8B (+143% YoY) &mdash; networking chips were &asymp;40% of AI revenue. Infrastructure Software revenue $7.18B (+9% YoY), a touch below consensus. Non-GAAP diluted EPS $2.44 (+54% YoY). Q3 FY2026 AI semiconductor guide &asymp;$16B; FY2026 AI revenue target reiterated at &asymp;$56B, FY2027 target &gt;$100B. Next earnings: Q3 FY2026 results due Sep 2, 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Mix &mdash; Semiconductor Solutions vs. Infrastructure Software (quarterly)</div>
+    <div class="chart-sub">Semiconductor Solutions (blue) has swelled from &asymp;56% of quarterly revenue in Q3 FY24 to &asymp;68% in Q2 FY26 as AI silicon compounds; Infrastructure Software (teal) is growing much more slowly in dollar terms and shrinking as a share of the mix, even with VMware integration largely complete.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#3b82f6;"></span>Semiconductor Solutions</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Infrastructure Software</span>
+    </div>
+    <svg viewBox="0 0 860 215" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="183.0" x2="840" y2="183.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="187.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="141.2" x2="840" y2="141.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="145.2" text-anchor="end" font-size="11" fill="#64748b">$6B</text><line x1="60" y1="99.5" x2="840" y2="99.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="103.5" text-anchor="end" font-size="11" fill="#64748b">$12B</text><line x1="60" y1="57.8" x2="840" y2="57.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="61.8" text-anchor="end" font-size="11" fill="#64748b">$18B</text><line x1="60" y1="16.0" x2="840" y2="16.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="20.0" text-anchor="end" font-size="11" fill="#64748b">$24B</text><rect x="81.9" y="132.39" width="53.6" height="50.61" rx="2" fill="#3b82f6"/><rect x="81.9" y="92.03" width="53.6" height="40.36" rx="2" fill="#2dd4bf"/><text x="108.8" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY24</text><rect x="179.4" y="125.73" width="53.6" height="57.27" rx="2" fill="#3b82f6"/><rect x="179.4" y="85.2" width="53.6" height="40.53" rx="2" fill="#2dd4bf"/><text x="206.2" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY24</text><rect x="276.9" y="125.87" width="53.6" height="57.13" rx="2" fill="#3b82f6"/><rect x="276.9" y="79.21" width="53.6" height="46.66" rx="2" fill="#2dd4bf"/><text x="303.8" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q1 FY25</text><rect x="374.4" y="124.55" width="53.6" height="58.45" rx="2" fill="#3b82f6"/><rect x="374.4" y="78.6" width="53.6" height="45.95" rx="2" fill="#2dd4bf"/><text x="401.2" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY25</text><rect x="471.9" y="118.98" width="53.6" height="64.02" rx="2" fill="#3b82f6"/><rect x="471.9" y="72.0" width="53.6" height="46.98" rx="2" fill="#2dd4bf"/><text x="498.8" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY25</text><rect x="569.4" y="105.76" width="53.6" height="77.24" rx="2" fill="#3b82f6"/><rect x="569.4" y="57.64" width="53.6" height="48.12" rx="2" fill="#2dd4bf"/><text x="596.2" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY25</text><rect x="666.9" y="96.02" width="53.6" height="86.98" rx="2" fill="#3b82f6"/><rect x="666.9" y="48.62" width="53.6" height="47.4" rx="2" fill="#2dd4bf"/><text x="693.8" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q1 FY26</text><rect x="764.4" y="78.55" width="53.6" height="104.45" rx="2" fill="#3b82f6"/><rect x="764.4" y="28.6" width="53.6" height="49.95" rx="2" fill="#2dd4bf"/><text x="791.2" y="201" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue YoY Growth % &mdash; with trendline</div>
+    <div class="chart-sub">Growth decelerated from 51% (Q4 FY24) to 20% (Q2 FY25) as VMware anniversaried into the comps, then reaccelerated sharply to 48% by Q2 FY26 on AI semiconductor demand &mdash; a dip-and-reaccelerate pattern, not a straight-line slowdown.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#34d399;"></span>YoY growth</span>
+      <span><span class="dot" style="background:#64748b;"></span>Linear trend (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 215" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="183.0" x2="840" y2="183.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="141.2" x2="840" y2="141.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="145.2" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="99.5" x2="840" y2="99.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="103.5" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="57.8" x2="840" y2="57.8" stroke="#1e293b" stroke-width="1"/><text x="42" y="61.8" text-anchor="end" font-size="11" fill="#64748b">45%</text><line x1="50" y1="16.0" x2="840" y2="16.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="20.0" text-anchor="end" font-size="11" fill="#64748b">60%</text><path d="M50.0,183.0 L50.0,51.42 L162.9,40.5 L275.7,114.25 L388.6,126.88 L501.4,121.68 L614.3,104.57 L727.1,100.98 L840.0,49.75 L840.0,183.0 Z" fill="#34d399" opacity="0.15"/><path d="M50.0,51.42 L162.9,40.5 L275.7,114.25 L388.6,126.88 L501.4,121.68 L614.3,104.57 L727.1,100.98 L840.0,49.75" fill="none" stroke="#34d399" stroke-width="2.5"/><circle cx="50.0" cy="51.42" r="3" fill="#34d399"/><circle cx="162.9" cy="40.5" r="3" fill="#34d399"/><circle cx="275.7" cy="114.25" r="3" fill="#34d399"/><circle cx="388.6" cy="126.88" r="3" fill="#34d399"/><circle cx="501.4" cy="121.68" r="3" fill="#34d399"/><circle cx="614.3" cy="104.57" r="3" fill="#34d399"/><circle cx="727.1" cy="100.98" r="3" fill="#34d399"/><circle cx="840.0" cy="49.75" r="3" fill="#34d399"/><line x1="50.0" y1="78.07" x2="840.0" y2="99.43" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="50.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY24</text><text x="162.9" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY24</text><text x="275.7" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY25</text><text x="388.6" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY25</text><text x="501.4" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY25</text><text x="614.3" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY25</text><text x="727.1" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY26</text><text x="840.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin % (quarterly) &mdash; with trendline</div>
+    <div class="chart-sub">GAAP margin has climbed almost every quarter since the FY2024 VMware-cost trough, hitting a record 48.6% in Q2 FY26 as AI mix shifts revenue toward higher-margin semiconductor product.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#fbbf24;"></span>Operating margin</span>
+      <span><span class="dot" style="background:#64748b;"></span>Linear trend (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 215" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="183.0" x2="840" y2="183.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="141.2" x2="840" y2="141.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="145.2" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="99.5" x2="840" y2="99.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="103.5" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="57.8" x2="840" y2="57.8" stroke="#1e293b" stroke-width="1"/><text x="42" y="61.8" text-anchor="end" font-size="11" fill="#64748b">45%</text><line x1="50" y1="16.0" x2="840" y2="16.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="20.0" text-anchor="end" font-size="11" fill="#64748b">60%</text><path d="M50.0,183.0 L50.0,102.35 L162.9,91.37 L275.7,66.17 L388.6,74.87 L501.4,80.29 L614.3,66.98 L727.1,59.58 L840.0,47.67 L840.0,183.0 Z" fill="#fbbf24" opacity="0.15"/><path d="M50.0,102.35 L162.9,91.37 L275.7,66.17 L388.6,74.87 L501.4,80.29 L614.3,66.98 L727.1,59.58 L840.0,47.67" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.0" cy="102.35" r="3" fill="#fbbf24"/><circle cx="162.9" cy="91.37" r="3" fill="#fbbf24"/><circle cx="275.7" cy="66.17" r="3" fill="#fbbf24"/><circle cx="388.6" cy="74.87" r="3" fill="#fbbf24"/><circle cx="501.4" cy="80.29" r="3" fill="#fbbf24"/><circle cx="614.3" cy="66.98" r="3" fill="#fbbf24"/><circle cx="727.1" cy="59.58" r="3" fill="#fbbf24"/><circle cx="840.0" cy="47.67" r="3" fill="#fbbf24"/><line x1="50.0" y1="95.9" x2="840.0" y2="51.42" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="50.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY24</text><text x="162.9" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY24</text><text x="275.7" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY25</text><text x="388.6" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY25</text><text x="501.4" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY25</text><text x="614.3" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY25</text><text x="727.1" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY26</text><text x="840.0" y="201" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Pattern to note:</b> infrastructure software is now the laggard, not the driver &mdash; Q2 FY26 infrastructure software revenue (+9% YoY) came in slightly below consensus while AI semiconductor revenue (+143% YoY) does essentially all the heavy lifting. The VMware cash-cow thesis looks intact, but the growth story has shifted almost entirely to custom AI silicon.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Quarter-end multiples are approximated from month-end closing prices nearest each fiscal quarter end and reported diluted share counts &mdash; indicative, not exact closing-day figures.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Sales Ratio &mdash; Quarterly (at quarter-end close) vs. 8-Quarter Average</div>
+    <div class="chart-sub">P/S has re-rated from &asymp;16x in mid-2024 to &asymp;27x today as the AI-ASIC narrative took hold. The current multiple sits above the 8-quarter average of &asymp;21.2x, consistent with the "Not met" call on criterion #10 (entry multiple vs. own trading history) on page 5.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>P/S ratio</span>
+      <span><span class="dot" style="background:#64748b;"></span>8-quarter average (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">8.75x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">17.5x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">26.25x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35x</text><path d="M50.0,129.15 L162.9,130.71 L275.7,109.55 L388.6,128.13 L501.4,84.69 L614.3,59.56 L727.1,85.06 L840.0,66.06" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="129.15" r="3" fill="#a78bfa"/><circle cx="162.9" cy="130.71" r="3" fill="#a78bfa"/><circle cx="275.7" cy="109.55" r="3" fill="#a78bfa"/><circle cx="388.6" cy="128.13" r="3" fill="#a78bfa"/><circle cx="501.4" cy="84.69" r="3" fill="#a78bfa"/><circle cx="614.3" cy="59.56" r="3" fill="#a78bfa"/><circle cx="727.1" cy="85.06" r="3" fill="#a78bfa"/><circle cx="840.0" cy="66.06" r="3" fill="#a78bfa"/><line x1="50.0" y1="99.1" x2="840.0" y2="99.1" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY24</text><text x="162.9" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY24</text><text x="275.7" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY25</text><text x="388.6" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY25</text><text x="501.4" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3 FY25</text><text x="614.3" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4 FY25</text><text x="727.1" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1 FY26</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2 FY26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Debt Trend (quarterly, $B) &mdash; with trendline</div>
+    <div class="chart-sub">Net debt has been paid down from &asymp;$60.0B (Q3 FY2024, in the wake of the VMware-financing debt raise) to &asymp;$45.3B two years later; net debt/EBITDA over the same stretch fell from 2.80x to 1.09x as EBITDA nearly doubled and debt was steadily retired &mdash; the clearest post-VMware deleveraging path in the data.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#f59e0b;"></span>Net debt ($B)</span>
+      <span><span class="dot" style="background:#64748b;"></span>Linear trend (dashed)</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$16.25B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$32.5B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$48.75B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$65B</text><rect x="71.7" y="36.92" width="74.1" height="203.08" rx="2" fill="#f59e0b"/><text x="108.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY24</text><rect x="169.2" y="43.02" width="74.1" height="196.98" rx="2" fill="#f59e0b"/><text x="206.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY24</text><rect x="266.7" y="46.08" width="74.1" height="193.92" rx="2" fill="#f59e0b"/><text x="303.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q1 FY25</text><rect x="364.2" y="44.37" width="74.1" height="195.63" rx="2" fill="#f59e0b"/><text x="401.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY25</text><rect x="461.7" y="58.92" width="74.1" height="181.08" rx="2" fill="#f59e0b"/><text x="498.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY25</text><rect x="559.2" y="74.15" width="74.1" height="165.85" rx="2" fill="#f59e0b"/><text x="596.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY25</text><rect x="656.7" y="64.32" width="74.1" height="175.68" rx="2" fill="#f59e0b"/><text x="693.8" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q1 FY26</text><rect x="754.2" y="86.68" width="74.1" height="153.32" rx="2" fill="#f59e0b"/><text x="791.2" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY26</text><line x1="108.75" y1="33.72" x2="791.25" y2="79.87" stroke="#64748b" stroke-width="2" stroke-dasharray="6,5"/></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 15.67,98.78 L52.41,103.15 A58,58 0 1 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M15.67,98.78 A95,95 0 0 1 103.37,15.23 L105.95,52.14 A58,58 0 0 0 52.41,103.15 Z" fill="#60a5fa"/><path d="M103.37,15.23 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 105.95,52.14 Z" fill="#64748b"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9"></text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1"></text></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutions &asymp; 76.9%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Public &amp; other float &asymp; 22.0%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Company insiders &asymp; 1.1%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> ownership is broad and institutional (76.9%) with a liquid float and no controlling shareholder or family/founder block &mdash; unlike, say, Arm's SoftBank-controlled structure. The flag is pure alignment: insider ownership (1.11%) is thin for a company this size. CEO Hock Tan is a long-tenured operator (running the Avago/Broadcom lineage since 2006) rather than a founder-owner with a large personal stake, which explains but doesn't offset the low figure.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is a 1&ndash;5 context score, not pass/fail, but is folded into the 13-item tally on page 1 for a conservative "Not met" call given its 3/5 score.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Broadcom</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>23.5% (VMware-inflated, see p.2)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY21-25)</td><td>&ge;15%</td><td>31.5% (VMware-inflated, see p.2)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>39.9%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>19.2%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>&asymp;70%+ share in custom AI-ASIC design services; #1/2 Ethernet switch silicon; #1 enterprise virtualization (VMware)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; dominant niches inside a diversified conglomerate</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>24.2% vs 12.1%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.09x (TTM), down from &asymp;2.80x in FY2024</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>&asymp;100% (TTM)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/FCF 60.4x vs &asymp;30.8x 5-yr avg; P/S 26.9x vs &asymp;21.2x 8-qtr avg</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>+1.04% YoY (still net dilutive from VMware stock deal; QoQ turned &minus;0.25% as buybacks pick up)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>1.11% &mdash; thin; Hock Tan is a long-tenured operator, not a founder</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.1% of TTM revenue &mdash; fabless-plus model</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Nine of thirteen criteria clear the bar; margins and ROIC have recovered sharply post-VMware integration; AI semiconductor revenue (&asymp;$10.8B in the latest quarter) is compounding at triple-digit growth rates on a &gt;$73B committed backlog and multi-year hyperscaler agreements including a Google TPU deal through 2031; leverage has been cut from &asymp;2.8x to &asymp;1.1x net debt/EBITDA in about two years; the capex-light model converts roughly all of EBIT to free cash flow; and the dividend has now grown for 15 consecutive years.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation has re-rated hard &mdash; P/S near 27x vs. a &asymp;21x trailing 8-quarter average and P/FCF near 60x vs. a &asymp;31x five-year average &mdash; leaving little room for disappointment. Infrastructure-software (VMware) growth is decelerating and missed consensus in the latest quarter, even as list-price increases (reportedly 50&ndash;200% per-core for some customers) draw enterprise pushback and EU antitrust scrutiny. Insider ownership is thin (1.11%) and share count is still net dilutive year-over-year from the all-stock portion of the VMware deal. FY2024 numbers are heavily distorted by one-time deal accounting, so the multi-year CAGRs partly reflect the VMware step-change rather than organic execution &mdash; don't extrapolate them at face value.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 11&ndash;12, 2026. Sources: stockanalysis.com (annual &amp; quarterly financial statements, balance sheet, valuation ratios, statistics), Broadcom Inc. Q1&ndash;Q4 FY2025 and Q1&ndash;Q2 FY2026 earnings press releases (investors.broadcom.com / PRNewswire), SEC 10-K/10-Q filings, digrin.com (monthly price history), and market coverage from Reuters, Tom's Hardware, Yahoo Finance and Network World on custom AI-ASIC positioning and VMware pricing.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of ROIC, WACC, valuation averages and ownership estimates) and function as indicators only, not as verified facts or a basis for investment decisions.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+</body>
+</html>
