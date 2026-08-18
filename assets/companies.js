@@ -53,6 +53,90 @@ const COMPANIES = [
     file: "companies/nvidia.html"
   },
 
+  {
+    slug: "broadcom",
+    name: "Broadcom Inc.",
+    ticker: "NASDAQ: AVGO",
+    sector: "Semiconductors + Enterprise Infrastructure Software",
+    dateFeatured: "2026-08-14",
+    price: "$416.08",
+    score: "9 / 13",
+    blurb: "Diversified semiconductor and enterprise software conglomerate — custom AI accelerators (ASICs) alongside VMware virtualization. Clears growth, margin, ROIC and balance-sheet bars comfortably; misses are mostly structural, including a concentrated customer base and thin insider ownership.",
+    file: "companies/broadcom.html"
+  },
+
+  {
+    slug: "demant",
+    name: "Demant A/S",
+    ticker: "CPH: DEMANT",
+    sector: "Hearing Healthcare / MedTech",
+    dateFeatured: "2026-08-15",
+    price: "DKK 282.20",
+    score: "6 / 13",
+    blurb: "Danish hearing-aid and hearing-healthcare manufacturer. A more mixed scorecard — margins have swung year to year, and only about half the criteria clear the bar.",
+    file: "companies/demant.html"
+  },
+
+  {
+    slug: "meta",
+    name: "Meta Platforms, Inc.",
+    ticker: "NASDAQ: META",
+    sector: "Social Media / Digital Advertising + AI Infrastructure",
+    dateFeatured: "2026-08-16",
+    price: "$599.12",
+    score: "8 / 13",
+    blurb: "Dominant in social media and digital advertising, now pouring capital into AI infrastructure. Margins, returns on capital and valuation-vs-history clear the bar; growth has cooled and capex is running hot as the AI buildout ramps.",
+    file: "companies/meta.html"
+  },
+
+  {
+    slug: "microsoft",
+    name: "Microsoft Corporation",
+    ticker: "NASDAQ: MSFT",
+    sector: "Cloud Computing / Enterprise Software",
+    dateFeatured: "2026-08-17",
+    price: "$503.81",
+    score: "5 / 10",
+    blurb: "Cloud and enterprise software giant, still compounding on Azure and Copilot-driven AI demand. Operating margin has expanded every year on the model's own numbers, though free cash flow has been squeezed by heavy AI capex.",
+    file: "companies/microsoft.html"
+  },
+
+  {
+    slug: "nkt",
+    name: "NKT A/S",
+    ticker: "CPH: NKT",
+    sector: "Power Cables / Energy Transition Infrastructure",
+    dateFeatured: "2026-08-18",
+    price: "DKK 954.00",
+    score: "5 / 13",
+    blurb: "Danish manufacturer of power cables for the subsea and land grid buildout tied to the energy transition. Margins have improved sharply from a low base, but the scorecard is still more miss than hit at this stage.",
+    file: "companies/nkt.html"
+  },
+
+  {
+    slug: "nn-group",
+    name: "NN Group N.V.",
+    ticker: "AMS: NN",
+    sector: "Insurance / Asset Management",
+    dateFeatured: "2026-08-18",
+    price: "€77.94",
+    score: "6 / 13",
+    blurb: "Dutch insurance and asset manager, mostly Netherlands-focused life and pension products. Solid capital generation and a high dividend yield, but growth and market-position criteria keep it under half the checklist met.",
+    file: "companies/nn-group.html"
+  },
+
+  {
+    slug: "visa",
+    name: "Visa Inc.",
+    ticker: "NYSE: V",
+    sector: "Global Payments Network",
+    dateFeatured: "2026-08-18",
+    price: "$362.82",
+    score: "9 / 13",
+    blurb: "The toll-booth on global card payments, alongside Mastercard in a genuine duopoly. Margins, returns on capital and valuation all clear the bar; growth has simply slowed as card payment volumes mature.",
+    file: "companies/visa.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
