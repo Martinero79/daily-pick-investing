@@ -107,7 +107,7 @@ const COMPANIES = [
     ticker: "CPH: NKT",
     sector: "Power Cables / Energy Transition Infrastructure",
     dateFeatured: "2026-08-18",
-    price: "DKK 954.00",
+    price: "DKK 966.50",
     score: "5 / 13",
     blurb: "Danish manufacturer of power cables for the subsea and land grid buildout tied to the energy transition. Margins have improved sharply from a low base, but the scorecard is still more miss than hit at this stage.",
     file: "companies/nkt.html"
