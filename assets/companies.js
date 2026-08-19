@@ -24,7 +24,7 @@ const COMPANIES = [
     sector: "Semiconductor IP / AI Compute",
     dateFeatured: "2026-08-11",           // YYYY-MM-DD, the day you're posting this
     price: "$274.58",
-    score: "6 / 11",                      // criteria met, from the dashboard's scorecard
+    score: "8 / 13",                      // criteria met, from the dashboard's scorecard
     blurb: "Near-monopoly architecture licensor behind 99% of smartphone CPUs, now pushing into AI datacenter compute.",
     file: "companies/arm-holdings.html"   // path to the dashboard file you saved
   },
@@ -36,7 +36,7 @@ const COMPANIES = [
     sector: "Semiconductor Lithography Equipment",
     dateFeatured: "2026-08-12",
     price: "$1,733.48",
-    score: "10 / 12",
+    score: "11 / 13",
     blurb: "Sole supplier of EUV lithography systems — the irreplaceable chokepoint behind every leading-edge chip. Clears growth, margin, ROIC and balance-sheet bars comfortably; the one real miss is valuation, up 140% over the last year to well above its own trading history.",
     file: "companies/asml-holding.html"
   },
@@ -48,7 +48,7 @@ const COMPANIES = [
     sector: "AI Compute / Data Center Semiconductors",
     dateFeatured: "2026-08-13",
     price: "$217.55",
-    score: "10 / 12",
+    score: "11 / 13",
     blurb: "Dominant AI accelerator GPU supplier — data-center AI/GPU now ~90% of revenue, up from ~41% five years ago. Growth, margin, ROIC and valuation-vs-history all clear the bar; misses are FCF conversion and thin insider ownership.",
     file: "companies/nvidia.html"
   },
@@ -96,7 +96,7 @@ const COMPANIES = [
     sector: "Cloud Computing / Enterprise Software",
     dateFeatured: "2026-08-17",
     price: "$503.81",
-    score: "5 / 10",
+    score: "8 / 13",
     blurb: "Cloud and enterprise software giant, still compounding on Azure and Copilot-driven AI demand. Operating margin has expanded every year on the model's own numbers, though free cash flow has been squeezed by heavy AI capex.",
     file: "companies/microsoft.html"
   },
