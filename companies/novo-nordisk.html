@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Novo Nordisk Investment Dashboard</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+.bullet-list { margin:0; padding-left:14px; } .bullet-list li { margin-bottom:5px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Novo Nordisk A/S</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq Copenhagen: NOVO-B &middot; NYSE ADR: NVO</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Bagsværd, Denmark &middot; Founded 1923</div>
+    <div class="badge warn">Controlled by Novo Nordisk Foundation (77.3% of votes)</div>
+  </div>
+
+  <div class="price">DKK 294.70</div>
+  <div class="price-sub">Aug 17, 2026 (delayed quote) &middot; ADR NVO $45.71 (Aug 18 close) &middot; Market cap ≈ $203bn &middot; 52-wk range (NVO) $35.12 – $64.16 &middot; Analyst consensus: Hold (14 analysts), PT ≈ $46.89</div>
+  <div style="font-size:11px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitor:</b> Eli Lilly (Zepbound/Mounjaro &amp; oral orforglipron/Foundayo) — now the larger of the two GLP-1 players by combined obesity+diabetes share</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">DKK 309.1bn</div>
+      <div class="sub green" style="color:#34d399;">+6.4% YoY</div>
+      <div class="note">5-yr revenue CAGR (FY21-25) +21.7%, though FY2025 growth decelerated sharply from the 2021-2024 pace.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating (EBIT) Margin</div>
+      <div class="val green" style="color:#34d399;">41.3%</div>
+      <div class="sub">FY2025, company-reported</div>
+      <div class="note">Genuinely elite margin for the industry, though down from 44.2% FY2023-24 as restructuring and impairment charges bite (~DKK 8bn FY25, further DKK 6.3bn in Q2 2026 alone).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green" style="color:#34d399;">39.2% vs ~7.5%</div>
+      <div class="sub">TTM ROIC; wide positive spread</div>
+      <div class="note">WACC estimated via CAPM. Even after the drawdown, capital already deployed still earns exceptional returns.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val">~0.80x</div>
+      <div class="sub">Swung from net CASH (FY23) to net debt</div>
+      <div class="note">Net debt rose from +DKK3.2bn cash (FY23) to DKK ~104bn (FY25), mainly funding the ~$11.7bn Catalent manufacturing-sites acquisition and capacity buildout.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="241.66 72.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="72.5 241.66" stroke-dashoffset="-241.66" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/13</text>
+      <text x="60" y="72" text-anchor="middle" font-size="9" fill="#7c8aa5">criteria met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria met</b> — revenue &amp; EBIT growth, margin, ROIC&gt;WACC, net debt/EBITDA, market position (#2 in a duopoly), market concentration, valuation vs. own history (now cheap), share count, controlling ownership</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> — FCF growth (capex outpacing it), FCF conversion, capex intensity</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Novo Nordisk is the company behind Ozempic and Wegovy — the drugs that created the GLP-1 obesity and diabetes-care category and, for a couple of years, made Novo briefly Europe's most valuable listed company. The underlying business is still genuinely exceptional: 41% operating margins, ROIC north of 39%, and a controlling shareholder (the Novo Nordisk Foundation, via Novo Holdings) that has run the company for a century with a multi-decade horizon rather than a quarterly one. But the last two years have been a real test of the thesis. Eli Lilly's Zepbound/Mounjaro franchise and its newly approved oral pill (orforglipron, branded Foundayo) have overtaken Novo in combined GLP-1 market share (roughly 60% vs. 39% as of Q1 2026), and two separate disappointments from Novo's next-generation drug candidate CagriSema — first in December 2024, then again in February 2026 — repeatedly punctured the growth narrative. The stock fell from an intraday peak of $148.23 (June 25, 2024) to a 52-week low near $35 in March 2026, a roughly 75% drawdown, even as revenue and earnings kept growing throughout. What's left is a business still compounding, now priced at about a third of its own 2022-2023 valuation multiple — the scorecard below is an attempt to separate the real deterioration (a genuine competitive setback, a heavier capex load) from what looks more like a sentiment reset.
+  </div>
+
+  <div class="callout">
+    <b>This is a "was this a bubble or a reset" case:</b> almost every fundamental keeps growing — revenue, EBIT, dividends — while the stock is down ~75% from its 2024 peak and trades at 11.4x trailing earnings versus a 2021-2025 average closer to 30x. The open question isn't whether Novo is still a good business (the numbers say yes); it's whether Lilly's lead in oral GLP-1s marks a permanent shift in the category's #1 spot, or a gap Novo's pipeline can close.
+  </div>
+
+  <div class="bignum-corner">NOVO</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021–FY2025, DKK billions as reported. Revenue and earnings kept compounding at a rapid clip throughout — the growth story here has not broken, even as the stock has.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. EBIT (DKK bn)</div>
+    <div class="chart-sub">EBIT is company-reported operating profit. FY2025 includes roughly DKK 8bn of restructuring costs.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT</span></div>
+    <svg viewBox="0 0 700 190">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="90.4" width="30" height="69.6" fill="#5eead4"/><text x="35" y="85" text-anchor="middle" font-size="8" fill="#cbd5e1">140.8</text>
+      <rect x="54" y="130.6" width="30" height="29.4" fill="#60a5fa"/><text x="69" y="126" text-anchor="middle" font-size="7.5" fill="#93c5fd">58.6</text>
+      <text x="52" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <rect x="160" y="73.6" width="30" height="86.4" fill="#5eead4"/><text x="175" y="69" text-anchor="middle" font-size="8" fill="#cbd5e1">177.0</text>
+      <rect x="194" y="122.7" width="30" height="37.3" fill="#60a5fa"/><text x="209" y="118" text-anchor="middle" font-size="7.5" fill="#93c5fd">74.8</text>
+      <text x="192" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <rect x="300" y="44.6" width="30" height="115.4" fill="#5eead4"/><text x="315" y="40" text-anchor="middle" font-size="8" fill="#cbd5e1">232.3</text>
+      <rect x="334" y="109.3" width="30" height="50.7" fill="#60a5fa"/><text x="349" y="105" text-anchor="middle" font-size="7.5" fill="#93c5fd">102.6</text>
+      <text x="332" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <rect x="440" y="14.1" width="30" height="145.9" fill="#5eead4"/><text x="455" y="9" text-anchor="middle" font-size="8" fill="#cbd5e1">290.4</text>
+      <rect x="474" y="96.4" width="30" height="63.6" fill="#60a5fa"/><text x="489" y="92" text-anchor="middle" font-size="7.5" fill="#93c5fd">128.3</text>
+      <text x="472" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <rect x="580" y="4.6" width="30" height="155.4" fill="#5eead4"/><text x="595" y="0" text-anchor="middle" font-size="8" fill="#cbd5e1">309.1</text>
+      <rect x="614" y="96.7" width="30" height="63.3" fill="#60a5fa"/><text x="629" y="93" text-anchor="middle" font-size="7.5" fill="#93c5fd">127.7</text>
+      <text x="612" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr)</div>
+      <div class="val" style="color:#34d399;">21.7%</div>
+      <div class="sub">FY21→FY25, well above the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr)</div>
+      <div class="val" style="color:#34d399;">~21.5%</div>
+      <div class="sub">Company-reported basis; FY25 dented by restructuring charges</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr)</div>
+      <div class="val" style="color:#f87171;">+4.9%</div>
+      <div class="sub">Capex rose ~9.5x (DKK 6.3bn→60.1bn) as manufacturing capacity was built out — FCF growth lagged badly</div>
+    </div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>DKK millions</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+    <tr><td>Revenue</td><td>140,800</td><td>176,954</td><td>232,261</td><td>290,403</td><td>309,064</td></tr>
+    <tr><td>EBIT (operating profit)</td><td>58,600</td><td>74,800</td><td>102,600</td><td>128,300</td><td>127,658</td></tr>
+    <tr><td>EBIT margin</td><td>41.6%</td><td>42.3%</td><td>44.2%</td><td>44.2%</td><td>41.3%</td></tr>
+    <tr><td>Net income</td><td>47,757</td><td>55,525</td><td>83,683</td><td>100,988</td><td>102,434</td></tr>
+    <tr><td>EPS (diluted, DKK)</td><td>10.37</td><td>12.22</td><td>18.62</td><td>22.63</td><td>23.03</td></tr>
+    <tr><td>Free cash flow</td><td>48,665</td><td>66,741</td><td>83,102</td><td>73,804</td><td>58,962</td></tr>
+    <tr><td>Capex</td><td>6,335</td><td>12,146</td><td>25,806</td><td>47,164</td><td>60,140</td></tr>
+    <tr><td>Net cash / (debt)</td><td>(9,160)</td><td>(2,210)</td><td>+3,224</td><td>(76,479)</td><td>(103,996)</td></tr>
+    <tr><td>Dividend per share (DKK)</td><td>5.20</td><td>6.20</td><td>9.40</td><td>11.40</td><td>11.70</td></tr>
+  </table>
+  <div class="footer-note">Source: stockanalysis.com (NVO financials, data via S&amp;P Global Market Intelligence), cross-checked against official Novo Nordisk annual report press releases. EBIT shown on company-reported basis rather than standardized/adjusted figures.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; the Competitive Setback</div></div>
+  <div class="sec-sub">Last 6 reported quarters, DKK millions. Two GLP-1 pipeline disappointments (Dec 2024, Feb 2026) — not the quarterly numbers themselves — are what actually broke the stock.</div>
+
+  <div class="headline-box">
+    <div class="title">What actually moved the stock</div>
+    <p>Revenue and margins have stayed strong throughout 2025-2026 (see table below) — the drawdown was driven by pipeline and competitive news, not by the reported numbers. <b>Dec 20, 2024:</b> Novo's next-gen drug CagriSema missed weight-loss expectations in the REDEFINE 1 trial (~-20% headline result was reported as "disappointing" as the market had priced in more); the stock gapped down ~19% in a day. <b>Feb 23, 2026:</b> a second CagriSema trial (REDEFINE 4) again failed to beat Eli Lilly's tirzepatide (20.2% vs. 23.6% weight loss at 84 weeks) — a second, harder confirmation that Novo's next-generation pipeline hadn't closed the gap. Combined with Lilly's oral pill (orforglipron/Foundayo) reaching the market and taking share, the stock made a fresh multi-year low of ~$35 in March 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Growth YoY %, by Quarter</div>
+    <div class="chart-sub">Q1 2026's headline +24% and Q2 2026's modest +2.1% both understate the real trend: Q1'26 was inflated by a one-time ~DKK 28bn US drug-pricing provision reversal — adjusted for that, underlying sales actually fell slightly. Q2 2026 (reported Aug 4, 2026) showed adjusted sales +7% at constant exchange rates.</div>
+    <svg viewBox="0 0 700 130">
+      <line x1="10" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="55.8" width="90" height="34.2" fill="#34d399"/><text x="75" y="51" text-anchor="middle" font-size="9" fill="#cbd5e1">19.5%</text><text x="75" y="103" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'25</text>
+      <rect x="165" y="67.4" width="90" height="22.6" fill="#34d399"/><text x="210" y="63" text-anchor="middle" font-size="9" fill="#cbd5e1">12.9%</text><text x="210" y="103" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'25</text>
+      <rect x="300" y="80.9" width="90" height="9.1" fill="#34d399"/><text x="345" y="76" text-anchor="middle" font-size="9" fill="#cbd5e1">5.1%</text><text x="345" y="103" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'25</text>
+      <rect x="435" y="90" width="90" height="13.7" fill="#f87171"/><text x="480" y="116" text-anchor="middle" font-size="9" fill="#cbd5e1">-7.6%</text><text x="480" y="103" text-anchor="middle" font-size="9" fill="#94a3b8" transform="translate(0,17)">Q4'25</text>
+      <rect x="570" y="1.8" width="90" height="88.2" fill="#34d399"/><text x="615" y="14" text-anchor="middle" font-size="9" fill="#cbd5e1">24.0%*</text><text x="615" y="103" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'26</text>
+      <text x="615" y="127" text-anchor="middle" font-size="7" fill="#64748b">*one-time item</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>DKK millions</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Revenue</td><td>78,087</td><td>76,857</td><td>74,976</td><td>79,144</td><td>96,823</td><td>78,488</td></tr>
+    <tr><td>YoY growth</td><td>+19.5%</td><td>+12.9%</td><td>+5.1%</td><td>-7.6%</td><td>+24.0%*</td><td>+2.1%</td></tr>
+    <tr><td>Operating margin</td><td>49.7%</td><td>43.5%</td><td>44.4%</td><td>44.5%</td><td>61.6%*</td><td>42.5%</td></tr>
+  </table>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Guidance:</b> with Q2 2026 results, Novo raised full-year 2026 guidance to 0% to -6% adjusted sales growth at constant exchange rates (from a prior -4% to -12%) — an upward revision, but still a guided year-over-year decline. Q2 2026 also included a DKK 6.3bn non-cash impairment (DKK 4.0bn tied to writing down the monlunabant program).
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">A rare case of a quality compounder trading meaningfully below its own historical multiple.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E — FY-End vs. Current</div>
+    <div class="chart-sub">Current trailing P/E (11.4x) is roughly a third of the 2022-2023 peak multiple (~38x) — the de-rating combines the price collapse with continued earnings growth.</div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="17.9" width="75" height="92.1" fill="#60a5fa"/><text x="57" y="14" text-anchor="middle" font-size="9" fill="#cbd5e1">35.1x</text><text x="57" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2021</text>
+      <rect x="130" y="8.0" width="75" height="102" fill="#60a5fa"/><text x="167" y="4" text-anchor="middle" font-size="9" fill="#cbd5e1">38.2x</text><text x="167" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2022</text>
+      <rect x="240" y="10.6" width="75" height="99.4" fill="#60a5fa"/><text x="277" y="7" text-anchor="middle" font-size="9" fill="#cbd5e1">37.2x</text><text x="277" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2023</text>
+      <rect x="350" y="36.5" width="75" height="73.5" fill="#60a5fa"/><text x="387" y="32" text-anchor="middle" font-size="9" fill="#cbd5e1">27.5x</text><text x="387" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2024</text>
+      <rect x="460" y="72.3" width="75" height="37.7" fill="#60a5fa"/><text x="497" y="68" text-anchor="middle" font-size="9" fill="#cbd5e1">14.1x</text><text x="497" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2025</text>
+      <rect x="590" y="80.5" width="75" height="29.5" fill="#2dd4bf"/><text x="627" y="76" text-anchor="middle" font-size="9" fill="#cbd5e1">11.4x</text><text x="627" y="123" text-anchor="middle" font-size="8.5" fill="#94a3b8">Current</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="242.9 71.26" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="71.26 242.9" stroke-dashoffset="-242.9" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="#f8fafc">77%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Novo Holdings / Foundation: 77.3% of votes</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Free float (B-shares): remaining votes / ~72% of capital</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Capital Structure Note</div>
+      <p>Novo Holdings A/S — wholly owned by the Novo Nordisk Foundation, a Danish charitable foundation — holds A- and B-shares equal to ~28.1% of share capital but ~77.3% of votes, since A-shares carry 10x the voting power of B-shares and are legally non-transferable while the Foundation exists. This is one of the most entrenched, long-horizon control structures of any large-cap globally — for better (patient capital, no activist-driven short-termism) and worse (no external check on capital-allocation decisions like the Catalent deal).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Dividend note:</b> DPS has grown every year, DKK 5.20 (FY2021) → DKK 11.70 (FY2025), roughly 2.25x over five years. Current yield sits around 2.8-3.8% depending on the exact date/FX used — the yield rose mechanically as the share price fell, not because the dividend was cut.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">13-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored honestly. The misses cluster exactly where the "capex supercycle" story is happening — Novo is spending heavily to build capacity, which shows up as weak FCF conversion, not as a demand problem.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) ≥15%</td><td>21.7% (FY21-25)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) ≥15%</td><td>~21.5% company-reported; FY25 dented by ~DKK 8bn restructuring costs</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY ≥20%</td><td>41.3% FY2025 — still an elite margin despite compression from 44.2% FY23-24</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) ≥15%</td><td>+4.9% — capex rose ~9.5x (DKK 6.3bn→60.1bn) as manufacturing capacity was built out</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share — #1 or #2 in category</td><td>#2 in combined obesity+diabetes GLP-1 share (~39.4% vs. Lilly's ~60.1%, Q1 2026) — clearly #2, but the gap is widening against Novo</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open) — 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score ~2/5 — a tight two-player duopoly with Eli Lilly; extremely high barriers to entry (biologics manufacturing, clinical scale)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>TTM ROIC 39.2% vs. est. WACC ~7.5% — very wide spread</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>~0.80x — modest leverage, though a real swing from a small net cash position (FY2023) as the Catalent acquisition and capex cycle were funded</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) ≥80%</td><td>~46% FY2025 (DKK 59.0bn FCF / DKK 127.7bn EBIT) — capex supercycle is eating into cash conversion</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>11.4x trailing P/E vs. a 2021-2025 range of 14.1x-38.2x — meaningfully below its own history for the first time in years</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend — flat/declining</td><td>EPS growth has tracked net income growth closely (both ~21% CAGR), implying a broadly stable share count; continued modest buybacks</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership — meaningful</td><td>Novo Holdings/Foundation controls 77.3% of votes — one of the most entrenched controlling-shareholder structures of any large-cap globally</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity — low/asset-light</td><td>Capex ≈19.5% of FY2025 revenue (up from ~4.5% in FY2021) — structurally high right now due to the manufacturing buildout, not a low-capex model</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <ul class="bullet-list">
+        <li>Revenue, EBIT and dividends have all kept growing every year through the entire drawdown — this was a valuation reset and a competitive setback, not a business breaking down</li>
+        <li>Still #2 globally in a two-player category with enormous, still-growing total demand (obesity care is nowhere near saturated)</li>
+        <li>ROIC (39.2%) far exceeds any reasonable cost of capital; margins remain elite even after compression</li>
+        <li>Trailing P/E (11.4x) is roughly a third of the 2022-2023 peak multiple — a quality compounder now priced closer to an average industrial than a growth pharma</li>
+        <li>Controlling Foundation ownership gives genuine multi-decade patience — no activist pressure for short-term fixes</li>
+      </ul>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <ul class="bullet-list">
+        <li>Two consecutive CagriSema trial disappointments (Dec 2024, Feb 2026) suggest the next-gen pipeline hasn't yet closed the gap to Lilly's tirzepatide/orforglipron</li>
+        <li>Eli Lilly's oral pill (Foundayo) has an easier dosing profile than Novo's own oral Wegovy pill — a real product-level disadvantage in the fastest-growing part of the category</li>
+        <li>FCF conversion and capex intensity both fail the checklist right now — the capacity buildout needs to actually convert into volume/share, not just cost</li>
+        <li>Net debt swung from cash-positive to ~DKK 104bn in two years; leverage is still low in absolute terms but the direction of travel is worth tracking</li>
+        <li>Full-year 2026 guidance, even after being raised, still points to a year-over-year decline in adjusted sales/profit growth at constant currency</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (NVO — financials, ratios, statistics, price history; data via S&amp;P Global Market Intelligence); Novo Nordisk 6-K SEC filings and official Q2 2026 press release (GlobeNewswire, Aug 4, 2026); Novo Nordisk Foundation ownership disclosures (novonordiskfonden.dk); CNBC coverage of CagriSema trial results (Dec 2024, Feb 2026) and GLP-1 market-share data; Capital.com and Benzinga for share-price peak/trough context. Beta and some ownership-breakdown figures vary across data providers and are flagged as approximate where cited. <br>
+    <b>Disclaimer:</b> this is a personal-research summary, not financial advice — Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting. Prepared Aug 19, 2026.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price — The Full Round Trip</div></div>
+  <div class="sec-sub">Novo Nordisk A/S (NOVO-B, Copenhagen) &mdash; DKK share price trend. The steepest, fastest round trip of any dashboard on this site so far.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Novo Nordisk — Year-End Close, Peak &amp; Trough</div>
+    <div class="chart-sub">2022-2023 levels are approximate (directional). The June 2024 peak and Aug 2026 current price are well-sourced; the March 2026 trough is approximate, inferred from the 52-week-low range. NVO ADR (USD) equivalents in parentheses.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,159.8 L 172.8,120.3 L 299.6,42.7 L 426.4,159.4 L 553.2,168.3 L 680.0,151.8 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,159.8 L 172.8,120.3 L 299.6,42.7 L 426.4,159.4 L 553.2,168.3 L 680.0,151.8" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="159.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="149.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 370</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="172.8" cy="120.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="110.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 680</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="299.6" cy="42.7" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="32.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 1,033</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Peak Jun'24</text>
+<circle cx="426.4" cy="159.4" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="149.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 613</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">End 2024</text>
+<circle cx="553.2" cy="168.3" r="4" fill="#f87171" stroke="#f87171" stroke-width="1.6"/>
+<text x="553.2" y="158.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~DKK 225</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Trough Mar'26</text>
+<circle cx="680.0" cy="151.8" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="141.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 294.70</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data via stockanalysis.com / macrotrends.net / capital.com. Peak: NOVO-B ~DKK 1,033 intraday, June 25-26, 2024 (NVO ADR: $137.40 close / $148.23 intraday, June 25, 2024). Trough: approximate, March 2026 (NVO ADR confirmed low: $35.37 close, March 30, 2026).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
