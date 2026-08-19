@@ -137,6 +137,19 @@ const COMPANIES = [
     file: "companies/visa.html"
   },
 
+  {
+    slug: "novo-nordisk",
+    name: "Novo Nordisk A/S",
+    ticker: "CPH: NOVO-B / NYSE: NVO",
+    sector: "Pharmaceuticals / GLP-1 Obesity &amp; Diabetes Care",
+    dateFeatured: "2026-08-19",
+    price: "DKK 294.70",
+    score: "10 / 13",
+    blurb: "The maker of Ozempic and Wegovy — still growing revenue and earnings every year, but down roughly 75% from its June 2024 peak after two clinical setbacks for its next-gen drug CagriSema and a resurgent Eli Lilly. Clears growth, margin, ROIC and balance-sheet bars; misses are capex intensity and weak free-cash-flow conversion as it builds out manufacturing capacity.",
+    file: "companies/novo-nordisk.html",
+    personalNote: "Today's pick is partly thanks to the media attention Novo Nordisk has gotten since its Q2 results — but there's a personal angle too. I used to own this stock. Over Christmas break in 2023, I reshuffled my portfolio and bought three names at once: Arm, NVIDIA, and Novo Nordisk. All three took off early on. Arm and NVIDIA kept climbing, but Novo went the other way — from a peak around DKK 1,033 on June 25, 2024, down to a low near DKK 225 in March 2026. It wasn't a winner for me, and I don't hold any Novo shares today. But that's a story about my timing, not necessarily the company's potential — which is exactly why it's worth a clear-eyed look."
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];

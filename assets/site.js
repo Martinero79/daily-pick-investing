@@ -9,6 +9,15 @@ function fmtDate(iso) {
   return dt.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
+function personalNoteHTML(c) {
+  if (!c.personalNote) return "";
+  return `
+    <div class="personal-note">
+      <div class="kicker">Why I picked this one</div>
+      <p>${c.personalNote}<span class="signoff">— Maarten</span></p>
+    </div>`;
+}
+
 function cardHTML(c) {
   return `
     <a class="company-card" href="view.html?c=${encodeURIComponent(c.slug)}">
@@ -48,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="hero-stat"><div class="stat-label">Price</div><div class="stat-value">${c.price}</div></div>
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
         </div>
+        ${personalNoteHTML(c)}
         <a class="btn" href="view.html?c=${encodeURIComponent(c.slug)}">View full dashboard →</a>`;
     }
   }
@@ -82,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (titleEl) titleEl.textContent = c.name;
       if (openEl) openEl.href = c.file;
       frame.src = c.file;
+      const noteEl = document.getElementById("view-personal-note");
+      if (noteEl) noteEl.innerHTML = personalNoteHTML(c);
     } else if (titleEl) {
       titleEl.textContent = "Company not found";
     }
