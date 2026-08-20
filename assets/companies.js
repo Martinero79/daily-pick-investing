@@ -150,6 +150,19 @@ const COMPANIES = [
     personalNote: "Today's pick is partly thanks to the media attention Novo Nordisk has gotten since its Q2 results — but there's a personal angle too. I used to own this stock. Over Christmas break in 2023, I reshuffled my portfolio and bought three names at once: Arm, NVIDIA, and Novo Nordisk. All three took off early on. Arm and NVIDIA kept climbing, but Novo went the other way — from a peak around DKK 1,033 on June 25, 2024, down to a low near DKK 225 in March 2026. It wasn't a winner for me, and I don't hold any Novo shares today. But that's a story about my timing, not necessarily the company's potential — which is exactly why it's worth a clear-eyed look."
   },
 
+  {
+    slug: "sandisk",
+    name: "SanDisk Corporation",
+    ticker: "NASDAQ: SNDK",
+    sector: "NAND Flash Memory / AI Data Storage",
+    dateFeatured: "2026-08-21",
+    price: "$1,568.87",
+    score: "5 / 13",
+    blurb: "The NAND flash memory maker behind SD cards and enterprise SSDs, spun off from Western Digital in Feb 2025 — up roughly 570% year-to-date on a structural memory shortage colliding with AI-datacenter demand, though down about a third from its June 2026 all-time high. A genuinely extraordinary numbers story, but with only ~18 months of standalone history, four of the model's thirteen criteria can't honestly be tested yet.",
+    file: "companies/sandisk.html",
+    personalNote: "I didn't see this one coming. To me, SanDisk was always just the name on the memory card in my old camera — not a stock I'd ever think to check. Then a friend mentioned it to me, already deep into a run I'd completely missed: from around $235 at the start of the year to a peak near $2,354 by late June, on a genuine shortage of the NAND flash memory that AI data centers need for storage. It's cooled off since — down to around $1,569 now, roughly a third off that peak, as the memory-chip trade caught some profit-taking. Still up something like 570% since January, though. I don't own it — I'm overwhelmingly overexposed to AI as it is. But I expect he serves me a good Malbec at our next asado."
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
