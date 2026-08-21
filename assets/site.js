@@ -19,6 +19,8 @@ function personalNoteHTML(c) {
 }
 
 function cardHTML(c) {
+  const martineroChip = (c.martinero !== undefined)
+    ? `<span class="score-chip martinero-chip">Martinero ${c.martinero}/100</span>` : "";
   return `
     <a class="company-card" href="view.html?c=${encodeURIComponent(c.slug)}">
       <div class="card-top">
@@ -29,7 +31,10 @@ function cardHTML(c) {
       <div class="card-sector">${c.sector}</div>
       <p class="card-blurb">${c.blurb}</p>
       <div class="card-bottom">
-        <span class="score-chip">${c.score} criteria met</span>
+        <span class="chip-row">
+          <span class="score-chip">${c.score} criteria met</span>
+          ${martineroChip}
+        </span>
         <span class="card-link">View dashboard →</span>
       </div>
     </a>`;
@@ -56,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="hero-stats">
           <div class="hero-stat"><div class="stat-label">Price</div><div class="stat-value">${c.price}</div></div>
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
+          ${c.martinero !== undefined ? `<div class="hero-stat"><div class="stat-label">Martinero Index</div><div class="stat-value stat-value-martinero">${c.martinero}/100</div></div>` : ""}
         </div>
         ${personalNoteHTML(c)}
         <a class="btn" href="view.html?c=${encodeURIComponent(c.slug)}">View full dashboard →</a>`;
