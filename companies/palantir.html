@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Palantir Technologies Investment Dashboard</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:9px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 12px; }
+.mcard .label { font-size:10.5px; letter-spacing:0.6px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:19px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.status-na { background:#1b2436; color:#94a3b8; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+.bullet-list { margin:0; padding-left:14px; font-size:12px; color:#cbd5e1; line-height:1.55; } .bullet-list li { margin-bottom:5px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Palantir Technologies Inc.</h1>
+  <div class="badges">
+    <div class="badge">NASDAQ: PLTR</div>
+    <div class="badge">FY = calendar year</div>
+    <div class="badge">HQ: Denver, CO &middot; Direct listing Sep 30, 2020</div>
+    <div class="badge warn">Founder Voting Trust controls up to 49.99% of votes</div>
+    <div class="badge warn">Michael Burry has disclosed a large short position</div>
+  </div>
+
+  <div class="price">$173.96</div>
+  <div class="price-sub">Close Aug 20, 2026 &middot; Mkt cap &asymp; $418.0bn &middot; Trailing P/E 148.8x / Forward P/E 91.4x &middot; ~16% below its Nov 3, 2025 all-time-high close of $207.18</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Two different businesses under one ticker:</b> Government/defense analytics (near-monopoly, few real rivals: Anduril, Booz Allen, Leidos, CACI, SAIC) &middot; Commercial AI/data platform (genuinely competitive: Databricks, Snowflake, Microsoft Fabric, C3.ai)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$6.16B</div>
+      <div class="sub" style="color:#34d399;">+78.9% YoY</div>
+      <div class="note">FY2025 full year was $4.48B — growth has accelerated, not slowed, as the commercial ramp builds on top of government.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (TTM)</div>
+      <div class="val green" style="color:#34d399;">~42.8%</div>
+      <div class="sub">GAAP, last 4 quarters</div>
+      <div class="note">Up from 31.6% for full-year FY2025 and from a -26.7% margin in FY2021 — a genuinely fast scale-up.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green" style="color:#34d399;">Very high vs ~11%</div>
+      <div class="note">Asset-light, high-margin model comfortably clears any reasonable WACC estimate; a precise ROIC% is sensitive to whether the ~$9.2B cash pile counts as invested capital, so shown qualitatively rather than as one headline number.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val" style="color:#fbbf24;">~$9.2B net cash</div>
+      <div class="sub">Debt of only ~$211M (mostly leases)</div>
+      <div class="note">Essentially debt-free — funds continued R&amp;D and go-to-market spend without needing to raise capital.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">90/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Growth &amp; profitability weighted highest, ownership lowest — a different lens than the simple 13-count below.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="265.99 48.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="48.33 265.83" stroke-dashoffset="-265.99" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/13</text>
+      <text x="60" y="72" text-anchor="middle" font-size="9" fill="#7c8aa5">criteria met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 met</b> &mdash; revenue &amp; FCF CAGR, EBIT growth &amp; margin, market share (govt.), ROIC&gt;WACC, net debt/EBITDA, FCF conversion, entry multiple vs. history, founder voting control, capex intensity</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>2 not met</b> &mdash; market concentration (commercial side is genuinely competitive) and share count trend (dilutive)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Palantir builds software platforms — Gotham, Foundry, and now the AI Platform (AIP) — that let organizations fuse messy, siloed data and run AI models against it. It started almost entirely as a U.S. government and intelligence contractor and has spent the last few years pushing hard into commercial AI deployments. The financial turnaround has been dramatic: GAAP operating losses every year from IPO through 2022 gave way to a first profitable year in 2023, and by Q2 2026 (reported Aug 3, 2026) revenue was growing 93% year over year, with U.S. commercial revenue up 149%. The stock has tracked that story almost exactly — from around $16 in late January 2024 to an all-time-high close of $207.18 on November 3, 2025, before cooling to today's $173.96. What makes this one harder to read cleanly than most names on this site is the ownership structure: a Founder Voting Trust gives Peter Thiel, CEO Alex Karp, and Stephen Cohen up to 49.99% of total voting power through Class F shares, regardless of how much stock they actually own or how much further the company issues — a genuine governance story, not just a simple insider-ownership percentage.
+  </div>
+
+  <div class="callout">
+    <b>This is a "growth is real, valuation is the argument" case:</b> on the operating numbers, Palantir clears almost every bar in this model — growth, margins, cash generation, balance sheet, even entry multiple relative to its own extreme 2025 peak. The genuine debate is whether 149x trailing earnings and roughly 68x sales is a fair price for a company still early in monetizing an AI-driven commercial pivot, or a valuation that has run well ahead of any realistic long-run cash flows. Investor Michael Burry has taken the other side of that argument publicly and sized a large short position on it.
+  </div>
+
+  <div class="bignum-corner">PLTR</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIAL TRAJECTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">Five full fiscal (calendar) years as a standalone public company since the September 2020 direct listing — no predecessor-entity caveats needed here, unlike some recent picks on this site.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow, FY2021&ndash;FY2025 ($M)</div>
+    <div class="chart-sub">GAAP operating income was negative through FY2022, turned positive in FY2023 (the first GAAP-profitable year), and then compounded fast — free cash flow, by contrast, was positive throughout even while GAAP EBIT was still negative.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 700 225">
+      <line x1="10" y1="170" x2="690" y2="170" stroke="#263049" stroke-width="1"/>
+      <text x="695" y="173" text-anchor="end" font-size="8" fill="#64748b">$0</text>
+      <rect x="20" y="118.32" width="18" height="51.68" fill="#5eead4"/><text x="29" y="113.32" text-anchor="middle" font-size="7.5" fill="#cbd5e1">1,542</text>
+      <rect x="40" y="170" width="18" height="13.78" fill="#60a5fa"/><text x="49" y="192.78" text-anchor="middle" font-size="7" fill="#f87171">(411)</text>
+      <rect x="60" y="159.23" width="18" height="10.77" fill="#fbbf24"/><text x="69" y="154.23" text-anchor="middle" font-size="7" fill="#fde68a">321</text>
+      <text x="49" y="208" text-anchor="middle" font-size="10" fill="#94a3b8">FY21</text>
+      <rect x="156" y="106.10" width="18" height="63.90" fill="#5eead4"/><text x="165" y="101.10" text-anchor="middle" font-size="7.5" fill="#cbd5e1">1,906</text>
+      <rect x="176" y="170" width="18" height="5.40" fill="#60a5fa"/><text x="185" y="184.40" text-anchor="middle" font-size="7" fill="#f87171">(161)</text>
+      <rect x="196" y="163.84" width="18" height="6.16" fill="#fbbf24"/><text x="205" y="158.84" text-anchor="middle" font-size="7" fill="#fde68a">184</text>
+      <text x="185" y="208" text-anchor="middle" font-size="10" fill="#94a3b8">FY22</text>
+      <rect x="292" y="95.42" width="18" height="74.58" fill="#5eead4"/><text x="301" y="90.42" text-anchor="middle" font-size="7.5" fill="#cbd5e1">2,225</text>
+      <rect x="312" y="165.98" width="18" height="4.02" fill="#60a5fa"/><text x="321" y="160.98" text-anchor="middle" font-size="7" fill="#93c5fd">120</text>
+      <rect x="332" y="146.63" width="18" height="23.37" fill="#fbbf24"/><text x="341" y="141.63" text-anchor="middle" font-size="7" fill="#fde68a">697</text>
+      <text x="321" y="208" text-anchor="middle" font-size="10" fill="#94a3b8">FY23</text>
+      <rect x="428" y="73.93" width="18" height="96.07" fill="#5eead4"/><text x="437" y="68.93" text-anchor="middle" font-size="7.5" fill="#cbd5e1">2,866</text>
+      <rect x="448" y="159.60" width="18" height="10.40" fill="#60a5fa"/><text x="457" y="154.60" text-anchor="middle" font-size="7" fill="#93c5fd">310</text>
+      <rect x="468" y="131.76" width="18" height="38.24" fill="#fbbf24"/><text x="477" y="126.76" text-anchor="middle" font-size="7" fill="#fde68a">1,141</text>
+      <text x="457" y="208" text-anchor="middle" font-size="10" fill="#94a3b8">FY24</text>
+      <rect x="564" y="20.0" width="18" height="150.0" fill="#5eead4"/><text x="573" y="15.0" text-anchor="middle" font-size="7.5" fill="#cbd5e1">4,475</text>
+      <rect x="584" y="122.60" width="18" height="47.40" fill="#60a5fa"/><text x="593" y="117.60" text-anchor="middle" font-size="7" fill="#93c5fd">1,414</text>
+      <rect x="604" y="99.58" width="18" height="70.42" fill="#fbbf24"/><text x="613" y="94.58" text-anchor="middle" font-size="7" fill="#fde68a">2,101</text>
+      <text x="593" y="208" text-anchor="middle" font-size="10" fill="#94a3b8">FY25</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Margin Trend, FY2021&ndash;FY2025</div>
+    <div class="chart-sub">The clearest single chart on this page — a straight line from deep losses to a genuinely high-margin software business in four years.</div>
+    <svg viewBox="0 0 700 178">
+      <line x1="30" y1="150" x2="680" y2="150" stroke="#1a2236" stroke-width="1"/>
+      <line x1="30" y1="90" x2="680" y2="90" stroke="#2a3654" stroke-width="1.2"/>
+      <line x1="30" y1="30" x2="680" y2="30" stroke="#1a2236" stroke-width="1"/>
+      <text x="24" y="153.5" font-size="9" fill="#64748b" text-anchor="end">-30%</text>
+      <text x="24" y="93.5" font-size="9" fill="#64748b" text-anchor="end">0%</text>
+      <text x="24" y="33.5" font-size="9" fill="#64748b" text-anchor="end">+30%</text>
+      <path d="M 50,143.4 L 200,107 L 350,79.2 L 500,68.4 L 650,26.8" fill="none" stroke="#a78bfa" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="50" cy="143.4" r="3.2" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/><text x="50" y="155.4" text-anchor="middle" font-size="9" fill="#f87171">-26.7%</text>
+      <circle cx="200" cy="107" r="3.2" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/><text x="200" y="119" text-anchor="middle" font-size="9" fill="#f87171">-8.5%</text>
+      <circle cx="350" cy="79.2" r="3.2" fill="#0e1626" stroke="#a78bfa" stroke-width="1.6"/><text x="350" y="69.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5.4%</text>
+      <circle cx="500" cy="68.4" r="3.2" fill="#0e1626" stroke="#a78bfa" stroke-width="1.6"/><text x="500" y="58.4" text-anchor="middle" font-size="9" fill="#cbd5e1">10.8%</text>
+      <circle cx="650" cy="26.8" r="3.8" fill="#a78bfa" stroke="#a78bfa" stroke-width="1.6"/><text x="650" y="16.8" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">31.6%</text>
+      <text x="50" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">FY21</text>
+      <text x="200" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">FY22</text>
+      <text x="350" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">FY23</text>
+      <text x="500" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">FY24</text>
+      <text x="650" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+30.5%</div><div class="sub">$1.54B &rarr; $4.48B over 4 years; TTM run-rate of $6.16B implies growth has kept accelerating</div></div>
+    <div class="cagr-card"><div class="label">EBIT: FY21 &rarr; FY25</div><div class="val" style="color:#34d399;">$(411)M &rarr; $1,414M</div><div class="sub">First GAAP-profitable year was FY2023 ($120.0M); FY23&rarr;FY25 alone is a ~243%/yr 2-yr rate</div></div>
+    <div class="cagr-card"><div class="label">Free Cash Flow CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+60.0%</div><div class="sub">$321M &rarr; $2,101M &mdash; a clean 4-yr CAGR since FCF stayed positive even while GAAP EBIT was still negative</div></div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>$ millions unless noted</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+    <tr><td>Revenue</td><td>1,542</td><td>1,906</td><td>2,225</td><td>2,866</td><td>4,475</td></tr>
+    <tr><td>Operating income (EBIT)</td><td>(411)</td><td>(161)</td><td>120</td><td>310</td><td>1,414</td></tr>
+    <tr><td>Operating margin</td><td>(26.7%)</td><td>(8.5%)</td><td>5.4%</td><td>10.8%</td><td>31.6%</td></tr>
+    <tr><td>Net income</td><td>(520)</td><td>(374)</td><td>210</td><td>462</td><td>1,625</td></tr>
+    <tr><td>Diluted EPS</td><td>$(0.23)</td><td>$(0.16)</td><td>$0.08</td><td>$0.18</td><td>$0.63</td></tr>
+    <tr><td>Free cash flow</td><td>321</td><td>184</td><td>697</td><td>1,141</td><td>2,101</td></tr>
+    <tr><td>Capex (approx.)</td><td>~1.7% of rev.</td><td>~1.6% of rev.</td><td>~0.8% of rev.</td><td>~0.6% of rev.</td><td>~0.7% of rev.</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Palantir does not break out a single consistent capex line in every period, so capex is shown as an approximate % of revenue derived from "purchases of property and equipment" on the cash flow statement rather than as precise dollar figures. No dividend has ever been paid.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; What Moved the Stock</div></div>
+  <div class="sec-sub">Eight fiscal quarters, Q3 2024 through Q2 2026 &mdash; spanning the point where commercial growth really started compounding on top of the government base.</div>
+
+  <div class="headline-box">
+    <div class="title">What actually moved the stock recently</div>
+    <p><b>Aug 3, 2026:</b> Palantir reported Q2 2026 results &mdash; revenue of $1,935M (+93% YoY), government revenue $990.0M (+79%) and commercial revenue $945.4M (+110%, with U.S. commercial alone up 149%) &mdash; and raised guidance, sending the stock up roughly 30% that session. <b>Aug 12, 2026:</b> a broader rotation out of high-multiple AI/software names and into semiconductors pulled the stock back some of those gains. <b>Ongoing:</b> investor Michael Burry has disclosed a large notional short position (reportedly north of $900M), arguing publicly that Palantir is worth "less than $1" on a long-run basis &mdash; a prominent, well-known bear case running alongside the bull case above. <b>Also in the news:</b> a 2026 report highlighted Palantir paying only about &pound;2m of UK corporation tax in 2024 against roughly &pound;670m of UK government contracts, and the company continues to sign defense-adjacent deals such as a digital-twin supply-chain partnership with Mercury Systems.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue, Q3 2024&ndash;Q2 2026 ($M)</div>
+    <div class="chart-sub">Revenue growth has accelerated every single quarter shown here, not slowed &mdash; unusual for a company already growing this fast off this large a base.</div>
+    <svg viewBox="0 0 700 190">
+      <line x1="10" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="21" y="101.25" width="70" height="48.75" fill="#5eead4"/><text x="56" y="95.25" text-anchor="middle" font-size="9" fill="#cbd5e1">$726M</text><text x="56" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'24</text>
+      <rect x="105" y="94.39" width="70" height="55.61" fill="#5eead4"/><text x="140" y="88.39" text-anchor="middle" font-size="9" fill="#cbd5e1">$828M</text><text x="140" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'24</text>
+      <rect x="189" y="90.60" width="70" height="59.40" fill="#5eead4"/><text x="224" y="84.60" text-anchor="middle" font-size="9" fill="#cbd5e1">$884M</text><text x="224" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'25</text>
+      <rect x="273" y="82.53" width="70" height="67.47" fill="#60a5fa"/><text x="308" y="76.53" text-anchor="middle" font-size="9" fill="#cbd5e1">$1,004M</text><text x="308" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'25</text>
+      <rect x="357" y="70.64" width="70" height="79.36" fill="#60a5fa"/><text x="392" y="64.64" text-anchor="middle" font-size="9" fill="#cbd5e1">$1,181M</text><text x="392" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'25</text>
+      <rect x="441" y="55.45" width="70" height="94.55" fill="#60a5fa"/><text x="476" y="49.45" text-anchor="middle" font-size="9" fill="#cbd5e1">$1,407M</text><text x="476" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'25</text>
+      <rect x="525" y="40.26" width="70" height="109.74" fill="#2dd4bf"/><text x="560" y="34.26" text-anchor="middle" font-size="9" fill="#cbd5e1">$1,633M</text><text x="560" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'26</text>
+      <rect x="609" y="19.97" width="70" height="130.03" fill="#2dd4bf"/><text x="644" y="13.97" text-anchor="middle" font-size="9" fill="#cbd5e1">$1,935M</text><text x="644" y="168" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Margin by Quarter, Q3 2024&ndash;Q2 2026</div>
+    <div class="chart-sub">A steady climb from the mid-teens to the high-40s, with one visible dip.</div>
+    <svg viewBox="0 0 700 155">
+      <line x1="46" y1="120" x2="680" y2="120" stroke="#1a2236" stroke-width="1"/>
+      <line x1="46" y1="70" x2="680" y2="70" stroke="#1a2236" stroke-width="1"/>
+      <line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+      <text x="40" y="123.5" font-size="9" fill="#64748b" text-anchor="end">0%</text>
+      <text x="40" y="73.5" font-size="9" fill="#64748b" text-anchor="end">25%</text>
+      <text x="40" y="23.5" font-size="9" fill="#64748b" text-anchor="end">50%</text>
+      <path d="M 50,88.8 L 135.7,117.4 L 221.4,80.2 L 307.1,66.4 L 392.9,53.4 L 478.6,38.2 L 564.3,27.6 L 650,25.8" fill="none" stroke="#60a5fa" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="50" cy="88.8" r="2.8" fill="#0e1626" stroke="#60a5fa" stroke-width="1.4"/><text x="50" y="80.8" text-anchor="middle" font-size="8.5" fill="#cbd5e1">15.6%</text>
+      <circle cx="135.7" cy="117.4" r="2.8" fill="#0e1626" stroke="#f87171" stroke-width="1.4"/><text x="135.7" y="109.4" text-anchor="middle" font-size="8.5" fill="#f87171">1.3%*</text>
+      <circle cx="221.4" cy="80.2" r="2.8" fill="#0e1626" stroke="#60a5fa" stroke-width="1.4"/><text x="221.4" y="72.2" text-anchor="middle" font-size="8.5" fill="#cbd5e1">19.9%</text>
+      <circle cx="307.1" cy="66.4" r="2.8" fill="#0e1626" stroke="#60a5fa" stroke-width="1.4"/><text x="307.1" y="58.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">26.8%</text>
+      <circle cx="392.9" cy="53.4" r="2.8" fill="#0e1626" stroke="#60a5fa" stroke-width="1.4"/><text x="392.9" y="45.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">33.3%</text>
+      <circle cx="478.6" cy="38.2" r="2.8" fill="#0e1626" stroke="#60a5fa" stroke-width="1.4"/><text x="478.6" y="30.2" text-anchor="middle" font-size="8.5" fill="#cbd5e1">40.9%</text>
+      <circle cx="564.3" cy="27.6" r="2.8" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.4"/><text x="564.3" y="19.6" text-anchor="middle" font-size="8.5" fill="#e2e8f0">46.2%</text>
+      <circle cx="650" cy="25.8" r="3.5" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.4"/><text x="650" y="17.8" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">47.1%</text>
+      <text x="50" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'24</text>
+      <text x="135.7" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'24</text>
+      <text x="221.4" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'25</text>
+      <text x="307.1" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'25</text>
+      <text x="392.9" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'25</text>
+      <text x="478.6" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'25</text>
+      <text x="564.3" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'26</text>
+      <text x="650" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>&nbsp;</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Revenue</td><td>$726M</td><td>$828M</td><td>$884M</td><td>$1,004M</td><td>$1,181M</td><td>$1,407M</td><td>$1,633M</td><td>$1,935M</td></tr>
+    <tr><td>YoY growth</td><td>30.0%</td><td>36.0%</td><td>39.3%</td><td>48.0%</td><td>62.8%</td><td>70.0%</td><td>84.7%</td><td>93.0%</td></tr>
+    <tr><td>GAAP operating margin</td><td>15.6%</td><td>1.3%*</td><td>19.9%</td><td>26.8%</td><td>33.3%</td><td>40.9%</td><td>46.2%</td><td>47.1%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:2px;">*Q4 2024's GAAP operating margin was unusually low versus the quarters around it (15-16% range) — likely a one-time item; shown here as reported, without adjustment.</div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Guidance:</b> alongside the Aug 3, 2026 print, Palantir raised its full-year 2026 revenue guidance again — the fourth consecutive quarter of raised guidance — reflecting management's own confidence that the commercial ramp is durable rather than a one-off pull-forward.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">The multiple has actually compressed sharply since its 2025 peak, even as the share price stayed close to its highs — earnings have been growing faster than the stock.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E, Q4 2023&ndash;Q2 2026</div>
+    <div class="chart-sub">Today's 148.8x trailing multiple sits well below the ~395-421x peak reached around mid-to-late 2025, and below the ~252x average of the eight quarters shown here — genuinely cheaper than its own recent trading history, even though still expensive in absolute terms.</div>
+    <svg viewBox="0 0 700 165">
+      <line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+      <line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+      <text x="40" y="143.5" font-size="9" fill="#64748b" text-anchor="end">0x</text>
+      <text x="40" y="23.5" font-size="9" fill="#64748b" text-anchor="end">~420x</text>
+      <path d="M 50,89.28 L 135.7,100.30 L 221.4,33.84 L 307.1,20.0 L 392.9,27.49 L 478.6,65.76 L 564.3,96.34 L 650,113.60" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="50" cy="89.28" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="50" y="81.28" text-anchor="middle" font-size="8.5" fill="#cbd5e1">178x</text>
+      <circle cx="135.7" cy="100.30" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="135.7" y="92.30" text-anchor="middle" font-size="8.5" fill="#cbd5e1">139x</text>
+      <circle cx="221.4" cy="33.84" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="221.4" y="25.84" text-anchor="middle" font-size="8.5" fill="#cbd5e1">373x</text>
+      <circle cx="307.1" cy="20.0" r="3.2" fill="#f87171" stroke="#f87171" stroke-width="1.6"/><text x="307.1" y="12.0" text-anchor="middle" font-size="8.5" fill="#f87171" font-weight="700">421x (peak)</text>
+      <circle cx="392.9" cy="27.49" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="392.9" y="19.49" text-anchor="middle" font-size="8.5" fill="#cbd5e1">395x</text>
+      <circle cx="478.6" cy="65.76" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="478.6" y="57.76" text-anchor="middle" font-size="8.5" fill="#cbd5e1">261x</text>
+      <circle cx="564.3" cy="96.34" r="2.8" fill="#0e1626" stroke="#a78bfa" stroke-width="1.4"/><text x="564.3" y="88.34" text-anchor="middle" font-size="8.5" fill="#cbd5e1">153x</text>
+      <circle cx="650" cy="113.60" r="3.5" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.4"/><text x="650" y="105.60" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">93x</text>
+      <text x="50" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'23</text>
+      <text x="135.7" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'24</text>
+      <text x="221.4" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'24</text>
+      <text x="307.1" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'25</text>
+      <text x="392.9" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q3'25</text>
+      <text x="478.6" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q4'25</text>
+      <text x="564.3" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q1'26</text>
+      <text x="650" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+  <div class="footer-note" style="margin-top:-3px;margin-bottom:8px;">Current trailing P/E as of Aug 20, 2026 close is 148.8x — slightly above the Q2'26 quarter-end reading of ~93x shown above, since the stock has moved since that snapshot.</div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership &amp; Voting Control</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="157.06 157.10" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="157.10 157.06" stroke-dashoffset="-157.06" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="#f8fafc">50%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#a78bfa;"></span>Founder Voting Trust &asymp; up to 49.99% of votes (Thiel, Karp, Cohen — Class F shares, held via Wilmington Trust)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Remaining public float &amp; other holders &asymp; 50.01% of votes</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Balance Sheet Note</div>
+      <p>Net cash of roughly $9.2bn against debt of only ~$211M, mostly operating lease liabilities — essentially debt-free. FY2025 free cash flow of $2,101M against FY2025 GAAP EBIT of $1,414M is comfortably above 100% conversion, helped by deferred revenue growth and non-cash stock-comp addbacks.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Governance note, not a simple ownership %:</b> direct economic insider stakes are modest by dollar value (Peter Thiel's disclosed stake is roughly 4% per SEC filings; totals vary by source), but the three-class share structure (Class A = 1 vote, Class B = 10 votes, Class F = variable "Founder" shares) locks founder voting control at up to 49.99% regardless of future dilution or share sales. That's a durable control mechanism, but a different story from a founder who simply owns a large chunk of the company outright.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">13-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 13 criteria are testable here — five years of clean standalone GAAP history, no N/A needed.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>+30.5% (FY21&rarr;FY25, $1.54bn&rarr;$4.48bn); TTM run-rate of $6.16bn implies the pace has if anything accelerated further</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15%</td><td>Not a standard CAGR &mdash; FY21 EBIT was a $(411)M loss. GAAP EBIT swung to $1,414M profit by FY25; using FY23 (first profitable year, $120.0M) as base, the 2-yr rate is ~243%/yr &mdash; genuine operating leverage, not just a base-effect artifact</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY &ge;20%</td><td>31.6% FY2025 GAAP operating margin, and still expanding &mdash; 47.1% by Q2 2026</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15%</td><td>+60.0% (FY21&rarr;FY25, $321M&rarr;$2,101M) &mdash; a clean CAGR since FCF was positive throughout, even while GAAP EBIT was still negative in the earliest years</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>No single disclosed market-share %, but broad analyst consensus describes Palantir as the dominant platform for classified U.S. government data/AI analytics &mdash; a qualitative #1, not backed by one cited statistic</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open) &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Bifurcated moat: government/defense side is concentrated (score ~2/5: Anduril, Booz Allen, Leidos, CACI, SAIC as the main rivals); commercial side (now ~46% of Q2'26 revenue) is genuinely competitive against Databricks, Snowflake, Microsoft Fabric and C3.ai (score ~4/5). Blended score ~3/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>Asset-light, high-margin model clears any reasonable WACC estimate (~10-13%) on a core-operations basis; a precise ROIC% is highly sensitive to whether the ~$9.2bn cash pile counts as invested capital (readings span from ~30% to well over 100% depending on methodology), so treated qualitatively</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>Net cash of roughly $9.2bn against debt of only ~$211M &mdash; deeply net cash</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &ge;80%</td><td>148.6% (FY2025 FCF $2,101M / FY2025 GAAP EBIT $1,414M) &mdash; helped by deferred-revenue growth and non-cash stock-comp addbacks</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>148.8x trailing P/E is well below the ~395-421x peak reached in mid-to-late 2025 and below the ~252x average of the last 8 quarters &mdash; cheaper than its own recent history, though still expensive in absolute terms</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Shares outstanding grew from ~2,030M (2021) to ~2,403M today, +18.4%; FY2025 stock-based comp ($684M, ~15% of revenue) far exceeds the modest ~$57M of TTM buybacks &mdash; clearly dilutive</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>Direct economic stakes are modest (Thiel's disclosed stake ~4%), but a Founder Voting Trust (Thiel, Karp, Cohen via Class F shares) locks in up to 49.99% of total voting power regardless of dilution &mdash; a real, durable control mechanism, distinct from a simple ownership %</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capex has run roughly 0.7% of revenue in recent periods &mdash; a genuinely asset-light software/platform model</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <ul class="bullet-list">
+        <li>Explosive, broad-based growth: TTM revenue $6.16bn (+78.9% YoY), Q2 2026 revenue +93% YoY, with U.S. commercial specifically up 149%</li>
+        <li>GAAP profitability scaled fast: operating margin went from -26.7% (FY2021) to 31.6% (FY2025) to 47.1% (Q2 2026), with FCF conversion comfortably above 100% of EBIT</li>
+        <li>Essentially debt-free with roughly $9.2bn in net cash &mdash; plenty of room to keep investing without diluting through debt</li>
+        <li>Today's 148.8x trailing P/E is well below its own 2025 peak (~395-421x) &mdash; the multiple has compressed sharply as earnings caught up to the stock price</li>
+        <li>A durable, if unusual, governance structure: the Founder Voting Trust locks in founder control regardless of future dilution or share sales</li>
+      </ul>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <ul class="bullet-list">
+        <li>Valuation is still extreme in absolute terms &mdash; 148.8x trailing earnings and roughly 68x sales prices in a lot of future growth that still has to show up</li>
+        <li>The commercial side (now nearly half of revenue) faces genuine competition from Databricks, Snowflake, Microsoft Fabric and C3.ai &mdash; a more contested moat than the government side</li>
+        <li>Heavy dilution: shares outstanding up ~18.4% since 2021, with FY2025 stock comp ($684M) far outpacing ~$57M of TTM buybacks</li>
+        <li>A high-profile bear case: investor Michael Burry has disclosed a large notional short position, arguing the stock is worth "less than $1" long-run &mdash; a genuinely contested stock, not a consensus one</li>
+        <li>Reputational/political exposure cuts both ways: deep defense and intelligence ties plus an outspoken CEO, and a 2026 report highlighted only ~&pound;2m of UK corporate tax paid against ~&pound;670m of UK government contracts</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 20&ndash;21, 2026. Sources: stockanalysis.com and macrotrends.net (PLTR price, financials, valuation history), Palantir SEC filings and investor relations (10-K/10-Q, Q2 2026 earnings release Aug 3, 2026), reporting from Reuters, Bloomberg, Barron's and CNBC on the Michael Burry short position, the UK tax story, and the Mercury Systems partnership.<br>
+    <b>Disclaimer:</b> some figures here (historical P/E peak, ROIC methodology, precise insider ownership %) vary meaningfully by data source and calculation method &mdash; treated as directional, not precise, throughout. This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Verify before acting.
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE, LAST 5 YEARS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Year-end closes 2021-2025 plus the November 2025 all-time high and today's price &mdash; one of the more dramatic 5-year moves in this whole screen, from under $7 at the 2022 low to over $200 at the 2025 peak.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Palantir Technologies Inc. &mdash; Year-End Closes, 2021&ndash;2026</div>
+    <div class="chart-sub">All seven points are exact reported closing prices. Note the order: the November 2025 all-time high actually preceded that year's Dec 31 close, since the stock pulled back somewhat into year-end.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.67" x2="680" y2="78.67" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.33" x2="680" y2="129.33" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<text x="40" y="31.5" font-size="9" fill="#64748b" text-anchor="end">$210</text>
+<text x="40" y="82.17" font-size="9" fill="#64748b" text-anchor="end">$140</text>
+<text x="40" y="132.83" font-size="9" fill="#64748b" text-anchor="end">$70</text>
+<text x="40" y="183.5" font-size="9" fill="#64748b" text-anchor="end">$0</text>
+<path d="M 46,166.82 L 151.67,175.35 L 257.33,167.57 L 363,125.26 L 468.67,30.06 L 574.33,51.37 L 680,54.10 L 680,180 L 46,180 Z" fill="url(#lg2)" stroke="none"/>
+<path d="M 46,166.82 L 151.67,175.35 L 257.33,167.57 L 363,125.26 L 468.67,30.06 L 574.33,51.37 L 680,54.10" fill="none" stroke="#2dd4bf" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46" cy="166.82" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46" y="156.82" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$18.21</text>
+<text x="46" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Dec 31, 2021</text>
+<circle cx="151.67" cy="175.35" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="151.67" y="192" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$6.42</text>
+<text x="151.67" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Dec 30, 2022</text>
+<circle cx="257.33" cy="167.57" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="257.33" y="157.57" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$17.17</text>
+<text x="257.33" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Dec 29, 2023</text>
+<circle cx="363" cy="125.26" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="363" y="115.26" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$75.63</text>
+<text x="363" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Dec 31, 2024</text>
+<circle cx="468.67" cy="30.06" r="4" fill="#f87171" stroke="#f87171" stroke-width="1.6"/>
+<text x="468.67" y="20.06" font-size="9.5" fill="#f87171" text-anchor="middle" font-weight="700">$207.18 (ATH)</text>
+<text x="468.67" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Nov 3, 2025</text>
+<circle cx="574.33" cy="51.37" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="574.33" y="41.37" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$177.75</text>
+<text x="574.33" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Dec 31, 2025</text>
+<circle cx="680" cy="54.10" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680" y="44.10" font-size="9.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$173.96</text>
+<text x="680" y="198.0" font-size="8.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data via macrotrends.net and stockanalysis.com. All seven data points are exact reported daily closes (year-end closes for 2021-2025, the Nov 3, 2025 all-time-high close, and the Aug 20, 2026 close).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
