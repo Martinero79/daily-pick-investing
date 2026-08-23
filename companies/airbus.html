@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Airbus Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; height: 297mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Commercial Aircraft Manufacturing</div>
+  <h1>Airbus SE</h1>
+  <div class="badges">
+    <span class="badge">Euronext Paris: AIR &middot; OTC ADR: EADSY</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Airbus Industrie founded 1970 &middot; Airbus SE since 2015</span>
+    <span class="badge warn">France, Germany &amp; Spain hold ~25.7% combined via a shareholder pact</span>
+  </div>
+  <div class="price">&euro;203.70</div>
+  <div class="price-sub">Close Aug 21, 2026 &middot; Mkt cap &asymp; &euro;164.7B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Boeing (direct global duopoly rival) &middot; COMAC (China, emerging &mdash; C919 flying domestically, not yet EU/US certified) &middot; Embraer (Brazil, mostly the smaller regional-jet segment)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;73.42B</div>
+      <div class="sub green" style="color:#34d399;">+6.0% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin, Adjusted (FY2025)</div>
+      <div class="val">9.7%</div>
+      <div class="sub">well below the 20% screen bar &mdash; aerospace manufacturing runs structurally thin</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green">~17% / ~8%</div>
+      <div class="note">Both figures are indicative, third-party-style estimates &mdash; Airbus doesn't disclose ROIC/WACC directly. Directional only.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (company-reported)</div>
+      <div class="val green">&euro;12.2B</div>
+      <div class="sub">FY2025 &middot; a narrower balance-sheet view has since swung negative &mdash; see page 4</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">38/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Growth &amp; profitability weighted highest &mdash; Airbus's thin margins and modest growth weigh heavily here despite its duopoly position.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 132.73,202.23 L123.88,166.31 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M132.73,202.23 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 123.88,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (market share, market concentration, ROIC/WACC, net debt/EBITDA, share count trend, insider/aligned ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, FCF conversion, entry multiple vs. history, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> &mdash; a real duopoly with Boeing (combined ~70%+ of deliveries), looser than Visa/Mastercard's; scores of 1&ndash;2 count as met above</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Airbus is one half of the commercial-aircraft duopoly, building the A220/A320/A330/A350 families against Boeing's 737/777/787. Its order backlog runs to 9,222 aircraft as of mid-2026 &mdash; more than ten years of production already locked in at current delivery rates. But a duopoly position doesn't automatically make a great scorecard: aerospace manufacturing is capital-intensive and structurally thin-margin, and on the model's own numbers, growth, margin, cash conversion and valuation all miss the bar. What clears comfortably: the duopoly position itself, a healthy return on capital, a stable share count, and long-term-oriented government ownership.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (reported end-July 2026) and spot price as of Aug 21, 2026 close. Guidance for FY2026 (~&euro;7.5B Adjusted EBIT, ~870 deliveries) was reaffirmed, not raised, at the H1 mark.
+  </div>
+
+  <div class="bignum-corner">6/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR billions. Adjusted EBIT and "FCF before customer financing" are Airbus's own non-GAAP KPIs, used throughout this dashboard for consistency with company reporting. CAGR computed FY21&rarr;FY25 (4-year span).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Annual</div>
+    <div class="chart-sub">Steady, unspectacular growth &mdash; +6% in FY2025, the best year in this window, still well under the 15% screen bar.</div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">&euro;20B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">&euro;40B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">&euro;60B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;80B</text><rect x="108" y="96.59" width="60" height="143.41" rx="2" fill="#2dd4bf"/><text x="138" y="90" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;52.1B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="264" y="78.41" width="60" height="161.59" rx="2" fill="#2dd4bf"/><text x="294" y="72" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;58.8B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="420" y="59.76" width="60" height="180.24" rx="2" fill="#2dd4bf"/><text x="450" y="53" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;65.4B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="576" y="49.62" width="60" height="190.38" rx="2" fill="#2dd4bf"/><text x="606" y="43" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;69.2B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="732" y="38.09" width="60" height="201.91" rx="2" fill="#2dd4bf"/><text x="762" y="32" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;73.4B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Adjusted EBIT vs. Free Cash Flow (before customer financing)</div>
+    <div class="chart-sub">Shown on their own true scale, separate from revenue above &mdash; both run a fraction of revenue, the reality of thin-margin aircraft manufacturing. FY2025's EBIT jump (+33% YoY) outpaced FCF, which is why conversion dropped (page 5).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Adjusted EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (before customer financing)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;2B</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;4B</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;6B</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;8B</text><rect x="80" y="98.25" width="26" height="121.75" rx="2" fill="#60a5fa"/><text x="93" y="92" text-anchor="middle" font-size="9.5" fill="#93c5fd">&euro;4.87B</text><rect x="114" y="132.0" width="26" height="88.0" rx="2" fill="#fbbf24"/><text x="127" y="126" text-anchor="middle" font-size="9.5" fill="#fde68a">&euro;3.52B</text><text x="128" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="236" y="79.25" width="26" height="140.75" rx="2" fill="#60a5fa"/><text x="249" y="73" text-anchor="middle" font-size="9.5" fill="#93c5fd">&euro;5.63B</text><rect x="270" y="103.0" width="26" height="117.0" rx="2" fill="#fbbf24"/><text x="283" y="97" text-anchor="middle" font-size="9.5" fill="#fde68a">&euro;4.68B</text><text x="284" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="392" y="74.0" width="26" height="146.0" rx="2" fill="#60a5fa"/><text x="405" y="68" text-anchor="middle" font-size="9.5" fill="#93c5fd">&euro;5.84B</text><rect x="426" y="110.25" width="26" height="109.75" rx="2" fill="#fbbf24"/><text x="439" y="104" text-anchor="middle" font-size="9.5" fill="#fde68a">&euro;4.39B</text><text x="440" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="548" y="86.25" width="26" height="133.75" rx="2" fill="#60a5fa"/><text x="561" y="80" text-anchor="middle" font-size="9.5" fill="#93c5fd">&euro;5.35B</text><rect x="582" y="108.5" width="26" height="111.5" rx="2" fill="#fbbf24"/><text x="595" y="102" text-anchor="middle" font-size="9.5" fill="#fde68a">&euro;4.46B</text><text x="596" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="704" y="42.5" width="26" height="177.5" rx="2" fill="#60a5fa"/><text x="717" y="36" text-anchor="middle" font-size="9.5" fill="#93c5fd">&euro;7.10B</text><rect x="738" y="105.75" width="26" height="114.25" rx="2" fill="#fbbf24"/><text x="751" y="100" text-anchor="middle" font-size="9.5" fill="#fde68a">&euro;4.57B</text><text x="752" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+8.9%</div><div class="sub">&euro;52.15B &rarr; &euro;73.42B; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Adj. EBIT CAGR</div><div class="val" style="color:#fbbf24;">+9.9%</div><div class="sub">&euro;4.87B &rarr; &euro;7.10B; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+6.8%</div><div class="sub">&euro;3.52B &rarr; &euro;4.57B; below the 15% bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Adjusted EBIT Margin Trend</div>
+    <div class="chart-sub">Dashed line marks the 20% screen threshold &mdash; Airbus has never come close in this window. Aerospace OEM margins are structurally thin; the story here is stability and direction, not the absolute level.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M50.0,220.0 L50.0,127.0 L247.5,125.0 L445.0,131.0 L642.5,143.0 L840.0,123.0 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,127.0 L247.5,125.0 L445.0,131.0 L642.5,143.0 L840.0,123.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="127.0" r="3" fill="#2dd4bf"/><circle cx="247.5" cy="125.0" r="3" fill="#2dd4bf"/><circle cx="445.0" cy="131.0" r="3" fill="#2dd4bf"/><circle cx="642.5" cy="143.0" r="3" fill="#2dd4bf"/><circle cx="840.0" cy="123.0" r="3" fill="#2dd4bf"/><text x="50.0" y="117" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.3%</text><text x="247.5" y="115" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.5%</text><text x="445.0" y="121" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.9%</text><text x="642.5" y="133" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.7%</text><text x="840.0" y="113" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.7%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Adj. EBIT</th><th>EBIT Margin</th><th>Net Income</th><th>Free Cash Flow*</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&euro;52.15B</td><td>&euro;4.87B</td><td>9.3%</td><td>&euro;4.21B</td><td>&euro;3.52B</td><td>72.3%</td></tr>
+    <tr><td>FY2022</td><td>&euro;58.76B</td><td>&euro;5.63B</td><td>9.5%</td><td>&euro;4.25B</td><td>&euro;4.68B</td><td>83.2%</td></tr>
+    <tr><td>FY2023</td><td>&euro;65.45B</td><td>&euro;5.84B</td><td>8.9%</td><td>&euro;3.79B</td><td>&euro;4.39B</td><td>75.1%</td></tr>
+    <tr><td>FY2024</td><td>&euro;69.23B</td><td>&euro;5.35B</td><td>7.7%</td><td>&euro;4.23B</td><td>&euro;4.46B</td><td>83.4%</td></tr>
+    <tr><td>FY2025</td><td>&euro;73.42B</td><td>&euro;7.10B</td><td>9.7%</td><td>&euro;5.22B</td><td>&euro;4.57B</td><td>64.4%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*"Free Cash Flow before customer financing" &mdash; Airbus's own headline cash-flow KPI. Capex has climbed from 3.7% of revenue (FY21) to 5.4% (FY25) funding production-rate increases, including a new A320 final assembly line in Toulouse (opened June 2026) &mdash; the main reason FCF conversion dipped in FY2025 even as EBIT jumped.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Momentum, Deliveries &amp; Backlog</div></div>
+  <div class="sec-sub">Latest reported period: H1 2026 (six months to June 30, 2026, reported end-July 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">&euro;33.2B</b>, +12% YoY. Adjusted EBIT <b style="color:#f8fafc;">&euro;2.7B</b> (vs &euro;2.2B H1 2025). Net income &euro;2,243M. Commercial deliveries <b style="color:#f8fafc;">351</b> aircraft (vs 306 H1 2025). Order backlog reached a record <b style="color:#f8fafc;">9,222</b> aircraft, up from 8,754 at FY2025-end, on 821 net new orders in the half. FY2026 guidance reaffirmed: ~&euro;7.5B Adjusted EBIT, ~870 deliveries, ~&euro;4.5B FCF before customer financing. Next major milestone: A350 Freighter maiden flight targeted for September 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &amp; Adjusted EBIT, H1 2025 vs. H1 2026 (&euro;B)</div>
+    <div class="chart-sub">Both metrics grew, but EBIT's tiny bar next to revenue is the same story as page 2 &mdash; thin margins even in a genuinely strong half.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Adjusted EBIT</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;10B</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;20B</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;30B</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;40B</text><rect x="220" y="71.8" width="70" height="148.2" rx="2" fill="#2dd4bf"/><text x="255" y="65" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;29.6B</text><rect x="300" y="209.0" width="70" height="11.0" rx="2" fill="#60a5fa"/><text x="335" y="203" text-anchor="middle" font-size="10" fill="#93c5fd">&euro;2.2B</text><text x="295" y="245" text-anchor="middle" font-size="12" fill="#94a3b8">H1 2025</text><rect x="520" y="54.0" width="70" height="166.0" rx="2" fill="#2dd4bf"/><text x="555" y="47" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">&euro;33.2B</text><rect x="600" y="206.5" width="70" height="13.5" rx="2" fill="#60a5fa"/><text x="635" y="200" text-anchor="middle" font-size="10" fill="#93c5fd">&euro;2.7B</text><text x="595" y="245" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">H1 2026</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Order Backlog by Program Family &mdash; 9,222 Aircraft (mid-2026)</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#2dd4bf" stroke-width="40" stroke-dasharray="356.25 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="39.58 439.82" stroke-dashoffset="-356.25"/><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="26.39 439.82" stroke-dashoffset="-395.83"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="13.19 439.82" stroke-dashoffset="-422.22"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#2dd4bf;"></span>A320neo family (narrowbody) &mdash; 7,461 (~81%)</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>A350 (widebody) &mdash; 870 (~9%)</div>
+        <div><span class="dot" style="background:#a78bfa;"></span>A220 (narrowbody) &mdash; 581 (~6%)</div>
+        <div><span class="dot" style="background:#64748b;"></span>A330 (widebody) &mdash; 304 (~3%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Production constraint to watch:</b> Pratt &amp; Whitney GTF engine supply shortfalls (with CFM's LEAP-1A unable to fully offset) have pushed the A320 "Rate 75" target (75 aircraft/month) from 2026 out to late 2027. Airbus led full-year deliveries in 2025 (793 vs. Boeing's 600), but Boeing retook the lead in Q1 2026 (143 vs. 114) &mdash; the delivery race between the two has been close and volatile through mid-2026, with Airbus needing to average roughly 90/month for the rest of the year to hit its 870 target.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Airbus has a long public trading history, so the entry-multiple criterion is fully scorable here (see page 5, #10).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current multiple (&asymp;28.1x) sits above the FY21&ndash;25 average of 25.9x (dashed) &mdash; the stock has re-rated somewhat ahead of earnings, consistent with strong 2025/2026 momentum.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50.0" y1="90.75" x2="840.0" y2="90.75" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="86" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 25.9x</text><path d="M50.0,115.85 L208.0,117.65 L366.0,75.30 L524.0,75.35 L682.0,69.70 L840.0,79.50" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="115.85" r="3" fill="#a78bfa"/><circle cx="208.0" cy="117.65" r="3" fill="#a78bfa"/><circle cx="366.0" cy="75.30" r="3" fill="#a78bfa"/><circle cx="524.0" cy="75.35" r="3" fill="#a78bfa"/><circle cx="682.0" cy="69.70" r="3" fill="#a78bfa"/><circle cx="840.0" cy="79.50" r="3.5" fill="#a78bfa"/><text x="50.0" y="105.85" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.8x</text><text x="208.0" y="130.65" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.5x</text><text x="366.0" y="65.30" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.9x</text><text x="524.0" y="88.35" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.9x</text><text x="682.0" y="59.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">30.1x</text><text x="840.0" y="69.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.1x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Cash / (Net Debt) &mdash; Strict Balance-Sheet Basis (&euro;B)</div>
+    <div class="chart-sub">Cash &amp; investments minus total debt, a single consistent methodology across periods. This is narrower than Airbus's own headline "net cash" KPI (&euro;12.2B at FY2025-end, using a broader definition of cash net of a different debt scope) &mdash; on this stricter view, the cushion has shrunk every year since FY2022 and tipped into a small net debt position by mid-2026.</div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#3a4a6b" stroke-width="1.5"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">&euro;5B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">-&euro;5B</text><rect x="60" y="123" width="50" height="17" rx="2" fill="#2dd4bf"/><text x="85" y="116" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+&euro;0.85B</text><text x="85" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="216" y="43.8" width="50" height="96.2" rx="2" fill="#2dd4bf"/><text x="241" y="37" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+&euro;4.81B</text><text x="241" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="372" y="56.4" width="50" height="83.6" rx="2" fill="#2dd4bf"/><text x="397" y="49" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+&euro;4.18B</text><text x="397" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="528" y="69" width="50" height="71" rx="2" fill="#2dd4bf"/><text x="553" y="62" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+&euro;3.55B</text><text x="553" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="684" y="80.6" width="50" height="59.4" rx="2" fill="#2dd4bf"/><text x="709" y="73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+&euro;2.97B</text><text x="709" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="790" y="140" width="50" height="39.6" rx="2" fill="#f87171"/><text x="815" y="192" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">-&euro;1.98B</text><text x="815" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">TTM Jun'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="47.65 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="47.60 439.82" stroke-dashoffset="-47.65"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="17.94 439.82" stroke-dashoffset="-95.25"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="326.70 439.82" stroke-dashoffset="-113.19"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>French State (SOGEPA) &asymp; 10.83%</div>
+        <div><span class="dot" style="background:#fbbf24;"></span>German State (GZBV) &asymp; 10.82%</div>
+        <div><span class="dot" style="background:#f87171;"></span>Spanish State (SEPI) &asymp; 4.08%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float &amp; institutions &asymp; 74.3%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> the three-government shareholder pact (~25.7% combined, capped at France/Germany ~12% each, Spain ~4%) is not founder ownership, but functions similarly for stability: permanent capital, resistant to short-term activist pressure, aligned with Airbus's multi-decade industrial and strategic importance to Europe. We treat this as "meaningful aligned ownership" for criterion #12 on page 5.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Airbus</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>8.9%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Adj. EBIT CAGR (FY21-25)</td><td>&ge;15%</td><td>9.9%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>9.7%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>6.8%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 or #2 with Boeing every year, alternates</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; duopoly with Boeing, ~70%+ combined; looser than Visa/Mastercard</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>~17% vs ~8% (indicative estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash &euro;12.2B (company metric); narrower view now slightly net debt</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>64.4% (FY2025, capex ramp)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/E 28.1x vs 25.9x FY21-25 avg</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Flat, ~791M shares &mdash; dividends are the primary capital return, not buybacks</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>~25.7% combined France/Germany/Spain government pact</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.4% of revenue (FY2025), up from 3.7% (FY2021), rising</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A genuine duopoly position with Boeing; a record order backlog of 9,222 aircraft, over ten years of production already locked in; revenue and deliveries both growing every year; a healthy return on capital versus its cost; a stable share count; and a long-term-oriented government ownership pact that isn't going anywhere.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Structurally thin margins (9.7% vs. the 20% screen bar) are simply the nature of aircraft manufacturing, not a fixable flaw. FCF conversion weakened in FY2025 as capex ramped for production expansion. The stock has re-rated above its own 5-year average P/E. Pratt &amp; Whitney engine supply constraints have pushed the "Rate 75" production target out to late 2027. A stricter balance-sheet view shows the net-cash cushion has swung to a small net debt position by mid-2026, even as Airbus's own headline metric stays positive. China's COMAC is a real but distant threat &mdash; flying commercially at home and now internationally, but still years from EU/US certification.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 21&ndash;23, 2026. Sources: Airbus press releases (FY2021&ndash;FY2025 full-year results, Q1 2026, H1 2026), stockanalysis.com (valuation ratios, balance sheet), Reuters/aviation trade press (Flight Plan, Aviation24, afm.aero) for deliveries and backlog detail, SimpleFlying/LegalClarity for ownership structure.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of ROIC, WACC and valuation averages) and function as indicators only, not as verified facts or a basis for investment decisions. Airbus's own "net cash" KPI and the stricter balance-sheet calculation used for the page-4 trend chart do not reconcile exactly &mdash; see page 4 note.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Airbus SE &mdash; EUR share price trend, Euronext Paris.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Airbus SE &mdash; Year-End Close</div>
+    <div class="chart-sub">Year-end closing price. No stock split in this window. Current price matches the valuation figures used elsewhere in this dashboard.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,102.62 L 172.8,104.01 L 299.6,83.96 L 426.4,72.91 L 553.2,43.20 L 680.0,39.26 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="102.62" x2="680.0" y2="39.26" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="62" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +12.7%</text>
+<path d="M 46.0,102.62 L 172.8,104.01 L 299.6,83.96 L 426.4,72.91 L 553.2,43.20 L 680.0,39.26" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="102.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="118.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;112.00</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="104.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="120.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;110.00</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="83.96" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="73.96" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;139.00</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="72.91" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="62.91" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;155.00</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="43.20" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="33.20" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;198.00</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="39.26" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="29.26" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;203.70</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end 2021&ndash;2025 closes derived from trailing P/E &times; EPS (both independently sourced from stockanalysis.com) after a direct price-history pull returned inconsistent figures; current price is a direct quote. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
