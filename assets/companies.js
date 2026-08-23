@@ -95,7 +95,8 @@ const COMPANIES = [
     score: "6 / 13",
     martinero: 39,                    // Martinero Index (weighted 1-100 score, see About)
     blurb: "Danish hearing-aid and hearing-healthcare manufacturer. A more mixed scorecard — margins have swung year to year, and only about half the criteria clear the bar.",
-    file: "companies/demant.html"
+    file: "companies/demant.html",
+    personalNote: "As an ex-employee, I hold an oversized position in my portfolio. Somewhere between growth and blue chip: it grows mid-single digits, but the share price swings far more than the business does — maybe a case for buying low and selling high, if you can time it. The sector behaves like an oligopoly and is consolidating — GN just sold its hearing business to Amplifon, and Demant bought a retail chain of its own. Major launch years tend to be strong; the year after, more moderate. Right now it's riding real momentum — a multi-month rally, strong H1 2026 results and upgraded guidance, a well-received launch with another coming, cost cuts behind it, and that acquisition settling in. Let's see how far it goes."
   },
 
   {
@@ -175,7 +176,8 @@ const COMPANIES = [
     score: "9 / 13",
     martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
     blurb: "The toll-booth on global card payments, alongside Mastercard in a genuine duopoly. Margins, returns on capital and valuation all clear the bar; growth has simply slowed as card payment volumes mature.",
-    file: "companies/visa.html"
+    file: "companies/visa.html",
+    personalNote: "Visa caught my attention for the sub-sector — Visa and Mastercard run a genuine duopoly on card-payment rails, with Amex as a small, closed-loop niche player. Merchants have complained about the fees for years, and they just pass them on — we're all quietly overpaying on every card swipe. It used to feel like a pure blue-chip compounder. Now real-time rails like Pix, UPI and FedNow are built to cut Visa out entirely. Are Visa's golden days ending, or do I just hold and let it grow conservatively?"
   },
 
   {
