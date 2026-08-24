@@ -265,6 +265,23 @@ const COMPANIES = [
     personalNote: "I filled out the papers for a pilot academy early in my studies — never sent them. Airbus and Boeing run something close to a duopoly, just over 70% of the commercial aircraft market between them, and Airbus's own backlog runs past 9,200 aircraft — over a decade of production already locked in. Does that make it a good investment? Not automatically — a duopoly helps, but Boeing's own execution problems show it can still burn one of the two members. On new entrants: China's COMAC is the real one to watch, already flying commercially and just made its first international flight, though it's still years from EU/US certification. Brazil's Embraer plays a real but smaller game in regional jets. Canada's actually out of it entirely now — Bombardier sold its whole commercial jet program to Airbus back in 2018."
   },
 
+  {
+    slug: "intuitive-surgical",
+    name: "Intuitive Surgical, Inc.",
+    ticker: "NASDAQ: ISRG",
+    sector: "Surgical Robotics",
+    industry: "MedTech",
+    subIndustry: "Surgical Robotics",
+    tags: ["Near-Monopoly", "Robotics"],
+    dateFeatured: "2026-08-24",
+    price: "$378.81",
+    score: "10 / 13",
+    martinero: 76,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Two-decade near-monopoly in robotic surgery — 60%+ market share, a recurring-revenue model, and one of the highest scorecards on this site. Clears growth, margin, ROIC, balance-sheet and even valuation bars; the misses are EBIT/FCF growth during a 2023-24 capacity build and a lack of any founder-anchored ownership. 2025-26 also marks the first year of real, FDA-cleared competition after twenty years unchallenged.",
+    file: "companies/intuitive-surgical.html",
+    personalNote: "I used to own a robotics ETF that did reasonably well, but I prefer picking my own stocks — and robotics is a sector I believe will only become more relevant, even without deep technical knowledge of it. Intuitive Surgical is how I'd want to express that belief: instead of the cyclical, lower-margin world of industrial robot makers like FANUC or Yaskawa, it's a near-monopoly in one defensible niche — robotic surgery — with a recurring-revenue model built around every da Vinci system placed. For two decades it had the operating room to itself; 2025-26 is the first year real rivals — Medtronic, J&J — show up. It's also just been through a real de-rating, from a P/E in the 70s-80s down to the low 40s — could this be a good buying moment?"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
