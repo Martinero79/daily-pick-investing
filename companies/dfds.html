@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DFDS Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Ferry &amp; Freight Shipping</div>
+  <h1>DFDS A/S</h1>
+  <div class="badges">
+    <span class="badge">Nasdaq Copenhagen: DFDS</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Founded 1866</span>
+    <span class="badge warn">2025 EBIT collapsed 65% on Mediterranean losses and Channel competition &mdash; Q1-Q2 2026 mark a real sequential turnaround</span>
+  </div>
+  <div class="price">DKK 145.60</div>
+  <div class="price-sub">Close Aug 19, 2026 &middot; Mkt cap &asymp; DKK 8.3bn</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Key competitors:</b> Stena Line &middot; P&amp;O Ferries &middot; Irish Ferries &middot; CLdN &middot; Scandlines &middot; Tallink &middot; Brittany Ferries &mdash; a genuinely fragmented market with no single dominant player</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">DKK 31.0bn</div>
+      <div class="sub green" style="color:#34d399;">+4% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (FY2025)</div>
+      <div class="val red">0.9%</div>
+      <div class="sub">down from 9.2% in FY2022 &mdash; the framework's 20% bar isn't close</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val red">~1-2% / ~8%</div>
+      <div class="note">WACC is an indicative shipping-sector estimate, not company-disclosed. ROIC has sat below WACC every year except FY2022.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Leverage (NIBD/EBITDA)</div>
+      <div class="val red">3.4x-5.9x</div>
+      <div class="sub">Company's own metric: 3.4x (Q2'26, improving). Stricter balance-sheet calc: ~5.9x. Either way, above the 2x bar.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">30/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">One of the lower scores on this site &mdash; a textbook case of the framework's bias against capital-intensive, thin-margin transport, even for a genuine #1-by-scale operator.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 173.00,181.10 L148.46,153.41 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M173.00,181.10 A95,95 0 1 1 65.85,25.89 L83.05,58.65 A58,58 0 1 0 148.46,153.41 Z" fill="#f87171"/><path d="M65.85,25.89 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 83.05,58.65 Z" fill="#64748b"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">5/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 5 (market share, entry multiple vs. history, share count trend, foundation ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market concentration, ROIC/WACC, net debt/EBITDA)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 1 (FCF conversion &mdash; the FY2025 ratio is mathematically distorted by a near-zero EBIT base, not a genuine cash-conversion signal)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; DFDS is the largest player, but the ferry market is genuinely competitive across six-plus real rivals; scores of 3&ndash;5 count as not met above</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    DFDS is Northern Europe's largest integrated ferry and logistics operator &mdash; 25+ routes across the North Sea, Baltic, Channel and Mediterranean, 15,000 employees, 160 years of history. But scale hasn't translated into scorecard quality: EBIT margin cratered from 9.2% (FY2022) to under 1% (FY2025) as competitive pricing pressure, a Mediterranean misstep and Channel softness hit at once, and leverage sits well above the framework's comfort zone. What clears: DFDS is genuinely #1 by scale, the stock trades below its own historical multiple, the share count has quietly declined every year, and the Lauritzen Fonden foundation holds a real 40%+ controlling, long-horizon stake. The open question is whether the sharp Q1-Q2 2026 recovery is the start of a genuine re-rating or a cyclical bounce in a structurally tough industry.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported Aug 13, 2026) and spot price as of Aug 19, 2026 close. FY2026 guidance, raised twice this year: revenue growth 3-5%, EBIT DKK 1.2-1.4bn, adjusted FCF around DKK 500m.
+  </div>
+
+  <div class="bignum-corner">5/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in DKK billions unless noted. CAGR computed FY21&rarr;FY25 (4-year span). DFDS reports in DKK.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue kept climbing every year. EBIT did the opposite from FY2022 &mdash; the near-invisible FY2025 bar is not a chart error, it's a 65% collapse to just DKK 0.29bn.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">DKK0bn</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">DKK10bn</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">DKK20bn</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">DKK30bn</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">DKK40bn</text><rect x="110" y="139.47" width="16" height="100.53" rx="1.5" fill="#2dd4bf"/><text x="118" y="134.5" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">18.3bn</text><rect x="130" y="233.03" width="16" height="6.97" rx="1.5" fill="#60a5fa"/><text x="138" y="229.0" text-anchor="middle" font-size="7.5" fill="#93c5fd">1.27bn</text><rect x="150" y="230.97" width="16" height="9.03" rx="1.5" fill="#fbbf24"/><text x="158" y="226.97" text-anchor="middle" font-size="7.5" fill="#fde68a">1.64bn</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="266" y="92.20" width="16" height="147.80" rx="1.5" fill="#2dd4bf"/><text x="274" y="87.2" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">26.9bn</text><rect x="286" y="226.45" width="16" height="13.55" rx="1.5" fill="#60a5fa"/><text x="294" y="222.5" text-anchor="middle" font-size="7.5" fill="#93c5fd">2.46bn</text><rect x="306" y="230.61" width="16" height="9.39" rx="1.5" fill="#fbbf24"/><text x="314" y="226.6" text-anchor="middle" font-size="7.5" fill="#fde68a">1.71bn</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="422" y="89.83" width="16" height="150.17" rx="1.5" fill="#2dd4bf"/><text x="430" y="84.8" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">27.3bn</text><rect x="442" y="227.71" width="16" height="12.29" rx="1.5" fill="#60a5fa"/><text x="450" y="223.7" text-anchor="middle" font-size="7.5" fill="#93c5fd">2.24bn</text><rect x="462" y="228.46" width="16" height="11.54" rx="1.5" fill="#fbbf24"/><text x="470" y="224.5" text-anchor="middle" font-size="7.5" fill="#fde68a">2.10bn</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="578" y="76.36" width="16" height="163.64" rx="1.5" fill="#2dd4bf"/><text x="586" y="71.4" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">29.8bn</text><rect x="598" y="232.10" width="16" height="7.90" rx="1.5" fill="#60a5fa"/><text x="606" y="228.1" text-anchor="middle" font-size="7.5" fill="#93c5fd">1.44bn</text><rect x="618" y="229.37" width="16" height="10.63" rx="1.5" fill="#fbbf24"/><text x="626" y="225.4" text-anchor="middle" font-size="7.5" fill="#fde68a">1.93bn</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="734" y="69.77" width="16" height="170.23" rx="1.5" fill="#2dd4bf"/><text x="742" y="64.8" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">31.0bn</text><rect x="754" y="238.42" width="16" height="1.58" rx="1.5" fill="#f87171"/><text x="762" y="234.4" text-anchor="middle" font-size="7.5" fill="#fca5a5">0.29bn</text><rect x="774" y="230.00" width="16" height="10.00" rx="1.5" fill="#fbbf24"/><text x="782" y="226.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.82bn</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+14.1%</div><div class="sub">DKK18.3bn &rarr; DKK31.0bn; just under the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">-31.0%</div><div class="sub">DKK1.27bn &rarr; DKK0.29bn; a genuine collapse</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+2.6%</div><div class="sub">DKK1.64bn &rarr; DKK1.82bn; below the 15% bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT Margin Trend</div>
+    <div class="chart-sub">Dashed line marks the 20% screen threshold, far off the top of this chart &mdash; margin peaked at 9.2% in FY2022 and nearly vanished by FY2025.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M50.0,220.0 L50.0,150.7 L247.5,128.3 L445.0,138.1 L642.5,171.7 L840.0,210.7 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,150.7 L247.5,128.3 L445.0,138.1 L642.5,171.7 L840.0,210.7" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="150.7" r="3" fill="#2dd4bf"/><circle cx="247.5" cy="128.3" r="3" fill="#2dd4bf"/><circle cx="445.0" cy="138.1" r="3" fill="#2dd4bf"/><circle cx="642.5" cy="171.7" r="3" fill="#2dd4bf"/><circle cx="840.0" cy="210.7" r="3" fill="#2dd4bf"/><text x="50.0" y="140.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.9%</text><text x="247.5" y="118.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.2%</text><text x="445.0" y="128.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.2%</text><text x="642.5" y="161.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.8%</text><text x="840.0" y="200.7" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">0.9%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT</th><th>EBIT Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>DKK18.3bn</td><td>DKK1.27bn</td><td>6.9%</td><td>DKK0.96bn</td><td>DKK1.64bn</td><td>129.6%</td></tr>
+    <tr><td>FY2022</td><td>DKK26.9bn</td><td>DKK2.46bn</td><td>9.2%</td><td>DKK2.01bn</td><td>DKK1.71bn</td><td>69.3%</td></tr>
+    <tr><td>FY2023</td><td>DKK27.3bn</td><td>DKK2.24bn</td><td>8.2%</td><td>DKK1.52bn</td><td>DKK2.10bn</td><td>93.9%</td></tr>
+    <tr><td>FY2024</td><td>DKK29.8bn</td><td>DKK1.44bn</td><td>4.8%</td><td>DKK0.53bn</td><td>DKK1.93bn</td><td>134.5%</td></tr>
+    <tr><td>FY2025</td><td>DKK31.0bn</td><td>DKK0.29bn</td><td>0.9%</td><td>-DKK0.43bn (loss)</td><td>DKK1.82bn</td><td>631.6%*</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2025's FCF/EBIT ratio is a mathematical artifact, not a genuine signal &mdash; free cash flow held up reasonably well, but EBIT shrank to almost nothing, so dividing one by the other produces a meaningless multiple. Treated as N/A on the scorecard (page 5, #9) rather than a false "met."</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Latest reported period: Q2 2026 (three months to June 30, 2026, reported Aug 13, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">DKK 8,584m</b>, +10% YoY. EBITDA <b style="color:#f8fafc;">DKK 1,205m</b>, +35% YoY. EBIT <b style="color:#f8fafc;">DKK 454m</b>, more than double the DKK 163m of Q2 2025, with both the Ferry and Logistics divisions improving. Leverage (NIBD/EBITDA) fell to <b style="color:#f8fafc;">3.4x</b> from 4.1x at year-end 2025 &mdash; back within the company's own 2.5-3.5x mid-term target range. FY2026 guidance raised for the second time this year: revenue growth 3-5% (from ~0%), EBIT DKK 1.2-1.4bn (from DKK 1.0-1.4bn), adjusted FCF around DKK 500m (from above DKK 250m).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (DKK bn)</div>
+    <div class="chart-sub">A choppy but generally rising trend, with Q2 the seasonally strongest quarter each year.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">DKK0bn</text><line x1="60" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.33" text-anchor="end" font-size="11" fill="#64748b">DKK3bn</text><line x1="60" y1="86.67" x2="840" y2="86.67" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.67" text-anchor="end" font-size="11" fill="#64748b">DKK6bn</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">DKK9bn</text><rect x="97" y="52.48" width="56" height="167.52" rx="2" fill="#2dd4bf"/><text x="125" y="45.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.54bn</text><text x="125" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'25</text><rect x="227" y="46.59" width="56" height="173.41" rx="2" fill="#2dd4bf"/><text x="255" y="39.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.80bn</text><text x="255" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2'25</text><rect x="357" y="35.65" width="56" height="184.35" rx="2" fill="#2dd4bf"/><text x="385" y="28.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.30bn</text><text x="385" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3'25</text><rect x="487" y="57.55" width="56" height="162.45" rx="2" fill="#2dd4bf"/><text x="515" y="50.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.31bn</text><text x="515" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4'25</text><rect x="617" y="56.62" width="56" height="163.38" rx="2" fill="#2dd4bf"/><text x="645" y="49.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.35bn</text><text x="645" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'26</text><rect x="747" y="29.25" width="56" height="190.75" rx="2" fill="#2dd4bf"/><text x="775" y="22.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.58bn</text><text x="775" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly EBIT (DKK m)</div>
+    <div class="chart-sub">The trough was Q1 2025 (a loss); every quarter since Q3 2025 has been solidly positive, and Q2 2026 is the strongest quarter shown by a wide margin.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="110.0" x2="840" y2="110.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="114.0" text-anchor="end" font-size="11" fill="#64748b">300</text><line x1="60" y1="30.0" x2="840" y2="30.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="34.0" text-anchor="end" font-size="11" fill="#64748b">600</text><line x1="60" y1="190.0" x2="840" y2="190.0" stroke="#3a4a6b" stroke-width="1.5"/><text x="50" y="194.0" text-anchor="end" font-size="11" fill="#64748b">0</text><rect x="97" y="190" width="56" height="31.2" rx="2" fill="#f87171"/><text x="125" y="211" text-anchor="middle" font-size="9" fill="#fecaca" font-weight="700">-117</text><text x="125" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'25</text><rect x="227" y="146.53" width="56" height="43.47" rx="2" fill="#60a5fa"/><text x="255" y="140.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">163</text><text x="255" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2'25</text><rect x="357" y="47.05" width="56" height="142.95" rx="2" fill="#60a5fa"/><text x="385" y="41.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">536</text><text x="385" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3'25</text><rect x="487" y="173.47" width="56" height="16.53" rx="2" fill="#60a5fa"/><text x="515" y="167.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">62</text><text x="515" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4'25</text><rect x="617" y="181.20" width="56" height="8.80" rx="2" fill="#60a5fa"/><text x="645" y="175.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">33</text><text x="645" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1'26</text><rect x="747" y="68.92" width="56" height="121.08" rx="2" fill="#60a5fa"/><text x="775" y="62.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">454</text><text x="775" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>What went wrong, and what's changed:</b> 2025 was described by management as a "transition year" &mdash; competitive pricing pressure, an underperforming Mediterranean ferry business (now turned profitable), and softening Channel volumes hit simultaneously, prompting a DKK 300m cost-reduction program launched in Q3 2025. Both the Ferry and Logistics divisions have now posted improving results for two straight quarters, and guidance has been raised at both the Q1 and Q2 2026 reports &mdash; a genuine, not just guided, recovery so far.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E is undefined for FY2025 and the current TTM (both net losses), so EV/EBITDA &mdash; unaffected by the sign of net income &mdash; is used for the entry-multiple criterion instead (page 5, #10).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">EV/EBITDA &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current multiple (&asymp;5.9x) sits below the FY21-25 average of 8.7x (dashed) &mdash; genuinely cheap relative to its own history, though partly because the earnings base it's priced against is still depressed.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">4x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">12x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">16x</text><line x1="50.0" y1="111.0" x2="840.0" y2="111.0" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="106" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 8.7x</text><path d="M50.0,54.25 L208.0,126.37 L366.0,131.50 L524.0,134.12 L682.0,108.62 L840.0,146.50" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="54.25" r="3" fill="#a78bfa"/><circle cx="208.0" cy="126.37" r="3" fill="#a78bfa"/><circle cx="366.0" cy="131.50" r="3" fill="#a78bfa"/><circle cx="524.0" cy="134.12" r="3" fill="#a78bfa"/><circle cx="682.0" cy="108.62" r="3" fill="#a78bfa"/><circle cx="840.0" cy="146.50" r="3.5" fill="#a78bfa"/><text x="50.0" y="44.25" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.3x</text><text x="208.0" y="140.37" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.5x</text><text x="366.0" y="145.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.1x</text><text x="524.0" y="148.12" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">6.9x</text><text x="682.0" y="98.62" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.9x</text><text x="840.0" y="160.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">5.9x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Debt / EBITDA (stricter balance-sheet basis)</div>
+    <div class="chart-sub">Dashed line marks the scorecard's 2.0x bar. DFDS has never been close to it in this window &mdash; leverage is improving (company's own NIBD/EBITDA metric reads a lower 3.4x at Q2'26) but remains a real structural weight.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">2x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">4x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">6x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50.0" y1="170.0" x2="840.0" y2="170.0" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="165" text-anchor="end" font-size="10" fill="#fbbf24">2.0x scorecard bar</text><path d="M50.0,82.0 L208.0,127.5 L366.0,128.0 L524.0,90.0 L682.0,59.5 L840.0,71.5" fill="none" stroke="#f87171" stroke-width="2.5"/><circle cx="50.0" cy="82.0" r="3" fill="#f87171"/><circle cx="208.0" cy="127.5" r="3" fill="#f87171"/><circle cx="366.0" cy="128.0" r="3" fill="#f87171"/><circle cx="524.0" cy="90.0" r="3" fill="#f87171"/><circle cx="682.0" cy="59.5" r="3" fill="#f87171"/><circle cx="840.0" cy="71.5" r="3.5" fill="#f87171"/><text x="50.0" y="72.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">5.5x</text><text x="208.0" y="117.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">3.7x</text><text x="366.0" y="118.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">3.7x</text><text x="524.0" y="80.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">5.2x</text><text x="682.0" y="49.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">6.4x</text><text x="840.0" y="61.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">5.9x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="175.93 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="263.89 439.82" stroke-dashoffset="-175.93"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>Lauritzen Fonden Holding (foundation) &asymp; 40%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float &amp; other institutions &asymp; 60%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Lauritzen Fonden Holding ApS, the corporate vehicle of the Danish shipping foundation Lauritzen Fonden, holds just over 40% of DFDS and has held a controlling stake for decades. That's a genuine, long-horizon anchoring shareholder in the mold of Airbus's government pact or Demant's founding family &mdash; one reason DFDS clears criterion #12 despite its rough recent scorecard.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>DFDS</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>14.1%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY21-25)</td><td>&ge;15%</td><td>-31.0%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>0.9%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>2.6%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 &mdash; Northern Europe's largest integrated ferry &amp; logistics operator</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; six-plus real competitors (Stena Line, P&amp;O, Irish Ferries, CLdN, Scandlines, Tallink)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>~1-2% vs ~8% (indicative estimate) &mdash; below WACC in 4 of 5 years</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~5.9x (stricter calc); 3.4x on the company's own metric</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>631.6% (FY2025) &mdash; distorted by a near-zero EBIT base, not a genuine signal</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>EV/EBITDA 5.9x vs 8.7x FY21-25 avg</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>~57M (FY21) &rarr; ~54M (FY25), declining every year</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Lauritzen Fonden Holding &asymp; 40%, controlling long-horizon stake</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>&asymp;5.5% of revenue (2026 guidance), helped by sale-and-leaseback fleet financing</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Genuine #1-by-scale market position; a real, foundation-anchored controlling shareholder with a multi-decade horizon; a quietly shrinking share count even through a rough earnings year; a valuation multiple below its own five-year average; and two straight quarters of broad-based, both-division earnings improvement with guidance raised twice in 2026.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The core problem is structural, not just cyclical: ferry shipping is capital-intensive and competitively fragmented, and margins collapsed from 9.2% to under 1% in three years even before any single bad event. Leverage remains well above the framework's comfort zone on any measure. Whether the 2026 recovery becomes a genuine multi-year re-rating or fades back into thin-margin competition is the central question &mdash; there isn't yet a full year of evidence either way.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 13-19, 2026. Sources: DFDS A/S annual and quarterly reports (FY2021-FY2025, Q1/Q2 2026), stockanalysis.com (financial statements, valuation ratios), GlobeNewswire and Investing.com (quarterly results coverage), ferryshippingnews.com and Shippax (competitive landscape, ownership).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of WACC estimates) and function as indicators only, not as verified facts or a basis for investment decisions. Quarterly EBIT figures as individually reported may not sum exactly to the annual figures shown on page 2, due to reporting-definition differences and year-end special items.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">DFDS A/S &mdash; DKK share price trend, Nasdaq Copenhagen. Direct year-end closing prices (not derived).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">DFDS A/S &mdash; Year-End Close</div>
+    <div class="chart-sub">A rare negative 5-year CAGR on this site: the stock has fallen in four of the last five years as earnings deteriorated, only partly offset by the sharp 2026 recovery rally. Current price matches the valuation figures used elsewhere in this dashboard.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f87171" stop-opacity="0.24"/><stop offset="100%" stop-color="#f87171" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,37.50 L 172.8,85.44 L 299.6,101.39 L 426.4,149.89 L 553.2,171.19 L 680.0,143.07 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="37.50" x2="680.0" y2="143.07" stroke="#f87171" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="400" y="24" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">5-Yr CAGR: -15.3%</text>
+<path d="M 46.0,37.50 L 172.8,85.44 L 299.6,101.39 L 426.4,149.89 L 553.2,171.19 L 680.0,143.07" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="37.50" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="23.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK333.12</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="85.44" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="101.44" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK247.96</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="101.39" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="117.39" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK219.64</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="149.89" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="165.89" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK133.50</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="171.19" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="161.19" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK95.65</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="143.07" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="133.07" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK145.60</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end 2021-2025 closes are direct closing prices (stockanalysis.com); current price is a direct quote as of Aug 19, 2026. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
