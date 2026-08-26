@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Schneider Electric Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Energy Management &amp; Industrial Automation</div>
+  <h1>Schneider Electric S.E.</h1>
+  <div class="badges">
+    <span class="badge">Euronext Paris: SU &middot; ADR: SBGSY</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Founded 1836</span>
+    <span class="badge warn">Entry multiple sits well above its own 5-year average after the 2025-26 AI/data-center-driven re-rating</span>
+  </div>
+  <div class="price">&euro;291.80</div>
+  <div class="price-sub">Close Aug 24, 2026 &middot; Mkt cap &asymp; &euro;164.1B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Siemens, ABB, Eaton, Legrand (Energy Management) &middot; Rockwell Automation, Honeywell, Mitsubishi Electric (Industrial Automation) &middot; Vertiv (data center power &amp; cooling) &mdash; a genuinely open, multi-player field rather than a monopoly or duopoly</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;40.15B</div>
+      <div class="sub" style="color:#34d399;">+5.2% reported / +8.9% organic YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">16.7%</div>
+      <div class="sub">Adj. EBITA margin (company's own metric): 18.7%</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val">~13.3% / ~9.6%</div>
+      <div class="note">Clears WACC by a healthy ~4pt spread, but doesn't reach the 15% ROIC bar this framework screens for.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#fbbf24;">~1.9x</div>
+      <div class="sub">Up from ~1.0x in FY2024 &mdash; India JV buyout (&euro;5.5B) and Cognite deal ($3.1B) both debt-funded</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">21/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">One of the lower scores on this site despite Schneider's genuine quality reputation &mdash; a fragmented competitive market, growth/margin bars tuned for smaller names, and a rich AI-driven re-rating all weigh on the mechanical score.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 198.83,143.69 L164.23,130.57 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M198.83,143.69 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 164.23,130.57 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">4/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 4 (market share, net debt/EBITDA, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC, FCF conversion, entry multiple vs. history, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; a genuinely competitive global market with Siemens, ABB, Eaton, Legrand, Honeywell and Rockwell all scaled rivals</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Schneider Electric is a genuinely excellent, well-run business &mdash; ranked #1 on Gartner's Top 25 Supply Chain list for ten straight years, twice named World's Most Sustainable Company, and sitting at the center of two of the decade's strongest structural trends: AI-driven data-center buildout and grid electrification. But this framework's mechanical scorecard comes out low regardless. At &euro;40B+ revenue, Schneider is simply too large to clear a 15% five-year growth bar; it competes in a genuinely fragmented market rather than holding a monopoly or duopoly position; and the 2025-26 AI-fueled re-rating has pushed the entry multiple well above its own five-year average. None of that makes it a bad company &mdash; it's a case study in this score measuring something narrower than overall quality.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (reported July 30, 2026) and spot price as of Aug 24, 2026 close. FY2026 guidance has been raised twice this year: organic revenue growth now 10%-13% (from 7%-10% initially), adjusted EBITA growth 14%-19% (from 10%-15%).
+  </div>
+
+  <div class="bignum-corner">4/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR billions. CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue has compounded at a steady ~8-9% a year &mdash; solid for a &euro;40B industrial, but well under the 15% bar this framework screens for. Operating margin expanded from 15.0% to 16.7% over the period, still short of the 20% threshold.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="166.67" x2="840" y2="166.67" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.67" text-anchor="end" font-size="11" fill="#64748b">&euro;15B</text><line x1="60" y1="93.33" x2="840" y2="93.33" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.33" text-anchor="end" font-size="11" fill="#64748b">&euro;30B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;45B</text><rect x="110" y="98.69" width="16" height="141.31" rx="1.5" fill="#2dd4bf"/><text x="118" y="93.69" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;28.9B</text><rect x="130" y="218.83" width="16" height="21.17" rx="1.5" fill="#60a5fa"/><text x="138" y="214.83" text-anchor="middle" font-size="7.5" fill="#93c5fd">&euro;4.33B</text><rect x="150" y="224.98" width="16" height="15.02" rx="1.5" fill="#fbbf24"/><text x="158" y="220.98" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;3.07B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="266" y="72.92" width="16" height="167.08" rx="1.5" fill="#2dd4bf"/><text x="274" y="67.92" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;34.2B</text><rect x="286" y="215.88" width="16" height="24.12" rx="1.5" fill="#60a5fa"/><text x="294" y="211.88" text-anchor="middle" font-size="7.5" fill="#93c5fd">&euro;4.93B</text><rect x="306" y="222.17" width="16" height="17.83" rx="1.5" fill="#fbbf24"/><text x="314" y="218.17" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;3.65B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="422" y="64.48" width="16" height="175.52" rx="1.5" fill="#2dd4bf"/><text x="430" y="59.48" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;35.9B</text><rect x="442" y="210.99" width="16" height="29.01" rx="1.5" fill="#60a5fa"/><text x="450" y="206.99" text-anchor="middle" font-size="7.5" fill="#93c5fd">&euro;5.93B</text><rect x="462" y="215.59" width="16" height="24.41" rx="1.5" fill="#fbbf24"/><text x="470" y="211.59" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;4.99B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="578" y="53.47" width="16" height="186.53" rx="1.5" fill="#2dd4bf"/><text x="586" y="48.47" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;38.2B</text><rect x="598" y="208.47" width="16" height="31.53" rx="1.5" fill="#60a5fa"/><text x="606" y="204.47" text-anchor="middle" font-size="7.5" fill="#93c5fd">&euro;6.45B</text><rect x="618" y="217.36" width="16" height="22.64" rx="1.5" fill="#fbbf24"/><text x="626" y="213.36" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;4.63B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="734" y="43.70" width="16" height="196.30" rx="1.5" fill="#2dd4bf"/><text x="742" y="38.70" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;40.2B</text><rect x="754" y="207.25" width="16" height="32.75" rx="1.5" fill="#60a5fa"/><text x="762" y="203.25" text-anchor="middle" font-size="7.5" fill="#93c5fd">&euro;6.70B</text><rect x="774" y="215.27" width="16" height="24.73" rx="1.5" fill="#fbbf24"/><text x="782" y="211.27" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;5.06B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+8.6%</div><div class="sub">&euro;28.9B &rarr; &euro;40.2B; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#fbbf24;">+11.5%</div><div class="sub">&euro;4.33B &rarr; &euro;6.70B; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+13.3%</div><div class="sub">&euro;3.07B &rarr; &euro;5.06B; just below the 15% bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Dashed line marks the 20% screen threshold. Margin dipped in FY2022 on input-cost inflation, then resumed its climb &mdash; but has never crossed 20%.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M 50.00,145.10 L 247.50,147.85 L 445.00,137.35 L 642.50,135.50 L 840.00,136.60 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,145.10 L 247.50,147.85 L 445.00,137.35 L 642.50,135.50 L 840.00,136.60" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="145.10" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="147.85" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="137.35" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="135.50" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="136.60" r="3" fill="#2dd4bf"/><text x="50.00" y="135.10" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.98%</text><text x="247.50" y="137.85" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.43%</text><text x="445.00" y="127.35" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.53%</text><text x="642.50" y="125.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.90%</text><text x="840.00" y="126.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.68%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&euro;28.91B</td><td>&euro;4.33B</td><td>15.0%</td><td>&euro;3.20B</td><td>&euro;3.07B</td><td>71.0%</td></tr>
+    <tr><td>FY2022</td><td>&euro;34.18B</td><td>&euro;4.93B</td><td>14.4%</td><td>&euro;3.48B</td><td>&euro;3.65B</td><td>73.9%</td></tr>
+    <tr><td>FY2023</td><td>&euro;35.90B</td><td>&euro;5.93B</td><td>16.5%</td><td>&euro;4.00B</td><td>&euro;4.99B</td><td>84.2%</td></tr>
+    <tr><td>FY2024</td><td>&euro;38.15B</td><td>&euro;6.45B</td><td>16.9%</td><td>&euro;4.27B</td><td>&euro;4.63B</td><td>71.8%</td></tr>
+    <tr><td>FY2025</td><td>&euro;40.15B</td><td>&euro;6.70B</td><td>16.7%</td><td>&euro;4.16B</td><td>&euro;5.06B</td><td>75.5%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Net capital expenditure has stayed low and stable at roughly 2.4%-3.7% of revenue throughout the period &mdash; Schneider is largely an asset-light systems, software and services integrator rather than a heavy manufacturer, which is why capex intensity (#13) is comfortably met despite the growth and margin misses elsewhere.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Schneider reports full P&amp;L detail (incl. Adjusted EBITA) semi-annually; H2 figures below are derived as FY total minus H1. Latest reported period: H1 2026 (six months to June 30, 2026, reported July 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Record H1 revenue <b style="color:#f8fafc;">&euro;21.2B</b>, +14% organic (Q2 alone: &euro;11.5B, also a quarterly record). Adjusted EBITA <b style="color:#f8fafc;">&euro;4.09B</b>, +22% organic, margin <b style="color:#f8fafc;">19.3%</b> (+120bps). Net income <b style="color:#f8fafc;">&euro;2.49B</b>, +30% reported. Free cash flow <b style="color:#f8fafc;">&euro;1.6B</b>, a record H1. Growth was broad-based: Energy Management led (Data Center systems especially strong on AI-driven demand), while Industrial Automation returned to positive growth after a soft 2025. FY2026 guidance raised twice this year: organic revenue growth now 10%-13% (from 7%-10%), adjusted EBITA growth 14%-19% (from 10%-15%).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Half-Year Revenue (&euro;B)</div>
+    <div class="chart-sub">Five straight halves of growth, with H1 2026 the strongest yet as AI/data-center demand accelerated.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;6B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;12B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;18B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;24B</text><rect x="103.0" y="68.56" width="70" height="151.44" rx="2" fill="#2dd4bf"/><text x="138" y="61.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;18.2B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H1'24</text><rect x="259.0" y="53.50" width="70" height="166.50" rx="2" fill="#2dd4bf"/><text x="294" y="46.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;20.0B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H2'24</text><rect x="415.0" y="58.87" width="70" height="161.13" rx="2" fill="#2dd4bf"/><text x="450" y="51.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;19.3B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H1'25</text><rect x="571.0" y="46.53" width="70" height="173.47" rx="2" fill="#2dd4bf"/><text x="606" y="39.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;20.8B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H2'25</text><rect x="727.0" y="43.33" width="70" height="176.67" rx="2" fill="#2dd4bf"/><text x="762" y="36.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;21.2B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">H1'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Half-Year Adjusted EBITA (&euro;B) &amp; Margin</div>
+    <div class="chart-sub">Company-reported non-GAAP measure. Margin dipped in H1 2025 on FX headwinds and raw-material inflation, then expanded 120bps to a record 19.3% in H1 2026 on volume and productivity.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;1.25B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;2.5B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;3.75B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;5B</text><rect x="103.0" y="84.68" width="70" height="135.32" rx="2" fill="#60a5fa"/><text x="138" y="66.68" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;3.38B</text><text x="138" y="78.68" text-anchor="middle" font-size="9" fill="#93c5fd">18.6%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H1'24</text><rect x="259.0" y="72.00" width="70" height="148.00" rx="2" fill="#60a5fa"/><text x="294" y="54.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;3.70B</text><text x="294" y="66.00" text-anchor="middle" font-size="9" fill="#93c5fd">18.5%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H2'24</text><rect x="415.0" y="79.60" width="70" height="140.40" rx="2" fill="#60a5fa"/><text x="450" y="61.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;3.51B</text><text x="450" y="73.60" text-anchor="middle" font-size="9" fill="#93c5fd">18.2%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H1'25</text><rect x="571.0" y="59.60" width="70" height="160.40" rx="2" fill="#60a5fa"/><text x="606" y="41.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;4.01B</text><text x="606" y="53.60" text-anchor="middle" font-size="9" fill="#93c5fd">19.3%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">H2'25</text><rect x="727.0" y="56.40" width="70" height="163.60" rx="2" fill="#60a5fa"/><text x="762" y="38.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;4.09B</text><text x="762" y="50.40" text-anchor="middle" font-size="9" fill="#93c5fd">19.3%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">H1'26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Active, debt-funded M&amp;A:</b> Schneider announced the $3.1B acquisition of Cognite (an industrial AI platform, to be integrated with AVEVA) in July 2026, and in July 2025 agreed to pay Temasek &euro;5.5B for full ownership of its India joint venture. Both deals lean into the electrification/AI thesis, but they've pushed net debt from &euro;8.1B (Dec 2024) toward &euro;16B+, lifting net debt/EBITDA from ~1.0x to ~1.9x &mdash; still under this framework's 2x screen, but moving the wrong direction.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Schneider has a long public trading history, so the entry-multiple criterion is fully scorable here (see page 5, #10).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current multiple (&asymp;35.1x) sits well ABOVE the FY21-25 average of 28.3x (dashed) &mdash; the AI/data-center-driven re-rating has made this one of the richer entry points in Schneider's own trading history, not a discount.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50.0" y1="78.57" x2="840.0" y2="78.57" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="73.57" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 28.3x</text><path d="M 50.00,67.90 L 208.00,113.70 L 366.00,91.45 L 524.00,60.05 L 682.00,59.75 L 840.00,44.50" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.00" cy="67.90" r="3" fill="#a78bfa"/><circle cx="208.00" cy="113.70" r="3" fill="#a78bfa"/><circle cx="366.00" cy="91.45" r="3" fill="#a78bfa"/><circle cx="524.00" cy="60.05" r="3" fill="#a78bfa"/><circle cx="682.00" cy="59.75" r="3" fill="#a78bfa"/><circle cx="840.00" cy="44.50" r="3.5" fill="#a78bfa"/><text x="50.00" y="57.90" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">30.4x</text><text x="208.00" y="103.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.3x</text><text x="366.00" y="81.45" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.7x</text><text x="524.00" y="50.05" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.0x</text><text x="682.00" y="49.75" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.1x</text><text x="840.00" y="34.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">35.1x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Debt/EBITDA</div>
+    <div class="chart-sub">Dashed line marks the 2x screen threshold. Leverage stayed comfortably under 1.3x for four straight years before rising sharply in FY2025-26 as the Group funded the India JV buyout and Cognite acquisition partly with debt.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">1.75x</text><line x1="60" y1="162.86" x2="840" y2="162.86" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="50" y="158.86" text-anchor="end" font-size="10" fill="#94a3b8">2x threshold</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">3.5x</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">5.25x</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">7x</text><rect x="97.0" y="184.57" width="56" height="35.43" rx="2" fill="#34d399"/><text x="125" y="177.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.24x</text><text x="125" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="227.0" y="191.14" width="56" height="28.86" rx="2" fill="#34d399"/><text x="255" y="184.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.01x</text><text x="255" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="357.0" y="184.29" width="56" height="35.71" rx="2" fill="#34d399"/><text x="385" y="177.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.25x</text><text x="385" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="487.0" y="191.43" width="56" height="28.57" rx="2" fill="#34d399"/><text x="515" y="184.43" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.00x</text><text x="515" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="617.0" y="174.57" width="56" height="45.43" rx="2" fill="#34d399"/><text x="645" y="167.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.59x</text><text x="645" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="747.0" y="165.43" width="56" height="54.57" rx="2" fill="#34d399"/><text x="775" y="158.43" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.91x</text><text x="775" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="197.92 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="26.39 439.82" stroke-dashoffset="-197.92"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="215.51 439.82" stroke-dashoffset="-224.31"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional (Vanguard, BlackRock, Dodge &amp; Cox, etc.) &asymp; 45%</div>
+        <div><span class="dot" style="background:#fbbf24;"></span>Employee shareholding &amp; savings plans &asymp; 6%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float, retail &amp; other &asymp; 49%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> ownership is widely dispersed among institutional investors (Vanguard, BlackRock, Dodge &amp; Cox and others) with no single controlling shareholder &mdash; insiders (officers &amp; directors) hold just 0.2% of shares outstanding. Schneider does run a broad employee shareholding/savings plan (&asymp;5-6% of shares), a genuine positive for alignment, but it isn't the kind of founder- or family-anchored stake this framework's criterion #12 is really looking for. This is a real, structural miss despite the otherwise well-run governance profile.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Schneider Electric</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>8.6%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>11.5%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>16.7% (Adj. EBITA margin: 18.7%)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>13.3%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in Energy Management (&asymp;87% of revenue); top-3 in Industrial Automation</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; genuinely open market: Siemens, ABB, Eaton, Legrand, Honeywell and Rockwell all scaled rivals</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>&asymp;13.3-14.0% vs &asymp;9.6% &mdash; clears WACC but not the 15% ROIC bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;1.9x, up from &asymp;1.0x in FY2024</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>75.5% (FY2025)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/E 35.1x vs 28.3x FY21-25 avg</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;565M (FY21, implied) &rarr; 562.3M (current) &mdash; essentially flat</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.2% insiders; no controlling family stake (though &asymp;5-6% employee ownership plan)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.7% of revenue (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A genuinely dominant, well-diversified franchise sitting at the center of two of the decade's strongest structural trends &mdash; AI/data-center power and cooling demand, and grid electrification &mdash; with ten straight years atop Gartner's global supply chain ranking and back-to-back recognition as the World's Most Sustainable Company. Leverage remains modest in absolute terms, share count has stayed essentially flat, and capex intensity is low for an industrial of this scale. 2026 guidance has already been raised twice on real momentum: H1 organic revenue growth accelerated to 14%.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This framework's growth and market-concentration bars are simply tough for a &euro;40B+ diversified industrial to clear &mdash; Schneider competes against Siemens, ABB, Eaton, Legrand, Honeywell and Rockwell across genuinely open markets rather than holding a monopoly position. The entry multiple (35x trailing P/E) sits well above its own five-year average following the AI-driven re-rating, and net debt/EBITDA has nearly doubled since FY2024 funding the India JV buyout and Cognite acquisition. None of these misses signal operational trouble &mdash; H1 2026 was a record half &mdash; but they do mean paying a premium multiple for a business whose own scorecard doesn't yet show a clear margin of safety.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 21-24, 2026. Sources: Schneider Electric press releases (FY2021-FY2025 full-year and half-year results, H1 2026 results), stockanalysis.com (financial statements, valuation ratios, ownership statistics), Gartner Top 25 Supply Chain, TIME/Statista World's Most Sustainable Company rankings.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources (not company disclosures in the case of ROIC, WACC and valuation averages) and function as indicators only, not as verified facts or a basis for investment decisions.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Schneider Electric &mdash; EUR share price trend, Euronext Paris. Direct year-end closing prices (not derived).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Schneider Electric &mdash; Year-End Close</div>
+    <div class="chart-sub">A real double-digit compounder: the stock dipped through the 2022 rate-driven industrials sell-off, then more than doubled from that low as AI/data-center demand and margin expansion took hold. Current price matches the valuation figures used elsewhere in this dashboard.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,140.61 L 172.8,180.0 L 299.6,131.82 L 426.4,76.03 L 553.2,81.69 L 680.0,28.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="140.61" x2="680.0" y2="28.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +11.1%</text>
+<path d="M 46.0,140.61 L 172.8,180.0 L 299.6,131.82 L 426.4,76.03 L 553.2,81.69 L 680.0,28.0" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="140.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="130.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;172.46</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="180.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="170.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;130.72</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="131.82" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="121.82" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;181.78</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="76.03" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="66.03" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;240.90</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="81.69" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="71.69" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;234.90</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="28.0" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="18.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;291.80</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end 2021-2025 closes are direct quotes (stockanalysis.com), not derived. 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
