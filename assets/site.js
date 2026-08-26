@@ -165,6 +165,31 @@ document.addEventListener("DOMContentLoaded", () => {
       : `<p class="muted">No companies match this label yet.</p>`;
   }
 
+  // ---- Scoreboard page: every company ranked by Martinero Index, highest first ----
+  const scoreboardEl = document.getElementById("scoreboard-table");
+  if (scoreboardEl) {
+    const ranked = hasData
+      ? [...COMPANIES].filter(c => c.martinero !== undefined).sort((a, b) => b.martinero - a.martinero)
+      : [];
+    if (!ranked.length) {
+      scoreboardEl.innerHTML = `<p class="muted">No scored companies yet.</p>`;
+    } else {
+      const rows = ranked.map((c, i) => `
+        <tr>
+          <td class="num">${i + 1}</td>
+          <td><a class="card-link" href="view.html?c=${encodeURIComponent(c.slug)}">${c.name}</a><div class="card-date">${c.ticker}</div></td>
+          <td>${c.sector || ""}</td>
+          <td class="num">${c.score || ""}</td>
+          <td class="num"><span class="score-chip martinero-chip">${c.martinero}/100</span></td>
+        </tr>`).join("");
+      scoreboardEl.innerHTML = `
+        <table class="holdings-table">
+          <tr><th>#</th><th>Company</th><th>Sector</th><th>Criteria Met</th><th>Martinero Index</th></tr>
+          ${rows}
+        </table>`;
+    }
+  }
+
   // ---- View page: load the right dashboard into the iframe ----
   const frame = document.getElementById("dashboard-frame");
   if (frame) {
