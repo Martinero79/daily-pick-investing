@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tesla Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Electric Vehicles, Energy Storage &amp; Robotics</div>
+  <h1>Tesla, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: TSLA</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Founded 2003</span>
+    <span class="badge warn">Q2 2026 operating margin collapsed to 1.4% (from 4.1% a year earlier) as opex jumped 47% on AI/robotaxi/Optimus spend &mdash; while the stock trades near 2x its own 5-year average P/E</span>
+  </div>
+  <div class="price">$347.70</div>
+  <div class="price-sub">Close Aug 26, 2026 &middot; Mkt cap &asymp;$1.37T (&asymp;3.95B diluted shares)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> BYD, Volkswagen Group, Xiaomi, Li Auto, NIO (global EVs) &middot; Ford, GM, Hyundai (US) &mdash; Tesla holds &asymp;50-59% of the US EV market but only &asymp;13% globally, roughly neck-and-neck with BYD for the world lead</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$94.8B</div>
+      <div class="sub" style="color:#f87171;">&minus;2.9% YoY &mdash; first annual decline since IPO</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#f87171;">4.6%</div>
+      <div class="sub">Down from a 16.8% peak in FY2022 &mdash; a real, multi-year margin decline</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">&asymp;3-5% / &asymp;16.1%</div>
+      <div class="note">A materially negative spread &mdash; on this measure, growth is currently destroying value rather than creating it.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">&asymp;$34.2B net cash ($43.5B cash vs $9.3B debt)</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">45/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Lower end of this list &mdash; genuine revenue growth and US market dominance, offset by declining margins, negative capital efficiency and a very rich valuation.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 132.73,202.24 L123.88,166.31 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M132.73,202.24 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 123.88,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (revenue CAGR, market share, net debt/EBITDA, FCF conversion, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC, entry multiple, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; a genuinely open, fragmented global EV market with BYD, VW, and a wave of fast-growing Chinese challengers</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Tesla's scorecard reads very differently depending on which lens you use. Revenue has actually compounded at a healthy 15.2% a year since FY2021, and the company still commands a dominant &asymp;50-59% share of the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net over the period, ROIC now sits well below Tesla's cost of capital, and share count has crept up roughly 11% &mdash; largely tied to 2025's CEO pay-package option exercises rather than open-market fundraising. Meanwhile the stock trades at close to twice its own 5-year average P/E, pricing in a great deal of optimism about robotaxi, Optimus, and AI that hasn't yet shown up in the reported numbers.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported July 22, 2026) and spot price as of Aug 26, 2026 close.
+  </div>
+
+  <div class="bignum-corner">6/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Operating income and net income both peaked in FY2023/FY2022 and have declined since, even as revenue kept growing through FY2024 &mdash; a genuine, multi-year margin compression story, not a one-off.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$25B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$50B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$75B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$100B</text><rect x="110" y="121.60" width="16" height="118.40" rx="1.5" fill="#2dd4bf"/><text x="118" y="116.60" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$53.8B</text><rect x="130" y="225.66" width="16" height="14.34" rx="1.5" fill="#60a5fa"/><text x="138" y="220.66" text-anchor="middle" font-size="7.5" fill="#93c5fd">$6.5B</text><rect x="150" y="227.86" width="16" height="12.14" rx="1.5" fill="#fbbf24"/><text x="158" y="222.86" text-anchor="middle" font-size="7.5" fill="#fde68a">$5.5B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="60.79" width="16" height="179.21" rx="1.5" fill="#2dd4bf"/><text x="274" y="55.79" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$81.5B</text><rect x="286" y="209.95" width="16" height="30.05" rx="1.5" fill="#60a5fa"/><text x="294" y="204.95" text-anchor="middle" font-size="7.5" fill="#93c5fd">$13.7B</text><rect x="306" y="212.37" width="16" height="27.63" rx="1.5" fill="#fbbf24"/><text x="314" y="207.37" text-anchor="middle" font-size="7.5" fill="#fde68a">$12.6B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="27.11" width="16" height="212.89" rx="1.5" fill="#2dd4bf"/><text x="430" y="22.11" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$96.8B</text><rect x="442" y="220.44" width="16" height="19.56" rx="1.5" fill="#60a5fa"/><text x="450" y="215.44" text-anchor="middle" font-size="7.5" fill="#93c5fd">$8.9B</text><rect x="462" y="207.00" width="16" height="33.00" rx="1.5" fill="#fbbf24"/><text x="470" y="202.00" text-anchor="middle" font-size="7.5" fill="#fde68a">$15.0B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="25.08" width="16" height="214.92" rx="1.5" fill="#2dd4bf"/><text x="586" y="20.08" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$97.7B</text><rect x="598" y="224.42" width="16" height="15.58" rx="1.5" fill="#60a5fa"/><text x="606" y="219.42" text-anchor="middle" font-size="7.5" fill="#93c5fd">$7.1B</text><rect x="618" y="224.40" width="16" height="15.60" rx="1.5" fill="#fbbf24"/><text x="626" y="219.40" text-anchor="middle" font-size="7.5" fill="#fde68a">$7.1B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="31.37" width="16" height="208.63" rx="1.5" fill="#2dd4bf"/><text x="742" y="26.37" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$94.8B</text><rect x="754" y="230.41" width="16" height="9.59" rx="1.5" fill="#60a5fa"/><text x="762" y="225.41" text-anchor="middle" font-size="7.5" fill="#93c5fd">$4.4B</text><rect x="774" y="231.66" width="16" height="8.34" rx="1.5" fill="#fbbf24"/><text x="782" y="226.66" text-anchor="middle" font-size="7.5" fill="#fde68a">$3.8B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+15.2%</div><div class="sub">$53.8B &rarr; $94.8B; clears the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">&minus;9.6%</div><div class="sub">$6.5B &rarr; $4.4B; a genuine multi-year decline, not a base-year artifact</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+5.6%</div><div class="sub">$5.0B &rarr; $6.2B; positive but below the 15% bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin peaked at 16.8% in FY2022 and has fallen in every year since, reaching 4.6% in FY2025 &mdash; driven by price cuts to defend volume against BYD and other Chinese entrants, plus rising R&amp;D on AI, Optimus and robotaxi.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><path d="M 50.00,98.90 L 247.50,52.30 L 445.00,128.10 L 642.50,147.50 L 840.00,174.00 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,98.90 L 247.50,52.30 L 445.00,128.10 L 642.50,147.50 L 840.00,174.00" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="98.90" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="52.30" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="128.10" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="147.50" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="174.00" r="3" fill="#2dd4bf"/><text x="50.00" y="88.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.11%</text><text x="247.50" y="42.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.77%</text><text x="445.00" y="118.10" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.19%</text><text x="642.50" y="137.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.25%</text><text x="840.00" y="164.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.60%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>$53.8B</td><td>$6.5B</td><td>12.1%</td><td>$5.5B</td></tr>
+    <tr><td>FY2022</td><td>$81.5B</td><td>$13.7B</td><td>16.8%</td><td>$12.6B</td></tr>
+    <tr><td>FY2023</td><td>$96.8B</td><td>$8.9B</td><td>9.2%</td><td>$15.0B</td></tr>
+    <tr><td>FY2024</td><td>$97.7B</td><td>$7.1B</td><td>7.2%</td><td>$7.1B</td></tr>
+    <tr><td>FY2025</td><td>$94.8B</td><td>$4.4B</td><td>4.6%</td><td>$3.8B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2025 capex was $8.5B (&asymp;9.0% of revenue). Management guided FY2026 capex above $20B as AI compute, data-center and robotaxi/Optimus buildout accelerate &mdash; a step-change that isn't yet reflected in the FY2025 figures above.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Tesla reports calendar quarters. Latest reported period: Q2 2026 (three months to June 30, 2026, reported July 22, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">$28.2B</b>, a quarterly record, but operating income fell to just <b style="color:#f8fafc;">$0.4B</b> (a 1.4% margin) as operating expenses jumped 47% year-over-year to $4.35B. Management attributed the jump to AI/Optimus/robotaxi investment plus stock-based compensation tied to Elon Musk's 2025 CEO pay package. Deliveries and revenue both grew, but profitability fell sharply &mdash; a genuine growth-versus-profitability tension playing out in real time.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($B)</div>
+    <div class="chart-sub">Revenue has been choppy quarter to quarter, with Q3 and Q4 typically stronger on delivery push, but has grown modestly on a year-over-year basis through Q2 2026.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$7.5B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$22.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$30B</text><rect x="103.0" y="70.03" width="70" height="149.97" rx="2" fill="#2dd4bf"/><text x="138" y="63.03" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$22.5B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2&#39;25</text><rect x="259.0" y="32.70" width="70" height="187.30" rx="2" fill="#2dd4bf"/><text x="294" y="25.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$28.1B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3&#39;25</text><rect x="415.0" y="53.99" width="70" height="166.01" rx="2" fill="#2dd4bf"/><text x="450" y="46.99" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$24.9B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4&#39;25</text><rect x="571.0" y="70.75" width="70" height="149.25" rx="2" fill="#2dd4bf"/><text x="606" y="63.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$22.4B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1&#39;26</text><rect x="727.0" y="31.76" width="70" height="188.24" rx="2" fill="#2dd4bf"/><text x="762" y="24.76" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$28.2B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income ($B) &amp; Margin</div>
+    <div class="chart-sub">The Q2 2026 drop is the standout data point here &mdash; margin fell by more than half sequentially even as revenue hit a new high, underscoring how much Tesla is currently spending ahead of any AI/robotaxi payoff.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$0.6B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$1.3B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$1.9B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$2.5B</text><rect x="103.0" y="146.16" width="70" height="73.84" rx="2" fill="#60a5fa"/><text x="138" y="130.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.92B</text><text x="138" y="141.16" text-anchor="middle" font-size="9" fill="#93c5fd">4.1%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="90.08" width="70" height="129.92" rx="2" fill="#60a5fa"/><text x="294" y="74.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.62B</text><text x="294" y="85.08" text-anchor="middle" font-size="9" fill="#93c5fd">5.8%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="107.28" width="70" height="112.72" rx="2" fill="#60a5fa"/><text x="450" y="91.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.41B</text><text x="450" y="102.28" text-anchor="middle" font-size="9" fill="#93c5fd">5.7%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="144.72" width="70" height="75.28" rx="2" fill="#60a5fa"/><text x="606" y="128.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.94B</text><text x="606" y="139.72" text-anchor="middle" font-size="9" fill="#93c5fd">4.2%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="188.16" width="70" height="31.84" rx="2" fill="#60a5fa"/><text x="762" y="172.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.40B</text><text x="762" y="183.16" text-anchor="middle" font-size="9" fill="#93c5fd">1.4%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>The growth-vs-profit tension:</b> Tesla is simultaneously defending its core auto margins against Chinese price competition, ramping FSD/robotaxi and Optimus spending, and guiding FY2026 capex above $20B &mdash; more than double FY2025's level. None of this is hidden or undisclosed; it's a deliberate strategic bet on the next phase of the business. But it means today's profitability numbers understate the spend, not the payoff, and the payoff itself remains unproven at scale.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Tesla's P/E has swung enormously across the past five years (from roughly 34x to over 400x at various points) as earnings themselves have been volatile, so this comparison uses the broadly-cited 5-year average as the cleanest available benchmark.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Current vs. 5-Year Average</div>
+    <div class="chart-sub">At roughly 2x its own 5-year average multiple, Tesla is priced for a great deal of success in areas &mdash; robotaxi, Optimus, AI &mdash; that haven't yet shown up in the reported financials.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">87.5x</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">175x</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">262.5x</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">350x</text><rect x="280" y="34.69" width="80" height="185.31" rx="2" fill="#a78bfa"/><text x="320" y="25.69" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">324.3x</text><text x="320" y="238" text-anchor="middle" font-size="11.5" fill="#cbd5e1">Current (TTM)</text><rect x="520" y="126.91" width="80" height="93.09" rx="2" fill="#64748b"/><text x="560" y="117.91" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">162.9x</text><text x="560" y="238" text-anchor="middle" font-size="11.5" fill="#cbd5e1">5-Yr Avg</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Tesla held $43.5B in cash and short-term investments against $9.3B in total debt as of Q2 2026 &mdash; a net cash position of roughly $34.2B, comfortably clearing this framework's net-debt/EBITDA bar. Balance sheet strength is not the concern here.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="89.28 439.82" stroke-dashoffset="0.00"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="188.24 439.82" stroke-dashoffset="-89.28"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="162.29 439.82" stroke-dashoffset="-277.53"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Elon Musk (founder/CEO) &asymp; 20.3%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional (Vanguard, BlackRock, others) &asymp; 42.8%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail &amp; other public float &asymp; 36.9%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Musk's ~20.3% stake (post his 2025 CEO pay-package option exercises) is a genuinely large founder position by this framework's standard, and shares outstanding jumped from 3.22B (FY2024) to 3.75B (FY2025) largely because of that same package &mdash; worth understanding as compensation-driven dilution rather than a cash raise, but dilution all the same.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Tesla</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>15.2%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;9.6% &mdash; a genuine multi-year decline</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>4.6% (FY2025), down from 16.8% in FY2022</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>5.6%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 in US EVs (&asymp;50-59%); roughly tied #1/#2 globally with BYD</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a genuinely open global EV market with BYD, VW and fast-growing Chinese entrants</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>&asymp;3-5% vs &asymp;16.1% &mdash; materially negative spread</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash, &asymp;$34.2B</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>142.7% (FY2025) &mdash; flattered by an unusually depressed EBIT base, see note below</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/E &asymp;324x vs &asymp;163x 5-yr average (&asymp;2x premium)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>+10.8% FY21-FY25, mostly from FY2025 CEO pay-package option exercises</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Elon Musk &asymp;20.3%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>9.0% of revenue (FY2025); guided well above $20B in FY2026</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>On criterion 9:</b> Tesla's FY2025 FCF-to-EBIT ratio (142.7%) looks unusually strong mainly because FY2025 operating income was so depressed ($4.4B) &mdash; in prior years the same ratio ran 49-77%, still respectable but not eye-catching. Worth reading this one criterion with that context rather than at face value.</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue has genuinely compounded at over 15% a year for four years, and Tesla remains the dominant EV brand in its home US market by a wide margin, even as the broader EV category cooled. The balance sheet is a clean net-cash position, Musk's founder stake remains large and aligned, and capex &mdash; for now &mdash; is still modest as a share of revenue. FCF has also held up reasonably well through the margin decline.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The core story here is margin: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk over the period, and ROIC now sits meaningfully below Tesla's cost of capital. Globally, Tesla is in a genuine, fragmented fight with BYD and a wave of fast-growing Chinese EV makers, not a monopoly. And the stock trades at roughly double its own 5-year average multiple, pricing in robotaxi, Optimus and AI outcomes that remain unproven at commercial scale &mdash; a real gap between today's numbers and today's valuation.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 21-26, 2026. Sources: Tesla shareholder deck and 10-K/10-Q filings (FY2021-FY2025, Q1-Q2 2026), GuruFocus (ROIC/WACC, ownership, P/E), Cox Automotive and CleanTechnica (US EV market share), Counterpoint Research (global EV market share), Motley Fool/SEC 13G filings (Musk ownership).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Tesla &mdash; USD share price trend, NASDAQ (split-adjusted for the August 2022 3-for-1 split). All values are direct year-end closes; current price is the Aug 26, 2026 close.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Tesla &mdash; Year-End Close</div>
+    <div class="chart-sub">A volatile five years: a 2022 crash, a strong 2023-2025 recovery to new highs, and a pullback into today that leaves the stock roughly flat versus its 2021 close &mdash; despite revenue nearly doubling over the same span.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,73.37 L 172.8,180.00 L 299.6,121.67 L 426.4,49.36 L 553.2,28.00 L 680.0,75.49 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="73.37" x2="680.0" y2="75.49" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: &minus;0.3%</text>
+<path d="M 46.0,73.37 L 172.8,180.00 L 299.6,121.67 L 426.4,49.36 L 553.2,28.00 L 680.0,75.49" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="73.37" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="63.37" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$352.26</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="180.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="170.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$123.18</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="121.67" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="111.67" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$248.48</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="49.36" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="39.36" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$403.84</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="28.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="18.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$449.72</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="75.49" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="65.49" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$347.70</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All prices are direct quotes, split-adjusted for the August 2022 3-for-1 split. 5-Yr CAGR is computed FY21-close to current (naive 5-year span) and is negative &mdash; the stock has round-tripped a large rally and pullback to sit close to where it started. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

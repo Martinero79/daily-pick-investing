@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apple Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Consumer Hardware &amp; Digital Services</div>
+  <h1>Apple Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: AAPL</span>
+    <span class="badge">FY ends last Saturday of September</span>
+    <span class="badge">Founded 1976</span>
+    <span class="badge warn">Growth has slowed sharply &mdash; revenue has compounded at just 3.3% a year since FY2021, and free cash flow hasn't grown at all over that span</span>
+  </div>
+  <div class="price">$310.34</div>
+  <div class="price-sub">Close Aug 24, 2026 &middot; Mkt cap &asymp; $4.56T (&asymp;14.7B shares)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Samsung, Google/Pixel, Xiaomi, Huawei (smartphones) &middot; Microsoft, Google (services/ecosystem) &mdash; Apple and Samsung together occupied all top-10 best-selling smartphone models globally in Q2 2026, a record level of concentration at the premium tier, with Apple alone capturing &asymp;49% of industry-wide smartphone revenue</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$416.2B</div>
+      <div class="sub" style="color:#34d399;">+6.4% YoY &mdash; a record year, but slow multi-year growth</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">31.97%</div>
+      <div class="sub">Up from 29.8% in FY2021 &mdash; steady, gradual expansion</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val">&asymp;40% / &asymp;10%</div>
+      <div class="note">One of the widest ROIC-WACC spreads of any large-cap; clears the 15% ROIC bar by a huge margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">&asymp;$31B net cash (Q3 2025), even after years of debt-funded buybacks</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Mid-pack &mdash; exceptional margins, returns on capital and balance sheet, but the framework's heavy growth weighting catches up with a company this size and this mature.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 87.27,202.24 L96.12,166.31 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M87.27,202.24 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 96.12,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (operating margin, market share, market concentration, ROIC/WACC, net debt/EBITDA, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (revenue CAGR, EBIT CAGR, FCF CAGR, FCF conversion, entry multiple vs. history, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> &mdash; the premium smartphone tier has become a near-duopoly with Samsung; Google, Xiaomi and others compete mainly below that tier</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Apple is an extraordinary business by almost any operating measure &mdash; a 32% operating margin, a ROIC-WACC spread few companies can match, a genuinely net-cash balance sheet even after hundreds of billions in buybacks, and a share count that keeps shrinking. What this framework catches, though, is that Apple today is a mature, wonderful-quality compounder rather than a growth story: revenue has compounded at just 3.3% a year since FY2021, and free cash flow hasn't grown at all over that span despite record profits, largely because operating cash flow growth has been mostly offset by tax and working-capital effects. None of that makes Apple a bad business &mdash; it's a case of this framework's heavy growth weighting doing exactly what it's designed to do.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q3 FY2026 (reported July 30, 2026) and spot price as of Aug 24, 2026 close. FY2025 ended Sept 27, 2025.
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year ends late September.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue growth has been genuinely slow for a company this size &mdash; +3.3% CAGR, well under the 15% bar this framework screens for. Margin expansion has done most of the work: operating income grew faster than revenue in every year shown.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">$150B</text><line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">$300B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$450B</text><rect x="110" y="61.16" width="16" height="178.84" rx="1.5" fill="#2dd4bf"/><text x="118" y="56.16" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$365.8B</text><rect x="130" y="186.74" width="16" height="53.26" rx="1.5" fill="#60a5fa"/><text x="138" y="181.74" text-anchor="middle" font-size="7.5" fill="#93c5fd">$109.0B</text><rect x="150" y="193.71" width="16" height="46.29" rx="1.5" fill="#fbbf24"/><text x="158" y="188.71" text-anchor="middle" font-size="7.5" fill="#fde68a">$94.7B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="47.23" width="16" height="192.77" rx="1.5" fill="#2dd4bf"/><text x="274" y="42.23" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$394.3B</text><rect x="286" y="181.61" width="16" height="58.39" rx="1.5" fill="#60a5fa"/><text x="294" y="176.61" text-anchor="middle" font-size="7.5" fill="#93c5fd">$119.4B</text><rect x="306" y="191.21" width="16" height="48.79" rx="1.5" fill="#fbbf24"/><text x="314" y="186.21" text-anchor="middle" font-size="7.5" fill="#fde68a">$99.8B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="52.61" width="16" height="187.39" rx="1.5" fill="#2dd4bf"/><text x="430" y="47.61" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$383.3B</text><rect x="442" y="184.12" width="16" height="55.88" rx="1.5" fill="#60a5fa"/><text x="450" y="179.12" text-anchor="middle" font-size="7.5" fill="#93c5fd">$114.3B</text><rect x="462" y="192.58" width="16" height="47.42" rx="1.5" fill="#fbbf24"/><text x="470" y="187.58" text-anchor="middle" font-size="7.5" fill="#fde68a">$97.0B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="48.82" width="16" height="191.18" rx="1.5" fill="#2dd4bf"/><text x="586" y="43.82" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$391.0B</text><rect x="598" y="179.76" width="16" height="60.24" rx="1.5" fill="#60a5fa"/><text x="606" y="174.76" text-anchor="middle" font-size="7.5" fill="#93c5fd">$123.2B</text><rect x="618" y="194.17" width="16" height="45.83" rx="1.5" fill="#fbbf24"/><text x="626" y="189.17" text-anchor="middle" font-size="7.5" fill="#fde68a">$93.7B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="36.54" width="16" height="203.46" rx="1.5" fill="#2dd4bf"/><text x="742" y="31.54" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$416.2B</text><rect x="754" y="174.95" width="16" height="65.05" rx="1.5" fill="#60a5fa"/><text x="762" y="169.95" text-anchor="middle" font-size="7.5" fill="#93c5fd">$133.1B</text><rect x="774" y="185.24" width="16" height="54.76" rx="1.5" fill="#fbbf24"/><text x="782" y="180.24" text-anchor="middle" font-size="7.5" fill="#fde68a">$112.0B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+3.3%</div><div class="sub">$365.8B &rarr; $416.2B; well below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+5.1%</div><div class="sub">$109.0B &rarr; $133.1B; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">&minus;0.2%</div><div class="sub">$99.6B (FY21) &rarr; $98.8B (FY25); essentially flat</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Dashed line marks the 20% screen threshold. Apple has cleared 20% comfortably throughout the period and kept expanding steadily, from 29.8% to 32.0%.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M 50.00,71.08 L 247.50,68.54 L 445.00,70.90 L 642.50,62.45 L 840.00,60.15 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,71.08 L 247.50,68.54 L 445.00,70.90 L 642.50,62.45 L 840.00,60.15" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="71.08" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="68.54" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="70.90" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="62.45" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="60.15" r="3" fill="#2dd4bf"/><text x="50.00" y="61.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.78%</text><text x="247.50" y="58.54" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">30.29%</text><text x="445.00" y="60.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.82%</text><text x="642.50" y="52.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.51%</text><text x="840.00" y="50.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.97%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>$365.8B</td><td>$109.0B</td><td>29.8%</td><td>$94.7B</td><td>$99.6B</td><td>91.4%</td></tr>
+    <tr><td>FY2022</td><td>$394.3B</td><td>$119.4B</td><td>30.3%</td><td>$99.8B</td><td>n/a</td><td>n/a</td></tr>
+    <tr><td>FY2023</td><td>$383.3B</td><td>$114.3B</td><td>29.8%</td><td>$97.0B</td><td>n/a</td><td>n/a</td></tr>
+    <tr><td>FY2024</td><td>$391.0B</td><td>$123.2B</td><td>31.5%</td><td>$93.7B</td><td>n/a</td><td>n/a</td></tr>
+    <tr><td>FY2025</td><td>$416.2B</td><td>$133.1B</td><td>32.0%</td><td>$112.0B</td><td>$98.8B</td><td>74.2%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Only FY2021 and FY2025 free cash flow are shown directly (both independently sourced); FY2022-FY2024 are omitted rather than estimated. Capex has stayed remarkably low and stable at &asymp;3% of revenue throughout &mdash; Apple designs and markets hardware but largely outsources manufacturing, keeping it capital-light for a company of this scale.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Apple reports quarterly. Latest reported period: Q3 FY2026 (three months to June 27, 2026, reported July 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q3 FY2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">$109.4B</b>, +16% YoY. Net income <b style="color:#f8fafc;">$29.8B</b>, +27% YoY. iPhone revenue $54.3B (+21.7%), Services revenue $30.7B (+12.1%, another all-time high). Gross margin 50.1%, boosted &asymp;2pts by tariff refunds. Q1 FY2026 (the December holiday quarter) was a genuine record: $143.8B revenue and $42.1B net income, with China (incl. Taiwan/Hong Kong) sales up 38% YoY on strong iPhone 17 demand.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($B)</div>
+    <div class="chart-sub">Q1 FY2026 (the December holiday quarter) was a genuine standalone record at $143.8B; the seasonal pattern is normal for Apple, with each quarter still running well ahead of the year-ago period.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$40B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$80B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$120B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$160B</text><rect x="103.0" y="102.45" width="70" height="117.55" rx="2" fill="#2dd4bf"/><text x="138" y="95.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$94.0B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3&#39;25</text><rect x="259.0" y="91.88" width="70" height="128.12" rx="2" fill="#2dd4bf"/><text x="294" y="84.88" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$102.5B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4&#39;25</text><rect x="415.0" y="40.25" width="70" height="179.75" rx="2" fill="#2dd4bf"/><text x="450" y="33.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$143.8B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1&#39;26</text><rect x="571.0" y="81.00" width="70" height="139.00" rx="2" fill="#2dd4bf"/><text x="606" y="74.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$111.2B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2&#39;26</text><rect x="727.0" y="83.25" width="70" height="136.75" rx="2" fill="#2dd4bf"/><text x="762" y="76.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$109.4B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3&#39;26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Net Income ($B) &amp; Margin</div>
+    <div class="chart-sub">Net margin has held in the 25-29% range across the last five quarters &mdash; genuinely stable profitability even as revenue swings seasonally.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$12.5B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$25.0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$37.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$50.0B</text><rect x="103.0" y="126.28" width="70" height="93.72" rx="2" fill="#fbbf24"/><text x="138" y="110.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$23.4B</text><text x="138" y="121.28" text-anchor="middle" font-size="9" fill="#fde68a">24.9%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="259.0" y="110.00" width="70" height="110.00" rx="2" fill="#fbbf24"/><text x="294" y="94.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$27.5B</text><text x="294" y="105.00" text-anchor="middle" font-size="9" fill="#fde68a">26.8%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="415.0" y="51.60" width="70" height="168.40" rx="2" fill="#fbbf24"/><text x="450" y="35.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$42.1B</text><text x="450" y="46.60" text-anchor="middle" font-size="9" fill="#fde68a">29.3%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="571.0" y="101.68" width="70" height="118.32" rx="2" fill="#fbbf24"/><text x="606" y="85.68" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$29.6B</text><text x="606" y="96.68" text-anchor="middle" font-size="9" fill="#fde68a">26.6%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;26</text><rect x="727.0" y="100.80" width="70" height="119.20" rx="2" fill="#fbbf24"/><text x="762" y="84.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$29.8B</text><text x="762" y="95.80" text-anchor="middle" font-size="9" fill="#fde68a">27.2%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc">Q3&#39;26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Tariff exposure:</b> Q3 FY2026 results included a favorable $0.11/share impact from tariff refunds and roughly 2 points of gross margin benefit &mdash; a reminder that US-China trade policy is a real, ongoing swing factor for Apple's hardware margins given its reliance on Chinese and broader Asian manufacturing, not something this framework's 13 criteria capture directly.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Apple has a long public trading history, so the entry-multiple criterion is fully scorable here.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Current vs. FY21-25 Average</div>
+    <div class="chart-sub">Current multiple (&asymp;35.5x) sits modestly ABOVE the FY21-25 average of &asymp;30.8x &mdash; not an extreme premium, but not a discount either, after the stock's 2024-2026 re-rating.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><rect x="280" y="62.00" width="80" height="158.00" rx="2" fill="#a78bfa"/><text x="320" y="53.00" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">35.5x</text><text x="320" y="238" text-anchor="middle" font-size="11.5" fill="#cbd5e1">Current (TTM)</text><rect x="520" y="83.24" width="80" height="136.76" rx="2" fill="#64748b"/><text x="560" y="74.24" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">30.8x</text><text x="560" y="238" text-anchor="middle" font-size="11.5" fill="#cbd5e1">FY21-25 Avg</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Apple held a net cash position of roughly $31B as of Q3 2025 (cash and marketable securities less total debt) &mdash; comfortably net cash even after issuing debt specifically to fund part of its buyback program, a deliberate capital-structure choice rather than a sign of financial strain.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="2.64 439.82" stroke-dashoffset="0.00"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="276.65 439.82" stroke-dashoffset="-2.64"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="160.54 439.82" stroke-dashoffset="-279.29"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Officers &amp; directors (incl. Tim Cook) &asymp; 0.06%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional (Vanguard 9.6%, BlackRock 7.1%, others) &asymp; 62.9%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail &amp; other public float &asymp; 37.0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Apple has no founder or family controlling stake &mdash; Steve Jobs is deceased and Tim Cook's personal holding is negligible (well under 0.1%). Ownership is dominated by large index and institutional managers (Vanguard, BlackRock, State Street). This is a real, structural miss against this framework's insider/founder-alignment criterion, despite Apple's otherwise disciplined capital allocation.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Apple</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>3.3%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>5.1%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>32.0% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-0.2% (essentially flat)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Strong #2 by smartphone units (Samsung 22% vs. Apple), but &asymp;49% of industry revenue &mdash; effective duopoly leader at the premium tier</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; Apple + Samsung held all top-10 best-selling models globally in Q2 2026, a record concentration level</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>&asymp;40% vs &asymp;10%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash (&asymp;$31B, Q3 2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>74.2% (FY2025)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/E 35.5x vs 30.8x FY21-25 avg</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;16.4B (FY21) &rarr; &asymp;14.6B (mid-2026), roughly -11%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.06% officers &amp; directors; no founder or family stake</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.1% of revenue (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Apple runs one of the most efficient, capital-disciplined businesses of any large company &mdash; a 32% operating margin, a ROIC-WACC spread most companies can't approach, and a genuinely net-cash balance sheet despite hundreds of billions returned to shareholders over the years. Q3 FY2026 was a real acceleration (+16% revenue, +27% net income), the December FY2026 holiday quarter set an all-time record, and Services keeps compounding as a high-margin, recurring layer on top of the hardware base. The premium smartphone tier has become a genuine Apple-Samsung duopoly, with Apple alone capturing roughly half of industry revenue.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The core scorecard miss here is growth: revenue has compounded at just 3.3% a year since FY2021, and free cash flow hasn't grown at all over that span even as profits hit records &mdash; a real sign of a maturing, not expanding, business. There's no founder or meaningfully-sized insider stake, the current multiple sits modestly above its own five-year average, and FCF conversion has dipped just under the 80% bar. Tariff policy is also a live, non-trivial swing factor given Apple's reliance on Chinese and broader Asian manufacturing &mdash; Q3 FY2026 results already included a real tariff-refund tailwind that may not repeat.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 24-25, 2026. Sources: Apple press releases and 10-K/10-Q filings (FY2021-FY2025, Q1-Q3 FY2026), GuruFocus (ROIC/WACC, trailing P/E history), Counterpoint Research and Forbes/BigGo (global smartphone market share and concentration), Apple DEF 14A (ownership).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Apple &mdash; USD share price trend, NASDAQ. Direct year-end closing prices (not derived).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Apple &mdash; Year-End Close</div>
+    <div class="chart-sub">A genuine double-digit compounder on price alone despite the slow revenue growth &mdash; the 2022 rate-driven tech sell-off was the only real setback, followed by a steady climb to new highs through 2025-2026.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,141.91 L 172.8,180.00 L 299.6,128.08 L 426.4,79.42 L 553.2,60.47 L 680.0,28.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="141.91" x2="680.0" y2="28.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +12.3%</text>
+<path d="M 46.0,141.91 L 172.8,180.00 L 299.6,128.08 L 426.4,79.42 L 553.2,60.47 L 680.0,28.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="141.91" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="131.91" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$173.60</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="180.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="170.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$127.88</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="128.08" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="118.08" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$190.21</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="79.42" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="69.42" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$248.62</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="60.47" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="50.47" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$271.36</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="28.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="18.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$310.34</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end 2021-2025 closes and the current price are direct quotes. 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
