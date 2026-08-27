@@ -317,6 +317,74 @@ const COMPANIES = [
   },
 
   {
+    slug: "apple",
+    name: "Apple Inc.",
+    ticker: "NASDAQ: AAPL",
+    sector: "Consumer Hardware & Digital Services",
+    industry: "Technology",
+    subIndustry: "Consumer Hardware & Digital Services",
+    tags: ["Magnificent Seven"],
+    dateFeatured: "2026-08-20",
+    price: "$310.34",
+    score: "7 / 13",
+    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Extraordinary quality, mature growth. A 32% operating margin, a ROIC-WACC spread few companies can match, and a genuinely net-cash balance sheet despite hundreds of billions in buybacks. What holds the score back: revenue has compounded at just 3.3% a year since FY2021 and free cash flow hasn't grown at all over that span — this framework's heavy growth weighting catching a mature mega-cap exactly as designed. Clears margin, market position (an effective Apple-Samsung duopoly at the premium tier), ROIC, balance sheet, share count and capex intensity; misses growth, FCF growth, FCF conversion, valuation-vs-history and insider ownership.",
+    file: "companies/apple.html",
+    personalNote: "Apple's probably the most obvious 'everyone already owns this' stock on this list, but running it through the same checklist as everything else here was still worth doing. The operating numbers are genuinely exceptional — a 32% margin, a ROIC-WACC spread most companies can't touch, and a net-cash balance sheet even after Apple's spent hundreds of billions buying back stock. What the checklist makes hard to ignore is that revenue has barely grown in five years and free cash flow hasn't grown at all, even as the stock itself has kept compounding at a healthy clip. That's not really an 'undervalued' story — the market already prices in the quality — it's more a question of whether I'm comfortable paying up for a wonderful, slow-growing business, or whether that capital is better spent finding the next thing still early in its growth curve."
+  },
+
+  {
+    slug: "alphabet",
+    name: "Alphabet Inc.",
+    ticker: "NASDAQ: GOOGL / GOOG",
+    sector: "Internet Search, Advertising & Cloud",
+    industry: "Technology",
+    subIndustry: "Internet Search & Cloud Computing",
+    tags: ["Magnificent Seven", "Near-Monopoly"],
+    dateFeatured: "2026-08-21",
+    price: "$346.96",
+    score: "8 / 13",
+    martinero: 71,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "A genuine near-monopoly (global search, ~89-90% share) paired with founder-controlled governance and, after years of AI-disruption fears, a trailing P/E that's actually cheap relative to its own five-year average. The scorecard's real drag is the current AI infrastructure buildout: capex jumped 74% YoY to $91.4B in FY2025, pulling capex intensity and FCF conversion below this framework's bars. Clears margin, market position, ROIC, balance sheet, valuation-vs-history, share count and founder ownership; misses growth, FCF growth, FCF conversion and capex intensity.",
+    file: "companies/alphabet.html",
+    personalNote: "Alphabet is the one on this list where the checklist and my gut actually agree for once. A near-monopoly in search, founders who still control the votes even after selling down most of their economic stake, and — this is the part that surprised me — a P/E that's actually below its own five-year average, because the market spent years worried ChatGPT would eat Google's lunch. Meanwhile Google Cloud is growing 82% a year and the core ad business hasn't missed a step. The honest complication is the AI capex ramp: it's eating free cash flow and pushing capex intensity well past what I'd normally call asset-light, and I don't think anyone — including Alphabet — really knows yet when that spending levels off. I like the setup, but I'm watching the capex trajectory closely before adding."
+  },
+
+  {
+    slug: "amazon",
+    name: "Amazon.com, Inc.",
+    ticker: "NASDAQ: AMZN",
+    sector: "E-Commerce, Cloud Computing & Logistics",
+    industry: "Consumer Discretionary",
+    subIndustry: "E-Commerce & Cloud Infrastructure",
+    tags: ["Magnificent Seven"],
+    dateFeatured: "2026-08-24",
+    price: "$261.06",
+    score: "7 / 13",
+    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "A commanding #1 in US e-commerce (~35.7% share, ~6x #2 Walmart) with a genuinely dominant, high-margin cloud business in AWS (39%+ segment margin, growing 37% YoY). Operating income has recovered dramatically off a depressed FY2021 base. The scorecard's real drag is the current AI infrastructure buildout: FY2025 capex hit $131B, pushing capex intensity well past this framework's bar, collapsing free cash flow 71% YoY, and pulling ROIC below WACC on a trailing basis. Clears market share, market concentration, net debt/EBITDA, valuation-vs-history, share count and founder ownership; misses growth, margin, FCF growth, ROIC/WACC, FCF conversion and capex intensity.",
+    file: "companies/amazon.html",
+    personalNote: "Amazon is the trickiest one on this list to score honestly, because the two halves of the business pull in different directions. AWS on its own would ace this checklist — dominant, high-margin, growing 37% a year — but it's bolted onto a much thinner-margin retail business, so the consolidated numbers land in the middle. The part I take most seriously is that ROIC has actually dipped below WACC right now, and free cash flow is down 71% year-over-year, both driven by a genuinely enormous AI capex ramp ($131B in FY2025 alone). That's not a red flag in the sense of something being broken — it's a deliberate, disclosed bet on AWS/AI infrastructure — but it does mean I'm being asked to trust that the payoff shows up later, and I don't think anyone outside Amazon really knows yet when that is. Jeff Bezos is still selling down his stake gradually too, which I note without reading too much into it."
+  },
+
+  {
+    slug: "tesla",
+    name: "Tesla, Inc.",
+    ticker: "NASDAQ: TSLA",
+    sector: "Electric Vehicles, Energy Storage & Robotics",
+    industry: "Consumer Discretionary",
+    subIndustry: "Electric Vehicles & Energy Storage",
+    tags: ["Magnificent Seven"],
+    dateFeatured: "2026-08-26",
+    price: "$347.70",
+    score: "6 / 13",
+    martinero: 45,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history and share count trend.",
+    file: "companies/tesla.html",
+    personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
+  },
+
+  {
     slug: "catl",
     name: "Contemporary Amperex Technology Co., Limited (CATL)",
     ticker: "SZSE: 300750 · HKEX: 3750",
