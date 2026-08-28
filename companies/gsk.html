@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GSK Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Vaccines, Specialty &amp; General Medicines (GRANOLAS)</div>
+  <h1>GSK plc</h1>
+  <div class="badges">
+    <span class="badge">LON: GSK</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Roots to 1715 &middot; modern GSK formed 2000 &middot; renamed &amp; Haleon demerger 2022</span>
+    <span class="badge warn">FY2022 net income (&pound;15.0B) is massively inflated by a one-off gain on the July 2022 Haleon Consumer Healthcare demerger &mdash; not a repeatable earnings level; that year's 3.90x P/E is a statistical artifact, not real cheapness</span>
+  </div>
+  <div class="price">&pound;18.49</div>
+  <div class="price-sub">Close Aug 28, 2026 &middot; Mkt cap &asymp;&pound;76.2B (&asymp;4.12B shares)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Pfizer, Merck, Sanofi, AstraZeneca, Novartis, Roche, J&amp;J, AbbVie (diversified pharma) &middot; Moderna (emerging mRNA shingles/vaccine competitor) &mdash; GSK holds category-leading positions in HIV (via majority-owned ViiV Healthcare) and shingles vaccines (Shingrix), but faces a genuinely fragmented, highly competitive global pharma market overall</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&pound;32.7B</div>
+      <div class="sub" style="color:#34d399;">+4.1% YoY &mdash; steady, unspectacular growth</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">28.92%</div>
+      <div class="sub">Best margin of the FY21-25 window, though the trend has been choppy, not steadily rising</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">28.5% / &asymp;8%</div>
+      <div class="note">Clears WACC (a third-party estimate) by a very wide margin &mdash; strong capital efficiency.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val">1.27x</div>
+      <div class="sub">&asymp;&pound;14.4B net debt &mdash; moderate, manageable leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">57/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A profitable, well-run diversified pharma held back by modest top-line growth and a widely-held ownership structure with no anchor shareholder.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 132.73,202.24 L123.88,166.31 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M132.73,202.24 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 123.88,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (operating margin, market share, ROIC/WACC, net debt/EBITDA, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, FCF conversion, entry multiple vs. history, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global pharma is genuinely fragmented across a dozen-plus large, well-resourced competitors</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    GSK is a well-run, profitable diversified pharma with real category leadership in a couple of important franchises &mdash; HIV treatment (through majority-owned ViiV Healthcare) and the Shingrix shingles vaccine &mdash; plus a strong balance sheet and a 28.5% ROIC that clears its cost of capital by a wide margin. What it doesn't offer is exciting growth: revenue has compounded at a modest 7.2% a year since FY2021, operating income growth (13.8%) falls just short of this framework's bar, and free cash flow has actually declined slightly over the period as capex and business-development spending have crept up. FY2022's results are a genuine outlier worth understanding on their own terms: GSK demerged its Consumer Healthcare business (Haleon) in July 2022, and the accounting gain on that separation temporarily more than doubled net income to &pound;15.0B against only &pound;7.3B of operating income &mdash; a one-off that has nothing to do with GSK's ongoing earnings power and is excluded from this dashboard's valuation-average calculation for that reason. Ownership is also unremarkable by this framework's standards: GSK is a widely-held FTSE 100 company with no founder or controlling shareholder.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported ~end July 2026) and spot price as of Aug 28, 2026 close (delayed LSE quote).
+  </div>
+
+  <div class="bignum-corner">6/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in GBP, continuing-operations basis (excludes the demerged Haleon Consumer Healthcare business from all years for comparability). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue and operating income both grew steadily; FY2022's net income spike to &pound;15.0B (dwarfing that year's &pound;7.3B of operating income) is the one-off Haleon separation gain, not operating performance &mdash; see callout below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&pound;0B</text><line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">&pound;12B</text><line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">&pound;24B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&pound;36B</text><rect x="110" y="89.08" width="16" height="150.92" rx="1.5" fill="#2dd4bf"/><text x="118" y="84.08" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&pound;24.7B</text><rect x="130" y="205.57" width="16" height="34.43" rx="1.5" fill="#60a5fa"/><text x="138" y="200.57" text-anchor="middle" font-size="7.5" fill="#93c5fd">&pound;5.6B</text><rect x="150" y="213.20" width="16" height="26.80" rx="1.5" fill="#fbbf24"/><text x="158" y="208.20" text-anchor="middle" font-size="7.5" fill="#fde68a">&pound;4.4B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="60.80" width="16" height="179.20" rx="1.5" fill="#2dd4bf"/><text x="274" y="55.80" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&pound;29.3B</text><rect x="286" y="195.25" width="16" height="44.75" rx="1.5" fill="#60a5fa"/><text x="294" y="190.25" text-anchor="middle" font-size="7.5" fill="#93c5fd">&pound;7.3B</text><rect x="306" y="148.60" width="16" height="91.40" rx="1.5" fill="#fbbf24"/><text x="314" y="143.60" text-anchor="middle" font-size="7.5" fill="#fde68a">&pound;15.0B*</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="54.66" width="16" height="185.34" rx="1.5" fill="#2dd4bf"/><text x="430" y="49.66" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&pound;30.3B</text><rect x="442" y="188.65" width="16" height="51.35" rx="1.5" fill="#60a5fa"/><text x="450" y="183.65" text-anchor="middle" font-size="7.5" fill="#93c5fd">&pound;8.4B</text><rect x="462" y="209.88" width="16" height="30.12" rx="1.5" fill="#fbbf24"/><text x="470" y="204.88" text-anchor="middle" font-size="7.5" fill="#fde68a">&pound;4.9B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="48.26" width="16" height="191.74" rx="1.5" fill="#2dd4bf"/><text x="586" y="43.26" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&pound;31.4B</text><rect x="598" y="202.17" width="16" height="37.83" rx="1.5" fill="#60a5fa"/><text x="606" y="197.17" text-anchor="middle" font-size="7.5" fill="#93c5fd">&pound;6.2B</text><rect x="618" y="224.26" width="16" height="15.74" rx="1.5" fill="#fbbf24"/><text x="626" y="219.26" text-anchor="middle" font-size="7.5" fill="#fde68a">&pound;2.6B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="40.37" width="16" height="199.63" rx="1.5" fill="#2dd4bf"/><text x="742" y="35.37" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&pound;32.7B</text><rect x="754" y="182.27" width="16" height="57.73" rx="1.5" fill="#60a5fa"/><text x="762" y="177.27" text-anchor="middle" font-size="7.5" fill="#93c5fd">&pound;9.4B</text><rect x="774" y="205.07" width="16" height="34.93" rx="1.5" fill="#fbbf24"/><text x="782" y="200.07" text-anchor="middle" font-size="7.5" fill="#fde68a">&pound;5.7B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>*FY2022 net income callout:</b> GSK demerged its Consumer Healthcare business as Haleon plc in July 2022. The transaction generated a large one-off accounting gain that flowed through net income, temporarily pushing it to &pound;15.0B against only &pound;7.3B of operating income that same year &mdash; a ratio that doesn't happen in normal operations. Treat FY2022's net income and P/E (3.90x) as a reporting artifact of the demerger, not a signal about GSK's underlying profitability or valuation.
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+7.24%</div><div class="sub">&pound;24.7B &rarr; &pound;32.7B; steady but below the 15% growth bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+13.79%</div><div class="sub">&pound;5.6B &rarr; &pound;9.4B; strong, but just short of the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">&minus;2.25%</div><div class="sub">&pound;7.0B &rarr; &pound;6.4B; rising capex and BD spend have outpaced cash generation growth</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin has been choppy rather than steadily improving &mdash; FY2024's dip to 19.7% reflects one-off items and litigation-related charges before recovering to a five-year-high 28.9% in FY2025.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M 50.00,105.95 L 247.50,95.15 L 445.00,81.45 L 642.50,121.35 L 840.00,75.40 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,105.95 L 247.50,95.15 L 445.00,81.45 L 642.50,121.35 L 840.00,75.40" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="105.95" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="95.15" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="81.45" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="121.35" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="75.40" r="3" fill="#2dd4bf"/><text x="50.00" y="95.95" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.81%</text><text x="247.50" y="85.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.97%</text><text x="445.00" y="71.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">27.71%</text><text x="642.50" y="111.35" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.73%</text><text x="840.00" y="65.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">28.92%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>&pound;24.7B</td><td>&pound;5.6B</td><td>22.81%</td><td>&pound;4.4B</td></tr>
+    <tr><td>FY2022</td><td>&pound;29.3B</td><td>&pound;7.3B</td><td>24.97%</td><td>&pound;15.0B*</td></tr>
+    <tr><td>FY2023</td><td>&pound;30.3B</td><td>&pound;8.4B</td><td>27.71%</td><td>&pound;4.9B</td></tr>
+    <tr><td>FY2024</td><td>&pound;31.4B</td><td>&pound;6.2B</td><td>19.73%</td><td>&pound;2.6B</td></tr>
+    <tr><td>FY2025</td><td>&pound;32.7B</td><td>&pound;9.4B</td><td>28.92%</td><td>&pound;5.7B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2022 net income includes the one-off Haleon demerger gain (see callout above). FY2025 capex was &pound;1.35B (&asymp;4.1% of revenue) &mdash; genuinely asset-light for a pharma major, since most of GSK's spend goes to R&amp;D (expensed, not capitalized) and business-development/licensing deals rather than physical plant.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">GSK reports calendar quarters. Latest reported period: Q2 2026 (three months to June 30, 2026, reported end July 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">&pound;8.41B</b>, +5.3% YoY. Operating income <b style="color:#f8fafc;">&pound;2.60B</b> (30.9% margin). Net income fell to <b style="color:#f8fafc;">&pound;435M</b> despite the healthy operating result &mdash; a reminder that below-the-line items (litigation provisions, tax, one-off charges) can swing GSK's reported net income considerably quarter to quarter even when the underlying operating business is performing well. Growth continues to be led by HIV (ViiV) and Specialty Medicines (oncology, respiratory/immunology), while legacy General Medicines and seasonal vaccines like influenza remain flat-to-declining.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (&pound;B)</div>
+    <div class="chart-sub">Revenue has grown steadily and predictably across the last five quarters &mdash; no major swings, consistent with a diversified, defensive pharma business.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&pound;0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&pound;2.50B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&pound;5.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&pound;7.50B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&pound;10.00B</text><rect x="103.0" y="60.28" width="70" height="159.72" rx="2" fill="#2dd4bf"/><text x="138" y="53.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;7.99B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="49.06" width="70" height="170.94" rx="2" fill="#2dd4bf"/><text x="294" y="42.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;8.55B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="47.64" width="70" height="172.36" rx="2" fill="#2dd4bf"/><text x="450" y="40.66" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;8.62B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="67.42" width="70" height="152.58" rx="2" fill="#2dd4bf"/><text x="606" y="60.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;7.63B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="51.82" width="70" height="168.18" rx="2" fill="#2dd4bf"/><text x="762" y="44.84" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;8.41B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income (&pound;B) &amp; Margin</div>
+    <div class="chart-sub">Q4 2025's dip to 18.9% margin stands out as the softest quarter of the run before a strong rebound in Q1-Q2 2026 &mdash; consistent with the choppy-but-resilient pattern seen at the annual level too.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&pound;0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&pound;1.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&pound;2.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&pound;3.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&pound;4.00B</text><rect x="103.0" y="100.40" width="70" height="119.60" rx="2" fill="#60a5fa"/><text x="138" y="93.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;2.39B</text><text x="138" y="104.42" text-anchor="middle" font-size="9" fill="#93c5fd">29.9%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="65.90" width="70" height="154.10" rx="2" fill="#60a5fa"/><text x="294" y="58.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;3.08B</text><text x="294" y="69.92" text-anchor="middle" font-size="9" fill="#93c5fd">36.1%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="138.45" width="70" height="81.55" rx="2" fill="#60a5fa"/><text x="450" y="131.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;1.63B</text><text x="450" y="142.47" text-anchor="middle" font-size="9" fill="#93c5fd">18.9%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="81.60" width="70" height="138.40" rx="2" fill="#60a5fa"/><text x="606" y="74.62" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;2.77B</text><text x="606" y="85.62" text-anchor="middle" font-size="9" fill="#93c5fd">36.3%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="89.90" width="70" height="130.10" rx="2" fill="#60a5fa"/><text x="762" y="82.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&pound;2.60B</text><text x="762" y="93.92" text-anchor="middle" font-size="9" fill="#93c5fd">30.9%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Pipeline &amp; patent-cliff watch:</b> like all large pharma companies, GSK faces an ongoing treadmill of patent expiries balanced against new drug approvals. Shingrix (shingles) faces its first real long-term competitive threat from Moderna's mRNA shingles vaccine candidate currently in development, and HIV (GSK's largest single franchise via ViiV) faces both generic and next-generation long-acting competition. None of this is unique to GSK &mdash; it's the standard structural risk of the pharma industry &mdash; but it's the main reason growth here is measured in single digits rather than double digits.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">FY2022's P/E (3.90x) is excluded from the "FY21-25 average" calculation below because it reflects the one-off Haleon demerger gain, not a genuine valuation signal (see p.2 callout).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Excluding the distorted FY2022 reading, GSK's P/E has ranged from about 12x to 21x across FY21-25, averaging 16.1x. At 16.36x, current pricing sits almost exactly in line with that average &mdash; essentially a fair-value entry point by GSK's own trading history, neither cheap nor expensive.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50.0" y1="91.00" x2="840.0" y2="91.00" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="87.00" text-anchor="end" font-size="10" fill="#94a3b8">FY21,23-25 avg (ex-FY22): 16.1x</text><path d="M50.0,73.20 L208.0,188.80 L366.0,124.00 L524.0,49.28 L682.0,117.52 L840.0,89.12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="73.20" r="3" fill="#a78bfa"/><circle cx="208.0" cy="188.80" r="3" fill="#a78bfa"/><circle cx="366.0" cy="124.00" r="3" fill="#a78bfa"/><circle cx="524.0" cy="49.28" r="3" fill="#a78bfa"/><circle cx="682.0" cy="117.52" r="3" fill="#a78bfa"/><circle cx="840.0" cy="89.12" r="3.5" fill="#a78bfa"/><text x="50.0" y="63.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.35x</text><text x="208.0" y="178.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">3.90x*</text><text x="366.0" y="114.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.00x</text><text x="524.0" y="39.28" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.34x</text><text x="682.0" y="107.52" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.81x</text><text x="840.0" y="79.12" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.36x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> GSK held roughly &pound;17.8B in total debt against &pound;3.4B of cash &amp; investments as of FY2025-end (Dec 31, 2025) &mdash; a net debt position of about &pound;14.4B, or &asymp;1.27x EBITDA. That's moderate, manageable leverage for a large, cash-generative pharma major, though notably higher than the "net cash" balance sheets seen at some other names on this site.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="4.40 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="228.71 439.82" stroke-dashoffset="-4.40"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="206.71 439.82" stroke-dashoffset="-233.11"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#fbbf24;"></span>Directors &amp; executives (combined) &asymp; 1%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional shareholders (index funds, asset managers) &asymp; 52%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Other public float &asymp; 47%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> GSK has no founder or controlling shareholder &mdash; it's a widely-held FTSE 100 company, majority owned by large institutional investors (index funds, pension funds, asset managers) rather than any single anchor holder. CEO Luke Miels and the executive team hold only a small stake typical of large-cap executive compensation, well below what this framework treats as a "meaningful" insider position. This isn't unusual for a company of GSK's size and history, but it does mean shareholder interests are represented through the board and institutional voting rather than through a large aligned insider.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>GSK</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+7.24%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+13.79%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>28.92% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;2.25%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Category leader in HIV (via ViiV) and shingles vaccines (Shingrix); not the overall #1 pharma company</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global pharma is fragmented across a dozen-plus large, well-capitalized competitors</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>28.45% vs &asymp;8% (third-party WACC estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.27x</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>67.7% (FY2025: &pound;6.4B FCF / &pound;9.4B EBIT)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 16.36x vs 16.1x FY21-25 avg (ex-FY22) &mdash; essentially in line, marginally above</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;4.05B &rarr; &asymp;4.12B shares (roughly flat, +1.7% over the period)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;1% combined (directors &amp; executives) &mdash; no founder or controlling shareholder</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.13% of revenue (FY2025) &mdash; genuinely asset-light; most spend goes to R&amp;D and licensing, not physical plant</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Genuine category leadership in two important, durable franchises (HIV via ViiV, and Shingrix in shingles vaccines), a strong 28.5% ROIC well clear of its cost of capital, moderate and manageable leverage, a roughly flat share count, and low capex intensity typical of an R&amp;D-driven rather than capital-intensive business. The current valuation (16.4x TTM P/E) sits almost exactly at GSK's own FY21-25 average, once the Haleon demerger distortion is stripped out &mdash; a fair, unremarkable entry point rather than either a bargain or an overpay.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is genuinely modest here — revenue, EBIT and free cash flow have all grown well below this framework's 15% bar, and FCF has actually declined slightly since FY2021 as capex and business-development spending rose. The global pharma market is fragmented and intensely competitive, ownership carries no founder or anchor shareholder to align incentives, and GSK faces the same structural patent-cliff and pipeline risk every large pharma company does — most notably early competitive threats emerging around Shingrix (Moderna's mRNA candidate) and HIV. None of this makes GSK a bad business, but it is a mature, defensive compounder rather than a growth story.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 28, 2026. Sources: stockanalysis.com (financials, ratios, quarterly/annual data, share price history, company profile, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;8%) is a third-party/analyst estimate, not company-reported. FY2022 net income and P/E reflect a one-off demerger gain, flagged throughout.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">GSK &mdash; GBP share price trend, London Stock Exchange. Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">GSK plc &mdash; Year-End Close</div>
+    <div class="chart-sub">The share price was essentially flat for four years (2021-2024, roughly &pound;12.5-13.5) before breaking out sharply in 2025-2026 as operating results improved and litigation overhangs (notably Zantac-related liability concerns) faded &mdash; a +6.5% annualized return over the full 5-year window, all of it concentrated in the most recent stretch.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,142.88 L 172.8,162.46 L 299.6,150.32 L 426.4,159.33 L 553.2,56.31 L 680.0,45.54 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="142.88" x2="680.0" y2="45.54" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +6.5%</text><path d="M 46.0,142.88 L 172.8,162.46 L 299.6,150.32 L 426.4,159.33 L 553.2,56.31 L 680.0,45.54" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="142.88" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="132.88" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;13.52</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="162.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="152.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;12.52</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="150.32" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="140.32" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;13.14</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="159.33" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="149.33" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;12.68</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="56.31" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="46.31" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;17.94</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="45.54" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="35.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;18.49</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

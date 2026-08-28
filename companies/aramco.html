@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Saudi Aramco Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Integrated Oil &amp; Gas &mdash; State-Owned National Oil Company</div>
+  <h1>Saudi Aramco (Saudi Arabian Oil Company)</h1>
+  <div class="badges">
+    <span class="badge">Tadawul: 2222</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Founded 1933 &middot; nationalized 1980 &middot; IPO'd Dec 2019</span>
+    <span class="badge warn">Q2 2026's profit surge is tied to a real but unusual event &mdash; a prolonged Strait of Hormuz disruption from the ongoing regional conflict pushed crude to &asymp;$108/bbl (vs &asymp;$67/bbl a year earlier); treat it as an outlier, not a new baseline</span>
+  </div>
+  <div class="price">SAR 26.10</div>
+  <div class="price-sub">Close Aug 27, 2026 (delayed Tadawul quote) &middot; Mkt cap &asymp;$1.68T (&asymp;241.96B shares)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> ExxonMobil, Chevron, Shell, TotalEnergies, BP (integrated majors) &middot; Rosneft, ADNOC, Kuwait Petroleum (other state producers) &mdash; Aramco is the single largest crude oil producer and exporter globally by volume, though the world oil market itself remains fragmented across OPEC+ members, non-OPEC producers and independent majors</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$445.7B</div>
+      <div class="sub" style="color:#f87171;">&minus;7.2% YoY &mdash; oil prices normalizing lower</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">44.19%</div>
+      <div class="sub">Down from a 51.4% FY2021 peak, but still among the highest of any large industrial company</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">20.8% / &asymp;8.3%</div>
+      <div class="note">Clears WACC by a &asymp;12.5pt spread (WACC is a third-party estimate) &mdash; one of the widest capital-efficiency gaps in this framework.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">0.09x</div>
+      <div class="sub">&asymp;$20.1B net debt vs &asymp;$220.0B EBITDA &mdash; very low leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">53/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A dominant, exceptionally profitable, low-leverage business held back by weak multi-year growth and a fragmented end market.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 87.27,202.24 L96.12,166.31 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M87.27,202.24 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 96.12,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (operating margin, market share, ROIC/WACC, net debt/EBITDA, entry multiple vs. history, share count trend, insider/state ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, FCF conversion, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; the global oil market is genuinely fragmented across OPEC+ members, non-OPEC producers (US, Russia, Brazil) and independent majors; no single producer, including Aramco, sets price unilaterally</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Saudi Aramco is, by almost any measure, one of the most profitable companies on earth: a 44% operating margin, a 20.8% return on invested capital against an estimated &asymp;8.3% cost of capital, and a balance sheet so lightly levered it barely registers net debt against roughly $220B of EBITDA. Ownership is concentrated too, just not in the founder-led sense this framework usually flags &mdash; the Saudi government and its Public Investment Fund together hold roughly 90% of shares outstanding. What the scorecard doesn't reward is growth: revenue, operating income and free cash flow have all been roughly flat-to-declining since FY2021 as oil prices normalized down from their 2022 peak, and FY2026's sharp profit rebound is tied to a genuine but unusual supply shock &mdash; a prolonged Strait of Hormuz disruption linked to the ongoing regional conflict pushed crude prices to roughly $108/barrel in Q2 2026, versus $67/barrel a year earlier. That's a real, disclosed driver of the recent numbers, not a fabricated one, but it's also not a trend to extrapolate forward.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported early August 2026) and spot price as of Aug 27, 2026 close (delayed Tadawul quote).
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD, converted from SAR at the Saudi Riyal's fixed peg of 3.75 SAR/USD (unchanged since 1986). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">FY2022's spike reflects the post-pandemic oil price surge; FY2023-FY2025 show prices and profits normalizing lower as OPEC+ supply and global demand rebalanced &mdash; before FY2026's disruption-driven rebound (see p.3).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">$210B</text><line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">$420B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$630B</text><rect x="110" y="100.15" width="16" height="139.85" rx="1.5" fill="#2dd4bf"/><text x="118" y="95.15" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$400.5B</text><rect x="130" y="168.16" width="16" height="71.84" rx="1.5" fill="#60a5fa"/><text x="138" y="163.16" text-anchor="middle" font-size="7.5" fill="#93c5fd">$205.7B</text><rect x="150" y="203.20" width="16" height="36.80" rx="1.5" fill="#fbbf24"/><text x="158" y="198.20" text-anchor="middle" font-size="7.5" fill="#fde68a">$105.4B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="28.95" width="16" height="211.05" rx="1.5" fill="#2dd4bf"/><text x="274" y="23.95" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$604.4B</text><rect x="286" y="133.50" width="16" height="106.50" rx="1.5" fill="#60a5fa"/><text x="294" y="128.50" text-anchor="middle" font-size="7.5" fill="#93c5fd">$305.0B</text><rect x="306" y="184.39" width="16" height="55.61" rx="1.5" fill="#fbbf24"/><text x="314" y="179.39" text-anchor="middle" font-size="7.5" fill="#fde68a">$159.3B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="67.13" width="16" height="172.87" rx="1.5" fill="#2dd4bf"/><text x="430" y="62.13" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$495.0B</text><rect x="442" y="158.80" width="16" height="81.20" rx="1.5" fill="#60a5fa"/><text x="450" y="153.80" text-anchor="middle" font-size="7.5" fill="#93c5fd">$232.5B</text><rect x="462" y="197.84" width="16" height="42.16" rx="1.5" fill="#fbbf24"/><text x="470" y="192.84" text-anchor="middle" font-size="7.5" fill="#fde68a">$120.7B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="72.22" width="16" height="167.78" rx="1.5" fill="#2dd4bf"/><text x="586" y="67.22" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$480.4B</text><rect x="598" y="166.83" width="16" height="73.17" rx="1.5" fill="#60a5fa"/><text x="606" y="161.83" text-anchor="middle" font-size="7.5" fill="#93c5fd">$209.5B</text><rect x="618" y="203.32" width="16" height="36.68" rx="1.5" fill="#fbbf24"/><text x="626" y="198.32" text-anchor="middle" font-size="7.5" fill="#fde68a">$105.0B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="84.38" width="16" height="155.62" rx="1.5" fill="#2dd4bf"/><text x="742" y="79.38" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$445.6B</text><rect x="754" y="171.23" width="16" height="68.77" rx="1.5" fill="#60a5fa"/><text x="762" y="166.23" text-anchor="middle" font-size="7.5" fill="#93c5fd">$196.9B</text><rect x="774" y="207.59" width="16" height="32.41" rx="1.5" fill="#fbbf24"/><text x="782" y="202.59" text-anchor="middle" font-size="7.5" fill="#fde68a">$92.8B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+2.71%</div><div class="sub">$400.5B &rarr; $445.7B; well below the growth bar, mostly oil-price driven</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">&minus;1.09%</div><div class="sub">$205.7B &rarr; $196.9B; operating income hasn't grown net over the period</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">&minus;5.57%</div><div class="sub">$107.5B &rarr; $85.4B; rising capex has eaten into FCF growth</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Operating margin has drifted down from FY2021's 51.4% peak as the extraordinary FY2022 windfall faded and costs normalized &mdash; still exceptionally high by any industrial standard, but the FY21&rarr;FY25 trend is a decline, not a hold.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">45%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60%</text><path d="M 50.00,48.77 L 247.50,51.77 L 445.00,63.43 L 642.50,74.63 L 840.00,72.70 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,48.77 L 247.50,51.77 L 445.00,63.43 L 642.50,74.63 L 840.00,72.70" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="48.77" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="51.77" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="63.43" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="74.63" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="72.70" r="3" fill="#2dd4bf"/><text x="50.00" y="38.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">51.37%</text><text x="247.50" y="41.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">50.47%</text><text x="445.00" y="53.43" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">46.97%</text><text x="642.50" y="64.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">43.61%</text><text x="840.00" y="62.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">44.19%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>$400.5B</td><td>$205.7B</td><td>51.37%</td><td>$105.4B</td></tr>
+    <tr><td>FY2022</td><td>$604.4B</td><td>$305.0B</td><td>50.47%</td><td>$159.3B</td></tr>
+    <tr><td>FY2023</td><td>$495.0B</td><td>$232.5B</td><td>46.97%</td><td>$120.7B</td></tr>
+    <tr><td>FY2024</td><td>$480.4B</td><td>$209.5B</td><td>43.61%</td><td>$105.0B</td></tr>
+    <tr><td>FY2025</td><td>$445.7B</td><td>$196.9B</td><td>44.19%</td><td>$92.8B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2025 capex was $50.8B (&asymp;11.4% of revenue), primarily upstream maintenance/expansion (Jafurah unconventional gas, Marjan/Berri) plus downstream/chemicals investment. Free cash flow still comfortably funds the dividend, though the payout ratio has climbed above 90% of net income as the base-plus-performance dividend has grown faster than earnings in recent years.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Aramco reports calendar quarters. Latest reported period: Q2 2026 (three months to June 30, 2026, reported early August 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">$139.1B</b>, +28.2% YoY. Operating income <b style="color:#f8fafc;">$57.8B</b> (41.5% margin). Net income <b style="color:#f8fafc;">$32.4B</b>, +41.9% YoY. The jump is real but has an unusual cause: a prolonged disruption in the Strait of Hormuz tied to the ongoing regional conflict pushed crude prices to an average of roughly $108/barrel in Q2 2026, versus $67/barrel in Q2 2025 &mdash; a genuine supply-shock windfall for the world's largest producer, not a reflection of improved underlying demand or efficiency. This quarter (and H1 2026 broadly) should be read as an outlier tied to a specific, disclosed geopolitical event rather than a new baseline.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($B)</div>
+    <div class="chart-sub">Revenue climbed steadily from Q2 2025 through Q2 2026 as crude prices rose through the period, culminating in the disruption-driven spike in Q1-Q2 2026.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$37.5B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$75.0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$112.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$150.0B</text><rect x="103.0" y="75.24" width="70" height="144.76" rx="2" fill="#2dd4bf"/><text x="138" y="68.26" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$108.6B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="71.32" width="70" height="148.68" rx="2" fill="#2dd4bf"/><text x="294" y="64.34" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$111.5B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="71.99" width="70" height="148.01" rx="2" fill="#2dd4bf"/><text x="450" y="65.01" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$111.0B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="53.87" width="70" height="166.13" rx="2" fill="#2dd4bf"/><text x="606" y="46.89" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$124.6B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="34.47" width="70" height="185.53" rx="2" fill="#2dd4bf"/><text x="762" y="27.49" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$139.2B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income ($B) &amp; Margin</div>
+    <div class="chart-sub">Margin bounced around a high band through the period; Q1-Q2 2026's absolute operating income sits well above the year-ago quarters even though margin itself didn't expand as much, since revenue grew faster than profit in percentage terms.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$16.88B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$33.75B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$50.62B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$67.50B</text><rect x="103.0" y="85.24" width="70" height="134.76" rx="2" fill="#60a5fa"/><text x="138" y="78.26" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$45.48B</text><text x="138" y="89.26" text-anchor="middle" font-size="9" fill="#93c5fd">41.9%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="62.87" width="70" height="157.13" rx="2" fill="#60a5fa"/><text x="294" y="55.89" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$53.03B</text><text x="294" y="66.89" text-anchor="middle" font-size="9" fill="#93c5fd">47.6%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="79.67" width="70" height="140.33" rx="2" fill="#60a5fa"/><text x="450" y="72.69" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$47.36B</text><text x="450" y="83.69" text-anchor="middle" font-size="9" fill="#93c5fd">42.7%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="43.94" width="70" height="176.06" rx="2" fill="#60a5fa"/><text x="606" y="36.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$59.42B</text><text x="606" y="47.96" text-anchor="middle" font-size="9" fill="#93c5fd">47.7%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="48.71" width="70" height="171.29" rx="2" fill="#60a5fa"/><text x="762" y="41.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$57.81B</text><text x="762" y="52.73" text-anchor="middle" font-size="9" fill="#93c5fd">41.5%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>A double-edged geopolitical driver:</b> the Strait of Hormuz disruption tied to the ongoing regional conflict has boosted Aramco's near-term profits by pushing crude prices sharply higher &mdash; but the same tail risk cuts both ways. Any de-escalation or resolution could normalize oil prices back down just as quickly, and a wider or more direct disruption to Gulf shipping routes would carry serious operational risk for a company whose own export infrastructure sits in the same region. This is real, disclosed news (Reuters, GuruFocus, OilPrice.com, and others have covered it extensively through July-August 2026), not a hypothetical &mdash; but it's a reminder that Aramco's fortunes remain tightly linked to events well outside the company's control.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current TTM reading.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Aramco's P/E has actually compressed since FY2021's 18.1x toward roughly 15.5x today &mdash; FY2022's low reading (11.8x) reflects earnings outrunning price during the oil-price spike, not cheapness. At &asymp;15.5x, current pricing sits modestly (&asymp;5%) below its own FY21-25 average of 16.3x.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50.0" y1="57.30" x2="840.0" y2="57.30" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="53.30" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 16.3x</text><path d="M50.0,38.90 L208.0,101.80 L366.0,43.70 L524.0,47.70 L682.0,54.40 L840.0,65.30" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="38.90" r="3" fill="#a78bfa"/><circle cx="208.0" cy="101.80" r="3" fill="#a78bfa"/><circle cx="366.0" cy="43.70" r="3" fill="#a78bfa"/><circle cx="524.0" cy="47.70" r="3" fill="#a78bfa"/><circle cx="682.0" cy="54.40" r="3" fill="#a78bfa"/><circle cx="840.0" cy="65.30" r="3.5" fill="#a78bfa"/><text x="50.0" y="28.90" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.11x</text><text x="208.0" y="91.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">11.82x</text><text x="366.0" y="33.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.63x</text><text x="524.0" y="37.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.23x</text><text x="682.0" y="44.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.56x</text><text x="840.0" y="55.30" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.47x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Aramco held roughly $97.0B in total debt against $76.9B of cash &amp; investments as of FY2025-end (Dec 31, 2025) &mdash; a net debt position of only about $20.1B against roughly $220.0B of EBITDA (net debt/EBITDA &asymp;0.09x). This is negligible leverage for a company of this scale, and net debt has fluctuated between small net-debt and net-cash positions across the FY21-25 window as the dividend and capex program flexed with oil prices.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="358.45 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="35.19 439.82" stroke-dashoffset="-358.45"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="46.18 439.82" stroke-dashoffset="-393.64"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Saudi government, via Ministry of Finance &asymp; 81.5%</div>
+        <div><span class="dot" style="background:#fbbf24;"></span>Public Investment Fund (PIF), sovereign wealth fund &asymp; 8%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float &amp; other public shareholders &asymp; 10.5%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Aramco isn't founder-led in the traditional sense this framework usually rewards &mdash; instead, the Saudi government directly owns roughly 81.5% of shares, with the sovereign Public Investment Fund (PIF) holding a further &asymp;8%, for combined state ownership near 90%. The remaining &asymp;10-11% free float has grown gradually through the December 2019 IPO and a further secondary offering in June 2024. This framework's "insider/founder ownership" criterion treats this concentrated, stable ownership base as a Met, though a sovereign majority owner's incentives (dividend policy tied to government budget needs, national strategic priorities) differ meaningfully from a private founder's.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Aramco</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+2.71%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;1.09%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>44.19% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;5.57%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 globally &mdash; largest single crude producer (&asymp;9-10M bbl/day, &asymp;10-12% of global output) and one of the largest proved-reserve holders</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global oil supply is fragmented across OPEC+, non-OPEC producers (US, Russia, Brazil) and independent majors</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>20.8% vs &asymp;8.3% (third-party WACC estimate) &mdash; &asymp;12.5pt spread</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;0.09x (&asymp;$20.1B net debt vs &asymp;$220.0B EBITDA)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>43.4% (FY2025: $85.4B FCF / $196.9B EBIT)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 15.47x vs 16.27x FY21-25 avg</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;241.9-243.2B shares &mdash; essentially flat since the 2019 IPO and 2024 secondary offering</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/state ownership</td><td>meaningful</td><td>&asymp;90% combined (Saudi government &asymp;81.5% + PIF &asymp;8%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>&asymp;11.4% of revenue (FY2025) &mdash; rising as Jafurah gas and downstream/chemicals investment ramps</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Unmatched profitability and balance-sheet strength: a 44% operating margin, a 20.8% ROIC against an estimated 8.3% cost of capital, and net debt/EBITDA of just &asymp;0.09x. Aramco is the clear #1 global crude producer and one of the largest reserve holders, ownership is stable and heavily aligned behind a single controlling shareholder (the Saudi state), share count has stayed essentially flat, and the current P/E sits modestly below its own FY21-25 average despite recent earnings volatility.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is the real structural weak point &mdash; revenue, operating income and free cash flow have all been roughly flat-to-declining since FY2021, and capex intensity (&asymp;11.4% of revenue) is climbing as Aramco invests in gas (Jafurah) and downstream/chemicals. FY2026's strong headline results are meaningfully inflated by a real but unusual supply shock tied to a Strait of Hormuz disruption from the ongoing regional conflict &mdash; a geopolitical tail risk that cuts both ways, since any de-escalation could just as quickly normalize oil prices lower. More broadly, Aramco's fortunes remain tightly linked to global oil prices and OPEC+ production policy, and its dividend policy (payout ratio over 90% of FY2025 net income) is itself tied to Saudi government budget needs rather than pure capital-allocation discipline.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27, 2026. Sources: stockanalysis.com (financials, ratios, quarterly/annual data, share price history, all sourced from S&amp;P Global Market Intelligence), Reuters, GuruFocus, OilPrice.com and IBTimes (Q2 2026 results and Strait of Hormuz coverage, Aug 2026).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;8.3%) is a third-party/analyst estimate, not company-reported.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Aramco &mdash; SAR share price trend, Saudi Exchange (Tadawul, ticker 2222). Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Saudi Aramco &mdash; Year-End Close</div>
+    <div class="chart-sub">Aramco's share price has been remarkably stable relative to its earnings volatility &mdash; essentially flat over this 5-year window (SAR 23.65 &rarr; SAR 26.10, a modest +2.0% annualized) even as profits swung by more than 60% peak-to-trough. The dividend, not price appreciation, has been the primary source of shareholder return.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,153.50 L 172.8,143.01 L 299.6,45.54 L 426.4,103.02 L 553.2,162.46 L 680.0,99.96 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="153.50" x2="680.0" y2="99.96" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +2.0%</text><path d="M 46.0,153.50 L 172.8,143.01 L 299.6,45.54 L 426.4,103.02 L 553.2,162.46 L 680.0,99.96" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="153.50" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="143.50" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 23.65</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="143.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="133.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 24.13</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="45.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="35.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 28.59</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="103.02" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="93.02" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 25.96</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="162.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="152.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 23.24</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="99.96" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="89.96" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SAR 26.10</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). SAR converted to USD elsewhere in this dashboard at the fixed 3.75 SAR/USD peg. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

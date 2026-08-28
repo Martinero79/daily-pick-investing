@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roche Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Pharmaceuticals &amp; In-Vitro Diagnostics (GRANOLAS)</div>
+  <h1>Roche Holding AG</h1>
+  <div class="badges">
+    <span class="badge">OTC: RHHBY (ADR) &middot; primary listing SIX: ROG</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually</span>
+    <span class="badge">Founded 1896 &middot; Basel, Switzerland</span>
+    <span class="badge warn">FY2024 net income dipped to CHF 8.3B (vs CHF 19.6B operating income) on a large one-off asset writedown/restructuring charge (CHF 5.7B) &mdash; a real but unusually lumpy expense year, not a Haleon-style accounting artifact</span>
+  </div>
+  <div class="price">$56.39</div>
+  <div class="price-sub">Close Aug 27, 2026 (OTC ADR) &middot; Mkt cap &asymp;$362.2B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Novartis, Merck, Pfizer, AstraZeneca, BMS, Sanofi (pharma) &middot; Abbott, Siemens Healthineers, Danaher (diagnostics) &mdash; Roche is the global #1 in in-vitro diagnostics and a top-3 oncology franchise, but faces genuine, well-resourced competition across both segments</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">CHF 63.4B</div>
+      <div class="sub" style="color:#34d399;">+1.5% YoY &mdash; roughly flat, held back by strong CHF and diagnostics normalization</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">33.08%</div>
+      <div class="sub">A five-year high, and the strongest margin on this framework's pharma cohort</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">30.8% / &asymp;7-8%</div>
+      <div class="note">Clears WACC (a third-party estimate) by a very wide margin &mdash; exceptional capital efficiency.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">0.74x</div>
+      <div class="sub">&asymp;CHF 17.7B net debt &mdash; low, comfortable leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">53/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Exceptional profitability and a rare, genuine 130-year-old family control structure, held back by a multi-year growth stall.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 87.27,202.24 L96.12,166.31 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M87.27,202.24 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 96.12,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (operating margin, market share, ROIC/WACC, net debt/EBITDA, share count trend, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, FCF conversion, entry multiple vs. history)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; both diagnostics and oncology pharma are genuinely fragmented, well-competed markets</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Roche is one of the most profitable and capital-efficient large companies on this entire site: a 33% operating margin, a 30.8% ROIC against an estimated 7-8% cost of capital, and comfortable leverage at 0.74x net debt/EBITDA. It's also a genuine rarity in large-cap pharma &mdash; 130 years after founding, the Hoffmann-Oeri family still controls roughly 45% of voting shares through a formal shareholder pool, a real and unusually durable form of founder alignment (the family pool held just over 50% until 2024, when a departing family member reduced it slightly). What the scorecard doesn't reward is growth: revenue has been essentially flat since FY2021 (-0.96% CAGR), weighed down by the post-pandemic normalization of Roche's COVID-testing-driven Diagnostics boom and biosimilar erosion on older oncology blockbusters, while free cash flow has also drifted lower. FY2024's net income dip to CHF 8.3B was driven by a real, disclosed CHF 5.7B asset-writedown and restructuring charge &mdash; a lumpy but genuine expense, not an accounting artifact, and profitability rebounded strongly in FY2025.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (reported July 23, 2026) and spot price as of Aug 27, 2026 close (delayed OTC ADR quote).
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in CHF (Roche's reporting currency). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue has been essentially flat for four years as Diagnostics' pandemic-era COVID-testing boom faded and legacy oncology drugs (Herceptin, Avastin, Rituxan) faced biosimilar competition. FY2024's net income dip reflects a real CHF 5.7B asset-writedown/restructuring charge, not a revenue or operating problem.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">CHF 0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">CHF 18B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">CHF 35B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">CHF 52B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">CHF 70B</text><rect x="110" y="33.04" width="16" height="206.96" rx="1.5" fill="#2dd4bf"/><text x="118" y="28.04" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">CHF 65.8B</text><rect x="130" y="176.35" width="16" height="63.65" rx="1.5" fill="#60a5fa"/><text x="138" y="171.35" text-anchor="middle" font-size="7.5" fill="#93c5fd">CHF 20.3B</text><rect x="150" y="196.22" width="16" height="43.78" rx="1.5" fill="#fbbf24"/><text x="158" y="191.22" text-anchor="middle" font-size="7.5" fill="#fde68a">CHF 13.9B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="33.16" width="16" height="206.84" rx="1.5" fill="#2dd4bf"/><text x="274" y="28.16" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">CHF 65.8B</text><rect x="286" y="175.35" width="16" height="64.65" rx="1.5" fill="#60a5fa"/><text x="294" y="170.35" text-anchor="middle" font-size="7.5" fill="#93c5fd">CHF 20.6B</text><rect x="306" y="200.96" width="16" height="39.04" rx="1.5" fill="#fbbf24"/><text x="314" y="195.96" text-anchor="middle" font-size="7.5" fill="#fde68a">CHF 12.4B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="50.04" width="16" height="189.96" rx="1.5" fill="#2dd4bf"/><text x="430" y="45.04" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">CHF 60.4B</text><rect x="442" y="184.12" width="16" height="55.88" rx="1.5" fill="#60a5fa"/><text x="450" y="179.12" text-anchor="middle" font-size="7.5" fill="#93c5fd">CHF 17.8B</text><rect x="462" y="203.86" width="16" height="36.14" rx="1.5" fill="#fbbf24"/><text x="470" y="198.86" text-anchor="middle" font-size="7.5" fill="#fde68a">CHF 11.5B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="43.90" width="16" height="196.10" rx="1.5" fill="#2dd4bf"/><text x="586" y="38.90" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">CHF 62.4B</text><rect x="598" y="178.35" width="16" height="61.65" rx="1.5" fill="#60a5fa"/><text x="606" y="173.35" text-anchor="middle" font-size="7.5" fill="#93c5fd">CHF 19.6B</text><rect x="618" y="213.99" width="16" height="26.01" rx="1.5" fill="#fbbf24"/><text x="626" y="208.99" text-anchor="middle" font-size="7.5" fill="#fde68a">CHF 8.3B*</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="40.88" width="16" height="199.12" rx="1.5" fill="#2dd4bf"/><text x="742" y="35.88" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">CHF 63.4B</text><rect x="754" y="174.13" width="16" height="65.87" rx="1.5" fill="#60a5fa"/><text x="762" y="169.13" text-anchor="middle" font-size="7.5" fill="#93c5fd">CHF 21.0B</text><rect x="774" y="199.52" width="16" height="40.48" rx="1.5" fill="#fbbf24"/><text x="782" y="194.52" text-anchor="middle" font-size="7.5" fill="#fde68a">CHF 12.9B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">&minus;0.96%</div><div class="sub">CHF 65.9B &rarr; CHF 63.4B; essentially flat over four years</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+0.86%</div><div class="sub">CHF 20.3B &rarr; CHF 21.0B; margin expansion offset flat revenue</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">&minus;3.31%</div><div class="sub">CHF 17.3B &rarr; CHF 15.1B; still very substantial in absolute terms</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin has held in a tight, high 29-33% band throughout, hitting a five-year high in FY2025 &mdash; genuinely strong and stable, in contrast to the flat top line.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M 50.00,66.20 L 247.50,63.75 L 445.00,72.90 L 642.50,62.80 L 840.00,54.60 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,66.20 L 247.50,63.75 L 445.00,72.90 L 642.50,62.80 L 840.00,54.60" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="66.20" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="63.75" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="72.90" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="62.80" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="54.60" r="3" fill="#2dd4bf"/><text x="50.00" y="56.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">30.76%</text><text x="247.50" y="53.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.25%</text><text x="445.00" y="62.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.42%</text><text x="642.50" y="52.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.44%</text><text x="840.00" y="44.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">33.08%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>CHF 65.8B</td><td>CHF 20.3B</td><td>30.76%</td><td>CHF 13.9B</td></tr>
+    <tr><td>FY2022</td><td>CHF 65.8B</td><td>CHF 20.6B</td><td>31.25%</td><td>CHF 12.4B</td></tr>
+    <tr><td>FY2023</td><td>CHF 60.4B</td><td>CHF 17.8B</td><td>29.42%</td><td>CHF 11.5B</td></tr>
+    <tr><td>FY2024</td><td>CHF 62.4B</td><td>CHF 19.6B</td><td>31.44%</td><td>CHF 8.3B*</td></tr>
+    <tr><td>FY2025</td><td>CHF 63.4B</td><td>CHF 21.0B</td><td>33.08%</td><td>CHF 12.9B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2024 net income includes a CHF 5.7B asset-writedown/restructuring charge, well above the CHF 1.4-2.9B seen in other years &mdash; a real, disclosed expense rather than an accounting artifact. FY2025 capex was CHF 3.75B (&asymp;5.9% of revenue), genuinely low for a pharma major since most spend goes to R&amp;D (expensed, not capitalized).</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Roche reports semi-annually, not quarterly. Latest reported period: H1 2026 (six months to June 30, 2026, reported July 23, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Group sales <b style="color:#f8fafc;">CHF 30.4B</b>: +6% at constant exchange rates, but &minus;2% as reported in CHF &mdash; the Swiss franc's strength against the US dollar and other currencies is a real, persistent headwind for a Basel-based multinational that earns most of its revenue outside Switzerland. Pharmaceuticals division sales were CHF 23.6B (+6% CER), Diagnostics CHF 6.7B (+3% CER, down from CHF 7.0B reported as diagnostics normalizes further past its pandemic-era testing peak). Core operating profit rose +10% at CER to CHF 11.9B. Management reaffirmed full-year guidance for mid-single-digit sales growth and high-single-digit core EPS growth.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Half-Year Group Sales (CHF B)</div>
+    <div class="chart-sub">The headline figures illustrate the currency story well: underlying constant-currency growth was solidly positive (+6%), but a stronger Swiss franc turned that into a small reported decline &mdash; a real business improving, obscured by FX translation rather than weak demand.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">CHF 0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">CHF 8.8B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">CHF 17.5B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">CHF 26.2B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">CHF 35.0B</text><rect x="250.0" y="42.74" width="100" height="177.26" rx="2" fill="#2dd4bf"/><text x="300" y="35.74" text-anchor="middle" font-size="12" fill="#e2e8f0" font-weight="700">CHF 31.0B</text><text x="300" y="238" text-anchor="middle" font-size="12" fill="#94a3b8" font-weight="700">H1&#39;25</text><rect x="470.0" y="46.29" width="100" height="173.71" rx="2" fill="#2dd4bf"/><text x="520" y="39.29" text-anchor="middle" font-size="12" fill="#e2e8f0" font-weight="700">CHF 30.4B</text><text x="520" y="238" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">H1&#39;26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Why only two bars:</b> Roche's official half-year disclosures don't provide a clean, consistently-restated quarterly or multi-period half-year series in the sourcing used for this dashboard, so rather than estimate additional historical half-year splits with false precision, this page shows only the two directly-reported, verified data points (H1 2025 and H1 2026). The full FY2021-FY2025 annual series on page 2 remains the primary growth reference.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current TTM reading (OTC ADR, USD).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">FY2024's elevated 24.8x reading reflects that year's depressed net income (the restructuring charge, see p.2) rather than a richer valuation. At 23.71x, current pricing sits about 14% above the FY21-25 average of 20.7x &mdash; Roche is trading somewhat rich relative to its own recent history.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.3" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50.0" y1="81.84" x2="840.0" y2="81.84" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="77.84" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 20.7x</text><path d="M50.0,73.13 L208.0,91.27 L366.0,105.73 L524.0,54.73 L682.0,84.33 L840.0,61.93" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="73.13" r="3" fill="#a78bfa"/><circle cx="208.0" cy="91.27" r="3" fill="#a78bfa"/><circle cx="366.0" cy="105.73" r="3" fill="#a78bfa"/><circle cx="524.0" cy="54.73" r="3" fill="#a78bfa"/><circle cx="682.0" cy="84.33" r="3" fill="#a78bfa"/><circle cx="840.0" cy="61.93" r="3.5" fill="#a78bfa"/><text x="50.0" y="63.13" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.03x</text><text x="208.0" y="81.27" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.31x</text><text x="366.0" y="95.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.14x</text><text x="524.0" y="44.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.79x*</text><text x="682.0" y="74.33" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.35x</text><text x="840.0" y="51.93" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.71x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Roche held roughly CHF 33.2B in total debt against CHF 15.5B of cash &amp; investments as of FY2025-end (Dec 31, 2025) &mdash; a net debt position of about CHF 17.7B, or 0.74x EBITDA. That's low, comfortable leverage for a company generating well over CHF 15B of free cash flow a year.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="197.92 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="21.99 439.82" stroke-dashoffset="-197.92"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="219.91 439.82" stroke-dashoffset="-219.91"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Hoffmann-Oeri family shareholder pool &asymp; 45% of voting bearer shares</div>
+        <div><span class="dot" style="background:#fbbf24;"></span>Maja Oeri (family member, outside the pool since 2024) &asymp; 5%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Other institutional &amp; public shareholders &asymp; 50%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Roche has a genuinely unusual dual-class structure &mdash; 160 million voting "bearer shares" and over 700 million non-voting "Genussscheine" (participation certificates, the security type most investors, including via the RHHBY ADR, actually hold). Voting control sits with the Hoffmann-Oeri founding family pool at roughly 45% (down from just over 50% after a family member, Maja Oeri, exited the pool in 2024) &mdash; a real, 130-year-old family-control structure that's genuinely rare at this scale. Novartis previously held a large Roche voting stake from a 2001-era investment but sold it back to Roche in 2021, ending two decades of an unusual cross-holding between the two Swiss rivals.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Roche</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;0.96%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+0.86%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>33.08% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;3.31%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Global #1 in in-vitro diagnostics; top-3 oncology pharma franchise</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; both diagnostics (Abbott, Siemens, Danaher) and oncology pharma (Merck, BMS, AstraZeneca) are fragmented, well-competed markets</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>30.76% vs &asymp;7-8% (third-party WACC estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.74x</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>72.1% (FY2025: CHF 15.1B FCF / CHF 21.0B EBIT)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 23.71x vs 20.7x FY21-25 avg &mdash; roughly 14% above average</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;859.9M &rarr; &asymp;802.9M shares (declining, &asymp;-6.6% over the period)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;45% (Hoffmann-Oeri family shareholder pool, controlling voting bearer shares)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.92% of revenue (FY2025) &mdash; genuinely low, R&amp;D-driven rather than capital-intensive</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Exceptional profitability (33% operating margin) and capital efficiency (30.8% ROIC, well clear of an estimated 7-8% cost of capital), low leverage, a declining share count, and low capex intensity typical of an R&amp;D-driven business. Most unusually for a company this large, Roche remains a genuine family-controlled business 130 years after founding &mdash; the Hoffmann-Oeri pool still controls roughly 45% of voting shares, a real and durable form of ownership alignment this framework specifically rewards.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth has genuinely stalled &mdash; revenue, EBIT and free cash flow have all been flat-to-slightly-declining since FY2021, as Diagnostics normalizes past its pandemic-era COVID-testing peak and older oncology blockbusters face biosimilar competition, only partly offset by newer drugs (Ocrevus, Tecentriq, Vabysmo, Hemlibra, Polivy). The current valuation (23.71x TTM P/E) sits roughly 14% above Roche's own FY21-25 average, making this a somewhat richer entry point than its recent history. Both of Roche's core markets &mdash; diagnostics and oncology pharma &mdash; are genuinely fragmented and competitive, and a persistently strong Swiss franc is a real, ongoing headwind to reported (though not constant-currency) results for a company that earns the vast majority of its revenue outside Switzerland.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, company profile, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Roche H1 2026 media release and half-year results presentation (roche.com, published Jul 23, 2026).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;7-8%) is a third-party/analyst estimate, not company-reported. FY2024 net income reflects a real, disclosed restructuring/writedown charge, flagged throughout.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Roche &mdash; USD share price trend via the OTC ADR (RHHBY). Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Roche Holding AG &mdash; Year-End Close (ADR, USD)</div>
+    <div class="chart-sub">The price fell for three straight years (2021-2024) as growth stalled and the FY2024 writedown weighed on sentiment, before a sharp recovery in 2025-2026 as margins expanded and the pipeline (Vabysmo, Ocrevus, Hemlibra) delivered &mdash; a modest +3.9% annualized return over the full 5-year window, concentrated almost entirely in the most recent year.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,95.59 L 172.8,150.40 L 299.6,160.21 L 426.4,162.46 L 553.2,75.14 L 680.0,45.54 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="95.59" x2="680.0" y2="45.54" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +3.9%</text><path d="M 46.0,95.59 L 172.8,150.40 L 299.6,160.21 L 426.4,162.46 L 553.2,75.14 L 680.0,45.54" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="95.59" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="85.59" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$46.60</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="150.40" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="140.40" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$35.88</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="160.21" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="150.21" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$33.96</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="162.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="152.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$33.52</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="75.14" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="65.14" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$50.60</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="45.54" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="35.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$56.39</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for the OTC ADR RHHBY (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

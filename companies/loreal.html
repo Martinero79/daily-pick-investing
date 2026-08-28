@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L'Oréal Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Beauty &amp; Personal Care (GRANOLAS)</div>
+  <h1>L'Oréal S.A.</h1>
+  <div class="badges">
+    <span class="badge">Primary listing Euronext Paris: OR &middot; also OTC: LRLCY (ADR)</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually (quarterly sales updates)</span>
+    <span class="badge">Founded 1909 &middot; Clichy, France</span>
+    <span class="badge">Founder-descendant controlled: Bettencourt Meyers family holds &asymp;34.8% &mdash; the strongest founder-alignment in this GRANOLAS batch</span>
+  </div>
+  <div class="price">&euro;386.60</div>
+  <div class="price-sub">Close Aug 21, 2026 (Euronext Paris, native currency) &middot; Mkt cap &asymp;&euro;205.8B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Estée Lauder, P&amp;G Beauty, Unilever, Shiseido, Coty, Beiersdorf, Kao &mdash; L'Oréal is the clear, unambiguous global #1 in beauty &amp; cosmetics by revenue, though the broader beauty/personal-care market remains genuinely fragmented and well-competed across mass, luxe, and dermatological segments</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;44.05B</div>
+      <div class="sub" style="color:#34d399;">+1.30% YoY (reported); +6.5% like-for-like in H1 2026, a real acceleration</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#34d399;">20.18%</div>
+      <div class="sub">Cleared the 20% threshold for the first time this window, and a record 21.3% in H1 2026</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val">13.33% / &asymp;7-8%</div>
+      <div class="note">Clears an estimated cost of capital comfortably, though below this framework's 15% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">0.19x</div>
+      <div class="sub">&asymp;&euro;2.05B net debt (FY2025) &mdash; very low, comfortable leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">63/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Highest binary criteria count (8/13) in this GRANOLAS batch, anchored by genuine founder-family ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 47.00,181.11 L71.54,153.41 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M47.00,181.11 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 71.54,153.41 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 8 (operating margin, market share, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 5 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, ROIC/WACC)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global beauty remains genuinely open and well-competed despite L'Oréal's clear leadership</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    L'Oréal has the highest binary criteria count (8/13) of any GRANOLAS name on this site, anchored by a genuinely rare combination for a company this size: real founder-family control (the Bettencourt Meyers family holds &asymp;34.8%, comfortably clearing this framework's 30% threshold) alongside clean, comfortable financials &mdash; 0.19x net debt/EBITDA, FCF conversion just clearing 80%, and a current valuation that actually sits below its own five-year average P/E for once. Growth is steady rather than spectacular (revenue CAGR +8.08%, EBIT CAGR +9.61%, both short of this framework's 15% bar), and ROIC at 13.33% falls just short of the 15% threshold despite comfortably clearing an estimated cost of capital. A notable cross-holding: Nestlé itself still owns roughly 20.1% of L'Oréal, a legacy stake dating to 1974 that connects directly back to the one-off gain flagged on Nestlé's own dashboard in this batch. H1 2026 results showed real acceleration &mdash; like-for-like growth of 6.5%, more than double the year-earlier pace, with a first-half record operating margin of 21.3%.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (reported July 29-30, 2026) and spot price as of Aug 21, 2026 close (Euronext Paris).
+  </div>
+
+  <div class="bignum-corner">8/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR (L'Oréal's reporting currency and primary Euronext Paris listing currency). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">A genuinely clean five-year series with no one-off distortions to flag &mdash; unusual in this GRANOLAS batch. Revenue growth has decelerated from the post-pandemic +18.5% surge in FY2022 to a more modest +1.3% in FY2025, though H1 2026's like-for-like growth (+6.5%) suggests renewed momentum.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">€0B</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">€10B</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">€20B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">€30B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">€40B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€50B</text><rect x="110" y="97.92" width="16" height="142.08" rx="1.5" fill="#2dd4bf"/><text x="118" y="92.92" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€32.29B</text><rect x="130" y="212.90" width="16" height="27.10" rx="1.5" fill="#60a5fa"/><text x="138" y="207.90" text-anchor="middle" font-size="7.5" fill="#93c5fd">€6.16B</text><rect x="150" y="219.76" width="16" height="20.24" rx="1.5" fill="#fbbf24"/><text x="158" y="214.76" text-anchor="middle" font-size="7.5" fill="#fde68a">€4.60B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="71.66" width="16" height="168.34" rx="1.5" fill="#2dd4bf"/><text x="274" y="66.66" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€38.26B</text><rect x="286" y="207.18" width="16" height="32.82" rx="1.5" fill="#60a5fa"/><text x="294" y="202.18" text-anchor="middle" font-size="7.5" fill="#93c5fd">€7.46B</text><rect x="306" y="214.88" width="16" height="25.12" rx="1.5" fill="#fbbf24"/><text x="314" y="209.88" text-anchor="middle" font-size="7.5" fill="#fde68a">€5.71B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="58.81" width="16" height="181.19" rx="1.5" fill="#2dd4bf"/><text x="430" y="53.81" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€41.18B</text><rect x="442" y="204.18" width="16" height="35.82" rx="1.5" fill="#60a5fa"/><text x="450" y="199.18" text-anchor="middle" font-size="7.5" fill="#93c5fd">€8.14B</text><rect x="462" y="212.81" width="16" height="27.19" rx="1.5" fill="#fbbf24"/><text x="470" y="207.81" text-anchor="middle" font-size="7.5" fill="#fde68a">€6.18B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="48.64" width="16" height="191.36" rx="1.5" fill="#2dd4bf"/><text x="586" y="43.64" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€43.49B</text><rect x="598" y="201.76" width="16" height="38.24" rx="1.5" fill="#60a5fa"/><text x="606" y="196.76" text-anchor="middle" font-size="7.5" fill="#93c5fd">€8.69B</text><rect x="618" y="211.80" width="16" height="28.20" rx="1.5" fill="#fbbf24"/><text x="626" y="206.80" text-anchor="middle" font-size="7.5" fill="#fde68a">€6.41B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="46.18" width="16" height="193.82" rx="1.5" fill="#2dd4bf"/><text x="742" y="41.18" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€44.05B</text><rect x="754" y="200.88" width="16" height="39.12" rx="1.5" fill="#60a5fa"/><text x="762" y="195.88" text-anchor="middle" font-size="7.5" fill="#93c5fd">€8.89B</text><rect x="774" y="213.03" width="16" height="26.97" rx="1.5" fill="#fbbf24"/><text x="782" y="208.03" text-anchor="middle" font-size="7.5" fill="#fde68a">€6.13B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+8.08%</div><div class="sub">&euro;32.3B &rarr; &euro;44.1B; solid, steady growth, below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+9.61%</div><div class="sub">&euro;6.2B &rarr; &euro;8.9B; margin expansion alongside revenue growth</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+6.09%</div><div class="sub">&euro;5.7B &rarr; &euro;7.2B; steady, unspectacular growth</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin has expanded steadily every single year, crossing this framework's 20% threshold for the first time in FY2025 &mdash; and reaching a first-half record 21.3% in H1 2026, ahead of the trend shown here.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><path d="M 50.00,67.36 L 247.50,64.08 L 445.00,61.84 L 642.50,60.16 L 840.00,58.56 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,67.36 L 247.50,64.08 L 445.00,61.84 L 642.50,60.16 L 840.00,58.56" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="67.36" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="64.08" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="61.84" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="60.16" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="58.56" r="3" fill="#2dd4bf"/><text x="50.00" y="57.36" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.08%</text><text x="247.50" y="54.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.49%</text><text x="445.00" y="51.84" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.77%</text><text x="642.50" y="50.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.98%</text><text x="840.00" y="48.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.18%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>&euro;32.3B</td><td>&euro;6.2B</td><td>19.08%</td><td>&euro;4.6B</td></tr>
+    <tr><td>FY2022</td><td>&euro;38.3B</td><td>&euro;7.5B</td><td>19.49%</td><td>&euro;5.7B</td></tr>
+    <tr><td>FY2023</td><td>&euro;41.2B</td><td>&euro;8.1B</td><td>19.77%</td><td>&euro;6.2B</td></tr>
+    <tr><td>FY2024</td><td>&euro;43.5B</td><td>&euro;8.7B</td><td>19.98%</td><td>&euro;6.4B</td></tr>
+    <tr><td>FY2025</td><td>&euro;44.1B</td><td>&euro;8.9B</td><td>20.18%</td><td>&euro;6.1B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">No one-off gains or charges to flag in this five-year window &mdash; a genuinely clean series. FY2025 capex was &euro;1.50B (&asymp;3.4% of revenue), low and typical of an asset-light, brand-driven consumer business.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">L'Oréal publishes quarterly sales updates but reports full P&amp;L semi-annually. Latest reported period: H1 2026 (six months to June 30, 2026, reported July 29-30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Sales reached <b style="color:#f8fafc;">&euro;23.7B</b>, up 5.8% as reported and a strong 6.5% on an adjusted like-for-like basis &mdash; more than double the 3.0% pace of H1 2025, a genuine acceleration. Growth was broad-based across all four divisions, with Dermatological Beauty, hair care, and e-commerce cited as particular strength areas, alongside emerging-market momentum (double-digit growth) and a mainland China market that returned to modest expansion. Operating margin reached a first-half record of 21.3%, up 20 basis points year-over-year despite a 70-basis-point increase in brand-building investment ("brand fuel"). Net profit excluding non-recurring items rose 4.7% to &euro;3.96B. Q1 2026 alone posted an especially strong +7.6% like-for-like print, with Q2 moderating slightly to a still-solid pace as reported growth normalized.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Half-Year Group Sales (&euro;B)</div>
+    <div class="chart-sub">A genuine acceleration in both reported and like-for-like growth versus H1 2025 &mdash; the clearest positive momentum story of any GRANOLAS name in this batch.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.0B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">€5.0B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">€10.0B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">€15.0B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">€20.0B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">€25.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€30.0B</text><rect x="250.0" y="70.20" width="100" height="149.80" rx="2" fill="#2dd4bf"/><text x="300" y="63.20" text-anchor="middle" font-size="12" fill="#e2e8f0" font-weight="700">€22.5B</text><text x="300" y="238" text-anchor="middle" font-size="12" fill="#94a3b8" font-weight="700">H1&#39;25</text><rect x="470.0" y="62.00" width="100" height="158.00" rx="2" fill="#2dd4bf"/><text x="520" y="55.00" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">€23.7B</text><text x="520" y="238" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">H1&#39;26</text></svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Recent M&amp;A:</b> L'Oréal signed a 50-year exclusive beauty license with Gucci (via Kering) in mid-2026, plans first Gucci-branded products as early as 2028, and acquired a majority stake in Innovist, a digital-first Indian personal-care house of brands &mdash; its first India acquisition in 13 years. Both moves extend L'Oréal's licensing-and-acquisition growth model rather than representing a strategic shift.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current TTM reading (Euronext Paris, EUR).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">A genuinely volatile multiple across this window, spanning 28.6x to 50.8x with no single obvious distortion &mdash; more a reflection of shifting growth expectations than a one-off event. At 32.82x, current pricing sits about 10% below the FY21-25 average of 36.4x, a rare case in this batch of the current entry point being cheaper than recent history.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.3" text-anchor="end" font-size="11" fill="#64748b">50x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50.0" y1="98.66" x2="840.0" y2="98.66" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="94.66" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 36.4x</text><path d="M50.0,50.70 L208.0,115.20 L366.0,89.60 L524.0,124.63 L682.0,113.17 L840.0,110.60" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="50.70" r="3" fill="#a78bfa"/><circle cx="208.0" cy="115.20" r="3" fill="#a78bfa"/><circle cx="366.0" cy="89.60" r="3" fill="#a78bfa"/><circle cx="524.0" cy="124.63" r="3" fill="#a78bfa"/><circle cx="682.0" cy="113.17" r="3" fill="#a78bfa"/><circle cx="840.0" cy="110.60" r="3.5" fill="#a78bfa"/><text x="50.0" y="40.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">50.79x</text><text x="208.0" y="105.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">31.44x</text><text x="366.0" y="79.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.12x</text><text x="524.0" y="114.63" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.61x</text><text x="682.0" y="103.17" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.05x</text><text x="840.0" y="100.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.82x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> L'Oréal held roughly &euro;11.9B in total debt against &euro;9.9B of cash &amp; investments as of FY2025-end (Dec 31, 2025) &mdash; a small net debt position of about &euro;2.05B, or just 0.19x EBITDA. This is very low, comfortable leverage, among the lowest in this GRANOLAS batch.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="153.06 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="88.40 439.82" stroke-dashoffset="-153.06"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="198.36 439.82" stroke-dashoffset="-241.46"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Bettencourt Meyers family (Françoise Bettencourt Meyers &amp; family, via Téthys SAS) &asymp; 34.8%</div>
+        <div><span class="dot" style="background:#fbbf24;"></span>Nestlé S.A. &asymp; 20.1% (legacy cross-holding dating to 1974)</div>
+        <div><span class="dot" style="background:#64748b;"></span>International &amp; French institutional investors, individual shareholders, employees &asymp; 45.1%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> L'Oréal has the strongest founder-descendant alignment in this GRANOLAS batch &mdash; Françoise Bettencourt Meyers, granddaughter of founder Eugène Schueller, and her family control roughly 34.8% of shares and voting rights through holding entities Téthys SAS and Financière L'Arcouest. Nestlé's separate &asymp;20.1% stake is the flip side of the L'Oréal-stake-sale gain flagged on Nestlé's own dashboard elsewhere in this batch &mdash; the two companies have held a cross-relationship since 1974, with periodic partial sell-downs on Nestlé's side over the decades while retaining a substantial position.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>L'Oréal</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+8.08%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+9.61%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>20.18% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+6.09%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>World's largest beauty &amp; cosmetics company by revenue &mdash; a clear, unambiguous #1</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global beauty remains genuinely fragmented (Estée Lauder, P&amp;G, Unilever, Shiseido, Coty, Beiersdorf all well-resourced competitors)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>13.33% vs &asymp;7-8% (third-party WACC estimate) &mdash; clears WACC but below the 15% bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.19x</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>80.5% (FY2025: &euro;7.16B FCF / &euro;8.89B EBIT) &mdash; clears the bar narrowly</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 32.82x vs 36.4x FY21-25 avg &mdash; roughly 10% below average</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;559.9M &rarr; &asymp;535.6M shares (declining modestly, &asymp;-4.3% over the period)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;34.8% (Bettencourt Meyers family, via Téthys SAS and Financière L'Arcouest) &mdash; the strongest founder alignment in this GRANOLAS batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.39% of revenue (FY2025) &mdash; low, typical of an asset-light, brand-driven consumer business</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>L'Oréal combines genuine, rare founder-family control (&asymp;34.8% Bettencourt Meyers) with clean financials virtually free of one-off distortions &mdash; the only GRANOLAS name in this batch with no flagged anomaly year. Leverage is minimal, FCF conversion clears 80%, the share count has declined modestly, and capex intensity is genuinely low. Unusually for this batch, the current valuation sits below its own five-year average, and H1 2026 showed real, broad-based acceleration (like-for-like growth more than doubling year-over-year) with a first-half record operating margin.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth, while steady, has never approached this framework's 15% CAGR bar on revenue, EBIT, or FCF, and ROIC at 13.33% falls just short of the 15% threshold despite clearing an estimated cost of capital comfortably. Global beauty remains a genuinely fragmented, well-competed market with several large, well-resourced rivals. The Nestlé cross-holding (&asymp;20.1%) is a structural feature worth understanding rather than a risk per se, but it does mean a meaningful block of shares sits with a strategic rather than purely financial holder. The five-year P/E range (28.6x-50.8x) has been genuinely volatile, so today's below-average multiple is not a guarantee against further re-rating in either direction.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 21-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, all sourced from Fiscal.ai and S&amp;P Global Market Intelligence), L'Oréal H1 2026 results release and earnings call (reported Jul 29-30, 2026), WebSearch on L'Oréal ownership structure (pestel-analysis.com, growthsharematrix.com, brandsownedby.com).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;7-8%) is a third-party/analyst estimate, not company-reported. Year-end share prices for FY2021-FY2025 are derived from reported P/E ratios and EPS figures (price = P/E &times; EPS), cross-checked against reported market-cap growth rates.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">L'Oréal &mdash; EUR share price trend, primary Euronext Paris listing. Year-end prices FY2021-FY2025 are derived from reported P/E &times; EPS (cross-checked against market-cap growth); the current price is a direct quote.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">L'Oréal S.A. &mdash; Year-End Close (Euronext Paris, EUR)</div>
+    <div class="chart-sub">A genuinely volatile five years &mdash; a sharp FY2023 peak (&euro;450.70) followed by a steep decline into FY2024, then a partial recovery. Despite steady underlying fundamentals, the net result is a slightly negative 5-year annualized return (-1.5%), entirely a function of multiple compression from an expensive FY2023 starting point rather than any operating problem.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,79.19 L 172.8,162.46 L 299.6,45.54 L 426.4,154.17 L 553.2,129.41 L 680.0,109.54 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="79.19" x2="680.0" y2="109.54" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -1.5%</text><path d="M 46.0,79.19 L 172.8,162.46 L 299.6,45.54 L 426.4,154.17 L 553.2,129.41 L 680.0,109.54" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="79.19" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="69.19" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;417.00</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="162.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="152.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;333.60</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="45.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="35.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;450.70</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="154.17" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="144.17" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;341.90</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="129.41" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="119.41" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;366.70</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="109.54" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="99.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8364;386.60</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Current price is a direct quote (Euronext Paris, stockanalysis.com / S&amp;P Global Market Intelligence). Year-end prices FY2021-FY2025 are derived from reported P/E &times; EPS, cross-checked against reported year-over-year market-cap growth rates. 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
