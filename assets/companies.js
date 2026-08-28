@@ -487,6 +487,91 @@ const COMPANIES = [
   },
 
   {
+    slug: "lvmh",
+    name: "LVMH Moët Hennessy - Louis Vuitton",
+    ticker: "EPA: MC · OTC: LVMUY (ADR)",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["GRANOLAS", "Founder-Controlled"],
+    dateFeatured: "2026-08-28",
+    price: "$105.10",
+    score: "8 / 13",
+    martinero: 58,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The unambiguous global #1 in luxury goods, matching L'Oréal's 8/13 binary criteria count but scoring lower on the weighted index because the misses run deeper: revenue has declined for two straight years from a FY2023 peak and free cash flow is down outright since FY2021 — a real, well-documented luxury demand slowdown, not a distortion. Leverage is moderate (1.13x net debt/EBITDA), FCF conversion clears 80%, and the current P/E (20.87x) sits about 22% below its own five-year average, the deepest discount in this batch. The Arnault family crossed 50% ownership of LVMH's capital in February 2026 (65.9% of voting rights) — the strongest, most direct founder control of any GRANOLAS name.",
+    file: "companies/lvmh.html",
+    personalNote: "LVMH is the batch's clearest lesson in separating a real cyclical slowdown from an accounting distortion — there's no one-off gain to flag here, just two straight years of declining revenue and margin compression as the global luxury boom of 2021-2023 normalized lower. What keeps me interested is what didn't change: this is still the undisputed #1 in luxury by a wide margin, leverage is comfortable, and the stock is trading about 22% below its own five-year average multiple, the biggest discount I've found in this whole batch. The ownership story is also unlike anything else here — Bernard Arnault and family crossed 50% of the company's capital and hold nearly 66% of the voting rights, which is about as direct as founder control gets at this scale. H1 2026 gave the first real hint of stabilization, with organic growth turning positive and accelerating through the second quarter even as currency effects kept the reported numbers negative. I'd want to see that organic recovery hold for another quarter or two, especially in the Fashion & Leather Goods division, before treating this as a confirmed turn rather than a cheaper entry into an ongoing downcycle."
+  },
+
+  {
+    slug: "astrazeneca",
+    name: "AstraZeneca PLC",
+    ticker: "NYSE: AZN · LSE: AZN (primary)",
+    sector: "Healthcare",
+    industry: "Healthcare",
+    subIndustry: "Pharmaceuticals",
+    tags: ["GRANOLAS"],
+    dateFeatured: "2026-08-28",
+    price: "$164.52",
+    score: "9 / 13",
+    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The strongest scorecard in the GRANOLAS batch, but only after untangling a real distortion: the 2021 Alexion acquisition loaded that year's income statement with one-off charges that crushed operating margin to 7.74% and net income to near-zero, making both the FY2021 P/E (1625x) and naive CAGRs statistically meaningless. Adjusting for this, operating income has compounded at roughly 17.5% annually since 2022, operating margin has expanded to 24.3%, ROIC (17.0%) comfortably clears an estimated cost of capital, leverage is moderate (1.24x net debt/EBITDA), and the stock trades at a 37% discount to its own recent average multiple — the largest valuation gap found anywhere in this batch. Oncology, now 44% of revenue, ranks a strong #2 globally. No founder or controlling shareholder; insiders hold well under 1%.",
+    file: "companies/astrazeneca.html",
+    personalNote: "AstraZeneca turned into the most rewarding puzzle of this whole GRANOLAS batch. My first pass at the numbers looked almost broken — a P/E of 1625x in 2021 and net income of basically zero that same year — until I traced it back to the Alexion acquisition and realized the entire income statement that year was loaded with one-off deal charges, not a real operating problem. Once I rebuilt the growth rates from a cleaner 2022 base, this turned into the strongest scorecard I've built in this entire batch: margins expanding every year since, ROIC comfortably above cost of capital, leverage cut by more than two-thirds, and Oncology growing into a genuine #2 global franchise behind Merck. What really caught my attention is the valuation — at 24x earnings against a recent average north of 30x, this is trading at the widest discount to its own history I've found in any GRANOLAS name so far, which is unusual for a company executing this well. The honest caveats: there's no founder or controlling family here, growth still falls a bit short of my usual bars even after adjusting for the distortion, and the July 2026 Phase III miss on Wainua is a reminder that pipeline risk never fully goes away in this industry. Still, this is the batch's biggest positive surprise for me."
+  },
+
+  {
+    slug: "sap",
+    name: "SAP SE",
+    ticker: "FWB (Xetra): SAP · NYSE: SAP (ADS)",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Enterprise Software",
+    tags: ["GRANOLAS", "Founder-Influenced"],
+    dateFeatured: "2026-08-28",
+    price: "$221.17",
+    score: "9 / 13",
+    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Ties AstraZeneca for the strongest scorecard in the GRANOLAS batch. Operating margin has expanded every year to a record 28.31% in FY2025, the balance sheet sits in a genuine net cash position — the strongest in this batch — and ROIC (16.82%) comfortably clears an estimated cost of capital. The one real distortion: a disclosed €3.14bn FY2024 restructuring charge (SAP's Business AI transformation program) crushed that year's net income and pushed its P/E to an absurd 88x, excluded here from the entry-multiple average. On the resulting adjusted average, the current 28.67x multiple sits about 17% below its own recent history. Growth is genuinely strong (cloud revenue +23-24%) but still falls short of this framework's 15% bar. Co-founder Hasso Plattner remains SAP's largest individual shareholder at ~6.1%, and active as Supervisory Board Chairman Emeritus.",
+    file: "companies/sap.html",
+    personalNote: "SAP quietly turned into one of the best all-around scorecards I've built in this entire GRANOLAS batch, and I didn't expect that going in — I had it filed mentally as 'steady enterprise software, nothing dramatic.' Instead I found a company with a genuine net cash balance sheet, margins expanding every single year to a record 28%, and ROIC comfortably above what I'd estimate its cost of capital to be. The one thing that needed real digging was 2024: net income collapsed and the P/E briefly hit 88x, which looked alarming until I traced it to a disclosed €3.1 billion restructuring charge tied to their AI transformation push — a real cost, but a one-time one, sitting below the line where operating income actually grew. Once I excluded that year from the valuation average, the stock is trading at a real discount to its own recent history, which is not something I expected to find in a name that's up double digits annually over five years. I also liked finding that Hasso Plattner, one of the original 1972 founders, still holds a real stake and an active board role — it's a much smaller percentage than LVMH's or L'Oréal's founder families, but it's genuine, ongoing skin in the game from someone who built the company. My main hesitation is that growth, while clearly strong and cloud-led, still hasn't crossed my usual 15% bar on any of the three growth measures — this is a high-quality compounder, not a hypergrowth story."
+  },
+
+  {
+    slug: "sanofi",
+    name: "Sanofi",
+    ticker: "EPA: SAN · NASDAQ: SNY (ADS)",
+    sector: "Healthcare",
+    industry: "Healthcare",
+    subIndustry: "Pharmaceuticals",
+    tags: ["GRANOLAS"],
+    dateFeatured: "2026-08-28",
+    price: "$44.84",
+    score: "6 / 13",
+    martinero: 47,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The honest weak point of this GRANOLAS batch's pharma names — a real, structural gap rather than a one-off distortion. ROIC has sat in the 8-10% range every year since FY2021, never approaching this framework's 15% bar, and revenue/EBIT/FCF growth have all been modest-to-flat over five years. Two genuine one-off items are worth flagging: FY2022's elevated margins reflect Regeneron-related equity stake gains, and FY2025's net income includes a €2.61bn gain from divesting Opella (consumer healthcare) to CD&R. What's working: Dupixent just crossed €5B in quarterly sales for the first time (+37.6%), leverage is moderate, and the share count is down a real 18% over five years. Current valuation (23.85x) sits about 30% above its own recent average — the richest gap in this batch.",
+    file: "companies/sanofi.html",
+    personalNote: "Sanofi is the batch's reality check — after AstraZeneca and SAP both turned into pleasant surprises, this one reminded me that not every GRANOLAS name is a hidden gem. The honest story here is a return-on-capital problem: ROIC has been stuck in the high single digits for five straight years, never getting close to my usual bar, and it's not explained away by any one-off charge — it's just a genuinely lower-return business than the other pharma names in this batch. I did find two real distortions worth flagging: 2022's margins were flattered by Regeneron stake-sale gains, and 2025's net income got a real boost from selling the Opella consumer health business, which is worth remembering if the headline numbers look better than they are. What keeps me from writing this off completely is Dupixent — crossing €5 billion in quarterly sales for the first time is a genuinely big deal, and the buyback funded by the Opella proceeds has meaningfully shrunk the share count. But at nearly 30% above its own recent average multiple for a business growing this slowly, I don't see the value case here right now — this is one I'd want to see re-rate lower, or the returns genuinely improve, before getting interested."
+  },
+
+  {
+    slug: "crwd",
+    name: "CrowdStrike Holdings",
+    ticker: "NASDAQ: CRWD",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Cybersecurity",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-28",
+    price: "$227.96",
+    score: "4 / 13",
+    martinero: 49,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The fastest, most consistent revenue growth found anywhere on this site — +34.9% CAGR over FY2022-26, never below +21% in any single year — funded almost entirely by strong free cash flow (+29.7% CAGR, 27-32% FCF margin every year) rather than GAAP profit. GAAP operating income has never been positive in five fiscal years due to heavy stock-based compensation, which drags this framework's score down hard: no valid EBIT CAGR to compute, no ROIC reading, and a P/FCF of 145x that's roughly double its own 5-year average after the Aug 27, 2026 earnings-beat pop (+20.5% in one day on record net-new ARR). The 49/100 undersells the underlying business quality — read it alongside the FCF story, not instead of it. Balance sheet carries no net debt and $4.41B in net cash.",
+    file: "companies/crwd.html",
+    personalNote: "CrowdStrike is the first name where this framework's limits really showed up. By GAAP the picture looks rough — never once profitable at the operating-income line in five years — but free cash flow tells a completely different story: 27-32% margins every single year, growing almost 30% annually, funding a debt-free balance sheet with $4.4 billion in net cash. That gap is just what a hyper-growth SaaS business with heavy stock-based comp looks like, and I don't think the low binary score here should be read as 'weak company' — it's 'wrong yardstick for this particular shape of business.' What actually gives me pause is entirely about price and timing: the stock popped 20% in a single day right before I built this, on a genuinely excellent quarter, which means today's multiple (145x P/FCF, about double its own history) reflects a lot of very recent enthusiasm. I'd want to see this settle before getting interested at these levels, not because the business is bad, but because I'd rather not pay for a one-day pop."
+  },
+
+  {
     slug: "aramco",
     name: "Saudi Aramco (Saudi Arabian Oil Company)",
     ticker: "Tadawul: 2222",
