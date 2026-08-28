@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAP Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Enterprise Software (GRANOLAS)</div>
+  <h1>SAP SE</h1>
+  <div class="badges">
+    <span class="badge">FWB (Xetra): SAP, EUR, primary listing &middot; also NYSE: SAP (ADS, USD, 1:1 ratio)</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1972 (Dietmar Hopp, Hasso Plattner &amp; co-founders) &middot; Walldorf, Germany</span>
+    <span class="badge warn">FY2024 net income is distorted by a real, disclosed &euro;3.14bn restructuring charge (the "Business AI transformation program," ~10,000 positions affected) sitting below the operating-income line, crushing that year's P/E to 88x</span>
+  </div>
+  <div class="price">$221.17</div>
+  <div class="price-sub">Close Aug 27, 2026 (NYSE ADS) &middot; Mkt cap &asymp;$255.3B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Oracle, Microsoft (Dynamics 365), Workday, Salesforce, ServiceNow, Infor &mdash; SAP is the clear global #1 in core enterprise ERP software, though the broader enterprise application landscape remains genuinely competitive across adjacent categories (HR, CRM, workflow)</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val" style="color:#34d399;">&euro;36.80B</div>
+      <div class="sub" style="color:#34d399;">+7.68% YoY, led by Cloud revenue +23% &mdash; the fifth straight year of acceleration</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#34d399;">28.31%</div>
+      <div class="sub">The highest in this five-year window, up from 19.27% in FY2023</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">16.82% / &asymp;8-8.5%</div>
+      <div class="note">Clears both this framework's 15% bar and an estimated cost of capital comfortably.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">-0.18x</div>
+      <div class="sub">A net cash position &mdash; the strongest balance sheet in this GRANOLAS batch</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">73/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/13 criteria met &mdash; tied with AstraZeneca for the strongest scorecard in this batch.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 21.17,143.69 L55.77,130.57 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M21.17,143.69 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 55.77,130.57 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 9 (operating margin, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; SAP dominates core ERP, but the broader enterprise software landscape (HR, CRM, workflow) remains genuinely competitive</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    SAP ties AstraZeneca for the strongest scorecard in this GRANOLAS batch, built on a business that is genuinely firing on all cylinders: operating margin has expanded every year to a record 28.31% in FY2025, the balance sheet sits in a net cash position, ROIC of 16.82% comfortably clears an estimated cost of capital, and FCF conversion clears 80%. The one real distortion to flag is FY2024: a €3.14bn restructuring charge tied to SAP's "Business AI transformation program" (roughly 10,000 positions affected, disclosed and completed by early 2025) sat below the operating-income line and crushed that year's net income to €3.12B and its P/E to an absurd 88x &mdash; both figures are shown as reported but excluded from the entry-multiple average, mirroring the same honest-disclosure approach used for AstraZeneca's Alexion charges earlier in this batch. On the resulting 34.4x FY21-25 average (ex-FY24), the current 28.67x multiple represents roughly a 17% discount. Growth, while genuinely strong (revenue CAGR +8.09%, cloud revenue +23% in FY2025), still falls short of this framework's 15% bar across all three growth criteria. Co-founder Hasso Plattner remains SAP's largest individual shareholder and Supervisory Board Chairman Emeritus, with a real, disclosed &asymp;6% stake &mdash; modest next to this batch's blockbuster founder holdings (LVMH, L'Oréal) but genuine, active founder alignment nonetheless.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported late Jul 2026) and spot price as of Aug 27, 2026 close.
+  </div>
+
+  <div class="bignum-corner">9/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR (SAP's reporting currency and primary Xetra listing currency). CAGR computed FY21&rarr;FY25 (4-year span).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">FY2024 note:</b> operating income actually grew strongly to &euro;8.15B that year &mdash; the distortion sits below the operating line, where a &euro;3.14bn restructuring charge (Business AI transformation program) crushed net income to just &euro;3.12B despite the underlying business performing well.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">€0B</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">€8B</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">€16B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">€24B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">€32B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€40B</text><rect x="110" y="91.78" width="16" height="148.22" rx="1.5" fill="#2dd4bf"/><text x="118" y="86.78" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€26.95B</text><rect x="130" y="204.85" width="16" height="35.15" rx="1.5" fill="#60a5fa"/><text x="138" y="199.85" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€6.39B</text><rect x="150" y="211.07" width="16" height="28.93" rx="1.5" fill="#fbbf24"/><text x="158" y="206.07" text-anchor="middle" font-size="7.5" fill="#fde68a">€5.26B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="77.64" width="16" height="162.36" rx="1.5" fill="#2dd4bf"/><text x="274" y="72.64" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€29.52B</text><rect x="286" y="206.72" width="16" height="33.28" rx="1.5" fill="#60a5fa"/><text x="294" y="201.72" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€6.05B</text><rect x="306" y="227.46" width="16" height="12.54" rx="1.5" fill="#fbbf24"/><text x="314" y="222.46" text-anchor="middle" font-size="7.5" fill="#fde68a">€2.28B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="68.34" width="16" height="171.66" rx="1.5" fill="#2dd4bf"/><text x="430" y="63.34" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€31.21B</text><rect x="442" y="206.94" width="16" height="33.06" rx="1.5" fill="#60a5fa"/><text x="450" y="201.94" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€6.01B</text><rect x="462" y="206.23" width="16" height="33.77" rx="1.5" fill="#fbbf24"/><text x="470" y="201.23" text-anchor="middle" font-size="7.5" fill="#fde68a">€6.14B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="52.01" width="16" height="187.99" rx="1.5" fill="#2dd4bf"/><text x="586" y="47.01" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€34.18B</text><rect x="598" y="195.18" width="16" height="44.82" rx="1.5" fill="#60a5fa"/><text x="606" y="190.18" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€8.15B</text><rect x="618" y="222.84" width="16" height="17.16" rx="1.5" fill="#fbbf24"/><text x="626" y="217.84" text-anchor="middle" font-size="7.5" fill="#fde68a">€3.12B*</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="37.60" width="16" height="202.40" rx="1.5" fill="#2dd4bf"/><text x="742" y="32.60" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€36.80B</text><rect x="754" y="182.69" width="16" height="57.31" rx="1.5" fill="#60a5fa"/><text x="762" y="177.69" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€10.42B</text><rect x="774" y="200.62" width="16" height="39.38" rx="1.5" fill="#fbbf24"/><text x="782" y="195.62" text-anchor="middle" font-size="7.5" fill="#fde68a">€7.16B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+8.09%</div><div class="sub">&euro;27.0B &rarr; &euro;36.8B; strong, real growth led by Cloud (+23% FY25), just short of the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+13.01%</div><div class="sub">&euro;6.39B &rarr; &euro;10.42B; unaffected by the FY24 restructuring charge, which sits below this line</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+11.10%</div><div class="sub">&euro;5.52B &rarr; &euro;8.42B; solid, real cash generation growth, just under the 15% bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A genuine, clean expansion story &mdash; margin dipped through FY2022-23 on cloud-transition investment, then re-accelerated to a record 28.31% in FY2025 as cloud scale kicked in. This line is unaffected by the FY2024 restructuring charge.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">18%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">24%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><path d="M 50.00,62.00 L 247.50,83.33 L 445.00,91.53 L 642.50,60.93 L 840.00,31.27 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,62.00 L 247.50,83.33 L 445.00,91.53 L 642.50,60.93 L 840.00,31.27" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="62.00" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="83.33" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="91.53" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="60.93" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="31.27" r="3" fill="#2dd4bf"/><text x="50.00" y="52.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.70%</text><text x="247.50" y="73.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.50%</text><text x="445.00" y="81.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.27%</text><text x="642.50" y="50.93" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.86%</text><text x="840.00" y="21.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">28.31%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>&euro;27.0B</td><td>&euro;6.39B</td><td>23.70%</td><td>&euro;5.26B</td></tr>
+    <tr><td>FY2022</td><td>&euro;29.5B</td><td>&euro;6.05B</td><td>20.50%</td><td>&euro;2.28B</td></tr>
+    <tr><td>FY2023</td><td>&euro;31.2B</td><td>&euro;6.01B</td><td>19.27%</td><td>&euro;6.14B</td></tr>
+    <tr><td>FY2024*</td><td>&euro;34.2B</td><td>&euro;8.15B</td><td>23.86%</td><td>&euro;3.12B*</td></tr>
+    <tr><td>FY2025</td><td>&euro;36.8B</td><td>&euro;10.42B</td><td>28.31%</td><td>&euro;7.16B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2024 net income reflects a real, disclosed &euro;3.14bn restructuring charge (Business AI transformation program, ~10,000 positions) recorded below operating income &mdash; the operating business performed well that year. FY2025 capex was &euro;0.74B (2.01% of revenue).</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">SAP reports quarterly. Latest reported period: Q2 2026 (three months to June 30, 2026), alongside H1 2026 results.</div>
+
+  <div class="headline-box">
+    <div class="title">H1 &amp; Q2 2026 Headlines</div>
+    <p>Q2 2026 total revenue was <b style="color:#f8fafc;">&euro;9.88B</b>, up 9% as reported (roughly 11% at constant currency), with Cloud revenue up a striking 24% to &euro;6.3B and current cloud backlog up 26-27% to nearly &euro;23B &mdash; a strong forward indicator of continued growth. Non-IFRS operating profit rose 9% year-over-year at constant currencies. CEO Christian Klein called the quarter "outstanding," highlighting the Sapphire customer conference and the launch of SAP's "autonomous enterprise" strategy centered on Business AI. Management raised its FY2026 cloud revenue guidance to &euro;25.8-26.2B at constant currency (+23-25% vs FY2025's &euro;21.02B) and updated its non-IFRS operating profit outlook to &euro;11.8-12.2B, reflecting more than &euro;100M of expected dilution from the July 2026 closings of the Dremio and Prior Labs acquisitions. Reported (GAAP) net income for Q2 2026 was &euro;2.18B, up 28% year-over-year, with no unusual restructuring items this quarter.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, &euro;B)</div>
+    <div class="chart-sub">A steady, accelerating uptrend across all five quarters, led by Cloud revenue growth &mdash; no distortion to flag here.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.00B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">€2.00B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">€4.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">€6.00B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">€8.00B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">€10.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€12.00B</text><rect x="103.0" y="69.55" width="70" height="150.45" rx="2" fill="#2dd4bf"/><text x="138" y="62.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.03B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="68.73" width="70" height="151.27" rx="2" fill="#2dd4bf"/><text x="294" y="61.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.08B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="58.60" width="70" height="161.40" rx="2" fill="#2dd4bf"/><text x="450" y="51.62" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.68B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="60.75" width="70" height="159.25" rx="2" fill="#2dd4bf"/><text x="606" y="53.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.55B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="55.38" width="70" height="164.62" rx="2" fill="#2dd4bf"/><text x="762" y="48.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.88B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub">Operating margin has held a consistently strong 27.6-30.0% band across all five quarters &mdash; no restructuring distortion visible here, since FY2024's charge fell in earlier quarters (Q1-Q2 2024, not shown).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">€1.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">€2.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">€3.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€4.00B</text><rect x="103.0" y="91.55" width="70" height="128.45" rx="2" fill="#60a5fa"/><text x="138" y="84.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.57B</text><rect x="121.0" y="88.05" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="99.05" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">28.5%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="91.70" width="70" height="128.30" rx="2" fill="#60a5fa"/><text x="294" y="84.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.57B</text><rect x="277.0" y="88.20" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="99.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">28.3%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="78.55" width="70" height="141.45" rx="2" fill="#60a5fa"/><text x="450" y="71.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.83B</text><rect x="433.0" y="75.05" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="86.05" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">29.2%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="76.55" width="70" height="143.45" rx="2" fill="#60a5fa"/><text x="606" y="69.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.87B</text><rect x="589.0" y="73.05" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="84.05" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">30.0%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="83.60" width="70" height="136.40" rx="2" fill="#60a5fa"/><text x="762" y="76.62" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.73B</text><rect x="745.0" y="80.10" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="91.10" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">27.6%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current reading.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">FY2024's P/E of 88.00x is distorted</b> by the restructuring charge crushing that year's net income, not a real valuation signal &mdash; it is excluded from the average (flagged with an asterisk). On the ex-FY24 average of 34.4x, the current 28.67x multiple represents roughly a 17% discount.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.3" text-anchor="end" font-size="11" fill="#64748b">75x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">90x</text><line x1="50.0" y1="143.60" x2="840.0" y2="143.60" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="139.60" text-anchor="end" font-size="10" fill="#94a3b8">Ex-FY24 avg: 34.4x</text><path d="M50.0,157.71 L208.0,110.76 L366.0,161.22 L524.0,24.44 L682.0,144.71 L840.0,156.29" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="157.71" r="3" fill="#a78bfa"/><circle cx="208.0" cy="110.76" r="3" fill="#a78bfa"/><circle cx="366.0" cy="161.22" r="3" fill="#a78bfa"/><circle cx="524.0" cy="24.44" r="3" fill="#a78bfa"/><circle cx="682.0" cy="144.71" r="3" fill="#a78bfa"/><circle cx="840.0" cy="156.29" r="3.5" fill="#a78bfa"/><text x="50.0" y="147.71" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.03x</text><text x="208.0" y="100.76" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">49.16x</text><text x="366.0" y="151.22" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.45x</text><text x="524.0" y="14.44" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">88.00x*</text><text x="682.0" y="134.71" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.88x</text><text x="840.0" y="146.29" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.67x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> SAP held about &euro;9.94B in total debt against &euro;11.63B of cash &amp; investments as of the latest reported quarter &mdash; a genuine net cash position of roughly &euro;1.69B, or -0.14x EBITDA. This is the strongest balance sheet found anywhere in this GRANOLAS batch, and has been net-cash-or-near-net-cash since FY2023, funded in part by strong free cash flow generation from the cloud transition.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="26.83 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="334.26 439.82" stroke-dashoffset="-26.83"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="78.73 439.82" stroke-dashoffset="-361.09"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Hasso Plattner (co-founder, direct + Hasso Plattner Foundation) &asymp; 6.1%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional (13F-reporting) &asymp; 76% &mdash; largest holders include BlackRock (&asymp;5-6%), Vanguard, State Street</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail &amp; other public float &asymp; 18%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> SAP was co-founded in 1972 by Dietmar Hopp, Hasso Plattner, Klaus Tschira, Claus Wellenreuther and Hans-Werner Hector. Plattner remains SAP's largest individual shareholder at roughly 6.1% (direct holdings via Hasso Plattner Single Asset KG plus the Hasso Plattner Foundation) and continues to serve as Supervisory Board Chairman Emeritus &mdash; real, active, disclosed founder alignment, though far smaller in percentage terms than this batch's largest founder stakes (LVMH's Arnault family at &asymp;50%, L'Oréal's Bettencourt Meyers family at &asymp;35%).
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>SAP</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+8.09%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+13.01%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>28.31% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+11.10%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear global #1 in core enterprise ERP software, well ahead of Oracle</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; SAP dominates core ERP, but the broader enterprise software landscape (Oracle, Microsoft, Workday, Salesforce, ServiceNow) remains genuinely competitive</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>16.82% (FY2025) vs &asymp;8-8.5% (third-party WACC estimate) &mdash; clears both bars</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>-0.18x (net cash, FY2025-end)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>80.8% (FY2025: &euro;8.42B FCF / &euro;10.42B EBIT)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/E 28.67x vs 34.4x ex-FY24 average &mdash; roughly 17% below average</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;1,180M &rarr; &asymp;1,153M basic shares (declining &asymp;2.3% over the period)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Co-founder Hasso Plattner holds &asymp;6.1% and remains active as Supervisory Board Chairman Emeritus &mdash; modest next to this batch's largest founder stakes, but real and disclosed</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.01% of revenue (FY2025) &mdash; very asset-light, typical for software</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The strongest balance sheet and cleanest all-around fundamentals in this GRANOLAS batch: a genuine net cash position, operating margin expanding to a record 28.31%, ROIC of 16.82% comfortably clearing an estimated cost of capital, and FCF conversion clearing 80%. Cloud revenue growing 23-24% year-over-year with cloud backlog up 26-27% points to durable forward momentum, and at 28.67x earnings versus a 34.4x recent average, the stock trades at a meaningful discount to its own history. Co-founder Hasso Plattner remains actively involved as Chairman Emeritus with a real, disclosed ownership stake.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Revenue, EBIT, and FCF growth, while genuinely strong, all fall short of this framework's 15% bar &mdash; SAP's transformation from on-premise licenses to cloud subscriptions is a real growth driver but has not yet produced hypergrowth-level CAGRs. FY2024's &euro;3.14bn restructuring charge, while disclosed and complete, is a reminder that large-scale organizational transformation carries real execution and cost risk. The enterprise software market beyond core ERP remains genuinely competitive, with Microsoft, Salesforce, Workday and ServiceNow all pushing into adjacent categories SAP also competes in.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 24-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), SAP Q2 &amp; H1 2026 results release (news.sap.com, reported late Jul 2026), WebSearch on SAP's 2024 restructuring program and Hasso Plattner ownership (Constellation Research, SAP News Center, various financial data aggregators).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;8-8.5%) is a third-party/analyst estimate, not company-reported. FY2024's P/E is shown as reported but excluded from the entry-multiple average for the reasons explicitly disclosed above.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">SAP SE &mdash; USD share price trend, NYSE-listed ADS (1:1 ratio with Xetra-listed ordinary shares). Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">SAP SE &mdash; Year-End Close (NYSE ADS, USD)</div>
+    <div class="chart-sub">A dip through FY2022 gave way to a powerful re-rating in FY2023-24 as the cloud transition and margin story became visible, followed by a modest pullback into current pricing &mdash; a strong positive 5-year annualized return, the best price performance found in this GRANOLAS batch.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,161.86 L 172.8,180.00 L 299.6,109.16 L 426.4,34.62 L 553.2,36.51 L 680.0,49.14 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +10.9%</text><path d="M 46.0,161.86 L 172.8,180.00 L 299.6,109.16 L 426.4,34.62 L 553.2,36.51 L 680.0,49.14" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="161.86" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="151.86" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$131.86</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="180.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="170.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$99.12</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="109.16" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="99.16" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$150.31</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="34.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="24.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$241.56</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="36.51" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="26.51" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$239.88</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="49.14" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="39.14" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$221.17</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for NYSE: SAP ADS (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sanofi Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Pharmaceuticals (GRANOLAS)</div>
+  <h1>Sanofi</h1>
+  <div class="badges">
+    <span class="badge">Euronext Paris: SAN, EUR, primary listing &middot; also NASDAQ: SNY (ADS, USD)</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Formed 2004 (Sanofi-Synthélabo + Aventis merger) &middot; Paris, France</span>
+    <span class="badge warn">FY2025 net income includes a real, disclosed &euro;2.61bn gain from the April 2025 divestment of Opella (consumer healthcare) to CD&amp;R, which crushed that year's P/E to an artificially low 12.88x</span>
+  </div>
+  <div class="price">$44.84</div>
+  <div class="price-sub">Close Aug 27, 2026 (NASDAQ ADS) &middot; Mkt cap &asymp;$107.9B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Pfizer, Merck, Novartis, Roche, AstraZeneca, GSK, AbbVie, Regeneron (Dupixent co-development partner) &mdash; the honest, weaker scorecard of the two French pharma names in this GRANOLAS batch, with real structural challenges rather than a one-off distortion driving the gap</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;46.72B</div>
+      <div class="sub">+5.49% YoY &mdash; steady but modest growth, led by Dupixent</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#34d399;">20.66%</div>
+      <div class="sub">Clears the 20% threshold, but down from a Regeneron-gain-boosted 25.76% peak in FY2022</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">9.25% / &asymp;7-7.5%</div>
+      <div class="note">Clears an estimated cost of capital only narrowly, and falls well short of the 15% bar &mdash; a genuine, persistent weak spot across all five years shown.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">1.00x</div>
+      <div class="sub">Moderate, comfortable leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">47/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/13 criteria met &mdash; the weakest scorecard of the pharma names in this GRANOLAS batch.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 132.73,202.24 L123.88,166.31 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M132.73,202.24 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 123.88,166.31 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (operating margin, market share, net debt/EBITDA, FCF conversion, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, ROIC/WACC, entry multiple, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global pharma remains genuinely fragmented</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Sanofi is the honest weak point among this batch's pharma names, and the gap is real rather than an accounting artifact. ROIC has sat between 8-10% every single year since FY2021, never approaching this framework's 15% bar and only narrowly clearing an estimated cost of capital &mdash; a genuine, structural profitability issue, not a one-off. Revenue, EBIT, and free cash flow have all grown in the low single digits or worse over the five-year window, and the current 23.85x P/E sits meaningfully above the company's own recent history even after excluding the artificially depressed FY2025 reading. Two real one-off items are worth flagging honestly: FY2022's unusually high 25.76% operating margin was boosted by gains tied to Sanofi's Regeneron equity stake sales, and FY2025's net income was lifted by a €2.61bn gain from divesting the Opella consumer-healthcare business to CD&R in April 2025 (Sanofi retained a 48.2% stake in the new joint venture and received €10.4bn in cash, funding an active buyback program). What is genuinely working: Dupixent, Sanofi's flagship immunology drug, just crossed €5B in quarterly sales for the first time (+37.6% in Q2 2026), the balance sheet carries only moderate leverage, and the share count has declined a real 18% over five years. L'Oréal remains Sanofi's largest shareholder at 7.2% of capital and 13.1% of voting rights &mdash; a real, disclosed strategic stake, though a corporate cross-holding rather than founder ownership.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported Jul 30, 2026) and spot price as of Aug 27, 2026 close.
+  </div>
+
+  <div class="bignum-corner">6/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR (Sanofi's reporting currency and primary Euronext Paris listing currency). CAGR computed FY21&rarr;FY25 (4-year span).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">Two flagged years:</b> FY2022's elevated net income (&euro;8.37B, the highest in this window) was boosted by gains related to Sanofi's Regeneron equity stake sales; FY2025's net income (&euro;7.81B) includes a &euro;2.61bn gain from divesting the Opella consumer-healthcare business to CD&amp;R in April 2025. Neither is used as a CAGR endpoint here (FY21 and FY25 are the endpoints, and only FY25 needed a valuation-specific adjustment &mdash; see page 4).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">€0B</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">€10B</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">€20B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">€30B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">€40B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€50B</text><rect x="110" y="67.61" width="16" height="172.39" rx="1.5" fill="#2dd4bf"/><text x="118" y="62.61" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€39.18B</text><rect x="130" y="202.29" width="16" height="37.71" rx="1.5" fill="#60a5fa"/><text x="138" y="197.29" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€8.57B</text><rect x="150" y="212.63" width="16" height="27.37" rx="1.5" fill="#fbbf24"/><text x="158" y="207.63" text-anchor="middle" font-size="7.5" fill="#fde68a">€6.22B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="62.68" width="16" height="177.32" rx="1.5" fill="#2dd4bf"/><text x="274" y="57.68" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€40.30B</text><rect x="286" y="194.33" width="16" height="45.67" rx="1.5" fill="#60a5fa"/><text x="294" y="189.33" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€10.38B*</text><rect x="306" y="203.17" width="16" height="36.83" rx="1.5" fill="#fbbf24"/><text x="314" y="198.17" text-anchor="middle" font-size="7.5" fill="#fde68a">€8.37B*</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="59.12" width="16" height="180.88" rx="1.5" fill="#2dd4bf"/><text x="430" y="54.12" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€41.11B</text><rect x="442" y="204.27" width="16" height="35.73" rx="1.5" fill="#60a5fa"/><text x="450" y="199.27" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€8.12B</text><rect x="462" y="216.24" width="16" height="23.76" rx="1.5" fill="#fbbf24"/><text x="470" y="211.24" text-anchor="middle" font-size="7.5" fill="#fde68a">€5.40B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="45.12" width="16" height="194.88" rx="1.5" fill="#2dd4bf"/><text x="586" y="40.12" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€44.29B</text><rect x="598" y="200.97" width="16" height="39.03" rx="1.5" fill="#60a5fa"/><text x="606" y="195.97" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€8.87B</text><rect x="618" y="215.54" width="16" height="24.46" rx="1.5" fill="#fbbf24"/><text x="626" y="210.54" text-anchor="middle" font-size="7.5" fill="#fde68a">€5.56B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="34.43" width="16" height="205.57" rx="1.5" fill="#2dd4bf"/><text x="742" y="29.43" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€46.72B</text><rect x="754" y="197.54" width="16" height="42.46" rx="1.5" fill="#60a5fa"/><text x="762" y="192.54" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€9.65B</text><rect x="774" y="205.64" width="16" height="34.36" rx="1.5" fill="#fbbf24"/><text x="782" y="200.64" text-anchor="middle" font-size="7.5" fill="#fde68a">€7.81B*</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+4.50%</div><div class="sub">&euro;39.2B &rarr; &euro;46.7B; steady but modest, well under the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+3.01%</div><div class="sub">&euro;8.57B &rarr; &euro;9.65B; genuinely slow growth, not a distortion artifact</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-0.16%</div><div class="sub">&euro;9.04B &rarr; &euro;8.99B; effectively flat to slightly negative over four years</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">FY2022's spike to 25.76% reflects Regeneron-related equity stake sale gains, not a genuine step-change in the core business &mdash; margin has otherwise held a fairly steady ~20% band across the period.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">18%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">24%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><path d="M 50.00,74.27 L 247.50,48.27 L 445.00,88.33 L 642.50,86.47 L 840.00,82.27 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,74.27 L 247.50,48.27 L 445.00,88.33 L 642.50,86.47 L 840.00,82.27" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="74.27" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="48.27" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="88.33" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="86.47" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="82.27" r="3" fill="#2dd4bf"/><text x="50.00" y="64.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.86%</text><text x="247.50" y="38.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">25.76%*</text><text x="445.00" y="78.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.75%</text><text x="642.50" y="76.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.03%</text><text x="840.00" y="72.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.66%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>&euro;39.2B</td><td>&euro;8.57B</td><td>21.86%</td><td>&euro;6.22B</td></tr>
+    <tr><td>FY2022*</td><td>&euro;40.3B</td><td>&euro;10.38B*</td><td>25.76%*</td><td>&euro;8.37B*</td></tr>
+    <tr><td>FY2023</td><td>&euro;41.1B</td><td>&euro;8.12B</td><td>19.75%</td><td>&euro;5.40B</td></tr>
+    <tr><td>FY2024</td><td>&euro;44.3B</td><td>&euro;8.87B</td><td>20.03%</td><td>&euro;5.56B</td></tr>
+    <tr><td>FY2025*</td><td>&euro;46.7B</td><td>&euro;9.65B</td><td>20.66%</td><td>&euro;7.81B*</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2022 boosted by Regeneron-related equity gains; FY2025 includes a &euro;2.61bn Opella divestment gain. FY2025 capex was &euro;1.76B (3.77% of revenue).</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Sanofi reports quarterly. Latest reported period: Q2 2026 (three months to June 30, 2026), alongside H1 2026 results.</div>
+
+  <div class="headline-box">
+    <div class="title">H1 &amp; Q2 2026 Headlines</div>
+    <p>Q2 2026 net sales were <b style="color:#f8fafc;">&euro;11.60B</b>, up 17.8% at constant exchange rates (+16.0% actual) &mdash; H1 2026 net sales reached &euro;22.11B, up 15.7% CER. The standout: Dupixent sales grew 37.6% to &euro;5.2B, crossing the &euro;5B-per-quarter mark for the first time, after returning to growth in 2026 following a 2025 price adjustment. Q2 2026 business operating income rose 35.8% at CER to &euro;3.29B, and business net income (Sanofi's core, non-IFRS measure) rose 31.0% at CER to &euro;2.5B. Management upgraded FY2026 guidance to roughly 10% sales growth, with business EPS growing slightly faster than sales at constant exchange rates. Sanofi is targeting &asymp;&euro;25B in Dupixent sales and &asymp;&euro;10B from newer pharma launches by 2030.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Net Sales (Q2'25&ndash;Q2'26, &euro;B)</div>
+    <div class="chart-sub">A genuinely volatile quarterly pattern (Sanofi's reported net sales) driven partly by seasonal vaccine-shipment timing &mdash; Q3 typically runs high on flu-vaccine shipments ahead of the Northern Hemisphere season.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">€3.00B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">€6.00B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">€9.00B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">€12.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€15.00B</text><rect x="103.0" y="86.75" width="70" height="133.25" rx="2" fill="#2dd4bf"/><text x="138" y="79.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€9.99B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="54.21" width="70" height="165.79" rx="2" fill="#2dd4bf"/><text x="294" y="47.23" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€12.43B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="69.29" width="70" height="150.71" rx="2" fill="#2dd4bf"/><text x="450" y="62.31" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€11.30B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="79.88" width="70" height="140.12" rx="2" fill="#2dd4bf"/><text x="606" y="72.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€10.51B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="65.37" width="70" height="154.63" rx="2" fill="#2dd4bf"/><text x="762" y="58.39" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€11.60B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Reported Margin</div>
+    <div class="chart-sub">Reported (IFRS) operating margin swings widely quarter to quarter (14-29%) due to R&amp;D-related impairments, restructuring charges, and legal provisions recognized as incurred &mdash; Sanofi's own guidance is based on "Business EPS" (a core, non-IFRS measure), which grew a steadier +31% at constant currency in Q2 2026.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">€1.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">€2.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">€3.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€4.00B</text><rect x="103.0" y="134.40" width="70" height="85.60" rx="2" fill="#60a5fa"/><text x="138" y="127.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€1.71B</text><rect x="121.0" y="130.90" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="141.90" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">15.9%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="30.80" width="70" height="189.20" rx="2" fill="#60a5fa"/><text x="294" y="23.82" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€3.78B</text><rect x="277.0" y="27.30" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="38.30" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">28.7%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="133.00" width="70" height="87.00" rx="2" fill="#60a5fa"/><text x="450" y="126.02" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€1.74B</text><rect x="433.0" y="129.50" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="140.50" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">14.3%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="107.55" width="70" height="112.45" rx="2" fill="#60a5fa"/><text x="606" y="100.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.25B</text><rect x="589.0" y="104.05" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="115.05" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">20.0%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="90.65" width="70" height="129.35" rx="2" fill="#60a5fa"/><text x="762" y="83.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">€2.59B</text><rect x="745.0" y="87.15" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="98.15" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">21.0%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current reading.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">FY2025's P/E of 12.88x is distorted</b> &mdash; artificially low because the Opella divestment gain inflated net income, not because the stock was genuinely cheap. Excluded from the average (flagged with an asterisk). On the ex-FY25 average of 18.3x, the current 23.85x multiple represents roughly a 30% premium &mdash; the richest valuation gap found anywhere in this GRANOLAS batch, and notable given Sanofi's otherwise unremarkable growth and returns.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50.0" y1="73.58" x2="840.0" y2="73.58" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="69.58" text-anchor="end" font-size="10" fill="#94a3b8">Ex-FY25 avg: 18.3x</text><path d="M50.0,77.04 L208.0,112.32 L366.0,53.28 L524.0,51.68 L682.0,116.96 L840.0,29.20" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="77.04" r="3" fill="#a78bfa"/><circle cx="208.0" cy="112.32" r="3" fill="#a78bfa"/><circle cx="366.0" cy="53.28" r="3" fill="#a78bfa"/><circle cx="524.0" cy="51.68" r="3" fill="#a78bfa"/><circle cx="682.0" cy="116.96" r="3" fill="#a78bfa"/><circle cx="840.0" cy="29.20" r="3.5" fill="#a78bfa"/><text x="50.0" y="67.04" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.87x</text><text x="208.0" y="102.32" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.46x</text><text x="366.0" y="43.28" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.84x</text><text x="524.0" y="41.68" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.04x</text><text x="682.0" y="106.96" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.88x*</text><text x="840.0" y="19.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.85x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Sanofi held about &euro;23.6B in total debt against &euro;6.4B of cash &amp; investments as of the latest reported quarter &mdash; a net debt position of roughly &euro;17.2B, or 1.27x EBITDA (1.00x at FY2025-end). This is moderate, manageable leverage, though it has crept up somewhat as the &euro;10.4B Opella proceeds have been partly redeployed into an active share buyback program.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="31.67 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="408.15 439.82" stroke-dashoffset="-31.67"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>L'Oréal (largest shareholder) &asymp; 7.2% of capital, 13.1% of voting rights</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutional &amp; public float &asymp; 92.8%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Sanofi has no founder or founding family &mdash; it was formed via the 2004 merger of Sanofi-Synthélabo and Aventis. L'Oréal remains its largest and longest-standing shareholder at 7.2% of capital (down from 9.4% after selling a 2.3% stake back to Sanofi in early 2025), and has historically used its position to actively influence Sanofi's board and CEO succession decisions. This is a real, disclosed strategic corporate stake with genuine governance influence, but it is a cross-holding rather than founder or insider ownership in the sense this framework is built to reward &mdash; scored accordingly on the scorecard below.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Sanofi</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+4.50%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+3.01%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>20.66% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-0.16%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Dupixent (co-developed with Regeneron) is the global leader in its immunology/dermatology class; Sanofi Pasteur ranks among the world's top-2 global vaccine makers alongside GSK/Merck/Pfizer</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global pharma remains genuinely fragmented across many large, well-capitalized rivals</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>9.25% (FY2025) vs &asymp;7-7.5% (third-party WACC estimate) &mdash; clears WACC only narrowly, well short of 15%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.00x (FY2025-end)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>93.1% (FY2025: &euro;8.99B FCF / &euro;9.65B EBIT)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/E 23.85x vs 18.3x ex-FY25 average &mdash; roughly 30% above average, the richest gap in this batch</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;2,943M &rarr; &asymp;2,405M shares (declining &asymp;18.3% over the period, aided by Opella-proceeds-funded buybacks)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>No founder or founding family; L'Oréal holds 7.2% as a strategic corporate shareholder, not insider/founder ownership in the intended sense</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.77% of revenue (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Dupixent just crossed &euro;5B in quarterly sales for the first time, growing 37.6% and returning to strong growth in 2026 after a 2025 price adjustment. The balance sheet carries only moderate leverage, FCF conversion clears 93%, and the share count has declined a genuine 18% over five years, aided by the &euro;10.4bn in cash Sanofi received from the 2025 Opella divestment. L'Oréal's continued 7.2% stake and demonstrated willingness to influence governance is a real, if unconventional, form of long-term shareholder alignment.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a genuine, structural profitability gap, not a one-off: ROIC has sat in the 8-10% range every year since FY2021 and has never approached this framework's 15% bar. Revenue, EBIT, and FCF growth have all been modest-to-flat over the full five-year window. The current 23.85x P/E sits roughly 30% above Sanofi's own recent average even after excluding the distorted FY2025 reading &mdash; a rich price for a business with this growth and return profile. Reported quarterly operating margins are notably volatile (14-29%) due to recurring R&amp;D impairments, restructuring, and legal charges, which is worth remembering when comparing quarter to quarter.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 25-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Sanofi Q2 &amp; H1 2026 results release (sanofi.com, reported Jul 30, 2026), WebSearch on the Opella divestment and L'Oréal's shareholding (Cleary Gottlieb, Euronext, L'Oréal press releases).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;7-7.5%) is a third-party/analyst estimate, not company-reported. FY2025's P/E is shown as reported but excluded from the entry-multiple average for the reasons explicitly disclosed above.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Sanofi &mdash; USD share price trend, NASDAQ-listed ADS. Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Sanofi &mdash; Year-End Close (NASDAQ ADS, USD)</div>
+    <div class="chart-sub">A largely flat, range-bound five years &mdash; the weakest price performance of any GRANOLAS name in this batch, consistent with the company's modest growth and persistently sub-par returns on capital. The stock has essentially gone nowhere in dollar terms since 2021.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,116.13 L 172.8,118.90 L 299.6,96.75 L 426.4,97.04 L 553.2,81.38 L 680.0,98.18 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +0.9%</text><path d="M 46.0,116.13 L 172.8,118.90 L 299.6,96.75 L 426.4,97.04 L 553.2,81.38 L 680.0,98.18" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="116.13" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="106.13" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$42.96</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="118.90" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="108.90" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$42.67</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="96.75" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="86.75" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$44.99</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="97.04" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="87.04" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$44.96</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="81.38" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="71.38" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$46.60</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="98.18" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="88.18" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$44.84</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for NASDAQ: SNY ADS (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

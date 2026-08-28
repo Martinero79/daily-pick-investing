@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LVMH Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Luxury Goods (GRANOLAS)</div>
+  <h1>LVMH Mo&euml;t Hennessy - Louis Vuitton</h1>
+  <div class="badges">
+    <span class="badge">Primary listing Euronext Paris: MC &middot; also OTC: LVMUY (ADR)</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually (quarterly sales updates)</span>
+    <span class="badge">Founded 1987 (LVMH merger) &middot; Paris, France</span>
+    <span class="badge warn">Revenue and margins have declined since the FY2023 peak amid a genuine, well-documented 2023-2025 global luxury demand slowdown &mdash; not a one-off, still an active trend</span>
+  </div>
+  <div class="price">$105.10</div>
+  <div class="price-sub">Close Aug 26, 2026 (OTC ADR) &middot; Mkt cap &asymp;$259.4B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Kering (Gucci), Richemont (Cartier), Herm&egrave;s, Chanel (private), Prada, Burberry, Est&eacute;e Lauder (cosmetics overlap) &mdash; LVMH is the clear, unambiguous global #1 in luxury goods by revenue, spanning fashion, wines &amp; spirits, watches &amp; jewelry, perfumes, and selective retailing, though the broader luxury market remains genuinely fragmented across brands and categories</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val" style="color:#f87171;">&euro;80.81B</div>
+      <div class="sub" style="color:#f87171;">&minus;4.58% YoY &mdash; the second straight year of decline from the FY2023 peak</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">21.86%</div>
+      <div class="sub">Still clears the 20% threshold, but down from &asymp;26.7% in FY2021-23 &mdash; real margin compression</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val">12.55% / &asymp;7-8%</div>
+      <div class="note">Clears an estimated cost of capital, but down sharply from &asymp;19-20% pre-slowdown.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">1.13x</div>
+      <div class="sub">&asymp;&euro;23.3B net debt (FY2025) &mdash; moderate, manageable leverage</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">58/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/13 criteria met, held back mainly by the real, ongoing luxury-demand slowdown.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 47.00,181.11 L71.54,153.41 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M47.00,181.11 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 71.54,153.41 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 8 (operating margin, market share, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 5 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, ROIC/WACC)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global luxury remains genuinely fragmented across strong brand houses</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    LVMH matches L'Oréal's 8/13 binary criteria count in this batch, but scores lower on the weighted index (58 vs 63) because the misses are more severe: revenue actually declined in both FY2024 and FY2025 from a FY2023 peak, EBIT growth has been essentially flat over the five-year window, and free cash flow is down outright since FY2021. This reflects a real, widely-reported global luxury demand slowdown &mdash; not an accounting distortion &mdash; driven by softer Chinese and Asian demand and a broader post-pandemic normalization of the sector's 2021-2023 boom. What remains genuinely strong: LVMH is the unambiguous global #1 in luxury goods, leverage is moderate at 1.13x net debt/EBITDA, FCF conversion clears 80%, and the current 20.87x P/E sits about 22% below its own five-year average &mdash; a real re-rating lower alongside the operating slowdown. Most notably, the Arnault family crossed 50% ownership of LVMH's capital in February 2026 (and holds 65.94% of voting rights) via Financière Agache and Christian Dior SE &mdash; the strongest, most direct founder-family control of any company in this GRANOLAS batch. H1 2026 showed early signs of stabilization: organic growth turned positive (+2%, accelerating to +3% in Q2) even as reported revenue fell 3% on currency and portfolio effects.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (reported July 2026) and spot price as of Aug 26, 2026 close (OTC ADR).
+  </div>
+
+  <div class="bignum-corner">8/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR (LVMH's reporting currency and primary Euronext Paris listing currency). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">No one-off gains or charges to flag here &mdash; this is a genuine business cycle. Revenue surged from the pandemic reopening (+43.8% in FY2021, +23.3% in FY2022) through a FY2023 peak of &euro;86.2B, then declined for two straight years as global luxury demand, especially in China, normalized lower.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">€0B</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">€20B</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">€40B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">€60B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">€80B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€100B</text><rect x="110" y="98.72" width="16" height="141.28" rx="1.5" fill="#2dd4bf"/><text x="118" y="93.72" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€64.22B</text><rect x="130" y="202.29" width="16" height="37.71" rx="1.5" fill="#60a5fa"/><text x="138" y="197.29" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€17.14B</text><rect x="150" y="213.51" width="16" height="26.49" rx="1.5" fill="#fbbf24"/><text x="158" y="208.51" text-anchor="middle" font-size="7.5" fill="#fde68a">€12.04B</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="65.80" width="16" height="174.20" rx="1.5" fill="#2dd4bf"/><text x="274" y="60.80" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€79.18B</text><rect x="286" y="193.78" width="16" height="46.22" rx="1.5" fill="#60a5fa"/><text x="294" y="188.78" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€21.01B</text><rect x="306" y="209.02" width="16" height="30.98" rx="1.5" fill="#fbbf24"/><text x="314" y="204.02" text-anchor="middle" font-size="7.5" fill="#fde68a">€14.08B</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="50.47" width="16" height="189.53" rx="1.5" fill="#2dd4bf"/><text x="430" y="45.47" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€86.15B</text><rect x="442" y="189.88" width="16" height="50.12" rx="1.5" fill="#60a5fa"/><text x="450" y="184.88" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€22.78B</text><rect x="462" y="206.63" width="16" height="33.37" rx="1.5" fill="#fbbf24"/><text x="470" y="201.63" text-anchor="middle" font-size="7.5" fill="#fde68a">€15.17B</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="53.70" width="16" height="186.30" rx="1.5" fill="#2dd4bf"/><text x="586" y="48.70" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€84.68B</text><rect x="598" y="196.92" width="16" height="43.08" rx="1.5" fill="#60a5fa"/><text x="606" y="191.92" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€19.58B</text><rect x="618" y="212.39" width="16" height="27.61" rx="1.5" fill="#fbbf24"/><text x="626" y="207.39" text-anchor="middle" font-size="7.5" fill="#fde68a">€12.55B</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="62.22" width="16" height="177.78" rx="1.5" fill="#2dd4bf"/><text x="742" y="57.22" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">€80.81B</text><rect x="754" y="201.13" width="16" height="38.87" rx="1.5" fill="#60a5fa"/><text x="762" y="196.13" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">€17.67B</text><rect x="774" y="216.06" width="16" height="23.94" rx="1.5" fill="#fbbf24"/><text x="782" y="211.06" text-anchor="middle" font-size="7.5" fill="#fde68a">€10.88B</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+5.91%</div><div class="sub">&euro;64.2B &rarr; &euro;80.8B; positive only because of the FY2021-22 pandemic-reopening surge</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">+0.76%</div><div class="sub">&euro;17.1B &rarr; &euro;17.7B; essentially flat over four years, masking a sharp FY2023 peak and decline</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">&minus;2.73%</div><div class="sub">&euro;16.0B &rarr; &euro;14.3B; genuinely declining, though FY2025 marked a second straight year of recovery</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A real, sustained margin decline from &asymp;26.7% in FY2021-23 to 21.86% in FY2025 &mdash; still above this framework's 20% threshold, but a meaningful compression as the luxury demand cycle turned.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">18%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">24%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><path d="M 50.00,42.07 L 247.50,43.07 L 445.00,43.73 L 642.50,65.87 L 840.00,74.27 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,42.07 L 247.50,43.07 L 445.00,43.73 L 642.50,65.87 L 840.00,74.27" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="42.07" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="43.07" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="43.73" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="65.87" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="74.27" r="3" fill="#2dd4bf"/><text x="50.00" y="32.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.69%</text><text x="247.50" y="33.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.54%</text><text x="445.00" y="33.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.44%</text><text x="642.50" y="55.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.12%</text><text x="840.00" y="64.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.86%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th></tr>
+    <tr><td>FY2021</td><td>&euro;64.2B</td><td>&euro;17.1B</td><td>26.69%</td><td>&euro;12.0B</td></tr>
+    <tr><td>FY2022</td><td>&euro;79.2B</td><td>&euro;21.0B</td><td>26.54%</td><td>&euro;14.1B</td></tr>
+    <tr><td>FY2023</td><td>&euro;86.2B</td><td>&euro;22.8B</td><td>26.44%</td><td>&euro;15.2B</td></tr>
+    <tr><td>FY2024</td><td>&euro;84.7B</td><td>&euro;19.6B</td><td>23.12%</td><td>&euro;12.6B</td></tr>
+    <tr><td>FY2025</td><td>&euro;80.8B</td><td>&euro;17.7B</td><td>21.86%</td><td>&euro;10.9B</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">No one-off gains or charges to flag &mdash; this trajectory reflects a real, widely-documented luxury demand cycle. FY2025 capex was &euro;4.57B (&asymp;5.7% of revenue), down from a FY2023 peak of &euro;7.48B (&asymp;8.7%) as post-Tiffany-acquisition integration and store-network investment normalized.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">LVMH publishes quarterly sales updates but reports full P&amp;L semi-annually. Latest reported period: H1 2026 (six months to June 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Revenue was <b style="color:#f8fafc;">&euro;38.6B</b>, down 3% as reported, but organic growth turned positive at +2% &mdash; the reported decline reflects a 5% negative currency headwind and a 1% negative portfolio/perimeter effect, not weaker underlying demand. Growth accelerated sequentially: Q1 organic growth was +1%, improving to +3% in Q2, a genuine positive inflection after the 2023-2025 slowdown. Profit from recurring operations was &euro;8.7B, an operating margin of 22.5% &mdash; down just 10 basis points year-over-year, reflecting strong cost discipline through the downturn. By segment: Watches &amp; Jewelry led with 9% organic growth (11% in Q2), Wines &amp; Spirits grew 5% organically, Selective Retailing grew 5% organically to &euro;8.40B, while Fashion &amp; Leather Goods (the largest and most-watched segment) declined 5% reported but returned to +1% organic growth in Q2 &mdash; an important signal given this division's size and margin contribution.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Half-Year Group Revenue (&euro;B)</div>
+    <div class="chart-sub">Reported revenue declined again year-over-year, but the underlying organic trend turned positive for the first time in several halves &mdash; a genuine, if early, sign of stabilization after the 2023-2025 slowdown.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">€0.0B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">€9.0B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">€18.0B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">€27.0B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">€36.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">€45.0B</text><rect x="250.0" y="43.11" width="100" height="176.89" rx="2" fill="#2dd4bf"/><text x="300" y="36.11" text-anchor="middle" font-size="12" fill="#e2e8f0" font-weight="700">€39.8B</text><text x="300" y="238" text-anchor="middle" font-size="12" fill="#94a3b8" font-weight="700">H1&#39;25</text><rect x="470.0" y="48.44" width="100" height="171.56" rx="2" fill="#2dd4bf"/><text x="520" y="41.44" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">€38.6B</text><text x="520" y="238" text-anchor="middle" font-size="12" fill="#f8fafc" font-weight="700">H1&#39;26</text></svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Why the FX/organic gap matters:</b> LVMH earns revenue globally but reports in EUR, so a strong euro against the US dollar, Japanese yen, and Chinese yuan mechanically shrinks reported growth even when constant-currency demand is improving &mdash; as it was here. The organic-growth figure strips out currency and portfolio (M&amp;A) effects and is the more reliable read on underlying demand trends.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current TTM reading (OTC ADR, USD).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">No single distorted year here &mdash; the multiple has simply compressed alongside the real operating slowdown. At 20.87x, current pricing sits about 22% below the FY21-25 average of 26.7x, the largest valuation discount to its own history of any GRANOLAS name in this batch.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="42" y="195.4" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="166.9" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="138.3" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="109.7" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="42" y="81.1" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="52.6" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35x</text><line x1="50.0" y1="67.51" x2="840.0" y2="67.51" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="63.51" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 26.7x</text><path d="M50.0,46.11 L208.0,81.77 L366.0,82.06 L524.0,75.37 L682.0,52.23 L840.0,100.74" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="46.11" r="3" fill="#a78bfa"/><circle cx="208.0" cy="81.77" r="3" fill="#a78bfa"/><circle cx="366.0" cy="82.06" r="3" fill="#a78bfa"/><circle cx="524.0" cy="75.37" r="3" fill="#a78bfa"/><circle cx="682.0" cy="52.23" r="3" fill="#a78bfa"/><circle cx="840.0" cy="100.74" r="3.5" fill="#a78bfa"/><text x="50.0" y="36.11" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">30.43x</text><text x="208.0" y="71.77" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.19x</text><text x="366.0" y="72.06" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.14x</text><text x="524.0" y="65.37" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.31x</text><text x="682.0" y="42.23" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.36x</text><text x="840.0" y="90.74" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.87x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> LVMH held roughly &euro;36.8B in total debt against &euro;13.5B of cash &amp; investments as of FY2025-end (Dec 31, 2025) &mdash; a net debt position of about &euro;23.3B, or 1.13x EBITDA. This is moderate, manageable leverage, well within a range this framework treats as comfortable, even after the large Tiffany &amp; Co. acquisition (completed January 2021) added meaningfully to the balance sheet.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="219.95 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="219.87 439.82" stroke-dashoffset="-219.95"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#34d399;"></span>Arnault family (via Financière Agache &amp; Christian Dior SE) &asymp; 50.0% of capital, 65.9% of voting rights</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutional &amp; public float &asymp; 50.0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> LVMH has the strongest, most direct founder-family control of any company in this GRANOLAS batch. Bernard Arnault and family crossed 50% ownership of LVMH's capital in February 2026 (up from 49.77% at end-2025), reached through a sustained program of regular open-market share purchases, and hold 65.94% of voting rights via the holding companies Financière Agache SA and Christian Dior SE. This gives the family an outright absolute majority, with real, unusually direct control over governance, capital allocation, and dividend policy &mdash; a genuinely rare structure for a company of this scale.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>LVMH</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+5.91%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+0.76%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>21.86% (FY2025)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;2.73%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>World's largest luxury goods conglomerate by revenue &mdash; a clear, unambiguous #1</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global luxury is genuinely fragmented across strong brand houses (Kering, Richemont, Herm&egrave;s, Chanel, Prada)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>12.55% vs &asymp;7-8% (third-party WACC estimate) &mdash; clears WACC but below the 15% bar, down from &asymp;20% pre-slowdown</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.13x</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>81.0% (FY2025: &euro;14.3B FCF / &euro;17.7B EBIT) &mdash; clears the bar narrowly</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>TTM P/E 20.87x vs 26.7x FY21-25 avg &mdash; roughly 22% below average, the biggest discount in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;503.8M &rarr; &asymp;497.8M shares (declining modestly, &asymp;-1.2% over the period)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;50.0% of capital, 65.9% of voting rights (Arnault family via Financière Agache &amp; Christian Dior SE) &mdash; the strongest founder control in this GRANOLAS batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.65% of revenue (FY2025), down from an 8.7% FY2023 peak during Tiffany integration</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>LVMH remains the unambiguous global #1 in luxury goods, with the most direct founder-family control of any GRANOLAS name (Arnault family, &gt;50% of capital, &gt;65% of voting rights). Leverage is moderate, FCF conversion clears 80%, the share count has declined modestly, and the current 20.87x P/E sits about 22% below its own five-year average &mdash; the deepest valuation discount in this batch. H1 2026 showed a genuine positive inflection: organic growth turned positive and accelerated through Q2, even as reported figures were held back by currency effects.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a real, ongoing industry-wide luxury demand slowdown, not a one-off distortion &mdash; revenue has declined for two straight years from the FY2023 peak, EBIT growth has been essentially flat over the full window, and free cash flow is down outright since FY2021. ROIC has fallen from &asymp;20% to 12.55%, still clearing an estimated cost of capital but well off its prior level. Global luxury remains a genuinely fragmented, well-competed market. The organic-growth recovery seen in H1 2026 is early and not yet confirmed over multiple quarters, and Fashion &amp; Leather Goods &mdash; LVMH's largest, highest-margin division &mdash; only just returned to positive organic growth in Q2 2026 after a prolonged decline.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 25-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), LVMH H1 2026 results release and earnings call (reported Jul 2026), WebSearch on LVMH/Arnault family ownership (Bloomberg, Business of Fashion, Luxury Tribune).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;7-8%) is a third-party/analyst estimate, not company-reported.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">LVMH &mdash; USD share price trend via the OTC ADR (LVMUY). Year-end closes FY2021-FY2025 plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">LVMH Mo&euml;t Hennessy - Louis Vuitton &mdash; Year-End Close (ADR, USD)</div>
+    <div class="chart-sub">A genuinely volatile five years tracking the underlying demand cycle &mdash; a FY2023 peak followed by a sharp decline into FY2026, resulting in a negative 5-year annualized return (-7.3%), the weakest price performance of any GRANOLAS name in this batch and a direct reflection of the real luxury slowdown.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,48.61 L 172.8,88.92 L 299.6,45.54 L 426.4,112.10 L 553.2,59.81 L 680.0,162.46 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="48.61" x2="680.0" y2="162.46" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -7.3%</text><path d="M 46.0,48.61 L 172.8,88.92 L 299.6,45.54 L 426.4,112.10 L 553.2,59.81 L 680.0,162.46" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="48.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="38.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$153.68</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="88.92" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="78.92" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$136.48</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="45.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="35.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$154.99</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="112.10" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="102.10" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$126.59</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="59.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="49.81" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$148.90</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="162.46" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="152.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$105.10</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for the OTC ADR LVMUY (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
