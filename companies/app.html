@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AppLovin Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Mobile App-Install / AI Ad-Tech Platform (AI/SaaS)</div>
+  <h1>AppLovin</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: APP, USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2012 &middot; Palo Alto, CA</span>
+    <span class="badge warn">Highest Martinero Index on this site (89/100, 12/13 criteria met) &mdash; but built on just two clean fiscal years since AppLovin divested its mobile-apps business (closed June 30, 2025) to become a pure AI ad-tech platform. The stock is down 53% from its FY2025 close amid short-seller allegations (Muddy Waters, Mar 2025) and a rough Q2 2026 earnings reaction. Read the scorecard with that context, not as an uncomplicated "best on the site."</span>
+  </div>
+  <div class="price">$317.76</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), +1.64% on the day &middot; Mkt cap &asymp;$106.34B &middot; down -31.36% over the last 52 weeks, down -53% from the Dec 31, 2025 close of $673.82</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Meta Audience Network, Google AdMob/Google Ads, Unity (ironSource), Digital Turbine, Liftoff/Vungle, Moloco &mdash; a large, fragmented, fast-moving mobile ad-tech field</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$5.48B</div>
+      <div class="sub">+69.99% YoY (restated, continuing-ops basis); Q2 2026 revenue $1.92B, +52.83% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#34d399;">75.75%</div>
+      <div class="note">TTM 77.44%. Up from -0.69% in FY2022, before the divestiture and the AXON-driven platform business took over as effectively the whole company.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">132.73% / 17.73%</div>
+      <div class="note">A &asymp;115-point spread &mdash; the widest capital-efficiency reading of any company covered on this site, reflecting an extremely capital-light ad-tech model.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.09x</div>
+      <div class="sub">Technically a slight net debt position (-$461.77M), not net cash, but trivial relative to $5.41B TTM EBITDA</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">89/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">12/13 criteria met &mdash; the highest score on this site. The lone miss is market concentration, in a genuinely crowded ad-tech field.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 92.71,204.29 L96.44,167.47 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M92.71,204.29 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 96.44,167.47 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">12/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 12 (revenue/EBIT/FCF CAGR, operating margin, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 1 (market concentration &mdash; a genuinely fragmented, competitive ad-tech field)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (unusual for this AI/SaaS batch &mdash; AppLovin's post-divestiture GAAP economics are clean enough that no criterion needed to be excluded)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Insider ownership: <b style="color:#fbbf24;">23.60%</b> &mdash; the highest in this AI/SaaS batch, concentrated mainly in founder/CEO Adam Foroughi's stake</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    AppLovin's scorecard is, mechanically, the strongest on this entire site &mdash; and that number needs real context before it means anything. In February 2024, AppLovin agreed to sell its legacy mobile-games/apps business (about 10 studios) to Tripledot Studios for roughly $400M cash plus a 20% stake in Tripledot; the deal closed June 30, 2025. What's left is AXON, AppLovin's AI-driven ad-recommendation and user-acquisition engine, now effectively the entire company &mdash; and it runs at software-platform economics rather than ad-tech economics: 75.75% operating margin, 132.73% ROIC, and revenue that's more than tripled since the restated FY2023 base. Because the divestiture changed what "AppLovin" actually is, FY2021-22 figures reflect the old, larger, lower-margin combined business and aren't comparable to FY2023 onward &mdash; this dashboard uses FY2023, the first full year on a clean continuing-operations basis, as the base year for every CAGR and valuation-history calculation, flagging rather than hiding the older data where it's shown. Two things temper the eye-popping scorecard. First, the underlying business is genuinely young in its current form &mdash; two clean fiscal years is a short track record for a 12/13 score. Second, the stock has been through a rough stretch: short-seller Muddy Waters Research published allegations in March 2025 of Terms-of-Service violations and overstated return-on-ad-spend claims (stock fell 20% that day), several other short firms piled on afterward, and Q2 2026 earnings on August 5 &mdash; despite 53% revenue growth and a 58% jump in adjusted EBITDA &mdash; sent the stock down another 16-21% on concerns about the pace of AppLovin's newer e-commerce advertising push and the CEO's own comments about "lumpy" timing in ad-model improvements. The net effect: the stock closed FY2025 at $673.82 and sits at $317.76 today, down 53% from that peak even as the fundamentals underneath have kept compounding.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Aug 5, 2026) and spot price as of Aug 28, 2026 close. Q3 2026 results are guided for revenue of $2.055-2.085B (46-48% YoY) and are expected to report in early November 2026.
+  </div>
+
+  <div class="bignum-corner">12/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD, calendar fiscal year (Jan-Dec). FY2023-2025 are reported on a continuing-operations basis following the Tripledot Studios divestiture (closed Jun 30, 2025); FY2021-22 reflect the old, larger, lower-margin combined apps+ads business and are not directly comparable. CAGRs computed FY23&rarr;FY25 (2-yr) using the first clean, comparable base year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">The apparent revenue "decline" from FY2022 ($2.82B) to FY2023 ($1.84B) is a restatement effect, not an organic drop &mdash; FY2023 onward excludes the divested apps business that FY2021-22 still included. On a like-for-like basis, the AXON ad-tech platform has grown explosively: operating income swung from a near-breakeven -$19.5M in FY2022 to $4.15B in FY2025.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$-1.0B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$1.0B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$2.0B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$3.0B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$4.0B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$5.0B</text><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$6.0B</text><rect x="114.0" y="48.6" width="16" height="79.8" rx="1.5" fill="#2dd4bf"/><text x="122.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.79B</text><rect x="130.0" y="48.6" width="16" height="4.8" rx="1.5" fill="#60a5fa"/><text x="138.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.17B</text><rect x="146.0" y="48.6" width="16" height="0.9" rx="1.5" fill="#fbbf24"/><text x="154.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.03B</text><text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="270.0" y="48.6" width="16" height="80.5" rx="1.5" fill="#2dd4bf"/><text x="278.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.82B</text><rect x="286.0" y="48.0" width="16" height="0.6" rx="1.5" fill="#60a5fa"/><text x="294.0" y="59.6" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.02B</text><rect x="302.0" y="43.1" width="16" height="5.5" rx="1.5" fill="#fbbf24"/><text x="310.0" y="59.6" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.19B</text><text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="426.0" y="48.6" width="16" height="52.6" rx="1.5" fill="#2dd4bf"/><text x="434.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.84B</text><rect x="442.0" y="48.6" width="16" height="22.1" rx="1.5" fill="#60a5fa"/><text x="450.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.77B</text><rect x="458.0" y="48.6" width="16" height="10.1" rx="1.5" fill="#fbbf24"/><text x="466.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.35B</text><text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="48.6" width="16" height="92.1" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$3.22B</text><rect x="598.0" y="48.6" width="16" height="54.6" rx="1.5" fill="#60a5fa"/><text x="606.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.91B</text><rect x="614.0" y="48.6" width="16" height="45.1" rx="1.5" fill="#fbbf24"/><text x="622.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.58B</text><text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="738.0" y="48.6" width="16" height="156.6" rx="1.5" fill="#2dd4bf"/><text x="746.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$5.48B</text><rect x="754.0" y="48.6" width="16" height="118.6" rx="1.5" fill="#60a5fa"/><text x="762.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$4.15B</text><rect x="770.0" y="48.6" width="16" height="95.2" rx="1.5" fill="#fbbf24"/><text x="778.0" y="43.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$3.33B</text><text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY23-25)</div><div class="val" style="color:#34d399;">+72.50%</div><div class="sub">$1.84B &rarr; $5.48B, clean continuing-ops basis; comfortably clears the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY23-25)</div><div class="val" style="color:#34d399;">+131.85%</div><div class="sub">$772.4M &rarr; $4.15B; margin expansion on top of revenue growth, both real</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY23-25)</div><div class="val" style="color:#34d399;">+94.44%</div><div class="sub">$1.06B &rarr; $4.02B; FCF has tracked operating income closely, capex is negligible</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FCF has grown every year without exception, including through the FY2021-22 period under the old business mix, and has roughly quadrupled since the FY2023 restatement.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="197.8" x2="840" y2="197.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="201.8" text-anchor="end" font-size="11" fill="#64748b">$0.50B</text><line x1="60" y1="175.6" x2="840" y2="175.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="179.6" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$1.50B</text><line x1="60" y1="131.1" x2="840" y2="131.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="135.1" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="108.9" x2="840" y2="108.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.9" text-anchor="end" font-size="11" fill="#64748b">$2.50B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$3.00B</text><line x1="60" y1="64.4" x2="840" y2="64.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.4" text-anchor="end" font-size="11" fill="#64748b">$3.50B</text><line x1="60" y1="42.2" x2="840" y2="42.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="46.2" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$4.50B</text><rect x="103.0" y="203.98" width="70" height="16.02" rx="2" fill="#34d399"/><text x="138" y="196.98" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.36B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="201.68" width="70" height="18.32" rx="2" fill="#34d399"/><text x="294" y="194.68" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.41B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="172.80" width="70" height="47.20" rx="2" fill="#34d399"/><text x="450" y="165.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.06B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="126.71" width="70" height="93.29" rx="2" fill="#34d399"/><text x="606" y="119.71" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.10B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="41.56" width="70" height="178.44" rx="2" fill="#34d399"/><text x="762" y="34.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$4.01B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A dramatic swing from FY2022's near-breakeven -0.69% to FY2025's 75.75% &mdash; not organic margin expansion in the usual sense, but the mechanical effect of shedding a low-margin apps business and keeping only the high-margin AXON ad-tech platform.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="197.8" x2="840" y2="197.8" stroke="#1e293b" stroke-width="1"/><text x="42" y="201.8" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="175.6" x2="840" y2="175.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="179.6" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="131.1" x2="840" y2="131.1" stroke="#1e293b" stroke-width="1"/><text x="42" y="135.1" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="108.9" x2="840" y2="108.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="112.9" text-anchor="end" font-size="11" fill="#64748b">40%</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">50%</text><line x1="50" y1="64.4" x2="840" y2="64.4" stroke="#1e293b" stroke-width="1"/><text x="42" y="68.4" text-anchor="end" font-size="11" fill="#64748b">60%</text><line x1="50" y1="42.2" x2="840" y2="42.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="46.2" text-anchor="end" font-size="11" fill="#64748b">70%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">80%</text><path d="M 50.00,184.51 L 247.50,199.31 L 445.00,104.58 L 642.50,66.07 L 840.00,29.44 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,184.51 L 247.50,199.31 L 445.00,104.58 L 642.50,66.07 L 840.00,29.44" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="184.51" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="199.31" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="104.58" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="66.07" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="29.44" r="3" fill="#2dd4bf"/><text x="50.00" y="174.51" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.97%</text><text x="247.50" y="189.31" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-0.69%</text><text x="445.00" y="94.58" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">41.94%</text><text x="642.50" y="56.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">59.27%</text><text x="840.00" y="19.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">75.75%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Capital expenditures are negligible/effectively zero (reported as "n/a" in the cash flow statement, TTM FCF and OCF are identical at $4.53B) &mdash; an extremely asset-light platform business. Net debt is a slight -$461.77M (not net cash), but at 0.09x TTM EBITDA it's immaterial to the balance sheet picture.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">AppLovin reports quarterly on a Jan-Dec fiscal year. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 5, 2026 after close). Q3 2026 results are expected in early November 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$1.92B</b>, up 52.83% YoY but a slight miss against the roughly $1.94B analyst consensus. Adjusted EBITDA rose 58% YoY to $1.61B (84% margin) and net income rose 54.54% to $1.27B &mdash; strong absolute growth by almost any measure. Despite that, the stock fell 16-21% on the print (sources vary on the exact figure), driven by CEO Adam Foroughi's comments describing "lumpy" timing on improvements to AppLovin's advertising models, plus market skepticism about the pace and scalability of the company's newer e-commerce advertising expansion, which management itself has characterized as early-stage with creative tooling still a bottleneck. Q3 2026 guidance calls for revenue of $2.055-2.085B, still 46-48% YoY growth.</p>
+  </div>
+
+  <div class="callout">
+    <b>Short-seller overhang:</b> Muddy Waters Research published a report on March 27, 2025 alleging AppLovin violated the terms of service of Meta, Google, TikTok, Snap and Reddit to extract user ID-graph data, and that the company overstated its return-on-ad-spend claims to advertisers; the stock fell roughly 20% (from about $325 to $260) on the day. Several other short-selling firms (Fuzzy Panda Research, Culper Research, The Bear Cave) published similar allegations in the following weeks. CEO Adam Foroughi publicly disputed the claims and retained outside counsel (Alex Spiro of Quinn Emanuel) to conduct an independent review. This overhang, more than any single fundamental miss, is a meaningful part of why the stock has underperformed its own scorecard over the past 18 months.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Consistent, strong sequential growth every quarter, though the YoY growth rate has been decelerating slightly from the mid-70s% range a year ago toward the low-50s% now &mdash; still a very high absolute growth rate off an increasingly large base.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$1.20B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$1.60B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><rect x="103.0" y="94.10" width="70" height="125.90" rx="2" fill="#2dd4bf"/><text x="138" y="87.10" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.26B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="79.50" width="70" height="140.50" rx="2" fill="#2dd4bf"/><text x="294" y="72.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.41B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="54.20" width="70" height="165.80" rx="2" fill="#2dd4bf"/><text x="450" y="47.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.66B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="35.80" width="70" height="184.20" rx="2" fill="#2dd4bf"/><text x="606" y="28.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.84B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="27.60" width="70" height="192.40" rx="2" fill="#2dd4bf"/><text x="762" y="20.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.92B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub">Operating margin has held remarkably steady in the high-70s% range for five straight quarters, ticking up to 78.15% in Q1 2026 before settling at 77.68% in Q2 2026 &mdash; a level of consistency unusual for a company still growing revenue above 50% YoY.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$1.20B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$1.60B</text><rect x="103.0" y="100.29" width="70" height="119.71" rx="2" fill="#60a5fa"/><text x="138" y="93.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.96B</text><rect x="121.0" y="77.29" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="88.29" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">76.1%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="85.12" width="70" height="134.88" rx="2" fill="#60a5fa"/><text x="294" y="78.12" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.08B</text><rect x="277.0" y="62.12" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="73.12" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">76.8%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="60.63" width="70" height="159.37" rx="2" fill="#60a5fa"/><text x="450" y="53.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.27B</text><rect x="433.0" y="37.63" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="48.63" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">76.9%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="40.00" width="70" height="180.00" rx="2" fill="#60a5fa"/><text x="606" y="33.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.44B</text><rect x="589.0" y="17.00" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="28.00" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">78.2%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="33.25" width="70" height="186.75" rx="2" fill="#60a5fa"/><text x="762" y="26.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.49B</text><rect x="745.0" y="10.25" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="21.25" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">77.7%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal. FY2021-22 figures reflect the old, divested apps+ads business mix and are shown for context only &mdash; excluded from the historical average this framework compares against, for the same reason they're excluded from the CAGR calculations on page 2.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">FY2021-22 (gray) reflect the old combined business and are not comparable. Using only the clean FY2023-25 window, AppLovin has averaged 40.4x P/FCF; today's 23.49x sits meaningfully below that, even before accounting for the business having grown substantially in scale and margin quality since.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">100x</text><line x1="50.0" y1="139.27" x2="840.0" y2="139.27" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="135.27" text-anchor="end" font-size="10" fill="#94a3b8">FY23-25 avg (clean): 40.4x</text><path d="M50.0,24.28 L208.0,201.00 L366.0,194.78 L524.0,116.46 L682.0,106.58 L840.0,173.02" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="0"/><circle cx="50.0" cy="24.28" r="3" fill="#64748b"/><circle cx="208.0" cy="201.00" r="3" fill="#64748b"/><circle cx="366.0" cy="194.78" r="3" fill="#a78bfa"/><circle cx="524.0" cy="116.46" r="3" fill="#a78bfa"/><circle cx="682.0" cy="106.58" r="3" fill="#a78bfa"/><circle cx="840.0" cy="173.02" r="3.5" fill="#a78bfa"/><text x="50.0" y="14.28" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-weight="700">97.9x (old biz)</text><text x="208.0" y="191.00" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-weight="700">9.5x (old biz)</text><text x="366.0" y="184.78" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">12.6x</text><text x="524.0" y="106.46" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">51.8x</text><text x="682.0" y="96.58" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">56.7x</text><text x="840.0" y="163.02" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">23.5x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Methodology note:</b> unlike Snowflake's FY2022 P/FCF outlier elsewhere in this AI/SaaS batch (a statistical quirk within the same business), AppLovin's FY2021-22 multiples reflect a structurally different company &mdash; the old apps+ads business that no longer exists. Including those years in the historical average would compare today's pure-play AXON platform against a business it isn't anymore, so this framework excludes them from the average (though the raw figures are still shown on the chart above for transparency). Even judged only against its own two clean fiscal years, AppLovin trades below its FY23-25 average today.
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> AppLovin holds $3.05B in cash against $3.52B in total debt, a net debt position of $461.77M ($1.38/share) &mdash; not net cash, but trivial at 0.09x TTM EBITDA. Current ratio of 4.30 and quick ratio of 4.17 are strong, and interest coverage stands at 25.79x, so near-term debt service is not a concern despite the technically negative net cash figure.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 204.63,101.65 L167.78,104.90 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M204.63,101.65 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 167.78,104.90 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 23.60% of shares outstanding &mdash; the highest insider stake in this AI/SaaS batch</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 76.40% (institutional ownership alone 68.72%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> founder and CEO Adam Foroughi holds the largest individual stake and continues to run day-to-day operations. Over the trailing six months, SEC filings show a substantial volume of routine insider sales attributed to him (roughly 204,166 shares across 113 transactions, about $97.3M) &mdash; consistent in scale with a pre-arranged 10b5-1 trading plan rather than a sudden discretionary signal, but still worth tracking given the concentration of ownership. Foroughi publicly disputed the Muddy Waters allegations (see page 3) and retained outside counsel to conduct an independent review; the outcome of that review, if and when disclosed, is a relevant catalyst to watch.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>AppLovin</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY23-25)</td><td>&ge;15%</td><td>+72.50% &mdash; clean continuing-ops basis post-divestiture</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY23-25)</td><td>&ge;15%</td><td>+131.85% &mdash; margin expansion compounding on top of revenue growth</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>75.75% (FY2025, GAAP), TTM 77.44% &mdash; the highest in this AI/SaaS batch by a wide margin</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY23-25)</td><td>&ge;15%</td><td>+94.44% &mdash; FCF has tracked EBIT closely given negligible capex</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>AXON is a leading platform within mobile app-install/UA ad-tech specifically, though the broader digital-ad market remains dominated by Meta and Google &mdash; scored as Strong #2 given AppLovin's narrower, well-defined niche</td><td><span class="status-pill status-met">Met (score 4)</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a genuinely fragmented, fast-moving field (Meta Audience Network, Google AdMob, Unity/ironSource, Digital Turbine, Liftoff/Vungle, Moloco)</td><td><span class="status-pill status-not">Not met (score 1)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 132.73% vs WACC 17.73% &mdash; a &asymp;115-point spread, the widest of any company covered on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.09x current &mdash; technically a slight net debt position ($461.77M), not net cash, but immaterial relative to $5.41B TTM EBITDA</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>85.63% TTM ($4.53B FCF / $5.29B EBIT)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 23.49x vs a 40.4x FY23-25 clean average (FY21-22 excluded as a different, divested business &mdash; see methodology note); ratio &asymp;0.58</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;371M &rarr; 334.65M shares since FY2022 year-end (down &asymp;9.8%), funded by ongoing buybacks (1.81% TTM buyback yield); note FY2021-22 themselves saw heavy dilution from post-IPO share issuance, since resolved</td><td><span class="status-pill status-met">Met (score 4)</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>23.60% &mdash; the highest in this AI/SaaS batch, concentrated mainly in founder/CEO Adam Foroughi's stake</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>Effectively 0% of revenue (capex reported as "n/a"; TTM FCF equals TTM OCF)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Every growth and profitability criterion in this framework is comfortably met &mdash; revenue, EBIT and FCF have all more than doubled since the FY2023 restatement, operating margin and ROIC are the strongest of any company on this site, capex is negligible, and the balance sheet carries only trivial leverage. The current valuation, even judged only against AppLovin's own clean two-year trading history, sits meaningfully below average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a genuinely young business in its current form &mdash; two clean fiscal years is a short track record to build a 12/13 score on, and the FY2021-22 exclusions, while well-justified by the Tripledot divestiture, mean this scorecard has less historical depth behind it than most others on this site. The stock remains under a live short-seller cloud (Muddy Waters and others), is down 53% from its FY2025 peak, and just posted a rough earnings reaction despite strong absolute growth &mdash; the newer e-commerce ad expansion is explicitly early-stage per management's own comments. Market concentration is the one structural scorecard miss, in a large, well-funded, fast-moving competitive field.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27-29, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, all sourced from S&amp;P Global Market Intelligence), WebSearch on the Tripledot Studios divestiture, Muddy Waters Research and related short-seller coverage, Q2 2026 earnings reaction, and Adam Foroughi insider transaction history.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (17.73%) is company-specific as reported by stockanalysis.com. FY2021-22 figures are shown for context only and excluded from CAGR and historical-average calculations due to the Tripledot Studios divestiture changing the underlying business; this is flagged, not hidden, throughout this dashboard.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">AppLovin &mdash; NASDAQ, USD share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">AppLovin &mdash; Calendar Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">One of the most volatile five-year charts on this entire site: an 89% collapse from the FY2021 IPO-era close to the FY2022 low, a roughly 64x run from that low to the FY2025 peak, and now a 53% pullback from that peak into today &mdash; a genuine round trip, not a steady climb.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +27.5%</text><path d="M 46.0,161.54 L 172.8,179.77 L 299.6,173.39 L 426.4,111.55 L 553.2,35.34 L 680.0,112.87 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,161.54 L 172.8,179.77 L 299.6,173.39 L 426.4,111.55 L 553.2,35.34 L 680.0,112.87" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="161.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="151.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$94.26</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="179.77" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="169.77" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$10.53</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="173.39" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="163.39" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$39.85</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="111.55" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="101.55" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$323.83</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="35.34" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="25.34" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$673.82</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="112.87" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="102.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$317.76</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes and the current price are direct quotes for NASDAQ: APP (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21 close to current (naive span) and reflects the extreme volatility shown above, not a smooth compounding path. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
