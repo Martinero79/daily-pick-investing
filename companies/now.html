@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ServiceNow Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Core Enterprise OS / IT Workflow Platform (AI/SaaS)</div>
+  <h1>ServiceNow</h1>
+  <div class="badges">
+    <span class="badge">NYSE: NOW, USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2004 &middot; Santa Clara, CA</span>
+    <span class="badge warn">Raised $4.0B in new notes (May 2026) to refinance a term loan used to fund the $7.75B Armis Security acquisition &mdash; a strategic AI/cybersecurity bolt-on, not a shareholder-return play. Net debt/EBITDA still sits at a healthy 0.60x even after the deal.</span>
+  </div>
+  <div class="price">$144.71</div>
+  <div class="price-sub">Close Aug 28, 2026 (NYSE), +4.54% on the day amid a broad software-sector rally &middot; Mkt cap &asymp;$149.61B (EV $151.36B) &middot; down -18.52% over the last 52 weeks despite continued 20%+ revenue growth &mdash; note: split-adjusted for the 5:1 forward stock split executed Dec 18, 2025</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Atlassian, BMC Software, Broadcom, Ivanti, ManageEngine &mdash; ServiceNow holds roughly 44% of the global ITSM (IT service management) market, more than 2.5x its nearest rival</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$13.28B</div>
+      <div class="sub">+20.89% YoY; Q2 2026 revenue $3.99B, +24.0% YoY &mdash; growth has been accelerating, not decelerating</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#34d399;">15.06%</div>
+      <div class="note">Up from FY2021's 4.36%. Note: TTM GAAP margin has since dropped to 12.39% on a sharp one-quarter compression &mdash; see page 3 callout. Non-GAAP operating margin, which the company itself guides to, was 29.5% in Q2 2026.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">10.28% / 8.90%</div>
+      <div class="note">Clears WACC by a modest &asymp;1.4pt but doesn't reach the 15% ROIC bar this framework looks for, despite genuinely strong underlying growth.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.60x</div>
+      <div class="sub">Flipped from a $7.65B net cash position (FY2025) to $1.75B net debt after the Armis-related financing &mdash; but leverage remains low</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">81/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">10/13 criteria met &mdash; the strongest scorecard of any core-enterprise-SaaS name on this site so far, driven by genuinely durable 20%+ growth and a still-healthy balance sheet.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 32.55,171.75 L69.11,148.85 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M32.55,171.75 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 69.11,148.85 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">10/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 10 (revenue CAGR, EBIT CAGR, FCF CAGR, market share, market concentration, net debt/EBITDA, FCF conversion, entry multiple, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 3 (operating margin, ROIC/WACC, insider ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>AI ACV: <b style="color:#fbbf24;">&gt;$1.0B</b> for the first time in Q2 2026, with agentic AI deployments up 9x in nine months &mdash; a genuine, fast-scaling AI product line rather than a bolt-on feature</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    ServiceNow is the most complete "core enterprise OS" growth story on this site so far: it commands roughly 44% of the global ITSM market (more than 2.5x its nearest rival), and unlike most mature SaaS names, its growth has been accelerating rather than decelerating &mdash; Q2 2026 revenue grew 24.0% YoY, the fastest quarter in over two years, with management now targeting the "Rule of 60" (revenue growth + non-GAAP operating margin). The AI story is real and quantified: AI-related annual contract value crossed $1 billion for the first time in Q2 2026, agentic AI deployments are up ninefold in nine months, and remaining performance obligations reached $29B on longer customer commitments. CEO Bill McDermott has leaned hard into the "fastest-growing major enterprise software and cybersecurity company" framing, backed by the April 2026 acquisition of Armis Security ($7.75B) to build out an AI-native cybersecurity/asset-visibility platform, financed initially by a term loan and refinanced via a $4.0B bond sale in May 2026 that drew nearly 10x oversubscription. That acquisition is the main reason the balance sheet flipped from net cash to a modest net debt position &mdash; but net debt/EBITDA of 0.60x remains comfortably low. The scorecard's soft spots are GAAP operating margin (still below this framework's 20% bar, and compressed sharply in the most recent quarter on higher SG&A/R&D spend even as non-GAAP margin expanded), ROIC not yet clearing 15%, and thin insider/founder ownership (0.14%) reflecting a professional-manager-led company rather than a founder-controlled one. The stock itself tells a starkly different story than the fundamentals: down 18.5% over the past year even as growth accelerated, though it has rallied hard over the past six weeks alongside a broader software-sector recovery.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Jul 22, 2026) and spot price as of Aug 28, 2026 close. Q3 2026 results are expected in late October 2026. All prices are split-adjusted for the 5:1 forward stock split executed Dec 18, 2025.
+  </div>
+
+  <div class="bignum-corner">10/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year ends Dec 31. FY2023 net income ($1.73B) is distorted upward by a one-time deferred-tax valuation-allowance release (a roughly $870M non-cash tax benefit); operating income is unaffected and used for the EBIT CAGR calculation instead.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue has compounded at over 20% annually for five straight years without a single deceleration year &mdash; unusual for a company already past $13B in revenue. Operating income has scaled even faster off a low base.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$2.0B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$4.0B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$6.0B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$8.0B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$10.0B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$12.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$14.0B</text><rect x="114.0" y="135.8" width="16" height="84.2" rx="1.5" fill="#2dd4bf"/><text x="122.0" y="130.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$5.90B</text><rect x="130.0" y="216.3" width="16" height="3.7" rx="1.5" fill="#60a5fa"/><text x="138.0" y="211.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.26B</text><rect x="146.0" y="216.7" width="16" height="3.3" rx="1.5" fill="#fbbf24"/><text x="154.0" y="211.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.23B</text><text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="270.0" y="116.5" width="16" height="103.5" rx="1.5" fill="#2dd4bf"/><text x="278.0" y="111.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$7.25B</text><rect x="286.0" y="214.6" width="16" height="5.4" rx="1.5" fill="#60a5fa"/><text x="294.0" y="209.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.38B</text><rect x="302.0" y="215.4" width="16" height="4.6" rx="1.5" fill="#fbbf24"/><text x="310.0" y="210.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.33B</text><text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="426.0" y="91.8" width="16" height="128.2" rx="1.5" fill="#2dd4bf"/><text x="434.0" y="86.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$8.97B</text><rect x="442.0" y="208.6" width="16" height="11.4" rx="1.5" fill="#60a5fa"/><text x="450.0" y="203.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.80B</text><rect x="458.0" y="195.3" width="16" height="24.7" rx="1.5" fill="#fbbf24"/><text x="466.0" y="190.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.73B</text><text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="63.1" width="16" height="156.9" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="58.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$10.98B</text><rect x="598.0" y="200.0" width="16" height="20.0" rx="1.5" fill="#60a5fa"/><text x="606.0" y="195.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.40B</text><rect x="614.0" y="199.6" width="16" height="20.4" rx="1.5" fill="#fbbf24"/><text x="622.0" y="194.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.43B</text><text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="738.0" y="30.3" width="16" height="189.7" rx="1.5" fill="#2dd4bf"/><text x="746.0" y="25.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$13.28B</text><rect x="754.0" y="191.4" width="16" height="28.6" rx="1.5" fill="#60a5fa"/><text x="762.0" y="186.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.00B</text><rect x="770.0" y="195.0" width="16" height="25.0" rx="1.5" fill="#fbbf24"/><text x="778.0" y="190.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.75B</text><text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+22.50%</div><div class="sub">$5.90B &rarr; $13.28B; genuinely rare for a company already past $10B in revenue</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+67.02%</div><div class="sub">$0.26B &rarr; $2.00B; operating leverage compounding well ahead of revenue growth</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+26.29%</div><div class="sub">$1.80B &rarr; $4.58B; FCF has grown every year without exception</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FCF has grown every year without exception, more than 2.5x since FY2021, with FCF margin climbing from 30.5% to 34.5%.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$3.00B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$5.00B</text><rect x="103.0" y="148.04" width="70" height="71.96" rx="2" fill="#34d399"/><text x="138" y="141.04" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.80B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="133.08" width="70" height="86.92" rx="2" fill="#34d399"/><text x="294" y="126.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.17B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="111.84" width="70" height="108.16" rx="2" fill="#34d399"/><text x="450" y="104.84" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.70B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="83.40" width="70" height="136.60" rx="2" fill="#34d399"/><text x="606" y="76.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.42B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="36.96" width="70" height="183.04" rx="2" fill="#34d399"/><text x="762" y="29.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$4.58B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A clean, uninterrupted climb from 4.36% (FY2021) to 15.06% (FY2025) &mdash; genuine operating leverage, though still short of this framework's 20% bar. TTM has since dipped to 12.39% on a one-quarter compression (see page 3).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M 50.00,176.40 L 247.50,167.70 L 445.00,130.80 L 642.50,92.80 L 840.00,69.40 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,176.40 L 247.50,167.70 L 445.00,130.80 L 642.50,92.80 L 840.00,69.40" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="176.40" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="167.70" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="130.80" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="92.80" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="69.40" r="3" fill="#2dd4bf"/><text x="50.00" y="166.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.36%</text><text x="247.50" y="157.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.23%</text><text x="445.00" y="120.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.92%</text><text x="642.50" y="82.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.72%</text><text x="840.00" y="59.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.06%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $728M (4.94% of TTM revenue) &mdash; a genuinely asset-light, capital-efficient business. Net cash swung from +$7.65B (FY2025) to -$1.75B (current) after the Armis-related financing; net debt/EBITDA is a low 0.60x.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">ServiceNow reports quarterly on a Jan-Dec fiscal year. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Jul 22, 2026). Q3 2026 results are expected in late October 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Total revenue reached <b style="color:#f8fafc;">$3.987B</b>, up 24.0% YoY &mdash; the fastest growth in over two years and well ahead of the mid-teens growth typical of mature $10B+ SaaS companies. Subscription revenue was $3.877B, up 24.5% YoY. Non-GAAP operating margin came in at 29.5%, 300bps above guidance, while GAAP operating margin compressed sharply to 4.06% (from 13.34% the prior quarter) on a roughly $511M sequential jump in SG&amp;A and R&amp;D expense &mdash; consistent with elevated stock-based compensation and integration costs tied to the Armis acquisition, not a deterioration in the underlying business. AI products crossed $1 billion in annual contract value for the first time, a threshold CEO Bill McDermott had targeted for over a year; agentic AI deployments grew ninefold in nine months, and first-time agentic AI buyers rose 45% YoY. Management raised full-year subscription revenue guidance to $15.755-15.770B (21% constant-currency growth) and non-GAAP operating margin guidance to 31.5%. Remaining performance obligations reached $29B, and the company describes itself as operating at the "Rule of 56," tracking toward "Rule of 60."</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Sequential growth has been remarkably steady and, unusually, accelerating &mdash; Q2 2026's 24.0% YoY growth is the fastest of the five quarters shown.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="197.8" x2="840" y2="197.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="201.8" text-anchor="end" font-size="11" fill="#64748b">$0.50B</text><line x1="60" y1="175.6" x2="840" y2="175.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="179.6" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$1.50B</text><line x1="60" y1="131.1" x2="840" y2="131.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="135.1" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="108.9" x2="840" y2="108.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.9" text-anchor="end" font-size="11" fill="#64748b">$2.50B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$3.00B</text><line x1="60" y1="64.4" x2="840" y2="64.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.4" text-anchor="end" font-size="11" fill="#64748b">$3.50B</text><line x1="60" y1="42.2" x2="840" y2="42.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="46.2" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$4.50B</text><rect x="103.0" y="77.11" width="70" height="142.89" rx="2" fill="#2dd4bf"/><text x="138" y="70.11" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.21B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="68.58" width="70" height="151.42" rx="2" fill="#2dd4bf"/><text x="294" y="61.58" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.41B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="61.42" width="70" height="158.58" rx="2" fill="#2dd4bf"/><text x="450" y="54.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.57B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="52.44" width="70" height="167.56" rx="2" fill="#2dd4bf"/><text x="606" y="45.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.77B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="42.80" width="70" height="177.20" rx="2" fill="#2dd4bf"/><text x="762" y="35.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.99B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (GAAP)</div>
+    <div class="chart-sub">Q2 2026's sharp margin dip to 4.06% is a one-quarter GAAP anomaly tied to Armis integration costs and stock-based comp &mdash; non-GAAP operating margin actually expanded to 29.5% the same quarter. Worth watching whether GAAP margin recovers next quarter.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$0.10B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$0.30B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$0.50B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$0.60B</text><rect x="103.0" y="109.14" width="70" height="110.86" rx="2" fill="#60a5fa"/><text x="138" y="102.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.39B</text><rect x="121.0" y="75.14" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="87.14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12.1%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="56.57" width="70" height="163.43" rx="2" fill="#60a5fa"/><text x="294" y="49.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.57B</text><rect x="277.0" y="22.57" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="34.57" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">16.8%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="51.71" width="70" height="168.29" rx="2" fill="#60a5fa"/><text x="450" y="44.71" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.59B</text><rect x="433.0" y="17.71" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="29.71" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">16.5%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="76.29" width="70" height="143.71" rx="2" fill="#60a5fa"/><text x="606" y="69.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.50B</text><rect x="589.0" y="42.29" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="54.29" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">13.3%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="173.71" width="70" height="46.29" rx="2" fill="#60a5fa"/><text x="762" y="166.71" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.16B</text><rect x="745.0" y="139.71" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="151.71" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">4.1%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current 32.7x sits well below the FY21-25 average of 52.0x (ratio &asymp;0.63) &mdash; a meaningfully cheaper entry point than ServiceNow's own recent history, despite growth accelerating rather than slowing.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50.0" y1="89.97" x2="840.0" y2="89.97" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="85.97" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 52.0x</text><path d="M50.0,40.50 L208.0,129.95 L366.0,86.37 L524.0,59.88 L682.0,133.18 L840.0,138.32" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="40.50" r="3" fill="#a78bfa"/><circle cx="208.0" cy="129.95" r="3" fill="#a78bfa"/><circle cx="366.0" cy="86.37" r="3" fill="#a78bfa"/><circle cx="524.0" cy="59.88" r="3" fill="#a78bfa"/><circle cx="682.0" cy="133.18" r="3" fill="#a78bfa"/><circle cx="840.0" cy="138.32" r="3.5" fill="#a78bfa"/><text x="50.0" y="30.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">71.8x</text><text x="208.0" y="119.95" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">36.0x</text><text x="366.0" y="76.37" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">53.5x</text><text x="524.0" y="49.88" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">64.0x</text><text x="682.0" y="123.18" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">34.7x</text><text x="840.0" y="128.32" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.7x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> ServiceNow carries $8.45B of total debt against $4.66B of cash, a modest net debt position of $1.75B ($1.69/share) after the Armis-related financing. Current ratio of 0.70 and quick ratio of 0.56 are tight (typical for a subscription business with large deferred-revenue liabilities), and interest coverage of 22.0x is strong. Net debt/EBITDA of 0.60x is comfortably below this framework's 2x threshold &mdash; a real contrast with some SaaS peers that have leveraged up purely to fund buybacks.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 110.84,15.00 L110.51,52.00 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M110.84,15.00 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 110.51,52.00 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 0.14% of shares outstanding &mdash; the thinnest of any name covered on this site</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 99.86% (institutional ownership alone 83.46%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> ServiceNow was founded in 2004 by Fred Luddy, who has not run the company operationally for over a decade. Current Chairman &amp; CEO Bill McDermott (former SAP CEO) joined in 2019 as a professional executive hire, not a founder, and holds a comparatively small personal equity stake typical of an externally-recruited CEO. This is meaningfully different from founder-led names on this site (Benioff at Salesforce, Prince at CrowdStrike) &mdash; worth weighing if founder-alignment matters to your thesis, though McDermott's operating track record (both at SAP and here) is strong on its own terms.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>ServiceNow</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+22.50% &mdash; rare for a company already past $10B in revenue; growth has been accelerating, not decelerating</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+67.02% &mdash; operating leverage compounding well ahead of revenue</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>15.06% (FY2025, GAAP) &mdash; up from 4.36% in FY2021 but not yet at the 20% bar; non-GAAP margin (29.5% in Q2 2026) is materially higher</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+26.29% &mdash; FCF has grown every year without exception</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 in global ITSM with &asymp;44% share, more than 2.5x nearest rival BMC Software</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; a dominant leader with real, distant competitors (BMC, Atlassian, Broadcom, Ivanti, ManageEngine)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 10.28% vs WACC 8.90% &mdash; clears WACC by a modest &asymp;1.4pt but doesn't reach the 15% ROIC bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.60x &mdash; flipped from net cash (FY2025: $7.65B) to modest net debt after the Armis-related financing, but leverage remains low</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>250.82% TTM ($4.58B FCF / $1.83B EBIT) &mdash; inflated by the same one-quarter GAAP operating-income compression noted above; FY2025 stand-alone was still a strong 228.8%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 32.7x vs a 52.0x FY21-25 average; ratio &asymp;0.63</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;993M &rarr; 1,031M shares since FY2021 (roughly flat, +3.8% over 4 years), but now declining YoY (-0.40%) and QoQ (-0.53%) as buybacks have picked up</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.14% of shares outstanding &mdash; a professional-manager-led company, not founder-controlled</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.94% of revenue (TTM)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>ServiceNow has the strongest growth durability of any core-enterprise-SaaS name covered on this site &mdash; 20%+ revenue growth sustained (and now accelerating) for five straight years off an already-large base, a dominant #1 ITSM market position with real distance from its nearest competitor, and a genuinely fast-scaling AI product line (Now Assist/agentic AI) that crossed $1B in ACV this quarter. The balance sheet remains conservatively levered even after a large strategic acquisition, and the stock trades meaningfully cheaper than its own recent history despite the growth acceleration.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>GAAP operating margin is still below this framework's 20% bar and just had an unusually sharp one-quarter compression tied to Armis integration and stock-based compensation &mdash; worth confirming this normalizes next quarter rather than becoming a trend. ROIC hasn't cleared 15% despite strong growth, and insider/founder ownership is the thinnest of any name on this site, reflecting professional (not founder) leadership. The stock's -18.5% 52-week decline despite accelerating fundamentals is itself a signal worth understanding before treating the current valuation as a clean discount.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 22-Aug 29, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, all sourced from S&amp;P Global Market Intelligence), digrin.com (split-adjusted monthly price history), ServiceNow Q2 2026 earnings release (Jul 22, 2026) and investor materials, SEC 424B2 prospectus for the May 2026 $4.0B note offering, Bloomberg coverage of the bond sale, market-share research (MarketsAndMarkets, 6sense) on the global ITSM market.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.90%) is company-specific as reported by stockanalysis.com. FY2023 net income is flagged as distorted by a one-time tax benefit; operating income (unaffected) is used for the EBIT CAGR instead.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">ServiceNow &mdash; NYSE, USD share price trend, split-adjusted for the 5:1 forward stock split executed Dec 18, 2025. Points shown are fiscal year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">ServiceNow &mdash; Fiscal Year-End Close (NYSE, USD, Split-Adjusted)</div>
+    <div class="chart-sub">A volatile five years: a 2022 growth-stock selloff, a strong FY2024 peak, and a sharp pullback through 2025 into early 2026 that has only partly reversed &mdash; despite revenue and free cash flow both more than doubling over the same span. The stock trades today barely above where it did five years ago.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +2.2%</text><path d="M 46.0,120.35 L 172.8,172.27 L 299.6,108.93 L 426.4,38.55 L 553.2,97.10 L 680.0,105.54 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,120.35 L 172.8,172.27 L 299.6,108.93 L 426.4,38.55 L 553.2,97.10 L 680.0,105.54" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="120.35" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="110.35" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$129.82</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="172.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="162.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$77.65</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="108.93" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="98.93" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$141.30</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="38.55" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="28.55" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$212.02</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="97.10" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="87.10" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$153.19</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="105.54" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="95.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$144.71</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes and the current price are direct quotes for NYSE: NOW, split-adjusted for the Dec 18, 2025 5:1 forward split (stockanalysis.com / digrin.com, sourced from S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21 close to current (naive span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

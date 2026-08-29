@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Salesforce Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Core Enterprise OS / CRM Platform (AI/SaaS)</div>
+  <h1>Salesforce</h1>
+  <div class="badges">
+    <span class="badge">NYSE: CRM, USD</span>
+    <span class="badge">FY ends Jan 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1999 &middot; San Francisco, CA</span>
+    <span class="badge warn">Issued $25B in debt (Mar 2026) to fund an accelerated share buyback, pushing net debt/EBITDA to 2.40x and flipping that criterion from Met to Not Met &mdash; a deliberate capital-allocation choice under investor pressure to improve capital discipline, not a distress signal, but worth tracking given the balance sheet was net cash as recently as FY2025.</span>
+  </div>
+  <div class="price">$256.00</div>
+  <div class="price-sub">Close Aug 28, 2026 (NYSE), +1.57% on the day &middot; Mkt cap &asymp;$210.69B &middot; up +2.34% over the last 52 weeks, still -24.2% below the FY2025 close of $337.77</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Microsoft Dynamics 365, Oracle, HubSpot, SAP, Adobe, Zoho &mdash; Salesforce has led global CRM market share for 13 straight years and now holds roughly 4x the share of its nearest rival</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$41.53B</div>
+      <div class="sub">+9.58% YoY; Q2 FY2027 revenue $11.35B, +10.83% YoY, beat guidance</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026, GAAP)</div>
+      <div class="val" style="color:#34d399;">21.47%</div>
+      <div class="note">TTM 21.52%. Up sharply from FY2022's depressed 2.07% (a Slack-acquisition-integration-cost trough), reflecting a genuine multi-year margin discipline push.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">10.96% / 9.12%</div>
+      <div class="note">Clears WACC by a modest &asymp;1.8pt, a real improvement from near-zero in FY2022-23, but still short of the 15% ROIC bar this framework looks for.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#f87171;">2.40x</div>
+      <div class="sub">Was net cash as recently as FY2025 ($1.96B); flipped to net debt after the March 2026 $25B buyback-funded bond sale</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">77/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/13 criteria met &mdash; a mature, dominant-market-leader profile, held back mainly by decelerated top-line growth, a still-below-target ROIC, and the freshly leveraged balance sheet.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 45.28,190.35 L77.86,158.65 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M45.28,190.35 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 77.86,158.65 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 9 (EBIT CAGR, operating margin, FCF CAGR, market share, market concentration, FCF conversion, entry multiple, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (revenue CAGR, ROIC/WACC, net debt/EBITDA, insider ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Agentforce ARR: <b style="color:#fbbf24;">$1.5B</b>, up 240% YoY &mdash; the clearest evidence yet that Salesforce's AI push is converting into real, growing revenue rather than just roadmap talk</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Salesforce is the single clearest "core enterprise OS" complement play in this batch &mdash; 20% global CRM market share, roughly 4x its nearest competitor, and 13 consecutive years at #1 by IDC's count. The AI story here has genuinely started showing up in the numbers rather than just marketing copy: Agentforce annualized revenue crossed $1.5B in Q2 FY2027 (up 240% YoY), agentic workflow actions hit 3.2 billion in the quarter (up 97% sequentially), and management raised full-year guidance on the back of that momentum plus two pending acquisitions (Contentful, Fin). Set against that: overall revenue growth has structurally decelerated to the low-teens as the company has scaled past $40B, missing this framework's 15% CAGR bar even though the AI-specific growth rate is far higher. ROIC has improved dramatically from near-zero in FY2022-23 but still hasn't cleared 15%. And in March 2026, Salesforce raised $25B in new debt &mdash; its largest-ever bond sale &mdash; specifically to fund an accelerated buyback, following a $50B repurchase authorization and a dividend increase, after real pressure from investors to sharpen capital discipline. That's flipped the balance sheet from net cash to a 2.40x net-debt/EBITDA position overnight; not distress, but a real trade-off between shareholder returns and balance-sheet flexibility worth watching.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2027 (three months to Jul 31, 2026, reported Aug 26, 2026) and spot price as of Aug 28, 2026 close. Q3 FY2027 results are expected in late November 2026.
+  </div>
+
+  <div class="bignum-corner">9/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year ends Jan 31 (FY2026 = year ended Jan 31, 2026). Revenue and FCF CAGR computed FY22&rarr;FY26; EBIT CAGR uses FY23 as a cleaner base year (FY2022's 2.07% margin was an unusually depressed trough tied to Slack-acquisition integration costs).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue growth has been steady but decelerating in percentage terms as the base has grown past $40B. Operating and net income both show a clean, accelerating trend from FY2022's post-Slack-acquisition trough.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="197.8" x2="840" y2="197.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="201.8" text-anchor="end" font-size="11" fill="#64748b">$5.0B</text><line x1="60" y1="175.6" x2="840" y2="175.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="179.6" text-anchor="end" font-size="11" fill="#64748b">$10.0B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$15.0B</text><line x1="60" y1="131.1" x2="840" y2="131.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="135.1" text-anchor="end" font-size="11" fill="#64748b">$20.0B</text><line x1="60" y1="108.9" x2="840" y2="108.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.9" text-anchor="end" font-size="11" fill="#64748b">$25.0B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$30.0B</text><line x1="60" y1="64.4" x2="840" y2="64.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.4" text-anchor="end" font-size="11" fill="#64748b">$35.0B</text><line x1="60" y1="42.2" x2="840" y2="42.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="46.2" text-anchor="end" font-size="11" fill="#64748b">$40.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$45.0B</text><rect x="114.0" y="102.3" width="16" height="117.7" rx="1.5" fill="#2dd4bf"/><text x="122.0" y="97.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$26.49B</text><rect x="130.0" y="217.6" width="16" height="2.4" rx="1.5" fill="#60a5fa"/><text x="138.0" y="212.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.55B</text><rect x="146.0" y="213.6" width="16" height="6.4" rx="1.5" fill="#fbbf24"/><text x="154.0" y="208.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.44B</text><text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="270.0" y="80.7" width="16" height="139.3" rx="1.5" fill="#2dd4bf"/><text x="278.0" y="75.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$31.35B</text><rect x="286.0" y="211.7" width="16" height="8.3" rx="1.5" fill="#60a5fa"/><text x="294.0" y="206.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.86B</text><rect x="302.0" y="219.1" width="16" height="0.9" rx="1.5" fill="#fbbf24"/><text x="310.0" y="214.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.21B</text><text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="426.0" y="65.1" width="16" height="154.9" rx="1.5" fill="#2dd4bf"/><text x="434.0" y="60.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$34.86B</text><rect x="442.0" y="193.3" width="16" height="26.7" rx="1.5" fill="#60a5fa"/><text x="450.0" y="188.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$6.00B</text><rect x="458.0" y="201.6" width="16" height="18.4" rx="1.5" fill="#fbbf24"/><text x="466.0" y="196.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$4.14B</text><text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="582.0" y="51.6" width="16" height="168.4" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="46.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$37.90B</text><rect x="598.0" y="185.9" width="16" height="34.1" rx="1.5" fill="#60a5fa"/><text x="606.0" y="180.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$7.67B</text><rect x="614.0" y="192.5" width="16" height="27.5" rx="1.5" fill="#fbbf24"/><text x="622.0" y="187.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$6.20B</text><text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text><rect x="738.0" y="35.4" width="16" height="184.6" rx="1.5" fill="#2dd4bf"/><text x="746.0" y="30.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$41.52B</text><rect x="754.0" y="180.4" width="16" height="39.6" rx="1.5" fill="#60a5fa"/><text x="762.0" y="175.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$8.92B</text><rect x="770.0" y="186.9" width="16" height="33.1" rx="1.5" fill="#fbbf24"/><text x="778.0" y="181.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$7.46B</text><text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY22-26)</div><div class="val" style="color:#f87171;">+11.89%</div><div class="sub">$26.49B &rarr; $41.53B; a mature-company growth rate that misses the 15% bar despite Agentforce's much faster growth</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY23-26)</div><div class="val" style="color:#34d399;">+68.68%</div><div class="sub">$1.86B &rarr; $8.92B; uses FY23 as base since FY22's 2.07% margin was an unusually depressed post-Slack-acquisition trough</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY22-26)</div><div class="val" style="color:#34d399;">+28.49%</div><div class="sub">$5.28B &rarr; $14.40B; comfortably clears the 15% bar on a clean, unadjusted base</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FCF has grown every year without exception and nearly tripled since FY2022, with FCF margin climbing from 19.94% to 34.68%.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="195.0" x2="840" y2="195.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="199.0" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="145.0" x2="840" y2="145.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.0" text-anchor="end" font-size="11" fill="#64748b">$6.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$8.00B</text><line x1="60" y1="95.0" x2="840" y2="95.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="99.0" text-anchor="end" font-size="11" fill="#64748b">$10.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$12.00B</text><line x1="60" y1="45.0" x2="840" y2="45.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="49.0" text-anchor="end" font-size="11" fill="#64748b">$14.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$16.00B</text><rect x="103.0" y="153.96" width="70" height="66.04" rx="2" fill="#34d399"/><text x="138" y="146.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$5.28B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="259.0" y="141.09" width="70" height="78.91" rx="2" fill="#34d399"/><text x="294" y="134.09" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$6.31B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="415.0" y="101.28" width="70" height="118.72" rx="2" fill="#34d399"/><text x="450" y="94.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$9.50B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="571.0" y="64.58" width="70" height="155.42" rx="2" fill="#34d399"/><text x="606" y="57.58" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$12.43B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text><rect x="727.0" y="39.98" width="70" height="180.02" rx="2" fill="#34d399"/><text x="762" y="32.98" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$14.40B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A clean, uninterrupted climb from FY2022's 2.07% trough to FY2026's 21.47% &mdash; the steadiest margin-expansion story in this batch, driven by real cost discipline rather than a one-off adjustment.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><path d="M 50.00,203.44 L 247.50,172.56 L 445.00,82.32 L 642.50,58.16 L 840.00,48.24 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,203.44 L 247.50,172.56 L 445.00,82.32 L 642.50,58.16 L 840.00,48.24" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="203.44" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="172.56" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="82.32" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="58.16" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="48.24" r="3" fill="#2dd4bf"/><text x="50.00" y="193.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.07%</text><text x="247.50" y="162.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.93%</text><text x="445.00" y="72.32" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.21%</text><text x="642.50" y="48.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.23%</text><text x="840.00" y="38.24" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.47%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $596M (1.36% of TTM revenue) &mdash; a genuinely asset-light, capital-efficient business. Net cash swung from +$1.96B (FY2025) to -$30.97B (current) after the March 2026 $25B debt-funded buyback; net debt/EBITDA now sits at 2.40x.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Salesforce reports quarterly on a Feb-Jan fiscal year. Latest reported period: Q2 FY2027 (three months to Jul 31, 2026, reported Aug 26, 2026). Q3 FY2027 results are expected in late November 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 FY2027 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$11.35B</b>, up 10.83% YoY and modestly above Street estimates. Adjusted EPS of $5.90 beat by a wide margin, and net income of $4.84B climbed 73.31% YoY. Agentforce was the standout: annualized AI product revenue crossed $1.5B (+240% YoY), agentic workflow actions hit 3.2 billion for the quarter (+97% sequentially), and Slack bot usage grew to 1 million active users (+150% QoQ). Management raised full-year FY2027 revenue guidance to $46.1-46.4B, citing organic Agentforce/Data 360/Slack strength plus the pending Contentful and Fin acquisitions. Current remaining performance obligations (contracted, unrecognized revenue) grew 14% YoY to $33.5B &mdash; the strongest quarter for net new order value in four years.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'26&ndash;Q2'27, $B)</div>
+    <div class="chart-sub">Steady, consistent sequential growth, with Q2 FY2027's 10.83% YoY print continuing a gradual multi-quarter acceleration from the high-single-digits seen in early FY2027.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$6.00B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$8.00B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$10.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$12.00B</text><rect x="103.0" y="49.40" width="70" height="170.60" rx="2" fill="#2dd4bf"/><text x="138" y="42.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$10.24B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="259.0" y="49.02" width="70" height="170.98" rx="2" fill="#2dd4bf"/><text x="294" y="42.02" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$10.26B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'26</text><rect x="415.0" y="33.32" width="70" height="186.68" rx="2" fill="#2dd4bf"/><text x="450" y="26.32" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$11.20B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'26</text><rect x="571.0" y="34.45" width="70" height="185.55" rx="2" fill="#2dd4bf"/><text x="606" y="27.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$11.13B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'27</text><rect x="727.0" y="30.92" width="70" height="189.08" rx="2" fill="#2dd4bf"/><text x="762" y="23.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$11.35B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'27</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub">Margin has held in a tight, healthy 19-24% band across all five quarters, with no sign of the AI investment cycle compressing profitability the way it has at some peers.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$0.50B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$1.50B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$2.50B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$3.00B</text><rect x="103.0" y="64.27" width="70" height="155.73" rx="2" fill="#60a5fa"/><text x="138" y="57.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.34B</text><rect x="121.0" y="30.27" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="41.27" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">22.8%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="259.0" y="56.80" width="70" height="163.20" rx="2" fill="#60a5fa"/><text x="294" y="49.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.45B</text><rect x="277.0" y="22.80" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="33.80" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">23.9%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'26</text><rect x="415.0" y="76.33" width="70" height="143.67" rx="2" fill="#60a5fa"/><text x="450" y="69.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.15B</text><rect x="433.0" y="42.33" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="53.33" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">19.2%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'26</text><rect x="571.0" y="58.20" width="70" height="161.80" rx="2" fill="#60a5fa"/><text x="606" y="51.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.43B</text><rect x="589.0" y="24.20" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="35.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">21.8%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'27</text><rect x="727.0" y="58.33" width="70" height="161.67" rx="2" fill="#60a5fa"/><text x="762" y="51.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.42B</text><rect x="745.0" y="24.33" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="35.33" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">21.4%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'27</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current 13.9x sits well below the FY22-26 average of 27.7x (about 0.50x) &mdash; the cheapest entry point in this batch relative to its own history, reflecting both real FCF growth and a stock that's still down materially from its FY2025 peak.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50x</text><line x1="50.0" y1="109.20" x2="840.0" y2="109.20" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="105.20" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 27.7x</text><path d="M50.0,46.52 L208.0,114.52 L366.0,105.40 L524.0,114.80 L682.0,164.76 L840.0,164.40" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="46.52" r="3" fill="#a78bfa"/><circle cx="208.0" cy="114.52" r="3" fill="#a78bfa"/><circle cx="366.0" cy="105.40" r="3" fill="#a78bfa"/><circle cx="524.0" cy="114.80" r="3" fill="#a78bfa"/><circle cx="682.0" cy="164.76" r="3" fill="#a78bfa"/><circle cx="840.0" cy="164.40" r="3.5" fill="#a78bfa"/><text x="50.0" y="36.52" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">43.4x</text><text x="208.0" y="104.52" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.4x</text><text x="366.0" y="95.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.6x</text><text x="524.0" y="104.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.3x</text><text x="682.0" y="154.76" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.8x</text><text x="840.0" y="154.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.9x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Salesforce carries $42.38B of total debt against $11.40B of cash &amp; investments, a net debt position of $30.97B ($37.63/share) after the March 2026 $25B bond sale. Current ratio of 0.84 and quick ratio of 0.67 are tight, and net debt/EBITDA of 2.40x is above this framework's 2x threshold &mdash; the trade-off for the accelerated buyback and dividend increase. Worth watching how quickly this normalizes given the company's strong FCF generation ($15.15B TTM).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 127.57,16.64 L120.72,53.00 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M127.57,16.64 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 120.72,53.00 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 2.96% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 97.04% (institutional ownership alone 87.25%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> founder, Chair &amp; CEO Marc Benioff remains the largest individual shareholder, with his personal stake reported between roughly 2.3% and 3.9% of shares outstanding depending on the filing date (the range reflects both the company's ongoing buyback shrinking the share count and normal reporting-date differences). That's a meaningful founder stake by dollar value even though it's a small percentage of a $210B company &mdash; Benioff has run Salesforce continuously since founding it in 1999, giving unusually long-tenured, singular strategic control for a company of this size, even without a dominant voting-equity position.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Salesforce</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+11.89% &mdash; a mature-company growth rate, decelerated from Salesforce's hypergrowth years as the base has scaled past $40B</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY23-26)</td><td>&ge;15%</td><td>+68.68% &mdash; uses FY23 as a cleaner base year since FY22's 2.07% margin was an unusually depressed post-Slack-acquisition trough</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>21.47% (FY2026, GAAP), TTM 21.52% &mdash; a clean, uninterrupted five-year climb from 2.07%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>+28.49% &mdash; FCF has grown every year without exception</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 in global CRM for 13 consecutive years (IDC), holding roughly 4x the share of nearest rival Microsoft</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; a dominant leader (20% share) with real but distant competitors (Microsoft, Oracle, HubSpot, Adobe, Zoho)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 10.96% vs WACC 9.12% &mdash; clears WACC by a modest &asymp;1.8pt but doesn't reach the 15% ROIC bar, despite genuine improvement from near-zero in FY2022-23</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>2.40x current &mdash; flipped from net cash (FY2025: $1.96B) after the March 2026 $25B buyback-funded bond sale</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>160.27% TTM ($15.15B FCF / $9.46B EBIT)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 13.9x vs a 27.7x FY22-26 average; ratio &asymp;0.50, the cheapest relative entry point in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;986M &rarr; 823M shares since FY2022 (down &asymp;16.5%), accelerating sharply in the latest quarter (-14.66% YoY) on the back of the 2026 accelerated buyback</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>2.96% of shares outstanding; founder/CEO Marc Benioff's personal stake is reported in the 2.3-3.9% range depending on filing date</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.36% of revenue (TTM)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Salesforce is the cleanest "core enterprise OS" complement story in this batch &mdash; a dominant, 13-years-running #1 CRM market position, a genuinely accelerating and now revenue-material Agentforce AI business ($1.5B ARR, +240% YoY), five straight years of uninterrupted margin expansion, and a valuation that's the cheapest relative to its own history of any name covered here. Free cash flow generation and conversion are both excellent.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Overall revenue growth has structurally decelerated below this framework's 15% bar as the company has matured past $40B, and ROIC, while much improved, still hasn't cleared 15%. The March 2026 $25B debt-funded buyback flipped the balance sheet from net cash to a 2.40x leveraged position overnight &mdash; a deliberate capital-allocation choice under investor pressure, not distress, but worth tracking as debt levels normalize (or don't) over the next few years. Founder/insider ownership is thin relative to some AI/SaaS peers.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 26-29, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, all sourced from S&amp;P Global Market Intelligence), Salesforce Q2 FY2027 earnings release (Aug 26, 2026), IDC CRM market share reporting, Bloomberg/CNBC coverage of the March 2026 $25B bond offering, WebSearch on Marc Benioff's insider ownership.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (9.12%) is company-specific as reported by stockanalysis.com. Criterion #2's base year is adjusted from FY22 to FY23 due to FY22's unusually depressed operating margin; this is flagged, not hidden.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Salesforce &mdash; NYSE, USD share price trend. Points shown are fiscal year-end closes (Salesforce's fiscal year runs Feb-Jan, so FY26 = close on Jan 31, 2026) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Salesforce &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A sharp FY2023 drawdown in the broader growth-stock selloff, a strong recovery into FY2025's peak, and a meaningful pullback since &mdash; the stock trades today roughly where it did five fiscal years ago despite revenue and free cash flow both having grown substantially over that span.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +2.3%</text><path d="M 46.0,120.94 L 172.8,167.82 L 299.6,85.79 L 426.4,40.46 L 553.2,133.81 L 680.0,100.78 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,120.94 L 172.8,167.82 L 299.6,85.79 L 426.4,40.46 L 553.2,133.81 L 680.0,100.78" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="120.94" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="110.94" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$228.67</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="172.8" cy="167.82" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="157.82" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$165.11</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="299.6" cy="85.79" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="75.79" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$276.31</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="426.4" cy="40.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="30.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$337.77</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="553.2" cy="133.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="123.81" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$211.22</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text><circle cx="680.0" cy="100.78" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="90.78" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$256.00</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes and the current price are direct quotes for NYSE: CRM (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY22 close to current (naive span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
