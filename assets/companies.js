@@ -673,6 +673,40 @@ const COMPANIES = [
     personalNote: "AppLovin is the highest score I've ever put on this site, and that number alone makes me want to slow down rather than get excited. This one genuinely could go both ways, and I think it's worth being honest about both sides rather than picking one. The bull case is real: a 53% drop from the FY2025 peak looks a lot more like sentiment and noise than a fundamentals problem — Q2 2026 EBITDA and net income both beat and grew 58% and 55% respectively, the stock fell mainly on the CEO's 'lumpy timing' comments rather than an actual miss, and today's valuation sits below AppLovin's own two-year average. If AXON's edge is real and durable, that's the kind of gap between price and business quality I'd normally want to lean into. But the bear case is just as real. The economics are extraordinary — software-platform margins on what used to be a lower-margin mobile ad business — but that's only true because AppLovin sold off half the company in mid-2025, so I'm judging a two-year-old version of this business against a 13-criteria framework built for companies with a much longer track record. The stock has round-tripped hard: up roughly 7x from its 2022 low to its 2025 peak, then down more than half from that peak into today. And the Muddy Waters allegations aren't resolved — if Foroughi's independent review finds real ToS violations with Meta, Google or TikTok, that's a risk to AXON's actual data pipeline, not just a PR headache. So: could be a fun, genuinely mispriced opportunity, could also be a value trap dressed up as one. I want to watch how the next couple of quarters land and how that independent review resolves before treating a 12/13 score as anything close to a sure thing."
   },
 
+  {
+    slug: "crm",
+    name: "Salesforce",
+    ticker: "NYSE: CRM",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "CRM / Core Enterprise SaaS",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$256.00",
+    score: "9 / 13",
+    martinero: 77,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The clearest 'core enterprise OS' name on this site — #1 in global CRM for 13 straight years, roughly 4x the market share of nearest rival Microsoft, and an AI story (Agentforce) that's now showing up as real revenue rather than roadmap talk: $1.5B annualized, up 240% YoY, with agentic workflow actions up 97% quarter-over-quarter. Margins have expanded cleanly and continuously from a 2022 trough of 2.07% to 21.47% today, and free cash flow has grown every single year. What holds the score back: overall revenue growth has structurally decelerated below this framework's 15% bar as the company has scaled past $40B, ROIC still hasn't cleared 15% despite real improvement, and a $25B debt-funded buyback in March 2026 flipped the balance sheet from net cash to a 2.40x leveraged position overnight — a deliberate capital-allocation call under investor pressure, not distress, but worth watching. Trades at 13.9x trailing free cash flow versus its own 27.7x five-year average, the cheapest relative entry point of any name covered here.",
+    file: "companies/crm.html",
+    personalNote: "Salesforce is the steady, unglamorous complement to the AI story on this site so far — no single quarter of dramatic AI-native growth, just a genuinely dominant, 27-year-old market leader that's finally converting Agentforce into real dollars while margins have marched upward for five straight years without a stumble. What I like: this is about as close to a durable moat as software gets, and the valuation is the cheapest relative to its own history of anything I've covered. What gives me pause: the $25B debt-funded buyback is a real trade-off, not free money, and I want to see net debt actually come back down rather than just admire the buyback math. Growth has also cooled to a level that's healthy for a $200B company but doesn't clear my own bar — that's normal maturation, not a red flag, but it means this is more of a 'compounds steadily while I wait' name than a high-conviction re-rating story."
+  },
+
+  {
+    slug: "now",
+    name: "ServiceNow",
+    ticker: "NYSE: NOW",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "IT Workflow / Core Enterprise SaaS",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$144.71",
+    score: "10 / 13",
+    martinero: 81,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The strongest scorecard of any core-enterprise-SaaS name on this site — 10/13 criteria met, Martinero Index 81 — built on genuinely rare growth durability: five straight years of 20%+ revenue growth that's now accelerating (Q2 2026 was +24.0% YoY, the fastest in two years) despite already being past $13B in revenue. ServiceNow holds roughly 44% of the global ITSM market, more than 2.5x its nearest rival, and its AI product line crossed $1B in annual contract value this quarter with agentic AI deployments up 9x in nine months. The balance sheet stayed conservatively levered (net debt/EBITDA 0.60x) even after the $7.75B Armis Security acquisition. What holds it back: GAAP operating margin (15.06%) is still below this framework's 20% bar and just had a sharp one-quarter compression tied to acquisition costs and stock comp; ROIC hasn't cleared 15%; and insider ownership is the thinnest on the site (0.14%) since CEO Bill McDermott is a professional hire, not a founder. The stock is down 18.5% over the past year despite the growth acceleration — a real disconnect between fundamentals and price.",
+    file: "companies/now.html",
+    personalNote: "ServiceNow might be the single best 'boring compounder' case I've built on this site. There's nothing flashy about IT workflow software, but the numbers are genuinely unusual: 20%+ revenue growth sustained for five years and now speeding up, not slowing down, at a size where deceleration is normal. The AI angle here is also more concrete than most — $1B in AI-specific contract value isn't a projection, it's booked. What I keep coming back to is the valuation disconnect: the stock is down almost a fifth over the past year while the business has only gotten stronger, which is either the market rightly worried about something I'm not weighing enough (the margin compression this quarter, thin insider ownership, a McDermott-not-founder leadership structure) or a genuine mispricing from macro software-sector jitters that had nothing to do with ServiceNow specifically. I want to see next quarter's GAAP margin before I fully trust that the Q2 dip was a one-off. But on growth quality and balance-sheet discipline alone, this is one of the more convincing setups I've put together."
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
