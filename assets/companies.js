@@ -572,6 +572,23 @@ const COMPANIES = [
   },
 
   {
+    slug: "panw",
+    name: "Palo Alto Networks",
+    ticker: "NASDAQ: PANW",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Cybersecurity",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$371.59",
+    score: "8 / 13",
+    martinero: 74,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The strongest scorecard in this site's AI/SaaS batch so far — 8/13, real and growing GAAP operating margins since FY2023, a comfortable net-cash balance sheet even after its largest deal ever, and a clear #1-or-#2 platform position that just added identity security via the $25B CyberArk acquisition (closed Feb 11, 2026). Revenue just accelerated to +31% YoY with Next-Gen Security ARR up 60% YoY. The catch is entirely about timing and price: the stock has roughly tripled since April 2026, pushing P/FCF to 79.8x against a 30.4x five-year average — the richest premium-to-history found anywhere in this project — while CyberArk integration costs pushed the most recent quarter to a rare GAAP operating loss. Share count is up 35% over five years, mostly from the CyberArk stock issuance.",
+    file: "companies/panw.html",
+    personalNote: "Palo Alto Networks is the flip side of CrowdStrike in this batch — a real, mature GAAP earner rather than a pure cash-flow story, and it shows in the score: 8/13 versus CRWD's 4/13. What holds it back isn't business quality, it's price and dilution. The stock has essentially tripled since April on a mix of genuine AI-security demand and a broad cybersecurity re-rating, and CyberArk added 112 million new shares on top of ordinary stock comp. I like the direction of this business a lot — CEO Nikesh Arora has actually been buying shares in the open market rather than selling, which is the opposite signal from what I usually see — but I'd rather wait for the CyberArk integration dust to settle and the multiple to cool off than chase it at 2.6x its own historical valuation."
+  },
+
+  {
     slug: "aramco",
     name: "Saudi Aramco (Saudi Arabian Oil Company)",
     ticker: "Tadawul: 2222",
