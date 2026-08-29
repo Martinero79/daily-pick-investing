@@ -589,6 +589,57 @@ const COMPANIES = [
   },
 
   {
+    slug: "zs",
+    name: "Zscaler",
+    ticker: "NASDAQ: ZS",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Cybersecurity",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$184.23",
+    score: "7 / 13",
+    martinero: 66,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Sits between CrowdStrike and Palo Alto Networks in this AI/SaaS batch — never GAAP operating-profitable, but the loss has narrowed every single year for five straight years (-30.7% to -4.6% operating margin), while free cash flow has compounded at +51.4% CAGR and margins held 22-30%. Two things set this dashboard apart: founder & CEO Jay Chaudhry's family trusts control roughly 35% of shares outstanding, the strongest insider alignment anywhere in this batch, and the stock is down -32.5% over the past year even as revenue kept growing above 20% — pushing the current 31.0x P/FCF to well under half its own five-year average of 91.8x. Market share is real (Gartner SASE/SSE Leader) but the competitive field is genuinely tightening, and share count is up 17% over five years from stock-based comp.",
+    file: "companies/zs.html",
+    personalNote: "Zscaler is the one in this batch where the price and the business seem to be telling different stories. The fundamentals are steadily converging on GAAP profitability — five years running of narrowing losses is not a fluke — and free cash flow has been compounding faster than revenue. Meanwhile the stock is down almost a third over the past year. Some of that is a genuine growth deceleration (management itself guided FY2027 ARR growth down to 16-17%), so I don't think it's simply 'the market is wrong.' But a 35% founder stake and a P/FCF multiple sitting at a third of its own five-year average is a combination I don't see very often, and it's enough to put this one on my watchlist for a closer look rather than filing it away next to CrowdStrike."
+  },
+
+  {
+    slug: "ddog",
+    name: "Datadog",
+    ticker: "NASDAQ: DDOG",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Observability & Monitoring",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$236.98",
+    score: "7 / 13",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The strongest market-position claim in this AI/SaaS batch — a Gartner Magic Quadrant Leader for Observability Platforms for six consecutive years, positioned highest in Ability to Execute in 2026 — paired with the messiest GAAP profitability path: operating income has flipped sign three times in five years, never building the clean trend seen at Palo Alto Networks or Zscaler. Free cash flow is the cleaner story, compounding at +37.9% CAGR with 22-35% margins every year. The stock is up +79.9% over the past year but fell -17% in a single day in August 2026 after management flagged a usage reduction from its largest customer, despite an otherwise beat-and-raise quarter. Insider ownership is thin at 5.48%, and share count is up 21% over five years.",
+    file: "companies/ddog.html",
+    personalNote: "Datadog is an interesting case because the market-position story is genuinely the best in this batch — six years running as the Gartner-recognized Observability leader is not a small thing — but the profit-and-loss statement refuses to settle into a trend. It's not deteriorating, it's just bouncing around zero year after year, which makes we wonder whether that's really a temporary phase or closer to where this business structurally sits given how competitive and price-sensitive observability tooling has become. The August drop on a single large customer trimming usage is the kind of thing I'd want to watch resolve over a couple more quarters before getting more constructive — not because the business is broken, but because it's a reminder that even a 33,000-customer SaaS company can still have concentration risk hiding in the guidance language."
+  },
+
+  {
+    slug: "snow",
+    name: "Snowflake",
+    ticker: "NYSE: SNOW",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Data Cloud & Analytics",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-08-29",
+    price: "$328.00",
+    score: "6 / 13",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The lowest binary score in this site's AI/SaaS batch — 6/13 — driven by the widest GAAP gap of the group: revenue and free cash flow have both compounded at 40%+ annually, but operating margin remains deeply negative (-28.32% in FY2026, the worst in this batch, though improving from -58.64% in FY2022). The competitive picture has genuinely shifted too — private rival Databricks has overtaken Snowflake in ARR and is growing faster (65% vs. 29%), a real reversal from 2023. Insider ownership is the thinnest here at 2.64%, reflecting a diffuse ownership structure after multiple CEO transitions. Current valuation (97.2x P/FCF) sits within its recent multi-year trading range rather than at either extreme.",
+    file: "companies/snow.html",
+    personalNote: "Snowflake is the toughest read in this batch for me. The growth numbers are genuinely excellent — 40% revenue CAGR, 86% FCF CAGR — but the GAAP losses aren't shrinking in dollar terms even as the margin percentage improves, and Databricks overtaking it in ARR is the kind of competitive shift I don't want to wave away as noise. I don't think this is a broken business by any means, but between the deepest losses in this batch, the thinnest insider ownership, and a well-funded private competitor now growing faster, this is one I'd want to see the FY2027 numbers on before getting more constructive. The valuation isn't demanding me to rush in either way — it's sitting in the middle of its own recent range, not screaming cheap or expensive."
+  },
+
+  {
     slug: "aramco",
     name: "Saudi Aramco (Saudi Arabian Oil Company)",
     ticker: "Tadawul: 2222",
