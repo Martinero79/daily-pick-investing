@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Palo Alto Networks Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Cybersecurity (AI/SaaS)</div>
+  <h1>Palo Alto Networks</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: PANW, USD</span>
+    <span class="badge">FY ends Jul 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2005 &middot; Santa Clara, CA</span>
+    <span class="badge warn">Completed the $25bn CyberArk (identity security) acquisition Feb 11, 2026 &mdash; the deal's merger/restructuring charges pushed Q3 FY2026 to a rare GAAP operating loss, and the stock has roughly tripled since April 2026, both distorting the "current" numbers below relative to the clean FY2025 baseline.</span>
+  </div>
+  <div class="price">$371.59</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -2.94% on the day &middot; Mkt cap &asymp;$303B</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> CrowdStrike, Fortinet, Check Point, Zscaler, Microsoft Defender, Cisco &mdash; the most GAAP-profitable, most acquisitive of the pure-play cybersecurity platforms in this batch, currently mid-digestion on its largest deal ever</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$9.22B</div>
+      <div class="sub">+14.87% YoY; Q3 FY2026 revenue $3.00B, +31% YoY (incl. $388M from CyberArk/Chronosphere)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#f87171;">11.59%</div>
+      <div class="note">Below the 20% threshold, but real and positive &mdash; a genuinely different profile from CRWD. Most recent quarter (Q3 FY26) swung to -2.46% on one-time CyberArk deal costs.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">16.38% (FY25) / &asymp;9%</div>
+      <div class="note">Clears both comfortably on the clean FY2025 base. TTM ROIC is temporarily just 3.65%, dragged down by fresh CyberArk goodwill still working through a full year of combined earnings.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val" style="color:#34d399;">$981M net cash</div>
+      <div class="sub">Still net cash even after a $25bn cash-and-stock acquisition</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">74/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/13 criteria met &mdash; the strongest scorecard in the AI/SaaS batch so far, though valuation is stretched right now.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 47.00,181.11 L71.54,153.41 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M47.00,181.11 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 71.54,153.41 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 8 (revenue CAGR, EBIT CAGR, FCF CAGR, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 5 (operating margin, market concentration, entry multiple, share count trend, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; cybersecurity remains genuinely fragmented across many capable rivals</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Palo Alto Networks is a real contrast to CrowdStrike: this is a company with genuine, sustained GAAP profitability (operating income turned positive in FY2023 and has grown every year since), a comfortable net-cash balance sheet, and a clear #1 or #2 platform position across network, cloud, and now identity security. The catch is timing. The $25bn CyberArk acquisition closed February 11, 2026, and its integration costs pushed the most recent quarter (Q3 FY2026) to a rare GAAP operating loss, while the stock itself has roughly tripled since April 2026 on a mix of genuinely strong AI-security demand (Q3 revenue +31% YoY, Next-Gen Security ARR +60% YoY to $8.13B) and broad cybersecurity re-rating. The result: the current P/FCF multiple (79.8x) sits at roughly 2.6x the company's own FY2021-25 average, the richest premium-to-history found anywhere in this whole project, and the share count is up 35% over five years, mostly from the CyberArk share issuance plus ordinary stock-based comp. FY2026 full-year results (including Q4) are due September 1, 2026 &mdash; just days from this write-up &mdash; and should give a cleaner read on where margins settle post-integration.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q3 FY2026 (three months to Apr 30, 2026, reported Jun 2, 2026) and spot price as of Aug 28, 2026 close. Q4/full-year FY2026 results are due Sep 1, 2026.
+  </div>
+
+  <div class="bignum-corner">8/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year ends Jul 31 (FY2025 = year ended Jul 31, 2025). CAGR computed FY21&rarr;FY25 where a valid base exists.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Unlike CrowdStrike, operating income turned durably positive in FY2023 and has grown every year since. FY2024's outsized net income ($2.58B vs. $0.89B operating income) reflects a disclosed one-time $1.6B tax benefit from releasing a deferred-tax valuation allowance &mdash; a real, one-off item, not operating performance.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-1B</text><line x1="60" y1="201.8" x2="840" y2="201.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="205.8" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="183.6" x2="840" y2="183.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="187.6" text-anchor="end" font-size="11" fill="#64748b">$1B</text><line x1="60" y1="165.5" x2="840" y2="165.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="169.5" text-anchor="end" font-size="11" fill="#64748b">$2B</text><line x1="60" y1="147.3" x2="840" y2="147.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="151.3" text-anchor="end" font-size="11" fill="#64748b">$3B</text><line x1="60" y1="129.1" x2="840" y2="129.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="133.1" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="110.9" x2="840" y2="110.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="114.9" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="60" y1="92.7" x2="840" y2="92.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="96.7" text-anchor="end" font-size="11" fill="#64748b">$6B</text><line x1="60" y1="74.5" x2="840" y2="74.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="78.5" text-anchor="end" font-size="11" fill="#64748b">$7B</text><line x1="60" y1="56.4" x2="840" y2="56.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.4" text-anchor="end" font-size="11" fill="#64748b">$8B</text><line x1="60" y1="38.2" x2="840" y2="38.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="42.2" text-anchor="end" font-size="11" fill="#64748b">$9B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$10B</text><rect x="103" y="124.4" width="16" height="77.4" rx="1.5" fill="#2dd4bf"/><text x="111" y="119.4" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$4.26B</text><rect x="123" y="201.8" width="16" height="5.5" rx="1.5" fill="#60a5fa"/><text x="131" y="220.3" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">-$0.30B</text><rect x="143" y="201.8" width="16" height="9.1" rx="1.5" fill="#fbbf24"/><text x="151" y="223.9" text-anchor="middle" font-size="7.5" fill="#fde68a">-$0.50B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="259" y="101.8" width="16" height="100.0" rx="1.5" fill="#2dd4bf"/><text x="267" y="96.8" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$5.50B</text><rect x="279" y="201.8" width="16" height="3.4" rx="1.5" fill="#60a5fa"/><text x="287" y="218.3" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">-$0.19B</text><rect x="299" y="201.8" width="16" height="4.9" rx="1.5" fill="#fbbf24"/><text x="307" y="219.7" text-anchor="middle" font-size="7.5" fill="#fde68a">-$0.27B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="415" y="76.5" width="16" height="125.3" rx="1.5" fill="#2dd4bf"/><text x="423" y="71.5" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$6.89B</text><rect x="435" y="194.8" width="16" height="7.0" rx="1.5" fill="#60a5fa"/><text x="443" y="189.8" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$0.39B</text><rect x="455" y="193.8" width="16" height="8.0" rx="1.5" fill="#fbbf24"/><text x="463" y="188.8" text-anchor="middle" font-size="7.5" fill="#fde68a">$0.44B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="571" y="55.9" width="16" height="146.0" rx="1.5" fill="#2dd4bf"/><text x="579" y="50.9" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$8.03B</text><rect x="591" y="185.7" width="16" height="16.2" rx="1.5" fill="#60a5fa"/><text x="599" y="180.7" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$0.89B</text><rect x="611" y="154.9" width="16" height="46.9" rx="1.5" fill="#fbbf24"/><text x="619" y="149.9" text-anchor="middle" font-size="7.5" fill="#fde68a">$2.58B*</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="727" y="34.1" width="16" height="167.7" rx="1.5" fill="#2dd4bf"/><text x="735" y="29.1" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$9.22B</text><rect x="747" y="182.4" width="16" height="19.4" rx="1.5" fill="#60a5fa"/><text x="755" y="177.4" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$1.07B</text><rect x="767" y="181.2" width="16" height="20.6" rx="1.5" fill="#fbbf24"/><text x="775" y="176.2" text-anchor="middle" font-size="7.5" fill="#fde68a">$1.13B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+21.33%</div><div class="sub">$4.26B &rarr; $9.22B; clears the 15% bar comfortably</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#34d399;">+66.14%</div><div class="sub">FY23&rarr;FY25 (2-yr): $0.39B &rarr; $1.07B. FY21-22 were GAAP losses, so FY23 &mdash; the first profitable year &mdash; is used as the base, same treatment as Palantir elsewhere on this site.</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+25.77%</div><div class="sub">$1.39B &rarr; $3.47B; strong and clean across the full window</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FCF has grown every year for five straight years, with margins consistently in the 32-39% range &mdash; the more reliable read on this business given GAAP EBIT's heavier sensitivity to deal costs and stock-based comp.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$1.60B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$2.40B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$3.20B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><rect x="103.0" y="150.65" width="70" height="69.35" rx="2" fill="#34d399"/><text x="138" y="143.65" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.39B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="130.40" width="70" height="89.60" rx="2" fill="#34d399"/><text x="294" y="123.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.79B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="88.45" width="70" height="131.55" rx="2" fill="#34d399"/><text x="450" y="81.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.63B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="64.95" width="70" height="155.05" rx="2" fill="#34d399"/><text x="606" y="57.95" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.10B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="46.50" width="70" height="173.50" rx="2" fill="#34d399"/><text x="762" y="39.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.47B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A genuine, sustained turnaround &mdash; margins crossed into positive territory in FY2023 and have expanded every year since, unlike the persistently negative pattern seen at CrowdStrike.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#334155" stroke-width="1.2"/><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><path d="M 50.00,197.12 L 247.50,167.44 L 445.00,95.04 L 642.50,51.44 L 840.00,47.28" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="197.12" r="3" fill="#2dd4bf"/><text x="50.00" y="189.12" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-7.14%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.50" cy="167.44" r="3" fill="#2dd4bf"/><text x="247.50" y="159.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-3.43%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.00" cy="95.04" r="3" fill="#2dd4bf"/><text x="445.00" y="87.04" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.62%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.50" cy="51.44" r="3" fill="#2dd4bf"/><text x="642.50" y="43.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.07%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.00" cy="47.28" r="3" fill="#2dd4bf"/><text x="840.00" y="39.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.59%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*FY2024 net income includes a disclosed $1.6B one-time tax benefit (release of a deferred-tax valuation allowance), unrelated to operating performance. FY2025 capex was $246.2M (2.67% of revenue); TTM capex 3.99% of revenue.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Palo Alto Networks reports quarterly. Latest reported period: Q3 FY2026 (three months to Apr 30, 2026), reported Jun 2, 2026. Q4/full-year FY2026 results are due Sep 1, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q3 FY2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$3.00B</b>, up 31% YoY and ahead of guidance, including $388M contributed by the recently closed CyberArk and Chronosphere acquisitions. Next-Generation Security ARR surged 60% YoY to $8.13B. Management raised full-year FY2026 guidance to $11.42-11.43B in revenue. CEO Nikesh Arora called it "a standout quarter," citing accelerating organic bookings growth as customers turn to Palo Alto Networks to secure their AI deployments. The quarter's GAAP operating income swung to -$74M (a rare loss) almost entirely because of a $218M one-time merger and restructuring charge tied to the CyberArk close &mdash; strip that out and the underlying business remained solidly profitable.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q3 FY25&ndash;Q3 FY26, $B)</div>
+    <div class="chart-sub">A clear acceleration in the most recent quarter, driven by both organic AI-security demand and the CyberArk/Chronosphere contribution.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$0.50B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$1.50B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$2.50B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$3.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$3.50B</text><rect x="103.0" y="89.20" width="70" height="130.80" rx="2" fill="#2dd4bf"/><text x="138" y="82.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.29B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="259.0" y="75.09" width="70" height="144.91" rx="2" fill="#2dd4bf"/><text x="294" y="68.09" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.54B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="415.0" y="78.63" width="70" height="141.37" rx="2" fill="#2dd4bf"/><text x="450" y="71.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.47B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="571.0" y="71.77" width="70" height="148.23" rx="2" fill="#2dd4bf"/><text x="606" y="64.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.59B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="727.0" y="48.46" width="70" height="171.54" rx="2" fill="#2dd4bf"/><text x="762" y="41.46" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.00B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">Q3 FY2026's dip to -2.5% is a one-off</b> &mdash; a $218M merger/restructuring charge tied to the CyberArk close, landing in the same quarter the deal completed (Feb 11, 2026). The three prior quarters show a healthy, improving margin trend (9.8% &rarr; 15.5%).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-0.20B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$-0.10B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$0.10B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$0.30B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><rect x="103" y="98.6" width="70" height="64.3" rx="2" fill="#60a5fa"/><text x="138" y="90.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.23B</text><rect x="121" y="79.6" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="90.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">9.8%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="259" y="64.8" width="70" height="98.0" rx="2" fill="#60a5fa"/><text x="294" y="56.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.34B</text><rect x="277" y="45.8" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="56.8" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">13.5%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="415" y="78.0" width="70" height="84.9" rx="2" fill="#60a5fa"/><text x="450" y="70.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.30B</text><rect x="433" y="59.0" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="70.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12.0%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="571" y="48.0" width="70" height="114.9" rx="2" fill="#60a5fa"/><text x="606" y="40.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.40B</text><rect x="589" y="29.0" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="40.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">15.5%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="727" y="162.9" width="70" height="21.1" rx="2" fill="#60a5fa"/><text x="762" y="200.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-$0.07B</text><rect x="745" y="202.0" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="213.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-2.5%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal, since GAAP P/E is erratic across this window (loss years, a one-off tax benefit, and deal costs).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">Current 79.8x is roughly 2.6x the FY21-25 average of 30.4x</b> &mdash; the richest premium-to-history found anywhere in this project so far, driven by a genuine stock re-rating (roughly tripled since April 2026) layered on top of the CyberArk deal. Worth watching for a better entry point rather than chasing at this level.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.3" text-anchor="end" font-size="11" fill="#64748b">75x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">90x</text><line x1="50.0" y1="152.37" x2="840.0" y2="152.37" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="148.37" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 30.4x</text><path d="M50.0,157.73 L208.0,158.33 L366.0,155.42 L524.0,144.64 L682.0,145.73 L840.0,42.60" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="157.73" r="3" fill="#a78bfa"/><circle cx="208.0" cy="158.33" r="3" fill="#a78bfa"/><circle cx="366.0" cy="155.42" r="3" fill="#a78bfa"/><circle cx="524.0" cy="144.64" r="3" fill="#a78bfa"/><circle cx="682.0" cy="145.73" r="3" fill="#a78bfa"/><circle cx="840.0" cy="42.60" r="3.5" fill="#a78bfa"/><text x="50.0" y="147.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.0x</text><text x="208.0" y="148.33" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">27.8x</text><text x="366.0" y="145.42" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.1x</text><text x="524.0" y="134.64" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.9x</text><text x="682.0" y="135.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.4x</text><text x="840.0" y="32.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">79.8x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Palo Alto Networks carries $2.13B of total debt against $3.11B of cash &amp; investments (current), a net cash position of $981M. That's down from FY2025's $2.49B net cash, reflecting the cash portion of the CyberArk deal ($2.3B) &mdash; but the company remains net cash positive even after its largest acquisition ever, a genuinely strong outcome.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 110.84,15.00 L110.51,52.00 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M110.84,15.00 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 110.51,52.00 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Nikesh Arora (CEO) &asymp; 0.14% of shares outstanding (&asymp;1.10M shares, ~$404M) &mdash; too small a slice to render visibly on the wheel</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutional &amp; public float &asymp; 99.86%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Nir Zuk founded Palo Alto Networks in 2005 and remains active as CTO, but after 21 years and extensive dilution his stake, like the CEO's, is well under 1% of shares outstanding &mdash; not found in a specific disclosed figure for this write-up. Unlike CrowdStrike's CEO, who is on an active systematic selling plan, Nikesh Arora has recently been an open-market <i>buyer</i> (a disclosed ~68,000-share purchase, roughly $10M), a real, if small, positive signal on insider conviction even at a sub-1% stake.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Palo Alto Networks</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+21.33%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR</td><td>&ge;15%</td><td>+66.14% (FY23-25, 2-yr; FY21-22 were losses, so FY23 &mdash; first profitable year &mdash; is the base)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>11.59% (FY2025, GAAP); most recent quarter (Q3 FY26) was -2.46% on a one-time CyberArk deal charge</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+25.77%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Consistent Leader across Gartner Magic Quadrants for network security and SASE; identity security leadership added via the CyberArk acquisition (Feb 2026)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; genuinely competitive field (CrowdStrike, Fortinet, Check Point, Zscaler, Microsoft, Cisco)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>16.38% (FY2025) vs &asymp;9% estimated WACC &mdash; clears both on the clean pre-deal base. TTM reading (3.65%) is temporarily depressed by fresh CyberArk goodwill/integration costs.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $981M (current); net cash every year since FY2024</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>324.6% (FY2025: $3.47B FCF / $1.07B EBIT) &mdash; unusually high because GAAP EBIT runs well below cash economics due to heavy stock-based comp and amortization of acquired intangibles, a recurring pattern for this serial-acquirer profile, not a one-off</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 79.8x vs 30.4x FY21-25 average &mdash; roughly 2.6x the historical average, the richest gap found anywhere on this site</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;584M &rarr; &asymp;791M shares (rising &asymp;35% over the period, mostly the 112M shares issued for CyberArk plus ordinary stock-based comp)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>CEO Nikesh Arora holds &asymp;0.14% of shares outstanding; founder/CTO Nir Zuk's current stake not separately disclosed here but likely similarly small after 21 years of dilution. Arora has been a recent open-market buyer, unlike some peers.</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.99% of revenue (TTM)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>This is a genuinely, durably GAAP-profitable cybersecurity platform &mdash; operating margins have expanded every year since FY2023, revenue growth just accelerated to +31% YoY on AI-security demand, and Next-Gen Security ARR is compounding at 60% YoY. The balance sheet remains net cash even after a $25bn acquisition, and CEO Nikesh Arora has recently been buying shares in the open market rather than selling. CyberArk adds a genuine #1-or-#2 identity security position on top of the existing network/cloud security leadership.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation is the clear risk here: the current 79.8x P/FCF is roughly 2.6x the company's own five-year average, mostly reflecting a stock price that's tripled since April 2026 rather than a slow re-rating. Share count is up 35% over five years, and the most recent quarter's GAAP operating loss (even though one-off) is a reminder that CyberArk integration costs will keep showing up for a few more quarters. FY2026 full-year results, due Sep 1, 2026, should clarify how quickly margins normalize post-deal.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27-28, 2026. Sources: stockanalysis.com (financials, ratios, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Palo Alto Networks Q3 FY2026 earnings release (Jun 2, 2026) and CyberArk acquisition press releases (paloaltonetworks.com), WebSearch on CEO Nikesh Arora's recent share purchases and FY2024 tax valuation-allowance release.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;9%) is an estimate, not company-reported. Criterion #2 uses a shortened FY23-25 base for the reasons explicitly disclosed above, consistent with how this site handles other companies with early-window GAAP losses.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Palo Alto Networks &mdash; NASDAQ, USD share price trend. Year-end closes 2021-2025 (calendar year, closest trading day to Dec 31) plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Palo Alto Networks &mdash; Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A steady, strong climb through 2025 followed by an extraordinary run in 2026 &mdash; the stock has more than doubled since April 2026 alone, on top of an already-strong five-year trend.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="133.7" x2="680" y2="133.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="87.5" x2="680" y2="87.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,175.78 L 172.8,168.74 L 299.6,151.07 L 426.4,135.27 L 553.2,130.52 L 680.0,46.85 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +41.1%</text><path d="M 46.0,175.78 L 172.8,168.74 L 299.6,151.07 L 426.4,135.27 L 553.2,130.52 L 680.0,46.85" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="175.78" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="165.78" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$66.51</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="168.74" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="158.74" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$83.18</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="151.07" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="141.07" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$124.98</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="135.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="125.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$162.37</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="130.52" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="120.52" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$173.60</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="46.85" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="36.85" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$371.59</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for NASDAQ: PANW (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed 2021-close to current (naive 5-year span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
