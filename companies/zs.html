@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zscaler Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Cybersecurity (AI/SaaS)</div>
+  <h1>Zscaler</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: ZS, USD</span>
+    <span class="badge">FY ends Jul 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2007 &middot; San Jose, CA</span>
+    <span class="badge warn">Never GAAP operating-profitable in the last five fiscal years, though the loss has narrowed sharply (-30.7% &rarr; -4.6% operating margin); this framework's EBIT CAGR and FCF-conversion criteria are marked N/A rather than forced through negative math &mdash; the same treatment used for CrowdStrike.</span>
+  </div>
+  <div class="price">$184.23</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -1.64% on the day &middot; Mkt cap &asymp;$29.79B &middot; down -32.5% over the last 52 weeks despite steady fundamental improvement</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Palo Alto Networks, Netskope, Cisco, Cloudflare, Microsoft &mdash; Zscaler is the closest thing the Zero Trust/SASE market has to an incumbent, but the field is genuinely competitive and getting more so</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$2.67B</div>
+      <div class="sub">+23.31% YoY; Q3 FY2026 revenue $850.5M, +25.4% YoY, ARR $3.53B +25% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#f87171;">-4.57%</div>
+      <div class="note">Still negative, but the trend is the real story: from -30.7% five years ago to -4.6% today, narrowing every single year. Non-GAAP operating margin (which strips out stock-based comp) hit an all-time high of 23% in Q3 FY2026.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">-2.32% / 8.78%</div>
+      <div class="note">Doesn't clear WACC yet &mdash; a direct consequence of GAAP profitability not yet arriving. Watch this alongside the margin trend rather than in isolation.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val" style="color:#34d399;">$1.67B net cash</div>
+      <div class="sub">$3.54B cash &amp; investments vs. $1.87B total debt</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">66/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/13 criteria met &mdash; sits between CrowdStrike (49) and Palo Alto Networks (74) in this batch, helped by unusually strong insider ownership and a cheap-vs-history valuation.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 61.15,176.85 L83.15,151.66 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M61.15,176.85 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 83.15,151.66 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (revenue CAGR, FCF CAGR, market share, net debt/EBITDA, entry multiple, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (operating margin, market concentration, ROIC/WACC, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (EBIT CAGR, FCF conversion &mdash; both meaningless while GAAP EBIT stays negative)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Insider/founder ownership: <b style="color:#fbbf24;">34.97%</b> &mdash; the highest of any company in this AI/SaaS batch, via founder &amp; CEO Jay Chaudhry's family holdings</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Zscaler shares CrowdStrike's core pattern &mdash; a hyper-growth, heavily SBC-funded SaaS business that has never posted a GAAP operating profit &mdash; but the trajectory here is more advanced and more encouraging: the operating margin has climbed from -30.7% five years ago to -4.6% today, narrowing every single year without exception, and non-GAAP operating margin just hit an all-time high of 23%. Free cash flow has been strong and growing throughout (FCF margin 22-30% every year), funding a genuinely clean balance sheet with $1.67B in net cash. What sets this dashboard apart from the rest of the batch is ownership and price: founder and CEO Jay Chaudhry's family trusts control roughly 35% of shares outstanding, the strongest founder alignment found anywhere in this project, and the stock itself is down 32.5% over the past year even as revenue keeps growing above 20% &mdash; a rare case in this framework where the current valuation (30.97x P/FCF) sits well below the company's own five-year average (91.8x), a genuine "priced for less enthusiasm than the business deserves" setup rather than a "chase the pop" one. The catch: it's still burning red ink on a GAAP basis, market concentration in SASE/SSE is genuinely fragile with Palo Alto Networks and Netskope both gaining ground, and share count is up 17% over five years from ongoing stock-based comp.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q3 FY2026 (three months to Apr 30, 2026, reported May 26, 2026) and spot price as of Aug 28, 2026 close. Q4/full-year FY2026 results are due Sep 3, 2026.
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year ends Jul 31 (FY2025 = year ended Jul 31, 2025). CAGR computed FY21&rarr;FY25 where a valid base exists.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue has more than tripled in five years while GAAP losses have shrunk to roughly a quarter of their FY2021 size, both in absolute dollars and as a share of revenue &mdash; a steady, unbroken march toward breakeven, not a one-off swing.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$-1B</text><line x1="60" y1="45.0" x2="840" y2="45.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="49.0" text-anchor="end" font-size="11" fill="#64748b">$-0.5B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="95.0" x2="840" y2="95.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="99.0" text-anchor="end" font-size="11" fill="#64748b">$0.5B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$1B</text><line x1="60" y1="145.0" x2="840" y2="145.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.0" text-anchor="end" font-size="11" fill="#64748b">$1.5B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$2B</text><line x1="60" y1="195.0" x2="840" y2="195.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="199.0" text-anchor="end" font-size="11" fill="#64748b">$2.5B</text><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$3B</text><rect x="114.0" y="70.0" width="16" height="33.7" rx="1.5" fill="#2dd4bf"/><text x="122.0" y="65.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.67B</text><rect x="130.0" y="59.7" width="16" height="10.3" rx="1.5" fill="#60a5fa"/><text x="138.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.21B</text><rect x="146.0" y="56.9" width="16" height="13.1" rx="1.5" fill="#fbbf24"/><text x="154.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.26B</text><text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="270.0" y="70.0" width="16" height="54.6" rx="1.5" fill="#2dd4bf"/><text x="278.0" y="65.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.09B</text><rect x="286.0" y="53.6" width="16" height="16.4" rx="1.5" fill="#60a5fa"/><text x="294.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.33B</text><rect x="302.0" y="50.5" width="16" height="19.5" rx="1.5" fill="#fbbf24"/><text x="310.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.39B</text><text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="426.0" y="70.0" width="16" height="80.8" rx="1.5" fill="#2dd4bf"/><text x="434.0" y="65.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.62B</text><rect x="442.0" y="58.6" width="16" height="11.4" rx="1.5" fill="#60a5fa"/><text x="450.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.23B</text><rect x="458.0" y="59.9" width="16" height="10.1" rx="1.5" fill="#fbbf24"/><text x="466.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.20B</text><text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="70.0" width="16" height="108.4" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="65.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.17B</text><rect x="598.0" y="63.9" width="16" height="6.1" rx="1.5" fill="#60a5fa"/><text x="606.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.12B</text><rect x="614.0" y="67.1" width="16" height="2.9" rx="1.5" fill="#fbbf24"/><text x="622.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.06B</text><text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="738.0" y="70.0" width="16" height="133.7" rx="1.5" fill="#2dd4bf"/><text x="746.0" y="65.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.67B</text><rect x="754.0" y="63.9" width="16" height="6.1" rx="1.5" fill="#60a5fa"/><text x="762.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.12B</text><rect x="770.0" y="67.9" width="16" height="2.1" rx="1.5" fill="#fbbf24"/><text x="778.0" y="81.0" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">-$0.04B</text><text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+41.17%</div><div class="sub">$673.1M &rarr; $2.67B; comfortably clears the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#94a3b8;">n.m.</div><div class="sub">GAAP operating income has been negative in every one of the last five fiscal years &mdash; no valid base year exists, so this criterion is marked N/A rather than forced. The margin trend (see below) is the more useful read.</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+51.39%</div><div class="sub">$153.9M &rarr; $808.2M; the standout number on this page, and the truer growth signal given the GAAP gap</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FCF has grown every year for five straight years, with margins holding in the 22-30% range even while GAAP net income stayed negative &mdash; the gap is almost entirely stock-based compensation, a standard hyper-growth SaaS pattern rather than a red flag on cash generation.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$0.60B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><rect x="103.0" y="189.22" width="70" height="30.78" rx="2" fill="#34d399"/><text x="138" y="182.22" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.15B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="169.48" width="70" height="50.52" rx="2" fill="#34d399"/><text x="294" y="162.48" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.25B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="146.97" width="70" height="73.03" rx="2" fill="#34d399"/><text x="450" y="139.97" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.37B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="92.95" width="70" height="127.05" rx="2" fill="#34d399"/><text x="606" y="85.95" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.64B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="58.36" width="70" height="161.64" rx="2" fill="#34d399"/><text x="762" y="51.36" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.81B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Still red, but the direction is unmistakable and consistent &mdash; margin has improved in every single fiscal year for five years running, from -30.7% to -4.6%. Non-GAAP operating margin (which excludes stock comp) already hit 23% in the latest quarter.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-35%</text><line x1="50" y1="195.0" x2="840" y2="195.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="199.0" text-anchor="end" font-size="11" fill="#64748b">-30%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">-25%</text><line x1="50" y1="145.0" x2="840" y2="145.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="149.0" text-anchor="end" font-size="11" fill="#64748b">-20%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">-15%</text><line x1="50" y1="95.0" x2="840" y2="95.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="99.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="45.0" x2="840" y2="45.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="49.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><path d="M 50.00,198.40 L 247.50,195.05 L 445.00,115.50 L 642.50,73.00 L 840.00,67.85 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,198.40 L 247.50,195.05 L 445.00,115.50 L 642.50,73.00 L 840.00,67.85" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="198.40" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="195.05" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="115.50" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="73.00" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="67.85" r="3" fill="#2dd4bf"/><text x="50.00" y="188.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-30.68%</text><text x="247.50" y="185.05" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-30.01%</text><text x="445.00" y="105.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-14.10%</text><text x="642.50" y="63.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-5.60%</text><text x="840.00" y="57.85" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-4.57%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $137.51M (4.33% of TTM revenue). Revenue growth has decelerated from FY21's 56% to FY25's 23% as the base has scaled, a normal maturation pattern for a company this size.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Zscaler reports quarterly. Latest reported period: Q3 FY2026 (three months to Apr 30, 2026), reported May 26, 2026. Q4/full-year FY2026 results are due Sep 3, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q3 FY2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$850.5M</b>, up 25.4% YoY. Annual Recurring Revenue grew 25% YoY to $3.53B, with $166M in net-new ARR for the quarter; excluding the Red Canary acquisition (which contributed $127M of ARR), organic ARR grew 21% and net-new ARR growth was 14%. Non-GAAP operating margin hit an all-time high of 23%. Management raised full-year FY2026 revenue guidance to $3.3295-3.3325B (about 24.6-24.7% YoY growth) and guided Q4 revenue to $875-878M. Looking further out, the company guided FY2027 ARR growth of 16-17% YoY &mdash; a deliberate deceleration from current rates as the business matures, worth watching against the multiple the market is willing to pay.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q3 FY25&ndash;Q3 FY26, $B)</div>
+    <div class="chart-sub">Steady, unbroken sequential growth every quarter &mdash; no acceleration event here, just consistent execution.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$0.60B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><rect x="103.0" y="84.39" width="70" height="135.61" rx="2" fill="#2dd4bf"/><text x="138" y="77.39" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.68B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="259.0" y="76.15" width="70" height="143.85" rx="2" fill="#2dd4bf"/><text x="294" y="69.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.72B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="415.0" y="62.38" width="70" height="157.62" rx="2" fill="#2dd4bf"/><text x="450" y="55.38" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.79B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="571.0" y="56.85" width="70" height="163.15" rx="2" fill="#2dd4bf"/><text x="606" y="49.85" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.82B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="727.0" y="49.90" width="70" height="170.10" rx="2" fill="#2dd4bf"/><text x="762" y="42.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.85B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub">Every quarter in this window posted a GAAP operating loss &mdash; there's no single distortion event to flag here, just a business that hasn't crossed into full-year GAAP profitability yet. Q2 FY2026's wider -6.2% dip reflects a seasonal step-up in sales &amp; marketing spend, not a one-off charge.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-0.08B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$-0.06B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$-0.04B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$-0.02B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><rect x="103.0" y="20.0" width="70" height="63.5" rx="2" fill="#60a5fa"/><text x="138" y="97.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.03B</text><rect x="121.0" y="101.5" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="112.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-3.8%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="259.0" y="20.0" width="70" height="65.0" rx="2" fill="#60a5fa"/><text x="294" y="99.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.03B</text><rect x="277.0" y="103.0" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="114.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-3.6%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="415.0" y="20.0" width="70" height="76.3" rx="2" fill="#60a5fa"/><text x="450" y="110.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.03B</text><rect x="433.0" y="114.3" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="125.3" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-3.9%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="571.0" y="20.0" width="70" height="126.4" rx="2" fill="#60a5fa"/><text x="606" y="160.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.05B</text><rect x="589.0" y="164.4" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="175.4" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-6.2%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="727.0" y="20.0" width="70" height="69.6" rx="2" fill="#60a5fa"/><text x="762" y="103.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.03B</text><rect x="745.0" y="107.6" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="118.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-3.3%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal, since GAAP P/E doesn't exist (no positive earnings in this window).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub"><b style="color:#34d399;">Current 31.0x sits at roughly 0.34x the FY21-25 average of 91.8x</b> &mdash; the cheapest entry point relative to its own history found anywhere in this AI/SaaS batch. The multiple has compressed steadily as the business has scaled and matured, and the past year's -32.5% stock decline has pushed it further below its historical range even as FCF kept growing.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="183.6" x2="840" y2="183.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.6" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="147.3" x2="840" y2="147.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="151.3" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50" y1="110.9" x2="840" y2="110.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="114.9" text-anchor="end" font-size="11" fill="#64748b">120x</text><line x1="50" y1="74.5" x2="840" y2="74.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="78.5" text-anchor="end" font-size="11" fill="#64748b">160x</text><line x1="50" y1="38.2" x2="840" y2="38.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="42.2" text-anchor="end" font-size="11" fill="#64748b">200x</text><line x1="50.0" y1="136.57" x2="840.0" y2="136.57" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="132.57" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 91.8x</text><path d="M50.0,29.07 L208.0,140.84 L366.0,161.75 L524.0,181.21 L682.0,169.99 L840.0,191.85" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="29.07" r="3" fill="#a78bfa"/><circle cx="208.0" cy="140.84" r="3" fill="#a78bfa"/><circle cx="366.0" cy="161.75" r="3" fill="#a78bfa"/><circle cx="524.0" cy="181.21" r="3" fill="#a78bfa"/><circle cx="682.0" cy="169.99" r="3" fill="#a78bfa"/><circle cx="840.0" cy="191.85" r="3.5" fill="#a78bfa"/><text x="50.0" y="19.07" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">210.0x</text><text x="208.0" y="130.84" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">87.1x</text><text x="366.0" y="151.75" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">64.1x</text><text x="524.0" y="171.21" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">42.7x</text><text x="682.0" y="159.99" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">55.0x</text><text x="840.0" y="181.85" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">31.0x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Zscaler carries $1.87B of total debt against $3.54B of cash &amp; investments, a net cash position of $1.67B ($10.33/share). Current ratio of 1.86 and quick ratio of 1.72 both point to a comfortably liquid balance sheet, with an Altman Z-Score of 5.37 (well into "safe zone" territory).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 186.96,165.69 L156.99,144.00 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M186.96,165.69 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 156.99,144.00 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (led by founder &amp; CEO Jay Chaudhry's family trusts) &asymp; 34.97% of shares outstanding &mdash; the strongest founder/insider alignment anywhere in this site's AI/SaaS batch</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 65.03% (institutional ownership alone 52.44%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Jay Chaudhry founded Zscaler in 2007 and remains Chairman &amp; CEO. Public sources put his and his family's combined stake at roughly 35% of shares outstanding &mdash; directly consistent with stockanalysis.com's disclosed 34.97% insider-ownership figure used here. That's an unusually large founder stake for a company at this scale (&asymp;$30B market cap), and it clears this framework's top ownership band (&gt;30%) outright.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Zscaler</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+41.17%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating income has been negative in all five fiscal years, so no valid base year exists for a CAGR</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>-4.57% (FY2025, GAAP); improving every year from -30.68% in FY2021</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+51.39%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Leader in both the 2026 Gartner Magic Quadrant for SASE Platforms and for SSE (5th consecutive year as SSE Leader); "closest thing to an incumbent" with &asymp;8,000 enterprise/government customers, though Palo Alto Networks' SASE ARR is now growing faster</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; genuinely competitive field (Palo Alto Networks, Netskope, Cisco, Cloudflare, Microsoft)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC -2.32% vs WACC 8.78% &mdash; doesn't clear, a direct consequence of GAAP profitability not yet arriving</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $1.67B (current); net cash every year in this window and growing</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>N/A &mdash; GAAP EBIT is negative (FY2025: -$122.2M), so FCF/EBIT is a meaningless ratio here, same treatment as CrowdStrike</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 31.0x vs 91.8x FY21-25 average &mdash; about 0.34x the historical average, the cheapest entry point vs. own history found anywhere in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;138M &rarr; &asymp;161.71M shares (rising &asymp;17.2% over the period, from ongoing stock-based comp; buyback yield of -3.74% partly offsets but doesn't reverse the dilution)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>34.97% &mdash; founder &amp; CEO Jay Chaudhry's family trusts, the strongest founder alignment in this site's AI/SaaS batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.33% of revenue (TTM)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>This is a company steadily converging on GAAP profitability rather than one still figuring out its cost structure &mdash; five straight years of narrowing losses, non-GAAP operating margin at an all-time high, and free cash flow that's already strong and growing (51% CAGR). Founder and CEO Jay Chaudhry's family holds roughly 35% of the company, the strongest insider alignment anywhere in this batch, and the stock's -32.5% year is a genuine disconnect from the underlying trend rather than a reaction to it &mdash; the current P/FCF sits at less than half its own historical range.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Zscaler still hasn't crossed into GAAP operating profitability, and the competitive field in SASE/SSE is genuinely getting tighter &mdash; Palo Alto Networks' SASE ARR is now growing faster than Zscaler's, and Netskope adds a third serious contender. Share count is up 17% over five years from stock-based comp, and management's own FY2027 ARR growth guidance (16-17%) signals a deliberate deceleration from current rates, worth weighing against whatever growth premium the market re-attaches to the stock.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27-28, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Zscaler Q3 FY2026 earnings release (May 26, 2026, ir.zscaler.com), Gartner 2026 Magic Quadrant press coverage, WebSearch on founder Jay Chaudhry's ownership stake and recent analyst price-target activity.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.78%) is company-specific as reported by stockanalysis.com. Criteria #2 and #9 are marked N/A because GAAP EBIT has been negative throughout the study window, consistent with how this site handles other companies with the same pattern (e.g. CrowdStrike).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Zscaler &mdash; NASDAQ, USD share price trend. Points shown are fiscal year-end closes (Zscaler's fiscal year runs Aug-Jul, so FY25 = close on Jul 31, 2025) plus the current price, kept consistent with how the rest of this dashboard reports Zscaler's fiscal years.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Zscaler &mdash; Fiscal Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A genuinely unusual pattern for this framework: the stock is <b style="color:#fbbf24;">lower today than it was five fiscal years ago</b>, despite revenue nearly quadrupling and losses shrinking every year in between &mdash; almost entirely a story of multiple compression as growth rates normalized from IPO-era hyper-growth, not of business deterioration.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -4.8%</text><path d="M 46.0,88.62 L 172.8,165.30 L 299.6,160.25 L 426.4,142.26 L 553.2,41.54 L 680.0,137.63 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,88.62 L 172.8,165.30 L 299.6,160.25 L 426.4,142.26 L 553.2,41.54 L 680.0,137.63" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="88.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="78.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$235.91</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="165.30" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="155.30" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$155.06</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="160.25" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="150.25" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.38</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="142.26" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="132.26" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$179.35</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="41.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="31.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$285.56</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="137.63" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="127.63" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$184.23</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes and the current price are direct quotes for NASDAQ: ZS (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed FY21 close to current (naive span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Datadog Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Observability &amp; Monitoring (AI/SaaS)</div>
+  <h1>Datadog</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: DDOG, USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2010 &middot; New York, NY</span>
+    <span class="badge warn">Stock fell -17% on Aug 6, 2026 despite a revenue beat and raised guidance, after management flagged a usage reduction from its largest customer baked into Q3/full-year guidance &mdash; a reminder that even strong quarters get punished when a single large account wobbles.</span>
+  </div>
+  <div class="price">$236.98</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -2.45% on the day &middot; Mkt cap &asymp;$85.09B &middot; up +79.9% over the last 52 weeks</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Splunk (Cisco), Dynatrace, New Relic, Elastic, Grafana &mdash; Datadog has been named a Leader in Gartner's Magic Quadrant for Observability Platforms for six consecutive years, positioned highest in Ability to Execute in 2026</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$3.43B</div>
+      <div class="sub">+27.68% YoY; Q2 2026 revenue $1.12B, +36% YoY, &asymp;33,400 total customers (+6.4% YoY)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#f87171;">-1.25%</div>
+      <div class="note">Bounces around breakeven rather than trending cleanly &mdash; FY2024 was slightly positive (+2.02%), FY2025 dipped back negative. Net income has stayed positive in three of the last four years, mostly thanks to a large cash pile generating meaningful interest income above the operating line.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">2.91% / 12.38%</div>
+      <div class="note">Doesn't clear WACC. ROIC has itself swung between -17.8% and +13.7% year to year as operating income has flipped sign, so treat this as noisy rather than a clean trend.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val" style="color:#34d399;">$3.71B net cash</div>
+      <div class="sub">$4.99B cash &amp; investments vs. $1.28B total debt</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">64/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/13 criteria met &mdash; the strongest market-share standing in this AI/SaaS batch (6 straight years as Gartner Observability Leader), let down by thin insider ownership and a still-unsettled path to consistent GAAP profitability.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 61.15,176.85 L83.15,151.66 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M61.15,176.85 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 83.15,151.66 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (revenue CAGR, FCF CAGR, market share, net debt/EBITDA, entry multiple, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (operating margin, market concentration, ROIC/WACC, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (EBIT CAGR, FCF conversion &mdash; both unreliable while GAAP operating income sits near zero and flips sign year to year)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Insider ownership: <b style="color:#fbbf24;">5.48%</b> &mdash; modest, and CEO Olivier Pomel's direct stake is a small 0.17% (recent share sales appear to be routine 10b5-1 plan activity)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Datadog is the most established market leader in this AI/SaaS batch on paper &mdash; six consecutive years as a Gartner Magic Quadrant Leader for Observability Platforms, positioned highest in Ability to Execute in 2026 &mdash; but its GAAP profitability story is the messiest of the four: operating income has flipped between small positive and small negative every single year for five years running, never building the kind of clean trend seen at Palo Alto Networks or even the steady-improvement pattern at Zscaler. Free cash flow tells a cleaner story, compounding at nearly 38% annually with margins consistently in the 22-35% range, and the balance sheet is comfortably net cash. What holds this dashboard back from a higher score is ownership (insiders hold just 5.48%, with CEO Olivier Pomel's direct stake at only 0.17% and recent share sales in the news, though these read as routine plan-based sales rather than a conviction signal) and persistent share dilution (+21% over five years). The stock is up nearly 80% over the past year but dropped 17% in a single day in early August after a beat-and-raise quarter, purely on guidance language about one large customer trimming usage &mdash; a useful reminder of how concentrated even a "diversified" 33,400-customer SaaS business's growth can still be around its largest accounts.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Aug 6, 2026) and spot price as of Aug 28, 2026 close. Q3 2026 results are expected in early November 2026.
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year matches the calendar year (FY2025 = year ended Dec 31, 2025). CAGR computed FY21&rarr;FY25 where a valid base exists.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">Revenue growth is the clean story here — more than tripled in five years. Operating income (blue) has flipped sign three times in five years, while net income (yellow) has been positive in three of the last four, helped by a growing pile of interest income on Datadog's large cash balance sitting below the operating line.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$-0.2B</text><line x1="60" y1="47.0" x2="840" y2="47.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="51.0" text-anchor="end" font-size="11" fill="#64748b">$0.3B</text><line x1="60" y1="74.1" x2="840" y2="74.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="78.1" text-anchor="end" font-size="11" fill="#64748b">$0.8B</text><line x1="60" y1="101.1" x2="840" y2="101.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="105.1" text-anchor="end" font-size="11" fill="#64748b">$1.3B</text><line x1="60" y1="128.1" x2="840" y2="128.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="132.1" text-anchor="end" font-size="11" fill="#64748b">$1.8B</text><line x1="60" y1="155.1" x2="840" y2="155.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="159.1" text-anchor="end" font-size="11" fill="#64748b">$2.3B</text><line x1="60" y1="182.2" x2="840" y2="182.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="186.2" text-anchor="end" font-size="11" fill="#64748b">$2.8B</text><line x1="60" y1="209.2" x2="840" y2="209.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="213.2" text-anchor="end" font-size="11" fill="#64748b">$3.3B</text><rect x="114.0" y="30.8" width="16" height="55.6" rx="1.5" fill="#2dd4bf"/><text x="122.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.03B</text><rect x="130.0" y="29.8" width="16" height="1.0" rx="1.5" fill="#60a5fa"/><text x="138.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.02B</text><rect x="146.0" y="29.7" width="16" height="1.1" rx="1.5" fill="#fbbf24"/><text x="154.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.02B</text><text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="270.0" y="30.8" width="16" height="90.5" rx="1.5" fill="#2dd4bf"/><text x="278.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.68B</text><rect x="286.0" y="27.6" width="16" height="3.2" rx="1.5" fill="#60a5fa"/><text x="294.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.06B</text><rect x="302.0" y="28.1" width="16" height="2.7" rx="1.5" fill="#fbbf24"/><text x="310.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.05B</text><text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="426.0" y="30.8" width="16" height="115.0" rx="1.5" fill="#2dd4bf"/><text x="434.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.13B</text><rect x="442.0" y="29.0" width="16" height="1.8" rx="1.5" fill="#60a5fa"/><text x="450.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.03B</text><rect x="458.0" y="30.8" width="16" height="2.6" rx="1.5" fill="#fbbf24"/><text x="466.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.05B</text><text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="30.8" width="16" height="145.1" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.68B</text><rect x="598.0" y="30.8" width="16" height="2.9" rx="1.5" fill="#60a5fa"/><text x="606.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.05B</text><rect x="614.0" y="30.8" width="16" height="9.9" rx="1.5" fill="#fbbf24"/><text x="622.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.18B</text><text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="738.0" y="30.8" width="16" height="185.2" rx="1.5" fill="#2dd4bf"/><text x="746.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$3.43B</text><rect x="754.0" y="28.5" width="16" height="2.3" rx="1.5" fill="#60a5fa"/><text x="762.0" y="41.8" text-anchor="middle" font-size="8" fill="#ffffff" font-weight="700">$-0.04B</text><rect x="770.0" y="30.8" width="16" height="5.8" rx="1.5" fill="#fbbf24"/><text x="778.0" y="25.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.11B</text><text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+35.09%</div><div class="sub">$1.03B &rarr; $3.43B; comfortably clears the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#94a3b8;">n.m.</div><div class="sub">GAAP operating income has flipped sign three times in five years (negative, negative, negative, positive, negative) &mdash; too volatile around breakeven for a meaningful multi-year CAGR, so this criterion is marked N/A rather than computed on noise.</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+37.93%</div><div class="sub">$276.6M &rarr; $1.00B; the clean growth signal on this page</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Unlike GAAP operating income, free cash flow has grown every single year without exception, crossing the $1B mark in FY2025 with margins consistently in the 23-35% range.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$0.60B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><rect x="103.0" y="173.90" width="70" height="46.10" rx="2" fill="#34d399"/><text x="138" y="166.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.28B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="156.14" width="70" height="63.86" rx="2" fill="#34d399"/><text x="294" y="149.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.38B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="114.61" width="70" height="105.39" rx="2" fill="#34d399"/><text x="450" y="107.61" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.63B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="80.69" width="70" height="139.31" rx="2" fill="#34d399"/><text x="606" y="73.69" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.84B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="53.17" width="70" height="166.83" rx="2" fill="#34d399"/><text x="762" y="46.17" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.00B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">No clean trend to point to &mdash; margin has hovered in a tight band around breakeven (-3.5% to +2.0%) rather than moving decisively in either direction. FY2024's brief crossing into positive territory reversed in FY2025.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><path d="M 50.00,111.47 L 247.50,133.33 L 445.00,107.60 L 642.50,59.73 L 840.00,103.33 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,111.47 L 247.50,133.33 L 445.00,107.60 L 642.50,59.73 L 840.00,103.33" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="111.47" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="133.33" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="107.60" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="59.73" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="103.33" r="3" fill="#2dd4bf"/><text x="50.00" y="101.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-1.86%</text><text x="247.50" y="123.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-3.50%</text><text x="445.00" y="97.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-1.57%</text><text x="642.50" y="49.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.02%</text><text x="840.00" y="93.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-1.25%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $46.93M (1.18% of TTM revenue, the lowest capex intensity anywhere in this AI/SaaS batch). Net income was positive in FY2023, FY2024, and FY2025, helped materially by growing interest income on Datadog's cash balance.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Datadog reports quarterly on a calendar-year basis. Latest reported period: Q2 2026 (three months to Jun 30, 2026), reported Aug 6, 2026. Q3 2026 results are expected in early November 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$1.12B</b>, up 36% YoY and above guidance, with non-GAAP EPS of $0.65 and a 25% free cash flow margin ($279M FCF). Total customer count grew to roughly 33,400, up from 31,400 a year earlier. Full-year 2026 revenue guidance was raised to $4.45-4.47B (about 30% YoY growth), and Q3 2026 guidance came in at $1.135-1.145B (28-29% YoY). Despite the beat and raise, the stock fell 17% on the day &mdash; management disclosed a usage reduction from its largest customer that's factored into forward guidance, and the market reacted to that concentration risk more than to the headline growth numbers.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Growth has been accelerating, not decelerating &mdash; each of the last four quarters posted a higher YoY growth rate than the one before, culminating in Q2 2026's 36% YoY print.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$0.20B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$0.40B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$0.60B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$0.80B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$1.00B</text><rect x="103.0" y="82.21" width="70" height="137.79" rx="2" fill="#2dd4bf"/><text x="138" y="75.21" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.83B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="72.39" width="70" height="147.61" rx="2" fill="#2dd4bf"/><text x="294" y="65.39" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.89B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="61.13" width="70" height="158.87" rx="2" fill="#2dd4bf"/><text x="450" y="54.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.95B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="52.33" width="70" height="167.67" rx="2" fill="#2dd4bf"/><text x="606" y="45.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.01B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="33.17" width="70" height="186.83" rx="2" fill="#2dd4bf"/><text x="762" y="26.17" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.12B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin</div>
+    <div class="chart-sub">Q2'25's deep dip to -4.13% margin was followed by three straight quarters of improvement back to modest positive territory &mdash; a better recent trend than the choppy annual picture suggests, though the absolute dollar amounts remain small either way.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-0.05B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$-0.04B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$-0.03B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$-0.02B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$-0.01B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$0.01B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$0.02B</text><rect x="103.0" y="77.1" width="70" height="97.5" rx="2" fill="#60a5fa"/><text x="138" y="188.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.034B</text><rect x="121.0" y="192.7" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="203.7" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-4.13%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="77.1" width="70" height="16.6" rx="2" fill="#60a5fa"/><text x="294" y="107.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.006B</text><rect x="277.0" y="111.7" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="122.7" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-0.66%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="49.8" width="70" height="27.3" rx="2" fill="#60a5fa"/><text x="450" y="42.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.010B</text><rect x="433.0" y="23.8" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="34.8" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1.00%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="54.2" width="70" height="22.9" rx="2" fill="#60a5fa"/><text x="606" y="47.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.008B</text><rect x="589.0" y="28.2" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="39.2" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">0.80%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="55.8" width="70" height="21.3" rx="2" fill="#60a5fa"/><text x="762" y="48.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.007B</text><rect x="745.0" y="29.8" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="40.8" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">0.67%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal, since GAAP P/E (483x) is distorted by an operating income figure that's barely above zero.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Current 72.6x sits modestly below the FY21-25 average of 86.1x (about 0.84x) &mdash; not the deep discount seen at Zscaler, but a reasonable entry point relative to Datadog's own history, especially given FCF growth has stayed strong and consistent throughout.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="183.6" x2="840" y2="183.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="187.6" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="147.3" x2="840" y2="147.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="151.3" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50" y1="110.9" x2="840" y2="110.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="114.9" text-anchor="end" font-size="11" fill="#64748b">120x</text><line x1="50" y1="74.5" x2="840" y2="74.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="78.5" text-anchor="end" font-size="11" fill="#64748b">160x</text><line x1="50" y1="38.2" x2="840" y2="38.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="42.2" text-anchor="end" font-size="11" fill="#64748b">200x</text><line x1="50.0" y1="141.70" x2="840.0" y2="141.70" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="137.70" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 86.1x</text><path d="M50.0,37.35 L208.0,164.62 L366.0,162.67 L524.0,167.21 L682.0,176.67 L840.0,154.00" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="37.35" r="3" fill="#a78bfa"/><circle cx="208.0" cy="164.62" r="3" fill="#a78bfa"/><circle cx="366.0" cy="162.67" r="3" fill="#a78bfa"/><circle cx="524.0" cy="167.21" r="3" fill="#a78bfa"/><circle cx="682.0" cy="176.67" r="3" fill="#a78bfa"/><circle cx="840.0" cy="154.00" r="3.5" fill="#a78bfa"/><text x="50.0" y="27.35" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">200.9x</text><text x="208.0" y="154.62" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">60.9x</text><text x="366.0" y="152.67" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">63.1x</text><text x="524.0" y="157.21" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">58.1x</text><text x="682.0" y="166.67" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">47.7x</text><text x="840.0" y="144.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">72.6x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Datadog carries $1.28B of total debt against $4.99B of cash &amp; investments, a net cash position of $3.71B ($10.33/share). Current ratio of 3.20 and quick ratio of 3.10 are the strongest liquidity figures anywhere in this batch, and the Altman Z-Score of 11.27 is deep into "safe zone" territory.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 142.07,20.58 L129.58,55.40 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M142.07,20.58 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 129.58,55.40 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 5.48% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 94.52% (institutional ownership alone 86.27%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Co-founder &amp; CEO Olivier Pomel's direct stake is about 612,747 shares (&asymp;0.17% of shares outstanding), worth roughly $174M at current prices, plus derivative securities (vested/unvested awards); co-founder Alexis Lê-Quôc holds a similar-sized position. Both crossed 2% combined direct-plus-derivative ownership at various points and became billionaires off Datadog stock in 2020. Recent news of Pomel selling shares (e.g. 47,054 shares for $11.1M in August 2026) reads as routine 10b5-1 plan-based diversification rather than a signal, but it's worth noting this is a company where founders have already substantially diversified out of concentrated stock ownership, unlike Zscaler's Jay Chaudhry.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Datadog</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+35.09%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating income has flipped sign three times in five years, too volatile around breakeven for a meaningful CAGR</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>-1.25% (FY2025, GAAP); has ranged between -3.50% and +2.02% over the last five years with no clear trend</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+37.93%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Named a Leader in the Gartner Magic Quadrant for Observability Platforms for six consecutive years (2026 report), positioned highest in Ability to Execute &mdash; the strongest market-position claim in this AI/SaaS batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; genuinely competitive field (Splunk/Cisco, Dynatrace, New Relic, Elastic, Grafana)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 2.91% vs WACC 12.38% &mdash; doesn't clear; ROIC itself has swung from -17.8% to +13.7% year to year, tracking the sign-flipping operating income</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $3.71B (current); net cash every year in this window and growing steadily</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>N/A &mdash; TTM EBIT is just $19.23M against $1.18B FCF, producing an absurd ratio (&gt;6,000%) that reflects a near-zero denominator, not genuine conversion efficiency</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 72.6x vs 86.1x FY21-25 average &mdash; about 0.84x the historical average</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;296M &rarr; &asymp;359M shares (rising &asymp;21% over the period, from ongoing stock-based comp)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>5.48% of shares outstanding held by officers &amp; directors; CEO Olivier Pomel's direct stake is a modest 0.17%</td><td><span class="status-pill status-met">Met (score 3)</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.18% of revenue (TTM) &mdash; the lowest capex intensity anywhere in this AI/SaaS batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Datadog has the strongest external validation of market position in this batch &mdash; six straight years as a Gartner Observability Leader, with 2026's report specifically citing it as highest in Ability to Execute. Revenue growth is accelerating rather than decelerating, free cash flow has compounded at nearly 38% annually without a single down year, capex intensity is the lowest in the group, and the balance sheet is comfortably net cash with the best liquidity ratios of any company covered here.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The GAAP profitability story here is genuinely unresolved &mdash; operating income has flipped sign three times in five years with no clean trend, unlike the steady march toward breakeven seen at Zscaler or Palo Alto Networks' established profitability. Insider ownership is thin (5.48%, with the CEO's direct stake under 1%), share count is up 21% over five years, and the August 2026 stock drop despite a beat-and-raise quarter is a reminder that customer concentration risk exists even at 33,400 total customers.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 27-28, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, all sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Datadog Q2 2026 earnings release (Aug 6, 2026), Gartner 2026 Magic Quadrant for Observability Platforms press coverage, WebSearch on founder ownership and recent insider transactions.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (12.38%) is company-specific as reported by stockanalysis.com. Criteria #2 and #9 are marked N/A because GAAP operating income has been too close to zero and too sign-volatile across the study window to produce a meaningful ratio or CAGR.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Datadog &mdash; NASDAQ, USD share price trend. Year-end closes 2021-2025 (calendar year) plus the current price are direct quotes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Datadog &mdash; Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A choppier path than most names on this site &mdash; a sharp 2022 drawdown (-58.7%) in the broader growth-stock selloff, a slow multi-year recovery, and then a strong run through 2026 that's pushed the stock to a new high despite the August drop.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +5.9%</text><path d="M 46.0,86.84 L 172.8,173.88 L 299.6,134.05 L 426.4,116.15 L 553.2,121.89 L 680.0,37.86 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,86.84 L 172.8,173.88 L 299.6,134.05 L 426.4,116.15 L 553.2,121.89 L 680.0,37.86" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="86.84" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="76.84" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$178.11</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="173.88" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="163.88" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$73.50</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="134.05" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="124.05" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$121.38</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="116.15" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="106.15" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$142.89</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="121.89" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="111.89" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$135.99</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="37.86" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="27.86" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$236.98</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    All year-end closes and the current price are direct quotes for NASDAQ: DDOG (stockanalysis.com / S&amp;P Global Market Intelligence). 5-Yr CAGR is computed 2021-close to current (naive span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
