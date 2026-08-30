@@ -707,6 +707,108 @@ const COMPANIES = [
     personalNote: "ServiceNow might be the single best 'boring compounder' case I've built on this site. There's nothing flashy about IT workflow software, but the numbers are genuinely unusual: 20%+ revenue growth sustained for five years and now speeding up, not slowing down, at a size where deceleration is normal. The AI angle here is also more concrete than most — $1B in AI-specific contract value isn't a projection, it's booked. What I keep coming back to is the valuation disconnect: the stock is down almost a fifth over the past year while the business has only gotten stronger, which is either the market rightly worried about something I'm not weighing enough (the margin compression this quarter, thin insider ownership, a McDermott-not-founder leadership structure) or a genuine mispricing from macro software-sector jitters that had nothing to do with ServiceNow specifically. I want to see next quarter's GAAP margin before I fully trust that the Q2 dip was a one-off. But on growth quality and balance-sheet discipline alone, this is one of the more convincing setups I've put together."
   },
 
+  {
+    slug: "baba",
+    name: "Alibaba",
+    ticker: "NYSE: BABA",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "China E-Commerce / Cloud Platform",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$118.90",
+    score: "3 / 13",
+    martinero: 31,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "By far the weakest scorecard on this site — 3/13 criteria met, Martinero Index 31 — but driven almost entirely by two live, real events rather than a broken business. First, Alibaba committed roughly ¥50B ($7B) to a quick-commerce subsidy war against Meituan and JD.com, taking GAAP operating margin from 15.22% (FY2025) to 6.15% (FY2026) and 4.56% TTM. Second, capex more than tripled to fund AI/cloud infrastructure, pushing free cash flow negative (-$11.38B TTM) for the first time in years. Set against that: Alibaba remains net cash ($17.5B), has cut its share count over 13% since FY2022, and trades at a PEG ratio of just 0.44. Taobao+Tmall remain China's largest combined e-commerce group (~40-46% GMV share) but the market has become genuinely four-way contested, unlike a decade ago.",
+    file: "companies/baba.html",
+    personalNote: "Alibaba is the hardest scorecard I've had to sit with on this site, because the number (31) looks like a broken business and the reality is a lot messier than that. Two things are doing basically all the damage: a subsidy war Alibaba chose to fight, and an AI capex ramp every hyperscaler is running through right now. Neither is a sign the core business is failing — quarterly operating margin already bounced off its March 2026 low (1.01% to 7.29%) — but neither has fully resolved either, and I don't know yet whether management can dial the subsidy spend back without just handing share back to Meituan and JD. What keeps me interested despite the ugly number: net cash balance sheet, a shrinking share count even through this mess, and a PEG of 0.44 that says the market is pricing in less growth than analysts still expect. What keeps me cautious: real, multi-way competition in a market that used to be Alibaba's alone, plus the structural China-ADR considerations that don't apply to anything else in this batch. I'd want to see two more quarters of margin recovery before treating this as a value opportunity rather than a business genuinely losing ground."
+  },
+
+  {
+    slug: "pdd",
+    name: "PDD Holdings",
+    ticker: "NASDAQ: PDD",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "China Discount E-Commerce / Global Cross-Border (Temu)",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$85.69",
+    score: "11 / 13",
+    martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "One of the strongest scorecards on this entire site — 11/13 criteria met, Martinero Index 90 — yet the stock is down nearly 30% over the past year. Pinduoduo has overtaken JD.com by domestic GMV, operating margin sits at 21.56%, ROIC-WACC spread is a huge 10.7 points, and net cash of $66.5B is worth more than half the market cap. The drag is Temu: the US ended its de minimis tariff exemption (May 2025) and the EU added its own per-item duty (Jul 2026), pushing Temu's global MAU down from ~525M to ~467M and cooling overall revenue growth from 89.68% (FY2023) to 9.65% (FY2025). ROIC missed this framework's 15% bar by just 0.08pt. Trades at 7.4x P/FCF against a 13.3x five-year average.",
+    file: "companies/pdd.html",
+    personalNote: "PDD is the sharpest gap I've found yet between what the scorecard says and what the stock price says — 11 of 13 criteria met, a Martinero Index of 90, and the stock is still down almost 30% over the last year. The business itself is genuinely excellent: Pinduoduo has grown past JD.com domestically, the balance sheet carries more cash than half the market cap, and founder Colin Huang still holds nearly 32% of the company, the strongest founder alignment of any e-commerce name I've built. What's actually weighing on the stock is real, not sentiment-only — Temu lost its US tariff exemption, the EU just added its own duty on top, and Temu's user base has genuinely shrunk as the company retools its shipping model from direct-from-China to local warehousing. That's a real headwind to the growth story, not a made-up one. The ROIC miss is almost comically close — 14.92% against a 15% bar — which tells me this framework's binary cutoffs can occasionally punish a company for being a hair on the wrong side of an arbitrary line. Cheap for a real reason, or genuinely mispriced? I lean toward the latter, but I'd want to see Temu's MAU trend stabilize before calling this an obvious buy."
+  },
+
+  {
+    slug: "se",
+    name: "Sea Limited",
+    ticker: "NYSE: SE",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "Southeast Asia E-Commerce, Digital Entertainment & Fintech",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$119.36",
+    score: "7 / 13",
+    martinero: 72,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "A genuine multi-year turnaround — Shopee (#1 in Southeast Asia e-commerce, ~52-53% share), Garena and Monee are now all GAAP operating-profitable at once for the first time in Sea's history. Operating margin has climbed cleanly from -15.90% (FY2021) to 8.65% (FY2025), free cash flow has compounded to $4.51B, and revenue growth has actually re-accelerated to +43% TTM. What holds the score to 7/13: operating margin is still thin, TikTok Shop is closing the gap in a genuinely three-way contested market, share count keeps drifting up from stock-based comp, and the current valuation sits slightly above Sea's own recent trading history. EBIT and FCF CAGR are marked N/A since FY2021 was a loss year for both, making a standard growth-rate calculation undefined.",
+    file: "companies/se.html",
+    personalNote: "Sea Limited is the most literal turnaround story in this whole e-commerce batch. This isn't a company still promising future profitability — Shopee, Garena and Monee are all making money at the same time right now, after years of Sea deliberately burning cash to win share. The margin chart alone tells the story: a clean, uninterrupted five-year climb from -15.9% to +8.65%, no zigzagging. What keeps this at a 72 rather than higher is that the margin, while genuinely improving, is still thin by this framework's standards, and TikTok Shop is a real, fast-growing threat in Sea's home market rather than a hypothetical one. There's also a fun connection to the rest of this batch: Sea just launched a 'Turbo Delivery' service in Brazil aimed squarely at Amazon and MercadoLibre, both of which I've covered elsewhere on this site. I like this business more than the score alone suggests — a genuine, working turnaround with a founder who still controls the company through multi-class voting shares — but I'd want to see operating margin actually clear double digits before calling this cheap rather than fairly priced."
+  },
+
+  {
+    slug: "cpng",
+    name: "Coupang, Inc.",
+    ticker: "NYSE: CPNG",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "South Korea E-Commerce & Fast Delivery Logistics",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$16.52",
+    score: "6 / 13",
+    martinero: 45,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "Korea's clear #1 e-commerce platform (37.7% usage share vs Naver's 27.2%) built on a genuine Rocket Delivery logistics moat — but the financial picture right now is the weakest in this batch outside Alibaba. A $410M Korean privacy-regulator fine over a November 2025 data breach (37M+ customers) drove Coupang's largest-ever quarterly operating loss in Q2 2026, and revenue growth has decelerated to just 3.90% YoY, the slowest in its public history. ROIC is deeply negative, net cash has shrunk to a thin $477M buffer, and free cash flow has collapsed toward breakeven. Clears market share, net cash, share count trend, insider ownership and capex intensity; misses margin, market concentration, ROIC/WACC, FCF conversion and entry multiple. EBIT and FCF CAGR are marked N/A since FY2021 was a loss year for both.",
+    file: "companies/cpng.html",
+    personalNote: "Coupang is the batch's clearest lesson in separating market position from financial health right now — those are two very different questions here. The market position is genuinely excellent: Coupang built a real logistics moat with Rocket Delivery and it shows in the usage numbers, clearly ahead of Naver. But the financials are rough. A $410 million fine over a data breach that exposed 37 million customers' data drove the company's worst quarter since its 2021 listing — and that's disclosed and one-off, easy enough to look past. What actually gives me pause is that Q1 2026 was already posting a loss before the fine hit, and revenue growth has slowed to the weakest pace in Coupang's history as a public company. Founder Bom Kim controls about 76% of the vote through 29-to-1 super-voting shares despite owning only about 9% of the economics, which is worth knowing given the breach happened on his watch. I'd want to see at least two clean quarters, with the fine fully behind them, before treating the current cheap-looking price as an opportunity rather than a warning."
+  },
+
+  {
+    slug: "jd",
+    name: "JD.com, Inc.",
+    ticker: "NASDAQ: JD",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "China E-Commerce, Logistics & Retail (1P Model)",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$28.74",
+    score: "6 / 13",
+    martinero: 44,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "China's largest retailer by revenue, running a first-party logistics model that leaves it with thin margins but a genuinely enormous net cash position ($22.78B, more than half the market cap). The weak score here is largely self-inflicted: JD launched an aggressive push into food delivery in February 2025, directly challenging Meituan, and the resulting subsidy war cost JD three straight quarterly operating losses (Q2-Q4 2025) before a modest recovery in Q1-Q2 2026. Revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC and entry multiple all miss; market share, net debt/EBITDA, FCF conversion, share count trend, insider ownership and capex intensity all clear. Unlike the rest of this batch's China/SE Asia names, no criteria needed N/A treatment — FY2021 was already a thin profit and positive-FCF year for JD, so every growth rate is directly computable, including the very poor ones.",
+    file: "companies/jd.html",
+    personalNote: "JD is the batch's best example of a company hurting itself on purpose. Alibaba and PDD are both dealing with pressure that's largely external — tariffs, a subsidy war Alibaba got pulled into. JD actually started this one: it chose to go after Meituan's food-delivery business in February 2025, and three quarters of real operating losses followed. I don't think that makes it a bad decision necessarily — JD is reportedly aiming for 30% food-delivery share by 2026, and the last two quarters show a real return to profit — but it's a choice, not something that happened to them, and that changes how I read the weak scorecard. What keeps me interested despite the 44 is the balance sheet: $22.78B of net cash against a $38.63B market cap is about as clean a margin of safety as this framework finds anywhere, and buybacks have already cut share count by 13% since 2021. I'd also flag a real contradiction I can't resolve from here: one source puts JD clearly at #2 in China e-commerce by GMV, but PDD's own dashboard on this site claims Pinduoduo has already passed JD domestically. Both can't be fully right, and I'm not going to pretend I know which one is."
+  },
+
+  {
+    slug: "meli",
+    name: "MercadoLibre, Inc.",
+    ticker: "NASDAQ: MELI",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    subIndustry: "Latin America E-Commerce, Fintech & Logistics",
+    tags: ["E-Commerce"],
+    dateFeatured: "2026-08-30",
+    price: "$1,966.25",
+    score: "11 / 13",
+    martinero: 86,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The strongest scorecard in this entire e-commerce batch: MercadoLibre is the clear, widening #1 in Latin American e-commerce and fintech across 18 countries, with revenue compounding at a 42.18% CAGR (FY21-25) and free cash flow growing even faster at 128.96% CAGR. Q2 2026 revenue grew 49.76% YoY, the fastest pace in nearly four years, yet the stock is down 18.53% over the past 52 weeks — a real gap between price and fundamentals. Current P/FCF of 8.0x sits well below its own FY22-25 average of 14.0x. Only two misses, both close calls: operating margin (11.08%, reinvesting into logistics and lending) and ROIC (14.20%, just under the 15% bar despite clearing WACC). No criteria needed N/A treatment — MELI was already profitable and FCF-positive in FY2021.",
+    file: "companies/meli.html",
+    personalNote: "MercadoLibre is the easiest story to like in this whole batch, and I mean that as a genuine compliment, not a knock on the framework's rigor. There's no tariff fight, no self-inflicted price war, no supervoting founder drama — just a dominant platform in a region growing faster than the global e-commerce average, compounding both revenue and free cash flow at rates nothing else here comes close to. And unlike most 'great business' stories, this one currently trades at a P/FCF multiple below its own five-year average, while the stock is actually down over the past year despite the business just posting its fastest growth in nearly four years. That combination — accelerating fundamentals, compressing valuation — is rare enough that I wanted it to be the batch's closing pick. The two things keeping this from a perfect score are worth taking seriously, though: margin has been drifting down for several quarters straight as they lean into logistics and Mercado Crédito, and I'd want to see that stabilize before assuming it's purely growth investment and not competitive pressure. I'd also flag the debt structure for what it is — most of it funds their own lending book, not the core commerce business — but it's exactly the kind of thing worth re-checking each quarter as that credit portfolio keeps scaling."
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
