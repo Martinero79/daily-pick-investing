@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coupang Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; South Korea E-Commerce &amp; Fast Delivery Logistics</div>
+  <h1>Coupang</h1>
+  <div class="badges">
+    <span class="badge">NYSE: CPNG, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2010 &middot; Seoul (HQ)</span>
+    <span class="badge warn">A $410M Korean privacy-regulator fine over a November 2025 data breach (37M+ customers) drove Coupang's largest-ever quarterly operating loss in Q2 2026 &mdash; a real, disclosed one-off, but not the only source of margin pressure this year.</span>
+  </div>
+  <div class="price">$16.52</div>
+  <div class="price-sub">Close Aug 28, 2026 (NYSE), +1.79% on the day &middot; Mkt cap $29.69B (EV $29.22B) &middot; down -41.50% over the last 52 weeks</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Naver Shopping, SSG.com, Lotte/Shinsegae, plus AliExpress and Temu on cross-border discount goods. Coupang is the clear #1 in Korea's B2C e-commerce market (37.7% vs Naver's 27.2%, per usage share), built around its Rocket Delivery same/next-day fulfillment network.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$35.46B</div>
+      <div class="sub">+9.92% YoY (TTM); FY2025 was $34.53B, +14.09% YoY &mdash; growth has decelerated sharply, with Q2 2026 up just +3.90% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025, GAAP)</div>
+      <div class="val" style="color:#fbbf24;">1.44%</div>
+      <div class="note">TTM margin is -1.70% because Q2 2026 alone absorbed the $410M fine; even excluding it, Q1-Q2 2026 margin was already softening before the fine hit.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">-21.79% / 9.09%</div>
+      <div class="note">Deeply negative and well below WACC &mdash; a direct reflection of the TTM net loss; this is the weakest reading in this entire e-commerce batch.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val" style="color:#fbbf24;">$477M</div>
+      <div class="sub">$0.27/share &mdash; a thin and shrinking buffer, down from $2.46B at FY2023</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">45/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/13 criteria met, 5 not met, 2 N/A &mdash; a genuinely rough patch for one of the strongest #1-market-position stories in this batch.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 46.63,187.66 L77.98,158.63 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M46.63,187.66 A95,95 0 0 1 15.05,110.00 L58.03,110.00 A58,58 0 0 0 77.98,158.63 Z" fill="#f87171"/><path d="M15.05,110.00 A95,95 0 0 1 27.16,73.90 L69.86,88.24 A58,58 0 0 0 58.03,110.00 Z" fill="#64748b"/><path d="M27.16,73.90 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 69.86,88.24 Z" fill="#34d399"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (revenue CAGR, market share, net debt/EBITDA, share count trend, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 5 (operating margin, market concentration, ROIC/WACC, FCF conversion, entry multiple)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both undefined because FY2021 was a loss year, making a standard growth-rate calculation mathematically meaningless)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Founder &amp; CEO Bom Kim owns just <b style="color:#fbbf24;">9.01%</b> of shares outstanding by economics, but controls roughly 76% of voting power via 29-to-1 Class B super-voting shares</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Coupang holds the clearest #1 market position of any name in this e-commerce batch &mdash; 37.7% platform usage share in Korea versus Naver's 27.2% &mdash; built on a genuinely differentiated same/next-day Rocket Delivery logistics network that took years and billions of dollars to build. That's exactly why this dashboard is uncomfortable: a company with that kind of moat just posted its worst quarter since its 2021 NYSE listing. In June 2026, Korea's Personal Information Protection Commission fined Coupang $410 million over a November 2025 data breach that exposed data on more than 37 million customers &mdash; a real, disclosed, one-off charge that alone explains most of Q2 2026's $556 million operating loss. But it isn't the whole story: Q1 2026 was already running an operating loss before the fine hit, and revenue growth has decelerated hard, from double digits in FY2024-25 to just 3.90% YoY in the most recent quarter. Net cash has shrunk to a thin $477 million buffer, down from $2.46 billion at the end of FY2023, as heavy capex on fulfillment infrastructure and international expansion (Taiwan, the Farfetch luxury platform) continues. None of this changes the underlying market position &mdash; Coupang is still clearly winning in Korea &mdash; but the financial picture right now is genuinely the weakest in this entire batch outside of Alibaba.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 30, 2026, reported Aug 4, 2026) and spot price as of Aug 28, 2026 close. Coupang reports in USD.
+  </div>
+
+  <div class="bignum-corner">6/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. Fiscal year is calendar year (Jan-Dec). FY2021 was a heavy loss year at IPO; FY2023-25 were modestly profitable before the FY2026 fine-driven reversal (not shown here, covered on the next page).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual ($B)</div>
+    <div class="chart-sub">Revenue has grown every year. Operating income and net income were meaningfully negative in FY2021 (IPO year), turned narrowly positive from FY2023, and FY2023's net income was further lifted by a one-time $861M tax benefit &mdash; negative bars shown below the zero line in red.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="65" y1="192.1" x2="840" y2="192.1" stroke="#1e293b" stroke-width="1"/><text x="55" y="196.1" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="65" y1="164.3" x2="840" y2="164.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="168.3" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="65" y1="136.4" x2="840" y2="136.4" stroke="#1e293b" stroke-width="1"/><text x="55" y="140.4" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="65" y1="108.6" x2="840" y2="108.6" stroke="#1e293b" stroke-width="1"/><text x="55" y="112.6" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="65" y1="80.7" x2="840" y2="80.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="84.7" text-anchor="end" font-size="11" fill="#64748b">$25B</text><line x1="65" y1="52.9" x2="840" y2="52.9" stroke="#1e293b" stroke-width="1"/><text x="55" y="56.9" text-anchor="end" font-size="11" fill="#64748b">$30B</text><line x1="65" y1="25.0" x2="840" y2="25.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="29.0" text-anchor="end" font-size="11" fill="#64748b">$35B</text><rect x="73.0" y="117.45" width="16" height="102.55" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="112.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$18.4B</text><rect x="91.0" y="220.00" width="16" height="6.67" rx="1.5" fill="#60a5fa"/><text x="99.0" y="235.7" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.2B</text><rect x="109.0" y="220.00" width="16" height="8.60" rx="1.5" fill="#fbbf24"/><text x="117.0" y="237.6" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.5B</text><text x="91.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="228.0" y="105.32" width="16" height="114.68" rx="1.5" fill="#2dd4bf"/><text x="236.0" y="100.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$20.6B</text><rect x="246.0" y="220.00" width="16" height="0.62" rx="1.5" fill="#60a5fa"/><text x="254.0" y="229.6" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-0.1B</text><rect x="264.0" y="220.00" width="16" height="0.51" rx="1.5" fill="#fbbf24"/><text x="272.0" y="229.5" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-0.1B</text><text x="246.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="383.0" y="84.15" width="16" height="135.85" rx="1.5" fill="#2dd4bf"/><text x="391.0" y="79.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$24.4B</text><rect x="401.0" y="217.36" width="16" height="2.64" rx="1.5" fill="#60a5fa"/><text x="409.0" y="212.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.5B</text><rect x="419.0" y="212.42" width="16" height="7.58" rx="1.5" fill="#fbbf24"/><text x="427.0" y="207.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.4B</text><text x="401.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="538.0" y="51.36" width="16" height="168.64" rx="1.5" fill="#2dd4bf"/><text x="546.0" y="46.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$30.3B</text><rect x="556.0" y="217.84" width="16" height="2.16" rx="1.5" fill="#60a5fa"/><text x="564.0" y="212.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.4B</text><rect x="574.0" y="219.14" width="16" height="0.86" rx="1.5" fill="#fbbf24"/><text x="582.0" y="214.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.2B</text><text x="556.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="693.0" y="27.60" width="16" height="192.40" rx="1.5" fill="#2dd4bf"/><text x="701.0" y="22.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$34.5B</text><rect x="711.0" y="217.23" width="16" height="2.77" rx="1.5" fill="#60a5fa"/><text x="719.0" y="212.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.5B</text><rect x="729.0" y="218.84" width="16" height="1.16" rx="1.5" fill="#fbbf24"/><text x="737.0" y="213.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.2B</text><text x="711.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+17.04%</div><div class="sub">$18.4B &rarr; $34.5B; but growth has decelerated to just +9.92% TTM and +3.90% YoY in Q2 2026 &mdash; the opposite trend of Sea Limited elsewhere in this batch</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">Undefined &mdash; FY2021 operating income was negative (-$1.20B), so a standard growth-rate formula can't be computed across the sign change to FY2025's +$0.50B</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">Same issue &mdash; FY2021 FCF was -$1.09B, turning positive by FY2023; excluded from both the binary tally and the weighted Martinero calculation</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FCF turned positive in FY2023 ($1.76B) but has declined for two straight years since as capex has ramped &mdash; down to just $0.52B in FY2025, and essentially breakeven on a TTM basis ($99M).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-1.5B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$-1.0B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$-0.5B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$0.5B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$1.0B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$1.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$2.0B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="134.29" width="70" height="62.00" rx="2" fill="#f87171"/><text x="138.0" y="211.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-1.08B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="134.29" width="70" height="14.80" rx="2" fill="#f87171"/><text x="294.0" y="164.09" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.26B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="33.94" width="70" height="100.34" rx="2" fill="#34d399"/><text x="450.0" y="26.94" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.76B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="76.74" width="70" height="57.54" rx="2" fill="#34d399"/><text x="606.0" y="69.74" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.01B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="104.46" width="70" height="29.83" rx="2" fill="#34d399"/><text x="762.0" y="97.46" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.52B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A steady climb from -6.51% (FY2021) to a narrow but positive 1.44-1.94% band by FY2023-25 &mdash; genuine progress, though still far short of this framework's 20% bar, and the FY2026 fine (not shown) has since reversed it on a TTM basis.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><path d="M 50.00,173.47 L 247.50,93.87 L 445.00,60.80 L 642.50,69.60 L 840.00,67.47 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,173.47 L 247.50,93.87 L 445.00,60.80 L 642.50,69.60 L 840.00,67.47" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="173.47" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="93.87" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="60.80" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="69.60" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="67.47" r="3" fill="#2dd4bf"/><text x="50.00" y="163.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-6.51%</text><text x="247.50" y="83.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-0.54%</text><text x="445.00" y="50.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.94%</text><text x="642.50" y="59.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.28%</text><text x="840.00" y="57.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.44%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2023's net income ($1.36B) includes a one-time $861M deferred-tax valuation-allowance release, not repeatable operating profit &mdash; flagged here so the FY23 bar isn't read as a clean profitability jump. TTM capex was $1.33B (3.74% of TTM revenue).</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Coupang's fiscal quarters already align with the calendar (Jan-Dec fiscal year). Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 4, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$8.86B</b>, up just 3.90% YoY (the slowest quarter in Coupang's public history) but up ~10% on a constant-currency basis. The company posted an operating loss of $556M &mdash; its largest ever &mdash; driven primarily by the $410M Korea Personal Information Protection Commission fine over the November 2025 data breach (37M+ customers affected). Management stated the adjusted operating loss, excluding the fine, was $146M, and that "customers now spend above their pre-incident levels." Q1 2026 had already posted a smaller operating loss of $242M before the fine was recorded, pointing to real underlying margin softness alongside the one-off charge.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Revenue has been essentially flat in the $8.5-9.3B range for a full year &mdash; a clear deceleration from the double-digit sequential growth Coupang posted through FY2023-24.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$6.00B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$8.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$10.00B</text><rect x="103.0" y="49.52" width="70" height="170.48" rx="2" fill="#2dd4bf"/><text x="138" y="42.52" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.52B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="34.66" width="70" height="185.34" rx="2" fill="#2dd4bf"/><text x="294" y="27.66" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$9.27B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="43.30" width="70" height="176.70" rx="2" fill="#2dd4bf"/><text x="450" y="36.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.84B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="49.92" width="70" height="170.08" rx="2" fill="#2dd4bf"/><text x="606" y="42.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.50B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="42.88" width="70" height="177.12" rx="2" fill="#2dd4bf"/><text x="762" y="35.88" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.86B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (GAAP, $B)</div>
+    <div class="chart-sub">A clean run of small profits through Q3 2025 gave way to two straight quarters of losses in 2026, culminating in Q2's $556M loss (-6.28% margin) once the $410M fine hit &mdash; negative bars and margins shown below the zero line in red.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="190.0" x2="840" y2="190.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="194.0" text-anchor="end" font-size="11" fill="#64748b">$-0.6B</text><line x1="60" y1="161.7" x2="840" y2="161.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="165.7" text-anchor="end" font-size="11" fill="#64748b">$-0.4B</text><line x1="60" y1="133.3" x2="840" y2="133.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="137.3" text-anchor="end" font-size="11" fill="#64748b">$-0.2B</text><line x1="60" y1="105.0" x2="840" y2="105.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="76.7" x2="840" y2="76.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="80.7" text-anchor="end" font-size="11" fill="#64748b">$0.2B</text><line x1="60" y1="48.3" x2="840" y2="48.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.3" text-anchor="end" font-size="11" fill="#64748b">$0.4B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$0.6B</text><line x1="60" y1="105.0" x2="840" y2="105.0" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="83.89" width="70" height="21.11" rx="2" fill="#60a5fa"/><text x="138" y="76.89" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.15B</text><rect x="121.0" y="49.89" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="60.89" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1.8%</text><text x="138" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="82.05" width="70" height="22.95" rx="2" fill="#60a5fa"/><text x="294" y="75.05" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.16B</text><rect x="277.0" y="48.05" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="59.05" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1.8%</text><text x="294" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="103.87" width="70" height="1.13" rx="2" fill="#60a5fa"/><text x="450" y="96.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.01B</text><rect x="433.0" y="69.87" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="80.87" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">0.1%</text><text x="450" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="105.00" width="70" height="34.28" rx="2" fill="#f87171"/><text x="606" y="154.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.24B</text><rect x="589.0" y="160.28" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="171.28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-2.9%</text><text x="606" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="105.00" width="70" height="78.77" rx="2" fill="#f87171"/><text x="762" y="198.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.56B</text><rect x="745.0" y="204.77" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="215.77" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-6.3%</text><text x="762" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the entry-multiple signal for FY2023-25; the current 299.95x reading is not plotted below since FCF has collapsed to near zero ($99M TTM), making the multiple mathematically real but not a meaningful cheap/expensive signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End (FY23-25 only)</div>
+    <div class="chart-sub">P/FCF has risen every year as FCF has shrunk against a still-substantial market cap: 16.5x (FY23) &rarr; 39.3x (FY24) &rarr; 82.5x (FY25). The current multiple (299.95x, off this chart's scale) reflects TTM FCF of just $99M &mdash; effectively breakeven &mdash; not a genuine re-rating.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">100x</text><line x1="50.0" y1="127.81" x2="840.0" y2="127.81" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="123.81" text-anchor="end" font-size="10" fill="#94a3b8">FY23-25 avg: 46.1x</text><path d="M 50.0,187.04 L 445.0,141.48 L 840.0,54.90" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="187.04" r="3" fill="#a78bfa"/><text x="50.0" y="177.04" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.5x</text><circle cx="445.0" cy="141.48" r="3" fill="#a78bfa"/><text x="445.0" y="131.48" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.3x</text><circle cx="840.0" cy="54.90" r="3" fill="#a78bfa"/><text x="840.0" y="44.90" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">82.5x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Coupang holds $6.11B in cash against $5.63B of total debt, a thin net cash position of $477M ($0.27/share) &mdash; down sharply from $2.46B at FY2023 as capex and international expansion have consumed cash. Current ratio of 0.87 and quick ratio of 0.61 are both below 1.0. Debt/Equity of 1.89 is the highest leverage ratio in this batch. Altman Z-Score of 3.27 and Piotroski F-Score of 4 are both moderate, not alarming, but clearly weaker than every other name covered here.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 160.95,29.82 L141.11,61.05 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M160.95,29.82 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 141.11,61.05 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 9.01% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 90.99% (institutional ownership alone 61.45%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> founder and CEO Bom Kim's economic stake is a modest ~9-11% by share count, but Coupang's Class B shares carry 29x the voting power of Class A shares, giving Kim control of roughly 76% of the combined vote &mdash; among the most concentrated founder voting control of any company on this site. A US securities class action tied to the data breach and its market impact is ongoing; Kim himself has faced public criticism in Korea for what critics call limited personal accountability for the breach given his outsized control.</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. EBIT and FCF CAGR (#2, #4) are marked N/A because FY2021 was a loss year for both, making the standard growth-rate formula mathematically undefined across the sign change to a positive FY2025.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Coupang</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+17.04% &mdash; but decelerating sharply: +9.92% TTM, +3.90% YoY in Q2 2026, the slowest quarter in Coupang's public history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>Undefined &mdash; FY2021 op income was -$1.20B, turning positive (+$0.50B) by FY2025; no valid CAGR across a sign change</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>1.44% (FY2025, GAAP) &mdash; a real improvement from -6.51% in FY2021, but TTM margin has since reversed to -1.70% on the Q2 2026 fine and softer underlying results</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>Undefined &mdash; FY2021 FCF was -$1.09B, turning positive by FY2023; same sign-change issue as EBIT CAGR</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Coupang is Korea's clear #1 e-commerce platform, 37.7% usage share vs Naver's 27.2%, built on its Rocket Delivery fulfillment network</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a genuinely multi-way contested market (Coupang, Naver, SSG.com, Lotte/Shinsegae, plus AliExpress/Temu cross-border pressure)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC -21.79% vs WACC 9.09% &mdash; deeply negative and well below WACC, the weakest reading anywhere in this batch, driven by the TTM net loss</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of $477M &mdash; a thin but still-positive buffer, down sharply from $2.46B at FY2023</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>-16.4% TTM ($99M FCF / -$603M EBIT) &mdash; a negative-EBIT scenario the metric wasn't designed for; scores at the bottom of the band</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 299.95x vs a 46.1x FY23-25 average; ratio &asymp;6.5, an extreme reading driven by FCF collapsing to near zero, not a genuine re-rating</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Basic shares roughly flat, +2.7% total FY2021-Q2'26, with recent quarters now net negative (-1.94% YoY, -3.02% at Q2'26) as buybacks have picked up</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>9.01% of shares outstanding; founder Bom Kim separately controls ~76% of voting power via 29-to-1 Class B super-voting shares</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.74% of revenue (TTM) &mdash; inside this framework's asset-light band despite heavy fulfillment-network investment</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Coupang's core market position is genuinely unshaken: it remains Korea's clear #1 e-commerce platform with a real logistics moat in Rocket Delivery, and management says the November 2025 breach did not meaningfully dent customer spending. Revenue growth, while decelerating, remains positive, the balance sheet is still technically net-cash, share count is roughly flat with recent buybacks, and capex intensity remains reasonable for a company still building out fulfillment infrastructure.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is genuinely the weakest financial picture in this e-commerce batch outside Alibaba: ROIC deeply negative, FCF collapsing toward breakeven, and revenue growth decelerating to the slowest pace in Coupang's history even before the fine hit. The $410M fine is disclosed and one-off, but Q1 2026's loss predates it, meaning real margin pressure exists independent of the breach. Net cash has shrunk fast, and founder Bom Kim's 76% voting control via super-voting shares concentrates governance risk in a way that drew public criticism after the breach.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 4-30, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), companiesmarketcap.com (annual price-performance history), Korea Herald/Korea JoongAng Daily/Seoul Economic Daily/BigGo Finance reporting on Q2 2026 earnings and the PIPC data-breach fine, Statista/Digital in Asia reporting on Korea e-commerce market share, Pestel-Analysis/Korea Times reporting on Coupang's dual-class ownership structure.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. FY-end share prices for FY2021-2024 are back-calculated from published annual percentage returns rather than sourced as raw closing quotes, and should be read as approximate. WACC (9.09%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Coupang &mdash; NYSE, USD share price trend. Points shown are fiscal year-end closes (back-calculated from published annual % returns) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Coupang &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Coupang IPO'd at $35 in March 2021 and traded as high as $50.45 that same month, but has never sustained those early highs: a rough FY2021-22 (down to a $9.35 intraday low in May 2022), a slow FY2023-24 recovery, a modest FY2025 gain, and a fresh -29.97% YTD decline through 2026 as growth has decelerated and the breach fine has weighed on results.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140.0" x2="680" y2="140.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100.0" x2="680" y2="100.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60.0" x2="680" y2="60.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="20.0" x2="680" y2="20.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -10.5%</text><path d="M 46.0,40.87 L 172.8,108.74 L 299.6,102.68 L 426.4,71.94 L 553.2,65.64 L 680.0,99.92 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,40.87 L 172.8,108.74 L 299.6,102.68 L 426.4,71.94 L 553.2,65.64 L 680.0,99.92" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="40.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="30.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$28.70</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="108.74" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="98.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$14.70</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="102.68" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="92.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.95</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="71.94" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="61.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$22.29</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="65.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="55.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$23.59</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="99.92" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="89.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$16.52</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2024 are back-calculated from companiesmarketcap.com's published annual percentage-return series, anchored to the current price; FY2025 close and the current price are more directly sourced. Treat FY2021-24 points as approximate. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

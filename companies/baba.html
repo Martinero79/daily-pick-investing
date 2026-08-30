@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alibaba Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; China E-Commerce / Cloud Platform</div>
+  <h1>Alibaba</h1>
+  <div class="badges">
+    <span class="badge">NYSE: BABA (ADR), USD &middot; financials reported in CNY</span>
+    <span class="badge">FY ends Mar 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1999 &middot; Hangzhou, China</span>
+    <span class="badge warn">GAAP operating margin cratered to 6.15% in FY2026 (from 15.22% in FY2025) as Alibaba committed &yen;50B (&asymp;$7B) over 12 months to a quick-commerce subsidy war against Meituan and JD.com &mdash; a deliberate, large strategic bet, not a one-off charge, and the single biggest swing factor in this scorecard.</span>
+  </div>
+  <div class="price">$118.90</div>
+  <div class="price-sub">Close Aug 28, 2026 (NYSE ADR), +2.23% on the day &middot; Mkt cap &asymp;$294.81B (EV $277.26B) &middot; down -2.72% over the last 52 weeks, well off its Sep 2025 high near $177</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> JD.com, PDD Holdings/Pinduoduo, Meituan, Douyin (ByteDance) &mdash; Alibaba's Taobao+Tmall remain the largest single e-commerce group in China (&asymp;40-46% of GMV) but the market has become genuinely four-way contested, unlike a decade ago</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&yen;1,023.7B</div>
+      <div class="sub">+2.74% YoY (CNY); TTM &yen;1,045.0B, +4.42% YoY &mdash; growth has slowed to low-single-digits</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026, GAAP)</div>
+      <div class="val" style="color:#f87171;">6.15%</div>
+      <div class="note">Down sharply from 15.22% in FY2025. TTM is even lower at 4.56%, reflecting the ongoing quick-commerce subsidy war rather than a structural cost problem in core commerce/cloud.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">3.08% / 6.51%</div>
+      <div class="note">ROIC doesn't even clear WACC right now &mdash; a genuine value-destruction signal on a trailing basis, though heavily depressed by the current investment cycle.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Free Cash Flow (TTM)</div>
+      <div class="val" style="color:#f87171;">-$11.38B</div>
+      <div class="sub">Turned negative as capex more than tripled (TTM capex $23.05B) funding AI/cloud infrastructure &mdash; consistent with the sector-wide hyperscaler capex supercycle</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">31/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/13 criteria met, 2 N/A &mdash; by far the weakest scorecard in this batch, driven almost entirely by two live, real events (the subsidy war and the AI capex ramp) rather than a broken business model.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 202.34,88.24 L166.19,97.06 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M202.34,88.24 A95,95 0 0 1 41.60,175.96 L74.13,153.90 A58,58 0 0 0 166.19,97.06 Z" fill="#f87171"/><path d="M41.60,175.96 A95,95 0 0 1 27.16,73.90 L69.86,88.24 A58,58 0 0 0 74.13,153.90 Z" fill="#64748b"/><path d="M27.16,73.90 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 69.86,88.24 Z" fill="#34d399"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (market share, net debt/EBITDA, share count trend)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 8 (revenue CAGR, EBIT CAGR, operating margin, market concentration, ROIC/WACC, FCF conversion, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (FCF CAGR, entry multiple &mdash; both undermined by the same negative-FCF distortion)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Valuation signal: PEG ratio of just <b style="color:#fbbf24;">0.44</b> &mdash; the market is pricing in much less growth than analysts currently forecast (12% 3-yr revenue growth consensus)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Alibaba is the most complicated name in this batch, and arguably on the whole site: a genuinely dominant, decades-old platform business currently absorbing two large, self-inflicted-but-strategic hits to its numbers at once. First, a quick-commerce subsidy war: Alibaba committed roughly &yen;50B ($7B) over 12 months to instant-delivery incentives via Ele.me and Taobao Instant Commerce, directly targeting Meituan's leadership, with JD.com fighting on the same front. That single decision took GAAP operating margin from a healthy 15.22% (FY2025) to 6.15% (FY2026) and just 4.56% on a trailing basis &mdash; the entire margin story for this scorecard. Second, an AI/cloud capex ramp: capital expenditure has more than tripled from &yen;32B (FY2024) to over &yen;126B (FY2026), pushing free cash flow negative for the first time in years, mirroring the same infrastructure investment cycle every major cloud provider is running through right now. Set against this: Alibaba remains net cash ($17.5B), has cut its share count by over 13% since FY2022, and trades at a PEG ratio of just 0.44 &mdash; genuinely cheap if you believe both the margin compression and the capex cycle are temporary rather than structural. The market concentration story has also shifted: Taobao+Tmall's combined &asymp;40-46% GMV share is still the largest in China, but PDD and Douyin have both grown into real, double-digit-share competitors, meaning this is no longer the uncontested moat it was a decade ago.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q1 FY2027 (three months to Jun 30, 2026, reported Aug 20, 2026) and spot price as of Aug 28, 2026 close. Financial statements are reported in CNY (Alibaba's functional currency); market cap, share price, and valuation ratios are in USD as the ADR trades on the NYSE.
+  </div>
+
+  <div class="bignum-corner">3/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in CNY billions (Alibaba's reporting currency). Fiscal year ends Mar 31 (FY2026 = year ended Mar 31, 2026). FY2026's operating income collapse reflects the quick-commerce subsidy war (see page 1), not a one-off accounting item.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual (&yen;B)</div>
+    <div class="chart-sub">Revenue growth has slowed to low-single-digits. Operating income climbed steadily through FY2025, then fell by more than half in FY2026 as the subsidy war ramped up; net income held up better, cushioned by investment gains and interest income unrelated to core operations.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">¥0B</text><line x1="65" y1="188.3" x2="840" y2="188.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="192.3" text-anchor="end" font-size="11" fill="#64748b">¥200B</text><line x1="65" y1="156.7" x2="840" y2="156.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="160.7" text-anchor="end" font-size="11" fill="#64748b">¥400B</text><line x1="65" y1="125.0" x2="840" y2="125.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="129.0" text-anchor="end" font-size="11" fill="#64748b">¥600B</text><line x1="65" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="97.3" text-anchor="end" font-size="11" fill="#64748b">¥800B</text><line x1="65" y1="61.7" x2="840" y2="61.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="65.7" text-anchor="end" font-size="11" fill="#64748b">¥1000B</text><line x1="65" y1="30.0" x2="840" y2="30.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="34.0" text-anchor="end" font-size="11" fill="#64748b">¥1200B</text><rect x="118.5" y="84.9" width="16" height="135.1" rx="1.5" fill="#2dd4bf"/><text x="126.5" y="79.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥853B</text><rect x="134.5" y="204.8" width="16" height="15.2" rx="1.5" fill="#60a5fa"/><text x="142.5" y="199.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥96B</text><rect x="150.5" y="210.2" width="16" height="9.8" rx="1.5" fill="#fbbf24"/><text x="158.5" y="205.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥62B</text><text x="142.5" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="273.5" y="82.4" width="16" height="137.6" rx="1.5" fill="#2dd4bf"/><text x="281.5" y="77.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥869B</text><rect x="289.5" y="203.2" width="16" height="16.8" rx="1.5" fill="#60a5fa"/><text x="297.5" y="198.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥106B</text><rect x="305.5" y="208.4" width="16" height="11.6" rx="1.5" fill="#fbbf24"/><text x="313.5" y="203.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥73B</text><text x="297.5" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="428.5" y="71.0" width="16" height="149.0" rx="1.5" fill="#2dd4bf"/><text x="436.5" y="66.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥941B</text><rect x="444.5" y="198.0" width="16" height="22.0" rx="1.5" fill="#60a5fa"/><text x="452.5" y="193.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥139B</text><rect x="460.5" y="207.3" width="16" height="12.7" rx="1.5" fill="#fbbf24"/><text x="468.5" y="202.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥80B</text><text x="452.5" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="583.5" y="62.3" width="16" height="157.7" rx="1.5" fill="#2dd4bf"/><text x="591.5" y="57.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥996B</text><rect x="599.5" y="195.9" width="16" height="24.1" rx="1.5" fill="#60a5fa"/><text x="607.5" y="190.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥152B</text><rect x="615.5" y="199.6" width="16" height="20.4" rx="1.5" fill="#fbbf24"/><text x="623.5" y="194.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥129B</text><text x="607.5" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text><rect x="738.5" y="57.9" width="16" height="162.1" rx="1.5" fill="#2dd4bf"/><text x="746.5" y="52.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥1024B</text><rect x="754.5" y="210.0" width="16" height="10.0" rx="1.5" fill="#60a5fa"/><text x="762.5" y="205.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥63B</text><rect x="770.5" y="203.2" width="16" height="16.8" rx="1.5" fill="#fbbf24"/><text x="778.5" y="198.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">¥106B</text><text x="762.5" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY22-26)</div><div class="val" style="color:#f87171;">+4.66%</div><div class="sub">&yen;853B &rarr; &yen;1,024B; growth has slowed materially from Alibaba's earlier hyper-growth years</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY22-26)</div><div class="val" style="color:#f87171;">-10.12%</div><div class="sub">&yen;96B &rarr; &yen;63B; entirely a function of the FY2026 subsidy-war margin hit, not a multi-year decline</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">FCF turned negative in FY2026 (-&yen;50B); a CAGR isn't mathematically meaningful across a sign change</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual (&yen;B)</div>
+    <div class="chart-sub">FCF grew for three straight years, then reversed hard in FY2026 as capex more than tripled to fund AI/cloud infrastructure and quick-commerce logistics &mdash; the same underlying capex story as the operating-margin hit, seen from the cash-flow side.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">¥-100B</text><line x1="65" y1="176.7" x2="840" y2="176.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="180.7" text-anchor="end" font-size="11" fill="#64748b">¥-50B</text><line x1="65" y1="133.3" x2="840" y2="133.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="137.3" text-anchor="end" font-size="11" fill="#64748b">¥0B</text><line x1="65" y1="90.0" x2="840" y2="90.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="94.0" text-anchor="end" font-size="11" fill="#64748b">¥50B</text><line x1="65" y1="46.7" x2="840" y2="46.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="50.7" text-anchor="end" font-size="11" fill="#64748b">¥100B</text><line x1="65" y1="3.3" x2="840" y2="3.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="7.3" text-anchor="end" font-size="11" fill="#64748b">¥150B</text><rect x="116.0" y="72.9" width="44" height="60.4" rx="2" fill="#34d399"/><text x="138.0" y="65.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥89B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="272.0" y="19.6" width="44" height="113.7" rx="2" fill="#34d399"/><text x="294.0" y="12.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥165B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="428.0" y="24.4" width="44" height="108.9" rx="2" fill="#34d399"/><text x="450.0" y="17.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥151B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="584.0" y="99.1" width="44" height="34.2" rx="2" fill="#34d399"/><text x="606.0" y="92.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥78B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text><rect x="740.0" y="133.3" width="44" height="21.7" rx="2" fill="#34d399" opacity="0.85"/><text x="762.0" y="170.0" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">¥-50B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A steady climb from 11.31% to 15.22% through FY2025, then a sharp reversal to 6.15% in FY2026 as subsidy spending hit the P&amp;L directly. Worth watching whether this recovers once the subsidy war cools, as management has signaled it's beginning to.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M 50.00,106.90 L 247.50,97.80 L 445.00,72.60 L 642.50,67.80 L 840.00,158.50 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,106.90 L 247.50,97.80 L 445.00,72.60 L 642.50,67.80 L 840.00,158.50" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="106.90" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="97.80" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="72.60" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="67.80" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="158.50" r="3" fill="#2dd4bf"/><text x="50.00" y="96.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.31%</text><text x="247.50" y="87.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.22%</text><text x="445.00" y="72.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.74%</text><text x="642.50" y="57.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.22%</text><text x="840.00" y="148.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.15%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $23.05B (14.98% of TTM revenue) &mdash; a marked step-up from the low-single-digit-percent capex intensity of a typical asset-light platform business, driven by AI/cloud data-center buildout. Net cash remains a healthy $17.54B.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Alibaba reports quarterly on a Apr-Mar fiscal year; quarters below are labeled by calendar quarter-end for clarity. Latest reported period: Q1 FY2027 (three months to Jun 30, 2026, reported Aug 20, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q1 FY2027 Headlines (quarter ended Jun 30, 2026)</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&yen;269.0B</b>, up 8.60% YoY &mdash; the fastest quarterly growth in over a year, helped by cloud intelligence revenue (up roughly 27% YoY) and international commerce. Operating income recovered to &yen;19.6B (7.29% margin) from March quarter's crisis-low &yen;2.5B (1.01% margin), suggesting the worst of the subsidy-war margin hit may be behind it, though margins remain far below the mid-teens levels seen through FY2025. Alibaba's cloud segment continues to scale (&yen;158B annualized run-rate) as the company positions itself as China's leading AI infrastructure provider via its Qwen model family. Management has signaled a gradual reduction in quick-commerce subsidy intensity as the market consolidates, though JD.com and Meituan have not fully stood down.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Jun'25&ndash;Jun'26, &yen;B)</div>
+    <div class="chart-sub">Growth has re-accelerated to high-single-digits in the most recent quarter after a soft stretch in calendar 2025, helped by cloud and international commerce.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">¥0B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">¥50B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">¥100B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">¥150B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">¥200B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">¥250B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">¥300B</text><rect x="103.0" y="54.90" width="70" height="165.10" rx="2" fill="#2dd4bf"/><text x="138" y="47.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥248B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Jun'25</text><rect x="259.0" y="54.80" width="70" height="165.20" rx="2" fill="#2dd4bf"/><text x="294" y="47.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥248B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Sep'25</text><rect x="415.0" y="30.10" width="70" height="189.90" rx="2" fill="#2dd4bf"/><text x="450" y="23.10" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥285B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Dec'25</text><rect x="571.0" y="57.75" width="70" height="162.25" rx="2" fill="#2dd4bf"/><text x="606" y="50.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥243B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Mar'26</text><rect x="727.0" y="40.70" width="70" height="179.30" rx="2" fill="#2dd4bf"/><text x="762" y="33.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥269B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Jun'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (GAAP, &yen;B)</div>
+    <div class="chart-sub">The subsidy war's impact is visible almost quarter by quarter: margin fell from 14.13% to a 1.01% trough in the March 2026 quarter, then recovered to 7.29% as of June 2026 &mdash; still well below the mid-teens levels seen a year earlier.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">¥0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">¥10.0B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">¥20.0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">¥30.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">¥40.0B</text><rect x="103.0" y="45.06" width="70" height="174.94" rx="2" fill="#60a5fa"/><text x="138" y="38.06" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥35.0B</text><rect x="121.0" y="11.06" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="23.06" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">14.1%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Jun'25</text><rect x="259.0" y="193.18" width="70" height="26.82" rx="2" fill="#60a5fa"/><text x="294" y="186.18" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥5.4B</text><rect x="277.0" y="159.18" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="171.18" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">2.2%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Sep'25</text><rect x="415.0" y="119.20" width="70" height="100.80" rx="2" fill="#60a5fa"/><text x="450" y="112.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥20.2B</text><rect x="433.0" y="85.20" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="97.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">7.1%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Dec'25</text><rect x="571.0" y="207.65" width="70" height="12.35" rx="2" fill="#60a5fa"/><text x="606" y="200.65" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥2.5B</text><rect x="589.0" y="173.65" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="185.65" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1.0%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Mar'26</text><rect x="727.0" y="121.91" width="70" height="98.09" rx="2" fill="#60a5fa"/><text x="762" y="114.91" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">¥19.6B</text><rect x="745.0" y="87.91" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="99.91" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">7.3%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Jun'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">P/FCF is not usable as the entry-multiple signal since TTM FCF is negative; trailing P/E is shown instead as the best available proxy, alongside forward P/E and PEG for context.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E by Quarter (proxy for entry multiple)</div>
+    <div class="chart-sub">Current 21.3x sits mid-range of the last five quarters, but a forward P/E of just 14.68x and a PEG ratio of 0.44 both suggest the market is pricing in meaningfully less growth than analyst consensus (12% 3-yr revenue growth) currently expects.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.3" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><path d="M50.0,135.07 L247.5,58.73 L445.0,44.40 L642.5,90.13 L840.0,78.20" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="135.07" r="3" fill="#a78bfa"/><circle cx="247.5" cy="58.73" r="3" fill="#a78bfa"/><circle cx="445.0" cy="44.40" r="3" fill="#a78bfa"/><circle cx="642.5" cy="90.13" r="3" fill="#a78bfa"/><circle cx="840.0" cy="78.20" r="3.5" fill="#a78bfa"/><text x="50.0" y="125.07" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.7x</text><text x="247.5" y="48.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.2x</text><text x="445.0" y="34.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.3x</text><text x="642.5" y="80.13" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.5x</text><text x="840.0" y="68.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.3x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Jun'25</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Sep'25</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Dec'25</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Mar'26</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Jun'26</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Alibaba carries $39.24B of total debt against $56.78B of cash &amp; investments, a net cash position of $17.54B ($7.08/share). Current ratio of 1.36 and quick ratio of 0.72 are reasonable. Despite the margin and FCF pressure, the balance sheet gives real flexibility to keep funding both the subsidy war and the AI/cloud buildout without needing external capital. The company's Altman Z-Score of 2.92 sits just below the conventional "safe" threshold of 3.0 &mdash; typical for an asset-heavy conglomerate structure rather than a distress signal, but worth being aware of.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 119.77,15.50 L115.97,52.31 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M119.77,15.50 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 115.97,52.31 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 1.64% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 98.36% (institutional ownership alone 38.89%, reflecting a large untracked retail/sovereign-fund float typical of a Chinese ADR)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance &amp; structural note:</b> founder Jack Ma stepped back from operational control years ago and holds a small remaining stake; Alibaba is run by a professional management team under Chairman Joe Tsai and CEO Eddie Wu. As with all China-based ADRs, US investors technically own shares in an offshore holding company with contractual (VIE-like or direct-ownership, depending on entity) rights to the underlying Chinese operating businesses, plus exposure to Chinese regulatory risk that doesn't apply to the rest of this batch &mdash; a structural consideration distinct from the operational and financial risks covered elsewhere in this dashboard.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. FCF CAGR (#4) and entry multiple (#10) are marked N/A because TTM free cash flow is negative, and both are excluded from the weighted Martinero Index.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Alibaba</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+4.66% &mdash; growth has slowed materially from Alibaba's hyper-growth years</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY22-26)</td><td>&ge;15%</td><td>-10.12% &mdash; entirely a function of the FY2026 subsidy-war margin hit</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>6.15% (FY2026, GAAP), down from 15.22% a year earlier</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>N/A &mdash; FCF turned negative in FY2026 (-&yen;50B); CAGR not meaningful across a sign change</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Taobao+Tmall combined remain the largest single e-commerce group in China at &asymp;40-46% GMV share, still #1 but genuinely contested</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a fragmented, four-way contested market (Alibaba, JD ~24-25%, PDD ~20-30% and rising, Douyin fast-growing)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 3.08% vs WACC 6.51% &mdash; doesn't even clear WACC on a trailing basis</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of $17.54B &mdash; comfortably in the strongest band despite the margin pressure elsewhere</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>-162.34% TTM &mdash; deeply negative, directly reflecting the capex-driven FCF reversal</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; P/FCF not usable given negative TTM FCF; qualitatively, a 0.44 PEG and 14.68x forward P/E both suggest a reasonably cheap entry point (see page 4)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;2,695M &rarr; 2,334M basic shares since FY2022 (down &asymp;13.4%), funded by buybacks despite the margin pressure</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>1.64% of shares outstanding &mdash; founder Jack Ma has stepped back from both operations and most of his stake</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>14.98% of revenue (TTM) &mdash; a marked step-up from Alibaba's historically asset-light profile, driven by AI/cloud infrastructure investment</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Alibaba remains the largest single e-commerce and cloud group in China by revenue, with a comfortable net-cash balance sheet, a shrinking share count, and a genuinely low valuation on a PEG basis (0.44) if the current margin compression proves temporary. Quarterly operating margin has already begun recovering from its March 2026 trough (1.01% &rarr; 7.29%), and cloud revenue growth is re-accelerating on the back of Alibaba's own AI model family.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Two live, ongoing events are doing almost all of the damage to this scorecard: the quick-commerce subsidy war against Meituan and JD.com, and a tripling of capex to fund AI/cloud infrastructure that's pushed FCF negative. Neither is necessarily permanent, but neither has fully resolved either &mdash; watch whether GAAP operating margin keeps recovering quarter over quarter, and whether capex growth moderates relative to revenue. Add to that genuine, multi-way competitive erosion in e-commerce (PDD and Douyin both now real, growing rivals) and the structural China-ADR/regulatory considerations noted on page 4.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 20-29, 2026. Sources: stockanalysis.com (financials, ratios, statistics, share price history, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), digrin.com (monthly price history), Alibaba Q1 FY2027 earnings release (Aug 20, 2026), South China Morning Post and TechBuzzChina reporting on the China quick-commerce subsidy war, market-share research (Statista, ECDB) on China e-commerce GMV.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Financial statements are reported in CNY; market cap, price and per-share valuation ratios are in USD as traded (NYSE ADR). WACC (6.51%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Alibaba &mdash; NYSE ADR, USD share price trend. Points shown are fiscal year-end closes (Mar 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Alibaba &mdash; Fiscal Year-End Close (NYSE ADR, USD)</div>
+    <div class="chart-sub">A genuine round trip: a slide to $72 by FY2024 amid China regulatory crackdowns and macro weakness, a recovery to $132 by FY2025, and a pullback since as the subsidy war and capex ramp have weighed on sentiment. The naive 5-year CAGR looks fine, but it masks a highly volatile path.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="142.0" x2="680" y2="142.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="104.0" x2="680" y2="104.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="66.0" x2="680" y2="66.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +1.8%</text><path d="M 46.0,89.94 L 172.8,103.59 L 299.6,165.08 L 426.4,41.63 L 553.2,55.59 L 680.0,69.12 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,89.94 L 172.8,103.59 L 299.6,165.08 L 426.4,41.63 L 553.2,55.59 L 680.0,69.12" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="89.94" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="79.94" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$108.80</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="172.8" cy="103.59" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="93.59" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$102.18</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="299.6" cy="165.08" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="155.08" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$72.36</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="426.4" cy="41.63" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="31.63" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$132.23</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="553.2" cy="55.59" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="45.59" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$125.46</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text><circle cx="680.0" cy="69.12" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="59.12" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$118.90</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes and the current price are direct quotes for NYSE: BABA (digrin.com / stockanalysis.com, sourced from underlying market data providers). 5-Yr CAGR is computed FY22 close to current (naive span). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

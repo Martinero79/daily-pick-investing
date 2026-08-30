@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sea Limited Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Southeast Asia E-Commerce, Digital Entertainment &amp; Fintech</div>
+  <h1>Sea Limited</h1>
+  <div class="badges">
+    <span class="badge">NYSE: SE, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2009 &middot; Singapore (HQ)</span>
+    <span class="badge star">A genuine three-business turnaround story: Shopee (#1 in SE Asia e-commerce), Garena (Free Fire), and Monee (digital financial services) all now GAAP operating-profitable at the same time for the first time in the company's history.</span>
+  </div>
+  <div class="price">$119.36</div>
+  <div class="price-sub">Close Aug 28, 2026 (NYSE), +0.88% on the day &middot; Mkt cap $73.11B (EV $68.13B) &middot; down -34.74% over the last 52 weeks, but up sharply since the Aug 11, 2026 Q2 earnings beat (+14.6% that day)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> TikTok Shop, Lazada (Alibaba-backed) and Tokopedia in e-commerce; Tencent-backed rivals in mobile gaming; a wide field of regional banks/fintechs in digital financial services. Also expanding Shopee into Brazil and the rest of Latin America, competing directly with Amazon and MercadoLibre (also covered in this batch).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$27.72B</div>
+      <div class="sub">+43.06% YoY (TTM); FY2025 was $22.94B, +36.38% YoY &mdash; growth has been re-accelerating, not slowing</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (TTM, GAAP)</div>
+      <div class="val" style="color:#fbbf24;">8.24%</div>
+      <div class="note">Up from -15.90% in FY2021 &mdash; a genuine turnaround from years of losses, but still well below this framework's 20% bar and thin next to the FCF margin (15.17%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">21.65% / 11.90%</div>
+      <div class="note">A real 9.75-point spread &mdash; ROIC comfortably clears both the 15% bar and Sea's own cost of capital.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val" style="color:#34d399;">$4.97B</div>
+      <div class="sub">$8.12/share &mdash; balance sheet has stayed net-cash throughout the turnaround</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">72/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/13 criteria met, 4 not met, 2 N/A &mdash; a solid, middle-of-pack score reflecting real quality tempered by thin margins and share dilution.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 40.08,182.28 L73.63,155.71 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M40.08,182.28 A95,95 0 0 1 23.68,111.94 L65.03,102.13 A58,58 0 0 0 73.63,155.71 Z" fill="#f87171"/><path d="M23.68,111.94 A95,95 0 0 1 27.16,73.90 L69.86,88.24 A58,58 0 0 0 65.03,102.13 Z" fill="#64748b"/><path d="M27.16,73.90 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 69.86,88.24 Z" fill="#34d399"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (revenue CAGR, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (operating margin, market concentration, entry multiple, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both undefined because FY2021 was a loss year, making a standard growth-rate calculation mathematically meaningless)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Insiders (founders + officers) own <b style="color:#fbbf24;">14.06%</b> of shares outstanding &mdash; founder Forrest Li also holds separate outsized voting control via multi-class shares</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Sea Limited's story is a genuine, multi-year turnaround rather than a straightforward growth or value case. Shopee has grown into the clear #1 e-commerce platform across Southeast Asia (roughly 52-53% of platform GMV, well ahead of TikTok Shop and Lazada), Garena's Free Fire remains a top mobile game franchise, and Monee (formerly SeaMoney) has scaled its consumer credit book to $11.1 billion. For years all three ran at a loss while Sea burned cash to win share; FY2021 group operating margin was -15.90%. That has now genuinely reversed: TTM operating margin is 8.24%, free cash flow has compounded from -$564M (FY2021) to $4.51B (FY2025), and revenue growth has actually re-accelerated to +43% TTM even at a much larger base. The catch is that GAAP profitability, while real, is still thin relative to the cash generation, share count keeps drifting upward from stock-based comp, and Southeast Asian e-commerce is a genuinely three-way contested market with TikTok Shop growing 40-55% a year and closing the gap. Sea is also pushing Shopee into Brazil and the rest of Latin America with a new "Turbo Delivery" service explicitly aimed at Amazon and MercadoLibre &mdash; a direct overlap with two other names in this dashboard batch.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 30, 2026, reported Aug 11, 2026) and spot price as of Aug 28, 2026 close. Sea reports in USD, so unlike Alibaba and PDD Holdings elsewhere in this batch, no currency-conversion convention is needed here.
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. Fiscal year is calendar year (Jan-Dec). FY2021-22 were loss years across operating income, net income and free cash flow; FY2023 marked the turn to sustained profitability.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual ($B)</div>
+    <div class="chart-sub">Revenue has grown every year, including through the loss years. Operating income and net income flipped from meaningfully negative (FY2021-22) to solidly positive by FY2025 &mdash; negative bars for FY2021-22 are shown below the zero line in red.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="65" y1="181.0" x2="840" y2="181.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="185.0" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="65" y1="142.0" x2="840" y2="142.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="146.0" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="65" y1="103.0" x2="840" y2="103.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="107.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="65" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="68.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="65" y1="25.0" x2="840" y2="25.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="29.0" text-anchor="end" font-size="11" fill="#64748b">$25B</text><rect x="73.0" y="142.35" width="16" height="77.65" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="137.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$10.0B</text><rect x="91.0" y="220.00" width="16" height="12.35" rx="1.5" fill="#60a5fa"/><text x="99.0" y="241.3" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.6B</text><rect x="109.0" y="220.00" width="16" height="15.97" rx="1.5" fill="#fbbf24"/><text x="117.0" y="245.0" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-2.0B</text><text x="91.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="228.0" y="122.89" width="16" height="97.11" rx="1.5" fill="#2dd4bf"/><text x="236.0" y="117.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$12.4B</text><rect x="246.0" y="220.00" width="16" height="8.84" rx="1.5" fill="#60a5fa"/><text x="254.0" y="237.8" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.1B</text><rect x="264.0" y="220.00" width="16" height="12.88" rx="1.5" fill="#fbbf24"/><text x="272.0" y="241.9" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.7B</text><text x="246.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="383.0" y="118.10" width="16" height="101.90" rx="1.5" fill="#2dd4bf"/><text x="391.0" y="113.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$13.1B</text><rect x="401.0" y="217.32" width="16" height="2.68" rx="1.5" fill="#60a5fa"/><text x="409.0" y="212.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.3B</text><rect x="419.0" y="218.82" width="16" height="1.18" rx="1.5" fill="#fbbf24"/><text x="427.0" y="213.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.2B</text><text x="401.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="538.0" y="88.80" width="16" height="131.20" rx="1.5" fill="#2dd4bf"/><text x="546.0" y="83.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$16.8B</text><rect x="556.0" y="214.84" width="16" height="5.16" rx="1.5" fill="#60a5fa"/><text x="564.0" y="209.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.7B</text><rect x="574.0" y="216.54" width="16" height="3.46" rx="1.5" fill="#fbbf24"/><text x="582.0" y="211.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.4B</text><text x="556.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="693.0" y="41.08" width="16" height="178.92" rx="1.5" fill="#2dd4bf"/><text x="701.0" y="36.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$22.9B</text><rect x="711.0" y="204.52" width="16" height="15.48" rx="1.5" fill="#60a5fa"/><text x="719.0" y="199.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.0B</text><rect x="729.0" y="207.69" width="16" height="12.31" rx="1.5" fill="#fbbf24"/><text x="737.0" y="202.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.6B</text><text x="711.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+23.21%</div><div class="sub">$9.96B &rarr; $22.94B; growth has re-accelerated to +43% on a TTM basis, not decelerated</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">Undefined &mdash; FY2021 operating income was negative (-$1.58B), so a standard growth-rate formula can't be computed across the sign change to FY2025's +$1.99B</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">Same issue &mdash; FY2021 FCF was -$0.56B, turning positive by FY2023; excluded from both the binary tally and the weighted Martinero calculation</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FCF was negative through FY2021-22 (shown in red, below the zero line) before turning solidly positive from FY2023 onward, compounding to $4.51B by FY2025 &mdash; notably larger than GAAP net income every year, reflecting working-capital float and non-cash add-backs typical of a marketplace-plus-fintech model.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$1B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$2B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$3B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="220.00" width="70" height="22.56" rx="2" fill="#f87171"/><text x="138.0" y="257.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-0.56B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="220.00" width="70" height="79.20" rx="2" fill="#f87171"/><text x="294.0" y="256" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$-1.98B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="146.48" width="70" height="73.52" rx="2" fill="#34d399"/><text x="450.0" y="139.48" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.84B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="101.64" width="70" height="118.36" rx="2" fill="#34d399"/><text x="606.0" y="94.64" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.96B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="39.56" width="70" height="180.44" rx="2" fill="#34d399"/><text x="762.0" y="32.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$4.51B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A clean, uninterrupted five-year climb from -15.90% to 8.65% &mdash; the clearest visual evidence of the turnaround, though the current level still sits well below this framework's 20% bar.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-20%</text><line x1="50" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="42" y="195.4" text-anchor="end" font-size="11" fill="#64748b">-15%</text><line x1="50" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="166.9" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="138.3" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="109.7" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="42" y="81.1" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="52.6" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><path d="M 50.00,196.57 L 247.50,157.71 L 445.00,90.74 L 642.50,83.20 L 840.00,56.29 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,196.57 L 247.50,157.71 L 445.00,90.74 L 642.50,83.20 L 840.00,56.29" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="196.57" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="157.71" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="90.74" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="83.20" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="56.29" r="3" fill="#2dd4bf"/><text x="50.00" y="186.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-15.90%</text><text x="247.50" y="147.71" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-9.10%</text><text x="445.00" y="80.74" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.62%</text><text x="642.50" y="73.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">3.94%</text><text x="840.00" y="46.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.65%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $1.01B (3.64% of TTM revenue), just inside this framework's asset-light band. Net cash of $4.97B against total debt of $4.13B keeps the balance sheet net-cash even after years of turnaround-phase investment.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">Sea's fiscal quarters already align with the calendar (Jan-Dec fiscal year), so no relabeling is needed here. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 11, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$7.79B</b>, up 48.07% YoY and ahead of Wall Street estimates ($7.09B), sending the stock up 14.6% on the day. Shopee alone posted $5.6B in revenue with GMV up 28% and gross orders up 27%. Monee's loan book grew to $11.1B, up 62% YoY, with asset quality holding stable. Adjusted EBITDA rose 10.6% YoY to $917.2M, and management reiterated guidance to exceed $1B in full-year adjusted EBITDA. GAAP operating margin held essentially flat at 8.35%, continuing the stabilized run seen since Q2 2025 rather than either reaccelerating or slipping.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Five straight quarters of sequential revenue growth, with YoY growth actually accelerating into 2026 (38.2% in Q2'25 to 48.1% in Q2'26) even as the base gets larger.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.00B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$2.00B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$4.00B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$6.00B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$8.00B</text><rect x="103.0" y="88.52" width="70" height="131.48" rx="2" fill="#2dd4bf"/><text x="138" y="81.52" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$5.26B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="70.35" width="70" height="149.65" rx="2" fill="#2dd4bf"/><text x="294" y="63.35" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$5.99B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="48.70" width="70" height="171.30" rx="2" fill="#2dd4bf"/><text x="450" y="41.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$6.85B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="42.57" width="70" height="177.43" rx="2" fill="#2dd4bf"/><text x="606" y="35.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$7.10B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="25.30" width="70" height="194.70" rx="2" fill="#2dd4bf"/><text x="762" y="18.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$7.79B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (GAAP, $B)</div>
+    <div class="chart-sub">Margin has held in a tight 8-9% band for five straight quarters &mdash; a real stabilization after years of losses, though not yet showing the kind of expansion that would clear this framework's 20% bar.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$0.2B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$0.4B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$0.6B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$0.8B</text><rect x="103.0" y="98.07" width="70" height="121.93" rx="2" fill="#60a5fa"/><text x="138" y="91.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.49B</text><rect x="121.0" y="64.07" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="75.07" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">9.3%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="101.01" width="70" height="118.99" rx="2" fill="#60a5fa"/><text x="294" y="94.01" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.48B</text><rect x="277.0" y="67.01" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="78.01" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8.0%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="78.69" width="70" height="141.31" rx="2" fill="#60a5fa"/><text x="450" y="71.69" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.57B</text><rect x="433.0" y="44.69" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="55.69" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8.2%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="71.75" width="70" height="148.25" rx="2" fill="#60a5fa"/><text x="606" y="64.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.59B</text><rect x="589.0" y="37.75" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="48.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8.4%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="57.42" width="70" height="162.58" rx="2" fill="#60a5fa"/><text x="762" y="50.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.65B</text><rect x="745.0" y="23.42" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="34.42" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8.3%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the primary entry-multiple signal; FY2021-22 excluded from the average since FCF was negative those years.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End (FY23-25), Plus Current</div>
+    <div class="chart-sub">Current 17.4x sits just above the FY23-25 average of 16.6x (ratio &asymp;1.05) &mdash; essentially fair value against Sea's own short trading history as a profitable company, neither a bargain nor obviously expensive.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50.0" y1="87.15" x2="840.0" y2="87.15" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="83.15" text-anchor="end" font-size="10" fill="#94a3b8">FY23-25 avg: 16.6x</text><path d="M 366.0,120.08 L 524.0,55.28 L 682.0,86.08 L 840.0,80.96" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="366.0" cy="120.08" r="3" fill="#a78bfa"/><text x="366.0" y="110.08" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.5x</text><circle cx="524.0" cy="55.28" r="3" fill="#a78bfa"/><text x="524.0" y="45.28" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.6x</text><circle cx="682.0" cy="86.08" r="3" fill="#a78bfa"/><text x="682.0" y="76.08" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.7x</text><circle cx="840.0" cy="80.96" r="3.5" fill="#a78bfa"/><text x="840.0" y="70.96" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.4x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Sea holds $9.10B in cash against $4.13B of total debt, a net cash position of $4.97B ($8.12/share). Current ratio of 1.49 is adequate though the quick ratio of 0.62 reflects Monee's loan-book inventory sitting on the balance sheet. Debt/EBITDA of 1.29x and interest coverage of 123x are both comfortable. Altman Z-Score of 3.58 and Piotroski F-Score of 6 both point to a financially healthy, improving company.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 183.43,49.72 L154.83,73.20 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M183.43,49.72 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 154.83,73.20 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 14.06% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 85.94% (institutional ownership alone 63.15%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> founder and CEO Forrest Li's economic stake is a modest ~12-15% by share count, but he and co-founder Gang Ye hold roughly 58% of voting power through Class B multi-class shares &mdash; real, durable founder control even though the pure economic-ownership figure used in this framework's scoring (14.06%) understates it. Both founders have made modest, disclosed insider sales in 2026 alongside the stock's recovery, which is worth noting without over-reading into routine diversification.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. EBIT and FCF CAGR (#2, #4) are marked N/A because FY2021 was a loss year for both, making the standard growth-rate formula mathematically undefined across the sign change to a positive FY2025.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Sea Limited</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+23.21% &mdash; and re-accelerating to +43.06% on a TTM basis even off a much larger base</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>Undefined &mdash; FY2021 op income was -$1.58B, turning positive (+$1.99B) by FY2025; no valid CAGR across a sign change</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>8.65% (FY2025, GAAP); 8.24% TTM &mdash; a real turnaround from -15.90% in FY2021, but still well under the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>Undefined &mdash; FY2021 FCF was -$0.56B, turning positive by FY2023; same sign-change issue as EBIT CAGR</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Shopee holds roughly 52-53% of Southeast Asia platform e-commerce GMV, the clear #1, well ahead of TikTok Shop and Lazada</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a genuinely three-way contested market; TikTok Shop's GMV has grown 40-55% a year and the top 3 platforms combined hold over 84% of GMV</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 21.65% vs WACC 11.90% &mdash; a real 9.75pt spread, comfortably above both the 15% bar and Sea's own cost of capital</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of $4.97B &mdash; balance sheet has stayed net-cash throughout the turnaround</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>184.2% TTM ($4.21B FCF / $2.28B EBIT) &mdash; FCF running well ahead of thin GAAP operating income, reflecting working-capital float typical of a marketplace-plus-fintech model</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 17.4x vs a 16.6x FY23-25 average; ratio &asymp;1.05, just above fair value against its own short profitable history</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Basic shares up roughly 8.7% FY2021-25 (554M &rarr; 602M), and +2.32% YoY most recently &mdash; steady dilution from stock-based comp, not a heavy issuer but not disciplined either</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>14.06% of shares outstanding; founders Forrest Li and Gang Ye separately hold ~58% of voting power via Class B shares</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.64% of revenue (TTM) &mdash; just inside this framework's asset-light band</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>This is a genuine, multi-year turnaround, not a story still waiting to happen: revenue growth has re-accelerated even at a much larger base, operating margin has climbed for five straight years, free cash flow has compounded to $4.51B, and Shopee, Garena and Monee are all now GAAP operating-profitable at the same time for the first time in Sea's history. Balance sheet stayed net-cash throughout, and ROIC comfortably clears both the 15% bar and Sea's own cost of capital.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin is still thin relative to GAAP standards and relative to Sea's own FCF margin, and TikTok Shop is a genuinely fast-growing competitive threat in Sea's core Southeast Asia market. Share count keeps drifting upward from stock-based comp, and the current valuation sits slightly above Sea's own recent trading history rather than offering a clear discount. The new Latin America expansion is a real opportunity but also a fresh, unproven front against entrenched incumbents Amazon and MercadoLibre.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 11-30, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), companiesmarketcap.com (annual price-performance history), Sea Limited Q2 2026 earnings release and call transcript (Aug 11, 2026), WhiteBox/Digital in Asia/Cube Asia reporting on Southeast Asia e-commerce market share, Motley Fool/Yahoo Finance reporting on insider transactions.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. FY-end share prices for FY2021-2024 are back-calculated from published annual percentage returns rather than sourced as raw closing quotes, and should be read as approximate. WACC (11.90%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Sea Limited &mdash; NYSE, USD share price trend. Points shown are fiscal year-end closes (back-calculated from published annual % returns) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Sea Limited &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">One of the most volatile price histories in this entire batch: a 2021 peak above $360 intraday, an -76.7% crash through 2022 to a 2023 low near $38, then a +176% FY2024 and further FY2025 gains as the turnaround took hold, before a choppy 2026 that's still up sharply since the Aug 11 earnings beat.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140.0" x2="680" y2="140.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100.0" x2="680" y2="100.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60.0" x2="680" y2="60.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="20.0" x2="680" y2="20.0" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -11.0%</text><path d="M 46.0,40.87 L 172.8,147.58 L 299.6,155.22 L 426.4,111.63 L 553.2,96.85 L 680.0,102.20 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,40.87 L 172.8,147.58 L 299.6,155.22 L 426.4,111.63 L 553.2,96.85 L 680.0,102.20" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="40.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="30.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$213.46</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="147.58" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="137.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$49.74</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="155.22" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="145.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$38.02</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="111.63" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="101.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$104.90</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="96.85" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="86.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$127.58</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="102.20" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="92.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$119.36</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2024 are back-calculated from companiesmarketcap.com's published annual percentage-return series, anchored to the current price; FY2025 close and the current price are more directly sourced. Treat FY2021-24 points as approximate. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

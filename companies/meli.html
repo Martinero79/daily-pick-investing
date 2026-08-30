@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MercadoLibre Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1f14; color:#d3f5df; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Latin America E-Commerce &amp; Fintech Ecosystem</div>
+  <h1>MercadoLibre</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: MELI, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1999 &middot; Buenos Aires / Montevideo (HQ)</span>
+    <span class="badge star">Today's Highlight &mdash; the strongest scorecard in this entire e-commerce batch: dominant #1 market position, accelerating growth (Q2 2026 revenue +49.76% YoY, the fastest pace in years), and a current valuation that sits meaningfully below its own trading history.</span>
+  </div>
+  <div class="price">$1,966.25</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), +1.84% on the day &middot; Mkt cap $99.68B, EV $107.14B &middot; down -18.53% over the last 52 weeks despite record fundamentals &mdash; a genuine disconnect between price and business performance</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Amazon (regional operations in Brazil/Mexico), Shein and Temu (low-cost cross-border), Magazine Luiza and Americanas (Brazil-focused), Falabella (Chile/Andes). MercadoLibre holds a widening majority share of Latin American e-commerce, and together with Amazon is projected to capture roughly two-thirds of the region's incremental online sales growth.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$35.18B</div>
+      <div class="sub">+46.0% YoY (TTM); Q2 2026 alone grew 49.76% YoY to $10.17B &mdash; the fastest quarterly pace in nearly four years, per management's own Q1 2026 commentary</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#fbbf24;">11.08%</div>
+      <div class="note">Down from a 14.61% FY2023 peak; TTM sits even lower at 8.26% as MELI keeps reinvesting heavily in logistics and credit expansion during a high-growth phase.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">14.20% / 10.26%</div>
+      <div class="note">Clears cost of capital by a comfortable ~4-point spread, but falls just short of this framework's 15% absolute bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val" style="color:#fbbf24;">-$7.46B</div>
+      <div class="sub">Net debt (not net cash) of 1.92x EBITDA &mdash; but this is fintech lending-book debt funding Mercado Crédito, not corporate leverage (see p.4)</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">86/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">11/13 criteria met, 2 not met, 0 N/A &mdash; the strongest binary and graduated scorecard anywhere in this e-commerce batch.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 45.29,185.29 L76.90,157.36 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M45.29,185.29 A95,95 0 0 1 25.55,68.63 L64.68,86.13 A58,58 0 0 0 76.90,157.36 Z" fill="#f87171"/><path d="M25.55,68.63 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 64.68,86.13 Z" fill="#34d399"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">11/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 11 (revenue CAGR, EBIT CAGR, FCF CAGR, market share, market concentration, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 2 (operating margin, ROIC/WACC &mdash; both close calls, not blowout misses)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (MELI was already GAAP-profitable and FCF-positive in FY2021, so unlike most of this batch, every growth-rate calculation here is directly computable)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Founder Marcos Galperin stepped down as CEO in 2026 after 26 years to become Executive Chairman &mdash; the company's first leadership transition since founding in 1999</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    MercadoLibre is the clearest "just buy the market leader" story in this entire e-commerce batch. It's the dominant commerce-and-fintech platform across 18 Latin American countries &mdash; more than 570,000 small and medium businesses actively sell on the marketplace, and for over 1.8 million families across the region, MercadoLibre income is their primary source of livelihood. Unlike Alibaba, PDD, Sea, Coupang or JD elsewhere in this batch, MELI's growth story isn't complicated by tariff politics, a self-inflicted price war, or founder-control drama &mdash; it's simply compounding: revenue has grown from $7.1B (FY2021) to $28.9B (FY2025), a 42% CAGR, while free cash flow has grown even faster, from $392M to $10.8B. The two things holding this dashboard's scorecard back from a clean sweep are both modest, not alarming: operating margin has actually compressed slightly from its FY2023 peak as the company reinvests aggressively in logistics and its fast-growing Mercado Crédito lending business, and ROIC (14.20%) sits just a hair below this framework's 15% bar despite clearing WACC comfortably. Meanwhile the stock is down 18.53% over the past year even as the business just posted its fastest revenue growth in nearly four years &mdash; a genuine and, on this dashboard's numbers, hard-to-explain gap between price and fundamentals.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 30, 2026, reported Aug 5, 2026) and spot price as of Aug 28, 2026 close. All financials reported natively in USD &mdash; no currency conversion needed, unlike Alibaba, PDD or JD elsewhere in this batch.
+  </div>
+
+  <div class="bignum-corner">11/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. Fiscal year is calendar year (Jan-Dec). Unlike most of this batch, every year shown was already profitable and FCF-positive &mdash; no sign-flip or N/A treatment is needed anywhere in this dashboard.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual ($B)</div>
+    <div class="chart-sub">A clean, uninterrupted five-year climb across all three lines &mdash; revenue up more than 4x, operating income up more than 7x, net income up more than 24x since FY2021.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="65" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="65" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="65" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="65" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$25B</text><line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$30B</text><rect x="73.0" y="172.87" width="16" height="47.13" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="167.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$7.1B</text><rect x="91.0" y="217.00" width="16" height="3.00" rx="1.5" fill="#60a5fa"/><text x="99.0" y="212.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.5B</text><rect x="109.0" y="219.45" width="16" height="0.55" rx="1.5" fill="#fbbf24"/><text x="117.0" y="214.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.1B</text><text x="90.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="229.0" y="148.13" width="16" height="71.87" rx="1.5" fill="#2dd4bf"/><text x="237.0" y="143.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$10.8B</text><rect x="247.0" y="212.79" width="16" height="7.21" rx="1.5" fill="#60a5fa"/><text x="255.0" y="207.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.1B</text><rect x="265.0" y="216.79" width="16" height="3.21" rx="1.5" fill="#fbbf24"/><text x="273.0" y="211.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.5B</text><text x="246.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="385.0" y="119.29" width="16" height="100.71" rx="1.5" fill="#2dd4bf"/><text x="393.0" y="114.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$15.1B</text><rect x="403.0" y="205.29" width="16" height="14.71" rx="1.5" fill="#60a5fa"/><text x="411.0" y="200.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.2B</text><rect x="421.0" y="213.42" width="16" height="6.58" rx="1.5" fill="#fbbf24"/><text x="429.0" y="208.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.0B</text><text x="402.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="541.0" y="81.49" width="16" height="138.51" rx="1.5" fill="#2dd4bf"/><text x="549.0" y="76.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$20.8B</text><rect x="559.0" y="202.46" width="16" height="17.54" rx="1.5" fill="#60a5fa"/><text x="567.0" y="197.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.6B</text><rect x="577.0" y="207.26" width="16" height="12.74" rx="1.5" fill="#fbbf24"/><text x="585.0" y="202.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.9B</text><text x="558.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="697.0" y="27.38" width="16" height="192.62" rx="1.5" fill="#2dd4bf"/><text x="705.0" y="22.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$28.9B</text><rect x="715.0" y="198.66" width="16" height="21.34" rx="1.5" fill="#60a5fa"/><text x="723.0" y="193.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$3.2B</text><rect x="733.0" y="206.69" width="16" height="13.31" rx="1.5" fill="#fbbf24"/><text x="741.0" y="201.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$2.0B</text><text x="714.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+42.18%</div><div class="sub">$7.1B &rarr; $28.9B; comfortably clears this framework's 15% bar, and growth just re-accelerated further into FY2026</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+63.30%</div><div class="sub">$450M &rarr; $3.2B; operating profit has compounded even faster than revenue over the period</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+128.96%</div><div class="sub">$392M &rarr; $10.8B; the strongest FCF growth trajectory anywhere in this batch, aided by MELI's working-capital-light fintech float</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FCF has grown every single year, roughly 27x since FY2021, partly powered by the growing float from Mercado Pago's payments and lending business alongside genuine operating leverage.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$3B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$6B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$9B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$12B</text><rect x="103.0" y="213.47" width="70" height="6.53" rx="2" fill="#34d399"/><text x="138.0" y="206.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.4B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="178.58" width="70" height="41.42" rx="2" fill="#34d399"/><text x="294.0" y="171.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.5B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="142.82" width="70" height="77.18" rx="2" fill="#34d399"/><text x="450.0" y="135.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$4.6B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="102.37" width="70" height="117.63" rx="2" fill="#34d399"/><text x="606.0" y="95.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$7.1B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="40.45" width="70" height="179.55" rx="2" fill="#34d399"/><text x="762.0" y="33.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$10.8B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin climbed to a 14.61% FY2023 peak, then eased back to 11.08% in FY2025 as MELI leaned into logistics investment (Mercado Envios) and rapid growth in Mercado Crédito lending &mdash; a reinvestment story, not a sign of competitive pressure eroding the core business.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">4%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">8%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">16%</text><path d="M 50.00,140.38 L 247.50,94.63 L 445.00,37.38 L 642.50,61.75 L 840.00,81.50 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,140.38 L 247.50,94.63 L 445.00,37.38 L 642.50,61.75 L 840.00,81.50" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="140.38" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="94.63" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="37.38" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="61.75" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="81.50" r="3" fill="#2dd4bf"/><text x="50.00" y="130.38" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.37%</text><text x="247.50" y="84.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">10.03%</text><text x="445.00" y="27.38" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.61%</text><text x="642.50" y="51.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.66%</text><text x="840.00" y="71.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.08%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $1.50B (4.25% of TTM revenue) &mdash; an asset-light profile despite MELI operating its own regional logistics network (Mercado Envios). FCF conversion (FCF/EBIT) runs extremely high (see p.4) partly due to fintech float dynamics.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">MELI's fiscal quarters already align with the calendar (Jan-Dec fiscal year). Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 5, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$10.17B</b>, up <b style="color:#34d399;">49.76% YoY</b> &mdash; an acceleration from Q1 2026's already-strong 49.03% YoY growth, which management itself described as the fastest pace "in almost four years," driven by strategic investment across Commerce and Fintech in all major markets, particularly Brazil. Operating income was $683M (6.72% margin), continuing a gradual margin compression from the low-double-digits seen a year earlier as the company leans harder into growth investment during this acceleration phase.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Five straight quarters of sequential revenue growth, capped by Q2 2026's $10.17B &mdash; the first quarter above the $10B mark in company history.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$3.0B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$6.0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$9.0B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$12.0B</text><rect x="103.0" y="106.83" width="70" height="113.17" rx="2" fill="#2dd4bf"/><text x="138" y="99.83" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$6.8B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="96.52" width="70" height="123.48" rx="2" fill="#2dd4bf"/><text x="294" y="89.52" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$7.4B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="74.02" width="70" height="145.98" rx="2" fill="#2dd4bf"/><text x="450" y="67.02" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.8B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="72.58" width="70" height="147.42" rx="2" fill="#2dd4bf"/><text x="606" y="65.58" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.8B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="50.52" width="70" height="169.48" rx="2" fill="#2dd4bf"/><text x="762" y="43.52" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$10.2B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin ($B)</div>
+    <div class="chart-sub">Operating income has stayed solidly positive every quarter, but margin has drifted down from 12.15% (Q2'25) to 6.72% (Q2'26) as reinvestment intensifies alongside the growth re-acceleration &mdash; worth watching, though absolute operating dollars are still growing.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$0.2B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$0.4B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$0.6B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$0.8B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$1.0B</text><rect x="103.0" y="55.00" width="70" height="165.00" rx="2" fill="#60a5fa"/><text x="138" y="36.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.82B</text><rect x="121.0" y="36.00" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="47.00" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12.2%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="75.20" width="70" height="144.80" rx="2" fill="#60a5fa"/><text x="294" y="56.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.72B</text><rect x="277.0" y="56.20" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="67.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">9.8%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="42.20" width="70" height="177.80" rx="2" fill="#60a5fa"/><text x="450" y="23.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.89B</text><rect x="433.0" y="23.20" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="34.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">10.2%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="97.80" width="70" height="122.20" rx="2" fill="#60a5fa"/><text x="606" y="78.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.61B</text><rect x="589.0" y="78.80" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="89.80" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6.9%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="83.40" width="70" height="136.60" rx="2" fill="#60a5fa"/><text x="762" y="64.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.68B</text><rect x="745.0" y="64.40" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="75.40" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6.7%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the entry-multiple signal. Unlike JD.com or Coupang elsewhere in this batch, no outlier year needs to be excluded here &mdash; MELI's FCF has been consistently strong enough that its P/FCF history is directly comparable across all years shown.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End (FY22-25), Plus Current</div>
+    <div class="chart-sub">Current 8.0x sits meaningfully below the FY22-25 average of 14.0x (ratio &asymp;0.57) &mdash; a genuinely attractive entry multiple against MELI's own trading history, and the only company in this e-commerce batch where valuation compression has actually outpaced the business's real improvement in cash generation.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">4x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">12x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">16x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50.0" y1="80.05" x2="840.0" y2="80.05" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="76.05" text-anchor="end" font-size="10" fill="#94a3b8">FY22-25 avg: 14.0x</text><path d="M 50.0,48.70 L 247.5,48.40 L 445.0,97.90 L 642.5,125.20 L 840.0,139.70" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="48.70" r="3" fill="#a78bfa"/><text x="50.0" y="38.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.1x</text><circle cx="247.5" cy="48.40" r="3" fill="#a78bfa"/><text x="247.5" y="38.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.2x</text><circle cx="445.0" cy="97.90" r="3" fill="#a78bfa"/><text x="445.0" y="87.90" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.2x</text><circle cx="642.5" cy="125.20" r="3" fill="#a78bfa"/><text x="642.5" y="115.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">9.5x</text><circle cx="840.0" cy="139.70" r="3.5" fill="#a78bfa"/><text x="840.0" y="129.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.0x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet nuance &mdash; read the debt carefully:</b> MELI carries $13.21B of total debt against $5.75B of cash and investments, a net debt position of $7.46B (1.92x TTM EBITDA, just inside this framework's 2x threshold). Unlike traditional corporate leverage, most of this debt funds MELI's own consumer and merchant lending book through Mercado Crédito &mdash; a fintech "loans funded by borrowings" structure similar to how a bank or BNPL lender operates, not debt taken on to prop up the core commerce business. Quick ratio is a thin 0.40 and the Altman Z-Score of 2.58 sits below the traditional "safe" threshold of 3 &mdash; both numbers that would normally raise a flag, but are partly an artifact of a business model with a large, rapidly growing lending portfolio on the balance sheet. Worth watching as the credit book scales, but not read as classic balance-sheet distress.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 153.45,25.52 L136.53,58.42 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M153.45,25.52 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 136.53,58.42 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Founder-related stake &asymp; 7.56% (Galperin Family Trust) + &asymp;0.9% (Marcos Galperin personal, 456,662 shares)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 84.70% institutional ownership, plus remaining public float</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> the narrow "officers & directors" insider-ownership metric that most trackers report for MELI shows just 0.22%, because founder Marcos Galperin's real economic stake is mostly held through a separate family trust (the Galperin Trust, 7.56% per its latest 13G/A filing) rather than as a direct personal holding subject to routine insider-transaction reporting. Combined, the founder-related stake is closer to 8.5% &mdash; meaningful, though nowhere near the majority-voting-control structures seen at Alibaba, Coupang or JD elsewhere in this batch. In 2026, after 26 years as CEO, Galperin stepped down to become Executive Chairman &mdash; the company's first leadership transition since its 1999 founding, worth watching as a governance milestone even though he remains closely involved.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. No criteria require N/A treatment here &mdash; MELI was already profitable and FCF-positive in FY2021, the earliest year in this framework's growth-rate window.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>MercadoLibre</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+42.18% &mdash; $7.1B &rarr; $28.9B, comfortably above the bar, and growth has since re-accelerated into FY2026 (Q2'26: +49.76% YoY)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+63.30% &mdash; $450M &rarr; $3.2B, operating profit growing faster than revenue over the period</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>11.08% (FY2025); TTM is even thinner at 8.26% as the company reinvests heavily into logistics and lending during a high-growth phase</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+128.96% &mdash; $392M &rarr; $10.8B, the strongest FCF growth trajectory anywhere in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 in Latin American e-commerce and fintech with a widening majority share, outperforming Amazon and low-cost Chinese entrants (Shein, Temu)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; effectively a MELI-and-Amazon two-horse race for incremental regional e-commerce growth, with smaller regional and cross-border players behind</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 14.20% vs WACC 10.26% &mdash; clears cost of capital by a healthy ~4-point spread, but falls just short of the strict 15% absolute bar</td><td><span class="status-pill status-not">Not met (close)</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.92x ($7.46B net debt / $3.89B TTM EBITDA) &mdash; inside the threshold, though this debt is largely fintech lending-book funding rather than corporate leverage (see p.4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>427% TTM ($12.41B FCF / $2.91B EBIT) &mdash; an extreme reading, likely inflated by fintech float and working-capital dynamics rather than pure operating efficiency; interpret with the same caution applied to JD's similarly extreme ratio elsewhere in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 8.0x vs a 14.0x FY22-25 average; ratio &asymp;0.57 &mdash; genuinely below its own trading history, a real value signal given consistently improving fundamentals</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Basic shares outstanding essentially flat, 50.42M (FY2021) to 50.70M (current), a cumulative rise of just +0.56% over 5 years</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;8.5% combined (Galperin Trust 7.56% + Galperin personal ~0.9%) &mdash; the narrow "officers & directors" tracker figure of 0.22% understates this because most of the stake sits in a family trust, not a direct personal holding</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.25% of TTM revenue &mdash; asset-light despite running its own regional logistics network</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>MELI is the clearest dominant-market-leader story in this batch: a widening #1 position across an 18-country region, revenue and FCF both compounding at rates well above this framework's bars, a current valuation meaningfully below its own trading history, and a nearly flat share count. Growth just re-accelerated to its fastest pace in nearly four years, even as the stock has fallen 18.53% over the past 52 weeks &mdash; a real disconnect between price and fundamentals.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin has compressed from its FY2023 peak and quarterly margins have kept drifting lower through Q2 2026, as the company reinvests aggressively into logistics and its fast-growing credit business. ROIC sits just under this framework's 15% bar. The extreme FCF-conversion ratio likely reflects fintech float dynamics rather than pure efficiency, and the growing lending book funded by debt is worth monitoring as it scales, even though it isn't classic corporate leverage risk today.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 5-29, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Businesswire/MercadoLibre investor relations (Q1 2026 results release), eMarketer and eMarketer-cited Latin America e-commerce market-share estimates, GuruFocus/Nasdaq/SEC 13G filings on Galperin Trust and Marcos Galperin's insider holdings.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. FY2025 year-end share price is approximated from partial-year and 52-week-change data points (precise Dec 31, 2025 close was not directly available at time of writing) and should be read as approximate; all other year-end prices are directly sourced. WACC (10.26%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">MercadoLibre &mdash; NASDAQ, USD share price trend. Points shown are fiscal year-end closes plus the current price; FY2025's close is approximated (see footer).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">MercadoLibre &mdash; Fiscal Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A volatile round trip: a sharp FY2021-22 decline during the broader growth-stock selloff, an 85.71% FY2023 rebound, continued gains into an all-time high above $2,600 in mid-2025, and a pullback since &mdash; the stock is down 18.53% over the past 52 weeks even as revenue growth has accelerated to its fastest pace in years.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +7.8%</text><path d="M 46.0,119.83 L 172.8,171.32 L 299.6,96.95 L 426.4,83.73 L 553.2,37.64 L 680.0,56.48 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,119.83 L 172.8,171.32 L 299.6,96.95 L 426.4,83.73 L 553.2,37.64 L 680.0,56.48" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="119.83" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="109.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,348</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="171.32" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="161.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$846</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="96.95" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="87.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,572</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="83.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="73.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,700</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="37.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="27.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$2,150</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="56.48" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="46.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,966</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    FY2021-24 and current prices are directly sourced closing quotes. FY2025's year-end close ($2,150) is approximated from the stock's mid-2025 all-time high (above $2,600 on Jun 30, 2025), an October 2025 quote (~$2,180), and the reported 52-week price change as of Aug 2026; treat this single point as approximate. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
