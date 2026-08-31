@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Samsung Electronics Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Memory Semiconductors, Foundry &amp; Consumer Electronics</div>
+  <h1>Samsung Electronics</h1>
+  <div class="badges">
+    <span class="badge">KRX: 005930, KRW &middot; reports in KRW</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1969 &middot; Suwon, South Korea (HQ)</span>
+    <span class="badge warn">TSMC-competitor batch entry #1 &mdash; Samsung is the only real head-to-head rival to TSMC in leading-edge foundry, but the two businesses are wildly different sizes: TSMC holds roughly 72-73% of global pure-play foundry revenue versus Samsung's 6.5-7%, and that gap widened, not narrowed, over the past year.</span>
+  </div>
+  <div class="price">₩256,250</div>
+  <div class="price-sub">Close Aug 31, 2026 (KRX, Seoul) &middot; Mkt cap ₩1,631.56T (&asymp;$1.18T USD equivalent) &middot; up +264.02% over the last 52 weeks &mdash; one of the largest one-year re-ratings of any company on this site, driven by an AI-fueled memory supercycle</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in memory (DRAM/NAND) &mdash; SK Hynix, Micron; in foundry &mdash; TSMC (dominant), Intel Foundry, GlobalFoundries, UMC; in mobile &mdash; Apple, Chinese Android OEMs. Samsung is genuinely #1 in memory and a distant #2 in foundry, making it a fundamentally different kind of TSMC "competitor" than the term usually implies.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">₩485.24T</div>
+      <div class="sub">+57.24% YoY (TTM); Q2 2026 alone grew 130.00% YoY to ₩171.50T as the memory shortage intensified</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025 / TTM)</div>
+      <div class="val" style="color:#fbbf24;">13.07% / 36.88%</div>
+      <div class="note">FY2025 (GAAP) still shows the scars of the 2023 memory downturn; TTM has already exploded past this framework's 20% bar as the AI/HBM supercycle plays out in real time.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">36.86% / 12.67%</div>
+      <div class="note">Clears cost of capital by an enormous ~24-point spread, driven by the current memory pricing boom.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val" style="color:#34d399;">₩167.59T</div>
+      <div class="sub">Up 93.30% YoY &mdash; among the largest net cash positions of any company on this entire site</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">65/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/13 criteria met, 4 not met, 0 N/A &mdash; a score meaningfully held back by a 5-year growth window that captures the 2023 memory-industry trough.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 30.15,159.63 L67.68,138.19 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M30.15,159.63 A95,95 0 0 1 15.05,110.00 L58.03,110.00 A58,58 0 0 0 67.68,138.19 Z" fill="#f87171"/><path d="M15.05,110.00 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 58.03,110.00 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 9 (FCF CAGR, market share, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider/affiliate ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (revenue CAGR, EBIT CAGR, operating margin, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (every year FY2021-25 was already profitable and FCF-positive except FY2023's FCF, which doesn't create a sign-flip problem since FY2021 and FY2025 are both positive)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>The Lee family doesn't directly own much of Samsung Electronics &mdash; control runs through a cross-shareholding pyramid: Lee family &rarr; Samsung C&amp;T (&asymp;31%) &rarr; Samsung Life Insurance (19.34%) &rarr; Samsung Electronics (8.51%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Samsung Electronics is really two very different businesses wearing one ticker. The Device Solutions division &mdash; memory chips (DRAM, NAND) plus a much smaller foundry unit &mdash; is in the middle of an extraordinary AI-driven upswing: Samsung reclaimed the #1 spot in global DRAM market share (39%, up 5.4 points YoY) and holds #1 in NAND (29%), and quarterly operating margin has rocketed from 6.27% (Q2 2025) to 52.18% (Q2 2026) as HBM and general memory pricing surged. The catch, and the reason this framework's five-year growth criteria mostly miss, is that FY2021-25 spans the last full memory down-cycle: FY2023's operating income cratered to just ₩6.57T (2.54% margin) from FY2021's ₩51.63T, dragging the trailing revenue and EBIT CAGRs to roughly flat or negative even though the business has since more than recovered and is now compounding at a pace unmatched anywhere else in this batch. Meanwhile Samsung's other bet &mdash; catching TSMC in leading-edge foundry &mdash; is not going well by the numbers: TSMC's foundry share actually widened its lead over Samsung's 6.5-7% share this past year, even as Samsung began 2nm mass production. This dashboard tries to hold both truths at once: a genuinely dominant, currently red-hot memory franchise, and a foundry ambition that remains a distant second place.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 30, 2026) and spot price as of Aug 31, 2026 close. Financial statements are reported in KRW; this dashboard keeps the same convention throughout (no USD conversion applied to financials, only a rough market-cap reference for scale) since Samsung has no standard USD primary listing.
+  </div>
+
+  <div class="bignum-corner">9/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in KRW trillions (₩T). Fiscal year is calendar year (Jan-Dec). FY2023 is the memory-industry trough year that distorts most of this framework's trailing growth criteria &mdash; shown here in full rather than smoothed over.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual (₩T)</div>
+    <div class="chart-sub">FY2023's collapse in operating and net income (against a revenue dip that was proportionally much milder) is the single clearest picture of how brutal the 2022-23 memory downturn was for Samsung specifically &mdash; and how completely FY2025 and TTM have since reversed it.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">₩0T</text><line x1="65" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="55" y="195.4" text-anchor="end" font-size="11" fill="#64748b">₩50T</text><line x1="65" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="55" y="166.9" text-anchor="end" font-size="11" fill="#64748b">₩100T</text><line x1="65" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="138.3" text-anchor="end" font-size="11" fill="#64748b">₩150T</text><line x1="65" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="55" y="109.7" text-anchor="end" font-size="11" fill="#64748b">₩200T</text><line x1="65" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="55" y="81.1" text-anchor="end" font-size="11" fill="#64748b">₩250T</text><line x1="65" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="55" y="52.6" text-anchor="end" font-size="11" fill="#64748b">₩300T</text><line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">₩350T</text><rect x="73.0" y="60.23" width="16" height="159.77" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="55.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩280T</text><rect x="91.0" y="190.50" width="16" height="29.50" rx="1.5" fill="#60a5fa"/><text x="99.0" y="185.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩52T</text><rect x="109.0" y="197.58" width="16" height="22.42" rx="1.5" fill="#fbbf24"/><text x="117.0" y="192.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩39T</text><text x="90.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="229.0" y="47.30" width="16" height="172.70" rx="1.5" fill="#2dd4bf"/><text x="237.0" y="42.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩302T</text><rect x="247.0" y="195.21" width="16" height="24.79" rx="1.5" fill="#60a5fa"/><text x="255.0" y="190.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩43T</text><rect x="265.0" y="188.73" width="16" height="31.27" rx="1.5" fill="#fbbf24"/><text x="273.0" y="183.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩55T</text><text x="246.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="385.0" y="72.03" width="16" height="147.97" rx="1.5" fill="#2dd4bf"/><text x="393.0" y="67.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩259T</text><rect x="403.0" y="216.25" width="16" height="3.75" rx="1.5" fill="#60a5fa"/><text x="411.0" y="211.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩7T</text><rect x="421.0" y="211.73" width="16" height="8.27" rx="1.5" fill="#fbbf24"/><text x="429.0" y="206.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩14T</text><text x="402.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="541.0" y="48.07" width="16" height="171.93" rx="1.5" fill="#2dd4bf"/><text x="549.0" y="43.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩301T</text><rect x="559.0" y="201.30" width="16" height="18.70" rx="1.5" fill="#60a5fa"/><text x="567.0" y="196.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩33T</text><rect x="577.0" y="200.79" width="16" height="19.21" rx="1.5" fill="#fbbf24"/><text x="585.0" y="195.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩34T</text><text x="558.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="697.0" y="29.37" width="16" height="190.63" rx="1.5" fill="#2dd4bf"/><text x="705.0" y="24.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩334T</text><rect x="715.0" y="195.09" width="16" height="24.91" rx="1.5" fill="#60a5fa"/><text x="723.0" y="190.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩44T</text><rect x="733.0" y="194.71" width="16" height="25.29" rx="1.5" fill="#fbbf24"/><text x="741.0" y="189.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">₩44T</text><text x="714.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#f87171;">+4.52%</div><div class="sub">₩279.6T &rarr; ₩333.6T; the 5-year window swallows the FY23 trough &mdash; TTM revenue growth is actually +57.24% YoY right now</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-4.14%</div><div class="sub">₩51.6T &rarr; ₩43.6T; negative only because FY2021 was itself an unusually strong prior peak and FY2023 collapsed in between</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#34d399;">+20.44%</div><div class="sub">₩18.0T &rarr; ₩37.8T; clears this framework's bar despite FY2023's negative FCF sitting in between two positive endpoints</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual (₩T)</div>
+    <div class="chart-sub">FY2023 is the only negative year in this five-year window (-₩13.5T), a direct result of the memory downturn combined with continued heavy fab capex &mdash; FCF has since rebounded to a new high of ₩37.8T in FY2025.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">₩-20T</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">₩-10T</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">₩0T</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">₩10T</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">₩20T</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">₩30T</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">₩40T</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="93.40" width="70" height="59.93" rx="2" fill="#34d399"/><text x="138.0" y="86.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩18.0T</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="110.83" width="70" height="42.50" rx="2" fill="#34d399"/><text x="294.0" y="103.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩12.8T</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="153.33" width="70" height="44.90" rx="2" fill="#f87171"/><text x="450.0" y="212.2" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">₩-13.5T</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="81.40" width="70" height="71.93" rx="2" fill="#34d399"/><text x="606.0" y="74.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩21.6T</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="27.37" width="70" height="125.97" rx="2" fill="#34d399"/><text x="762.0" y="20.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩37.8T</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">The FY2023 trough (2.54%) is the deepest point of the memory downturn; margin has since climbed back to 13.07% by FY2025 &mdash; and TTM margin (36.88%, not shown on this annual chart) has already blown far past both this chart's scale and this framework's 20% threshold.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M 50.00,35.30 L 247.50,76.50 L 445.00,194.60 L 642.50,111.20 L 840.00,89.30 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,35.30 L 247.50,76.50 L 445.00,194.60 L 642.50,111.20 L 840.00,89.30" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="35.30" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="76.50" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="194.60" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="111.20" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="89.30" r="3" fill="#2dd4bf"/><text x="50.00" y="25.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">18.47%</text><text x="247.50" y="66.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.35%</text><text x="445.00" y="184.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.54%</text><text x="642.50" y="101.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">10.88%</text><text x="840.00" y="79.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">13.07%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was ₩51.93T (10.70% of TTM revenue) &mdash; capital-intensive by nature given Samsung's own fabs across both memory and foundry, well above this framework's ~6% asset-light threshold.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; The Memory Supercycle in Real Time</div></div>
+  <div class="sec-sub">Samsung's fiscal quarters already align with the calendar (Jan-Dec fiscal year). Latest reported period: Q2 2026 (three months to Jun 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">₩171.50T</b>, up <b style="color:#34d399;">130.00% YoY</b> and up 28.10% sequentially from Q1 2026's already-record ₩133.87T. Operating margin hit <b style="color:#34d399;">52.18%</b>, the highest quarterly margin in the company's history, as AI-driven HBM and general DRAM/NAND demand collided with tight industry supply. In August 2026, Samsung's board approved a shareholder return package of up to ₩110 trillion (&asymp;$80B) &mdash; described as the largest in Korean corporate history &mdash; though the stock actually fell sharply (-8.7% in one session) on the announcement, as investors had priced in an even larger number.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, ₩T)</div>
+    <div class="chart-sub">Revenue has more than doubled in a year, with the steepest single-quarter jump (Q4'25&rarr;Q1'26, then again Q1'26&rarr;Q2'26) coinciding with the most acute phase of the industry-wide memory shortage.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">₩0T</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">₩45T</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">₩90T</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">₩135T</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">₩180T</text><rect x="103.0" y="137.14" width="70" height="82.86" rx="2" fill="#2dd4bf"/><text x="138" y="130.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩75T</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="124.38" width="70" height="95.62" rx="2" fill="#2dd4bf"/><text x="294" y="117.38" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩86T</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="115.77" width="70" height="104.23" rx="2" fill="#2dd4bf"/><text x="450" y="108.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩94T</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="71.26" width="70" height="148.74" rx="2" fill="#2dd4bf"/><text x="606" y="64.26" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩134T</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="29.44" width="70" height="190.56" rx="2" fill="#2dd4bf"/><text x="762" y="22.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩172T</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (₩T)</div>
+    <div class="chart-sub">Margin has climbed from 6.27% to 52.18% in five quarters &mdash; an almost unprecedented pace of margin expansion for a company this size, entirely attributable to AI-driven memory pricing and Samsung's dominant DRAM/NAND share.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">₩0T</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">₩20T</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">₩40T</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">₩60T</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">₩80T</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">₩100T</text><rect x="103.0" y="210.64" width="70" height="9.36" rx="2" fill="#60a5fa"/><text x="138" y="191.64" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩4.7T</text><rect x="121.0" y="191.64" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="202.64" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6.3%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="195.66" width="70" height="24.34" rx="2" fill="#60a5fa"/><text x="294" y="176.66" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩12.2T</text><rect x="277.0" y="176.66" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="187.66" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">14.1%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="180.00" width="70" height="40.00" rx="2" fill="#60a5fa"/><text x="450" y="161.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩20.0T</text><rect x="433.0" y="161.00" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="172.00" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">21.3%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="105.54" width="70" height="114.46" rx="2" fill="#60a5fa"/><text x="606" y="86.54" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩57.2T</text><rect x="589.0" y="86.54" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="97.54" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">42.8%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="41.02" width="70" height="178.98" rx="2" fill="#60a5fa"/><text x="762" y="22.02" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">₩89.5T</text><rect x="745.0" y="22.02" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="33.02" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">52.2%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the entry-multiple signal. FY2023 is excluded from the average as an undefined/negative-FCF year, the same treatment applied elsewhere on this site to genuine cyclical or one-off distortions.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; Year-End (FY21-22, FY24-25), Plus Current</div>
+    <div class="chart-sub">Current 11.3x sits well below the ex-FY23 average of 23.8x &mdash; despite the stock's 264% one-year rally, the multiple has actually compressed as FCF has grown even faster than the share price.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">7x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">14x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">21x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">28x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35x</text><line x1="50.0" y1="84.04" x2="840.0" y2="84.04" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="80.04" text-anchor="end" font-size="10" fill="#94a3b8">ex-FY23 avg: 23.8x</text><path d="M 50.0,52.86 L 247.5,53.43 L 445.0,126.23 L 642.5,103.66 L 840.0,155.60" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="52.86" r="3" fill="#a78bfa"/><text x="50.0" y="42.86" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.2x</text><circle cx="247.5" cy="53.43" r="3" fill="#a78bfa"/><text x="247.5" y="43.43" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.1x</text><circle cx="445.0" cy="126.23" r="3" fill="#a78bfa"/><text x="445.0" y="116.23" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.4x</text><circle cx="642.5" cy="103.66" r="3" fill="#a78bfa"/><text x="642.5" y="93.66" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.4x</text><circle cx="840.0" cy="155.60" r="3.5" fill="#a78bfa"/><text x="840.0" y="145.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">11.3x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Samsung holds ₩190.00T in cash and short-term investments against just ₩22.41T of total debt &mdash; a net cash position of ₩167.59T, up 93.30% YoY. Debt/Equity is a negligible 0.04, current ratio 2.83, and interest coverage a remarkable 236.78x. This is one of the strongest balance sheets on this entire site, and it's what's funding both the record shareholder-return program and continued heavy fab capex without any real financial strain.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 158.41,28.26 L139.56,60.10 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M158.41,28.26 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 139.56,60.10 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Samsung Life Insurance stake &asymp; 8.51% (the direct affiliate link in the Lee family's control chain)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 35.01% institutional (per narrow stockanalysis tracker), remainder free float</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; a classic chaebol cross-shareholding pyramid:</b> the narrow "insiders" ownership metric most trackers report for Samsung Electronics shows just 3.94%, which badly understates real control. The Lee family controls the entire Samsung Group not through direct Samsung Electronics shares, but through a chain: Lee Jae-yong and family hold roughly 31% of Samsung C&amp;T (the group's de facto holding company), Samsung C&amp;T is in turn the largest shareholder of Samsung Life Insurance (19.34%), and Samsung Life Insurance directly holds 8.51% of Samsung Electronics. This dashboard scores the ownership criterion on that more complete 8.51% figure rather than the narrow 3.94% headline stat, since it's the more accurate reflection of how control actually flows &mdash; but the structure itself, common across Korean chaebols, means minority shareholders are one more layer removed from direct founder accountability than at, say, Alphabet or Meta.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. No criteria require N/A treatment here &mdash; FY2021 was already profitable, so every growth-rate calculation is directly computable, even where the result (like EBIT CAGR) is negative.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Samsung Electronics</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+4.52% &mdash; ₩279.6T &rarr; ₩333.6T; the 5-year window spans the FY2023 memory trough; TTM revenue growth is actually +57.24% YoY</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>-4.14% &mdash; ₩51.6T &rarr; ₩43.6T; negative purely due to the FY2023 trough sitting between two strong years, not a structural decline</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>13.07% (FY2025, GAAP); TTM is already at 36.88%, comfortably above the bar, but this criterion is scored on the latest full fiscal year for consistency with the rest of this site</td><td><span class="status-pill status-not">Not met (FY basis; TTM would clear)</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+20.44% &mdash; ₩18.0T &rarr; ₩37.8T; both endpoints positive, so the FY2023 negative year in between doesn't create a sign-flip problem</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in global DRAM (39%, up 5.4pts YoY) and #1 in NAND (29%) &mdash; but only a distant #2 in foundry at 6.5-7% vs TSMC's 72-73%, a gap that widened this past year</td><td><span class="status-pill status-met">Met (memory-driven)</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; DRAM/NAND is a genuine oligopoly dominated by Samsung, SK Hynix and Micron</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 36.86% vs WACC 12.67% &mdash; clears both bars by a wide margin, driven by the current memory pricing boom</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of ₩167.59T, up 93.30% YoY &mdash; one of the strongest net cash positions of any company on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>80.02% TTM (₩143.19T FCF / ₩178.95T EBIT) &mdash; right at the threshold</td><td><span class="status-pill status-met">Met (narrow)</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 11.3x vs an ex-FY23 average of 23.8x; ratio &asymp;0.47 &mdash; the multiple has compressed even as the stock rallied 264% in a year, because FCF grew faster still</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding down from 6,793M (FY2021) to roughly 6,570M (current), a genuine decline via ongoing buybacks</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>8.51% via Samsung Life Insurance's direct stake, the closest link in the Lee family's cross-shareholding control chain (narrow "insiders" tracker stat of 3.94% understates this &mdash; see p.4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>10.70% of TTM revenue &mdash; capital-intensive by nature given Samsung's own memory and foundry fabs</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Samsung is riding a genuine, dominant #1 position in memory straight into the strongest pricing environment the industry has seen in years, with margins expanding at an almost unprecedented pace and a net cash pile that dwarfs nearly everything else on this site. The current valuation, remarkably, has not kept pace with the earnings surge &mdash; P/FCF has actually compressed even as the stock has nearly quadrupled.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Memory is a famously cyclical business, and FY2023 is a real, recent reminder of how quickly this exact profile can invert. The foundry bet against TSMC continues to lose ground rather than gain it (6.5-7% share, gap widening), capex intensity stays high, and this framework's trailing growth metrics will look very different a year from now depending on whether the current supercycle proves durable or is itself a peak.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 5-31, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Samsung Global Newsroom (quarterly results releases), Counterpoint Research (DRAM/NAND/foundry market share), Reuters/CNBC/WSJ/Motley Fool/Invezz (shareholder-return announcement coverage), Seoulz/Revenuememo/KED Global (Lee family and Samsung C&amp;T/Samsung Life ownership chain).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. All financials and the share price are in KRW as reported/traded on the Korea Exchange (KRX); the USD market-cap reference on page 1 is a rough approximation only. FY2021-2024 year-end share prices are approximate (back-calculated from general market history rather than exact sourced closes) and should be read as indicative, not precise. WACC (12.67%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Samsung Electronics &mdash; KRX, KRW share price trend. Points shown are approximate fiscal year-end closes plus the current price (see footer for methodology).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Samsung Electronics &mdash; Approximate Fiscal Year-End Close (KRX, KRW)</div>
+    <div class="chart-sub">A multi-year sideways-to-down grind through the 2022-2024 memory downturn and Samsung's own well-documented struggle to keep pace with SK Hynix in HBM, followed by an explosive 2026 breakout as the AI-driven memory supercycle took hold &mdash; the stock is up 264.02% over just the past 52 weeks.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +26.8%</text><path d="M 46.0,158.73 L 172.8,174.81 L 299.6,158.59 L 426.4,176.28 L 553.2,164.26 L 680.0,34.33 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,158.73 L 172.8,174.81 L 299.6,158.59 L 426.4,176.28 L 553.2,164.26 L 680.0,34.33" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="158.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="148.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩78,300</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="174.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="164.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩55,300</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="158.59" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="148.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩78,500</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="176.28" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="166.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩53,200</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="164.26" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="154.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩70,393</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="34.33" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="24.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩256,250</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2025 are approximate, based on general market history and back-calculated from the reported 52-week price change rather than exact sourced daily closes (note: FY2025's value predates Dec 31, 2025 slightly, approximated from an Aug 2025 reference point). Treat all historical points as indicative. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

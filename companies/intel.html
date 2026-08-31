@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Intel Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.red { border-left-color:#ef4444; background:#1f0f10; color:#f5d3d3; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; x86 CPUs, Data Center &amp; Foundry Turnaround</div>
+  <h1>Intel Corporation</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: INTC, USD &middot; reports in USD</span>
+    <span class="badge">FY ends late Dec &middot; reports quarterly</span>
+    <span class="badge">Founded 1968 &middot; Santa Clara, California (HQ)</span>
+    <span class="badge star">TSMC-competitor batch entry #2, today's highlight &mdash; a genuine high-stakes turnaround: the U.S. government took a 10% equity stake in 2025, Nvidia invested $5B, and the stock is up 260% in a year, even as the underlying scorecard on this page shows some of the weakest fundamentals in this framework.</span>
+  </div>
+  <div class="price">$89.47</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -2.85% on the day &middot; Mkt cap $470.12B, EV $490.68B &middot; up +260.04% over the last 52 weeks, largely on strategic-investor backing and turnaround hope rather than current earnings</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in CPUs &mdash; AMD (x86 duopoly); in foundry &mdash; TSMC (dominant), Samsung Foundry, GlobalFoundries; in AI accelerators &mdash; Nvidia, AMD, and Intel's own nascent Gaudi/Arc lines. Intel Foundry is a distant, unproven challenger to TSMC; Intel's real day-to-day competitive fight is still mostly against AMD in CPUs.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$57.03B</div>
+      <div class="sub">+7.47% YoY (TTM); still 27.8% below FY2021's $79.0B peak, though Q2 2026 grew a strong +25.42% YoY to $16.13B</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025 / TTM)</div>
+      <div class="val" style="color:#f87171;">1.75% / 7.82%</div>
+      <div class="note">Down from 27.94% in FY2021 &mdash; margins collapsed through the 2022-24 downturn and are only partially recovering.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#f87171;">3.42% / 15.14%</div>
+      <div class="note">ROIC sits far below both the 15% bar and Intel's own cost of capital &mdash; the clearest single number showing this turnaround isn't there yet financially.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val" style="color:#f87171;">-$20.56B</div>
+      <div class="sub">Net debt (not net cash), though improved from -$27.56B a year ago; still 1.22x TTM EBITDA</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">24/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/13 criteria met, 9 not met, 1 N/A &mdash; the weakest scorecard in this two-company TSMC-competitor batch, and one of the weakest on this entire site.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 178.85,45.55 L151.63,71.14 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M178.85,45.55 A95,95 0 0 1 202.35,132.03 L143.36,116.60 A58,58 0 0 0 151.63,71.14 Z" fill="#64748b"/><path d="M202.35,132.03 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 143.36,116.60 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (market position, market concentration, net debt/EBITDA)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, ROIC/WACC, FCF conversion, entry multiple, share count trend, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 1 (FCF CAGR: FY2021 was positive, FY2025 is negative &mdash; a genuine sign-flip that makes the standard CAGR formula mathematically undefined)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Shares outstanding are up <b style="color:#fbbf24;">+13.28%</b> in the last year alone (roughly +24% over 5 years) as Intel has repeatedly raised equity capital &mdash; including issuing new shares to the U.S. government and Nvidia &mdash; to fund the turnaround</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Intel is the most dramatic risk/reward story in this entire site's coverage right now, and the tension is right there in the numbers: the stock has nearly quadrupled over the past year, while this framework's scorecard is one of the weakest anywhere on the site. That's not a contradiction so much as two different questions being answered separately. The market is pricing in a specific, high-profile turnaround narrative &mdash; new CEO Lip-Bu Tan restructured the company and cut 15,000 jobs after replacing Pat Gelsinger in March 2025, the U.S. government converted CHIPS Act support into a 10% equity stake (plus a warrant for another 5% designed to keep Intel's foundry under American ownership), Nvidia bought a $5B stake and struck a co-development deal, and Intel's 18A process node finally reached high-volume manufacturing in January 2026 with yields improving roughly 7% a month. Whether that story pays off is genuinely unresolved. What the actual financials say today: revenue is still nearly 28% below its FY2021 peak, operating margin collapsed from 27.94% to low single digits and has only partially recovered, ROIC sits at 3.42% against a 15.14% cost of capital (meaning Intel is currently destroying, not creating, economic value on this measure), free cash flow swung from a $9.1B positive in FY2021 to deeply negative in FY2022-2025, and funding the recovery has meant diluting existing shareholders by roughly a quarter over five years. Q2 2026 does show real, tangible operating improvement (12.19% margin, the best quarter in years) &mdash; but one strong quarter against years of decline is not yet a trend this framework can confidently call.
+  </div>
+
+  <div class="callout red">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 27, 2026, reported Jul 23, 2026) and spot price as of Aug 28, 2026 close. Note Q2 2026 net income of -$11.03B despite a positive $1.97B operating income &mdash; driven by a large one-time non-operating charge (~-$12.7B) whose exact composition wasn't confirmed in available sources; treat that specific net-loss figure with caution pending Intel's full 10-Q detail.
+  </div>
+
+  <div class="bignum-corner">3/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. Fiscal year ends in late December. This is a genuine multi-year decline, not a single bad year &mdash; revenue, margin and net income all deteriorated from FY2021's levels and have only partially stabilized.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual ($B)</div>
+    <div class="chart-sub">A steady multi-year decline in every line, culminating in FY2024's -$18.76B net loss (driven by heavy restructuring and impairment charges) &mdash; FY2025 narrowed the loss to just -$0.27B, with operating income turning modestly positive again.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="65" y1="196.5" x2="840" y2="196.5" stroke="#1e293b" stroke-width="1"/><text x="55" y="200.5" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="65" y1="172.9" x2="840" y2="172.9" stroke="#1e293b" stroke-width="1"/><text x="55" y="176.9" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="65" y1="149.4" x2="840" y2="149.4" stroke="#1e293b" stroke-width="1"/><text x="55" y="153.4" text-anchor="end" font-size="11" fill="#64748b">$30B</text><line x1="65" y1="125.9" x2="840" y2="125.9" stroke="#1e293b" stroke-width="1"/><text x="55" y="129.9" text-anchor="end" font-size="11" fill="#64748b">$40B</text><line x1="65" y1="102.4" x2="840" y2="102.4" stroke="#1e293b" stroke-width="1"/><text x="55" y="106.4" text-anchor="end" font-size="11" fill="#64748b">$50B</text><line x1="65" y1="78.8" x2="840" y2="78.8" stroke="#1e293b" stroke-width="1"/><text x="55" y="82.8" text-anchor="end" font-size="11" fill="#64748b">$60B</text><line x1="65" y1="55.3" x2="840" y2="55.3" stroke="#1e293b" stroke-width="1"/><text x="55" y="59.3" text-anchor="end" font-size="11" fill="#64748b">$70B</text><line x1="65" y1="31.8" x2="840" y2="31.8" stroke="#1e293b" stroke-width="1"/><text x="55" y="35.8" text-anchor="end" font-size="11" fill="#64748b">$80B</text><rect x="73.0" y="34.06" width="16" height="185.94" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="29.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$79.0B</text><rect x="91.0" y="168.04" width="16" height="51.96" rx="1.5" fill="#60a5fa"/><text x="99.0" y="163.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$22.1B</text><rect x="109.0" y="173.25" width="16" height="46.75" rx="1.5" fill="#fbbf24"/><text x="117.0" y="168.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$19.9B</text><text x="90.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="229.0" y="71.64" width="16" height="148.36" rx="1.5" fill="#2dd4bf"/><text x="237.0" y="66.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$63.1B</text><rect x="247.0" y="210.79" width="16" height="9.21" rx="1.5" fill="#60a5fa"/><text x="255.0" y="205.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$3.9B</text><rect x="265.0" y="201.14" width="16" height="18.86" rx="1.5" fill="#fbbf24"/><text x="273.0" y="196.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$8.0B</text><text x="246.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="385.0" y="92.40" width="16" height="127.60" rx="1.5" fill="#2dd4bf"/><text x="393.0" y="87.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$54.2B</text><rect x="403.0" y="219.93" width="16" height="0.07" rx="1.5" fill="#60a5fa"/><text x="411.0" y="214.9" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.0B</text><rect x="421.0" y="216.03" width="16" height="3.97" rx="1.5" fill="#fbbf24"/><text x="429.0" y="211.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.7B</text><text x="402.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="541.0" y="95.06" width="16" height="124.94" rx="1.5" fill="#2dd4bf"/><text x="549.0" y="90.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$53.1B</text><rect x="559.0" y="220.00" width="16" height="3.31" rx="1.5" fill="#f87171"/><text x="567.0" y="232.3" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-1.4B</text><rect x="577.0" y="220.00" width="16" height="44.13" rx="1.5" fill="#f87171"/><text x="585.0" y="282.1" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-18.8B</text><text x="558.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="697.0" y="95.64" width="16" height="124.36" rx="1.5" fill="#2dd4bf"/><text x="705.0" y="90.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$52.9B</text><rect x="715.0" y="217.82" width="16" height="2.18" rx="1.5" fill="#60a5fa"/><text x="723.0" y="212.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.9B</text><rect x="733.0" y="220.00" width="16" height="0.63" rx="1.5" fill="#f87171"/><text x="741.0" y="238.6" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-0.3B</text><text x="714.0" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#475569" stroke-width="1.3"/></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-9.57%</div><div class="sub">$79.0B &rarr; $52.9B; a genuine, sustained decline, not a one-year blip</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-54.73%</div><div class="sub">$22.1B &rarr; $0.9B; both years positive so directly computable, but a severe collapse</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">FY2021 was +$9.1B, FY2025 was -$4.9B &mdash; a genuine sign flip that makes the standard growth-rate formula undefined</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FCF has been negative for four straight years (FY2022-2025) as heavy fab capex outpaced operating cash flow &mdash; FY2025's -$4.9B is the smallest shortfall of the stretch, and TTM has turned modestly positive again at +$2.8B.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-20B</text><line x1="60" y1="195.0" x2="840" y2="195.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="199.0" text-anchor="end" font-size="11" fill="#64748b">$-16B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$-12B</text><line x1="60" y1="145.0" x2="840" y2="145.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.0" text-anchor="end" font-size="11" fill="#64748b">$-8B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$-4B</text><line x1="60" y1="95.0" x2="840" y2="95.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="99.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="45.0" x2="840" y2="45.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="49.0" text-anchor="end" font-size="11" fill="#64748b">$8B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$12B</text><line x1="60" y1="95.0" x2="840" y2="95.0" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="37.96" width="70" height="57.04" rx="2" fill="#34d399"/><text x="138.0" y="31.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$9.1B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="259.0" y="95.00" width="70" height="58.82" rx="2" fill="#f87171"/><text x="294.0" y="167.8" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-9.4B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="415.0" y="95.00" width="70" height="89.24" rx="2" fill="#f87171"/><text x="450.0" y="198.2" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-14.3B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="571.0" y="95.00" width="70" height="97.85" rx="2" fill="#f87171"/><text x="606.0" y="206.8" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-15.7B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="727.0" y="95.00" width="70" height="30.93" rx="2" fill="#f87171"/><text x="762.0" y="139.9" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-4.9B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A near-uninterrupted decline from 27.94% (FY2021) to a trough of -2.65% (FY2024), with only a partial recovery to 1.75% by FY2025 &mdash; TTM (7.82%, not shown here) is meaningfully better but still far below the 20% bar.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><path d="M 50.00,30.30 L 247.50,138.95 L 445.00,169.70 L 642.50,183.25 L 840.00,161.25 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,30.30 L 247.50,138.95 L 445.00,169.70 L 642.50,183.25 L 840.00,161.25" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="30.30" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="138.95" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="169.70" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="183.25" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="161.25" r="3" fill="#2dd4bf"/><text x="50.00" y="20.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">27.94%</text><text x="247.50" y="128.95" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.21%</text><text x="445.00" y="159.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">0.06%</text><text x="642.50" y="173.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-2.65%</text><text x="840.00" y="151.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.75%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $12.11B (21.23% of TTM revenue) &mdash; extremely capital-intensive, reflecting Intel's ongoing investment in leading-edge fabs (18A and beyond) well above this framework's ~6% asset-light threshold.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Early Signs of a Turn</div></div>
+  <div class="sec-sub">Intel's fiscal quarters run roughly calendar-aligned (13-week quarters, late-December fiscal year-end). Latest reported period: Q2 2026 (three months to Jun 27, 2026, reported Jul 23, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$16.13B</b>, up <b style="color:#34d399;">25.42% YoY</b> and the strongest quarter in this five-quarter window, with operating margin climbing to <b style="color:#34d399;">12.19%</b> &mdash; a real, tangible improvement after a Q2 2025 quarter that was operating-loss territory (-3.80% margin). This is the clearest evidence yet that Tan's restructuring and 18A ramp are showing up in the numbers, not just in the narrative. Net income for the quarter was still deeply negative (-$11.03B) due to a large one-time non-operating charge; the operating-line improvement is the more meaningful signal of underlying business health.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, $B)</div>
+    <div class="chart-sub">Revenue has grown every quarter this window, culminating in Q2 2026's $16.13B &mdash; a meaningful step up from the roughly $13B range Intel had been stuck in for over a year.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$9B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$14B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$18B</text><rect x="103.0" y="77.12" width="70" height="142.88" rx="2" fill="#2dd4bf"/><text x="138" y="70.12" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$12.9B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="68.30" width="70" height="151.70" rx="2" fill="#2dd4bf"/><text x="294" y="61.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.7B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="68.07" width="70" height="151.93" rx="2" fill="#2dd4bf"/><text x="450" y="61.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.7B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="69.14" width="70" height="150.86" rx="2" fill="#2dd4bf"/><text x="606" y="62.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.6B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="40.80" width="70" height="179.20" rx="2" fill="#2dd4bf"/><text x="762" y="33.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$16.1B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin ($B)</div>
+    <div class="chart-sub">Q2 2025 was an operating loss (-$0.49B, -3.80% margin); every quarter since has been profitable and improving, culminating in Q2 2026's $1.97B (12.19% margin) &mdash; the best quarter of this stretch by a wide margin.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="190.0" x2="840" y2="190.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="194.0" text-anchor="end" font-size="11" fill="#64748b">$-0.7B</text><line x1="60" y1="161.7" x2="840" y2="161.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="165.7" text-anchor="end" font-size="11" fill="#64748b">$-0.2B</text><line x1="60" y1="133.3" x2="840" y2="133.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="137.3" text-anchor="end" font-size="11" fill="#64748b">$0.3B</text><line x1="60" y1="105.0" x2="840" y2="105.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.0" text-anchor="end" font-size="11" fill="#64748b">$0.8B</text><line x1="60" y1="76.7" x2="840" y2="76.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="80.7" text-anchor="end" font-size="11" fill="#64748b">$1.2B</text><line x1="60" y1="48.3" x2="840" y2="48.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.3" text-anchor="end" font-size="11" fill="#64748b">$1.7B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$2.2B</text><line x1="60" y1="150.8" x2="840" y2="150.8" stroke="#475569" stroke-width="1.3"/><rect x="103.0" y="150.77" width="70" height="29.07" rx="2" fill="#f87171"/><text x="138" y="193.84" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-0.49B</text><rect x="121.0" y="197.84" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="138" y="208.84" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">-3.8%</text><text x="138" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="259.0" y="99.77" width="70" height="51.00" rx="2" fill="#60a5fa"/><text x="294" y="80.77" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.86B</text><rect x="277.0" y="80.77" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="294" y="91.77" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6.3%</text><text x="294" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="415.0" y="108.98" width="70" height="41.79" rx="2" fill="#60a5fa"/><text x="450" y="89.98" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.70B</text><rect x="433.0" y="89.98" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="450" y="100.98" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">5.1%</text><text x="450" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="571.0" y="95.25" width="70" height="55.52" rx="2" fill="#60a5fa"/><text x="606" y="76.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.93B</text><rect x="589.0" y="76.25" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="606" y="87.25" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6.9%</text><text x="606" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="727.0" y="33.91" width="70" height="116.86" rx="2" fill="#60a5fa"/><text x="762" y="14.91" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.97B</text><rect x="745.0" y="14.91" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/><text x="762" y="25.91" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12.2%</text><text x="762" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the entry-multiple signal. Unlike every other company in this batch, Intel's own trading history offers almost no usable comparison points &mdash; FY2022-25 all had negative FCF, so only FY2021 and the current reading are directly comparable.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; FY2021 vs. Current (Only Two Usable Points)</div>
+    <div class="chart-sub">Current 166.1x is over 7x FY2021's 22.9x &mdash; but this comparison is nearly meaningless given how thin current TTM FCF ($2.8B against a $470B market cap) actually is. Treat this reading as a symptom of a barely-positive FCF base, not a genuine valuation signal.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">72x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">108x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">144x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">180x</text><line x1="50.0" y1="194.60" x2="840.0" y2="194.60" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="190.60" text-anchor="end" font-size="10" fill="#94a3b8">FY21 (only usable history): 22.9x</text><path d="M 50.0,194.60 L 840.0,35.49" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="194.60" r="3" fill="#a78bfa"/><text x="50.0" y="184.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.9x</text><circle cx="840.0" cy="35.49" r="3.5" fill="#a78bfa"/><text x="840.0" y="25.49" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">166.1x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Intel holds $29.73B in cash and short-term investments against $50.54B of total debt, a net debt position of $20.56B &mdash; improved from $27.56B a year ago, but still a genuine debt load (1.22x TTM EBITDA, Debt/Equity 0.49, current ratio 1.60). Altman Z-Score of 2.23 sits below the traditional "safe" threshold of 3, and interest coverage of 3.88x is thin for a company of this size. The balance sheet is stabilizing, not yet strong.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 110.48,15.00 L110.29,52.00 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M110.48,15.00 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 110.29,52.00 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Traditional "insiders" (officers &amp; directors) &asymp; 0.08% &mdash; effectively negligible</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions 67.44%, plus the U.S. government's new &asymp;10% strategic stake and Nvidia's &asymp;4-5% stake (both counted within the institutional/strategic float, not as traditional insiders)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; an unusual strategic-investor structure:</b> Intel has no founder-control structure at all (Gordon Moore and Robert Noyce are long gone, and CEO Lip-Bu Tan holds only a small personal stake). What makes Intel's ownership genuinely unusual right now is the arrival of two large, non-traditional strategic holders in 2025-26: the U.S. government converted CHIPS Act support into a roughly 10% equity stake, plus a five-year warrant for another 5% (exercisable only if Intel sells majority control of its foundry business &mdash; a poison pill designed to keep leading-edge domestic chip manufacturing under American ownership), and Nvidia separately invested $5B for roughly 4-5% of the company as part of a broader x86/AI co-development partnership. Neither of these is a "founder" in the traditional sense this criterion usually rewards, so it's scored as Not Met &mdash; but they represent a real, unusual form of strategic alignment worth watching regardless.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. FCF CAGR (#4) is the only N/A here &mdash; a genuine sign-flip from FY2021's positive FCF to FY2025's negative FCF, mathematically undefined for a standard CAGR.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Intel</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>-9.57% &mdash; $79.0B &rarr; $52.9B, a genuine multi-year decline, not a single bad year</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>-54.73% &mdash; $22.1B &rarr; $0.9B, both years positive but a severe collapse in between and at the endpoint</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>1.75% (FY2025, GAAP); TTM is better at 7.82% but still far below the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>FY2021 was +$9.1B, FY2025 was -$4.9B &mdash; a genuine sign flip, the standard CAGR formula is mathematically undefined here</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Still #1 or #2 in core x86 CPUs (duopoly with AMD); Intel Foundry itself is a distant, unproven challenger to TSMC, so this is scored on the core CPU business, not the foundry ambition</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; x86 CPUs remain a genuine Intel/AMD duopoly</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 3.42% vs WACC 15.14% &mdash; badly fails both the 15% floor and doesn't clear cost of capital; the clearest sign this turnaround hasn't shown up financially yet</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.22x ($20.56B net debt / $16.84B TTM EBITDA) &mdash; inside the threshold and improving, though this is real net debt, not net cash</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>63.46% TTM ($2.83B FCF / $4.46B EBIT) &mdash; below the threshold, though both figures are still thin in absolute terms</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 166.1x vs FY2021's 22.9x (the only other usable data point); ratio &asymp;7.3, an extreme reading distorted by a very thin current FCF base rather than a clean valuation signal</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding up +13.28% YoY and roughly +24% over 5 years, driven by repeated capital raises including the government and Nvidia placements &mdash; real, meaningful dilution</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.08% &mdash; no founder-control structure; the U.S. government (&asymp;10%) and Nvidia (&asymp;4-5%) are large strategic holders but not "insiders" in the sense this criterion measures</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>21.23% of TTM revenue &mdash; extremely capital-intensive given ongoing 18A and next-node fab investment</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Q2 2026 shows real, tangible operating improvement (12.19% margin, the best quarter in years, on accelerating revenue growth). The net debt position is shrinking, 18A finally reached high-volume manufacturing with improving yields, and Intel now has two extraordinarily well-resourced strategic partners &mdash; the U.S. government and Nvidia &mdash; both financially and politically invested in the company's success.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This scorecard is genuinely one of the weakest on the entire site: negative capital returns, heavy and rising dilution, extreme capex intensity, and a valuation multiple that's arithmetically almost meaningless given how thin current FCF still is. The stock's 260% one-year rally is priced substantially on turnaround hope, government/Nvidia backing, and Apple foundry talks &mdash; not on demonstrated financial performance. One strong quarter is a genuinely encouraging data point, not yet a trend.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 23-31, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), TheNextWeb/Yahoo Finance/WisdomTree/Phemex/TS2 (U.S. government stake, Nvidia investment, 18A progress, Lip-Bu Tan turnaround reporting).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. The exact composition of Q2 2026's large one-time non-operating charge (~-$12.7B) was not independently confirmed in available sources and should be verified against Intel's full 10-Q before relying on the net-income figure. WACC (15.14%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Intel &mdash; NASDAQ, USD share price trend. Points shown are fiscal year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Intel &mdash; Fiscal Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A brutal multi-year round trip &mdash; down from $47.74 (FY2021) to a low of $20.05 (FY2024) as the fundamentals deteriorated, followed by an explosive 2026 rally to $89.47 on turnaround hope, the government stake, and Nvidia's investment. The 5-year CAGR is positive only because of how sharp this final leg has been.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +13.4%</text><path d="M 46.0,119.54 L 172.8,164.88 L 299.6,115.77 L 426.4,175.92 L 553.2,141.61 L 680.0,34.57 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,119.54 L 172.8,164.88 L 299.6,115.77 L 426.4,175.92 L 553.2,141.61 L 680.0,34.57" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="119.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="109.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$47.74</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="164.88" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="154.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$25.47</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="115.77" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="105.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$49.59</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="175.92" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="165.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$20.05</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="141.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="131.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$36.90</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="34.57" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="24.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$89.47</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2025 and the current price are directly sourced closing quotes. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
