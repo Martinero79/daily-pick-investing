@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Micron Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; DRAM, NAND &amp; HBM Memory</div>
+  <h1>Micron Technology, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: MU, USD &middot; reports in USD</span>
+    <span class="badge">FY ends late Aug/early Sep &middot; reports quarterly</span>
+    <span class="badge">Founded 1978 &middot; Boise, Idaho (HQ)</span>
+    <span class="badge star">The US-based leg of the memory trio alongside Samsung and SK hynix &mdash; a genuine #2 in HBM (~21% share) and closing fast on DRAM's #2 spot, with a stock up +692% in a year. The scorecard is real but visibly weaker than SK hynix's: highest capex intensity of the three, weakest FCF conversion, and no anchor shareholder.</span>
+  </div>
+  <div class="price">$932.86</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -0.27% on the day &middot; Mkt cap ≈$1.05T, EV ≈$1.03T &middot; up +692.24% over the last 52 weeks, the steepest move of the three memory names in this batch</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in DRAM &mdash; Samsung (#1, ~38-39%), SK hynix (#2/#3, ~25-29%, closely contested with Micron); in HBM &mdash; SK hynix (dominant #1, 58-62%), Samsung (#3, distant); in NAND &mdash; Samsung, SK hynix, Kioxia, Western Digital and China's YMTC all ahead or roughly tied with Micron's ~13% share. Micron is not a foundry player; its business is entirely memory and storage.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">$90.27B</div>
+      <div class="sub">+167.0% YoY (TTM); Q3 FY2026 alone was $41.46B, up +345.72% YoY and larger than any full prior fiscal year in this window</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025 / TTM)</div>
+      <div class="val green">26.24% / 65.67%</div>
+      <div class="note">FY2025 (ended Aug 2025) predates the sharpest part of the ramp; the most recent quarter alone hit 80.37% &mdash; TTM captures more of that acceleration.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green">67.64% / 16.34%</div>
+      <div class="note">The widest ROIC/WACC spread of the three memory names in this batch &mdash; genuine, current economic value creation.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val green">$23.75B</div>
+      <div class="sub">Swung from net debt as recently as Q1 FY2026 (-$0.48B) to a large net cash position within two quarters</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/13 criteria met, 6 not met, 0 N/A &mdash; a real but visibly weaker scorecard than SK hynix's (89) or even Samsung's (65), despite the largest 52-week stock move of the three.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 178.85,45.55 L151.63,71.14 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M178.85,45.55 A95,95 0 0 1 189.86,168.03 L148.71,132.60 A58,58 0 0 0 151.63,71.14 Z" fill="#34d399" opacity="0.55"/><path d="M189.86,168.03 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 148.71,132.60 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (operating margin, market share, market concentration, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (revenue CAGR, EBIT CAGR, FCF CAGR, FCF conversion, insider ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>The 5-year revenue/EBIT/FCF CAGRs all miss the bar &mdash; not because the business is weak, but because the FY2021-FY2025 window mostly predates the real explosion, which is showing up in FY2026 quarters not yet captured by this metric.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Micron is the US-based leg of the memory trio covered in this batch, and the one where the gap between "the stock" and "the scorecard" is most pronounced. The 52-week move here (+692%) is even larger than SK hynix's (+536%), driven by the same AI memory supercycle: Micron holds roughly 21% of the HBM market (a solid #2 behind SK hynix), and its DRAM share has been closing in on the #2 spot held by SK hynix, with Nvidia's CEO publicly citing memory as a supply constraint on AI accelerator production. The most recent quarter (Q3 FY2026, ended May 2026) posted $41.46B in revenue, up 345.72% year-over-year, with an 80.37% operating margin &mdash; numbers that would look extraordinary anywhere on this site. Where this dashboard's scorecard pulls back from the enthusiasm: Micron's fiscal year (ending in late August) means the FY2021-FY2025 window used for this framework's CAGR calculations mostly predates the sharpest part of the ramp, which shows up in FY2026's quarters instead &mdash; so the 5-year revenue, EBIT and FCF growth rates all miss this framework's 15% bar despite the current run-rate being spectacular. More structurally, Micron also runs the highest capex intensity of the three memory names (28% of TTM revenue, funding a large US manufacturing buildout), has the weakest FCF conversion of the group, and &mdash; unlike Samsung and SK hynix &mdash; has no chaebol-style anchor shareholder to fall back on for the insider-ownership criterion; it's a straightforwardly widely-held US public company with just 0.22% insider ownership. None of this makes Micron a bad business. It makes it the more speculative, momentum-driven member of this three-company memory group, with a scorecard that says "real and improving fast" rather than SK hynix's "already excellent."
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q3 FY2026 (three months to May 28, 2026) and spot price as of Aug 28, 2026 close. Five-year price history (page 6) uses calendar year-end closes (Dec 31) as a simplification against Micron's Aug/Sep fiscal year-end, consistent with how other US companies on this site are charted; all other financial figures are sourced directly from S&amp;P Global Market Intelligence via stockanalysis.com.
+  </div>
+
+  <div class="bignum-corner">7/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions. Fiscal year ends in late August/early September. FY2023 was a genuine industry-wide memory trough; FY2025 (ended Aug 2025) still predates the sharpest part of the current AI-driven ramp, which shows up in the FY2026 quarters on page 3.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual ($B)</div>
+    <div class="chart-sub">FY2023 was a genuine loss year during the industry-wide memory downturn. FY2025's recovery to $37.4B revenue is a new high for this window &mdash; but as page 3 shows, a single FY2026 quarter has already exceeded most of FY2025's full-year total.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text>
+<line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$10B</text>
+<line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text>
+<line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$30B</text>
+<line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$40B</text>
+<rect x="73.0" y="81.48" width="16" height="138.52" rx="1.5" fill="#2dd4bf"/>
+<text x="81.0" y="76.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$27.7B</text>
+<rect x="91.0" y="186.02" width="16" height="33.98" rx="1.5" fill="#60a5fa"/>
+<text x="99.0" y="181.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$6.8B</text>
+<rect x="109.0" y="190.69" width="16" height="29.30" rx="1.5" fill="#fbbf24"/>
+<text x="117.0" y="185.7" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$5.9B</text>
+<text x="100.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="229.0" y="66.21" width="16" height="153.79" rx="1.5" fill="#2dd4bf"/>
+<text x="237.0" y="61.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$30.8B</text>
+<rect x="247.0" y="171.45" width="16" height="48.55" rx="1.5" fill="#60a5fa"/>
+<text x="255.0" y="166.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$9.7B</text>
+<rect x="265.0" y="176.56" width="16" height="43.43" rx="1.5" fill="#fbbf24"/>
+<text x="273.0" y="171.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$8.7B</text>
+<text x="256.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="385.0" y="142.30" width="16" height="77.70" rx="1.5" fill="#2dd4bf"/>
+<text x="393.0" y="137.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$15.5B</text>
+<rect x="403.0" y="220.00" width="16" height="17.87" rx="1.5" fill="#f87171"/>
+<text x="411.0" y="243.9" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-3.6B</text>
+<rect x="421.0" y="220.00" width="16" height="29.17" rx="1.5" fill="#f87171"/>
+<text x="429.0" y="255.2" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">$-5.8B</text>
+<text x="412.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="541.0" y="94.45" width="16" height="125.55" rx="1.5" fill="#2dd4bf"/>
+<text x="549.0" y="89.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$25.1B</text>
+<rect x="559.0" y="213.47" width="16" height="6.53" rx="1.5" fill="#60a5fa"/>
+<text x="567.0" y="208.5" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$1.3B</text>
+<rect x="577.0" y="216.11" width="16" height="3.89" rx="1.5" fill="#fbbf24"/>
+<text x="585.0" y="211.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$0.8B</text>
+<text x="568.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="697.0" y="33.11" width="16" height="186.89" rx="1.5" fill="#2dd4bf"/>
+<text x="705.0" y="28.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$37.4B</text>
+<rect x="715.0" y="170.96" width="16" height="49.04" rx="1.5" fill="#60a5fa"/>
+<text x="723.0" y="166.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$9.8B</text>
+<rect x="733.0" y="177.31" width="16" height="42.70" rx="1.5" fill="#fbbf24"/>
+<text x="741.0" y="172.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">$8.5B</text>
+<text x="724.0" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+<line x1="65" y1="220" x2="840" y2="220" stroke="#475569" stroke-width="1.3"/>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#f87171;">+7.78%</div><div class="sub">$27.7B &rarr; $37.4B; misses the 15% bar because FY2021 was already a cyclical high and the window ends before FY2026's explosion</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#f87171;">+9.60%</div><div class="sub">$6.8B &rarr; $9.8B; both endpoints positive, directly computable despite FY2023's loss year in between</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-9.06%</div><div class="sub">$2.4B &rarr; $1.7B; both years positive (no sign-flip), but FY2025's heavy capex ramp actually left FCF slightly below FY2021's level</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FY2023's deficit was industry-wide; FY2024 was a bare breakeven ($0.1B). FY2025's $1.7B is positive but still modest relative to revenue &mdash; capex has been consuming most of the operating cash flow gains so far, a pattern that reverses sharply in the FY2026 quarters on page 3.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$-8B</text>
+<line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">$-6B</text>
+<line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$-4B</text>
+<line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$-2B</text>
+<line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$0B</text>
+<line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">$2B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text>
+<line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#475569" stroke-width="1.3"/>
+<rect x="103.0" y="46.03" width="70" height="40.63" rx="2" fill="#34d399"/>
+<text x="138.0" y="38.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.4B</text>
+<text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="259.0" y="34.77" width="70" height="51.90" rx="2" fill="#34d399"/>
+<text x="294.0" y="26.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.1B</text>
+<text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="415.0" y="86.67" width="70" height="101.95" rx="2" fill="#f87171"/>
+<text x="450.0" y="202.6" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">$-6.1B</text>
+<text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="571.0" y="84.65" width="70" height="2.02" rx="2" fill="#34d399"/>
+<text x="606.0" y="76.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$0.1B</text>
+<text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="727.0" y="58.87" width="70" height="27.80" rx="2" fill="#34d399"/>
+<text x="762.0" y="50.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.7B</text>
+<text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">FY2023's -23.00% margin was industry-wide, not Micron-specific. FY2025's 26.24% recovery is real, but as page 3 shows, margin kept climbing well past this chart's endpoint &mdash; reaching 80.37% by Q3 FY2026.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-30%</text>
+<line x1="50" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="195.4" text-anchor="end" font-size="11" fill="#64748b">-20%</text>
+<line x1="50" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="166.9" text-anchor="end" font-size="11" fill="#64748b">-10%</text>
+<line x1="50" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="138.3" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+<line x1="50" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="109.7" text-anchor="end" font-size="11" fill="#64748b">10%</text>
+<line x1="50" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="81.1" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="52.6" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<path d="M 50.00,64.20 L 247.50,44.09 L 445.00,200.00 L 642.50,119.43 L 840.00,59.31 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/>
+<path d="M 50.00,64.20 L 247.50,44.09 L 445.00,200.00 L 642.50,119.43 L 840.00,59.31" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.00" cy="64.20" r="3" fill="#2dd4bf"/>
+<text x="50.00" y="54.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.53%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.50" cy="44.09" r="3" fill="#2dd4bf"/>
+<text x="247.50" y="34.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.57%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.00" cy="200.00" r="3" fill="#2dd4bf"/>
+<text x="445.00" y="190.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-23.00%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.50" cy="119.43" r="3" fill="#2dd4bf"/>
+<text x="642.50" y="109.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.20%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.00" cy="59.31" r="3" fill="#2dd4bf"/>
+<text x="840.00" y="49.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.24%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was $25.26B (27.98% of TTM revenue) &mdash; the highest capex intensity of the three memory names in this batch, reflecting Micron's large US fab and packaging expansion program, well above this framework's ~6% asset-light threshold.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Where the Real Story Is</div></div>
+  <div class="sec-sub">Micron's fiscal quarters run roughly Sep-Nov, Dec-Feb, Mar-May, Jun-Aug. Latest reported period: Q3 FY2026 (three months to May 28, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q3 FY2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$41.46B</b>, up <b style="color:#34d399;">345.72% YoY</b> &mdash; a single quarter now larger than any full prior fiscal year shown on page 2. Operating margin hit <b style="color:#34d399;">80.37%</b>, up from 23.32% just a year earlier. This is the clearest evidence that the FY2021-FY2025 CAGR figures on page 2, while technically correct, understate the current run-rate: the growth this framework's 5-year window was built to capture happened almost entirely in the quarters since.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q3'25&ndash;Q3'26, $B)</div>
+    <div class="chart-sub">Revenue has more than quadrupled across this five-quarter window, from $9.3B to $41.5B &mdash; the steepest quarterly acceleration of any company covered in this memory batch.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text>
+<line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">$15B</text>
+<line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">$30B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$45B</text>
+<rect x="103.0" y="178.66" width="70" height="41.34" rx="2" fill="#2dd4bf"/>
+<text x="138.0" y="171.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$9.3B</text>
+<text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="259.0" y="169.71" width="70" height="50.29" rx="2" fill="#2dd4bf"/>
+<text x="294.0" y="162.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$11.3B</text>
+<text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="415.0" y="159.36" width="70" height="60.64" rx="2" fill="#2dd4bf"/>
+<text x="450.0" y="152.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.6B</text>
+<text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="571.0" y="113.96" width="70" height="106.04" rx="2" fill="#2dd4bf"/>
+<text x="606.0" y="107.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$23.9B</text>
+<text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text>
+<rect x="727.0" y="35.75" width="70" height="184.25" rx="2" fill="#2dd4bf"/>
+<text x="762.0" y="28.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$41.5B</text>
+<text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin ($B)</div>
+    <div class="chart-sub">Every quarter in this window was solidly profitable at the operating line. Margin climbed from 23.32% to 80.37% across five quarters &mdash; the steepest margin expansion of any company in this batch.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="190.0" x2="840" y2="190.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="194.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text>
+<line x1="60" y1="147.5" x2="840" y2="147.5" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="151.5" text-anchor="end" font-size="11" fill="#64748b">$9B</text>
+<line x1="60" y1="105.0" x2="840" y2="105.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="109.0" text-anchor="end" font-size="11" fill="#64748b">$18B</text>
+<line x1="60" y1="62.5" x2="840" y2="62.5" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="66.5" text-anchor="end" font-size="11" fill="#64748b">$27B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$36B</text>
+<rect x="103.0" y="179.76" width="70" height="10.24" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="160.76" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.17B</text>
+<rect x="121.0" y="160.76" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="138.0" y="171.76" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">23.3%</text>
+<text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="259.0" y="172.56" width="70" height="17.44" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="153.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.69B</text>
+<rect x="277.0" y="153.56" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="294.0" y="164.56" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">32.6%</text>
+<text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="415.0" y="161.02" width="70" height="28.98" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="142.02" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$6.14B</text>
+<rect x="433.0" y="142.02" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="450.0" y="153.02" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">45.0%</text>
+<text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="571.0" y="113.81" width="70" height="76.19" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="94.81" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$16.14B</text>
+<rect x="589.0" y="94.81" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="606.0" y="105.81" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">67.6%</text>
+<text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text>
+<rect x="727.0" y="32.66" width="70" height="157.34" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="13.66" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$33.32B</text>
+<rect x="745.0" y="13.66" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="762.0" y="24.66" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">80.4%</text>
+<text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text>
+</svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/FCF used as the entry-multiple signal. FY2023 is excluded (negative FCF, undefined multiple); FY2024 is also excluded &mdash; its FCF was a bare $0.1B against $25.1B revenue, making its 875.80x P/FCF a near-zero-denominator distortion rather than a meaningful reading.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/FCF &mdash; FY21, FY22, FY25 &amp; Current</div>
+    <div class="chart-sub">The current multiple (40.26x) sits about 11% below the three-year usable average (45.44x) &mdash; a genuine, if modest, discount to Micron's own recent history, even after a +692% 52-week move. FY2025's 81.85x reading (above both) reflects that year's still-thin FCF relative to a fast-recovering share price.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">18x</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">36x</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">54x</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">72x</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">90x</text>
+<line x1="50.0" y1="119.02" x2="840.0" y2="119.02" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/>
+<text x="835" y="115.02" text-anchor="end" font-size="10" fill="#94a3b8">Avg (ex-FY23 neg. FCF, ex-FY24 near-zero-FCF outlier): 45.44x</text>
+<path d="M 50.0,144.07 L 313.3,174.89 L 576.7,38.11 L 840.0,130.53" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="50.0" cy="144.07" r="3" fill="#a78bfa"/>
+<text x="50.0" y="134.07" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">34.17x</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text>
+<circle cx="313.3" cy="174.89" r="3" fill="#a78bfa"/>
+<text x="313.3" y="164.89" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.30x</text>
+<text x="313.3" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text>
+<circle cx="576.7" cy="38.11" r="3" fill="#a78bfa"/>
+<text x="576.7" y="28.11" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">81.85x</text>
+<text x="576.7" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text>
+<circle cx="840.0" cy="130.53" r="3.5" fill="#a78bfa"/>
+<text x="840.0" y="120.53" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">40.26x</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text>
+</svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> $26.02B in cash against just $6.38B in total debt &mdash; a net cash position of $23.75B, Debt/EBITDA of just 0.09x, current ratio of 3.42, and an Altman Z-Score of 9.42 (the strongest of the three memory names in this batch, and one of the highest on this entire site). Piotroski F-Score of 8 out of 9 reflects broadly strong, improving fundamentals. This balance sheet strengthened dramatically in just the last two quarters as the cash generation caught up with the revenue ramp.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 111.31,15.01 L110.80,52.01 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M111.31,15.01 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 110.80,52.01 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 0.22%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions 78.88%, remainder public float &mdash; a straightforwardly widely-held US public company</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; no anchor shareholder, unlike Samsung or SK hynix:</b> both other memory names in this batch have a chaebol-style controlling structure (Samsung's Lee family via Samsung C&amp;T/Samsung Life; SK hynix's Chey family via SK Inc./SK Square) that this framework looks through to score the insider-ownership criterion as Met. Micron has no equivalent: it was founded in 1978 by four Boise, Idaho engineers, none of whom retain a meaningful stake today, and no single entity holds a controlling or even large minority position. That makes Micron's governance more conventional and arguably more accountable to public shareholders &mdash; but it also means this criterion is scored Not Met on its own terms, with no look-through adjustment available.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 13 criteria are directly computable here &mdash; no N/A cases, since FY2021 and FY2025 FCF were both positive.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Micron</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+7.78% &mdash; $27.7B &rarr; $37.4B; misses the bar because FY2021 was already a cyclical high and the window ends before FY2026's explosion</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>+9.60% &mdash; $6.8B &rarr; $9.8B</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>26.24% (FY2025, GAAP); TTM far higher at 65.67%, and the latest quarter alone was 80.37%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-9.06% &mdash; both FY2021 (+$2.4B) and FY2025 (+$1.7B) positive, so no sign-flip issue, but FY2025's heavy capex left FCF slightly below FY2021's level</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#2 in HBM (~21% share, behind SK hynix); closely contesting the #2 spot in overall DRAM (~22-25% vs SK hynix's ~25-29%); not top-2 in NAND (~13%) &mdash; a real but more contested position than SK hynix's or Samsung's</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; DRAM/HBM remains a tight three-player oligopoly (Samsung, SK hynix, Micron)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 67.64% vs WACC 16.34% &mdash; the widest spread of the three memory names in this batch</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $23.75B (Debt/EBITDA 0.09x) &mdash; automatically Met per methodology</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>44.15% TTM ($26.17B FCF / $59.28B EBIT) &mdash; the weakest FCF conversion of the three memory names, reflecting the highest capex intensity of the group</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/FCF 40.26x vs 3-year usable average (ex-FY23 negative, ex-FY24 near-zero-denominator outlier) of 45.44x &mdash; about 11% below average, a genuine discount</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding +0.62% YoY &mdash; a small net increase from stock-based compensation, not offset by meaningful buybacks (buyback yield -0.62%), but modest enough to treat as essentially flat</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>0.22% &mdash; no founder or anchor-shareholder structure of any kind; a straightforwardly widely-held public company (see governance note, page 4)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>27.98% of TTM revenue &mdash; the highest of the three memory names, reflecting a large US fab and advanced-packaging capacity buildout</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The current run-rate is genuinely extraordinary: revenue up 345.72% YoY and margin at 80.37% in the latest quarter, the steepest acceleration of any company in this memory batch. ROIC/WACC spread and balance sheet strength are both best-in-group, and even after a +692% year, the entry multiple sits modestly below its own recent average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is the most momentum-driven of the three memory names: weaker FCF conversion, the highest capex intensity, a more contested (rather than dominant) market position, and no anchor shareholder to fall back on if sentiment turns. The FY2021-FY2025 CAGR misses are a genuine artifact of timing rather than weak fundamentals, but they're a reminder that this framework's backward-looking criteria haven't yet caught up with what's happening in FY2026.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of May 28 &ndash; Aug 31, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Counterpoint Research / Astute Group (DRAM, NAND and HBM market share), TipRanks / Barron's / Invezz (AI memory supercycle reporting, Nvidia memory-constraint commentary).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Five-year price history (page 6) uses calendar year-end closes as a simplification against Micron's non-calendar fiscal year. WACC (16.34%) is company-specific as reported by stockanalysis.com.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Micron &mdash; NASDAQ, USD share price trend. Points shown are calendar year-end closes (Dec 31) plus the current price, used as a simplification against Micron's Aug/Sep fiscal year-end.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Micron &mdash; Calendar Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A choppy, cyclical first four years typical of memory stocks, followed by an explosive AI-driven re-rating: more than tripling in calendar 2025 alone, then more than tripling again in the eight months since &mdash; the steepest move of any company in this memory batch.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +59.2%</text>
+<path d="M 46.0,158.41 L 172.8,164.52 L 299.6,159.34 L 426.4,159.46 L 553.2,130.05 L 680.0,35.48 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,158.41 L 172.8,164.52 L 299.6,159.34 L 426.4,159.46 L 553.2,130.05 L 680.0,35.48" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="158.41" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="148.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$91</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="164.52" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="154.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$49</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="159.34" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="149.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$85</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="159.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="149.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$84</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="130.05" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="120.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$285</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="35.48" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="25.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$933</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for 2021-2025 are calendar (Dec 31) closes sourced from Macrotrends; labeled FY21-FY25 as a simplification against Micron's actual Aug/Sep fiscal year-end, consistent with the annual financials on page 2. The current price ($932.86, Aug 28, 2026 close) is a directly-sourced exact quote. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
