@@ -33,9 +33,96 @@ function labelChipsHTML(c) {
   return chips.length ? `<div class="label-row">${chips.join("")}</div>` : "";
 }
 
-function cardHTML(c) {
+// ============================================================
+// Live price / P/E — see worker.js and HOW-TO-LIVE-PRICES.md.
+// Deliberately scoped to just the homepage hero + the up-to-4
+// "recently featured" cards (5 tickers max), not the full archive —
+// that's what keeps this light on the free API tier. Every element
+// starts showing the static price already baked into companies.js;
+// hydrateLiveQuotes() only replaces it if a live value comes back,
+// and silently leaves the static value alone otherwise.
+// ============================================================
+
+function tickerSymbol(ticker) {
+  const idx = (ticker || "").indexOf(": ");
+  return idx > -1 ? ticker.slice(idx + 2) : (ticker || "");
+}
+
+function liveQuoteHTML(c) {
+  const sym = tickerSymbol(c.ticker);
+  return `<div class="live-quote" data-ticker="${sym}">
+    <span class="live-quote-price">${c.price}</span>
+    <span class="live-quote-pe"></span>
+    <span class="live-dot" title="Live price not loaded yet"></span>
+  </div>`;
+}
+
+function cssEscape(s) {
+  return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/["\\]/g, "\\$&");
+}
+
+function formatLivePrice(rawNumber, originalText) {
+  if (rawNumber == null || isNaN(rawNumber)) return originalText;
+  const m = (originalText || "").match(/^([^\d\-]*)/);
+  const prefix = m ? m[1] : "";
+  const hadDecimals = /\.\d/.test(originalText || "");
+  const decimals = hadDecimals ? 2 : 0;
+  const formatted = Number(rawNumber).toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  return prefix + formatted;
+}
+
+function applyLiveQuote(sym, data) {
+  const heroPriceEl = document.getElementById("hero-live-price");
+  if (heroPriceEl && heroPriceEl.dataset.ticker === sym && data.price != null) {
+    heroPriceEl.textContent = formatLivePrice(data.price, heroPriceEl.textContent);
+    const dot = document.getElementById("hero-live-dot");
+    if (dot) { dot.classList.add("is-live"); dot.title = "Live price, as of " + new Date(data.asOf).toLocaleString(); }
+    if (data.pe != null) {
+      const peStat = document.getElementById("hero-pe-stat");
+      const peEl = document.getElementById("hero-live-pe");
+      if (peStat) peStat.style.display = "";
+      if (peEl) peEl.textContent = data.pe.toFixed(1) + "x";
+    }
+  }
+
+  document.querySelectorAll(`.live-quote[data-ticker="${cssEscape(sym)}"]`).forEach(block => {
+    if (data.price == null) return;
+    const priceEl = block.querySelector(".live-quote-price");
+    const peEl = block.querySelector(".live-quote-pe");
+    const dot = block.querySelector(".live-dot");
+    if (priceEl) priceEl.textContent = formatLivePrice(data.price, priceEl.textContent);
+    if (peEl && data.pe != null) peEl.textContent = " · P/E " + data.pe.toFixed(1) + "x";
+    if (dot) { dot.classList.add("is-live"); dot.title = "Live price, as of " + new Date(data.asOf).toLocaleString(); }
+  });
+}
+
+async function hydrateLiveQuotes() {
+  const els = document.querySelectorAll("[data-ticker]");
+  if (!els.length) return;
+
+  const symbols = new Set();
+  els.forEach(el => { if (el.dataset.ticker) symbols.add(el.dataset.ticker); });
+
+  await Promise.allSettled([...symbols].map(async (sym) => {
+    try {
+      const r = await fetch(`/api/quote?symbol=${encodeURIComponent(sym)}`);
+      if (!r.ok) return;
+      const data = await r.json();
+      if (data.error || data.price == null) return; // static fallback already showing — nothing to do
+      applyLiveQuote(sym, data);
+    } catch (e) {
+      // Network hiccup, ticker not covered by the API, etc. — the
+      // static price from companies.js is already showing, so there's
+      // nothing more to do here.
+    }
+  }));
+}
+
+function cardHTML(c, opts) {
+  opts = opts || {};
   const martineroChip = (c.martinero !== undefined)
     ? `<span class="score-chip martinero-chip">Martinero ${c.martinero}/100</span>` : "";
+  const liveBlock = opts.live ? liveQuoteHTML(c) : "";
   return `
     <div class="company-card" data-href="view.html?c=${encodeURIComponent(c.slug)}">
       <div class="card-top">
@@ -45,6 +132,7 @@ function cardHTML(c) {
       <h3>${c.name}</h3>
       <div class="card-sector">${c.sector}</div>
       ${labelChipsHTML(c)}
+      ${liveBlock}
       <p class="card-blurb">${c.blurb}</p>
       <div class="card-bottom">
         <span class="chip-row">
@@ -85,7 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ${labelChipsHTML(c)}
         <p class="hero-blurb">${c.blurb}</p>
         <div class="hero-stats">
-          <div class="hero-stat"><div class="stat-label">Price</div><div class="stat-value">${c.price}</div></div>
+          <div class="hero-stat"><div class="stat-label">Price</div><div class="stat-value"><span id="hero-live-price" data-ticker="${tickerSymbol(c.ticker)}">${c.price}</span><span class="live-dot" id="hero-live-dot" title="Live price not loaded yet"></span></div></div>
+          <div class="hero-stat" id="hero-pe-stat" style="display:none;"><div class="stat-label">P/E (live)</div><div class="stat-value" id="hero-live-pe">—</div></div>
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
           ${c.martinero !== undefined ? `<div class="hero-stat"><div class="stat-label">Martinero Index</div><div class="stat-value stat-value-martinero">${c.martinero}/100</div></div>` : ""}
         </div>
@@ -99,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (recentEl) {
     const recent = hasData ? COMPANIES.slice(0, -1).slice(-4).reverse() : [];
     recentEl.innerHTML = recent.length
-      ? recent.map(cardHTML).join("")
+      ? recent.map(c => cardHTML(c, { live: true })).join("")
       : `<p class="muted">More companies will show up here as they're added.</p>`;
   }
 
@@ -210,4 +299,9 @@ document.addEventListener("DOMContentLoaded", () => {
       titleEl.textContent = "Company not found";
     }
   }
+
+  // ---- Live price / P/E, hero + recent-strip only (see above) ----
+  // No-ops harmlessly on pages with no [data-ticker] elements
+  // (archive.html, scoreboard.html, view.html).
+  hydrateLiveQuotes();
 });
