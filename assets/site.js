@@ -118,6 +118,19 @@ async function hydrateLiveQuotes() {
   }));
 }
 
+// Growth momentum — non-scored, not part of the Martinero Index. Compares the
+// most recent fiscal year's revenue growth rate to the prior year's: faster =
+// accelerating, slower = decelerating, roughly flat (within ~2pp) = steady.
+// Purely informational context on trend direction, see About page.
+function momentumChipHTML(c) {
+  if (!c.momentum) return "";
+  const m = c.momentum;
+  const arrow = m.status === "accelerating" ? "&#9650;" : m.status === "decelerating" ? "&#9660;" : "&#8213;";
+  const label = m.status === "accelerating" ? "Accelerating" : m.status === "decelerating" ? "Decelerating" : "Steady";
+  const detail = (m.recent != null && m.prior != null) ? ` (${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)` : "";
+  return `<span class="momentum-chip momentum-${m.status}" title="Revenue growth rate, most recent FY vs prior FY. Not part of the Martinero Index.">${arrow} ${label}${detail}</span>`;
+}
+
 function cardHTML(c, opts) {
   opts = opts || {};
   const martineroChip = (c.martinero !== undefined)
@@ -138,6 +151,7 @@ function cardHTML(c, opts) {
         <span class="chip-row">
           <span class="score-chip">${c.score} criteria met</span>
           ${martineroChip}
+          ${momentumChipHTML(c)}
         </span>
         <a class="card-link" href="view.html?c=${encodeURIComponent(c.slug)}">View dashboard →</a>
       </div>
@@ -178,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
           ${c.martinero !== undefined ? `<div class="hero-stat"><div class="stat-label">Martinero Index</div><div class="stat-value stat-value-martinero">${c.martinero}/100</div></div>` : ""}
         </div>
+        ${c.momentum ? `<div style="margin:2px 0 4px 0;">${momentumChipHTML(c)}</div>` : ""}
         ${personalNoteHTML(c)}
         <a class="btn" href="view.html?c=${encodeURIComponent(c.slug)}">View full dashboard →</a>`;
     }
