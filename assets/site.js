@@ -269,15 +269,46 @@ document.addEventListener("DOMContentLoaded", () => {
       : `<p class="muted">No companies match this label yet.</p>`;
   }
 
-  // ---- Scoreboard page: every company ranked by Martinero Index, highest first ----
+  // ---- Scoreboard page: ranked by Martinero Index (default) or Momentum (click column header) ----
+  // Momentum sort key = acceleration delta (recent growth % − prior growth %), highest first.
+  // This is a separate, non-scored ranking — it is NOT folded into the Martinero Index.
   const scoreboardEl = document.getElementById("scoreboard-table");
   if (scoreboardEl) {
-    const ranked = hasData
-      ? [...COMPANIES].filter(c => c.martinero !== undefined).sort((a, b) => b.martinero - a.martinero)
-      : [];
-    if (!ranked.length) {
-      scoreboardEl.innerHTML = `<p class="muted">No scored companies yet.</p>`;
-    } else {
+    let sortKey = "martinero"; // "martinero" | "momentum"
+
+    function momentumDelta(c) {
+      if (!c.momentum || c.momentum.recent == null || c.momentum.prior == null) return null;
+      return c.momentum.recent - c.momentum.prior;
+    }
+
+    function momentumCellHTML(c) {
+      const d = momentumDelta(c);
+      if (d === null) return `<span class="muted">—</span>`;
+      const arrow = d > 0 ? "&#9650;" : d < 0 ? "&#9660;" : "&#8213;";
+      const sign = d > 0 ? "+" : "";
+      return `<span class="momentum-chip momentum-${c.momentum.status}">${arrow} ${sign}${d.toFixed(1)}pp</span>`;
+    }
+
+    function renderScoreboard() {
+      const scored = hasData ? COMPANIES.filter(c => c.martinero !== undefined) : [];
+      let ranked;
+      if (sortKey === "momentum") {
+        ranked = [...scored].sort((a, b) => {
+          const da = momentumDelta(a), db = momentumDelta(b);
+          if (da === null && db === null) return 0;
+          if (da === null) return 1;   // companies without momentum data sink to the bottom
+          if (db === null) return -1;
+          return db - da;
+        });
+      } else {
+        ranked = [...scored].sort((a, b) => b.martinero - a.martinero);
+      }
+
+      if (!ranked.length) {
+        scoreboardEl.innerHTML = `<p class="muted">No scored companies yet.</p>`;
+        return;
+      }
+
       const rows = ranked.map((c, i) => `
         <tr>
           <td class="num">${i + 1}</td>
@@ -285,13 +316,31 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${c.sector || ""}</td>
           <td class="num">${c.score || ""}</td>
           <td class="num"><span class="score-chip martinero-chip">${c.martinero}/100</span></td>
+          <td class="num">${momentumCellHTML(c)}</td>
         </tr>`).join("");
+
       scoreboardEl.innerHTML = `
         <table class="holdings-table">
-          <tr><th>#</th><th>Company</th><th>Sector</th><th>Criteria Met</th><th>Martinero Index</th></tr>
+          <tr>
+            <th>#</th>
+            <th>Company</th>
+            <th>Sector</th>
+            <th>Criteria Met</th>
+            <th class="sortable-th${sortKey === "martinero" ? " sort-active" : ""}" data-sort="martinero">Martinero Index${sortKey === "martinero" ? " &#9660;" : ""}</th>
+            <th class="sortable-th${sortKey === "momentum" ? " sort-active" : ""}" data-sort="momentum" title="Revenue growth acceleration — recent FY growth minus prior FY growth. Not part of the Martinero Index.">Momentum${sortKey === "momentum" ? " &#9660;" : ""}</th>
+          </tr>
           ${rows}
         </table>`;
+
+      scoreboardEl.querySelectorAll(".sortable-th").forEach(th => {
+        th.addEventListener("click", () => {
+          sortKey = th.getAttribute("data-sort");
+          renderScoreboard();
+        });
+      });
     }
+
+    renderScoreboard();
   }
 
   // ---- View page: load the right dashboard into the iframe ----
