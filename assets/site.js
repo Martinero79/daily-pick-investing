@@ -118,17 +118,19 @@ async function hydrateLiveQuotes() {
   }));
 }
 
-// Growth momentum — non-scored, not part of the Martinero Index. Compares the
-// most recent fiscal year's revenue growth rate to the prior year's: faster =
-// accelerating, slower = decelerating, roughly flat (within ~2pp) = steady.
-// Purely informational context on trend direction, see About page.
+// Annual revenue growth trend — non-scored, not part of the Martinero Index.
+// Compares the most recent FULL FISCAL YEAR's revenue growth rate to the prior
+// fiscal year's: faster = accelerating, slower = decelerating, roughly flat
+// (within ~2pp) = steady. This is an annual measure, not a real-time or
+// quarterly signal — labeled explicitly as "(FY)" wherever it's shown so it
+// isn't mistaken for current-quarter momentum. See About page.
 function momentumChipHTML(c) {
   if (!c.momentum) return "";
   const m = c.momentum;
   const arrow = m.status === "accelerating" ? "&#9650;" : m.status === "decelerating" ? "&#9660;" : "&#8213;";
   const label = m.status === "accelerating" ? "Accelerating" : m.status === "decelerating" ? "Decelerating" : "Steady";
-  const detail = (m.recent != null && m.prior != null) ? ` (${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)` : "";
-  return `<span class="momentum-chip momentum-${m.status}" title="Revenue growth rate, most recent FY vs prior FY. Not part of the Martinero Index.">${arrow} ${label}${detail}</span>`;
+  const detail = (m.recent != null && m.prior != null) ? ` (FY ${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)` : "";
+  return `<span class="momentum-chip momentum-${m.status}" title="Annual revenue growth trend — most recent full fiscal year's growth rate vs the year before. Not real-time, not part of the Martinero Index.">${arrow} ${label}${detail}</span>`;
 }
 
 function cardHTML(c, opts) {
@@ -269,8 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
       : `<p class="muted">No companies match this label yet.</p>`;
   }
 
-  // ---- Scoreboard page: ranked by Martinero Index (default) or Momentum (click column header) ----
-  // Momentum sort key = acceleration delta (recent growth % − prior growth %), highest first.
+  // ---- Scoreboard page: ranked by Martinero Index (default) or Annual Growth Trend (click column header) ----
+  // Growth Trend sort key = annual acceleration delta (recent FY growth % − prior FY growth %), highest first.
   // This is a separate, non-scored ranking — it is NOT folded into the Martinero Index.
   const scoreboardEl = document.getElementById("scoreboard-table");
   if (scoreboardEl) {
@@ -284,9 +286,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function momentumCellHTML(c) {
       const d = momentumDelta(c);
       if (d === null) return `<span class="muted">—</span>`;
+      const m = c.momentum;
       const arrow = d > 0 ? "&#9650;" : d < 0 ? "&#9660;" : "&#8213;";
-      const sign = d > 0 ? "+" : "";
-      return `<span class="momentum-chip momentum-${c.momentum.status}">${arrow} ${sign}${d.toFixed(1)}pp</span>`;
+      const label = m.status === "accelerating" ? "Accelerating" : m.status === "decelerating" ? "Decelerating" : "Steady";
+      // Show the two actual growth rates, not just the raw pp delta — a bare
+      // "+27.3pp" means nothing without the numbers behind it. "FY" prefix
+      // makes clear this is annual, not a current-quarter reading.
+      return `<span class="momentum-chip momentum-${m.status}">${arrow} ${label} (FY ${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)</span>`;
     }
 
     function renderScoreboard() {
@@ -327,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <th>Sector</th>
             <th>Criteria Met</th>
             <th class="sortable-th${sortKey === "martinero" ? " sort-active" : ""}" data-sort="martinero">Martinero Index${sortKey === "martinero" ? " &#9660;" : ""}</th>
-            <th class="sortable-th${sortKey === "momentum" ? " sort-active" : ""}" data-sort="momentum" title="Revenue growth acceleration — recent FY growth minus prior FY growth. Not part of the Martinero Index.">Momentum${sortKey === "momentum" ? " &#9660;" : ""}</th>
+            <th class="sortable-th${sortKey === "momentum" ? " sort-active" : ""}" data-sort="momentum" title="Annual revenue growth trend — most recent full fiscal year's growth rate minus the year before's. Not real-time, not part of the Martinero Index.">Growth Trend (Annual)${sortKey === "momentum" ? " &#9660;" : ""}</th>
           </tr>
           ${rows}
         </table>`;
