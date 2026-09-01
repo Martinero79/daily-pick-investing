@@ -861,6 +861,74 @@ const COMPANIES = [
   },
 
   {
+    slug: "rigetti",
+    name: "Rigetti Computing, Inc.",
+    ticker: "NASDAQ: RGTI",
+    sector: "Technology",
+    industry: "Quantum Computing",
+    subIndustry: "Superconducting-Qubit Quantum Computing Hardware",
+    tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
+    dateFeatured: "2026-09-01",
+    price: "$15.59",
+    score: "2 / 13",
+    martinero: 11,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The weakest of four quantum-computing names covered in this batch, scored on this site's standard 13-criterion scorecard: revenue actually shrank over FY2021-FY2025 (-5.6% CAGR, the only decline among the four), operating losses have widened rather than narrowed, latest-FY capex ran at roughly 2.6x revenue, and market position is a distant follower to Google and IBM in superconducting-qubit hardware. Q2 2026 did show real sequential and YoY acceleration (+185% YoY on Novera system shipments) plus a $100M CHIPS Act letter of intent, and the balance sheet carries $436M in net cash from a large 2025 raise. Result: 2 of 13 criteria met, Martinero Index 11/100.",
+    file: "companies/rigetti.html",
+    personalNote: "Rigetti is the one company in this batch where the standard scorecard caught something I don't think I'd have seen otherwise: revenue actually went down over the FY2021-2025 window, even though the stock has had a wild multi-year run and just landed a $100M CHIPS Act letter of intent. That's a real, mechanical finding from plugging the same numbers into the same framework every other company here gets — exactly what a bespoke, gentler scorecard for early-stage names might have talked around. Q2 2026 looks like a genuine inflection (+185% YoY on actual system shipments), but one good quarter against a five-year decline is a start, not a trend. Of the four quantum names here, this is the one I'd want two or three more quarters of real growth from before taking the recent momentum at face value."
+  },
+
+  {
+    slug: "d-wave",
+    name: "D-Wave Quantum Inc.",
+    ticker: "NYSE: QBTS",
+    sector: "Technology",
+    industry: "Quantum Computing",
+    subIndustry: "Quantum Annealing Hardware & Cloud Services",
+    tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
+    dateFeatured: "2026-09-01",
+    price: "$17.20",
+    score: "3 / 13",
+    martinero: 28,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The second-strongest of four quantum-computing names in this batch on the site's standard scorecard, helped by a genuinely distinct competitive position: D-Wave is essentially the only commercial-scale public vendor of quantum annealing hardware, a narrower niche than the crowded gate-model race. FY2025 revenue grew 178.5% YoY to $24.59M and the balance sheet holds $841M in net cash, but EBIT and FCF losses have both widened, insider ownership is thin (~0.88%), and shares outstanding have roughly tripled since the 2022 SPAC merger. Result: 3 of 13 criteria met, Martinero Index 28/100.",
+    file: "companies/d-wave.html",
+    personalNote: "D-Wave is the one name in this batch where I think the market-share criterion genuinely deserves a Met: quantum annealing is a real, distinct architecture from the gate-model approach IonQ, Rigetti, Google and IBM are all racing on, and D-Wave is close to the only commercial-scale public company selling it. That's a meaningfully different, more defensible position than 'one of many gate-model startups.' Q2 2026 revenue of $3.1M looks like a slowdown next to Q2 2025's $15.0M, but that prior quarter included a lumpy system sale, not a sustainable run-rate — the real story is still deepening losses and thin insider alignment (under 1%). A Martinero Index of 28 puts this second of the four, behind IonQ on scale but ahead of Rigetti and Quantum Computing Inc on a cleaner niche story."
+  },
+
+  {
+    slug: "quantum-computing-inc",
+    name: "Quantum Computing Inc.",
+    ticker: "NASDAQ: QUBT",
+    sector: "Technology",
+    industry: "Quantum Computing",
+    subIndustry: "Photonic Quantum Computing & Semiconductor Foundry Services",
+    tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
+    dateFeatured: "2026-09-01",
+    price: "$8.15",
+    score: "3 / 13",
+    martinero: 23,                    // Martinero Index (weighted 1-100 score, see About)
+    blurb: "The smallest and most acquisition-driven of four quantum-computing names in this batch. Three 2026 acquisitions (most recently NHanced Semiconductors, an advanced-packaging foundry) took quarterly revenue from $61K to $5.6M, and the balance sheet carries $1.12B in net cash after large capital raises — but revenue is still tiny relative to that cash pile, capex now runs at roughly 10x annual revenue, and share count is up nearly 7x since FY2021, the heaviest dilution of the four. Founder/Chief Scientist Yuping Huang's ~10% personal stake is a genuine positive. Result: 3 of 13 criteria met, Martinero Index 23/100.",
+    file: "companies/quantum-computing-inc.html",
+    personalNote: "Quantum Computing Inc is the hardest of the four to get an honest read on, because the most important fact about its recent numbers isn't really about quantum computing at all: the jump from a $61K quarter to a $5.6M quarter is mostly M&A, not photonics demand, after three 2026 acquisitions including a semiconductor foundry that has nothing to do with the core photonics product line. I don't think that makes the revenue fake, but the growth rate is measuring roll-up activity more than organic traction. The one real positive: founder and Chief Scientist Yuping Huang's roughly 10% personal stake, a genuine alignment signal rare among these four names. But capex running at something like 10x annual revenue, on a business still generating single-digit millions in sales, is the number I keep coming back to. A Martinero Index of 23 feels right: real cash, a real founder stake, and a genuinely uncertain path from here."
+  },
+
+  {
+    slug: "ionq",
+    name: "IonQ, Inc.",
+    ticker: "NYSE: IONQ",
+    sector: "Technology",
+    industry: "Quantum Computing",
+    subIndustry: "Trapped-Ion Quantum Computing Hardware & Cloud Services",
+    tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
+    dateFeatured: "2026-09-01",
+    price: "$39.31",
+    score: "4 / 13",
+    martinero: 30,                    // Martinero Index (weighted 1-100 score, see About) — corrected onto this site's STANDARD scorecard; see dashboard page 5
+    blurb: "The lead name in this corrected four-company Quantum batch, and the largest by a wide margin (2025 revenue $130.02M vs. $24.59M, $7.09M and $0.68M for D-Wave, Rigetti and Quantum Computing Inc respectively) — but scored on the exact same 13-criterion standard scorecard as every other dashboard on this site, replacing an earlier custom \"speculative-risk\" version built the same day. Revenue is up 287% YoY in the latest quarter (fifth straight record) with backlog up 297% YoY, and the balance sheet carries $2.36B in net cash. Against the standard scorecard, though: operating margin is -487%, EBIT and FCF losses have both widened sharply, shares outstanding have roughly doubled since 2021, and capex intensity and market concentration both miss. Result: 4 of 13 criteria met, Martinero Index 30/100.",
+    file: "companies/ionq.html",
+    personalNote: "Earlier today I built IonQ's first dashboard using a custom scorecard designed specifically for early-stage quantum names, on the theory that judging a pre-profit hardware company by the same yardstick as Novo Nordisk or ASML would be unfair. I've reversed that and rebuilt this one on the site's standard scorecard, the same one every other company gets, and I think that was the right call: the whole point of a consistent framework is that a low score on it IS the finding, not a flaw in the test. Under the standard lens, IonQ is genuinely the strongest of the four quantum names I'm covering — by far the most revenue, the clearest realistic market position, a large net-cash cushion — and it still only clears 4 of 13 criteria for a Martinero Index of 30. That's not a knock on the business; it's an honest description of what pre-profit, capital-intensive, early-stage hardware looks like when you refuse to grade it on a curve. I'd still call this the most investable of the four on fundamentals, but investable-among-speculative and objectively strong are different claims, and conflating them was exactly the mistake the custom scorecard let me make this morning."
+  },
+
+  {
     slug: "sk-hynix",
     name: "SK hynix Inc.",
     ticker: "KRX: 000660",
@@ -875,23 +943,6 @@ const COMPANIES = [
     blurb: "The real supplier behind the AI buildout: the #1 maker of HBM (high-bandwidth memory) at 58-62% share, the component Nvidia's GPUs physically depend on. Revenue nearly quadrupled year-over-year last quarter, operating margin climbed from 41% to 76% across five straight quarters, and the balance sheet flipped from net debt to a ₩66.87T net cash cushion in under two years. ROIC of 61.59% clears its 17.27% cost of capital by more than 44 points — genuine current profitability, not a hoped-for turnaround. Valuation is the exception: the headline 7.26x trailing P/E is inflated by a one-off gain, and normalized on real operating earnings the multiple runs closer to 27.3x, roughly 2.2x its own recent average — a real premium for a stock up 536% in a year, not a discount. Scorecard isn't flawless — FCF conversion, entry multiple and capex intensity all miss — but 10/13 met is one of the strongest results on this site, backed by real numbers rather than narrative alone.",
     file: "companies/sk-hynix.html",
     personalNote: "Of the two names to come out of the TSMC-competitor detour, SK hynix is the one I'd actually want to own, and I think it's worth being explicit about why: Intel's case was 'the turnaround might work,' Samsung's was 'two different businesses pulling in different directions,' and SK hynix's is just... the numbers are good. Really good. Revenue nearly quadrupling in a year and margin going from 41% to 76% would normally make me suspicious of a one-off, but this maps directly onto something concrete and ongoing — every major AI accelerator needs HBM stacked next to the compute die, and SK hynix has held the lead in that specific product for a while now. What surprised me most building this one was the valuation math: at first glance the trailing P/E of 7.26x after a 536% year looks almost too good to be true — and it is. That figure is inflated by a one-off non-operating gain; strip it out and the normalized multiple is running around 27x, more than double the stock's own recent average. So the entry-multiple criterion does fail here, just not for the reason I expected going in — it's not that the market ignored the rally, it's that the cheap-looking headline number was hiding the real one. I'm not pretending this is risk-free — memory is savagely cyclical (FY2023 was a loss year for the whole industry, not just SK hynix), and Micron and Samsung are both racing to close the HBM gap. But of everything I've built recently, this is the dashboard where the fundamentals do the most work and the narrative does the least, and that's usually the combination I trust more."
-  },
-
-  {
-    slug: "ionq",
-    name: "IonQ, Inc.",
-    ticker: "NYSE: IONQ",
-    sector: "Technology",
-    industry: "Quantum Computing",
-    subIndustry: "Trapped-Ion Quantum Computing Hardware & Cloud Services",
-    tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
-    dateFeatured: "2026-09-01",
-    price: "$39.31",
-    score: "9 / 13",
-    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About) — SPECULATIVE-RISK scorecard, not this site's standard mature-company framework; see dashboard page 5
-    blurb: "The lead name in a new four-company Quantum batch (alongside Rigetti, D-Wave and Quantum Computing Inc), picked as the most investable of the group on revenue scale, growth and cash — not because it's a safe bet. Revenue is up 287% YoY (fifth straight record quarter) and backlog is up 297% YoY to $485M, backed by a genuinely diversified commercial-plus-government customer base and roughly $2.1B in net cash. But this is scored on a purpose-built speculative-risk scorecard, not the site's usual profitability-focused one: gross margin has compressed from 61% to 26% in a year, shares outstanding have roughly doubled in under two years, IonQ has never turned a profit or generated positive free cash flow, and reported net income currently swings by billions of dollars quarter to quarter on non-cash warrant revaluations that have nothing to do with the actual business.",
-    file: "companies/ionq.html",
-    personalNote: "This is the first of four quantum computing names I'm planning to cover, and I picked IonQ to go first specifically because it's the strongest of the four on paper — I wanted to start with the best version of this story before looking at the weaker ones. And it really is stronger: more revenue than the other three combined, more cash, more real government and commercial contracts, its own newly acquired US semiconductor foundry. But I built a completely different scorecard for this batch on purpose, because forcing IonQ through the same lens I use for Novo Nordisk or ASML would have been dishonest — this site's usual criteria assume a business that's already profitable, and IonQ isn't close. What actually kept me up a bit while building this one was the gross margin chart: revenue is exploding, which is the headline everyone reports, but margin has been quietly falling the whole time, from 61% to 26% in a single year, as hardware sales replace higher-margin cloud access. That's not necessarily bad — it might just mean the business is maturing into what it's actually going to be — but it's the opposite of the story you'd want if you were hoping IonQ was about to prove out a software-like profit model. The dilution is the other thing I can't wave away: shares outstanding have roughly doubled in under two years, and a chunk of the newest dilution came from an acquisition (SkyWater) I don't yet have a strong view on. So where I land is: genuinely the best-positioned of the four quantum stocks, real government tailwinds behind it, and a 79 on a scorecard I built specifically not to be read as 'safe' — because it isn't. I'd want to see gross margin stabilize before I'd call this anything more than a high-conviction speculative position."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
