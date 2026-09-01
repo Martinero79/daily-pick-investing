@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>D-Wave Quantum Inc. Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .mcard { flex:1; min-width:150px; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .val.amber { color:#fbbf24; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#1f0f0f; color:#f5d4d4; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Quantum Computing (Quantum Annealing)</div>
+  <h1>D-Wave Quantum Inc.</h1>
+  <div class="badges">
+    <span class="badge">NYSE: QBTS, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1999 &middot; Burnaby, Canada (HQ)</span>
+    <span class="badge star">The only quantum annealing pure-play among major public names &mdash; a genuinely distinct, more concentrated niche than the gate-model race IonQ, Rigetti and others compete in. Real FY2025 revenue growth (+178.5% YoY) and a large net-cash position, but scored on the exact same standard scorecard as the rest of the batch: 3/13 met, Martinero Index 28/100.</span>
+  </div>
+  <div class="price">$17.20</div>
+  <div class="price-sub">Close Aug 31, 2026 (NYSE), +1.24% on the day &middot; Mkt cap &asymp;$6.52B, EV &asymp;$6.02B &middot; up sharply over the past year on FY2025's revenue acceleration and a large capital raise, though choppy quarter to quarter on lumpy system-sale timing</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in quantum annealing specifically &mdash; D-Wave is essentially the only commercial-scale public vendor of this architecture (Fujitsu's Digital Annealer is the closest large-scale analog, using classical hardware to emulate annealing rather than true quantum annealing); in the broader quantum-computing race, Google, IBM, IonQ and others all pursue different (mostly gate-model) architectures.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY25)</div>
+      <div class="val">$24.59M</div>
+      <div class="sub">Revenue CAGR FY21-FY25: +40.67%</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY25)</div>
+      <div class="val red">-408.2%</div>
+      <div class="note">Deeply negative &mdash; a pre-profit, R&amp;D- and capex-heavy business at this stage.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val red">-77.62% (FY25) / -27.98% (TTM, ROE basis)</div>
+      <div class="note">Deeply negative on ROE/ROCE proxies &mdash; net losses mean there is no positive economic return to set against WACC.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val green">$841M</div>
+      <div class="sub">Built via a large FY2025 capital raise (issuance of common stock of $789.7M that year); FY2022-2023 were small net-debt positions.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">28/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/13 criteria met on this site's standard scorecard &mdash; same framework used for every company, no early-stage carve-outs.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 154.15,25.88 L136.95,58.64 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M154.15,25.88 A95,95 0 0 1 188.18,56.03 L157.73,77.05 A58,58 0 0 0 136.95,58.64 Z" fill="#34d399" opacity="0.55"/><path d="M188.18,56.03 A95,95 0 0 1 204.31,98.55 L167.58,103.01 A58,58 0 0 0 157.73,77.05 Z" fill="#34d399" opacity="0.55"/><path d="M204.31,98.55 A95,95 0 0 1 21.17,143.69 L55.77,130.57 A58,58 0 0 0 167.58,103.01 Z" fill="#f87171"/><path d="M21.17,143.69 A95,95 0 0 1 31.82,56.03 L62.27,77.05 A58,58 0 0 0 55.77,130.57 Z" fill="#64748b"/><path d="M31.82,56.03 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 62.27,77.05 Z" fill="#fbbf24"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (revenue CAGR, net debt/EBITDA, market share)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (operating margin, market concentration, ROIC/WACC, share count trend, capex intensity, insider ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (FCF conversion and entry multiple &mdash; both EBIT and FCF are negative, so the underlying ratios aren't meaningful)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Partial/n.m. &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both negative in every year of the window, so no valid CAGR exists; scored as partial rather than a blunt fail or pass)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    A genuinely distinct competitive position within this Quantum batch: D-Wave is essentially the only commercial-scale public vendor of quantum annealing hardware, a more concentrated niche than the crowded gate-model race IonQ, Rigetti and others compete in. FY2025 revenue grew 178.5% YoY to $24.59M and the balance sheet carries $841M in net cash, but Q2 2026 revenue was a modest $3.1M against a lumpy $15.0M comp a year earlier, EBIT and FCF losses have both widened over the period, insider ownership is thin (&asymp;0.88%), and shares outstanding have roughly tripled since the 2022 SPAC merger. Result: 3 of 13 criteria met, Martinero Index 28/100, second-best of the four on this standard scorecard.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials sourced from stockanalysis.com (S&amp;P Global Market Intelligence / Fiscal.ai), quarterly commentary from company press releases and Quantum Computing Report as of late Aug 2026. Spot price as of Aug 31, 2026 close. This dashboard replaces an earlier, non-standard "speculative-risk" version built the same day; every figure has been re-verified against current sources for this rebuild, not copied from the prior version.
+  </div>
+
+  <div class="bignum-corner">3/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Annual Financials (FY21-FY25)</div></div>
+  <div class="sec-sub">All figures in USD millions. Revenue/EBIT/FCF use the full FY2021-FY2025 window as carried by the data source. Share count (criterion #11) is treated separately below: D-Wave's Aug 2022 SPAC merger makes the pre-merger FY2021 share count (3.17M) a discontinuous, non-comparable base.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($M)</div>
+    <div class="chart-sub">The site's standard 3-series annual chart. Revenue (teal) is shown alongside GAAP operating income/EBIT (blue when positive) and free cash flow (amber when positive); both EBIT and FCF are negative in every year shown here, so both series render in red, extending below the zero line.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT (red if negative)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FCF (red if negative)</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-100</text><line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">-69</text><line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">-38</text><line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">-7</text><line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25</text><line x1="65" y1="59.4" x2="840" y2="59.4" stroke="#475569" stroke-width="1.3"/><rect x="120.0" y="49.3" width="16" height="10.05" rx="1.5" fill="#2dd4bf"/><text x="128.0" y="43.3" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">6.3</text><rect x="138.0" y="59.4" width="16" height="62.34" rx="1.5" fill="#f87171"/><text x="146.0" y="133.7" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-39.0</text><rect x="156.0" y="59.4" width="16" height="58.53" rx="1.5" fill="#f87171"/><text x="164.0" y="129.9" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-36.6</text><text x="138.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="274.0" y="47.9" width="16" height="11.48" rx="1.5" fill="#2dd4bf"/><text x="282.0" y="41.9" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">7.2</text><rect x="292.0" y="59.4" width="16" height="95.17" rx="1.5" fill="#f87171"/><text x="300.0" y="166.5" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-59.5</text><rect x="310.0" y="59.4" width="16" height="73.06" rx="1.5" fill="#f87171"/><text x="318.0" y="144.4" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-45.6</text><text x="292.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="428.0" y="45.3" width="16" height="14.02" rx="1.5" fill="#2dd4bf"/><text x="436.0" y="39.3" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">8.8</text><rect x="446.0" y="59.4" width="16" height="128.92" rx="1.5" fill="#f87171"/><text x="454.0" y="200.3" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-80.5</text><rect x="464.0" y="59.4" width="16" height="98.00" rx="1.5" fill="#f87171"/><text x="472.0" y="169.4" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-61.2</text><text x="446.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="45.2" width="16" height="14.13" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="39.2" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">8.8</text><rect x="600.0" y="59.4" width="16" height="123.59" rx="1.5" fill="#f87171"/><text x="608.0" y="194.9" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-77.2</text><rect x="618.0" y="59.4" width="16" height="71.62" rx="1.5" fill="#f87171"/><text x="626.0" y="143.0" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-44.8</text><text x="600.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="736.0" y="20.0" width="16" height="39.36" rx="1.5" fill="#2dd4bf"/><text x="744.0" y="14.0" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">24.6</text><rect x="754.0" y="59.4" width="16" height="160.64" rx="1.5" fill="#f87171"/><text x="762.0" y="232.0" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-100.4</text><rect x="772.0" y="59.4" width="16" height="121.38" rx="1.5" fill="#f87171"/><text x="780.0" y="192.7" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-75.8</text><text x="754.0" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-FY25)</div><div class="val" style="color:#34d399;">+40.67%</div><div class="sub">$6.28M &rarr; $24.59M</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">EBIT CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">GAAP EBIT widened from -$39.0M to -$100.4M (2.6x), both years negative</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">FCF CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">FCF widened from -$36.6M to -$75.8M (2.1x), both years negative</div></div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT (GAAP)</th><th>Op. Margin</th><th>Free Cash Flow</th></tr>
+      <tr><td>FY21</td><td>$6.28M</td><td>$-38.95M</td><td>-620.2%</td><td>$-36.57M</td></tr>
+      <tr><td>FY22</td><td>$7.17M</td><td>$-59.46M</td><td>-829.3%</td><td>$-45.65M</td></tr>
+      <tr><td>FY23</td><td>$8.76M</td><td>$-80.55M</td><td>-919.5%</td><td>$-61.23M</td></tr>
+      <tr><td>FY24</td><td>$8.83M</td><td>$-77.22M</td><td>-874.5%</td><td>$-44.75M</td></tr>
+      <tr><td>FY25</td><td>$24.59M</td><td>$-100.37M</td><td>-408.2%</td><td>$-75.84M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Latest-FY capex was $3.86M (15.7% of FY25 revenue) &mdash; well above this framework's asset-light band, reflecting hardware R&amp;D and (in some cases) manufacturing-capacity buildout.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development</div></div>
+  <div class="sec-sub">Q4'25 was not separately available in the sources checked. Q2'25's unusually large $15.0M reflects a lumpy system-sale quarter, not a sustained run-rate &mdash; the sharp step-down afterward is a base-effect, not a deterioration.</div>
+
+  <div class="headline-box">
+    <div class="title">Latest Quarter Headlines</div>
+    <p>Q2 2026 revenue was $3.1M (roughly flat sequentially, down from an unusually large $15.0M in Q2 2025 that included a lumpy system sale). Bookings were $2.1M in the quarter (+59% YoY) and $35.5M for H1 2026 (+1,120% YoY, aided by the Quantum Circuits Inc. acquisition). GAAP net loss narrowed to $48M from $167.3M a year earlier (which had included a large warrant-redemption charge). Remaining performance obligations stood at $40.7M.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($M)</div>
+    <div class="chart-sub">Quarters shown are those with a directly sourced figure; see note above for any gaps.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$M0</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$M4</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$M9</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$M13</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$M17</text><rect x="126.9" y="46.09" width="70" height="173.91" rx="2" fill="#2dd4bf"/><text x="161.9" y="38.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M15.00</text><text x="161.9" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="320.6" y="176.64" width="70" height="43.36" rx="2" fill="#2dd4bf"/><text x="355.6" y="168.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M3.74</text><text x="355.6" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="514.4" y="186.84" width="70" height="33.16" rx="2" fill="#2dd4bf"/><text x="549.4" y="178.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M2.86</text><text x="549.4" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="708.1" y="184.06" width="70" height="35.94" rx="2" fill="#2dd4bf"/><text x="743.1" y="176.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M3.10</text><text x="743.1" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E and P/FCF are both not meaningful here (negative earnings and negative FCF), so criterion #10 is scored N/A per this site's precedent for GAAP-loss businesses. The chart below shows Price/Sales purely as qualitative context, not as the scored signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price/Sales vs. Own History (context only &mdash; not the scored criterion)</div>
+    <div class="chart-sub">Current P/S of 524.86x vs. a FY21-FY25 average of 145.12x. P/S multiples for micro-revenue-base companies swing wildly and are not a clean substitute for P/E or P/FCF &mdash; shown for context only.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">151x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">302x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">453x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">604x</text><line x1="50" y1="171.91" x2="840" y2="171.91" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="167.91" text-anchor="end" font-size="10" fill="#94a3b8">FY21-FY25 avg: 145.1x</text><path d="M 50.0,200.57 L 208.0,212.58 L 366.0,214.68 L 524.0,135.13 L 682.0,96.61 L 840.0,46.09" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="200.57" r="3" fill="#a78bfa"/><text x="50.0" y="190.57" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">58.6x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="212.58" r="3" fill="#a78bfa"/><text x="208.0" y="202.58" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.4x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="214.68" r="3" fill="#a78bfa"/><text x="366.0" y="204.68" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.1x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="135.13" r="3" fill="#a78bfa"/><text x="524.0" y="125.13" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">256.1x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="96.61" r="3" fill="#a78bfa"/><text x="682.0" y="86.61" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">372.4x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="46.09" r="3.5" fill="#a78bfa"/><text x="840.0" y="36.09" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">524.9x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> Net cash position of $841M as of the latest fiscal year-end. Built via a large FY2025 capital raise (issuance of common stock of $789.7M that year); FY2022-2023 were small net-debt positions. Per this site's methodology, a net-cash position automatically satisfies the net debt/EBITDA criterion (&lt;2x) regardless of the sign distortions a negative-EBITDA denominator would otherwise create.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 115.25,15.15 L113.21,52.09 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M115.25,15.15 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 113.21,52.09 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers, directors &amp; founders) &asymp; 0.88%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions, funds &amp; public float, remainder</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Dilution note:</b> shares outstanding are up 216.6% over the window shown on page 2, funded mainly by at-the-market equity issuance rather than buybacks &mdash; the single clearest, most consistent negative finding across all four names in this Quantum batch.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Two criteria use non-standard treatment, both explained: #2 EBIT CAGR and #4 FCF CAGR are n.m. (partial) since both years in the window are negative; #9 FCF conversion and #10 entry multiple are N/A since EBIT and FCF are both negative, making the ratios not meaningful.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>QBTS</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-FY25)</td><td>&ge;15%</td><td>+40.67% &mdash; $6.28M &rarr; $24.59M</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP EBIT negative every year in this window; loss widened from -$39.0M to -$100.4M (2.6x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>-408.22% (FY25)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; FCF negative every year in this window; loss widened from -$36.6M to -$75.8M (2.1x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Essentially the only commercial-scale public vendor of quantum annealing hardware &mdash; a genuinely distinct, more concentrated architecture niche than the broader gate-model race, giving D-Wave a credible #1 claim within its own specific sub-category.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; scored at the level of the broader quantum-computing industry (fragmented, multi-architecture), consistent with the other three names in this batch, even though D-Wave's own annealing sub-niche is more concentrated (noted under market share above).</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC (ROE/ROCE proxy) -77.62% (FY25) / -27.98% (TTM, ROE basis) vs. an assumed WACC of ~11.5%, this framework's standard assumption for high-beta, pre-profit small-cap tech/hardware (consistent with treatment used elsewhere on this site for similarly early-stage names)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $841.02M (FY2025) &mdash; automatically Met per this site's methodology.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Not meaningful &mdash; EBIT is negative, so FCF/EBIT produces a nonsensical ratio.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; trailing P/E and P/FCF are both not meaningful (negative earnings and negative FCF). Qualitatively, current P/S of 524.86x vs. a FY21-FY25 average of 145.12x is offered only as context, not as the scored signal.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding up 216.6% over the window &mdash; heavy dilution via equity raises, not offset by buybacks</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;0.88% insider ownership per third-party trackers (one source shows as low as 0.15%) &mdash; thin, with no founder-controlled structure; institutional ownership runs &asymp;43-49%.</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>15.7% of latest-FY revenue ($3.86M capex / $24.59M revenue)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Essentially the only commercial-scale public vendor of quantum annealing hardware &mdash; a genuinely distinct, more concentrated architecture niche than the broader gate-model race, giving D-Wave a credible #1 claim within its own specific sub-category. Net debt/EBITDA is automatically Met on the strength of $841M in net cash. </p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin and ROIC are both deeply negative with no near-term path to the site's standard bars; EBIT and FCF losses have widened rather than narrowed over the window; capex intensity (15.7% of revenue) is well above an asset-light profile; and share count is up 216.6% on heavy equity-funded dilution, the common thread across all four names in this batch.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Sources: stockanalysis.com (financials, ratios, sourced from S&amp;P Global Market Intelligence / Fiscal.ai), company press releases and Quantum Computing Report / Data Center Dynamics (quarterly results, bookings, M&amp;A), third-party ownership trackers (WallStreetZen, GuruFocus, Yahoo Finance) for insider/institutional ownership percentages, cross-checked where multiple sources were available.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC is an estimated assumption (~11.5%, this framework's standard assumption for high-beta, pre-profit small-cap tech/hardware (consistent with treatment used elsewhere on this site for similarly early-stage names)), not a company-specific disclosed figure. Criteria #2, #4, #9 and #10 use the non-standard treatment explicitly disclosed above, consistent with how this site handles other GAAP-loss businesses (see CrowdStrike, Baba dashboards for precedent).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">D-Wave Quantum Inc. &mdash; NYSE, USD share price trend. Points shown are calendar/fiscal year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">D-Wave Quantum Inc. &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A volatile, largely speculative trading history typical of pre-profit small-cap quantum-computing names, with sharp moves in both directions tied to technical milestones, capital raises and sector sentiment rather than steady fundamentals.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +12.3%</text><path d="M 46.0,127.21 L 172.8,175.97 L 299.6,179.23 L 426.4,135.47 L 553.2,32.17 L 680.0,82.45 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,127.21 L 172.8,175.97 L 299.6,179.23 L 426.4,135.47 L 553.2,32.17 L 680.0,82.45" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="127.21" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="117.21" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$9.82</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="175.97" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="165.97" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1.44</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="179.23" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="169.23" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$0.88</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="135.47" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="125.47" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$8.40</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="32.17" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="22.17" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$26.15</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="82.45" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="72.45" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$17.51</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes sourced from stockanalysis.com. Current price ($17.20, Aug 31, 2026 close) is a directly-sourced exact quote. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rigetti Computing, Inc. Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .mcard { flex:1; min-width:150px; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .val.amber { color:#fbbf24; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#1f0f0f; color:#f5d4d4; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Quantum Computing (Superconducting)</div>
+  <h1>Rigetti Computing, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: RGTI, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2013 &middot; Berkeley, California (HQ)</span>
+    <span class="badge star">The only one of these four quantum names whose FY2021-FY2025 revenue actually shrank (-5.6% CAGR) rather than grew &mdash; a genuinely weaker top-line trend than IonQ, D-Wave or Quantum Computing Inc, even as the stock has re-rated hard. Scored on the same standard scorecard as the rest of the batch: 2/13 met, Martinero Index 11/100, the weakest of the four.</span>
+  </div>
+  <div class="price">$15.59</div>
+  <div class="price-sub">Close Aug 28, 2026 (NASDAQ), -5.17% on the day &middot; Mkt cap &asymp;$5.20B, EV &asymp;$4.82B &middot; volatile; re-rated sharply higher through 2025 on technical milestones (108-qubit Cepheus-1 system) and a $100M CHIPS Act letter of intent, before pulling back</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in superconducting-qubit quantum computing &mdash; Google and IBM run the same architecture at vastly larger scale and with far deeper balance sheets, though neither is a pure-play; among the four public pure-plays in this batch, Rigetti has the smallest and only shrinking revenue base.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY25)</div>
+      <div class="val">$7.09M</div>
+      <div class="sub">Revenue CAGR FY21-FY25: -5.63%</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY25)</div>
+      <div class="val red">-1194.4%</div>
+      <div class="note">Deeply negative &mdash; a pre-profit, R&amp;D- and capex-heavy business at this stage.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val red">-64.27% (FY25) / -43.77% (TTM, ROE basis)</div>
+      <div class="note">Deeply negative on ROE/ROCE proxies &mdash; consistent net losses mean there is no positive economic return to set against WACC.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val green">$436M</div>
+      <div class="sub">Built almost entirely from a large FY2025 capital raise (issuance of common stock of $433.7M that year); FY2021 was actually a small net debt position.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">11/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">2/13 criteria met on this site's standard scorecard &mdash; same framework used for every company, no early-stage carve-outs.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 140.08,19.89 L128.37,54.98 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M140.08,19.89 A95,95 0 0 1 167.07,34.05 L144.84,63.63 A58,58 0 0 0 128.37,54.98 Z" fill="#34d399" opacity="0.55"/><path d="M167.07,34.05 A95,95 0 0 1 188.18,56.03 L157.73,77.05 A58,58 0 0 0 144.84,63.63 Z" fill="#34d399" opacity="0.55"/><path d="M188.18,56.03 A95,95 0 1 1 21.17,143.69 L55.77,130.57 A58,58 0 1 0 157.73,77.05 Z" fill="#f87171"/><path d="M21.17,143.69 A95,95 0 0 1 31.82,56.03 L62.27,77.05 A58,58 0 0 0 55.77,130.57 Z" fill="#64748b"/><path d="M31.82,56.03 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 62.27,77.05 Z" fill="#fbbf24"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">2/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 2 (net debt/EBITDA, insider ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, operating margin, market concentration, ROIC/WACC, share count trend, capex intensity, market share)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 2 (FCF conversion and entry multiple &mdash; both EBIT and FCF are negative, so the underlying ratios aren't meaningful)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Partial/n.m. &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both negative in every year of the window, so no valid CAGR exists; scored as partial rather than a blunt fail or pass)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    The weakest of the four names in this corrected Quantum batch on the same standard scorecard used site-wide: revenue actually shrank over FY2021-FY2025 (-5.6% CAGR, the only decline among the four), operating losses have widened rather than narrowed, capex has run as high as 2.6x revenue in the latest fiscal year, and market position is a distant follower to Google and IBM in superconducting hardware. The one clear bright spot is Q2 2026's real sequential and YoY revenue acceleration (+185% YoY) on Novera system shipments, a $100M CHIPS Act letter of intent, and a genuinely large net-cash balance ($436M) built mostly from a single large 2025 capital raise. Result: 2 of 13 criteria met, Martinero Index 11/100, the lowest of the four.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials sourced from stockanalysis.com (S&amp;P Global Market Intelligence / Fiscal.ai), quarterly commentary from company press releases and Quantum Computing Report as of late Aug 2026. Spot price as of Aug 28, 2026 close. This dashboard replaces an earlier, non-standard "speculative-risk" version built the same day; every figure has been re-verified against current sources for this rebuild, not copied from the prior version.
+  </div>
+
+  <div class="bignum-corner">2/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Annual Financials (FY21-FY25)</div></div>
+  <div class="sec-sub">All figures in USD millions. Full FY2021-FY2025 window used (Rigetti went public via SPAC merger in March 2022; financials are carried back through FY2021 by the data source).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($M)</div>
+    <div class="chart-sub">The site's standard 3-series annual chart. Revenue (teal) is shown alongside GAAP operating income/EBIT (blue when positive) and free cash flow (amber when positive); both EBIT and FCF are negative in every year shown here, so both series render in red, extending below the zero line.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT (red if negative)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FCF (red if negative)</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-104</text><line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">-74</text><line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">-45</text><line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">-16</text><line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">13</text><line x1="65" y1="42.4" x2="840" y2="42.4" stroke="#475569" stroke-width="1.3"/><rect x="120.0" y="27.1" width="16" height="15.31" rx="1.5" fill="#2dd4bf"/><text x="128.0" y="21.1" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">8.9</text><rect x="138.0" y="42.4" width="16" height="63.75" rx="1.5" fill="#f87171"/><text x="146.0" y="118.2" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-37.2</text><rect x="156.0" y="42.4" width="16" height="67.35" rx="1.5" fill="#f87171"/><text x="164.0" y="121.8" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-39.3</text><text x="138.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text><rect x="274.0" y="20.0" width="16" height="22.43" rx="1.5" fill="#2dd4bf"/><text x="282.0" y="14.0" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">13.1</text><rect x="292.0" y="42.4" width="16" height="177.57" rx="1.5" fill="#f87171"/><text x="300.0" y="232.0" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-103.7</text><rect x="310.0" y="42.4" width="16" height="146.28" rx="1.5" fill="#f87171"/><text x="318.0" y="200.7" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-85.4</text><text x="292.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="428.0" y="21.9" width="16" height="20.57" rx="1.5" fill="#2dd4bf"/><text x="436.0" y="15.9" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">12.0</text><rect x="446.0" y="42.4" width="16" height="122.09" rx="1.5" fill="#f87171"/><text x="454.0" y="176.5" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-71.3</text><rect x="464.0" y="42.4" width="16" height="102.12" rx="1.5" fill="#f87171"/><text x="472.0" y="156.6" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-59.6</text><text x="446.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="582.0" y="24.0" width="16" height="18.48" rx="1.5" fill="#2dd4bf"/><text x="590.0" y="18.0" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">10.8</text><rect x="600.0" y="42.4" width="16" height="117.31" rx="1.5" fill="#f87171"/><text x="608.0" y="171.7" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-68.5</text><rect x="618.0" y="42.4" width="16" height="105.70" rx="1.5" fill="#f87171"/><text x="626.0" y="160.1" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-61.7</text><text x="600.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="736.0" y="30.3" width="16" height="12.14" rx="1.5" fill="#2dd4bf"/><text x="744.0" y="24.3" text-anchor="middle" font-size="7.5" fill="#e2e8f0" font-weight="700">7.1</text><rect x="754.0" y="42.4" width="16" height="144.97" rx="1.5" fill="#f87171"/><text x="762.0" y="199.4" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-84.7</text><rect x="772.0" y="42.4" width="16" height="132.23" rx="1.5" fill="#f87171"/><text x="780.0" y="186.7" text-anchor="middle" font-size="7.5" fill="#f87171" font-weight="700">-77.2</text><text x="754.0" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-FY25)</div><div class="val" style="color:#f87171;">-5.63%</div><div class="sub">$8.94M &rarr; $7.09M</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">EBIT CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">GAAP EBIT widened from -$37.2M to -$84.7M (2.3x), both years negative</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">FCF CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">FCF widened from -$39.3M to -$77.2M (2.0x), both years negative</div></div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>EBIT (GAAP)</th><th>Op. Margin</th><th>Free Cash Flow</th></tr>
+      <tr><td>FY21</td><td>$8.94M</td><td>$-37.23M</td><td>-416.4%</td><td>$-39.33M</td></tr>
+      <tr><td>FY22</td><td>$13.10M</td><td>$-103.70M</td><td>-791.6%</td><td>$-85.43M</td></tr>
+      <tr><td>FY23</td><td>$12.01M</td><td>$-71.30M</td><td>-593.7%</td><td>$-59.64M</td></tr>
+      <tr><td>FY24</td><td>$10.79M</td><td>$-68.51M</td><td>-634.9%</td><td>$-61.73M</td></tr>
+      <tr><td>FY25</td><td>$7.09M</td><td>$-84.66M</td><td>-1194.1%</td><td>$-77.22M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Latest-FY capex was $18.68M (263.5% of FY25 revenue) &mdash; well above this framework's asset-light band, reflecting hardware R&amp;D and (in some cases) manufacturing-capacity buildout.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development</div></div>
+  <div class="sec-sub">All five quarters directly sourced.</div>
+
+  <div class="headline-box">
+    <div class="title">Latest Quarter Headlines</div>
+    <p>Q2 2026 revenue was $5.14M, up 185% YoY and up 16.8% sequentially from Q1 2026's $4.40M, driven by Novera 9-qubit system shipments (including to the University of Saskatchewan) and international deliveries. Gross margin improved to 43% from 31% a year earlier. Operating loss widened to -$28.06M from -$25.95M in Q1. Rigetti also announced a letter of intent with the US Department of Commerce for up to $100M in CHIPS Act funding and expanded its HPE/Pittsburgh Supercomputing Center partnership.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($M)</div>
+    <div class="chart-sub">Quarters shown are those with a directly sourced figure; see note above for any gaps.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$M0</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$M1</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$M3</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$M4</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$M6</text><rect x="117.5" y="159.10" width="50" height="60.90" rx="2" fill="#2dd4bf"/><text x="142.5" y="151.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M1.80</text><text x="142.5" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="272.5" y="154.12" width="50" height="65.88" rx="2" fill="#2dd4bf"/><text x="297.5" y="146.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M1.95</text><text x="297.5" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="427.5" y="156.80" width="50" height="63.20" rx="2" fill="#2dd4bf"/><text x="452.5" y="148.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M1.87</text><text x="452.5" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="582.5" y="71.13" width="50" height="148.87" rx="2" fill="#2dd4bf"/><text x="607.5" y="63.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M4.40</text><text x="607.5" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="737.5" y="46.09" width="50" height="173.91" rx="2" fill="#2dd4bf"/><text x="762.5" y="38.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$M5.14</text><text x="762.5" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E and P/FCF are both not meaningful here (negative earnings and negative FCF), so criterion #10 is scored N/A per this site's precedent for GAAP-loss businesses. The chart below shows Price/Sales purely as qualitative context, not as the scored signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price/Sales vs. Own History (context only &mdash; not the scored criterion)</div>
+    <div class="chart-sub">Current P/S of 389.68x vs. a FY21-FY25 average of 299.18x. P/S multiples for micro-revenue-base companies swing wildly and are not a clean substitute for P/E or P/FCF &mdash; shown for context only.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">297x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">593x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">890x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">1186x</text><line x1="50" y1="169.55" x2="840" y2="169.55" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="165.55" text-anchor="end" font-size="10" fill="#94a3b8">FY21-FY25 avg: 299.2x</text><path d="M 50.0,211.63 L 208.0,218.84 L 366.0,217.97 L 524.0,153.21 L 682.0,46.09 L 840.0,154.29" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="211.63" r="3" fill="#a78bfa"/><text x="50.0" y="201.63" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">49.6x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="218.84" r="3" fill="#a78bfa"/><text x="208.0" y="208.84" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">6.8x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="217.97" r="3" fill="#a78bfa"/><text x="366.0" y="207.97" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.0x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="153.21" r="3" fill="#a78bfa"/><text x="524.0" y="143.21" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">396.1x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="46.09" r="3" fill="#a78bfa"/><text x="682.0" y="36.09" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">1031.3x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="154.29" r="3.5" fill="#a78bfa"/><text x="840.0" y="144.29" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">389.7x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> Net cash position of $436M as of the latest fiscal year-end. Built almost entirely from a large FY2025 capital raise (issuance of common stock of $433.7M that year); FY2021 was actually a small net debt position. Per this site's methodology, a net-cash position automatically satisfies the net debt/EBITDA criterion (&lt;2x) regardless of the sign distortions a negative-EBITDA denominator would otherwise create.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 192.81,63.45 L160.56,81.58 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M192.81,63.45 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 160.56,81.58 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers, directors &amp; founders) &asymp; 16.85%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions, funds &amp; public float, remainder</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Dilution note:</b> shares outstanding are up 191.0% over the window shown on page 2, funded mainly by at-the-market equity issuance rather than buybacks &mdash; the single clearest, most consistent negative finding across all four names in this Quantum batch.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Two criteria use non-standard treatment, both explained: #2 EBIT CAGR and #4 FCF CAGR are n.m. (partial) since both years in the window are negative; #9 FCF conversion and #10 entry multiple are N/A since EBIT and FCF are both negative, making the ratios not meaningful.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>RGTI</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-FY25)</td><td>&ge;15%</td><td>-5.63% &mdash; $8.94M &rarr; $7.09M</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP EBIT negative every year in this window; loss widened from -$37.2M to -$84.7M (2.3x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>-1194.41% (FY25)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; FCF negative every year in this window; loss widened from -$39.3M to -$77.2M (2.0x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Smallest and only shrinking revenue base of the four public pure-plays in this batch; a minor player relative to Google and IBM in superconducting-qubit hardware at scale &mdash; long-tail position, not a top-2 claim in any meaningful sub-segment.</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; the broader quantum-computing industry remains a fragmented, multi-architecture race, scored consistently across all four names in this batch.</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC (ROE/ROCE proxy) -64.27% (FY25) / -43.77% (TTM, ROE basis) vs. an assumed WACC of ~11.5%, this framework's standard assumption for high-beta, pre-profit small-cap tech/hardware (consistent with treatment used elsewhere on this site for similarly early-stage names)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $436.34M (FY2025) &mdash; automatically Met per this site's methodology.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Not meaningful &mdash; EBIT is negative, so FCF/EBIT produces a nonsensical ratio.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; trailing P/E and P/FCF are both not meaningful (negative earnings and negative FCF). Qualitatively, current P/S of 389.68x vs. a FY21-FY25 average of 299.18x is offered only as context, not as the scored signal.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding up 191.0% over the window &mdash; heavy dilution via equity raises, not offset by buybacks</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>16.85% insider ownership (per third-party ownership trackers), with Bessemer Venture Partners X LP the largest single holder at &asymp;12.2%; institutional ownership runs &asymp;52%.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>263.5% of latest-FY revenue ($18.68M capex / $7.09M revenue)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A net-cash balance sheet with no leverage concerns. Net debt/EBITDA is automatically Met on the strength of $436M in net cash. 16.85% insider ownership (per third-party ownership trackers), with Bessemer Venture Partners X LP the largest single holder at &asymp;12.2%; institutional ownership runs &asymp;52%.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin and ROIC are both deeply negative with no near-term path to the site's standard bars; EBIT and FCF losses have widened rather than narrowed over the window; capex intensity (263.5% of revenue) is well above an asset-light profile; and share count is up 191.0% on heavy equity-funded dilution, the common thread across all four names in this batch.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Sources: stockanalysis.com (financials, ratios, sourced from S&amp;P Global Market Intelligence / Fiscal.ai), company press releases and Quantum Computing Report / Data Center Dynamics (quarterly results, bookings, M&amp;A), third-party ownership trackers (WallStreetZen, GuruFocus, Yahoo Finance) for insider/institutional ownership percentages, cross-checked where multiple sources were available.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC is an estimated assumption (~11.5%, this framework's standard assumption for high-beta, pre-profit small-cap tech/hardware (consistent with treatment used elsewhere on this site for similarly early-stage names)), not a company-specific disclosed figure. Criteria #2, #4, #9 and #10 use the non-standard treatment explicitly disclosed above, consistent with how this site handles other GAAP-loss businesses (see CrowdStrike, Baba dashboards for precedent).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Rigetti Computing, Inc. &mdash; NASDAQ, USD share price trend. Points shown are calendar/fiscal year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Rigetti Computing, Inc. &mdash; Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">A volatile, largely speculative trading history typical of pre-profit small-cap quantum-computing names, with sharp moves in both directions tied to technical milestones, capital raises and sector sentiment rather than steady fundamentals.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +8.7%</text><path d="M 46.0,113.60 L 172.8,179.25 L 299.6,177.53 L 426.4,79.48 L 553.2,32.17 L 680.0,77.21 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,113.60 L 172.8,179.25 L 299.6,177.53 L 426.4,79.48 L 553.2,32.17 L 680.0,77.21" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="113.60" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="103.60" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$10.29</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="179.25" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="169.25" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$0.73</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="177.53" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="167.53" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$0.98</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="79.48" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="69.48" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.26</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="32.17" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="22.17" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$22.15</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="77.21" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="67.21" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.59</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes sourced from stockanalysis.com. Current price ($15.59, Aug 28, 2026 close) is a directly-sourced exact quote. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
