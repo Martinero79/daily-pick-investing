@@ -133,6 +133,24 @@ function momentumChipHTML(c) {
   return `<span class="momentum-chip momentum-${m.status}" title="Annual revenue growth trend — most recent full fiscal year's growth rate vs the year before. Not real-time, not part of the Martinero Index.">${arrow} ${label}${detail}</span>`;
 }
 
+// Latest-Quarter YoY revenue growth — a separate, non-scored, non-blended
+// secondary signal. This is a single snapshot (most recently reported
+// quarter's revenue vs the same quarter a year ago), not a two-period
+// acceleration comparison like the annual Growth Trend badge above. Shown
+// alongside it, never merged into one number, so each stays legible on its
+// own terms (annual = stable/comparable, quarterly = timely/noisier).
+function quarterYoYHTML(c) {
+  if (!c.quarterYoY) return "";
+  const q = c.quarterYoY;
+  const extreme = Math.abs(q.growth) >= 999;
+  const sign = q.growth > 0 ? "+" : "";
+  const valueText = extreme ? `>999% (tiny base)` : `${sign}${q.growth.toFixed(1)}%`;
+  const cls = q.growth > 0 ? "quarter-pos" : q.growth < 0 ? "quarter-neg" : "quarter-flat";
+  const titleParts = [`Latest reported quarter (${q.period}) revenue vs the same quarter a year earlier. Not part of the Martinero Index, not the same measure as the annual Growth Trend badge.`];
+  if (q.note) titleParts.push(q.note);
+  return `<span class="quarter-chip ${cls}" title="${titleParts.join(" ").replace(/"/g, "&quot;")}">Latest Q (${q.period}): ${valueText} YoY</span>`;
+}
+
 function cardHTML(c, opts) {
   opts = opts || {};
   const martineroChip = (c.martinero !== undefined)
@@ -154,6 +172,7 @@ function cardHTML(c, opts) {
           <span class="score-chip">${c.score} criteria met</span>
           ${martineroChip}
           ${momentumChipHTML(c)}
+          ${quarterYoYHTML(c)}
         </span>
         <a class="card-link" href="view.html?c=${encodeURIComponent(c.slug)}">View dashboard →</a>
       </div>
@@ -194,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
           ${c.martinero !== undefined ? `<div class="hero-stat"><div class="stat-label">Martinero Index</div><div class="stat-value stat-value-martinero">${c.martinero}/100</div></div>` : ""}
         </div>
-        ${c.momentum ? `<div style="margin:2px 0 4px 0;">${momentumChipHTML(c)}</div>` : ""}
+        ${(c.momentum || c.quarterYoY) ? `<div style="margin:2px 0 4px 0;display:flex;gap:6px;flex-wrap:wrap;">${momentumChipHTML(c)}${quarterYoYHTML(c)}</div>` : ""}
         ${personalNoteHTML(c)}
         <a class="btn" href="view.html?c=${encodeURIComponent(c.slug)}">View full dashboard →</a>`;
     }
@@ -276,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // This is a separate, non-scored ranking — it is NOT folded into the Martinero Index.
   const scoreboardEl = document.getElementById("scoreboard-table");
   if (scoreboardEl) {
-    let sortKey = "martinero"; // "martinero" | "momentum"
+    let sortKey = "martinero"; // "martinero" | "momentum" | "quarter"
 
     function momentumDelta(c) {
       if (!c.momentum || c.momentum.recent == null || c.momentum.prior == null) return null;
@@ -295,6 +314,20 @@ document.addEventListener("DOMContentLoaded", () => {
       return `<span class="momentum-chip momentum-${m.status}">${arrow} ${label} (FY ${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)</span>`;
     }
 
+    // Separate from momentumDelta above — this is a single-period snapshot
+    // (latest reported quarter's YoY), not a two-period acceleration
+    // comparison. Never blended with the annual figure; sorted independently.
+    function quarterGrowthValue(c) {
+      if (!c.quarterYoY || c.quarterYoY.growth == null) return null;
+      return c.quarterYoY.growth;
+    }
+
+    function quarterCellHTML(c) {
+      const g = quarterGrowthValue(c);
+      if (g === null) return `<span class="muted">—</span>`;
+      return quarterYoYHTML(c);
+    }
+
     function renderScoreboard() {
       const scored = hasData ? COMPANIES.filter(c => c.martinero !== undefined) : [];
       let ranked;
@@ -305,6 +338,14 @@ document.addEventListener("DOMContentLoaded", () => {
           if (da === null) return 1;   // companies without momentum data sink to the bottom
           if (db === null) return -1;
           return db - da;
+        });
+      } else if (sortKey === "quarter") {
+        ranked = [...scored].sort((a, b) => {
+          const ga = quarterGrowthValue(a), gb = quarterGrowthValue(b);
+          if (ga === null && gb === null) return 0;
+          if (ga === null) return 1;
+          if (gb === null) return -1;
+          return gb - ga;
         });
       } else {
         ranked = [...scored].sort((a, b) => b.martinero - a.martinero);
@@ -323,6 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="num">${c.score || ""}</td>
           <td class="num"><span class="score-chip martinero-chip">${c.martinero}/100</span></td>
           <td class="num">${momentumCellHTML(c)}</td>
+          <td class="num">${quarterCellHTML(c)}</td>
         </tr>`).join("");
 
       scoreboardEl.innerHTML = `
@@ -334,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <th>Criteria Met</th>
             <th class="sortable-th${sortKey === "martinero" ? " sort-active" : ""}" data-sort="martinero">Martinero Index${sortKey === "martinero" ? " &#9660;" : ""}</th>
             <th class="sortable-th${sortKey === "momentum" ? " sort-active" : ""}" data-sort="momentum" title="Annual revenue growth trend — most recent full fiscal year's growth rate minus the year before's. Not real-time, not part of the Martinero Index.">Growth Trend (Annual)${sortKey === "momentum" ? " &#9660;" : ""}</th>
+            <th class="sortable-th${sortKey === "quarter" ? " sort-active" : ""}" data-sort="quarter" title="Most recently reported quarter's revenue vs the same quarter a year earlier. A single snapshot, not blended with the annual Growth Trend column. Not part of the Martinero Index.">Latest Quarter YoY${sortKey === "quarter" ? " &#9660;" : ""}</th>
           </tr>
           ${rows}
         </table>`;
