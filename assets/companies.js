@@ -1051,6 +1051,133 @@ const COMPANIES = [
     blurb: "The largest of four public quantum-computing pure-plays covered on this site by a wide margin (2025 revenue $130.02M vs. $24.59M, $7.09M and $0.68M for D-Wave, Rigetti and Quantum Computing Inc respectively), scored on the same standard 13-criterion scorecard as every other company here. Revenue is up 287% YoY in the latest quarter (fifth straight record) with backlog up 297% YoY, and the balance sheet carries $2.36B in net cash. Against the standard scorecard, though: operating margin is -487%, EBIT and FCF losses have both widened sharply, shares outstanding have roughly doubled since 2021, and capex intensity and market concentration both miss. Result: 4 of 13 criteria met, Martinero Index 30/100 — a highly speculative, high-risk/high-reward bet on a still-unproven, loss-making, R&D-heavy industry with large long-run potential in cryptography, drug discovery, materials science and optimization.",
     file: "companies/ionq.html",
     personalNote: "IonQ is the one dashboard on this site I'd flag as genuinely high-risk, high-reward — a speculative bet, not a value pick. On the standard scorecard it only clears 4 of 13 criteria for a Martinero Index of 30: operating margin is -487%, both EBIT and FCF losses are widening, and shares outstanding have roughly doubled since 2021. But within that, IonQ is the strongest of the four public quantum-computing pure-plays I cover — by far the most revenue, the clearest realistic market position, and a $2.36B net-cash cushion that buys real runway. Quantum computing itself is still an early, unproven, deeply R&D-heavy industry — every public player here is loss-making, and nobody has yet demonstrated a commercial quantum advantage at meaningful scale — but the long-run promise (cryptography, drug discovery, materials science, optimization problems classical computers can't touch) is why serious capital keeps funding it despite the losses. I'd call this the most investable of the four on fundamentals, but 'most investable among speculative bets' and 'objectively strong' are different claims — this is a venture-stage wager on a technology that may take a decade or more to prove out, not a value pick."
+  },
+
+  {
+    slug: "hapag-lloyd",
+    name: "Hapag-Lloyd AG",
+    ticker: "FRA (Xetra): HLAG / OTC: HPGLY",
+    sector: "Container Shipping / Global Freight",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["Cyclical", "Family-Controlled", "Pending M&A"],
+    dateFeatured: "2026-09-02",
+    price: "€129.60",
+    score: "4 / 13",
+    martinero: 29,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -2.51, prior: 6.59 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 8.37, note: "Revenue growth was genuine (freight-rate and volume recovery), but roughly $600M in Strait-of-Hormuz-related disruption costs kept profit from following — EBIT margin was only 2.88% that quarter." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Hapag-Lloyd is the world's #5 container shipping carrier by capacity (~7.1% share) and a Gemini Cooperation alliance partner with Maersk, even as the two remain direct commercial rivals. Its FY2021-2025 financials trace the full container-shipping supercycle round trip — revenue and EBIT roughly 1.5x'd in the 2022 rate spike before crashing over 90% at the EBIT line by FY2025, and 2026 has added fresh disruption from adverse weather and a Strait of Hormuz closure. Control rests with a three-way anchor pact — CSAV, the Kühne family, and the City of Hamburg's HGV, holding roughly 74% combined and locked in through at least 2031 — while a pending $4.2B acquisition of ZIM (see that dashboard) would materially expand scale if it clears regulatory review.",
+    file: "companies/hapag-lloyd.html"
+  },
+
+  {
+    slug: "zim",
+    name: "ZIM Integrated Shipping Services Ltd.",
+    ticker: "NYSE: ZIM",
+    sector: "Container Shipping / Global Freight",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["Pending Acquisition", "Highly Cyclical"],
+    dateFeatured: "2026-09-02",
+    price: "$27.01",
+    score: "3 / 13",
+    martinero: 37,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -18.07, prior: 63.25 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 8.87, note: "First quarter of renewed YoY growth after three straight quarters of double-digit declines." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "ZIM is a global container-shipping carrier and a much smaller direct competitor to Maersk, ranking roughly #10 globally by TEU capacity (~2.4% share). Its financials are sharply cyclical: EBIT swung from a $5.8B profit in FY2021 to a $2.7B net loss in FY2023 and back to modest FY2025 profitability, and it clears just 3 of 13 scorecard criteria (Martinero Index 37/100). ZIM is also a pending M&A target — it agreed in February 2026 to be acquired by Hapag-Lloyd (see that dashboard) for $35.00/share cash, shareholder-approved in May 2026 — and as of September 2026 trades near $27, a discount reflecting the deal's still-pending Israeli regulatory approval.",
+    file: "companies/zim.html"
+  },
+
+  {
+    slug: "cosco-shipping",
+    name: "COSCO SHIPPING Holdings Co., Ltd.",
+    ticker: "HKEX: 1919 / SSE: 601919",
+    sector: "Container Shipping / Global Freight (Chinese State-Owned Enterprise)",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["State-Owned", "Deep Cyclical", "Dual-Listed A/H"],
+    dateFeatured: "2026-09-02",
+    price: "HK$16.81",
+    score: "4 / 13",
+    martinero: 41,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -6.1, prior: 33.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 17.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "COSCO SHIPPING Holdings is the world's fourth-largest container shipping line (~10.7% global capacity share) and a Chinese state-owned enterprise, dual-listed on the Hong Kong (1919.HK) and Shanghai (601919.SS) exchanges. Revenue and earnings have swung dramatically with the freight-rate cycle — from a 2021-2022 supercycle peak to a 2023 crash and a partial, uneven recovery since — leaving 5-year growth, margin and valuation metrics well below this framework's bars. The balance sheet remains a genuine strength: a persistent net cash position, an ~6.5% share-count reduction from buybacks, and one of the higher dividend yields in this shipping batch.",
+    file: "companies/cosco-shipping.html"
+  },
+
+  {
+    slug: "evergreen-marine",
+    name: "Evergreen Marine Corp (Taiwan) Ltd.",
+    ticker: "TWSE: 2603",
+    sector: "Container Shipping / Global Freight",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["Cyclical", "Dividend Payer"],
+    dateFeatured: "2026-09-02",
+    price: "NT$234.50",
+    score: "4 / 13",
+    martinero: 32,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -18.23, prior: 67.53 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 21.60, note: "Snapped four straight quarters of double-digit YoY revenue declines (Q2'25-Q1'26)." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Evergreen Marine is Taiwan's flagship container carrier and the anchor of the Ocean Alliance, ranking #7 globally by fleet capacity (~5.5% share) behind MSC, Maersk, CMA CGM, COSCO and Hapag-Lloyd. The company posted some of the highest EPS in the world during the 2021-2022 COVID-era freight-rate supercycle (net income peaked at NT$334.2B in FY2022) before earnings normalized sharply in FY2023 and partially rebounded in FY2024 on Red Sea rerouting disruption. The Chang family and Evergreen Group affiliated entities hold a combined stake of roughly 21%, and the balance sheet carries very little net leverage despite a recent swing from net cash to a small net-debt position. TWSE-listed only, with no actively-traded U.S. ADR.",
+    file: "companies/evergreen-marine.html"
+  },
+
+  {
+    slug: "hmm",
+    name: "HMM Co., Ltd.",
+    ticker: "KRX: 011200",
+    sector: "Container Shipping / Global Freight",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["State-Owned", "Turnaround Bet"],
+    dateFeatured: "2026-09-02",
+    price: "₩20,800",
+    score: "2 / 13",
+    martinero: 18,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -6.9, prior: 39.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 29.7, note: "Growth is flattered by an easy comparison against Q2 2025's tariff-driven freight-rate slump, not a clean sustained acceleration." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "HMM is South Korea's largest ocean carrier and a direct global competitor to Maersk, but ranks only #9 worldwide by container capacity (~2.9% share) at roughly a fifth of Maersk's fleet size. Every growth metric in this scorecard is negative largely because the fixed FY2021-25 window starts at the pandemic freight-rate supercycle's peak and ends in a normalized 2025 — a genuine base-year effect, not an operating collapse — but heavy historical dilution (+92.9% share count), a valuation still at a premium to its own boom-adjusted history, and thin margins keep the scorecard weak regardless. HMM remains majority-owned by two state creditors from its 2016 bankruptcy rescue, KDB and KOBC (~65% combined), who have been trying and failing to exit since 2023; POSCO Holdings is now conducting preliminary due diligence on KDB's stake with no decision expected before December 2026.",
+    file: "companies/hmm.html"
+  },
+
+  {
+    slug: "yang-ming",
+    name: "Yang Ming Marine Transport Corporation",
+    ticker: "TWSE: 2609",
+    sector: "Container Shipping / Global Freight",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["Cyclical", "State-Linked"],
+    dateFeatured: "2026-09-02",
+    price: "NT$59.50",
+    score: "3 / 13",
+    martinero: 19,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -26.56, prior: 58.37 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 18.78, note: "Growth is measured against Q2 2025's already-depressed base after the FY2023-25 freight-rate collapse, not a return to 2021-22 boom levels — Q2 2026 revenue (NT$45.9B) remains far below 2022's peak quarters (>NT$100B each)." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Taiwan's #2 container carrier and the world's #7 by TEU capacity (~2.1-2.3% share), a Premier Alliance partner alongside ONE and HMM. Revenue and profit round-tripped from a 2021-22 pandemic freight-rate windfall (60%+ operating margins) to a 2023 near-breakeven trough and a still-thin 8.99% FY2025 margin. A strong net-cash balance sheet (NT$110.8B) and ~14% Taiwan-government-linked ownership are the clear positives; ROIC below WACC, negative FCF, and rising fleet-renewal capex keep the scorecard weak at 3/13.",
+    file: "companies/yang-ming.html"
+  },
+
+  {
+    slug: "maersk",
+    name: "A.P. Møller - Mærsk A/S",
+    ticker: "CPH: MAERSK-B / OTC: AMKBY",
+    sector: "Container Shipping / Terminals & Logistics",
+    industry: "Industrials",
+    subIndustry: "Container Shipping",
+    tags: ["Founder-Controlled", "Cyclical"],
+    dateFeatured: "2026-09-02",
+    price: "DKK 20,980",
+    score: "5 / 13",
+    martinero: 37,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -2.7, prior: 8.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "World's #2 container shipping line by capacity (~13% of global fleet, behind MSC's ~21.6%), controlled since 1904 by the A.P. Møller Foundation, which holds roughly 41.5% of share capital and 51.45% of voting rights. Revenue, EBIT and free cash flow all show negative 5-year CAGRs — the window brackets the 2021-22 freight-rate supercycle and the 2023 crash — despite a genuine rate-driven recovery underway in 2026. The balance sheet stayed net-cash every year of the period and the share count has shrunk by over a fifth on continued buybacks, but the current 20.75x trailing P/E sits at roughly 3.6x the stock's own 5-year average.",
+    file: "companies/maersk.html",
+    personalNote: "I started my career at Maersk, which makes this dashboard different from most of what I build here — I know this company from the inside, not just from a spreadsheet. That's exactly why I want to name the bias risk upfront and then set it aside: the scorecard here is honest, and it isn't flattering. Revenue, EBIT and FCF all show negative 5-year CAGRs, but that's really a story about the window, not the business — it starts at the 2021-22 freight-rate supercycle peak and ends after the 2023 crash, and container shipping has always run this cyclical; I'd be more suspicious if the numbers were smooth. What I take more seriously is the valuation: at 20.75x trailing P/E against a 5.80x five-year average, the stock is pricing in a much better cycle than the fundamentals have delivered yet — roughly 3.6x its own history, a real premium, not a discount. The things that hold up regardless of cycle are real, too: the Møller family has controlled this company since 1904 and still holds roughly 41.5% of the capital and over half the voting rights, the balance sheet stayed net-cash through every year of the crash, and the share count has shrunk by more than a fifth on buybacks. I'm glad this is where I started, but 5 of 13 criteria met is 5 of 13 — I'd rather tell you the score is mediocre and mean it than dress it up because of where I used to work."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
