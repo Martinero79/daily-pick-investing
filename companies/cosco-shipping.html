@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>COSCO SHIPPING Holdings Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1f14; color:#d3f5df; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Container Shipping (Chinese State-Owned Enterprise)</div>
+  <h1>COSCO SHIPPING Holdings Co., Ltd.</h1>
+  <div class="badges">
+    <span class="badge">HKEX: 1919 (H-shares), HKD &middot; also SSE: 601919 (A-shares), CNY &middot; financials reported in CNY</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Predecessor lines founded 1961/1997 &middot; COSCO SHIPPING Holdings formed 2016 (COSCO/China Shipping merger) &middot; Shanghai, China (HQ)</span>
+  </div>
+  <div class="badges">
+    <span class="badge warn">Dual-listed, state-controlled &mdash; this is a Hong Kong (H-share) &amp; Shanghai (A-share) dual-listed Chinese state-owned enterprise (SASAC-supervised), not a founder-controlled Western-style company. Accessibility, disclosure norms and governance context differ materially from other names on this site &mdash; see ownership note, page 4.</span>
+  </div>
+  <div class="price">HK$16.81</div>
+  <div class="price-sub">Sep 2, 2026, 2:55pm HKT (intraday, HKEX) &middot; -2.83% on the day &middot; Mkt cap &asymp;HK$253B (H-share price &times; total shares outstanding; blended A+H market cap likely somewhat higher given the typical A-share premium) &middot; EV &asymp;HK$170B &middot; A-shares (601919.SS) last traded &asymp;&yen;15.48 (Aug 11, 2026)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> MSC (#1, &asymp;21% global capacity share), Maersk (#2, &asymp;14% &mdash; today's featured pick in this batch), CMA CGM (#3, &asymp;12%), Hapag-Lloyd, ONE, Evergreen, HMM. COSCO SHIPPING Lines ranks #4 globally at &asymp;10.7% capacity share and co-operates the Ocean Alliance together with CMA CGM and Evergreen.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">&yen;222.3B</div>
+      <div class="sub">-8.0% YoY (TTM, ending Jun 2026); FY2025 revenue fell -6.14% YoY to &yen;219.5B, down 44% from the FY2022 supercycle peak of &yen;390.8B</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025 / TTM)</div>
+      <div class="val" style="color:#fbbf24;">15.45% / 13.80%</div>
+      <div class="note">Down sharply from FY2022's supercycle peak of 40.76%; TTM sits even lower as freight rates keep normalizing.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">&asymp;11.0% / 8.5%</div>
+      <div class="note">Clears this framework's 8.5% indicative shipping-sector WACC assumption by &asymp;2.5pts, but misses the strict 15% absolute ROIC bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (FY2025)</div>
+      <div class="val green">&yen;75.2B</div>
+      <div class="sub">Net cash maintained throughout the down-cycle, though down from FY2022's &yen;143.5B peak as capex and dividends stepped up</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">41/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">4/13 criteria met, 9 not met, 0 N/A &mdash; a textbook case of a deep-cyclical business scoring weak on growth/margin/valuation but strong on balance sheet and capital return.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 167.05,34.08 L144.83,63.65 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M167.05,34.08 A95,95 0 0 1 201.25,83.57 L165.71,93.86 A58,58 0 0 0 144.83,63.65 Z" fill="#34d399" opacity="0.55"/><path d="M201.25,83.57 A95,95 0 0 1 198.81,143.68 L164.22,130.56 A58,58 0 0 0 165.71,93.86 Z" fill="#34d399" opacity="0.55"/><path d="M198.81,143.68 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 164.22,130.56 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">4/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 4 (market concentration, net debt/EBITDA, share count trend, insider/state ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market share, ROIC/WACC, FCF conversion, entry multiple, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (both FY2021 and FY2025 were profitable and FCF-positive, so every growth-rate calculation here is directly computable, however ugly the result)</div>
+      <div>All five growth/CAGR-style criteria (#1, #2, #4) and the latest-FY margin (#3) are dragged deeply negative by the 2021-22 freight-rate supercycle unwinding into a 2023 crash &mdash; a real, honestly-reported cyclical swing, not a data error.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    COSCO SHIPPING Holdings is the world's fourth-largest container liner by capacity (&asymp;10.7% share, per Alphaliner) and the container-shipping arm of a Chinese state-owned conglomerate, dual-listed on the Hong Kong (1919.HK) and Shanghai (601919.SS) exchanges. Its five-year window (FY2021-25) captures almost the entire pandemic-era freight-rate supercycle in one framework: revenue peaked at &yen;390.8B in FY2022 on record spot rates, then collapsed -55% in FY2023 as rates normalized, before a partial, uneven recovery to &yen;219.5B in FY2025 &mdash; still 44% below the FY2022 peak. Every growth-rate criterion in this scorecard (#1, #2, #4) and the latest-FY operating margin (#3) are consequently deeply negative or below-bar, not because the underlying business deteriorated structurally, but because FY2021-22 set an extraordinary, temporary high-water mark that FY2025 was never going to match. What holds up is the balance sheet and capital-return story: COSCO has stayed net-cash through the entire cycle, cut its share count by &asymp;6.5% via buybacks, and pays one of the highest dividend yields in this shipping batch (&asymp;7.6-8.8%, though a payout ratio above 100% in the trough year means the dividend isn't currently earnings-covered). Ownership is unusual for this site: COSCO SHIPPING Group, itself wholly state-owned and SASAC-supervised, holds &asymp;44% &mdash; comfortably meeting this framework's "meaningful ownership" bar, but that is state industrial-policy alignment, not a founder's personal capital at risk. On valuation, the current trailing P/E (&asymp;9.6x) sits roughly 2.1x the company's own FY2021-25 average (4.54x) &mdash; but that average was itself compressed by the supercycle's enormous, temporary earnings, so a "cheap-looking history, expensive-looking present" read here says more about how extraordinary FY2021-22 was than about today's price being unusually rich in absolute terms.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026) and spot price as of Sep 2, 2026 intraday (2:55pm HKT). Financial statements (revenue, EBIT, net income, FCF, EPS) are reported in CNY, the company's functional/reporting currency; share price, market cap and EV are in HKD as traded on the primary Hong Kong listing used for this dashboard. FX assumption where cross-currency comparison is needed: &asymp;1 CNY &asymp; 1.09 HKD.
+  </div>
+
+  <div class="bignum-corner">4/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in CNY (&yen;) billions, COSCO's reporting currency. Fiscal year is calendar year (Jan-Dec). FY2021-22 captured the pandemic-era freight-rate supercycle; FY2023 was the crash; FY2024-25 show a partial, uneven recovery.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual (&yen;B)</div>
+    <div class="chart-sub">A boom-bust round trip: revenue and profit both roughly tripled from FY2021 to their FY2022 peak, then collapsed through FY2023, before a partial recovery that has since stalled &mdash; FY2025 revenue is still 44% below the FY2022 high.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text>
+<line x1="65" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="184.0" text-anchor="end" font-size="11" fill="#64748b">&yen;80B</text>
+<line x1="65" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&yen;160B</text>
+<line x1="65" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="104.0" text-anchor="end" font-size="11" fill="#64748b">&yen;240B</text>
+<line x1="65" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="64.0" text-anchor="end" font-size="11" fill="#64748b">&yen;320B</text>
+<line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;400B</text>
+<rect x="73.0" y="53.15" width="16" height="166.85" rx="1.5" fill="#2dd4bf"/>
+<text x="81.0" y="48.15" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;333.7B</text>
+<rect x="91.0" y="155.90" width="16" height="64.10" rx="1.5" fill="#60a5fa"/>
+<text x="99.0" y="150.90" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;128.2B</text>
+<rect x="109.0" y="175.35" width="16" height="44.65" rx="1.5" fill="#fbbf24"/>
+<text x="117.0" y="170.35" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;89.3B</text>
+<text x="100.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="229.0" y="24.60" width="16" height="195.40" rx="1.5" fill="#2dd4bf"/>
+<text x="237.0" y="19.60" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;390.8B</text>
+<rect x="247.0" y="140.35" width="16" height="79.65" rx="1.5" fill="#60a5fa"/>
+<text x="255.0" y="135.35" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;159.3B</text>
+<rect x="265.0" y="165.15" width="16" height="54.85" rx="1.5" fill="#fbbf24"/>
+<text x="273.0" y="160.15" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;109.7B</text>
+<text x="256.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="385.0" y="132.25" width="16" height="87.75" rx="1.5" fill="#2dd4bf"/>
+<text x="393.0" y="127.25" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;175.5B</text>
+<rect x="403.0" y="208.75" width="16" height="11.25" rx="1.5" fill="#60a5fa"/>
+<text x="411.0" y="203.75" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;22.5B</text>
+<rect x="421.0" y="208.05" width="16" height="11.95" rx="1.5" fill="#fbbf24"/>
+<text x="429.0" y="203.05" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;23.9B</text>
+<text x="412.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="541.0" y="103.05" width="16" height="116.95" rx="1.5" fill="#2dd4bf"/>
+<text x="549.0" y="98.05" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;233.9B</text>
+<rect x="559.0" y="190.90" width="16" height="29.10" rx="1.5" fill="#60a5fa"/>
+<text x="567.0" y="185.90" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;58.2B</text>
+<rect x="577.0" y="195.45" width="16" height="24.55" rx="1.5" fill="#fbbf24"/>
+<text x="585.0" y="190.45" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;49.1B</text>
+<text x="568.0" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="697.0" y="110.25" width="16" height="109.75" rx="1.5" fill="#2dd4bf"/>
+<text x="705.0" y="105.25" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;219.5B</text>
+<rect x="715.0" y="203.05" width="16" height="16.95" rx="1.5" fill="#60a5fa"/>
+<text x="723.0" y="198.05" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;33.9B</text>
+<rect x="733.0" y="204.55" width="16" height="15.45" rx="1.5" fill="#fbbf24"/>
+<text x="741.0" y="199.55" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&yen;30.9B</text>
+<text x="724.0" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+<line x1="65" y1="220" x2="840" y2="220" stroke="#475569" stroke-width="1.3"/>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-9.94%</div><div class="sub">&yen;333.7B &rarr; &yen;219.5B; both endpoints are directly comparable, but the window absorbs a full supercycle-to-crash round trip</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-28.29%</div><div class="sub">&yen;128.2B &rarr; &yen;33.9B; operating profit fell even faster than revenue as margins compressed alongside falling rates</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-40.29%</div><div class="sub">&yen;161.5B &rarr; &yen;20.5B; the steepest decline of the three growth metrics, reflecting both lower earnings and higher fleet capex</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual (&yen;B)</div>
+    <div class="chart-sub">FCF stayed positive throughout, but fell from a supercycle-inflated &yen;161.5B-186.3B in FY2021-22 to just &yen;7.3B at the FY2023 trough, before a modest recovery to &yen;20.5B in FY2025 &mdash; still a fraction of the boom-year levels.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text>
+<line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">&yen;40B</text>
+<line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&yen;80B</text>
+<line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">&yen;120B</text>
+<line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">&yen;160B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;200B</text>
+<rect x="103.0" y="58.50" width="70" height="161.50" rx="2" fill="#34d399"/>
+<text x="138.0" y="50.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;161.5B</text>
+<text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="259.0" y="33.70" width="70" height="186.30" rx="2" fill="#34d399"/>
+<text x="294.0" y="25.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;186.3B</text>
+<text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="415.0" y="212.70" width="70" height="7.30" rx="2" fill="#34d399"/>
+<text x="450.0" y="204.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;7.3B</text>
+<text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="571.0" y="176.70" width="70" height="43.30" rx="2" fill="#34d399"/>
+<text x="606.0" y="168.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;43.3B</text>
+<text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="727.0" y="199.50" width="70" height="20.50" rx="2" fill="#34d399"/>
+<text x="762.0" y="191.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;20.5B</text>
+<text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin swung from a supercycle-inflated 38-41% in FY2021-22 down to 12.80% at the FY2023 trough, recovered to 24.91% in FY2024 on the Red Sea/Suez disruption-driven rate spike, then eased back to 15.45% in FY2025 as capacity normalized.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">10%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<path d="M 50.00,66.32 L 247.50,56.96 L 445.00,168.80 L 642.50,120.36 L 840.00,158.20 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/>
+<path d="M 50.00,66.32 L 247.50,56.96 L 445.00,168.80 L 642.50,120.36 L 840.00,158.20" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.00" cy="66.32" r="3" fill="#2dd4bf"/>
+<text x="50.00" y="56.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">38.42%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.50" cy="56.96" r="3" fill="#2dd4bf"/>
+<text x="247.50" y="47.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">40.76%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.00" cy="168.80" r="3" fill="#2dd4bf"/>
+<text x="445.00" y="158.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.80%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.50" cy="120.36" r="3" fill="#2dd4bf"/>
+<text x="642.50" y="110.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.91%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.00" cy="158.20" r="3" fill="#2dd4bf"/>
+<text x="840.00" y="148.2" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">15.45%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM capex was &yen;29.75B (12.27% of TTM revenue) &mdash; capital-intensive fleet renewal and newbuild ordering, well above this framework's asset-light threshold; COSCO's own terminal/port operations (&yen;12.0B revenue, &asymp;5.5% of FY2025 total) add modestly to the group's overall capital intensity but the bulk of capex is containership fleet.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">COSCO's fiscal quarters align with the calendar (Jan-Dec fiscal year). Latest reported period: Q2 2026 (three months to Jun 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&yen;60.13B</b>, up <b style="color:#34d399;">17.57% YoY</b> &mdash; a genuine re-acceleration after Q1 2026's -10.63% YoY decline, reflecting a modest freight-rate recovery. Operating income was &yen;8.86B (14.74% margin), up from 10.88% in Q2 2025, though still far below the 30-50% margins COSCO posted routinely during the FY2021-22 supercycle. Net income was &yen;7.54B, up 29.11% YoY &mdash; the strongest quarterly net income growth in this five-quarter window.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q2'25&ndash;Q2'26, &yen;B)</div>
+    <div class="chart-sub">A choppy path within a fairly narrow &yen;51-60B band &mdash; nothing like the FY2021-22 supercycle's extreme swings, but still no clear sustained trend until Q2 2026's re-acceleration.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text>
+<line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">&yen;15B</text>
+<line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&yen;30B</text>
+<line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">&yen;45B</text>
+<line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">&yen;60B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;75B</text>
+<rect x="103.0" y="83.63" width="70" height="136.37" rx="2" fill="#2dd4bf"/>
+<text x="138.0" y="75.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;51.1B</text>
+<text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text>
+<rect x="259.0" y="64.00" width="70" height="156.00" rx="2" fill="#2dd4bf"/>
+<text x="294.0" y="56.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;58.5B</text>
+<text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="415.0" y="81.57" width="70" height="138.43" rx="2" fill="#2dd4bf"/>
+<text x="450.0" y="73.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;51.9B</text>
+<text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="571.0" y="81.87" width="70" height="138.13" rx="2" fill="#2dd4bf"/>
+<text x="606.0" y="73.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;51.8B</text>
+<text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="727.0" y="59.65" width="70" height="160.35" rx="2" fill="#2dd4bf"/>
+<text x="762.0" y="51.65" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;60.1B</text>
+<text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income &amp; Margin (&yen;B)</div>
+    <div class="chart-sub">Margin bounced between a weak 7.82% (Q4'25) and a much stronger 18.94% (Q3'25) across this window &mdash; genuine quarter-to-quarter freight-rate volatility, not a steady trend in either direction, before Q2'26's 14.74% recovery.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text>
+<line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">&yen;3B</text>
+<line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&yen;6B</text>
+<line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">&yen;9B</text>
+<line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">&yen;12B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;15B</text>
+<rect x="103.0" y="145.87" width="70" height="74.13" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="126.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5.56B</text>
+<rect x="121.0" y="126.87" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="138.0" y="137.87" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">10.9%</text>
+<text x="138.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text>
+<rect x="259.0" y="72.27" width="70" height="147.73" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="53.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;11.08B</text>
+<rect x="277.0" y="53.27" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="294.0" y="64.27" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">18.9%</text>
+<text x="294.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="415.0" y="165.87" width="70" height="54.13" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="146.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;4.06B</text>
+<rect x="433.0" y="146.87" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="450.0" y="157.87" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">7.8%</text>
+<text x="450.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="571.0" y="130.93" width="70" height="89.07" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="111.93" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;6.68B</text>
+<rect x="589.0" y="111.93" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="606.0" y="122.93" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12.9%</text>
+<text x="606.0" y="252" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="727.0" y="101.87" width="70" height="118.13" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="82.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;8.86B</text>
+<rect x="745.0" y="82.87" width="34" height="15" rx="7.5" fill="#0b1220" opacity="0.82"/>
+<text x="762.0" y="93.87" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">14.7%</text>
+<text x="762.0" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text>
+</svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal. All five FY2021-25 years had real, meaningful (non-near-zero) earnings, so none is excluded from the historical average &mdash; even the FY2023 trough (&yen;23.9B net income) produced a normal, computable P/E of 6.10x.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current P/E of &asymp;9.61x sits roughly 2.1x the FY2021-25 average of 4.54x &mdash; but that average is itself pulled down by FY2021-22's supercycle-inflated earnings, which produced unusually low P/Es (1.41x-3.11x) on temporarily enormous profits, not because the stock was cheap in any normal sense.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">2x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">4x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">6x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50.0" y1="129.28" x2="840.0" y2="129.28" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="125.28" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 4.54x</text><path d="M 50.0,157.80 L 208.0,191.80 L 366.0,98.00 L 524.0,124.40 L 682.0,74.40 L 840.0,27.80" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="157.80" r="3" fill="#a78bfa"/><text x="50.0" y="147.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">3.11x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="191.80" r="3" fill="#a78bfa"/><text x="208.0" y="181.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">1.41x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="98.00" r="3" fill="#a78bfa"/><text x="366.0" y="88.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">6.10x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="124.40" r="3" fill="#a78bfa"/><text x="524.0" y="114.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">4.78x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="74.40" r="3" fill="#a78bfa"/><text x="682.0" y="64.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.28x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="27.80" r="3.5" fill="#a78bfa"/><text x="840.0" y="17.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">9.61x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> &yen;151.8B in cash &amp; investments against &yen;76.6B in total debt &mdash; a net cash position of &yen;75.2B as of FY2025 (and &yen;76.4B as of the most recent quarter), Debt/EBITDA around 1.5x gross (moot given net cash), and a current ratio of &asymp;1.5x. Altman Z-Score of 2.02 sits below the traditional "safe" 3.0 threshold and Piotroski F-Score is a middling 5/9 &mdash; both consistent with a capital-intensive, cyclically-depressed-earnings business rather than acute distress. Dividend yield runs &asymp;7.6-8.8% with a payout ratio above 100% in FY2025, funded partly out of the large cash balance rather than fully out of current-year earnings.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 144.97,198.33 L131.35,163.93 A58,58 0 0 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M144.97,198.33 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 131.35,163.93 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>China COSCO Shipping Corporation Limited ("COSCO SHIPPING Group") &asymp; 44% (combined A+H share capital)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Remaining float: other institutions (&asymp;13% per narrow tracker), individual investors, and public shareholders across both listings</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; state control, not founder control:</b> COSCO SHIPPING Holdings is a Chinese state-owned enterprise. Its controlling shareholder is China COSCO Shipping Corporation Limited ("COSCO SHIPPING Group"), holding &asymp;44% of combined A- and H-share capital; the Group is itself wholly state-owned and ultimately supervised by SASAC (the State-owned Assets Supervision and Administration Commission of the State Council). This is materially different from the founder-controlled or family-chaebol structures scored elsewhere on this site (e.g., MercadoLibre's Galperin Trust, SK hynix's Chey family chain): it is direct state industrial-policy control, not an individual founder's personal capital at risk. Per this framework's strict "&asymp;5%+ meaningful stake" bar, 44% comfortably clears the threshold and is scored Met &mdash; but the qualitative character of that alignment (state mandate vs. personal wealth) is genuinely different and worth weighing separately, particularly given past US regulatory/sanctions scrutiny of COSCO Shipping entities.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. WACC assumption: 8.5% (indicative shipping-sector estimate for China-domiciled operators, consistent with the &asymp;8-9% range used across this shipping-sector batch; not company-disclosed).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>COSCO SHIPPING Holdings</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>-9.94% &mdash; &yen;333.7B &rarr; &yen;219.5B; the window absorbs the full 2021-22 freight-rate supercycle and its 2023 crash</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (FY21-25)</td><td>&ge;15%</td><td>-28.29% &mdash; &yen;128.2B &rarr; &yen;33.9B; operating profit fell faster than revenue as margins compressed</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>15.45% (FY2025); TTM is even lower at 13.80%, versus a 38-41% supercycle peak in FY2021-22</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-40.29% &mdash; &yen;161.5B &rarr; &yen;20.5B; both endpoints positive, so directly computable, but the steepest decline of the three growth metrics</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#4 globally at &asymp;10.7% container capacity share (Alphaliner), behind MSC (&asymp;21%), Maersk (&asymp;14%) and CMA CGM (&asymp;12%)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; the top 4 carriers control &asymp;58% of global capacity and the top 10 control &gt;84%, a tight alliance-structured oligopoly with high entry barriers</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC &asymp;11.0% vs 8.5% indicative WACC &mdash; clears the cost-of-capital spread by &asymp;2.5pts but misses the strict 15% absolute ROIC bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of &yen;75.2B (FY2025) / &yen;76.4B (latest quarter) &mdash; automatically Met per methodology</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>60.52% (FY2025: &yen;20.5B FCF / &yen;33.9B EBIT); TTM is weaker still at 44.65% as capex has risen while EBIT normalized lower</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current P/E &asymp;9.61x vs a FY2021-25 average of 4.54x (all 5 years included, no exclusions) &mdash; &asymp;2.1x its own history, though that average is itself depressed by supercycle-inflated FY2021-22 earnings</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Basic shares outstanding fell from 16,082M (FY2021 Q4) to 15,032M (Q2 2026), a cumulative -6.53% decline via active buybacks (buyback yield &asymp;2.80%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&asymp;44% held by COSCO SHIPPING Group, a wholly state-owned, SASAC-supervised parent &mdash; comfortably above the 5% bar, though this is state control, not founder alignment; see governance note on page 4</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>12.27% of TTM revenue (&yen;29.75B capex) &mdash; capital-intensive fleet renewal; terminal/port operations add modestly but the bulk is containership newbuilds</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The balance sheet and capital-return story is genuinely solid: a net cash position maintained throughout the entire down-cycle, an active buyback program that has cut the share count by &asymp;6.5% since FY2021, and one of the highest dividend yields in this shipping batch. The industry itself is a reasonably concentrated, alliance-structured oligopoly (top 4 carriers &asymp;58% of capacity) with high barriers to entry, and COSCO's 44% state-backed ownership provides strategic continuity and access (e.g., its pursuit of a stake in Panama Canal port assets) that a purely private competitor might lack.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Every growth and margin metric in this scorecard is still working through the aftermath of the 2021-22 freight-rate supercycle and 2023 crash &mdash; revenue, EBIT and FCF are all deeply negative on a 5-year CAGR basis, and the latest-FY operating margin sits well under this framework's 20% bar. FCF conversion and capex intensity both miss, reflecting a genuinely capital-intensive fleet-renewal cycle. Valuation looks expensive relative to the company's own (supercycle-depressed) history, though less so in absolute terms. As a Chinese SOE dual-listed in Hong Kong and Shanghai, COSCO also carries governance, transparency and geopolitical/sanctions-scrutiny considerations that don't apply to most other names on this site &mdash; worth weighing independently of the numeric scorecard.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jun 30 &ndash; Sep 2, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Alphaliner / Container News / AJOT (global container capacity market share and rankings), public filings and press coverage (COSCO SHIPPING Group ownership structure, Panama Canal ports stake pursuit).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Financial statements are reported in CNY; market cap, share price and EV are in HKD as traded on the Hong Kong (H-share) listing used as this dashboard's primary reference. Market cap is approximated as H-share price &times; total shares outstanding and may understate the true blended A+H market cap given the typical A-share premium. WACC (8.5%) is an indicative shipping-sector estimate, not company-disclosed, and is kept consistent across this six-company shipping-sector batch for comparability.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">COSCO SHIPPING Holdings &mdash; HKEX (H-shares), HKD share price trend. Points shown are approximate fiscal year-end closes plus the current price; see disclaimer below.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">COSCO SHIPPING Holdings &mdash; Fiscal Year-End Close (HKEX, HKD)</div>
+    <div class="chart-sub">A sharp FY2021-23 decline as the freight-rate supercycle unwound, a strong FY2024 rebound on the Red Sea/Suez disruption-driven rate spike, a flat FY2025, and a modest further gain into current levels &mdash; the stock remains well below its FY2021 supercycle-era high.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -3.2%</text>
+<path d="M 46.0,21.6 L 172.8,98.8 L 299.6,105.6 L 426.4,64.1 L 553.2,63.9 L 680.0,45.5 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,21.6 L 172.8,98.8 L 299.6,105.6 L 426.4,64.1 L 553.2,63.9 L 680.0,45.5" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="21.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="11.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$19.80</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="98.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="88.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$10.15</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="105.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="119.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$9.30</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="64.1" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="54.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$14.49</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="63.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="53.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$14.51</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="45.5" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="35.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$16.81</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2025 are approximate, back-calculated from annual/interim market-capitalization percentage-change data (a secondary source with some data-quality caveats) rather than sourced directly as exact closing prices; treat this chart as directionally accurate rather than precise. The current price (HK$16.81, Sep 2, 2026 intraday) is a directly-sourced quote. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

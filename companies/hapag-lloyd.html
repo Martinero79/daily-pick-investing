@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hapag-Lloyd Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Container Shipping &amp; Liner Logistics</div>
+  <h1>Hapag-Lloyd AG</h1>
+  <div class="badges">
+    <span class="badge">FRA (Xetra): HLAG, EUR &middot; also US OTC (unsponsored, thin volume): HPGLY</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1847 (HAPAG) &middot; current entity from 1970 merger &middot; Hamburg, Germany (HQ)</span>
+    <span class="badge warn">Supporting competitor dashboard, not today's pick &mdash; world's #5 container carrier by capacity (&asymp;7.1% share) and Maersk's own Gemini Cooperation alliance partner, yet still a direct commercial rival on price and volume.</span>
+  </div>
+  <div class="price">&euro;129.60</div>
+  <div class="price-sub">Close Sep 1, 2026 (Xetra, Frankfurt), -1.07% on the day &middot; Mkt cap &asymp;&euro;22.78B (&asymp;$26.4B), EV &asymp;&euro;24.20B &middot; up +9.27% over the last 52 weeks even as FY2025 and H1 2026 earnings fell sharply &mdash; a re-rating on hopes of recovery and the pending ZIM deal, not on current results</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> MSC (#1, privately held, roughly a fifth of global capacity), Maersk (#2, &asymp;13-15% share, Gemini Cooperation partner), CMA CGM (#3, Ocean Alliance), COSCO (#4, Ocean Alliance) &mdash; plus ONE, Evergreen, HMM, Yang Ming and ZIM (a pending $4.2B acquisition target facing regulatory pushback). Hapag-Lloyd ranks #5 globally at &asymp;7.1% share, 288 vessels and 2.4M TEU of capacity (Dec 2025, Alphaliner).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">&euro;18.17B</div>
+      <div class="sub">-9.1% YoY (TTM); Q2 2026 alone grew +8.37% YoY to &euro;5.02B as freight rates and volumes recovered &mdash; though $600M in Middle East/Hormuz-related disruption costs kept profit from following</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025 / TTM)</div>
+      <div class="val red">5.10% / 2.02%</div>
+      <div class="note">Down from 50.48% at the FY2022 freight-rate supercycle peak and still 14.02% as recently as FY2023 &mdash; the cyclical collapse is the central fact of this scorecard.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Assumed WACC</div>
+      <div class="val red">4.65% / ~8.5%</div>
+      <div class="note">FY2025 ROIC sits below both this framework's 15% floor and an assumed ~8.5% WACC; TTM ROIC is even weaker at 0.51% after Q1 2026 weather losses and Q2's Hormuz cost hit.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">-&euro;1.42B</div>
+      <div class="sub">Swung from a &euro;12.87B net CASH peak in FY2022 to net debt within about three years &mdash; still just 1.08x TTM EBITDA, comfortably under the 2x bar</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">29/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">4/13 criteria met, 9 not met, 0 N/A &mdash; the weakest scorecard so far in this shipping-sector batch, driven by a 5-year growth window that spans the entire 2022 supercycle-to-trough round trip.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 188.18,56.03 L157.73,77.05 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M188.18,56.03 A95,95 0 0 1 198.83,143.69 L164.23,130.57 A58,58 0 0 0 157.73,77.05 Z" fill="#34d399" opacity="0.55"/><path d="M198.83,143.69 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 164.23,130.57 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">4/13</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 4 (net debt/EBITDA, FCF conversion, share count trend, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market share, market concentration, ROIC/WACC, entry multiple, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (every year FY2021-25 was profitable and FCF-positive, so every growth calculation is directly computable, even where sharply negative)</div>
+      <div>Trailing P/E is excluded as noise this cycle (TTM P/E &asymp;400x on near-zero TTM earnings); the valuation criterion instead uses P/FCF, where the current 22.69x multiple runs about 2.5x the FY21-25 average of 9.14x.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Hapag-Lloyd is the cleanest illustration in this entire shipping batch of just how violent container-freight cycles can be. Revenue went from &euro;22.3B (FY2021) to &euro;34.5B at the freight-rate supercycle peak (FY2022) to &euro;17.9B after the crash (FY2023) and has drifted only modestly since, closing FY2025 at &euro;18.6B &mdash; a five-year revenue CAGR of -4.36% despite starting from an already-strong base, not a weak one. EBIT fell even harder, from &euro;9.4B in FY2021 to just &euro;0.95B in FY2025 (-43.6% CAGR), and 2026 has piled on fresh, real disruption: adverse weather and Red Sea rerouting hurt Q1, then the closure of the Strait of Hormuz added roughly $600M of extra cost in Q2 alone. None of this reflects a broken business &mdash; Hapag-Lloyd's Gemini Cooperation with Maersk delivered a record 90% schedule reliability in 2025, and the company remains solidly the world's #5 carrier by capacity &mdash; but this framework's 5-year growth and margin criteria are built to catch exactly this kind of round trip, and they do: 9 of 13 criteria miss, mostly on growth, margin, ROIC and valuation. What still works is almost entirely balance-sheet and governance: net leverage remains low (1.08x EBITDA) even after swinging from net cash to net debt, the share count hasn't moved in five years, and control sits with one of the most durable ownership pacts on the site &mdash; CSAV, the Kühne family and the City of Hamburg's HGV together hold 73.9%, locked in under an agreement renewed through at least 2031. The pending $4.2B acquisition of ZIM, if it clears regulatory review, would meaningfully change Hapag-Lloyd's scale; as things stand, this is a supporting, non-featured dashboard meant to sit alongside Maersk's for direct comparison, not today's pick.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 FY2026 (three months to Jun 30, 2026, reported Aug 13, 2026) and spot price as of Sep 1, 2026 close. All financials are reported natively in EUR (Hapag-Lloyd's functional reporting currency); the USD market-cap figure on this page is a rough scale reference only, not a company-reported number. WACC (&asymp;8.5%) is an analyst-style estimate for a capital-intensive, moderate-beta global shipping company &mdash; not company-reported &mdash; and is applied consistently across all six dashboards in this shipping-sector batch for comparability.
+  </div>
+
+  <div class="bignum-corner">4/13 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR billions unless noted. Fiscal year is calendar year (Jan-Dec). This window spans the entire 2022 freight-rate supercycle peak and the crash/normalization that followed &mdash; shown here in full, not smoothed over.</div>
+
+  <table class="datatable" style="margin-bottom:10px;">
+    <tr><th>Metric</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+    <tr><td>Revenue</td><td>&euro;22.27B</td><td>&euro;34.54B</td><td>&euro;17.93B</td><td>&euro;19.11B</td><td>&euro;18.63B</td></tr>
+    <tr><td>EBIT</td><td>&euro;9.36B</td><td>&euro;17.43B</td><td>&euro;2.51B</td><td>&euro;2.58B</td><td>&euro;0.95B</td></tr>
+    <tr><td>EBIT margin</td><td>42.04%</td><td>50.48%</td><td>14.02%</td><td>13.48%</td><td>5.10%</td></tr>
+    <tr><td>Net income</td><td>&euro;9.08B</td><td>&euro;17.03B</td><td>&euro;2.93B</td><td>&euro;2.39B</td><td>&euro;0.92B</td></tr>
+    <tr><td>EPS</td><td>&euro;51.63</td><td>&euro;96.89</td><td>&euro;16.70</td><td>&euro;13.57</td><td>&euro;5.18</td></tr>
+    <tr><td>Free cash flow</td><td>&euro;9.15B</td><td>&euro;18.06B</td><td>&euro;3.26B</td><td>&euro;2.20B</td><td>&euro;1.08B</td></tr>
+    <tr><td>Capex</td><td>&euro;1.25B</td><td>&euro;1.44B</td><td>&euro;1.71B</td><td>&euro;2.17B</td><td>&euro;1.45B</td></tr>
+    <tr><td>Net cash / (debt)</td><td>+&euro;2.46B</td><td>+&euro;12.87B</td><td>+&euro;2.83B</td><td>+&euro;1.18B</td><td>-&euro;0.73B</td></tr>
+    <tr><td>Dividend per share</td><td>&euro;35.00</td><td>&euro;63.00</td><td>&euro;9.25</td><td>&euro;8.20</td><td>&euro;3.00 (proposed)</td></tr>
+  </table>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Net Income &mdash; Annual (&euro;B)</div>
+    <div class="chart-sub">A textbook boom-bust: revenue and profit both roughly 1.5x'd in the FY2022 supercycle, then EBIT alone fell more than 94% from that peak to the FY2025 trough &mdash; a far steeper decline than revenue, since freight-rate swings hit thin operating margins disproportionately hard.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text>
+<line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;10B</text>
+<line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;20B</text>
+<line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;30B</text>
+<line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;40B</text>
+<rect x="73.0" y="108.63" width="16" height="111.37" rx="1.5" fill="#2dd4bf"/><text x="81.0" y="103.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;22.27B</text>
+<rect x="91.0" y="173.19" width="16" height="46.81" rx="1.5" fill="#60a5fa"/><text x="99.0" y="168.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;9.36B</text>
+<rect x="109.0" y="174.62" width="16" height="45.38" rx="1.5" fill="#fbbf24"/><text x="117.0" y="169.6" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;9.08B</text>
+<text x="99" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="229.0" y="47.28" width="16" height="172.72" rx="1.5" fill="#2dd4bf"/><text x="237.0" y="42.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;34.54B</text>
+<rect x="247.0" y="132.82" width="16" height="87.18" rx="1.5" fill="#60a5fa"/><text x="255.0" y="127.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;17.43B</text>
+<rect x="265.0" y="134.85" width="16" height="85.15" rx="1.5" fill="#fbbf24"/><text x="273.0" y="129.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;17.03B</text>
+<text x="255" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="385.0" y="130.35" width="16" height="89.65" rx="1.5" fill="#2dd4bf"/><text x="393.0" y="125.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;17.93B</text>
+<rect x="403.0" y="207.44" width="16" height="12.56" rx="1.5" fill="#60a5fa"/><text x="411.0" y="202.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;2.51B</text>
+<rect x="421.0" y="205.33" width="16" height="14.67" rx="1.5" fill="#fbbf24"/><text x="429.0" y="200.3" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;2.93B</text>
+<text x="411" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="541.0" y="124.44" width="16" height="95.56" rx="1.5" fill="#2dd4bf"/><text x="549.0" y="119.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;19.11B</text>
+<rect x="559.0" y="207.12" width="16" height="12.88" rx="1.5" fill="#60a5fa"/><text x="567.0" y="202.1" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;2.58B</text>
+<rect x="577.0" y="208.04" width="16" height="11.96" rx="1.5" fill="#fbbf24"/><text x="585.0" y="203.0" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;2.39B</text>
+<text x="567" y="255" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="697.0" y="126.84" width="16" height="93.16" rx="1.5" fill="#2dd4bf"/><text x="705.0" y="121.8" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;18.63B</text>
+<rect x="715.0" y="215.25" width="16" height="4.75" rx="1.5" fill="#60a5fa"/><text x="723.0" y="210.2" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;0.95B</text>
+<rect x="733.0" y="215.38" width="16" height="4.62" rx="1.5" fill="#fbbf24"/><text x="741.0" y="210.4" text-anchor="middle" font-size="8" fill="#e2e8f0" font-weight="700">&euro;0.92B</text>
+<text x="723" y="255" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+<line x1="65" y1="220" x2="840" y2="220" stroke="#475569" stroke-width="1.3"/>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-4.36%</div><div class="sub">&euro;22.27B &rarr; &euro;18.63B; negative even though FY2021 was itself a strong, not weak, starting year</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-43.56%</div><div class="sub">&euro;9.36B &rarr; &euro;0.95B; EBIT fell far harder than revenue as thin liner margins amplified the freight-rate crash</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-25)</div><div class="val" style="color:#f87171;">-41.36%</div><div class="sub">&euro;9.15B &rarr; &euro;1.08B; both endpoints positive, so directly computable, but a steep genuine decline</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual (&euro;B)</div>
+    <div class="chart-sub">FCF stayed positive every year in this window, but fell almost every year since the FY2022 peak &mdash; FY2025's &euro;1.08B is barely a twentieth of the supercycle high, and capex rose even as cash generation fell.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text>
+<line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">&euro;4B</text>
+<line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">&euro;8B</text>
+<line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">&euro;12B</text>
+<line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">&euro;16B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;20B</text>
+<line x1="60" y1="220" x2="840" y2="220" stroke="#475569" stroke-width="1.3"/>
+<rect x="103.0" y="128.47" width="70" height="91.53" rx="2" fill="#34d399"/><text x="138.0" y="120.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;9.15B</text><text x="138.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="259.0" y="39.37" width="70" height="180.63" rx="2" fill="#34d399"/><text x="294.0" y="31.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;18.06B</text><text x="294.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="415.0" y="187.39" width="70" height="32.61" rx="2" fill="#34d399"/><text x="450.0" y="179.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;3.26B</text><text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="571.0" y="198.01" width="70" height="21.99" rx="2" fill="#34d399"/><text x="606.0" y="190.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;2.20B</text><text x="606.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="727.0" y="209.18" width="70" height="10.82" rx="2" fill="#34d399"/><text x="762.0" y="201.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&euro;1.08B</text><text x="762.0" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">A 45-point round trip: FY2022's 50.48% margin was itself an unusually extreme supercycle peak, and FY2025's 5.10% is the lowest point in this window &mdash; TTM margin (2.02%, not shown here) is lower still.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">15%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">45%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<path d="M 50.00,79.87 L 247.50,51.73 L 445.00,173.27 L 642.50,175.07 L 840.00,203.00 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/>
+<path d="M 50.00,79.87 L 247.50,51.73 L 445.00,173.27 L 642.50,175.07 L 840.00,203.00" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.00" cy="79.87" r="3" fill="#2dd4bf"/>
+<circle cx="247.50" cy="51.73" r="3" fill="#2dd4bf"/>
+<circle cx="445.00" cy="173.27" r="3" fill="#2dd4bf"/>
+<circle cx="642.50" cy="175.07" r="3" fill="#2dd4bf"/>
+<circle cx="840.00" cy="203.00" r="3" fill="#2dd4bf"/>
+<text x="50.00" y="69.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">42.04%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<text x="247.50" y="41.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">50.48%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<text x="445.00" y="163.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.02%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<text x="642.50" y="165.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">13.48%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<text x="840.00" y="193.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.10%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2025 capex was &euro;1.45B (7.78% of FY2025 revenue) &mdash; capital-intensive by nature for a global container fleet operator. TTM capex intensity reads a much lower 3.12% purely because the last newbuild delivery wave has tapered off; a new ~$500M+ order for methanol dual-fuel vessels (delivering 2027-2029) means capex is likely to rise again, not a structural improvement.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Freight-Rate Recovery Meets New Disruption</div></div>
+  <div class="sec-sub">Hapag-Lloyd's fiscal quarters already align with the calendar (Jan-Dec fiscal year). Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 13, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&euro;5.02B</b>, up <b style="color:#34d399;">8.37% YoY</b> and up 19% sequentially from Q1 2026, as freight rates recovered to $1,475/TEU (+11% QoQ, +9% YoY) and volumes rose to 3.5 million TEU. EBIT swung back to a positive <b style="color:#f8fafc;">&euro;144.7M</b> (2.88% margin) from a Q1 2026 loss of &euro;-57.5M, and net profit was &euro;68.3M. The recovery came despite the Strait of Hormuz blockage adding roughly <b style="color:#f87171;">$600M</b> in extra bunker, insurance, storage, rerouting and inland-transport costs during the quarter &mdash; management raised full-year 2026 guidance even so, to Group EBITDA of &euro;0.9-2.6B and Group EBIT of &euro;-1.3B to &euro;0.4B, a range that still allows for a full-year loss.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q3'24&ndash;Q2'26, &euro;B)</div>
+    <div class="chart-sub">Revenue peaked at &euro;5.26B in Q3 2024 (Red Sea rerouting still supporting rates), then drifted down through most of 2025 before recovering to &euro;5.02B in Q2 2026 &mdash; still below the Q3'24 high.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0.0B</text>
+<line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;1.5B</text>
+<line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;3.0B</text>
+<line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;4.5B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;6.0B</text>
+<rect x="83.8" y="44.77" width="50" height="175.23" rx="2" fill="#2dd4bf"/><text x="108.8" y="36.8" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;5.26B</text><text x="108.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q3'24</text>
+<rect x="181.2" y="51.63" width="50" height="168.37" rx="2" fill="#2dd4bf"/><text x="206.2" y="43.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;5.05B</text><text x="206.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q4'24</text>
+<rect x="278.8" y="51.60" width="50" height="168.40" rx="2" fill="#2dd4bf"/><text x="303.8" y="43.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;5.05B</text><text x="303.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q1'25</text>
+<rect x="376.2" y="65.57" width="50" height="154.43" rx="2" fill="#2dd4bf"/><text x="401.2" y="57.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;4.63B</text><text x="401.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q2'25</text>
+<rect x="473.8" y="64.50" width="50" height="155.50" rx="2" fill="#2dd4bf"/><text x="498.8" y="56.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;4.67B</text><text x="498.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="571.2" y="77.23" width="50" height="142.77" rx="2" fill="#2dd4bf"/><text x="596.2" y="69.2" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;4.28B</text><text x="596.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="668.8" y="79.97" width="50" height="140.03" rx="2" fill="#2dd4bf"/><text x="693.8" y="72.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;4.20B</text><text x="693.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="766.2" y="52.63" width="50" height="167.37" rx="2" fill="#2dd4bf"/><text x="791.2" y="44.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">&euro;5.02B</text><text x="791.2" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly EBIT &amp; Margin (Q3'24&ndash;Q2'26, &euro;B)</div>
+    <div class="chart-sub">EBIT fell for five straight quarters, turned outright negative in Q1 2026 (adverse weather, Red Sea rerouting costs), then recovered to &euro;144.7M in Q2 2026 despite absorbing $600M of Hormuz-related costs &mdash; the underlying rate/volume recovery is real, but margin remains far below the FY21-22 norm.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;-0.2B</text>
+<line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">&euro;0.0B</text>
+<line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">&euro;0.2B</text>
+<line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">&euro;0.4B</text>
+<line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">&euro;0.6B</text>
+<line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">&euro;0.8B</text>
+<line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">&euro;1.0B</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;1.2B</text>
+<line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#475569" stroke-width="1.3"/>
+<rect x="83.8" y="53.04" width="50" height="138.39" rx="2" fill="#60a5fa"/>
+<text x="108.8" y="33.0" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">18.4%</text>
+<text x="108.8" y="45.0" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.97B</text>
+<text x="108.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q3'24</text>
+<rect x="181.2" y="91.87" width="50" height="99.56" rx="2" fill="#60a5fa"/>
+<text x="206.2" y="71.9" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">13.8%</text>
+<text x="206.2" y="83.9" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.70B</text>
+<text x="206.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q4'24</text>
+<rect x="278.8" y="103.69" width="50" height="87.74" rx="2" fill="#60a5fa"/>
+<text x="303.8" y="83.7" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">12.2%</text>
+<text x="303.8" y="95.7" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.61B</text>
+<text x="303.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q1'25</text>
+<rect x="376.2" y="170.36" width="50" height="21.07" rx="2" fill="#60a5fa"/>
+<text x="401.2" y="150.4" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">3.2%</text>
+<text x="401.2" y="162.4" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.15B</text>
+<text x="401.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q2'25</text>
+<rect x="473.8" y="163.59" width="50" height="27.84" rx="2" fill="#60a5fa"/>
+<text x="498.8" y="143.6" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">4.2%</text>
+<text x="498.8" y="155.6" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.19B</text>
+<text x="498.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q3'25</text>
+<rect x="571.2" y="179.33" width="50" height="12.10" rx="2" fill="#60a5fa"/>
+<text x="596.2" y="159.3" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">2.0%</text>
+<text x="596.2" y="171.3" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.08B</text>
+<text x="596.2" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q4'25</text>
+<rect x="668.8" y="191.43" width="50" height="8.21" rx="2" fill="#f87171"/>
+<text x="693.8" y="226.6" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">-1.4%</text>
+<text x="693.8" y="213.6" text-anchor="middle" font-size="9.5" fill="#f87171" font-weight="700">&euro;-0.06B</text>
+<text x="693.8" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">Q1'26</text>
+<rect x="766.2" y="170.76" width="50" height="20.67" rx="2" fill="#60a5fa"/>
+<text x="791.2" y="150.8" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">2.9%</text>
+<text x="791.2" y="162.8" text-anchor="middle" font-size="9.5" fill="#e2e8f0" font-weight="700">&euro;0.14B</text>
+<text x="791.2" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Q2'26</text>
+</svg>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E is excluded here as genuinely not meaningful: TTM net income is just &euro;58-248M against a &euro;22.8B market cap (depending on snapshot date), producing a trailing P/E near 400x that swings wildly on small earnings changes &mdash; textbook near-zero-earnings noise. P/FCF is used instead, consistently across both the current point and the FY21-25 historical average. No year is excluded from that average: FY2022's very low 1.73x is a genuine cyclical high-cash-flow year (the supercycle peak), not noise, and stays in per this framework's cyclicality guidance.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Free Cash Flow &mdash; Year-End (FY21-25), Plus Current</div>
+    <div class="chart-sub">Current P/FCF of 22.69x sits about 2.5x the FY21-25 average of 9.14x &mdash; a real, large premium, though it says more about how depressed trailing FCF is right now (&euro;1.08B, the smallest in this window) than about the market suddenly overpaying.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">6x</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">12x</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">18x</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">24x</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30x</text>
+<line x1="50.0" y1="159.08" x2="840.0" y2="159.08" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="155.08" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 9.1x</text>
+<path d="M 50.0,184.53 L 208.0,208.47 L 366.0,171.47 L 524.0,138.27 L 682.0,92.67 L 840.0,68.73" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="50.0" cy="184.53" r="3" fill="#a78bfa"/><text x="50.0" y="174.53" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">5.32x</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text>
+<circle cx="208.0" cy="208.47" r="3" fill="#a78bfa"/><text x="208.0" y="198.47" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">1.73x</text>
+<text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text>
+<circle cx="366.0" cy="171.47" r="3" fill="#a78bfa"/><text x="366.0" y="161.47" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.28x</text>
+<text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text>
+<circle cx="524.0" cy="138.27" r="3" fill="#a78bfa"/><text x="524.0" y="128.27" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.26x</text>
+<text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text>
+<circle cx="682.0" cy="92.67" r="3" fill="#a78bfa"/><text x="682.0" y="82.67" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.10x</text>
+<text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text>
+<circle cx="840.0" cy="68.73" r="3.5" fill="#a78bfa"/><text x="840.0" y="58.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.69x</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> &euro;4.85B in cash &amp; investments against &euro;6.28B total debt as of Jun 30, 2026 &mdash; a net debt position of &euro;1.42B, still just 1.08x TTM EBITDA and comfortably under this framework's 2x threshold. Current ratio 1.36x and quick ratio 1.19x are both fine but a clear step down from the extraordinarily liquid FY2022 peak (current ratio 3.41x, &euro;12.87B net cash). Notably, dividends have not been cut nearly as fast as earnings: the FY2025 payout ratio was 160% of that year's EPS (versus just 6.8% in FY2021), which is part of why the net cash cushion built during the supercycle has eroded.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 15.23,116.56 L52.14,114.01 A58,58 0 1 0 110.00,52.00 Z" fill="#a78bfa"/><path d="M15.23,116.56 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 52.14,114.01 Z" fill="#64748b"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Anchor shareholders' pact (CSAV 30.0% + Kühne family 30.0% + Hamburg's HGV 13.9%) &asymp; 73.9% combined, renewed through at least 2031</div>
+        <div><span class="dot" style="background:#64748b;"></span>Remaining float: Qatar Investment Authority (&asymp;12.3%), Saudi Arabia's Public Investment Fund (&asymp;10.2%), and public free float (&asymp;3.6%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; a three-way anchor pact, not a single founder:</b> Hapag-Lloyd's controlling block isn't one family or founder but a shareholders' agreement between Chilean shipping group CSAV (30.0%), German logistics entrepreneur Klaus-Michael Kühne's holding vehicles &mdash; Kühne Holding AG and Kühne Maritime GmbH (30.0%) &mdash; and HGV, the City of Hamburg's investment arm (13.9%). The pact was renewed in 2026, with a new four-year agreement taking effect January 1, 2027, meaning control is locked in well past this scorecard's horizon. This criterion is scored on Kühne's 30.0% stake alone as the closest analog to a founder-style anchor holder (already far past this framework's 5% "meaningful" bar); the full 73.9% combined bloc is even more concentrated than that headline number implies.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">13-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 13-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. No criteria require N/A treatment here &mdash; every year FY2021-25 was profitable and FCF-positive, so all growth calculations are directly computable, even where sharply negative.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Hapag-Lloyd</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>-4.36% &mdash; &euro;22.27B &rarr; &euro;18.63B; window spans the entire 2022 supercycle peak-to-trough round trip</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY21-25)</td><td>&ge;15%</td><td>-43.56% &mdash; &euro;9.36B &rarr; &euro;0.95B; EBIT fell far harder than revenue as thin liner margins amplified the crash</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>5.10% (FY2025); TTM even lower at 2.02%, down from 50.48% at the FY2022 peak</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-41.36% &mdash; &euro;9.15B &rarr; &euro;1.08B; both endpoints positive, so directly computable, but a steep genuine decline</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#5 globally, &asymp;7.1% share, 2.4M TEU capacity (Dec 2025, Alphaliner) &mdash; behind MSC, Maersk, CMA CGM and COSCO</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a handful of alliance groups (Gemini, Ocean Alliance, Premier Alliance) plus independent MSC control the majority of capacity, but a dozen-plus real carriers still compete hard on price</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 4.65% (FY2025) vs an assumed &asymp;8.5% WACC &mdash; below both the 15% floor and its own cost of capital; TTM even weaker at 0.51%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.08x (Jun 30, 2026) &mdash; comfortably under the bar despite swinging from &euro;12.87B net cash (FY2022) to net debt</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>113.89% (FY2025: &euro;1.08B FCF / &euro;0.95B EBIT); TTM reads an extreme 280%+ purely because the TTM EBIT denominator is near-zero &mdash; FY2025's annual figure is the meaningful read</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E excluded as noise (TTM P/E &asymp;400x on near-zero earnings); P/FCF used instead &mdash; current 22.69x vs a FY21-25 average of 9.14x (ratio &asymp;2.48), a large premium</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;175.77M (FY2021) &rarr; 175.76M (current) &mdash; essentially flat, no dilution or buybacks either way</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Kühne family stake 30.0%, part of a 73.9% combined three-way anchor bloc with CSAV and Hamburg's HGV, locked in through at least 2031 (see p.4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>7.78% of FY2025 revenue; TTM temporarily lower at 3.12% as the last newbuild wave tapers, before new ~$500M+ methanol-vessel orders (2027-29 delivery) push capex back up</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The balance sheet and ownership structure are genuinely strong: net leverage stayed at just 1.08x EBITDA even after swinging from net cash to net debt, the share count hasn't moved in five years, and control sits with one of the most durable, longest-tenured anchor pacts on the site (73.9% combined, locked in through at least 2031). FCF conversion on a clean annual basis clears the 80% bar comfortably, and the Gemini Cooperation with Maersk delivered a record 90% schedule reliability in 2025.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Every growth, margin and returns criterion misses by a wide margin &mdash; this is a genuinely weak scorecard, not a borderline one, and the stock trades at roughly 2.5x its own 5-year cash-flow multiple average despite depressed near-term earnings. 2026 has brought fresh, real disruption on top of the post-supercycle normalization: adverse weather hurt Q1, and the Strait of Hormuz closure added roughly $600M of extra cost in Q2 alone, with full-year EBIT guidance (&euro;-1.3B to &euro;0.4B) still allowing for an outright loss. The pending $4.2B ZIM acquisition faces a "major regulatory setback" per Reuters and would materially reshape scale and leverage if it proceeds. Not today's pick &mdash; built as a direct, supporting comparison point against Maersk within the same alliance.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 13 &ndash; Sep 1, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Hapag-Lloyd press releases and investor reports (FY2025 annual report, Q2 2026 results), Reuters/gCaptain/Container News (ZIM acquisition status, Alphaliner-sourced market share and fleet rankings), CSAV investor relations (shareholders' agreement renewal), GuruFocus (ROIC).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. All financials and the share price are in EUR as reported/traded on Deutsche Börse Xetra; the USD market-cap reference on page 1 is a rough approximation only (&asymp;1.16 EUR/USD). WACC (&asymp;8.5%) is an analyst-style estimate, not company-reported, applied consistently across this shipping-sector batch.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Hapag-Lloyd &mdash; Xetra, EUR share price trend. Points shown are fiscal year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Hapag-Lloyd &mdash; Fiscal Year-End Close (Xetra, EUR)</div>
+    <div class="chart-sub">The share price never matched the extremity of the earnings cycle &mdash; it roughly halved from the FY2021 close (&euro;169.22, itself set before the supercycle's full profit wave hit) to the FY2022-23 lows, then partially recovered on Red Sea disruption and Gemini/ZIM-deal optimism. Current price sits 23% below the FY2021 close despite five years of dividends paid out along the way.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -5.20%</text>
+<path d="M 46.0,41.56 L 172.8,144.64 L 299.6,145.78 L 426.4,98.78 L 553.2,150.76 L 680.0,120.80 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,41.56 L 172.8,144.64 L 299.6,145.78 L 426.4,98.78 L 553.2,150.76 L 680.0,120.80" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="41.56" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="31.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;169.22</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="144.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="134.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;117.68</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="145.78" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="135.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;117.11</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="98.78" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="88.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;140.61</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="150.76" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="140.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;114.62</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="120.80" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="110.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;129.60</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes for FY2021-2025 and the current price are directly-sourced closing quotes (stockanalysis.com / S&amp;P Global Market Intelligence). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
