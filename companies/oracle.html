@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oracle Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Enterprise Software, Databases &amp; Cloud Infrastructure</div>
+  <h1>Oracle Corporation</h1>
+  <div class="badges">
+    <span class="badge">NYSE: ORCL &middot; reports in USD</span>
+    <span class="badge">FY ends May 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1977 &middot; Austin, Texas (HQ)</span>
+    <span class="badge warn">Massive, largely debt-funded AI-cloud (OCI) capex buildout turned FCF sharply negative in FY2026 and pushed leverage to 4.45x net debt/EBITDA &mdash; the scorecard's dominant story this cycle.</span>
+  </div>
+  <div class="price">$145.75</div>
+  <div class="price-sub">Close Sep 2, 2026 (NYSE) &middot; Mkt cap &asymp;$420B &middot; down roughly 35% from the FY2026 fiscal year-end close of $225.00 on AI-capex/free-cash-flow-burn concerns</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in relational databases &mdash; Oracle is the long-standing #1 (40%+ share), the profit core of the business; in cloud infrastructure (OCI, now driving almost all incremental growth and capex) &mdash; a distant #4-5 at roughly 3% share, behind AWS (~28%), Microsoft Azure (~21%) and Google Cloud (~14%), even behind Alibaba Cloud (~4%). OCI revenue grew ~93% YoY in Q4 FY2026 off that small base, with Oracle guiding OCI revenue toward $144B by fiscal 2030.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$67.36B</div>
+      <div class="sub">+17.35% YoY, accelerating from +8.38% in FY2025; Q4 FY2026 alone was $19.2B, up 21% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val green">33.23%</div>
+      <div class="note">Up from 27.37% (FY2023) &rarr; 29.75% (FY2024) &rarr; 31.32% (FY2025) &mdash; genuinely improving, the best margin in four years.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val red">11.48% / 9.5%</div>
+      <div class="note">Clears WACC but not the framework's 15% ROIC bar, and the trend is declining &mdash; ROIC was 20.84% in FY2022 as the capital base has ballooned faster than returns.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">$135.54B</div>
+      <div class="sub">Net Debt/EBITDA 4.45x, up from 2.85x in FY2022 &mdash; leverage has climbed steadily funding the OCI buildout</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">52/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">5/14 criteria met, 9 not met, 0 N/A &mdash; a genuine growth/moat story in OCI paired with real balance-sheet and cash-flow strain.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 174.62,40.36 L149.45,67.48 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M174.62,40.36 A95,95 0 0 1 204.73,102.90 L167.84,105.67 A58,58 0 0 0 149.45,67.48 Z" fill="#34d399" opacity="0.55"/><path d="M204.73,102.90 A95,95 0 0 1 184.27,169.23 L155.35,146.16 A58,58 0 0 0 167.84,105.67 Z" fill="#34d399" opacity="0.55"/><path d="M184.27,169.23 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 155.35,146.16 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">5/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 5 (operating margin, market share, entry multiple, share count trend, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, capex intensity, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; a handful of hyperscalers plus Oracle/SAP/Salesforce in enterprise software/cloud, but not a tight oligopoly</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Oracle is in the middle of a massive, largely debt-funded bet on AI cloud infrastructure (OCI). The growth is real and accelerating: revenue was up 17.35% in FY2026 versus 8.38% the year before, OCI itself grew roughly 93% year-over-year in the most recent quarter alone, and Oracle has guided OCI revenue toward $144B by fiscal 2030. Operating margin is genuinely improving too &mdash; 33.23% in FY2026, the best in four years &mdash; and Larry Ellison's roughly 40% ownership stake means insiders are about as aligned as it gets anywhere on this site. But that AI bet is being funded by capex that ate the entire free cash flow: capital expenditures jumped 162% to $55.66B in FY2026 (82.6% of revenue), turning FCF sharply negative (-$23.69B) for the first time in years, and net debt/EBITDA has climbed to 4.45x from under 3x a few years ago. ROIC is trending the wrong way as the capital base grows faster than the returns on it, down to 13.16% (11.48% on a current basis) from 20.84% in FY2022. The stock has already priced in a lot of that concern &mdash; down roughly 35% from its FY2026 high of $225 &mdash; which is the one place the numbers currently look attractive: a trailing P/E of 25.00x sits well below Oracle's own FY22-26 average of roughly 33.7x. Net: a genuine growth/moat story in cloud infrastructure, paired with balance-sheet and cash-flow strain that this framework's fixed checklist is specifically designed to catch, and it does &mdash; 5 of 14 criteria met, Martinero Index 52/100, one of the weaker scores on this site. This isn't a call to avoid or buy Oracle &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q4 FY2026 (three months to May 31, 2026, reported Jun 10, 2026) and spot price as of Sep 2, 2026 close. Oracle's fiscal year runs June-May; FY2026 = year ended May 31, 2026. Five-year price history (page 6) uses fiscal year-end closes.
+  </div>
+
+  <div class="bignum-corner">5/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Six-Year Annual Financials (FY2021&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year ends May 31. CAGR computed FY21&rarr;FY26 (5-year span). Operating income, margin and gross margin are only reported here for the years disclosed; FY2022 operating income/margin and FY2021 capex/gross margin are not separately available and are omitted rather than estimated.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Annual ($M)</div>
+    <div class="chart-sub">Revenue growth has accelerated every year since FY2023, culminating in +17.35% in FY2026 as OCI cloud infrastructure demand ramps &mdash; the latest reported quarter (Q4 FY2026) was up 21% YoY alone.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text>
+<line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$17.5B</text>
+<line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$35B</text>
+<line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$52.5B</text>
+<line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$70B</text>
+<rect x="107.6" y="104.35" width="44" height="115.65" rx="1.5" fill="#2dd4bf"/>
+<text x="129.6" y="99.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$40.5B</text>
+<text x="129.6" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="236.8" y="98.74" width="44" height="121.26" rx="1.5" fill="#2dd4bf"/>
+<text x="258.8" y="93.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$42.4B</text>
+<text x="258.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="365.9" y="77.27" width="44" height="142.73" rx="1.5" fill="#2dd4bf"/>
+<text x="387.9" y="72.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$50.0B</text>
+<text x="387.9" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="495.1" y="68.68" width="44" height="151.32" rx="1.5" fill="#2dd4bf"/>
+<text x="517.1" y="63.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$53.0B</text>
+<text x="517.1" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="624.2" y="56.0" width="44" height="164.0" rx="1.5" fill="#2dd4bf"/>
+<text x="646.2" y="51.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$57.4B</text>
+<text x="646.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text>
+<rect x="753.4" y="27.55" width="44" height="192.45" rx="1.5" fill="#2dd4bf"/>
+<text x="775.4" y="22.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$67.4B</text>
+<text x="775.4" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text>
+<line x1="65" y1="220" x2="840" y2="220" stroke="#475569" stroke-width="1.3"/>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-26)</div><div class="val" style="color:#f87171;">+10.72%</div><div class="sub">$40.48B &rarr; $67.36B; misses the 15% bar despite recent acceleration</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY21-26)</div><div class="val" style="color:#f87171;">+8.05%</div><div class="sub">$15.20B &rarr; $22.39B; both endpoints positive, directly computable</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY21-26)</div><div class="val" style="color:#f87171;">n.m.</div><div class="sub">$13.75B &rarr; -$23.69B; sign-flipped to deeply negative, no meaningful CAGR</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow &mdash; Annual ($M)</div>
+    <div class="chart-sub">FCF held up reasonably through FY2024, then turned negative in FY2025 and cratered to -$23.69B in FY2026 as capex more than doubled &mdash; the single clearest number on this dashboard.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="65" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-$25B</text>
+<line x1="65" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="174.0" text-anchor="end" font-size="11" fill="#64748b">-$15B</text>
+<line x1="65" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="124.0" text-anchor="end" font-size="11" fill="#64748b">-$5B</text>
+<line x1="65" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$5B</text>
+<line x1="65" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="55" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text>
+<line x1="65" y1="95.0" x2="840" y2="95.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="107.6" y="26.24" width="44" height="68.76" rx="1.5" fill="#34d399"/>
+<text x="129.6" y="21.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.8B</text>
+<text x="129.6" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21</text>
+<rect x="236.8" y="69.86" width="44" height="25.14" rx="1.5" fill="#34d399"/>
+<text x="258.8" y="64.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$5.0B</text>
+<text x="258.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text>
+<rect x="365.9" y="52.65" width="44" height="42.35" rx="1.5" fill="#34d399"/>
+<text x="387.9" y="47.7" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$8.5B</text>
+<text x="387.9" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text>
+<rect x="495.1" y="35.97" width="44" height="59.03" rx="1.5" fill="#34d399"/>
+<text x="517.1" y="31.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$11.8B</text>
+<text x="517.1" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text>
+<rect x="624.2" y="95.0" width="44" height="1.97" rx="1.5" fill="#f87171"/>
+<text x="646.2" y="112.0" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">-$0.4B</text>
+<text x="646.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY25</text>
+<rect x="753.4" y="95.0" width="44" height="118.43" rx="1.5" fill="#f87171"/>
+<text x="775.4" y="228.0" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">-$23.7B</text>
+<text x="775.4" y="252" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend (FY2023-FY2026)</div>
+    <div class="chart-sub">A genuinely positive, improving trend &mdash; margin has climbed every year on record, reaching 33.23% in FY2026 despite (or alongside) the capex ramp. FY2021-FY2022 margin is not separately disclosed and is omitted rather than estimated.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<path d="M50.0,83.15 L313.33,71.25 L576.67,63.40 L840.0,53.85 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/>
+<path d="M50.0,83.15 L313.33,71.25 L576.67,63.40 L840.0,53.85" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.0" cy="83.15" r="3" fill="#2dd4bf"/>
+<text x="50.0" y="73.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">27.37%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="313.33" cy="71.25" r="3" fill="#2dd4bf"/>
+<text x="313.33" y="61.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.75%</text>
+<text x="313.33" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="576.67" cy="63.40" r="3" fill="#2dd4bf"/>
+<text x="576.67" y="53.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.32%</text>
+<text x="576.67" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="53.85" r="3" fill="#2dd4bf"/>
+<text x="840.0" y="43.85" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">33.23%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Operating Income</th><th>Operating Margin</th><th>Free Cash Flow</th><th>Capex</th></tr>
+    <tr><td>FY2021</td><td>$40,479M</td><td>$15,200M</td><td>&mdash;</td><td>$13,752M</td><td>&mdash;</td></tr>
+    <tr><td>FY2022</td><td>$42,440M</td><td>&mdash;</td><td>&mdash;</td><td>$5,028M</td><td>$4,511M</td></tr>
+    <tr><td>FY2023</td><td>$49,954M</td><td>$13,674M</td><td>27.37%</td><td>$8,470M</td><td>$8,695M</td></tr>
+    <tr><td>FY2024</td><td>$52,961M</td><td>$15,756M</td><td>29.75%</td><td>$11,807M</td><td>$6,866M</td></tr>
+    <tr><td>FY2025</td><td>$57,399M</td><td>$17,978M</td><td>31.32%</td><td>-$394M</td><td>$21,215M</td></tr>
+    <tr><td>FY2026</td><td>$67,357M</td><td>$22,385M</td><td>33.23%</td><td>-$23,686M</td><td>$55,663M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2022 operating income/margin not separately available and omitted rather than estimated (FY2023-26 operating income is calculated from disclosed operating margin &times; revenue). FY2026 capex was $55.66B, or 82.64% of revenue &mdash; far above this framework's asset-light threshold, and the direct cause of FY2026's negative free cash flow.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; the OCI Buildout</div></div>
+  <div class="sec-sub">Oracle's fiscal quarters run roughly Jun-Aug, Sep-Nov, Dec-Feb, Mar-May. Latest reported period: Q4 FY2026 (three months to May 31, 2026, reported Jun 10, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q4 FY2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$19.2B</b>, up <b style="color:#34d399;">21% YoY</b>. Oracle Cloud Infrastructure (OCI) &mdash; the segment now driving almost all incremental growth and virtually all of the capex &mdash; grew roughly <b style="color:#34d399;">93% YoY</b> in the quarter off a small base (~3% global cloud infrastructure share), with management guiding OCI revenue toward $144B by fiscal 2030. This is the clearest evidence of the growth acceleration behind FY2026's headline number, but also of why capex has exploded: building out datacenter capacity to serve that OCI backlog is what pushed FY2026 capex to $55.66B (82.6% of revenue) and turned free cash flow deeply negative.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2026)</div>
+    <div class="chart-sub">Gross margin has compressed every year since FY2022, from 79.08% to 65.82% &mdash; a &minus;7.03pp drop versus FY2023 alone (the window used for criterion #14), driven by the lower-margin cloud infrastructure mix and the cost of standing up new OCI capacity.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">65%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">70%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">75%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">80%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">85%</text>
+<path d="M50.0,67.36 L247.5,117.20 L445.0,128.72 L642.5,135.92 L840.0,173.44 L840.0,220.0 L50.0,220.0 Z" fill="#f87171" opacity="0.12"/>
+<path d="M50.0,67.36 L247.5,117.20 L445.0,128.72 L642.5,135.92 L840.0,173.44" fill="none" stroke="#f87171" stroke-width="2.5"/>
+<circle cx="50.0" cy="67.36" r="3" fill="#f87171"/>
+<text x="50.0" y="57.36" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">79.08%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="247.5" cy="117.20" r="3" fill="#f87171"/>
+<text x="247.5" y="107.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">72.85%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="445.0" cy="128.72" r="3" fill="#f87171"/>
+<text x="445.0" y="118.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">71.41%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="642.5" cy="135.92" r="3" fill="#f87171"/>
+<text x="642.5" y="125.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">70.51%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="173.44" r="3" fill="#f87171"/>
+<text x="840.0" y="163.44" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">65.82%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Oracle's #1 relational-database position (40%+ share) remains its profit core and is why criterion #5 (market share) scores Met. But the fast-growing part of the business &mdash; OCI, cloud infrastructure &mdash; is a distant #4-5 at roughly 3% global share, well behind AWS, Azure and Google Cloud, and even behind Alibaba Cloud. Both things are true at once: a durable legacy moat in databases, and a genuine underdog position in the infrastructure segment that's absorbing virtually all of the current capex and driving almost all of the incremental growth.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 9.5% &mdash; lower than the ~11.5% used for high-beta AI/growth names elsewhere on this site, reflecting Oracle's large-cap, investment-grade profile, but higher than a purely defensive mega-cap given the recent leverage run-up.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 25.00x sits well below the FY22-26 average of roughly 33.7x &mdash; a genuine discount versus Oracle's own recent history, driven by the stock's ~35% pullback from its FY2026 high rather than any change in trailing earnings.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">9x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">27x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50.0" y1="70.20" x2="840.0" y2="70.20" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="66.20" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 33.70x</text><path d="M 50.0,93.02 L 208.0,70.49 L 366.0,83.24 L 524.0,54.18 L 682.0,50.09 L 840.0,108.89" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="93.02" r="3" fill="#a78bfa"/><text x="50.0" y="83.02" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.57x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="70.49" r="3" fill="#a78bfa"/><text x="208.0" y="60.49" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.64x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="83.24" r="3" fill="#a78bfa"/><text x="366.0" y="73.24" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">30.77x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="54.18" r="3" fill="#a78bfa"/><text x="524.0" y="44.18" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">37.31x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="50.09" r="3" fill="#a78bfa"/><text x="682.0" y="40.09" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">38.23x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="108.89" r="3.5" fill="#a78bfa"/><text x="840.0" y="98.89" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.00x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of $135.54B against EBITDA, for a Net Debt/EBITDA of 4.45x &mdash; well above this framework's &lt;2x bar, and up steadily from 2.85x in FY2022, 4.06x (FY2023), 3.83x (FY2024) and 4.38x (FY2025). ROIC has fallen from 20.84% (FY2022) to 13.16% (FY2026, 11.48% current) as the capital base has grown faster than the returns it generates &mdash; it still clears the assumed 9.5% WACC, but no longer clears this framework's 15% absolute bar. Buybacks were net-positive (share-reducing) in 4 of the last 5 fiscal years, with a mild dilution blip in FY2023 only (+0.72%).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="175.93 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="263.89 439.82" stroke-dashoffset="-175.93"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Larry Ellison (co-founder, Chairman &amp; CTO) &asymp; 40% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 60% of shares outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note:</b> Larry Ellison co-founded Oracle in 1977 and, nearly 50 years later, still holds roughly 40% of shares outstanding as Chairman and CTO &mdash; among the highest founder-ownership stakes of any large-cap company on this site. That's an enormous, direct alignment between the person making the AI-capex bet and the shareholders funding it.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Oracle</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-26)</td><td>&ge;15%</td><td>+10.72% &mdash; $40.48B &rarr; $67.36B; misses the bar despite accelerating recently (+17.35% FY26 vs +8.38% FY25)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-26)</td><td>&ge;15%</td><td>+8.05% &mdash; $15.20B &rarr; $22.39B</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>33.23% (FY2026) &mdash; comfortably clears the bar, and the best margin in four years</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-26)</td><td>&ge;15%</td><td>$13.75B &rarr; -$23.69B; sign-flipped to deeply negative on the FY2026 capex surge, no meaningful CAGR</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in relational databases (40%+ share, the core profit engine); OCI cloud infrastructure is a distant #4-5 (~3% share) behind AWS, Azure and Google Cloud &mdash; scored on the enduring database position, flagged honestly against the OCI reality</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a handful of hyperscalers plus Oracle/SAP/Salesforce in enterprise software/cloud, but not a tight oligopoly</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 13.16% (FY2026), 11.48% current, clears the assumed 9.5% WACC but misses the 15% absolute bar; trend is declining (was 20.84% in FY2022)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>4.45x, up from 2.85x in FY2022 and worsening every year since &mdash; far above the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Negative &mdash; FCF is -$23.69B while EBIT is a positive $22.39B in FY2026, driven by the capex surge</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 25.00x vs a FY22-26 average of roughly 33.70x &mdash; meaningfully cheaper than its own recent history after the ~35% pullback from the FY2026 high</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Net buybacks in 4 of the last 5 fiscal years (FY22 -7.81%, FY24 -2.06%, FY25 -1.52%, FY26 -1.68%), with one mild dilution year, FY2023 (+0.72%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Larry Ellison (co-founder, Chairman &amp; CTO) &asymp; 40% of shares outstanding &mdash; among the highest founder stakes on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>82.64% of FY2026 revenue ($55.66B) &mdash; extremely high, driven entirely by the AI datacenter (OCI) buildout</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 65.82% (FY2026) vs 72.85% (FY2023), a &minus;7.03pp drop &mdash; worse than the threshold, driven by the lower-margin OCI infrastructure mix</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue growth is real and accelerating (+17.35% FY2026, OCI +93% YoY in the latest quarter alone), operating margin is genuinely improving (33.23%, best in four years), the entry multiple is meaningfully below Oracle's own recent history after the stock's pullback, buybacks have reduced share count in 4 of the last 5 years, and Larry Ellison's ~40% ownership is about as aligned as insider ownership gets on this site.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The AI-cloud buildout has consumed all of free cash flow and then some: capex more than doubled in FY2026 to 82.6% of revenue, turning FCF sharply negative and pushing net debt/EBITDA to 4.45x. ROIC is trending down as the capital base outgrows returns, and OCI &mdash; the growth engine absorbing all that spending &mdash; remains a distant #4-5 in cloud infrastructure at just ~3% share. Whether the OCI bet pays off before the balance sheet strain becomes a real problem is the central question for Oracle from here.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jun 10 &ndash; Sep 2, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Oracle Q4 &amp; FY2026 earnings release (Jun 10, 2026), Synergy Research Group / Statista (global cloud infrastructure market share estimates).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (9.5%) is an assumed estimate reflecting Oracle's large-cap, investment-grade profile, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Oracle &mdash; NYSE, USD share price trend. Points shown are fiscal year-end closes (May 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Oracle &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A steady multi-year climb accelerated sharply into the FY2026 close ($225.00) on AI-cloud enthusiasm, before a roughly 35% pullback to today's $145.75 as capex and free-cash-flow concerns took hold.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +16.48%</text>
+<path d="M 46.0,136.05 L 172.8,114.12 L 299.6,106.08 L 426.4,74.42 L 553.2,34.55 L 680.0,85.78 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,136.05 L 172.8,114.12 L 299.6,106.08 L 426.4,74.42 L 553.2,34.55 L 680.0,85.78" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="136.05" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="126.05" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$67.98</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="114.12" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="104.12" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$101.91</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="106.08" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="96.08" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$114.35</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="74.42" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="64.42" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$163.32</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="34.55" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="24.55" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$225.00</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="85.78" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="75.78" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$145.75</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2022-2026 (May 31 each year) and the current price ($145.75, Sep 2, 2026 close) are direct closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
