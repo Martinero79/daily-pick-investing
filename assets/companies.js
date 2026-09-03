@@ -1178,6 +1178,24 @@ const COMPANIES = [
     blurb: "World's #2 container shipping line by capacity (~13% of global fleet, behind MSC's ~21.6%), controlled since 1904 by the A.P. Møller Foundation, which holds roughly 41.5% of share capital and 51.45% of voting rights. Revenue, EBIT and free cash flow all show negative 5-year CAGRs — the window brackets the 2021-22 freight-rate supercycle and the 2023 crash — despite a genuine rate-driven recovery underway in 2026. The balance sheet stayed net-cash every year of the period and the share count has shrunk by over a fifth on continued buybacks, but the current 20.75x trailing P/E sits at roughly 3.6x the stock's own 5-year average.",
     file: "companies/maersk.html",
     personalNote: "Fun personal footnote: I started my career at Maersk back in 2007. Left in 2009, though, so that's a nostalgia point, not an insider edge — I have no real read on how the place runs today, and the dashboard below is built the same way as every other one on this site. The tricky part of this sector, and the reason the scorecard looks rough, is the lag: freight rates move fast, but new ship capacity takes years to order and deliver, so supply always arrives late — either piling onto a boom until it becomes a glut, or missing a trough entirely. That's why revenue, EBIT and FCF all show negative 5-year CAGRs here: the window happens to start at the 2021-22 supercycle peak and end after the 2023 crash, which is a cycle-timing artifact, not a deteriorating business. The valuation is what actually gives me pause — at 20.75x trailing P/E against a 5.80x five-year average, the stock is pricing in a better cycle than the fundamentals have delivered yet. What holds up regardless of timing: the Møller family has controlled this company since 1904 and still holds roughly 41.5% of the capital and over half the voting rights, the balance sheet stayed net-cash through the crash, and the share count has shrunk by more than a fifth on buybacks. Five of 13 criteria met is a mediocre score, and I think that's the honest read of a cyclical, lagging-supply business priced for a recovery it hasn't fully delivered yet."
+  },
+
+  {
+    slug: "oracle",
+    name: "Oracle",
+    ticker: "NYSE: ORCL",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Enterprise Software",
+    tags: [],
+    dateFeatured: "2026-09-03",
+    price: 145.75,
+    score: "5 / 14",
+    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 17.35, prior: 8.38 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q4 FY26", growth: 21.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Long-standing #1 in relational databases now making a massive, largely debt-funded bet on AI cloud infrastructure (OCI) — revenue and margin are both accelerating, but capex ate all of free cash flow and leverage has jumped to 4.45x net debt/EBITDA.",
+    file: "companies/oracle.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
