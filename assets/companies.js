@@ -1191,7 +1191,7 @@ const COMPANIES = [
     dateFeatured: "2026-09-03",
     price: 145.75,
     score: "5 / 14",
-    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 17.35, prior: 8.38 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q4 FY26", growth: 21.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in relational databases now making a massive, largely debt-funded bet on AI cloud infrastructure (OCI) — revenue and margin are both accelerating, but capex ate all of free cash flow and leverage has jumped to 4.45x net debt/EBITDA.",
