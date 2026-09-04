@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tencent Holdings Investment Dashboard</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Social Media, Gaming &amp; Fintech (China)</div>
+  <h1>Tencent Holdings Limited</h1>
+  <div class="badges">
+    <span class="badge">OTC: TCEHY (unsponsored ADR) / HKEX: 0700.HK &middot; reports in CNY</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1998 &middot; Shenzhen, China (HQ)</span>
+    <span class="badge warn">5-yr revenue and FCF CAGR both miss this framework's 15% growth bar &mdash; the FY2022 trough (COVID lockdowns + the 2021-22 regulatory crackdown) is a depressed base year that flatters the EBIT CAGR shown below.</span>
+  </div>
+  <div class="price">$55.85</div>
+  <div class="price-sub">Close Sep 3, 2026 (OTC ADR) &middot; Mkt cap &asymp;$497B &middot; down roughly 26% from the FY2025 year-end close of $75.76 amid a 2026 growth-deceleration/AI-capex reset across Chinese internet names</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in Chinese gaming &mdash; Tencent is #1 domestically (&gt;50% share) and the world's largest video-game publisher by revenue (&asymp;$33.6B / &yen;241.6B FY2025), with NetEase a distant #2 (&asymp;17%) &mdash; together the two take roughly 70% of the China market; in social/messaging &mdash; WeChat/Weixin has no real domestic peer at 1.43B combined MAU, though ByteDance's Douyin ecosystem competes hard for user attention and ad dollars; in mobile payments &mdash; WeChat Pay is a close #2 to Ant Group's Alipay in China's payments near-duopoly.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&yen;751.77B</div>
+      <div class="sub">+13.86% YoY, accelerating from +8.41% in FY2024; Q2 2026 alone was &yen;204.8B, up 11% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green">32.67%</div>
+      <div class="note">Up from 19.99% (FY2022) &rarr; 26.76% (FY2023) &rarr; 31.50% (FY2024) &mdash; a genuine post-crackdown recovery, not a one-off.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">17.71% / 10.5%</div>
+      <div class="note">Clears both this framework's 15% ROIC bar and the assumed WACC comfortably; current-basis ROIC runs even higher at 18.27%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (FY2025)</div>
+      <div class="val green">&yen;16.15B</div>
+      <div class="sub">Net Debt/EBITDA -0.06x &mdash; swung from &yen;68.4B net debt (FY2022) to net cash by FY2023, briefly back to net debt in FY2024, then net cash again in FY2025</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">81/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">12/14 criteria met, 2 not met, 0 N/A &mdash; a high-quality, cash-generative platform let down mainly by sub-bar top-line and FCF growth.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 35.73,50.77 L64.65,73.84 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M35.73,50.77 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 64.65,73.84 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">12/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 12 (EBIT CAGR, operating margin, market share, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider/founder ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 2 (revenue CAGR, FCF CAGR)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> &mdash; Tencent + NetEase together take roughly 70% of Chinese gaming, a tight duopoly</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Tencent is one of the highest-quality businesses in this framework, and the scorecard mostly says so: 12 of 14 criteria met, a Martinero Index of 81. WeChat/Weixin's 1.43 billion combined monthly users anchor a platform that is simultaneously the world's largest video-game publisher by revenue, the #2 player in Chinese mobile payments, and a genuine margin story &mdash; operating margin has climbed from 19.99% in the FY2022 regulatory-crackdown trough to 32.67% in FY2025, gross margin is up 13.17 points over the same window, and the balance sheet sits in a net-cash position with buybacks running for four straight years. ROIC (17.71%, current basis 18.27%) comfortably clears both the 15% absolute bar and an assumed 10.5% WACC. Where the checklist bites is growth: 5-year revenue CAGR is 7.63% and FCF CAGR is 10.25%, both well short of the 15% bar this framework applies everywhere &mdash; and because the window starts at FY2021's peak and dips through FY2022's crackdown-driven trough (revenue actually fell 0.99% that year), even the "good" EBIT CAGR of 18.67% is flattered by a depressed base rather than representing clean, linear growth. The valuation looks statistically cheap at 14.33x trailing P/E versus Tencent's own FY21-25 average of 18.45x, but a forward P/E of 12.64x against consensus EPS growth in the mid-single-digits pencils out to a PEG north of 2 &mdash; not the bargain the headline multiple suggests once growth is priced in. Net: a dominant, cash-generative platform business trading at a reasonable-but-not-cheap multiple, with regulatory risk (Chinese gaming approvals, minor playtime limits) and ByteDance's relentless competition for user attention as the two things most likely to derail the current margin trajectory. This isn't a call to buy or avoid Tencent &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Aug 12, 2026) and spot price as of Sep 3, 2026 close. Tencent's fiscal year is the calendar year; FY2025 = year ended Dec 31, 2025 (fully reported Mar 18, 2026). Five-year price history (page 6) uses calendar year-end closes.
+  </div>
+
+  <div class="bignum-corner">12/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in CNY billions (Tencent's reporting currency). Fiscal year ends Dec 31. CAGR computed FY21&rarr;FY25.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FY2022 is the cycle low across all three lines &mdash; COVID lockdowns plus the 2021-22 regulatory crackdown on gaming and fintech briefly shrank revenue and operating income; every metric has grown every year since.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">&yen;200B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">&yen;400B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">&yen;600B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;800B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="85.97" width="22.5" height="154.03" rx="2" fill="#2dd4bf"/><rect x="113.7" y="205.94" width="22.5" height="34.06" rx="2" fill="#60a5fa"/><rect x="151.9" y="199.88" width="22.5" height="40.12" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="238.1" y="87.50" width="22.5" height="152.50" rx="2" fill="#2dd4bf"/><rect x="276.2" y="209.51" width="22.5" height="30.49" rx="2" fill="#60a5fa"/><rect x="314.4" y="206.06" width="22.5" height="33.94" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="400.6" y="72.52" width="22.5" height="167.48" rx="2" fill="#2dd4bf"/><rect x="438.7" y="195.19" width="22.5" height="44.81" rx="2" fill="#60a5fa"/><rect x="476.9" y="184.74" width="22.5" height="55.26" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="563.1" y="58.43" width="22.5" height="181.57" rx="2" fill="#2dd4bf"/><rect x="601.2" y="182.81" width="22.5" height="57.19" rx="2" fill="#60a5fa"/><rect x="639.4" y="186.21" width="22.5" height="53.79" rx="2" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="725.6" y="33.26" width="22.5" height="206.74" rx="2" fill="#2dd4bf"/><rect x="763.7" y="172.45" width="22.5" height="67.55" rx="2" fill="#60a5fa"/><rect x="801.9" y="180.72" width="22.5" height="59.28" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+7.63%</div><div class="sub">&yen;560.12B &rarr; &yen;751.77B; misses the 15% bar (score 2/5)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#34d399;">+18.67%</div><div class="sub">&yen;123.85B &rarr; &yen;245.63B; clears the bar, but off a depressed FY2022 base</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+10.25%</div><div class="sub">&yen;145.88B &rarr; &yen;215.57B; below the 15% bar, closer to it than revenue</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Tencent cleared it every year in this window; FY2022 marks the low point (19.99%, just below the line) amid the regulatory crackdown, before margins recovered sharply through FY2025.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,109.45 L247.5,120.05 L445.0,86.20 L642.5,62.50 L840.0,56.65 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,109.45 L247.5,120.05 L445.0,86.20 L642.5,62.50 L840.0,56.65" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="109.45" r="3" fill="#2dd4bf"/><text x="50.0" y="99.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.11%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="120.05" r="3" fill="#2dd4bf"/><text x="247.5" y="110.05" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.99%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="86.20" r="3" fill="#2dd4bf"/><text x="445.0" y="76.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.76%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="62.50" r="3" fill="#2dd4bf"/><text x="642.5" y="52.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.50%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="56.65" r="3" fill="#2dd4bf"/><text x="840.0" y="46.65" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">32.67%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&yen;560.12B</td><td>&yen;123.85B</td><td>22.11%</td><td>&yen;224.82B</td><td>&yen;145.88B</td><td>117.8%</td></tr>
+    <tr><td>FY2022</td><td>&yen;554.55B</td><td>&yen;110.88B</td><td>19.99%</td><td>&yen;188.24B</td><td>&yen;123.41B</td><td>111.3%</td></tr>
+    <tr><td>FY2023</td><td>&yen;609.02B</td><td>&yen;162.96B</td><td>26.76%</td><td>&yen;115.22B</td><td>&yen;200.95B</td><td>123.3%</td></tr>
+    <tr><td>FY2024</td><td>&yen;660.26B</td><td>&yen;207.96B</td><td>31.50%</td><td>&yen;194.07B</td><td>&yen;195.59B</td><td>94.1%</td></tr>
+    <tr><td>FY2025</td><td>&yen;751.77B</td><td>&yen;245.63B</td><td>32.67%</td><td>&yen;224.84B</td><td>&yen;215.57B</td><td>87.8%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; the Chinese Gaming/Social Landscape</div></div>
+  <div class="sec-sub">Tencent reports calendar quarters. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 12, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&yen;204.8B</b>, up <b style="color:#34d399;">11% YoY</b>. Gross profit was &yen;118.4B (+13% YoY, +6% QoQ), with gross margin improving to 58%; within that, Value-Added Services (games + social) gross margin hit 64%, up 4 points YoY on a richer mix of internally-developed, higher-margin titles. Non-IFRS net profit rose 9% YoY to &yen;68.4B. This continues the post-crackdown pattern visible in the annual numbers: revenue growth in the low-double-digits, margin expansion running ahead of revenue growth as mix shifts toward higher-margin games and advertising.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has expanded every year since the FY2022 trough, from 43.08% to 56.25% &mdash; a +13.17pp gain versus FY2022 (the window used for criterion #14), driven by a richer games/social mix, ad-tech improvements, and cost discipline in fintech.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">35%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">45%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">55%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<path d="M50.0,148.72 L247.5,155.36 L445.0,114.96 L642.5,76.80 L840.0,50.00 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/>
+<path d="M50.0,148.72 L247.5,155.36 L445.0,114.96 L642.5,76.80 L840.0,50.00" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="50.0" cy="148.72" r="3" fill="#34d399"/>
+<text x="50.0" y="138.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">43.91%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="155.36" r="3" fill="#34d399"/>
+<text x="247.5" y="145.36" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">43.08%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="114.96" r="3" fill="#34d399"/>
+<text x="445.0" y="104.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">48.13%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="76.80" r="3" fill="#34d399"/>
+<text x="642.5" y="66.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">52.90%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="50.00" r="3" fill="#34d399"/>
+<text x="840.0" y="40.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">56.25%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> WeChat/Weixin's 1.43 billion combined MAU (Q1 2026, +2% YoY) is at or near a ceiling &mdash; it already exceeds China's entire mobile-internet user base of roughly 1.28 billion, meaning growth here is essentially over and the platform's value now comes from monetization (ads, mini-programs, fintech), not user growth. In gaming, Tencent and NetEase together take roughly 70% of the Chinese market (Tencent alone &gt;50%), a tight duopoly that scores 2/5 on this framework's concentration scale &mdash; but Chinese gaming carries real regulatory risk: Beijing froze new game approvals for months in 2021-22 and maintains playtime limits for minors, and further intervention remains a standing risk, not a resolved one. ByteDance's Douyin ecosystem is the other structural threat, competing hard with WeChat for user attention and advertiser budgets even though it doesn't touch Tencent's gaming or fintech businesses directly.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 10.5% &mdash; above the ~9.5% used for US investment-grade mega-caps elsewhere on this site, reflecting Tencent's above-average Chinese regulatory and geopolitical risk, but below the higher assumption used for smaller or more speculative China plays.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 14.33x sits meaningfully below the FY21-25 average of 18.45x (dashed) &mdash; a genuine discount versus Tencent's own recent history. Forward P/E (12.64x, shown as the single dashed point at right) is lower still &mdash; see explainer below for why that isn't automatically a bargain.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50.0" y1="96.99" x2="840.0" y2="96.99" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="92.99" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 18.45x</text><path d="M 50.0,114.73 L 208.0,121.53 L 366.0,75.80 L 524.0,97.07 L 682.0,75.80 L 840.0,124.47" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="114.73" r="3" fill="#a78bfa"/><text x="50.0" y="104.73" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.79x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="121.53" r="3" fill="#a78bfa"/><text x="208.0" y="111.53" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">14.77x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="75.80" r="3" fill="#a78bfa"/><text x="366.0" y="65.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.63x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="97.07" r="3" fill="#a78bfa"/><text x="524.0" y="87.07" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.44x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="75.80" r="3" fill="#a78bfa"/><text x="682.0" y="65.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.63x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="124.47" r="3.5" fill="#a78bfa"/><text x="840.0" y="114.47" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">14.33x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><circle cx="840.0" cy="135.73" r="3.5" fill="#c4b5fd"/><text x="840.0" y="150.73" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">12.64x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings. Trailing P/E (the FY21-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock relative to what it had already earned. Forward P/E is today's price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and normally the more useful lens for judging whether a "cheap" multiple reflects genuinely cheap growth or just a slowdown priced in. For Tencent specifically: trailing P/E (14.33x) is a real discount to its own FY21-25 average (18.45x), and forward P/E (12.64x) is cheaper still. But the PEG ratio &mdash; forward P/E divided by expected annual EPS growth &mdash; tells a less flattering story: with consensus EPS growth running around 4-7% over the next two years, Tencent's PEG works out to roughly 2.3, well above the traditional 1.0 "fair value" line. In other words, the low absolute multiple mostly reflects genuinely slower expected earnings growth, not an obvious mispricing &mdash; this is the one place the "cheap-looking" headline number and the growth-adjusted reality pull in different directions.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Tencent ended FY2025 with net cash of &yen;16.15B (Net Debt/EBITDA -0.06x), a position that has swung around this window &mdash; net debt of &yen;59.7B (FY2021) and &yen;68.4B (FY2022), briefly net cash in FY2023 (&yen;7.9B), back to net debt in FY2024 (&yen;19.7B), then net cash again in FY2025. Every year in the window comfortably clears this framework's &lt;2x bar regardless of sign. ROIC has climbed steadily from 11.13% (FY2022) to 17.71% (FY2025, 18.27% current), clearing both the 15% absolute bar and the assumed 10.5% WACC. Buybacks were net share-reducing in 4 of the last 5 fiscal years (FY22 +0.01%, FY23 +0.88%, FY24 +2.10%, FY25 +1.74%), with a mild dilution year only in FY2021 (-0.48%).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="35.19 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="100.28 439.82" stroke-dashoffset="-35.19"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="304.35 439.82" stroke-dashoffset="-135.47"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Ma Huateng "Pony Ma" (co-founder, Chairman &amp; CEO) &asymp; 8% of shares outstanding</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Prosus N.V. (Naspers-controlled, largest external holder) &asymp; 22.8%, down from &asymp;31% via an ongoing sell-down since 2022</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 69.2%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note, honestly framed:</b> Pony Ma co-founded Tencent in 1998 and remains Chairman and CEO with roughly 8% of shares outstanding &mdash; meaningfully above this framework's 5% bar, but far below the concentrated founder stakes seen elsewhere on this site (Larry Ellison's ~40% at Oracle, for instance). Prosus, majority-controlled by South Africa's Naspers, is Tencent's largest single shareholder at roughly 22.8% &mdash; but this is a large external strategic/financial holder, not an operating insider, and Prosus has been gradually trimming its stake since 2022 to fund its own buybacks, which is a modest structural overhang worth watching rather than an alignment signal.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Tencent</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+7.63% &mdash; &yen;560.12B &rarr; &yen;751.77B; noticeably below the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+18.67% &mdash; &yen;123.85B &rarr; &yen;245.63B; clears the bar, though flattered by the depressed FY2022 base (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>32.67% (FY2025) &mdash; comfortably clears the bar, up from 19.99% in FY2022</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+10.25% &mdash; &yen;145.88B &rarr; &yen;215.57B; below the bar, though closer to it than revenue (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 globally in gaming revenue (&asymp;$33.6B FY2025) and #1 domestically in Chinese gaming (&gt;50%); WeChat/Weixin has no domestic peer at 1.43B MAU; WeChat Pay is a close #2 to Alipay in fintech</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; Tencent + NetEase together take roughly 70% of Chinese gaming, a tight duopoly, though miHoYo and others are gaining share</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 17.71% (FY2025), 18.27% current, clears both the 15% absolute bar and the assumed 10.5% WACC; trending up from 11.13% in FY2022</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of &yen;16.15B in FY2025 (-0.06x); every year in the window is well under 2x regardless of net cash/debt sign</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>87.8% (FY2025) &mdash; FCF &yen;215.57B vs EBIT &yen;245.63B, clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 14.33x vs a FY21-25 average of 18.45x &mdash; a real discount to Tencent's own recent history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Net buybacks in 4 of the last 5 fiscal years (FY22 +0.01%, FY23 +0.88%, FY24 +2.10%, FY25 +1.74%), with one mild dilution year, FY2021 (-0.48%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Pony Ma (co-founder, Chairman &amp; CEO) &asymp; 8% of shares outstanding &mdash; above the 5% bar, though modest next to the largest founder stakes on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>11.64% of FY2025 revenue (&yen;87.48B capex) &mdash; a rising trend (up from 4.1% in FY2022) but still well within an asset-light range</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 56.25% (FY2025) vs 43.08% (FY2022), a +13.17pp gain &mdash; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A genuine post-crackdown margin recovery (operating margin 19.99%&rarr;32.67%, gross margin 43.08%&rarr;56.25% since FY2022), a net-cash balance sheet, ROIC comfortably above both the 15% bar and assumed WACC, four straight years of net buybacks, and a dominant, largely unchallenged position in Chinese social/messaging and global gaming revenue.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Revenue and FCF growth both miss this framework's 15% bar, and WeChat/Weixin's user base (1.43B MAU) is at or past saturation relative to China's mobile-internet population, so future growth leans on monetization, not new users. Chinese gaming regulation is a standing risk, not a resolved one, after the 2021-22 approval freeze. ByteDance's Douyin continues to pressure ad share and user attention. TCEHY itself trades as an unsponsored OTC ADR (lower liquidity/wider spreads than the primary HKEX 0700.HK listing), and the stock's "cheap" 12.64x forward P/E carries a PEG near 2.3 once slower expected growth is factored in.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 12 &ndash; Sep 3, 2026. Sources: stockanalysis.com (financials, ratios, forecasts, sourced from S&amp;P Global Market Intelligence), Tencent Q2 2026 &amp; FY2025 results announcements (Aug 12, 2026 and Mar 18, 2026), company/press reporting on WeChat/Weixin MAU, China gaming market share (Tencent/NetEase), and Prosus/Naspers ownership.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (10.5%) is an assumed estimate reflecting Tencent's large-cap profile with above-average Chinese regulatory/geopolitical risk, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Tencent &mdash; OTC ADR (TCEHY), USD share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Tencent (TCEHY) &mdash; Calendar Year-End Close (OTC ADR, USD)</div>
+    <div class="chart-sub">A sharp 2021-2023 decline through the regulatory crackdown gave way to a strong recovery into the FY2025 close ($75.76), before a roughly 26% pullback to today's $55.85 as 2026 growth-deceleration and AI-capex concerns weighed on Chinese internet names broadly.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr Price CAGR (FY21&rarr;FY25): +9.36%</text>
+<path d="M 46.0,114.06 L 172.8,140.92 L 299.6,146.32 L 426.4,115.54 L 553.2,68.48 L 680.0,108.30 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,114.06 L 172.8,140.92 L 299.6,146.32 L 426.4,115.54 L 553.2,68.48 L 680.0,108.30" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="114.06" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="104.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$52.97</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="140.92" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="130.92" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$39.54</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="146.32" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="136.32" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$36.84</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="115.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="105.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$52.23</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="68.48" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="58.48" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$75.76</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="108.30" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="98.30" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$55.85</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for FY2021-2025 (Dec 31 each year) and the current price ($55.85, Sep 3, 2026 close) are direct closing/spot prices for the TCEHY OTC ADR, sourced from stockanalysis.com. 5-Yr CAGR computed FY2021&rarr;FY2025 only (excludes the current, off-cycle price point). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
