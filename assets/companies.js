@@ -46,10 +46,10 @@ const COMPANIES = [
     dateFeatured: "2026-08-12",
     price: "$1,733.48",
     score: "11 / 13",
-    martinero: 82,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 15.6, prior: 2.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: 20.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Sole supplier of EUV lithography systems — the irreplaceable chokepoint behind every leading-edge chip. Clears growth, margin, ROIC and balance-sheet bars comfortably; the one real miss is valuation, up 140% over the last year to well above its own trading history.",
+    blurb: "Sole supplier of EUV lithography systems — the irreplaceable chokepoint behind every leading-edge chip. Clears margin, ROIC and balance-sheet bars comfortably; misses on valuation (up sharply over the last year, well above its own trading history) and on 5-yr FCF CAGR, a base-effect artifact of an unusually strong FY2021 starting year.",
     file: "companies/asml-holding.html",
     personalNote: "ASML is where my portfolio started, 13 years ago, and it taught me a lesson. It nearly doubled fast, so I sold a chunk around €100 to bank some profit — a mistake in hindsight, given it's now trading above €1,600. ASML holds a near-monopoly on the EUV lithography machines behind every leading-edge chip, which is exactly why the US leans on the EU over what it can export, and to whom. It's one leg of the ASML-TSMC-NVIDIA chain driving the AI buildout — boom or bust, I honestly don't know."
   },
@@ -1196,6 +1196,42 @@ const COMPANIES = [
     quarterYoY: { period: "Q4 FY26", growth: 21.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in relational databases now making a massive, largely debt-funded bet on AI cloud infrastructure (OCI) — revenue and margin are both accelerating, but capex ate all of free cash flow and leverage has jumped to 4.45x net debt/EBITDA.",
     file: "companies/oracle.html"
+  },
+
+  {
+    slug: "tencent",
+    name: "Tencent Holdings Limited",
+    ticker: "OTC: TCEHY (ADR) / HKEX: 0700.HK",
+    sector: "Social Media, Gaming & Fintech",
+    industry: "Technology",
+    subIndustry: "China Internet Platform (Social, Gaming, Fintech, Cloud)",
+    tags: ["Duopoly"],
+    dateFeatured: "2026-09-04",
+    price: "$55.85",
+    score: "12 / 14",
+    martinero: 81,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 13.86, prior: 8.41 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 11.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Tencent is China's dominant social/gaming/fintech platform — WeChat/Weixin's 1.43bn combined MAU underpins a business that is also the world's largest video-game publisher by revenue (Tencent + NetEase together take roughly 70% of the Chinese gaming market) and a close #2 in Chinese mobile payments behind Alipay. Margins have expanded sharply since the 2022 regulatory-crackdown trough (operating margin 32.67% FY2025, gross margin up 13.17pp since FY2022), the balance sheet sits net-cash, and buybacks have run for four straight years — but 5-year revenue and FCF CAGRs both miss this framework's 15% growth bar, and the statistically cheap-looking 14.33x trailing P/E carries a PEG north of 2 once slower forward growth is priced in.",
+    file: "companies/tencent.html"
+  },
+
+  {
+    slug: "adobe",
+    name: "Adobe Inc.",
+    ticker: "NASDAQ: ADBE",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Creative, Document & Digital Experience Software",
+    tags: ["AI/SaaS"],
+    dateFeatured: "2026-09-04",
+    price: "$285.75",
+    score: "9 / 14",
+    martinero: 75,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: 10.53, prior: 10.80 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 FY2026", growth: 12.68 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Adobe is the long-standing #1 in professional creative software (Photoshop/Illustrator/Premiere via Creative Cloud, an estimated 58-70% category share) and effectively invented and still leads document software (Acrobat/PDF) — margins are excellent and stable (36.63% operating margin FY2025, gross margin actually up 1.57pp over three years), FCF conversion runs above 100% of EBIT, the balance sheet is essentially net cash, and buybacks have cut share count every year since FY2021. But 5-year revenue, EBIT and FCF CAGRs all miss this framework's 15% growth bar, insider ownership is genuinely low at just 0.19%, and the stock is down roughly 54% from its FY2023 high on real fears that generative-AI tools erode the Creative Cloud moat — fears underscored by Adobe's own blocked $20B bid for Figma, terminated in December 2023 after regulators balked.",
+    file: "companies/adobe.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
