@@ -408,25 +408,6 @@ const COMPANIES = [
   },
 
   {
-    slug: "tesla",
-    name: "Tesla, Inc.",
-    ticker: "NASDAQ: TSLA",
-    sector: "Electric Vehicles, Energy Storage & Robotics",
-    industry: "Consumer Discretionary",
-    subIndustry: "Electric Vehicles & Energy Storage",
-    tags: ["Magnificent Seven"],
-    dateFeatured: "2026-08-26",
-    price: "$347.70",
-    score: "6 / 13",
-    martinero: 45,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: -3.0, prior: 0.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 25.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history and share count trend.",
-    file: "companies/tesla.html",
-    personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
-  },
-
-  {
     slug: "catl",
     name: "Contemporary Amperex Technology Co., Limited (CATL)",
     ticker: "SZSE: 300750 · HKEX: 3750",
@@ -1232,6 +1213,41 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 FY2026", growth: 12.68 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Adobe is the long-standing #1 in professional creative software (Photoshop/Illustrator/Premiere via Creative Cloud, an estimated 58-70% category share) and effectively invented and still leads document software (Acrobat/PDF) — margins are excellent and stable (36.63% operating margin FY2025, gross margin actually up 1.57pp over three years), FCF conversion runs above 100% of EBIT, the balance sheet is essentially net cash, and buybacks have cut share count every year since FY2021. But 5-year revenue, EBIT and FCF CAGRs all miss this framework's 15% growth bar, insider ownership is genuinely low at just 0.19%, and the stock is down roughly 54% from its FY2023 high on real fears that generative-AI tools erode the Creative Cloud moat — fears underscored by Adobe's own blocked $20B bid for Figma, terminated in December 2023 after regulators balked.",
     file: "companies/adobe.html"
+  },
+
+  {
+    slug: "spacex",
+    name: "Space Exploration Technologies Corp.",
+    ticker: "NASDAQ: SPCX",
+    sector: "Space Launch, Satellite Broadband & AI Infrastructure",
+    industry: "Industrials",
+    subIndustry: "Space Launch & Satellite Communications",
+    tags: ["IPO Exception", "Near-Monopoly", "Founder-Controlled"],
+    dateFeatured: "2026-09-05",
+    price: "$149.74",
+    score: "4 / 14",
+    martinero: 59,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
+    blurb: "SpaceX completed the largest IPO in history on June 12, 2026 (NASDAQ: SPCX, priced at $135/share, ~$1.77T debut valuation). Falcon 9 dominates global launch (~82% share, 165 orbital missions in 2025) and Starlink is the clear #1 in LEO satellite broadband (~58-62% revenue share), but the S-1 also revealed a consolidated FY2025 operating loss (-13.86% margin) driven by a newly-disclosed, loss-making AI/compute segment, extreme capex intensity, and a balance sheet that appears to have swung to roughly $71B net cash after the IPO raise. Marked as an explicit exception: 7 of 14 criteria are N/A because they require 5 years of public trading/reporting history that simply doesn't exist yet, 3 months post-IPO.",
+    file: "companies/spacex.html"
+  },
+
+  {
+    slug: "tesla",
+    name: "Tesla, Inc.",
+    ticker: "NASDAQ: TSLA",
+    sector: "Electric Vehicles, Energy Storage & Robotics",
+    industry: "Consumer Discretionary",
+    subIndustry: "Electric Vehicles & Energy Storage",
+    tags: ["Magnificent Seven"],
+    dateFeatured: "2026-09-05",
+    price: "$347.70",
+    score: "6 / 14",
+    martinero: 48,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -3.0, prior: 0.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 25.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, gross margin has compressed 7.6pp over three years on price cuts and mix shift, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history, share count trend and margin stability.",
+    file: "companies/tesla.html",
+    personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
