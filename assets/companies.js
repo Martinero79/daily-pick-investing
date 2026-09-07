@@ -1322,6 +1322,96 @@ const COMPANIES = [
   },
 
   {
+    slug: "procter-gamble",
+    name: "Procter & Gamble Co.",
+    ticker: "NYSE: PG",
+    sector: "Consumer Staples",
+    industry: "Household & Personal Products",
+    subIndustry: "Household Products",
+    tags: ["FMCG", "Dividend Aristocrat"],
+    dateFeatured: "2026-09-07",
+    price: "$146.44",
+    score: "8 / 14",
+    martinero: 70,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 3.26, prior: 1.51 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q4 FY2026", growth: 1.51 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "A genuinely high-quality, well-margined dividend compounder — expanding operating and gross margins, rock-steady ROIC and a conservative balance sheet — but five-year growth (2-4% CAGRs) is mature-market slow, and a PEG near 4.2x argues the stock isn't statistically cheap despite trading modestly below its own trailing P/E history.",
+    file: "companies/procter-gamble.html"
+  },
+
+  {
+    slug: "colgate-palmolive",
+    name: "Colgate-Palmolive Company",
+    ticker: "NYSE: CL",
+    sector: "Consumer Staples",
+    industry: "Household & Personal Products",
+    subIndustry: "Oral Care, Personal/Home Care & Pet Nutrition",
+    tags: ["FMCG", "Dividend King"],
+    dateFeatured: "2026-09-07",
+    price: "$88.77",
+    score: "9 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: 1.40, prior: 3.31 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 4.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Long-standing #1 in global toothpaste (41.3% value share, still gaining) with a stable ~20% operating margin, low leverage and 63 straight years of dividend growth — plus a genuine second growth leg in Hill's Pet Nutrition (~23% of sales, up nearly 60% in five years). Growth is mature and low-single-digit against this framework's 15% bars, insider ownership is essentially zero (0.13%), and the stock trades roughly 14% above its own 5-year average P/E.",
+    file: "companies/colgate-palmolive.html"
+  },
+
+  {
+    slug: "reckitt-benckiser",
+    name: "Reckitt Benckiser Group plc",
+    ticker: "LSE: RKT",
+    sector: "Consumer Staples",
+    industry: "Household & Personal Products",
+    subIndustry: "Household Hygiene, Health & Consumer Nutrition (FMCG)",
+    tags: ["FMCG"],
+    dateFeatured: "2026-09-07",
+    price: "5,114.00p",
+    score: "8 / 14",
+    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "flat", recent: 1.79, prior: 1.5 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 4.7 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "A profitable, cash-generative FMCG operator (24.11% operating margin, 19.7% ROIC, low 1.75x net debt/EBITDA, cheap-looking 11.5x trailing P/E) held back by low-single-digit growth, weak FCF conversion (51.4%), essentially zero insider ownership, and an unresolved Mead Johnson/Enfamil NEC baby-formula litigation overhang with mixed 2026 bellwether verdicts and no settlement in sight.",
+    file: "companies/reckitt-benckiser.html"
+  },
+
+  {
+    slug: "kimberly-clark",
+    name: "Kimberly-Clark Corporation",
+    ticker: "NASDAQ: KMB",
+    sector: "Consumer Staples",
+    industry: "Household & Personal Products",
+    subIndustry: "Personal Care, Tissue & Consumer Paper Products",
+    tags: ["FMCG"],
+    dateFeatured: "2026-09-07",
+    price: "$104.96",
+    score: "6 / 14",
+    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -2.1, prior: -2.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 0.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Huggies is a durable global #2 in diapers, ROIC comfortably clears both the 15% bar and assumed WACC, net debt/EBITDA sits under 2x, and the current P/E is modestly below Kimberly-Clark's own five-year average. But reported revenue, EBIT and free cash flow all show negative 5-year CAGRs (heavily distorted by shifting the international tissue business into a new Suzano joint venture, but still real on a reported basis), operating margin has never cleared the framework's 20% bar in this window, FCF conversion slipped back below 80%, insider ownership is negligible, and capex runs hotter than typical CPG peers. Layered on top: a pending $48.7B acquisition of Kenvue (Tylenol, Band-Aid, Listerine, Neutrogena), shareholder-approved but still awaiting final regulatory clearance and expected to close in H2 2026 — not reflected anywhere in these figures.",
+    file: "companies/kimberly-clark.html"
+  },
+
+  {
+    slug: "pepsico",
+    name: "PepsiCo",
+    ticker: "NASDAQ: PEP",
+    sector: "Consumer Staples",
+    industry: "Food & Beverage",
+    subIndustry: "Packaged Foods & Soft Drinks",
+    tags: ["Duopoly"],
+    dateFeatured: "2026-09-07",
+    price: "$137.63",
+    score: "7 / 14",
+    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 2.25, prior: 0.42 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 FY26", growth: 6.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Frito-Lay's dominant snacks franchise and a genuine Coke/Pepsi beverage duopoly (plus Gatorade's #1 in sports drinks) are real, but mature single-digit growth, weak ~50% FCF conversion, and no founder/insider ownership are why Elliott Management built a $4B activist stake in Sep 2025 amid GLP-1-driven demand softness.",
+    file: "companies/pepsico.html"
+  },
+
+  {
     slug: "tesla",
     name: "Tesla, Inc.",
     ticker: "NASDAQ: TSLA",
@@ -1338,6 +1428,25 @@ const COMPANIES = [
     blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, gross margin has compressed 7.6pp over three years on price cuts and mix shift, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history, share count trend and margin stability.",
     file: "companies/tesla.html",
     personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
+  },
+
+  {
+    slug: "unilever",
+    name: "Unilever PLC",
+    ticker: "LSE: ULVR / NYSE ADR: UL",
+    sector: "Packaged Consumer Goods (Beauty, Personal Care, Home Care & Nutrition)",
+    industry: "Consumer Staples",
+    subIndustry: "Household & Personal Products",
+    tags: ["FMCG"],
+    dateFeatured: "2026-09-07",
+    price: "£47.82",
+    score: "6 / 14",
+    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -3.77, prior: 1.55 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "H1 2026", growth: 0.5 },  // latest reported period revenue YoY (non-scored, separate from annual trend)
+    blurb: "The Dove/Persil/OMO consumer-goods giant delivers exactly what you'd expect from a 95-year-old FMCG portfolio: genuinely strong, stable ROIC (15.9%-17.8%) and steadily improving margins (20.05% operating margin in FY2025, a first for this window), paired with reported revenue, EBIT and free cash flow that are all essentially flat to negative over five years. Clears operating margin, market share, ROIC/WACC, share count trend, capex intensity and margin stability; misses revenue/EBIT/FCF growth, market concentration, net debt/EBITDA, FCF conversion, entry multiple and insider/founder ownership.",
+    file: "companies/unilever.html",
+    personalNote: "Unilever was one of my first 'safe' blue-chip buys — the kind of stock you own because it's boring, not despite it. And for a long stretch it really was: revenue and earnings barely moved for years, the share price spent most of a decade going sideways, and the whole thesis came down to a dependable, ever-so-slightly-growing dividend rather than any real growth story. That's exactly what the numbers here confirm — five-year revenue and EBIT CAGRs that are basically flat to negative, even as the dividend kept showing up like clockwork. The ROIC is genuinely good and the balance sheet is fine, so this was never a bad business, just a slow one. Eventually the lack of any growth narrative wore me down and I sold to put the money somewhere with more of a story — the 2024-2025 margin turnaround and ice cream demerger came after I'd already moved on, which feels about right for how these things usually go."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
