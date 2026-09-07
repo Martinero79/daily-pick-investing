@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PepsiCo Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/pepsico.html">
+<meta property="og:title" content="PepsiCo Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PepsiCo Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Global Packaged Snacks &amp; Beverages (Frito-Lay, Pepsi, Gatorade)</div>
+  <h1>PepsiCo, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: PEP &middot; reports in USD</span>
+    <span class="badge">FY ends late Dec (52/53-week) &middot; reports quarterly</span>
+    <span class="badge">Founded 1965 (Pepsi-Cola/Frito-Lay merger) &middot; Purchase, New York (HQ)</span>
+    <span class="badge warn">Activist investor Elliott Management built a ~$4B stake in Sep 2025 pushing for a bottling refranchise, while GLP-1-driven demand softness has pressured North America snack &amp; soda volumes for multiple quarters &mdash; the two dominant storylines on the stock right now.</span>
+  </div>
+  <div class="price">$137.63</div>
+  <div class="price-sub">Close Sep 4, 2026 (NASDAQ) &middot; Mkt cap &asymp;$187.9B &middot; down from the FY2025 fiscal year-end close of $141.02 and from a FY2022 year-end close of $160.49</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in savory snacks &mdash; Frito-Lay is the dominant #1 in the U.S. and globally (Lay's, Doritos, Cheetos, Tostitos, Ruffles), a scale and direct-store-delivery network few rivals can match; in carbonated soft drinks &mdash; Pepsi is a genuine, durable #2 to Coca-Cola (roughly high-20s% vs Coca-Cola's mid-40s% U.S. share), a real category-level duopoly; in sports drinks &mdash; Gatorade holds a commanding #1 (historically ~65-70% U.S. share) well ahead of Coca-Cola's Powerade.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$93,925M</div>
+      <div class="sub">+2.25% YoY, following +0.42% in FY2024 &mdash; growth has re-accelerated off a soft base but remains far below the FY21-22 double-digit era</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val red">15.95%</div>
+      <div class="note">Rangebound for five years: 14.92% (FY21) &rarr; 14.25% (FY22) &rarr; 15.30% (FY23) &rarr; 16.20% (FY24) &rarr; 15.95% (FY25) &mdash; genuinely stable, but well under this framework's 20% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">20.10% / 7.5%</div>
+      <div class="note">Clears both the assumed WACC and the framework's 15% ROIC bar comfortably, and has held in a tight 18-21% band for five straight years &mdash; one of the steadier ROIC records on this site.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">$43.50B</div>
+      <div class="sub">Net Debt/EBITDA 2.39x (FY2025), rangebound 2.16x-2.52x across FY21-25 &mdash; persistently just above this framework's &lt;2x bar</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met, 7 not met, 0 N/A &mdash; a genuinely dominant snacks franchise and duopoly beverage position, weighed down by mature-company growth, thin FCF conversion, and no meaningful insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110,15 A95,95 0 0 1 110,205 L110,168 A58,58 0 0 0 110,52 Z" fill="#34d399"/><path d="M110,205 A95,95 0 0 1 110,15 L110,52 A58,58 0 0 0 110,168 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (market share, market concentration, ROIC/WACC, entry multiple, share count trend, capex intensity, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, net debt/EBITDA, FCF conversion, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> (effective 4/5) &mdash; snacks are dominated by a handful of players (PepsiCo chief among them) and CSDs are a genuine Coke/Pepsi duopoly; both point toward a concentrated, moat-friendly structure</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    PepsiCo is really two businesses wearing one ticker. Frito-Lay is a dominant, hard-to-dislodge #1 in savory snacks with a distribution network competitors can't easily replicate. The beverage side is a genuine duopoly story: Pepsi is a durable, real #2 to Coca-Cola in carbonated soft drinks, while Gatorade is the clear #1 in sports drinks. Both halves are under real pressure right now for the same underlying reason &mdash; GLP-1 weight-loss drug adoption and value-seeking consumers have driven North America snack and soda volumes lower for multiple consecutive quarters, and it shows up directly in the growth numbers: five-year revenue CAGR of just 4.3% and EBIT CAGR of 6.0%, both far short of this framework's 15% bar for a mature consumer-staples giant. That growth pressure, combined with a roughly 25% drop in market value from PepsiCo's 2023 peak, is what drew activist investor Elliott Management to build a ~$4 billion stake in September 2025 and publicly push the board to refranchise its company-owned bottling operations and fix what it calls execution missteps in North America beverages. The balance sheet and returns picture is more reassuring: ROIC has held a steady 18-21% for five years, comfortably clearing an assumed 7.5% WACC, and the current trailing P/E of 18.04x sits well below PepsiCo's own FY21-25 average of roughly 26.3x. But that "cheap vs. history" read comes with a catch &mdash; the PEG ratio, which adjusts for expected growth, sits around 3.1x, well above the traditional 1.0 fair-value line, so the discount isn't a screaming bargain once slower growth is priced in. Add in a Net Debt/EBITDA that's been stuck just above 2x for five years, FCF conversion running roughly 45-59% against an 80% bar, and no founder or controlling shareholder (insiders own just 0.61% of shares), and the checklist lands at 7 of 14 criteria met and a Martinero Index of 56/100 &mdash; a real, durable business with two genuinely strong brand franchises, scored down by mature growth mechanics and cash-conversion math that this framework is built to catch. This isn't a call to avoid or buy PepsiCo &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through FY2025 (fiscal year ended Dec 27, 2025) and Q2 FY2026 (12 weeks ended Jun 13, 2026, reported Jul 9, 2026); spot price as of Sep 4, 2026 close. PepsiCo's fiscal year equals the calendar year (a 52/53-week year ending in late December). Five-year price history (page 6) uses fiscal year-end closes.
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year ends late December (calendar year). CAGR computed FY21&rarr;FY25.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Steady, unspectacular growth across all three lines &mdash; no capex shock, no margin collapse, but nothing close to this framework's 15% growth bars either. FCF dipped sharply in FY2022 on cost inflation and working-capital swings before partially recovering.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$25B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$50B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$75B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$100B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="65.16" width="22.5" height="174.84" rx="2" fill="#2dd4bf"/><rect x="113.7" y="213.91" width="22.5" height="26.09" rx="2" fill="#60a5fa"/><rect x="151.9" y="224.62" width="22.5" height="15.38" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="238.1" y="49.94" width="22.5" height="190.06" rx="2" fill="#2dd4bf"/><rect x="276.2" y="212.92" width="22.5" height="27.08" rx="2" fill="#60a5fa"/><rect x="314.4" y="227.67" width="22.5" height="12.33" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="400.6" y="38.76" width="22.5" height="201.24" rx="2" fill="#2dd4bf"/><rect x="438.7" y="209.21" width="22.5" height="30.79" rx="2" fill="#60a5fa"/><rect x="476.9" y="222.57" width="22.5" height="17.43" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="563.1" y="37.92" width="22.5" height="202.08" rx="2" fill="#2dd4bf"/><rect x="601.2" y="207.26" width="22.5" height="32.74" rx="2" fill="#60a5fa"/><rect x="639.4" y="224.18" width="22.5" height="15.82" rx="2" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="725.6" y="33.36" width="22.5" height="206.64" rx="2" fill="#2dd4bf"/><rect x="763.7" y="207.04" width="22.5" height="32.96" rx="2" fill="#60a5fa"/><rect x="801.9" y="223.12" width="22.5" height="16.88" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+4.3%</div><div class="sub">$79,474M &rarr; $93,925M</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">+6.0%</div><div class="sub">$11,858M &rarr; $14,983M</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+2.3%</div><div class="sub">$6,991M &rarr; $7,672M; dipped to $5,604M in FY2022</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; PepsiCo has stayed in a tight 14.2%-16.2% band for five straight years, genuinely stable but consistently well below the bar.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,220.0 L50.0,145.4 L247.5,148.75 L445.0,143.5 L642.5,139.0 L840.0,140.25 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,145.4 L247.5,148.75 L445.0,143.5 L642.5,139.0 L840.0,140.25" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="145.4" r="3" fill="#2dd4bf"/><text x="50.0" y="135.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.92%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="148.75" r="3" fill="#2dd4bf"/><text x="247.5" y="138.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.25%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="143.5" r="3" fill="#2dd4bf"/><text x="445.0" y="133.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.30%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="139.0" r="3" fill="#2dd4bf"/><text x="642.5" y="129.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.20%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="140.25" r="3" fill="#2dd4bf"/><text x="840.0" y="130.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.95%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>$79,474M</td><td>$11,858M</td><td>14.92%</td><td>$7,618M</td><td>$6,991M</td><td>58.9%</td></tr>
+    <tr><td>FY2022</td><td>$86,392M</td><td>$12,310M</td><td>14.25%</td><td>$8,910M</td><td>$5,604M</td><td>45.5%</td></tr>
+    <tr><td>FY2023</td><td>$91,471M</td><td>$13,996M</td><td>15.30%</td><td>$9,074M</td><td>$7,924M</td><td>56.6%</td></tr>
+    <tr><td>FY2024</td><td>$91,854M</td><td>$14,881M</td><td>16.20%</td><td>$9,578M</td><td>$7,189M</td><td>48.3%</td></tr>
+    <tr><td>FY2025</td><td>$93,925M</td><td>$14,983M</td><td>15.95%</td><td>$8,240M</td><td>$7,672M</td><td>51.2%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development, GLP-1 Headwinds &amp; the Elliott Campaign</div></div>
+  <div class="sec-sub">PepsiCo's fiscal quarters run roughly Jan-Mar, Apr-Jun, Jul-Sep, Oct-Dec (12-13 week periods). Latest reported period: Q2 FY2026 (12 weeks to Jun 13, 2026, reported Jul 9, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 FY2026 Headlines</div>
+    <p>Reported net revenue was <b style="color:#f8fafc;">$24.18B</b>, up <b style="color:#34d399;">6.4% YoY</b>, but roughly 2.2 percentage points of that was a foreign-exchange tailwind. Organic revenue &mdash; PepsiCo's preferred underlying growth measure, which strips out FX, M&amp;A and divestitures &mdash; grew a slower <b style="color:#fbbf24;">2.4%</b>, on 3% global food volume growth and 2% beverage volume growth. Nearly all of that volume growth came from international markets: North America foods volume was flat and North America beverages volume fell 4% in the quarter, which is exactly the gap between "reported" and "organic" growth, and between the U.S. and the rest of the world, that Elliott's campaign and the GLP-1 narrative below are both about.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has actually held up better than the revenue growth story suggests &mdash; 53.39% (FY2021) to 54.46% (FY2025), a +1.16pp improvement versus the FY2022 base used for criterion #14, as pricing/mix and productivity programs offset input-cost inflation.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">52%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">54%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">56%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">58%</text>
+<path d="M50.0,135.25 L247.5,137.5 L445.0,110.5 L642.5,97.75 L840.0,108.5 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/>
+<path d="M50.0,135.25 L247.5,137.5 L445.0,110.5 L642.5,97.75 L840.0,108.5" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="50.0" cy="135.25" r="3" fill="#34d399"/>
+<text x="50.0" y="125.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">53.39%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="137.5" r="3" fill="#34d399"/>
+<text x="247.5" y="127.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">53.30%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="110.5" r="3" fill="#34d399"/>
+<text x="445.0" y="100.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">54.38%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="97.75" r="3" fill="#34d399"/>
+<text x="642.5" y="87.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">54.89%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="108.5" r="3" fill="#34d399"/>
+<text x="840.0" y="98.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">54.46%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>GLP-1 &amp; the demand backdrop:</b> PepsiCo's North American snack and soda volumes have declined for multiple consecutive quarters. Analysts at firms including Barclays and Morgan Stanley have flagged GLP-1 weight-loss drug adoption (used in an estimated one in five U.S. households) as a real, structural drag on calorie-dense snack and soda consumption, compounding more ordinary value-seeking and inflation pressures. PepsiCo's response has leaned into portion control, higher-protein items and "better-for-you" reformulations (Sun Chips with legumes, Stacy's whole-grain pita chips) rather than deny the shift is happening.
+  </div>
+
+  <div class="callout blue">
+    <b>The Elliott campaign:</b> In September 2025, activist investor Elliott Investment Management disclosed a roughly $4 billion stake in PepsiCo &mdash; among its top-five active holdings &mdash; and publicly pushed the board to refranchise its company-owned bottling operations and address what it called strategic missteps and market-share losses in North America beverages, arguing the stock had 50%+ upside from where it sat. PepsiCo's market value had fallen from a 2023 peak near $270B to roughly $190-200B by the time of the campaign. Management said it welcomes shareholder dialogue while defending its current strategy; as of this writing, it remains an unresolved, material overhang on the stock.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 7.5% &mdash; near the low end of this site's range, reflecting PepsiCo's low-beta, investment-grade, recession-resistant consumer-staples profile.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 18.04x sits well below the FY21-25 average of roughly 26.3x &mdash; a genuine discount versus PepsiCo's own recent history, driven by the stock's decline from 2023 highs amid the GLP-1/volume/activist overhang rather than a change in trailing earnings. Forward P/E (26.10x&ndash;16.93x FY21-25, now 15.80x) has run below trailing P/E throughout &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">9x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">27x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50.0" y1="103.12" x2="840.0" y2="103.12" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="99.12" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 26.30x</text><path d="M 50.0,81.47 L 208.0,94.40 L 366.0,104.27 L 524.0,121.51 L 682.0,113.95 L 840.0,139.82" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="81.47" r="3" fill="#a78bfa"/><text x="50.0" y="71.47" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">31.17x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="94.40" r="3" fill="#a78bfa"/><text x="208.0" y="84.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.26x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="104.27" r="3" fill="#a78bfa"/><text x="366.0" y="94.27" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.04x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="121.51" r="3" fill="#a78bfa"/><text x="524.0" y="111.51" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.16x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="113.95" r="3" fill="#a78bfa"/><text x="682.0" y="103.95" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.86x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="139.82" r="3.5" fill="#a78bfa"/><text x="840.0" y="129.82" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.04x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,104.00 L 208.0,107.91 L 366.0,125.60 L 524.0,139.78 L 682.0,144.76 L 840.0,149.78" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="104.00" r="3" fill="#c4b5fd"/><text x="50.0" y="119.00" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">26.10x</text><circle cx="208.0" cy="107.91" r="3" fill="#c4b5fd"/><text x="208.0" y="122.91" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">25.22x</text><circle cx="366.0" cy="125.60" r="3" fill="#c4b5fd"/><text x="366.0" y="140.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">21.24x</text><circle cx="524.0" cy="139.78" r="3" fill="#c4b5fd"/><text x="524.0" y="154.78" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">18.05x</text><circle cx="682.0" cy="144.76" r="3" fill="#c4b5fd"/><text x="682.0" y="159.76" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.93x</text><circle cx="840.0" cy="149.78" r="3.5" fill="#c4b5fd"/><text x="840.0" y="164.78" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">15.80x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY21-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are actually headed. For PepsiCo specifically: both trailing (18.04x) and forward (15.80x) P/E sit well below their FY21-25 averages, a real discount versus its own history. But the PEG ratio &mdash; forward P/E divided by expected annual EPS growth, which sanity-checks whether a "cheap" multiple is actually cheap once growth is accounted for &mdash; currently runs around 3.1x for PepsiCo, well above the traditional 1.0 "fair value" line. That's the honest read: the stock is cheaper than its own history, but not cheap relative to how slowly earnings are now expected to grow.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of $43.50B against EBITDA, for a Net Debt/EBITDA of 2.39x (FY2025) &mdash; just above this framework's &lt;2x bar, and essentially rangebound for five years: 2.52x (FY2021), 2.42x (FY2022), 2.21x (FY2023), 2.16x (FY2024), 2.39x (FY2025). ROIC has stayed remarkably steady &mdash; 18.11% (FY2021) &rarr; 19.49% (FY2022) &rarr; 20.57% (FY2023) &rarr; 21.35% (FY2024) &rarr; 20.10% (FY2025) &mdash; clearing both the assumed 7.5% WACC and this framework's 15% bar every year in the window. Share count has declined slowly but consistently, from 1,383M (FY2021) to 1,367M (FY2025), roughly -0.3%/year &mdash; modest, but the right direction throughout.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="2.68 437.14" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="330.60 109.22" stroke-dashoffset="-2.68"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="106.55 333.27" stroke-dashoffset="-333.28"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#fbbf24;"></span>Insiders &amp; management &asymp; 0.61% of shares outstanding</div>
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutional holders (Vanguard ~9.7%, BlackRock ~8.2%, State Street ~4.2%, others) &asymp; 75.2%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public &amp; retail float &asymp; 24.2%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> unlike some of the founder-led names on this site, PepsiCo has no controlling family or founder stake today &mdash; insider/management ownership sits at roughly 0.61% of shares outstanding, and the register is dominated by index and active institutional holders. That's unremarkable for a 60-year-old public company, but it fails this framework's ~5%+ meaningful-ownership bar outright, and it's part of why an outside activist (Elliott) was able to build a $4B stake and force a public governance conversation in the first place.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>PepsiCo</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+4.3% &mdash; $79,474M &rarr; $93,925M; far below the bar, typical of a mature FMCG giant (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+6.0% &mdash; $11,858M &rarr; $14,983M &mdash; far below the bar (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>15.95% (FY2025) &mdash; stable for five years but noticeably below the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+2.3% &mdash; $6,991M &rarr; $7,672M, with a sharp FY2022 dip to $5,604M; far below the bar (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in savory snacks (Frito-Lay) and sports drinks (Gatorade); genuine #2 to Coca-Cola in carbonated soft drinks &mdash; strong across the portfolio, though not a clean #1 everywhere (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; savory snacks are dominated by a handful of players (PepsiCo chief among them) and CSDs are a genuine Coke/Pepsi duopoly; a concentrated, moat-friendly structure</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 20.10% (FY2025), clears the assumed 7.5% WACC and the 15% bar; steady 18-21% for five straight years</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>2.39x (FY2025), rangebound 2.16x-2.52x for five years &mdash; persistently just above the bar, never clearing it</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>51.2% (FY2025); ranged 45.5%-58.9% across FY21-25 &mdash; consistently well below the bar on capex, dividend and working-capital cash needs (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 18.04x vs a FY21-25 average of roughly 26.30x &mdash; meaningfully cheaper than its own recent history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Steady, modest decline: 1,383M (FY21) &rarr; 1,367M (FY25), roughly -0.3%/year every year in the window</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Insiders/management own roughly 0.61% of shares outstanding &mdash; no founder or controlling family; fails the bar outright</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.70% of FY2025 revenue ($4,415M), down from ~6% earlier in the window &mdash; low and improving despite bottling/manufacturing operations</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 54.46% (FY2025) vs 53.30% (FY2022), a +1.16pp improvement &mdash; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Two genuinely strong brand franchises &mdash; Frito-Lay's dominant snacks position and a real Coke/Pepsi duopoly in beverages with Gatorade's outright #1 in sports drinks. ROIC has held a steady 18-21% for five years, comfortably clearing WACC. The entry multiple is meaningfully below PepsiCo's own recent history, share count keeps drifting lower, capex intensity is low and improving, and gross margin has actually improved versus three years ago despite the growth slowdown.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is genuinely mature &mdash; 4.3% revenue CAGR and multiple quarters of North America volume declines tied in part to GLP-1-driven demand shifts. FCF conversion is structurally weak (45-59% vs. an 80% bar) and net debt/EBITDA has been stuck just above 2x for five years. There's no founder or controlling shareholder to anchor governance, which is part of why activist investor Elliott built a $4B stake in September 2025 and is publicly pushing for a bottling refranchise and a North America beverages turnaround &mdash; an unresolved overhang heading into 2026-27.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 9 &ndash; Sep 4, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), PepsiCo Q2 FY2026 earnings release (Jul 9, 2026) and FY2025 10-K/earnings release, Wall Street Journal / CNBC reporting on the Elliott Management campaign (Sep 2025), bakeryandsnacks.com / Barclays &amp; Morgan Stanley estimates on GLP-1 demand impact, WallStreetZen/Trendlyne ownership data.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (7.5%) is an assumed estimate reflecting PepsiCo's low-beta, investment-grade consumer-staples profile, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">PepsiCo &mdash; NASDAQ, USD share price trend. Points shown are fiscal year-end closes (late December) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">PepsiCo &mdash; Fiscal Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">The stock peaked into the FY2022 close ($160.49) before drifting lower for three straight fiscal year-ends as growth slowed and, more recently, GLP-1 demand concerns and the Elliott activist campaign weighed on sentiment &mdash; down to today's $137.63.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -1.4%</text>
+<path d="M 46.0,112.40 L 172.8,58.04 L 299.6,79.16 L 426.4,123.20 L 553.2,135.92 L 680.0,149.48 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,112.40 L 172.8,58.04 L 299.6,79.16 L 426.4,123.20 L 553.2,135.92 L 680.0,149.48" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="112.40" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="102.40" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$146.90</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="58.04" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="48.04" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.49</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="79.16" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="69.16" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$155.21</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="123.20" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="113.20" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$144.20</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="135.92" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="125.92" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$141.02</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="149.48" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="139.48" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$137.63</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (late December each year) and the current price ($137.63, Sep 4, 2026 close) are direct closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

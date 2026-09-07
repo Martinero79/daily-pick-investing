@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unilever Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/unilever.html">
+<meta property="og:title" content="Unilever Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unilever Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Packaged Consumer Goods (Beauty, Personal Care, Home Care &amp; Nutrition)</div>
+  <h1>Unilever PLC</h1>
+  <div class="badges">
+    <span class="badge">LSE: ULVR (primary) &middot; NYSE ADR: UL</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually &middot; financials in EUR</span>
+    <span class="badge">Roots to 1929 merger (Lever Brothers &amp; Margarine Unie) &middot; unified into a single UK plc in 2020</span>
+    <span class="badge warn">Ice Cream business (Magnum, Ben &amp; Jerry's, Wall's) demerged as the separately listed "The Magnum Ice Cream Company" in December 2025 &mdash; a real structural narrowing, not a distortion, but it affects year-over-year comparability</span>
+  </div>
+  <div class="price">&pound;47.82</div>
+  <div class="price-sub">Close Aug 28, 2026 (LSE) &middot; Mkt cap &asymp;&pound;103B &middot; financials reported in EUR (Unilever's functional/reporting currency since the 2020 unification), share price and market cap in GBP (LSE primary listing)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Procter &amp; Gamble, Nestl&eacute;, Reckitt Benckiser, Colgate-Palmolive, L'Or&eacute;al, Henkel, Kimberly-Clark, Mondelez &mdash; Unilever holds genuine #1/#2 positions in skin cleansing and deodorants (Dove) and is a clear #2 globally in home care (Persil/OMO vs. P&amp;G's Tide), but sits further back in categories like oral care (#4) &mdash; a real, mixed picture rather than blanket category dominance, across a genuinely fragmented global FMCG market</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val red">&euro;50.50B</div>
+      <div class="sub">&minus;3.77% reported YoY, though underlying sales growth (price + volume, ex-FX/portfolio) was +3.5% &mdash; the gap is currency and the ice-cream/tea disposals, not weaker demand</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green">20.05%</div>
+      <div class="note">Up from 15.83% (FY2022) &rarr; 17.95% (FY2023) &rarr; 19.59% (FY2024) &mdash; the first year in this window to clear the framework's 20% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">16.42% / 7.0%</div>
+      <div class="note">Comfortably clears both the assumed 7% WACC and the framework's 15% bar &mdash; genuinely strong and stable across the whole window (15.9%-17.8%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">&euro;23.3B</div>
+      <div class="sub">Net Debt/EBITDA &asymp;2.0x-2.15x depending on EBITDA basis &mdash; right at this framework's &lt;2x bar, not clearly under it</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">54/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/14 criteria met, 8 not met, 0 N/A &mdash; a genuinely solid, dependable dividend payer with strong returns on capital, paired with growth that is essentially flat to negative on a reported basis.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 184.27,50.77 L155.35,73.84 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M184.27,50.77 A95,95 0 0 1 202.62,131.14 L166.55,122.91 A58,58 0 0 0 155.35,73.84 Z" fill="#34d399" opacity="0.7"/><path d="M202.62,131.14 A95,95 0 0 1 151.22,195.59 L135.17,162.26 A58,58 0 0 0 166.55,122.91 Z" fill="#34d399" opacity="0.45"/><path d="M151.22,195.59 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 135.17,162.26 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (operating margin, market share, ROIC/WACC, share count trend, capex intensity, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 8 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, net debt/EBITDA, FCF conversion, entry multiple, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global packaged consumer goods is a genuinely open, well-competed market (P&amp;G, Nestl&eacute;, Reckitt, Colgate, L'Or&eacute;al, Henkel all sizable rivals)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Unilever reads exactly the way you'd expect a mature, 95-year-old consumer-goods giant to read: genuinely low growth, paired with real, structural profitability. Reported revenue actually has a small negative five-year CAGR (&minus;0.94%, &euro;52.4B &rarr; &euro;50.5B), and EBIT and free cash flow are both essentially flat over the same window &mdash; a materially different picture from the mid-single-digit "underlying sales growth" Unilever prefers to headline, which strips out currency and the portfolio disposals (Russia exit, the 2022 sale of the Ekaterra tea business, and the December 2025 demerger of Ice Cream as the separately listed "The Magnum Ice Cream Company"). What's genuinely working: operating margin has climbed every year in this window to a first-time-in-the-period 20.05% in FY2025, gross margin has expanded a full 6.7 points versus three years ago, capex is a lean 2.8% of revenue, and ROIC has stayed remarkably strong and stable (15.9%-17.8%) throughout &mdash; comfortably clearing both this framework's 15% bar and an assumed ~7% cost of capital, a genuine rarity among the slow-growers on this site. Like Nestl&eacute; in the same GRANOLAS batch, Unilever's problem isn't the quality of the business, it's that there's barely a growth story to tell: the current 21.3x trailing P/E sits above its own five-year average of 17.8x, net debt/EBITDA is right at the 2x line rather than clearly under it, and no founder or controlling family remains to provide long-term alignment. H1 2026 showed the clearest recent bright spot &mdash; underlying sales growth accelerating to 4.8% (5.8% in Q2 alone) on real volume gains, not just pricing.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (six months to Jun 30, 2026, reported Jul 30, 2026) and FY2025 full-year results (reported Feb 12, 2026); spot price as of Aug 28, 2026 close. Fiscal year = calendar year; FY2025 = year ended Dec 31, 2025.
+  </div>
+
+  <div class="bignum-corner">6/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR millions (Unilever's reporting currency). CAGR computed FY21&rarr;FY25. Figures are as reported each year and include the Ice Cream business through most of the window (demerged Dec 2025), so year-over-year swings partly reflect real portfolio and FX changes, not just underlying trading.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FY2022's revenue spike to &euro;60.1B reflects heavy inflation-driven pricing that year; the FY2023 drop that follows reflects a mix of currency, the Russia business exit and easing pricing &mdash; not a demand collapse. Underlying sales growth (Unilever's preferred, FX/portfolio-adjusted measure) was positive in every year shown.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text><line x1="60" y1="192.86" x2="840" y2="192.86" stroke="#1e293b" stroke-width="1"/><text x="50" y="196.86" text-anchor="end" font-size="11" fill="#64748b">&euro;15B</text><line x1="60" y1="145.71" x2="840" y2="145.71" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.71" text-anchor="end" font-size="11" fill="#64748b">&euro;30B</text><line x1="60" y1="98.57" x2="840" y2="98.57" stroke="#1e293b" stroke-width="1"/><text x="50" y="102.57" text-anchor="end" font-size="11" fill="#64748b">&euro;45B</text><line x1="60" y1="51.43" x2="840" y2="51.43" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.43" text-anchor="end" font-size="11" fill="#64748b">&euro;60B</text><rect x="98.2" y="75.18" width="22.5" height="164.82" rx="2" fill="#2dd4bf"/><text x="109.5" y="70.18" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;52.4B</text><rect x="126.8" y="209.71" width="22.5" height="30.29" rx="2" fill="#60a5fa"/><rect x="155.2" y="218.43" width="22.5" height="21.57" rx="2" fill="#fbbf24"/><text x="138.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="254.2" y="51.20" width="22.5" height="188.80" rx="2" fill="#2dd4bf"/><text x="265.5" y="46.20" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;60.1B</text><rect x="282.8" y="210.11" width="22.5" height="29.89" rx="2" fill="#60a5fa"/><rect x="311.2" y="221.69" width="22.5" height="18.31" rx="2" fill="#fbbf24"/><text x="294.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="410.2" y="77.58" width="22.5" height="162.42" rx="2" fill="#2dd4bf"/><text x="421.5" y="72.58" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;51.7B</text><rect x="438.8" y="210.85" width="22.5" height="29.15" rx="2" fill="#60a5fa"/><rect x="467.2" y="214.13" width="22.5" height="25.87" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="566.2" y="75.07" width="22.5" height="164.93" rx="2" fill="#2dd4bf"/><text x="577.5" y="70.07" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;52.5B</text><rect x="594.8" y="207.70" width="22.5" height="32.30" rx="2" fill="#60a5fa"/><rect x="623.2" y="214.42" width="22.5" height="25.58" rx="2" fill="#fbbf24"/><text x="606.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="722.2" y="81.28" width="22.5" height="158.72" rx="2" fill="#2dd4bf"/><text x="733.5" y="76.28" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;50.5B</text><rect x="750.8" y="208.17" width="22.5" height="31.83" rx="2" fill="#60a5fa"/><rect x="779.2" y="218.21" width="22.5" height="21.79" rx="2" fill="#fbbf24"/><text x="762.0" y="258" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">&minus;0.94%</div><div class="sub">&euro;52,444M &rarr; &euro;50,503M; genuinely negative on a reported basis</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">+1.24%</div><div class="sub">&euro;9,637M &rarr; &euro;10,127M; essentially flat over four years</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+0.25%</div><div class="sub">&euro;6,864M &rarr; &euro;6,933M; flat, with meaningful year-to-year swings</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Unilever spent three of the last five years below it, only clearing the bar in FY2025 as the "Growth Action Plan" cost and mix program took hold.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><path d="M50.0,72.96 L247.5,93.36 L445.0,76.40 L642.5,63.28 L840.0,59.60 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,72.96 L247.5,93.36 L445.0,76.40 L642.5,63.28 L840.0,59.60" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="72.96" r="3" fill="#2dd4bf"/><text x="50.0" y="62.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">18.38%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="93.36" r="3" fill="#2dd4bf"/><text x="247.5" y="83.36" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.83%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="76.40" r="3" fill="#2dd4bf"/><text x="445.0" y="66.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.95%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="63.28" r="3" fill="#2dd4bf"/><text x="642.5" y="53.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.59%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="59.60" r="3" fill="#2dd4bf"/><text x="840.0" y="49.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.05%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&euro;52,444M</td><td>&euro;9,637M</td><td>18.38%</td><td>&euro;6,049M</td><td>&euro;6,864M</td><td>71.2%</td></tr>
+    <tr><td>FY2022</td><td>&euro;60,073M</td><td>&euro;9,512M</td><td>15.83%</td><td>&euro;7,642M</td><td>&euro;5,826M</td><td>61.2%</td></tr>
+    <tr><td>FY2023</td><td>&euro;51,680M</td><td>&euro;9,275M</td><td>17.95%</td><td>&euro;6,487M</td><td>&euro;8,232M</td><td>88.8%</td></tr>
+    <tr><td>FY2024</td><td>&euro;52,479M</td><td>&euro;10,278M</td><td>19.59%</td><td>&euro;5,744M</td><td>&euro;8,138M</td><td>79.2%</td></tr>
+    <tr><td>FY2025</td><td>&euro;50,503M</td><td>&euro;10,127M</td><td>20.05%</td><td>&euro;9,469M</td><td>&euro;6,933M</td><td>68.4%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2025 net income includes a real gain tied to the Ice Cream demerger accounting; underlying (non-IFRS) earnings per share grew a more modest +0.7% to &euro;3.08. Capex was &euro;1.42B in FY2025 (&asymp;2.8% of revenue) &mdash; genuinely low and asset-light for a global manufacturer.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Development &amp; Portfolio Reshaping</div></div>
+  <div class="sec-sub">Unilever reports semi-annually, not quarterly, for detailed P&amp;L figures. Latest reported period: H1 2026 (six months to Jun 30, 2026, reported Jul 30, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Turnover was <b style="color:#f8fafc;">&euro;25.6B</b>, up a modest <b style="color:#34d399;">+0.5%</b> reported YoY (+0.7% from acquisitions net of disposals, offset by &minus;4.9% currency). The more meaningful number is underlying sales growth (USG) &mdash; Unilever's preferred, FX/portfolio-adjusted measure &mdash; which accelerated to <b style="color:#34d399;">4.8%</b> in H1 (4.2% volume + 0.6% price), and to <b style="color:#34d399;">5.8%</b> in Q2 alone (5.5% from volume), a genuine sign of real demand rather than just price increases. Underlying operating margin rose 10bps to 20.3%, with gross margin at 46.8% despite higher brand investment (16.1% of turnover). Power Brands &mdash; 78% of total turnover &mdash; grew USG 6.0%. The &euro;800M productivity program was completed ahead of schedule, the quarterly dividend was raised 3%, and a &euro;1.5B share buyback programme was completed.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has expanded every year since the FY2022 low, from 40.23% to 46.95% &mdash; a genuine +6.72pp improvement versus FY2022 (the window used for criterion #14), driven by pricing discipline, mix shift toward Power Brands, and the productivity program.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">35%</text>
+<line x1="50" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="157.33" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<line x1="50" y1="86.67" x2="840" y2="86.67" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="90.67" text-anchor="end" font-size="11" fill="#64748b">45%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<path d="M50.0,122.67 L247.5,150.27 L445.0,106.13 L642.5,64.13 L840.0,60.67 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/>
+<path d="M50.0,122.67 L247.5,150.27 L445.0,106.13 L642.5,64.13 L840.0,60.67" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.0" cy="122.67" r="3" fill="#2dd4bf"/>
+<text x="50.0" y="112.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">42.30%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="150.27" r="3" fill="#2dd4bf"/>
+<text x="247.5" y="140.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">40.23%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="106.13" r="3" fill="#2dd4bf"/>
+<text x="445.0" y="96.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">43.54%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="64.13" r="3" fill="#2dd4bf"/>
+<text x="642.5" y="54.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">46.69%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="60.67" r="3" fill="#2dd4bf"/>
+<text x="840.0" y="50.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">46.95%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Unilever holds genuine #1 or #2 positions in skin cleansing and deodorants globally (Dove is a top-line global brand in both), and is a clear #2 in home care behind Procter &amp; Gamble's Tide (Persil/OMO/Surf are all &euro;1B+ brands) &mdash; but it's only #4 globally in oral care, and faces genuinely well-resourced competitors (P&amp;G, Nestl&eacute;, Reckitt, Colgate-Palmolive, L'Or&eacute;al, Henkel) across every category it operates in. Both things are true: real category leadership in its core brands, in a market that remains structurally fragmented and competitive.
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Portfolio reshaping, completed:</b> Unilever sold its global tea business (Ekaterra, including Lipton) to CVC Capital Partners in 2022, and completed the demerger of its Ice Cream business (Magnum, Ben &amp; Jerry's, Wall's, Talenti) as the separately listed "The Magnum Ice Cream Company" in December 2025. The continuing business is now organized around four divisions &mdash; Beauty &amp; Wellbeing, Personal Care, Home Care, and Nutrition (Foods) &mdash; a genuinely simpler, more focused portfolio than five years ago, though it makes clean long-run revenue comparisons harder.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 7.0% &mdash; a low-beta, investment-grade consumer-staples estimate, similar to the range used for Nestl&eacute; elsewhere in this batch.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of &asymp;21.3x sits above the FY21-25 average of 17.8x &mdash; Unilever is trading somewhat rich relative to its own recent history, likely reflecting the FY2025 margin improvement and the market's hope that H1 2026's volume-led acceleration continues. Forward P/E (&asymp;16.5x now) runs meaningfully below trailing, implying the market expects real earnings growth from here &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="186.67" x2="840" y2="186.67" stroke="#1e293b" stroke-width="1"/><text x="42" y="190.67" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.33" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="86.67" x2="840" y2="86.67" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.67" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="53.33" x2="840" y2="53.33" stroke="#1e293b" stroke-width="1"/><text x="42" y="57.33" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50.0" y1="101.53" x2="840.0" y2="101.53" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="97.53" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 17.77x</text><path d="M 50.0,87.47 L 208.0,116.00 L 366.0,107.53 L 524.0,62.00 L 682.0,134.67 L 840.0,78.00" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="87.47" r="3" fill="#a78bfa"/><text x="50.0" y="77.47" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.88x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="116.00" r="3" fill="#a78bfa"/><text x="208.0" y="130.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.60x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="107.53" r="3" fill="#a78bfa"/><text x="366.0" y="121.53" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.87x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="62.00" r="3" fill="#a78bfa"/><text x="524.0" y="52.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.70x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="134.67" r="3" fill="#a78bfa"/><text x="682.0" y="148.67" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.80x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="78.00" r="3.5" fill="#a78bfa"/><text x="840.0" y="68.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.30x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,99.27 L 208.0,100.60 L 366.0,112.60 L 524.0,100.33 L 682.0,102.20 L 840.0,110.00" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="99.27" r="3" fill="#c4b5fd"/><text x="50.0" y="114.27" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">18.11x</text><circle cx="208.0" cy="100.60" r="3" fill="#c4b5fd"/><text x="208.0" y="115.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.91x</text><circle cx="366.0" cy="112.60" r="3" fill="#c4b5fd"/><text x="366.0" y="127.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.11x</text><circle cx="524.0" cy="100.33" r="3" fill="#c4b5fd"/><text x="524.0" y="115.33" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.95x</text><circle cx="682.0" cy="102.20" r="3" fill="#c4b5fd"/><text x="682.0" y="117.20" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.67x</text><circle cx="840.0" cy="110.00" r="3.5" fill="#c4b5fd"/><text x="840.0" y="125.00" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.50x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY21-25 series above) is that same backward-looking ratio calculated at each fiscal year-end. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are actually headed. For Unilever specifically: trailing P/E (&asymp;21.3x) sits above its own five-year history, but forward P/E (&asymp;16.5x) is meaningfully cheaper, implying consensus expects real earnings growth from here as the margin recovery continues. One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth. With Unilever guiding to 4-6% underlying sales growth for 2026 and analysts penciling in mid-single-digit EPS growth, the forward-P/E-implied PEG works out to roughly 3.0 &mdash; well above the traditional 1.0 "fair value" line, a reminder that even at a discounted forward multiple, this isn't a statistically cheap stock once its genuinely slow growth is accounted for.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt was &euro;23.3B at FY2025-end, down from &euro;24.7B a year earlier, aided by free cash flow and a &euro;3B pre-demerger cash payment from the Ice Cream business. Unilever's own disclosure puts net debt/underlying EBITDA at 2.0x post-demerger; recomputed on a reported-EBITDA basis across the window it has run a steady 2.1x-2.3x every year since FY2021 &mdash; consistently right at, not clearly under, this framework's &lt;2x bar. ROIC, by contrast, is a genuine strength: 15.9%-17.8% every year in this window, comfortably clearing both the 15% bar and the assumed 7% WACC &mdash; a rare combination of modest leverage tolerance and consistently strong capital returns for a company with almost no top-line growth.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="343.06 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="96.76 439.82" stroke-dashoffset="-343.06"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional holders &asymp; 78% (largest: BlackRock &asymp;7.9%, Vanguard &asymp;5.9%, plus UBS Asset Management, State Street and other index/pension funds)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail &amp; other public float &asymp; 22%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> the Lever and Van den Bergh families who built Unilever's predecessor businesses a century ago have no remaining controlling stake today. Ownership is genuinely dispersed among institutional index funds and asset managers &mdash; the top 25 shareholders together control less than half the company &mdash; with no founder, descendant, or single block anywhere near a meaningful (~5%+) alignment stake. This framework scores that as a genuine miss on the insider/founder-ownership criterion, the same honest conclusion reached for Nestl&eacute; elsewhere in this batch.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Unilever</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>&minus;0.94% &mdash; &euro;52,444M &rarr; &euro;50,503M; genuinely negative on a reported basis, though underlying sales growth was positive every year</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+1.24% &mdash; &euro;9,637M &rarr; &euro;10,127M &mdash; far below the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>20.05% (FY2025) &mdash; clears the bar for the first time in this window</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+0.25% &mdash; &euro;6,864M &rarr; &euro;6,933M; essentially flat with meaningful year-to-year swings</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1/#2 in skin cleansing and deodorants (Dove), #2 globally in home care behind P&amp;G's Tide &mdash; though only #4 in oral care, a genuinely mixed picture scored on the core categories</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global packaged consumer goods is genuinely fragmented and well-competed (P&amp;G, Nestl&eacute;, Reckitt, Colgate, L'Or&eacute;al, Henkel)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>16.42% (FY2025), clears the assumed 7.0% WACC comfortably and stays above 15% in every year of the window (15.9%-17.8%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;2.0x-2.15x depending on EBITDA basis (company-stated 2.0x post-demerger; 2.1x-2.3x on a reported basis across the window) &mdash; right at the line, not clearly under it</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>68.4% (FY2025: &euro;6,933M FCF / &euro;10,127M EBIT) &mdash; noticeably below the bar, though it ran above 80% as recently as FY2023 (88.8%)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E &asymp;21.3x vs a FY21-25 average of 17.77x &mdash; trading above its own recent history</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding down modestly from &asymp;2.57B (post the 2021 buyback) to roughly &asymp;2.1-2.2B now, via consistent if unspectacular annual buybacks &mdash; a genuine, if gradual, decline</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>&lt;1% &mdash; no founder or controlling family remains; largest holder is BlackRock at &asymp;7.9% (an index fund, not an aligned insider)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.81% of revenue (FY2025: &euro;1.42B) &mdash; genuinely low for a global consumer-goods manufacturer</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 46.95% (FY2025) vs 40.23% (FY2022), a +6.72pp improvement &mdash; comfortably better than flat</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Operating margin has expanded every year in this window to a first-time 20.05% in FY2025, gross margin is up 6.7 points versus three years ago, and ROIC has stayed remarkably strong and stable (15.9%-17.8%) throughout &mdash; comfortably clearing both this framework's bar and its assumed cost of capital. Capex is genuinely low at 2.8% of revenue, the share count has declined modestly via consistent buybacks, and H1 2026 showed real underlying sales growth acceleration (4.8%, then 5.8% in Q2) driven by volume, not just price. The dividend has been raised again (+3%), and the portfolio is now genuinely simpler after the tea and ice cream divestments.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a real, structural growth problem, not a one-off distortion: reported revenue, EBIT and free cash flow are all essentially flat to negative over five years, and FCF conversion has fallen well below this framework's 80% bar. Net debt/EBITDA sits right at the 2x line rather than clearly under it, the current 21.3x trailing P/E is above Unilever's own five-year average, and ownership is genuinely dispersed with no founder or controlling family for long-term alignment. The Ice Cream demerger and prior tea disposal are real strategic simplifications, but they also mean the next few years of reported figures will be compared against a smaller, restated revenue base &mdash; worth tracking closely rather than assuming like-for-like continuity.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 30 &ndash; Aug 28, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Unilever FY2025 &amp; H1 2026 results announcements (Feb 12, 2026 and Jul 30, 2026), WebSearch on Unilever ownership structure and category market-share positions.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (7.0%) is an assumed estimate reflecting Unilever's large-cap, low-beta consumer-staples profile, not a company-disclosed figure. Net debt/EBITDA is shown on two bases (company-stated underlying vs. reported) because they diverge meaningfully; both are disclosed above.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Unilever &mdash; LSE, GBP share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Unilever &mdash; Year-End Close (LSE, GBP)</div>
+    <div class="chart-sub">The share price spent 2021-2023 essentially range-bound around &pound;36-40 before re-rating higher in 2024-2025 alongside the margin recovery &mdash; a genuine improvement in this specific window, though it followed a much longer stretch of the stock going nowhere in the years before it, which is the more common lived experience of holding Unilever through the 2010s and early 2020s.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (2021&rarr;Now): +5.84%</text>
+<path d="M 46.0,161.54 L 172.8,123.81 L 299.6,147.68 L 426.4,55.34 L 553.2,38.98 L 680.0,38.46 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,161.54 L 172.8,123.81 L 299.6,147.68 L 426.4,55.34 L 553.2,38.98 L 680.0,38.46" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="161.54" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="151.54" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;36.01</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="123.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="113.81" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;39.63</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="147.68" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="137.68" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;37.34</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="55.34" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="45.34" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;46.20</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="38.98" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="28.98" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;47.77</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="38.46" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="28.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;47.82</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021-2025 and the current price (&pound;47.82, Aug 28, 2026 close) are direct LSE closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

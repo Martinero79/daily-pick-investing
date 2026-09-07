@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reckitt Benckiser Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/reckitt-benckiser.html">
+<meta property="og:title" content="Reckitt Benckiser Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reckitt Benckiser Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Household Hygiene, Health &amp; Consumer Nutrition (FMCG)</div>
+  <h1>Reckitt Benckiser Group plc</h1>
+  <div class="badges">
+    <span class="badge">LSE: RKT &middot; reports in GBP</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually (H1/H2)</span>
+    <span class="badge">Founded 1819 &middot; Slough, UK (HQ)</span>
+    <span class="badge warn">Mead Johnson/Enfamil infant-formula unit faces ongoing US NEC ("necrotizing enterocolitis") baby-formula multidistrict litigation &mdash; mixed bellwether verdicts through 2026, no global settlement yet, hundreds of cases pending.</span>
+  </div>
+  <div class="price">5,114.00p</div>
+  <div class="price-sub">Close Sep 4, 2026 (LSE, GBX) &middot; Mkt cap &asymp;&pound;32.5B &middot; down roughly 11% from the FY2025 year-end close of 5,770.00p amid the NEC litigation overhang and a muted FY2026 growth outlook</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main brands:</b> Durex &amp; K-Y (Intimate Wellness) &mdash; genuine global #1 in condoms; Dettol &amp; Lysol (Germ Protection) &mdash; #1 or #2 in household disinfectant across most of its markets, competing with Clorox and P&amp;G; Nurofen, Strepsils, Gaviscon, Mucinex, Clearasil (Self Care) &mdash; the largest single segment, strong but not category-monopoly positions; Finish, Vanish, Air Wick, Harpic (Household Care); Enfamil/Mead Johnson (Nutrition, &ldquo;MJN&rdquo;) &mdash; a top-3 global infant formula franchise, and also the source of the NEC litigation risk described above. Reckitt has not divested MJN; it remains a reported segment (&asymp;15% of FY2025 revenue).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&pound;14,205M</div>
+      <div class="sub">+0.25% YoY reported, after -3.00% in FY2024; like-for-like (organic) Core Reckitt growth was +5.2% in FY2025 &mdash; the gap is divestments/FX, not demand</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green">24.11%</div>
+      <div class="note">21.16% (FY2021) &rarr; 23.25% (FY2022) &rarr; 22.97% (FY2023) &rarr; 24.34% (FY2024) &rarr; 24.11% (FY2025) &mdash; comfortably above the 20% screen and structurally stable.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">19.70% / 7.5%</div>
+      <div class="note">Clears both the assumed 7.5% WACC and the framework's 15% absolute bar comfortably; current (TTM) ROIC is 16.93%, still well clear.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val green">&pound;6,478M</div>
+      <div class="sub">Net Debt/EBITDA 1.75x (FY2025), under the &lt;2x bar; TTM figure has since drifted up to 2.61x on trailing revenue softness &mdash; worth watching</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">67/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/14 criteria met, 6 not met, 0 N/A &mdash; a genuinely profitable, cash-generative FMCG business let down by low-single-digit reported growth and weak insider alignment.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 68.78,195.59 L84.83,162.26 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M68.78,195.59 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 84.83,162.26 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 8 (operating margin, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 6 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, FCF conversion, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; several large global FMCG players (P&amp;G, Unilever, Colgate-Palmolive, Church &amp; Dwight, Clorox, Henkel) compete across Reckitt's categories; no tight duopoly</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Reckitt Benckiser is a genuinely profitable, cash-generative consumer-staples business dressed in a growth-framework checklist that isn't built for mature FMCG. Operating margin has been stable-to-improving for five years (24.11% in FY2025), gross margin actually widened (+2.93pp versus three years prior), ROIC of 19.70% comfortably clears an assumed 7.5% WACC and this framework's 15% bar, leverage has come down to a genuinely low 1.75x net debt/EBITDA, and the entry multiple looks cheap against Reckitt's own history &mdash; a trailing P/E of 11.53x versus a FY2022-25 average of roughly 19.3x. But the top-line growth criteria simply don't fit a company growing low-single-digits: 5-year revenue CAGR is just +1.79% (FY2021-2025), EBIT CAGR +5.16%, FCF CAGR +7.39%, all well short of the framework's 15% bars, and free cash flow conversion (51% of EBIT in FY2025) lags the 80% bar too, partly on a genuine step-up in capex. There's also no meaningful insider or founder ownership &mdash; management holds under 1% of shares, and the largest shareholder is BlackRock's index funds at roughly 8.8% &mdash; so this fails the alignment bar cleanly. And it would be dishonest to leave out the overhang: Reckitt's Mead Johnson/Enfamil infant-formula unit is a defendant in the US NEC ("necrotizing enterocolitis") baby-formula multidistrict litigation, with mixed bellwether verdicts through 2026 (Mead Johnson won a federal bellwether in July 2026, then lost an Illinois state case with a $60M compensatory award the same month) and no global settlement in sight. Net: a solid, cash-generative operator trading at a reasonable multiple, with real balance-sheet health, but low structural growth and a live legal risk this checklist is right to flag &mdash; 8 of 14 criteria met, Martinero Index 67/100. This isn't a call to avoid or buy Reckitt &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through H1 2026 (six months to Jun 30, 2026, reported Jul 29, 2026) and spot price as of Sep 4, 2026 close. Reckitt's fiscal year matches the calendar year; FY2025 = year ended Dec 31, 2025, fully reported Mar 5, 2026. Five-year price history (page 6) uses calendar year-end closes.
+  </div>
+
+  <div class="bignum-corner">8/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in GBP millions. Fiscal year ends Dec 31. CAGR computed FY21&rarr;FY25.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue has been essentially flat for five years (&pound;13.2B&rarr;&pound;14.2B); EBIT has grown faster than revenue on margin expansion, while FCF dipped in FY2025 as capital expenditure stepped up.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&pound;0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">&pound;4B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">&pound;8B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">&pound;12B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&pound;16B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="58.03" width="22.5" height="181.97" rx="2" fill="#2dd4bf"/><rect x="113.7" y="201.49" width="22.5" height="38.51" rx="2" fill="#60a5fa"/><rect x="151.9" y="221.79" width="22.5" height="18.21" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="238.1" y="41.27" width="22.5" height="198.73" rx="2" fill="#2dd4bf"/><rect x="276.2" y="193.79" width="22.5" height="46.21" rx="2" fill="#60a5fa"/><rect x="314.4" y="212.02" width="22.5" height="27.98" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="400.6" y="39.15" width="22.5" height="200.85" rx="2" fill="#2dd4bf"/><rect x="438.7" y="193.87" width="22.5" height="46.13" rx="2" fill="#60a5fa"/><rect x="476.9" y="208.54" width="22.5" height="31.46" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="563.1" y="45.18" width="22.5" height="194.82" rx="2" fill="#2dd4bf"/><rect x="601.2" y="192.58" width="22.5" height="47.42" rx="2" fill="#60a5fa"/><rect x="639.4" y="208.21" width="22.5" height="31.79" rx="2" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="725.6" y="44.68" width="22.5" height="195.32" rx="2" fill="#2dd4bf"/><rect x="763.7" y="192.91" width="22.5" height="47.09" rx="2" fill="#60a5fa"/><rect x="801.9" y="215.79" width="22.5" height="24.21" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+1.79%</div><div class="sub">&pound;13,234M &rarr; &pound;14,205M</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">+5.16%</div><div class="sub">&pound;2,801M &rarr; &pound;3,425M</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">+7.39%</div><div class="sub">&pound;1,324M &rarr; &pound;1,761M</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Reckitt has cleared it every year in this window, with margin trending up overall despite a small FY2023 dip.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,220.0 L50.0,114.20 L247.5,103.75 L445.0,105.15 L642.5,98.30 L840.0,99.45 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,114.20 L247.5,103.75 L445.0,105.15 L642.5,98.30 L840.0,99.45" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="114.20" r="3" fill="#2dd4bf"/><text x="50.0" y="104.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.16%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="103.75" r="3" fill="#2dd4bf"/><text x="247.5" y="93.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.25%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="105.15" r="3" fill="#2dd4bf"/><text x="445.0" y="95.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.97%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="98.30" r="3" fill="#2dd4bf"/><text x="642.5" y="88.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.34%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="99.45" r="3" fill="#2dd4bf"/><text x="840.0" y="89.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.11%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&pound;13,234M</td><td>&pound;2,801M</td><td>21.16%</td><td>-&pound;32M</td><td>&pound;1,324M</td><td>47.3%</td></tr>
+    <tr><td>FY2022</td><td>&pound;14,453M</td><td>&pound;3,361M</td><td>23.25%</td><td>&pound;2,330M</td><td>&pound;2,035M</td><td>60.5%</td></tr>
+    <tr><td>FY2023</td><td>&pound;14,607M</td><td>&pound;3,355M</td><td>22.97%</td><td>&pound;1,643M</td><td>&pound;2,288M</td><td>68.2%</td></tr>
+    <tr><td>FY2024</td><td>&pound;14,169M</td><td>&pound;3,449M</td><td>24.34%</td><td>&pound;1,426M</td><td>&pound;2,312M</td><td>67.0%</td></tr>
+    <tr><td>FY2025</td><td>&pound;14,205M</td><td>&pound;3,425M</td><td>24.11%</td><td>&pound;3,182M</td><td>&pound;1,761M</td><td>51.4%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; Portfolio Position</div></div>
+  <div class="sec-sub">Reckitt reports semi-annually (H1/H2) plus lighter Q1/Q3 trading updates. Latest reported period: H1 2026 (six months to Jun 30, 2026, reported Jul 29, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Reported net revenue was <b style="color:#f8fafc;">&pound;6,411M</b>, roughly flat year-on-year. Reckitt's preferred metric &mdash; like-for-like (organic) net revenue growth, which strips out divestments (Russia hygiene business, portfolio exits) and FX &mdash; was <b style="color:#34d399;">+2.6%</b> for the group (+2.7% for Core Reckitt), with Q2 2026 alone accelerating to <b style="color:#34d399;">+4.7%</b> on stronger China, India and emerging-market demand. Adjusted operating margin was 23.6%, down 100bps year-on-year, though full-year guidance of 24.9%-25.6% operating margin and 4%-5% LFL growth was reiterated. Over &pound;3B was returned to shareholders via dividends and buybacks in the period.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has expanded every year since FY2022, from 57.85% to 60.78% &mdash; a +2.93pp improvement versus FY2022 (the window used for criterion #14), driven by pricing, mix and supply-chain efficiency rather than any one-off.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">45%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">55%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">65%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">70%</text>
+<path d="M50.0,115.12 L247.5,117.20 L445.0,100.24 L642.5,94.72 L840.0,93.76 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.12"/>
+<path d="M50.0,115.12 L247.5,117.20 L445.0,100.24 L642.5,94.72 L840.0,93.76" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.0" cy="115.12" r="3" fill="#2dd4bf"/>
+<text x="50.0" y="105.12" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">58.11%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="117.20" r="3" fill="#2dd4bf"/>
+<text x="247.5" y="132.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">57.85%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="100.24" r="3" fill="#2dd4bf"/>
+<text x="445.0" y="90.24" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">59.97%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="94.72" r="3" fill="#2dd4bf"/>
+<text x="642.5" y="84.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">60.66%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="93.76" r="3" fill="#2dd4bf"/>
+<text x="840.0" y="83.76" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">60.78%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Durex is a genuine global #1 in condoms (roughly a quarter of the global market), and Dettol/Lysol hold #1 or #2 disinfectant-hygiene positions in most of their markets, competing directly with Clorox and P&amp;G. But Reckitt's largest segment, Self Care (Nurofen, Strepsils, Gaviscon, Mucinex), competes against strong regional and global rivals (Haleon, Bayer, Sanofi, GSK-descended brands) without a single dominant share, and the Mead Johnson/Enfamil nutrition business is a top-3 global player, not the outright leader (Nestl&eacute; and Danone/Abbott-scale rivals compete hard). Criterion #5 scores Met on the strength of Durex and Dettol/Lysol, with the honest caveat that not every Reckitt brand carries that same leadership position.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 7.5% &mdash; typical for a large-cap, investment-grade consumer-staples business with stable, defensive cash flows.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 11.53x sits well below the FY22-25 average of roughly 19.30x (FY2021 trailing P/E is not meaningful &mdash; net income was slightly negative that year). Forward P/E (14.52x-16.46x FY23-25, now 14.78x) has stayed in a tighter band than trailing P/E &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">9x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">27x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50.0" y1="134.22" x2="840.0" y2="134.22" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="130.22" text-anchor="end" font-size="10" fill="#94a3b8">FY22-25 avg: 19.30x</text><path d="M 208.0,141.42 L 366.0,115.33 L 524.0,116.58 L 682.0,163.64 L 840.0,168.76" fill="none" stroke="#a78bfa" stroke-width="2.5"/><text x="50.0" y="210" text-anchor="middle" font-size="10" fill="#94a3b8" font-weight="700">n/m</text><circle cx="208.0" cy="141.42" r="3" fill="#a78bfa"/><text x="208.0" y="131.42" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.68x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="115.33" r="3" fill="#a78bfa"/><text x="366.0" y="105.33" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.55x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="116.58" r="3" fill="#a78bfa"/><text x="524.0" y="106.58" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.27x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="163.64" r="3" fill="#a78bfa"/><text x="682.0" y="153.64" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.68x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="168.76" r="3.5" fill="#a78bfa"/><text x="840.0" y="158.76" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">11.53x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,126.93 L 208.0,146.44 L 366.0,150.13 L 524.0,155.47 L 682.0,146.84 L 840.0,154.31" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="126.93" r="3" fill="#c4b5fd"/><text x="50.0" y="141.93" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">20.94x</text><circle cx="208.0" cy="146.44" r="3" fill="#c4b5fd"/><text x="208.0" y="161.44" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.55x</text><circle cx="366.0" cy="150.13" r="3" fill="#c4b5fd"/><text x="366.0" y="165.13" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">15.72x</text><circle cx="524.0" cy="155.47" r="3" fill="#c4b5fd"/><text x="524.0" y="170.47" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">14.52x</text><circle cx="682.0" cy="146.84" r="3" fill="#c4b5fd"/><text x="682.0" y="161.84" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.46x</text><circle cx="840.0" cy="154.31" r="3.5" fill="#c4b5fd"/><text x="840.0" y="169.31" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">14.78x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY21-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are actually headed. For Reckitt specifically: trailing P/E (11.53x) looks cheap against its own recent history, but the more useful lens here is the PEG ratio &mdash; forward P/E divided by expected annual EPS growth, which sanity-checks whether a "cheap" multiple is actually cheap once growth is priced in. Reckitt's current PEG is elevated at roughly 10.8x, well above the traditional 1.0 "fair value" line, because consensus has next-twelve-months EPS growth running low single digits (analysts currently model FY2026 revenue actually declining versus FY2025, largely a portfolio-divestment effect, not a demand problem in the underlying like-for-like business). The honest read: Reckitt looks statistically cheap on trailing earnings, but not obviously cheap once you weigh in how little near-term earnings growth the market is pricing in.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of &pound;6,478M against EBITDA gives Net Debt/EBITDA of 1.75x (FY2025) &mdash; comfortably under this framework's &lt;2x bar, and down from 2.72x (FY2021), 2.19x (FY2022), 2.01x (FY2023) and 2.12x (FY2024). The FY2025 improvement was helped by roughly &pound;1.8B of divestment proceeds (including the Russian hygiene-business exit). Note the trailing-twelve-month ratio has since drifted back up to 2.61x as revenue softened and buybacks/dividends consumed cash &mdash; a trend worth watching, even though the last full fiscal year clears the bar. ROIC of 19.70% (FY2025, 16.93% current) clears both the assumed 7.5% WACC and the framework's 15% absolute bar. Share count has been roughly flat-to-declining on balance: minor dilution in FY2022-23 (buyback yield -0.52% and -0.11%) gave way to real buybacks in FY2024 (+2.30%) and FY2025 (+2.94%), funded partly by divestment cash.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="38.70 401.12" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="401.12 38.70" stroke-dashoffset="-38.70"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>BlackRock (largest single holder, index/asset-manager) &asymp; 8.8% of voting rights</div>
+        <div><span class="dot" style="background:#64748b;"></span>All other institutions &amp; public float &asymp; 91.2% &mdash; including Vanguard (~5.4%), MFS (~4.9%), Norges Bank (~3.2%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note, honestly stated:</b> Reckitt has no controlling family or founder shareholder today &mdash; roughly 85% of shares are held by institutions, and company insiders (directors and management) hold under 1% of shares outstanding, well short of this framework's ~5% "meaningful" bar. The largest single holder, BlackRock, is a passive index manager, not an aligned operating insider. Criterion #12 fails cleanly here, which is typical for a long-listed FTSE mega-cap without founder involvement.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Reckitt Benckiser</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+1.79% &mdash; &pound;13,234M &rarr; &pound;14,205M; typical mature-FMCG growth, far below the bar (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+5.16% &mdash; &pound;2,801M &rarr; &pound;3,425M &mdash; better than revenue growth on margin expansion, but still well short (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>24.11% (FY2025) &mdash; comfortably clears the bar and has held above 21% every year in the window</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+7.39% &mdash; &pound;1,324M &rarr; &pound;1,761M; positive and growing, but well below the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Durex is a genuine global #1 in condoms; Dettol/Lysol hold #1-2 disinfectant positions in most markets. Other segments (Self Care, Nutrition/MJN) are strong but not category-leading &mdash; scored on the strength of the clear leadership brands</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; several large global FMCG players (P&amp;G, Unilever, Colgate-Palmolive, Church &amp; Dwight, Clorox, Henkel) compete across Reckitt's categories; not a tight oligopoly</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 19.70% (FY2025), 16.93% current, comfortably clears the assumed 7.5% WACC and the 15% absolute bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.75x (FY2025), down from 2.72x in FY2021; TTM figure has since risen to 2.61x, a trend worth watching but the last full fiscal year clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>51.4% (FY2025) &mdash; &pound;1,761M FCF against &pound;3,425M EBIT; a step-up in capex to &pound;536M in FY2025 (from &pound;370M FY2024) drove the shortfall against the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 11.53x vs a FY22-25 average of roughly 19.30x &mdash; meaningfully cheaper than its own recent history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Minor dilution FY2022-23 (buyback yield -0.52%, -0.11%), followed by genuine buybacks in FY2024 (+2.30%) and FY2025 (+2.94%) &mdash; net flat-to-declining over the window</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Directors and management hold under 1% of shares outstanding; no controlling family or founder; largest holder (BlackRock, ~8.8%) is a passive index manager, not an aligned insider</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.77% of FY2025 revenue (&pound;536M) &mdash; up from roughly 2.4-2.8% in FY2021-24, but still low and asset-light for a manufacturer</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 60.78% (FY2025) vs 57.85% (FY2022), a +2.93pp improvement &mdash; comfortably better than the threshold</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Operating margin is stable and above 20% every year (24.11% FY2025), gross margin has expanded +2.93pp over three years, ROIC of 19.70% comfortably clears both WACC and the framework's bar, leverage is genuinely low (1.75x net debt/EBITDA FY2025), the entry multiple is meaningfully below Reckitt's own recent history, and share count has turned to real buybacks in the last two fiscal years, funded in part by divestment proceeds.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Top-line growth is genuinely low (five-year revenue CAGR of just 1.79%), FCF conversion slipped to 51% of EBIT on a capex step-up, there is no meaningful insider or founder ownership to align management with shareholders, and the Mead Johnson/Enfamil NEC baby-formula litigation remains unresolved with mixed bellwether verdicts through 2026 and no global settlement &mdash; a real, unquantified tail risk sitting alongside an otherwise solid balance sheet.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 29 &ndash; Sep 4, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Reckitt FY2025 &amp; H1 2026 results announcements (reckitt.com), Reuters and Business Wire coverage of the Mead Johnson NEC baby-formula multidistrict litigation (Jul-Aug 2026), Yahoo Finance ownership data.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (7.5%) is an assumed estimate reflecting Reckitt's large-cap, investment-grade consumer-staples profile, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Reckitt Benckiser &mdash; LSE, GBX (pence) share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Reckitt Benckiser &mdash; Calendar Year-End Close (LSE, GBX)</div>
+    <div class="chart-sub">The stock has been essentially flat-to-slightly-down over five years &mdash; a brief FY2025 rally to 5,770p on strong core LFL growth and divestment proceeds has partly reversed on the muted FY2026 guidance and the NEC litigation overhang.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -0.59%</text>
+<path d="M 46.0,101.97 L 172.8,123.88 L 299.6,132.49 L 426.4,151.75 L 553.2,71.08 L 680.0,111.43 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,101.97 L 172.8,123.88 L 299.6,132.49 L 426.4,151.75 L 553.2,71.08 L 680.0,111.43" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="101.97" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="91.97" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">5,268p</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="123.88" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="113.88" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">4,912p</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="132.49" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="147.49" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">4,772p</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="151.75" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="166.75" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">4,459p</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="71.08" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="61.08" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">5,770p</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="111.43" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="101.43" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">5,114p</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for FY2021-2025 (Dec 31 each year) and the current price (5,114.00p, Sep 4, 2026 close) are direct closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
