@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JPMorgan Chase & Co. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/jpmorgan-chase.html">
+<meta property="og:title" content="JPMorgan Chase & Co. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JPMorgan Chase & Co. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · NYSE: JPM</div>
+  <h1>JPMorgan Chase & Co.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: JPM · reports in USD</div>
+    <div class="badge">Sector: Diversified Banking &amp; Financial Services</div>
+    <div class="badge">HQ: New York, NY · Founding roots to 1799 (Chase) / 1871 (J.P. Morgan &amp; Co.)</div>
+    <div class="badge">Largest U.S. bank by assets (~$4.4tn)</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">$358.64</div>
+  <div class="price-sub">Close Sep 4, 2026 (NYSE) · Market cap ≈ $955bn · 52-week range ≈ $235–$362.86 (approx.) · TTM dividend ≈ $5.55–$5.80/share, yield ≈ 1.6%</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Bank of America (#2 U.S. bank by assets, ~$3.3tn) &middot; Wells Fargo &middot; Citigroup &middot; Goldman Sachs &amp; Morgan Stanley (investment banking/trading) &middot; a large, fragmented tier of regional banks and fintechs below the top-4 — large but not monopolistic.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Net Revenue (FY25)</div>
+      <div class="val">$185.6B</div>
+      <div class="sub">+4.5% vs FY24 ($177.6B); growth decelerating as rate tailwinds fade (FY23→FY24 was +12.3%)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Income / ROTCE (FY25)</div>
+      <div class="val green">$57.0B / 20%</div>
+      <div class="note">ROTCE (return on tangible common equity) is the standard bank profitability metric used in place of ROIC — down from 22% in FY24 but still comfortably above a ~10–11% cost-of-equity assumption.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Efficiency Ratio (FY25)</div>
+      <div class="val green">52%</div>
+      <div class="note">Overhead expense &divide; revenue — lower is better. Improved from 59% (FY21) / 58% (FY22), the bank-specific analog to operating margin used here.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (Standardized)</div>
+      <div class="val green">14.5%</div>
+      <div class="note">Vs. an ~11.5% regulatory minimum + buffer (effective Oct 2025, down from ~12.3%) — substitutes for net debt/EBITDA, a metric that doesn't apply to a bank's leveraged-by-design balance sheet.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">74/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/14 criteria met — strong capital, profitability and capital-return record, weighed against growth-bar misses and a rich current valuation.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 68.78,195.60 L 84.83,162.26 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 68.78,195.60 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 84.83,162.26 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 Met</b> — operating-margin proxy, market share (#1 U.S. bank by assets), ROTCE vs. cost of equity, CET1 capital strength, capital-distribution ratio, share count trend, capex intensity, margin stability (efficiency ratio).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 Not Met</b> — revenue CAGR below the 15% bar, EBIT/FCF proxy (net income) CAGR distorted and below bar, market concentration (large but fragmented U.S. banking market), rich entry multiple vs. own history, negligible insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    JPMorgan Chase is the largest bank in the United States by assets (~$4.4tn) and the most profitable, generating $57.0bn of net income on $185.6bn of net revenue in FY2025 with a 20% return on tangible common equity — a level most global banks would consider excellent. The honest case for including it on a growth/AI-tilted scorecard rests on <b>scale, capital strength and consistent capital return</b>, not growth: revenue compounded at ~11% annually over FY2021–FY2025 (short of this framework's 15% bar) and the net-income proxy used for the EBIT/FCF criteria compounds at just ~4% over the same window — though that figure is distorted by outsized 2021 loan-loss-reserve releases that made FY2021 an unusually easy earnings comparison. CET1 capital sits at 14.5%, comfortably above the ~11.5% regulatory floor, and the bank has bought back stock and raised its dividend every year of the window, cutting share count by roughly 14% since FY2021. The catch: the stock now trades at ~15.5x trailing earnings and ~3.4x tangible book value, both well above its own FY2021–FY2025 range — the "cheap megabank" case is much weaker today than the fundamentals-only case for owning it.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> JPMorgan is the second financial-services company on this site after NN Group (an insurer), and the standard revenue/EBIT/FCF/net-debt framework doesn't map cleanly onto a bank either. Substitutions used throughout, all flagged inline: <b>Total Net Revenue</b> stands in for revenue (criterion 1); <b>Net Income</b> substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) — a bank's cash flow statement is dominated by deposit and trading-book swings that don't map to a "free cash flow" concept, so criteria 2 and 4 are necessarily correlated here, which is a genuine limitation of adapting the framework, not a workaround to inflate the score; <b>ROTCE vs. an assumed ~10–11% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7); <b>CET1 ratio vs. regulatory minimum</b> substitutes for net debt/EBITDA (criterion 8), since banks run leveraged balance sheets by design; and <b>dividends + buybacks ÷ net income</b> substitutes for FCF conversion (criterion 9), since FCF/EBIT would be circular once both use the same net-income proxy. Entry multiple (criterion 10) uses both P/E and P/TBV, the two standard bank valuation lenses.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021–FY2025 (fiscal year = calendar year). All figures in USD billions unless noted. Net Income is used as the bank-appropriate proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Net Revenue vs. Net Income ($B)</div>
+    <div class="chart-sub">FY2021 net income was unusually elevated by large loan-loss-reserve releases as pandemic-era credit fears reversed — that makes the FY21→FY25 net-income "growth" figure look weaker than the underlying trend, since FY2021 was an easy comparison, not a representative base year.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Total Net Revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="680" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="70.9" width="24" height="79.1" fill="#2dd4bf"/><text x="74" y="65" text-anchor="middle" font-size="8" fill="#cbd5e1">121.6</text>
+      <rect x="92" y="118.6" width="24" height="31.4" fill="#fbbf24"/><text x="104" y="113" text-anchor="middle" font-size="8" fill="#cbd5e1">48.3</text>
+      <text x="104" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21*</text>
+      <rect x="190" y="66.3" width="24" height="83.7" fill="#2dd4bf"/><text x="202" y="61" text-anchor="middle" font-size="8" fill="#cbd5e1">128.7</text>
+      <rect x="220" y="125.5" width="24" height="24.5" fill="#fbbf24"/><text x="232" y="120" text-anchor="middle" font-size="8" fill="#cbd5e1">37.7</text>
+      <text x="232" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="47.2" width="24" height="102.8" fill="#2dd4bf"/><text x="330" y="42" text-anchor="middle" font-size="8" fill="#cbd5e1">158.1</text>
+      <rect x="348" y="117.8" width="24" height="32.2" fill="#fbbf24"/><text x="360" y="112" text-anchor="middle" font-size="8" fill="#cbd5e1">49.6</text>
+      <text x="360" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="34.6" width="24" height="115.4" fill="#2dd4bf"/><text x="458" y="29" text-anchor="middle" font-size="8" fill="#cbd5e1">177.6</text>
+      <rect x="476" y="112.0" width="24" height="38.0" fill="#fbbf24"/><text x="488" y="106" text-anchor="middle" font-size="8" fill="#cbd5e1">58.5</text>
+      <text x="488" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="29.4" width="24" height="120.6" fill="#5eead4"/><text x="586" y="24" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">185.6</text>
+      <rect x="604" y="112.9" width="24" height="37.1" fill="#fde68a"/><text x="616" y="107" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">57.0</text>
+      <text x="616" y="165" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, EBIT-analog crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~11.1%</div>
+      <div class="sub">FY21→FY25, $121.6B→$185.6B; below the 15% growth bar but strong for a megabank</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val red">~4.2%</div>
+      <div class="sub">$48.3B→$57.0B; distorted low by FY21's outsized reserve-release earnings base</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (ex-FY21 base, FY22→FY25)</div>
+      <div class="val green">~14.8%</div>
+      <div class="sub">$37.7B→$57.0B over 3 years — closer to the 15% bar once the 2021 distortion is excluded (reference only, not the scored figure)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">$20.02</div>
+      <div class="sub">Up from $15.36 (FY21) even as share count fell — buybacks add to per-share growth</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Efficiency Ratio Trend — bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Overhead expense &divide; total net revenue, reported/managed basis. This is the standard bank profitability-efficiency metric, used here in place of a conventional operating-margin line; FY2025 net margin (net income &divide; revenue) was 30.7%, also comfortably above the 20% operating-margin screen used elsewhere on this site.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,53.0 210,58.5 360,80.5 510,91.5 660,91.5" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="53.0" r="4" fill="#2dd4bf"/><text x="60" y="41" text-anchor="middle" font-size="9" fill="#f1f5f9">59%*</text>
+      <circle cx="210" cy="58.5" r="4" fill="#2dd4bf"/><text x="210" y="46.5" text-anchor="middle" font-size="9" fill="#f1f5f9">58%</text>
+      <circle cx="360" cy="80.5" r="4" fill="#2dd4bf"/><text x="360" y="68.5" text-anchor="middle" font-size="9" fill="#f1f5f9">54%</text>
+      <circle cx="510" cy="91.5" r="4" fill="#2dd4bf"/><text x="510" y="79.5" text-anchor="middle" font-size="9" fill="#f1f5f9">52%</text>
+      <circle cx="660" cy="91.5" r="4" fill="#5eead4"/><text x="660" y="79.5" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">52%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($B)</th><th>Net Revenue</th><th>Net Income</th><th>Net Margin</th><th>ROTCE</th><th>Efficiency Ratio</th><th>Diluted EPS</th></tr>
+    <tr><td>FY21*</td><td>121.6</td><td>48.3</td><td>39.7%</td><td>23%</td><td>59%</td><td>$15.36</td></tr>
+    <tr><td>FY22</td><td>128.7</td><td>37.7</td><td>29.3%</td><td>18%</td><td>58%</td><td>$12.09</td></tr>
+    <tr><td>FY23</td><td>158.1</td><td>49.6</td><td>31.4%</td><td>21%</td><td>54%</td><td>$16.23</td></tr>
+    <tr><td>FY24</td><td>177.6</td><td>58.5</td><td>32.9%</td><td>22%</td><td>52%</td><td>$19.75</td></tr>
+    <tr><td>FY25</td><td>185.6</td><td>57.0</td><td>30.7%</td><td>20%</td><td>52%</td><td>$20.02</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">As a bank, JPMorgan doesn't report EBIT or free cash flow in the industrial sense — Net Income is used as the closest available proxy for both criteria 2 and 4 (see framing note, page 1); "Net Margin" (Net Income &divide; Net Revenue) plays the role of the FCF/EBIT conversion column used on other dashboards, alongside the dedicated capital-distribution-ratio metric on page 4.</div>
+  <div class="footer-note" style="margin-top:4px;">* FY2021 net margin and efficiency ratio are unusually favorable due to large loan-loss-reserve releases as pandemic-era credit-loss provisions reversed — flagged as a distortion, not treated as the new normal.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — SEGMENTS & PROFITABILITY TRENDS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Segment Mix &amp; Profitability Trends</div></div>
+  <div class="sec-sub">JPMorgan reports through three main operating segments plus a small Corporate/other reconciling line.</div>
+
+  <div class="headline-box">
+    <div class="title">FY2025 full-year results (reported Jan 13, 2026)</div>
+    <p>Total net revenue $185.6bn (+4.5% YoY, decelerating from +12.3% in FY2024 as the tailwind from higher interest rates faded); net income $57.0bn ($20.02 diluted EPS); ROTCE 20% (down from 22%); CET1 (standardized) 14.5%; tangible book value per share up 11% to $107.56. Full-year 2025 share repurchases totaled $31.6bn (114.4 million shares) plus roughly $16bn of common dividends — a new $50bn buyback authorization was approved effective July 1, 2025. Management guided FY2026 total expenses toward roughly $105–106bn, driven mostly by volume- and growth-related costs and continued technology/AI investment (~$18bn technology budget for 2025).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">FY2025 Net Revenue by Segment ($B, % of total)</div>
+    <div class="chart-sub">Segment mix substitutes for a "product/geography revenue split." Corporate/Other is a small positive reconciling segment in FY2025 (Treasury &amp; CIO plus other corporate items), not a drag as in some prior years.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Commercial &amp; Investment Bank</text>
+      <rect x="180" y="10" width="202.9" height="20" fill="#2dd4bf"/>
+      <text x="391" y="24" font-size="9" fill="#f8fafc">$78.45B &middot; 42.3%</text>
+
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Consumer &amp; Community Banking</text>
+      <rect x="180" y="45" width="196.6" height="20" fill="#3b82f6"/>
+      <text x="384" y="59" font-size="9" fill="#f1f5f9">$76.03B &middot; 41.0%</text>
+
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Asset &amp; Wealth Management</text>
+      <rect x="180" y="80" width="62.2" height="20" fill="#5eead4"/>
+      <text x="250" y="94" font-size="9" fill="#f1f5f9">$24.07B &middot; 13.0%</text>
+
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Corporate / Other</text>
+      <rect x="180" y="115" width="18.2" height="20" fill="#818cf8"/>
+      <text x="206" y="129" font-size="9" fill="#f1f5f9">$7.03B &middot; 3.8%</text>
+      <line x1="180" y1="5" x2="180" y2="140" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">ROTCE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Return on tangible common equity, full-year, vs. an assumed ~10–11% cost of equity (dashed reference not drawn to keep the chart legible — all five years sit comfortably above that hurdle). Used as the bank-appropriate substitute for ROIC vs. WACC (criterion 7).</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,42 210,97 360,64 510,53 660,75" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="42" r="4" fill="#a78bfa"/><text x="60" y="30" text-anchor="middle" font-size="9" fill="#f1f5f9">23%</text>
+      <circle cx="210" cy="97" r="4" fill="#a78bfa"/><text x="210" y="85" text-anchor="middle" font-size="9" fill="#f1f5f9">18%</text>
+      <circle cx="360" cy="64" r="4" fill="#a78bfa"/><text x="360" y="52" text-anchor="middle" font-size="9" fill="#f1f5f9">21%</text>
+      <circle cx="510" cy="53" r="4" fill="#a78bfa"/><text x="510" y="41" text-anchor="middle" font-size="9" fill="#f1f5f9">22%</text>
+      <circle cx="660" cy="75" r="4" fill="#c4b5fd"/><text x="660" y="63" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">20%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> JPMorgan is the largest U.S. bank by assets (~$4.4tn) and by market capitalization, and the most profitable — a genuine #1 position that satisfies criterion #5. But U.S. banking is not a monopoly or even a tight duopoly/oligopoly: Bank of America (~$3.3tn assets), Wells Fargo, Citigroup and Goldman Sachs/Morgan Stanley (in investment banking and trading) are all large, well-capitalized competitors, and thousands of regional banks, credit unions and fintechs compete at the margins. That combination — clear #1 share, but a genuinely competitive top tier below it — is why criterion #5 (market share) scores Met while criterion #6 (market concentration) scores Not Met.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/TBV (price-to-tangible-book-value) are the two standard bank valuation lenses, shown together; CET1 capital ratio vs. regulatory minimum substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/TBV (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end close &divide; that year's diluted EPS; P/TBV = year-end close &divide; that year's tangible book value per share. Current = trailing, as of Sep 4, 2026 close ($358.64); forward P/E is separately ~15.0x on consensus FY2026 estimates.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/TBV ratio (right scale 0&ndash;4x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="70.06" width="44" height="79.94" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="64" text-anchor="middle" font-size="8" fill="#cbd5e1">9.48x</text>
+      <rect x="172.95" y="61.23" width="44" height="88.77" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="55" text-anchor="middle" font-size="8" fill="#cbd5e1">10.52x</text>
+      <rect x="276.25" y="63.62" width="44" height="86.38" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="57" text-anchor="middle" font-size="8" fill="#cbd5e1">10.24x</text>
+      <rect x="379.55" y="47.59" width="44" height="102.41" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="41" text-anchor="middle" font-size="8" fill="#cbd5e1">12.14x</text>
+      <rect x="482.85" y="38.38" width="44" height="111.62" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="32" text-anchor="middle" font-size="8" fill="#cbd5e1">13.23x</text>
+      <rect x="586.15" y="19.13" width="44" height="130.87" fill="#5eead4"/><text x="608.15" y="13" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">15.51x</text>
+      <polyline points="91.65,81.32 194.95,91.27 298.25,84.86 401.55,66.84 504.85,66.91 608.15,34.03" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="81.32" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="91.27" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="84.86" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="66.84" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="66.91" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="34.03" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (2.04x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (1.74x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (1.93x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (2.46x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (2.46x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now (3.44x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~15.5x trailing earnings and ~3.44x tangible book value, JPMorgan trades meaningfully above its own FY2021&ndash;FY2025 ranges on both measures (P/E 9.5x&ndash;13.2x, average ~11.1x; P/TBV 1.74x&ndash;2.46x, average ~2.13x). Some re-rating is earned &mdash; ROTCE and capital strength are both better than they were in 2022 &mdash; but on a strict "vs. own history" test this is a Not Met, not a cheap entry point. Forward P/E (~15.0x) sits just below trailing, implying only modest expected earnings growth into FY2026.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Minimum (Standardized Approach)</div>
+    <div class="chart-sub">Substitutes for a net-debt/EBITDA chart, since net debt/EBITDA is not a meaningful concept for a bank's leveraged-by-design balance sheet. Dashed line = current ~11.5% regulatory minimum + buffer (effective Oct 1, 2025, down from ~12.3% previously). FY21&ndash;FY22 figures are approximate/recollected; FY23&ndash;FY25 are as reported.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="102.5" x2="680" y2="102.5" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="98" text-anchor="end" font-size="8" fill="#fbbf24">11.5% regulatory minimum (eff. Oct 2025)</text>
+      <polyline points="60,73.2 210,84.2 360,38.35 510,38.35 660,47.5" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="73.2" r="4" fill="#2dd4bf"/><text x="60" y="61.2" text-anchor="middle" font-size="9" fill="#f1f5f9">13.1%*</text>
+      <circle cx="210" cy="84.2" r="4" fill="#2dd4bf"/><text x="210" y="72.2" text-anchor="middle" font-size="9" fill="#f1f5f9">12.5%*</text>
+      <circle cx="360" cy="38.35" r="4" fill="#2dd4bf"/><text x="360" y="26.35" text-anchor="middle" font-size="9" fill="#f1f5f9">15.0%</text>
+      <circle cx="510" cy="38.35" r="4" fill="#2dd4bf"/><text x="510" y="26.35" text-anchor="middle" font-size="9" fill="#f1f5f9">15.0%</text>
+      <circle cx="660" cy="47.5" r="4" fill="#5eead4"/><text x="660" y="35.5" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">14.5%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="184.7 263.9" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="78.5 263.9" stroke-dashoffset="-184.7" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="0.7 263.9" stroke-dashoffset="-263.2" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>Institutional ~70% (Vanguard, BlackRock, State Street and other index/active managers)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail / public float ~29.7%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Jamie Dimon (Chairman &amp; CEO) ~0.27% (~7.84M shares)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>No founder-owner or controlling shareholder — JPMorgan Chase is the product of decades of mergers (Chase Manhattan, J.P. Morgan &amp; Co., Bank One, Washington Mutual and Bear Stearns assets among others), and Jamie Dimon, CEO since 2005, is the largest individual shareholder at roughly 0.27% of shares outstanding, built through compensation, personal purchases and a 2021 special award. That is a meaningful personal stake in dollar terms (worth well over $2.5bn at the current price) but far below this framework's ~5% "meaningful ownership" bar for founder/insider alignment — an honest miss, typical of a bank this size with no founding family or single controlling holder.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained further on pages 1, 2 and 4. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>~11.1% CAGR FY21&ndash;FY25 ($121.6B&rarr;$185.6B) &mdash; strong for a megabank, but short of the growth bar</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>~4.2% CAGR FY21&ndash;FY25 ($48.3B&rarr;$57.0B); distorted low by FY21's outsized reserve-release earnings (ex-FY21 base, FY22&rarr;FY25 net income CAGR is ~14.8%, shown for reference only)</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; efficiency-ratio/net-margin proxy</td><td>Net margin 30.7% (FY25); efficiency ratio 52% (100&minus;52%=48% margin-equivalent) &mdash; both comfortably clear the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>Same ~4.2% net-income CAGR as criterion #2 &mdash; unavoidably correlated once both EBIT and FCF are proxied by the same figure, an honest limitation of the bank adaptation rather than a true independent FCF measure</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 U.S. bank by total assets (~$4.4tn) and by market capitalization (~$955bn); also #1 or top-3 in U.S. credit card issuance and investment banking fees</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; a large, well-capitalized top-4 U.S. bank tier (JPM, BofA, Wells Fargo, Citi) plus Goldman/Morgan Stanley in IB, but thousands of regional banks, credit unions and fintechs keep the broader market genuinely competitive, not a tight oligopoly</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROTCE vs. cost of equity (bank proxy)</td><td>ROTCE 20% (FY25), 18&ndash;23% across FY21&ndash;FY25, vs. an assumed ~10&ndash;11% cost of equity &mdash; comfortably clears the hurdle every year shown</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. regulatory minimum</td><td>CET1 (standardized) 14.5% vs. an ~11.5% regulatory minimum + buffer (effective Oct 2025) &mdash; a comfortable ~300bp cushion; net debt/EBITDA itself is not a meaningful concept for a bank's leveraged-by-design balance sheet</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &mdash; substituted with capital-distribution ratio</td><td>FY25 dividends (~$16B) + buybacks ($31.6B) &divide; net income ($57.0B) &asymp; 84% &mdash; used because FCF/EBIT would be circular once both are proxied by the same net-income figure (criteria #2 &amp; #4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/TBV) vs. own trading history</td><td>Current P/E ~15.5x and P/TBV ~3.44x both sit well above the FY21&ndash;FY25 range (P/E 9.5x&ndash;13.2x avg ~11.1x; P/TBV 1.74x&ndash;2.46x avg ~2.13x) &mdash; a rich valuation by the bank's own recent history</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Diluted shares down from ~3.15B (FY21) to 2.70B (FY25), roughly a 14% reduction via consistent, accelerating buybacks ($9.9B in FY23 to $31.6B in FY25)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Jamie Dimon (Chairman &amp; CEO) owns ~0.27% of shares outstanding (~7.84M shares) &mdash; the largest individual holder, but far below the 5% bar; no founding family or controlling shareholder exists at this scale</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Direct capital expenditure (premises &amp; equipment) runs at roughly 2% of net revenue &mdash; genuinely low/asset-light. (Separately, JPMorgan's ~$18B annual technology budget is real but is predominantly an operating expense &mdash; software, cloud, headcount &mdash; not capitalized capex, and is not counted against this criterion)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>Bank special case: no traditional gross margin, so evaluated on the efficiency ratio (lower = better), comparing FY2025 to FY2022 (3 years prior, per methodology). Efficiency ratio improved from 58% (FY2022) to 52% (FY2025), a margin-equivalent improvement of about +6pp &mdash; genuine structural improvement, not a one-off year</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Undisputed #1 U.S. bank by assets and profitability, with a 20% ROTCE that comfortably clears a reasonable cost-of-equity hurdle in every year of the window. CET1 capital sits well above regulatory minimums even as the bar itself has eased. Capital return is real and accelerating &mdash; buybacks tripled from FY23 to FY25 and the dividend has been raised twice in 2025 alone &mdash; cutting share count by roughly 14% since FY2021. Efficiency ratio has structurally improved from 59% to 52% over the period, and the physical/capex footprint remains genuinely light for a bank of this size.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Revenue growth (~11%/yr) and the net-income proxy used for EBIT/FCF (~4%/yr, distorted by an easy FY2021 comparison) both miss this framework's 15% growth bar &mdash; this is a scale-and-capital-return story, not a growth story. The stock has re-rated well above its own FY2021&ndash;FY2025 range on both P/E (~15.5x vs. ~11.1x average) and P/TBV (~3.44x vs. ~2.13x average), so today's entry point is priced for continued excellence, not for a margin of safety. Insider ownership is negligible relative to the 5% bar, typical of a bank this size with no founding family. U.S. banking, while led by JPMorgan, remains a genuinely competitive top tier rather than a tight oligopoly.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked across &ge;2 where possible):</b> JPMorgan Chase 4Q25/full-year 2025 earnings release (Jan 13, 2026) and prior-year 4Q21&ndash;4Q24 earnings releases, jpmorganchase.com; JPMorgan Chase 2025, 2024 and 2023 Form 10-K/Annual Report filings, SEC EDGAR; stockanalysis.com (NYSE: JPM) &mdash; price history, statistics, dividend history, as of Sep 4&ndash;5, 2026; gurufocus.com &mdash; trailing/forward P/E, efficiency ratio, tangible book value per share; macrotrends.net &mdash; annual stock price and dividend history; WebSearch aggregation of company press releases, Reuters and Fortune/Yahoo Finance coverage of Jamie Dimon's ownership stake and 2025 capital-return actions.
+    <br><b>Data-quality flags:</b> FY2021&ndash;FY2022 CET1 ratios (13.1%/12.5%) are approximate/recollected figures, not independently re-verified against the original 10-K filings for this dashboard; 52-week price range and current dividend yield are approximate; the diluted-share-count trend for FY2021&ndash;FY2022 uses net income &divide; reported diluted EPS as a proxy for weighted-average diluted shares, which is directionally accurate but not an exact period-end share count.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in USD, unaudited/as originally reported, subject to restatement. Compiled Sep 5, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">JPMorgan Chase &amp; Co. &mdash; NYSE, USD share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">JPMorgan Chase &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A steady climb through FY2021&ndash;FY2025 accelerated further into 2026 as investors rotated into large-cap financials amid rate and AI-adjacent-spending narratives &mdash; the stock has more than doubled off its FY2022 low.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +19.8%</text>
+<path d="M 46.0,153.97 L 172.8,164.46 L 299.6,142.20 L 426.4,100.17 L 553.2,85.81 L 680.0,32.21 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,153.97 L 172.8,164.46 L 299.6,142.20 L 426.4,100.17 L 553.2,85.81 L 680.0,32.21" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="153.97" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="143.97" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$145.55</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="164.46" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="182.46" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$127.20</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="142.20" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="132.20" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$166.15</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="100.17" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="90.17" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$239.71</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="85.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="75.81" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$264.84</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="32.21" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="22.21" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$358.64</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021&ndash;2025 and the current price ($358.64, Sep 4, 2026 close) sourced from macrotrends.net and stockanalysis.com. Prices are as originally reported, adjusted for splits (none occurred in this window).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
