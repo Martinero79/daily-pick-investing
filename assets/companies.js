@@ -1232,6 +1232,96 @@ const COMPANIES = [
   },
 
   {
+    slug: "amd",
+    name: "Advanced Micro Devices, Inc.",
+    ticker: "NASDAQ: AMD",
+    sector: "Technology",
+    industry: "Semiconductors",
+    subIndustry: "CPUs, GPUs & AI Accelerators",
+    tags: ["Intel Competitor", "AI Compute"],
+    dateFeatured: "2026-09-05",
+    price: "$477.57",
+    score: "9 / 14",
+    martinero: 70,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 34.34, prior: 13.69 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 50.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "A strong, fast-improving #2 in x86 CPUs (34.1% share vs. Intel) and a distant but credible #2 in AI accelerators (vs. Nvidia's 73-80%+ share) — revenue and free cash flow are both compounding at over 20% annually and the balance sheet carries net cash every year, but operating margin and ROIC still haven't recovered from the goodwill-heavy Xilinx/Pensando deals, and insider ownership is thin.",
+    file: "companies/amd.html"
+  },
+
+  {
+    slug: "walmart",
+    name: "Walmart Inc.",
+    ticker: "NYSE: WMT",
+    sector: "Consumer Defensive",
+    industry: "Discount Stores & General Merchandise Retail",
+    subIndustry: "Grocery, E-Commerce & Retail Media",
+    tags: ["Founder-Controlled", "Defensive"],
+    dateFeatured: "2026-09-05",
+    price: "$107.14",
+    score: "6 / 14",
+    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: 5.6, prior: 6.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
+    file: "companies/walmart.html"
+  },
+
+  {
+    slug: "berkshire-hathaway",
+    name: "Berkshire Hathaway Inc.",
+    ticker: "NYSE: BRK.B",
+    sector: "Financials",
+    industry: "Diversified Holding Company",
+    subIndustry: "Insurance, Rail, Energy & Public Equities Conglomerate",
+    tags: [],
+    dateFeatured: "2026-09-05",
+    price: "$506.03",
+    score: "5 / 14",
+    martinero: 59,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "flat", recent: 0.0, prior: 1.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 FY26", growth: 10.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "A diversified conglomerate of insurance, rail (BNSF), energy (BHE) and manufacturing businesses plus a $300B+ public-equities portfolio, sitting on a record $344B net-cash pile — a fortress balance sheet story, not a growth one, six months into the Buffett-to-Abel CEO transition. GAAP net income is distorted by mandatory mark-to-market swings in the equity portfolio, so this dashboard scores against Berkshire's own preferred non-GAAP operating earnings instead — clears net debt/EBITDA, FCF conversion and (partially) market position; misses growth, margin, ROIC-vs-WACC, valuation-vs-history and capex intensity (BNSF and BHE alone run ~$14B/yr in capex).",
+    file: "companies/berkshire-hathaway.html"
+  },
+
+  {
+    slug: "eli-lilly",
+    name: "Eli Lilly and Company",
+    ticker: "NYSE: LLY",
+    sector: "Healthcare",
+    industry: "Pharmaceuticals",
+    subIndustry: "GLP-1 / Incretin Therapies & Diversified Pharma",
+    tags: [],
+    dateFeatured: "2026-09-05",
+    price: "$1,149.36",
+    score: "11 / 14",
+    martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 44.70, prior: 32.00 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 47.67 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The maker of Mounjaro and Zepbound — the tirzepatide franchise that took the #1 spot in the GLP-1 duopoly from Novo Nordisk, with revenue and EBIT compounding at 23%+ and 37%+ over five years and margins expanding every year. Clears growth, margin, ROIC, balance-sheet, market-position and valuation-vs-history bars; misses cluster in the capex/cash-conversion story as manufacturing capacity is built out — FCF growth, FCF conversion and capex intensity all fall short.",
+    file: "companies/eli-lilly.html"
+  },
+
+  {
+    slug: "jpmorgan-chase",
+    name: "JPMorgan Chase & Co.",
+    ticker: "NYSE: JPM",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: [],
+    dateFeatured: "2026-09-05",
+    price: "$358.64",
+    score: "8 / 14",
+    martinero: 74,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: 4.5, prior: 12.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q4 2025", growth: 7.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The largest U.S. bank by assets (~$4.4tn) and the most profitable, with a 20% ROTCE and CET1 capital comfortably above regulatory minimums — but revenue and the bank-appropriate net-income proxy used for EBIT/FCF both miss this framework's 15% growth bar, and the stock now trades well above its own 5-year P/E and P/TBV history.",
+    file: "companies/jpmorgan-chase.html"
+  },
+
+  {
     slug: "tesla",
     name: "Tesla, Inc.",
     ticker: "NASDAQ: TSLA",
