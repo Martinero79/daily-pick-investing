@@ -1412,6 +1412,24 @@ const COMPANIES = [
   },
 
   {
+    slug: "mastercard",
+    name: "Mastercard Incorporated",
+    ticker: "NYSE: MA",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payment Processing / Card Networks",
+    tags: ["Duopoly"],
+    dateFeatured: "2026-09-08",
+    price: "$579.21",
+    score: "12 / 14",
+    martinero: 83,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: 14.79, prior: 13.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 14.07 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Visa's direct duopoly rival and a genuine toll-booth business in its own right — a strong #2 globally by card volume, not the #1, but with cleaner growth (EBIT and FCF both still clear 15%/year) and a real discount to its own valuation history where Visa trades flat against its average.",
+    file: "companies/mastercard.html"
+  },
+
+  {
     slug: "tesla",
     name: "Tesla, Inc.",
     ticker: "NASDAQ: TSLA",
@@ -1447,6 +1465,22 @@ const COMPANIES = [
     blurb: "The Dove/Persil/OMO consumer-goods giant delivers exactly what you'd expect from a 95-year-old FMCG portfolio: genuinely strong, stable ROIC (15.9%-17.8%) and steadily improving margins (20.05% operating margin in FY2025, a first for this window), paired with reported revenue, EBIT and free cash flow that are all essentially flat to negative over five years. Clears operating margin, market share, ROIC/WACC, share count trend, capex intensity and margin stability; misses revenue/EBIT/FCF growth, market concentration, net debt/EBITDA, FCF conversion, entry multiple and insider/founder ownership.",
     file: "companies/unilever.html",
     personalNote: "Unilever was one of my first 'safe' blue-chip buys — the kind of stock you own because it's boring, not despite it. And for a long stretch it really was: revenue and earnings barely moved for years, the share price spent most of a decade going sideways, and the whole thesis came down to a dependable, ever-so-slightly-growing dividend rather than any real growth story. That's exactly what the numbers here confirm — five-year revenue and EBIT CAGRs that are basically flat to negative, even as the dividend kept showing up like clockwork. The ROIC is genuinely good and the balance sheet is fine, so this was never a bad business, just a slow one. Eventually the lack of any growth narrative wore me down and I sold to put the money somewhere with more of a story — the 2024-2025 margin turnaround and ice cream demerger came after I'd already moved on, which feels about right for how these things usually go."
+  },
+
+  {
+    slug: "cerebras",
+    name: "Cerebras Systems, Inc.",
+    ticker: "NASDAQ: CBRS",
+    sector: "Technology",
+    industry: "Semiconductors",
+    subIndustry: "AI Accelerators / Wafer-Scale Compute",
+    tags: ["IPO Exception", "AI", "Fabless"],
+    dateFeatured: "2026-09-08",
+    price: "$210.43",
+    score: "3 / 14",
+    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
+    blurb: "Wafer-scale AI-chip challenger to Nvidia that IPO'd in May 2026 at $185/share (opened at $350, closed day one up 68%, then fell ~10% the next day). Real multi-year revenue ($78.7M FY23 to $510.3M FY25) and a fortress post-IPO balance sheet (~$8.6B cash, minimal debt), but still GAAP loss-making at the operating line, extremely customer-concentrated (G42/UAE, now layering on a vendor-financed OpenAI deal), and under 4 months of public trading history — 7 of 14 scorecard criteria are marked N/A as a result, the same honest treatment as SpaceX.",
+    file: "companies/cerebras.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
