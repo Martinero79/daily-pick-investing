@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Netflix Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/netflix.html">
+<meta property="og:title" content="Netflix Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Netflix Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.purple { border-left-color:#a78bfa; background:#160f2e; color:#e3d9f7; }
+  .callout.purple b { color:#c4b5fd; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Subscription Streaming Entertainment</div>
+  <h1>Netflix, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: NFLX &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1997 &middot; Los Gatos, California (HQ)</span>
+    <span class="badge warn">Stock down roughly 38% over the last 52 weeks and 43% from its June 2025 all-time high, even as revenue, margins and free cash flow all kept improving &mdash; a genuine valuation reset rather than a business-quality problem.</span>
+  </div>
+  <div class="price">$76.77</div>
+  <div class="price-sub">Close Sep 8, 2026 (NASDAQ) &middot; Mkt cap &asymp;$319.7B &middot; prices reflect Netflix's 10-for-1 stock split completed Nov 17, 2025</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> the largest paid streaming service globally by both revenue and subscribers, but the field is genuinely crowded &mdash; roughly 27% of a major cross-platform subscriber comparison, ahead of Amazon Prime Video (~17%, though Amazon doesn't break out video-only subscribers), Max (~12%, having overtaken Disney+ in early 2026), Disney+ (~11%) and YouTube Premium (125M+ subscribers). This is a leadership position in a multi-front competitive market, not a monopoly.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$45.18B</div>
+      <div class="sub">+15.85% YoY, essentially matching FY2024's +15.65%; latest quarter (Q2 2026) grew +13.36% YoY to $12.56B</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green">29.49%</div>
+      <div class="note">Up from 20.86% (FY2021) &rarr; 17.82% (FY2022) &rarr; 20.62% (FY2023) &rarr; 26.71% (FY2024) &mdash; a genuine, multi-year margin expansion story.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">32.43% / 9.0%</div>
+      <div class="note">Comfortably clears both the assumed 9.0% WACC and this framework's 15% absolute ROIC bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val green">$7.91B</div>
+      <div class="sub">Net Debt/EBITDA &asymp;0.58x, down from &asymp;1.8x in FY2021 &mdash; leverage has fallen steadily as free cash flow turned durably positive</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">85/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">10/14 criteria met, 4 not met, 0 N/A &mdash; one of the stronger scores on this site, with real, honestly-flagged caveats on growth pace, insider ownership and disclosure.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 17.38,131.14 L53.45,122.91 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M17.38,131.14 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 53.45,122.91 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">10/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 10 (EBIT CAGR, operating margin, FCF CAGR, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (revenue CAGR, market concentration, FCF conversion, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; a genuinely crowded, multi-front field (Disney+, Prime Video, Max, Apple TV+, YouTube), not a tight oligopoly</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Netflix's numbers today look like a company that has actually finished its "growth at all costs" phase and moved into a genuine, durable profitability phase. Revenue grew 15.85% in FY2025 (on top of 15.65% in FY2024), operating margin has climbed from 17.82% (FY2022) to 29.49% (FY2025), and free cash flow &mdash; which was essentially breakeven as recently as FY2021 (-$132M) &mdash; came in at $9.46B in FY2025. Net debt/EBITDA has fallen to roughly 0.58x, ROIC sits at 32.43% against an assumed 9% cost of capital, and the current trailing P/E of 24.19x is well below Netflix's own FY21-25 average of roughly 40.1x, largely because the stock has fallen about 43% from its June 2025 all-time high. That pullback is the most interesting thing about this pick: the checklist doesn't find a broken business, it finds a strong, cash-generative one trading meaningfully cheaper than its own recent history. Where the framework pushes back: five-year revenue CAGR (11.06%) still misses the 15% growth bar despite the improving trend, FCF conversion (71% of EBIT in FY2025) sits just under the 80% bar, streaming remains a genuinely crowded field with real competitors at scale, and insider/founder ownership has fallen to just 0.58% company-wide as co-founder Reed Hastings has steadily sold down his stake (now roughly 0.5%, per SEC filings). Net: 10 of 14 criteria met, Martinero Index 85/100 &mdash; a strong score built on real margin and cash-flow improvement, not on wishful growth assumptions. This isn't a call to buy or avoid Netflix &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported ~Jul 2026) and spot price as of Sep 8, 2026 close. Netflix's fiscal year matches the calendar year; FY2025 = year ended Dec 31, 2025. All share counts and prices reflect the 10-for-1 forward stock split completed Nov 17, 2025. Five-year price history (page 6) uses fiscal year-end closes.
+  </div>
+
+  <div class="bignum-corner">10/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year ends Dec 31. CAGR computed FY21&rarr;FY25.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">All three lines have grown almost every year since FY2022 &mdash; free cash flow in particular went from essentially breakeven (-$132M, FY2021) to $9.46B (FY2025) as content-spend growth slowed relative to subscription and ad revenue.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$12.5B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$25B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$37.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$50B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="109.33" width="22.5" height="130.67" rx="2" fill="#2dd4bf"/><rect x="113.7" y="212.74" width="22.5" height="27.26" rx="2" fill="#60a5fa"/><rect x="151.9" y="239.42" width="22.5" height="0.58" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="238.1" y="100.89" width="22.5" height="139.11" rx="2" fill="#2dd4bf"/><rect x="276.2" y="215.21" width="22.5" height="24.79" rx="2" fill="#60a5fa"/><rect x="314.4" y="232.88" width="22.5" height="7.12" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="400.6" y="91.62" width="22.5" height="148.38" rx="2" fill="#2dd4bf"/><rect x="438.7" y="209.40" width="22.5" height="30.60" rx="2" fill="#60a5fa"/><rect x="476.9" y="209.53" width="22.5" height="30.47" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="563.1" y="68.40" width="22.5" height="171.60" rx="2" fill="#2dd4bf"/><rect x="601.2" y="194.16" width="22.5" height="45.84" rx="2" fill="#60a5fa"/><rect x="639.4" y="209.54" width="22.5" height="30.46" rx="2" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="725.6" y="41.19" width="22.5" height="198.81" rx="2" fill="#2dd4bf"/><rect x="763.7" y="181.36" width="22.5" height="58.64" rx="2" fill="#60a5fa"/><rect x="801.9" y="198.37" width="22.5" height="41.63" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+11.1%</div><div class="sub">$29,698M &rarr; $45,183M; below the 15% bar but accelerating (+15.85% in FY2025 alone)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#34d399;">+21.1%</div><div class="sub">$6,195M &rarr; $13,327M</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">n/m (from ~breakeven)</div><div class="sub">-$132M &rarr; $9,461M; FY2021 base too close to zero for a meaningful CAGR, but the trajectory is unambiguous</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Netflix dipped just below it in FY2022 before recovering and then expanding sharply through FY2025, the clearest single trend in this scorecard.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,220.0 L50.0,115.70 L247.5,130.90 L445.0,116.90 L642.5,86.45 L840.0,72.55 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,115.70 L247.5,130.90 L445.0,116.90 L642.5,86.45 L840.0,72.55" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="115.70" r="3" fill="#2dd4bf"/><text x="50.0" y="105.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.86%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="130.90" r="3" fill="#2dd4bf"/><text x="247.5" y="120.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.82%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="116.90" r="3" fill="#2dd4bf"/><text x="445.0" y="106.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.62%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="86.45" r="3" fill="#2dd4bf"/><text x="642.5" y="76.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.71%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="72.55" r="3" fill="#2dd4bf"/><text x="840.0" y="62.55" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.49%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>$29,698M</td><td>$6,195M</td><td>20.86%</td><td>$5,116M</td><td>-$132M</td><td>-2.1%</td></tr>
+    <tr><td>FY2022</td><td>$31,616M</td><td>$5,633M</td><td>17.82%</td><td>$4,492M</td><td>$1,619M</td><td>28.7%</td></tr>
+    <tr><td>FY2023</td><td>$33,723M</td><td>$6,954M</td><td>20.62%</td><td>$5,408M</td><td>$6,926M</td><td>99.6%</td></tr>
+    <tr><td>FY2024</td><td>$39,001M</td><td>$10,418M</td><td>26.71%</td><td>$8,712M</td><td>$6,922M</td><td>66.4%</td></tr>
+    <tr><td>FY2025</td><td>$45,183M</td><td>$13,327M</td><td>29.49%</td><td>$10,981M</td><td>$9,461M</td><td>71.0%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; Accounting/Disclosure Scrutiny</div></div>
+  <div class="sec-sub">Latest reported period: Q2 2026 (three months to Jun 30, 2026). This page also covers a set of legitimate, well-documented areas where analysts and forensic-accounting courses have historically scrutinized Netflix's financials and disclosures &mdash; not an accusation of wrongdoing.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$12.56B</b>, up <b style="color:#34d399;">13.36% YoY</b> from $11.08B in Q2 2025 &mdash; a step down from the mid-teens growth rates of 2024-2025 (Q1 2026 was +16.19%), consistent with the deceleration a much larger revenue base naturally produces. Operating margin was 33.38% for the quarter, and UCAN (US &amp; Canada) remains the largest region at $5.43B, with EMEA close behind at $4.03B. Netflix no longer discloses a quarterly paid-membership figure alongside these results (see callout below).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has expanded every year except FY2022, from 41.64% to 48.49% &mdash; a +9.12pp improvement versus FY2022 (the window used for criterion #14), driven by slowing content-spend growth relative to revenue and a growing, higher-margin ad-supported tier.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="190.7" text-anchor="end" font-size="11" fill="#64748b">35%</text>
+<line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">45%</text>
+<line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<path d="M50.0,142.40 L247.5,157.53 L445.0,143.07 L642.5,112.93 L840.0,96.73 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.12"/>
+<path d="M50.0,142.40 L247.5,157.53 L445.0,143.07 L642.5,112.93 L840.0,96.73" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="50.0" cy="142.40" r="3" fill="#2dd4bf"/>
+<text x="50.0" y="132.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">41.64%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="157.53" r="3" fill="#2dd4bf"/>
+<text x="247.5" y="172.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">39.37%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="143.07" r="3" fill="#2dd4bf"/>
+<text x="445.0" y="133.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">41.54%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="112.93" r="3" fill="#2dd4bf"/>
+<text x="642.5" y="102.93" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">46.06%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="96.73" r="3" fill="#2dd4bf"/>
+<text x="840.0" y="86.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">48.49%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout purple">
+    <b>Accounting &amp; disclosure scrutiny, honestly stated:</b> this section exists because it's the kind of thing a forensic-accounting or short-selling-focused CPA course would flag as worth understanding, not because Netflix has been accused of fraud &mdash; it hasn't. Four genuinely documented areas: <b>(1) Content amortization</b> &mdash; Netflix expenses over 90% of an average content asset's cost within its first four years of availability (a declining-balance rate of roughly 45%/year), an accelerated policy that several analysts have argued is judgmental enough that reported EBIT and margins are sensitive to management's own assumptions about content lifespan; Netflix's own auditor discloses this is a complex, subjective area to test. <b>(2) Discontinued subscriber disclosure</b> &mdash; starting with Q1 2025 results, Netflix stopped reporting quarterly paid-membership counts, shifting emphasis to revenue, operating margin, FCF and engagement instead; this was widely covered as a reduction in transparency into what had been a key non-financial KPI, and the stock fell on the announcement. <b>(3) GAAP-vs-FCF gap</b> &mdash; this gap has narrowed substantially as Netflix has become durably FCF-positive (FCF now exceeds net income in most recent years, e.g. $9.46B FCF vs $10.98B net income in FY2025), which is a genuine improvement versus the 2018-2021 era when heavy content-spend accounting made the two numbers diverge sharply. <b>(4) Other watch items</b> &mdash; password-sharing crackdown revenue recognition and a growing ad-tier are both relatively new revenue streams with less multi-year track record than the core subscription business, and stock-based comp has grown alongside headcount and margin expansion.
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Netflix's #1 position by both revenue and global paid memberships (325M+) is real and durable, and it scores Met on criterion #5. But streaming is a genuinely crowded, multi-front market &mdash; Amazon Prime Video, Max (which overtook Disney+ in early 2026), Disney+, Apple TV+ and YouTube (Premium plus ad-supported) are all real, well-funded competitors at meaningful scale. That's why market concentration (#6) scores 4/5 (fragmented) rather than 1-2, and is Not met under this framework's inverted scoring &mdash; leadership in a competitive field, not a moat built on scarcity.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 9.0% &mdash; toward the lower end of this site's range, reflecting Netflix's large-cap scale, durable FCF generation and much-reduced leverage, though still above a purely defensive mega-cap given real competitive and content-cost variables.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 24.19x sits well below the FY21-25 average of roughly 40.1x &mdash; driven almost entirely by the stock's ~43% pullback from its June 2025 all-time high rather than any deterioration in trailing earnings, which kept growing throughout. Forward P/E (22.15x) sits close to trailing P/E, and the PEG ratio (see explainer below) is close to the traditional "fair value" line.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50.0" y1="86.21" x2="840.0" y2="86.21" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="82.21" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 40.14x</text><path d="M 50.0,46.13 L 208.0,122.63 L 366.0,88.67 L 524.0,74.20 L 682.0,99.40 L 840.0,139.37" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="46.13" r="3" fill="#a78bfa"/><text x="50.0" y="36.13" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">52.16x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208.0" cy="122.63" r="3" fill="#a78bfa"/><text x="208.0" y="112.63" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.21x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="366.0" cy="88.67" r="3" fill="#a78bfa"/><text x="366.0" y="78.67" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.40x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524.0" cy="74.20" r="3" fill="#a78bfa"/><text x="524.0" y="64.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">43.74x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682.0" cy="99.40" r="3" fill="#a78bfa"/><text x="682.0" y="89.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">36.18x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="139.37" r="3.5" fill="#a78bfa"/><text x="840.0" y="129.37" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.19x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,46.10 L 208.0,114.80 L 366.0,112.13 L 524.0,89.60 L 682.0,118.30 L 840.0,146.17" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="46.10" r="3" fill="#c4b5fd"/><text x="50.0" y="61.10" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">52.17x</text><circle cx="208.0" cy="114.80" r="3" fill="#c4b5fd"/><text x="208.0" y="129.80" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">31.56x</text><circle cx="366.0" cy="112.13" r="3" fill="#c4b5fd"/><text x="366.0" y="127.13" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">32.36x</text><circle cx="524.0" cy="89.60" r="3" fill="#c4b5fd"/><text x="524.0" y="104.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">39.12x</text><circle cx="682.0" cy="118.30" r="3" fill="#c4b5fd"/><text x="682.0" y="133.30" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">30.51x</text><circle cx="840.0" cy="146.17" r="3.5" fill="#c4b5fd"/><text x="840.0" y="161.17" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">22.15x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY21-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are actually headed. For Netflix specifically: trailing P/E (24.19x) and forward P/E (22.15x) are close together, meaning the market isn't pricing in a dramatic near-term earnings inflection either way &mdash; it's a re-rating story, not an earnings-estimate story. One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth, which sanity-checks whether a given multiple is cheap once growth is accounted for. Netflix's PEG currently sits around 1.04 &mdash; right around the traditional 1.0 "fair value" line, suggesting the discount versus Netflix's own history is real but the stock isn't obviously cheap once analysts' forward earnings growth (consensus EPS growth &asymp;22% over 3 years) is factored in.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of $7.91B against an estimated FY2025 EBITDA of roughly $13.66B, for a Net Debt/EBITDA of approximately 0.58x &mdash; comfortably under this framework's &lt;2x bar, and it has been under 2x for the entire five-year window, falling steadily from &asymp;1.8x (FY2021) as free cash flow turned durably positive. ROIC of 32.43% clears both the assumed 9.0% WACC and this framework's 15% absolute bar by a wide margin. Share count has declined on net across the window (4,440M &rarr; 4,164M shares, roughly -6.2%), with buybacks outweighing a small dilution blip in FY2022 (+0.29%).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="2.55 437.27" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="365.93 73.89" stroke-dashoffset="-2.55"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="71.34 368.48" stroke-dashoffset="-368.48"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#fbbf24;"></span>Insiders &amp; executives (all officers/directors) &asymp; 0.58% of shares outstanding</div>
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutions &asymp; 83.20% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public float &amp; other &asymp; 16.22% of shares outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> co-founder Reed Hastings stepped down as co-CEO in 2023 and remains Executive Chairman, but has steadily sold down his stake for years &mdash; SEC filings show 38 sells against 1 buy over the past five years, with his most recent sale in June 2026. He now holds roughly 21.2 million shares, about 0.5% of shares outstanding, and total insider/officer/director ownership company-wide is just 0.58%. That's well below this framework's ~5% "meaningful ownership" bar &mdash; a genuine governance data point, not a red flag on its own, but a real difference from founder-led companies elsewhere on this site where insiders still hold 20-40%+.</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Netflix</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+11.06% &mdash; $29,698M &rarr; $45,183M; misses the bar but the trend is accelerating toward it (FY2025 alone grew +15.85%) (score 3/5, borderline)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+21.09% &mdash; $6,195M &rarr; $13,327M &mdash; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>29.49% (FY2025) &mdash; comfortably clears the bar, up from 17.82% just three years earlier</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>-$132M &rarr; $9,461M; base year too close to zero for a standard CAGR calculation, but the trajectory from near-breakeven to $9.46B comfortably clears the growth bar in substance</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 globally by both revenue and paid memberships (325M+), roughly 27% of a major cross-platform subscriber comparison &mdash; ahead of Amazon Prime Video, Max, Disney+ and YouTube Premium</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a genuinely crowded, multi-front field: Amazon Prime Video, Max, Disney+, Apple TV+ and YouTube are all real competitors at scale</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 32.43%, clears both the assumed 9.0% WACC and the 15% absolute bar by a wide margin</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;0.58x (FY2025), down from &asymp;1.8x in FY2021 and falling every year since &mdash; comfortably under the bar for the entire window</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>71.0% (FY2025); trailing twelve months is closer at 77.7% &mdash; close to the bar but not quite there</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 24.19x vs a FY21-25 average of roughly 40.14x &mdash; meaningfully cheaper than its own recent history after the ~43% pullback from the June 2025 high</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Net decline across the window (4,440M &rarr; 4,164M shares, roughly -6.2%), with only a small +0.29% dilution blip in FY2022</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (~5%+)</td><td>0.58% company-wide; co-founder Reed Hastings holds roughly 0.5% (about 21.2M shares) after years of steady selling &mdash; well below the framework's bar</td><td><span class="status-pill status-not">Not met (score 1)</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>Reported capex is just 1.69% of TTM revenue ($818.83M / $48.37B) &mdash; but this dramatically understates true reinvestment: content spend (well over $17B/year in cash) is classified as an operating/content-asset item, not capex, so the "low capex" reading needs this caveat to be meaningful</td><td><span class="status-pill status-met">Met (score 4, caveated)</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 48.49% (FY2025) vs 39.37% (FY2022), a +9.12pp improvement &mdash; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Operating margin has expanded every year since FY2022 (17.82% &rarr; 29.49%), free cash flow went from essentially breakeven to $9.46B in four years, net debt/EBITDA has fallen to roughly 0.58x, ROIC of 32.43% clears the assumed WACC by a wide margin, and the entry multiple (24.19x trailing P/E) is meaningfully below Netflix's own five-year average after a genuine ~43% stock pullback from its 2025 high.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Five-year revenue growth (11.06%) still misses this framework's 15% bar, FCF conversion (71.0%) sits just under the 80% bar, and insider ownership has fallen to just 0.58% as Reed Hastings continues selling down his stake. Streaming remains genuinely competitive, not a moat built on scarcity. And on disclosure specifically: Netflix's accelerated content-amortization policy and its 2025 decision to stop reporting quarterly subscriber counts are both real, well-documented areas that make some of the non-financial KPIs harder to independently verify than they used to be &mdash; worth understanding, not a reason for alarm on their own.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 16 &ndash; Sep 9, 2026. Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Netflix Q2 2026 shareholder letter, SEC Form 4 filings (Reed Hastings), Variety/Adweek (2025 subscriber-disclosure change coverage), Behind The Balance Sheet / Accounting Perspectives (Wiley) (content amortization policy analysis), cross-platform streaming subscriber comparisons (Cloudwards, SellCell, 2026).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (9.0%) is an assumed estimate, not a company-disclosed figure. The accounting/disclosure scrutiny section describes areas of legitimate analyst debate and is not an allegation of wrongdoing by Netflix.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Netflix &mdash; NASDAQ, USD share price trend, split-adjusted for the 10-for-1 forward stock split completed Nov 17, 2025. Points shown are fiscal year-end closes (Dec 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Netflix &mdash; Fiscal Year-End Close (NASDAQ, USD, split-adjusted)</div>
+    <div class="chart-sub">A sharp FY2022 drawdown (the "password-sharing crackdown" scare and slowing growth) gave way to a powerful multi-year recovery to an all-time high of $133.91 in June 2025, before a roughly 43% pullback to today's $76.77 as growth-deceleration and valuation concerns took hold.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +4.97%</text>
+<path d="M 46.0,90.61 L 172.8,136.24 L 299.6,107.75 L 426.4,47.74 L 553.2,40.87 L 680.0,66.08 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,90.61 L 172.8,136.24 L 299.6,107.75 L 426.4,47.74 L 553.2,40.87 L 680.0,66.08" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="90.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="80.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$60.24</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="136.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="126.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$29.49</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="107.75" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="97.75" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$48.69</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="47.74" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="37.74" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$89.13</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="40.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="30.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$93.76</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="66.08" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="56.08" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$76.77</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (Dec 31 each year) and the current price ($76.77, Sep 8, 2026 close) are direct closing/spot prices sourced from stockanalysis.com and macrotrends.net, split-adjusted for the 10-for-1 forward split completed Nov 17, 2025. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
