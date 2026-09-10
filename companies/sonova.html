@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sonova Holding AG Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/sonova.html">
+<meta property="og:title" content="Sonova Holding AG Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sonova Holding AG Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Hearing Healthcare / MedTech</div>
+  <h1>Sonova Holding AG</h1>
+  <div class="badges">
+    <span class="badge">SIX: SOON &middot; reports in CHF</span>
+    <span class="badge">FY ends March 31 &middot; reports semi-annually (H1 &amp; Full Year)</span>
+    <span class="badge">Founded 1947 &middot; St&auml;fa, Switzerland (HQ)</span>
+    <span class="badge">18,000+ employees &middot; Phonak, Unitron, AudioNova, Advanced Bionics</span>
+    <span class="badge warn">Global #1 hearing-aid maker by revenue/share &mdash; but the lead over #2 Demant is narrow (&asymp;31% vs &asymp;30%), and reported-CHF growth has been essentially flat for four years on strong-franc FX headwinds even as local-currency growth stayed solid.</span>
+  </div>
+  <div class="price">CHF 233.00</div>
+  <div class="price-sub">Close Sep 8, 2026 (SIX) &middot; Mkt cap &asymp;CHF 13.9bn (&asymp;59.6m shares) &middot; down from a low-CHF-250s level in late 2025 to a CHF 174.81 trough on May 15, 2026 (day before FY2025/26 results), before recovering on the earnings beat and a subsequent UBS/Citi upgrade cycle</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> a five-player global oligopoly that collectively holds an estimated 99%+ of the prescription hearing-aid market &mdash; Sonova (&asymp;31% share, this dashboard), <b>Demant A/S</b> (Denmark, Oticon &mdash; &asymp;30% share, the direct comparable already on this site), WS Audiology (Denmark/Singapore, private, Signia/Widex), GN Store Nord/ReSound (&asymp;15%, now folding its hearing business into Amplifon), and Starkey (US, &asymp;4%). Sonova is also a top-3 global player in cochlear implants via Advanced Bionics, behind Cochlear Ltd.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Sales, FY2025/26</div>
+      <div class="val">CHF 3,605.9m</div>
+      <div class="sub">-0.2% reported (CHF) / +5.9% local currency &mdash; FX, not demand, is the story</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBITA Margin (reported)</div>
+      <div class="val" style="color:#34d399;">20.1%</div>
+      <div class="note">Normalized/adjusted EBITA margin 22.5% (excl. one-off legal, restructuring &amp; impairment items); GAAP EBIT margin 18.7% &mdash; see EBITA-vs-EBIT note below</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC (ROCE) vs WACC (assumed)</div>
+      <div class="val green">19.0% / 7.5%</div>
+      <div class="note">Company-disclosed ROCE, down slightly from 19.9% a year ago but still comfortably clearing both the framework's 15% bar and the assumed WACC</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">1.1x</div>
+      <div class="sub">CHF 994m net debt &mdash; well inside the &lt;2x bar, improved from 1.2x a year ago</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">69/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">10/14 criteria met &mdash; a genuinely stronger quality profile than sector comparable Demant (Martinero 54), despite near-flat reported-CHF top-line growth.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.000,15.000 A95,95 0 1 1 17.384,131.139 L53.455,122.906 A58,58 0 1 0 110.000,52.000 Z" fill="#34d399"/><path d="M17.384,131.139 A95,95 0 0 1 110.000,15.000 L110.000,52.000 A58,58 0 0 0 53.455,122.906 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">10/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 10 (market share, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, insider ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (revenue CAGR, EBIT CAGR, operating margin latest FY, FCF CAGR &mdash; the reported-CHF growth/margin cluster, largely an FX and one-off-cost story)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> (near-duopoly at the top, five-player oligopoly controls the near-entirety of the market) &mdash; scores of 1&ndash;2 count as Met</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Sonova is the global #1 in hearing care, built around the Phonak (wholesale hearing instruments) and Advanced Bionics (cochlear implants) brands plus a fast-growing owned retail/audiological-care network. At roughly 31% global value share it narrowly leads #2 Demant A/S (&asymp;30%) &mdash; the Danish Oticon maker already covered on this site and the closest sector comparable &mdash; in what both companies operate as a genuine five-player oligopoly (Sonova, Demant, WS Audiology, GN/ReSound, Starkey) controlling an estimated 99%+ of the prescription market. Unlike Demant, Sonova has no controlling family or foundation shareholder, but its pre-IPO founding shareholders (Beda Diethelm at 11.3%, the Rihs family at 6.2%) still hold a meaningful, disclosed 17.7% combined stake. The headline growth numbers look weak in reported Swiss francs &mdash; revenue CAGR of just 1.75% and a negative EBIT CAGR over FY2022&ndash;FY2026 &mdash; but that's overwhelmingly a currency story: local-currency sales growth was +5.9% in FY2025/26 alone, and the strong franc has been a persistent headwind against a USD/EUR-heavy revenue base for years. Where Sonova clearly separates itself from Demant is balance-sheet and capital-efficiency quality: net debt/EBITDA of just 1.1x (versus Demant's 3.0x post-KIND-acquisition), a company-disclosed ROCE of 19.0% comfortably above a ~7.5% WACC assumption, asset-light capex (~2.3% of sales), and gross margin that has actually expanded, not compressed, over the past three years.
+  </div>
+
+  <div class="callout blue">
+    <b>Reported EBITA vs. GAAP EBIT &mdash; read carefully:</b> Sonova's own headline profitability metric is EBITA (earnings before interest, tax and acquisition-related amortization), not GAAP EBIT. FY2025/26 reported EBITA was CHF 724.2m (20.1% margin); normalized/adjusted EBITA (excluding non-recurring legal, restructuring and impairment items) was CHF 811.2m (22.5% margin, comfortably above this framework's 20% screen). GAAP EBIT (after acquisition-related amortization) was lower at CHF 675.8m (18.7% margin). This dashboard's 5-year chart and CAGR figures (page 2) use a consistent GAAP-style "operating income" series sourced from S&amp;P Global Market Intelligence via stockanalysis.com throughout, for year-over-year comparability &mdash; which is more conservative than the company's own adjusted-EBITA framing and is why criterion #3 (operating margin) scores as a near-miss rather than a clean pass.
+  </div>
+
+  <div class="bignum-corner">10/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in CHF millions. Fiscal year ends March 31; FY2026 = year ended March 31, 2026 (reported May 18, 2026 &mdash; already the most recently completed fiscal year as of this Sep 2026 snapshot). "EBIT" below is a GAAP-style operating income series (S&amp;P Global Market Intelligence via stockanalysis.com), used consistently for cross-year comparability &mdash; it differs from Sonova's own headline "EBITA" metric; see page 1 callout. FY2025/26 figures reflect the intended divestment of the Consumer Hearing (Sennheiser-licensed) business, announced March 2026 and reclassified as discontinued operations; FY2022&ndash;FY2024 figures are as originally reported (not restated) and may include a small amount of now-discontinued Consumer Hearing revenue.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Reported-CHF revenue has been essentially flat since FY2023 &mdash; a strong-franc FX headwind against a USD/EUR-heavy revenue base, not a demand problem (local-currency growth has stayed positive throughout, +5.9% in FY2025/26 alone). EBIT and FCF have drifted down modestly from FY2022's peak margins.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">CHF 0</text><line x1="60" y1="182.1" x2="840" y2="182.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="186.1" text-anchor="end" font-size="11" fill="#64748b">1,000m</text><line x1="60" y1="124.2" x2="840" y2="124.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="128.2" text-anchor="end" font-size="11" fill="#64748b">2,000m</text><line x1="60" y1="66.3" x2="840" y2="66.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="70.3" text-anchor="end" font-size="11" fill="#64748b">3,000m</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/>
+    <rect x="75.6" y="45.2" width="22.5" height="194.8" rx="2" fill="#2dd4bf"/><text x="86.85" y="39.2" text-anchor="middle" font-size="10" fill="#cbd5e1">3,364</text>
+    <rect x="113.7" y="194.58" width="22.5" height="45.42" rx="2" fill="#60a5fa"/><text x="124.95" y="188.58" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">784.6</text>
+    <rect x="151.9" y="190.12" width="22.5" height="49.88" rx="2" fill="#fbbf24"/><text x="163.15" y="184.12" text-anchor="middle" font-size="9" fill="#4a3200" font-weight="700">861.6</text>
+    <text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+    <rect x="238.1" y="23.6" width="22.5" height="216.4" rx="2" fill="#2dd4bf"/><text x="249.35" y="17.6" text-anchor="middle" font-size="10" fill="#cbd5e1">3,738</text>
+    <rect x="276.2" y="194.62" width="22.5" height="45.38" rx="2" fill="#60a5fa"/><text x="287.45" y="188.62" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">783.9</text>
+    <rect x="314.4" y="200.23" width="22.5" height="39.77" rx="2" fill="#fbbf24"/><text x="325.65" y="194.23" text-anchor="middle" font-size="9" fill="#4a3200" font-weight="700">687.0</text>
+    <text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+    <rect x="400.6" y="30.0" width="22.5" height="210.0" rx="2" fill="#2dd4bf"/><text x="411.85" y="24.0" text-anchor="middle" font-size="10" fill="#cbd5e1">3,627</text>
+    <rect x="438.7" y="198.65" width="22.5" height="41.35" rx="2" fill="#60a5fa"/><text x="449.95" y="192.65" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">714.2</text>
+    <rect x="476.9" y="201.33" width="22.5" height="38.67" rx="2" fill="#fbbf24"/><text x="488.15" y="195.33" text-anchor="middle" font-size="9" fill="#4a3200" font-weight="700">668.0</text>
+    <text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+    <rect x="563.1" y="30.8" width="22.5" height="209.2" rx="2" fill="#2dd4bf"/><text x="574.35" y="24.8" text-anchor="middle" font-size="10" fill="#cbd5e1">3,613</text>
+    <rect x="601.2" y="197.53" width="22.5" height="42.47" rx="2" fill="#60a5fa"/><text x="612.45" y="191.53" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">733.6</text>
+    <rect x="639.4" y="198.91" width="22.5" height="41.09" rx="2" fill="#fbbf24"/><text x="650.65" y="192.91" text-anchor="middle" font-size="9" fill="#4a3200" font-weight="700">709.8</text>
+    <text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text>
+    <rect x="725.6" y="31.2" width="22.5" height="208.8" rx="2" fill="#2dd4bf"/><text x="736.85" y="25.2" text-anchor="middle" font-size="10" fill="#cbd5e1">3,606</text>
+    <rect x="763.7" y="199.20" width="22.5" height="40.80" rx="2" fill="#60a5fa"/><text x="774.95" y="193.20" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">704.8</text>
+    <rect x="801.9" y="203.76" width="22.5" height="36.24" rx="2" fill="#fbbf24"/><text x="813.15" y="197.76" text-anchor="middle" font-size="9" fill="#4a3200" font-weight="700">626.1</text>
+    <text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY26</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr)</div><div class="val" style="color:#f87171;">+1.75%</div><div class="sub">CHF 3,364m &rarr; 3,606m &mdash; FX-suppressed vs. local-currency growth</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr)</div><div class="val" style="color:#f87171;">-2.65%</div><div class="sub">CHF 784.6m &rarr; 704.8m</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr)</div><div class="val" style="color:#f87171;">-7.67%</div><div class="sub">CHF 861.6m &rarr; 626.1m; still 88.8% FCF/EBIT conversion</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend (GAAP-style operating income basis)</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line. Margin has drifted down from FY2022's post-pandemic peak (23.3%) to 19.6% in FY2026 &mdash; just below the bar on this conservative GAAP-style measure, though Sonova's own normalized EBITA margin (22.5%, not charted here) would clear it.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,103.40 L247.5,115.15 L445.0,121.55 L642.5,118.50 L840.0,122.25 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,103.40 L247.5,115.15 L445.0,121.55 L642.5,118.50 L840.0,122.25" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="103.40" r="3" fill="#2dd4bf"/><text x="50.0" y="93.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.32%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="115.15" r="3" fill="#2dd4bf"/><text x="247.5" y="105.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.97%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="121.55" r="3" fill="#2dd4bf"/><text x="445.0" y="135.55" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.69%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="118.50" r="3" fill="#2dd4bf"/><text x="642.5" y="108.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.30%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="122.25" r="3" fill="#2dd4bf"/><text x="840.0" y="136.25" text-anchor="middle" font-size="10.5" fill="#f8fafc">19.55%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>CHF 3,364.0m</td><td>CHF 784.6m</td><td>23.32%</td><td>CHF 649.0m</td><td>CHF 861.6m</td><td>109.8%</td></tr>
+    <tr><td>FY2023</td><td>CHF 3,738.0m</td><td>CHF 783.9m</td><td>20.97%</td><td>CHF 647.5m</td><td>CHF 687.0m</td><td>87.6%</td></tr>
+    <tr><td>FY2024</td><td>CHF 3,627.0m</td><td>CHF 714.2m</td><td>19.69%</td><td>CHF 601.0m</td><td>CHF 668.0m</td><td>93.5%</td></tr>
+    <tr><td>FY2025</td><td>CHF 3,613.0m</td><td>CHF 733.6m</td><td>20.30%</td><td>CHF 540.5m</td><td>CHF 709.8m</td><td>96.8%</td></tr>
+    <tr><td>FY2026</td><td>CHF 3,606.0m</td><td>CHF 704.8m</td><td>19.55%</td><td>CHF 430.6m</td><td>CHF 626.1m</td><td>88.8%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">FY2025/26 Results, Segment Mix &amp; Margin Stability</div></div>
+  <div class="sec-sub">Sonova reports twice a year (Half-Year to Sept 30, Full Year to March 31), not quarterly. Latest reported period: FY2025/26 full year (year to March 31, 2026, reported May 18, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">FY2025/26 Headlines (reported 18 May 2026)</div>
+    <p>Group sales reached <b style="color:#f8fafc;">CHF 3,605.9m</b>, up <b style="color:#34d399;">5.9% in local currencies</b> but down 0.2% in Swiss francs as FX cut CHF 221.0m off reported growth. Wholesale (Phonak) accelerated to double-digit local-currency growth in the second half on the Infinio Ultra and Virto R Infinio launches; Retail (audiological care) grew 5.1% LC; Cochlear Implants declined 11.1% LC on China volume-based-procurement headwinds and a competitor product launch. Net debt/EBITDA improved to 1.1x and ROCE was 19.0%. Sonova guided FY2026/27 to 5&ndash;8% sales growth and 7&ndash;10% core EBIT growth at constant FX, and separately laid out an ambition to reach <b style="color:#f8fafc;">CHF 6 billion in revenue by FY2030/31</b> in a March 2026 strategy update.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue by Segment, FY2022&ndash;FY2026 (CHF million)</div>
+    <div class="chart-sub">Wholesale (Hearing Instruments) and Retail (Audiological Care) have both grown steadily; the small Consumer Hearing segment (Sennheiser-licensed consumer audio) is being divested (announced March 2026) and is excluded from FY2026; Cochlear Implants has been the weak link, pressured by Chinese procurement reform.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Wholesale (Hearing Instruments)</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Retail (Audiological Care)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Cochlear Implants + Upgrades</span>
+    </div>
+    <svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="160" x2="670" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="90" y="112.0" width="60" height="48.0" fill="#fbbf24" rx="2"/><text x="120" y="134" text-anchor="middle" font-size="7" fill="#4a3200">280</text>
+      <rect x="90" y="47.9" width="60" height="64.1" fill="#60a5fa" rx="2"/><text x="120" y="78" text-anchor="middle" font-size="7" fill="#eaf1ff">1,237</text>
+      <rect x="90" y="4.9" width="60" height="43.0" fill="#2dd4bf" rx="2"/><text x="120" y="25" text-anchor="middle" font-size="7" fill="#052e2a" font-weight="700">1,838</text>
+      <text x="120" y="176" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY22</text>
+      <rect x="220" y="107.5" width="60" height="52.5" fill="#fbbf24" rx="2"/><text x="250" y="132" text-anchor="middle" font-size="7" fill="#4a3200">386</text>
+      <rect x="220" y="38.8" width="60" height="68.7" fill="#60a5fa" rx="2"/><text x="250" y="70" text-anchor="middle" font-size="7" fill="#eaf1ff">1,358</text>
+      <rect x="220" y="4.2" width="60" height="34.6" fill="#2dd4bf" rx="2"/><text x="250" y="20" text-anchor="middle" font-size="7" fill="#052e2a" font-weight="700">1,809</text>
+      <text x="250" y="176" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY23</text>
+      <rect x="350" y="115.9" width="60" height="44.1" fill="#fbbf24" rx="2"/><text x="380" y="136" text-anchor="middle" font-size="7" fill="#4a3200">333</text>
+      <rect x="350" y="47.9" width="60" height="68.0" fill="#60a5fa" rx="2"/><text x="380" y="78" text-anchor="middle" font-size="7" fill="#eaf1ff">1,411</text>
+      <rect x="350" y="6.9" width="60" height="41.0" fill="#2dd4bf" rx="2"/><text x="380" y="22" text-anchor="middle" font-size="7" fill="#052e2a" font-weight="700">1,698</text>
+      <text x="380" y="176" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY24</text>
+      <rect x="480" y="113.7" width="60" height="46.3" fill="#fbbf24" rx="2"/><text x="510" y="136" text-anchor="middle" font-size="7" fill="#4a3200">304</text>
+      <rect x="480" y="41.9" width="60" height="71.8" fill="#60a5fa" rx="2"/><text x="510" y="72" text-anchor="middle" font-size="7" fill="#eaf1ff">1,488</text>
+      <rect x="480" y="5.1" width="60" height="36.8" fill="#2dd4bf" rx="2"/><text x="510" y="21" text-anchor="middle" font-size="7" fill="#052e2a" font-weight="700">1,821</text>
+      <text x="510" y="176" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY25</text>
+      <rect x="610" y="121.4" width="60" height="38.6" fill="#fbbf24" rx="2"/><text x="640" y="140" text-anchor="middle" font-size="7" fill="#4a3200">252</text>
+      <rect x="610" y="43.6" width="60" height="77.8" fill="#60a5fa" rx="2"/><text x="640" y="74" text-anchor="middle" font-size="7" fill="#eaf1ff">1,492</text>
+      <rect x="610" y="4.6" width="60" height="39.0" fill="#2dd4bf" rx="2"/><text x="640" y="20" text-anchor="middle" font-size="7" fill="#052e2a" font-weight="700">1,862</text>
+      <text x="640" y="176" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY26</text>
+    </svg>
+    <div class="chart-sub">FY2026 bars exclude the Consumer Hearing segment (discontinued/held-for-sale); Cochlear Implants + Upgrades figure (CHF 252m) combines the Cochlear Implant Systems and Upgrades &amp; Accessories KPI lines.</div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend, FY2022&ndash;FY2026 &mdash; the Margin Stability criterion</div>
+    <div class="chart-sub">Gross margin has actually expanded over the past three years, not compressed &mdash; 73.72% in FY2026 vs. 70.76% in FY2023 (the window used for criterion #14), a +2.96pp improvement despite the FX and manufacturing-footprint-regionalization costs absorbed along the way.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+    <line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+    <line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">65%</text>
+    <line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">70%</text>
+    <line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">75%</text>
+    <line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">80%</text>
+    <line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">85%</text>
+    <path d="M50.0,114.16 L247.5,133.92 L445.0,121.76 L642.5,105.60 L840.0,110.24 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.14"/>
+    <path d="M50.0,114.16 L247.5,133.92 L445.0,121.76 L642.5,105.60 L840.0,110.24" fill="none" stroke="#34d399" stroke-width="2.5"/>
+    <circle cx="50.0" cy="114.16" r="3" fill="#34d399"/><text x="50.0" y="104.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">73.23%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+    <circle cx="247.5" cy="133.92" r="3" fill="#34d399"/><text x="247.5" y="147.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">70.76%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+    <circle cx="445.0" cy="121.76" r="3" fill="#34d399"/><text x="445.0" y="111.76" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">72.28%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+    <circle cx="642.5" cy="105.60" r="3" fill="#34d399"/><text x="642.5" y="95.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">74.30%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+    <circle cx="840.0" cy="110.24" r="3" fill="#34d399"/><text x="840.0" y="100.24" text-anchor="middle" font-size="10.5" fill="#f8fafc">73.72%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Sonova is the global #1 in hearing aids at roughly 31% value share, but the margin over #2 Demant (&asymp;30%) is narrow &mdash; this is closer to a duopoly-at-the-top than a dominant #1, inside a broader five-player oligopoly (with WS Audiology, GN/ReSound and Starkey) that collectively controls an estimated 99%+ of the global prescription market. That concentration is structurally favorable for pricing power and is why criterion #6 scores as Met, but it also means Sonova's lead is contestable rather than commanding &mdash; Demant, its direct comparable already covered on this site, has been actively consolidating too (its own recent KIND Group retail acquisition), and GN's hearing business has just been folded into Amplifon, reshaping the competitive map further.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing and forward P/E at each fiscal year-end close, per stockanalysis.com (S&amp;P Global Market Intelligence). WACC is assumed at 7.5% &mdash; toward the lower end of the ~7&ndash;8% range appropriate for a mature, investment-grade MedTech/consumer-health name, reflecting Sonova's net-cash-light leverage and defensive demand profile.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 25.75x sits modestly below the FY22-26 average of 28.22x, but is essentially in line with the 5-year median (25.90x) &mdash; a mild, not dramatic, discount to its own history. Forward P/E (21.69x) implies further earnings recovery is priced in; dividing it by Sonova's guided 7-10% constant-FX core EBIT growth puts the PEG around 2.2-2.5x &mdash; comfortably above the traditional 1.0 "fair value" line, so despite trading near its own historical multiple, the stock isn't cheap once growth is accounted for.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">9x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">27x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50.0" y1="94.60" x2="840.0" y2="94.60" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="90.60" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 28.22x</text><path d="M 50.0,54.58 L 208.0,109.16 L 366.0,104.89 L 524.0,94.32 L 682.0,109.87 L 840.0,105.56" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="54.58" r="3" fill="#a78bfa"/><text x="50.0" y="44.58" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">37.22x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="109.16" r="3" fill="#a78bfa"/><text x="208.0" y="123.16" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.94x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="104.89" r="3" fill="#a78bfa"/><text x="366.0" y="94.89" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.90x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="94.32" r="3" fill="#a78bfa"/><text x="524.0" y="84.32" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.28x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="109.87" r="3" fill="#a78bfa"/><text x="682.0" y="123.87" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.78x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="105.56" r="3.5" fill="#a78bfa"/><text x="840.0" y="95.56" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">25.75x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,79.25 L 208.0,118.15 L 366.0,114.56 L 524.0,120.58 L 682.0,144.18 L 840.0,123.60" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="79.25" r="3" fill="#c4b5fd"/><text x="50.0" y="69.25" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">31.67x</text><circle cx="208.0" cy="118.15" r="3" fill="#c4b5fd"/><text x="208.0" y="132.15" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">22.92x</text><circle cx="366.0" cy="114.56" r="3" fill="#c4b5fd"/><text x="366.0" y="128.56" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">23.73x</text><circle cx="524.0" cy="120.58" r="3" fill="#c4b5fd"/><text x="524.0" y="134.58" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">22.37x</text><circle cx="682.0" cy="144.18" r="3" fill="#c4b5fd"/><text x="682.0" y="158.18" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.06x</text><circle cx="840.0" cy="123.60" r="3.5" fill="#c4b5fd"/><text x="840.0" y="137.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">21.69x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings. Trailing P/E (the FY22-26 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock relative to what it had already earned. Forward P/E is today's price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and better able to capture expected growth Sonova's FY2026/27 guidance (5-8% sales, 7-10% core EBIT at constant FX) implies. For Sonova, forward P/E (21.69x) sits meaningfully below trailing (25.75x), consistent with the market expecting earnings to recover as FY2025/26's one-off legal, restructuring and impairment charges roll off. The PEG ratio (forward P/E &divide; expected earnings growth) sanity-checks whether that gap represents genuine value: at roughly 2.2-2.5x, Sonova's PEG sits well above the traditional 1.0 "fair value" line &mdash; the stock is not demonstrably cheap once its own growth outlook is factored in, even though it trades close to (and slightly below) its own 5-year average multiple.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Debt / EBITDA (company-disclosed)</div>
+    <div class="chart-sub">Company-reported net debt/EBITDA ratio, both comfortably inside the &lt;2x bar (shaded) used by this framework, and improving year over year even as Sonova continued funding retail bolt-on M&amp;A and dividend growth.</div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="18.75" width="670" height="16.25" fill="#1a2b22" opacity="0.7"/>
+      <text x="695" y="29" text-anchor="end" font-size="7.5" fill="#34d399">&lt;2x framework bar</text>
+      <line x1="30" y1="150" x2="700" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="205" y="60.0" width="90" height="90.0" rx="2" fill="#60a5fa"/>
+      <rect x="405" y="67.5" width="90" height="82.5" rx="2" fill="#34d399"/>
+      <text x="250" y="53" text-anchor="middle" font-size="10" fill="#e2e8f0">1.2x</text>
+      <text x="450" y="60" text-anchor="middle" font-size="10" fill="#e2e8f0">1.1x</text>
+      <text x="250" y="164" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2024/25-end</text>
+      <text x="450" y="164" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2025/26-end</text>
+    </svg>
+  </div>
+
+  <div class="sec-head" style="margin-top:6px;"><div class="sec-num">4</div><div class="sec-title" style="font-size:14px;">Ownership Structure</div></div>
+  <div class="ownership-row">
+    <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="77.85 361.97" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="194.40 245.42" stroke-dashoffset="-77.85"/><circle cx="110" cy="110" r="70" fill="none" stroke="#475569" stroke-width="40" stroke-dasharray="167.57 272.25" stroke-dashoffset="-272.25"/></g></svg></div>
+    <div class="ownership-legend">
+      <div><span class="dot" style="background:#a78bfa;"></span><b>Individual/founding insiders</b> &asymp; 17.7% &mdash; led by Beda &amp; Annamaria Diethelm (11.3%) and the family of Hans-Ulrich Rihs (6.2%), both pre-IPO (1994) shareholders with no shareholders' agreement between them</div>
+      <div><span class="dot" style="background:#60a5fa;"></span><b>Institutional investors</b> &asymp; 44.2% &mdash; incl. BlackRock (5.1%), UBS Fund Management (5.5%), MFS/Sun Life (3.0%), T. Rowe Price (3.0%)</div>
+      <div><span class="dot" style="background:#475569;"></span><b>Free float / general public</b> &asymp; 38.1%</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note:</b> Sonova has no controlling family or foundation shareholder the way Demant does (William Demant Foundation, ~56%) &mdash; ownership here is genuinely dispersed. But it isn't founder-less either: Beda Diethelm and the Rihs family were both shareholders before Sonova's (then Phonak's) 1994 IPO and together still hold a disclosed 17.4% combined stake, well above this framework's ~5% "meaningful" bar, with no cross-shareholding agreements and free ability to trade. We score this as meaningful, aligned insider ownership (criterion #12), while noting honestly it is more diffuse than a single controlling block.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 on an openness scale (1=near-monopoly, 5=fragmented/open) with raw scores of 1&ndash;2 counting as Met on this 14-item tally; the weighted Martinero Index (page 1) applies an inversion (effective score = 6 &minus; raw) so a tightly concentrated market is rewarded, not penalized, in the weighted calculation. Criterion #14 compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Sonova</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+1.75% reported CHF (CHF 3,364m &rarr; 3,606m) &mdash; local-currency growth was materially stronger throughout, but the reported figure is what's screened (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (FY22-26)</td><td>&ge;15%</td><td>-2.65% (CHF 784.6m &rarr; 704.8m), GAAP-style operating income basis (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>19.55% (FY2026, GAAP-style basis) &mdash; a near-miss; normalized EBITA margin of 22.5% would clear the bar, but this dashboard scores the more conservative consistent measure (score 3/5, borderline)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>-7.67% (CHF 861.6m &rarr; 626.1m) &mdash; declining from an unusually strong FY2022, but still solidly cash-generative throughout (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Global #1 in hearing aids at &asymp;31% value share, narrowly ahead of #2 Demant (&asymp;30%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; raw 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (near-monopoly) &ndash; 5 (open)</td><td>2 &mdash; five-player oligopoly (Sonova, Demant, WS Audiology, GN/ReSound, Starkey) controls an estimated 99%+ of the global prescription market; top two alone hold &asymp;61%</td><td><span class="status-pill status-met">Met (raw score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC (ROCE) vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>Company-disclosed ROCE 19.0% (FY2025/26), down slightly from 19.9% but comfortably above both the 15% framework bar and the assumed 7.5% WACC</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.1x (FY2025/26-end), improved from 1.2x a year earlier &mdash; comfortably inside the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>88.8% (FY2026, stockanalysis-basis FCF/EBIT); Sonova's own narrower "operating free cash flow" metric runs lower (&asymp;72% of EBITA) &mdash; still healthy either way (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>below average</td><td>Current trailing P/E 25.75x vs. FY22-26 average 28.22x (below) but essentially at the 5-yr median of 25.90x &mdash; a modest, not dramatic, discount (score 3/5, borderline)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding flat at 59.6m since the September 2023 cancellation of 1.53m treasury shares; declining versus the pre-2023 base</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful, ~5%+</td><td>Pre-IPO founding shareholders Beda Diethelm (11.3%) and the Rihs family (6.2%) together hold 17.4% &mdash; no controlling block, but comfortably meaningful and disclosed</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.26% of FY2026 revenue (CHF 81.4m capex) &mdash; genuinely asset-light</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 73.72% (FY2026) vs 70.76% (FY2023), a +2.96pp improvement &mdash; expanding, not compressing (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Sonova is the global #1 in a genuine five-player oligopoly, with a materially stronger balance sheet and capital-efficiency profile than sector comparable Demant &mdash; 1.1x net debt/EBITDA versus Demant's 3.0x, a 19.0% ROCE comfortably above WACC, asset-light capex, and gross margin that has expanded rather than compressed. Local-currency demand has stayed genuinely healthy throughout (+5.9% FY2025/26), the trailing multiple sits modestly below its own 5-year average, and pre-IPO founding shareholders still hold a meaningful, disclosed 17.4% stake with no controlling block diluting alignment.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The reported-CHF growth and margin numbers are genuinely weak on this framework's terms &mdash; a sub-2% four-year revenue CAGR, a negative EBIT CAGR, and an operating margin that's a hair below the 20% screen &mdash; and while FX is the dominant driver, a persistently strong Swiss franc is a real, ongoing structural headwind that shows no sign of reversing. Cochlear Implants remains a genuine soft spot (China volume-based-procurement pressure, competitive product launches). The Consumer Hearing divestment adds a one-off complexity to year-over-year comparisons. And despite trading near its own historical multiple, the stock isn't demonstrably cheap on a growth-adjusted (PEG) basis.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of May 18 &ndash; Sep 8, 2026. Sources: stockanalysis.com (SWX:SOON financials, ratios, statistics &amp; segment KPIs, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Sonova Group Media &amp; Investor Release "Sonova delivers strong FY 2025/26 results" (18 May 2026, EQS News), sonova.com Shareholder Structure &amp; Share Data pages (as of 31 March 2026), companiesmarketcap.com (long-run annual price performance), macrotrends.net (SONVY ADR history, cross-check), hearing-aid market-share estimates via GlobeNewswire industry outlook coverage.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (7.5%) is an assumed estimate for a mature MedTech/consumer-health name, not a company-disclosed figure. Fiscal-year-end price figures for FY2022-FY2024 and calendar-year price points on page 6 are partly reconstructed from confirmed annual return series and FY-end market-capitalization disclosures rather than scraped exact daily closes &mdash; treat the shape as directional.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Sonova Holding AG &mdash; SIX Swiss Exchange, CHF share price trend. Year-end points are approximate, reconstructed from confirmed annual return series (companiesmarketcap.com, macrotrends.net) anchored to sourced FY-end market-capitalization disclosures; the current price is an exact, sourced close.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Sonova &mdash; Calendar Year-End Close (SIX, CHF)</div>
+    <div class="chart-sub">The stock peaked near CHF 409 intraday in November 2021 before a sharp guidance-related selloff into year-end; it fell further through 2022, recovered through 2023-2024, slid again through 2025 and into a May 2026 trough around the FY2025/26 earnings release, then rallied to today's CHF 233.00 on the results beat and subsequent analyst upgrades.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">5-Yr CAGR (2021&rarr;Now): -3.88%</text>
+<path d="M 46.0,37.07 L 172.8,154.40 L 299.6,85.06 L 426.4,72.27 L 553.2,120.27 L 680.0,91.47 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,37.07 L 172.8,154.40 L 299.6,85.06 L 426.4,72.27 L 553.2,120.27 L 680.0,91.47" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="37.07" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="27.07" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 284</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="154.40" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="170.40" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 174</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="85.06" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="75.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 239</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="72.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="62.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 251</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="120.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="136.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 206</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="91.47" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="81.47" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 233.00</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end 2021-2025 points are approximate/reconstructed (see note above); current price (CHF 233.00, Sep 8, 2026 close) and the May 15, 2026 trough (CHF 174.81) referenced on page 1 are exact, sourced closes via stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cochlear Limited Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/cochlear.html">
+<meta property="og:title" content="Cochlear Limited Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 80+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cochlear Limited Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 80+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Implantable Hearing Solutions / MedTech</div>
+  <h1>Cochlear Limited</h1>
+  <div class="badges">
+    <span class="badge">ASX: COH &middot; reports in AUD</span>
+    <span class="badge">FY ends Jun 30 &middot; reports half-yearly</span>
+    <span class="badge">Founded 1981 (Nucleus program) &middot; Sydney, Australia (HQ)</span>
+    <span class="badge warn">Global #1 in cochlear implants (~50-60% share) but a genuinely different product category from conventional hearing aids &mdash; implants, not amplification devices.</span>
+  </div>
+  <div class="price">A$139.65</div>
+  <div class="price-sub">Close Sep 8, 2026 (ASX) &middot; Mkt cap &asymp;A$9.1B &middot; 52-week range A$88.74&ndash;A$303.74 &mdash; stock crashed ~40% on Apr 22, 2026 after flagging weak emerging-market demand and Middle East conflict disruption, then partly recovered into the Aug 18, 2026 FY26 result</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Important distinction:</b> Cochlear implants are surgically implanted devices for severe-to-profound hearing loss &mdash; a genuinely different market from conventional (non-surgical) hearing aids made by Demant/Oticon, Sonova/Phonak and Amplifon. Cochlear does not compete head-to-head with those companies' core hearing-aid business. In cochlear implants specifically, the market is a tight three-player field: Cochlear (~50-60% share, #1), MED-EL (~25%, private, Austria) and Advanced Bionics (~20%, owned by Sonova) &mdash; making Sonova a competitor here only through its Advanced Bionics implant unit, not through Phonak hearing aids.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">A$2,348M</div>
+      <div class="sub">+0.2% reported / +2% constant currency &mdash; decelerating from +4.8% in FY2025</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val red">17.95%</div>
+      <div class="note">Down from 22.32% (FY2025) on Nexa-launch manufacturing inefficiencies &amp; unfavourable mix; below the 20% screen threshold for the first time in 5 years.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">16.44% / 8.5%</div>
+      <div class="note">Clears both the assumed 8.5% WACC and this framework's 15% ROIC bar, though only just &mdash; TTM figure reflects a depressed earnings year.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">~0.05x</div>
+      <div class="sub">A$25M net debt vs A$479.9M EBITDA (FY2026) &mdash; effectively net-cash after years of a genuine net-cash balance sheet</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">55/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/14 criteria met, 8 not met &mdash; a genuine implant-market near-monopoly weighed down by a rough FY2026 on growth, margin and ownership criteria.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 151.11,195.65 L135.10,162.29 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M151.11,195.65 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 135.10,162.29 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (market share, market concentration, ROIC/WACC, net debt/EBITDA, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 8 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, FCF conversion, entry multiple, insider/founder ownership, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#34d399;">2 / 5</b> &mdash; a tight three-player global implant market (Cochlear, MED-EL, Advanced Bionics), scored favourably</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Cochlear Limited is the Australian pioneer and dominant global leader in cochlear implants &mdash; surgically implanted devices that restore hearing for people with severe-to-profound hearing loss, an entirely different clinical category from the conventional (non-surgical) hearing aids sold by Demant/Oticon, Sonova/Phonak or fitted by Amplifon's retail network. Since its Nucleus implant program in the 1980s, Cochlear has built roughly 50-60% global share in implants, competing mainly with Austria's privately held MED-EL (~25%) and Sonova-owned Advanced Bionics (~20%) &mdash; a genuinely concentrated, near-monopoly market structure that shows up clearly in this scorecard's market-share and market-concentration criteria. FY2026, however, was a rough year on the numbers: revenue grew just 0.2% reported (2% in constant currency, decelerating sharply from FY2025's 4.8%) as the rollout of the new Nucleus Nexa implant platform brought manufacturing inefficiencies and unfavourable emerging-market mix, operating margin fell to 17.95% from 22.32%, and statutory net profit collapsed 62% to A$147.3M after A$109.1M in non-cash investment write-downs (mainly the Epiminder neural-monitoring stake) and roughly A$66M of cloud-computing costs &mdash; underlying net profit, which strips out those one-offs, was a milder A$322M, down 22% but at the top of guidance. The stock priced in a lot of that stress already: shares crashed roughly 40% on April 22, 2026 after a guidance downgrade citing weak emerging-market demand and Middle East conflict disruption, and still trade about 54% below their 52-week high even after a partial recovery. Balance sheet strength and capital discipline remain intact &mdash; Cochlear is effectively net-cash, capex runs under 3% of revenue, and the share count has been roughly flat to slightly down &mdash; but growth, margin and FCF-conversion criteria all miss this framework's bars in FY2026, and there is no meaningful insider or founder ownership anchoring the register. Net: a real, durable near-monopoly in a growing implant category, going through a genuine operational rough patch, with 6 of 14 criteria met and a Martinero Index of 55/100.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through FY2026 (year ended June 30, 2026, reported Aug 18, 2026) and spot price as of Sep 8, 2026 close. Cochlear's fiscal year runs July-June; FY2026 = year ended June 30, 2026, confirmed fully reported and used as the most recent year (FY2022-FY2026 window). All figures in AUD, Cochlear's reporting currency. Five-year price history (page 6) uses fiscal year-end closes plus current price.
+  </div>
+
+  <div class="bignum-corner">6/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in AUD millions. Fiscal year ends June 30. CAGR computed FY22&rarr;FY26 (4-year span). Net income shown is statutory (IFRS); FY2026 statutory net income (A$147.3M) was depressed by A$109.1M in non-cash investment write-downs (mainly the Epiminder neural-monitoring stake) and cloud-computing costs &mdash; underlying net profit, which excludes those items, was A$322M.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue and EBIT grew steadily through FY2025 before FY2026 stalled on Nexa-launch costs and FX; free cash flow dipped sharply in FY2025 on working-capital build ahead of the Nexa launch, then recovered in FY2026.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="200.0" x2="840" y2="200.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="204.0" text-anchor="end" font-size="11" fill="#64748b">A$0M</text><line x1="60" y1="155.0" x2="840" y2="155.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="159.0" text-anchor="end" font-size="11" fill="#64748b">A$625M</text><line x1="60" y1="110.0" x2="840" y2="110.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="114.0" text-anchor="end" font-size="11" fill="#64748b">A$1,250M</text><line x1="60" y1="65.0" x2="840" y2="65.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="69.0" text-anchor="end" font-size="11" fill="#64748b">A$1,875M</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">A$2,500M</text><line x1="60" y1="200.0" x2="840" y2="200.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="81.3" width="22.5" height="118.7" rx="2" fill="#2dd4bf"/><text x="86.85" y="75.3" text-anchor="middle" font-size="10" fill="#cbd5e1">1,648</text><rect x="113.7" y="172.6" width="22.5" height="27.4" rx="2" fill="#60a5fa"/><text x="124.95" y="166.6" text-anchor="middle" font-size="10" fill="#eaf1ff">381</text><rect x="151.9" y="176.1" width="22.5" height="23.9" rx="2" fill="#fbbf24"/><text x="163.15" y="170.1" text-anchor="middle" font-size="10" fill="#fde68a">332</text><text x="125.0" y="222" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="238.1" y="60.6" width="22.5" height="139.4" rx="2" fill="#2dd4bf"/><text x="249.35" y="54.6" text-anchor="middle" font-size="10" fill="#cbd5e1">1,936</text><rect x="276.2" y="170.7" width="22.5" height="29.3" rx="2" fill="#60a5fa"/><text x="287.45" y="164.7" text-anchor="middle" font-size="10" fill="#eaf1ff">406</text><rect x="314.4" y="177.5" width="22.5" height="22.5" rx="2" fill="#fbbf24"/><text x="325.65" y="171.5" text-anchor="middle" font-size="10" fill="#fde68a">312</text><text x="287.5" y="222" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="400.6" y="39.0" width="22.5" height="161.0" rx="2" fill="#2dd4bf"/><text x="411.85" y="33.0" text-anchor="middle" font-size="10" fill="#cbd5e1">2,236</text><rect x="438.7" y="163.3" width="22.5" height="36.7" rx="2" fill="#60a5fa"/><text x="449.95" y="157.3" text-anchor="middle" font-size="10" fill="#eaf1ff">510</text><rect x="476.9" y="176.5" width="22.5" height="23.5" rx="2" fill="#fbbf24"/><text x="488.15" y="170.5" text-anchor="middle" font-size="10" fill="#fde68a">326</text><text x="450.0" y="222" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="563.1" y="31.3" width="22.5" height="168.7" rx="2" fill="#2dd4bf"/><text x="574.35" y="25.3" text-anchor="middle" font-size="10" fill="#cbd5e1">2,343</text><rect x="601.2" y="162.4" width="22.5" height="37.6" rx="2" fill="#60a5fa"/><text x="612.45" y="156.4" text-anchor="middle" font-size="10" fill="#eaf1ff">523</text><rect x="639.4" y="187.4" width="22.5" height="12.6" rx="2" fill="#fbbf24"/><text x="650.65" y="181.4" text-anchor="middle" font-size="10" fill="#fde68a">175</text><text x="612.5" y="222" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="725.6" y="30.9" width="22.5" height="169.1" rx="2" fill="#2dd4bf"/><text x="736.85" y="24.9" text-anchor="middle" font-size="10" fill="#cbd5e1">2,348</text><rect x="763.7" y="169.7" width="22.5" height="30.3" rx="2" fill="#60a5fa"/><text x="774.95" y="163.7" text-anchor="middle" font-size="10" fill="#eaf1ff">422</text><rect x="801.9" y="177.9" width="22.5" height="22.1" rx="2" fill="#fbbf24"/><text x="813.15" y="171.9" text-anchor="middle" font-size="10" fill="#fde68a">307</text><text x="775.0" y="222" text-anchor="middle" font-size="11" fill="#94a3b8">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+9.26%</div><div class="sub">A$1,648M &rarr; A$2,348M; below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">+2.56%</div><div class="sub">A$380.9M &rarr; A$421.5M; well below the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-1.95%</div><div class="sub">A$332.0M &rarr; A$306.9M; slightly negative, FY25 was the low point</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Cochlear cleared it every year through FY2025, then fell below it in FY2026 on Nexa-launch manufacturing inefficiencies and unfavourable emerging-market mix.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,104.45 L247.5,115.1 L445.0,106.0 L642.5,108.4 L840.0,130.25 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,104.45 L247.5,115.1 L445.0,106.0 L642.5,108.4 L840.0,130.25" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="104.45" r="3" fill="#2dd4bf"/><text x="50.0" y="94.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.11%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="115.1" r="3" fill="#2dd4bf"/><text x="247.5" y="129.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.98%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="106.0" r="3" fill="#2dd4bf"/><text x="445.0" y="96.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.80%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="108.4" r="3" fill="#2dd4bf"/><text x="642.5" y="98.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.32%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="130.25" r="3" fill="#2dd4bf"/><text x="840.0" y="145.25" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.95%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income (statutory)</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>A$1,648M</td><td>A$380.9M</td><td>23.11%</td><td>A$289.1M</td><td>A$332.0M</td><td>87.2%</td></tr>
+    <tr><td>FY2023</td><td>A$1,936M</td><td>A$406.3M</td><td>20.98%</td><td>A$300.6M</td><td>A$312.4M</td><td>76.9%</td></tr>
+    <tr><td>FY2024</td><td>A$2,236M</td><td>A$509.6M</td><td>22.80%</td><td>A$356.8M</td><td>A$326.4M</td><td>64.1%</td></tr>
+    <tr><td>FY2025</td><td>A$2,343M</td><td>A$522.9M</td><td>22.32%</td><td>A$388.9M</td><td>A$175.2M</td><td>33.5%</td></tr>
+    <tr><td>FY2026</td><td>A$2,348M</td><td>A$421.5M</td><td>17.95%</td><td>A$147.3M</td><td>A$306.9M</td><td>72.8%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Half-Year Momentum &amp; the Nexa Launch</div></div>
+  <div class="sec-sub">Cochlear reports full financials half-yearly (HY/FY results), not quarterly. Latest reported period: FY2026 (12 months to June 30, 2026, reported Aug 18, 2026); H1 FY2026 was reported Feb 13, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">FY2026: Revenue Growth Decelerated, Margin Compressed, but Cash Flow Recovered (reported Aug 18, 2026)</div>
+    <p>Full-year sales revenue reached <b style="color:#f8fafc;">A$2,343-2,348M</b>, up just <b style="color:#fbbf24;">0.2% reported / 2% constant currency</b> &mdash; a sharp deceleration from FY2025's +4.8%, though growth reaccelerated to roughly <b style="color:#34d399;">+6% constant currency in H2</b> alone. Cochlear implant units grew 5% to 56,692, but implant revenue was roughly flat in constant currency as a greater share of lower-priced emerging-market units offset the volume gain. The new Nucleus Nexa System captured over 95% of the developed-market implant mix by June 2026 and, combined with a roughly 3% average price increase, is expected to drive both volume and margin recovery into FY2027 (underlying net profit guidance: A$435-460M, up 11-17% on FY2026's underlying A$322M). Free cash flow more than doubled year-over-year as working capital normalised after the FY2025 Nexa-launch build-up.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Annual Revenue Growth &amp; Half-Year Acceleration</div>
+    <div class="chart-sub">Reported (AUD) revenue growth by fiscal year, plus the H1/H2 FY2026 split showing the deceleration-then-reacceleration pattern around the Nexa launch.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Full fiscal year</span>
+      <span><span class="dot" style="background:#5eead4;"></span>Half-year (FY2026 only)</span>
+    </div>
+    <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="160" x2="840" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="80" y="60.8" width="70" height="99.2" rx="2" fill="#2dd4bf"/><text x="115" y="54.8" text-anchor="middle" font-size="11" fill="#e2e8f0">+10.06%</text><text x="115" y="176" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+      <rect x="220" y="42.5" width="70" height="117.5" rx="2" fill="#2dd4bf"/><text x="255" y="36.5" text-anchor="middle" font-size="11" fill="#e2e8f0">+17.46%</text><text x="255" y="176" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+      <rect x="360" y="24.4" width="70" height="135.6" rx="2" fill="#2dd4bf"/><text x="395" y="18.4" text-anchor="middle" font-size="11" fill="#e2e8f0">+15.47%</text><text x="395" y="176" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+      <rect x="500" y="127.5" width="70" height="32.5" rx="2" fill="#2dd4bf"/><text x="535" y="121.5" text-anchor="middle" font-size="11" fill="#e2e8f0">+4.81%</text><text x="535" y="176" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+      <rect x="640" y="154.7" width="70" height="5.3" rx="2" fill="#2dd4bf"/><text x="675" y="148.7" text-anchor="middle" font-size="11" fill="#e2e8f0">+0.19%</text><text x="675" y="176" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY26 (FY)</text>
+      <rect x="770" y="95.0" width="70" height="65.0" rx="2" fill="#5eead4"/><text x="805" y="89.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">~+6% cc</text><text x="805" y="176" text-anchor="middle" font-size="10.5" fill="#5eead4">H2 FY26</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Cochlear's #1 position (~50-60% global share) is specific to cochlear implants &mdash; surgically implanted devices for severe-to-profound hearing loss. This is not the same market as conventional hearing aids: Demant/Oticon, Sonova/Phonak and GN/ReSound compete there, not in implants, and Cochlear itself sold its Hearing Implants (bone-conduction) unit to Demant in 2024-25, narrowing its own portfolio back toward core cochlear implants, services and acoustics. Within cochlear implants specifically, the field is genuinely concentrated: Cochlear (~50-60%), Austria's privately held MED-EL (~25%) and Sonova-owned Advanced Bionics (~20%) account for essentially the whole market &mdash; the kind of tight, high-barrier-to-entry structure (regulatory approval, decades of clinical evidence, surgeon relationships, a large installed base needing lifetime upgrades and services) this framework's market-share and market-concentration criteria are designed to reward.
+  </div>
+
+  <div class="callout blue">
+    <b>Revenue mix, FY2026:</b> Cochlear Implants ~61% of revenue (A$1,435-1,470M, roughly flat in constant currency despite +5% unit growth, due to emerging-market price/mix), Services (sound-processor upgrades and other, tied to the ~700,000-strong global implant recipient base) ~27% (A$609-635M), Acoustics (bone-conduction/other, post the 2024-25 Hearing Implants divestment to Demant) ~12% (A$273-276M). The Services line is the closest thing this business has to a recurring-revenue annuity, growing with the installed base regardless of new-implant volume in any given year.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">AUD-denominated multiples and balance-sheet figures as reported by Cochlear and third-party aggregators (stockanalysis.com, sourced from S&amp;P Global Market Intelligence). WACC is assumed at 8.5% &mdash; within this framework's typical 8-9% range for a MedTech device maker; not a company-disclosed figure.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 63.50x sits well above the FY22-26 average of roughly 52.16x &mdash; expensive relative to Cochlear's own recent history, though the multiple is heavily distorted by FY2026's depressed statutory earnings (the write-down-driven collapse in net income mechanically inflates trailing P/E even as the share price itself has fallen sharply). Forward P/E (27.41x current) sits far below trailing, and PEG below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">75x</text><line x1="50.0" y1="80.9" x2="840.0" y2="80.9" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="76.9" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 52.16x</text><path d="M 50.0,99.4 L 208.0,86.5 L 366.0,57.4 L 524.0,85.3 L 682.0,75.8 L 840.0,50.6" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="99.4" r="3" fill="#a78bfa"/><text x="50.0" y="89.4" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">45.21x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="86.5" r="3" fill="#a78bfa"/><text x="208.0" y="76.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">50.04x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="57.4" r="3" fill="#a78bfa"/><text x="366.0" y="47.4" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">60.97x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="85.3" r="3" fill="#a78bfa"/><text x="524.0" y="75.3" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">50.52x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="75.8" r="3" fill="#a78bfa"/><text x="682.0" y="65.8" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">54.06x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="50.6" r="3.5" fill="#a78bfa"/><text x="840.0" y="40.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">63.50x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,104.7 L 208.0,101.4 L 366.0,86.9 L 524.0,101.0 L 682.0,156.1 L 840.0,146.9" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="104.7" r="3" fill="#c4b5fd"/><text x="50.0" y="119.7" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">43.22x</text><circle cx="208.0" cy="101.4" r="3" fill="#c4b5fd"/><text x="208.0" y="116.4" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">44.48x</text><circle cx="366.0" cy="86.9" r="3" fill="#c4b5fd"/><text x="366.0" y="101.9" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">49.92x</text><circle cx="524.0" cy="101.0" r="3" fill="#c4b5fd"/><text x="524.0" y="116.0" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">44.62x</text><circle cx="682.0" cy="156.1" r="3" fill="#c4b5fd"/><text x="682.0" y="171.1" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">23.97x</text><circle cx="840.0" cy="146.9" r="3.5" fill="#c4b5fd"/><text x="840.0" y="161.9" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">27.41x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY22-26 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are actually headed. For Cochlear specifically: trailing P/E (63.50x) looks expensive versus its own FY22-26 average (52.16x), but that trailing figure is mechanically distorted by FY2026's write-down-depressed statutory earnings, not by a rising share price (the stock is down over 50% from its 52-week high). Forward P/E (27.41x) is far lower, implying the market expects a substantial earnings recovery as the Epiminder write-down and one-off cloud costs roll off and the Nexa launch matures &mdash; consistent with management's FY2027 underlying-profit guidance of A$435-460M. One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth, which sanity-checks whether that recovery is already priced in. Cochlear's PEG currently runs around 2.27 &mdash; well above the traditional 1.0 "fair value" line, suggesting that even on a forward, growth-adjusted basis the stock is not cheap; the market is paying up for the expected implant-market recovery and Nexa margin ramp, not getting it at a discount.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Cochlear has run net-cash every year of this window until FY2026, when a small net debt position of A$25M emerged (net cash A$375.4M in FY2022, A$353.7M FY2023, A$269.9M FY2024, A$40.0M FY2025, -A$25.0M FY2026) against EBITDA of A$479.9M &mdash; a Net Debt/EBITDA of roughly 0.05x, still comfortably inside this framework's &lt;2x bar and close to a pure net-cash position. ROIC stands at 16.44% (TTM, per stockanalysis.com), clearing both the assumed 8.5% WACC and the framework's 15% ROIC bar, though the margin of comfort is thin given FY2026's depressed earnings base. Capex ran at roughly 2.6% of revenue (A$61.1M on A$2,348M) in FY2026 &mdash; a genuinely low, asset-light capital intensity typical of an IP- and installed-base-driven MedTech franchise. Shares outstanding have been essentially flat (65.40M currently, down 0.11% year-over-year), reflecting modest, consistent buyback activity rather than aggressive capital return.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="292.9 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="146.92 439.82" stroke-dashoffset="-292.9"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutional investors &asymp; 66.6% of shares outstanding (BlackRock ~7.2%, State Street ~7.2%, Stichting Pensioenfonds ABP ~5.7%, and others)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public float, other &amp; insiders &asymp; 33.4% of shares outstanding (insiders/directors hold just ~0.4% in their own names)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Cochlear has no controlling family, founder or majority shareholder &mdash; ownership is dominated by conventional institutional asset managers (BlackRock, State Street, large pension funds), and insiders/directors collectively hold well under 1% of shares in their own names. This fails this framework's ~5% "meaningful aligned ownership" bar honestly and cleanly, unlike Demant's foundation-controlled structure or Intuitive Surgical/Oracle-style founder stakes elsewhere on this site &mdash; Cochlear's governance is standard public-company oversight, not a source of long-horizon insider alignment.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 (1=near-monopoly, 5=fragmented/open) and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met; for the weighted Martinero Index, the effective score used is 6 minus the raw score shown. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Cochlear</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+9.26% &mdash; A$1,648M &rarr; A$2,348M; noticeably below the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>&ge;15%</td><td>+2.56% &mdash; A$380.9M &rarr; A$421.5M &mdash; far below the bar, dragged down by the FY2026 margin dip (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>17.95% (FY2026) &mdash; missed the bar for the first time in 5 years, down from 22.32% in FY2025 (score 3/5, close to bar)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>-1.95% &mdash; A$332.0M &rarr; A$306.9M; slightly negative, driven by a FY2025 working-capital dip ahead of the Nexa launch (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in cochlear implants specifically, roughly 50-60% global share &mdash; a genuine near-monopoly in its actual product category, distinct from the broader hearing-aid market</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; a tight three-player global market (Cochlear ~50-60%, MED-EL ~25%, Sonova-owned Advanced Bionics ~20%); effective score for weighting = 4/5</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 16.44% (TTM) clears the assumed 8.5% WACC and the 15% absolute bar, though only just, on a depressed FY2026 earnings base (score 3/5, borderline)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~0.05x &mdash; A$25M net debt vs A$479.9M EBITDA (FY2026); essentially net-cash after four straight years of an outright net-cash position</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>72.8% (FY2026) &mdash; recovered sharply from FY2025's 33.5% low but still shy of the bar (score 3/5, close)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 63.50x vs a FY22-26 average of roughly 52.16x &mdash; above its own recent history, though the trailing figure is distorted by FY2026's depressed statutory earnings rather than a rising price</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>65.40M shares outstanding, down 0.11% year-over-year &mdash; essentially flat with a modest declining bias</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (~5%+)</td><td>Insiders/directors hold well under 1% (~0.4%) of shares in their own names; no controlling family or founder stake &mdash; fails the bar honestly</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>~2.6% of FY2026 revenue (A$61.1M) &mdash; low and asset-light, consistent with an IP- and installed-base-driven device maker</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 70.69% (FY2026) vs 74.80% (FY2023), a &minus;4.11pp drop &mdash; worse than the threshold, driven by Nexa-launch manufacturing inefficiencies and emerging-market mix (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Cochlear holds a genuine near-monopoly in its actual product category (implants, not hearing aids) &mdash; roughly 50-60% global share in a concentrated three-player market with MED-EL and Sonova-owned Advanced Bionics. The balance sheet has run net-cash for essentially this entire window, capex intensity is low and asset-light, share count is flat-to-declining, and free cash flow more than doubled year-over-year in FY2026 as post-Nexa-launch working capital normalised. The Nucleus Nexa platform has already captured over 95% of the developed-market implant mix, and management guides underlying profit up 11-17% for FY2027.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>FY2026 was genuinely weak on the numbers this framework screens for: revenue growth decelerated to roughly flat, operating margin fell below 20% for the first time in five years, EBIT and FCF five-year CAGRs are both far below the 15% bar, and statutory net profit collapsed 62% on one-off write-downs. There is no meaningful insider or founder ownership anchoring the register, and the trailing P/E looks expensive versus Cochlear's own history &mdash; though that's partly a mechanical effect of depressed FY2026 earnings rather than a rising share price, which has in fact fallen roughly 54% from its 52-week high. Whether the Nexa ramp and emerging-market pricing genuinely resolve the margin and growth issues in FY2027, as guided, is the central question here.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 18 &ndash; Sep 8, 2026. Sources: stockanalysis.com (ASX:COH financials, statistics &amp; income statement, sourced from S&amp;P Global Market Intelligence), Cochlear Limited FY2026 Full Year Results &amp; Appendix 4E (ASX announcement, Aug 18, 2026), Cochlear HY2026 Interim Report (Feb 13, 2026), Reuters (Apr 22, 2026 coverage of the guidance downgrade and share-price crash), various trade-press cochlear-implant market-share estimates (Research and Markets, Mordor Intelligence, MarketsandMarkets).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.5%) is an assumed estimate reflecting Cochlear's mid-cap, asset-light MedTech profile, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Cochlear Limited &mdash; ASX, AUD share price trend. FY2022-FY2025 points are derived from reported trailing P/E &times; EPS at each fiscal year-end close (method validated against the FY2026 actual close, which it reproduces to within 0.1%); FY2026 and the current price are actual closes. Points shown are fiscal year-end closes (June 30) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cochlear &mdash; Fiscal Year-End Close (ASX, AUD)</div>
+    <div class="chart-sub">The stock climbed from FY2022 through a FY2024 peak, held up through FY2025, then crashed roughly 40% in a single day (Apr 22, 2026) on a guidance downgrade citing weak emerging-market demand and Middle East conflict disruption &mdash; the FY2026 close and current price both sit well below the prior peak.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">5-Yr CAGR (FY22&rarr;Now): -6.83%</text>
+<path d="M 46.0,116.7 L 172.8,98.0 L 299.6,32.1 L 426.4,52.3 L 553.2,166.1 L 680.0,154.6 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,116.7 L 172.8,98.0 L 299.6,32.1 L 426.4,52.3 L 553.2,166.1 L 680.0,154.6" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="116.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="106.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$198.90</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="98.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="88.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$228.20</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="32.1" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="22.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$331.10</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="52.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="42.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$299.60</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="166.1" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="182.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$121.75</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="154.6" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="170.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">A$139.65</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end close data (FY2022-2025 derived from trailing P/E &times; EPS; FY2026 and current are actual closes) and 52-week range sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
