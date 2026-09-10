@@ -1250,24 +1250,6 @@ const COMPANIES = [
   },
 
   {
-    slug: "walmart",
-    name: "Walmart Inc.",
-    ticker: "NYSE: WMT",
-    sector: "Consumer Defensive",
-    industry: "Discount Stores & General Merchandise Retail",
-    subIndustry: "Grocery, E-Commerce & Retail Media",
-    tags: ["Founder-Controlled", "Defensive"],
-    dateFeatured: "2026-09-05",
-    price: "$107.14",
-    score: "6 / 14",
-    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 5.6, prior: 6.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
-    file: "companies/walmart.html"
-  },
-
-  {
     slug: "berkshire-hathaway",
     name: "Berkshire Hathaway Inc.",
     ticker: "NYSE: BRK.B",
@@ -1500,6 +1482,78 @@ const COMPANIES = [
     blurb: "The largest streaming service globally by both revenue and subscribers — operating margin has expanded from 17.82% to 29.49% since FY2022, free cash flow went from essentially breakeven to $9.46B, and net debt/EBITDA has fallen to roughly 0.58x. But the share price hasn't tracked that improvement: Netflix's own 5-year CAGR is just +4.97%, blue-chip territory rather than a growth stock's return, even with EBIT more than doubling over the same stretch. Most of that gap is a ~43% pullback from Netflix's June 2025 high (split-adjusted following a 10-for-1 forward split in Nov 2025), which is also why the entry multiple now sits well below its own five-year average. Clears EBIT growth, operating margin, FCF growth, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity and margin stability; misses revenue growth, market concentration, FCF conversion and insider/founder ownership (down to 0.58% company-wide as co-founder Reed Hastings has steadily sold down his stake).",
     file: "companies/netflix.html",
     personalNote: "Netflix is an interesting one for me because a few years back I took a CPA course specifically on how to analyze a public company's balance sheet to find inconsistencies — the kind of forensic-accounting lens that can build toward a short-selling case. The instructor used Netflix as an example at one point. He stopped well short of actually recommending a short, but he flagged that there could be some inflated items, or at least real inconsistencies, in both the financial and non-financial KPIs — not fraud, just areas where the numbers deserved more scrutiny than most investors gave them. Looking at it now, years later, the honest update is: Netflix just kept rising. Whatever those flagged inconsistencies were, they clearly weren't disqualifying, and margins, free cash flow and leverage have all genuinely improved since then — a useful reminder that accounting skepticism and share-price performance don't always move together. I can still see what he might have meant, though: the content amortization has always been judgment-heavy, and Netflix quietly stopped reporting subscriber counts in 2025 — right when that used to be the single most-watched non-financial KPI for the company — which is exactly the kind of disclosure change that would catch a forensic accountant's eye, even years after the fact."
+  },
+
+  {
+    slug: "sonova",
+    name: "Sonova Holding AG",
+    ticker: "SIX: SOON",
+    sector: "Hearing Healthcare / MedTech",
+    industry: "MedTech",
+    subIndustry: "Hearing Aids",
+    tags: [],
+    dateFeatured: "2026-09-10",
+    price: "CHF 233.00",
+    score: "10 / 14",
+    martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: -0.2, prior: -0.4 },  // revenue growth, most recent FY vs prior FY (non-scored, reported CHF; local-currency growth was +5.9% recent vs. high-single-digit prior)
+    quarterYoY: { period: "FY 2025/26 (LC)", growth: 5.9 },  // latest reported period revenue YoY, local currency (non-scored) — reported CHF growth was -0.2% on FX headwinds
+    blurb: "Global #1 hearing-aid maker (Phonak, Advanced Bionics) in a five-player oligopoly with Demant, WS Audiology, GN and Starkey. Reported-CHF growth looks flat on strong-franc FX headwinds, but balance-sheet quality (1.1x net debt/EBITDA, 19% ROCE) is well ahead of sector comparable Demant.",
+    file: "companies/sonova.html"
+  },
+
+  {
+    slug: "amplifon",
+    name: "Amplifon S.p.A.",
+    ticker: "Borsa Italiana: AMP",
+    sector: "Healthcare",
+    industry: "Hearing Healthcare",
+    subIndustry: "Hearing Aid Retail & Distribution",
+    tags: [],
+    dateFeatured: "2026-09-10",
+    price: "€11.96",
+    score: "6 / 14",
+    martinero: 51,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: -0.56, prior: 6.60 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 2.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "World's largest hearing-aid retail/distribution network (not a manufacturer) is about to become one too — a pending, not-yet-closed ~€2.3-2.5bn acquisition of GN Store Nord's hearing-aid manufacturing business would end that distinction, but standalone growth has stalled and ROIC doesn't clear even a conservative WACC.",
+    file: "companies/amplifon.html"
+  },
+
+  {
+    slug: "cochlear",
+    name: "Cochlear Limited",
+    ticker: "ASX: COH",
+    sector: "Hearing Healthcare / MedTech",
+    industry: "MedTech",
+    subIndustry: "Cochlear Implants (Implantable Hearing Solutions)",
+    tags: ["Near-Monopoly"],
+    dateFeatured: "2026-09-10",
+    price: "A$139.65",
+    score: "6 / 14",
+    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: 0.19, prior: 4.81 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "H2 FY26", growth: 6.0 },  // latest reported half-year revenue YoY (non-scored, separate from annual trend)
+    blurb: "The Australian dominant global leader in cochlear implants (~50-60% share) — surgically implanted devices for severe-to-profound hearing loss, a genuinely different category from conventional hearing aids (Demant/Oticon, Sonova/Phonak). Competes mainly with Austria's MED-EL (~25%) and Sonova-owned Advanced Bionics (~20%) in a tight, concentrated implant market. FY2026 was a rough operating year — revenue growth stalled, operating margin fell below 20% for the first time in five years, and statutory profit fell 62% on one-off write-downs — while the balance sheet stayed net-cash and capex stayed low.",
+    file: "companies/cochlear.html"
+  },
+
+  {
+    slug: "walmart",
+    name: "Walmart Inc.",
+    ticker: "NYSE: WMT",
+    sector: "Consumer Defensive",
+    industry: "Discount Stores & General Merchandise Retail",
+    subIndustry: "Grocery, E-Commerce & Retail Media",
+    tags: ["Founder-Controlled", "Defensive"],
+    dateFeatured: "2026-09-10",
+    price: "$107.14",
+    score: "6 / 14",
+    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: 5.6, prior: 6.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
+    file: "companies/walmart.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
