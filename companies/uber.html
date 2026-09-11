@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Uber Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/uber.html">
+<meta property="og:title" content="Uber Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Uber Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Ride-Hailing, Delivery &amp; Freight Platform</div>
+  <h1>Uber Technologies, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NYSE: UBER &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2009 &middot; San Francisco, CA (HQ)</span>
+    <span class="badge warn">Uber's central AV partner, Waymo, is simultaneously pulling away: the Phoenix tie-up ended May 2026, and Waymo has notified Uber it will launch its own branded app in Austin &amp; Atlanta from 2028 &mdash; partner and competitor at once.</span>
+  </div>
+  <div class="price">$72.56</div>
+  <div class="price-sub">Close Sep 10, 2026 (NYSE) &middot; Mkt cap &asymp;$153B (&asymp;2.11B diluted shares)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> ride-hailing &mdash; Lyft (US, distant #2), Didi (China, where Uber doesn't operate), Grab (Southeast Asia, Uber holds a minority equity stake instead of operating directly), Bolt (Europe/Africa) &middot; food delivery &mdash; DoorDash (US market leader, roughly 2-3x Uber Eats' share), Grubhub.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$52.02B</div>
+      <div class="sub" style="color:#34d399;">+18.3% YoY &mdash; fifth straight year of double-digit growth</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val" style="color:#fbbf24;">10.70%</div>
+      <div class="note">Up from &minus;21.96% in FY2021 &mdash; a genuine turnaround, but still well under this framework's 20% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val" style="color:#fbbf24;">11.85% / 9.5%</div>
+      <div class="note">Clears the assumed cost of capital but misses this framework's 15% absolute ROIC bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val green">&asymp;0.01x</div>
+      <div class="sub">$76M net debt vs $8.7B FY2025 Adj. EBITDA &mdash; effectively net-cash-equivalent</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">67/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met &mdash; a real profitability turnaround and cheap-vs-own-history valuation, offset by heavy historical dilution, thin insider ownership and margins still below this framework's bar.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 192.27,62.50 L160.23,81.00 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M192.27,62.50 A95,95 0 0 1 192.27,157.50 L160.23,139.00 A58,58 0 0 0 160.23,81.00 Z" fill="#34d399" opacity="0.55"/><path d="M192.27,157.50 A95,95 0 0 1 110.00,205.00 L110.00,168.00 A58,58 0 0 0 160.23,139.00 Z" fill="#34d399" opacity="0.55"/><path d="M110.00,205.00 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 110.00,168.00 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (revenue CAGR, market share, net debt/EBITDA, FCF conversion, entry multiple, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC, share count trend, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; a genuine US ride-hailing duopoly (Uber/Lyft) but a far more fragmented global map, with Didi entrenched in China and Grab in Southeast Asia</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Uber's scorecard tells a turnaround story: revenue has compounded at roughly 31% a year since FY2021, operating margin has climbed from a deeply negative &minus;21.96% to a genuinely positive 10.70%, and free cash flow reached $9.76B in FY2025 on capex of just $336M &mdash; 0.65% of revenue, about as asset-light as this framework sees. That structural lightness is the core of the bull case: Uber owns no vehicles and employs no drivers, so growth doesn't require proportional capital. The bear case is just as real: five-year EBIT and FCF CAGR are both mathematically undefined because the FY2021 base was negative, current operating margin still sits well under this framework's 20% bar, diluted share count grew roughly 20% from FY2021 to FY2024 before flattening in FY2025, and insider/founder ownership is thin at roughly 2% &mdash; Travis Kalanick departed the board years ago and no longer holds a meaningful stake. The most interesting wrinkle sits in the autonomous-vehicle strategy: where Tesla is betting on building, owning and operating its own robotaxi fleet end-to-end, Uber is betting on being the marketplace that aggregates everyone else's vehicles &mdash; Waymo, WeRide, Nuro, Avride, Momenta, Wayve, Pony.ai and roughly two dozen others &mdash; onto its existing demand platform. It's the opposite path to the same destination, and Uber's own Waymo relationship (its most important AV partner today) is already showing the strain of that platform bet: Phoenix wound down in May 2026, and Waymo has told Uber it plans a standalone app in Austin and Atlanta starting 2028.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (reported Aug 5, 2026) and spot price as of Sep 10, 2026 close. Uber's fiscal year = calendar year; FY2025 = year ended Dec 31, 2025.
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD billions unless noted. CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue has grown every year; operating income and free cash flow both started deeply negative in FY2021 and turned durably positive by FY2023 &mdash; a genuine operational turnaround, not a one-off.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 290" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$30B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">$45B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$60B</text><rect x="110" y="175.98" width="16" height="64.02" rx="1.5" fill="#2dd4bf"/><text x="118" y="170.98" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$17.5B</text><rect x="130" y="240.0" width="16" height="14.04" rx="1.5" fill="#60a5fa"/><text x="138" y="252.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">-$3.8B</text><rect x="150" y="240.0" width="16" height="2.71" rx="1.5" fill="#fbbf24"/><text x="158" y="250.5" text-anchor="middle" font-size="7.5" fill="#fde68a">-$0.7B</text><text x="138" y="272" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="266" y="123.10" width="16" height="116.90" rx="1.5" fill="#2dd4bf"/><text x="274" y="118.10" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$31.9B</text><rect x="286" y="240.0" width="16" height="6.71" rx="1.5" fill="#60a5fa"/><text x="294" y="252.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">-$1.8B</text><rect x="306" y="238.57" width="16" height="1.43" rx="1.5" fill="#fbbf24"/><text x="314" y="234.57" text-anchor="middle" font-size="7.5" fill="#fde68a">$0.4B</text><text x="294" y="272" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="422" y="103.30" width="16" height="136.70" rx="1.5" fill="#2dd4bf"/><text x="430" y="98.30" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$37.3B</text><rect x="442" y="235.93" width="16" height="4.07" rx="1.5" fill="#60a5fa"/><text x="450" y="230.93" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$1.1B</text><rect x="462" y="227.68" width="16" height="12.32" rx="1.5" fill="#fbbf24"/><text x="470" y="222.68" text-anchor="middle" font-size="7.5" fill="#fde68a">$3.4B</text><text x="450" y="272" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="578" y="78.74" width="16" height="161.26" rx="1.5" fill="#2dd4bf"/><text x="586" y="73.74" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$44.0B</text><rect x="598" y="229.73" width="16" height="10.27" rx="1.5" fill="#60a5fa"/><text x="606" y="224.73" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$2.8B</text><rect x="618" y="214.70" width="16" height="25.30" rx="1.5" fill="#fbbf24"/><text x="626" y="209.70" text-anchor="middle" font-size="7.5" fill="#fde68a">$6.9B</text><text x="606" y="272" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="734" y="49.26" width="16" height="190.74" rx="1.5" fill="#2dd4bf"/><text x="742" y="44.26" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">$52.0B</text><rect x="754" y="219.57" width="16" height="20.43" rx="1.5" fill="#60a5fa"/><text x="762" y="214.57" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">$5.6B</text><rect x="774" y="204.21" width="16" height="35.79" rx="1.5" fill="#fbbf24"/><text x="782" y="199.21" text-anchor="middle" font-size="7.5" fill="#fde68a">$9.8B</text><text x="762" y="272" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+31.4%</div><div class="sub">$17.5B &rarr; $52.0B; comfortably clears the 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">n/m</div><div class="sub">&minus;$3.83B &rarr; +$5.57B; sign flip, no meaningful CAGR &mdash; see note below</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">n/m</div><div class="sub">&minus;$0.74B &rarr; +$9.76B; sign flip, no meaningful CAGR &mdash; see note below</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Margin has improved every single year, from &minus;21.96% in FY2021 to 10.70% in FY2025 &mdash; the clearest, most consistent trend line on this scorecard &mdash; but still sits roughly half of this framework's 20% screen threshold.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="197.78" x2="840" y2="197.78" stroke="#1e293b" stroke-width="1"/><text x="42" y="201.78" text-anchor="end" font-size="11" fill="#64748b">-20%</text><line x1="50" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.33" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="108.89" x2="840" y2="108.89" stroke="#475569" stroke-width="1.3"/><text x="42" y="112.89" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="64.44" x2="840" y2="64.44" stroke="#1e293b" stroke-width="1"/><text x="42" y="68.44" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><path d="M 50.00,206.67 L 247.50,134.45 L 445.00,95.65 L 642.50,80.58 L 840.00,61.33 L 840.00,220.0 L 50.00,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M 50.00,206.67 L 247.50,134.45 L 445.00,95.65 L 642.50,80.58 L 840.00,61.33" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="206.67" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="134.45" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="95.65" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="80.58" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="61.33" r="3" fill="#2dd4bf"/><text x="50.00" y="196.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-21.96%</text><text x="247.50" y="124.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-5.75%</text><text x="445.00" y="85.65" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.98%</text><text x="642.50" y="70.58" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.37%</text><text x="840.00" y="51.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">10.70%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>$17.46B</td><td>-$3.83B</td><td>-21.96%</td><td>-$0.50B</td><td>-$0.74B</td><td>n/m</td></tr>
+    <tr><td>FY2022</td><td>$31.88B</td><td>-$1.83B</td><td>-5.75%</td><td>-$9.14B</td><td>$0.39B</td><td>n/m</td></tr>
+    <tr><td>FY2023</td><td>$37.28B</td><td>$1.11B</td><td>2.98%</td><td>$1.89B</td><td>$3.36B</td><td>302.9%</td></tr>
+    <tr><td>FY2024</td><td>$43.98B</td><td>$2.80B</td><td>6.37%</td><td>$9.86B</td><td>$6.90B</td><td>246.3%</td></tr>
+    <tr><td>FY2025</td><td>$52.02B</td><td>$5.57B</td><td>10.70%</td><td>$10.05B</td><td>$9.76B</td><td>175.5%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>On EBIT/FCF CAGR (n/m):</b> both metrics started FY2021 negative, so a percentage CAGR is mathematically undefined &mdash; the honest read is the trend itself: EBIT went from -$3.83B to +$5.57B and FCF from -$0.74B to +$9.76B over the same five years, a real turnaround rather than a comparable growth rate.<br><b>On net income:</b> FY2024's $9.86B and FY2025's $10.05B both include material one-off, non-cash items &mdash; principally deferred-tax valuation-allowance releases and mark-to-market gains on Uber's equity stakes in Aurora, Didi and Grab &mdash; so GAAP net income overstates the underlying run-rate; operating income and FCF are the cleaner reads on this page.<br><b>Capex:</b> FY2025 capex was just $336M, 0.65% of revenue &mdash; Uber owns no vehicle fleet, which is the structural reason FCF can outrun EBIT (criterion 9).</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; the Autonomous-Vehicle Platform Bet</div></div>
+  <div class="sec-sub">Uber reports calendar quarters. Latest reported period: Q2 2026 (three months to June 30, 2026, reported Aug 5, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$14.2B</b>, up <b style="color:#34d399;">12% YoY</b> (11% constant-currency) &mdash; a deceleration from FY2025's ~18% pace, but management flagged that business-model/accounting changes (how certain delivery and mobility contracts are recognized) shaved roughly 8 points off reported revenue growth. Gross Bookings, the cleaner volume signal, grew <b style="color:#34d399;">24% YoY to $58.0B</b>. Trips grew 18% YoY to 3.9 billion, GAAP operating income was $1.9B (13.4% margin) and non-GAAP EPS grew 35% YoY to $0.81. Read together, underlying demand kept accelerating even as reported revenue growth looked slower &mdash; a genuine case where the headline number understates the trend.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($B)</div>
+    <div class="chart-sub">A seasonal Q1 dip (mobility demand softens after year-end) followed by sequential growth into Q2 &mdash; consistent with the broader multi-year uptrend.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$8B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$12B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$16B</text><rect x="103.0" y="61.88" width="70" height="158.12" rx="2" fill="#2dd4bf"/><text x="138" y="54.88" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$12.65B</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2&#39;25</text><rect x="259.0" y="51.63" width="70" height="168.37" rx="2" fill="#2dd4bf"/><text x="294" y="44.63" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.47B</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3&#39;25</text><rect x="415.0" y="40.0" width="70" height="180.0" rx="2" fill="#2dd4bf"/><text x="450" y="33.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$14.40B</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4&#39;25</text><rect x="571.0" y="55.0" width="70" height="165.0" rx="2" fill="#2dd4bf"/><text x="606" y="48.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.20B</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1&#39;26</text><rect x="727.0" y="42.5" width="70" height="177.5" rx="2" fill="#2dd4bf"/><text x="762" y="35.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$14.20B</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income ($B) &amp; Margin</div>
+    <div class="chart-sub">Op income and margin have both trended up over the last five quarters despite the Q3&#39;25 dip &mdash; Q1 and Q2 2026 are the two strongest quarters on record for GAAP profitability.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0.0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$0.5B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$1.0B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$1.5B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$2.0B</text><rect x="103.0" y="70.0" width="70" height="150.0" rx="2" fill="#60a5fa"/><text x="138" y="54.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.50B</text><text x="138" y="65.0" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">11.9%</text><text x="138" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q2&#39;25</text><rect x="259.0" y="110.0" width="70" height="110.0" rx="2" fill="#60a5fa"/><text x="294" y="94.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.10B</text><text x="294" y="105.0" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">8.2%</text><text x="294" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q3&#39;25</text><rect x="415.0" y="40.0" width="70" height="180.0" rx="2" fill="#60a5fa"/><text x="450" y="24.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.80B</text><text x="450" y="35.0" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">12.5%</text><text x="450" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q4&#39;25</text><rect x="571.0" y="30.0" width="70" height="190.0" rx="2" fill="#60a5fa"/><text x="606" y="14.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.90B</text><text x="606" y="25.0" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">14.4%</text><text x="606" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">Q1&#39;26</text><rect x="727.0" y="30.0" width="70" height="190.0" rx="2" fill="#60a5fa"/><text x="762" y="14.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$1.90B</text><text x="762" y="25.0" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">13.4%</text><text x="762" y="238" text-anchor="middle" font-size="11" fill="#f8fafc">Q2&#39;26</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>The Waymo &amp; Tesla contrast:</b> Tesla is building a fully vertically-integrated robotaxi stack &mdash; its own vehicles, its own FSD software, its own fleet &mdash; and betting that owning the whole stack is the winning model. Uber is making the opposite bet: after selling its own self-driving unit (ATG) to Aurora in December 2020, it now positions itself purely as the demand-side marketplace, integrating autonomous vehicles from roughly 30 partners &mdash; Waymo, WeRide, Avride, Nuro, Wayve, Momenta, May Mobility, Pony.ai and more &mdash; onto its existing rider app, plus Aurora, Volvo Autonomous Solutions and Waabi for autonomous trucking. Uber has committed roughly $10B in capital across these partnerships and targets rides in 15+ cities and 10+ countries by the end of 2026. Same destination (autonomous ride-hailing at scale), opposite paths: Tesla owns the risk and the upside of the technology itself; Uber owns the distribution and diversifies technology risk across many bets &mdash; but depends on partners who could, and in Waymo's case already are, choosing to go direct. Waymo robotaxis currently run through the Uber app in Austin and Atlanta (Phoenix ended May 2026); WeRide operates in Abu Dhabi, Dubai and Riyadh via Uber; Avride in Dallas; and Uber/Lucid/Nuro's premium robotaxi service is slated to launch later in 2026. The clearest sign the model carries real risk: Uber and Waymo are already set to compete head-on, not partner, in markets like London.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E only became meaningful from FY2023, once Uber turned durably GAAP-profitable; FY2021-FY2022 are shown as n/m rather than plugged with a distorted fallback number. WACC assumed at 9.5%, in line with this site's standard assumption for large-cap, investment-grade-adjacent names.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY23-25 (n/m FY21-22) &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 15.83x sits well below the FY23-25 average of roughly 32.3x, largely because FY2023's 67.15x reading reflected a still-thin, early-profitability earnings base rather than a rich valuation. Forward P/E (17.37x now) has run persistently below trailing P/E &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">60x</text><text x="45" y="224" font-size="10" fill="#64748b">FY21-22: n/m (net losses)</text><line x1="50.0" y1="187.35" x2="840.0" y2="187.35" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="183.35" text-anchor="end" font-size="10" fill="#94a3b8">FY23-25 avg: 32.31x</text><path d="M 366.0,40.93 L 524.0,185.63 L 682.0,174.96 L 840.0,177.79" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="366.0" cy="40.93" r="3" fill="#a78bfa"/><circle cx="524.0" cy="185.63" r="3" fill="#a78bfa"/><circle cx="682.0" cy="174.96" r="3" fill="#a78bfa"/><circle cx="840.0" cy="177.79" r="3.5" fill="#a78bfa"/><text x="50.0" y="212" text-anchor="middle" font-size="10" fill="#64748b">n/m</text><text x="208.0" y="212" text-anchor="middle" font-size="10" fill="#64748b">n/m</text><text x="366.0" y="30.93" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">67.15x</text><text x="524.0" y="199.63" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.89x</text><text x="682.0" y="164.96" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.89x</text><text x="840.0" y="167.79" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.83x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 366.0,53.65 L 524.0,144.77 L 682.0,155.47 L 840.0,173.68" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="366.0" cy="53.65" r="3" fill="#c4b5fd"/><text x="366.0" y="68.65" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">62.38x</text><circle cx="524.0" cy="144.77" r="3" fill="#c4b5fd"/><text x="524.0" y="159.77" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">28.21x</text><circle cx="682.0" cy="155.47" r="3" fill="#c4b5fd"/><text x="682.0" y="140.47" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">24.20x</text><circle cx="840.0" cy="173.68" r="3.5" fill="#c4b5fd"/><text x="840.0" y="188.68" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.37x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading trailing vs. forward P/E, and the PEG caveat:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings; the trailing-P/E series above is that same ratio calculated at each year-end. Forward P/E divides today's price by analysts' consensus estimate of the <i>next</i> 12 months of earnings, capturing expected growth that trailing P/E can't see. For Uber, forward P/E (17.37x) sits modestly above current trailing (15.83x) &mdash; consensus actually expects <i>lower</i> GAAP EPS in 2026 than in 2025, but that's a base-effect artifact: FY2024 and FY2025 GAAP earnings were both inflated by one-off tax and mark-to-market items (see page 2), so the year-ahead comparison looks like a decline even though revenue, gross bookings and operating income are all still growing at double digits. On that basis, Uber's PEG ratio (forward P/E &divide; consensus EPS growth) comes out around 2.6&ndash;2.7x using the ~6.6% GAAP EPS growth analysts currently model for 2026-2028 &mdash; above the traditional 1.0 "fair value" line, but this PEG reading should be treated with real skepticism given how much the denominator is distorted by lapping one-off items rather than reflecting Uber's underlying operating growth rate.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Uber ended FY2025 with $12.23B in cash &amp; investments against $12.30B in total debt &mdash; a net debt position of just $76M, against $8.7B of FY2025 Adjusted EBITDA (+35% YoY). That's a Net Debt/EBITDA ratio of roughly 0.01x, comfortably clearing this framework's &lt;2x bar and functionally equivalent to a net-cash balance sheet. Net debt/cash has swung between small net-cash and small net-debt positions every year since FY2021 (FY21 net cash $4.05B, FY22 net debt $5.23B, FY23 net debt $2.89B, FY24 net cash $0.65B, FY25 net debt $0.08B) &mdash; consistently low leverage in either direction, not a trend to worry about.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="8.80 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="343.06 439.82" stroke-dashoffset="-8.80"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="87.96 439.82" stroke-dashoffset="-351.86"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors, incl. CEO Dara Khosrowshahi) &asymp; 2%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional (Vanguard, BlackRock, Morgan Stanley, Fidelity, PIF/Al-Rumayyan, others) &asymp; 78%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail &amp; other public float &asymp; 20%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note, honestly stated:</b> founder Travis Kalanick was pushed out as CEO in 2017 and has since sold down his stake entirely &mdash; he holds no meaningful position today. Current CEO Dara Khosrowshahi owns roughly 0.4% of shares outstanding; total insider ownership across officers and directors runs around 2%, well under this framework's ~5% "meaningful" bar. The largest non-institutional holder is Saudi Arabia's Public Investment Fund (Governor Yasir Al-Rumayyan, &asymp;3.64%, with board representation) &mdash; a strategic stake, not a founder one. This is a professionally-managed, institutionally-owned company rather than a founder-aligned one.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Uber</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+31.4% &mdash; $17.46B &rarr; $52.02B; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>n/m &mdash; sign flip from -$3.83B to +$5.57B; a genuine turnaround but no defined CAGR</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>10.70% (FY2025) &mdash; up from -21.96% in FY2021, but still roughly half the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>n/m &mdash; sign flip from -$0.74B to +$9.76B; same base-effect issue as EBIT CAGR</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in US ride-hailing (&asymp;74-76% vs Lyft's &asymp;24-26%); #2 in US food delivery (Uber Eats &asymp;23-25% vs DoorDash's &asymp;56-67%); absent from China (Didi) and a minority stakeholder rather than operator in Southeast Asia (Grab)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a genuine US ride-hailing/delivery duopoly, but a fragmented global map with strong regional incumbents (Didi, Grab, Bolt) Uber doesn't control</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC &asymp;11.85% (current) vs assumed 9.5% WACC &mdash; clears WACC but misses the 15% absolute bar; up sharply from a 3-yr average of 6.93%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;0.01x &mdash; $76M net debt vs $8.7B FY2025 Adj. EBITDA, effectively net-cash-equivalent</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>175.5% (FY2025) &mdash; a structural feature of the asset-light marketplace model (negative working capital, minimal capex), not a one-off</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 15.83x vs FY23-25 average of &asymp;32.31x &mdash; meaningfully cheaper than its own recent (admittedly short) profitable history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Diluted shares grew from &asymp;1.77B (FY2021) to &asymp;2.15B (FY2024), roughly +20%, before dipping slightly to &asymp;2.13B in FY2025 on early buybacks &mdash; still net dilutive over the full window</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (&asymp;5%+)</td><td>&asymp;2% total insider ownership; founder Travis Kalanick fully exited years ago; CEO Dara Khosrowshahi holds &asymp;0.4%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.65% of FY2025 revenue ($336M) &mdash; Uber owns no vehicle fleet; about as asset-light as this framework sees</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 38.50% (FY2025) vs 30.76% (FY2022), a +7.74pp improvement &mdash; genuinely widening, not just stable</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue has compounded above 30% a year for four years, operating margin has improved in every single year since FY2021, and free cash flow conversion is exceptional thanks to a genuinely asset-light model (0.65% capex intensity). The balance sheet carries essentially no net leverage, and the stock trades well below its own short profitable-era valuation history. Gross margin has widened by nearly 8 points over three years even as the business has scaled.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin, ROIC and both growth CAGRs (EBIT, FCF) still miss this framework's absolute bars even after the turnaround &mdash; Uber is a much better business than it was in 2021, but not yet an elite one by these thresholds. Share count grew roughly 20% through FY2024 before flattening, and insider/founder ownership is thin at &asymp;2%, with Kalanick long gone. The biggest strategic swing factor is the AV platform bet: Uber doesn't own the autonomous technology it's aggregating, and its most important partner, Waymo, is already pulling back exclusivity in some cities and preparing to compete directly in others &mdash; a real structural risk to the "Uber as universal AV marketplace" thesis that doesn't exist in the same form for a vertically-integrated competitor like Tesla.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 5 &ndash; Sep 10, 2026. Sources: stockanalysis.com (financials, ratios, sourced from S&amp;P Global Market Intelligence), Uber Q4/FY2025 and Q1-Q2 2026 earnings releases and prepared remarks (investor.uber.com), GuruFocus (ROIC, insider transactions), Bloomberg Second Measure / IBISWorld (US ride-hailing share), Statista / industry trackers (US food delivery share), TechCrunch / Road to Autonomy / Smart Cities Dive (Waymo-Uber partnership status), TechCrunch AV deal tracker and NVIDIA newsroom (Uber's broader AV partner roster).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (9.5%) is an assumed estimate, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Uber &mdash; NYSE, USD share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Uber &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A rough 2022 drawdown (rate-hike/growth-stock selloff) followed by a strong, fairly steady climb through 2025 as profitability turned real &mdash; today's price sits a bit below the 2025 year-end close.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<text x="38" y="32" text-anchor="end" font-size="9.5" fill="#64748b">$90</text>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<text x="38" y="82.7" text-anchor="end" font-size="9.5" fill="#64748b">$65</text>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<text x="38" y="133.3" text-anchor="end" font-size="9.5" fill="#64748b">$40</text>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<text x="38" y="184.0" text-anchor="end" font-size="9.5" fill="#64748b">$15</text>
+<path d="M 46.0,125.42 L 172.8,160.28 L 299.6,85.62 L 426.4,88.15 L 553.2,44.81 L 680.0,63.35 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="125.42" x2="680.0" y2="63.35" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +11.6%</text>
+<path d="M 46.0,125.42 L 172.8,160.28 L 299.6,85.62 L 426.4,88.15 L 553.2,44.81 L 680.0,63.35" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="125.42" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="115.42" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$41.93</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="160.28" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="172.28" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$24.73</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="85.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="75.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$61.57</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="88.15" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="102.15" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$60.32</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="44.81" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="34.81" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$81.71</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="63.35" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="53.35" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$72.56</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021-2025 and the current price ($72.56, Sep 10, 2026 close) are direct closing/spot prices. 5-Yr CAGR is computed 2021-close to current. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
