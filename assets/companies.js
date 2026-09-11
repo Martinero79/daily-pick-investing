@@ -1554,6 +1554,42 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
     file: "companies/walmart.html"
+  },
+
+  {
+    slug: "costco",
+    name: "Costco Wholesale Corporation",
+    ticker: "NASDAQ: COST",
+    sector: "Consumer Defensive",
+    industry: "Membership Warehouse Retail",
+    subIndustry: "Wholesale Clubs & E-Commerce",
+    tags: [],
+    dateFeatured: "2026-09-10",
+    price: "$902.60",
+    score: "7 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 8.17, prior: 5.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q3 FY2026", growth: 11.58 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The standing counterexample to Walmart's thin-merchandise-margin model: Costco prices goods near cost to drive membership renewals, and its real profit engine is a separate, near-100%-margin membership-fee line that supplied roughly 51% of FY2025 operating income from just 1.9% of revenue. ROIC of 38.44% comfortably clears WACC, the balance sheet has carried net cash every year for five years, and capex runs a lean 2.0% of revenue. But the stock has never been cheap (45.40x trailing P/E, PEG 3.64), five-year revenue/EBIT/FCF CAGRs all miss this framework's 15% bars, and insider ownership has faded to just 0.17% since co-founder Jim Sinegal's 2012 retirement.",
+    file: "companies/costco.html"
+  },
+
+  {
+    slug: "uber",
+    name: "Uber Technologies, Inc.",
+    ticker: "NYSE: UBER",
+    sector: "Ride-Hailing, Delivery & Freight Platform",
+    industry: "Transportation & Logistics",
+    subIndustry: "Ride-Hailing & Delivery Platforms",
+    tags: ["Autonomous Vehicles", "Platform/Marketplace"],
+    dateFeatured: "2026-09-11",
+    price: "$72.56",
+    score: "7 / 14",
+    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "steady", recent: 18.3, prior: 18.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
+    blurb: "Ride-hailing and delivery platform that has genuinely turned profitable, now betting on aggregating autonomous vehicles from Waymo, WeRide, Nuro and ~30 other partners rather than building its own — the opposite path from Tesla's vertically-integrated robotaxi bet, with an already-fraying Waymo relationship as the central risk.",
+    file: "companies/uber.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
