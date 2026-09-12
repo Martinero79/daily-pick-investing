@@ -1590,6 +1590,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
     blurb: "Ride-hailing and delivery platform that has genuinely turned profitable, now betting on aggregating autonomous vehicles from Waymo, WeRide, Nuro and ~30 other partners rather than building its own — the opposite path from Tesla's vertically-integrated robotaxi bet, with an already-fraying Waymo relationship as the central risk.",
     file: "companies/uber.html"
+  },
+
+  {
+    slug: "byd",
+    name: "BYD Company Limited",
+    ticker: "HKEX: 1211 · OTC ADR: BYDDY",
+    sector: "Electric Vehicles, Batteries & Auto Manufacturing",
+    industry: "Consumer Discretionary",
+    subIndustry: "Electric Vehicles & Battery Manufacturing",
+    tags: ["Geopolitically Critical"],
+    dateFeatured: "2026-09-12",
+    price: "$10.13",
+    score: "8 / 14",
+    martinero: 60,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "decelerating", recent: 3.46, prior: 29.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: -3.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
+    blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL: revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% (well under the 20% bar), free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge, and H1 2026 revenue actually fell 7.1% YoY as a brutal domestic price war bit into China sales. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
+    file: "companies/byd.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
