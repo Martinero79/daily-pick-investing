@@ -1608,6 +1608,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: -3.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
     blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL: revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% (well under the 20% bar), free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge, and H1 2026 revenue actually fell 7.1% YoY as a brutal domestic price war bit into China sales. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
     file: "companies/byd.html"
+  },
+
+  {
+    slug: "hitachi",
+    name: "Hitachi, Ltd.",
+    ticker: "TSE: 6501 · OTC ADR: HTHIY",
+    sector: "Diversified Industrial / Digital Conglomerate",
+    industry: "Industrials",
+    subIndustry: "Diversified Industrials & Digital Systems",
+    tags: [],
+    dateFeatured: "2026-09-13",
+    price: "¥5,199",
+    score: "7 / 14",
+    martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 8.21, prior: 0.56 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q1 FY2027", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic) — up 35.8% over the past year to an all-time high in February 2026, with FY2026 revenue +8.21% and net income +30.31% YoY. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses are the flip side of years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR to near zero and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot anywhere and no founder or insider stake.",
+    file: "companies/hitachi.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
