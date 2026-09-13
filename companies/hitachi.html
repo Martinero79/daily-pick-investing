@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hitachi Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/hitachi.html">
+<meta property="og:title" content="Hitachi Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hitachi Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Diversified Industrial-to-Digital Conglomerate</div>
+  <h1>Hitachi, Ltd.</h1>
+  <div class="badges">
+    <span class="badge">TSE: 6501 &middot; OTC ADR: HTHIY &middot; reports in JPY (&yen;) under IFRS</span>
+    <span class="badge">FY ends Mar 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1910 &middot; Tokyo, Japan (HQ)</span>
+    <span class="badge warn">2026 momentum pick: up ~35.8% over the past year to an all-time high of &yen;6,039 on Feb 10, 2026, with FY2026 revenue +8.21% and net income +30.31% YoY &mdash; but a decade of business-portfolio pruning (Hitachi Metals, Hitachi Astemo divested) flattens the 5-year revenue CAGR to near zero.</span>
+  </div>
+  <div class="price">&yen;5,199</div>
+  <div class="price-sub">TSE close Sep 11, 2026 &middot; HTHIY (OTC ADR) $34.21 same date &middot; Mkt cap &asymp;&yen;24.0T (&asymp;$158B at &yen;152/$1) &middot; 52-week range &yen;3,826&ndash;&yen;6,039</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> a genuinely diversified conglomerate with no single dominant position &mdash; in power grid equipment (Hitachi Energy) a top-4 player behind Siemens Energy and GE Vernova, alongside Schneider Electric and ABB; in rail rolling stock (Hitachi Rail) a top-5 global player (roughly 8-10% share) behind Alstom and CRRC, on par with Siemens Mobility and Wabtec, though a genuine leader in high-speed rail (Shinkansen, UK's HS2) and driverless metro systems; in nuclear, the GE-Hitachi Nuclear Energy joint venture is a real BWR-technology leader alongside Westinghouse and Framatome; in industrial digital/IoT (Lumada) and digital engineering (GlobalLogic, acquired 2021) it competes with Accenture, IBM, TCS, Infosys, Cognizant and EPAM in a highly fragmented services market.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&yen;10,586.8B</div>
+      <div class="sub">+8.21% YoY, accelerating from +0.56% in FY2025; Q1 FY2027 revenue grew ~20% YoY with record adjusted EBITA</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val red">12.35%</div>
+      <div class="note">Up from 7.19% (FY2022) &rarr; 8.66% (FY2023) &rarr; 8.30% (FY2024) &rarr; 9.84% (FY2025) &mdash; genuinely improving every year, but still well under this framework's 20% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val" style="color:#fbbf24;">12.4% / 7.0%</div>
+      <div class="note">Clears the assumed WACC comfortably but misses the framework's flat 15% ROIC bar; Hitachi's own Inspire 2027 plan targets 12-13% ROIC by FY2027.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val green">&yen;669.7B</div>
+      <div class="sub">Turned net cash in FY2026 for the first time in at least five years, from -&yen;1,781.6B (FY2022) via divestiture proceeds and rising FCF</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">63/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met, 7 not met, 0 N/A &mdash; strong cash generation and balance-sheet quality set against weak headline growth and a fragmented competitive position.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 110.00,205.00 L110.00,168.00 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M110.00,205.00 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 110.00,168.00 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (EBIT CAGR, FCF CAGR, net debt/EBITDA, FCF conversion, share count trend, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, operating margin, market share, market concentration, ROIC/WACC, entry multiple, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; a genuinely fragmented conglomerate competing against a different set of large industrial and services rivals in nearly every segment</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Hitachi's 2026 momentum is real: the stock is up roughly 35.8% over the past year, hit an all-time high of &yen;6,039 on February 10, 2026, and FY2026 (year ended March 31, 2026) revenue grew 8.21% to &yen;10,586.8B while net income jumped 30.31% to &yen;802.4B, with Q1 FY2027 revenue up a further ~20% YoY on record adjusted EBITA. Operating margin has improved every single year for five years running, from 7.19% (FY2022) to 12.35% (FY2026), and the balance sheet turned net cash in FY2026 for the first time in years as free cash flow more than tripled since FY2022 (&yen;433.0B &rarr; &yen;1,316.3B). But the 14-criterion checklist is unforgiving about what sits underneath that momentum: this is a company that spent the last five years actively shrinking through divestiture &mdash; selling control of Hitachi Metals to a Bain Capital-led consortium and partially divesting Hitachi Astemo to Honda and JIC Capital (recognizing a &yen;122.0B one-off gain in FY2024) &mdash; so the reported 5-year revenue CAGR is barely positive (+0.78%) even though FY2026 revenue itself never actually exceeded FY2023's pre-divestiture peak of &yen;10,881.2B until this year. Hitachi also holds no dominant #1/#2 position anywhere: it's a genuine top-4/top-5 player in power grids, rail and nuclear, but never the outright leader, and Lumada/GlobalLogic digital services compete in a wide-open field against Accenture, IBM and the major India-based IT services firms. There's no founder or family stake either &mdash; ownership is roughly 48% foreign institutional and the rest domestic institutions, trust banks and retail. Net: 7 of 14 criteria met, Martinero Index 63/100 &mdash; a genuinely improving, cash-generative industrial conglomerate whose headline momentum outruns what the fixed checklist can verify about its growth and competitive position.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q1 FY2027 (three months to June 30, 2026, reported Jul 29, 2026) and spot price as of Sep 11, 2026 close. Hitachi's fiscal year runs April-March; this dashboard labels years by the calendar year in which they end (FY2026 = year ended March 31, 2026), matching S&amp;P Global Market Intelligence's convention used throughout. All financial figures are as originally reported in JPY (&yen;) under IFRS; USD conversions are approximate and noted explicitly.
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in JPY (&yen;) billions, as reported under IFRS. CAGR computed FY22&rarr;FY26 (4-year span). Fiscal year ends March 31.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue actually dipped in FY2024 and only regained its FY2023 peak in FY2026 &mdash; a structural effect of Hitachi deconsolidating Hitachi Astemo (converted to an equity-method affiliate) and selling control of Hitachi Metals, not organic contraction. Operating income and free cash flow, by contrast, have both grown steadily throughout.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">&yen;3,000B</text><line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">&yen;6,000B</text><line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">&yen;9,000B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;12,000B</text><rect x="75.6" y="51.81" width="22.5" height="188.19" rx="2" fill="#2dd4bf"/><rect x="113.7" y="226.47" width="22.5" height="13.53" rx="2" fill="#60a5fa"/><rect x="151.9" y="232.06" width="22.5" height="7.94" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="238.1" y="40.51" width="22.5" height="199.49" rx="2" fill="#2dd4bf"/><rect x="276.2" y="222.72" width="22.5" height="17.28" rx="2" fill="#60a5fa"/><rect x="314.4" y="229.47" width="22.5" height="10.53" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="400.6" y="61.64" width="22.5" height="178.36" rx="2" fill="#2dd4bf"/><rect x="438.7" y="225.20" width="22.5" height="14.80" rx="2" fill="#60a5fa"/><rect x="476.9" y="226.73" width="22.5" height="13.27" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="563.1" y="60.64" width="22.5" height="179.36" rx="2" fill="#2dd4bf"/><rect x="601.2" y="222.36" width="22.5" height="17.64" rx="2" fill="#60a5fa"/><rect x="639.4" y="223.03" width="22.5" height="16.97" rx="2" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="725.6" y="45.91" width="22.5" height="194.09" rx="2" fill="#2dd4bf"/><rect x="763.7" y="216.04" width="22.5" height="23.96" rx="2" fill="#60a5fa"/><rect x="801.9" y="215.87" width="22.5" height="24.13" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+0.78%</div><div class="sub">&yen;10,264.6B &rarr; &yen;10,586.8B; flattened by the Astemo/Metals divestitures</div></div>
+    <div class="cagr-card"><div class="label">Operating Income CAGR</div><div class="val" style="color:#34d399;">+15.4%</div><div class="sub">&yen;738.2B &rarr; &yen;1,307.1B; clears the 15% bar, just</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+32.0%</div><div class="sub">&yen;433.0B &rarr; &yen;1,316.3B; comfortably above the bar</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Hitachi has never reached it in this window, but margin has expanded every year, from 7.19% (FY2022) to 12.35% (FY2026), roughly 5.2 points of steady improvement.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><path d="M50.0,162.48 L247.5,150.72 L445.0,153.60 L642.5,141.28 L840.0,121.20 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,162.48 L247.5,150.72 L445.0,153.60 L642.5,141.28 L840.0,121.20" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="162.48" r="3" fill="#2dd4bf"/><text x="50.0" y="175" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.19%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="150.72" r="3" fill="#2dd4bf"/><text x="247.5" y="140.72" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.66%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="153.60" r="3" fill="#2dd4bf"/><text x="445.0" y="166" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.30%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="141.28" r="3" fill="#2dd4bf"/><text x="642.5" y="131.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.84%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="121.20" r="3" fill="#2dd4bf"/><text x="840.0" y="111.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.35%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text><text x="835" y="55" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>&yen;10,264.6B</td><td>&yen;738.2B</td><td>7.19%</td><td>&yen;583.5B</td><td>&yen;433.0B</td><td>58.7%</td></tr>
+    <tr><td>FY2023</td><td>&yen;10,881.2B</td><td>&yen;942.3B</td><td>8.66%</td><td>&yen;649.1B</td><td>&yen;574.4B</td><td>61.0%</td></tr>
+    <tr><td>FY2024</td><td>&yen;9,728.7B</td><td>&yen;807.3B</td><td>8.30%</td><td>&yen;589.9B</td><td>&yen;723.7B</td><td>89.7%</td></tr>
+    <tr><td>FY2025</td><td>&yen;9,783.4B</td><td>&yen;962.2B</td><td>9.84%</td><td>&yen;615.7B</td><td>&yen;925.4B</td><td>96.2%</td></tr>
+    <tr><td>FY2026</td><td>&yen;10,586.8B</td><td>&yen;1,307.1B</td><td>12.35%</td><td>&yen;802.4B</td><td>&yen;1,316.3B</td><td>100.7%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>On the FY2024 revenue dip:</b> Hitachi converted Hitachi Astemo into an equity-method affiliate (after selling a stake to Honda and JIC Capital, completed Oct 2023) and had already sold control of Hitachi Metals to a Bain Capital-led consortium &mdash; both remove revenue from consolidation without reflecting any operating weakness. A &yen;122.0B one-off gain on the Astemo share transfer was booked in FY2024, one of several one-off divestiture gains flagged throughout this dashboard.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; Portfolio Restructuring</div></div>
+  <div class="sec-sub">Hitachi's fiscal quarters run Apr-Jun, Jul-Sep, Oct-Dec, Jan-Mar. Latest reported period: Q1 FY2027 (three months to June 30, 2026, reported Jul 29, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q1 FY2027 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&yen;2,712.7B</b>, up <b style="color:#34d399;">~20% YoY</b>, with record adjusted EBITA and all four sectors (Digital Systems &amp; Services, Energy, Mobility, Connective Industries) posting double-digit gains. Management raised full-year FY2027 guidance across revenue, profit and cash flow on the back of this quarter, citing strong demand, productivity improvements from internal AI tooling, and continued capital returns (including an up-to-&yen;500B buyback program, roughly 3.56% of shares outstanding, resolved in April 2026). This is the clearest evidence that the FY2026 acceleration has continued into the new fiscal year rather than being a one-off.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2026)</div>
+    <div class="chart-sub">Gross margin has expanded every year since FY2022, from 24.93% to 30.03% &mdash; a +5.32pp improvement versus FY2023 alone (the window used for criterion #14), consistent with the shift toward higher-margin Lumada digital services and energy-grid equipment.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">15%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">25%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35%</text>
+<path d="M50.0,120.70 L247.5,122.90 L445.0,104.60 L642.5,81.70 L840.0,69.70 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/>
+<path d="M50.0,120.70 L247.5,122.90 L445.0,104.60 L642.5,81.70 L840.0,69.70" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="50.0" cy="120.70" r="3" fill="#34d399"/>
+<text x="50.0" y="133" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.93%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="247.5" cy="122.90" r="3" fill="#34d399"/>
+<text x="247.5" y="135" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.71%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="445.0" cy="104.60" r="3" fill="#34d399"/>
+<text x="445.0" y="94.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.54%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="642.5" cy="81.70" r="3" fill="#34d399"/>
+<text x="642.5" y="71.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">28.83%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="69.70" r="3" fill="#34d399"/>
+<text x="840.0" y="59.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">30.03%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Hitachi is a genuine, diversified conglomerate rather than a category leader. Hitachi Rail is a real top-5 global rolling-stock maker (roughly 8-10% share, leading in high-speed rail and driverless metro) but sits behind Alstom and CRRC; Hitachi Energy (built substantially on the acquired ABB power grids business) is a strong #3-4 in grid equipment behind Siemens Energy and GE Vernova; GE-Hitachi Nuclear Energy is a credible BWR-technology leader but nuclear new-build itself is a small, slow-moving market; and Lumada/GlobalLogic digital services compete in one of the most fragmented markets in the world, against Accenture, IBM, Capgemini, TCS, Infosys and Cognizant among many others. That's why criterion #5 (market share) scores Not met and market concentration scores a 4/5 (fragmented) despite Hitachi's real momentum and improving execution across every one of these businesses.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close (TSE 6501). WACC is assumed at 7.0% (GuruFocus estimates Hitachi's current WACC at roughly 6.74%), reflecting Hitachi's large-cap, investment-grade, low-beta profile (beta &asymp;0.54).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 29.39x sits well above the FY22-26 average of 18.67x &mdash; but that average is pulled down by one-off divestiture gains: FY2022's 10.22x and FY2024's 21.84x both reflect years distorted by gains from selling down Hitachi Metals and Hitachi Astemo, mechanically inflating net income and depressing the P/E ratio in those specific years. Forward P/E (10.87x-23.54x FY22-26, now 22.45x) tells a similar but less extreme story &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50.0" y1="126.65" x2="840.0" y2="126.65" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="122.65" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 18.67x</text><path d="M 50.0,168.90 L 208.0,167.60 L 366.0,110.80 L 524.0,91.45 L 682.0,94.50 L 840.0,73.05" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="168.90" r="3" fill="#a78bfa"/><text x="50.0" y="181" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.22x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="167.60" r="3" fill="#a78bfa"/><text x="208.0" y="180" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.48x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="110.80" r="3" fill="#a78bfa"/><text x="366.0" y="100.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.84x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="91.45" r="3" fill="#a78bfa"/><text x="524.0" y="81.45" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.71x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="94.50" r="3" fill="#a78bfa"/><text x="682.0" y="84.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">25.10x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="73.05" r="3.5" fill="#a78bfa"/><text x="840.0" y="63.05" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">29.39x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,165.65 L 208.0,170.55 L 366.0,103.65 L 524.0,119.40 L 682.0,102.30 L 840.0,107.75" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="165.65" r="3" fill="#c4b5fd"/><text x="50.0" y="155.65" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">10.87x</text><circle cx="208.0" cy="170.55" r="3" fill="#c4b5fd"/><text x="208.0" y="185.55" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">9.89x</text><circle cx="366.0" cy="103.65" r="3" fill="#c4b5fd"/><text x="366.0" y="188.65" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700"></text><text x="366.0" y="93.65" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">23.27x</text><circle cx="524.0" cy="119.40" r="3" fill="#c4b5fd"/><text x="524.0" y="134.40" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">20.12x</text><circle cx="682.0" cy="102.30" r="3" fill="#c4b5fd"/><text x="682.0" y="117.30" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">23.54x</text><circle cx="840.0" cy="107.75" r="3.5" fill="#c4b5fd"/><text x="840.0" y="122.75" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">22.45x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers, and the one-off gains behind this chart:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings; the trailing-P/E series above is that same ratio at each fiscal year-end. Forward P/E divides today's price by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and generally the more useful lens. For Hitachi specifically, the "own-history" comparison this framework relies on is distorted: FY2022's unusually low 10.22x trailing P/E coincides with the completed sale of control in Hitachi Metals to a Bain Capital-led consortium, and FY2024's jump to 21.84x still sits below where it might otherwise be because that year absorbed a &yen;122.0B one-off gain on partially divesting Hitachi Astemo to Honda and JIC Capital &mdash; both mechanically inflate net income and depress the P/E ratio in the specific year they land, the same kind of distortion flagged on this site's GSK and Novartis dashboards. That pulls the FY22-26 average down to 18.67x, so today's 29.39x trailing multiple looks more stretched by comparison than the underlying earnings trend alone would suggest. Forward P/E, less exposed to that one-off-gain effect, tells a milder version of the same story: 22.45x now versus a 17.54x FY22-26 average &mdash; still a premium, but a smaller one. This is the criterion where this dashboard's honest read differs most from a naive reading of the raw multiple.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Hitachi ended FY2026 with a net cash position of &yen;669.7B, up from net debt of &yen;21.5B (FY2025), &yen;143.4B (FY2024), &yen;1,033.1B (FY2023) and &yen;1,781.6B (FY2022) &mdash; a genuine multi-year deleveraging story funded by divestiture proceeds and rising free cash flow, and this framework's net-debt/EBITDA bar auto-qualifies on any net-cash position. ROIC has climbed to 12.4% (FY2026, per company disclosure) from roughly 6% in FY2020, comfortably clearing the assumed 7.0% WACC but still short of this framework's flat 15% bar; Hitachi's own Inspire 2027 plan targets 12-13% ROIC by FY2027, meaning management itself is not promising to clear that bar either. Capex ran at just 3.32% of FY2026 revenue (&yen;351.8B), though it jumped 42.5% YoY as Hitachi ramps grid and data-infrastructure investment.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="211.11 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="228.71 439.82" stroke-dashoffset="-211.11"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Foreign institutional investors &asymp; 48% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Domestic institutions, trust banks &amp; retail &asymp; 52% (largest single holder, Custody Bank of Japan, &asymp;6.2%, is a nominee/trustee account, not a beneficial owner)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note, honestly stated:</b> unlike several names on this site (Oracle's Larry Ellison, BYD's Wang Chuanfu, L'Or&eacute;al's Bettencourt Meyers family), Hitachi has no founder, family or executive shareholder with a meaningful stake &mdash; 116 years after its 1910 founding by engineer Namihei Odaira, ownership is entirely dispersed across foreign and domestic institutions. That's typical for a company of this size and age, but it means criterion #12 scores a clean Not met with no ambiguity.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Hitachi</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+0.78% &mdash; &yen;10,264.6B &rarr; &yen;10,586.8B; flattened by the Hitachi Metals and Hitachi Astemo divestitures, and revenue only regained its FY2023 pre-divestiture peak this year (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>&ge;15%</td><td>+15.4% &mdash; &yen;738.2B &rarr; &yen;1,307.1B; clears the bar, though only just (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>12.35% (FY2026) &mdash; up every year from 7.19% (FY2022), genuine improvement, but still well under the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>+32.0% &mdash; &yen;433.0B &rarr; &yen;1,316.3B; comfortably above the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>No #1/#2 anywhere &mdash; top-4/top-5 in power grids, rail and nuclear technology, a small player among many in digital/IT services (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a genuinely fragmented conglomerate facing a different set of large, credible competitors (Siemens, GE Vernova, Mitsubishi Electric, Schneider Electric, ABB, Alstom, CRRC, Accenture) in nearly every segment</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 12.4% (FY2026) clears the assumed 7.0% WACC comfortably but misses the framework's flat 15% bar; Hitachi's own Inspire 2027 plan targets only 12-13% by FY2027 (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash (&yen;669.7B) as of FY2026, turning positive for the first time in years from -&yen;1,781.6B (FY2022) &mdash; auto-qualifies</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>100.7% (FY2026) &mdash; FCF of &yen;1,316.3B against EBIT of &yen;1,307.1B, comfortably above the bar and up from 58.7% (FY2022)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 29.39x vs a FY22-26 average of 18.67x &mdash; but that average is depressed by one-off divestiture gains in FY2022 (Hitachi Metals sale) and FY2024 (&yen;122.0B Astemo gain); forward P/E (22.45x vs 17.54x avg) shows a smaller but still real premium (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding down 1.35% over the past year; an up-to-&yen;500B buyback (&asymp;3.56% of shares) resolved April 2026</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (&asymp;5%+)</td><td>None &mdash; no founder, family or executive holds a meaningful stake; ownership is &asymp;48% foreign institutional and &asymp;52% domestic institutions/trust banks/retail</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.32% of FY2026 revenue (&yen;351.8B) &mdash; low for a heavy-industrial conglomerate, even after a 42.5% YoY jump funding grid/data-infrastructure investment</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 30.03% (FY2026) vs 24.71% (FY2023), a +5.32pp improvement &mdash; comfortably clears the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Operating margin has expanded every single year for five straight years (7.19% &rarr; 12.35%), free cash flow has more than tripled since FY2022 and now converts above 100% of EBIT, and the balance sheet swung to net cash in FY2026 for the first time in years. Capex intensity is low for a heavy-industrial name, the share count is gently declining alongside an active buyback program, and gross margin has improved by over 5 points on a 3-year view. Momentum is genuine and current: Q1 FY2027 revenue grew roughly 20% YoY with all four business sectors posting double-digit gains, and guidance was raised.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The reported 5-year revenue CAGR (+0.78%) is a checklist trap of Hitachi's own making: years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) shrank the consolidated top line, and one-off gains from those same sales distort the P/E history this framework leans on for its valuation signal. Hitachi has no dominant #1/#2 market position anywhere and competes against a different set of large, credible rivals in almost every segment, and there's no founder or insider stake to align management with shareholders. ROIC, while genuinely improving, still falls short of both this framework's 15% bar and, tellingly, Hitachi's own 12-13% FY2027 target. Whether the current momentum (accelerating growth, expanding margins, a stronger balance sheet) represents a genuine structural re-rating or simply the easier comps that follow several years of restructuring is the central open question here.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Apr 27 &ndash; Sep 11, 2026. Sources: stockanalysis.com (TYO:6501 financials, ratios, margins, sourced from S&amp;P Global Market Intelligence), Hitachi FY2026 (Apr 27, 2026) and Q1 FY2027 (Jul 29, 2026) earnings releases and Investor Day 2026 materials, GuruFocus (WACC estimate, ownership data), macrotrends.net (historical operating margin cross-check), market research on global rolling stock and power grid equipment market shares (railmarket.com, marketsandmarkets.com).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Hitachi reports in JPY under IFRS; USD conversions are approximate. WACC (7.0%) is an assumed estimate reflecting Hitachi's own profile, not a company-disclosed figure.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Hitachi &mdash; TSE, JPY share price trend. Points shown are fiscal year-end closes (March 31), derived from reported trailing P/E &times; EPS, plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Hitachi &mdash; Fiscal Year-End Close (TSE, JPY)</div>
+    <div class="chart-sub">A remarkable five-year run: the shares have compounded at roughly 43% a year since the FY2022 close, driven by both earnings growth and a substantial re-rating (trailing P/E roughly tripled from about 10x to the high-20s), before hitting an all-time high of &yen;6,039 on February 10, 2026.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +43.3%</text>
+<path d="M 46.0,148.21 L 172.8,143.00 L 299.6,108.58 L 426.4,91.27 L 553.2,65.60 L 680.0,45.83 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,148.21 L 172.8,143.00 L 299.6,108.58 L 426.4,91.27 L 553.2,65.60 L 680.0,45.83" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="148.21" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="138.21" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,232</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="143.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="133.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,434</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="108.58" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="98.58" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;2,768</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="91.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="81.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;3,438</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="65.60" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="55.60" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;4,433</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="45.83" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="35.83" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;5,199</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2022-2026 (March 31 each year) are derived from reported trailing P/E &times; EPS (stockanalysis.com); the current price (&yen;5,199, Sep 11, 2026 close) is a direct TSE closing price. HTHIY (OTC ADR) closed at $34.21 the same day, implying a roughly &yen;152/$1 rate. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
