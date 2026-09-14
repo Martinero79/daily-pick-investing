@@ -1626,6 +1626,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q1 FY2027", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic) — up 35.8% over the past year to an all-time high in February 2026, with FY2026 revenue +8.21% and net income +30.31% YoY. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses are the flip side of years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR to near zero and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot anywhere and no founder or insider stake.",
     file: "companies/hitachi.html"
+  },
+
+  {
+    slug: "shopify",
+    name: "Shopify Inc.",
+    ticker: "NYSE: SHOP · TSX: SHOP",
+    sector: "E-Commerce Infrastructure & Merchant Platform Software",
+    industry: "Technology",
+    subIndustry: "E-Commerce Platform Software",
+    tags: [],
+    dateFeatured: "2026-09-14",
+    price: "$128.79",
+    score: "12 / 14",
+    martinero: 83,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 30.14, prior: 25.78 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q2 2026", growth: 34.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Canadian e-commerce infrastructure platform (storefronts, payments, fulfillment, POS) that just posted +34% YoY quarterly revenue growth and real operating leverage, with shares up ~17% on the print. One of the stronger scorecards on this site — net cash, near-zero capex, ROIC well above cost of capital — but operating margin (16.42%) still misses the 20% bar and GAAP earnings are distorted by the 2023 Deliverr/Flexport writedown, so valuation is scored on P/FCF instead of trailing P/E.",
+    file: "companies/shopify.html"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
