@@ -1644,6 +1644,25 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: 34.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Canadian e-commerce infrastructure platform (storefronts, payments, fulfillment, POS) that just posted +34% YoY quarterly revenue growth and real operating leverage, with shares up ~17% on the print. One of the stronger scorecards on this site — net cash, near-zero capex, ROIC well above cost of capital — but operating margin (16.42%) still misses the 20% bar and GAAP earnings are distorted by the 2023 Deliverr/Flexport writedown, so valuation is scored on P/FCF instead of trailing P/E. IMPORTANT: the 'entry multiple' criterion is Met only relative to Shopify's own trading history (70x P/FCF vs a ~100x average) — at 70x FCF and a PEG near 2.0, the stock is still priced for a lot of future growth. Financials will probably keep delivering; the share price already assumes they will.",
     file: "companies/shopify.html"
+  },
+
+  {
+    slug: "reliance-industries",
+    name: "Reliance Industries Limited",
+    ticker: "NSE: RELIANCE · BSE: 500325",
+    sector: "Diversified Conglomerate — Refining/Petrochemicals, Retail & Telecom",
+    industry: "Industrials",
+    subIndustry: "Diversified Conglomerate (Energy, Retail & Telecom)",
+    tags: ["Family-Controlled"],
+    dateFeatured: "2026-09-15",
+    price: "₹1,257.50",
+    score: "7 / 14",
+    martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 9.59, prior: 7.06 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q1 FY2027", growth: 25.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "India's largest private-sector conglomerate — the Jamnagar O2C refining/petrochemicals engine, Reliance Retail (India's largest retailer) and Jio (India's #1 telecom carrier, ~49% wireless-broadband share) under one roof, with the Ambani family/promoter group holding roughly 50.5%. Clears net debt/EBITDA, valuation-vs-history, share count and insider ownership; misses are the growth and profitability criteria this framework weighs most heavily — revenue/EBIT CAGR near 11% and an 11.5% consolidated operating margin, both well under the bars, reflecting the low-margin refining business blended into the mix.",
+    file: "companies/reliance-industries.html",
+    personalNote: "Reliance is the first Indian company I've run through this checklist, and it's a good test of whether the framework travels outside the US and Europe. It's genuinely three or four businesses under one roof — the original Jamnagar refining and petrochemicals engine, India's largest retailer, and Jio, now India's dominant telecom carrier, on the verge of what would be India's biggest-ever IPO after Jio Platforms just got SEBI approval for a roughly ₹37,700 crore listing. The Ambani family and promoter entities control just over half the company (~50.5%, recently increased, not reduced), which is about as concentrated as insider ownership gets on this site — reassuring for alignment, though it's also one family effectively controlling a company that touches national telecom and energy infrastructure. The checklist is fairly unforgiving here: revenue and EBIT have both compounded around 11% a year, comfortably below my 15% growth bar, and the consolidated operating margin (11.5%) looks thin next to the software and pharma names on this site — though that's really an artifact of blending a low-margin refining business with much higher-margin retail and telecom units, something one number can't show. What I do like: the balance sheet is genuinely conservative for a company spending this much on capex (net debt/EBITDA under 1x), the share count is flat (the 2024 bonus issue was a split, not dilution), and the stock itself has gone essentially nowhere in five years even as earnings grew roughly 31% — either a value opportunity or a sign the market already suspects growth is slowing before the trailing numbers show it. I don't currently hold any India exposure myself."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
