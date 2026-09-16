@@ -1663,6 +1663,101 @@ const COMPANIES = [
     blurb: "India's largest private-sector conglomerate — the Jamnagar O2C refining/petrochemicals engine, Reliance Retail (India's largest retailer) and Jio (India's #1 telecom carrier, ~49% wireless-broadband share) under one roof, with the Ambani family/promoter group holding roughly 50.5%. Clears net debt/EBITDA, valuation-vs-history, share count and insider ownership; misses are the growth and profitability criteria this framework weighs most heavily — revenue/EBIT CAGR near 11% and an 11.5% consolidated operating margin, both well under the bars, reflecting the low-margin refining business blended into the mix.",
     file: "companies/reliance-industries.html",
     personalNote: "Reliance is the first Indian company I've run through this checklist, and it's a good test of whether the framework travels outside the US and Europe. It's genuinely three or four businesses under one roof — the original Jamnagar refining and petrochemicals engine, India's largest retailer, and Jio, now India's dominant telecom carrier, on the verge of what would be India's biggest-ever IPO after Jio Platforms just got SEBI approval for a roughly ₹37,700 crore listing. The Ambani family and promoter entities control just over half the company (~50.5%, recently increased, not reduced), which is about as concentrated as insider ownership gets on this site — reassuring for alignment, though it's also one family effectively controlling a company that touches national telecom and energy infrastructure. The checklist is fairly unforgiving here: revenue and EBIT have both compounded around 11% a year, comfortably below my 15% growth bar, and the consolidated operating margin (11.5%) looks thin next to the software and pharma names on this site — though that's really an artifact of blending a low-margin refining business with much higher-margin retail and telecom units, something one number can't show. What I do like: the balance sheet is genuinely conservative for a company spending this much on capex (net debt/EBITDA under 1x), the share count is flat (the 2024 bonus issue was a split, not dilution), and the stock itself has gone essentially nowhere in five years even as earnings grew roughly 31% — either a value opportunity or a sign the market already suspects growth is slowing before the trailing numbers show it. I don't currently hold any India exposure myself."
+  },
+
+  {
+    slug: "colliers",
+    name: "Colliers International Group Inc.",
+    ticker: "NASDAQ: CIGI · TSX: CIGI",
+    sector: "Commercial Real Estate Services & Investment Management",
+    industry: "Real Estate",
+    subIndustry: "Commercial Real Estate Services",
+    tags: ["Family-Controlled"],
+    dateFeatured: "2026-09-16",
+    price: "$94.00",
+    score: "4 / 14",
+    martinero: 43,
+    momentum: { status: "accelerating", recent: 15.3, prior: 11.2 },
+    quarterYoY: { period: "TTM (Jun 2026)", growth: 15.2 },
+    blurb: "A genuine top-5 global commercial real estate services firm, differentiated by Investment Management (Harrison Street) and Engineering (Englobe, Ayesa) now making up ~41% of revenue. Real double-digit growth, but EBIT has been essentially flat since FY2021 despite it, ROIC misses its own cost of capital, and net debt/EBITDA has widened to 3-4x funding the acquisition strategy. Co-founder Jay Hennick's ownership and dual-class voting control give real founder alignment.",
+    file: "companies/colliers.html",
+    personalNote: "Built this one ahead of an interview with Colliers, and it's a useful stress test of the checklist on a services business. The growth headline is real — revenue's still compounding at a double-digit clip — but this framework is built to look past that, and what it finds underneath is less comfortable: EBIT hasn't actually grown since FY2021 even as revenue grew nearly 8% a year, meaning the M&A that's driving growth has been diluting margin, not adding to it. ROIC doesn't clear even the stock's own auto-computed cost of capital. What I do like: capex is minimal, gross margin has actually held up, and Jay Hennick's ownership plus dual-class voting structure gives him genuine, durable skin in the game — rare among the CRE peers I ran alongside this one. The stock's down over 40% in a year, which has pulled the multiple well below its own average, but a chunk of that 'cheapness' is a shrinking earnings base, not a pure bargain."
+  },
+
+  {
+    slug: "cbre",
+    name: "CBRE Group, Inc.",
+    ticker: "NYSE: CBRE",
+    sector: "Commercial Real Estate Services & Investment Management",
+    industry: "Real Estate",
+    subIndustry: "Commercial Real Estate Services",
+    tags: [],
+    dateFeatured: "2026-09-16",
+    price: "$140.90",
+    score: "5 / 14",
+    martinero: 36,
+    momentum: { status: "accelerating", recent: 13.4, prior: 12.0 },
+    quarterYoY: { period: "Q2 2026", growth: 16.0 },
+    blurb: "The clear #1 global commercial real estate services firm by revenue and investment-sales volume (25% share, 15th consecutive year at #1) — but the clearest example on this site of growth without profitability: revenue is up ~46% since FY2021 while EBIT is actually lower today than it was then. Operating margin has thinned every year (5.6%→3.2%), ROIC misses its cost of capital, and leverage has climbed from near-zero to ~4x EBITDA. Insider ownership is negligible (<1%), unlike Colliers' founder-controlled structure.",
+    file: "companies/cbre.html",
+    personalNote: "CBRE is the scale leader of the group by a wide margin — genuinely #1, not a close call — which makes the margin story more interesting, not less. Revenue's grown nearly 46% in four years and EBIT is actually lower than where it started; that's not a company struggling to grow, it's a company where growth and profitability have become disconnected, which is exactly the kind of thing a growth-only view would miss entirely. Capex is minimal and the entry multiple sits right at its own five-year average, so there's no real discount being offered for the profitability problem. No founder or concentrated insider stake here either, unlike Colliers — CBRE is a fully institutionally-run business at this point. I don't hold this one."
+  },
+
+  {
+    slug: "cushman-wakefield",
+    name: "Cushman & Wakefield plc",
+    ticker: "NYSE: CWK",
+    sector: "Commercial Real Estate Services & Investment Management",
+    industry: "Real Estate",
+    subIndustry: "Commercial Real Estate Services",
+    tags: [],
+    dateFeatured: "2026-09-16",
+    price: "$12.52",
+    score: "2 / 14",
+    martinero: 25,
+    momentum: { status: "accelerating", recent: 8.9, prior: -0.5 },
+    quarterYoY: { period: "TTM (Jun 2026)", growth: 11.0 },
+    blurb: "The weakest scorer of the group. Revenue is only marginally above FY2021 levels after a genuine two-year decline through the 2022-23 rate-hike downturn, EBIT is still below its FY2021 level, and net debt/EBITDA runs the highest of the peer set at ~4-4.3x — a legacy of its LBO/2018-IPO capital structure. Insider ownership is negligible (0.82%). The one real positive: capex is minimal and the current entry multiple, while messy given a loss-making FY2023, looks cheap on a forward basis if the recovery holds.",
+    file: "companies/cushman-wakefield.html",
+    personalNote: "The clearest 'show me' story of the CRE batch. Revenue's only just recovered to above FY2021 levels, EBIT still hasn't, and the leverage — already the highest-risk balance sheet among the peers I looked at — hasn't come down with the recovery. It's genuinely accelerating right now (FY2025 revenue growth flipped from negative to nearly 9%), so this could be the early innings of a real turnaround, or it could be a cyclical bounce off a very low base. Insider ownership is essentially nil, so there's no founder conviction here to lean on either way. Lowest score of the group, and the balance sheet is the reason why — worth watching the deleveraging path, not worth owning yet on what's in front of me."
+  },
+
+  {
+    slug: "savills",
+    name: "Savills plc",
+    ticker: "LSE: SVS",
+    sector: "Commercial Real Estate Services & Investment Management",
+    industry: "Real Estate",
+    subIndustry: "Commercial Real Estate Services",
+    tags: [],
+    dateFeatured: "2026-09-16",
+    price: "£9.76",
+    score: "5 / 14",
+    martinero: 35,
+    momentum: { status: "decelerating", recent: 6.1, prior: 7.4 },
+    quarterYoY: { period: "H1 2026", growth: 9.0 },
+    blurb: "UK-headquartered and the smallest of this batch by revenue — genuinely more a strong #5-6 globally than a confident top-5, despite sitting in the same competitive set as CBRE, JLL, Colliers and Cushman & Wakefield. The standout strength is the balance sheet: run far more conservatively than the US roll-up peers, with net cash on an ex-lease basis. EBIT declined over the FY21-25 window (a genuine -12% CAGR) before recovering post-2023, and ROIC sits right at the edge of its assumed cost of capital.",
+    file: "companies/savills.html",
+    personalNote: "Savills is the odd one out in this batch — smaller, UK-listed, and run with a noticeably more conservative balance sheet than the American names. No founder or family control, but also none of the aggressive leverage that shows up at Colliers and especially Cushman & Wakefield. The FY21-25 window was rougher than the headline suggests: EBIT actually fell over that span before recovering, and the recovery itself is decelerating slightly quarter to quarter rather than accelerating. I sized it honestly as a #5-6 global player rather than forcing a top-5 story just to fit the batch — it doesn't have CBRE's or JLL's scale, but it also doesn't carry their debt. A smaller, cleaner balance sheet with weaker growth — a real trade-off, not a clear win either way."
+  },
+
+  {
+    slug: "jll",
+    name: "Jones Lang LaSalle Incorporated",
+    ticker: "NYSE: JLL",
+    sector: "Commercial Real Estate Services & Investment Management",
+    industry: "Real Estate",
+    subIndustry: "Commercial Real Estate Services",
+    tags: [],
+    dateFeatured: "2026-09-16",
+    price: "$343.65",
+    score: "6 / 14",
+    martinero: 46,
+    momentum: { status: "decelerating", recent: 11.5, prior: 12.9 },
+    quarterYoY: { period: "TTM (Jun 2026)", growth: 11.2 },
+    blurb: "The strongest scorer of the Big 5 CRE batch. The clear standout is the balance sheet — net debt/EBITDA of ~1.3-1.6x, well under the 2x bar and far better than every other peer in the group (all running 3x or higher) — paired with genuine FCF conversion (83%) and a trailing P/E meaningfully below its own five-year average (PEG ≈0.67). Growth and margin are still real misses (EBIT roughly flat over the period, margin the thinnest of the group at 4.5%), and gross margin has eroded just past this framework's stability threshold.",
+    file: "companies/jll.html",
+    personalNote: "Of the five commercial real estate names I ran through the checklist this week — Colliers, CBRE, Cushman & Wakefield, Savills and this one — JLL comes out on top, and it's not close. It's the only one of the group that actually clears the leverage bar outright, converts free cash flow at a real rate, and trades at a genuine discount to its own trading history rather than a discount that's mostly a shrinking earnings base in disguise. That doesn't mean it's a strong business in absolute terms — margin is still the thinnest of the group, EBIT has barely grown since FY2021, and gross margin has eroded a touch more than I'd like. But relative to CBRE's growth-without-profit problem, Colliers' and Cushman & Wakefield's leverage, this is the one balance sheet in the group I'd actually trust through a downturn. Picking it as today's highlight less because it's a great business and more because, of this specific peer set, it's the one that would worry me least."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
