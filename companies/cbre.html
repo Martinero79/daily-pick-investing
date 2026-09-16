@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CBRE Group Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/cbre.html">
+<meta property="og:title" content="CBRE Group Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 90+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CBRE Group Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 90+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+
+  .note-box { background:#0f1a10; border:1px solid #1f4a2a; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+  .note-box .title { color:#4ade80; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .note-box p { font-size:12.5px; color:#cfe8d4; line-height:1.6; margin:0 0 8px 0; }
+  .note-box p:last-child { margin-bottom:0; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Global Commercial Real Estate Services &amp; Investment Management</div>
+  <h1>CBRE Group, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NYSE: CBRE &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Traces to 1906 (Coldwell Banker) &middot; HQ Dallas, Texas</span>
+    <span class="badge warn">A 3.19% operating margin is one of the thinnest on this site &mdash; structurally normal for an asset-light real estate services brokerage, but the mix is shifting hard toward lower-margin, higher-volume outsourced facilities management, and net debt/EBITDA near 3.8x-4.2x plus an ROIC that doesn't clear its own cost of capital are real, not cosmetic, issues.</span>
+  </div>
+  <div class="price">$140.90</div>
+  <div class="price-sub">Close Sep 15, 2026 (NYSE) &middot; Mkt cap &asymp;$40.57B &middot; down roughly 14.6% over the past 52 weeks (range approx. $121.69&ndash;$174.27, per third-party trackers) &mdash; a pullback from a Feb 2026 high even as revenue and Core EPS keep growing double digits</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> CBRE is the clear #1 of the global "big five" full-service commercial real estate firms by revenue &mdash; comfortably ahead of JLL, Cushman &amp; Wakefield, Colliers and Newmark, with Savills a large adjacent peer weighted more to the UK/Europe. CBRE held a 25% global share of commercial property investment sales in 2024, an 800-basis-point lead over its nearest competitor and its 15th consecutive year at #1 &mdash; a genuine, durable #1 position, not a marginal one. What differentiates it structurally at this point is scale and diversification: Building Operations &amp; Experience (outsourced facilities/property management, including fast-growing data-center &amp; critical-infrastructure services) is now the majority of revenue, ahead of the traditional Advisory Services (brokerage) business.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$40,550M</div>
+      <div class="sub">+13.4% YoY, accelerating from +11.95% in FY2024; TTM (Jun 2026) revenue of $43,711M is up +14.9% YoY, and Q2 2026 revenue grew +16% YoY to $11.2B</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val red">3.19%</div>
+      <div class="note">Range 3.19%-5.64% FY21-25 &mdash; thin even by this site's real-estate-services standards; the steady drift down from 5.64% (FY2021) reflects a mix shift toward lower-margin, higher-volume Building Operations &amp; Experience (facilities management) revenue outgrowing higher-margin Advisory Services.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (auto-computed)</div>
+      <div class="val red">5.17% / 8.86%</div>
+      <div class="note">Misses both stockanalysis.com's own auto-computed 8.86% WACC and this framework's 15% absolute bar &mdash; a genuine miss on both counts, and ROIC itself has been sliding (11.37% in FY2021 &rarr; 6.49% in FY2025).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">$8,363M</div>
+      <div class="sub">Net Debt/EBITDA &asymp;3.76x (FY2025), widening to &asymp;4.21x on a trailing-twelve-month basis &mdash; up sharply from &asymp;0.90x as recently as FY2021, reflecting rising leverage used to fund scale and acquisitions (e.g. Direct Line, infrastructure/data-center buildout)</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">36/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">5/14 criteria met, 9 not met, 0 N/A &mdash; genuine #1 market position and real double-digit revenue growth held back by wafer-thin and declining margins, sub-cost-of-capital returns, and rising leverage.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="157.08 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="282.74 439.82" stroke-dashoffset="-157.08"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">5/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 5 (market share, FCF conversion, entry multiple vs. own history, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC, net debt/EBITDA, insider/founder ownership, margin stability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; CBRE's own lead is real and durable (25% share, 15 straight years at #1), but the broader global brokerage/facilities-management market remains genuinely fragmented with thousands of regional and boutique competitors</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    CBRE is the genuine, durable #1 in global commercial real estate services &mdash; 25% share of global investment sales in 2024, an 800bps lead over the nearest competitor, and its 15th consecutive year on top. The growth headline is real too: revenue was up 13.4% in FY2025 and accelerating further on a trailing basis (+14.9% TTM, +16% in Q2 2026), with Core EBITDA up 34% and Core EPS up 30% in the latest quarter as data-center and infrastructure services demand runs hot. But this framework is built to look past the growth headline, and what it finds underneath is less comfortable: operating margin has drifted down every year for five years straight, from 5.64% (FY2021) to 3.19% (FY2025) &mdash; one of the thinnest margins on this entire site &mdash; as the lower-margin, contractual Building Operations &amp; Experience segment (facilities/property management, now the majority of revenue) scales faster than the higher-margin Advisory Services brokerage business. Return on invested capital (5.17%) doesn't clear stockanalysis.com's own auto-computed 8.86% cost of capital, let alone this framework's 15% bar, and it has been sliding for years (11.37% in FY2021). Net debt/EBITDA has climbed from a low 0.90x in FY2021 to roughly 3.76x-4.21x today. What's genuinely working: capex is minimal (0.90% of revenue, classically asset-light), FCF conversion is solid (92.2% of EBIT in FY2025), share count is quietly shrinking (buybacks funded by strong cash generation), and the current trailing P/E (32.17x) sits almost exactly at its own FY22-25 average (32.23x) &mdash; not a bargain, but not obviously rich either, with a forward P/E (17.44x) that implies a meaningful expected earnings recovery and a PEG ratio of roughly 1.0 against consensus 3-year EPS growth. Net: 5 of 14 criteria met, Martinero Index 36/100 &mdash; a real #1 market position and real growth that this framework's profitability and capital-efficiency criteria are specifically designed to stress-test, and they do. This isn't a call to buy or avoid CBRE &mdash; just what the checklist says today.
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's note</div>
+    <p>Built this one as part of a "Big 5" commercial real estate batch (alongside Colliers, JLL, Cushman &amp; Wakefield and Savills) &mdash; wanted to see how the actual #1 in the space stacks up against the others once you strip away the "world's largest" headline. The honest answer: being #1 by revenue doesn't mean being #1 on this checklist. CBRE's margin has gone the wrong direction for five straight years, and it's not an accident &mdash; it's the deliberate consequence of leaning harder into lower-margin, high-volume facilities management and infrastructure services (which is also, to be fair, where a lot of the AI-data-center-driven demand is showing up right now). I don't think thin margins are automatically bad here; asset-light services businesses are supposed to look like this. What actually gives me pause is the trend combined with rising leverage &mdash; net debt/EBITDA more than quadrupling from FY2021 to now while ROIC keeps sliding further below the firm's own cost of capital. That's the kind of thing I'd want a clean explanation for before getting excited about the stock, "biggest in the industry" or not.</p>
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Jul 29, 2026) and spot price as of Sep 15, 2026 close. CBRE's fiscal year is the calendar year; FY2025 = year ended Dec 31, 2025. Five-year price history (page 6) uses fiscal year-end closes sourced from stockanalysis.com's own market-cap/price-ratio series; the 52-week high/low range is sourced from secondary aggregators (not directly re-verified against a primary exchange feed) and should be treated as approximate.
+  </div>
+
+  <div class="bignum-corner">5/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year ends Dec 31. CAGR computed FY21&rarr;FY25 (4-year span). Source: stockanalysis.com (S&amp;P Global Market Intelligence).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue has grown every year, roughly $13B added since FY2021. EBIT and FCF are thin slivers of revenue on this scale &mdash; structurally normal for a real estate services brokerage, but notable here is that EBIT ($1,294M FY2025) is barely above FY2021's $1,566M &mdash; actually lower &mdash; despite revenue growing nearly 46% over the same span.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">$9B</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">$18B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">$27B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">$36B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$45B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="104.34" width="22.5" height="135.66" rx="2" fill="#2dd4bf"/><rect x="113.7" y="232.34" width="22.5" height="7.66" rx="2" fill="#60a5fa"/><rect x="151.9" y="229.47" width="22.5" height="10.53" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="231.6" y="89.27" width="22.5" height="150.73" rx="2" fill="#2dd4bf"/><rect x="269.7" y="233.07" width="22.5" height="6.93" rx="2" fill="#60a5fa"/><rect x="307.9" y="233.31" width="22.5" height="6.69" rx="2" fill="#fbbf24"/><text x="281.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="387.6" y="83.79" width="22.5" height="156.21" rx="2" fill="#2dd4bf"/><rect x="425.7" y="234.67" width="22.5" height="5.33" rx="2" fill="#60a5fa"/><rect x="463.9" y="239.14" width="22.5" height="0.86" rx="2" fill="#fbbf24"/><text x="437.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="543.6" y="65.12" width="22.5" height="174.88" rx="2" fill="#2dd4bf"/><rect x="581.7" y="233.79" width="22.5" height="6.21" rx="2" fill="#60a5fa"/><rect x="619.9" y="233.15" width="22.5" height="6.85" rx="2" fill="#fbbf24"/><text x="593.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="699.6" y="41.73" width="22.5" height="198.27" rx="2" fill="#2dd4bf"/><rect x="737.7" y="233.67" width="22.5" height="6.33" rx="2" fill="#60a5fa"/><rect x="775.9" y="234.17" width="22.5" height="5.83" rx="2" fill="#fbbf24"/><text x="749.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+9.9%</div><div class="sub">$27,746M &rarr; $40,550M</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">-4.7%</div><div class="sub">$1,566M &rarr; $1,294M &mdash; operating income is actually lower today than in FY2021</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-13.7%</div><div class="sub">$2,154M &rarr; $1,193M; troughed at just $175M in FY2023 (a working-capital-heavy year)</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">This framework's 20% screen threshold sits far above this chart's range and isn't drawn here &mdash; CBRE has never been close to it and structurally isn't built to be. The trend itself is the concern: margin has declined every single year, from 5.64% (FY2021) to 3.19% (FY2025), as the lower-margin, contractual Building Operations &amp; Experience segment outgrows the higher-margin Advisory Services brokerage business.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">3%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">9%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><path d="M50.0,144.8 L247.5,158.67 L445.0,174.53 L642.5,172.67 L840.0,177.47 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,144.8 L247.5,158.67 L445.0,174.53 L642.5,172.67 L840.0,177.47" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="144.8" r="3" fill="#2dd4bf"/><text x="50.0" y="134.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.64%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="158.67" r="3" fill="#2dd4bf"/><text x="247.5" y="148.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.60%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="174.53" r="3" fill="#2dd4bf"/><text x="445.0" y="188.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">3.41%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="172.67" r="3" fill="#2dd4bf"/><text x="642.5" y="162.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">3.55%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="177.47" r="3" fill="#2dd4bf"/><text x="840.0" y="191.47" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">3.19%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>$27,746M</td><td>$1,566M</td><td>5.64%</td><td>$1,837M</td><td>$2,154M</td><td>137.5%</td></tr>
+    <tr><td>FY2022</td><td>$30,828M</td><td>$1,417M</td><td>4.60%</td><td>$1,407M</td><td>$1,369M</td><td>96.6%</td></tr>
+    <tr><td>FY2023</td><td>$31,949M</td><td>$1,090M</td><td>3.41%</td><td>$986M</td><td>$175M</td><td>16.1%</td></tr>
+    <tr><td>FY2024</td><td>$35,767M</td><td>$1,271M</td><td>3.55%</td><td>$968M</td><td>$1,401M</td><td>110.2%</td></tr>
+    <tr><td>FY2025</td><td>$40,550M</td><td>$1,294M</td><td>3.19%</td><td>$1,157M</td><td>$1,193M</td><td>92.2%</td></tr>
+  </table>
+  <div class="chart-sub" style="margin-top:6px;">FY2023's near-zero FCF was driven by working-capital swings and a heavy year for compensation-related cash outflows, not an operating collapse (EBIT stayed solidly positive); FY2021's outsized net income and FCF benefited from a strong post-pandemic transaction-volume rebound across the industry.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Segment Mix &amp; Quarterly Development</div></div>
+  <div class="sec-sub">CBRE reports four segments: Advisory Services (leasing, capital markets, valuation), Building Operations &amp; Experience (outsourced facilities/property management, including critical-infrastructure &amp; data-center services), Project Management (Turner &amp; Townsend), and Real Estate Investments (development + investment management). Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Jul 29, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Consolidated revenue reached <b style="color:#f8fafc;">$11.2B</b>, up <b style="color:#34d399;">16%</b> YoY. Core EBITDA was $836M, up 34%, and Core EPS was $1.56, up 30%. Every segment grew Segment Operating Profit by more than 25%. Global Leasing Revenue grew 24%, US Office Leasing was up 29% and US Industrial Leasing was up 17%; Global Property Sales Revenue grew 20%. Infrastructure/critical-infrastructure services revenue reached nearly $1.2B in the quarter, driven by a 30% jump in data-center services as AI-driven build-out demand stays elevated. Management raised full-year 2026 Core EPS guidance to $7.80-$7.90 (23% growth at the midpoint) &mdash; growth that's real, even as margin dilution from the mix shift remains the central tension in the story.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">FY2025 Revenue by Segment</div>
+    <div class="chart-sub">Building Operations &amp; Experience &mdash; the outsourced facilities/property management business, now including fast-growing critical-infrastructure and data-center services &mdash; has become CBRE's largest segment by a wide margin, well ahead of the traditional Advisory Services brokerage business. This is the structural reason operating margin keeps drifting down: it's a lower-margin, higher-volume, more contractual business than brokerage.</div>
+    <table class="datatable">
+      <tr><th>Segment</th><th>FY2025 Revenue</th><th>% of Total</th><th>Note</th></tr>
+      <tr><td>Building Operations &amp; Experience</td><td>$23,224M</td><td>57.3%</td><td>Outsourced facilities/property management for corporate occupiers; includes critical-infrastructure &amp; data-center services, the fastest-growing sub-segment</td></tr>
+      <tr><td>Advisory Services</td><td>$8,840M</td><td>21.8%</td><td>Leasing, capital markets (investment sales &amp; debt/structured finance), valuation &amp; advisory &mdash; the traditional, higher-margin brokerage business</td></tr>
+      <tr><td>Project Management</td><td>$7,657M</td><td>18.9%</td><td>Turner &amp; Townsend (construction &amp; program management consultancy); growing fast alongside infrastructure and data-center project demand</td></tr>
+      <tr><td>Real Estate Investments</td><td>$879M</td><td>2.2%</td><td>Development (Trammell Crow Company) and CBRE Investment Management; the smallest segment by revenue</td></tr>
+    </table>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has declined every year, from 22.22% (FY2021) to 18.66% (FY2025) &mdash; a -2.82pp drop versus FY2022 specifically (the window used for criterion #14), just missing this framework's -2.5pp stability threshold. This mirrors the operating margin trend and has the same structural cause: the revenue mix keeps shifting toward the lower-margin Building Operations &amp; Experience segment.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">14%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">16%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">22%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">24%</text>
+<path d="M50.0,55.6 L247.5,70.4 L445.0,107.2 L642.5,111.0 L840.0,126.8 L840.0,220.0 L50.0,220.0 Z" fill="#f87171" opacity="0.12"/>
+<path d="M50.0,55.6 L247.5,70.4 L445.0,107.2 L642.5,111.0 L840.0,126.8" fill="none" stroke="#f87171" stroke-width="2.5"/>
+<circle cx="50.0" cy="55.6" r="3" fill="#f87171"/>
+<text x="50.0" y="45.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.22%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="70.4" r="3" fill="#f87171"/>
+<text x="247.5" y="60.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.48%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="107.2" r="3" fill="#f87171"/>
+<text x="445.0" y="97.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.64%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="111.0" r="3" fill="#f87171"/>
+<text x="642.5" y="101.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.45%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="126.8" r="3" fill="#f87171"/>
+<text x="840.0" y="116.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">18.66%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> criterion #5 (market share) scores Met because CBRE is the clear, durable #1 in global commercial real estate services by revenue and by investment-sales activity (25% global share in 2024, 800bps ahead of the nearest competitor, 15 consecutive years at #1). Criterion #6 (market concentration) still scores a middling 3/5: CBRE's own lead is real, but the broader global brokerage and facilities-management market &mdash; especially at the regional and local level &mdash; remains genuinely fragmented, with thousands of independent and boutique firms competing for smaller mandates that never touch the "big five."
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC (8.86%) is stockanalysis.com's own auto-computed figure for CBRE, not an assumed input &mdash; used here because the framework's usual assumed-WACC approach isn't needed when a company-specific auto-computed figure is available.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 32.17x sits almost exactly at the FY22-25 average of roughly 32.23x &mdash; not a bargain relative to its own recent history, but not a premium either, which is a genuinely balanced entry point by this framework's own measure. Forward P/E (17.44x) is only available as a current figure &mdash; historical forward-P/E data for CBRE isn't reliably available for prior fiscal years, so only the single current point is shown, flagged as such rather than estimated.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (current only)</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50x</text><line x1="50.0" y1="90.7" x2="840.0" y2="90.7" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="86.7" text-anchor="end" font-size="10" fill="#94a3b8">FY22-25 avg: 32.23x</text><path d="M 50.0,150.9 L 247.5,105.3 L 445.0,64.0 L 642.5,64.6 L 840.0,91.3" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="150.9" r="3" fill="#a78bfa"/><text x="50.0" y="140.9" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.28x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="247.5" cy="105.3" r="3" fill="#a78bfa"/><text x="247.5" y="95.3" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.78x</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="445.0" cy="64.0" r="3" fill="#a78bfa"/><text x="445.0" y="54.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.51x</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="642.5" cy="64.6" r="3" fill="#a78bfa"/><text x="642.5" y="54.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.36x</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="91.3" r="3.5" fill="#a78bfa"/><text x="840.0" y="81.3" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">32.17x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><circle cx="840.0" cy="150.24" r="4" fill="#c4b5fd" stroke="#c4b5fd" stroke-width="1"/><text x="840.0" y="166.24" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">Fwd 17.44x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY22-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and generally the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are headed. For CBRE specifically: trailing P/E (32.17x) sits almost exactly at its own FY22-25 average (32.23x), a neutral read rather than cheap or rich. Forward P/E (17.44x) is meaningfully lower, implying the market expects real earnings growth to keep coming through. One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth, which sanity-checks whether a multiple is cheap once growth is accounted for. Using forward P/E (17.44x) against the 3-year consensus EPS growth forecast (17.38%, per stockanalysis.com), CBRE's PEG works out to roughly 1.00 &mdash; right on the traditional "fair value" line, suggesting the stock is priced about in line with its expected growth, neither a bargain nor obviously expensive.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of $8,363M against FY2025 EBITDA gives a Net Debt/EBITDA of &asymp;3.76x &mdash; above this framework's &lt;2x bar, and up sharply from just &asymp;0.90x as recently as FY2021. On a trailing-twelve-month basis (through Jun 2026), net debt/EBITDA has widened further to &asymp;4.21x. This is a meaningful, multi-year re-leveraging, not a one-off spike &mdash; debt/equity has climbed from 0.46x (FY2021) to 1.18x (current). ROIC of 5.17% doesn't clear stockanalysis.com's own auto-computed 8.86% WACC, let alone this framework's 15% bar, and has been sliding for years (11.37% in FY2021). Share count is down 2.26% YoY &mdash; genuine, real buybacks, a rare bright spot funded by consistently positive free cash flow.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="2.55 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="433.68 439.82" stroke-dashoffset="-2.55"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="3.59 439.82" stroke-dashoffset="-436.23"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors, incl. CEO &amp; Board Chair Bob Sulentic) &asymp; 0.58% of shares outstanding</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional investors &asymp; 98.61%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public &amp; other float &asymp; 0.81%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note, honestly stated:</b> unlike Colliers (co-founder Jay Hennick, dual-class voting control) or Reliance (Ambani promoter group), CBRE has no dominant founder or family stake &mdash; it's an institutionally-owned, professionally-managed company. CEO &amp; Board Chair Bob Sulentic directly holds roughly 1.0 million shares (about 0.35% of shares outstanding); all current directors and executive officers combined own less than 1.0% of the company, per CBRE's 2026 proxy statement. That's genuine management skin in the game in dollar terms (worth well over $100M at the current price) but a modest, non-controlling percentage stake &mdash; this criterion scores Not Met on the "meaningful ownership" bar this framework uses.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>CBRE Group</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+9.9% &mdash; $27,746M &rarr; $40,550M; real growth, but short of the bar (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>-4.7% &mdash; $1,566M &rarr; $1,294M &mdash; EBIT is actually lower today than four years ago despite revenue growing nearly 46% (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>3.19% (FY2025) &mdash; well below the bar and still declining; structurally normal for a real estate services brokerage, but the multi-year downtrend (was 5.64% in FY2021) is the real concern</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>$2,154M &rarr; $1,193M, -13.7% CAGR; troughed at $175M in FY2023 &mdash; a volatile, declining path scored on its endpoints</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>The clear, durable global #1 in commercial real estate services &mdash; 25% share of global investment sales in 2024, 800bps ahead of the nearest competitor, 15 consecutive years at #1</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; CBRE's lead over the "big five" peer group is real, but the broader global brokerage/facilities market remains genuinely fragmented with thousands of regional and boutique firms</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 5.17% clears neither stockanalysis.com's own auto-computed 8.86% WACC nor the 15% absolute bar &mdash; a genuine miss on both counts, and ROIC has been declining for years</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;3.76x (FY2025), widening to &asymp;4.21x on a TTM basis &mdash; up sharply from &asymp;0.90x in FY2021, a genuine multi-year re-leveraging trend</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>92.2% (FY2025) &mdash; strong, well above the bar despite the volatile path (FY2023 troughed near 16%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 32.17x vs a FY22-25 average of roughly 32.23x &mdash; essentially at its own average, a neutral-to-slightly-favorable entry point</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>-2.26% YoY, and down roughly 11.5% since FY2021 (implied from EPS/net income) &mdash; genuine, ongoing buybacks funded by consistent free cash flow</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>No dominant founder or family stake; CEO &amp; Board Chair Bob Sulentic holds &asymp;0.35% directly, and all directors/officers combined own less than 1.0% of shares outstanding (2026 proxy) &mdash; a professionally-managed, institutionally-owned company</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.90% of FY2025 revenue ($366M capex) &mdash; genuinely low and asset-light, as expected for a services brokerage</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 18.66% (FY2025) vs 21.48% (FY2022), a -2.82pp decline &mdash; just misses the threshold, consistent with the multi-year margin-dilution trend</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>CBRE is the genuine, durable #1 in global commercial real estate services, revenue growth is real and accelerating on a trailing basis, FCF conversion is strong (92.2% of EBIT), capex is genuinely minimal (0.90% of revenue), share count is quietly shrinking via real buybacks, and the current entry multiple sits almost exactly at CBRE's own five-year average &mdash; a fair, not stretched, starting point.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin has declined every single year for five years straight, from 5.64% to 3.19%, as the lower-margin Building Operations &amp; Experience segment (now the majority of revenue) outgrows the higher-margin Advisory Services brokerage business &mdash; and EBIT itself is lower today than in FY2021 despite revenue growing nearly 46%. ROIC sits below CBRE's own cost of capital and has been sliding for years, and net debt/EBITDA has climbed from 0.90x to roughly 3.8x-4.2x. Whether the infrastructure/data-center growth engine eventually converts into real operating leverage &mdash; or keeps diluting margin as it scales &mdash; is the central question for CBRE from here.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 29, 2026 (Q2 2026 results) &ndash; Sep 15, 2026 (spot price). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), CBRE Q2 2026 earnings release and investor materials (ir.cbre.com / businesswire.com), CBRE 2026 proxy statement / DEF 14A (SEC EDGAR, insider ownership), CBRE press release on 2024 global investment sales leadership (cbre.com).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.86%) is stockanalysis.com's own auto-computed figure, not a company-disclosed metric. FY2021 share count is estimated by dividing reported net income by reported EPS (both stockanalysis.com), not a directly reported shares-outstanding figure for that date. The 52-week price range is sourced from secondary aggregators, not a primary exchange feed, and should be treated as approximate.<br>
+    This is private personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">CBRE Group &mdash; NYSE, USD share price trend. Points shown are fiscal year-end closes (Dec 31) plus the current price, sourced from stockanalysis.com's own price-ratio series.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">CBRE Group &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A volatile path: down sharply from $108.51 at the FY2021 close to $76.96 in FY2022, then a strong climb to $160.79 at the FY2025 close, and now back down to $140.90 &mdash; a pullback from a Feb 2026 high near $174 even as the underlying revenue trend keeps accelerating.</div>
+<svg viewBox="0 -20 700 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="-8" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +5.71%</text>
+<path d="M 46.0,116.72 L 172.8,162.61 L 299.6,139.14 L 426.4,83.58 L 553.2,40.69 L 680.0,69.60 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,116.72 L 172.8,162.61 L 299.6,139.14 L 426.4,83.58 L 553.2,40.69 L 680.0,69.60" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="116.72" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="106.72" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$108.51</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="162.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="152.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$76.96</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="139.14" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="129.14" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$93.09</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="83.58" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="73.58" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$131.29</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="40.69" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="30.69" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.79</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="69.60" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="676.0" y="59.60" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$140.90</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (Dec 31 each year) and the current price ($140.90, Sep 15, 2026 close) are sourced from stockanalysis.com's own price-ratio series (S&amp;P Global Market Intelligence); the 52-week high/low range on page 1 is a separate secondary-aggregator figure and may not tie exactly to this series. Private personal research, not investment advice.
+  </div>
+</div>
+
+</body>
+</html>
