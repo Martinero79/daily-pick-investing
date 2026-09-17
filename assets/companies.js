@@ -1758,6 +1758,25 @@ const COMPANIES = [
     blurb: "The strongest scorer of the Big 5 CRE batch. The clear standout is the balance sheet — net debt/EBITDA of ~1.3-1.6x, well under the 2x bar and far better than every other peer in the group (all running 3x or higher) — paired with genuine FCF conversion (83%) and a trailing P/E meaningfully below its own five-year average (PEG ≈0.67). Growth and margin are still real misses (EBIT roughly flat over the period, margin the thinnest of the group at 4.5%), and gross margin has eroded just past this framework's stability threshold.",
     file: "companies/jll.html",
     personalNote: "Of the five commercial real estate names I ran through the checklist this week — Colliers, CBRE, Cushman & Wakefield, Savills and this one — JLL comes out on top, and it's not close. It's the only one of the group that actually clears the leverage bar outright, converts free cash flow at a real rate, and trades at a genuine discount to its own trading history rather than a discount that's mostly a shrinking earnings base in disguise. That doesn't mean it's a strong business in absolute terms — margin is still the thinnest of the group, EBIT has barely grown since FY2021, and gross margin has eroded a touch more than I'd like. But relative to CBRE's growth-without-profit problem, Colliers' and Cushman & Wakefield's leverage, this is the one balance sheet in the group I'd actually trust through a downturn. Picking it as today's highlight less because it's a great business and more because, of this specific peer set, it's the one that would worry me least."
+  },
+
+  {
+    slug: "booking-holdings",
+    name: "Booking Holdings Inc.",
+    ticker: "NASDAQ: BKNG",
+    sector: "Online Travel Agency / Travel Platform",
+    industry: "Consumer Discretionary",
+    subIndustry: "Online Travel & Booking Platforms",
+    tags: [],
+    dateFeatured: "2026-09-17",
+    price: "$171.40",
+    score: "12 / 14",
+    martinero: 89,
+    momentum: { status: "accelerating", recent: 13.4, prior: 11.1 },
+    quarterYoY: { period: "Q2 2026", growth: 8.0 },
+    blurb: "The dominant global online travel platform (Booking.com, Priceline, Kayak, Agoda, OpenTable) by gross bookings, though Trip.com Group narrowly leads on one global-share measure thanks to China's domestic market. Excellent margins (35% operating, 87% gross), aggressive buybacks (~27% share count decline), minimal leverage and capex, and a trailing P/E sitting near half its own five-year average — PEG comes in around 0.9, genuinely below the 1.0-2.0 band this was checked against. One of the highest scores on the site; the only real misses are negligible insider ownership and a genuinely competitive market.",
+    file: "companies/booking-holdings.html",
+    personalNote: "Booking.com is one of my favorite platforms to just dream away on — scrolling through hotels in places I have no concrete travel plans for, half-building a trip I'm not booking. If it weren't for the share price, I think I'd have bought this one for fun a long time ago, on vibes rather than the checklist. Not because it was actually expensive — more often than not it wasn't — but because a four- or five-figure number next to the ticker (BKNG traded near $5,000/share before its 25:1 split in April 2026) is psychologically hard to click 'buy' on, even when I know that's not a rational reason to skip a stock. Now it trades at a normal-looking $171 and change, so this time the checklist got to make the case instead of my gut, and it makes a genuinely strong one: 12 of 14 criteria met, Martinero Index of 89 — one of the highest scores on the whole site. Revenue, EBIT and free cash flow all look like they compounded above 20% a year since 2021, though I want to be upfront that 2021 was still a COVID-recovery year for travel off a badly depressed base, so part of that growth rate is a low-base artifact rather than pure momentum — the cleaner 2022-2025 read is still good (mid-teens revenue, low-20s EBIT) just less dramatic than the headline number. What actually convinced me is the valuation: trailing P/E is sitting at roughly half its own five-year average, and the PEG ratio comes in around 0.9 — genuinely below 1.0, not just inside the 1.0-2.0 'reasonably priced growth' band I went in expecting to find. Margins are excellent, it's been buying back stock aggressively for years, capex is basically nothing, and leverage is low. The two real knocks: almost no insider ownership (0.2% — fully institutional since the Priceline-to-Booking-Holdings rename in 2018, no founder at the wheel) and a genuinely competitive market, with Expedia, Airbnb and China's Trip.com Group all pushing back hard. Neither is a dealbreaker, but they're why this isn't a perfect score. Bottom line: a platform I already loved turns out to also be one of the better-priced growth compounders on this whole list."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
