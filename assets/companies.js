@@ -1685,6 +1685,25 @@ const COMPANIES = [
   },
 
   {
+    slug: "huscompagniet",
+    name: "HusCompagniet A/S",
+    ticker: "Nasdaq Copenhagen: HUSCO",
+    sector: "Homebuilding — Single-Family Detached Houses",
+    industry: "Consumer Discretionary",
+    subIndustry: "Homebuilders",
+    tags: [],
+    dateFeatured: "2026-09-18",
+    price: "DKK 29.50",
+    score: "3 / 14",
+    martinero: 24,
+    momentum: { status: "accelerating", recent: 28.7, prior: -3.5 },
+    quarterYoY: { period: "Q2 2026", growth: 28.7 },
+    blurb: "Denmark's clear #1 single-family homebuilder (~22% share, more than double #2), but one of the lowest scorers on this site. Revenue, EBIT and FCF are all negative on a 5-year CAGR basis after the 2022 rate-hike downturn, ROIC doesn't cover its cost of capital, and net debt/EBITDA has climbed near 7x — though that's an earnings problem more than a debt one, since net debt itself sits at a 5-year low. Capex is minimal (asset-light, builds on customer-owned land), and volumes are genuinely recovering (+28.7% YoY in Q2 2026), but three legacy B2B contracts keep margins depressed through at least 2027 per management's own guidance.",
+    file: "companies/huscompagniet.html",
+    personalNote: "HusCompagniet is the smallest, most speculative name I've put on this site so far — a Danish homebuilder trading at DKK 29.50, down about 30% over the past year, with a Martinero Index of just 24/100. I'm not dressing this up as a quality compounder: revenue, EBIT and FCF are all negative on a 5-year CAGR basis, ROIC doesn't come close to covering its cost of capital, and net debt/EBITDA has climbed to nearly 7x — though that's really an earnings problem, not a debt problem, since net debt itself is at a 5-year low. What keeps me curious: they're genuinely #1 in Danish detached houses by a wide margin, capex is almost nothing because they build on customer-owned land, and the 2025-26 volume recovery looks real — revenue's up 25-30% the last several quarters. The catch is three legacy B2B contracts eating the P&L, and management itself says margins don't normalize until after 2027. That's a long time to wait on a thin, illiquid stock with no dividend. This isn't a pick — it's a name I'm tracking to see if the market position and asset-light model eventually show up in the numbers once the bad contracts roll off."
+  },
+
+  {
     slug: "cbre",
     name: "CBRE Group, Inc.",
     ticker: "NYSE: CBRE",
@@ -1777,6 +1796,25 @@ const COMPANIES = [
     blurb: "The dominant global online travel platform (Booking.com, Priceline, Kayak, Agoda, OpenTable) by gross bookings, though Trip.com Group narrowly leads on one global-share measure thanks to China's domestic market. Excellent margins (35% operating, 87% gross), aggressive buybacks (~27% share count decline), minimal leverage and capex, and a trailing P/E sitting near half its own five-year average — PEG comes in around 0.9, genuinely below the 1.0-2.0 band this was checked against. One of the highest scores on the site; the only real misses are negligible insider ownership and a genuinely competitive market.",
     file: "companies/booking-holdings.html",
     personalNote: "Booking.com is one of my favorite platforms to just dream away on — scrolling through hotels in places I have no concrete travel plans for, half-building a trip I'm not booking. For years the one thing that kept me from ever buying it just for fun was the share price — it used to trade north of $4,000/share, a number that's psychologically hard to click 'buy' on even when you know that's not a rational reason to skip a stock. A 25-for-1 split in April 2026 brought it down to a normal-looking $171 and change, so that barrier is technically gone now. But it turns out I didn't need the vibes-only excuse anyway: the fundamentals are surprisingly strong, making this a rational buy on its own merits too. 12 of 14 criteria met, Martinero Index of 89 — one of the highest scores on the whole site. Worth knowing before reading too much into the growth numbers: COVID first crushed travel demand, then triggered a sharp reopening snap-back (+56% revenue growth in FY2022 alone), so the FY21-25 CAGR is inflated by that low base — the cleaner FY22-25 read is still good (mid-teens revenue, low-20s EBIT growth) just less dramatic than the headline number, and that specific source of volatility should be behind the stock now that the reopening cycle is years past. What actually convinced me is the valuation: trailing P/E is sitting at roughly half its own five-year average, and the PEG ratio comes in around 0.9 — genuinely below 1.0, not just inside the 1.0-2.0 'reasonably priced growth' band I went in expecting to find. Margins are excellent, it's been buying back stock aggressively for years, capex is basically nothing, and leverage is low. The two real knocks: almost no insider ownership (0.2% — fully institutional since the Priceline-to-Booking-Holdings rename in 2018, no founder at the wheel) and a genuinely competitive market, with Expedia, Airbnb and China's Trip.com Group all pushing back hard. Neither is a dealbreaker, but they're why this isn't a perfect score. Bottom line: a platform I already loved turns out to also be one of the better-priced growth compounders on this whole list."
+  },
+
+  {
+    slug: "nintendo",
+    name: "Nintendo Co., Ltd.",
+    ticker: "TYO: 7974 · OTC ADR: NTDOY",
+    sector: "Video Games — Console Hardware & First-Party Software",
+    industry: "Consumer Discretionary",
+    subIndustry: "Interactive Entertainment",
+    tags: [],
+    dateFeatured: "2026-09-18",
+    price: "¥8,093",
+    score: "7 / 14",
+    martinero: 55,
+    momentum: { status: "accelerating", recent: 98.6, prior: -30.3 },
+    quarterYoY: { period: "FY2026 (ended Mar 2026)", growth: 98.6 },
+    blurb: "A genuine mid-pack score, and honestly a fun pick more than a screaming value case. Switch 2 launched in June 2025 and nearly doubled revenue (+98.6% FY2026), but hardware-launch economics crushed gross margin (61.0%→39.3%) and operating margin (35.0%→15.6%) — the classic pattern before high-margin software attach rates catch up. Zero debt, a ¥2.2T net cash pile, steady buybacks (~11% share count decline over 5 years), and a trailing P/E modestly below its own average are real positives. The clear miss: insider/founder ownership is under 1% — Yamauchi family control ended in 2013, fully institutional today.",
+    file: "companies/nintendo.html",
+    personalNote: "I picked Nintendo the way I picked Booking Holdings — not because a screen flagged it, but because I've been playing Mario and Zelda since I was a kid and wanted to see what the checklist actually says about it. The honest answer: it's a genuine mixed bag, and this happens to be about the worst fiscal year to look at it in. Nintendo just launched Switch 2 (June 2025), and hardware launch years are structurally brutal on this framework — revenue nearly doubled to ¥2,313.1B (+98.6%) as tens of millions of new consoles shipped, but gross margin collapsed from 61.0% to 39.3% and operating margin fell to 15.6% (from 35.0% just four years ago) because early-cycle hardware sells at thin or negative margins before the high-margin software attach rate catches up. That single dynamic is why revenue CAGR, EBIT CAGR, FCF CAGR and the margin-stability criterion all land as misses despite Switch 2 objectively outselling the PS5 at launch. What isn't a launch-year artifact: Nintendo carries zero debt and a ¥2.2T net cash pile, buybacks have quietly shrunk the share count by roughly 11% over five years, capex is essentially nothing since Nintendo doesn't manufacture its own hardware, and at a trailing P/E of roughly 19.75x the stock actually sits modestly below its own five-year average multiple. The clear miss, and the one that matters most for a 'beloved brand' thesis: insider and founder ownership is under 1% — the Yamauchi family's direct control ended after Hiroshi Yamauchi's 2013 death, and Nintendo today is fully institutionally owned, not founder-run. Net: 7 of 14 criteria met, Martinero Index 55/100 — middle of the pack, not a standout. This is sentiment more than a screaming value case right now; the checklist mildly likes the balance sheet and the valuation, is neutral on the market position, and actively dislikes this specific fiscal year's growth and margin trend. An honest, unglamorous result for a stock I picked mostly because I love the games."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
