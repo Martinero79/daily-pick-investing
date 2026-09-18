@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nintendo Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/nintendo.html">
+<meta property="og:title" content="Nintendo Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nintendo Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Video Game Consoles, Software &amp; First-Party IP</div>
+  <h1>Nintendo Co., Ltd.</h1>
+  <div class="badges">
+    <span class="badge">TYO: 7974 &middot; reports in JPY</span>
+    <span class="badge">OTC ADR: NTDOY (4 ADS = 1 ordinary share) &middot; trades in USD</span>
+    <span class="badge">FY ends Mar 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1889 &middot; Kyoto, Japan (HQ)</span>
+    <span class="badge warn">Switch 2 launched June 5, 2025, mid-FY2026 &mdash; the hardware ramp crushed gross margin (60.96%&rarr;39.30%) and operating margin (24.25%&rarr;15.57%) even as revenue nearly doubled. FY2027 guidance calls for both revenue and profit to fall back as the launch-year unit surge normalizes. Today's pick is a "fun" one &mdash; chosen for the brand, not pre-screened for a strong score.</span>
+  </div>
+  <div class="price">&yen;8,093</div>
+  <div class="price-sub">Close Sep 11, 2026 (TSE, most recent available close) &middot; NTDOY ADR &asymp;$13.40 (Sep 17, 2026, OTC) &middot; Mkt cap &asymp;&yen;9.33T (&asymp;$62B USD equivalent) &middot; up roughly 45% over the trailing 12 months on Switch 2 launch enthusiasm, though down about 45% from the 52-week high of &yen;14,630 hit earlier in the cycle</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in dedicated video game hardware &mdash; Nintendo is the current-generation leader: Switch 2 (launched June 2025) outsold the PlayStation 5 in the Jan-Mar 2026 quarter alone, and Nintendo's share of the global active console installed base is projected to reach roughly 49% by 2027 (up from 43% in 2022), ahead of Sony's PlayStation 5 (&asymp;93.7M lifetime units through Mar 2026) and Microsoft's Xbox Series X|S (&asymp;34.1M lifetime estimate; Microsoft no longer discloses unit sales). In the much larger total gaming market that also includes PC and mobile gaming, Nintendo's share is far smaller &mdash; this dashboard scores it on its dominant position within dedicated console hardware and first-party IP, not the broader all-platforms gaming industry.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&yen;2,313.1B</div>
+      <div class="sub">+98.56% YoY on the Switch 2 launch-year hardware surge, rebounding off FY2025's cycle-trough &yen;1,164.9B (-30.32% YoY) as the original Switch aged out</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val red">15.57%</div>
+      <div class="note">Down from 34.96% (FY2022) &rarr; 31.49% (FY2023) &rarr; 31.64% (FY2024) &rarr; 24.25% (FY2025) &mdash; hardware-ramp costs around the Switch 2 launch crushed margin even as revenue surged.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">~38.3% / 8.0%</div>
+      <div class="note">Clears WACC by a wide margin &mdash; though the reported ROIC figure is flattered by Nintendo's enormous net cash pile shrinking the invested-capital base; even a much more conservative cash-adjusted read stays comfortably above WACC.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (FY2026)</div>
+      <div class="val green">&yen;2,216.9B</div>
+      <div class="sub">Zero debt &mdash; net debt/EBITDA is negative (net cash position), among the strongest balance sheets on this whole site</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">55/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met, 7 not met, 0 N/A &mdash; a genuine mid-pack score: real balance-sheet and market-position strength offset almost exactly by a hardware-cycle trough hitting nearly every growth and margin criterion this year.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="219.91 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="219.91 439.82" stroke-dashoffset="-219.91"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (market share, market concentration, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, FCF conversion, insider/founder ownership, margin stability &amp; structural profitability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">2 / 5</b> &mdash; a tight three-player console oligopoly (Nintendo, Sony, Microsoft), not a true monopoly</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Maarten picked Nintendo the way he picked Booking Holdings &mdash; not because a screen flagged it, but because he's been playing Mario and Zelda since he was a kid and wanted to see what the checklist actually says about it. The honest answer: it's a genuine mixed bag, and this happens to be about the worst fiscal year to look at it in. Nintendo just launched Switch 2 (June 2025), and hardware launch years are structurally brutal on this framework &mdash; revenue nearly doubled to &yen;2,313.1B (+98.56%) as tens of millions of new consoles shipped, but gross margin collapsed from 60.96% to 39.30% and operating margin fell to 15.57% (from 34.96% just four years ago) because early-cycle hardware is sold at thin or negative margins before the high-margin software attach rate catches up. That single dynamic is why revenue CAGR (+8.1%), EBIT CAGR (-11.7%), FCF CAGR (-1.8%) and the new margin-stability criterion all land as misses despite Switch 2 objectively outselling the PS5 at launch. What isn't a launch-year artifact: Nintendo carries zero debt and a &yen;2.2T net cash pile, buybacks have quietly shrunk the share count by roughly 11% over five years, capex is essentially nothing (1.17% of revenue &mdash; Nintendo doesn't manufacture its own hardware), and at a trailing P/E of roughly 19.75x the stock actually sits modestly below its own five-year average multiple (&asymp;22.90x). The clear miss, and the one that matters most for a "beloved brand" thesis: insider and founder ownership is under 1% &mdash; the Yamauchi family's direct control ended after Hiroshi Yamauchi's 2013 death, and Nintendo today is fully institutionally owned like Booking Holdings, not founder-run like Oracle. Net: 7 of 14 criteria met, Martinero Index 55/100 &mdash; middle of the pack, not a standout. This is sentiment more than a screaming value case right now; the checklist mildly likes the balance sheet and the valuation, is neutral on the market position, and actively dislikes this specific fiscal year's growth and margin trend. That's an honest, unglamorous result for a stock Maarten picked mostly because he loves the games.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q1 FY2027 (three months to Jun 30, 2026, reported Aug 6, 2026) and FY2026 annual results (year ended Mar 31, 2026, reported May 8, 2026); spot price as of Sep 11, 2026 TSE close (the most recent daily close available at time of writing), cross-checked against the NTDOY ADR (&asymp;$13.40, Sep 17, 2026) which implies a consistent level given the 4-ADS-per-share ratio and prevailing JPY/USD rate. Nintendo's fiscal year runs April-March; FY2026 = year ended March 31, 2026. This dashboard reports financials in JPY throughout (Nintendo's native reporting currency) with only a rough USD market-cap reference for scale.
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in JPY billions. Fiscal year ends March 31 (FY2026 = year ended Mar 31, 2026). CAGR computed FY2022&rarr;FY2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">FY2025 was the deepest trough of the old Switch cycle (revenue -30.32% YoY, FCF barely negative); FY2026 shows the Switch 2 launch-year surge in revenue without a matching surge in EBIT or FCF, since early hardware sales carry thin margins.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0.6T</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&yen;1.2T</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&yen;1.8T</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;2.4T</text><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="78.72" width="22.5" height="141.28" rx="2" fill="#2dd4bf"/><rect x="113.7" y="170.60" width="22.5" height="49.40" rx="2" fill="#60a5fa"/><rect x="151.9" y="196.49" width="22.5" height="23.51" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="238.1" y="86.53" width="22.5" height="133.47" rx="2" fill="#2dd4bf"/><rect x="276.2" y="177.97" width="22.5" height="42.03" rx="2" fill="#60a5fa"/><rect x="314.4" y="194.95" width="22.5" height="25.05" rx="2" fill="#fbbf24"/><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="400.6" y="80.68" width="22.5" height="139.32" rx="2" fill="#2dd4bf"/><rect x="438.7" y="175.92" width="22.5" height="44.08" rx="2" fill="#60a5fa"/><rect x="476.9" y="182.84" width="22.5" height="37.16" rx="2" fill="#fbbf24"/><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="563.1" y="122.92" width="22.5" height="97.08" rx="2" fill="#2dd4bf"/><rect x="601.2" y="196.45" width="22.5" height="23.55" rx="2" fill="#60a5fa"/><rect x="639.4" y="220.0" width="22.5" height="3.0" rx="1" fill="#fbbf24"/><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="725.6" y="27.25" width="22.5" height="192.75" rx="2" fill="#2dd4bf"/><rect x="763.7" y="189.99" width="22.5" height="30.01" rx="2" fill="#60a5fa"/><rect x="801.9" y="198.12" width="22.5" height="21.88" rx="2" fill="#fbbf24"/><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+8.1%</div><div class="sub">&yen;1,695.3B &rarr; &yen;2,313.1B (a lumpy, hardware-cycle path, not steady compounding)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">-11.7%</div><div class="sub">&yen;592.8B &rarr; &yen;360.1B; launch-year margin compression more than offset the revenue surge</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-1.8%</div><div class="sub">&yen;282.1B &rarr; &yen;262.6B; dipped to roughly break-even in the FY2025 trough year</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Nintendo cleared it comfortably through FY2024, then fell through it in FY2025 (old-cycle decline) and again in FY2026 (Switch 2 launch-year hardware-ramp costs).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><path d="M50.0,220.0 L50.0,45.2 L247.5,62.55 L445.0,61.8 L642.5,98.75 L840.0,142.15 L840.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,45.2 L247.5,62.55 L445.0,61.8 L642.5,98.75 L840.0,142.15" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="45.2" r="3" fill="#2dd4bf"/><text x="50.0" y="35.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">34.96%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="62.55" r="3" fill="#2dd4bf"/><text x="247.5" y="52.55" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.49%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="61.8" r="3" fill="#2dd4bf"/><text x="445.0" y="51.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.64%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="98.75" r="3" fill="#2dd4bf"/><text x="642.5" y="88.75" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.25%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="142.15" r="3" fill="#2dd4bf"/><text x="840.0" y="132.15" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.57%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="115" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>&yen;1,695.3B</td><td>&yen;592.8B</td><td>34.96%</td><td>&yen;477.7B</td><td>&yen;282.1B</td><td>47.6%</td></tr>
+    <tr><td>FY2023</td><td>&yen;1,601.7B</td><td>&yen;504.4B</td><td>31.49%</td><td>&yen;432.8B</td><td>&yen;300.7B</td><td>59.6%</td></tr>
+    <tr><td>FY2024</td><td>&yen;1,671.9B</td><td>&yen;528.9B</td><td>31.64%</td><td>&yen;490.6B</td><td>&yen;446.0B</td><td>84.3%</td></tr>
+    <tr><td>FY2025</td><td>&yen;1,164.9B</td><td>&yen;282.6B</td><td>24.25%</td><td>&yen;278.8B</td><td>-&yen;6.9B</td><td>-2.5%</td></tr>
+    <tr><td>FY2026</td><td>&yen;2,313.1B</td><td>&yen;360.1B</td><td>15.57%</td><td>&yen;424.1B</td><td>&yen;262.6B</td><td>72.9%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; the Switch 2 Launch</div></div>
+  <div class="sec-sub">Nintendo's fiscal quarters run Apr-Jun, Jul-Sep, Oct-Dec, Jan-Mar. Latest reported period: Q1 FY2027 (three months to Jun 30, 2026, reported Aug 6, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q1 FY2027 Headlines</div>
+    <p>Revenue was <b style="color:#f8fafc;">&yen;517.8B</b>, down <b style="color:#f87171;">9.5% YoY</b> as the quarter lapped the initial Switch 2 launch frenzy. Operating profit still rose <b style="color:#34d399;">150.5% YoY</b> to <b style="color:#f8fafc;">&yen;142.6B</b>, helped substantially by roughly <b style="color:#f8fafc;">$300M</b> in U.S. IEEPA tariff refunds booked as a reduction to cost of sales &mdash; a one-off that flatters this quarter's margin and shouldn't be extrapolated. Nintendo reaffirmed full FY2027 guidance: net sales of <b style="color:#f8fafc;">&yen;2.05T</b> (-11% YoY), operating profit of <b style="color:#f8fafc;">&yen;370B</b>, and net income of <b style="color:#f8fafc;">&yen;310B</b> (-27% YoY) &mdash; management itself expects this year's launch-year revenue spike to partially reverse as Switch 2 hardware unit sales step down from FY2026's pace to a guided 16.5M units. Switch 2 lifetime shipments reached roughly 23.68M units by Jun 30, 2026, already Nintendo's fastest-selling console ever.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2026)</div>
+    <div class="chart-sub">Gross margin held in a tight 55-61% band for four years, then fell off a cliff in FY2026, from 60.96% to 39.30% &mdash; a &minus;15.98pp drop versus FY2023 alone (the window used for criterion #14), driven almost entirely by the cost of mass-producing Switch 2 hardware in its first launch year.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">60%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">70%</text>
+<path d="M50.0,91.0 L247.5,93.6 L445.0,84.6 L642.5,65.2 L840.0,173.5 L840.0,220.0 L50.0,220.0 Z" fill="#f87171" opacity="0.12"/>
+<path d="M50.0,91.0 L247.5,93.6 L445.0,84.6 L642.5,65.2 L840.0,173.5" fill="none" stroke="#f87171" stroke-width="2.5"/>
+<circle cx="50.0" cy="91.0" r="3" fill="#f87171"/>
+<text x="50.0" y="81.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">55.80%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="247.5" cy="93.6" r="3" fill="#f87171"/>
+<text x="247.5" y="83.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">55.28%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="445.0" cy="84.6" r="3" fill="#f87171"/>
+<text x="445.0" y="74.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">57.08%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="642.5" cy="65.2" r="3" fill="#f87171"/>
+<text x="642.5" y="55.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">60.96%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="173.5" r="3" fill="#f87171"/>
+<text x="840.0" y="163.5" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">39.30%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> within dedicated video game consoles, Nintendo is the clear current-generation leader &mdash; Switch 2 outsold the PS5 in the Jan-Mar 2026 quarter, the original Switch is Nintendo's best-selling console ever at 155.92M lifetime units, and Nintendo's share of the global active console installed base is projected to climb to roughly 49% by 2027. Scored here as a "Clear #1" on that basis. But zoom out to the total gaming industry &mdash; which also includes PC gaming (Steam, Epic) and mobile gaming (a larger revenue pool than console gaming globally) &mdash; and Nintendo's overall share of "gaming" spend is far smaller and more fragmented; Nintendo has repeatedly struggled to translate its IP into meaningful mobile revenue (Mobile &amp; IP-related income was just &yen;67.7B in FY2025, a small slice of the total). Both things are true: dominant in dedicated console hardware, a minor player in the much larger all-platforms gaming market.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 8.0% &mdash; a low, defensive-consumer-hardware estimate reflecting Nintendo's debt-free balance sheet and historically low measured volatility (reported beta is unusually low, likely a data artifact of thin cross-border trading; not solely relied upon here).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of roughly 19.75x sits modestly below the FY22-26 average of &asymp;22.90x (itself dragged up by FY2025's 42.22x spike, when earnings were depressed mid-transition but the multiple hadn't caught down yet). Unusually, forward P/E (27.24x currently) now sits above trailing P/E &mdash; the reverse of the normal pattern &mdash; because FY2026's trailing earnings were flattered by one-off tariff refunds and FX gains, while FY2027 guidance points to profit falling 27% as the launch-year hardware surge fades.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50x</text><line x1="50.0" y1="128.42" x2="840.0" y2="128.42" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="124.42" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 22.90x</text><path d="M 50.0,159.40 L 208.0,164.80 L 366.0,142.20 L 524.0,51.12 L 682.0,124.56 L 840.0,141.00" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="159.40" r="3" fill="#a78bfa"/><text x="50.0" y="149.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.15x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="164.80" r="3" fill="#a78bfa"/><text x="208.0" y="154.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.80x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="142.20" r="3" fill="#a78bfa"/><text x="366.0" y="132.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.45x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="51.12" r="3" fill="#a78bfa"/><text x="524.0" y="41.12" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">42.22x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="124.56" r="3" fill="#a78bfa"/><text x="682.0" y="114.56" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.86x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="141.00" r="3.5" fill="#a78bfa"/><text x="840.0" y="131.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.75x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,149.88 L 208.0,155.56 L 366.0,101.68 L 524.0,112.20 L 682.0,121.48 L 840.0,111.04" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="149.88" r="3" fill="#c4b5fd"/><text x="50.0" y="164.88" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">17.53x</text><circle cx="208.0" cy="155.56" r="3" fill="#c4b5fd"/><text x="208.0" y="170.56" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">16.11x</text><circle cx="366.0" cy="101.68" r="3" fill="#c4b5fd"/><text x="366.0" y="116.68" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">29.58x</text><circle cx="524.0" cy="112.20" r="3" fill="#c4b5fd"/><text x="524.0" y="127.20" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">26.95x</text><circle cx="682.0" cy="121.48" r="3" fill="#c4b5fd"/><text x="682.0" y="136.48" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">24.63x</text><circle cx="840.0" cy="111.04" r="3.5" fill="#c4b5fd"/><text x="840.0" y="126.04" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">27.24x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers, and the PEG check:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings. Trailing P/E (the FY22-26 series above) is that same ratio computed at each fiscal year-end. Forward P/E is today's price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings. Nintendo is one of the few names on this site where forward P/E currently runs <b>above</b> trailing P/E (27.24x vs 19.75x) &mdash; the opposite of the usual growth-discount pattern. That's consistent with Nintendo's own guidance: FY2026's trailing earnings were lifted by one-off items (U.S. tariff refunds, FX gains) on top of the Switch 2 launch surge, while FY2027 guidance calls for net income to fall 27% as hardware volumes normalize and those one-offs don't repeat. The PEG ratio (forward P/E &divide; expected earnings growth) reinforces this: stockanalysis.com puts it around <b>2.5</b>, well above the traditional 1.0 "fair value" line and above the 1.0-2.0 "reasonably priced growth" band this framework generally likes to see &mdash; because near-term consensus earnings growth is actually negative, not positive, making a simple PEG read less useful here than the entry-multiple-vs-own-history comparison above.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Nintendo carries zero net debt &mdash; net cash of &yen;2,216.9B against FY2026 EBITDA gives a Net Debt/EBITDA of roughly -5.9x (i.e., net cash, comfortably inside and beyond this framework's &lt;2x bar). ROIC of 38.25% (FY2026) clears the assumed 8.0% WACC by a wide margin, though this figure is flattered by an unusually small invested-capital base once the enormous cash pile is netted out &mdash; a more conservative, cash-adjusted view of returns on operating capital would be lower, but still clearly profitable. Share count has declined steadily via modest buybacks, from roughly 1.294B shares (FY2022-equivalent) to about 1.153B today &mdash; a reduction of roughly 10.9% over four years, without ever taking on debt to fund it.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="2.20 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="437.62 439.82" stroke-dashoffset="-2.20"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Directors, officers &amp; disclosed insider holdings (combined) &asymp; under 0.5% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions, trust banks &amp; public float &asymp; 99%+ of shares outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> Nintendo is not a founder-controlled company today. Hiroshi Yamauchi, whose family ran Nintendo for four generations, retired as president in 2002 and died in 2013; the Yamauchi family's direct control ended with him, and no successor family stake anywhere near that scale exists on the current shareholder register. The largest disclosed shareholder, The Master Trust Bank of Japan (Trust Account), holds roughly 16.5% &mdash; but that's an institutional trust bank administering assets on behalf of thousands of pension funds and pooled investors, not a founder or insider with personal skin in the game. That makes Nintendo's ownership structure much closer to Booking Holdings' fully-institutional model than to Oracle's Larry-Ellison-style founder concentration &mdash; a genuine trade-off for anyone drawn to this stock partly because of its founder-driven creative legacy (Miyamoto, Iwata) rather than its current cap table.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Nintendo</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+8.1% &mdash; &yen;1,695.3B &rarr; &yen;2,313.1B; a lumpy hardware-cycle path (FY25 trough, FY26 launch surge), not steady growth (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>&ge;15%</td><td>-11.7% &mdash; &yen;592.8B &rarr; &yen;360.1B; Switch 2 launch-year margin compression outweighed the revenue surge</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>15.57% (FY2026) &mdash; below the bar for the first time in this window, down from 34.96% four years ago (score 4/5, still in the 15-20% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>-1.8% &mdash; &yen;282.1B &rarr; &yen;262.6B; dipped to roughly break-even (-&yen;6.9B) in the FY2025 trough year</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 in dedicated console hardware &mdash; Switch 2 outsold PS5 at launch, installed-base share trending toward &asymp;49% by 2027; far smaller share of the total gaming market including PC/mobile, flagged honestly</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>2 &mdash; a tight three-player console oligopoly (Nintendo, Sony, Microsoft), light competition rather than an open market</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 38.25% (FY2026) vs assumed 8.0% WACC &mdash; clears both by a wide margin, though the figure is inflated by a thin invested-capital base once Nintendo's huge net cash pile is excluded</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash of &yen;2,216.9B, Net Debt/EBITDA roughly -5.9x &mdash; zero debt, one of the strongest balance sheets on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>72.9% (FY2026) &mdash; solid but just under the bar; ran negative in FY2025 (-2.5%) during the pre-launch trough</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E &asymp;19.75x vs a FY22-26 average of &asymp;22.90x (ratio &asymp;0.86) &mdash; a modest discount to its own recent history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Declined from &asymp;1.294B shares (FY2022-equivalent) to &asymp;1.153B today &mdash; roughly 10.9% reduction over four years via modest buybacks, no debt-funded buybacks</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Under 1% combined for directors and officers &mdash; Yamauchi family control ended in 2013; largest holder (&asymp;16.5%) is an institutional trust bank, not a founder or insider</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.17% of FY2026 revenue (&yen;27.2B) &mdash; extremely low; Nintendo outsources hardware manufacturing rather than owning fabs or factories</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 39.30% (FY2026) vs 55.28% (FY2023), a &minus;15.98pp drop &mdash; the single largest driver of this year's weak scorecard, caused by Switch 2 hardware-ramp costs</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Zero debt and a &yen;2.2T net cash pile; genuinely dominant, launch-validated position in dedicated console hardware (Switch 2 already outselling the PS5); capex is close to nothing since Nintendo doesn't own its own factories; the share count has quietly shrunk about 11% over five years without leverage; and the entry multiple is modestly below Nintendo's own five-year average despite the stock's run-up.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a genuine console-cycle trough for margins: gross margin cratered 16pp in a single year on Switch 2 hardware-ramp costs, and management's own FY2027 guidance calls for revenue, operating profit and net income to all decline as the launch-year unit surge normalizes &mdash; the checklist's growth and margin misses aren't a one-off data quirk, they're the current reality of the business. Insider/founder ownership is under 1%; the Yamauchi era is over and this is now an institutionally-owned company. And software/IP monetization outside dedicated hardware (mobile, in particular) remains a persistently small part of the business relative to Nintendo's brand reach.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of May 8 &ndash; Aug 6, 2026 (FY2026 and Q1 FY2027 results) &ndash; Sep 11-17, 2026 (spot price, TSE and NTDOY ADR). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Nintendo Co., Ltd. IR financial results explanatory materials (May 8, 2026 and Aug 6, 2026), VGChartz and SQ Magazine (console hardware shipment/installed-base estimates), Citi Depositary Receipt Services (NTDOY ADR ratio notice).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.0%) is an assumed estimate, not a company-disclosed figure; reported ROIC is likely inflated by Nintendo's unusually small invested-capital base once its large net cash position is excluded.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Nintendo &mdash; TSE, JPY share price trend. Points shown are fiscal year-end closes (Mar 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Nintendo &mdash; Fiscal Year-End Close (TSE, JPY)</div>
+    <div class="chart-sub">Shares dipped into the FY2023 low ahead of the Switch cycle's late-stage slowdown, then climbed steadily into the FY2025 close on Switch 2 anticipation, pulled back slightly through FY2026, and have given back further ground since &mdash; today's &yen;8,093 sits roughly 18% below the FY2025 fiscal year-end close of &yen;9,883.77.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +7.68%</text>
+<path d="M 46.0,147.82 L 172.8,170.0 L 299.6,81.30 L 426.4,25.0 L 553.2,56.71 L 680.0,76.22 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,147.82 L 172.8,170.0 L 299.6,81.30 L 426.4,25.0 L 553.2,56.71 L 680.0,76.22" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="147.82" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="137.82" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;5,591</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="170.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="160.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;4,816</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="81.30" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="71.30" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;7,916</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="25.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="15.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;9,884</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="56.71" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="46.71" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;8,775</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="76.22" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="66.22" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;8,093</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2022-2026 (Mar 31 each year) and the current price (&yen;8,093, Sep 11, 2026 close, the most recent available TSE daily close) are direct closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
