@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spotify Technology Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/spotify.html">
+<meta property="og:title" content="Spotify Technology Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spotify Technology Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+
+  .note-box { background:#161029; border:1px solid #3b2a63; border-radius:10px; padding:12px 15px; margin-top:10px; }
+  .note-box .title { color:#c4b5fd; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .note-box p { font-size:12.5px; color:#e4defa; line-height:1.65; margin:0; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Audio Streaming Platforms &middot; Today's Daily Pick</div>
+  <h1>Spotify Technology S.A.</h1>
+  <div class="badges">
+    <span class="badge">NYSE: SPOT &middot; reports in EUR</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2006 &middot; Luxembourg-incorporated, Stockholm-headquartered operations</span>
+    <span class="badge warn">Unprofitable or barely breakeven for most of its history &mdash; consistent operating profit only arrived in FY2024. The FY21-25 EBIT and FCF CAGR figures below are inflated by a near-zero/negative starting base; read the callouts before trusting the headline growth rates.</span>
+  </div>
+  <div class="price">$509.45</div>
+  <div class="price-sub">Close Sep 18, 2026 (NYSE) &middot; Mkt cap &asymp;$104.7B (enterprise value &asymp;$97.3B, net cash position) &middot; ordinary shares trade directly on the NYSE (no ADR structure, unlike some other European names on this site)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in global music streaming &mdash; Spotify is the clear #1 by both paid subscribers (300 million, Q2 2026) and monthly active users (777 million), holding roughly 31-32% of global paid music-streaming subscriptions. Tencent Music is a distant #2 (&asymp;14%, dominant in China specifically), followed by Apple Music (&asymp;12-13%, bundled into Apple One), YouTube Music (&asymp;12%, bundled with YouTube Premium) and Amazon Music (&asymp;8-9%, bundled with Prime). No rival comes close to Spotify's scale globally, but all four are backed by trillion-dollar parents that can subsidize music as a loss-leader for a bigger ecosystem &mdash; a real structural risk even for the category leader.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;17.19B</div>
+      <div class="sub">+9.65% YoY, decelerating from +18.31% (FY2024); 5-yr CAGR (FY21-25) &asymp;15.5%, a genuine, undistorted growth number since revenue was never negative or near-zero</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green">12.79%</div>
+      <div class="note">Up from -5.62% (FY2022) and -1.50% (FY2023) after a razor-thin 0.97% in FY2021 &mdash; a real, structural turnaround, but still well below the 20% bar this framework screens for, and below the &asymp;33% gross margin's ceiling.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val green">Clears comfortably</div>
+      <div class="note">Return on Capital Employed &asymp;24.6% (FY2025) vs an assumed WACC of &asymp;7.5% (third-party estimates cluster 6.5%-8.3%) &mdash; a wide, genuine spread. Raw "ROIC" as reported by some data providers shows 128%-200%+, which is a math artifact of Spotify's tiny invested-capital base (net cash, minimal fixed assets), not a real return figure &mdash; ROCE is the saner read here.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (current)</div>
+      <div class="val green">&euro;6.52B</div>
+      <div class="sub">Net cash, not net debt &mdash; Net Debt/EBITDA is negative (net-cash) every year in this window except FY2022-23, when EBITDA itself was near zero and briefly made the ratio mathematically noisy</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">86/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">11/14 criteria met, 3 not met, 0 N/A &mdash; a strong score built mostly on balance-sheet strength, cash conversion and market leadership; held back by sub-20% operating margin, real platform competition, and share count still rising from stock-based comp.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="345.57 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="94.25 439.82" stroke-dashoffset="-345.57"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">11/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 11 (revenue CAGR, EBIT CAGR*, FCF CAGR*, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, insider/founder ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 3 (operating margin, market concentration, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>*EBIT and FCF CAGR technically clear the &ge;15% bar on the headline FY21-25 math, but both are flagged as base-effect distortions below &mdash; see page 2.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Spotify is today's "fun" pick &mdash; a platform I actually use every day &mdash; not a name pre-screened for a strong score, so I want to be upfront about what the checklist actually says. And honestly, it says more than I expected: 11 of 14 criteria met, Martinero Index 86/100, one of the stronger scores on this site. But the two headline growth numbers on page 2 (EBIT CAGR, FCF CAGR) are seriously distorted: Spotify was barely breakeven in FY2021 (0.97% operating margin) and posted real operating losses in FY2022 (-5.62% margin) and FY2023 (-1.50% margin) before swinging to genuine, structural profitability in FY2024-25. Computing a compound annual growth rate from a near-zero or negative starting point produces a huge, almost meaningless percentage &mdash; the real story isn't "120% annual EBIT growth," it's a company that crossed from unprofitable to solidly profitable in the last two years. What's genuinely strong, not distorted: revenue growth has been real and consistent (&asymp;15.5% CAGR, never negative), free cash flow conversion is now excellent (130.7% of EBIT in FY2025), the balance sheet is net cash with essentially no debt, capex is close to nothing (0.35% of revenue &mdash; about as asset-light as platforms get), and Spotify is the unambiguous #1 in global music streaming by both subscribers and revenue. The valuation looks cheap relative to Spotify's own (very short) history as a profitable company, but that "own history" is really just two data points (FY2024, FY2025), so I'd treat that reading with real caution too. Net: a likeable business with a real, recent profitability inflection &mdash; not the "priced-for-perfection growth story" its 28x trailing P/E might suggest at first glance, but not a screaming bargain either given how thin the profitable track record still is.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Aug 2026) and FY2025 annual results (reported Feb 2026); spot price as of Sep 18, 2026 close. Spotify's fiscal year is the calendar year, and it reports its financial statements in euros (EUR) even though its shares trade on the NYSE in US dollars &mdash; all figures below are EUR unless a dollar sign is shown for the share price or market cap.
+  </div>
+
+  <div class="bignum-corner">11/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in EUR millions (Spotify reports in euros). Fiscal year is the calendar year (Jan&ndash;Dec). CAGR computed FY2021&rarr;FY2025.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue climbed steadily and was never negative. Operating income and free cash flow tell a very different story: both dipped to near-zero or negative in FY2022-23 before swinging to genuine profitability in FY2024-25 &mdash; the bars below zero are real operating losses, not a rounding artifact.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income (EBIT)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&euro;18B</text>
+      <line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">&euro;13.5B</text>
+      <line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&euro;9B</text>
+      <line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">&euro;4.5B</text>
+      <line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#475569" stroke-width="1.3"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&euro;0</text>
+      <rect x="75.6" y="112.58" width="22.5" height="107.42" rx="2" fill="#2dd4bf"/>
+      <rect x="113.7" y="218.96" width="22.5" height="1.04" rx="2" fill="#60a5fa"/>
+      <rect x="151.9" y="216.93" width="22.5" height="3.07" rx="2" fill="#fbbf24"/>
+      <text x="125.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text>
+      <rect x="238.1" y="89.70" width="22.5" height="130.30" rx="2" fill="#2dd4bf"/>
+      <rect x="276.2" y="220.0" width="22.5" height="7.32" rx="2" fill="#f87171"/>
+      <rect x="314.4" y="219.77" width="22.5" height="0.23" rx="2" fill="#fbbf24"/>
+      <text x="287.5" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+      <rect x="400.6" y="72.81" width="22.5" height="147.19" rx="2" fill="#2dd4bf"/>
+      <rect x="438.7" y="220.0" width="22.5" height="2.21" rx="2" fill="#f87171"/>
+      <rect x="476.9" y="212.51" width="22.5" height="7.49" rx="2" fill="#fbbf24"/>
+      <text x="450.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+      <rect x="563.1" y="45.86" width="22.5" height="174.14" rx="2" fill="#2dd4bf"/>
+      <rect x="601.2" y="204.68" width="22.5" height="15.32" rx="2" fill="#60a5fa"/>
+      <rect x="639.4" y="194.62" width="22.5" height="25.38" rx="2" fill="#fbbf24"/>
+      <text x="612.5" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+      <rect x="725.6" y="29.04" width="22.5" height="190.96" rx="2" fill="#2dd4bf"/>
+      <rect x="763.7" y="195.58" width="22.5" height="24.42" rx="2" fill="#60a5fa"/>
+      <rect x="801.9" y="188.09" width="22.5" height="31.91" rx="2" fill="#fbbf24"/>
+      <text x="775.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+15.5%</div><div class="sub">&euro;9,668M &rarr; &euro;17,186M (FY21-25) &mdash; the one clean, undistorted CAGR of the three; revenue was positive throughout</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR &mdash; flagged</div><div class="val" style="color:#fbbf24;">+119.9%*</div><div class="sub">&euro;94M &rarr; &euro;2,198M (FY21-25); *near-meaningless &mdash; the path went 94 &rarr; -659 &rarr; -199 &rarr; 1,379 &rarr; 2,198, not smooth compounding</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR &mdash; flagged</div><div class="val" style="color:#fbbf24;">+79.6%*</div><div class="sub">&euro;276M &rarr; &euro;2,872M (FY21-25); *dipped to a near-zero &euro;21M trough in FY2022, so the headline rate overstates the real trend</div></div>
+  </div>
+
+  <div class="callout">
+    <b>Read this before trusting the EBIT/FCF growth numbers:</b> a compound annual growth rate is only a meaningful summary of a trend when the underlying series grows roughly smoothly. Spotify's does not. FY2021's &euro;94M operating income was already a razor-thin, near-breakeven result (0.97% margin) &mdash; and it got worse from there before it got better: FY2022 was a real operating loss (-&euro;659M, -5.62% margin), FY2023 was a smaller loss (-&euro;199M, -1.50% margin), and only FY2024-25 delivered genuine, structural profitability (8.80% &rarr; 12.79% margin). Dividing a healthy endpoint (&euro;2,198M) by a near-zero starting point (&euro;94M) produces a dramatic-looking +119.9% "growth rate" that has nothing to do with steady compounding &mdash; it's a base-effect artifact, the same category of distortion this site flags for COVID-depressed base years elsewhere (e.g. Booking Holdings, Airbus). The real signal is the margin trajectory itself, not the CAGR percentage.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">Breakeven (0%) shown as a dashed reference line, since that's the more meaningful threshold for Spotify's story than the framework's usual 20% screen bar &mdash; which FY2025's 12.79% still falls well short of. Two real loss years (FY2022-23) sit between a near-breakeven FY2021 and a genuinely profitable FY2024-25.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-10%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="135" text-anchor="end" font-size="10" fill="#94a3b8">breakeven (0%)</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text>
+    <path d="M50.0,132.24 L247.5,184.96 L445.0,152.00 L642.5,69.60 L840.0,37.68 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.12"/>
+    <path d="M50.0,132.24 L247.5,184.96 L445.0,152.00 L642.5,69.60 L840.0,37.68" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+    <circle cx="50.0" cy="132.24" r="3" fill="#2dd4bf"/><text x="50.0" y="122.24" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">0.97%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+    <circle cx="247.5" cy="184.96" r="3" fill="#f87171"/><text x="247.5" y="199.96" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">-5.62%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+    <circle cx="445.0" cy="152.00" r="3" fill="#f87171"/><text x="445.0" y="167.00" text-anchor="middle" font-size="10.5" fill="#f87171" font-weight="700">-1.50%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+    <circle cx="642.5" cy="69.60" r="3" fill="#2dd4bf"/><text x="642.5" y="59.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">8.80%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+    <circle cx="840.0" cy="37.68" r="3" fill="#2dd4bf"/><text x="840.0" y="27.68" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.79%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&euro;9,668M</td><td>&euro;94M</td><td>0.97%</td><td>-&euro;34M</td><td>&euro;276M</td><td>293.6%*</td></tr>
+    <tr><td>FY2022</td><td>&euro;11,727M</td><td>-&euro;659M</td><td>-5.62%</td><td>-&euro;430M</td><td>&euro;21M</td><td>n/m*</td></tr>
+    <tr><td>FY2023</td><td>&euro;13,247M</td><td>-&euro;199M</td><td>-1.50%</td><td>-&euro;532M</td><td>&euro;674M</td><td>n/m*</td></tr>
+    <tr><td>FY2024</td><td>&euro;15,673M</td><td>&euro;1,379M</td><td>8.80%</td><td>&euro;1,138M</td><td>&euro;2,284M</td><td>165.6%</td></tr>
+    <tr><td>FY2025</td><td>&euro;17,186M</td><td>&euro;2,198M</td><td>12.79%</td><td>&euro;2,212M</td><td>&euro;2,872M</td><td>130.7%</td></tr>
+  </table>
+  <div style="font-size:10.5px;color:#5b6b85;margin-top:6px;">*FCF/EBIT is "not meaningful" (n/m) or distorted in years where EBIT is negative or near-zero (FY2021-23) &mdash; the ratio itself becomes uninformative when the denominator is tiny or negative. The criterion score (page 5) uses the clean FY2025 figure of 130.7%.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; Market Position</div></div>
+  <div class="sec-sub">Spotify reports calendar quarters. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&euro;4.78B</b>, up <b style="color:#34d399;">14% YoY</b>, in line with guidance. Premium subscribers crossed a milestone, hitting <b style="color:#f8fafc;">300 million</b> (+7M in the quarter, ahead of guidance), while total monthly active users reached <b style="color:#f8fafc;">777 million</b>. Gross margin hit a record <b style="color:#34d399;">33.4%</b>, operating income was &euro;655M, and free cash flow was &euro;797M. For Q3 2026, Spotify guided to &euro;5.0B revenue, &euro;670M operating income, 32.9% gross margin, 305M Premium subscribers and 788M MAU &mdash; a slightly softer MAU add than some expected, which the company attributed partly to product changes in emerging markets like India and Indonesia aimed at longer-term monetization rather than raw user-count growth. In August 2026, Spotify also upsized its share repurchase program by $1.5B, its clearest signal yet that buybacks (not just stock-based comp dilution) are becoming part of the capital-return story going forward.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2021-FY2025)</div>
+    <div class="chart-sub">Gross margin has improved every year in this window, from 26.80% to 31.98% &mdash; a +7.03pp gain versus FY2022 alone (the window used for criterion #14), driven by a shift toward higher-margin marketplace revenue (advertising, podcasts, audiobooks) and better content-licensing terms, not the kind of margin erosion seen at some capex-heavy names elsewhere on this site.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+<line x1="50" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="157.33" text-anchor="end" font-size="11" fill="#64748b">25%</text>
+<line x1="50" y1="86.67" x2="840" y2="86.67" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="90.67" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35%</text>
+<path d="M50.0,129.33 L247.5,154.00 L445.0,139.73 L642.5,83.60 L840.0,60.27 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/>
+<path d="M50.0,129.33 L247.5,154.00 L445.0,139.73 L642.5,83.60 L840.0,60.27" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="50.0" cy="129.33" r="3" fill="#34d399"/>
+<text x="50.0" y="119.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.80%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<circle cx="247.5" cy="154.00" r="3" fill="#34d399"/>
+<text x="247.5" y="144.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">24.95%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="445.0" cy="139.73" r="3" fill="#34d399"/>
+<text x="445.0" y="129.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.02%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="642.5" cy="83.60" r="3" fill="#34d399"/>
+<text x="642.5" y="73.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">30.23%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="840.0" cy="60.27" r="3" fill="#34d399"/>
+<text x="840.0" y="50.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.98%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Spotify is the clear global #1 in music streaming by every widely-cited measure &mdash; 300 million paid subscribers, 777 million monthly active users, and roughly 31-32% of global paid music-streaming subscriptions, well ahead of Tencent Music (&asymp;14%, China-concentrated), Apple Music (&asymp;12-13%), YouTube Music (&asymp;12%) and Amazon Music (&asymp;8-9%). That said, this isn't a market with weak competitors: Apple, Amazon, Google/YouTube and Tencent are all trillion-dollar (or near-trillion) companies that can and do bundle music into broader ecosystems (Apple One, Prime, YouTube Premium) as a retention tool rather than a standalone profit center &mdash; a structurally different, harder-to-out-compete kind of rival than Spotify itself, which has no other business line to cross-subsidize with. Scored here as "Clear #1" given the subscriber and revenue evidence, with market concentration (criterion #6, separate from market share) scored more cautiously at 3/5 given how many large, well-funded platforms are genuinely competing for the same listeners.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. WACC is assumed at 7.5%, roughly the midpoint of third-party estimates (which range from &asymp;6.5% to &asymp;8.3% depending on methodology) for a large-cap, asset-light consumer platform.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Trailing P/E is only computable for two of the last five fiscal years (FY2024-25) &mdash; FY2021-23 had net losses, so there's no meaningful P/E to plot. The "5-yr average" (&asymp;61.4x) this framework uses is really just an average of those two years, both unusually high because earnings were still small relative to the price. Current trailing P/E (28.01x) sits well below even that limited average &mdash; genuine multiple compression as earnings caught up, but treat the "discount" with some caution given how thin the comparable history is.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E (FY24-25, Now)</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (FY23-25, Now)</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="153.33" x2="840" y2="153.33" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.33" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="86.67" x2="840" y2="86.67" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.67" text-anchor="end" font-size="11" fill="#64748b">80x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">120x</text>
+<text x="50" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text>
+<text x="208" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<text x="366" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<text x="524" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<text x="682" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<text x="840" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">Now</text>
+<text x="50" y="215" text-anchor="middle" font-size="10" fill="#64748b">n/a</text>
+<text x="208" y="215" text-anchor="middle" font-size="10" fill="#64748b">n/a</text>
+<text x="366" y="215" text-anchor="middle" font-size="10" fill="#64748b">n/a</text>
+<path d="M 524.0,92.10 L 682.0,143.20 L 840.0,173.30" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="524.0" cy="92.10" r="3" fill="#a78bfa"/><text x="524.0" y="82.10" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">76.73x</text>
+<circle cx="682.0" cy="143.20" r="3" fill="#a78bfa"/><text x="682.0" y="133.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">46.08x</text>
+<circle cx="840.0" cy="173.30" r="3.5" fill="#a78bfa"/><text x="840.0" y="163.30" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.01x</text>
+<path d="M 366.0,28.98 L 524.0,132.32 L 682.0,145.78 L 840.0,165.91" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/>
+<circle cx="366.0" cy="28.98" r="3" fill="#c4b5fd"/><text x="366.0" y="43.98" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">114.59x</text>
+<circle cx="524.0" cy="132.32" r="3" fill="#c4b5fd"/><text x="524.0" y="147.32" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">52.59x</text>
+<circle cx="682.0" cy="145.78" r="3" fill="#c4b5fd"/><text x="682.0" y="160.78" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">44.52x</text>
+<circle cx="840.0" cy="165.91" r="3.5" fill="#c4b5fd"/><text x="840.0" y="180.91" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">32.44x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers, and the PEG ratio:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings (28.01x). Trailing P/E (the FY21-25 series above) is that same ratio computed at each fiscal year-end &mdash; only meaningful for FY2024-25 here, since Spotify posted net losses in FY2021-23. Forward P/E is today's price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings (32.44x currently) &mdash; useful for judging whether a multiple is fair relative to where earnings are actually headed, though note forward P/E is currently <i>higher</i> than trailing P/E, meaning the market expects near-term earnings growth to moderate somewhat from its recent explosive pace. The PEG ratio (forward P/E &divide; expected annual EPS growth) sits at <b>1.23</b> per stockanalysis.com &mdash; squarely inside the 1.0-2.0 "reasonably priced growth" range this dashboard checks for, not screaming cheap (like Booking Holdings' sub-1.0 PEG elsewhere on this site) but not expensive either, given how fast earnings have actually been growing off the recent turnaround.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net cash of &euro;6.52B (current) against essentially minimal total debt (&euro;466M) &mdash; Net Debt/EBITDA is negative (net-cash position), comfortably inside this framework's &lt;2x bar under any methodology. FY2022-23 show mathematically noisy Net Debt/EBITDA readings (3.30x and 53.95x per some data providers) purely because EBITDA itself was near zero those years, not because leverage changed &mdash; the underlying debt load barely moved (&euro;1.7-1.8B throughout). Free cash flow conversion is now strong and clean: 130.7% of EBIT in FY2025, 165.6% in FY2024. Capex is minimal at &euro;61M (FY2025, just 0.35% of revenue) &mdash; a genuinely asset-light platform with almost no fixed-capital requirements, consistent with running data centers and content delivery mostly through third-party cloud infrastructure (notably Google Cloud) rather than owned hardware.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="110.83 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="328.99 439.82" stroke-dashoffset="-110.83"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Co-founders Daniel Ek (&asymp;14.3%) &amp; Martin Lorentzon (&asymp;10.9-12%) &asymp; 25% combined economic stake</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 75% of shares outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> economic ownership (&asymp;25% combined for Ek and Lorentzon) understates how much control the founders actually have. Spotify's dual-class structure gives founders "beneficiary certificates" carrying 10 votes each versus 1 vote per ordinary share &mdash; pushing Ek's individual voting power to roughly 29-31% and Lorentzon's to roughly 42%, for a combined <b style="color:#c4b5fd;">&asymp;70-73% of total voting power</b> despite owning only about a quarter of the economic value. That's a meaningfully different governance picture than the ~25% economic figure alone suggests: Ek and Lorentzon retain effective control over major corporate decisions even as their pure economic stake has been diluted by years of stock-based comp and secondary sales (both founders have sold hundreds of millions of dollars of stock over time). Scored on the economic stake for consistency with how this criterion is applied elsewhere on the site, with the voting-control nuance flagged here for honesty.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Spotify</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+15.5% &mdash; &euro;9,668M &rarr; &euro;17,186M; the one clean CAGR of the three growth criteria, revenue was positive and growing every year</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+119.9% on paper &mdash; but flagged as a base-effect distortion: FY2021's &euro;94M base was near-breakeven, and FY2022-23 were real operating losses before the FY2024-25 turnaround. Technically clears the bar; treat the percentage itself with real skepticism</td><td><span class="status-pill status-met">Met (flagged)</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>12.79% (FY2025) &mdash; a genuine, structural improvement from breakeven, but still well short of the 20% bar; TTM (through Jun 2026) is a bit higher at 14.65%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+79.6% on paper &mdash; also flagged: FCF dipped to a near-zero &euro;21M trough in FY2022 between the FY2021 (&euro;276M) and FY2025 (&euro;2,872M) endpoints, so the smooth headline rate overstates the real trajectory</td><td><span class="status-pill status-met">Met (flagged)</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear global #1 by both paid subscribers (300M) and monthly active users (777M); roughly 31-32% of global paid music-streaming subscriptions, well ahead of Tencent Music (&asymp;14%), Apple Music (&asymp;12-13%), YouTube Music (&asymp;12%) and Amazon Music (&asymp;8-9%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; Spotify leads clearly, but Apple, Amazon, Google/YouTube and Tencent are all large, well-funded platforms bundling music into bigger ecosystems, not token competitors</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROCE &asymp;24.6% (FY2025) vs assumed WACC &asymp;7.5% &mdash; clears comfortably. Raw "ROIC" as reported by some providers (128%-200%+) is a math artifact of Spotify's tiny invested-capital base, not a meaningful figure &mdash; flagged and not used for scoring</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position (&euro;6.52B net cash, current) &mdash; comfortably inside the bar; FY2022-23 readings are mathematically noisy due to near-zero EBITDA those years, not a real leverage change</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>130.7% (FY2025), 165.6% (FY2024) &mdash; strong, clean cash conversion now that EBIT is a real, positive number; FY2021-23 ratios are not meaningful given near-zero/negative EBIT those years</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 28.01x vs a "5-yr average" of &asymp;61.4x &mdash; but that average is really just FY2024 (76.73x) and FY2025 (46.08x), the only two years with positive earnings; a real discount, but on a very thin comparable base</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Risen from &asymp;194M shares (FY2021) to &asymp;214-216M (FY2025), roughly +11-12%, driven by stock-based comp; a new $1.5B buyback upsize (Aug 2026) is a recent signal of change, but hasn't shown up in this window yet</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Co-founders Daniel Ek (&asymp;14.3%) and Martin Lorentzon (&asymp;10.9-12%) hold roughly 25% combined economic stake, but &asymp;70-73% combined voting power via 10-vote beneficiary certificates &mdash; genuinely meaningful founder control by any read</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.35% of FY2025 revenue (&euro;61M) &mdash; about as asset-light as platforms get on this site, consistent with leaning on third-party cloud infrastructure rather than owned data centers</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 31.98% (FY2025) vs 24.95% (FY2022), a +7.03pp improvement &mdash; margin is expanding meaningfully, not eroding</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The turnaround from unprofitable to genuinely profitable is real: gross margin has climbed every year (26.80% &rarr; 31.98%), operating margin flipped from -5.62% to +12.79% in three years, and free cash flow conversion is now excellent (130.7% of EBIT). The balance sheet is net cash with essentially no meaningful leverage, capex is close to nothing (0.35% of revenue), and Spotify is the unambiguous global #1 in music streaming by subscribers, MAU and revenue. Founders retain real, meaningful control (&asymp;70-73% of votes) despite a diluted economic stake, and the current trailing P/E (28.01x) is well below Spotify's own (short) history as a profitable company.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The headline EBIT and FCF growth rates (+119.9%, +79.6%) are base-effect distortions from a near-zero/negative FY2021-23 starting point &mdash; don't read them as smooth compounding. Operating margin (12.79%) is still well short of the 20% bar this framework screens for. Share count has risen roughly 11-12% since FY2021 from stock-based comp, though the new $1.5B buyback upsize (Aug 2026) may start to offset that. And despite being the clear leader, Spotify faces genuinely well-funded competition from Apple, Amazon, Google/YouTube and Tencent, all of which can subsidize music streaming as a loss-leader for a bigger ecosystem in a way Spotify itself cannot.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Feb 2026 (FY2025 results) &ndash; Sep 18, 2026 (spot price &amp; Q2 2026 results, reported Aug 2026). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Spotify Q2 2026 shareholder letter and Form 6-K filings, macrotrends.net (historical share price &amp; share count), various market-share estimates (Tencent Music, Apple Music, YouTube Music, Amazon Music comparisons drawn from multiple third-party industry trackers, which vary in methodology), Music Business Worldwide / Motley Fool / Forbes (founder ownership &amp; voting power).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (7.5%) is an estimate, not a company-disclosed figure. FY2025 shares outstanding is an approximation interpolated from the most recent quarterly data available (Q3 2025: 214M) since a precise Dec 31, 2025 figure wasn't independently confirmed. Global music-streaming market-share percentages vary meaningfully across third-party sources depending on methodology (MAU-based vs. paid-subscriber-based vs. revenue-based).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Spotify Technology S.A. &mdash; NYSE, USD share price trend (ordinary shares, no ADR). Points shown are fiscal year-end closes (Dec 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Spotify &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A brutal FY2021-22 drawdown (-66% peak-to-trough as growth-stock valuations reset and losses persisted) followed by a powerful multi-year recovery as the company actually turned profitable &mdash; up at a 17.9% annualized clip since FY2021's year-end close, despite a pullback from the FY2025 close ($580.71) to today's $509.45.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +17.9%</text>
+<path d="M 46.0,122.40 L 172.8,160.57 L 299.6,133.74 L 426.4,69.89 L 553.2,37.06 L 680.0,54.61 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,122.40 L 172.8,160.57 L 299.6,133.74 L 426.4,69.89 L 553.2,37.06 L 680.0,54.61" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="122.40" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="112.40" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$234.03</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="160.57" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="150.57" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$78.95</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="133.74" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="123.74" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$187.91</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="69.89" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="59.89" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$447.38</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="37.06" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="27.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$580.71</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="54.61" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="44.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$509.45</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (Dec 31 each year) and the current price ($509.45, Sep 18, 2026 close) are direct closing/spot prices sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's Note</div>
+    <p>I use Spotify every day &mdash; it's the soundtrack to basically everything I do, from commuting to working to falling asleep to a playlist. So when I say this is a "fun" pick, I mean it: I picked this company because I love the product, not because I screened for a strong score first. What actually surprised me running the numbers is that the checklist likes it more than I expected &mdash; 86/100, 11 of 14 criteria met. But I don't want to oversell that. The two scariest-looking numbers on this dashboard (+120% EBIT CAGR, +80% FCF CAGR) are basically noise: Spotify was losing money or barely breaking even for most of the last five years, and those huge percentages are just what happens when you divide a real number by a number that used to be near zero. The actual story is simpler and, I think, more honest: Spotify spent years proving the subscription model could work at scale, and only in the last two years has it actually shown it can make real money doing it &mdash; healthy margins, strong free cash flow, a clean net-cash balance sheet. That's a good story. It's just a much shorter track record of actual profitability than the headline growth rates make it look like, and I'd rather be straight about that than let a two-year hot streak convince me this is a proven compounder yet. Daniel Ek and Martin Lorentzon still controlling roughly 70% of the vote gives me some comfort that the founders have skin in the game for the long haul, even though their economic ownership has been diluted down to about a quarter of the company. I'm not making a buy call here &mdash; I just like using the product, and it turns out the numbers aren't embarrassing either, which isn't always true when I pick a "fun" one.</p>
+  </div>
+</div>
+
+</body>
+</html>
