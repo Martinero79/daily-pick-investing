@@ -1834,6 +1834,61 @@ const COMPANIES = [
     blurb: "The clear #1 global audio streaming platform (300M Premium subscribers, 777M MAU, ~31-32% global share), and one of the highest scores on the site at 86/100. Genuine, undistorted 15.5% revenue CAGR, net cash balance sheet, minimal capex, FCF conversion over 100%, and an entry multiple well below its own average. The eye-catching EBIT/FCF growth rates (+120%, +80%) are largely base-effect noise from a company that was barely profitable for most of its history — real profitability is only ~2 years old. Founders Daniel Ek and Martin Lorentzon still control ~70% of the vote despite owning only ~25% economically.",
     file: "companies/spotify.html",
     personalNote: "I use Spotify every day — it's the soundtrack to basically everything I do, from commuting to working to falling asleep to a playlist. So when I say this is a 'fun' pick, I mean it: I picked this company because I love the product, not because I screened for a strong score first. What actually surprised me running the numbers is that the checklist likes it more than I expected — 86/100, 11 of 14 criteria met. But I don't want to oversell that. The two scariest-looking numbers on this dashboard (+120% EBIT CAGR, +80% FCF CAGR) are basically noise: Spotify was losing money or barely breaking even for most of the last five years, and those huge percentages are just what happens when you divide a real number by a number that used to be near zero. The actual story is simpler and, I think, more honest: Spotify spent years proving the subscription model could work at scale, and only in the last two years has it actually shown it can make real money doing it — healthy margins, strong free cash flow, a clean net-cash balance sheet. That's a good story. It's just a much shorter track record of actual profitability than the headline growth rates make it look like, and I'd rather be straight about that than let a two-year hot streak convince me this is a proven compounder yet. Daniel Ek and Martin Lorentzon still controlling roughly 70% of the vote gives me some comfort that the founders have skin in the game for the long haul, even though their economic ownership has been diluted down to about a quarter of the company. I'm not making a buy call here — I just like using the product, and it turns out the numbers aren't embarrassing either, which isn't always true when I pick a 'fun' one."
+  },
+
+  {
+    slug: "coreweave",
+    name: "CoreWeave, Inc.",
+    ticker: "NASDAQ: CRWV",
+    sector: "AI Cloud Infrastructure / GPU-as-a-Service",
+    industry: "Technology",
+    subIndustry: "AI Cloud Infrastructure",
+    tags: [],
+    dateFeatured: "2026-09-22",
+    price: "$85.43",
+    score: "3 / 14",
+    martinero: 26,
+    momentum: { status: "decelerating", recent: 167.9, prior: 736.0 },
+    quarterYoY: { period: "TTM (Jun 2026)", growth: 115.3 },
+    blurb: "The largest pure-play 'neocloud' GPU-as-a-service provider, IPO'd March 2025 and up ~114% from its $40 IPO price despite a ~53% drop from its June 2025 high. Revenue growth is undeniable (+167.9% FY24-25) but every other criterion breaks down: FCF is deeply negative and worsening (-$13.7B TTM) on capex running 200%+ of revenue, net debt/EBITDA sits near 12x, ROIC is negative, and shares outstanding are up ~76% YoY. Roughly two-thirds of revenue comes from Microsoft and Meta combined — its two biggest customers are also its two biggest long-term competitive threats as they build out their own AI silicon.",
+    file: "companies/coreweave.html"
+  },
+
+  {
+    slug: "microstrategy",
+    name: "Strategy Inc. (formerly MicroStrategy)",
+    ticker: "NASDAQ: MSTR",
+    sector: "Leveraged Bitcoin Treasury (legacy Enterprise Software)",
+    industry: "Technology",
+    subIndustry: "Corporate Bitcoin Treasury",
+    tags: [],
+    dateFeatured: "2026-09-22",
+    price: "$168.50",
+    score: "2 / 14",
+    martinero: 13,
+    momentum: { status: "accelerating", recent: 2.97, prior: -6.61 },
+    quarterYoY: { period: "FY2025", growth: 2.97 },
+    blurb: "Not really a software dashboard anymore — Strategy's ~$65B market value is now driven almost entirely by its ~845,000 BTC treasury, funded by convertible debt and heavy share issuance (+240% share count since FY2021). The legacy BI software business is flat-to-declining (-1.68% CAGR, $510.8M→$477.2M). mNAV (market cap ÷ Bitcoin holdings value) — the one number that actually matters here — has compressed from a historical 1.5-2x+ premium (briefly 6x in 2021) to around 0.9-1.1x today, dipping below 1.0x entirely in June 2026. Almost every traditional criterion on this site simply isn't built for a company like this, and the scorecard shows it.",
+    file: "companies/microstrategy.html"
+  },
+
+  {
+    slug: "reddit",
+    name: "Reddit, Inc.",
+    ticker: "NYSE: RDDT",
+    sector: "Online Community & Content Platform",
+    industry: "Communication Services",
+    subIndustry: "Social Media & Community Platforms",
+    tags: [],
+    dateFeatured: "2026-09-22",
+    price: "$158.73",
+    score: "10 / 14",
+    martinero: 71,
+    momentum: { status: "decelerating", recent: 61.0, prior: 69.0 },
+    quarterYoY: { period: "Q2 2026", growth: 61.0 },
+    blurb: "The clear #1 online forum/community discussion platform (~84% share of Google forum search results), two and a half years into life as a public company (IPO'd March 2024 at $34, now ~4.7x that despite a ~40% pullback from highs). Revenue has compounded at roughly 46%/year since FY2021, with FY2025 delivering Reddit's first full year of real GAAP profitability (20.1% operating margin) and a near-debt-free balance sheet ($2.45B net cash). AI licensing deals with Google and OpenAI add a differentiated revenue stream beyond advertising. Misses: still-rising share count (+5.9% in FY2025) and modest direct insider ownership (2.95% — CEO Steve Huffman's often-cited 24.8% SEC stake is mostly shared voting power, not personal economic ownership).",
+    file: "companies/reddit.html",
+    personalNote: "I picked Reddit as a long-time user — I've been reading and posting on the site for years — and wanted to see what the checklist says now that it's two and a half years into life as a public company. The picture is genuinely strong. Revenue has compounded at roughly 46% a year since FY2021 ($484.9M → $2,203M), and FY2025 was Reddit's first full year of solid GAAP profitability: a 20.07% operating margin, up from deep losses every year before it. The one asterisk on the growth numbers is FY2024, when a one-time $534.7M stock-based comp charge tied to IPO vesting pushed operating income to -$560.6M even as revenue kept climbing — that single item is why EBIT and FCF CAGR both come out mathematically undefined ('n/m', a loss-to-profit sign flip) rather than a clean percentage. Strip that out and the underlying trend is a real, durable swing to profitability: free cash flow went from -$132.5M (FY2021) to $684.2M (FY2025), a 154.8% FCF-to-EBIT conversion rate. The balance sheet is close to debt-free ($2.45B net cash), capex is next to nothing (0.3% of revenue), and today's trailing P/E (37.0x) sits at roughly a 55% discount to the only comparable data point available, FY2025's 82.2x reading, with a PEG ratio around 0.59. Where the checklist pushes back: share count is still rising (+5.9% in FY2025 alone, from ongoing RSU issuance) and direct insider/officer ownership is a modest 2.95% — Steve Huffman's often-cited 24.8% SEC-reported stake is mostly shared voting power tied to a pre-IPO voting agreement with Advance Publications, not shares he personally owns. Net: 10 of 14 criteria met, Martinero Index 71/100 — a genuinely strong scorecard for a two-year-old public company, with dilution and ownership structure as the honest counterweights to an otherwise clean growth-and-margin story."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
