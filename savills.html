@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Savills plc Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/savills.html">
+<meta property="og:title" content="Savills plc Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 100+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Savills plc Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 100+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+
+  .note-box { background:#0f1a10; border:1px solid #1f4a2a; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+  .note-box .title { color:#4ade80; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .note-box p { font-size:12.5px; color:#cfe8d4; line-height:1.6; margin:0 0 8px 0; }
+  .note-box p:last-child { margin-bottom:0; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Global Real Estate Advisory, Property &amp; Facilities Management, Investment Management</div>
+  <h1>Savills plc</h1>
+  <div class="badges">
+    <span class="badge">LSE: SVS &middot; reports in GBP</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually (H1/H2)</span>
+    <span class="badge">Founded 1855 (as a London land agency by Alfred Savill) &middot; London, UK (HQ)</span>
+    <span class="badge warn">Operating margin is thin and unusually volatile for this framework &mdash; 4.61% in FY2025, but it fell as low as 2.77% in FY2023 &mdash; and unlike most services peers on this site, both EBIT and free cash flow are actually <i>lower</i> today than in FY2021, not just slow-growing.</span>
+  </div>
+  <div class="price">&pound;9.76</div>
+  <div class="price-sub">Close Aug 7, 2026 (LSE, most recent daily print available at data-pull time) &middot; Mkt cap &asymp;&pound;1.35B (138.55M shares) &middot; down about 2% versus the FY2025 year-end close of &pound;9.96, and inside a 52-week range of &pound;7.92&ndash;&pound;11.26</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors, honestly sized:</b> Savills is routinely grouped with CBRE, JLL, Cushman &amp; Wakefield and Colliers as one of the handful of genuinely global full-service real estate firms (plus privately-held Knight Frank), but by group revenue it is the smallest of that set, not a peer on equal footing &mdash; FY2025 revenue of &pound;2.55B (&asymp;$3.2B) compares with Colliers' FY2025 revenue of $5.56B, and both are dwarfed by CBRE (&asymp;$38B) and JLL (&asymp;$23B). Where Savills genuinely differentiates: an unusually strong Asia Pacific franchise (28% of group revenue, built from a Hong Kong presence dating to the 1970s-80s) alongside a UK-heavy home base (40% of group revenue), real strength in prime/luxury residential advisory &mdash; a segment CBRE and JLL barely compete in &mdash; and, as of 31 Jul 2026, a serious push into US real estate investment banking via the completed acquisition of Eastdil Secured (enterprise value $1.1B / &asymp;&pound;827M), which Savills describes as creating a global leader in real estate capital markets advisory.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&pound;2,551M</div>
+      <div class="sub">+6.1% YoY (FY2024: +7.4%); H1 2026 continued at +9% YoY to &pound;1.23B, with underlying profit before tax up 47% following the Eastdil Secured deal closing 31 Jul 2026</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val red">4.61%</div>
+      <div class="note">Range 2.77%-9.21% FY21-25 &mdash; thin and genuinely volatile, not just structurally low; margin nearly halved from FY2021's 9.21% to a FY2023 trough of 2.77% (a weak year globally for property transaction volumes) before a partial recovery.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val red">7.64% / 8.0%</div>
+      <div class="note">No stockanalysis.com auto-computed WACC was available for Savills at data-pull time, so this framework's standard 8.0% developed-market services-sector assumption is used. The resulting spread (&asymp;-0.36pts) is a genuine miss, but an unusually close one &mdash; Savills sits almost exactly at its assumed cost of capital, not dramatically below it.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">&asymp;0.49x</div>
+      <div class="sub">FY2025, per stockanalysis.com (includes IFRS16 lease liabilities as debt). Savills' own headline figure is a net <i>cash</i> position of &pound;167.7M at FY2025 year-end &mdash; the two numbers differ because the company's own measure excludes lease liabilities; both are shown here for transparency.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">35/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">5/14 criteria met, 9 not met, 0 N/A &mdash; a genuinely conservative balance sheet and clean cash conversion, undercut by shrinking EBIT and FCF over the FY21-25 window and a market position smaller than the "Big 5" framing usually implies.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="188.5 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="251.32 439.82" stroke-dashoffset="-188.5"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">5/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 5 (net debt/EBITDA, FCF conversion, entry multiple vs. own history, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market share, market concentration, ROIC/WACC, insider/founder ownership, margin stability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; a handful of large global full-service firms dominate cross-border and institutional mandates, but the broader property advisory market remains fragmented with thousands of national and boutique firms</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Savills is a real, long-standing global real estate services firm &mdash; 170 years old, genuinely international, with a UK/Asia-Pacific footprint few Western-headquartered peers can match &mdash; but this framework's numbers tell a more mixed story than the "Big 5" label usually suggests. Revenue has grown every year except FY2023 (+4.4% CAGR FY21-25), but EBIT and free cash flow have both <i>shrunk</i> over that same span (EBIT: &pound;197.8M &rarr; &pound;117.6M, a -12.2% CAGR; FCF: &pound;284.1M &rarr; &pound;144.5M, a -15.6% CAGR), driven by a genuinely rough FY2023 in which operating margin bottomed at 2.77% and free cash flow collapsed to essentially zero (&pound;1.4M) amid a global slowdown in property transaction volumes. FY2025 shows real recovery &mdash; operating margin back to 4.61%, FCF back to &pound;144.5M, FCF conversion above 100% of EBIT &mdash; but neither EBIT nor FCF has yet reclaimed its FY2021 level. What's genuinely working: the balance sheet is conservative by this industry's standards (net debt/EBITDA of roughly 0.49x even before counting the company's own net-cash framing), capex is minimal (under 0.5% of revenue), the entry multiple sits close to Savills' own five-year average rather than at a premium, and share count has actually declined modestly rather than diluting. What's more mixed: ROIC (7.64%) sits almost exactly at this framework's assumed cost of capital rather than clearing it, insider/founder ownership is thin (Savills demutualized via IPO in 1997 and has no controlling family stake), and Savills' claim to "Big 5" status doesn't fully hold up against Colliers, let alone CBRE and JLL, once you compare actual group revenue rather than reputation. The 31 Jul 2026 completion of the Eastdil Secured acquisition (US real estate investment banking, $1.1B enterprise value) is a genuinely significant forward-looking development &mdash; H1 2026 underlying profit was already up 47% &mdash; but it postdates the FY2021-25 window this scorecard is built on, so its full effect isn't in these numbers yet. Net: 5 of 14 criteria met, Martinero Index 35/100 &mdash; a financially conservative, geographically differentiated firm whose recent profit trend has been more volatile than its brand recognition would suggest.
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's note</div>
+    <p>Built this one as part of a batch covering the "Big 5" commercial real estate names alongside Colliers, CBRE, JLL and Cushman &amp; Wakefield &mdash; and Savills is the one where the framework pushed back hardest on the label itself. It's genuinely everywhere in UK property conversations (probably the most recognisable name on a London high street of any firm on this list), but by the numbers it's smaller than Colliers, let alone the two giants. What actually impressed me digging in: the balance sheet discipline is real and doesn't get flagged nearly as much as the flashier growth stories on this site, and a management team that keeps capex near-zero while funding an genuinely large acquisition (Eastdil Secured) out of a conservative balance sheet is doing something right operationally, even if EBIT has been going backwards on a 5-year view. I'd want to understand FY2023's near-total FCF wipeout better before forming any view &mdash; was that purely cyclical (rates, transaction volumes) or did something structural change &mdash; before this checklist result would change my mind either way.</p>
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> five-year financials (FY2021-25) and the FY2025 balance sheet are sourced from stockanalysis.com (S&amp;P Global Market Intelligence / Fiscal.ai); the most recent results referenced (H1 2026, reported 13 Aug 2026) are used only for forward-looking context and are not part of the scored FY21-25 window. Spot price (&pound;9.76) is the most recent daily close available at data-pull time (Aug 7, 2026), not a same-day quote as of this dashboard's publication. Savills' fiscal year is the calendar year; FY2025 = year ended Dec 31, 2025.
+  </div>
+
+  <div class="bignum-corner">5/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in GBP millions. Fiscal year ends Dec 31. CAGR computed FY21&rarr;FY25 (4-year span). Source: stockanalysis.com (S&amp;P Global Market Intelligence).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue has grown in every year except FY2023's small dip, but EBIT and FCF tell a different story: both peaked in FY2021, fell sharply through FY2023 (a rough year globally for property transaction volumes, when FCF collapsed to near-zero), and have only partially recovered since &mdash; FY2025's EBIT (&pound;117.6M) and FCF (&pound;144.5M) both remain below their FY2021 levels despite four more years of revenue growth.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&pound;0</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">&pound;600M</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">&pound;1.2B</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">&pound;1.8B</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">&pound;2.4B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&pound;3.0B</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="82.56" width="22.5" height="157.44" rx="2" fill="#2dd4bf"/><rect x="113.7" y="225.49" width="22.5" height="14.51" rx="2" fill="#60a5fa"/><rect x="151.9" y="219.17" width="22.5" height="20.83" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="231.6" y="71.47" width="22.5" height="168.53" rx="2" fill="#2dd4bf"/><rect x="269.7" y="228.14" width="22.5" height="11.86" rx="2" fill="#60a5fa"/><rect x="307.9" y="229.43" width="22.5" height="10.57" rx="2" fill="#fbbf24"/><text x="281.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="387.6" y="75.87" width="22.5" height="164.13" rx="2" fill="#2dd4bf"/><rect x="425.7" y="235.45" width="22.5" height="4.55" rx="2" fill="#60a5fa"/><rect x="463.9" y="239.90" width="22.5" height="0.10" rx="2" fill="#fbbf24"/><text x="437.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="543.6" y="63.71" width="22.5" height="176.29" rx="2" fill="#2dd4bf"/><rect x="581.7" y="232.75" width="22.5" height="7.25" rx="2" fill="#60a5fa"/><rect x="619.9" y="229.23" width="22.5" height="10.77" rx="2" fill="#fbbf24"/><text x="593.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="699.6" y="52.93" width="22.5" height="187.07" rx="2" fill="#2dd4bf"/><rect x="737.7" y="231.38" width="22.5" height="8.62" rx="2" fill="#60a5fa"/><rect x="775.9" y="229.40" width="22.5" height="10.60" rx="2" fill="#fbbf24"/><text x="749.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+4.4%</div><div class="sub">&pound;2,147M &rarr; &pound;2,551M</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">-12.2%</div><div class="sub">&pound;197.8M &rarr; &pound;117.6M &mdash; genuinely lower, not just slower-growing, over four years</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-15.6%</div><div class="sub">&pound;284.1M &rarr; &pound;144.5M; collapsed to near-zero (&pound;1.4M) in FY2023 before partially recovering</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">This framework's 20% screen threshold sits far above this chart's entire range and isn't drawn here &mdash; Savills has never been close to it, consistent with a fee-based advisory business. The shape is the real story: margin nearly halved from 9.21% (FY2021) to a FY2023 trough of 2.77% during a weak global property-transaction cycle, then recovered only partway to 4.61% by FY2025 &mdash; a genuinely volatile trend, not a steady structural decline or a stable plateau.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">3%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">9%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><path d="M50.0,97.2 L247.5,126.13 L445.0,183.07 L642.5,165.2 L840.0,158.53 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,97.2 L247.5,126.13 L445.0,183.07 L642.5,165.2 L840.0,158.53" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="97.2" r="3" fill="#2dd4bf"/><text x="50.0" y="87.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">9.21%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="126.13" r="3" fill="#2dd4bf"/><text x="247.5" y="116.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">7.04%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="183.07" r="3" fill="#2dd4bf"/><text x="445.0" y="173.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.77%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="165.2" r="3" fill="#2dd4bf"/><text x="642.5" y="155.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.11%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="158.53" r="3" fill="#2dd4bf"/><text x="840.0" y="148.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.61%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>&pound;2,147M</td><td>&pound;197.8M</td><td>9.21%</td><td>&pound;146.2M</td><td>&pound;284.1M</td><td>143.6%</td></tr>
+    <tr><td>FY2022</td><td>&pound;2,298M</td><td>&pound;161.7M</td><td>7.04%</td><td>&pound;119.4M</td><td>&pound;144.2M</td><td>89.2%</td></tr>
+    <tr><td>FY2023</td><td>&pound;2,238M</td><td>&pound;62.1M</td><td>2.77%</td><td>&pound;40.8M</td><td>&pound;1.4M</td><td>2.3%</td></tr>
+    <tr><td>FY2024</td><td>&pound;2,404M</td><td>&pound;98.9M</td><td>4.11%</td><td>&pound;53.6M</td><td>&pound;146.9M</td><td>148.5%</td></tr>
+    <tr><td>FY2025</td><td>&pound;2,551M</td><td>&pound;117.6M</td><td>4.61%</td><td>&pound;70.9M</td><td>&pound;144.5M</td><td>122.9%</td></tr>
+  </table>
+  <div class="chart-sub" style="margin-top:6px;">FY2023 was a genuine trough across every profitability line, driven by a global slowdown in commercial property transaction volumes as interest rates rose &mdash; not an isolated accounting item. FY2025 net income (&pound;70.9M) is still well below FY2021's &pound;146.2M despite higher revenue, though the FY2025 underlying profit before tax Savills itself reports (&pound;145.3M, up 11.4% YoY) excludes exceptional/restructuring items and reads more favourably than the statutory figures shown here.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Segment Mix, Geography &amp; Market Position</div></div>
+  <div class="sec-sub">Savills reports four segments: Transaction Advisory, Property &amp; Facilities Management, Consultancy, and Investment Management. Latest full results: FY2025 (year ended Dec 31, 2025, reported 12 Mar 2026); latest interim update: H1 2026 (reported 13 Aug 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines (context only &mdash; outside the scored FY21-25 window)</div>
+    <p>Revenue rose <b style="color:#f8fafc;">9%</b> YoY to <b style="color:#f8fafc;">&pound;1.23B</b>, with underlying profit before tax up a sharp <b style="color:#34d399;">47%</b> to &pound;34.3M (49% in constant currency) and underlying EBITDA up 32% to &pound;73.9M. Growth was broad-based across all segments and regions, with particular strength in Asia Pacific and North America. On 31 Jul 2026, Savills completed its acquisition of Eastdil Secured, a leading US real estate investment bank, for an enterprise value of $1.1B (&asymp;&pound;827M) &mdash; a deal management frames as creating a global leader in real estate capital markets advisory. Because the deal closed after H1 2026 ended, its full financial impact will only start showing up from H2 2026 onward, and none of it is reflected in the FY2021-25 table on the previous page.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">FY2025 Revenue by Segment</div>
+    <div class="chart-sub">Property &amp; Facilities Management (managing existing real estate for owners and occupiers) is Savills' largest and historically most stable segment; Transaction Advisory (the deal-driven brokerage business, split between commercial and residential) is a close second and the most cyclical &mdash; it was the segment hit hardest in FY2023's downturn.</div>
+    <table class="datatable">
+      <tr><th>Segment</th><th>FY2025 Revenue</th><th>% of Total</th><th>Note</th></tr>
+      <tr><td>Property &amp; Facilities Management</td><td>&pound;943.3M</td><td>37.0%</td><td>+6.2% YoY &mdash; largest segment; recurring, contract-based management and servicing of existing real estate portfolios</td></tr>
+      <tr><td>Transaction Advisory</td><td>&pound;966.2M</td><td>37.9%</td><td>Commercial &pound;672.6M (+1.9%) + Residential &pound;293.6M (+8.9%) &mdash; the most cyclical, deal-driven segment, and the one most exposed to the FY2023 rate-driven slowdown</td></tr>
+      <tr><td>Consultancy</td><td>&pound;546.6M</td><td>21.4%</td><td>+11.0% YoY, the fastest-growing segment &mdash; valuation, planning, research and advisory services</td></tr>
+      <tr><td>Investment Management</td><td>&asymp;&pound;94.9M</td><td>3.7%</td><td>Smallest segment; fund and mandate management for institutional real estate capital, roughly flat YoY</td></tr>
+    </table>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">FY2025 Revenue by Geography</div>
+    <div class="chart-sub">EMEA (dominated by the UK) is the largest region by a clear margin; Asia Pacific is genuinely large for a Western-headquartered real estate firm, a legacy of Savills' decades-long Hong Kong and broader APAC presence. North America is currently the smallest region but will grow materially from H2 2026 as Eastdil Secured (a US-focused investment bank) consolidates.</div>
+    <table class="datatable">
+      <tr><th>Region</th><th>% of FY2025 Group Revenue</th><th>Note</th></tr>
+      <tr><td>EMEA (of which UK)</td><td>59% (UK: 40%)</td><td>+8% YoY; UK alone +6% YoY &mdash; Savills' home market and single largest country exposure</td></tr>
+      <tr><td>Asia Pacific</td><td>28%</td><td>A genuinely large, differentiated APAC franchise most Western CRE peers can't match at this scale</td></tr>
+      <tr><td>North America</td><td>13%</td><td>Smallest region today, but set to grow sharply from H2 2026 once Eastdil Secured (completed 31 Jul 2026) consolidates</td></tr>
+    </table>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> criterion #5 (market share) scores a middling 1/5 (band: #4-5 position) &mdash; generous, arguably. Savills is often bundled into a "Big 5" of global full-service real estate firms alongside CBRE, JLL, Cushman &amp; Wakefield and Colliers, but by group revenue it is the smallest of that group, roughly two-thirds the size of Colliers ($3.2B vs $5.56B) and a fraction of CBRE's or JLL's scale &mdash; a #5-6 position by revenue is more accurate than a confident "top-5," and this dashboard flags that caveat explicitly rather than forcing the flattering framing. Criterion #6 (market concentration) scores 3/5: a handful of large global firms dominate cross-border and institutional mandates, but the broader property advisory market &mdash; especially residential and regional commercial work &mdash; remains genuinely fragmented with thousands of national and local firms competing on the ground.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close. No stockanalysis.com auto-computed WACC was available for Savills at data-pull time, so this framework's standard 8.0% developed-market services-sector assumption is used for criterion #7 instead.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 19.80x sits close to (a shade below) the FY22-25 average of roughly 22.94x &mdash; not a deep discount, but not a premium either. That average is pulled up by FY2023's 33.65x and FY2024's 27.85x, both set against depressed earnings during the FY2023 profit trough, so part of the "average" reflects a smaller earnings base rather than a genuinely rich market multiple in those years. Forward P/E (11.35x, current) is meaningfully below the trailing multiple, implying the market expects a real earnings recovery &mdash; plausible given H1 2026's 47% underlying profit growth, though that growth also reflects one-off deal effects (Eastdil Secured) rather than pure organic improvement.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (current only)</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">8x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">16x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">24x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">32x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50.0" y1="105.3" x2="840.0" y2="105.3" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="101.3" text-anchor="end" font-size="10" fill="#94a3b8">FY22-25 avg: 22.94x</text><path d="M 50.0,169.8 L 247.5,51.75 L 445.0,80.75 L 642.5,119.0 L 840.0,121.0" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="169.8" r="3" fill="#a78bfa"/><text x="50.0" y="159.8" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.04x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="247.5" cy="51.75" r="3" fill="#a78bfa"/><text x="247.5" y="41.75" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.65x</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="445.0" cy="80.75" r="3" fill="#a78bfa"/><text x="445.0" y="70.75" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">27.85x</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="642.5" cy="119.0" r="3" fill="#a78bfa"/><text x="642.5" y="109.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.20x</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840.0" cy="121.0" r="3.5" fill="#a78bfa"/><text x="840.0" y="111.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.80x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><circle cx="840.0" cy="163.25" r="4" fill="#c4b5fd" stroke="#c4b5fd" stroke-width="1"/><text x="840.0" y="179.25" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">Fwd 11.35x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY22-25 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and generally the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are headed. For Savills specifically: trailing P/E (19.80x) sits just under its own FY22-25 average (22.94x), and forward P/E (11.35x) is dramatically lower still, implying the market expects a real near-term earnings recovery &mdash; consistent with H1 2026's 47% underlying profit growth, though some of that growth is deal-driven (Eastdil Secured) rather than purely organic. One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth, which sanity-checks whether a "cheap" multiple is actually cheap once growth is accounted for. Savills' current PEG works out to roughly 0.77 per stockanalysis.com &mdash; comfortably under the traditional 1.0 "fair value" line, suggesting the stock isn't just cheaper than its own recent history, it's also reasonably priced relative to expected growth, assuming that growth (including the Eastdil integration) actually shows up.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> per stockanalysis.com, net debt/EBITDA was roughly 0.49x at FY2025 year-end (includes IFRS16 lease liabilities, which make up the bulk of reported "debt") and 0.49x on the latest available basis too &mdash; comfortably inside this framework's &lt;2x bar either way. Savills' own headline balance-sheet metric, which excludes lease liabilities, was a net <i>cash</i> position of &pound;167.7M at FY2025 year-end; both figures are shown here because they tell a genuinely consistent story (a conservative, low-leverage balance sheet) even though the exact number depends on whether lease liabilities are counted as debt. ROIC of 7.64% (current) / 7.89% (FY2025) sits almost exactly at this framework's assumed 8.0% WACC &mdash; a genuine miss under the framework's rules, but a much closer one than most companies that fail this criterion on this site. (Note: a separate stockanalysis.com statistics snapshot showed ROIC of 4.53% using a different calculation methodology; this dashboard uses the ratios-page figures above for internal consistency and flags the discrepancy for transparency.) Share count has declined modestly, from 139M (FY2021, basic) to 136M (FY2025, basic), a -2.2% change &mdash; real, if mild, shareholder-friendly behavior rather than dilution.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="11.0 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="329.87 439.82" stroke-dashoffset="-11.0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="98.96 439.82" stroke-dashoffset="-340.87"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers &amp; directors) &asymp; 2-3% of shares outstanding &mdash; estimate, sources vary and some are dated</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional investors &asymp; 75%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public &amp; other float &asymp; 22-23%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note, honestly stated:</b> Savills has no founder or controlling-family stake to point to &mdash; the firm demutualized via a London IPO in 1997, and 170 years on it is a widely-held public company with dispersed institutional ownership (roughly 70-80% of the free float) and no disclosed shareholder above 20%. Officer/director holdings are thin, in the low single digits of shares outstanding by most available estimates &mdash; genuinely modest alignment by this framework's standards, and a real point of difference from peers like Colliers (co-founder Jay Hennick's dual-class control) elsewhere in this "Big 5" batch.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) uses EBITDA margin, not gross margin &mdash; Savills, as a fee-based advisory business, reports no distinct cost-of-sales line the way a company like Colliers does, so EBITDA margin (FY2025 vs. FY2022, three fiscal years earlier) is used as the closest available proxy, flagged as a methodology adaptation.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Savills plc</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+4.4% &mdash; &pound;2,147M &rarr; &pound;2,551M; real but modest growth, well short of the bar (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>-12.2% &mdash; &pound;197.8M &rarr; &pound;117.6M &mdash; genuinely lower, not just slower-growing, over four years (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>4.61% (FY2025) &mdash; well below the bar; thin and volatile even by real-estate-advisory standards (fell as low as 2.77% in FY2023)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>&pound;284.1M &rarr; &pound;144.5M, -15.6% CAGR; collapsed to near-zero (&pound;1.4M) in FY2023 before partially recovering (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Often grouped in a "Big 5" of global CRE firms, but by group revenue it's the smallest of that set &mdash; roughly a #5-6 position, not #1 or #2 (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a handful of large global firms dominate cross-border/institutional mandates, but the broader property advisory market remains fragmented with thousands of national and boutique firms</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 7.64% (current) misses this framework's assumed 8.0% WACC by only &asymp;0.36pts &mdash; a genuine miss, but an unusually close one for this site</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;0.49x (FY2025, per stockanalysis.com, includes lease liabilities); Savills' own headline metric is a net cash position of &pound;167.7M &mdash; comfortably clears the bar either way</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>122.9% (FY2025) &mdash; strong conversion, though this reflects recovery from FY2023's near-total collapse (2.3%) as much as consistent strength</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 19.80x vs a FY22-25 average of roughly 22.94x &mdash; a modest discount to its own recent history (ratio 0.86)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>-2.2% over FY21-25 (139M &rarr; 136M basic shares) &mdash; mild but real net reduction, not dilution</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>No founder or controlling-family stake &mdash; Savills demutualized via IPO in 1997; officer/director holdings estimated in the low single digits of shares outstanding, genuinely modest by this framework's standard</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>&asymp;0.5% of revenue (FY2024 capex of &pound;11.7M against &pound;2,404M revenue) &mdash; genuinely minimal, as expected for an advisory-heavy services business</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>EBITDA margin 5.67% (FY2025) vs 8.19% (FY2022), a -2.52pp decline &mdash; misses the threshold by a hair (0.02pp), essentially a coin-flip call rather than a clean fail</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The balance sheet is genuinely conservative &mdash; net debt/EBITDA around 0.5x even on the more debt-inclusive measure, and a real net cash position on Savills' own reporting basis. Capex is minimal, FCF conversion in FY2025 was strong, the current entry multiple sits at a modest discount to Savills' own five-year average, and share count has quietly declined rather than diluted. ROIC, while technically missing this framework's assumed cost of capital, is close enough that a small change in assumptions would flip it.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>EBIT and free cash flow are both lower today than in FY2021 &mdash; not just growing slower, actually smaller &mdash; and FY2023 showed how exposed Savills' transaction-heavy segments are to a weak property cycle (FCF fell to near-zero that year). Insider/founder alignment is thin, and the "Big 5" market-share framing doesn't hold up cleanly against Colliers, let alone CBRE and JLL, once actual group revenue is compared. The Eastdil Secured acquisition (completed 31 Jul 2026) is a real, large bet on US capital-markets advisory &mdash; H1 2026 results already look much stronger, but that's outside the scored FY21-25 window and integration risk on a deal this size shouldn't be waved away.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of 12 Mar 2026 (FY2025 results) and 13 Aug 2026 (H1 2026 results, context only) &ndash; Aug 7, 2026 (most recent available spot price). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence and Fiscal.ai), Savills plc FY2025 Annual Report and preliminary results announcement (ir.savills.com), Savills H1 2026 results announcement (savills.com, 13 Aug 2026), Reuters (Eastdil Secured acquisition, 12 Mar 2026 and completion 31 Jul 2026), and general web research on ownership structure (flagged as approximate/dated where sourced from secondary aggregators).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (8.0%) is this framework's own assumption, not a company-disclosed or auto-computed figure &mdash; flagged as such. Insider/founder ownership percentages are estimates from secondary sources with some disagreement between them; treated as approximate. Criterion #14 uses EBITDA margin as a proxy for gross margin, a methodology adaptation specific to fee-based advisory businesses that don't report a distinct cost-of-sales line.<br>
+    This is private personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Savills plc &mdash; London Stock Exchange, GBP share price trend. Points shown are fiscal year-end closes (Dec 31) plus the most recent available price; sourced from stockanalysis.com (S&amp;P Global Market Intelligence).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Savills plc &mdash; Fiscal Year-End Close (LSE, GBP)</div>
+    <div class="chart-sub">A sharp de-rate from FY2021's &pound;14.08 close (a post-pandemic high, driven by a strong property transaction cycle) down to &pound;8.26 by FY2022, followed by a partial, choppy recovery to the current &pound;9.76 &mdash; still nearly 31% below the FY2021 peak, broadly tracking the EBIT and FCF declines shown on page 2 rather than a pure sentiment story.</div>
+<svg viewBox="0 -20 700 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="-8" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -7.7%</text>
+<path d="M 46.0,50.72 L 172.8,143.84 L 299.6,120.96 L 426.4,110.24 L 553.2,116.64 L 680.0,119.84 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,50.72 L 172.8,143.84 L 299.6,120.96 L 426.4,110.24 L 553.2,116.64 L 680.0,119.84" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="50.72" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="40.72" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;14.08</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="143.84" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="133.84" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;8.26</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="120.96" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="110.96" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;9.69</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="110.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="100.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;10.36</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="116.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="106.64" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&pound;9.96</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="119.84" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="676.0" y="109.84" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&pound;9.76</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (Dec 31 each year) and the current price (&pound;9.76, Aug 7, 2026 close, the most recent daily print available at data-pull time) are sourced from stockanalysis.com (S&amp;P Global Market Intelligence). Private personal research, not investment advice.
+  </div>
+</div>
+
+</body>
+</html>

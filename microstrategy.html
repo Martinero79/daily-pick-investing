@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strategy Inc. (MicroStrategy) Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/microstrategy.html">
+<meta property="og:title" content="Strategy Inc. (MicroStrategy) Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Strategy Inc. (MicroStrategy) Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#210f0f; color:#f5d4d4; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Bitcoin Treasury Company (formerly Enterprise BI Software)</div>
+  <h1>Strategy Inc. (formerly MicroStrategy)</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: MSTR &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1989 as MicroStrategy &middot; renamed Strategy Inc. Feb 2025 &middot; Tysons Corner, Virginia (HQ)</span>
+    <span class="badge warn">This is not really a software dashboard. Strategy's market value is now driven almost entirely by its ~845,000 BTC treasury, funded with convertible debt and heavy share issuance. The legacy BI software business (~$477M revenue) is a rounding error next to a &asymp;$65B equity story built on bitcoin's price. Read every metric below with that in mind &mdash; most of this scorecard simply isn't designed for a company like this, and it shows.</span>
+  </div>
+  <div class="price">$168.50</div>
+  <div class="price-sub">Close Sep 21, 2026 (NASDAQ), up 9.47% on the day as bitcoin rallied toward $85K &middot; Mkt cap &asymp;$64.7B &middot; 52-week range $81.81&ndash;$365.21 &mdash; among the most volatile large-caps on this entire site (beta &asymp;3.60)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">What Strategy actually is today:</b> a NASDAQ-listed operating company that holds roughly 845,000 bitcoin (&asymp;4.0% of the 21 million that will ever exist) on its balance sheet, financed by a mix of 0%&ndash;coupon convertible notes (&asymp;$8.2B, staggered maturities 2028&ndash;2032) and a series of preferred-stock instruments (STRK, STRF, STRC, STRD) plus massive at-the-market common-stock issuance. The original enterprise analytics software business (Strategy One / MicroStrategy BI) still exists, generates &asymp;$477M of annual revenue, and is profitable at the gross-margin line &mdash; but it is genuinely small, essentially flat-to-declining, and irrelevant to how the stock trades day to day. Competitors in that legacy market: Microsoft Power BI, Salesforce/Tableau, Qlik, SAP BusinessObjects, Oracle Analytics, Google Looker &mdash; Strategy is a minor player, not a top-5 name, in a crowded, commoditizing BI/analytics space.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Software Revenue (FY2025)</div>
+      <div class="val red">$477.2M</div>
+      <div class="sub">-1.68% CAGR FY21-25 ($510.8M &rarr; $477.2M) &mdash; genuinely flat-to-declining, not a growth business by any definition used on this site</div>
+    </div>
+    <div class="mcard">
+      <div class="label">GAAP Operating Margin (FY2025)</div>
+      <div class="val red">-1,140.8%</div>
+      <div class="note">Not a typo. Dominated by an $8.3B+ unrealized mark-to-market loss on bitcoin holdings (new fair-value accounting, ASU 2023-08) &mdash; this number says almost nothing about the underlying software business and everything about bitcoin's price path that quarter.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">mNAV (Market Cap &divide; BTC Holdings Value)</div>
+      <div class="val" style="color:#fbbf24;">&asymp;0.9x&ndash;1.1x</div>
+      <div class="note">The single most important number for this company &mdash; and it has compressed dramatically. Full math and sourcing on page 4. As recently as June 2026, mNAV dipped below 1.0x entirely (CoinDesk) &mdash; the stock briefly traded for less than the bitcoin sitting on its balance sheet.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Shares Outstanding Growth</div>
+      <div class="val red">+240%</div>
+      <div class="sub">112.85M (FY2021) &rarr; 384.23M (current) &mdash; among the most aggressive dilution records of any company on this site, entirely by design (issue stock, buy more bitcoin)</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">13/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">2/14 criteria met, 11 not met, 1 N/A &mdash; one of the lowest scores on this entire site. That's not a bug in the scoring; it's the honest result of running a leveraged bitcoin vehicle through a checklist built for operating businesses.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="62.83 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="31.42 439.82" stroke-dashoffset="-62.83"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="345.58 439.82" stroke-dashoffset="-94.25"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">2/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 2 (entry multiple via mNAV, insider/founder ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 1 (FCF CAGR: FY2021 was positive, FY2025 is negative &mdash; a genuine sign-flip, mathematically undefined)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 11 (revenue CAGR, EBIT CAGR, operating margin, market share, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, share count trend, capex intensity, margin stability)</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">5 / 5</b> &mdash; the legacy BI software market is fully open and fragmented; Strategy is not a leader there</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Strategy Inc. is, honestly, the hardest company this checklist has been run against. It is not a growth story, not a margin story, not a capital-efficiency story &mdash; it is a leveraged bet on bitcoin's price, wrapped in the corporate shell of a once-mid-size enterprise software company. The legacy business (Strategy One / MicroStrategy BI) still exists and is real: &asymp;$477M revenue, roughly flat-to-declining over five years (-1.68% CAGR), 68.7% gross margin, a niche also-ran against Microsoft, Salesforce/Tableau, Qlik, SAP and Google in a crowded BI market. But it stopped being the reason to own the stock years ago. Since 2020, under Executive Chairman Michael Saylor, the company has raised roughly $8.2B in staggered 0%-coupon convertible notes (maturities 2028-2032) plus a growing stack of preferred instruments (STRK/STRF/STRC/STRD) and diluted the common share count by over 240% since FY2021 (112.85M &rarr; 384.23M shares) &mdash; all to fund the purchase of roughly 845,000 bitcoin, about 4.0% of the total supply that will ever exist, making Strategy the largest corporate bitcoin holder on earth. That means the stock's value lives or dies with the "mNAV" &mdash; market cap divided by the value of the bitcoin held &mdash; and that number has compressed hard: from a historical range that included a brief 6x spike during the 2021 bull run, down toward 1.0x-1.1x today, and briefly below 1.0x as recently as June 2026 (the stock trading for less than its own bitcoin). Every traditional operating metric on this checklist reads poorly here almost by construction: GAAP operating margin is -1,140.8% (FY2025), driven overwhelmingly by non-cash mark-to-market swings on the bitcoin holdings under new fair-value accounting rules (ASU 2023-08), not by the software business deteriorating. ROIC/WACC, net debt/EBITDA and FCF conversion are all effectively meaningless for a company whose "earnings" are really unrealized bitcoin price swings &mdash; scored honestly at zero rather than smoothed into something that looks more normal than it is. The two criteria that do score positively say something real: the entry-multiple criterion (substituting mNAV for P/E, since P/E is undefined) shows the stock trading at a genuine discount to its own historical premium, and Michael Saylor's ~5.3% remaining economic stake (down from majority ownership before the dilution wave, but still worth roughly $3.3B and paired with 35.8% of voting power via Class B shares) represents real, if shrinking, founder skin in the game. Net: 2 of 14 criteria met, Martinero Index 13/100 &mdash; not a verdict on whether bitcoin itself is a good long-term holding, just an honest statement that Strategy, evaluated as an operating business the way every other company on this site is evaluated, does not look like one anymore.
+  </div>
+
+  <div class="callout red">
+    <b>The one number that actually matters here:</b> mNAV (market cap &divide; value of bitcoin held). At &asymp;0.9x-1.1x today, Strategy trades roughly in line with &mdash; or even at a discount to &mdash; the raw value of its own bitcoin stack, down from historical premiums that ran 1.5x-2x+ and briefly spiked to 6x in the 2021 bull run. A discount here is the opposite of what made the "Saylor trade" work for years: the whole flywheel (issue overpriced stock &rarr; buy more bitcoin &rarr; premium justifies more issuance) breaks down once the market stops paying a premium for MSTR shares over the bitcoin backing them.
+  </div>
+
+  <div class="bignum-corner">2/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD. Fiscal year is the calendar year (Jan&ndash;Dec). CAGR computed FY2021&rarr;FY2025. These are the legacy software business's GAAP figures &mdash; operating income and net income below are massively distorted by non-cash bitcoin fair-value accounting (ASU 2023-08, adopted FY2025) and should not be read as a software-business profitability signal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Legacy Software Revenue &mdash; Annual (the actual operating business)</div>
+    <div class="chart-sub">Flat to slightly declining for five straight years: $510.8M (FY2021) &rarr; $477.2M (FY2025), a -1.68% CAGR. Subscription revenue (cloud-hosted BI) has grown well (+54% YoY most recently) but isn't large enough yet to offset ongoing declines in legacy product-license and product-support revenue as customers migrate off older on-premise deployments.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$150M</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$300M</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$450M</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$600M</text><path d="M50.0,50.6 L247.5,54.2 L445.0,55.0 L642.5,65.9 L840.0,60.8" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="50.6" r="3" fill="#2dd4bf"/><text x="50.0" y="40.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$510.8M</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="247.5" cy="54.2" r="3" fill="#2dd4bf"/><text x="247.5" y="44.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$499.3M</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="445.0" cy="55.0" r="3" fill="#2dd4bf"/><text x="445.0" y="45.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$496.3M</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="642.5" cy="65.9" r="3" fill="#2dd4bf"/><text x="642.5" y="55.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$463.5M</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="840.0" cy="60.8" r="3" fill="#2dd4bf"/><text x="840.0" y="50.8" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">$477.2M</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Dominated by Bitcoin Fair-Value Accounting, Not the Software Business</div>
+    <div class="chart-sub">This is not a business getting 7x worse operationally &mdash; FY2025's -$5.44B figure reflects an $8.3B+ unrealized mark-to-market loss on bitcoin holdings under new fair-value rules (ASU 2023-08, adopted Jan 2025), which now runs the swing in bitcoin's price straight through the income statement every quarter. TTM operating loss is -$36.4B, reflecting bitcoin's decline from its 2025 highs.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="40.0" x2="840" y2="40.0" stroke="#475569" stroke-width="1.3"/><text x="42" y="44.0" text-anchor="end" font-size="11" fill="#94a3b8">$0</text><line x1="50" y1="90.0" x2="840" y2="90.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="94.0" text-anchor="end" font-size="11" fill="#64748b">-$1.5B</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">-$3B</text><line x1="50" y1="190.0" x2="840" y2="190.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="194.0" text-anchor="end" font-size="11" fill="#64748b">-$4.5B</text><line x1="50" y1="235.0" x2="840" y2="235.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="239.0" text-anchor="end" font-size="11" fill="#64748b">-$6B</text><rect x="75.6" y="40" width="60" height="26.0" rx="2" fill="#f87171"/><text x="105.6" y="80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-$0.78B</text><text x="105.6" y="253" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><rect x="238.1" y="40" width="60" height="42.6" rx="2" fill="#f87171"/><text x="268.1" y="96.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-$1.28B</text><text x="268.1" y="253" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><rect x="400.6" y="40" width="60" height="3.8" rx="2" fill="#f87171"/><text x="430.6" y="57.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-$0.12B</text><text x="430.6" y="253" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><rect x="563.1" y="40" width="60" height="61.6" rx="2" fill="#f87171"/><text x="593.1" y="115.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-$1.85B</text><text x="593.1" y="253" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><rect x="725.6" y="40" width="60" height="181.2" rx="2" fill="#f87171"/><text x="755.6" y="234.5" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">-$5.44B</text><text x="755.6" y="253" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Software Revenue</th><th>Op. Income (GAAP)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th></tr>
+    <tr><td>FY2021</td><td>$510.76M</td><td>-$784.53M</td><td>-153.60%</td><td>-$535.48M</td><td>+$91.13M</td></tr>
+    <tr><td>FY2022</td><td>$499.26M</td><td>-$1,276M</td><td>-255.53%</td><td>-$1,470M</td><td>+$0.73M</td></tr>
+    <tr><td>FY2023</td><td>$496.26M</td><td>-$115.05M</td><td>-23.18%</td><td>+$429.12M</td><td>+$9.77M</td></tr>
+    <tr><td>FY2024</td><td>$463.46M</td><td>-$1,853M</td><td>-399.82%</td><td>-$1,167M</td><td>-$66.51M</td></tr>
+    <tr><td>FY2025</td><td>$477.23M</td><td>-$5,444M</td><td>-1,140.82%</td><td>-$4,230M</td><td>-$112.45M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:8px;">FY2023's positive net income was itself a one-off tax-related item, not operating strength. FY2025 was the first full year under ASU 2023-08 fair-value accounting for digital assets &mdash; prior years used cost-less-impairment accounting for bitcoin, which only recognized losses, never gains, making even the pre-2025 figures not fully comparable to FY2025's.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">The Bitcoin Treasury &mdash; The Actual Investment Case</div></div>
+  <div class="sec-sub">This is what Strategy is actually being valued on. Holdings figures are approximate year-end counts reconstructed from public purchase disclosures; the company buys nearly continuously via its ATM programs.</div>
+
+  <div class="headline-box">
+    <div class="title">Where things stand (Sept 2026)</div>
+    <p>Strategy holds approximately <b style="color:#f8fafc;">845,000+ bitcoin</b> (&asymp;4.0% of the 21 million that will ever exist), making it the largest corporate bitcoin holder in the world by a wide margin &mdash; ahead of every other public "bitcoin treasury company" combined. The company resumed buying in mid-September 2026 after a brief pause, purchasing 4,600 BTC on Aug 31 and a further 950 BTC in the days before this dashboard was compiled. It funds these purchases almost entirely through capital markets activity: common-stock ATM issuance, convertible notes, and a growing stack of preferred securities (STRK, STRF, STRC, STRD) designed to appeal to yield-seeking rather than growth-seeking investors.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Bitcoin Holdings &mdash; Year-End Approximate Totals (FY2021-FY2025) + Current</div>
+    <div class="chart-sub">The real growth story on this dashboard: holdings roughly grew 6.8x since FY2021, funded almost entirely by issuing new shares and convertible debt rather than by cash generated from the software business, which could never have funded purchases at this scale.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">225K</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">450K</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">675K</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">900K</text><path d="M50.0,192.4 L207.5,190.6 L365.0,178.0 L522.5,120.8 L680.0,77.8 L837.5,32.2 L837.5,220.0 L50.0,220.0 Z" fill="#fbbf24" opacity="0.13"/><path d="M50.0,192.4 L207.5,190.6 L365.0,178.0 L522.5,120.8 L680.0,77.8 L837.5,32.2" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.0" cy="192.4" r="3" fill="#fbbf24"/><text x="50.0" y="182.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">124K</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="207.5" cy="190.6" r="3" fill="#fbbf24"/><text x="207.5" y="180.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">133K</text><text x="207.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="365.0" cy="178.0" r="3" fill="#fbbf24"/><text x="365.0" y="168.0" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">189K</text><text x="365.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="522.5" cy="120.8" r="3" fill="#fbbf24"/><text x="522.5" y="110.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">446K</text><text x="522.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="680.0" cy="77.8" r="3" fill="#fbbf24"/><text x="680.0" y="67.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">640K</text><text x="680.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="837.5" cy="32.2" r="4" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.6"/><text x="837.5" y="22.2" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">845K</text><text x="837.5" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Q2 2026 headlines:</b> Revenue reached <b style="color:#f8fafc;">$122.4M</b>, up 6.9% YoY, with subscription (cloud) revenue up a striking 54% YoY &mdash; a genuine bright spot obscured by everything else on this dashboard. The quarter's headline story, though, was an <b style="color:#f87171;">$8.32B unrealized loss</b> on bitcoin holdings as BTC's price fell during the period, which drove the overwhelming majority of the reported operating and net loss. TTM net loss stands at roughly -$31.4B, EPS -$99.30 &mdash; both figures that say far more about bitcoin's price path over the trailing year than about Strategy's operations.
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> in enterprise BI/analytics software, Strategy One is a legacy, sub-scale player behind Microsoft Power BI, Salesforce (Tableau), Qlik, SAP BusinessObjects, Oracle Analytics and Google Looker &mdash; a genuinely fragmented, open market with no dominant player, let alone Strategy. Scored here as "long tail, no top-5 position" for market share and "fully open market" (score 5/5, worst band) for market concentration &mdash; not because the software is bad, but because it simply isn't a market leader anymore, and hasn't been positioned as the growth priority internally for years.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation (mNAV), Leverage &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and EV/EBITDA are not meaningful here &mdash; "earnings" are dominated by unrealized bitcoin price swings, not operating performance. mNAV (market cap &divide; value of bitcoin held) is the metric that actually matters for this company, and is used here in place of a P/E-based entry multiple.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Market Cap vs. Bitcoin Treasury Value (Today)</div>
+    <div class="chart-sub">Market cap $64.74B (Sep 21, 2026 close, 384.23M shares &times; $168.50) vs. an estimated bitcoin treasury value of &asymp;$71.8B (&asymp;845,000 BTC &times; &asymp;$85,000/BTC, the price level cited in contemporaneous news reports). That computes to an mNAV of roughly <b style="color:#fbbf24;">0.90x</b> &mdash; a discount to the bitcoin held. Third-party trackers show a similar but not identical picture: mnav.com's live tracker read 1.10x around the same period, and CoinDesk reported mNAV falling below 1.0x entirely in June 2026. The exact figure moves by the hour with both bitcoin's price and MSTR's share price; the direction of travel &mdash; a collapsed, sometimes-negative premium, down from a historical range including a 6x spike in 2021 &mdash; is the real signal.</div>
+<svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#475569" stroke-width="1.3"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#94a3b8">$0</text><line x1="50" y1="125.0" x2="840" y2="125.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="129.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="50" y1="80.0" x2="840" y2="80.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="84.0" text-anchor="end" font-size="11" fill="#64748b">$40B</text><line x1="50" y1="35.0" x2="840" y2="35.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="39.0" text-anchor="end" font-size="11" fill="#64748b">$60B</text><rect x="220" y="43.7" width="140" height="126.3" rx="3" fill="#60a5fa"/><text x="290" y="35" text-anchor="middle" font-size="12.5" fill="#f8fafc" font-weight="700">$64.74B</text><text x="290" y="188" text-anchor="middle" font-size="11" fill="#94a3b8">Market Cap</text><rect x="500" y="19.5" width="140" height="150.5" rx="3" fill="#fbbf24"/><text x="570" y="11" text-anchor="middle" font-size="12.5" fill="#f8fafc" font-weight="700">&asymp;$71.8B</text><text x="570" y="188" text-anchor="middle" font-size="11" fill="#94a3b8">BTC Treasury Value</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Leverage: the "true" picture vs. the traditional ratio.</b> On a traditional Net Debt/EBITDA basis, this metric simply doesn't compute honestly &mdash; net debt is real (&asymp;$4.3B-$5.9B depending on the period) but EBITDA is deeply negative and dominated by non-cash bitcoin mark-to-market swings, not recurring cash generation. Scored at the worst band here (0/5) precisely because the ratio is undefined against a genuine debt load, not smoothed over. The more honest way to read leverage at Strategy is <b style="color:#fbbf24;">debt against the bitcoin collateral itself</b>: roughly $8.2B of convertible notes (staggered maturities 2028-2032, mostly 0%-coupon) against &asymp;$71.8B of bitcoin held is an implied loan-to-value of only &asymp;11-12% &mdash; genuinely low, and a key reason the company has survived prior bitcoin drawdowns of 70-80% without a forced liquidation. The real risk isn't insolvency at current bitcoin prices; it's a scenario where a much deeper, multi-year bitcoin bear market combines with mNAV staying at or below 1.0x for an extended period, which would strand the company's entire capital-raising flywheel (it can no longer profitably issue stock to buy more bitcoin once the market stops paying a premium for the shares).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="23.3 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="416.5 439.82" stroke-dashoffset="-23.3"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Michael Saylor (Executive Chairman) &asymp; 5.3% of economic shares outstanding (19.64M Class B shares / &asymp;371.6M total common) &mdash; down sharply from a majority stake before the 2024-2026 dilution wave, but still worth roughly $3.3B at current prices</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 94.7% of economic shares outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <b>Voting control is a separate, more nuanced story.</b> Saylor's Class B shares carry 10 votes each vs. 1 for Class A, giving him &asymp;35.8% of total voting power as of the most recent 10-Q &mdash; still the single largest voting bloc by far, but no longer outright majority control, which he held for most of the company's history before the scale of recent equity issuance diluted it below 50%. Scored here as "Met" on the insider/founder ownership criterion (5-15% economic band) given the real, substantial dollar value and voting influence still at stake &mdash; but this is a criterion trending the wrong direction as issuance continues.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. FCF CAGR (#4) is N/A &mdash; a genuine sign-flip from FY2021's positive FCF to FY2025's negative FCF. Criterion #10 (entry multiple) substitutes mNAV for P/E, since P/E is not meaningful for this company. Criterion #14 compares FY2025 gross margin to FY2022's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Strategy Inc.</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>-1.68% &mdash; $510.8M &rarr; $477.2M; genuinely flat-to-declining legacy software revenue</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>Both endpoints deeply negative and widening (-$784.5M &rarr; -$5.44B); standard CAGR math breaks down, but the trend is unambiguously worse, driven by bitcoin mark-to-market losses, not software deterioration</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>-1,140.82% (FY2025, GAAP) &mdash; dominated by an $8.3B+ unrealized bitcoin fair-value loss, not the underlying software business</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>FY2021 was +$91.1M, FY2025 was -$112.5M &mdash; a genuine sign-flip, the standard CAGR formula is mathematically undefined here</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Legacy BI/analytics software: a minor, sub-scale player behind Microsoft Power BI, Salesforce/Tableau, Qlik, SAP and Oracle &mdash; long tail, no top-5 position</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>5 &mdash; the BI/analytics software market is fully open and fragmented, with numerous well-funded competitors</td><td><span class="status-pill status-not">Not met (score 5)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC deeply negative (TTM net loss -$31.4B against &asymp;$45B equity); WACC estimated &asymp;18-20% given extreme volatility (beta 3.60) &mdash; a severely negative spread. This metric arguably isn't meaningful for a leveraged bitcoin vehicle, but scored honestly at zero rather than excluded</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net debt &asymp;$4.3B-$5.9B is real, but EBITDA is deeply negative and dominated by non-cash bitcoin mark-to-market swings &mdash; the ratio is not meaningfully computable, scored at the worst band given genuine debt against no real recurring cash generation (see page 4 for the more honest loan-to-value-against-bitcoin framing, &asymp;11-12%)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>FCF was -$112.5M in FY2025 (outright cash burn from operations); not a conversion story</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history (mNAV substituted for P/E)</td><td>at/below average</td><td>Current mNAV &asymp;0.9x-1.1x vs. a rough historical average estimated at &asymp;1.5x-1.8x (which itself included a brief 2021 spike to 6x) &mdash; a genuine, substantial discount to Strategy's own historical premium</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Risen from 112.85M (FY2021) to 384.23M (current), a +240% increase &mdash; among the most aggressive dilution records on this site, done deliberately to fund bitcoin purchases</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Michael Saylor holds &asymp;5.3% of economic shares (&asymp;$3.3B at current prices) and 35.8% of total voting power via Class B shares &mdash; down from historical majority control but still substantial, real skin in the game as Executive Chairman</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>9.48% of FY2025 revenue ($45.2M capex / $477.2M revenue) &mdash; above this framework's informal 5-8% "asset-light" bar; note this figure captures the software segment's own capex, not bitcoin purchases (which run through investing activities separately, not capex)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (FY25 vs FY22 gross margin)</td><td>Gross margin (software segment): 79.37% (FY2022) &rarr; 68.69% (FY2025), a -10.68pp compression as lower-margin subscription/cloud revenue mix-shifts against higher-margin legacy licenses</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Strategy remains the largest corporate bitcoin holder on earth by a wide margin, and its convertible-debt structure has proven durable through multiple severe bitcoin drawdowns (70-80%+ peak-to-trough) without a forced liquidation &mdash; the roughly 11-12% loan-to-value against the bitcoin stack is genuinely conservative. The legacy software business, while not the point anymore, is still cash-generative at the gross-margin line and subscription revenue is growing at a healthy clip (+54% YoY). And the stock's current mNAV of roughly 0.9x-1.1x represents a real discount to Strategy's own historical premium, which some would read as the closest thing to a value signal available here.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The entire capital-raising flywheel depends on the market paying a premium for MSTR shares over the bitcoin they represent &mdash; that premium has now compressed toward parity, and briefly went negative in June 2026. If it stays there, the company loses its main tool for accretive bitcoin accumulation. Roughly $8.2B of convertible notes come due in a concentrated 2028-2029 window; refinancing terms will depend heavily on where bitcoin and MSTR's own share price sit at that time. Share dilution (+240% since FY2021) continues to erode per-share economics even as headline bitcoin-per-share metrics the company promotes can still rise. And virtually every traditional profitability and leverage metric on this dashboard is either negative or not meaningfully computable &mdash; this is, by design, not an operating business anymore.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Q2 2026 earnings (reported Aug 2026) and Sep 21-22, 2026 (spot price, mNAV context, bitcoin holdings). Sources: stockanalysis.com (financials, ratios, balance sheet, price history, sourced from S&amp;P Global Market Intelligence), bitcointreasuries.net and strategy.com/learn (bitcoin holdings), mnav.com and CoinDesk (mNAV tracking), SEC 10-Q (Jun 30, 2026) and SEC FWP filings (convertible note maturity schedule, Class B ownership and voting power), TipRanks/TheFly news wires (recent bitcoin purchases, bitcoin spot price context).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. mNAV in particular moves continuously with both bitcoin's price and MSTR's share price; the figures here are a snapshot, not a live number. WACC (&asymp;18-20%) is a rough estimate given Strategy's extreme volatility (beta 3.60), not a company-disclosed figure, and ROIC/WACC framing is of limited use for a company functioning as a leveraged bitcoin vehicle rather than a traditional operating business.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Strategy Inc. (MSTR) &mdash; NASDAQ, USD share price trend, split-adjusted (10-for-1 forward stock split, effective Aug 2024). Points shown are fiscal year-end closes (Dec 31) plus the current price. This is one of the most volatile price histories of any company on this site &mdash; a genuine round-trip from $54 to $14 to $290 to $152 to $168 in under five years, driven almost entirely by bitcoin's price and the market's shifting willingness to pay a premium for it via MSTR shares.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Strategy Inc. &mdash; Fiscal Year-End Close (NASDAQ, USD, split-adjusted)</div>
+    <div class="chart-sub">A brutal 2022 bitcoin bear market took the stock down roughly 74% (FY21 $54.40 &rarr; FY22 $14.16) before the 2023-2024 bitcoin bull run and ETF-approval cycle drove a roughly 20x round trip back up to $289.62 by FY2024. FY2025 gave back nearly half of that ($151.95), and the stock sits at $168.50 today &mdash; still up a 27.0% annualized clip since FY2021's close, but only if you were able to sit through a 74% drawdown along the way.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +27.0%</text>
+<path d="M 46.0,152.8 L 172.8,172.9 L 299.6,148.4 L 426.4,35.2 L 553.2,104.0 L 680.0,95.75 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,152.8 L 172.8,172.9 L 299.6,148.4 L 426.4,35.2 L 553.2,104.0 L 680.0,95.75" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="152.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="142.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$54.40</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="172.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="192.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$14.16</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="148.4" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="138.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$63.16</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="35.2" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="25.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$289.62</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="104.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="94.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$151.95</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="95.75" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="85.75" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$168.50</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2021-2025 (Dec 31 each year) and the current price ($168.50, Sep 21, 2026 close) are split-adjusted closing prices sourced from stockanalysis.com and statmuse.com, adjusted for the 10-for-1 forward stock split effective August 2024. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

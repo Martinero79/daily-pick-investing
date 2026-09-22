@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reliance Industries Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/reliance-industries.html">
+<meta property="og:title" content="Reliance Industries Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 100+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reliance Industries Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 100+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Diversified Conglomerate &mdash; Refining/Petrochemicals, Retail &amp; Telecom</div>
+  <h1>Reliance Industries Limited</h1>
+  <div class="badges">
+    <span class="badge">NSE: RELIANCE &middot; BSE: 500325 &middot; reports in INR (thinly-traded OTC ADR: RLI also exists)</span>
+    <span class="badge">FY ends Mar 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 1966 (as Reliance Commercial Corp., by Dhirubhai Ambani) &middot; Mumbai, India (HQ)</span>
+    <span class="badge warn">Three structurally different businesses &mdash; low-margin O2C refining, high-growth Jio telecom, and fast-expanding retail &mdash; roll up into one consolidated 11.47% operating margin, the main reason this framework's growth and profitability bars read low despite genuine #1 positions in telecom, retail and refining scale.</span>
+  </div>
+  <div class="price">&#8377;1,257.50</div>
+  <div class="price-sub">Close Sep 11, 2026 (NSE) &middot; Mkt cap &asymp;&#8377;17.01 trillion (&#8377;17.0 lakh crore, roughly $193B equivalent at an indicative &#8377;88/USD &mdash; RIL has no primary USD listing) &middot; roughly flat (+0.4%) versus the FY2022 fiscal year-end close of &#8377;1,252.66, despite trailing EPS growing about 31% over that span &mdash; multiple compression, not earnings decline</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in refining/petrochemicals (O2C) &mdash; Jamnagar is the world's largest single-site refining complex (&asymp;1.24m barrels/day), competing with IOCL/BPCL/HPCL domestically and ExxonMobil, Saudi Aramco and Sinopec globally on scale, though the global refining market itself is not concentrated; in telecom (Jio) &mdash; India's #1 mobile/broadband carrier at roughly 48.9% wireless-broadband share (TRAI, Jun 2026) in an effective duopoly with Bharti Airtel (&asymp;34.9%), well ahead of Vodafone Idea and BSNL; in retail &mdash; India's largest omni-channel retailer (20,000+ stores, &#8377;3.70 lakh crore FY2026 gross revenue), but organized retail is still only &asymp;18-20% of India's total retail market, so Reliance Retail's overall share of all Indian retail spend remains small.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&#8377;10,57,219 Cr</div>
+      <div class="sub">+9.59% YoY, accelerating from +7.06% in FY2025; Q1 FY2027 alone was up &asymp;25% YoY on O2C and Jio strength, crossing &#8377;3 lakh crore in a single quarter for the first time</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val red">11.47%</div>
+      <div class="note">Range 11.4%-12.4% across FY22-26 &mdash; thin by this site's software/pharma standards, but that's the structural effect of blending low-margin refining with much higher-margin retail and telecom units into one consolidated number.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val red">8.07% / 11.5%</div>
+      <div class="note">Misses both the assumed 11.5% WACC (reflecting India regulatory/currency risk) and this framework's 15% absolute bar. Note: stockanalysis.com's own auto-computed WACC (5.04%) is lower and would be cleared &mdash; flagged here as a methodology discrepancy, not used.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val green">&#8377;1,39,853 Cr</div>
+      <div class="sub">Net Debt/EBITDA &asymp;0.8x, comfortably under the 2x bar despite very heavy capex across all three segments</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">57/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met, 7 not met, 0 N/A &mdash; a genuine three-way #1 in scale (refining, retail, telecom) held back by thin consolidated margins and sub-bar growth.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 188.72,52.75 L157.73,74.17 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399" opacity="1"/><path d="M188.72,52.75 A95,95 0 0 1 204.90,105.23 L167.94,106.33 A58,58 0 0 0 157.73,74.17 Z" fill="#34d399" opacity="0.7"/><path d="M204.90,105.23 A95,95 0 0 1 190.06,162.94 L158.23,141.52 A58,58 0 0 0 167.94,106.33 Z" fill="#34d399" opacity="0.55"/><path d="M190.06,162.94 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 158.23,141.52 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (FCF CAGR, market share, net debt/EBITDA, entry multiple, share count trend, insider/promoter ownership, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, operating margin, market concentration, ROIC/WACC, FCF conversion, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; a concentrated telecom duopoly-ish market (Jio/Airtel) offset by a genuinely fragmented retail market and a globally competitive (non-monopoly) refining/petrochemicals business</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Reliance is the first Indian company run through this checklist, and it's a useful stress test of a framework built mostly around single-business US/Europe names. It's genuinely three or four businesses under one roof: the original Jamnagar refining and petrochemicals engine (O2C, still &asymp;63% of revenue), India's largest retailer (Reliance Retail, 20,000+ stores), and Jio, India's #1 telecom and broadband carrier with roughly 48.9% wireless-broadband share &mdash; now on the verge of what would be India's largest-ever IPO after Jio Platforms received SEBI approval for a &#8377;37,700 crore listing. Revenue and EBIT have both compounded at roughly 11% a year over FY22-26 &mdash; real growth, just short of this framework's 15% bar &mdash; and the consolidated operating margin of 11.47% looks thin next to the software and pharma names on this site, though that single number can't show that it's blending a low-margin refining business with much higher-margin retail and telecom units. What holds up well: the balance sheet is genuinely conservative for a company spending this much on capex (net debt/EBITDA under 1x), the share count is flat (the October 2024 1:1 bonus issue was a split, not dilution), and the Ambani family/promoter group's roughly 50.5% stake is about as concentrated an insider holding as anywhere on this site. The stock itself is a genuine curiosity: split-adjusted, it's essentially flat since the FY2022 fiscal year-end close even though trailing EPS is up roughly 31% over the same stretch &mdash; a straightforward story of P/E compression, not earnings decline. Net: 7 of 14 criteria met, Martinero Index 57/100, a mid-pack score driven mostly by the growth and profitability criteria this framework weighs most heavily. This isn't a call to buy or avoid Reliance &mdash; just what the checklist says today.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q1 FY2027 (three months to Jun 30, 2026, reported Jul 2026) and spot price as of Sep 11, 2026 close. Reliance's fiscal year runs April-March; FY2026 = year ended Mar 31, 2026. Five-year price history (page 6) uses fiscal year-end closes, computed from stockanalysis.com's trailing P/E &times; EPS at each period end (all figures already split-adjusted for the Oct 2024 1:1 bonus issue).
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in &#8377; crore (1 crore = 10 million). Fiscal year ends Mar 31. CAGR computed FY22&rarr;FY26. Source: stockanalysis.com (S&amp;P Global Market Intelligence), converted from INR millions.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Revenue and EBIT have grown steadily every year; EBIT and FCF are a thin sliver of revenue on this scale, the structural effect of a low-margin refining business dominating the consolidated total &mdash; not a red flag by itself. Free cash flow swung negative in FY2023 on a capex surge before recovering strongly through FY2026.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;0</text><line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;2.5L Cr</text><line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;5.0L Cr</text><line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;7.5L Cr</text><line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;10.0L Cr</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&#8377;12.5L Cr</text><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/><rect x="75.6" y="117.5" width="22.5" height="122.5" rx="2" fill="#2dd4bf"/><rect x="113.7" y="226.1" width="22.5" height="13.9" rx="2" fill="#60a5fa"/><rect x="151.9" y="238.2" width="22.5" height="1.8" rx="2" fill="#fbbf24"/><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="231.6" y="85.5" width="22.5" height="154.5" rx="2" fill="#2dd4bf"/><rect x="269.7" y="222.0" width="22.5" height="18.0" rx="2" fill="#60a5fa"/><rect x="307.9" y="240.0" width="22.5" height="4.6" rx="2" fill="#fbbf24"/><text x="280.9" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="387.6" y="81.4" width="22.5" height="158.6" rx="2" fill="#2dd4bf"/><rect x="425.7" y="220.4" width="22.5" height="19.6" rx="2" fill="#60a5fa"/><rect x="463.9" y="239.0" width="22.5" height="1.0" rx="2" fill="#fbbf24"/><text x="436.9" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="543.6" y="70.2" width="22.5" height="169.8" rx="2" fill="#2dd4bf"/><rect x="581.7" y="220.2" width="22.5" height="19.8" rx="2" fill="#60a5fa"/><rect x="619.9" y="233.2" width="22.5" height="6.8" rx="2" fill="#fbbf24"/><text x="593.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="699.6" y="53.9" width="22.5" height="186.1" rx="2" fill="#2dd4bf"/><rect x="737.7" y="218.7" width="22.5" height="21.3" rx="2" fill="#60a5fa"/><rect x="775.9" y="227.8" width="22.5" height="12.2" rx="2" fill="#fbbf24"/><text x="749.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+11.0%</div><div class="sub">&#8377;6,95,963 Cr &rarr; &#8377;10,57,219 Cr</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#f87171;">+11.2%</div><div class="sub">&#8377;79,239 Cr &rarr; &#8377;1,21,261 Cr</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+60.2%</div><div class="sub">&#8377;10,509 Cr &rarr; &#8377;69,197 Cr; note &mdash; swung negative (-&#8377;25,956 Cr) in FY23, so this endpoint CAGR overstates how smooth the path was</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">This framework's 20% screen threshold sits far above this chart's range and isn't drawn here &mdash; Reliance has never been close to it and structurally isn't built to be, given the low-margin refining business in the mix. What matters more is stability: margin has held in a tight 11.4%-12.4% band for five straight years.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">3%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">6%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">9%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">12%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><path d="M50.0,68.1 L247.5,64.4 L445.0,55.2 L642.5,64.8 L840.0,67.1 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,68.1 L247.5,64.4 L445.0,55.2 L642.5,64.8 L840.0,67.1" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="68.1" r="3" fill="#2dd4bf"/><text x="50.0" y="58.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.39%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="64.4" r="3" fill="#2dd4bf"/><text x="247.5" y="54.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.67%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="55.2" r="3" fill="#2dd4bf"/><text x="445.0" y="45.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">12.36%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="64.8" r="3" fill="#2dd4bf"/><text x="642.5" y="54.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.64%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="67.1" r="3" fill="#2dd4bf"/><text x="840.0" y="57.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.47%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>&#8377;6,95,963 Cr</td><td>&#8377;79,239 Cr</td><td>11.39%</td><td>&#8377;60,705 Cr</td><td>&#8377;10,509 Cr</td><td>13.3%</td></tr>
+    <tr><td>FY2023</td><td>&#8377;8,77,835 Cr</td><td>&#8377;1,02,478 Cr</td><td>11.67%</td><td>&#8377;66,702 Cr</td><td>-&#8377;25,956 Cr</td><td>-25.3%</td></tr>
+    <tr><td>FY2024</td><td>&#8377;9,01,064 Cr</td><td>&#8377;1,11,401 Cr</td><td>12.36%</td><td>&#8377;69,621 Cr</td><td>&#8377;5,905 Cr</td><td>5.3%</td></tr>
+    <tr><td>FY2025</td><td>&#8377;9,64,693 Cr</td><td>&#8377;1,12,308 Cr</td><td>11.64%</td><td>&#8377;69,648 Cr</td><td>&#8377;38,736 Cr</td><td>34.5%</td></tr>
+    <tr><td>FY2026</td><td>&#8377;10,57,219 Cr</td><td>&#8377;1,21,261 Cr</td><td>11.47%</td><td>&#8377;80,775 Cr</td><td>&#8377;69,197 Cr</td><td>57.1%</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Segment Mix &amp; Quarterly Development</div></div>
+  <div class="sec-sub">Reliance's fiscal quarters run Apr-Jun, Jul-Sep, Oct-Dec, Jan-Mar. Latest reported period: Q1 FY2027 (three months to Jun 30, 2026, reported Jul 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q1 FY2027 Headlines</div>
+    <p>Consolidated revenue reached <b style="color:#f8fafc;">&#8377;3.09-3.12 lakh crore</b>, up roughly <b style="color:#34d399;">25% YoY</b> &mdash; the first time quarterly revenue crossed &#8377;3 lakh crore, led by O2C (segment revenue +30% YoY to &#8377;2,01,803 crore) and continued Jio/digital-services growth. Consolidated EBITDA improved to &#8377;47,517 crore from &#8377;42,905 crore a year earlier. Net profit fell about 22% YoY to &#8377;20,946 crore, but that's a base-effect distortion, not an operating problem: the year-ago quarter included a one-off &#8377;8,924 crore gain on the sale of listed investments that didn't repeat.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">FY2026 Revenue by Segment</div>
+    <div class="chart-sub">O2C (refining &amp; petrochemicals) remains the largest single segment by revenue, though Retail and Digital Services (Jio) together now contribute nearly half of consolidated EBITDA on a much smaller combined revenue base &mdash; the higher-margin engines of the business.</div>
+    <table class="datatable">
+      <tr><th>Segment</th><th>FY2026 Revenue</th><th>% of Total</th><th>Note</th></tr>
+      <tr><td>O2C (Refining &amp; Petrochemicals)</td><td>&#8377;6,62,401 Cr</td><td>62.7%</td><td>Anchored by the Jamnagar refining complex, the world's largest single-site refinery</td></tr>
+      <tr><td>Retail</td><td>&#8377;3,71,085 Cr</td><td>35.1%</td><td>India's largest omni-channel retailer, 20,000+ stores, 387M registered customers</td></tr>
+      <tr><td>Digital Services (Jio)</td><td>&#8377;1,76,164 Cr</td><td>16.7%</td><td>India's #1 telecom/broadband carrier; Jio Platforms cleared SEBI approval for a &#8377;37,700 Cr IPO in Aug 2026</td></tr>
+      <tr><td>Oil &amp; Gas (E&amp;P)</td><td>&#8377;23,861 Cr</td><td>2.3%</td><td>KG D6 and CBM block production</td></tr>
+      <tr><td>Other</td><td>&#8377;80,522 Cr</td><td>7.6%</td><td>Media, financial services and other smaller businesses</td></tr>
+    </table>
+    <div class="chart-sub" style="margin-top:6px;">Segment lines sum to more than 100% of consolidated revenue due to inter-segment eliminations not shown here; percentages are of gross segment revenue, not a precise consolidated breakdown.</div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2026)</div>
+    <div class="chart-sub">Gross margin has held in a narrow 32-35% band and improved modestly overall, from 32.04% (FY2022) to 34.86% (FY2026) &mdash; a +1.90pp gain versus FY2023 specifically (the window used for criterion #14), driven mainly by the growing weight of higher-margin retail and digital services in the mix.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">28%</text>
+<line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+<line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">32%</text>
+<line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">34%</text>
+<line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">38%</text>
+<path d="M50.0,139.2 L247.5,120.8 L445.0,79.2 L642.5,85.4 L840.0,82.8 L840.0,220.0 L50.0,220.0 Z" fill="#f87171" opacity="0.12"/>
+<path d="M50.0,139.2 L247.5,120.8 L445.0,79.2 L642.5,85.4 L840.0,82.8" fill="none" stroke="#f87171" stroke-width="2.5"/>
+<circle cx="50.0" cy="139.2" r="3" fill="#f87171"/>
+<text x="50.0" y="129.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">32.04%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="247.5" cy="120.8" r="3" fill="#f87171"/>
+<text x="247.5" y="110.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">32.96%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="445.0" cy="79.2" r="3" fill="#f87171"/>
+<text x="445.0" y="69.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">35.04%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="642.5" cy="85.4" r="3" fill="#f87171"/>
+<text x="642.5" y="75.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">34.73%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="82.8" r="3" fill="#f87171"/>
+<text x="840.0" y="72.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">34.86%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> the three segments sit at very different points on the concentration spectrum, which is why criterion #6 (market concentration) scores a middling 3/5 rather than a clean "Met". Jio is genuinely dominant in a near-duopoly telecom market (&asymp;48.9% share vs Airtel's &asymp;34.9%). Jamnagar gives Reliance real refining scale, but the global refining/petrochemicals market itself is competitive, not concentrated, against Aramco, ExxonMobil and Sinopec. Retail is the fragmented outlier: Reliance is India's largest organized retailer, but organized retail overall is still only &asymp;18-20% of India's total retail spend, so even the #1 organized player controls a small slice of the whole market.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, computed at each fiscal year-end close (derived from stockanalysis.com's reported trailing P/E &times; split-adjusted EPS). WACC is assumed at 11.5% &mdash; above the ~9.5% used for US investment-grade mega-caps and the ~10.5% used for Tencent elsewhere on this site, reflecting India-specific regulatory, currency and emerging-market risk premia on top of Reliance's large-cap scale.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 23.45x sits just below the FY22-26 average of roughly 24.89x &mdash; a modest discount to its own recent history, consistent with the stock's broadly flat five-year price performance even as earnings grew. Forward P/E (19.67x currently) has generally run below trailing P/E &mdash; see explainer below.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">9x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">18x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">27x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">36x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">45x</text><line x1="50.0" y1="109.4" x2="840.0" y2="109.4" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="105.4" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 avg: 24.89x</text><path d="M 50.0,97.4 L 208.0,121.3 L 366.0,91.6 L 524.0,116.6 L 682.0,119.9 L 840.0,115.8" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="97.4" r="3" fill="#a78bfa"/><text x="50.0" y="87.4" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">27.58x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><circle cx="208.0" cy="121.3" r="3" fill="#a78bfa"/><text x="208.0" y="111.3" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.20x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="366.0" cy="91.6" r="3" fill="#a78bfa"/><text x="366.0" y="81.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">28.88x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="524.0" cy="116.6" r="3" fill="#a78bfa"/><text x="524.0" y="106.6" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.26x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="682.0" cy="119.9" r="3" fill="#a78bfa"/><text x="682.0" y="109.9" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">22.52x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><circle cx="840.0" cy="115.8" r="3.5" fill="#a78bfa"/><text x="840.0" y="105.8" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.45x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><path d="M 50.0,125.3 L 208.0,131.0 L 366.0,99.6 L 524.0,112.9 L 682.0,123.0 L 840.0,132.6" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="125.3" r="3" fill="#c4b5fd"/><text x="50.0" y="140.3" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">21.32x</text><circle cx="208.0" cy="131.0" r="3" fill="#c4b5fd"/><text x="208.0" y="146.0" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">20.03x</text><circle cx="366.0" cy="99.6" r="3" fill="#c4b5fd"/><text x="366.0" y="114.6" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">27.10x</text><circle cx="524.0" cy="112.9" r="3" fill="#c4b5fd"/><text x="524.0" y="127.9" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">24.11x</text><circle cx="682.0" cy="123.0" r="3" fill="#c4b5fd"/><text x="682.0" y="138.0" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">21.82x</text><circle cx="840.0" cy="132.6" r="3.5" fill="#c4b5fd"/><text x="840.0" y="147.6" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">19.67x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of actual reported earnings &mdash; a backward-looking snapshot at today's price. Trailing P/E (the FY22-26 series above) is that same backward-looking ratio calculated at each fiscal year-end, showing how the market has re-rated the stock over time relative to what it had already earned. Forward P/E is today's share price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings &mdash; forward-looking, and generally the more useful of the two for judging whether a stock is priced fairly relative to where its earnings are headed. For Reliance specifically: trailing P/E (23.45x) sits just below its own FY22-26 average (24.89x), and forward P/E (19.67x) is noticeably cheaper still, consistent with analyst consensus expecting continued double-digit EPS growth (3-year forecast &asymp;34.5% cumulative, per stockanalysis.com). One more lens worth a glance: the PEG ratio, forward P/E divided by expected annual EPS growth, which sanity-checks whether a "cheap" multiple is actually cheap once growth is accounted for. Reliance's PEG currently runs around 1.5 &mdash; above the traditional 1.0 "fair value" line, suggesting the stock isn't dramatically cheap relative to its own growth outlook despite the modest discount to its own trading history.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> net debt of &#8377;1,39,853 crore against an estimated FY2026 EBITDA of roughly &#8377;1,70,732 crore gives a Net Debt/EBITDA of &asymp;0.82x &mdash; comfortably under this framework's &lt;2x bar (note: Reliance's own reported EBITDA figure, &#8377;2,07,911 crore, differs from this standardized EBIT+D&amp;A calculation due to differing treatment of other income and JV/associate income; either way, leverage stays well under 1x). ROIC of 8.07% clears neither the assumed 11.5% WACC nor this framework's 15% absolute bar &mdash; a genuine miss, not a borderline one. Share count has been essentially flat (0.00% YoY); the October 2024 1:1 bonus issue was a stock split (doubling shares while halving the per-share price and EPS proportionally), not dilution, and is explicitly excluded from this framework's dilution read.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="222.11 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="126.67 439.82" stroke-dashoffset="-222.11"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="91.04 439.82" stroke-dashoffset="-348.78"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Promoter group (Ambani family &amp; related entities, incl. Mukesh Ambani as Chairman &amp; MD) &asymp; 50.5% of shares outstanding</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional investors (FII/DII) &asymp; 28.8%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public &amp; other float &asymp; 20.7%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note:</b> the promoter group &mdash; the Ambani family together with a set of holding entities (Srichakra Commercials LLP at &asymp;10.9%, and several other LLPs at &asymp;8% each) &mdash; held roughly 50% of Reliance for decades and actively raised that stake to &asymp;50.5% through market purchases in mid-2026. That's one of the highest founder/promoter concentrations of any company on this site, though it's worth being honest that it also means one family effectively controls a company operating critical national infrastructure (telecom, energy) &mdash; a different kind of governance profile than, say, Larry Ellison's ~40% stake in a purely commercial software business.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Reliance Industries</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+11.0% &mdash; &#8377;6,95,963 Cr &rarr; &#8377;10,57,219 Cr; real growth, but below the bar (score 3/5, borderline)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>&ge;15%</td><td>+11.2% &mdash; &#8377;79,239 Cr &rarr; &#8377;1,21,261 Cr &mdash; tracks revenue growth closely, still short of the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>11.47% (FY2026) &mdash; well below the bar; structurally thin given the low-margin O2C refining business dominates consolidated revenue</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>&#8377;10,509 Cr &rarr; &#8377;69,197 Cr, +60.2% CAGR on the endpoints, but FCF swung negative (-&#8377;25,956 Cr) in FY2023 on a capex surge &mdash; a volatile, non-monotonic path scored on its endpoints</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#1 in Indian telecom/broadband (Jio, &asymp;48.9% share), #1 in Indian organized retail (Reliance Retail), and operator of the world's largest single-site refining complex (Jamnagar) &mdash; a genuine #1 across all three core segments</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; a near-duopoly in telecom (Jio/Airtel) offset by a genuinely fragmented retail market and a globally competitive, non-monopoly refining/petrochemicals industry</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC 8.07%, clears neither the assumed 11.5% WACC nor the 15% absolute bar (note: stockanalysis.com's own auto-computed 5.04% WACC would be cleared &mdash; flagged as a methodology discrepancy, not used for scoring)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;0.82x (net debt &#8377;1,39,853 Cr vs estimated FY2026 EBITDA &#8377;1,70,732 Cr) &mdash; comfortably under the bar despite very heavy capex</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>57.1% (FY2026) &mdash; improved sharply from a negative FY2023, but still short of the bar given ongoing heavy capex across all three segments</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E 23.45x vs a FY22-26 average of roughly 24.89x &mdash; a modest discount to its own recent history</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>0.00% YoY change; the Oct 2024 1:1 bonus issue was a stock split, not dilution &mdash; share count has been effectively flat</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Promoter group (Ambani family and related holding entities) &asymp; 50.5% of shares outstanding, actively increased via market purchases in 2026 &mdash; one of the highest promoter/founder stakes on this site</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>11.63% of FY2026 revenue (&#8377;1,22,916 Cr capex) &mdash; heavy, driven by simultaneous investment across refining, new energy, retail store buildout and Jio network expansion</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp (3-yr)</td><td>Gross margin 34.86% (FY2026) vs 32.96% (FY2023), a +1.90pp improvement &mdash; comfortably clears the threshold</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Genuine #1 positions across all three core segments (telecom, organized retail, refining scale), a conservative balance sheet for a company spending this heavily on capex (net debt/EBITDA under 1x), a flat share count, gross margin that's actually improved over three years, and a promoter/family stake (&asymp;50.5%) that's among the most concentrated insider ownership on this site &mdash; recently increased, not reduced. The current entry multiple also sits modestly below Reliance's own five-year average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth (revenue and EBIT both &asymp;11% CAGR) and profitability (11.47% operating margin, 8.07% ROIC) are the real misses, and they sit in the two categories this framework weighs most heavily. Capex remains very heavy across all three segments simultaneously, keeping FCF conversion under the bar despite an improving trend. The pending Jio Platforms IPO (SEBI-approved, &#8377;37,700 Cr) could unlock value or introduce new minority-shareholder dynamics depending on structure and pricing &mdash; worth watching closely once it prices.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Jul 2026 (Q1 FY2027 results) &ndash; Sep 11, 2026 (spot price). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), Reliance Industries FY2025-26 Annual Report and Q1 FY2027 media release (ril.com), TRAI subscriber data (Jun 2026), Business Standard / Angel One (promoter shareholding).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (11.5%) and the FY2026 EBITDA estimate (EBIT + D&amp;A) are assumed/derived figures, not company-disclosed metrics, and are explicitly flagged where they diverge from other sources. Revenue-by-segment percentages are approximate (gross segment revenue, not net of inter-segment eliminations).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Reliance Industries &mdash; NSE, INR share price trend, split-adjusted for the October 2024 1:1 bonus issue. Points shown are fiscal year-end closes (Mar 31) plus the current price, derived from stockanalysis.com's trailing P/E &times; split-adjusted EPS at each period end.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Reliance Industries &mdash; Fiscal Year-End Close (NSE, INR, split-adjusted)</div>
+    <div class="chart-sub">A choppy, essentially flat five-year round trip: from &#8377;1,252.66 at the FY2022 close to &#8377;1,257.50 today, despite trailing EPS rising roughly 31% over the same span &mdash; the FY2024 peak (&#8377;1,485.87) came on a re-rating that has since fully unwound as the stock's P/E multiple compressed back toward its own average.</div>
+<svg viewBox="0 -20 700 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="-8" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +0.09%</text>
+<path d="M 46.0,106.5 L 172.8,152.6 L 299.6,38.7 L 426.4,122.6 L 553.2,79.8 L 680.0,105.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,106.5 L 172.8,152.6 L 299.6,38.7 L 426.4,122.6 L 553.2,79.8 L 680.0,105.1" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="106.5" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="96.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8377;1,252.66</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="152.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="142.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8377;1,094.24</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="38.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="28.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8377;1,485.87</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="122.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="112.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8377;1,197.19</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="79.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="69.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&#8377;1,344.42</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="105.1" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="676.0" y="95.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&#8377;1,257.50</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes for FY2022-2026 (Mar 31 each year, split-adjusted) are derived from stockanalysis.com's trailing P/E &times; split-adjusted EPS at each period end; the current price (&#8377;1,257.50, Sep 11, 2026 close) is a direct closing/spot price from the same source. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
