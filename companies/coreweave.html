@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CoreWeave Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/coreweave.html">
+<meta property="og:title" content="CoreWeave Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CoreWeave Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#1f1212; color:#f5d6d6; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; AI Cloud / GPU Infrastructure ("Neocloud")</div>
+  <h1>CoreWeave, Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: CRWV &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2017 (as Atlantic Crypto; renamed CoreWeave 2019) &middot; Livingston, New Jersey (HQ)</span>
+    <span class="badge warn">IPO'd March 28, 2025 at $40/share &mdash; under 18 months of public trading history. Every "vs. own history" and multi-year CAGR figure below is necessarily a short, early-stage window, flagged explicitly rather than stretched into a fake 5-year track record.</span>
+  </div>
+  <div class="price">$85.43</div>
+  <div class="price-sub">Close Sep 21, 2026 (NASDAQ) &middot; Mkt cap &asymp;$47.1B (enterprise value &asymp;$93.2B, reflecting &asymp;$46.0B net debt) &middot; up ~113.6% from the $40 IPO price, but down ~53.4% from the June 2025 all-time-high close of $183.58 amid growing scrutiny of AI-infrastructure debt and customer concentration</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> CoreWeave is the largest pure-play "neocloud" (independent GPU-as-a-service provider) &mdash; roughly 10x the GPU fleet size of its closest independent rival, Nebius, and generally ranked in the top "Platinum" tier of neocloud providers alongside much smaller names like Lambda and Crusoe. But the honest comparison the user asked for is broader: against the hyperscalers &mdash; AWS, Microsoft Azure and Google Cloud &mdash; who together account for roughly two-thirds of total worldwide cloud infrastructure spend and are increasingly building their own custom AI silicon (AWS Trainium, Google TPU, Azure Maia) in-house, CoreWeave is a small, fast-growing specialist subcontractor, not a peer. Its own largest customers (Microsoft, and increasingly Meta) are simultaneously CoreWeave's biggest revenue source and long-term potential competitive threats as they build out proprietary capacity.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM, Jun 2026)</div>
+      <div class="val">$7.59B</div>
+      <div class="sub">+115.3% YoY. FY2025 revenue was $5.13B (+167.9% YoY vs FY2024's $1.92B, itself +736% vs FY2023's $229M) &mdash; hyper-growth off a near-zero base, not a steady compounding rate</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (TTM)</div>
+      <div class="val red">-2.66%</div>
+      <div class="note">Volatile and still negative: -144.54% (FY2022) &rarr; -6.11% (FY2023) &rarr; +16.92% (FY2024, the one profitable year so far) &rarr; -0.33% (FY2025) &rarr; -2.66% (TTM). No stable trend yet.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val red">-0.34% / ~12.0%</div>
+      <div class="note">ROIC is negative and WACC is assumed unusually high (~12%) given the heavy debt load, elevated equity risk and pre-profit status &mdash; the spread is deeply negative under any reasonable methodology.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt (current)</div>
+      <div class="val red">$46.03B</div>
+      <div class="sub">Net Debt/EBITDA &asymp;12.15x (current, TTM EBITDA $3.79B) &mdash; extreme leverage from GPU-financing debt, including a new $3.7B convertible note priced Sep 2026</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">26/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/14 criteria met, 11 not met, 0 N/A &mdash; one of the lowest scores on this site, dragged down by heavy leverage, negative profitability/FCF, extreme capex, and dilution, only partly offset by explosive top-line growth and real founder skin-in-the-game.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="94.25 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f87171" stroke-width="40" stroke-dasharray="345.57 439.82" stroke-dashoffset="-94.25"/></g><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (revenue growth, insider/founder ownership, margin stability trend)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 11 (EBIT growth, operating margin, FCF growth, market share vs. hyperscalers, market concentration, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; fragmented and intensifying: well-funded neocloud rivals (Nebius, Lambda, Crusoe) plus hyperscalers building proprietary AI silicon in-house</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    CoreWeave is the poster child of the "neocloud" boom: a former crypto-mining operation that pivoted into renting out Nvidia GPU capacity and rode the generative-AI wave to a $40 IPO in March 2025, a run to $183.58 by June 2025, and revenue that's compounded from effectively zero to a $7.59B TTM run rate in about three years. Q2 2026 revenue was $2.58B (+112% YoY), and the revenue backlog reached $104.2B (+246% YoY) &mdash; genuinely extraordinary demand signals. But the checklist used on this site is built for capital discipline and durable profitability, and CoreWeave fails almost all of it today: operating margin is negative on a TTM basis, free cash flow is deeply negative and getting more negative every year (-$13.66B TTM), capex alone ran over 200% of FY2025 revenue as the company races to buy and deploy GPUs, net debt/EBITDA sits around 12x (funded via GPU-collateralized loans and now a fresh $3.7B convertible note), and shares outstanding have grown 75.6% in the last year alone. Two-thirds or more of revenue has historically come from a single customer (Microsoft), though CoreWeave has been actively diversifying via large new OpenAI (~$6.5B through 2031) and Meta (up to ~$21B) agreements. The one genuinely strong signal is founder alignment: the three co-founders retain a combined ~73.6% of voting power (via 10-votes-per-share Class B stock) even though their aggregated economic/insider ownership is a still-meaningful 19.28%. Net: 3 of 14 criteria met, Martinero Index 26/100 &mdash; a name defined by extraordinary growth and extraordinary financial risk in roughly equal measure. This isn't a call to buy or avoid CoreWeave &mdash; just what the checklist says today, on a company still writing its first few chapters as a public entity.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q2 2026 (three months to Jun 30, 2026, reported Aug 11, 2026) and FY2025 annual results (reported Feb 2026); spot price as of Sep 21, 2026 close. CoreWeave's fiscal year is the calendar year. CoreWeave has under 18 months of public trading history (IPO March 28, 2025) &mdash; several criteria below that assume a 5-year window are computed on the best available shorter window instead, and flagged as such rather than fabricated.
+  </div>
+
+  <div class="bignum-corner">3/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Financials Since Scale-Up (FY2022&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year is the calendar year (Jan&ndash;Dec). CoreWeave IPO'd in March 2025, so there is no FY21-25 window &mdash; this shows the full FY2022-FY2025 history available, explicitly labeled as a 4-year (not 5-year) window, plus TTM through Jun 2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual (FY2022-FY2025)</div>
+    <div class="chart-sub">Revenue exploded from effectively zero ($15.8M, FY2022) to $5.13B (FY2025) as the GPU-cloud business scaled &mdash; but free cash flow collapsed in the opposite direction, from -$71M to -$7.25B, as capex to buy and deploy GPUs vastly outpaced operating cash generation. Operating income has stayed roughly flat near breakeven throughout, swinging between small losses and one profitable year (FY2024).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 330" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="29.66" x2="840" y2="29.66" stroke="#1e293b" stroke-width="1"/><text x="50" y="33.66" text-anchor="end" font-size="11" fill="#64748b">$6B</text>
+      <line x1="60" y1="87.59" x2="840" y2="87.59" stroke="#1e293b" stroke-width="1"/><text x="50" y="91.59" text-anchor="end" font-size="11" fill="#64748b">$3B</text>
+      <line x1="60" y1="145.45" x2="840" y2="145.45" stroke="#475569" stroke-width="1.3"/><text x="50" y="149.45" text-anchor="end" font-size="11" fill="#94a3b8">$0</text>
+      <line x1="60" y1="203.45" x2="840" y2="203.45" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.45" text-anchor="end" font-size="11" fill="#64748b">-$3B</text>
+      <line x1="60" y1="261.38" x2="840" y2="261.38" stroke="#1e293b" stroke-width="1"/><text x="50" y="265.38" text-anchor="end" font-size="11" fill="#64748b">-$6B</text>
+      <rect x="80" y="145.21" width="22.5" height="0.24" rx="1" fill="#2dd4bf"/>
+      <rect x="118" y="145.45" width="22.5" height="0.51" rx="1" fill="#60a5fa"/>
+      <rect x="156" y="145.45" width="22.5" height="1.45" rx="1" fill="#fbbf24"/>
+      <text x="129" y="278" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+      <rect x="275" y="141.10" width="22.5" height="4.35" rx="1" fill="#2dd4bf"/>
+      <rect x="313" y="145.45" width="22.5" height="0.34" rx="1" fill="#60a5fa"/>
+      <rect x="351" y="145.45" width="22.5" height="21.48" rx="1" fill="#fbbf24"/>
+      <text x="324" y="278" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+      <rect x="470" y="108.55" width="22.5" height="36.90" rx="1" fill="#2dd4bf"/>
+      <rect x="508" y="139.25" width="22.5" height="6.20" rx="1" fill="#60a5fa"/>
+      <rect x="546" y="145.45" width="22.5" height="115.01" rx="1" fill="#fbbf24"/>
+      <text x="519" y="278" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+      <rect x="665" y="46.44" width="22.5" height="99.01" rx="1" fill="#2dd4bf"/>
+      <rect x="703" y="145.45" width="22.5" height="0.40" rx="1" fill="#60a5fa"/>
+      <rect x="741" y="145.45" width="22.5" height="140.07" rx="1" fill="#fbbf24"/>
+      <text x="714" y="278" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue Growth</div><div class="val" style="color:#34d399;">+167.9% YoY</div><div class="sub">$1,915M &rarr; $5,131M (FY24-25). 2-yr FY23-25 CAGR computes to ~373%, but that figure is an artifact of the near-zero FY23 base &mdash; not a meaningful long-run rate</div></div>
+    <div class="cagr-card"><div class="label">Operating Income</div><div class="val" style="color:#f87171;">n/m</div><div class="sub">-$22.9M &rarr; -$14M &rarr; +$324M &rarr; -$17M (FY22-25); no stable trend. TTM -$202M</div></div>
+    <div class="cagr-card"><div class="label">Free Cash Flow</div><div class="val" style="color:#f87171;">n/m (worsening)</div><div class="sub">-$71M &rarr; -$1,110M &rarr; -$5,953M &rarr; -$7,251M (FY22-25); TTM -$13.66B as capex accelerates further</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line for comparability with other dashboards on this site &mdash; CoreWeave has never cleared it on an annual basis; FY2024's +16.92% was the closest approach, followed by a relapse to negative territory in FY2025 and the TTM period.</div>
+    <svg viewBox="0 0 860 240" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-160%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">-100%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">-40%</text><line x1="50" y1="60.0" x2="840" y2="220.0" stroke="none"/><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">+20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">+40%</text>
+    <line x1="50" y1="60" x2="840" y2="60" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="55" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text>
+    <line x1="50" y1="145" x2="840" y2="145" stroke="#334155" stroke-width="1" stroke-dasharray="2,3"/>
+    <path d="M50.0,204.5 L247.5,66.1 L445.0,43.1 L642.5,60.3 L840.0,62.7" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+    <circle cx="50.0" cy="204.5" r="3" fill="#2dd4bf"/><text x="50.0" y="216" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-144.5%</text><text x="50.0" y="234" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+    <circle cx="247.5" cy="66.1" r="3" fill="#2dd4bf"/><text x="247.5" y="56.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-6.11%</text><text x="247.5" y="234" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+    <circle cx="445.0" cy="43.1" r="3" fill="#2dd4bf"/><text x="445.0" y="33.1" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">+16.92%</text><text x="445.0" y="234" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+    <circle cx="642.5" cy="60.3" r="3" fill="#2dd4bf"/><text x="642.5" y="50.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-0.33%</text><text x="642.5" y="234" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+    <circle cx="840.0" cy="62.7" r="3.5" fill="#2dd4bf"/><text x="840.0" y="52.7" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">-2.66%</text><text x="840.0" y="234" text-anchor="middle" font-size="10.5" fill="#f8fafc">TTM</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>$15.8M</td><td>-$22.9M</td><td>-144.54%</td><td>-$31.1M</td><td>-$71.5M</td><td>n/m</td></tr>
+    <tr><td>FY2023</td><td>$229M</td><td>-$14M</td><td>-6.11%</td><td>-$594M</td><td>-$1,110M</td><td>n/m</td></tr>
+    <tr><td>FY2024</td><td>$1,915M</td><td>$324M</td><td>16.92%</td><td>-$937M</td><td>-$5,953M</td><td>n/m</td></tr>
+    <tr><td>FY2025</td><td>$5,131M</td><td>-$17M</td><td>-0.33%</td><td>-$1,196M</td><td>-$7,251M</td><td>n/m</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>$7,590M</td><td>-$202M</td><td>-2.66%</td><td>-$1,928M</td><td>-$13,655M</td><td>n/m</td></tr>
+  </table>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &amp; Market Position</div></div>
+  <div class="sec-sub">CoreWeave reports calendar quarters. Latest reported period: Q2 2026 (three months to Jun 30, 2026, reported Aug 11, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">$2.58B</b>, up <b style="color:#34d399;">112% YoY</b> from $1.21B, and comfortably beat consensus. Revenue backlog (remaining performance obligations) hit a striking <b style="color:#f8fafc;">$104.2B</b>, up <b style="color:#34d399;">246% YoY</b>, with over $25B in net new customer commitments signed in the early weeks of Q3 alone. But net loss widened sharply to <b style="color:#f87171;">$626M</b> (from $290M a year earlier), driven largely by a surge in interest expense on the company's rapidly growing debt load. CoreWeave raised full-year 2026 revenue guidance to $12.4B-$13.2B and guided Q3 revenue to $3.45B-$3.6B. The stock jumped as much as 14% in after-hours trading on the beat-and-raise, before broader AI-infrastructure debt jitters pulled shares back down in the following weeks.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2025)</div>
+    <div class="chart-sub">Gross margin jumped from a startup-like 23.42% (FY2022, when the business was tiny and infrastructure was underutilized) to the low-to-mid 70s as CoreWeave scaled &mdash; a +48.3pp improvement over the window used for criterion #14, though a large part of that swing reflects moving off an unrepresentatively low, pre-scale base rather than steady-state margin durability. TTM gross margin is 67.42%, down slightly from the FY2024 peak of 74.26% as newer, larger, and somewhat lower-margin enterprise contracts have entered the mix.</div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+<line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">25%</text>
+<line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+<line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">75%</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/>
+<text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">100%</text>
+<path d="M50.0,173.16 L247.5,80.26 L445.0,71.48 L642.5,76.64 L840.0,85.16 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/>
+<path d="M50.0,173.16 L247.5,80.26 L445.0,71.48 L642.5,76.64 L840.0,85.16" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="50.0" cy="173.16" r="3" fill="#34d399"/>
+<text x="50.0" y="163.16" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">23.42%</text>
+<text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text>
+<circle cx="247.5" cy="80.26" r="3" fill="#34d399"/>
+<text x="247.5" y="70.26" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">69.87%</text>
+<text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text>
+<circle cx="445.0" cy="71.48" r="3" fill="#34d399"/>
+<text x="445.0" y="61.48" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">74.26%</text>
+<text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text>
+<circle cx="642.5" cy="76.64" r="3" fill="#34d399"/>
+<text x="642.5" y="66.64" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">71.68%</text>
+<text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text>
+<circle cx="840.0" cy="85.16" r="3.5" fill="#34d399"/>
+<text x="840.0" y="75.16" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">67.42%</text>
+<text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">TTM</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> CoreWeave is the clear #1 pure-play "neocloud" &mdash; a specialist GPU-cloud provider &mdash; with roughly 10x the deployed GPU fleet of its closest independent rival, Nebius, and a widely-cited "Platinum tier" ranking among GPU-as-a-service providers. But that's a narrow, self-selected category. Against the comparison set the user actually asked for &mdash; AWS, Azure and Google Cloud &mdash; CoreWeave is small: those three hyperscalers combine for roughly two-thirds of total worldwide cloud infrastructure spend, each generate tens of billions of dollars of cloud revenue per quarter (vs. CoreWeave's ~$2.6B in its best quarter so far), and each is investing heavily in proprietary AI accelerator silicon (Trainium, TPU, Maia) that reduces their own need for third-party GPU capacity over time. CoreWeave's edge is speed-to-deploy and Nvidia-partnership depth (it was an early, favored buyer of new GPU generations including the Vera Rubin NVL72), not scale versus the giants. Scored here as "#4-5" rather than "#1 or #2" given that broader, more honest comparison set.
+  </div>
+
+  <div class="callout red">
+    <b>Customer concentration, a known structural risk:</b> Microsoft was ~62% of FY2024 revenue and roughly ~67% of FY2025 revenue &mdash; an extraordinary reliance on a single counterparty. The top two customers together were ~65% of Q1 2026 revenue, showing some diversification is underway (a ~$6.5B OpenAI agreement signed May 2025, running through May 2031, and an order from Meta worth up to ~$21B signed March 2026 are the main drivers), but CoreWeave remains dependent on a small number of very large AI-lab and hyperscaler relationships rather than a broad customer base. If any one of these relationships were to shrink, renegotiate, or move workloads in-house, the revenue impact would be immediate and severe.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">P/E is not meaningful (CoreWeave has never posted a full-year GAAP profit), so EV/EBITDA is used as the entry-multiple signal, per this site's convention for unprofitable companies. WACC is assumed at an elevated ~12.0%, reflecting CoreWeave's heavy leverage, high-beta AI-capex profile and pre-profit status &mdash; well above the ~8-9% typically assumed for large, stable compounders on this site.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">EV/EBITDA &mdash; Only Data Point Available vs. Current</div>
+    <div class="chart-sub">CoreWeave has been public for barely 18 months, so there is no genuine multi-year multiple history to compare against &mdash; unlike most dashboards on this site, this is a two-point comparison, not a 5-year average. FY2025 year-end EV/EBITDA was 21.56x; the current multiple is 23.99x-24.58x depending on the exact EV/EBITDA snapshot used (this dashboard uses 24.58x). That's roughly a 14% premium to the only prior data point available &mdash; a small sample that should be read with real caution.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>EV/EBITDA</span>
+    </div>
+<svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text>
+<line x1="50.0" y1="93.76" x2="840.0" y2="93.76" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="89.76" text-anchor="end" font-size="10" fill="#94a3b8">only prior point: 21.56x</text>
+<path d="M 246.0,93.76 L 644.0,81.68" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="246.0" cy="93.76" r="4" fill="#a78bfa"/><text x="246.0" y="83.76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-weight="700">21.56x</text><text x="246.0" y="198" text-anchor="middle" font-size="11" fill="#94a3b8">FY25 year-end</text>
+<circle cx="644.0" cy="81.68" r="4.5" fill="#a78bfa"/><text x="644.0" y="71.68" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">24.58x</text><text x="644.0" y="198" text-anchor="middle" font-size="11" fill="#f8fafc">Now</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Why EV/EBITDA (and not P/E or PEG) for CoreWeave:</b> CoreWeave has never posted a full-year GAAP profit, so P/E and PEG are not computable in any meaningful way (stockanalysis.com shows both as "n/a"). EV/EBITDA is the more honest lens here anyway, precisely because it's capital-structure-aware &mdash; and CoreWeave's capital structure is the whole story. EV ($93.2B) already bakes in the ~$46.0B of net debt that market cap alone ($47.1B) ignores; on a pure market-cap/sales basis (P/S 6.21x current vs 6.96x at FY2025 year-end, i.e. actually a slight discount), CoreWeave looks cheaper than it does on EV/EBITDA (a ~14% premium) &mdash; the gap between those two readings is the leverage. This dashboard scores the entry-multiple criterion on EV/EBITDA specifically because it doesn't let the debt hide.
+  </div>
+
+  <div class="callout red">
+    <b>Balance sheet:</b> net debt of $46.03B against TTM EBITDA of just $3.79B, for a Net Debt/EBITDA of roughly 12.15x (current) to 10.94x (FY2025 year-end) &mdash; extreme leverage, far outside this framework's &lt;2x bar, funded mostly by debt specifically collateralized against GPU purchases plus a series of convertible note offerings (including a fresh $3.7B priced mid-September 2026). Interest coverage is negative (-0.11x): operating income doesn't come close to covering interest expense today. The Altman Z-Score sits at just 0.29 (a score under 3 flags elevated bankruptcy risk under that model, though the model wasn't built for capital-intensive, contract-backed infrastructure financing structures like this one) and the Piotroski F-Score is a weak 2 out of 9. None of this means CoreWeave is in imminent distress &mdash; its debt is largely asset- and contract-backed against a $104.2B revenue backlog &mdash; but the leverage is real, growing, and the single biggest financial risk on this dashboard.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="84.80 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="239.15 439.82" stroke-dashoffset="-84.80"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="115.87 439.82" stroke-dashoffset="-323.95"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders &amp; management &asymp; 19.28% of shares outstanding (economic ownership)</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp; 54.38% of shares outstanding</div>
+        <div><span class="dot" style="background:#64748b;"></span>Other public float &asymp; 26.34%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note &mdash; economic stake vs. voting control:</b> the pie above shows economic ownership (19.28% insiders), which alone would land this criterion in the "15-30%" band. But CoreWeave's dual-class structure means the real story is starker: co-founders Michael Intrator (CEO), Brian Venturo (CTO) and Brannin McBee (CSO) hold Class B shares carrying 10 votes each versus 1 vote for Class A shares, giving the three of them a combined ~73.6% of total voting power as of April 2026 &mdash; effectively controlling-shareholder-level influence despite a smaller economic slice. That's genuine, unambiguous founder skin in the game, one of the few unambiguous positives in this scorecard.
+  </div>
+
+  <div class="callout red">
+    <b>Dilution:</b> shares outstanding have grown 75.59% over the last 12 months (and +4.55% in just the last quarter), as CoreWeave has issued new shares via its IPO overhang, stock-based compensation, and an at-the-market equity program announced September 2026 alongside its debt raises. Buyback/shareholder yield is -75.59% &mdash; the mirror image of the aggressive buyback records seen at other, more mature names on this site. This is a young, capital-hungry company funding hypergrowth with both debt and equity simultaneously, and existing shareholders have been diluted substantially as a result.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Criterion #14 (Margin Stability &amp; Structural Profitability) compares TTM/FY2025 gross margin to FY2022's, the earliest year with meaningful data &mdash; not a full 3-fiscal-year-prior comparison, since CoreWeave's operating history is this short.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>CoreWeave</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR</td><td>&ge;15%</td><td>+167.9% YoY (FY24-25); no clean 5-yr window exists (IPO'd 2025). 2-yr FY23-25 CAGR ~373% is base-effect inflated and not treated as the "real" number, but every available growth read clears the bar by a huge margin</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) growth</td><td>&ge;15%</td><td>No stable trend: -$22.9M &rarr; -$14M &rarr; +$324M &rarr; -$17M (FY22-25); TTM -$202M, still negative</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest period</td><td>&ge;20%</td><td>-2.66% (TTM); FY2025 was -0.33%. Best year so far was FY2024 at +16.92%, still short of the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF growth</td><td>&ge;15%</td><td>Deeply negative and worsening every year: -$71M &rarr; -$1,110M &rarr; -$5,953M &rarr; -$7,251M (FY22-25); TTM -$13.66B</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Clear #1 among pure-play neoclouds (~10x Nebius's GPU fleet), but scored against the broader AWS/Azure/GCP comparison set the checklist intends, CoreWeave is roughly a #4-5 player by revenue scale, not a top-2 name</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; fragmented and intensifying: multiple well-funded neocloud rivals (Nebius, Lambda, Crusoe) plus hyperscalers building proprietary AI accelerator silicon in-house</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC -0.34% (negative) vs. an assumed elevated WACC of ~12.0% given heavy leverage and pre-profit status &mdash; a deeply negative spread under every reasonable read</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;12.15x (current), 10.94x at FY2025 year-end &mdash; extreme leverage from GPU-financing debt, ~6x over the bar</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Not meaningful &mdash; FCF is deeply negative in every year shown and EBIT has been near zero or negative in most years; there is no real "conversion" to measure</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current EV/EBITDA 24.58x vs. the only prior data point available, FY2025 year-end (21.56x) &mdash; roughly a 14% premium, on a sample of just one prior period given CoreWeave's short trading history</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding +75.59% over the last 12 months, +4.55% in the last quarter alone &mdash; substantial, ongoing dilution from equity raises and stock compensation</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>19.28% economic ownership by insiders; separately, the three co-founders control ~73.6% of voting power via 10-votes-per-share Class B stock &mdash; genuine, meaningful alignment either way it's measured</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>FY2025 capex was $10,309M against $5,131M revenue &mdash; roughly 201% of revenue (TTM is even higher, &asymp;271%). The polar opposite of asset-light; CoreWeave is essentially a leveraged GPU-buying machine</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin improved from 23.42% (FY2022) to 71.68% (FY2025) / 67.42% (TTM) &mdash; a large positive delta, though it partly reflects moving off an unrepresentatively low, pre-scale FY2022 base rather than mature steady-state stability</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue growth is genuinely extraordinary (+167.9% FY2025, +112% Q2 2026 YoY), backed by a $104.2B revenue backlog (+246% YoY) that suggests years of visible demand ahead. Gross margins have scaled into the high-60s/low-70s range as the business matured past its startup phase. Founder alignment is real and unusually strong for a newly-public company &mdash; the three co-founders control ~73.6% of voting power. And CoreWeave has moved quickly to diversify beyond its historical over-reliance on Microsoft, signing large new agreements with OpenAI and Meta.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Leverage is the central risk: ~$51.6B of total debt and a ~12x net debt/EBITDA ratio, funded through GPU-collateralized loans and a growing stack of convertible notes, with interest coverage currently negative. Customer concentration remains high (Microsoft alone was ~67% of FY2025 revenue) even after recent diversification. Free cash flow is deeply and increasingly negative as capex (over 200% of FY2025 revenue) races ahead of cash generation. Shares outstanding are up 75.59% in a year. And with under 18 months of public trading history, CoreWeave simply doesn't have the multi-year track record this checklist is built to evaluate &mdash; every historical read here is a short, early, and volatile one.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Feb 2026 (FY2025 results) &ndash; Sep 21, 2026 (spot price &amp; Q2 2026 results, reported Aug 11, 2026). Sources: stockanalysis.com (financials, ratios, statistics, sourced from S&amp;P Global Market Intelligence), CoreWeave Q2 2026 earnings release and investor presentation (Aug 11, 2026), SEC filings (S-1, 10-Q, 8-K), Reuters/Barron's/Investing.com/CNBC reporting on CoreWeave's Q2 2026 results and September 2026 convertible note offering, and public reporting (aifundingtracker.com, Forbes) on founder voting control.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (~12.0%) is an estimate, not a company-disclosed figure, chosen to reflect CoreWeave's elevated leverage and risk profile; ROIC and other ratios can swing sharply quarter to quarter for a company scaling this fast.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Since IPO (March 2025)</div></div>
+  <div class="sec-sub">CoreWeave &mdash; NASDAQ, USD share price trend. Unlike other dashboards on this site, there is no 5-year history to show: CoreWeave IPO'd on March 28, 2025, so the points below span its entire ~18-month public trading life, labeled by actual date rather than forced into a fiscal-year grid.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">CoreWeave &mdash; Since IPO (NASDAQ, USD)</div>
+    <div class="chart-sub">Priced at $40 (below its original $47-$55 expected range) on March 28, 2025, CRWV nearly quadrupled to an all-time-high close of $183.58 by June 20, 2025 amid peak AI-infrastructure enthusiasm, before a sharp, ongoing retracement as investors began pricing in leverage and customer-concentration risk &mdash; down to $85.43 by Sep 21, 2026. Total return since IPO is still a strong +113.6%, but from a much higher, now-faded peak.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">Total return since IPO (Mar'25&rarr;Now): +113.6%</text>
+<path d="M 46.0,148.0 L 204.5,33.1 L 363.0,113.6 L 521.5,99.7 L 680.0,111.7 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,148.0 L 204.5,33.1 L 363.0,113.6 L 521.5,99.7 L 680.0,111.7" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="148.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="163.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$40.00</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">IPO Mar'25</text>
+<circle cx="204.5" cy="33.1" r="3.5" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="204.5" y="20.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$183.58</text>
+<text x="204.5" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">ATH Jun'25</text>
+<circle cx="363.0" cy="113.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="363.0" y="129.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~$83</text>
+<text x="363.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">~Dec'25</text>
+<circle cx="521.5" cy="99.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="521.5" y="89.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$100.39</text>
+<text x="521.5" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun'26</text>
+<circle cx="680.0" cy="111.7" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="101.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$85.43</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading this chart honestly:</b> the "~Dec'25" point ($83, approximate) is a lower-confidence estimate drawn from secondary reporting rather than a directly-sourced closing price, flagged as such rather than presented with false precision. The other four points (IPO price, June 2025 all-time-high close, a June 2026 closing price, and the current Sep 21, 2026 close) are direct closing prices from stockanalysis.com/press reporting. This is not a fiscal-year grid like other dashboards on this site &mdash; it's the honest shape of CoreWeave's short, volatile public history so far.
+  </div>
+
+  <div class="footer-note">
+    IPO price $40.00 (Mar 28, 2025); all-time-high close $183.58 (Jun 20, 2025); current price $85.43 (Sep 21, 2026 close). Sourced from stockanalysis.com and contemporaneous financial press (CNBC, Yahoo Finance). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
