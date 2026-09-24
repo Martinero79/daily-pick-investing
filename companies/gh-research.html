@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GH Research PLC Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/gh-research.html">
+<meta property="og:title" content="GH Research PLC Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GH Research PLC Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .mcard { flex:1; min-width:150px; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .val.amber { color:#fbbf24; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#1f0f0f; color:#f5d4d4; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Clinical-Stage Biopharmaceuticals (Psychedelic-Derived CNS Therapeutics)</div>
+  <h1>GH Research PLC</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: GHRS, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly (Form 6-K, foreign private issuer)</span>
+    <span class="badge">Founded 2018 &middot; Dublin, Ireland (HQ)</span>
+    <span class="badge warn">Pre-Revenue Clinical-Stage Biotech &mdash; No Approved Product, No Growth/Margin/Valuation Metrics Apply</span>
+    <span class="badge star">One of several public psychedelic-derived neuropsychiatric names covered on this site (also Definium Therapeutics, Compass Pathways, atai Life Sciences), scored on the same 14-criterion standard scorecard. Result: 3/14 met (plus 2 partial, 5 N/A), Martinero Index 56/100.</span>
+  </div>
+  <div class="price">$25.96</div>
+  <div class="price-sub">Close Sep 23, 2026 (NASDAQ), -6.82% on the day &middot; Mkt cap &asymp;$1.78B, EV &asymp;$1.42B (net cash &asymp;$362M) &middot; 52-wk range $12.04&ndash;$31.44 (+109.5% over the past year) &middot; Beta (5Y) 1.28 &middot; Analyst consensus: Strong Buy (9 analysts), PT $42.89 (+65% upside)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in inhaled/rapid-acting 5-MeO-DMT-derived (proprietary "mebufotenin") treatment for treatment-resistant depression (TRD) &mdash; Compass Pathways (psilocybin, COMP360, further along in a global Phase 3 program) and Definium Therapeutics are generally viewed as larger or more advanced peers in the broader psychedelic-derived TRD space; atai Life Sciences/Beckley Psytech, Otsuka-partnered programs, Usona Institute, MindMed and Cybin all run earlier-stage or differently-mechanism candidates in adjacent psychiatric indications. No public player in this group has an FDA-approved product yet.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY25)</div>
+      <div class="val">N/A &mdash; Pre-Commercial</div>
+      <div class="sub">No approved product; not yet generating revenue</div>
+      <div class="note">Clinical-stage biotech &mdash; every scored criterion that requires a revenue base (growth, margin, FCF conversion, valuation multiples, margin stability) is N/A on this dashboard, per this site's precedent for GAAP-loss/pre-revenue names.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Loss (FY25)</div>
+      <div class="val red">-$60.68M</div>
+      <div class="sub">vs -$50.25M FY24 &mdash; loss widened as Phase 3 prep ramped</div>
+      <div class="note">TTM (Jun 2026) operating loss -$71.43M. Widening losses reflect increased R&amp;D and CMC/device spend ahead of the global Phase 3 pivotal program, not deteriorating unit economics (there are no units yet).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val red">-13.45% vs ~11.30%</div>
+      <div class="note">Deeply negative spread &mdash; expected and unavoidable for a pre-revenue clinical-stage company; WACC is a third-party model estimate (stockanalysis.com/S&amp;P Global).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val green">$362.29M</div>
+      <div class="sub">$5.28/share; effectively no debt ($360K)</div>
+      <div class="note">Up from $280.2M at FY2025-end after a $117.5M underwritten equity offering priced in April 2026 &mdash; the main driver of recent share dilution (see criterion 11).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/14 criteria fully met, 2 partial (n.m.), 4 not met, 5 N/A &mdash; a speculative, binary-catalyst clinical-stage biotech score, not a "quality compounder" one.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#34d399" stroke-width="36" stroke-dasharray="67.32 246.84" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#f87171" stroke-width="36" stroke-dasharray="89.76 224.4" stroke-dashoffset="-67.32" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#fbbf24" stroke-width="36" stroke-dasharray="44.88 269.28" stroke-dashoffset="-157.08" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#64748b" stroke-width="36" stroke-dasharray="112.20 201.96" stroke-dashoffset="-201.96" transform="rotate(-90 110 110)"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (net debt/EBITDA, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (market share, market concentration, ROIC/WACC, share count trend)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Partial/n.m. &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both negative in every year of the window, so no valid CAGR exists)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 5 (revenue CAGR, EBIT margin, FCF conversion, entry multiple, margin stability &mdash; all require a revenue/earnings base this company doesn't have yet)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    GH Research is a Dublin-headquartered, Nasdaq-listed clinical-stage biopharmaceutical company developing GH001, an inhalable proprietary formulation of mebufotenin (5-MeO-DMT) for treatment-resistant depression (TRD). The Phase 2b trial met its primary endpoint with a highly significant placebo-adjusted MADRS reduction of -15.5 points at Day 8 (p&lt;0.0001), and the open-label extension showed a 73% remission rate at six months &mdash; genuinely striking numbers, since published in JAMA Psychiatry. The FDA lifted a clinical hold on GH001 in January 2026, clearing the path to a global Phase 3 pivotal program; as of the Q2 2026 update, the two Phase 1 studies needed to finalize device and dosing (GH001-HV-106 and the US IND-opening GH001-HV-109) were both completed and doses were selected, but Phase 3 itself has not yet begun enrolling and there is no topline Phase 3 data as of September 2026 &mdash; despite background materials suggesting otherwise, this is confirmed via GH Research's own Q2 2026 filing and press coverage. GH Research is generally viewed as smaller and earlier in its late-stage pipeline than Compass Pathways and Definium Therapeutics within the psychedelic-TRD space, which is why market share and market concentration both score Not Met here even though the underlying science reads well. Financially, this is a textbook pre-revenue biotech: no product revenue, widening GAAP operating losses (-$15.1M FY21 &rarr; -$60.68M FY25), and a $362M net-cash balance sheet (no debt) funded mainly by a $117.5M equity raise in April 2026 that also drove +12.74% share dilution over the past year. Against this site's standard 14-criterion scorecard, most growth/margin/valuation criteria are N/A by construction (no revenue exists to compute them against) rather than failing outright &mdash; 3 criteria are cleanly met (balance sheet, insider ownership, capex), 4 are not met, 2 are "partial" (EBIT/FCF losses that widened rather than narrowed, with no clean CAGR to compute), and 5 are N/A. Martinero Index: 56/100. This is a binary-catalyst, clinical-stage biotech bet on Phase 3 execution and eventual FDA approval &mdash; not a name to size or hold the way you would a profitable compounder.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials and statistics sourced from stockanalysis.com (S&amp;P Global Market Intelligence), company press releases (GlobeNewsWire) and SEC/EDGAR filings as of late Sep 2026. Spot price as of Sep 23, 2026 close.
+  </div>
+
+  <div class="bignum-corner">3/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Annual Financials (FY21-FY25)</div></div>
+  <div class="sec-sub">All figures in USD millions. GH Research has never reported product revenue, so this page shows operating loss and free cash flow only &mdash; both widening every year as the company funds Phase 2/3 development, device engineering and CMC work with no offsetting sales.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Loss &amp; Free Cash Flow &mdash; Annual ($M)</div>
+    <div class="chart-sub">No revenue series is shown &mdash; GH Research reports none. Both operating income (GAAP EBIT) and free cash flow are negative in every year of the window and have widened steadily as R&amp;D and pre-Phase-3 spend ramped.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating Loss (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="40" x2="690" y2="40" stroke="#475569" stroke-width="1.3"/>
+      <text x="12" y="35" font-size="8" fill="#5b6b85">$0M</text>
+      <rect x="60" y="40" width="24" height="37.3" fill="#f87171"/><text x="72" y="88.3" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-15.1</text>
+      <rect x="86" y="40" width="24" height="38.05" fill="#f87171" opacity="0.72"/><text x="98" y="89.05" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-15.4</text>
+      <text x="85" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY21</text>
+
+      <rect x="190" y="40" width="24" height="75.9" fill="#f87171"/><text x="202" y="126.9" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-30.7</text>
+      <rect x="216" y="40" width="24" height="64.9" fill="#f87171" opacity="0.72"/><text x="228" y="115.9" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-26.3</text>
+      <text x="215" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY22</text>
+
+      <rect x="320" y="40" width="24" height="101.9" fill="#f87171"/><text x="332" y="152.9" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-41.2</text>
+      <rect x="346" y="40" width="24" height="82.7" fill="#f87171" opacity="0.72"/><text x="358" y="133.7" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-33.4</text>
+      <text x="345" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY23</text>
+
+      <rect x="450" y="40" width="24" height="124.2" fill="#f87171"/><text x="462" y="175.2" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-50.3</text>
+      <rect x="476" y="40" width="24" height="104.6" fill="#f87171" opacity="0.72"/><text x="488" y="155.6" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-42.3</text>
+      <text x="475" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY24</text>
+
+      <rect x="580" y="40" width="24" height="150.0" fill="#f87171"/><text x="592" y="201.0" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-60.7</text>
+      <rect x="606" y="40" width="24" height="108.0" fill="#f87171" opacity="0.72"/><text x="618" y="159.0" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-43.7</text>
+      <text x="605" y="210" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY21-FY25)</div><div class="val" style="color:#64748b;">N/A</div><div class="sub">No product revenue reported in any year</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">EBIT CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">Operating loss widened from -$15.1M to -$60.68M (4.0x), both years negative</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">FCF CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">FCF widened from -$15.39M to -$43.67M (2.8x), both years negative</div></div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Operating Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th></tr>
+    <tr><td>FY21</td><td>N/A</td><td>$-15.10M</td><td>N/A</td><td>$-9.20M</td><td>$-15.39M</td></tr>
+    <tr><td>FY22</td><td>N/A</td><td>$-30.68M</td><td>N/A</td><td>$-22.46M</td><td>$-26.27M</td></tr>
+    <tr><td>FY23</td><td>N/A</td><td>$-41.22M</td><td>N/A</td><td>$-35.59M</td><td>$-33.44M</td></tr>
+    <tr><td>FY24</td><td>N/A</td><td>$-50.25M</td><td>N/A</td><td>$-38.96M</td><td>$-42.33M</td></tr>
+    <tr><td>FY25</td><td>N/A</td><td>$-60.68M</td><td>N/A</td><td>$-48.26M</td><td>$-43.67M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM (through Jun 30, 2026): operating loss -$71.43M, net loss -$62.27M, FCF -$51.84M, EPS -$0.99. Latest-FY capex was just $0.12M (FY25) / $0.14M (TTM) &mdash; too small to chart meaningfully and not expressed as a % of revenue since none exists; see criterion 13 on page 5.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Pipeline &amp; Recent Development</div></div>
+  <div class="sec-sub">The entire investment case rests on clinical and regulatory catalysts, not reported financials. This page tracks where GH001 actually stands as of September 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">The path to Phase 3, in plain terms</div>
+    <p>GH Research's Phase 2b trial of GH001 in treatment-resistant depression met its primary endpoint with a highly significant placebo-adjusted MADRS reduction of -15.5 points at Day 8 (p&lt;0.0001); the open-label extension showed a 73% remission rate at six months with infrequent visits and no mandated psychotherapy add-on. Full results were published in JAMA Psychiatry in 2026. The FDA placed GH001's US IND on clinical hold at one point, then lifted it in January 2026, clearing the way for US enrollment and a global Phase 3 pivotal program. Since then, GH Research has completed the two remaining Phase 1 studies needed to finalize the program: GH001-HV-106 (its proprietary aerosol delivery device, in healthy volunteers) and GH001-HV-109 (the US IND-opening clinical pharmacology study) &mdash; both completed and reported in the Q2 2026 update, with doses selected for the global Phase 3 program. As of this writing, Phase 3 enrollment has not yet been confirmed as started and no Phase 3 topline data exists &mdash; the pivotal readout remains a forward catalyst, not a reported result.</p>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Program</th><th>Indication</th><th>Status (Sep 2026)</th></tr>
+    <tr><td>GH001 (inhaled mebufotenin)</td><td>Treatment-resistant depression (TRD)</td><td>Phase 2b complete (positive, published JAMA Psychiatry); FDA clinical hold lifted Jan 2026; Phase 1 device/dosing studies (HV-106, HV-109) completed; global Phase 3 pivotal program planned, not yet reading out</td></tr>
+    <tr><td>GH001 (inhaled mebufotenin)</td><td>Bipolar II disorder</td><td>Phase 2a ongoing</td></tr>
+    <tr><td>GH001 (inhaled mebufotenin)</td><td>Postpartum depression (PPD)</td><td>Phase 2a complete (positive full results published June 2026)</td></tr>
+    <tr><td>GH002 (intravenous mebufotenin)</td><td>Psychiatric &amp; neurological disorders (exploratory)</td><td>Phase 1 clinical pharmacology trial in healthy volunteers</td></tr>
+  </table>
+
+  <div class="callout green" style="margin-top:8px;">
+    <b>Q2 2026 print:</b> reported Aug 6, 2026. GAAP EPS of -$0.23 beat consensus of -$0.30. Management highlighted alignment with the FDA on CMC and device plans for Phase 3, completion of both HV-106 and HV-109 Phase 1 studies, further strengthening of the US/EU mebufotenin patent estate, and positive Phase 2a postpartum-depression results. Next scheduled catalyst: Q3 2026 earnings, estimated Nov 5, 2026.
+  </div>
+
+  <div class="callout blue">
+    <b>Capital raise context:</b> GH Research priced a $117.5M underwritten public offering in late April 2026, the primary driver of the +12.74% year-over-year increase in shares outstanding (see criterion 11 on page 5). This meaningfully extended the cash runway (net cash rose from $280.2M at FY2025-end to $362.29M as of Jun 30, 2026) ahead of the capital-intensive Phase 3 program, but it is real, recent dilution and a reasonable base case for more of it as Phase 3 costs come due.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E, P/FCF and P/S are all undefined or not meaningful here (net losses, negative FCF, and no revenue at all) &mdash; criterion #10 is scored N/A per this site's precedent for GAAP-loss, pre-revenue businesses. The chart below shows the cash position instead, since that &mdash; not any multiple &mdash; is what actually gates this company's ability to reach a Phase 3 readout.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cash &amp; Investments Trend ($M)</div>
+    <div class="chart-sub">Cash dipped through FY2022-24 as trial spend ran ahead of raises, then stepped back up with the $117.5M April 2026 offering. This is the balance sheet a pre-revenue biotech needs to watch, not a P/E ratio.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Cash &amp; Investments</span></div>
+    <svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="15" y="53.1" width="70" height="106.9" fill="#2dd4bf"/><text x="50" y="48" text-anchor="middle" font-size="9" fill="#cbd5e1">276.8</text><text x="50" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY21</text>
+      <rect x="135" y="62.75" width="70" height="97.25" fill="#2dd4bf"/><text x="170" y="57.75" text-anchor="middle" font-size="9" fill="#cbd5e1">251.7</text><text x="170" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY22</text>
+      <rect x="255" y="74.3" width="70" height="85.7" fill="#2dd4bf"/><text x="290" y="69.3" text-anchor="middle" font-size="9" fill="#cbd5e1">221.7</text><text x="290" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY23</text>
+      <rect x="375" y="89.7" width="70" height="70.3" fill="#2dd4bf"/><text x="410" y="84.7" text-anchor="middle" font-size="9" fill="#cbd5e1">182.0</text><text x="410" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY24</text>
+      <rect x="495" y="51.7" width="70" height="108.3" fill="#2dd4bf"/><text x="530" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">280.2</text><text x="530" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY25</text>
+      <rect x="615" y="20.0" width="70" height="140.0" fill="#5eead4"/><text x="650" y="15.0" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">362.3</text><text x="650" y="173" text-anchor="middle" font-size="9.5" fill="#f8fafc" font-weight="700">Jun'26</text>
+    </svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> $362.65M in cash and investments against just $360K in total debt &mdash; a net cash position of $362.29M ($5.28/share) as of Jun 30, 2026. Per this site's methodology, a net-cash position automatically satisfies the net debt/EBITDA criterion (&lt;2x) regardless of the sign distortions a deeply negative-EBITDA denominator would otherwise create. Current ratio 28.7x &mdash; no near-term liquidity risk.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="76.85 237.31" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="134.55 179.61" stroke-dashoffset="-76.85" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="102.76 211.40" stroke-dashoffset="-211.40" transform="rotate(-90 60 60)"/>
+        <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">24.5%</text>
+      </svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers, directors &amp; founders) &asymp; 24.46%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutions &amp; large fund holders &asymp; 42.83%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float / other &asymp; 32.71%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Ownership note:</b> co-founder and non-executive chairman Florian Schonharting and co-founder Magnus Halle (MD of Ireland) both remain with the company, and Schonharting is reported among the top five shareholders &mdash; genuine founder skin in the game, well above typical clinical-stage biotech insider levels (24.46% total). The largest disclosed institutional holders are Lynx1 Capital Management/Weston Nichols (&asymp;19.3% per a May 2026 Schedule 13G/A) and RA Capital Management (&asymp;7.1% per an August 2026 filing) &mdash; both specialist biotech/life-sciences investors rather than generalist index funds, which is a modestly encouraging signal about the quality of scrutiny on the name, though these stakes can and do change quickly; verify current ownership before acting. Shares outstanding rose 12.74% over the past year (see criterion 11), primarily from the April 2026 equity raise, not from insider or founder selling.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. #2 EBIT CAGR and #4 FCF CAGR are scored "Partial (n.m.)" since both years in the window are negative, so no valid growth rate exists &mdash; this is distinct from N/A, which is reserved for criteria with no computable base at all (revenue-dependent ratios, since GH Research reports no revenue). #1, #3, #9, #10 and #14 are N/A for that reason.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>GHRS</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-FY25)</td><td>&ge;15%</td><td>N/A &mdash; GH Research has never reported product revenue; it is pre-commercial with no approved product.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating loss widened from -$15.1M to -$60.68M (4.0x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>N/A &mdash; margin (EBIT/Revenue) is mathematically undefined with no revenue base, distinct from a deeply negative but computable margin</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-FY25)</td><td>&ge;15%</td><td>n.m. &mdash; FCF widened from -$15.39M to -$43.67M (2.8x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Not met &mdash; GH Research is generally viewed as smaller and earlier-stage in its late-stage pipeline than Compass Pathways and Definium Therapeutics within the psychedelic-derived TRD space, despite strong Phase 2b data; no player in this group has an approved product</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a fragmented, pre-approval field: Compass Pathways (COMP360 psilocybin), Definium Therapeutics, atai Life Sciences/Beckley Psytech, and earlier-stage programs from Usona Institute, MindMed and Cybin all compete for the same broad psychedelic-derived psychiatric indications</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC -13.45% vs. an estimated WACC of ~11.30% (third-party model, stockanalysis.com/S&amp;P Global) &mdash; deeply negative spread, as expected pre-revenue</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $362.29M (Jun 30, 2026), essentially no debt ($360K) &mdash; automatically Met per this site's methodology for net-cash companies.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>N/A &mdash; both EBIT and FCF are negative every year, so FCF/EBIT is not a meaningful ratio (same treatment as other GAAP-loss names on this site, e.g. IonQ)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; trailing P/E, P/FCF and P/S are all undefined or not meaningful (net losses, negative FCF, no revenue). P/B (5.33x) is the only computable multiple but isn't treated as a substitute valuation-vs-history signal on this site.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding up 12.74% over the past year (+7.25% QoQ), driven mainly by the $117.5M April 2026 underwritten offering &mdash; real, recent dilution, not offset by buybacks</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>24.46% total insider (officer, director &amp; founder) ownership. Co-founder &amp; non-executive chairman Florian Schonharting is reported among the top five shareholders alongside co-founder Magnus Halle (MD Ireland) &mdash; genuine, meaningful founder skin in the game, well above typical clinical-stage biotech insider levels.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>Capex is negligible in absolute dollar terms ($0.12M FY25, $0.14M TTM) against $362M of cash &mdash; a fully outsourced, contract-manufactured clinical-stage model with no owned lab or manufacturing infrastructure. Revenue-relative intensity isn't computable (no revenue), so this is scored qualitatively on the cash-burn evidence.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>drop &le;2.5pp (3-yr)</td><td>N/A &mdash; no revenue or gross profit exists to measure a 3-year margin trend on.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Phase 2b data for GH001 in treatment-resistant depression is genuinely strong &mdash; a highly significant -15.5 point placebo-adjusted MADRS reduction at Day 8 (p&lt;0.0001) and a 73% six-month remission rate in the open-label extension, since published in JAMA Psychiatry. The FDA lifted its clinical hold on GH001 in January 2026, and the two Phase 1 studies needed to finalize the Phase 3 program (device pharmacology and the US IND-opening trial) are both complete with doses selected. The balance sheet is a genuine strength for a clinical-stage name: $362.29M in net cash and essentially no debt, freshly topped up by an April 2026 raise ahead of Phase 3 spend. Founder and insider ownership (24.46%) is meaningfully higher than is typical for a biotech at this stage, and capex is close to zero.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a single-asset, binary-catalyst story: there is no revenue, no approved product, and no Phase 3 topline data yet &mdash; the entire valuation rests on a pivotal readout that hasn't started reading out. GH Research is viewed as smaller and earlier-stage than Compass Pathways and Definium Therapeutics in the same space, so it isn't a #1/#2 name today. Share count is already up 12.74% in a year from equity dilution, and more raises are a reasonable base case as Phase 3 costs come due &mdash; cash covers a multi-year runway at the current burn rate (roughly $50-70M/year operating loss) but not the full cost of a global pivotal program plus a potential launch. ROIC is deeply negative with no near-term path to profitability, and 9 of 14 criteria are either Not Met, Partial, or N/A by the nature of the business &mdash; this dashboard reflects genuine binary regulatory/clinical risk, not a scoring quirk.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Sources: stockanalysis.com (GHRS &mdash; overview, financials, statistics, ownership and price history, sourced from S&amp;P Global Market Intelligence); GH Research PLC investor relations (investor.ghres.com) press releases, including the FDA clinical-hold-lift announcement (Jan 5, 2026), Q1 2026 and Q2 2026 results (May 14 and Aug 6, 2026), the JAMA Psychiatry Phase 2b publication announcement, and the Phase 2a postpartum-depression results publication (Jun 4, 2026); SEC EDGAR filings (CIK 1855129), including Schedule 13G/A filings from Lynx1 Capital Management/Weston Nichols and RA Capital Management; ClinicalTrials.gov (NCT05800860). Figures cross-checked across at least two sources where possible.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (~11.30%) is a third-party model estimate, not a company-disclosed figure. Ownership percentages (insider stakes, Lynx1, RA Capital) reflect the most recent filings found and can change quickly &mdash; verify current holdings before acting. Criteria #1, #3, #9, #10 and #14 are scored N/A and criteria #2 and #4 "Partial (n.m.)" per the non-standard treatment explicitly disclosed above, consistent with how this site handles other GAAP-loss and pre-revenue businesses (see IonQ dashboard for precedent).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. This is an especially speculative, early-stage, binary-catalyst clinical-stage biotech; verify all figures independently before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Since IPO</div></div>
+  <div class="sec-sub">GH Research PLC &mdash; NASDAQ, USD share price trend. Points shown are calendar/fiscal year-end closes plus the current price. GH Research IPO'd on Jun 25, 2021 at $16.00/share.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">GH Research PLC &mdash; Year-End Close (NASDAQ, USD)</div>
+    <div class="chart-sub">An extremely volatile trading history, typical of a single-asset clinical-stage biotech: a post-IPO run to the low $20s in 2021, a collapse to an all-time low of $5.05 (intraday, Dec 2023) as early hold/regulatory uncertainty weighed on the stock, then a sharp 2025-26 re-rating as Phase 2b data, the FDA hold lift and Phase 3 clarity landed. FY2021's year-end close is approximated from the first trading session of 2022 (exact Dec 31, 2021 close not independently confirmed).</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +2.2% (masks huge intra-period volatility)</text><path d="M 46.0,55.1 L 172.8,127.93 L 299.6,148.93 L 426.4,142.5 L 553.2,111.97 L 680.0,40.93 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,55.1 L 172.8,127.93 L 299.6,148.93 L 426.4,142.5 L 553.2,111.97 L 680.0,40.93" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="55.1" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="45.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$23.31*</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="127.93" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="117.93" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$9.72</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="148.93" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="163.93" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$5.80</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="142.5" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="157.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$7.00</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="553.2" cy="111.97" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="101.97" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$12.70</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="40.93" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="30.93" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$25.96</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    *FY2021 year-end close is approximated from the Jan 3, 2022 opening price ($23.31), the closest available data point in the sourced series; not independently confirmed against an exact Dec 31, 2021 close. All other points are directly-sourced exact closes. Current price ($25.96, Sep 23, 2026 close) is a directly-sourced exact quote. Year-end/current closes sourced from stockanalysis.com. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tilray Brands, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/tilray.html">
+<meta property="og:title" content="Tilray Brands, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tilray Brands, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.status-na { background:#1a2030; color:#94a3b8; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Tilray Brands, Inc.</h1>
+  <div class="badges">
+    <div class="badge">NASDAQ: TLRY &middot; TSX: TLRY</div>
+    <div class="badge">FY = Fiscal Year ending May 31</div>
+    <div class="badge">HQ: New York, NY (operations centered in Leamington, Ontario, Canada)</div>
+    <div class="badge warn">1-for-10 Reverse Split, Dec 2, 2025 — all prices/CAGRs below are split-adjusted</div>
+    <div class="badge warn">Real Revenue, Not Pre-Revenue — Scored as an Operating Business</div>
+  </div>
+
+  <div class="price">$4.11</div>
+  <div class="price-sub">Sep 23, 2026 close &middot; Market cap &asymp; $563.0m &middot; 52-wk range $3.67 &ndash; $23.20 (down ~65% over the trailing year) &middot; Beta (5Y) 1.92 &middot; Analyst consensus: Buy (3 analysts), PT $7.34 (+78.6%)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> Tilray states it is the #1 cannabis company in Canada by net revenue and a leading global medical-cannabis distributor across Europe (Germany, Portugal, UK) &mdash; but the broader cannabis and craft-beverage-alcohol markets it competes in remain fragmented, with numerous well-capitalized U.S. MSOs, Canadian licensed producers, and craft brewers/distillers</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM / FY2026)</div>
+      <div class="val">$915.5m</div>
+      <div class="sub green" style="color:#34d399;">+11.5% YoY</div>
+      <div class="note">Real, growing operating revenue across four segments (Distribution 35.7%, Cannabis 29.3%, Beverage 27.7%, Wellness 7.2% of TTM revenue) &mdash; unlike this site's pre-revenue psychedelics-biotech names, Tilray is scored as a normal operating company.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating (EBIT) Margin</div>
+      <div class="val red" style="color:#f87171;">-5.75%</div>
+      <div class="sub">TTM; vs -13.04% FY2025 &mdash; narrowing losses</div>
+      <div class="note">GAAP EBIT has been negative every year since FY2022, but the loss has shrunk from -$230.4m (FY22) to -$52.6m (TTM) as the business scales and the beverage-alcohol mix improves gross margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val red" style="color:#f87171;">-3.11% vs 11.19%</div>
+      <div class="sub">TTM ROIC; deeply negative spread</div>
+      <div class="note">WACC per third-party model (~11.2%, reasonable for a high-beta small-cap consumer name). ROIC has been negative every year on record &mdash; capital deployed into acquisitions has not yet generated a positive return.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val red" style="color:#f87171;">11.14x</div>
+      <div class="sub">TTM &mdash; distorted by a near-zero EBITDA base</div>
+      <div class="note">Net debt is $167.1m (manageable in isolation, D/E 0.25x, current ratio 2.21x) but TTM EBITDA is barely positive at $15.0m, so the ratio balloons mathematically rather than reflecting genuinely dangerous leverage.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">38/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A low but not rock-bottom score &mdash; real (if unprofitable) revenue growth, an improving gross margin, and a statistically cheap P/S ratio earn partial credit that most pre-revenue names on this site don't get.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="64.6 249.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="249.5 64.6" stroke-dashoffset="-64.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">3/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>3 criteria fully met</b> &mdash; #1 Canadian cannabis market share, entry P/S well below Tilray's own 5-year average, gross margin structurally improved (not compressed) over the last 3 fiscal years</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>10 not met, 1 N/A</b> &mdash; growth CAGRs, EBIT margin, ROIC vs WACC, leverage, share count (heavy dilution), insider ownership, capex intensity and market fragmentation all fail; FCF conversion is not meaningful since EBIT is negative</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Tilray Brands is a lifestyle consumer-products company built around cannabis cultivation, processing and distribution, plus a fast-growing beverage-alcohol business and a smaller wellness/CBD segment. It traces its roots to Tilray Inc. (founded 2013/2014 in Nanaimo, BC, then centered on Leamington, Ontario) and took its current form via the 2021 all-stock merger with Aphria, after which the combined company retained the Tilray name and relocated its principal executive offices to New York while keeping the bulk of its cultivation and processing footprint in Canada. Since then it has pursued an aggressive, debt-and-equity-funded acquisition strategy that has fundamentally reshaped the business: HEXO Corp and Truss Beverage (2023), and a run of U.S. craft-beer and spirits acquisitions &mdash; SweetWater Brewing, Breckenridge Distillery, Montauk Brewing, Shock Top, 10 Barrel, Hop Valley, Sweetwater and, most recently, the UK's BrewDog &mdash; have turned Tilray into a genuine multi-brand alcohol company as much as a cannabis one; beverage-alcohol is now roughly 28% of revenue. Tilray also owns CC Pharma and Tilray Medical, positioning it as a leading distributor and grower for the fast-growing European medical-cannabis market (Germany, Portugal, UK). The result is a real, ~$915m-revenue operating business &mdash; genuinely different from this site's pre-revenue psychedelics-biotech names &mdash; but one with a deeply messy financial history: multiple large acquisitions funded mostly by new share issuance, a currency- and segment-complex P&amp;L spanning cannabis, alcohol, distribution and wellness in several countries, and a string of large non-cash goodwill and intangible-asset writedowns as the original cannabis-boom valuations of acquired assets proved unsupportable. GAAP profitability has never been achieved; the FY2025 net loss alone was -$2.19 billion, driven almost entirely by a $2.1 billion non-cash impairment charge, not an operating cash crisis.
+  </div>
+
+  <div class="callout">
+    <b>Reverse split &amp; dilution, read together:</b> Tilray executed a 1-for-10 reverse stock split on December 2, 2025 to regain Nasdaq minimum-bid-price compliance after the shares fell toward $1. That reset the nominal share count, but it did not stop dilution: shares outstanding (split-adjusted throughout for comparability) have risen from roughly 53.3 million (FY2022) to 136.99 million currently &mdash; up ~157% over four-plus years, including +25.6% in just the past twelve months, funded almost entirely by at-the-market equity issuance. Every price and CAGR figure on this dashboard is split-adjusted; treat the reverse split itself as a cosmetic reset, not a fix for the underlying dilution problem.
+  </div>
+
+  <div class="callout blue">
+    <b>The FY2025 writedown, in plain terms:</b> Goodwill fell from $2.64 billion (FY2022) to $752 million (FY2025-26) and other intangible assets fell from $915m (FY2024) to $21m (FY2025) as Tilray wrote down the carrying value of acquired cannabis and beverage assets that hadn't lived up to their purchase price. This produced the -$24.56 FY2025 EPS figure and the -$2.19bn FY2025 net loss shown on page 2 &mdash; a one-off accounting event, not a sign the underlying business collapsed that year (FY2025 revenue actually grew 4.1% and TTM revenue growth has since re-accelerated to +11.5%). Read GAAP net income/EPS on this dashboard with that context; operating cash flow and EBIT are the more useful lines for judging the ongoing business.
+  </div>
+
+  <div class="bignum-corner">TLRY</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ended May 31), USD millions as reported. Revenue growth is real; GAAP profitability has never been reached, though the operating loss has narrowed considerably since FY2022.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. Operating Income (EBIT)</div>
+    <div class="chart-sub">EBIT has been negative every year in this window &mdash; shown below the zero line at true relative scale (0.304x revenue's per-dollar scale, for visibility). The loss has narrowed from -$230.4m (FY22) to -$52.6m (TTM), even as revenue grew.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue ($m)</span><span><span class="dot" style="background:#f87171;"></span>Operating Income / EBIT ($m, loss)</span></div>
+    <svg viewBox="0 0 700 200">
+      <line x1="10" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1.4"/>
+      <text x="12" y="96" font-size="8" fill="#5b6b85">$0m</text>
+      <!-- FY2022 -->
+      <rect x="30" y="38.2" width="40" height="61.8" fill="#5eead4"/>
+      <text x="50" y="34" text-anchor="middle" font-size="8" fill="#cbd5e1">628.4</text>
+      <rect x="30" y="100" width="40" height="70.0" fill="#f87171"/>
+      <text x="50" y="182" text-anchor="middle" font-size="7.5" fill="#fca5a5">-230.4</text>
+      <text x="50" y="196" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2022</text>
+      <!-- FY2023 -->
+      <rect x="170" y="38.3" width="40" height="61.7" fill="#5eead4"/>
+      <text x="190" y="34" text-anchor="middle" font-size="8" fill="#cbd5e1">627.1</text>
+      <rect x="170" y="100" width="40" height="52.8" fill="#f87171"/>
+      <text x="190" y="164" text-anchor="middle" font-size="7.5" fill="#fca5a5">-173.7</text>
+      <text x="190" y="196" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2023</text>
+      <!-- FY2024 -->
+      <rect x="310" y="22.4" width="40" height="77.6" fill="#5eead4"/>
+      <text x="330" y="18" text-anchor="middle" font-size="8" fill="#cbd5e1">788.9</text>
+      <rect x="310" y="100" width="40" height="29.3" fill="#f87171"/>
+      <text x="330" y="141" text-anchor="middle" font-size="7.5" fill="#fca5a5">-96.3</text>
+      <text x="330" y="196" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2024</text>
+      <!-- FY2025 -->
+      <rect x="450" y="19.2" width="40" height="80.8" fill="#5eead4"/>
+      <text x="470" y="15" text-anchor="middle" font-size="8" fill="#cbd5e1">821.3</text>
+      <rect x="450" y="100" width="40" height="32.6" fill="#f87171"/>
+      <text x="470" y="144" text-anchor="middle" font-size="7.5" fill="#fca5a5">-107.1</text>
+      <text x="470" y="196" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2025</text>
+      <!-- FY2026 / TTM -->
+      <rect x="590" y="10.0" width="40" height="90.0" fill="#5eead4"/>
+      <text x="610" y="6" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">915.5</text>
+      <rect x="590" y="100" width="40" height="16.0" fill="#f87171"/>
+      <text x="610" y="128" text-anchor="middle" font-size="7.5" fill="#fca5a5">-52.6</text>
+      <text x="610" y="196" text-anchor="middle" font-size="9.5" fill="#f8fafc" font-weight="700">FY26/TTM</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT vs. Free Cash Flow ($m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size, both below the zero line. FCF has been negative in 4 of the last 5 fiscal years &mdash; FY2023 was the one near-breakeven year, but the trend reversed sharply worse again by FY2025 as M&amp;A and working-capital needs stepped up.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>EBIT ($m)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow ($m)</span></div>
+    <svg viewBox="0 0 700 175">
+      <line x1="10" y1="20" x2="690" y2="20" stroke="#263049" stroke-width="1.4"/>
+      <text x="12" y="16" font-size="8" fill="#5b6b85">$0m</text>
+      <!-- FY2022 -->
+      <rect x="28" y="20" width="28" height="130.0" fill="#60a5fa"/><text x="42" y="163" text-anchor="middle" font-size="7.5" fill="#93c5fd">-230.4</text>
+      <rect x="64" y="20" width="28" height="119.3" fill="#fbbf24"/><text x="78" y="152" text-anchor="middle" font-size="7.5" fill="#fde68a">-211.3</text>
+      <text x="60" y="170" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2022</text>
+      <!-- FY2023 -->
+      <rect x="168" y="20" width="28" height="98.0" fill="#60a5fa"/><text x="182" y="131" text-anchor="middle" font-size="7.5" fill="#93c5fd">-173.7</text>
+      <rect x="204" y="20" width="28" height="7.3" fill="#fbbf24"/><text x="218" y="40" text-anchor="middle" font-size="7.5" fill="#fde68a">-12.9</text>
+      <text x="200" y="170" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2023</text>
+      <!-- FY2024 -->
+      <rect x="308" y="20" width="28" height="54.4" fill="#60a5fa"/><text x="322" y="87" text-anchor="middle" font-size="7.5" fill="#93c5fd">-96.3</text>
+      <rect x="344" y="20" width="28" height="33.9" fill="#fbbf24"/><text x="358" y="66" text-anchor="middle" font-size="7.5" fill="#fde68a">-60.2</text>
+      <text x="340" y="170" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2024</text>
+      <!-- FY2025 -->
+      <rect x="448" y="20" width="28" height="60.5" fill="#60a5fa"/><text x="462" y="93" text-anchor="middle" font-size="7.5" fill="#93c5fd">-107.1</text>
+      <rect x="484" y="20" width="28" height="72.0" fill="#fbbf24"/><text x="498" y="104" text-anchor="middle" font-size="7.5" fill="#fde68a">-127.5</text>
+      <text x="480" y="170" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2025</text>
+      <!-- FY2026/TTM -->
+      <rect x="588" y="20" width="28" height="29.7" fill="#60a5fa"/><text x="602" y="63" text-anchor="middle" font-size="7.5" fill="#93c5fd">-52.6</text>
+      <rect x="624" y="20" width="28" height="57.6" fill="#fbbf24"/><text x="638" y="90" text-anchor="middle" font-size="7.5" fill="#fde68a">-102.1</text>
+      <text x="620" y="170" text-anchor="middle" font-size="9.5" fill="#f8fafc" font-weight="700">FY26/TTM</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr)</div>
+      <div class="val" style="color:#fbbf24;">+9.9%</div>
+      <div class="sub">FY22&rarr;TTM &mdash; real growth, but well short of a 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr)</div>
+      <div class="val" style="color:#f87171;">n.m. (loss narrowing)</div>
+      <div class="sub">EBIT negative every year; loss shrank from -$230.4m to -$52.6m (-77%)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr)</div>
+      <div class="val" style="color:#f87171;">n.m. (volatile)</div>
+      <div class="sub">FCF negative every year; no consistent improving trend since FY23's trough</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin Trend</div>
+    <div class="chart-sub">The one genuinely improving structural trend on this dashboard: gross margin has risen from 18.94% (FY2022) to 28.68% (TTM) as the higher-margin beverage-alcohol segment has grown to ~28% of revenue, diluting the thin, oversupplied Canadian wholesale-cannabis mix.</div>
+    <svg viewBox="0 0 700 100">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="55" x2="690" y2="55" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="20" x2="690" y2="20" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="2" y="58" font-size="7.5" fill="#64748b">17.5%</text>
+      <text x="2" y="23" font-size="7.5" fill="#64748b">35%</text>
+      <polyline points="60,52.1 205,41.7 350,30.3 495,31.0 640,32.6" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="52.1" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">FY22</text><text x="60" y="45" text-anchor="middle" font-size="8" fill="#cbd5e1">18.94%</text>
+      <circle cx="205" cy="41.7" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">FY23</text><text x="205" y="34.7" text-anchor="middle" font-size="8" fill="#cbd5e1">24.15%</text>
+      <circle cx="350" cy="30.3" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">FY24</text><text x="350" y="23.3" text-anchor="middle" font-size="8" fill="#cbd5e1">29.86%</text>
+      <circle cx="495" cy="31.0" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">FY25</text><text x="495" y="24.0" text-anchor="middle" font-size="8" fill="#cbd5e1">29.49%</text>
+      <circle cx="640" cy="32.6" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">TTM</text><text x="640" y="25.6" text-anchor="middle" font-size="8" fill="#cbd5e1">28.68%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($m)</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th></tr>
+    <tr><td>FY2022</td><td>628.4</td><td>-230.4</td><td>-36.66%</td><td>-476.8</td><td>-211.3</td></tr>
+    <tr><td>FY2023</td><td>627.1</td><td>-173.7</td><td>-27.69%</td><td>-1,453.0</td><td>-12.9</td></tr>
+    <tr><td>FY2024</td><td>788.9</td><td>-96.3</td><td>-12.21%</td><td>-245.0</td><td>-60.2</td></tr>
+    <tr><td>FY2025</td><td>821.3</td><td>-107.1</td><td>-13.04%</td><td>-2,187.0*</td><td>-127.5</td></tr>
+    <tr><td>FY2026/TTM</td><td>915.5</td><td>-52.6</td><td>-5.75%</td><td>-121.4</td><td>-102.1</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*FY2025's -$2,187m net loss was driven almost entirely by a ~$2.1 billion non-cash goodwill/intangible-asset writedown (Asset Writedown &amp; Restructuring Costs of $2,096m on the cash flow statement) &mdash; not an operating cash crisis. FY2023's -$1,453m net loss reflects a similar, smaller ($934m) writedown. EBIT and operating cash flow are the more representative lines for judging the ongoing business in those years.</div>
+  <div class="footer-note">Source: stockanalysis.com (TLRY financial statements, data via S&amp;P Global Market Intelligence); Tilray Brands 10-K and 10-Q filings (SEC EDGAR, CIK 0001731348); Tilray Investor Relations (ir.tilray.com) FY2026 results release.</div>
+</div>
+
+<!-- ============ PAGE 3 — SEGMENTS & RECENT PERFORMANCE ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Segment Mix &amp; Recent Performance</div></div>
+  <div class="sec-sub">Four segments spanning cannabis, alcohol, wholesale distribution and wellness/CBD &mdash; a genuinely diversified but genuinely complex P&amp;L, not a single-product cannabis pure-play.</div>
+
+  <div class="headline-box">
+    <div class="title">Four segments, one P&amp;L</div>
+    <p>Distribution (35.7% of TTM revenue, $327.2m) is Tilray's largest segment by dollars &mdash; low-margin European pharmaceutical and wellness-product wholesale distribution via CC Pharma and Alcohol Countries, which brings scale but thin margins. Cannabis (29.3%, $268.3m) covers Canadian adult-use and medical cannabis plus international medical cannabis exports (Germany, Portugal, UK, Australia). Beverage (27.7%, $254.0m) is the fastest-growing and highest-margin segment, built through the SweetWater, Breckenridge, Montauk, Shock Top, 10 Barrel, Hop Valley and (most recently) BrewDog acquisitions &mdash; Tilray now describes itself as one of the largest craft beverage-alcohol platforms in the U.S. by volume. Wellness (7.2%, $65.9m) is the smallest segment, hemp-based food and wellness products. This mix is the direct explanation for the gross-margin improvement on page 2: as beverage-alcohol (higher-margin) grows faster than distribution (lower-margin), blended gross margin rises even without any single segment getting structurally better on its own.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue by Segment — TTM ($m)</div>
+    <div class="chart-sub">Distribution and Cannabis remain the two largest pieces; Beverage has grown from a standing start into more than a quarter of revenue in a few years of acquisitions.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Distribution</span><span><span class="dot" style="background:#34d399;"></span>Cannabis</span><span><span class="dot" style="background:#fbbf24;"></span>Beverage</span><span><span class="dot" style="background:#a78bfa;"></span>Wellness</span></div>
+    <svg viewBox="0 0 700 130">
+      <line x1="10" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1"/>
+      <rect x="60" y="20.6" width="110" height="79.4" fill="#60a5fa"/><text x="115" y="16" text-anchor="middle" font-size="9" fill="#cbd5e1">$327.2m (35.7%)</text><text x="115" y="115" text-anchor="middle" font-size="9.5" fill="#94a3b8">Distribution</text>
+      <rect x="220" y="34.9" width="110" height="65.1" fill="#34d399"/><text x="275" y="30" text-anchor="middle" font-size="9" fill="#cbd5e1">$268.3m (29.3%)</text><text x="275" y="115" text-anchor="middle" font-size="9.5" fill="#94a3b8">Cannabis</text>
+      <rect x="380" y="38.3" width="110" height="61.7" fill="#fbbf24"/><text x="435" y="33" text-anchor="middle" font-size="9" fill="#cbd5e1">$254.0m (27.7%)</text><text x="435" y="115" text-anchor="middle" font-size="9.5" fill="#94a3b8">Beverage</text>
+      <rect x="540" y="84.0" width="110" height="16.0" fill="#a78bfa"/><text x="595" y="79" text-anchor="middle" font-size="9" fill="#cbd5e1">$65.9m (7.2%)</text><text x="595" y="115" text-anchor="middle" font-size="9.5" fill="#94a3b8">Wellness</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>FY2025 Actual</th><th>FY2026 Actual (TTM)</th></tr>
+    <tr><td>Revenue</td><td>$821.3m (+4.1% YoY)</td><td>$915.5m (+11.5% YoY)</td></tr>
+    <tr><td>Adjusted EBITDA</td><td>~$63m (company-reported, non-GAAP)</td><td>Record fiscal-year Adjusted EBITDA per FY2026 results release (company-reported, non-GAAP)</td></tr>
+    <tr><td>GAAP EBIT</td><td>-$107.1m (-13.04% margin)</td><td>-$52.6m (-5.75% margin)</td></tr>
+    <tr><td>GAAP Net Income</td><td>-$2,187.0m (one-off $2.1bn writedown)</td><td>-$121.4m</td></tr>
+    <tr><td>Dividend</td><td>None</td><td>None &mdash; no plans disclosed</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Company narrative vs. GAAP reality:</b> Tilray's own FY2026 results release headline emphasizes "record fiscal 2026 revenue and Adjusted EBITDA," and quarterly releases through FY2026 (Q1, Q3) describe "record" net revenue and organic growth. Those non-GAAP framings are directionally consistent with the real revenue growth and narrowing GAAP losses shown on page 2, but Adjusted EBITDA excludes stock-based compensation ($45.9m TTM), restructuring, and impairment charges &mdash; treat "record Adjusted EBITDA" language as a genuine but partial picture; GAAP EBIT remains solidly negative.
+  </div>
+
+  <div class="callout">
+    <b>Analyst view:</b> 3 sell-side analysts cover TLRY, with a consensus "Buy" rating and a 12-month price target of $7.34 (+78.6% from the current $4.11) &mdash; a wide gap that reflects both the small analyst sample size (thin independent scrutiny) and a genuine bull case built on the beverage-alcohol platform, European medical-cannabis growth, and eventual U.S. federal cannabis rescheduling/legalization optionality. Consensus 3-year forecasts call for modest +8.6% revenue growth but a much larger +63.4% EPS growth off today's deeply negative base &mdash; take both figures as a reminder that a small loss-making base makes growth percentages easy to overstate in either direction.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E and P/FCF are not usable &mdash; Tilray has never reported a GAAP profit or positive free cash flow in this window. Price/Sales (P/S) is used as the valuation substitute, matching the treatment used elsewhere on this site for loss-making names.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Sales (P/S) — FY-End vs. Current</div>
+    <div class="chart-sub">Current TTM P/S (~0.615x) sits well below Tilray's own FY22-FY26 average (~1.90x) &mdash; statistically cheap on this basis. Read this carefully: it reflects a stock that has fallen ~94% (split-adjusted) from its FY2022-era levels while revenue has grown, not necessarily an attractive entry &mdash; the market may simply be pricing continued dilution, thin margins and distress risk (Altman Z-Score -1.63) rather than mispricing quality.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>P/S (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>P/S (current, TTM basis)</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="20.0" width="70" height="110.0" fill="#60a5fa"/><text x="55" y="16" text-anchor="middle" font-size="9" fill="#cbd5e1">4.75x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#0a0e1a">FY22</text><text x="55" y="142" text-anchor="middle" font-size="9" fill="#94a3b8"></text>
+      <rect x="115" y="91.8" width="70" height="38.2" fill="#60a5fa"/><text x="150" y="87" text-anchor="middle" font-size="9" fill="#cbd5e1">1.65x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#0a0e1a">FY23</text>
+      <rect x="210" y="86.5" width="70" height="43.5" fill="#60a5fa"/><text x="245" y="82" text-anchor="middle" font-size="9" fill="#cbd5e1">1.88x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#0a0e1a">FY24</text>
+      <rect x="305" y="118.0" width="70" height="12.0" fill="#60a5fa"/><text x="340" y="114" text-anchor="middle" font-size="9" fill="#cbd5e1">0.52x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#0a0e1a"></text>
+      <rect x="400" y="113.3" width="70" height="16.7" fill="#60a5fa"/><text x="435" y="109" text-anchor="middle" font-size="9" fill="#cbd5e1">0.72x</text>
+      <rect x="495" y="115.8" width="70" height="14.2" fill="#2dd4bf"/><text x="530" y="111" text-anchor="middle" font-size="9" fill="#cbd5e1">~0.615x</text><text x="530" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <text x="55" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <text x="150" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <text x="245" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <text x="340" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <text x="435" y="145" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Why P/E and EV/EBITDA aren't usable either:</b> trailing P/E is not computable in any of the last 5 fiscal years or currently &mdash; Tilray has reported a GAAP net loss every year. EV/EBITDA (~49.8x on the last reported snapshot) is technically calculable but not meaningful: TTM EBITDA is only $15.0m, a near-zero denominator that makes the multiple balloon without reflecting genuine over- or under-valuation. Forward P/E estimates from different data-provider snapshots ranged from ~17.6x to ~35x depending on date and which non-GAAP EPS estimate vintage was used &mdash; too inconsistent to trust as a single signal. P/S is used above instead, as the cleanest available like-for-like comparison against Tilray's own history.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Tilray owns substantial cultivation greenhouses, processing facilities and now craft breweries/distilleries (PP&amp;E of $722.5m) &mdash; this is a capital-intensive agricultural and manufacturing business, not an asset-light model. Capex has run a fairly steady 3.3%-5.4% of revenue for five straight years.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 170">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="76.0" width="60" height="84.0" fill="#60a5fa"/><text x="60" y="71" text-anchor="middle" font-size="8" fill="#cbd5e1">34.1</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY22</text>
+      <rect x="170" y="108.7" width="60" height="51.3" fill="#60a5fa"/><text x="200" y="104" text-anchor="middle" font-size="8" fill="#cbd5e1">20.8</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY23</text>
+      <rect x="310" y="88.0" width="60" height="72.0" fill="#60a5fa"/><text x="340" y="83" text-anchor="middle" font-size="8" fill="#cbd5e1">29.3</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY24</text>
+      <rect x="450" y="79.0" width="60" height="81.0" fill="#60a5fa"/><text x="480" y="74" text-anchor="middle" font-size="8" fill="#cbd5e1">32.9</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY25</text>
+      <rect x="590" y="78.7" width="60" height="81.3" fill="#60a5fa"/><text x="620" y="73" text-anchor="middle" font-size="8" fill="#cbd5e1">33.0</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY26</text>
+      <polyline points="60,64.6 200,110.6 340,101.9 480,92.9 620,105.4" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="64.6" r="3" fill="#fbbf24"/><text x="60" y="54.6" text-anchor="middle" font-size="7.5" fill="#fde68a">5.42%</text>
+      <circle cx="200" cy="110.6" r="3" fill="#fbbf24"/><text x="200" y="123.6" text-anchor="middle" font-size="7.5" fill="#fde68a">3.32%</text>
+      <circle cx="340" cy="101.9" r="3" fill="#fbbf24"/><text x="340" y="114.9" text-anchor="middle" font-size="7.5" fill="#fde68a">3.71%</text>
+      <circle cx="480" cy="92.9" r="3" fill="#fbbf24"/><text x="480" y="82.9" text-anchor="middle" font-size="7.5" fill="#fde68a">4.01%</text>
+      <circle cx="620" cy="105.4" r="3" fill="#fbbf24"/><text x="620" y="118.4" text-anchor="middle" font-size="7.5" fill="#fde68a">3.60%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="7.0 307.4" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="28.3 286.1" stroke-dashoffset="-7.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="279.1 35.3" stroke-dashoffset="-35.3" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">2.2%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#f87171;"></span>Insiders (officers &amp; directors) 2.23%</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions &amp; funds 9.00%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Free float / retail / other 88.77%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count Trend</div>
+      <p>Shares outstanding (split-adjusted for the Dec 2025 1-for-10 reverse split) rose from ~53.3m (FY2022-end) to 136.99m currently &mdash; up roughly +157% over four-plus years, including +25.6% in the past twelve months alone. Dilution has been continuous and heavily M&amp;A/equity-issuance funded ($161.6m of common stock issued in FY2026 alone); there is no buyback program.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership note:</b> Insider ownership (officers and directors) is thin at 2.23% of shares outstanding, and institutional ownership is also unusually low for a Nasdaq-listed name at 9.00% &mdash; together implying the large majority of the float is held by retail investors, consistent with short interest of 13.18% of shares outstanding (18.06m shares) and an average 20-day trading volume of ~3.5m shares. This is a name with limited "smart money" or founder skin-in-the-game validating the current price.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored as a normal operating company (real, growing revenue), not with the N/A-heavy treatment used for this site's pre-revenue psychedelics-biotech names. #9 FCF conversion is N/A since EBIT is negative, making the ratio not meaningful; its weight (8) is excluded from the Martinero Index denominator below.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr) &ge;15%</td><td>+9.9% (FY22&rarr;TTM) &mdash; $628.4m &rarr; $915.5m; real growth, below the bar</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr) &ge;15%</td><td>n.m. &mdash; EBIT negative every year; loss narrowed -$230.4m &rarr; -$52.6m (-77%), a genuinely improving trajectory but not a clean CAGR</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY/TTM &ge;20%</td><td>-5.75% TTM (vs -13.04% FY2025) &mdash; improving but still solidly negative</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr) &ge;15%</td><td>n.m. &mdash; FCF negative every year; volatile, no consistent trend (FY23 near-breakeven at -$12.9m, then worsened again to -$127.5m by FY25)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 cannabis company in Canada by net revenue; leading global medical-cannabis distributor in Europe (Germany, Portugal, UK)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open/competitive) &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score 4/5 &mdash; both cannabis (numerous Canadian LPs, U.S. MSOs like Curaleaf and Green Thumb) and craft beverage-alcohol remain fragmented, competitive markets</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC -3.11% (TTM) vs est. WACC ~11.19% &mdash; deeply negative spread, negative every year on record</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>11.14x TTM ($167.1m net debt / $15.0m TTM EBITDA) &mdash; driven by a near-zero EBITDA base as much as by the debt itself (D/E only 0.25x)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &ge;80%</td><td>Not meaningful &mdash; both EBIT (-$52.6m TTM) and FCF (-$102.1m TTM) are negative, so the ratio is nonsensical</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>Trailing P/E and P/FCF not usable (losses/negative FCF every year); TTM P/S ~0.615x vs FY22-FY26 average ~1.90x = ~32% of own average &mdash; statistically cheap</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>+157% since FY2022 (53.3m &rarr; 136.99m, split-adjusted), +25.6% in the past year alone &mdash; heavy, ongoing, equity-funded dilution</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>2.23% of shares held by officers &amp; directors; institutional ownership also low at 9.00% &mdash; thin skin-in-the-game by either measure</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>3.3%-5.4% of revenue every year (TTM 3.60%, $33.0m) &mdash; a capital-intensive cultivation, processing and brewing/distilling asset base ($722.5m PP&amp;E), not an asset-light model</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&le;2.5pp drop in gross margin, 3-yr trailing)</td><td>Gross margin 24.15% FY2023 &rarr; 28.68% TTM, delta +4.53pp &mdash; a genuine improvement, not a decline, driven by beverage-alcohol mix shift</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Genuine, real operating revenue with positive growth (+11.5% TTM, ~9.9% 4-year CAGR) &mdash; not a pre-revenue story like Tilray's psychedelics-biotech siblings on this site. Operating losses have narrowed by roughly 77% since FY2022 (-$230.4m to -$52.6m TTM) as the business scales. Gross margin has structurally improved, from 18.94% (FY2022) to 28.68% (TTM), driven by the higher-margin beverage-alcohol segment (now ~28% of revenue) diluting the historically thin, oversupplied Canadian wholesale-cannabis mix. Tilray holds genuine #1 positions &mdash; largest cannabis company in Canada by revenue and a leading global medical-cannabis distributor across Europe via CC Pharma/Tilray Medical &mdash; and its TTM P/S of ~0.615x sits well below its own 5-year average of ~1.90x, a statistically cheap entry point by this narrow measure. Balance-sheet liquidity is adequate for now (current ratio 2.21x, quick ratio 1.17x, Debt/Equity 0.25x), and a real U.S. craft-beverage platform (BrewDog, Breckenridge, Montauk, Shock Top and others) has been built to diversify away from cannabis-only exposure.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a name with almost every quality-compounder metric failing, and several failures are severe rather than marginal. Shares outstanding have roughly tripled since FY2022 (53.3m to 136.99m currently, +25.6% in the past year alone) even after the December 2025 1-for-10 reverse split reset the nominal count &mdash; dilution has been relentless, funded mostly by at-the-market equity issuance rather than debt. FY2025 alone absorbed a $2.1 billion non-cash writedown that dragged goodwill from $2.64bn (FY2022) to $752m (FY2025-26) and produced a -$2.19bn net loss (EPS -$24.56) &mdash; Tilray's serial acquisitions have repeatedly outrun the earnings power those deals actually delivered. Net debt/EBITDA is effectively unusable as a ratio (TTM EBITDA is barely positive at $15.0m against $167.1m of net debt), ROIC (-3.11%) remains deeply negative against an ~11.2% WACC, insider ownership is thin (2.23%), and the stock's Altman Z-Score of -1.63 sits in the model's distress zone with a low Piotroski F-Score of 3/9. Short interest remains elevated at ~13% of float. Free cash flow has been negative in 4 of the last 5 fiscal years, so this is a name to track for an actual, sustained inflection in cash generation and dilution discipline &mdash; not one to buy on narrative or federal-legalization optionality alone.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Martinero Index: 38/100 (3/14 criteria fully met).</b> Graduated 0-5 scoring per criterion &times; weight, summed and divided by the adjusted 97-point denominator (105 minus the 8-point weight of N/A criterion #9, FCF conversion) &times; 100, matching the treatment used on this site's other N/A-containing scorecards (e.g. companies/ionq.html). Partial credit reflects real revenue growth, a narrowing operating loss, an improving gross margin, and a statistically cheap P/S ratio &mdash; factors that don't exist for this site's pre-revenue biotech names and that lift Tilray meaningfully above the very bottom of the site's score range, even though the underlying scorecard remains overwhelmingly Not Met.
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (TLRY &mdash; financial statements, ratios, statistics, price history; data via S&amp;P Global Market Intelligence); Tilray Brands 10-K and 10-Q filings (SEC EDGAR, CIK 0001731348); Tilray Investor Relations (ir.tilray.com) FY2026, Q1 FY2026 and Q3 FY2026 results releases; macrotrends.net (TLRY split-adjusted annual stock price history). Figures cross-checked across at least two sources where possible; WACC, market-share/concentration, and forward-P/E figures are estimates or third-party model outputs with meaningful uncertainty and are flagged as such in the text. All financial statement figures and the share price are in USD. Prepared Sep 24, 2026 &mdash; for personal portfolio research only, added as the "cannabis" name alongside a small batch of pre-revenue psychedelics-clinical-biotech dashboards (Definium Therapeutics, Compass Pathways, ATAI Life Sciences, GH Research) being built at the same time; unlike those names, Tilray is scored as a normal operating business, not with N/A-heavy biotech treatment. <b>Not a daily/featured pick. Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Tilray Brands, Inc. &mdash; USD share price trend, split-adjusted throughout for the December 2, 2025 1-for-10 reverse stock split. A near-uninterrupted decline, not a compounding line.</div>
+
+  <div class="callout" style="margin-bottom:8px;">
+    <b>Reverse split flag:</b> Tilray executed a 1-for-10 reverse stock split effective December 2, 2025, to regain compliance with Nasdaq's minimum $1.00 bid-price requirement after the shares fell into penny-stock territory. All prices, the 52-week range, and every CAGR figure on this dashboard are split-adjusted (i.e., historical prices are multiplied by 10x to be comparable to today's post-split share count) &mdash; the standard convention used by stockanalysis.com and macrotrends.net alike. Without this adjustment, cross-year price comparisons for TLRY are meaningless; this is one of the most common sources of confusion for this stock.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Tilray Brands, Inc. &mdash; Year-End Close (Split-Adjusted)</div>
+    <div class="chart-sub">Calendar year-end closing price, 2021-2025, plus current. The 2021 close of $70.30 reflects the tail end of the 2021 cannabis-legalization/SPAC-era rally; the stock has fallen in every year since.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f87171" stop-opacity="0.24"/><stop offset="100%" stop-color="#f87171" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,20.0 L 172.8,118.8 L 299.6,127.7 L 426.4,149.7 L 553.2,159.5 L 680.0,170.7 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="20.0" x2="680.0" y2="170.7" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="66" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -43.3%</text>
+<path d="M 46.0,20.0 L 172.8,118.8 L 299.6,127.7 L 426.4,149.7 L 553.2,159.5 L 680.0,170.7" fill="none" stroke="#f87171" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="20.0" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="46.0" y="14.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$70.30</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="118.8" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="172.8" y="133.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$26.90</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="127.7" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="299.6" y="142.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$23.00</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="149.7" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="426.4" y="164.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$13.30</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="159.5" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="553.2" y="174.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$9.03</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="170.7" r="4" fill="#f87171" stroke="#f87171" stroke-width="1.6"/>
+<text x="680.0" y="185.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$4.11</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data via stockanalysis.com and macrotrends.net, split-adjusted for the Dec 2, 2025 1-for-10 reverse stock split. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

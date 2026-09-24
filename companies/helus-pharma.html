@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Helus Pharma Inc. Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/helus-pharma.html">
+<meta property="og:title" content="Helus Pharma Inc. Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Helus Pharma Inc. Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .mcard { flex:1; min-width:150px; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .val.amber { color:#fbbf24; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .callout.red { border-left-color:#ef4444; background:#1f0f0f; color:#f5d4d4; }
+  .callout.red b { color:#f87171; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Psychedelic-Derived Neuropsychiatric Therapeutics (Clinical-Stage)</div>
+  <h1>Helus Pharma Inc.</h1>
+  <div class="badges">
+    <span class="badge">NASDAQ: HELP, USD &middot; reports in USD</span>
+    <span class="badge">FY ends Mar 31 &middot; reports quarterly (Form 6-K, foreign private issuer)</span>
+    <span class="badge">Formerly Cybin Inc. (NYSE American: CYBN) &mdash; began trading on Nasdaq as Helus Pharma / HELP on Jan 5, 2026; same listed entity (CIK 1833141) throughout, no share exchange</span>
+    <span class="badge">Founded 2016 &middot; HQ Toronto, Canada &middot; ~100 employees</span>
+    <span class="badge warn">Pre-Revenue Clinical-Stage Biotech &mdash; No Approved Product, No Growth/Margin/Valuation Metrics Apply</span>
+    <span class="badge star">One of several public psychedelic-derived neuropsychiatric names covered on this site (also Definium Therapeutics, Compass Pathways, GH Research), scored on the same 14-criterion standard scorecard. Result: 3/14 met (plus 2 partial, 5 N/A), Martinero Index 47/100.</span>
+  </div>
+  <div class="price">$13.02</div>
+  <div class="price-sub">Close Sep 23, 2026 (NASDAQ), -5.03% on the day (after-hours $13.09) &middot; Mkt cap &asymp;$951.24M, EV &asymp;$784.88M (net cash &asymp;$166.37M) &middot; 52-wk range $3.76&ndash;$15.15 (+115.2% over the past year) &middot; Beta (5Y) 0.63 &middot; Analyst consensus: Strong Buy (11 analysts), PT $40.40 (+210% upside, though individual targets range widely from $16 to $62)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Pipeline &amp; competitive context:</b> lead asset HLP003 (formerly CYB003, a proprietary deuterated psilocybin/psilocin analog) is in Phase 3 for adjunctive major depressive disorder (MDD) with FDA Breakthrough Therapy designation; HLP004 (formerly CYB004, a proprietary deuterated DMT molecule) is in Phase 2 for generalized anxiety disorder (GAD). No product is approved yet, so there is no addressable market share to measure today. Within the same "next-generation psychedelic-derived CNS therapeutics" race, Compass Pathways (COMP360 psilocybin) and Definium Therapeutics (DT120 oral LSD) are generally viewed as further along, both already holding positive Phase 3 topline data; GH Research (GH001 mebufotenin) is earlier-stage (Phase 2b). If approved, HLP003 would be a first-in-class deuterated, adjunctive oral psilocybin therapeutic for MDD.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (TTM)</div>
+      <div class="val">N/A &mdash; Pre-Commercial</div>
+      <div class="sub">No approved product; not yet generating revenue</div>
+      <div class="note">Clinical-stage biotech &mdash; every scored criterion that requires a revenue base (growth, margin, FCF conversion, valuation multiples, margin stability) is N/A on this dashboard, per this site's precedent for GAAP-loss/pre-revenue names.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Loss (FY26, ended Mar'26)</div>
+      <div class="val red">-$142.59M</div>
+      <div class="sub">vs -$103.13M FY25 &mdash; loss widened as Phase 3 enrollment ramped</div>
+      <div class="note">TTM (Jun 2026) operating loss -$167.05M, net loss -$171.20M (EPS -$4.05). Widening losses reflect increased trial, CMC and pre-commercial spend ahead of the Q4 2026 Phase 3 readout, not deteriorating unit economics (there are no units yet).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val red">-47.63% vs ~7.73%</div>
+      <div class="note">Deeply negative spread &mdash; expected and unavoidable pre-revenue. WACC (stockanalysis.com/S&amp;P Global model) looks low for a clinical-stage biotech, likely reflecting HELP's unusually low 5-yr beta (0.63); treat as a rough estimate, not a precise company-specific figure.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash</div>
+      <div class="val green">$166.37M</div>
+      <div class="sub">$2.28/share (TTM, Jun 30, 2026); no debt</div>
+      <div class="note">Rebuilt from $93.92M (FY25-end) via a $174.2M FY26 equity/debt raise, but TTM operating cash burn is ~$140.8M/yr &mdash; roughly a 1.2-year runway at the current burn rate, shorter than most psychedelic-biotech peers on this site. Expect another raise around or after the Q4 2026 Phase 3 readout.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">47/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">3/14 criteria fully met, 2 partial (n.m.), 4 not met, 5 N/A &mdash; a speculative, binary-catalyst clinical-stage biotech score, not a "quality compounder" one.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#34d399" stroke-width="36" stroke-dasharray="67.32 246.84" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#f87171" stroke-width="36" stroke-dasharray="89.76 224.4" stroke-dashoffset="-67.32" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#fbbf24" stroke-width="36" stroke-dasharray="44.88 269.28" stroke-dashoffset="-157.08" transform="rotate(-90 110 110)"/>
+      <circle cx="110" cy="110" r="50" fill="none" stroke="#64748b" stroke-width="36" stroke-dasharray="112.20 201.96" stroke-dashoffset="-201.96" transform="rotate(-90 110 110)"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">3/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 3 (net debt/EBITDA, insider/founder ownership, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 4 (market share, market concentration, ROIC/WACC, share count trend)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Partial/n.m. &mdash; 2 (EBIT CAGR, FCF CAGR &mdash; both negative in every year of the window, so no valid CAGR exists)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 5 (revenue CAGR, EBIT margin, FCF conversion, entry multiple, margin stability &mdash; all require a revenue/earnings base this company doesn't have yet)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Helus Pharma is the renamed, re-ticked continuation of Cybin Inc. &mdash; same Toronto-headquartered, Nasdaq-listed entity (CIK 1833141) throughout, with no share exchange or reverse split tied to the rename itself. On January 5, 2026, Cybin transferred its US listing from NYSE American (ticker CYBN) to Nasdaq under "HELP" and began doing business as Helus Pharma; shareholders approved the formal legal name change at the September 2026 AGM. This is unlike Definium Therapeutics' predecessor MindMed, whose 2022 reverse split happened years before that company's own 2026 rename &mdash; Cybin's own reverse split (a 1-for-38 consolidation) also predates the Helus rename, landing on September 19, 2024; all prices in this dashboard are shown on a post-split, continuous basis, consistent with how stockanalysis.com reports the history. The company develops proprietary deuterated psychedelic-derived molecules: lead asset HLP003 (deuterated psilocybin/psilocin analog, formerly CYB003) is in the Phase 3 PARADIGM program (APPROACH and EMBRACE pivotal studies, plus the EXTEND long-term safety study) for adjunctive treatment of major depressive disorder, holds FDA Breakthrough Therapy designation, completed APPROACH enrollment ahead of schedule in July 2026, and is guided to topline Phase 3 data in Q4 2026 with a targeted 2028 NDA filing. The second asset, HLP004 (deuterated DMT, formerly CYB004), reported positive Phase 2 signal-detection data in generalized anxiety disorder on March 5, 2026 (20mg arm: -10.4 points on HAM-A from baseline at 6 weeks, p&lt;0.0001, vs a 2mg low-dose comparator arm). None of this shows up as revenue: Helus has never generated product sales, so this dashboard's usual growth, margin and cash-conversion criteria mostly return N/A rather than a pass/fail verdict, the same treatment this site applies to Definium Therapeutics and GH Research. What is measurable is a widening loss trajectory (GAAP operating loss -$51.1M FY22 &rarr; -$142.6M FY26), a net-cash balance sheet rebuilt to $166.37M via a $174.2M FY26 capital raise, a share count up roughly 15.7x since FY22 (4.64M &rarr; 73.06M, +103% in the past year alone &mdash; the heaviest dilution of any psychedelic-biotech name on this site), and a stock up over 115% over the past year on the CYB003 Phase 3 progress and the Nasdaq uplisting/rebrand. A brand-new CEO, Michael Halstead (former President of Intra-Cellular Therapies, acquired by J&amp;J), was appointed in August 2026 to lead the company toward the Q4 2026 readout and, if positive, commercialization. Against this site's standard 14-criterion scorecard, only net debt/EBITDA (automatic on the net-cash position), insider/founder ownership (14.57%, with co-founders Paul Glavine and Eric So both making recent open-market purchases), and capex intensity (genuinely near-zero) are cleared outright; ROIC, market share/concentration and share count trend all fail, and EBIT/FCF CAGR are scored partial since losses widened rather than narrowed. Martinero Index: 47/100. This is a binary, catalyst-driven clinical bet on an imminent Phase 3 readout, funded on roughly a one-year cash runway &mdash; not a name to size or hold the way you would a profitable compounder.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials sourced from stockanalysis.com (S&amp;P Global Market Intelligence / Fiscal.ai), clinical and regulatory updates from company press releases (GlobeNewswire), SEC/EDGAR 6-K and 40-F filings, and sell-side notes (TD Cowen, Barclays, Wells Fargo) as of late Sep 2026. Spot price as of Sep 23, 2026 close.
+  </div>
+
+  <div class="bignum-corner">3/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Annual Financials (FY2022-FY2026)</div></div>
+  <div class="sec-sub">All figures in USD millions. Fiscal year ends March 31 (FY2026 = year ended Mar 31, 2026). Cybin/Helus has never reported product revenue, so this page shows operating loss and free cash flow only &mdash; both widening over the window as HLP003's Phase 3 program and HLP004's Phase 2 program ramped up, with no offsetting sales.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Loss &amp; Free Cash Flow &mdash; Annual ($M)</div>
+    <div class="chart-sub">No revenue series is shown &mdash; Helus/Cybin reports none. Both operating income (GAAP EBIT) and free cash flow are negative in every year of the window; FY23 briefly narrowed before both widened sharply into the Phase 3 ramp.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating Loss (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="40" x2="690" y2="40" stroke="#475569" stroke-width="1.3"/>
+      <text x="12" y="35" font-size="8" fill="#5b6b85">$0M</text>
+      <rect x="60" y="40" width="24" height="53.7" fill="#f87171"/><text x="72" y="104.7" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-51.1</text>
+      <rect x="86" y="40" width="24" height="38.1" fill="#f87171" opacity="0.72"/><text x="98" y="89.1" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-36.3</text>
+      <text x="85" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY22</text>
+
+      <rect x="190" y="40" width="24" height="40.0" fill="#f87171"/><text x="202" y="91.0" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-38.1</text>
+      <rect x="216" y="40" width="24" height="36.9" fill="#f87171" opacity="0.72"/><text x="228" y="87.9" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-35.2</text>
+      <text x="215" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY23</text>
+
+      <rect x="320" y="40" width="24" height="61.1" fill="#f87171"/><text x="332" y="112.1" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-58.2</text>
+      <rect x="346" y="40" width="24" height="53.4" fill="#f87171" opacity="0.72"/><text x="358" y="104.4" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-50.9</text>
+      <text x="345" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY24</text>
+
+      <rect x="450" y="40" width="24" height="108.3" fill="#f87171"/><text x="462" y="159.3" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-103.1</text>
+      <rect x="476" y="40" width="24" height="76.0" fill="#f87171" opacity="0.72"/><text x="488" y="127.0" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-72.4</text>
+      <text x="475" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">FY25</text>
+
+      <rect x="580" y="40" width="24" height="149.7" fill="#f87171"/><text x="592" y="200.7" text-anchor="middle" font-size="8" fill="#f87171" font-weight="700">-142.6</text>
+      <rect x="606" y="40" width="24" height="140.1" fill="#f87171" opacity="0.72"/><text x="618" y="191.1" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="700">-133.5</text>
+      <text x="605" y="210" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">FY26</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY22-FY26)</div><div class="val" style="color:#64748b;">N/A</div><div class="sub">No product revenue reported in any year</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">EBIT CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">Operating loss widened from -$51.1M to -$142.6M (2.8x), both years negative</div></div>
+    <div class="cagr-card" style="border-color:#6b4a10;"><div class="label" style="color:#fbbf24;">FCF CAGR</div><div class="val" style="color:#fbbf24;">n.m.</div><div class="sub">FCF widened from -$36.3M to -$133.5M (3.7x), both years negative</div></div>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Operating Income (EBIT)</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>Free Cash Flow</th></tr>
+    <tr><td>FY22 (Mar'22)</td><td>N/A</td><td>$-51.13M</td><td>N/A</td><td>$-54.17M</td><td>$-12.30</td><td>$-36.29M</td></tr>
+    <tr><td>FY23 (Mar'23)</td><td>N/A</td><td>$-38.08M</td><td>N/A</td><td>$-35.10M</td><td>$-7.30</td><td>$-35.16M</td></tr>
+    <tr><td>FY24 (Mar'24)</td><td>N/A</td><td>$-58.22M</td><td>N/A</td><td>$-57.66M</td><td>$-6.95</td><td>$-50.90M</td></tr>
+    <tr><td>FY25 (Mar'25)</td><td>N/A</td><td>$-103.13M</td><td>N/A</td><td>$-81.61M</td><td>$-4.04</td><td>$-72.35M</td></tr>
+    <tr><td>FY26 (Mar'26)</td><td>N/A</td><td>$-142.59M</td><td>N/A</td><td>$-148.00M</td><td>$-4.25</td><td>$-133.46M</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">TTM (through Jun 30, 2026): operating loss -$167.05M, net loss -$171.20M, FCF -$140.76M, EPS -$4.05. TTM capital expenditure was just $0.03M (~$34K) against $166.37M of cash &mdash; too small to register as a meaningful % of any base and consistent with a fully outsourced, contract-manufactured clinical-stage model; see criterion 13 on page 5. EPS improved (became less negative) through FY24-26 purely because the share count roughly tripled over that stretch, not because losses shrank.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Pipeline &amp; Recent Development</div></div>
+  <div class="sec-sub">The entire investment case rests on clinical and regulatory catalysts, not reported financials. This page tracks where HLP003 and HLP004 actually stand as of September 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">The path to a Q4 2026 readout, in plain terms</div>
+    <p>HLP003 (formerly CYB003), a proprietary deuterated psilocybin/psilocin analog, is Helus Pharma's lead asset for the adjunctive treatment of major depressive disorder (MDD) and holds FDA Breakthrough Therapy designation &mdash; the first such designation granted to an adjunctive neuroactive-steroid-class asset for MDD, per the company. It is in the Phase 3 PARADIGM program: APPROACH (n&asymp;220, 16mg vs placebo, 2-dose regimen 3 weeks apart, primary endpoint MADRS change at 6 weeks) completed enrollment ahead of schedule in July 2026; EMBRACE (a second, larger pivotal study, n&asymp;330, testing 16mg and 8mg vs placebo) was still enrolling as of the APPROACH completion announcement; and EXTEND is collecting long-term durability and safety data via participant rollover. Phase 2 data supporting the program showed improvement in depressive symptoms across all participants after two 16mg doses. Topline Phase 3 data from APPROACH and EMBRACE is guided for Q4 2026, with a targeted NDA filing in 2028 &mdash; as of this writing, no Phase 3 topline data has been released.</p>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Program</th><th>Indication</th><th>Status (Sep 2026)</th></tr>
+    <tr><td>HLP003 (deuterated psilocybin/psilocin analog, formerly CYB003)</td><td>Adjunctive major depressive disorder (MDD)</td><td>Phase 3 PARADIGM program; FDA Breakthrough Therapy designation; APPROACH enrollment complete (Jul 2026, ahead of schedule); EMBRACE enrolling; topline data guided Q4 2026; NDA target 2028</td></tr>
+    <tr><td>HLP004 (deuterated DMT, formerly CYB004)</td><td>Generalized anxiety disorder (GAD)</td><td>Phase 2 signal-detection study complete; positive topline Mar 5, 2026 (20mg: -10.4 pts HAM-A at 6 wks, p&lt;0.0001, n=36, 2:1 randomization vs 2mg comparator)</td></tr>
+    <tr><td>HLP005 (phenethylamine/tryptamine derivative)</td><td>CNS disorders (exploratory)</td><td>Preclinical</td></tr>
+  </table>
+
+  <div class="callout green" style="margin-top:8px;">
+    <b>Leadership transition:</b> Michael Halstead, former President of Intra-Cellular Therapies (built and scaled the company through its 2025 acquisition by Johnson &amp; Johnson), was appointed CEO of Helus Pharma on Aug 3, 2026, to lead the company through the Q4 2026 Phase 3 readout and, if positive, toward commercialization. He succeeds Eric So, who had served as interim CEO since Sep 2025 following co-founder Doug Drysdale's departure from the CEO role. Halstead's hire, alongside other recent Intra-Cellular alumni additions to the leadership team, is a credible signal that Helus is staffing up for a potential launch, not just a trial readout.
+  </div>
+
+  <div class="callout blue">
+    <b>Capital and dilution context:</b> Helus raised $174.2M in FY2026 (mostly equity, plus a modest debt draw largely repaid within the year), rebuilding net cash from $93.92M (FY25-end) to $157.26M (FY26-end) / $166.37M (TTM, Jun 30, 2026). Shares outstanding rose from 23.03M (FY25-end) to 73.06M (current) &mdash; up 103% in the past year alone, the primary driver of the capital raise and the single heaviest dilution of any psychedelic-biotech name on this site. At the current ~$140.8M/yr operating cash burn rate, the $166.37M cash balance implies roughly 14 months of runway even before Phase 3-completion or launch-preparation costs step up &mdash; a real, near-term catalyst for further dilution around or after the Q4 2026 data.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E, P/FCF and P/S are all undefined or not meaningful here (net losses, negative FCF, no revenue) &mdash; criterion #10 is scored N/A per this site's precedent for GAAP-loss, pre-revenue businesses. The chart below shows the cash position instead, since that &mdash; not any multiple &mdash; is what actually gates this company's ability to reach the Q4 2026 readout.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cash &amp; Investments Trend ($M)</div>
+    <div class="chart-sub">Cash collapsed to just $12.29M at FY23-end before a large FY24 raise ($188.3M of common stock issued) rebuilt the balance sheet; FY25 burned back down before the FY26 raise ($174.2M) restored it again. This boom-bust cash pattern, not any P/E ratio, is what a pre-revenue biotech investor needs to watch.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Cash &amp; Investments</span></div>
+    <svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="15" y="123.8" width="70" height="36.2" fill="#2dd4bf"/><text x="50" y="118.8" text-anchor="middle" font-size="9" fill="#cbd5e1">43.0</text><text x="50" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY22</text>
+      <rect x="135" y="149.7" width="70" height="10.3" fill="#2dd4bf"/><text x="170" y="144.7" text-anchor="middle" font-size="9" fill="#cbd5e1">12.3</text><text x="170" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY23</text>
+      <rect x="255" y="30.1" width="70" height="129.9" fill="#2dd4bf"/><text x="290" y="25.1" text-anchor="middle" font-size="9" fill="#cbd5e1">154.3</text><text x="290" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY24</text>
+      <rect x="375" y="81.0" width="70" height="79.0" fill="#2dd4bf"/><text x="410" y="76.0" text-anchor="middle" font-size="9" fill="#cbd5e1">93.9</text><text x="410" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY25</text>
+      <rect x="495" y="27.7" width="70" height="132.3" fill="#2dd4bf"/><text x="530" y="22.7" text-anchor="middle" font-size="9" fill="#cbd5e1">157.3</text><text x="530" y="173" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY26</text>
+      <rect x="615" y="20.0" width="70" height="140.0" fill="#5eead4"/><text x="650" y="15.0" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">166.4</text><text x="650" y="173" text-anchor="middle" font-size="9.5" fill="#f8fafc" font-weight="700">Jun'26</text>
+    </svg>
+  </div>
+
+  <div class="callout green">
+    <b>Balance sheet:</b> $166.37M net cash, essentially no debt, as of Jun 30, 2026 &mdash; current ratio 10.97x, quick ratio 9.76x, no near-term liquidity crunch. Per this site's methodology, a net-cash position automatically satisfies the net debt/EBITDA criterion (&lt;2x) regardless of the sign distortions a deeply negative-EBITDA denominator would otherwise create.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="45.79 269.37" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="121.86 193.30" stroke-dashoffset="-45.79" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="146.51 168.65" stroke-dashoffset="-167.65" transform="rotate(-90 60 60)"/>
+        <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">14.6%</text>
+      </svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Insiders (officers, directors &amp; founders) &asymp; 14.57%</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutions &amp; large fund holders &asymp; 38.79%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Free float / retail &amp; other &asymp; 46.64%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Ownership note:</b> co-founder Paul Glavine (CEO until Sep 2025, now board) and co-founder Eric So (President, interim CEO Sep 2025-Aug 2026) both remain with the company and made open-market purchases in Aug-Sep 2026 &mdash; Glavine bought roughly 190,000 shares across Aug 31 and Sep 3, taking his stake to 4,271,252 shares (&asymp;5.85% of shares outstanding, &asymp;$53.3M), and So bought 100,000 shares (&asymp;$1.24M) &mdash; genuine, recent founder buying rather than selling into the post-uplisting rally, a modestly encouraging signal. A third founder, Doug Drysdale, stepped down as CEO in Sep 2025 and is no longer in an executive role. Total insider ownership (14.57%) is real but well short of GH Research's 24.46% on this site, and share count is up 103% over the past year &mdash; heavy, ongoing dilution funded the FY26 cash rebuild and is likely to continue around the Q4 2026 data readout.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. #2 EBIT CAGR and #4 FCF CAGR are scored "Partial (n.m.)" since both years in the window are negative, so no valid growth rate exists &mdash; distinct from N/A, which is reserved for criteria with no computable base at all (revenue-dependent ratios, since Helus reports no revenue). #1, #3, #9, #10 and #14 are N/A for that reason.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>HELP</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-FY26)</td><td>&ge;15%</td><td>N/A &mdash; Helus/Cybin has never recorded product revenue; it is pre-commercial with no approved product.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-FY26)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating loss widened from -$51.1M to -$142.6M (2.8x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>N/A &mdash; margin (EBIT/Revenue) is mathematically undefined with no revenue base, distinct from a deeply negative but computable margin</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-FY26)</td><td>&ge;15%</td><td>n.m. &mdash; FCF widened from -$36.3M to -$133.5M (3.7x), both years negative</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Not met &mdash; Compass Pathways and Definium Therapeutics are generally viewed as further along than Helus within the psychedelic-derived CNS-therapeutics space, both already holding positive Phase 3 topline data ahead of Helus's Q4 2026 HLP003 readout; no player in this group has an approved product</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; a fragmented, pre-approval field: Compass Pathways (COMP360 psilocybin), Definium Therapeutics (DT120 oral LSD), GH Research (GH001 mebufotenin), and earlier-stage programs from other psychedelic and CNS developers all compete for the same broad indications</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC -47.63% vs. an estimated WACC of ~7.73% (third-party model, stockanalysis.com/S&amp;P Global &mdash; likely understated given HELP's unusually low 0.63 beta) &mdash; deeply negative spread either way, as expected pre-revenue</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash position of $166.37M (Jun 30, 2026), no debt &mdash; automatically Met per this site's methodology for net-cash companies.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>N/A &mdash; both EBIT and FCF are negative every year, so FCF/EBIT is not a meaningful ratio (same treatment as other GAAP-loss names on this site, e.g. IonQ)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; trailing P/E, P/FCF and P/S are all undefined or not meaningful (net losses, negative FCF, no revenue). P/B (3.33x) is the only computable multiple but isn't treated as a substitute valuation-vs-history signal on this site.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares outstanding up 103% over the past year (23.03M &rarr; 73.06M) and roughly 15.7x since FY22 (4.64M &rarr; 73.06M) &mdash; the heaviest dilution of any psychedelic-biotech name on this site, funding successive capital raises</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>14.57% total insider (officer, director &amp; founder) ownership. Co-founders Paul Glavine and Eric So both remain involved and made open-market purchases in Aug-Sep 2026 (combined &asymp;$54.5M in recent buying) &mdash; a real, if more modest than GH Research's 24.46%, aligned stake with recent buying rather than selling.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>TTM capex just $0.03M (~$34K) against $166.37M of cash &mdash; a fully outsourced, contract-manufactured clinical-stage model with no owned lab or manufacturing infrastructure. Revenue-relative intensity isn't computable (no revenue), so this is scored qualitatively on the cash-burn evidence.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability</td><td>drop &le;2.5pp (3-yr)</td><td>N/A &mdash; no revenue or gross profit exists to measure a 3-year margin trend on.</td><td><span class="status-pill status-na">N/A</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>HLP003 holds FDA Breakthrough Therapy designation and completed Phase 3 APPROACH enrollment ahead of schedule in July 2026, with topline data (APPROACH and EMBRACE) guided for Q4 2026 &mdash; a genuinely near-term, defined catalyst rather than a multi-year wait. HLP004 already posted a statistically significant Phase 2 GAD signal (-10.4 points HAM-A, p&lt;0.0001) in March 2026, giving the pipeline a second, earlier-stage shot on goal. The balance sheet carries no debt and a fresh $166.37M in net cash after the FY26 raise, automatically satisfying the net debt/EBITDA criterion, and capex is genuinely near-zero given the outsourced clinical-stage model. A new CEO with direct large-pharma-acquisition experience (Michael Halstead, ex-Intra-Cellular Therapies) was brought in specifically to manage the transition toward a potential launch, and co-founders Glavine and So have both been buying stock on the open market in recent weeks rather than selling.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a single-catalyst, binary bet: there is no revenue, no approved product, and no Phase 3 topline data yet &mdash; the entire near-term valuation rests on a readout that hasn't happened. Dilution is the standout negative on this scorecard: shares outstanding are up 103% in the past year and roughly 15.7x since FY22, and at the current ~$140.8M/yr burn rate the $166.37M cash balance implies only about 14 months of runway, meaning another raise (and further dilution) is a reasonable base case around or shortly after the Q4 2026 data, regardless of outcome. ROIC is deeply negative with no near-term path to profitability, and analyst price targets are unusually scattered ($16 to $62, consensus $40.40) &mdash; a sign of genuine disagreement about how to value a story this early and this binary. Compass Pathways and Definium Therapeutics remain ahead in the same race with Phase 3 data already in hand, so Helus is not a #1/#2 name today even with a credible near-term catalyst.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Sources: stockanalysis.com (HELP &mdash; overview, financials, statistics, ownership and price history, sourced from S&amp;P Global Market Intelligence and Fiscal.ai); Helus Pharma / Cybin investor relations (ir.helus.com) press releases, including the Jan 5, 2026 Nasdaq uplisting/rebrand announcement, the Mar 5, 2026 HLP004 Phase 2 topline release, the Jul 21, 2026 APPROACH enrollment-completion release, the Aug 3, 2026 CEO appointment release, and the Sep 22, 2026 AGM/legal-name-change results release; SEC EDGAR filings (CIK 1833141), including 6-K and 40-F annual information forms; insider-transaction trackers (MarketBeat, The Cerbat Gem, Defense World) for the Aug-Sep 2026 Glavine/So open-market purchases; sell-side notes via TheFly (TD Cowen, Barclays, Wells Fargo). Figures cross-checked across at least two sources where possible.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (~7.73%) is a third-party model estimate, not a company-disclosed figure, and looks low relative to comparable pre-revenue biotechs on this site &mdash; treat the ROIC-vs-WACC spread as directionally, not precisely, accurate. Criteria #1, #3, #9, #10 and #14 are scored N/A and criteria #2 and #4 "Partial (n.m.)" per the non-standard treatment explicitly disclosed above, consistent with how this site handles other GAAP-loss and pre-revenue businesses (see IonQ, Definium Therapeutics and GH Research dashboards for precedent).<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. This is an especially speculative, early-stage, binary-catalyst clinical-stage biotech with a short cash runway; verify all figures independently before acting. Formerly Cybin Inc. (NYSE American: CYBN) &mdash; searches and older coverage may still reference that name/ticker.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Helus Pharma / Cybin Inc. &mdash; NASDAQ (formerly NYSE American), USD share price trend, shown on a continuous basis under the CYBN &rarr; HELP ticker transition. Cybin executed a 1-for-38 reverse stock split on Sep 19, 2024 &mdash; well before the Jan 2026 Nasdaq uplisting/rebrand, and unrelated to it. All prices below are shown on a split-adjusted basis for a clean like-for-like comparison, consistent with how stockanalysis.com reports the continuous history; no additional share exchange or split accompanied the CYBN&rarr;HELP rename itself.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Helus Pharma / Cybin &mdash; Year-End Close (NASDAQ/NYSE American, USD, split-adjusted)</div>
+    <div class="chart-sub">A boom-bust-boom pattern typical of pre-revenue clinical-stage psychedelic biotech: an elevated, sentiment-driven 2021 peak (post-NYSE American listing hype), a brutal 2022-2025 drawdown as the sector cooled and dilution mounted, then a sharp 2026 recovery on the Nasdaq uplisting, rebrand and Phase 3 progress. The 5-year CAGR looks deeply negative largely because the FY2021 starting point was itself an elevated, hype-driven peak, not because the recent trend is down.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="20.0" x2="680" y2="20.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="60.0" x2="680" y2="60.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="100.0" x2="680" y2="100.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="140.0" x2="680" y2="140.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -22.2% (masks a 2026 rebound off the lows)</text><path d="M 46.0,20.0 L 172.8,166.7 L 299.6,148.4 L 426.4,177.3 L 553.2,180.0 L 680.0,159.3 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><path d="M 46.0,20.0 L 172.8,166.7 L 299.6,148.4 L 426.4,177.3 L 553.2,180.0 L 680.0,159.3" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="20.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="14.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$45.60*</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text><circle cx="172.8" cy="166.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="181.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$11.29</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="299.6" cy="148.4" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="138.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.58</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="426.4" cy="177.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="192.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$8.82</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle" dy="14">FY24</text><circle cx="553.2" cy="180.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="169.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$8.18</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="680.0" cy="159.3" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="148.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$13.02</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    *FY2021 year-end close ($45.60) is approximated from the first trading session of 2022, the closest available split-adjusted data point in the sourced series; not independently confirmed against an exact Dec 31, 2021 close. All other year-end points and the current price are directly-sourced exact closes. The Sep 19, 2024 1-for-38 reverse split is reflected throughout (split-adjusted history per stockanalysis.com). Current price ($13.02, Sep 23, 2026 close) is a directly-sourced exact quote. 52-week range $3.76-$15.15; beta 0.63. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
