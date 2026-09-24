@@ -1889,6 +1889,89 @@ const COMPANIES = [
     blurb: "The clear #1 online forum/community discussion platform (~84% share of Google forum search results), two and a half years into life as a public company (IPO'd March 2024 at $34, now ~4.7x that despite a ~40% pullback from highs). Revenue has compounded at roughly 46%/year since FY2021, with FY2025 delivering Reddit's first full year of real GAAP profitability (20.1% operating margin) and a near-debt-free balance sheet ($2.45B net cash). AI licensing deals with Google and OpenAI add a differentiated revenue stream beyond advertising. Misses: still-rising share count (+5.9% in FY2025) and modest direct insider ownership (2.95% — CEO Steve Huffman's often-cited 24.8% SEC stake is mostly shared voting power, not personal economic ownership).",
     file: "companies/reddit.html",
     personalNote: "I picked Reddit as a long-time user — I've been reading and posting on the site for years — and wanted to see what the checklist says now that it's two and a half years into life as a public company. The picture is genuinely strong. Revenue has compounded at roughly 46% a year since FY2021 ($484.9M → $2,203M), and FY2025 was Reddit's first full year of solid GAAP profitability: a 20.07% operating margin, up from deep losses every year before it. The one asterisk on the growth numbers is FY2024, when a one-time $534.7M stock-based comp charge tied to IPO vesting pushed operating income to -$560.6M even as revenue kept climbing — that single item is why EBIT and FCF CAGR both come out mathematically undefined ('n/m', a loss-to-profit sign flip) rather than a clean percentage. Strip that out and the underlying trend is a real, durable swing to profitability: free cash flow went from -$132.5M (FY2021) to $684.2M (FY2025), a 154.8% FCF-to-EBIT conversion rate. The balance sheet is close to debt-free ($2.45B net cash), capex is next to nothing (0.3% of revenue), and today's trailing P/E (37.0x) sits at roughly a 55% discount to the only comparable data point available, FY2025's 82.2x reading, with a PEG ratio around 0.59. Where the checklist pushes back: share count is still rising (+5.9% in FY2025 alone, from ongoing RSU issuance) and direct insider/officer ownership is a modest 2.95% — Steve Huffman's often-cited 24.8% SEC-reported stake is mostly shared voting power tied to a pre-IPO voting agreement with Advance Publications, not shares he personally owns. Net: 10 of 14 criteria met, Martinero Index 71/100 — a genuinely strong scorecard for a two-year-old public company, with dilution and ownership structure as the honest counterweights to an otherwise clean growth-and-margin story."
+  },
+
+  {
+    slug: "compass-pathways",
+    name: "Compass Pathways plc",
+    ticker: "NASDAQ: CMPS",
+    sector: "Healthcare",
+    industry: "Biotechnology",
+    subIndustry: "Psychedelic-Assisted Therapeutics",
+    tags: ["Speculative Growth", "Pre-Revenue", "Clinical-Stage Biotech"],
+    dateFeatured: "2026-09-24",
+    price: "$13.75",
+    score: "2 / 14",
+    martinero: 53,
+    blurb: "Clinical-stage psychedelic-therapy biopharma whose COMP360 psilocybin just cleared two pivotal Phase 3 trials in treatment-resistant depression with an FDA rolling NDA review underway — a binary, pre-revenue, heavily diluted bet (+36.6% share count in the past year) on a H1 2027 launch. Almost every growth and profitability criterion on this site's checklist is N/A pending approval, not failed outright, which is why the Martinero Index (53/100) sits meaningfully above the raw 2/14 tally.",
+    file: "companies/compass-pathways.html"
+  },
+
+  {
+    slug: "helus-pharma",
+    name: "Helus Pharma, Inc.",
+    ticker: "NASDAQ: HELP",
+    sector: "Healthcare",
+    industry: "Biotechnology",
+    subIndustry: "Psychedelic-Derived Neuropsychiatric Therapeutics (Clinical-Stage)",
+    tags: ["Speculative Growth", "Pre-Revenue", "Clinical-Stage Biotech"],
+    dateFeatured: "2026-09-24",
+    price: "$13.02",
+    score: "3 / 14",
+    martinero: 47,
+    blurb: "Formerly Cybin (NYSE American: CYBN), renamed Helus Pharma and uplisted to Nasdaq in Jan 2026. Racing toward a Q4 2026 Phase 3 readout for HLP003 (deuterated psilocybin, FDA Breakthrough Therapy, adjunctive MDD) against roughly a one-year cash runway — the heaviest share dilution of any name in this site's small psychedelics batch (+103% shares outstanding in the past year), partly offset by real open-market insider buying from co-founders Paul Glavine and Eric So in Aug-Sep 2026.",
+    file: "companies/helus-pharma.html"
+  },
+
+  {
+    slug: "gh-research",
+    name: "GH Research PLC",
+    ticker: "NASDAQ: GHRS",
+    sector: "Healthcare",
+    industry: "Healthcare",
+    subIndustry: "Clinical-Stage Biopharmaceuticals / Psychedelic-Derived CNS Therapeutics",
+    tags: ["Speculative Growth", "Pre-Revenue", "Clinical-Stage Biotech"],
+    dateFeatured: "2026-09-24",
+    price: "$25.96",
+    score: "3 / 14",
+    martinero: 56,
+    blurb: "Dublin-based clinical-stage biotech developing GH001, an inhaled 5-MeO-DMT-derived treatment for depression with striking Phase 2b data (73% 6-month remission, published in JAMA Psychiatry) but no Phase 3 readout yet. Pre-revenue and binary-catalyst by nature, though genuine co-founder ownership (~24.5%) and a clean, debt-free balance sheet ($362M net cash) are real positives on an otherwise mostly-N/A scorecard.",
+    file: "companies/gh-research.html"
+  },
+
+  {
+    slug: "tilray",
+    name: "Tilray Brands, Inc.",
+    ticker: "NASDAQ: TLRY · TSX: TLRY",
+    sector: "Consumer Staples",
+    industry: "Cannabis",
+    subIndustry: "Cannabis Cultivation, Processing & Beverage-Alcohol",
+    tags: ["Speculative", "Heavy Dilution", "Cannabis"],
+    dateFeatured: "2026-09-24",
+    price: "$4.11",
+    score: "3 / 14",
+    martinero: 38,
+    momentum: { status: "accelerating", recent: 11.5, prior: 4.1 },
+    quarterYoY: { period: "TTM (Sep 2026)", growth: 11.5 },
+    blurb: "A real, ~$915.5M-revenue cannabis-and-craft-beverage-alcohol company with growing sales (+11.5% TTM) and a narrowing operating loss — unlike this site's pre-revenue psychedelics names, Tilray is scored as a normal operating business, not N/A-heavy. But relentless share dilution (a 1-for-10 reverse split in Dec 2025 didn't stop it), a deeply negative ROIC, and a history of billion-dollar goodwill writedowns keep it firmly out of quality-compounder territory. Down roughly 65% over the trailing year.",
+    file: "companies/tilray.html"
+  },
+
+  {
+    slug: "definium-therapeutics",
+    name: "Definium Therapeutics, Inc.",
+    ticker: "NASDAQ: DFTX",
+    sector: "Healthcare",
+    industry: "Biopharmaceuticals",
+    subIndustry: "Clinical-Stage Psychedelic/CNS Therapeutics",
+    tags: ["Speculative Growth", "Pre-Revenue", "Clinical-Stage Biotech"],
+    dateFeatured: "2026-09-24",
+    price: "$37.65",
+    score: "2 / 14",
+    martinero: 25,
+    blurb: "Formerly Mind Medicine (MindMed), renamed Definium Therapeutics in 2026. Late-stage, pre-revenue biotech whose DT120 (an oral, orally-disintegrating LSD tablet) posted positive Phase 3 data in both generalized anxiety disorder and major depressive disorder through Sep 2026, with FDA Breakthrough Therapy status and an NDA filing planned for 2027. A binary, event-driven bet backed by $1.05B in net cash — but only 2 of 14 scorecard criteria are met, since almost every growth/profitability/valuation criterion is genuinely N/A with zero product revenue.",
+    file: "companies/definium-therapeutics.html",
+    personalNote: "Psychedelics-based medicine is one of the more interesting emerging categories in biotech right now, and Definium is the most advanced name in it — Phase 3 data in hand for LSD in both GAD and MDD, FDA Breakthrough Therapy status, and a clean $1B+ net cash position to fund the NDA filing. I'm featuring it today less as a standalone conviction pick and more as the anchor of a small basket I've put together to track this space: Compass Pathways, Helus Pharma and GH Research alongside it on the psychedelics side, plus Tilray for cannabis exposure. Nearly every name in that basket fails almost the entire checklist by its nature — no revenue, no EBIT, nothing to compound yet — and that's not a flaw in the framework, it's just what a binary, pre-approval biotech looks like before a drug either gets approved or doesn't. I don't currently own any of these five. This is me tracking a category I find genuinely interesting, not a real position, and I'll be upfront about that distinction whenever these names come up."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
