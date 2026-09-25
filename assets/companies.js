@@ -1972,6 +1972,25 @@ const COMPANIES = [
     blurb: "Formerly Mind Medicine (MindMed), renamed Definium Therapeutics in 2026. Late-stage, pre-revenue biotech whose DT120 (an oral, orally-disintegrating LSD tablet) posted positive Phase 3 data in both generalized anxiety disorder and major depressive disorder through Sep 2026, with FDA Breakthrough Therapy status and an NDA filing planned for 2027. A binary, event-driven bet backed by $1.05B in net cash — but only 2 of 14 scorecard criteria are met, since almost every growth/profitability/valuation criterion is genuinely N/A with zero product revenue.",
     file: "companies/definium-therapeutics.html",
     personalNote: "Psychedelics-based medicine is one of the more interesting emerging categories in biotech right now, and Definium is the most advanced name in it — Phase 3 data in hand for LSD in both GAD and MDD, FDA Breakthrough Therapy status, and a clean $1B+ net cash position to fund the NDA filing. I'm featuring it today less as a standalone conviction pick and more as the anchor of a small basket I've put together to track this space: Compass Pathways, Helus Pharma and GH Research alongside it on the psychedelics side, plus Tilray for cannabis exposure. Nearly every name in that basket fails almost the entire checklist by its nature — no revenue, no EBIT, nothing to compound yet — and that's not a flaw in the framework, it's just what a binary, pre-approval biotech looks like before a drug either gets approved or doesn't. I don't currently own any of these five. This is me tracking a category I find genuinely interesting, not a real position, and I'll be upfront about that distinction whenever these names come up."
+  },
+
+  {
+    slug: "constellation-software",
+    name: "Constellation Software Inc.",
+    ticker: "TSX: CSU",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Vertical Market Software (Diversified Serial Acquirer)",
+    tags: ["Serial Acquirer", "Founder-Built", "Low Dilution"],
+    dateFeatured: "2026-09-25",
+    price: "CAD 2,785.32",
+    score: "11 / 14",
+    martinero: 89,
+    momentum: { status: "accelerating", recent: 17.7, prior: 15.5 },
+    quarterYoY: { period: "TTM (Sep 2026)", growth: 17.7 },
+    blurb: "A decentralized, three-decade compounder of ~1,000+ niche B2B vertical-market software businesses — utilities billing, library systems, funeral homes, hospitality, and hundreds of other narrow, sticky verticals, acquired and held permanently, never sold. Reported TTM revenue growth of 17.7% and a 4-year revenue CAGR of 22.8%, one of the widest ROIC-vs-cost-of-capital spreads on this site (19.58% vs ~7.55%), an essentially flat share count for years, and net debt/EBITDA around 1.27x. Down roughly 45% from its 2025 high on AI-moat fears and founder Mark Leonard's health-related exit from the President role (successor Mark Miller, a 30-year company veteran, has run it since late 2025) — the reported growth never actually confirmed the panic. Misses: latest-FY operating margin (16.6% vs this site's 20% bar), a market-concentration criterion that's hard to score cleanly for a business with no single market, and modest direct founder/insider ownership relative to other founder-led names here.",
+    file: "companies/constellation-software.html",
+    personalNote: "Constellation Software is the answer to a question I get asked a lot in different forms: is there a real business that can compound at 15%+ a year for five years without taking on speculative, story-stock risk? CSU is about as close as I've found. It's not exciting — a Toronto-based holding company buying and permanently keeping mission-critical but deeply boring software businesses across hundreds of tiny niches, run by operators who never have to worry about a competitor showing up because most of these markets are too small for anyone else to bother building for. That's the whole moat: nobody wants to compete for a library-software contract worth a few hundred thousand dollars a year, but a few hundred thousand of those add up. The scorecard backs it up better than almost anything else on this site — 11 of 14 criteria met, a Martinero Index of 89, essentially no dilution in years, and a return on capital that dwarfs its cost of capital by a wide margin. The stock is down about 45% from its 2025 high, partly on generic 'AI will eat legacy enterprise software' fears that I don't think really apply to a portfolio this fragmented and mission-critical, and partly because founder Mark Leonard stepped back from President for health reasons in late 2025. I don't own this yet, but it's now on my shortlist — the real risks are a very high per-share price that makes position-sizing awkward, and a growth engine that depends on continuing to find and integrate good acquisitions at sensible prices, which gets harder as the company gets bigger. Still, of everything I've looked at recently, this is the one that made me want to actually go do more homework rather than just publish the dashboard and move on."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
