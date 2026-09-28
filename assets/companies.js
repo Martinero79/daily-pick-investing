@@ -1991,6 +1991,105 @@ const COMPANIES = [
     blurb: "A decentralized, three-decade compounder of ~1,000+ niche B2B vertical-market software businesses — utilities billing, library systems, funeral homes, hospitality, and hundreds of other narrow, sticky verticals, acquired and held permanently, never sold. Reported TTM revenue growth of 17.7% and a 4-year revenue CAGR of 22.8%, one of the widest ROIC-vs-cost-of-capital spreads on this site (19.58% vs ~7.55%), an essentially flat share count for years, and net debt/EBITDA around 1.27x. Down roughly 45% from its 2025 high on AI-moat fears and founder Mark Leonard's health-related exit from the President role (successor Mark Miller, a 30-year company veteran, has run it since late 2025) — the reported growth never actually confirmed the panic. Misses: latest-FY operating margin (16.6% vs this site's 20% bar), a market-concentration criterion that's hard to score cleanly for a business with no single market, and modest direct founder/insider ownership relative to other founder-led names here.",
     file: "companies/constellation-software.html",
     personalNote: "Constellation Software is the answer to a question I get asked a lot in different forms: is there a real business that can compound at 15%+ a year for five years without taking on speculative, story-stock risk? CSU is about as close as I've found. It's not exciting — a Toronto-based holding company buying and permanently keeping mission-critical but deeply boring software businesses across hundreds of tiny niches, run by operators who never have to worry about a competitor showing up because most of these markets are too small for anyone else to bother building for. That's the whole moat: nobody wants to compete for a library-software contract worth a few hundred thousand dollars a year, but a few hundred thousand of those add up. The scorecard backs it up better than almost anything else on this site — 11 of 14 criteria met, a Martinero Index of 89, essentially no dilution in years, and a return on capital that dwarfs its cost of capital by a wide margin. The stock is down about 45% from its 2025 high, partly on generic 'AI will eat legacy enterprise software' fears that I don't think really apply to a portfolio this fragmented and mission-critical, and partly because founder Mark Leonard stepped back from President for health reasons in late 2025. I don't own this yet, but it's now on my shortlist — the real risks are a very high per-share price that makes position-sizing awkward, and a growth engine that depends on continuing to find and integrate good acquisitions at sensible prices, which gets harder as the company gets bigger. Still, of everything I've looked at recently, this is the one that made me want to actually go do more homework rather than just publish the dashboard and move on."
+  },
+
+  {
+    slug: "kering",
+    name: "Kering SA",
+    ticker: "EPA: KER",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Turnaround"],
+    dateFeatured: "2026-09-26",
+    price: "€223.35",
+    score: "4 / 14",
+    martinero: 32,
+    blurb: "Gucci-owner Kering is a genuine, severe multi-year earnings collapse, not a distortion — group operating margin has more than halved since 2021 (28.4%→11.1%) as Gucci alone lost roughly 38% of its revenue amid a brand repositioning and softer Chinese demand, while ROIC has fallen below a reasonable cost of capital. Non-Gucci houses (Saint Laurent, Bottega Veneta, Eyewear) have actually grown, and gross margins have stayed surprisingly stable, but even after a roughly 68% price decline the stock isn't obviously cheap against its own history once a one-off FCF distortion is corrected for. Pinault family (Artémis) ownership ~42.3%.",
+    file: "companies/kering.html"
+  },
+
+  {
+    slug: "richemont",
+    name: "Compagnie Financière Richemont SA",
+    ticker: "SIX: CFR",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Founder-Controlled"],
+    dateFeatured: "2026-09-26",
+    price: "CHF 171.40",
+    score: "8 / 14",
+    martinero: 64,
+    blurb: "The Swiss luxury conglomerate behind Cartier and Van Cleef & Arpels — the standout jewelry performer in global luxury, with a net-cash balance sheet (~€8.5-9.1B) and a dual-class structure that gives the Rupert family only ~10% of economic ownership but ~50.6% of voting control. Jewellery Maisons have carried the group; the Watchmakers division has been weaker and more cyclical, and a one-off FY2023 divestment charge (YNAP/Net-a-Porter) distorts that year's P/E.",
+    file: "companies/richemont.html"
+  },
+
+  {
+    slug: "burberry",
+    name: "Burberry Group plc",
+    ticker: "LSE: BRBY",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Turnaround"],
+    dateFeatured: "2026-09-26",
+    price: "1,022.50p",
+    score: "4 / 14",
+    martinero: 34,
+    blurb: "British heritage luxury house mid-turnaround: a self-inflicted 'ultra-luxury' repositioning cratered sales and margins (operating margin fell to a 1.06% FY2025 trough) and forced a dividend suspension in 2024, still not reinstated. New CEO Joshua Schulman's 'Burberry Forward' strategy is showing genuine recovery (FY2026 margin back to 6.61%, a swing to modest profit) — real progress, not yet a full repair. Deliberately scored without flattery: one of the weaker performers in this luxury batch.",
+    file: "companies/burberry.html"
+  },
+
+  {
+    slug: "moncler",
+    name: "Moncler S.p.A.",
+    ticker: "BIT: MONC",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Founder-Controlled"],
+    dateFeatured: "2026-09-26",
+    price: "€43.56",
+    score: "9 / 14",
+    martinero: 73,
+    blurb: "One of the stronger, more disciplined operators in the luxury sector — clear #1 in luxury outerwear/technical jackets (Moncler brand plus Stone Island), with operating margin held in a tight 28-30% band every year since FY2021, a net-cash balance sheet, and a flat share count. Held back mainly by growth that's decelerated to low-double-digits and a genuinely fragmented competitive backdrop, not by any operating weakness. Chairman/CEO Remo Ruffini remains a controlling shareholder.",
+    file: "companies/moncler.html"
+  },
+
+  {
+    slug: "brunello-cucinelli",
+    name: "Brunello Cucinelli S.p.A.",
+    ticker: "BIT: BC",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Founder-Controlled"],
+    dateFeatured: "2026-09-26",
+    price: "€80.80",
+    score: "7 / 14",
+    martinero: 62,
+    blurb: "Founder-controlled 'King of Cashmere' — ten straight years of revenue growth (+18.6% 5-yr CAGR), expanding gross margins (84.1%→91.4%), and a real discount to its own 5-year valuation history (trailing P/E 39.85x vs a 59.5x own-average, a genuine de-rating despite the brand's growing reputation). Capex intensity is elevated (6.4%→9.1% of revenue) because the company owns 94 of its 124 stores plus its Solomeo campus — a deliberate real-estate strategy, not inefficiency. Brunello Cucinelli personally controls ~50-51% via an irrevocable trust.",
+    file: "companies/brunello-cucinelli.html"
+  },
+
+  {
+    slug: "hermes",
+    name: "Hermès International SCA",
+    ticker: "EPA: RMS",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Luxury Goods & Fashion",
+    tags: ["Founder-Controlled"],
+    dateFeatured: "2026-09-26",
+    price: "€1,356.50",
+    score: "11 / 14",
+    martinero: 80,
+    momentum: { status: "steady", recent: 15.5, prior: 15.5 },
+    quarterYoY: { period: "Q2 2026", growth: 7.0 },
+    blurb: "The Birkin-and-Kelly house that deliberately makes less than the world wants — a 41.0% operating margin, zero net debt (~€9.9B net cash), and a founder family (the Dumas/Guerrand/Puech branches, consolidated via the H51 holding company) that's controlled it since 1837, holding ~66.7% of capital and ~78.6% of voting rights. Down roughly 41% from its 2025 high on a sector-wide luxury multiple de-rating, not deteriorating fundamentals — revenue CAGR is a clean +15.5% (FY21-25). The two misses (FCF CAGR, FCF conversion) both trace to elevated leather-workshop capex from vertical integration (owned tanneries, ~55% in-house manufacturing) — a structural trait, not a red flag.",
+    file: "companies/hermes.html",
+    personalNote: "Hermès is the purest example I've found on this site of a business that simply refuses to grow as fast as demand would let it, on purpose, and gets rewarded for it anyway. Most luxury names eventually chase volume — more stores, more product drops, more accessible price points — and it erodes the brand over time; you can see exactly that story play out in Kering's Gucci and in Burberry's last few years, both built this week alongside Hermès as direct comparisons. Hermès has never done that. Birkin and Kelly bags stay capped well below what the company could sell, waitlists run for years, and the result is a 41% operating margin that would be a rounding error for almost any other consumer-goods company. The family control appeals to me too — descendants of the founder still hold roughly two-thirds of the company through a holding vehicle called H51, and that kind of multi-generational patience is a real reason a brand doesn't get milked for a decade of quick earnings. The stock is down about 41% from its 2025 high, which on the surface sounds alarming, but the dashboard shows revenue still compounding at a clean 15%+ and margins holding — this reads much more like a sector-wide luxury re-rating (institutional money rotating out of expensive luxury names generally) than anything specific going wrong at Hermès itself. I don't currently own it, and it's never been what I'd call cheap, but of the six luxury names I looked at together this week, this is the one I'd actually want to own for the next decade, not just admire from the sidelines."
   }
 
   // Add the next company below this line, as a new {...} block ⬇
