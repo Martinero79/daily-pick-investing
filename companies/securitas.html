@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Securitas AB — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/securitas.html">
+<meta property="og:title" content="Securitas AB — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Securitas AB — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.note-box { background:#0f1a10; border:1px solid #1f4a2a; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.note-box .title { color:#4ade80; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.note-box p { font-size:12.5px; color:#cfe8d4; line-height:1.6; margin:0 0 8px 0; }
+.note-box p:last-child { margin-bottom:0; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.status-na { background:#1a2030; color:#94a3b8; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard &mdash; Competitor / Adjacent-Industry Comparison</div>
+  <h1>Securitas AB</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq Stockholm: SECU B</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Stockholm, Sweden</div>
+    <div class="badge">Reports &amp; Trades in SEK</div>
+    <div class="badge warn">Labor-Intensive Guarding &mdash; Structurally Thin Margins, Not a Recurring-Subscriber Model</div>
+  </div>
+
+  <div class="price">SEK 152.10</div>
+  <div class="price-sub">Sep 18, 2026 (delayed quote) &middot; Market cap &asymp; SEK 87.1bn (&asymp; EUR 7.7bn) &middot; Shares outstanding 572.92m &middot; 52-wk range SEK 136.00 &ndash; 172.00 &middot; Beta 0.73 &middot; Analyst consensus: Hold (14 analysts), PT SEK 167.57 (+10.2%)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> widely regarded as the global #2 in manned guarding / security services, behind Allied Universal (which absorbed G4S in 2021) &middot; a genuinely fragmented industry beneath the top tier &mdash; Prosegur, GardaWorld and thousands of regional/local operators still compete for contracts &middot; built as a companion piece to today's Verisure pick &mdash; see Maarten's note below for why the two aren't really the same business despite the shared history.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">SEK 155,113m</div>
+      <div class="sub red" style="color:#f87171;">-4.2% YoY</div>
+      <div class="note">A deliberate contraction, not a demand collapse &mdash; management has been shedding low-margin/unprofitable contracts under a "quality over quantity" portfolio strategy. 5-yr revenue CAGR (FY21-25) is still a modest +9.5%, well short of this framework's 15% growth bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating (EBIT) Margin</div>
+      <div class="val red" style="color:#f87171;">6.91%</div>
+      <div class="sub">vs 4.68% FY2021 &mdash; genuine structural improvement</div>
+      <div class="note">Still far below this framework's 20% bar &mdash; but that bar is calibrated for asset-light/software models, not labor-intensive manned guarding. EBIT CAGR is +20.7% (FY21-25) as the mix shifts toward higher-margin Technology and Corporate Risk Management revenue.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green" style="color:#34d399;">~10.2% vs ~7.5%</div>
+      <div class="sub">TTM ROIC; modest but real positive spread</div>
+      <div class="note">WACC is a third-party model estimate, reasonable for a BBB+-rated, low-beta (0.73) European services company. ROIC has held a stable 9.6%-10.6% range every year except a 2023 dip to 5.6%, the year of the dilutive rights issue.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val red" style="color:#f87171;">2.1x</div>
+      <div class="sub">FY2025-end, company-reported &mdash; down from ~4.5x FY2022</div>
+      <div class="note">Just above the 2x bar, but the trend is genuinely positive: S&amp;P upgraded Securitas to BBB+ in August 2026, explicitly citing lower leverage. Third-party data providers compute the ratio somewhat differently (~2.5x on their own EBITDA definition) &mdash; the company's own reported figure is used here.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">63/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A solid mid-pack score &mdash; real operating improvement and a durable #2 market position, offset by a structurally thin margin ceiling, leverage still just above the 2x bar, and dilution from the 2022-23 Stanley Security rights issue.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 179.6" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.6 134.6" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; EBIT CAGR, market share (#2 global), ROIC vs WACC, insider/founder ownership, capex intensity, margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR, EBIT margin, FCF CAGR (near-miss), market concentration, net debt/EBITDA (just above bar), FCF conversion, entry multiple vs. own history, share count trend</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Securitas AB is a Stockholm-headquartered, Nasdaq Stockholm-listed security services group founded in 1934, and one of the two or three genuinely global players in manned guarding &mdash; on-site officers, mobile patrols, aviation security, remote video monitoring, and increasingly "intelligence-led" risk services, delivered through three reporting segments (Securitas North America, Securitas Europe, Securitas Ibero-America) plus a growing Technology and Corporate Risk Management layer on top. This is a fundamentally different economic model from Verisure, today's daily pick: Securitas sells labor by the hour, on contracts that get re-bid and re-priced constantly, with roughly 322,000 employees on payroll; Verisure sells a recurring subscription to monitor hardware it has already installed in a customer's home. The two companies share real history &mdash; Verisure was literally Securitas's own alarm-monitoring division until it was spun off as "Securitas Direct" in 2006 and later sold on to private equity (EQT, then Bain Capital and Hellman &amp; Friedman by 2011) &mdash; but they have diverged completely since. What Securitas has been doing well: in 2022 it acquired STANLEY Security (Convergent Security Solutions) from Stanley Black &amp; Decker for roughly $3.2bn, its largest deal ever, deliberately building out a North American electronic-security and technology installed base to shift the revenue mix toward higher-margin, more defensible services. That's a real, structural margin lever &mdash; operating margin has climbed from 4.68% (FY2021) to 6.91% (FY2025), and EBIT has compounded at +20.7% a year over the same stretch, comfortably clearing this framework's growth bar even as reported revenue actually shrank in FY2025 (down 4.2%, mostly from shedding low-margin contracts on purpose). The acquisition was funded partly by a heavily dilutive rights issue completed in 2023, which is the main reason the share-count criterion fails outright on this scorecard. Net debt/EBITDA has come down from a roughly 4.5x peak in FY2022 to 2.1x today (S&amp;P upgraded Securitas to BBB+ in August 2026 on the back of it), just above this framework's 2x line. The core tension for an investor: this is a genuinely well-run #2 player in a durable, if fragmented and low-margin, global industry &mdash; but no amount of "Technology-led" repositioning is likely to get manned guarding anywhere near a 20% EBIT margin, because the cost base is fundamentally labor, not software or installed hardware.
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's note</div>
+    <p>Built this one as a direct pair with today's Verisure pick, since the historical link is too good to skip: Verisure literally used to be Securitas's own alarm-monitoring division, spun out as "Securitas Direct" in 2006 and eventually sold on to private equity (EQT, then Bain Capital and Hellman &amp; Friedman) by 2011. Same DNA at the root, completely different business today. Verisure kept the parts of the security industry I actually find attractive as an investor &mdash; recurring subscriber revenue, high gross margins, and capex that mostly happens once per customer at install rather than every year. Securitas kept the parts that don't fit that mold: hundreds of thousands of guards on payroll, contracts that get re-bid constantly, and margins that top out in the high single digits no matter how much "Technology" and "intelligence-led" language gets layered on top. The EBIT CAGR here (+20.7%) genuinely clears my growth bar, and the capex story is real and clean (1.4-1.7% of revenue every year) &mdash; this isn't a story I'm inventing, Securitas has actually gotten better at converting revenue into profit. But the ceiling is just structurally lower than Verisure's: a 20%+ EBIT margin isn't realistically in reach for a guarding-led business, because the cost base is people, not installed hardware or software. Worth keeping both dashboards side by side as a reminder that "security industry" isn't one business model, it's at least two very different ones, and who owns the customer relationship and pricing power matters more than the industry label on the tin.</p>
+  </div>
+
+  <div class="headline-box">
+    <div class="title">The Stanley Security acquisition and the Technology mix shift</div>
+    <p>In 2022 Securitas acquired STANLEY Security (Convergent Security Solutions) from Stanley Black &amp; Decker for roughly $3.2bn, its largest deal ever, to build a genuine North American electronic-security and technology installed base rather than relying purely on manned guarding. The deal was funded partly by a heavily dilutive rights issue completed in early 2023 &mdash; shares outstanding jumped from roughly 468 million to around 573 million in the space of a year, the single biggest driver of this dashboard's failed share-count criterion. In exchange, Securitas got a real structural margin lever: EBIT margin has climbed from 4.68% (FY2021) to 6.91% (FY2025) as Technology and Corporate Risk Management revenue, priced more like electronic-security/software than guarding labor, has grown as a share of the total mix.</p>
+  </div>
+
+  <div class="callout blue">
+    <b>Q2 2026 and the new Investor Day targets:</b> adjusted organic sales growth was 3% in Q2 2026 (headline organic growth flat at 0%, masked by the ongoing pruning of low-margin contracts), operating margin improved to 7.6%, and EPS grew 7% &mdash; but aviation and Pinkerton (investigations/executive-protection unit) contract losses weighed on both Europe and North America margins in the quarter. At its June 2026 Investor Day, management set new medium-term targets: roughly 10% average annual EPS growth, higher cash-flow conversion, and continued "disciplined" bolt-on M&amp;A rather than another transformational deal on the scale of Stanley Security.
+  </div>
+
+  <div class="bignum-corner">SECU B</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, SEK millions as reported. A steady margin-improvement story layered on top of choppy, acquisition-and-portfolio-driven revenue &mdash; not a smooth top-line compounder.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. EBIT</div>
+    <div class="chart-sub">EBIT bars shown &times;8 for visual scale (actual SEK values labelled) &mdash; margin has climbed steadily even as revenue growth stalled and reversed in FY2025 on deliberate contract-quality pruning.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue (SEKm)</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (SEKm, &times;8 scale)</span></div>
+    <svg viewBox="0 0 700 190">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <!-- 2021 -->
+      <rect x="20" y="60.3" width="30" height="99.7" fill="#5eead4"/>
+      <text x="35" y="56" text-anchor="middle" font-size="8" fill="#cbd5e1">107,700</text>
+      <rect x="54" y="122.6" width="30" height="37.4" fill="#60a5fa"/>
+      <text x="69" y="119.6" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">5,042</text>
+      <text x="52" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="160" y="36.6" width="30" height="123.4" fill="#5eead4"/>
+      <text x="175" y="32.6" text-anchor="middle" font-size="8" fill="#cbd5e1">133,237</text>
+      <rect x="194" y="105.7" width="30" height="54.3" fill="#60a5fa"/>
+      <text x="209" y="102.7" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">7,324</text>
+      <text x="192" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="300" y="14.4" width="30" height="145.6" fill="#5eead4"/>
+      <text x="315" y="10.4" text-anchor="middle" font-size="8" fill="#cbd5e1">157,249</text>
+      <rect x="334" y="90.5" width="30" height="69.5" fill="#60a5fa"/>
+      <text x="349" y="87.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">9,376</text>
+      <text x="332" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="440" y="10.0" width="30" height="150.0" fill="#5eead4"/>
+      <text x="455" y="6.5" text-anchor="middle" font-size="8" fill="#cbd5e1">161,921</text>
+      <rect x="474" y="83.5" width="30" height="76.5" fill="#60a5fa"/>
+      <text x="489" y="80.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">10,317</text>
+      <text x="472" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="580" y="16.3" width="30" height="143.7" fill="#5eead4"/>
+      <text x="595" y="12.3" text-anchor="middle" font-size="8" fill="#cbd5e1">155,113</text>
+      <rect x="614" y="80.6" width="30" height="79.4" fill="#60a5fa"/>
+      <text x="629" y="77.6" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">10,717</text>
+      <text x="612" y="175" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT vs. Free Cash Flow (SEKm)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. FCF has grown faster than EBIT in the last two years as working-capital discipline and the post-acquisition integration matured.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>EBIT (SEKm)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (SEKm)</span></div>
+    <svg viewBox="0 0 700 215">
+      <line x1="10" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <text x="12" y="146" font-size="8" fill="#5b6b85">SEK 0m</text>
+      <!-- 2021 -->
+      <rect x="28" y="84.1" width="28" height="65.9" fill="#60a5fa"/>
+      <text x="42" y="80.1" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">5,042</text>
+      <rect x="64" y="95.2" width="28" height="54.8" fill="#fbbf24"/>
+      <text x="78" y="91.2" text-anchor="middle" font-size="7.5" fill="#fde68a">4,195</text>
+      <text x="60" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="168" y="54.3" width="28" height="95.7" fill="#60a5fa"/>
+      <text x="182" y="50.3" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">7,324</text>
+      <rect x="204" y="106.4" width="28" height="43.6" fill="#fbbf24"/>
+      <text x="218" y="102.4" text-anchor="middle" font-size="7.5" fill="#fde68a">3,339</text>
+      <text x="200" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="308" y="27.5" width="28" height="122.5" fill="#60a5fa"/>
+      <text x="322" y="23.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">9,376</text>
+      <rect x="344" y="86.0" width="28" height="64.0" fill="#fbbf24"/>
+      <text x="358" y="82.0" text-anchor="middle" font-size="7.5" fill="#fde68a">4,899</text>
+      <text x="340" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="448" y="15.2" width="28" height="134.8" fill="#60a5fa"/>
+      <text x="462" y="11.2" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">10,317</text>
+      <rect x="484" y="76.0" width="28" height="74.0" fill="#fbbf24"/>
+      <text x="498" y="72.0" text-anchor="middle" font-size="7.5" fill="#fde68a">5,663</text>
+      <text x="480" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="588" y="10.0" width="28" height="140.0" fill="#60a5fa"/>
+      <text x="602" y="6.0" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">10,717</text>
+      <rect x="624" y="56.1" width="28" height="93.9" fill="#fbbf24"/>
+      <text x="638" y="52.1" text-anchor="middle" font-size="7.5" fill="#fde68a">7,185</text>
+      <text x="620" y="205" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr)</div>
+      <div class="val" style="color:#f87171;">+9.5%</div>
+      <div class="sub">FY21&rarr;FY25 &mdash; respectable but short of the 15% growth bar; FY25 itself declined -4.2%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr)</div>
+      <div class="val" style="color:#34d399;">+20.7%</div>
+      <div class="sub">FY21 EBIT SEK 5,042m &rarr; FY25 SEK 10,717m &mdash; clears the bar on real margin-mix improvement</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr)</div>
+      <div class="val" style="color:#fbbf24;">+14.4%</div>
+      <div class="sub">A genuine near-miss, just short of the 15% bar</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">A steady, uninterrupted climb for five straight years &mdash; the clearest evidence that the post-Stanley Security Technology mix shift is a genuine structural improvement, not a one-off.</div>
+    <svg viewBox="0 0 700 100">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="4" y="55.5" font-size="7.5" fill="#64748b">5%</text>
+      <text x="2" y="18" font-size="7.5" fill="#64748b">10%</text>
+      <polyline points="60,54.9 205,48.75 350,45.3 495,42.2 640,38.2" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="54.9" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="47.9" text-anchor="middle" font-size="8" fill="#cbd5e1">4.68%</text>
+      <circle cx="205" cy="48.75" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="41.75" text-anchor="middle" font-size="8" fill="#cbd5e1">5.50%</text>
+      <circle cx="350" cy="45.3" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="38.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.96%</text>
+      <circle cx="495" cy="42.2" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="35.2" text-anchor="middle" font-size="8" fill="#cbd5e1">6.37%</text>
+      <circle cx="640" cy="38.2" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="31.2" text-anchor="middle" font-size="8" fill="#cbd5e1">6.91%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (SEK m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>107,700</td><td>5,042</td><td>4.68%</td><td>3,133</td><td>4,195</td><td>83.2%</td></tr>
+    <tr><td>FY2022</td><td>133,237</td><td>7,324</td><td>5.50%</td><td>4,310</td><td>3,339</td><td>45.6%</td></tr>
+    <tr><td>FY2023</td><td>157,249</td><td>9,376</td><td>5.96%</td><td>1,285</td><td>4,899</td><td>52.2%</td></tr>
+    <tr><td>FY2024</td><td>161,921</td><td>10,317</td><td>6.37%</td><td>5,160</td><td>5,663</td><td>54.9%</td></tr>
+    <tr><td>FY2025</td><td>155,113</td><td>10,717</td><td>6.91%</td><td>5,115</td><td>7,185</td><td>67.0%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">FY2023 net income (SEK 1,285m) was depressed by one-off refinancing and integration costs tied to the Stanley Security acquisition and the debt carried ahead of the 2023 rights issue &mdash; the reason FY2023's P/E (43.95x, page 4) is an outlier and not treated as representative.</div>
+  <div class="footer-note">Source: stockanalysis.com (STO:SECU.B financial statements, data via S&amp;P Global Market Intelligence); Securitas AB Full Year Report Q4 2025 and Annual Report 2025 (securitas.com).</div>
+</div>
+
+<!-- ============ PAGE 3 — SEGMENTS, RECENT PERFORMANCE & STRATEGY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Segments, Recent Performance &amp; Strategy</div></div>
+  <div class="sec-sub">Three geographic guarding segments plus a growing Technology/Corporate Risk Management layer &mdash; the mix shift toward the latter is the whole margin story.</div>
+
+  <table class="datatable">
+    <tr><th>Segment (FY2025)</th><th>Revenue (SEKm)</th><th>% of Total</th></tr>
+    <tr><td>Securitas Europe</td><td>67,378</td><td>43.4%</td></tr>
+    <tr><td>Securitas North America</td><td>61,931</td><td>39.9%</td></tr>
+    <tr><td>Securitas Ibero-America</td><td>14,699</td><td>9.5%</td></tr>
+    <tr><td>Other (incl. Technology/Corporate Risk Mgmt, net of eliminations)</td><td>11,105</td><td>7.2%</td></tr>
+    <tr><td><b>Total</b></td><td><b>155,113</b></td><td><b>100%</b></td></tr>
+  </table>
+
+  <div class="callout" style="margin-top:8px;">
+    <b>Aviation &amp; Pinkerton contract losses (Q2 2026):</b> management flagged that lost aviation-security contracts and reduced Pinkerton (investigations/executive-protection) volumes weighed on both Europe and North America segment margins in Q2 2026, even as group-level adjusted organic growth held at 3%. A useful reminder that guarding and investigations contracts can be lost on a re-bid as easily as they're won &mdash; a structurally different risk than Verisure's stickier, harder-to-churn subscriber base.
+  </div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Metric</th><th>FY2025 Actual</th><th>Investor Day 2026 Medium-Term Target</th></tr>
+    <tr><td>EPS growth</td><td>+18% (FY2025)</td><td>~10% average annual growth</td></tr>
+    <tr><td>Operating margin</td><td>7.4% (H2 2025; 6.91% full-year)</td><td>Continued gradual expansion, no fixed new target disclosed</td></tr>
+    <tr><td>Cash flow conversion (OCF/op. income)</td><td>88% (FY2025, vs 84% FY2024)</td><td>Higher cash conversion targeted going forward</td></tr>
+    <tr><td>M&amp;A strategy</td><td>$3.2bn Stanley Security deal (2022)</td><td>"Disciplined" bolt-on M&amp;A, not another transformational deal</td></tr>
+    <tr><td>Net debt/EBITDA</td><td>2.1x (down from ~4.5x FY2022)</td><td>Continued deleveraging; BBB+ rating (S&amp;P, upgraded Aug 2026)</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Note on operating cash flow conversion:</b> Securitas's own reported metric (operating cash flow as % of operating income &mdash; 88% in FY2025) is more favorable than the FCF/EBIT figure used in this framework's scorecard (67.0% FY2025), because it's calculated before capex and using a different operating-income base. This dashboard uses the stricter FCF/EBIT definition for consistency with every other company on this site, and flags the discrepancy explicitly rather than picking whichever number looks better.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E is usable here (unlike some cyclical/loss-making names on this site) &mdash; but FY2023 is a genuine outlier, flagged and excluded from the "own history" comparison below.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Dashed line marks the FY21-22/24-25 average of 14.44x (FY2023's 43.95x print excluded as a one-off earnings-base distortion, see page 2). Current trailing P/E (15.59x) sits modestly above that average; forward P/E (11.27x) is meaningfully cheaper, reflecting expected earnings growth.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <line x1="10" y1="77.15" x2="690" y2="77.15" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <text x="500" y="73" font-size="9" fill="#fde68a">5-yr avg (excl. FY23 outlier): 14.44x</text>
+      <rect x="20" y="76.99" width="70" height="33.01" fill="#60a5fa"/><text x="55" y="72.99" text-anchor="middle" font-size="9" fill="#cbd5e1">14.51x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="115" y="83.70" width="70" height="26.30" fill="#60a5fa"/><text x="150" y="79.70" text-anchor="middle" font-size="9" fill="#cbd5e1">11.56x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="210" y="10.0" width="70" height="100.0" fill="#60a5fa"/><text x="245" y="6" text-anchor="middle" font-size="9" fill="#cbd5e1">43.95x*</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="305" y="75.42" width="70" height="34.58" fill="#60a5fa"/><text x="340" y="71.42" text-anchor="middle" font-size="9" fill="#cbd5e1">15.20x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="400" y="72.49" width="70" height="37.51" fill="#60a5fa"/><text x="435" y="68.49" text-anchor="middle" font-size="9" fill="#cbd5e1">16.49x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="495" y="74.53" width="70" height="35.47" fill="#2dd4bf"/><text x="530" y="70.53" text-anchor="middle" font-size="9" fill="#cbd5e1">15.59x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>*Why FY2023 is excluded:</b> net income fell to SEK 1,285m (from SEK 4,310m in FY2022) on one-off refinancing and Stanley Security integration costs, crushing EPS to 2.24 and mechanically spiking the trailing P/E to 43.95x on an artificially small earnings base &mdash; not a genuine valuation re-rating. On a free-cash-flow basis, current P/FCF (11.24x) sits below Securitas's own FY21-25 average (12.57x) &mdash; cheap-looking on that metric. Forward P/E (11.27x) and PEG (~1.3x on the latest estimate vintage) both point to an undemanding valuation if the EPS-growth targets set at the June 2026 Investor Day (~10%/yr) hold.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Structurally low every year &mdash; the clearest point of contrast with Verisure, whose alarm-monitoring model requires meaningfully higher installed-hardware capex per new subscriber. Guarding is a people cost, not a capital cost.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (SEKm, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 170">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="62.5" width="60" height="97.5" fill="#60a5fa"/><text x="60" y="57.5" text-anchor="middle" font-size="8" fill="#cbd5e1">1,785</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="35.7" width="60" height="124.3" fill="#60a5fa"/><text x="200" y="30.7" text-anchor="middle" font-size="8" fill="#cbd5e1">2,276</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="20.0" width="60" height="140.0" fill="#60a5fa"/><text x="340" y="15" text-anchor="middle" font-size="8" fill="#cbd5e1">2,563</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="34.1" width="60" height="125.9" fill="#60a5fa"/><text x="480" y="29.1" text-anchor="middle" font-size="8" fill="#cbd5e1">2,305</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="35.4" width="60" height="124.6" fill="#60a5fa"/><text x="620" y="30.4" text-anchor="middle" font-size="8" fill="#cbd5e1">2,281</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,82.0 200,79.6 340,83.4 480,93.3 620,90.9" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="82.0" r="3" fill="#fbbf24"/><text x="60" y="72.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.66%</text>
+      <circle cx="200" cy="79.6" r="3" fill="#fbbf24"/><text x="200" y="69.6" text-anchor="middle" font-size="7.5" fill="#fde68a">1.71%</text>
+      <circle cx="340" cy="83.4" r="3" fill="#fbbf24"/><text x="340" y="73.4" text-anchor="middle" font-size="7.5" fill="#fde68a">1.63%</text>
+      <circle cx="480" cy="93.3" r="3" fill="#fbbf24"/><text x="480" y="106.3" text-anchor="middle" font-size="7.5" fill="#fde68a">1.42%</text>
+      <circle cx="620" cy="90.9" r="3" fill="#fbbf24"/><text x="620" y="103.9" text-anchor="middle" font-size="7.5" fill="#fde68a">1.47%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="34.24 279.92" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="14.14 300.02" stroke-dashoffset="-34.24" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="25.76 288.40" stroke-dashoffset="-48.38" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="13.82 300.34" stroke-dashoffset="-74.14" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~28%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Investment AB Latour (Gustaf Douglas family) 10.9% capital / 29.6% votes</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Melker Schörling AB 4.5% capital / 10.5% votes</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>AMF (pension fund) ~8.2% capital</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>Alecta (pension fund) ~4.4% capital</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count Trend</div>
+      <p>Shares outstanding rose from an EPS-implied ~365m (FY2021) to 572.92m currently, up roughly +57% &mdash; almost entirely from the dilutive rights issue completed in 2023 that helped fund the $3.2bn Stanley Security acquisition. The count has been essentially flat since the raise (573.4m per the March 2025 shareholder disclosure vs 572.92m now).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership note:</b> Securitas trades a dual-class share structure (Series A, 10 votes; Series B, 1 vote). Investment AB Latour, the Gustaf Douglas family's holding company, is the largest shareholder at 10.9% of capital but 29.6% of votes &mdash; a genuine long-standing cornerstone stake, though a family/institutional holding-company position rather than a founder-operator stake (Securitas was founded in 1934 and has been professionally managed for decades). Melker Schörling AB, another long-tenured Swedish holding company, adds a further 4.5% capital / 10.5% votes. Together with pension funds AMF and Alecta, this is a genuinely concentrated, stable ownership base by the standards of a large-cap industrial services company.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored honestly against a "quality compounder" checklist calibrated for asset-light/high-margin businesses. Securitas is a genuinely well-run #2 player in a structurally low-margin, labor-intensive global industry &mdash; several criteria are expected to fail by the nature of the business model, not because it's poorly managed.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>+9.5% (FY21-25) &mdash; respectable but short of the bar; FY2025 itself declined -4.2% on deliberate contract-quality pruning, not demand weakness</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15%</td><td>+20.7% &mdash; EBIT rose from SEK 5,042m (FY21) to SEK 10,717m (FY25) on the post-Stanley Security margin-mix shift</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY &ge;20%</td><td>6.91% FY2025 (7.09% TTM) &mdash; nearly doubled from 4.68% FY2021, but structurally capped by manned guarding's labor-cost base, far below the 20% bar</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15%</td><td>+14.4% &mdash; a genuine near-miss, SEK 4,195m (FY21) to SEK 7,185m (FY25)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Widely regarded as the global #2 in manned guarding/security services, behind Allied Universal (which absorbed G4S in 2021)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open/competitive) &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score ~4/5 &mdash; a handful of large multinationals (Allied Universal, Securitas, Prosegur, GardaWorld) sit atop a still-fragmented industry of thousands of regional/local guarding operators</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC ~9.8%-10.2% (TTM) vs. est. WACC ~7.5% &mdash; a real, if modest, positive spread; stable 9.6%-10.6% every year except a 2023 dip to 5.6% (rights-issue year)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>2.1x company-reported at FY2025-end (down from ~4.5x FY2022 peak) &mdash; just above the bar, but S&amp;P upgraded Securitas to BBB+ in Aug 2026 citing lower leverage; third-party data (~2.5x, different EBITDA definition) is even less favorable</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &ge;80%</td><td>67.0% FY2025 (71.4% TTM) &mdash; below the bar but improving steadily from 45.6% (FY2022); company's own OCF/op-income metric reads higher (88% FY2025) on a looser definition</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>Mixed: trailing P/E 15.59x vs 5-yr avg 14.44x (ex. FY23 outlier) = modestly above own history; P/FCF 11.24x vs 5-yr avg 12.57x = below own history; forward P/E 11.27x meaningfully cheaper than trailing</td><td><span class="status-pill status-not">NOT MET*</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>+57% since FY2021 (EPS-implied ~365m &rarr; 572.92m), almost entirely from the 2023 rights issue funding the Stanley Security acquisition; flat since the raise</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>Investment AB Latour (Douglas family) 10.9% capital / 29.6% votes + Melker Schörling AB 4.5% capital / 10.5% votes &mdash; a genuinely concentrated, long-standing dual-class ownership base, though cornerstone-family rather than founder-operator</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>1.4%-1.7% of revenue every year FY21-25 &mdash; genuinely low and structural (labor-intensive, not capital-intensive), the clearest contrast with Verisure's higher per-subscriber hardware capex</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&le;2.5pp drop in gross margin, 3-yr trailing)</td><td>Gross margin improved from 19.44% (FY2022) to 21.28% (FY2025), +1.84pp over 3 years &mdash; comfortably clears the bar, genuine structural improvement</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">*Scored conservatively: trailing P/E sits modestly above Securitas's own history while P/FCF and forward P/E both suggest an undemanding valuation &mdash; a genuinely mixed signal, not scored as "cheap."</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A genuine #2 global market position in a fragmented industry, EBIT growth that clears this framework's bar (+20.7% CAGR) on real margin-mix improvement rather than one-off items, structurally low and stable capex (1.4%-1.7% of revenue, the clearest contrast with Verisure's heavier per-subscriber hardware model), gross margin that's actually widened over the trailing three years, a positive ROIC/WACC spread, and a long-standing concentrated dual-class ownership base (Investment AB Latour, Melker Schörling AB) with real voting-control skin in the game. S&amp;P's August 2026 upgrade to BBB+ on improving leverage is a genuine credit-quality signal, not marketing.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The EBIT-margin ceiling here is real and structural &mdash; even after years of Technology-led mix shift, Securitas is nowhere near this framework's 20% bar, and probably never will be, because manned guarding is inherently priced on labor. Net debt/EBITDA (2.1x) sits just above the 2x line, FCF conversion (67%-71%) is still short of 80%, and the 2022-23 rights issue diluted shareholders by more than half over the trailing five years &mdash; a real cost of the Stanley Security bet that per-share earnings growth hasn't fully offset yet. Aviation and Pinkerton contract losses flagged in Q2 2026 are a reminder that guarding and investigations contracts can be lost on a re-bid as easily as they're won, a structurally different risk profile than Verisure's stickier subscriber base.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (STO:SECU.B &mdash; financial statements, ratios, statistics; data via S&amp;P Global Market Intelligence); Securitas AB Full Year Report Q4 2025 and Annual Report 2025 (securitas.com, published Feb/Mar 2026); Securitas AB Interim Report Q2 2026 and Q2 2026 earnings call transcript (published Jul 24, 2026); Securitas AB Investor Day 2026 transcript (Jun 2026); S&amp;P Global Ratings upgrade announcement (Aug 28, 2026, BBB+); MarketScreener.com shareholder/ownership data; Securitas AB major-shareholders investor-relations page. Figures cross-checked across at least two sources where possible; WACC, market-share/concentration, and ROIC figures are third-party model outputs or estimates with meaningful uncertainty and are flagged as such in the text. All financial statement figures and the share price are in SEK (Securitas reports and trades in SEK). Prepared Sep 18, 2026 &mdash; for personal portfolio research only. <b>Not a daily/featured pick &mdash; a competitor/adjacent-industry comparison built alongside today's Verisure pick. Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Securitas AB &mdash; SEK share price trend. A choppy 2021-22 derate followed by a steady, multi-year re-rating as margin improvement became visible.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Securitas AB &mdash; Year-End Close</div>
+    <div class="chart-sub">Year-end closing price, FY2021-FY2025, plus current. The stock fell through 2022 (rate-hike derating across European industrials) before more than doubling off that low as the Stanley Security integration and margin story played out.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.24"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,146.9 L 172.8,166.7 L 299.6,142.1 L 426.4,72.1 L 553.2,46.5 L 680.0,33.3 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="146.9" x2="680.0" y2="33.3" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="68" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: +11.5%</text>
+<path d="M 46.0,146.9 L 172.8,166.7 L 299.6,142.1 L 426.4,72.1 L 553.2,46.5 L 680.0,33.3" fill="none" stroke="#34d399" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="146.9" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="46.0" y="134.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 88.16</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="166.7" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="172.8" y="181.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 77.06</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="142.1" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="299.6" y="130.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 90.88</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="72.1" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="426.4" y="60.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 130.27</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="46.5" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="553.2" y="34.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 144.71</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="33.3" r="4" fill="#34d399" stroke="#34d399" stroke-width="1.6"/>
+<text x="678" y="21.3" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">SEK 152.10</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data via stockanalysis.com. Currency: SEK throughout (Securitas reports and trades in SEK).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
