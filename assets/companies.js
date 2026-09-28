@@ -2090,6 +2090,89 @@ const COMPANIES = [
     blurb: "The Birkin-and-Kelly house that deliberately makes less than the world wants — a 41.0% operating margin, zero net debt (~€9.9B net cash), and a founder family (the Dumas/Guerrand/Puech branches, consolidated via the H51 holding company) that's controlled it since 1837, holding ~66.7% of capital and ~78.6% of voting rights. Down roughly 41% from its 2025 high on a sector-wide luxury multiple de-rating, not deteriorating fundamentals — revenue CAGR is a clean +15.5% (FY21-25). The two misses (FCF CAGR, FCF conversion) both trace to elevated leather-workshop capex from vertical integration (owned tanneries, ~55% in-house manufacturing) — a structural trait, not a red flag.",
     file: "companies/hermes.html",
     personalNote: "Hermès is the purest example I've found on this site of a business that simply refuses to grow as fast as demand would let it, on purpose, and gets rewarded for it anyway. Most luxury names eventually chase volume — more stores, more product drops, more accessible price points — and it erodes the brand over time; you can see exactly that story play out in Kering's Gucci and in Burberry's last few years, both built this week alongside Hermès as direct comparisons. Hermès has never done that. Birkin and Kelly bags stay capped well below what the company could sell, waitlists run for years, and the result is a 41% operating margin that would be a rounding error for almost any other consumer-goods company. The family control appeals to me too — descendants of the founder still hold roughly two-thirds of the company through a holding vehicle called H51, and that kind of multi-generational patience is a real reason a brand doesn't get milked for a decade of quick earnings. The stock is down about 41% from its 2025 high, which on the surface sounds alarming, but the dashboard shows revenue still compounding at a clean 15%+ and margins holding — this reads much more like a sector-wide luxury re-rating (institutional money rotating out of expensive luxury names generally) than anything specific going wrong at Hermès itself. I don't currently own it, and it's never been what I'd call cheap, but of the six luxury names I looked at together this week, this is the one I'd actually want to own for the next decade, not just admire from the sidelines."
+  },
+
+  {
+    slug: "adt",
+    name: "ADT Inc.",
+    ticker: "NYSE: ADT",
+    sector: "Industrials",
+    industry: "Security Services",
+    subIndustry: "Home & Business Alarm Monitoring",
+    tags: ["Recurring Revenue", "Leveraged Buyout Legacy"],
+    dateFeatured: "2026-09-28",
+    price: "$6.40",
+    score: "8 / 14",
+    martinero: 65,
+    blurb: "The dominant incumbent in US home/business alarm monitoring (~30% share, ~5x the next competitor) — strong 26% EBIT margins and 98% FCF conversion, but low growth (~5% revenue CAGR) and leverage left over from its 2016 Apollo LBO (net debt/EBITDA 2.8x).",
+    file: "companies/adt.html"
+  },
+
+  {
+    slug: "securitas",
+    name: "Securitas AB",
+    ticker: "STO: SECU B",
+    sector: "Industrials",
+    industry: "Security Services",
+    subIndustry: "Manned Guarding & Electronic Security",
+    tags: ["Labor-Intensive", "Historical Parent of Verisure"],
+    dateFeatured: "2026-09-28",
+    price: "SEK 152.10",
+    score: "6 / 14",
+    martinero: 63,
+    blurb: "Global #2 in manned guarding, and the historical parent of today's Verisure pick — Verisure was Securitas's own alarm-monitoring arm until its 2006 spin-off. A structurally different, labor-intensive, thin-margin business (6.9% EBIT margin), not a recurring-subscriber compounder.",
+    file: "companies/securitas.html"
+  },
+
+  {
+    slug: "prosegur",
+    name: "Prosegur Compañía de Seguridad, S.A.",
+    ticker: "BME: PSG",
+    sector: "Industrials",
+    industry: "Security Services",
+    subIndustry: "Diversified Security & Cash Logistics",
+    tags: ["Family-Controlled", "LatAm FX Exposure"],
+    dateFeatured: "2026-09-28",
+    price: "€2.90",
+    score: "4 / 14",
+    martinero: 54,
+    blurb: "Verisure's most direct alarm-monitoring rival in Spain and Latin America (Prosegur Alarmas) — but that's only ~5% of a much larger, family-controlled security conglomerate spanning guarding, cash logistics and outsourcing, with structurally thinner margins and real Argentina/Brazil currency risk.",
+    file: "companies/prosegur.html"
+  },
+
+  {
+    slug: "alarm-com",
+    name: "Alarm.com Holdings, Inc.",
+    ticker: "NASDAQ: ALRM",
+    sector: "Technology",
+    industry: "Security Services",
+    subIndustry: "Smart-Home & Alarm SaaS Platform",
+    tags: ["Capital-Light", "Platform Model"],
+    dateFeatured: "2026-09-28",
+    price: "$53.38",
+    score: "10 / 14",
+    martinero: 80,
+    blurb: "Licenses the cloud SaaS platform independent security dealers run on — 66% gross margins, sub-2% capex, expanding EBIT margins, but high-single-digit growth rather than 15%+. Not a Verisure/ADT competitor: it's the software layer one level up from the subscriber relationship.",
+    file: "companies/alarm-com.html"
+  },
+
+  {
+    slug: "verisure",
+    name: "Verisure plc",
+    ticker: "STO: VSURE",
+    sector: "Industrials",
+    industry: "Security Services",
+    subIndustry: "Home & Business Alarm Monitoring",
+    tags: ["Recurring Revenue", "PE-Backed", "Recent IPO"],
+    dateFeatured: "2026-09-28",
+    price: "€8.08",
+    score: "7 / 14",
+    martinero: 66,
+    momentum: { status: "accelerating", recent: 13.0, prior: 9.0 },
+    quarterYoY: { period: "H1 2026", growth: 12.0 },
+    blurb: "Europe's #1 monitored home-security alarm company, growing double-digit every quarter since its October 2025 IPO — but trading ~39% below its own offer price on lingering PE-era leverage and a fresh post-IPO sponsor overhang.",
+    file: "companies/verisure.html",
+    personalNote: "I built four competitor dashboards alongside this one on purpose, because the alarm-monitoring industry has genuinely different business models hiding under one label, and Verisure sits in an interesting spot among them. ADT is the leveraged US incumbent with similar economics but slower growth. Securitas is actually Verisure's own former parent — it spun the alarm-monitoring business out in 2006 as 'Securitas Direct,' and what's left at Securitas today is a much lower-margin guarding business, which tells you how much better the subscriber-monitoring model is than the labor-intensive one. Prosegur Alarmas is Verisure's most direct rival in Spain and Latin America, but it's a small piece of a diversified, family-run conglomerate. And Alarm.com is the odd one out — a capital-light software platform sitting a level above the subscriber relationship entirely, with better margins than any of the hardware-and-monitoring players including this one. Verisure itself is the purest expression of the direct-to-consumer subscriber model: #1 position in 13 of 17 markets, expanding margins, real double-digit growth. The reason it's not screening better is straightforward and worth being honest about — it's still carrying private-equity-era leverage (net debt/EBITDA around 2.7x, down from roughly 5x before the IPO) and it's trading nearly 40% below where Hellman & Friedman priced it just under a year ago, which reads to me as a fresh-IPO sponsor overhang more than a verdict on the business. I don't own this one yet. A single year of public trading history isn't much to judge a stock on, and I'd want to see the leverage keep coming down before I'd treat this as anything other than 'interesting and worth watching closely.'"
   }
 
   // Add the next company below this line, as a new {...} block ⬇
