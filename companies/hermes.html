@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Herm&egrave;s International SCA &mdash; Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/hermes.html">
+<meta property="og:title" content="Herm&egrave;s International SCA &mdash; Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Herm&egrave;s International SCA &mdash; Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard &middot; Luxury Goods</div>
+  <h1>Herm&egrave;s International SCA</h1>
+  <div class="badges">
+    <div class="badge">Euronext Paris: RMS &middot; OTC: HESAY (ADR)</div>
+    <div class="badge">FY ends Dec 31 &middot; reports semi-annually</div>
+    <div class="badge">Founded 1837 &middot; Paris, France</div>
+    <div class="badge">Reports &amp; Trades in EUR</div>
+    <div class="badge warn">Stock down ~41% from its 52-wk high amid a broad luxury-sector multiple de-rating &mdash; fundamentals have kept growing throughout</div>
+  </div>
+
+  <div class="price">&euro;1,356.50</div>
+  <div class="price-sub">Close Sep 24, 2026 (Euronext Paris) &middot; Market cap &asymp; &euro;142.1B &middot; 52-wk range &euro;1,298.50 &ndash; &euro;2,300.00 &middot; Beta 1.00 &middot; Analyst consensus: Buy (22 analysts), PT &euro;1,799 (+32.8%)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> the undisputed benchmark of ultra-luxury leather goods &mdash; Birkin and Kelly production is deliberately capped at roughly 12,000&ndash;15,000 units/year each against demand estimated at 100x supply, producing genuine multi-year waitlists. Main comparators: LVMH (Louis Vuitton), Kering (Gucci, Bottega Veneta), Chanel (private), Richemont (Cartier) &mdash; Herm&egrave;s posts the highest operating margin of any of them by a wide margin.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val green" style="color:#34d399;">&euro;16.00B</div>
+      <div class="sub" style="color:#34d399;">+5.5% YoY reported &middot; H1 2026 +6.1% cc</div>
+      <div class="note">Revenue CAGR FY21-25: +15.5%, clearing this framework's 15% bar &mdash; rare for a company already this large.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val green" style="color:#34d399;">41.84%</div>
+      <div class="sub">H1 2026 recurring operating margin: 41.0%</div>
+      <div class="note">Extraordinarily high and stable for a consumer goods company &mdash; roughly double LVMH's group-wide margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green" style="color:#34d399;">&asymp;40.5% / &asymp;8-9%</div>
+      <div class="note">ROIC per GuruFocus (quarter ended Jun 2026); WACC per ValueInvesting.io / Alpha Spread third-party models (excludes a 13%+ outlier estimate). An exceptional, multi-times spread.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green" style="color:#34d399;">Net cash</div>
+      <div class="sub">&asymp;&euro;9.9B net cash (FY2025-end)</div>
+      <div class="note">Zero leverage risk &mdash; capex and expansion are entirely self-funded.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">80/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">11/14 criteria fully met &mdash; one of the strongest scores on the site.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="246.8 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.36 314.16" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 criteria fully met</b> &mdash; revenue &amp; EBIT CAGR, EBIT margin, ROIC vs WACC, net cash position, entry multiple vs own history, flat share count, exceptional founder/family ownership, capex intensity (context below), and outstanding margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; FCF CAGR (elevated capex program), FCF conversion (same driver), and market concentration (global luxury remains genuinely fragmented across strong houses)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Herm&egrave;s International is the family-controlled French luxury house behind the Birkin and Kelly handbags, founded as a Paris harness workshop in 1837 and still run on the same principle of artisanal scarcity: rather than chasing volume, Herm&egrave;s deliberately caps production of its icon bags at roughly 12,000-15,000 units each per year, against demand many multiples higher, creating genuine multi-year waitlists that few other brands can replicate. That scarcity, combined with near-total vertical integration (Herm&egrave;s owns its own tanneries, secures effectively all of its high-grade calfskin and 100% of its crocodile/alligator skin supply, and manufactures roughly 55% of what it sells in-house across more than 50 French production sites), is the foundation of a 41%+ operating margin &mdash; about double LVMH's and the highest of any major listed luxury house. H1 2026 revenue reached &euro;8.16B, up 6.1% at constant currency (accelerating to 6.7% in Q2) even as the broader luxury sector continues to work through a well-documented 2023-2026 demand slowdown; recurring operating income held at &euro;3.35B, a 41.0% margin. The Herm&egrave;s family &mdash; roughly 100 descendants of founder Thierry Herm&egrave;s across the Dumas, Guerrand and Puech branches &mdash; consolidated its control in 2011 via the H51 holding company, and together with Emile Herm&egrave;s SAS the family now holds roughly 66.7% of share capital and 78.6% of voting rights, the strongest, most durable founder-family control structure of any luxury name on this site. The one place the numbers get more nuanced: Herm&egrave;s' capex runs meaningfully higher than a typical luxury "brand licensing" peer (historically 3.6%-7.0% of revenue, spiking in FY2024 for new leather-workshop construction) precisely because it owns its manufacturing rather than outsourcing it &mdash; a genuine structural trait, not a red flag, but one that also means free cash flow conversion has recently dipped just under this framework's 80% bar. And despite the operating strength, the shares have been hit hard: down roughly 41% from their 52-week high of &euro;2,300 to &euro;1,356.50 amid a sector-wide luxury multiple compression (RBC, HSBC, Deutsche Bank, Citi, Morgan Stanley and JPMorgan have all cut price targets in the past two months) &mdash; a real repricing of growth expectations, not a reflection of deteriorating fundamentals.
+  </div>
+
+  <div class="callout">
+    <b>Not cross-listed on a US exchange:</b> Herm&egrave;s trades in EUR on Euronext Paris (RMS); US investors can access it only via the unsponsored OTC ADR (HESAY), which carries its own liquidity and spread considerations. All figures on this dashboard are in EUR, Herm&egrave;s' reporting and primary listing currency.
+  </div>
+
+  <div class="callout blue">
+    <b>Why the capex looks "high" for a luxury stock:</b> Herm&egrave;s spent &euro;708m on capex in FY2025 (4.4% of revenue) and as much as &euro;1,067m in FY2024 (7.0%) building new leather workshops (four planned 2024-2027) to grow production of a deliberately supply-constrained product. A pure fashion-licensing luxury peer would show a lower ratio; Herm&egrave;s runs higher because it owns the factories, tanneries and workshops that make its products, funding all of it from operating cash flow with zero net debt.
+  </div>
+
+  <div class="bignum-corner">RMS</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, EUR millions as reported. A rare case among mega-cap luxury names: revenue, operating income and net income have compounded upward in every one of the last five years, with no post-pandemic reversal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Net Income &mdash; Annual</div>
+    <div class="chart-sub">No one-off gains or restatements to flag. Growth has decelerated from pandemic-reopening rates (+40.6% FY2021, +29.2% FY2022) toward a still-exceptional high-single-digit pace, while operating income has kept pace almost exactly with revenue &mdash; the hallmark of true pricing power.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="240" x2="840" y2="240" stroke="#1e293b" stroke-width="1"/><text x="50" y="244" text-anchor="end" font-size="11" fill="#64748b">&euro;0B</text>
+      <line x1="60" y1="203.33" x2="840" y2="203.33" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.33" text-anchor="end" font-size="11" fill="#64748b">&euro;3B</text>
+      <line x1="60" y1="166.67" x2="840" y2="166.67" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.67" text-anchor="end" font-size="11" fill="#64748b">&euro;6B</text>
+      <line x1="60" y1="130" x2="840" y2="130" stroke="#1e293b" stroke-width="1"/><text x="50" y="134" text-anchor="end" font-size="11" fill="#64748b">&euro;9B</text>
+      <line x1="60" y1="93.33" x2="840" y2="93.33" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.33" text-anchor="end" font-size="11" fill="#64748b">&euro;12B</text>
+      <line x1="60" y1="56.67" x2="840" y2="56.67" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.67" text-anchor="end" font-size="11" fill="#64748b">&euro;15B</text>
+      <line x1="60" y1="20" x2="840" y2="20" stroke="#1e293b" stroke-width="1"/><text x="50" y="24" text-anchor="end" font-size="11" fill="#64748b">&euro;18B</text>
+      <rect x="110" y="130.2" width="16" height="109.8" rx="1.5" fill="#2dd4bf"/><text x="118" y="125.2" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;8.98B</text>
+      <rect x="130" y="196.04" width="16" height="43.96" rx="1.5" fill="#60a5fa"/><text x="138" y="191.04" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">&euro;3.60B</text>
+      <rect x="150" y="210.1" width="16" height="29.9" rx="1.5" fill="#fbbf24"/><text x="158" y="205.1" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;2.45B</text>
+      <text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text>
+      <rect x="266" y="98.2" width="16" height="141.8" rx="1.5" fill="#2dd4bf"/><text x="274" y="93.2" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;11.60B</text>
+      <rect x="286" y="181.1" width="16" height="58.9" rx="1.5" fill="#60a5fa"/><text x="294" y="176.1" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">&euro;4.82B</text>
+      <rect x="306" y="198.84" width="16" height="41.16" rx="1.5" fill="#fbbf24"/><text x="314" y="193.84" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;3.37B</text>
+      <text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text>
+      <rect x="422" y="75.9" width="16" height="164.1" rx="1.5" fill="#2dd4bf"/><text x="430" y="70.9" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;13.43B</text>
+      <rect x="442" y="169.66" width="16" height="70.34" rx="1.5" fill="#60a5fa"/><text x="450" y="164.66" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">&euro;5.76B</text>
+      <rect x="462" y="187.31" width="16" height="52.69" rx="1.5" fill="#fbbf24"/><text x="470" y="182.31" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;4.31B</text>
+      <text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text>
+      <rect x="578" y="54.6" width="16" height="185.4" rx="1.5" fill="#2dd4bf"/><text x="586" y="49.6" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;15.17B</text>
+      <rect x="598" y="163.84" width="16" height="76.16" rx="1.5" fill="#60a5fa"/><text x="606" y="158.84" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">&euro;6.23B</text>
+      <rect x="618" y="183.74" width="16" height="56.26" rx="1.5" fill="#fbbf24"/><text x="626" y="178.74" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;4.60B</text>
+      <text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text>
+      <rect x="734" y="44.4" width="16" height="195.6" rx="1.5" fill="#2dd4bf"/><text x="742" y="39.4" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&euro;16.00B</text>
+      <rect x="754" y="158.15" width="16" height="81.85" rx="1.5" fill="#60a5fa"/><text x="762" y="153.15" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">&euro;6.70B</text>
+      <rect x="774" y="184.69" width="16" height="55.31" rx="1.5" fill="#fbbf24"/><text x="782" y="179.69" text-anchor="middle" font-size="7.5" fill="#fde68a">&euro;4.52B</text>
+      <text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr)</div><div class="val" style="color:#34d399;">+15.53%</div><div class="sub">&euro;8.98B &rarr; &euro;16.00B, FY21-FY25 &mdash; clears this framework's 15% bar</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR (4yr)</div><div class="val" style="color:#34d399;">+16.79%</div><div class="sub">&euro;3.60B &rarr; &euro;6.70B &mdash; growing slightly faster than revenue</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr)</div><div class="val" style="color:#f87171;">+11.67%</div><div class="sub">&euro;3.00B &rarr; &euro;4.67B &mdash; strong in absolute terms, just under the 15% bar (elevated capex program is the driver)</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">One of the most stable, structurally high margins of any company on this site &mdash; never below 40% in five years, and the FY2025 print of 41.84% sits right in the middle of its own five-year range.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="220" x2="840" y2="220" stroke="#1e293b" stroke-width="1"/><text x="42" y="224" text-anchor="end" font-size="11" fill="#64748b">0%</text>
+      <line x1="50" y1="176" x2="840" y2="176" stroke="#1e293b" stroke-width="1"/><text x="42" y="180" text-anchor="end" font-size="11" fill="#64748b">10%</text>
+      <line x1="50" y1="132" x2="840" y2="132" stroke="#1e293b" stroke-width="1"/><text x="42" y="136" text-anchor="end" font-size="11" fill="#64748b">20%</text>
+      <line x1="50" y1="88" x2="840" y2="88" stroke="#1e293b" stroke-width="1"/><text x="42" y="92" text-anchor="end" font-size="11" fill="#64748b">30%</text>
+      <line x1="50" y1="44" x2="840" y2="44" stroke="#1e293b" stroke-width="1"/><text x="42" y="48" text-anchor="end" font-size="11" fill="#64748b">40%</text>
+      <line x1="50" y1="20" x2="840" y2="20" stroke="#1e293b" stroke-width="1" stroke-dasharray="3 3"/><text x="42" y="24" text-anchor="end" font-size="11" fill="#64748b">50%</text>
+      <path d="M 50.00,43.82 L 247.50,37.18 L 445.00,31.42 L 642.50,39.31 L 840.00,35.90" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="50.00" cy="43.82" r="3" fill="#2dd4bf"/><circle cx="247.50" cy="37.18" r="3" fill="#2dd4bf"/><circle cx="445.00" cy="31.42" r="3" fill="#2dd4bf"/><circle cx="642.50" cy="39.31" r="3" fill="#2dd4bf"/><circle cx="840.00" cy="35.90" r="3" fill="#2dd4bf"/>
+      <text x="50.00" y="33.82" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">40.04%</text>
+      <text x="247.50" y="27.18" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">41.55%</text>
+      <text x="445.00" y="21.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">42.86%</text>
+      <text x="642.50" y="29.31" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">41.07%</text>
+      <text x="840.00" y="25.90" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">41.84%</text>
+      <text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (&euro;m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>8,982</td><td>3,596</td><td>40.04%</td><td>2,445</td><td>3,002</td><td>83.5%</td></tr>
+    <tr><td>FY2022</td><td>11,602</td><td>4,820</td><td>41.55%</td><td>3,367</td><td>3,770</td><td>78.2%</td></tr>
+    <tr><td>FY2023</td><td>13,427</td><td>5,755</td><td>42.86%</td><td>4,311</td><td>3,750</td><td>65.2%</td></tr>
+    <tr><td>FY2024</td><td>15,170</td><td>6,231</td><td>41.07%</td><td>4,603</td><td>4,072</td><td>65.4%</td></tr>
+    <tr><td>FY2025</td><td>16,002</td><td>6,696</td><td>41.84%</td><td>4,524</td><td>4,666</td><td>69.7%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">No one-off gains or charges to flag. FCF/EBIT has drifted down from FY2021's 83.5% to the high-60s% as the leather-workshop capex program (see page 4) has ramped &mdash; a real, explainable driver, not a quality concern.</div>
+  <div class="footer-note">Source: stockanalysis.com (EPA:RMS financial statements, data via S&amp;P Global Market Intelligence); Herm&egrave;s International 2025 Full-Year Results press release (Feb 12, 2026) and H1 2026 Results press release (Jul 29, 2026), finance.hermes.com.</div>
+</div>
+
+<!-- ============ PAGE 3 — BUSINESS MODEL, SEGMENTS & RECENT RESULTS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Business Model, Segment Mix &amp; H1 2026 Results</div></div>
+  <div class="sec-sub">Deliberate scarcity and near-total vertical integration are the two structural pillars behind the margin on page 1 &mdash; not a typical "brand licensing" luxury model.</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Revenue reached <b style="color:#f8fafc;">&euro;8.16B</b>, up 6.1% at constant exchange rates (1.6% at reported rates, as currency reduced first-half revenue by more than &euro;360m). Growth accelerated through the half: Q1 2026 constant-currency growth was 5.6%, improving to 6.7% in Q2 (4.8% reported, &euro;4.09B). Recurring operating income was &euro;3.35B, a margin of 41.0% (vs 41.4% in H1 2025) &mdash; a genuinely minor, 40bps decline despite continued heavy investment in production capacity. Management reiterated confidence in full-year targets, citing broad-based growth across geographies (America, Japan and Europe ex-France all posted gains) even as Perfume &amp; Beauty and parts of the Middle East region remained soft.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue by Division (FY2025 mix, &euro;16.00B total)</div>
+    <div class="chart-sub">Leather Goods &amp; Saddlery &mdash; the Birkin/Kelly category &mdash; is the core of the business at 44% of revenue and the primary driver of both growth and margin. Herm&egrave;s is far more concentrated in its highest-margin category than diversified peers like LVMH.</div>
+    <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="24" font-size="11.5" fill="#cbd5e1">Leather Goods &amp; Saddlery</text>
+      <rect x="230" y="12" width="399" height="18" rx="3" fill="#2dd4bf"/><text x="635" y="25" font-size="11" fill="#e2e8f0" font-weight="700">&euro;7.07B &middot; 44.2%</text>
+      <text x="0" y="54" font-size="11.5" fill="#cbd5e1">Ready-to-Wear &amp; Accessories</text>
+      <rect x="230" y="42" width="256" height="18" rx="3" fill="#60a5fa"/><text x="492" y="55" font-size="11" fill="#e2e8f0" font-weight="700">&euro;4.53B &middot; 28.3%</text>
+      <text x="0" y="84" font-size="11.5" fill="#cbd5e1">Other Herm&egrave;s Sectors (home, jewelry)</text>
+      <rect x="230" y="72" width="116" height="18" rx="3" fill="#a78bfa"/><text x="352" y="85" font-size="11" fill="#e2e8f0" font-weight="700">&euro;2.06B &middot; 12.8%</text>
+      <text x="0" y="114" font-size="11.5" fill="#cbd5e1">Silk &amp; Textiles</text>
+      <rect x="230" y="102" width="54" height="18" rx="3" fill="#fbbf24"/><text x="290" y="115" font-size="11" fill="#e2e8f0" font-weight="700">&euro;0.96B &middot; 6.0%</text>
+      <text x="0" y="144" font-size="11.5" fill="#cbd5e1">Watches</text>
+      <rect x="230" y="132" width="31" height="18" rx="3" fill="#f87171"/><text x="267" y="145" font-size="11" fill="#e2e8f0" font-weight="700">&euro;0.55B &middot; 3.4%</text>
+      <text x="0" y="174" font-size="11.5" fill="#cbd5e1">Perfume &amp; Beauty</text>
+      <rect x="230" y="162" width="28" height="18" rx="3" fill="#5eead4"/><text x="264" y="175" font-size="11" fill="#e2e8f0" font-weight="700">&euro;0.49B &middot; 3.1%</text>
+      <text x="0" y="204" font-size="11.5" fill="#cbd5e1">Other Products</text>
+      <rect x="230" y="192" width="20" height="18" rx="3" fill="#7c8aa5"/><text x="256" y="205" font-size="11" fill="#e2e8f0" font-weight="700">&euro;0.35B &middot; 2.2%</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Vertical integration, in plain terms:</b> Herm&egrave;s owns the Herm&egrave;s Cuirs Pr&eacute;cieux tannery network that secures roughly 90% of its high-grade calfskin needs, and owns tanneries in Australia and Louisiana that supply effectively 100% of its crocodile and alligator skins. Overall, the company manufactures about 55% of what it sells in-house across more than 50 French production sites, versus outsourcing the bulk of production the way most fashion-licensing luxury brands do. This is why Herm&egrave;s' capex intensity runs higher than a typical luxury peer (see page 4) &mdash; it is buying and building factories and workshops, not just marketing budgets and store leases.</p>
+  </div>
+
+  <div class="callout">
+    <b>Scarcity as strategy:</b> Herm&egrave;s produces an estimated 12,000-15,000 Birkin bags per year (and a similar order for the Kelly) against demand that industry estimates place at roughly 100x that supply. Rather than expanding output to meet demand, management has held production growth well below revenue growth for the icon leather goods category for over a decade, sustaining multi-year waitlists in most markets. This is the direct source of the pricing power and margin seen on page 1 &mdash; and a structural feature this framework treats as a genuine, durable moat rather than a marketing story.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021-FY2025, plus the current and forward readings.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Year-End, Plus Current &amp; Forward</div>
+    <div class="chart-sub">Current P/E of 31.50x sits about 39% below the FY21-25 average of 51.83x &mdash; genuinely cheap relative to its own trading history, though still an absolute multiple most value investors would call rich. The compression is driven mostly by EPS nearly doubling (&euro;23.30 &rarr; &euro;43.00) while the price itself is roughly flat-to-down over the same stretch, not by a collapse in the business.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span><span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (current only)</span></div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="220" x2="840" y2="220" stroke="#1e293b" stroke-width="1"/><text x="42" y="224" text-anchor="end" font-size="11" fill="#64748b">0x</text>
+      <line x1="50" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="42" y="195.4" text-anchor="end" font-size="11" fill="#64748b">10x</text>
+      <line x1="50" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="166.9" text-anchor="end" font-size="11" fill="#64748b">20x</text>
+      <line x1="50" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="138.3" text-anchor="end" font-size="11" fill="#64748b">30x</text>
+      <line x1="50" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="109.7" text-anchor="end" font-size="11" fill="#64748b">40x</text>
+      <line x1="50" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="42" y="81.1" text-anchor="end" font-size="11" fill="#64748b">50x</text>
+      <line x1="50" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="52.6" text-anchor="end" font-size="11" fill="#64748b">60x</text>
+      <line x1="50" y1="20" x2="840" y2="20" stroke="#1e293b" stroke-width="1"/><text x="42" y="24" text-anchor="end" font-size="11" fill="#64748b">70x</text>
+      <line x1="50.0" y1="71.9" x2="840.0" y2="71.9" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="67.9" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 51.83x</text>
+      <path d="M50.0,32.1 L208.0,91.8 L366.0,87.1 L524.0,69.1 L682.0,79.5 L840.0,130.0" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="50.0" cy="32.1" r="3" fill="#a78bfa"/><circle cx="208.0" cy="91.8" r="3" fill="#a78bfa"/><circle cx="366.0" cy="87.1" r="3" fill="#a78bfa"/><circle cx="524.0" cy="69.1" r="3" fill="#a78bfa"/><circle cx="682.0" cy="79.5" r="3" fill="#a78bfa"/><circle cx="840.0" cy="130.0" r="3.5" fill="#a78bfa"/>
+      <text x="50.0" y="22.1" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">65.74x</text>
+      <text x="208.0" y="81.8" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">44.86x</text>
+      <text x="366.0" y="77.1" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">46.53x</text>
+      <text x="524.0" y="59.1" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">52.83x</text>
+      <text x="682.0" y="69.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">49.17x</text>
+      <text x="840.0" y="120.0" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">31.50x</text>
+      <text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text>
+      <circle cx="840.0" cy="138.3" r="3.5" fill="#c4b5fd" stroke="#0e1626" stroke-width="1"/><text x="795.0" y="138.3" text-anchor="end" font-size="10" fill="#c4b5fd" font-weight="700">Fwd 28.58x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading this multiple honestly:</b> at 31.5x trailing / 28.6x forward earnings, Herm&egrave;s is not a "cheap stock" by any absolute measure &mdash; but it is priced meaningfully below its own five-year trading range, and the gap between trailing and forward P/E is small, implying the market expects continued steady (not collapsing, but not accelerating) earnings growth. A PEG ratio built off consensus forward growth sits close to 2x, above the traditional "fair value" line of 1.0x &mdash; a reminder that "cheap vs. its own history" and "cheap in absolute terms" are two different questions, and only the first one is true here.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Structurally higher than a typical luxury "brand" peer because Herm&egrave;s owns its tanneries and workshops rather than outsourcing production &mdash; see page 3. FY2024's spike to 7.0% reflects new leather-workshop construction (part of a four-site build-out running 2024-2027); FY2025 fell back to 4.4%, in line with the five-year norm.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (&euro;m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="99.2" width="60" height="60.8" fill="#60a5fa"/><text x="60" y="94" text-anchor="middle" font-size="8" fill="#cbd5e1">403</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="98.8" width="60" height="61.2" fill="#60a5fa"/><text x="200" y="93" text-anchor="middle" font-size="8" fill="#cbd5e1">414</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="89.6" width="60" height="70.4" fill="#60a5fa"/><text x="340" y="84" text-anchor="middle" font-size="8" fill="#cbd5e1">578</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="20" width="60" height="140" fill="#60a5fa"/><text x="480" y="15" text-anchor="middle" font-size="8" fill="#cbd5e1">1,067</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="97" width="60" height="63" fill="#60a5fa"/><text x="620" y="92" text-anchor="middle" font-size="8" fill="#cbd5e1">708</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,116.4 200,124.1 340,117.7 480,64.0 620,115.7" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="116.4" r="3" fill="#fbbf24"/><text x="60" y="106.4" text-anchor="middle" font-size="7.5" fill="#fde68a">4.49%</text>
+      <circle cx="200" cy="124.1" r="3" fill="#fbbf24"/><text x="200" y="140.1" text-anchor="middle" font-size="7.5" fill="#fde68a">3.57%</text>
+      <circle cx="340" cy="117.7" r="3" fill="#fbbf24"/><text x="340" y="133.7" text-anchor="middle" font-size="7.5" fill="#fde68a">4.31%</text>
+      <circle cx="480" cy="64.0" r="3" fill="#fbbf24"/><text x="480" y="54.0" text-anchor="middle" font-size="7.5" fill="#fde68a">7.03%</text>
+      <circle cx="620" cy="115.7" r="3" fill="#fbbf24"/><text x="620" y="131.7" text-anchor="middle" font-size="7.5" fill="#fde68a">4.43%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <g transform="rotate(-90 60 60)">
+            <circle cx="60" cy="60" r="35" fill="none" stroke="#34d399" stroke-width="20" stroke-dasharray="146.7 219.9" stroke-dashoffset="0"/>
+            <circle cx="60" cy="60" r="35" fill="none" stroke="#64748b" stroke-width="20" stroke-dasharray="73.2 219.9" stroke-dashoffset="-146.7"/>
+          </g>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">66.7%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#34d399;"></span>Herm&egrave;s family (H51 SAS &amp; Emile Herm&egrave;s SAS) &asymp; 66.7% of capital, 78.6% of voting rights</div>
+          <div><span class="dot" style="background:#64748b;"></span>Institutional &amp; public float &asymp; 33.3%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count Trend</div>
+      <p>Shares outstanding have been essentially flat for five straight years &mdash; EPS-implied count moved from &asymp;104.94m (FY2021) to &asymp;105.02m (TTM), a change of roughly +0.08%. There is no meaningful dilution and no active buyback program; Herm&egrave;s simply doesn't need either lever given its cash generation.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>H51 and the family's control structure:</b> roughly 100 descendants of founder Thierry Herm&egrave;s, spanning the Dumas, Guerrand and Puech branches, consolidated their holdings into H51 SAS in 2011 &mdash; explicitly as a defensive measure after LVMH built a secret ~23% stake in Herm&egrave;s between 2008 and 2010. H51 SAS alone locks roughly 50.2% of capital under a shareholder pact running through 2031; combined with Emile Herm&egrave;s SAS and other family holdings, the family controls about 66.7% of capital and 78.6% of votes (aided by French double voting rights for long-held registered shares). This is about as durable a founder-family control structure as exists in a public company of this scale, and it is the direct reason Herm&egrave;s has been able to prioritize the multi-decade Birkin/Kelly scarcity strategy over short-term volume growth that public markets often demand.
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Herm&egrave;s held &euro;2.31B of total debt against &euro;12.24B of cash &amp; investments at FY2025-end &mdash; a net cash position of &euro;9.93B (&euro;94.51 per share), up from &euro;4.92B of net cash just four years earlier. There is no leverage risk of any kind; every euro of the capex program on this page is self-funded.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored honestly against this site's fixed "quality compounder" checklist. Herm&egrave;s clears the large majority of criteria &mdash; among the strongest results on the site &mdash; with misses concentrated in the capex-driven FCF metrics and a genuinely fragmented luxury market.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr) &ge;15%</td><td>+15.53% (&euro;8.98B &rarr; &euro;16.00B, FY21-25)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr) &ge;15%</td><td>+16.79% (&euro;3.60B &rarr; &euro;6.70B)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY &ge;20%</td><td>41.84% FY2025 &mdash; roughly double the threshold</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr) &ge;15%</td><td>+11.67% (&euro;3.00B &rarr; &euro;4.67B) &mdash; strong in absolute terms, held back by the elevated leather-workshop capex program</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>The undisputed benchmark of ultra-luxury leather goods by margin, pricing power and brand cachet &mdash; multi-year Birkin/Kelly waitlists with demand estimated at &asymp;100x annual supply</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open/competitive) &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score 4/5 &mdash; global luxury remains genuinely fragmented across strong houses (LVMH, Kering, Chanel, Richemont)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &asymp;40.5% (GuruFocus, TTM) vs est. WACC &asymp;8-9% (ValueInvesting.io / Alpha Spread) &mdash; an exceptional, multi-times spread</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>Net cash position of &euro;9.93B (FY2025-end) &mdash; trivially clears the threshold</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &ge;80%</td><td>69.7% FY2025 (TTM &asymp;75%) &mdash; down from 83.5% in FY2021 as the leather-workshop capex program has ramped; a real, explainable driver rather than an earnings-quality problem</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>Trailing P/E 31.50x vs FY21-25 average 51.83x &mdash; roughly 39% below its own average; still an elevated absolute multiple, but genuinely cheap relative to itself</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>&asymp;104.94m (FY2021) &rarr; &asymp;105.02m (TTM), +0.08% &mdash; effectively flat, no dilution</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>Herm&egrave;s family via H51 SAS &amp; Emile Herm&egrave;s SAS &asymp; 66.7% of capital, 78.6% of voting rights &mdash; among the strongest founder-family control structures of any company on this site</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>4.4% of revenue FY2025 (5-yr range 3.6%-7.0%) &mdash; structurally higher than a licensing-model luxury peer because Herm&egrave;s owns its tanneries and workshops, but still a modest share of revenue and entirely self-funded from operating cash flow</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&le;2.5pp drop in gross margin, 3-yr trailing)</td><td>Gross margin 72.30% (FY2023) &rarr; 71.11% (FY2025), &minus;1.19pp &mdash; and margin has ranged narrowly between 70.3% and 72.3% across all five years, a standout for stability</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">ROIC and WACC are third-party model estimates with meaningful methodology variance across providers (GuruFocus separately estimates Herm&egrave;s' own WACC at 13.1%, which this framework treats as an outlier versus ValueInvesting.io's 9.4% and Alpha Spread's 7.4%); market share/concentration scores are qualitative judgments, not audited figures.</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Herm&egrave;s clears 11 of 14 criteria on this checklist, one of the strongest results on the site. Revenue and operating income have both compounded above 15% a year for four straight years despite already being a mega-cap business, operating margin has never dipped below 40% in five years, and ROIC of roughly 40% dwarfs any reasonable estimate of the company's cost of capital. The balance sheet carries zero net debt (&euro;9.9B of net cash), the share count hasn't moved in five years, and the Herm&egrave;s family's 66.7%-of-capital, 78.6%-of-votes control via H51 is about as durable a founder-family governance structure as exists anywhere in public markets. Despite trading at an absolute P/E north of 30x, the current multiple sits roughly 39% below the stock's own five-year average &mdash; a real, if modest, valuation reprieve after a sharp 2026 de-rating.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The three misses are genuinely connected: FCF CAGR and FCF conversion have both softened because capex (owning tanneries and building new leather workshops) has run at 4-7% of revenue in recent years, well above what a typical outsourced-manufacturing luxury brand would spend &mdash; a deliberate structural choice, not a red flag, but one worth tracking if it doesn't moderate. Global luxury also remains a genuinely fragmented, well-competed market (LVMH, Kering, Chanel, Richemont all field strong brands), so the market-concentration criterion fails even though Herm&egrave;s' own category leadership is not in question. Separately, the shares have been hit meaningfully harder than the fundamentals over the past year &mdash; down roughly 41% from a 52-week high of &euro;2,300, with six major sell-side banks cutting price targets since mid-2026 &mdash; reflecting a broad luxury-sector multiple reset rather than a company-specific problem, but a real source of near-term volatility for holders.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (EPA:RMS &mdash; financial statements, ratios, statistics, price history; data via S&amp;P Global Market Intelligence); Herm&egrave;s International 2025 Full-Year Results (Feb 12, 2026) and H1 2026 Results press releases &amp; slides (finance.hermes.com); GuruFocus (ROIC); ValueInvesting.io and Alpha Spread (WACC estimates); Business of Fashion and WSJ reporting on Herm&egrave;s' production model and Birkin/Kelly scarcity; Stratrix and Visionary Talks analysis of the H51 SAS family holding structure and shareholder pact (through 2031); TheFly/TipRanks analyst price-target updates (Jul-Sep 2026). Figures cross-checked across at least two sources where possible; WACC, market-share/concentration scores, and ROIC methodology are third-party estimates with meaningful uncertainty and are flagged as such in the text. All financial statement figures and the share price are in EUR. Prepared Sep 26, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Herm&egrave;s International SCA &mdash; EUR share price trend. No stock splits in this window &mdash; a genuine, sharp de-rating over the past year after a strong multi-year run.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Herm&egrave;s International SCA &mdash; Year-End Close</div>
+    <div class="chart-sub">Year-end closing price, FY2021-FY2025 (implied from reported trailing P/E &times; EPS, stockanalysis.com), plus current. The stock rallied to a 52-week (and all-time) high of &euro;2,300 in early 2026 before a sharp, broad luxury-sector multiple reset pulled it back to &euro;1,356.50 &mdash; a decline that has run well ahead of any change in the underlying business.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f87171" stop-opacity="0.24"/><stop offset="100%" stop-color="#f87171" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,147.98 L 172.8,160.70 L 299.6,95.22 L 426.4,39.43 L 553.2,67.00 L 680.0,172.19 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="147.98" x2="680.0" y2="172.19" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="185" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR: -2.4%</text>
+<path d="M 46.0,147.98 L 172.8,160.70 L 299.6,95.22 L 426.4,39.43 L 553.2,67.00 L 680.0,172.19" fill="none" stroke="#f87171" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="147.98" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="46.0" y="135.98" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,531.70</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="160.70" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="172.8" y="148.70" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,439.70</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="95.22" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="299.6" y="83.22" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,913.60</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="39.43" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="426.4" y="27.43" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;2,317.50</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="67.00" r="3" fill="#0e1626" stroke="#f87171" stroke-width="1.6"/>
+<text x="553.2" y="55.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;2,117.70</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="172.19" r="4" fill="#f87171" stroke="#f87171" stroke-width="1.6"/>
+<text x="680.0" y="187.19" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,356.50</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes implied from stockanalysis.com's reported trailing P/E &times; EPS for each fiscal year (a reliable cross-check method given semi-annual reporting); current price is a direct quote. Currency: EUR throughout (Herm&egrave;s reports and trades in EUR on Euronext Paris; no stock splits occurred in this window).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
