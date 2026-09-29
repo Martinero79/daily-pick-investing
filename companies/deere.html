@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Deere &amp; Company — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/deere.html">
+<meta property="og:title" content="Deere &amp; Company — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deere &amp; Company — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; margin-bottom:8px; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.note-box { background:#0f1a10; border:1px solid #1f4a2a; border-radius:10px; padding:12px 15px; margin-top:10px; margin-bottom:10px; }
+.note-box .title { color:#4ade80; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.note-box p { font-size:12.5px; color:#cfe8d4; line-height:1.6; margin:0 0 8px 0; }
+.note-box p:last-child { margin-bottom:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard &middot; Competitor Reference</div>
+  <h1>Deere &amp; Company</h1>
+  <div class="badges">
+    <div class="badge">NYSE: DE</div>
+    <div class="badge">FY ends late Oct / early Nov</div>
+    <div class="badge">HQ: Moline, Illinois</div>
+    <div class="badge">Reports &amp; Trades in USD</div>
+    <div class="badge warn">Cycle-Bottom Rebound Already Priced In &mdash; Stock +48.6% in 52 Weeks While Equipment Profit Is Down ~40%</div>
+  </div>
+
+  <div class="price">$689.59</div>
+  <div class="price-sub">Sep 28, 2026 close &middot; Market cap &asymp; $185.9B &middot; 269.6M shares outstanding &middot; 52-wk price change +48.6% &middot; Beta 0.91 &middot; Analyst consensus: Buy (25 analysts), avg PT $691.83 (+0.3%) &middot; Dividend $6.48/yr (0.94% yield)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> the world's largest agricultural equipment maker by revenue &mdash; #1 in large tractors and combines in North America (third-party estimates of roughly 50-60% share in each; see caveat on page 5) &middot; main competitors: CNH Industrial, AGCO, Kubota and CLAAS in agriculture; Caterpillar, Komatsu, Volvo CE and CNH in construction. This is a competitor reference dashboard alongside Caterpillar, not the daily pick.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$45.7B</div>
+      <div class="sub" style="color:#f87171;">-11.7% YoY (FY24: -15.6%)</div>
+      <div class="note">Consolidated net sales and revenues incl. John Deere Financial; equipment net sales $38.9B. Down 25% from the FY2023 peak of $61.3B. Q3 FY2026 (Aug 2, 2026) revenue grew +4.9% YoY to $12.6B.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Equipment Ops EBIT Margin</div>
+      <div class="val red" style="color:#f87171;">12.6%</div>
+      <div class="sub">FY2025 &mdash; from 21.9% at the FY2023 peak</div>
+      <div class="note">EBIT = equipment operations operating profit (PPA + SAT + CF segments), $4.9B on $38.9B net sales. Q3 FY2026 margin recovered to 14.4%; management calls FY2026 the bottom.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val green" style="color:#34d399;">~16.0% vs 6.9%</div>
+      <div class="sub">Equipment ops basis (my calc); S&amp;P consolidated ROIC only 5.7%</div>
+      <div class="note">WACC 6.94% per S&amp;P model. Consolidated ROIC is depressed because $50B+ of John Deere Financial receivables sit in the capital base &mdash; see page 4 for the two-books approach.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green" style="color:#34d399;">~0.4x</div>
+      <div class="sub">Equipment operations only (Aug 2, 2026)</div>
+      <div class="note">Equipment-ops net debt ~$2.6B vs TTM EBITDA ~$6.4B. Including John Deere Financial's ~$54.5B of debt, the consolidated figure is ~6.7x &mdash; not the right lens for a captive-finance arm funded by its own receivables.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">45/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/14 criteria met &mdash; a dominant, cash-generative franchise scoring well on moat and balance sheet but poorly on growth, margins and (above all) entry multiple at this point in the cycle.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 179.6" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.6 134.6" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria met</b> &mdash; #1 market share, ROIC well above WACC (equipment-ops basis), near-zero equipment-ops leverage, shrinking share count, low capex intensity, stable gross margin</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue, EBIT and FCF CAGRs (all flat-to-negative over the downcycle), EBIT margin, market concentration (moderate), FCF conversion, entry multiple (2.2x its own average P/E), insider ownership (0.1%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Deere &amp; Company, founded in 1837 and headquartered in Moline, Illinois, is the world's largest maker of agricultural machinery and a major player in construction and forestry equipment. It runs three equipment segments &mdash; Production &amp; Precision Agriculture (large tractors, combines, planters, sprayers), Small Agriculture &amp; Turf, and Construction &amp; Forestry &mdash; plus John Deere Financial, a captive finance arm that funds dealer inventory and customer purchases. The business is intensely cyclical: consolidated revenue rose from $44.0B (FY2021) to a $61.3B peak (FY2023) as farmers enjoyed record incomes, then fell 25% to $45.7B by FY2025 as grain prices, farm income and used-equipment overhang turned against large-ag demand. Equipment operating profit fell harder: from $12.2B (21.9% margin) in FY2023 to $4.9B (12.6%) in FY2025. That is what a five-year window that starts near a cycle trough and ends near another one looks like &mdash; revenue CAGR of just +0.9%, EBIT CAGR of -8.1%. Deere itself says fiscal 2026 marks the bottom of the ag equipment cycle: Q3 FY2026 revenue grew +4.9% YoY, net income rose 7% to $1.379B ($5.10 per share) and the equipment margin recovered to 14.4%, with net income guidance for the year raised to $4.75-5.00B. The market has moved faster than the earnings: the stock is up 48.6% over 52 weeks to $689.59, leaving it at about 38x trailing earnings against a 17x average at fiscal year-ends over the past five years. Quality is not the question here &mdash; a dominant franchise, an almost debt-free equipment business, and a share count down ~14% since FY2021. Price paid for a recovery that has not yet shown up in the numbers is.
+  </div>
+
+  <div class="callout">
+    <b>Two books, one company:</b> Deere reports consolidated results that include John Deere Financial ($54.5B of debt funding ~$49B of financing receivables and $7.4B of leased equipment). This dashboard states its basis explicitly throughout: <b>EBIT and margin = equipment operations</b> (the three equipment segments, before corporate expense and tax); <b>revenue = consolidated</b> net sales and revenues; <b>leverage and ROIC = equipment operations</b>, with consolidated figures shown alongside; <b>FCF = consolidated</b> (operating cash flow less property purchases and equipment-on-operating-lease purchases, S&amp;P definition) because a consistent five-year equipment-only FCF series was not obtainable (page 2 footnote).
+  </div>
+
+  <div class="callout blue">
+    <b>Q3 FY2026 (quarter ended Aug 2, 2026):</b> net sales and revenues $12.61B (+4.9% YoY); equipment net sales $11.0B (+6.2%); net income $1.379B (+7%), EPS $5.10 vs $4.75. Segments: Production &amp; Precision Ag sales -6% (13.2% margin), Small Ag &amp; Turf +12% (18.4%), Construction &amp; Forestry +18% (12.1%). Tariff recoveries of $110M in the quarter ($382M year-to-date) helped costs.
+  </div>
+
+  <div class="bignum-corner">DE</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD as reported (fiscal years end late Oct / early Nov). A full up-and-down ag cycle: FY2021-23 was the record-income upswing, FY2024-25 the downcycle. EBIT = equipment operations operating profit.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. EBIT (Equipment Operations)</div>
+    <div class="chart-sub">Revenue = consolidated net sales and revenues. EBIT bars shown &times;3 for visual scale (actual values labelled). Equipment-ops EBIT peaked in FY2023 and has since fallen 60%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue ($B)</span><span><span class="dot" style="background:#60a5fa;"></span>Equip. ops EBIT ($B, &times;3 scale)</span></div>
+    <svg viewBox="0 0 700 190">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <!-- 2021 -->
+      <rect x="20" y="52.2" width="30" height="107.8" fill="#5eead4"/>
+      <text x="35" y="48" text-anchor="middle" font-size="8" fill="#cbd5e1">44.0</text>
+      <rect x="54" y="109.5" width="30" height="50.5" fill="#60a5fa"/>
+      <text x="69" y="106.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">6.9</text>
+      <text x="52" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="160" y="31.2" width="30" height="128.8" fill="#5eead4"/>
+      <text x="175" y="27" text-anchor="middle" font-size="8" fill="#cbd5e1">52.6</text>
+      <rect x="194" y="98.7" width="30" height="61.3" fill="#60a5fa"/>
+      <text x="209" y="95.7" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">8.3</text>
+      <text x="192" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="300" y="10" width="30" height="150" fill="#5eead4"/>
+      <text x="315" y="7" text-anchor="middle" font-size="8" fill="#cbd5e1">61.3</text>
+      <rect x="334" y="70.6" width="30" height="89.4" fill="#60a5fa"/>
+      <text x="349" y="67.6" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">12.2</text>
+      <text x="332" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="440" y="33.3" width="30" height="126.7" fill="#5eead4"/>
+      <text x="455" y="29" text-anchor="middle" font-size="8" fill="#cbd5e1">51.7</text>
+      <rect x="474" y="100.1" width="30" height="59.9" fill="#60a5fa"/>
+      <text x="489" y="97.1" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">8.2</text>
+      <text x="472" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="580" y="48.1" width="30" height="111.9" fill="#5eead4"/>
+      <text x="595" y="44" text-anchor="middle" font-size="8" fill="#cbd5e1">45.7</text>
+      <rect x="614" y="124.0" width="30" height="36.0" fill="#60a5fa"/>
+      <text x="629" y="121" text-anchor="middle" font-size="7.5" fill="#fde68a">4.9</text>
+      <text x="612" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2025</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT vs. Free Cash Flow ($B)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. EBIT = equipment-ops operating profit; FCF = consolidated (operating cash flow less property purchases and operating-lease equipment purchases, S&amp;P Global definition). FY2022's FCF collapse reflects a working-capital and inventory build in the boom year, not weak earnings.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Equip. ops EBIT ($B)</span><span><span class="dot" style="background:#fbbf24;"></span>Consolidated FCF ($B)</span></div>
+    <svg viewBox="0 0 700 215">
+      <line x1="10" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <text x="12" y="146" font-size="8" fill="#5b6b85">$0B</text>
+      <!-- 2021 -->
+      <rect x="28" y="70.9" width="28" height="79.1" fill="#60a5fa"/>
+      <text x="42" y="67" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">6.9</text>
+      <rect x="64" y="90.8" width="28" height="59.2" fill="#fbbf24"/>
+      <text x="78" y="87" text-anchor="middle" font-size="7.5" fill="#fde68a">5.1</text>
+      <text x="60" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="168" y="53.9" width="28" height="96.1" fill="#60a5fa"/>
+      <text x="182" y="50" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">8.3</text>
+      <rect x="204" y="139.5" width="28" height="10.5" fill="#fbbf24"/>
+      <text x="218" y="135.5" text-anchor="middle" font-size="7.5" fill="#fde68a">0.9</text>
+      <text x="200" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="308" y="10" width="28" height="140" fill="#60a5fa"/>
+      <text x="322" y="7" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">12.2</text>
+      <rect x="344" y="102.6" width="28" height="47.4" fill="#fbbf24"/>
+      <text x="358" y="98.6" text-anchor="middle" font-size="7.5" fill="#fde68a">4.1</text>
+      <text x="340" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="448" y="56.2" width="28" height="93.8" fill="#60a5fa"/>
+      <text x="462" y="52.2" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">8.2</text>
+      <rect x="484" y="99.0" width="28" height="51.0" fill="#fbbf24"/>
+      <text x="498" y="95" text-anchor="middle" font-size="7.5" fill="#fde68a">4.4</text>
+      <text x="480" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="588" y="93.5" width="28" height="56.5" fill="#60a5fa"/>
+      <text x="602" y="89.5" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">4.9</text>
+      <rect x="624" y="112.8" width="28" height="37.2" fill="#fbbf24"/>
+      <text x="638" y="108.8" text-anchor="middle" font-size="7.5" fill="#fde68a">3.2</text>
+      <text x="620" y="205" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr)</div>
+      <div class="val" style="color:#f87171;">+0.9%</div>
+      <div class="sub">FY21&rarr;FY25, $44.0B &rarr; $45.7B consolidated; equipment net sales -0.5%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr)</div>
+      <div class="val" style="color:#f87171;">-8.1%</div>
+      <div class="sub">Equipment-ops operating profit $6.9B &rarr; $4.9B; peak $12.2B in FY23</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr)</div>
+      <div class="val" style="color:#f87171;">-11.0%</div>
+      <div class="sub">Consolidated FCF $5.1B &rarr; $3.2B; FY22 dip to $0.9B distorts the path</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Equipment Operations EBIT Margin Trend</div>
+    <div class="chart-sub">Operating profit as % of equipment net sales. Up sharply into the FY2023 peak, then compressed by lower large-ag volume, tariffs and cost inflation; Q3 FY2026 rebounded to 14.4%.</div>
+    <svg viewBox="0 0 700 100">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="60" x2="690" y2="60" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="30" x2="690" y2="30" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="2" y="63" font-size="7.5" fill="#64748b">10%</text>
+      <text x="2" y="33" font-size="7.5" fill="#64748b">20%</text>
+      <polyline points="60,38.1 205,37.8 350,24.3 495,35.4 640,52.2" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+      <circle cx="60" cy="38.1" r="3.2" fill="#60a5fa"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="31" text-anchor="middle" font-size="8" fill="#cbd5e1">17.3%</text>
+      <circle cx="205" cy="37.8" r="3.2" fill="#60a5fa"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="31" text-anchor="middle" font-size="8" fill="#cbd5e1">17.4%</text>
+      <circle cx="350" cy="24.3" r="3.2" fill="#60a5fa"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="17" text-anchor="middle" font-size="8" fill="#cbd5e1">21.9%</text>
+      <circle cx="495" cy="35.4" r="3.2" fill="#60a5fa"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="28" text-anchor="middle" font-size="8" fill="#cbd5e1">18.2%</text>
+      <circle cx="640" cy="52.2" r="3.2" fill="#60a5fa"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="45" text-anchor="middle" font-size="8" fill="#cbd5e1">12.6%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue (consol.)</th><th>Equip. Op. Profit (EBIT)</th><th>EBIT Margin*</th><th>Net Income</th><th>FCF (consol.)</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>44,024</td><td>6,868</td><td>17.3%</td><td>5,963</td><td>5,146</td><td>74.9%</td></tr>
+    <tr><td>FY2022</td><td>52,577</td><td>8,349</td><td>17.4%</td><td>7,131</td><td>911</td><td>10.9%</td></tr>
+    <tr><td>FY2023</td><td>61,251</td><td>12,163</td><td>21.9%</td><td>10,166</td><td>4,121</td><td>33.9%</td></tr>
+    <tr><td>FY2024</td><td>51,716</td><td>8,150</td><td>18.2%</td><td>7,100</td><td>4,429</td><td>54.3%</td></tr>
+    <tr><td>FY2025</td><td>45,684</td><td>4,906</td><td>12.6%</td><td>5,027</td><td>3,231</td><td>65.9%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*EBIT = Production &amp; Precision Ag + Small Ag &amp; Turf + Construction &amp; Forestry operating profit (Deere-reported segment operating profit: before corporate expenses, certain interest and FX items, and income taxes); margin = EBIT divided by equipment net sales (FY21 $39.7B, FY22 $47.9B, FY23 $55.6B, FY24 $44.8B, FY25 $38.9B). John Deere Financial's operating profit ($0.8-1.2B a year) is excluded. FCF = consolidated operating cash flow minus property &amp; equipment purchases minus operating-lease equipment purchases (S&amp;P Global via stockanalysis.com); it mixes bases with the equipment-ops EBIT denominator and excludes growth in financing receivables. An equipment-operations-only FCF series for FY21-25 could not be built on a consistent basis (Deere changed how equipment operations present receivables from sales); the only clean equipment-ops figures are 9M FY2026: operating cash flow $4,012M less capex $714M = $3,298M FCF (9M FY2025: $2,487M).</div>
+  <div class="footer-note">Source: Deere &amp; Company Q4/full-year earnings releases (FY2021, FY2023, FY2025 8-Ks) and Q3 FY2026 release (SEC EDGAR); stockanalysis.com (S&amp;P Global Market Intelligence) for consolidated FCF.</div>
+</div>
+
+<!-- ============ PAGE 3 — RECENT PERFORMANCE & GUIDANCE ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Recent Performance, Guidance &amp; Cycle Themes</div></div>
+  <div class="sec-sub">Management says fiscal 2026 is the bottom of the ag equipment cycle: growth has returned at the consolidated level, but large-ag (Production &amp; Precision Ag) is still shrinking while construction and small-ag carry the year.</div>
+
+  <div class="headline-box">
+    <div class="title">The cycle in plain terms</div>
+    <p>Large-ag equipment (the high-margin combines and big tractors that make up Production &amp; Precision Ag) sold at a record pace in FY2022-23 on strong farm incomes, then fell as grain prices and farm profitability weakened and used-equipment inventories built up. Deere deliberately cut production to protect pricing rather than discount, which is why profit fell faster than sales. In Q3 FY2026 Production &amp; Precision Ag sales were still down 6%, but Small Ag &amp; Turf (+12%) and Construction &amp; Forestry (+18%) grew, and Deere says early-order-program trends and improving used inventories support 2026 as the low point. 2026 industry guidance still has U.S./Canada large ag down 15-20% and South American tractors and combines down 15-20%, so the recovery Deere is pointing to is a 2027 story, not something visible in this year's numbers.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Growth &mdash; Recent Periods (YoY, consolidated net sales &amp; revenues)</div>
+    <div class="chart-sub">The two negative bars are full fiscal years; the three positive bars show the turn. Q4 FY2025 $12.39B vs $11.14B; 9M FY2026 $35.59B vs $33.29B; Q3 FY2026 $12.61B vs $12.02B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Growth</span><span><span class="dot" style="background:#f87171;"></span>Decline</span></div>
+    <svg viewBox="0 0 700 158">
+      <line x1="10" y1="85" x2="690" y2="85" stroke="#263049" stroke-width="1"/>
+      <rect x="50" y="85" width="80" height="40.6" fill="#f87171"/><text x="90" y="137" text-anchor="middle" font-size="9" fill="#cbd5e1">-15.6%</text>
+      <rect x="190" y="85" width="80" height="30.4" fill="#f87171"/><text x="230" y="127" text-anchor="middle" font-size="9" fill="#cbd5e1">-11.7%</text>
+      <rect x="330" y="55.9" width="80" height="29.1" fill="#34d399"/><text x="370" y="51" text-anchor="middle" font-size="9" fill="#cbd5e1">+11.2%</text>
+      <rect x="470" y="67.1" width="80" height="17.9" fill="#34d399"/><text x="510" y="62" text-anchor="middle" font-size="9" fill="#cbd5e1">+6.9%</text>
+      <rect x="610" y="72.3" width="80" height="12.7" fill="#34d399"/><text x="650" y="67" text-anchor="middle" font-size="9" fill="#cbd5e1">+4.9%</text>
+      <text x="90" y="153" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2024</text>
+      <text x="230" y="153" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2025</text>
+      <text x="370" y="153" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+      <text x="510" y="153" text-anchor="middle" font-size="9.5" fill="#94a3b8">9M FY26</text>
+      <text x="650" y="153" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>FY2025 Actual</th><th>FY2026 Guidance (Aug 20, 2026)</th></tr>
+    <tr><td>Net income attributable</td><td>$5.027B ($18.50/share)</td><td>$4.75B - $5.00B (improved from prior range)</td></tr>
+    <tr><td>Production &amp; Precision Ag net sales</td><td>$17.3B</td><td>Down ~10% (price +1.0%, FX +2.5%)</td></tr>
+    <tr><td>Small Ag &amp; Turf net sales</td><td>$10.2B</td><td>Up ~15% (price +1.5%, FX +0.5%)</td></tr>
+    <tr><td>Construction &amp; Forestry net sales</td><td>$11.4B</td><td>Up ~20% (price +3.0%, FX +1.5%)</td></tr>
+    <tr><td>Implied equipment net sales</td><td>$38.9B</td><td>&asymp; $41.0B (+5%) &mdash; my arithmetic from the segment guides</td></tr>
+    <tr><td>John Deere Financial net income</td><td>$890M</td><td>&asymp; $870M</td></tr>
+    <tr><td>Equipment-ops operating cash flow</td><td>not disclosed on comparable basis</td><td>$5.0B - $5.5B (per earnings-call coverage; capex &asymp; $1.3B)</td></tr>
+    <tr><td>Industry: U.S./Canada large ag</td><td>&mdash;</td><td>Down 15-20%; South America tractors &amp; combines down 15-20%; Europe flat</td></tr>
+    <tr><td>Industry: construction</td><td>&mdash;</td><td>U.S./Canada construction equipment up 5-10%, roadbuilding up ~10%, global forestry down ~10%</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Tariffs:</b> Deere recorded tariff recoveries of $110M in Q3 and $382M in the first nine months of FY2026 (press release). Earnings-call coverage from secondary outlets puts gross direct tariff expense at roughly $1.1B for FY2026 (about $750M net of the recoveries) and about $1B net for FY2027, with revisions to Section 232 tariff treatment of European imports cited as the main improvement &mdash; treat those two figures as call commentary I could not tie to a filing. Deere's own risk factors also name contested tariffs and retaliatory trade measures as a demand-side risk for its farm customers.
+  </div>
+
+  <div class="callout">
+    <b>Precision agriculture and recurring revenue:</b> the technology story is the reason bulls argue Deere is less cyclical than it used to be. Earnings-call coverage says See &amp; Spray (camera-guided targeted herbicide application, claimed &gt;50% herbicide savings) is on about one-third of North American sprayers on order, and management cites about 190 million highly engaged digital acres. Deere bills precision-guidance and telematics subscriptions in advance and reported deferred revenue of about $2.1B at Aug 2, 2026 (per 10-Q coverage). What I could <b>not</b> find is a separate reported line for recurring software revenue or its margin, so the shift from one-time machine sales to subscriptions is a thesis rather than something the financials let me measure.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E is usable here (Deere is solidly profitable), but it is inflated by trough earnings: TTM EPS is $17.99 against a FY2023 peak of $34.63. Both the raw multiple and the cycle context matter.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E of 38.4x is 2.25x the FY2021-25 fiscal-year-end average of 17.1x (dashed line). Forward P/E tells the same story: 32.9x now vs a 17.4x FY-end average (16.75x, 14.85x, 11.16x, 19.39x, 24.63x). PEG ratio 2.03 (S&amp;P Global).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>P/E (current)</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="72.9" width="70" height="37.1" fill="#60a5fa"/><text x="55" y="68" text-anchor="middle" font-size="9" fill="#cbd5e1">17.80x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="115" y="75.0" width="70" height="35.0" fill="#60a5fa"/><text x="150" y="70" text-anchor="middle" font-size="9" fill="#cbd5e1">16.80x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="210" y="88.7" width="70" height="21.3" fill="#60a5fa"/><text x="245" y="84" text-anchor="middle" font-size="9" fill="#cbd5e1">10.23x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="305" y="77.2" width="70" height="32.8" fill="#60a5fa"/><text x="340" y="72" text-anchor="middle" font-size="9" fill="#cbd5e1">15.72x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="400" y="58.3" width="70" height="51.7" fill="#60a5fa"/><text x="435" y="53" text-anchor="middle" font-size="9" fill="#cbd5e1">24.82x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="495" y="30.0" width="70" height="80.0" fill="#2dd4bf"/><text x="530" y="25" text-anchor="middle" font-size="9" fill="#cbd5e1">38.39x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="74.4" x2="690" y2="74.4" stroke="#fbbf24" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="688" y="66" text-anchor="end" font-size="9" fill="#fbbf24" font-weight="700">5-yr avg 17.1x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>How to read the multiple:</b> the raw comparison (38.4x trailing vs 17.1x average, i.e. 2.25x) is a clear fail on the entry-multiple criterion. But the multiple is partly a cycle artefact &mdash; earnings are near the bottom, so the same price on FY2023 peak EPS of $34.63 would be only 19.9x. The market is paying up in advance for a recovery, which is a normal pattern for cyclicals off the trough and also exactly why a stock up 48.6% in a year, with the consensus price target ($691.83) sitting on top of the current price, leaves little room for the recovery to disappoint. The stock also moved from $457.51 at the FY2025 year-end to $689.59 while trailing EPS fell.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capex &amp; Capex Intensity (% of Consolidated Revenue)</div>
+    <div class="chart-sub">Property and equipment purchases only ($M, bars) and as % of consolidated revenue (line). Low and stable at 2-3% of revenue. Excluded: purchases of equipment for operating leases (about $2.9B in FY2025), which sit in John Deere Financial and are counted in the FCF definition on page 2.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($M, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 170">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="87.6" width="60" height="72.4" fill="#60a5fa"/><text x="60" y="83" text-anchor="middle" font-size="8" fill="#cbd5e1">848</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="63.2" width="60" height="96.8" fill="#60a5fa"/><text x="200" y="59" text-anchor="middle" font-size="8" fill="#cbd5e1">1,134</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="32.1" width="60" height="127.9" fill="#60a5fa"/><text x="340" y="28" text-anchor="middle" font-size="8" fill="#cbd5e1">1,498</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="20" width="60" height="140" fill="#60a5fa"/><text x="480" y="15" text-anchor="middle" font-size="8" fill="#cbd5e1">1,640</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="43.9" width="60" height="116.1" fill="#60a5fa"/><text x="620" y="39" text-anchor="middle" font-size="8" fill="#cbd5e1">1,360</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,102.1 200,95.2 340,86.5 480,64.9 620,70.6" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="102.1" r="3" fill="#fbbf24"/><text x="60" y="118" text-anchor="middle" font-size="7.5" fill="#fde68a">1.93%</text>
+      <circle cx="200" cy="95.2" r="3" fill="#fbbf24"/><text x="200" y="111" text-anchor="middle" font-size="7.5" fill="#fde68a">2.16%</text>
+      <circle cx="340" cy="86.5" r="3" fill="#fbbf24"/><text x="340" y="102" text-anchor="middle" font-size="7.5" fill="#fde68a">2.45%</text>
+      <circle cx="480" cy="64.9" r="3" fill="#fbbf24"/><text x="480" y="80" text-anchor="middle" font-size="7.5" fill="#fde68a">3.17%</text>
+      <circle cx="620" cy="70.6" r="3" fill="#fbbf24"/><text x="620" y="86" text-anchor="middle" font-size="7.5" fill="#fde68a">2.98%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Balance sheet, Aug 2, 2026 ($M)</th><th>Equipment Operations</th><th>John Deere Financial</th><th>Consolidated</th></tr>
+    <tr><td>Cash &amp; marketable securities</td><td>6,762</td><td>3,516</td><td>10,278</td></tr>
+    <tr><td>Total borrowings</td><td>9,325</td><td>54,511</td><td>63,836</td></tr>
+    <tr><td>Net debt</td><td>2,563</td><td>50,995</td><td>53,558</td></tr>
+    <tr><td>Equity</td><td>21,044 (ex-Financial Services)</td><td>6,953</td><td>27,997</td></tr>
+    <tr><td>TTM EBITDA (approx.)</td><td>&asymp; 6,400</td><td>n/m</td><td>&asymp; 8,600 (S&amp;P)</td></tr>
+    <tr><td>Net debt / EBITDA</td><td>&asymp; 0.4x</td><td>n/m (receivables-funded)</td><td>&asymp; 6.2x-6.7x</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Approach: John Deere Financial's borrowings fund financing receivables and leased equipment (about $49B and $7.4B) and are serviced from customer payments, so I separate them; equipment operations carry only $9.3B of debt against $6.8B of cash. Equipment-ops TTM EBITDA = TTM segment operating profit (~$5.0B: FY25 $4,906M + 9M FY26 $4,044M - 9M FY25 $3,929M) plus D&amp;A annualised from 9M FY26 equipment D&amp;A of $1,042M (~$1.4B) &mdash; an estimate. Consolidated ratio range: my rough $53.6B net debt over ~$8.6B S&amp;P EBITDA, vs S&amp;P's own 6.70x on a slightly different debt definition.</div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="263.8 50.4" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="50.0 264.2" stroke-dashoffset="-263.8" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="1.5 312.7" stroke-dashoffset="-313.8" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">0.1%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~84.0%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail / other ~15.9%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Insiders (directors &amp; officers) ~0.10%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count Trend</div>
+      <p>EPS-implied diluted shares fell from ~314M (FY2021) to ~272M (FY2025) and 270.8M in Q3 FY2026 &mdash; down ~14%, funded by about $18.5B of buybacks over FY2021-25 ($2.5B, $3.6B, $7.2B, $4.0B, $1.1B). Repurchases have slowed to $697M in the first nine months of FY2026 as cash conservation matters in the trough. 269.6M shares outstanding today.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership note:</b> Deere is a widely held, professionally managed company with no founder or family stake; insiders own about 0.10% (S&amp;P Global) and institutions about 84%. Alignment comes from executive equity compensation and a strong dividend/buyback record ($6.48 dividend per share, 36% payout), not from meaningful insider ownership.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored honestly against the same checklist as every other name. Deere's five-year window runs from an upswing through a full downcycle, so growth criteria fail on the calendar rather than the franchise; the entry multiple, though, is a genuine mark against buying here today. Graduated scores (0-5) shown in each row feed the weighted Martinero Index.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Result</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>+0.9% (FY21-25, $44.0B &rarr; $45.7B) &mdash; record upswing then a 25% downcycle net to almost nothing (score 1/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15%</td><td>-8.1% &mdash; equipment-ops operating profit $6.9B (FY21) &rarr; $4.9B (FY25), after a $12.2B FY23 peak (score 0/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY &ge;20%</td><td>12.6% FY2025 (equipment ops); 21.9% at the FY2023 peak, 14.4% in Q3 FY2026 (score 2/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15%</td><td>-11.0% &mdash; consolidated FCF $5.1B &rarr; $3.2B; FY22 trough of $0.9B (score 0/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Clear #1 in agricultural equipment globally and in North American large tractors and combines (roughly 50-60% share per third-party estimates; exact current figures unverified) (score 5/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open/competitive) &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>Score 3/5 &mdash; large ag in North America is a Deere / CNH / AGCO oligopoly (Deere with over half of large tractors and combines), but globally and in small ag, turf and construction it faces Kubota, CLAAS, Caterpillar, Komatsu, Volvo and many others (points 3/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>~16.0% equipment-ops ROIC (TTM NOPAT ~$3.8B on ~$23.6B invested capital, my calc) vs 6.94% WACC (S&amp;P model); S&amp;P's consolidated ROIC is only 5.7% because it loads in John Deere Financial's capital (score 4/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x</td><td>~0.4x for equipment operations (net debt ~$2.6B); ~6.2-6.7x consolidated including John Deere Financial's receivables-funded debt &mdash; equipment-ops basis used, see page 4 (score 5/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &ge;80%</td><td>65.9% FY2025 (consolidated FCF / equipment EBIT); 5-yr average ~48%; equipment-ops 9M FY2026 FCF/EBIT ~82% ($3,298M / $4,044M) is the one period above the bar (score 3/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own trading history</td><td>Trailing P/E 38.4x vs FY21-25 fiscal-year-end average 17.1x = 2.25x; forward P/E 32.9x vs 17.4x average = 1.9x. Partly a trough-earnings artefact (19.9x on FY23 peak EPS) but a fail as measured (score 0/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>-14% since FY2021 (EPS-implied ~314M &rarr; 270.8M diluted), ~$18.5B repurchased FY21-25 (score 5/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>Insiders ~0.10%; no founder or family stake; institutions ~84% (score 0/5)</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low</td><td>2.0-3.2% of revenue FY21-25 (FY25: $1.36B, 3.0%); operating-lease equipment sits in the finance arm and is not counted (score 4/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&le;2.5pp drop in gross margin, 3-yr trailing)</td><td>Gross margin 27.39% FY2022 &rarr; 26.96% FY2025, delta -0.43pp; TTM 25.18% (-2.2pp) still inside the band, but equipment EBIT margin fell 4.8pp over the same window (score 4/5)</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Martinero Index = &Sigma;(score &divide; 5 &times; weight) &divide; 105 &times; 100 = 236 &divide; 525 = 45/100. No criteria are N/A. Market share: Deere is widely reported as the largest agricultural equipment manufacturer; the ~53% (large tractors) and ~60% (combines) North American figures come from an older third-party industry article and could not be re-verified for 2026. WACC is S&amp;P Global's model output (6.94%); a more conservative 8-9% would still leave the ROIC spread wide open. Equipment-ops ROIC, leverage, and EBITDA are my own calculations from Deere's Aug 2, 2026 supplemental consolidating data and are approximate.</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>An unmatched franchise: the #1 position in large agricultural equipment, a dealer network competitors cannot easily copy, and pricing discipline that let it cut production rather than discount through the downcycle (Q3 FY2026 equipment margin recovered to 14.4% with sales still declining in large ag). The equipment business is close to debt-free (~0.4x net debt/EBITDA) with ROIC around 16% even at trough earnings, the share count is down ~14% since FY2021, and diversification is helping: Construction &amp; Forestry (+18%) and Small Ag &amp; Turf (+12%) grew strongly in Q3. Management says the order book supports FY2026 as the bottom, net income guidance was raised to $4.75-5.00B, and precision technology (See &amp; Spray on about a third of sprayers on order, per call coverage) gives a credible path to a less cyclical earnings stream.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The price already discounts the recovery: 38x trailing earnings against a 17x fiscal-year-end average, the stock up 48.6% in 52 weeks, and the consensus price target barely above spot. Large ag, the highest-margin part of the business, is still guided down about 10% for FY2026, and the industry is guided down 15-20% in the U.S./Canada and South America; if the 2027 recovery is slower or shallower than the roughly 20% margin peak-to-trough would imply, the multiple is exposed. Tariffs are a real cost (roughly $1.1B gross in FY2026 per call coverage) and depend on policy that can change; farm-income dependence on trade disputes and commodity prices is unavoidable. Growth criteria fail across the board, FCF conversion is below 80% on a consolidated basis, insiders own almost nothing, and I could not verify a separate reported recurring-software revenue line, so the technology story rests on management commentary.</p>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's note</div>
+    <p>I keep Deere next to Caterpillar because they are the two names I would use to sanity-check anything in heavy machinery, but they are exposed to very different cycles. Deere is really a bet on the farm economy: grain prices, farm incomes and the health of large-ag demand, plus construction where it is a smaller player. Caterpillar leans more on mining, energy and construction, and as far as I can tell has a larger services and aftermarket business, so I see its earnings as a little less tied to one crop cycle. On pure business quality Deere stacks up well &mdash; #1 share, an equipment arm with almost no net debt, ROIC well above its cost of capital &mdash; but it has visibly been through the ag downcycle in the numbers: equipment operating profit fell about 60% from the FY2023 peak.</p>
+    <p>The part of Deere I find genuinely interesting is precision ag: See &amp; Spray, autonomy, and the subscription and software layer on top of the machines. If that becomes a large recurring-revenue business, Deere deserves a higher and more stable multiple than a normal machinery maker, which is the argument for today's price. What holds me back is that I cannot find recurring software revenue reported separately, so I treat it as an option rather than something I can see in the financials. At 38x trailing earnings versus its own 17x average the market is paying for both the cycle recovery and the tech story before either shows up. I would rather wait to see whether the 2027 recovery arrives and what the margin looks like, and compare that to what I can get at Caterpillar's multiple. Not a recommendation, just how I think about it.</p>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Deere &amp; Company Q3 FY2026 earnings release, financial statements and supplemental consolidating data (8-K, Aug 20, 2026, SEC EDGAR); Q4/full-year earnings releases for FY2025 (Nov 26, 2025), FY2023 (Nov 22, 2023) and FY2021 (Nov 24, 2021); stockanalysis.com / S&amp;P Global Market Intelligence (financials, ratios, statistics and price data, accessed Sep 28-29, 2026: market cap, shares, fiscal-year-end prices and P/E, ROIC, WACC, insider ownership, consensus); Q3 FY2026 earnings-call and 10-Q coverage (Yahoo Finance, GuruFocus, Investing.com, Farm Equipment, AgNavigator) for tariff, precision-tech, deferred-revenue, cash-flow and capex commentary; farm-equipment.com industry article for North American large-tractor and combine share estimates. Figures cross-checked across the SEC releases and S&amp;P data where possible. The equipment-ops ROIC, EBITDA, net debt, and FCF conversion figures are my own approximate calculations; WACC, market share and concentration are third-party estimates with meaningful uncertainty and are flagged as such in the text. Prepared Sep 29, 2026 &mdash; for personal portfolio research only. <b>Not a daily/featured pick &mdash; a competitor reference dashboard alongside Caterpillar. Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Deere &amp; Company (NYSE: DE) &mdash; USD share price trend. A steady climb through the downcycle, then a sharp re-rating over the last year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Deere &amp; Company &mdash; Fiscal Year-End Close</div>
+    <div class="chart-sub">Fiscal year-end closing prices FY2021-FY2025 as reported by stockanalysis.com (S&amp;P Global), plus the Sep 28, 2026 close. *The historical closes appear to be dividend-adjusted, so the +16.5% CAGR is closer to a total-return figure than a pure price return. The stock rose through the earnings downcycle, and about $232 of the $689.59 arrived since the FY2025 year-end.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.24"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,112.1 L 172.8,100.3 L 299.6,106.6 L 426.4,95.8 L 553.2,83.4 L 680.0,34.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="112.1" x2="680.0" y2="34.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="300" y="58" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+16.5%*</text>
+<path d="M 46.0,112.1 L 172.8,100.3 L 299.6,106.6 L 426.4,95.8 L 553.2,83.4 L 680.0,34.4" fill="none" stroke="#34d399" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="112.1" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="46.0" y="127.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$321.49</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="100.3" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="172.8" y="115.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$377.41</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="106.6" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="299.6" y="121.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$347.78</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="95.8" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="426.4" y="110.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$398.69</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="83.4" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="553.2" y="98.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$457.51</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="34.4" r="4" fill="#34d399" stroke="#34d399" stroke-width="1.6"/>
+<text x="678" y="22.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$689.59</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="end">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data via stockanalysis.com (S&amp;P Global Market Intelligence); "Now" = Sep 28, 2026 close. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

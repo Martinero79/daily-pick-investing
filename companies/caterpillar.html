@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Caterpillar Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/caterpillar.html">
+<meta property="og:title" content="Caterpillar Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Caterpillar Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.status-na { background:#1a2030; color:#94a3b8; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+/* helper (not overriding template classes) */
+.bullet-list { margin:0; padding-left:14px; font-size:12px; color:#cbd5e1; line-height:1.55; }
+.bullet-list li { margin-bottom:5px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Caterpillar Inc.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: CAT</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Irving, Texas</div>
+    <div class="badge">Reports &amp; Trades in USD</div>
+    <div class="badge warn">Cyclical Compounder — Record Backlog, but a Premium Multiple</div>
+  </div>
+
+  <div class="price">$819.95</div>
+  <div class="price-sub">Sep 28, 2026 close (latest at time of writing) · Market cap ≈ $376.9B · 459.7M shares outstanding · Stock ≈ 23% below its Jun 30, 2026 all-time closing high (≈ $1,063) yet still ≈ +76% over 52 weeks · Beta 1.59 · Analyst consensus: Buy (28 analysts), avg PT ≈ $975.6 (+19%) · Dividend $6.52/yr (0.80% yield)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> #1 construction-equipment maker in the world by equipment sales (KHL Yellow Table 2026; Komatsu #2, XCMG #3 at ~5.8% share) and one of two dominant makers of large mining equipment &middot; also a top supplier of reciprocating gensets, gas engines and industrial turbines for power generation. Caterpillar's own % share of global construction equipment is not disclosed and was not independently verified here.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$67.6B</div>
+      <div class="sub green" style="color:#34d399;">+4.3% YoY · TTM $74.7B</div>
+      <div class="note">Record year, but growth was muted (FY2024 was -3.4%). The acceleration is recent: Q1 2026 +22%, Q2 2026 +24% YoY to a record $20.5B.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating (EBIT) Margin</div>
+      <div class="val" style="color:#fbbf24;">16.5%</div>
+      <div class="sub">FY2025 reported · 20.2% FY24 peak</div>
+      <div class="note">Tariffs and a soft Q4 dragged FY25 (adjusted 17.2%). Q2 2026 rebounded to 20.9% reported / 21.9% adjusted despite ~$400M of tariff cost in the quarter.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green">18.3% vs ~11.7%</div>
+      <div class="sub">Spread ≈ +6.6 pts</div>
+      <div class="note">Both from S&amp;P Global model outputs (WACC uses beta 1.59, so it is on the high side). ROIC includes Cat Financial's debt-funded assets in invested capital.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">~0.1–0.4x ME&amp;T</div>
+      <div class="sub">2.4x consolidated (incl. Cat Financial)</div>
+      <div class="note">My approach: score the industrial (ME&amp;T/MP&amp;E) balance sheet and treat Cat Financial's ~$33B of receivable-funding debt separately. ME&amp;T figure is an estimate — see page 4.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">59/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A strong-quality, mid-growth cyclical: top marks on market position, buybacks and cash conversion; zero on entry multiple and insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="-157.1" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">7/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>7 criteria met</b> — clear #1 market position, ROIC above WACC, low leverage on an industrial (ME&amp;T) basis, ME&amp;T FCF conversion ~87%, share count down ~16% since FY21, capex intensity ~6%, and gross margin up 2.6pp over three years</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>7 not met</b> — revenue, EBIT and FCF CAGRs (all ~7–13%, under the 15% bar), FY25 EBIT margin under 20%, moderate market concentration, a trailing P/E about 1.8x its own 5-year average, and negligible insider ownership (0.2%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Caterpillar (founded 1925, Irving, Texas) makes the yellow iron most people picture &mdash; excavators, dozers, mining trucks &mdash; but services (parts, rebuilds, digital) were about 39% of machinery-and-power revenue in 2024 (the latest figure I found), and its Power &amp; Energy segment (engines, gensets, turbines, rail) is the biggest by sales at $28.6B in FY2025. Financial Products (Cat Financial) finances dealers and customers. Revenue rose from $51.0B (FY21) to $67.6B (FY25), a 7.3% CAGR; operating profit grew 12.8% a year off a depressed FY21 base, and ME&amp;T free cash flow rose about 57% to roughly $9.5B. The stock is up ~4x since end-2021, driven by two things: margins that moved from ~13% to a ~20% peak, and, more recently, AI data-center power demand that has pushed the backlog to a record $72B (+92% YoY at Q2 2026).
+  </div>
+
+  <div class="personal-note">
+    <div class="title">Maarten's note</div>
+    <p>Caterpillar is the best example I have on the site of a cyclical that has quietly become less cyclical. Each cycle bottoms higher: operating margin went from ~13% to ~20% at the FY24 peak, and about 39% of machinery-and-power revenue (2024) is services on an installed base that has to be maintained whether or not anyone is buying new trucks. Add a share count that fell ~16% in five years and a 33-year dividend growth streak, and the compounding story is real &mdash; it just doesn't show up in the 15%-CAGR screens, which is why the growth criteria score only 2&ndash;3 out of 5.</p>
+    <p>The part that changes the story is power. Data-center gensets, gas recips and turbines are booked out into 2028&ndash;29, Q2 power-generation sales to users grew 72%, and the backlog nearly doubled to $72B. That turns a mining-and-construction stock into a power-infrastructure story with multi-year visibility. What I can't underwrite is how much of it is durable versus an AI capex cycle that could pause &mdash; large, lumpy orders are the exact thing that makes backlog look better at the peak.</p>
+    <p>The valuation is where I slow down. 35x trailing and 28.5x forward earnings against a five-year average near 19x means the market is already paying for the AI-power cycle, and the entry-multiple criterion scores a flat zero. The shares are ~23% off the June high, which helps, but what I'd want to see is margins holding at 20%+ after ~$2.2B of tariff costs this year and the second-half dealer destock. Great business, demanding price &mdash; my own reasoning only, not advice.</p>
+  </div>
+
+  <div class="callout">
+    <b>Read the ME&amp;T vs consolidated labels carefully.</b> "ME&amp;T" (renamed "MP&amp;E", Machinery, Power &amp; Energy, from 2026) excludes Financial Products. ME&amp;T free cash flow is $9.5B for FY2025, while consolidated free cash flow (S&amp;P definition, including Cat Financial and its leased-equipment capex) is only $7.5B. Both are shown throughout; the scorecard uses ME&amp;T for cash-flow criteria and says so wherever it matters.
+  </div>
+
+  <div class="bignum-corner">CAT</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD millions. Operating profit is Caterpillar's reported consolidated operating profit (GAAP, includes Financial Products). A recovering cyclical: FY21-22 were an inflation-hit ~13% margin, FY23-24 reached ~20%, and FY25 stepped back on tariffs and mix.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs. Operating Profit (EBIT)</div>
+    <div class="chart-sub">EBIT bars shown ×4 for visual scale (actual USD-million values labelled). Sales and revenues include Cat Financial revenue.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#5eead4;"></span>Revenue (USDm)</span><span><span class="dot" style="background:#60a5fa;"></span>Operating profit (USDm, ×4 scale)</span></div>
+    <svg viewBox="0 0 700 190">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <!-- 2021 -->
+      <rect x="20" y="46.9" width="30" height="113.1" fill="#5eead4"/>
+      <text x="35" y="42.9" text-anchor="middle" font-size="8" fill="#cbd5e1">50,971</text>
+      <rect x="54" y="98.9" width="30" height="61.1" fill="#60a5fa"/>
+      <text x="69" y="95.9" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">6,878</text>
+      <text x="52" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="160" y="28.1" width="30" height="131.9" fill="#5eead4"/>
+      <text x="175" y="24.1" text-anchor="middle" font-size="8" fill="#cbd5e1">59,427</text>
+      <rect x="194" y="89.8" width="30" height="70.2" fill="#60a5fa"/>
+      <text x="209" y="86.8" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">7,904</text>
+      <text x="192" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="300" y="11.2" width="30" height="148.8" fill="#5eead4"/>
+      <text x="315" y="7.2" text-anchor="middle" font-size="8" fill="#cbd5e1">67,060</text>
+      <rect x="334" y="44.9" width="30" height="115.1" fill="#60a5fa"/>
+      <text x="349" y="41.9" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">12,966</text>
+      <text x="332" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="440" y="16.2" width="30" height="143.8" fill="#5eead4"/>
+      <text x="455" y="12.2" text-anchor="middle" font-size="8" fill="#cbd5e1">64,809</text>
+      <rect x="474" y="43.9" width="30" height="116.1" fill="#60a5fa"/>
+      <text x="489" y="40.9" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">13,072</text>
+      <text x="472" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="580" y="10" width="30" height="150" fill="#5eead4"/>
+      <text x="595" y="6" text-anchor="middle" font-size="8" fill="#cbd5e1">67,589</text>
+      <rect x="614" y="61" width="30" height="99" fill="#60a5fa"/>
+      <text x="629" y="58" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">11,151</text>
+      <text x="612" y="175" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Profit vs. Free Cash Flow (ME&amp;T and Consolidated), USDm</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. ME&amp;T FCF (company-defined, excludes Cat Financial) is consistently higher than consolidated FCF because Cat Financial's leased-equipment capex and financing flows sit only in the consolidated figure. ME&amp;T FCF: FY2023 record ~$10.0B; FY2021-22 as re-derived from the 10-K reconciliations; FY2024-25 as stated by management ($9.4B, $9.5B).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating profit (consolidated)</span><span><span class="dot" style="background:#fbbf24;"></span>Consolidated FCF (OCF - all capex)</span><span><span class="dot" style="background:#34d399;"></span>ME&amp;T FCF (company-defined)</span></div>
+    <svg viewBox="0 0 700 180">
+      <line x1="10" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <!-- 2021 -->
+      <rect x="20" y="76.3" width="28" height="73.7" fill="#60a5fa"/>
+      <text x="34" y="72.3" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">6,878</text>
+      <rect x="52" y="99.4" width="28" height="50.6" fill="#fbbf24"/>
+      <text x="66" y="95.4" text-anchor="middle" font-size="7" fill="#fde68a">4,726</text>
+      <rect x="84" y="85.2" width="28" height="64.8" fill="#34d399"/>
+      <text x="98" y="81.2" text-anchor="middle" font-size="7" fill="#a7f3d0">~6,048</text>
+      <text x="66" y="168" text-anchor="middle" font-size="10" fill="#94a3b8">2021</text>
+      <!-- 2022 -->
+      <rect x="160" y="65.4" width="28" height="84.6" fill="#60a5fa"/>
+      <text x="174" y="61.4" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">7,904</text>
+      <rect x="192" y="94.7" width="28" height="55.3" fill="#fbbf24"/>
+      <text x="206" y="90.7" text-anchor="middle" font-size="7" fill="#fde68a">5,167</text>
+      <rect x="224" y="88.1" width="28" height="61.9" fill="#34d399"/>
+      <text x="238" y="84.1" text-anchor="middle" font-size="7" fill="#a7f3d0">5,777</text>
+      <text x="206" y="168" text-anchor="middle" font-size="10" fill="#94a3b8">2022</text>
+      <!-- 2023 -->
+      <rect x="300" y="11.1" width="28" height="138.9" fill="#60a5fa"/>
+      <text x="314" y="7.1" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">12,966</text>
+      <rect x="332" y="45.1" width="28" height="104.9" fill="#fbbf24"/>
+      <text x="346" y="41.1" text-anchor="middle" font-size="7" fill="#fde68a">9,793</text>
+      <rect x="364" y="42.9" width="28" height="107.1" fill="#34d399"/>
+      <text x="378" y="38.9" text-anchor="middle" font-size="7" fill="#a7f3d0">~10,000</text>
+      <text x="346" y="168" text-anchor="middle" font-size="10" fill="#94a3b8">2023</text>
+      <!-- 2024 -->
+      <rect x="440" y="10" width="28" height="140" fill="#60a5fa"/>
+      <text x="454" y="6" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">13,072</text>
+      <rect x="472" y="55.5" width="28" height="94.5" fill="#fbbf24"/>
+      <text x="486" y="51.5" text-anchor="middle" font-size="7" fill="#fde68a">8,820</text>
+      <rect x="504" y="49.3" width="28" height="100.7" fill="#34d399"/>
+      <text x="518" y="45.3" text-anchor="middle" font-size="7" fill="#a7f3d0">~9,400</text>
+      <text x="486" y="168" text-anchor="middle" font-size="10" fill="#94a3b8">2024</text>
+      <!-- 2025 -->
+      <rect x="580" y="30.6" width="28" height="119.4" fill="#60a5fa"/>
+      <text x="594" y="26.6" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">11,151</text>
+      <rect x="612" y="70.2" width="28" height="79.8" fill="#fbbf24"/>
+      <text x="626" y="66.2" text-anchor="middle" font-size="7" fill="#fde68a">7,453</text>
+      <rect x="644" y="48.3" width="28" height="101.7" fill="#34d399"/>
+      <text x="658" y="44.3" text-anchor="middle" font-size="7" fill="#a7f3d0">~9,500</text>
+      <text x="626" y="168" text-anchor="middle" font-size="10" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr)</div>
+      <div class="val" style="color:#fbbf24;">+7.3%</div>
+      <div class="sub">FY21→FY25 ($51.0B → $67.6B) — steady, but under the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr)</div>
+      <div class="val" style="color:#fbbf24;">+12.8%</div>
+      <div class="sub">$6.9B → $11.2B; peaked at $13.1B in FY24, so margin expansion did the work</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr)</div>
+      <div class="val" style="color:#fbbf24;">+11.9%</div>
+      <div class="sub">ME&amp;T FCF ~$6.0B → ~$9.5B; consolidated FCF +12.1% ($4.7B → $7.5B)</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Reported consolidated operating profit margin. Dashed line marks the 20% bar this scorecard uses; Caterpillar cleared it only in FY24 (20.2%; FY23 was 19.3%), and was back at 20.9% reported in Q2 2026.</div>
+    <svg viewBox="0 0 700 100">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="60" x2="690" y2="60" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="30" x2="690" y2="30" stroke="#475569" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="4" y="63" font-size="7.5" fill="#64748b">10%</text>
+      <text x="4" y="33" font-size="7.5" fill="#64748b">20%</text>
+      <polyline points="60,49.5 205,50.1 350,32.1 495,29.4 640,40.5" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="49.5" r="3.2" fill="#fbbf24"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="42.5" text-anchor="middle" font-size="8" fill="#cbd5e1">13.5%</text>
+      <circle cx="205" cy="50.1" r="3.2" fill="#fbbf24"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="43.1" text-anchor="middle" font-size="8" fill="#cbd5e1">13.3%</text>
+      <circle cx="350" cy="32.1" r="3.2" fill="#fbbf24"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="25.1" text-anchor="middle" font-size="8" fill="#cbd5e1">19.3%</text>
+      <circle cx="495" cy="29.4" r="3.2" fill="#fbbf24"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="22.4" text-anchor="middle" font-size="8" fill="#cbd5e1">20.2%</text>
+      <circle cx="640" cy="40.5" r="3.2" fill="#fbbf24"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="33.5" text-anchor="middle" font-size="8" fill="#cbd5e1">16.5%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>ME&amp;T FCF</th><th>Consol. FCF</th><th>ME&amp;T FCF / MP&amp;E EBIT</th></tr>
+    <tr><td>FY2021</td><td>50,971</td><td>6,878</td><td>13.5%</td><td>6,489</td><td>$11.83</td><td>~6,048</td><td>4,726</td><td>95%</td></tr>
+    <tr><td>FY2022</td><td>59,427</td><td>7,904</td><td>13.3%</td><td>6,705</td><td>$12.64</td><td>5,777</td><td>5,167</td><td>78%</td></tr>
+    <tr><td>FY2023</td><td>67,060</td><td>12,966</td><td>19.3%</td><td>10,335</td><td>$20.12</td><td>~10,000</td><td>9,793</td><td>79%</td></tr>
+    <tr><td>FY2024</td><td>64,809</td><td>13,072</td><td>20.2%</td><td>10,792</td><td>$22.05</td><td>~9,400</td><td>8,820</td><td>72%</td></tr>
+    <tr><td>FY2025</td><td>67,589</td><td>11,151</td><td>16.5%</td><td>8,884</td><td>$18.81</td><td>~9,500</td><td>7,453</td><td>87%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">ME&amp;T FCF / MP&amp;E EBIT divides ME&amp;T free cash flow by Machinery, Power &amp; Energy operating profit ($6,363m / $7,433m / $12,659m / $13,098m / $10,884m for FY21-25), so numerator and denominator both exclude Financial Products. Rounded "~" ME&amp;T FCF figures come from management commentary ($10.0B FY23, $9.4B FY24, $9.5B FY25); FY21 ($6.05B) and FY22 ($5.78B) come from 10-K reconciliations that add back IRS settlement payments. FY22 and FY23 operating margins include restructuring and impairment charges (adjusted: 15.4% and 20.5%); FY25 adjusted is 17.2%.</div>
+  <div class="footer-note">Source: Caterpillar Q4/full-year earnings releases (SEC 8-K exhibits, Feb 2023 - Jan 2026); stockanalysis.com (CAT financial statements, data via S&amp;P Global Market Intelligence) for net income, EPS and consolidated FCF.</div>
+</div>
+
+<!-- ============ PAGE 3 — RECENT PERFORMANCE & OUTLOOK ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Recent Performance, Backlog &amp; 2026 Outlook</div></div>
+  <div class="sec-sub">Eight quarters show a clean turn: revenue fell year-on-year through Q2 2025, then accelerated to +24% in Q2 2026 as power-generation demand, rental fleet loading and price kicked in.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 (reported Aug 4, 2026): first $20B+ quarter, backlog $72B</div>
+    <p>Sales and revenues were $20.5B (+24% YoY, +$4.0B on higher volume of $3.1B and price of $0.6B). Operating margin was 20.9% reported (21.9% adjusted vs 17.6% a year earlier); adjusted EPS was $8.17 (+73%). Record MP&amp;E free cash flow of $5.1B (+$2.8B YoY), with $2.2B returned via dividends and buybacks in the quarter. Backlog reached $72B, +$9B in the quarter and +92% YoY, with all three segments contributing and orders extending into 2030. The stock rose 5.6% on results day but has since given back that move.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Growth — Last 8 Quarters (YoY, reported)</div>
+    <div class="chart-sub">Total sales and revenues. Four flat-to-down quarters, then four accelerating ones. Q2 2026 is the fastest growth since 2022.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Growth YoY % (positive)</span><span><span class="dot" style="background:#f87171;"></span>Growth YoY % (negative)</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="100" width="56" height="10.9" fill="#f87171"/><text x="58" y="123" text-anchor="middle" font-size="9" fill="#cbd5e1">-4.2%</text><text x="58" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+      <rect x="114" y="100" width="56" height="13" fill="#f87171"/><text x="142" y="125" text-anchor="middle" font-size="9" fill="#cbd5e1">-5.0%</text><text x="142" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="198" y="100" width="56" height="25.5" fill="#f87171"/><text x="226" y="138" text-anchor="middle" font-size="9" fill="#cbd5e1">-9.8%</text><text x="226" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="282" y="100" width="56" height="1.9" fill="#f87171"/><text x="310" y="114" text-anchor="middle" font-size="9" fill="#cbd5e1">-0.7%</text><text x="310" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="366" y="75.3" width="56" height="24.7" fill="#34d399"/><text x="394" y="71" text-anchor="middle" font-size="9" fill="#cbd5e1">+9.5%</text><text x="394" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="450" y="53.2" width="56" height="46.8" fill="#34d399"/><text x="478" y="49" text-anchor="middle" font-size="9" fill="#cbd5e1">+18.0%</text><text x="478" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="534" y="42.2" width="56" height="57.8" fill="#34d399"/><text x="562" y="38" text-anchor="middle" font-size="9" fill="#cbd5e1">+22.2%</text><text x="562" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="618" y="37.7" width="56" height="62.3" fill="#34d399"/><text x="646" y="33" text-anchor="middle" font-size="9" fill="#cbd5e1">+24.0%</text><text x="646" y="152" text-anchor="middle" font-size="9.5" fill="#f8fafc" font-weight="700">Q2'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue (USD m)</th><th>YoY</th><th>Op. margin (S&amp;P basis)</th><th>Consol. FCF (USD m)</th></tr>
+    <tr><td>Q3 2024</td><td>16,106</td><td>-4.2%</td><td>19.9%</td><td>2,846</td></tr>
+    <tr><td>Q4 2024</td><td>16,215</td><td>-5.0%</td><td>19.2%</td><td>2,356</td></tr>
+    <tr><td>Q1 2025</td><td>14,249</td><td>-9.8%</td><td>18.4%</td><td>371</td></tr>
+    <tr><td>Q2 2025</td><td>16,569</td><td>-0.7%</td><td>17.7%</td><td>2,167</td></tr>
+    <tr><td>Q3 2025</td><td>17,638</td><td>+9.5%</td><td>17.8%</td><td>2,666</td></tr>
+    <tr><td>Q4 2025</td><td>19,133</td><td>+18.0%</td><td>16.0%</td><td>2,249</td></tr>
+    <tr><td>Q1 2026</td><td>17,415</td><td>+22.2%</td><td>18.2%</td><td>819</td></tr>
+    <tr><td>Q2 2026</td><td>20,543</td><td>+24.0%</td><td>22.2%</td><td>3,260</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly margin uses S&amp;P Global's standardized basis, which excludes some restructuring items and runs ~1-2pp above Caterpillar's own reported margin (e.g. Q2 2026: 20.9% reported / 21.9% adjusted; Q4 2025: 13.9% reported / 15.6% adjusted).</div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Segment (Q2 2026)</th><th>Sales</th><th>YoY</th><th>Segment margin</th><th>What is driving it</th></tr>
+    <tr><td>Construction Industries</td><td>$8.3B</td><td>+35%</td><td>23.3%</td><td>Rental-fleet loading in North America, price; residential still soft; dealer inventory a H2 headwind</td></tr>
+    <tr><td>Resource Industries</td><td>$4.6B</td><td>+20%</td><td>14.9%</td><td>Mining and heavy-construction demand; long-cycle autonomy and services</td></tr>
+    <tr><td>Power &amp; Energy</td><td>$8.2B</td><td>+17%</td><td>24.6%</td><td>Sales to users +33%, power generation +72% (data centers); oil &amp; gas backlog ~2x YoY</td></tr>
+    <tr><td>Financial Products</td><td>$1.1B</td><td>+10%</td><td>Profit $328M (+32%)</td><td>Past dues 1.31%, lowest since 1998; allowance rate at a record-low 0.84%</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>AI data-center power is the swing factor.</b> Management said no customers are slowing AI-related orders, gas-prime lead times run to late 2028-29 (turbines slightly longer, diesel standby into 2028), and Caterpillar is restarting its 10-megawatt gas reciprocating engine platform, with first orders taken and deliveries from Q4. It also referenced a 65-gigawatt power-generation target for 2030 (definition not verified here). Capacity expansion brings higher depreciation and freight costs, which management flagged as margin pressure.
+  </div>
+
+  <div class="callout" style="margin-top:8px;">
+    <b>Tariffs and cyclicality.</b> Tariff costs were about $400M in Q2 and are expected around $2.2B for FY2026 (both excluding IEEPA recoveries), at the low end of the earlier range. Outlook raised in August: sales growth in the mid- to high-teens, better margin, and MP&amp;E FCF in the top half of the $6-15B target range (per call summaries). Q4 usually brings a Construction Industries dealer-inventory drawdown. Q3 results are due around Oct 28, 2026. Any pause in hyperscaler capex, or a mining or construction downturn, would hit a stock priced for continuity.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Caterpillar earns real profits, so trailing and forward P/E are both usable here. Both have roughly doubled from their FY21-24 range of 14-19x; the stock is priced for the AI-power cycle to last.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Earnings — FY-End vs. Current (trailing and forward)</div>
+    <div class="chart-sub">Current trailing P/E 35.3x vs. a FY21-25 average of 19.4x (1.83x its own history); current forward P/E 28.5x vs. a 18.6x average (1.53x). PEG ratio ≈ 1.56. P/FCF is 41.9x now vs. a 23.8x five-year average.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (FY-end)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Forward P/E (FY-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Current (trailing / forward)</span>
+    </div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="20" y1="86.4" x2="690" y2="86.4" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="20" y="18" font-size="9.5" fill="#fbbf24">Dashed line = FY21-25 average trailing P/E (19.4x)</text>
+      <rect x="30" y="91.2" width="40" height="38.8" fill="#60a5fa"/><text x="50" y="106.2" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">17.2x</text>
+      <rect x="74" y="89.6" width="40" height="40.4" fill="#fbbf24"/><text x="94" y="105" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">18.0x</text>
+      <text x="72" y="143" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="140" y="88.2" width="40" height="41.8" fill="#60a5fa"/><text x="160" y="103.2" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">18.6x</text>
+      <rect x="184" y="94.4" width="40" height="35.6" fill="#fbbf24"/><text x="204" y="110" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">15.8x</text>
+      <text x="182" y="143" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="250" y="97.2" width="40" height="32.8" fill="#60a5fa"/><text x="270" y="112.2" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">14.6x</text>
+      <rect x="294" y="97.4" width="40" height="32.6" fill="#fbbf24"/><text x="314" y="113" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">14.5x</text>
+      <text x="292" y="143" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="360" y="93.5" width="40" height="36.5" fill="#60a5fa"/><text x="380" y="108.5" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">16.2x</text>
+      <rect x="404" y="91.6" width="40" height="38.4" fill="#fbbf24"/><text x="424" y="107" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">17.1x</text>
+      <text x="402" y="143" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="470" y="62.1" width="40" height="67.9" fill="#60a5fa"/><text x="490" y="58" text-anchor="middle" font-size="9" fill="#cbd5e1">30.2x</text>
+      <rect x="514" y="67.6" width="40" height="62.4" fill="#fbbf24"/><text x="534" y="83" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">27.7x</text>
+      <text x="512" y="143" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="580" y="50.5" width="40" height="79.5" fill="#2dd4bf"/><text x="600" y="46" text-anchor="middle" font-size="9" fill="#cbd5e1">35.3x</text>
+      <rect x="624" y="65.8" width="40" height="64.2" fill="#5eead4"/><text x="644" y="81" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">28.5x</text>
+      <text x="622" y="143" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Current</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>How to read the three ratios.</b> Trailing P/E (35.3x) divides today's price by the last four quarters of GAAP EPS ($23.21). Forward P/E (28.5x) divides by consensus next-twelve-month EPS, so it is lower because analysts expect earnings to keep growing (consensus 3-yr EPS growth ≈ 27%). The PEG of ~1.56 says the market is paying about 1.6x for each point of expected growth &mdash; not extreme for a quality industrial, but well above Caterpillar's own history. Every measure agrees: the multiple has expanded far faster than the earnings. The stock has already de-rated slightly from June (trailing P/E was ~45x at the Jun 30 peak).
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet: how I separate Cat Financial from ME&amp;T.</b> Consolidated debt is $45.1B against $5.9B of cash (Jun 2026), i.e. net debt of $39.2B or 2.4x TTM EBITDA ($16.3B). But most of that is Cat Financial funding customer and dealer receivables. At year-end 2025, Financial Products debt was ~$32.6B (short-term $5.5B, long-term $27.1B) while ME&amp;T (MP&amp;E) debt was only ~$10.7B, against $10.0B of enterprise cash. Netting that gives ME&amp;T net debt of roughly $0.7B, or ~0.1x a MP&amp;E EBITDA proxy of $12-13B. Because consolidated cash fell to $5.9B by mid-2026 (buybacks and working capital), I put ME&amp;T leverage at ~0.1-0.4x. This is an estimate: enterprise cash is not split by segment in the sources I used, and MP&amp;E depreciation isn't disclosed separately. Scored on the ME&amp;T basis.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CapEx &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Includes equipment leased to others (rental and Cat Financial operating leases), so it overstates a pure manufacturing capex figure: ex-leased-equipment capex was $2.8B or 4.2% of FY2025 revenue. Intensity is rising as Caterpillar adds Power &amp; Energy capacity.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (USDm, bars; % of revenue in bar)</span></div>
+    <svg viewBox="0 0 700 175">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="79.3" width="60" height="80.7" fill="#60a5fa"/><text x="60" y="74.3" text-anchor="middle" font-size="8" fill="#cbd5e1">2,472</text><text x="60" y="95.3" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">4.85%</text><text x="60" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="75.1" width="60" height="84.9" fill="#60a5fa"/><text x="200" y="70.1" text-anchor="middle" font-size="8" fill="#cbd5e1">2,599</text><text x="200" y="91.1" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">4.37%</text><text x="200" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="59" width="60" height="101" fill="#60a5fa"/><text x="340" y="54" text-anchor="middle" font-size="8" fill="#cbd5e1">3,092</text><text x="340" y="75" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">4.61%</text><text x="340" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="55" width="60" height="105" fill="#60a5fa"/><text x="480" y="50" text-anchor="middle" font-size="8" fill="#cbd5e1">3,215</text><text x="480" y="71" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">4.96%</text><text x="480" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="20" width="60" height="140" fill="#60a5fa"/><text x="620" y="15" text-anchor="middle" font-size="8" fill="#cbd5e1">4,286</text><text x="620" y="36" text-anchor="middle" font-size="9" fill="#0a0e1a" font-weight="700">6.34%</text><text x="620" y="172" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">2025</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="230.1 84.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="83.4 230.8" stroke-dashoffset="-230.1" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="1.5 312.7" stroke-dashoffset="-313.5" transform="rotate(-90 60 60)"/>
+          <text x="60" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#f8fafc">0.2%</text>
+          <text x="60" y="71" text-anchor="middle" font-size="7" fill="#7c8aa5">insiders</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~73.2% (largest passive index managers; holder-level detail not verified)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail / other ~26.6%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Insiders (officers &amp; directors) ~0.21%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Return</div>
+      <p>Shares outstanding fell from an EPS-implied ~548M (FY2021) to 459.7M today, down about 16%, and by 2.7% in the last year alone. Buybacks were $2.7B, $4.2B, $5.0B, $7.7B and $5.3B in FY21-25 ($7.3B TTM), on top of $2.7B a year of dividends. The dividend has grown for 33 straight years to $6.52 (payout ≈ 28%, yield 0.8% &mdash; low because the price has risen so fast).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Each criterion is scored 0-5 on the graduated scale (points shown as X/5) and weighted (total weight 105); the Martinero Index is the weighted sum &divide; 105 &times; 100. The Met / Not met pill uses the original fixed thresholds. Cash-flow criteria use ME&amp;T (MP&amp;E) figures and leverage uses ME&amp;T net debt, with consolidated values shown alongside.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion (weight)</th><th>Result</th><th>Pts</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) ≥15% (13)</td><td>+7.3% FY21-25 ($51.0B → $67.6B) — 5-10% band</td><td>2/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) ≥15% (11)</td><td>+12.8% ($6.9B → $11.2B reported operating profit) — 10-15% band</td><td>3/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY ≥20% (10)</td><td>16.5% FY2025 (20.2% FY24; Q2 2026 20.9%) — 15-20% band</td><td>4/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) ≥15% (8)</td><td>+11.9% ME&amp;T FCF (~$6.0B → ~$9.5B); +12.1% consolidated ($4.7B → $7.5B) — 10-15% band</td><td>3/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>5</td><td>Market share — #1 or #2 (7)</td><td>#1 global construction-equipment maker by sales (KHL Yellow Table 2026, Komatsu #2); co-leader in large mining equipment. Exact % share not disclosed/verified</td><td>5/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly, 5=open) — 1&ndash;2 = Met, 3&ndash;5 = Not met (6)</td><td>Score 3/5 — a global oligopoly of 8-10 scaled rivals (Komatsu, XCMG, Deere, Volvo CE, Liebherr, Sany, Hitachi...) plus Cummins, Rolls-Royce and others in power generation; not a near-monopoly</td><td>2/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC (10)</td><td>ROIC 18.3% vs model WACC 11.7% = +6.6 pt spread (S&amp;P model; a lower WACC of ~9% would widen it) — 6-9 pt band</td><td>3/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &lt;2x (6)</td><td>~0.1-0.4x ME&amp;T (estimate; see page 4). Consolidated incl. Cat Financial: 2.4x — scored on the ME&amp;T basis, 0-1x band</td><td>4/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) ≥80% (8)</td><td>87% FY2025 (ME&amp;T FCF $9.5B ÷ MP&amp;E operating profit $10.9B); five-year range 72-95%. Consolidated basis would be 67% (3/5)</td><td>4/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history (8)</td><td>Trailing P/E 35.3x vs FY21-25 avg 19.4x = 1.83x own history (forward 28.5x vs 18.6x = 1.53x) — above the 1.30x ceiling</td><td>0/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>11</td><td>Share count trend — flat/declining (4)</td><td>~548M (FY21) → 459.7M, down ~16%; -2.7% in the last year (buybacks)</td><td>5/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership — meaningful (5)</td><td>0.21% insiders; no founder or family stake; broad employee-plan ownership not verified</td><td>0/5</td><td><span class="status-pill status-not">NOT MET</span></td></tr>
+    <tr><td>13</td><td>Capex intensity — low/asset-light (4)</td><td>6.3% of FY2025 revenue including leased equipment (4.2% ex-leased); 4.4-5.0% in FY21-24. Borderline, and rising with capacity expansion</td><td>3/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; ≥ -2.5pp gross margin, 3-yr) (5)</td><td>Gross margin 26.19% FY2022 → 28.79% FY2025 = +2.60pp over the window; but FY25 fell 3.75pp from the FY24 peak (32.54%) on tariffs and mix, so 4/5 rather than 5/5</td><td>4/5</td><td><span class="status-pill status-met">MET</span></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Weighted points: 5.2 + 6.6 + 8.0 + 4.8 + 7.0 + 2.4 + 6.0 + 4.8 + 6.4 + 0.0 + 4.0 + 0.0 + 2.4 + 4.0 = 61.6 of 105, so Martinero Index = 61.6 &divide; 105 &times; 100 = 58.7, shown as 59/100. No criterion was N/A. Criterion 14 has no fixed graduated bands yet; 4/5 is my judgement (window gain qualifies, but the latest-year slide caps it).</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A category-leading franchise with a record $72B backlog (+92% YoY), Q2 2026 revenue growth of 24% and a 20.9% reported margin, ME&amp;T free cash flow near $9.5B a year (about 87% of MP&amp;E operating profit), and a very light industrial balance sheet once Cat Financial is separated. Services are ~39% of machinery-and-power revenue, which cushions the cycle; AI data-center power demand (power generation sales to users +72%) is a genuine second growth engine with order books into 2029-30; and shareholders benefit from a ~16% lower share count and 33 years of dividend growth.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The price already discounts the good news: trailing P/E is 1.8x its own five-year average and the entry-multiple and insider-ownership criteria score zero. Five-year growth (7% revenue, 13% EBIT) is respectable, not exceptional, and depends on the last two quarters holding. Risks include ~$2.2B of FY2026 tariff cost, a Q4 dealer-inventory drawdown, capacity-expansion costs (depreciation, freight) and rising capex intensity, lumpy data-center orders that could pause if hyperscaler spending slows, and the usual mining and construction cyclicality. The stock is also volatile (beta 1.59) and already ~23% below its June high.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Caterpillar earnings releases (SEC 8-K exhibits: Q4/FY2022, FY2023, FY2025; Q2 2026, Aug 4, 2026) and Q4 2023 / Q4 2025 / Q2 2026 earnings-call materials (via GuruFocus and call transcripts); stockanalysis.com (CAT financials, statistics, ratios and quarterly data via S&amp;P Global Market Intelligence, updated Sep 29, 2026); KHL Group Yellow Table 2026 (via XCMG and industry press coverage). <b>Flagged as unverified or estimated:</b> Caterpillar's own share of construction and mining equipment (not disclosed); ME&amp;T-only net debt (estimated from year-end 2025 segment debt, cash not split by segment); FY2021-22 ME&amp;T FCF (10-K reconciliation, slightly different from later management framing); year-end 2025 share price (derived from the reported +59.5% 2025 gain); holder-level institutional ownership; customer and geographic concentration (not reviewed in this pass); the 65-gigawatt 2030 target (mentioned on the Q2 call, definition not confirmed); WACC (S&amp;P model output). Prepared Sep 29, 2026 &mdash; <b>today's daily pick, for personal portfolio research only. Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Caterpillar Inc. &mdash; NYSE, USD share price trend. Points are calendar year-end closes plus the latest close; price only, excluding dividends.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Caterpillar Inc. &mdash; Year-End Close</div>
+    <div class="chart-sub">Year-end closes FY2021-FY2025, plus the Sep 28, 2026 close. *The ~$578 year-end 2025 figure is derived from the widely reported +59.5% 2025 gain, not read from a price table; the dashed CAGR line (+31.7%*, Dec 2021 to Sep 2026, annualised over five years as on the other dashboards) is price return only. The stock hit an all-time closing high of about $1,063 on Jun 30, 2026 and is ~23% below it today.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity="0.24"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,145.1 L 172.8,139.5 L 299.6,130.1 L 426.4,118.7 L 553.2,82.4 L 680.0,41.5 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="145.1" x2="680.0" y2="41.5" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="70" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+31.7%*</text>
+<path d="M 46.0,145.1 L 172.8,139.5 L 299.6,130.1 L 426.4,118.7 L 553.2,82.4 L 680.0,41.5" fill="none" stroke="#34d399" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="145.1" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="46.0" y="163.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$206.74</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="139.5" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="172.8" y="157.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$239.56</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="130.1" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="299.6" y="148.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$295.67</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="118.7" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="426.4" y="138.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$362.76</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="82.4" r="3" fill="#0e1626" stroke="#34d399" stroke-width="1.6"/>
+<text x="561" y="99" font-size="10.5" fill="#e2e8f0" text-anchor="start" font-weight="700">~$578*</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="41.5" r="4" fill="#34d399" stroke="#34d399" stroke-width="1.6"/>
+<text x="678" y="30" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$819.95</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Share price data: year-end 2021-2024 closes from historical price records; Sep 28, 2026 close via stockanalysis.com (S&amp;P Global Market Intelligence). Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

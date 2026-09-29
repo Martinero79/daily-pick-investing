@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Komatsu Ltd. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/komatsu.html">
+<meta property="og:title" content="Komatsu Ltd. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Komatsu Ltd. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; }
+.mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; margin-bottom:8px; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+.callout.blue b { color:#60a5fa; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; }
+.status-not { background:#301414; color:#f87171; }
+.status-score { background:#2a2110; color:#fbbf24; }
+.status-na { background:#1a2236; color:#94a3b8; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; }
+.info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.note-box { background:#0f1a10; border:1px solid #1f4a2a; border-radius:10px; padding:12px 15px; margin-top:10px; margin-bottom:10px; }
+.note-box .title { color:#4ade80; font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.note-box p { font-size:12.5px; color:#cfe8d4; line-height:1.6; margin:0 0 8px 0; }
+.note-box p:last-child { margin-bottom:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+.footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+.headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard &middot; Competitor Profile</div>
+  <h1>Komatsu Ltd.</h1>
+  <div class="badges">
+    <div class="badge">Tokyo: 6301 &middot; OTC ADR: KMTUY</div>
+    <div class="badge">FY ends Mar 31 &middot; reports quarterly (U.S. GAAP)</div>
+    <div class="badge">HQ: Tokyo, Japan &middot; founded 1921</div>
+    <div class="badge">Reports &amp; trades in JPY (&yen;)</div>
+    <div class="badge warn">Global #2 in construction &amp; mining equipment &mdash; record sales, but margins are past their peak and the stock now trades well above its own history</div>
+  </div>
+
+  <div class="price">&yen;7,012</div>
+  <div class="price-sub">Sep 21, 2026 (delayed quote) &middot; Market cap &asymp; &yen;6.25T (&asymp; US$42B) on 891.5M shares &middot; 52-wk range &yen;4,914 &ndash; &yen;7,840 &middot; ~+49% over the past year &middot; Beta 0.98 &middot; Analyst consensus: Hold (12 analysts), avg target &asymp; &yen;6,739 (as of early Sep) &middot; Dividend &yen;190/share (&asymp;2.7% yield)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Market position:</b> the world's second-largest maker of construction and mining equipment behind Caterpillar, with mining (large haul trucks, autonomous haulage) its crown jewel &middot; other rivals: Volvo CE, Hitachi Construction Machinery, Liebherr, Sandvik and Epiroc in mining, and XCMG, Sany and Zoomlion from China &middot; this is a <b style="color:#94a3b8;">competitor dashboard</b> alongside Caterpillar, not the daily pick</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&yen;4,132.8B</div>
+      <div class="sub" style="color:#fbbf24;">+0.7% YoY (FY2025: +6.2%)</div>
+      <div class="note">Year ended Mar 31, 2026 &mdash; a record but essentially flat; price increases offset lower volumes. Latest quarter (Apr&ndash;Jun 2026) rebounded +14.7% YoY.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating (EBIT) Margin</div>
+      <div class="val red">13.8%</div>
+      <div class="sub">vs 16.2% FY2025 &mdash; off the peak</div>
+      <div class="note">Tariffs, higher material and shipping costs and lower volumes compressed margin 2.4pp. Management guides FY2027 to roughly 12.9%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">9.4% / 8.1%</div>
+      <div class="sub">FY2026; spread only +1.3pp</div>
+      <div class="note">Both figures are S&amp;P Global Market Intelligence estimates. ROIC peaked at 12.3% in FY2025; a captive retail-finance arm dilutes returns.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">1.35x</div>
+      <div class="sub">FY2026 consolidated; 1.55x trailing to Jun 2026</div>
+      <div class="note">Consolidated (includes debt that funds customer-finance receivables), so a conservative read; industrial-only leverage is lower but was not independently verified.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">57/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">5/14 criteria met &mdash; a solid, cash-generative #2 with a clean balance sheet and shrinking share count, held back by mid-teens margins, a premium multiple and no insider skin in the game.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="112.2 202.0" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="202.0 112.2" stroke-dashoffset="-112.2" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">5/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>5 criteria met</b> &mdash; EBIT CAGR (just), global #2 market share, net debt/EBITDA under 2x, falling share count, and margin stability over three years</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>9 not met</b> &mdash; revenue CAGR, EBIT margin, FCF CAGR (just missed), market concentration, ROIC vs WACC, FCF conversion, entry multiple vs own history, insider ownership, capex intensity</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0 (all 14 criteria are computable)</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; a top-end duopoly with Caterpillar in mining, but a contested global construction market</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Komatsu, founded in 1921 and headquartered in Tokyo, is the world's second-largest builder of construction and mining equipment, behind only Caterpillar. About 92% of revenue comes from construction, mining and utility equipment; the rest is a small captive retail-finance arm (about 2%) and industrial machinery such as large presses and excimer lasers for chipmaking (about 6%). The last five fiscal years were a strong upcycle: revenue rose from &yen;2.80T (FY2022) to &yen;4.13T (FY2026), and operating income from &yen;324B to &yen;571B, with the operating margin peaking at 16.2% in FY2025. But the momentum has stalled: FY2026 revenue grew just 0.7% and operating income fell 14% as tariffs, higher input and shipping costs and lower volumes bit, and management's own FY2027 plan calls for slightly higher sales but a further ~2% decline in operating income. The most recent quarter (Apr&ndash;Jun 2026) was a record first quarter for sales (+14.7% YoY), which lifted full-year guidance, though the operating margin still slipped to 14.5%. Two things stand out on the scorecard. First, the growth CAGRs look better than they are: a much weaker yen inflates every yen-reported number, because most Komatsu sales are made overseas. Second, the share price has re-rated sharply &mdash; up roughly 49% in a year while earnings were flat &mdash; so the trailing P/E of about 16.6x sits roughly 49% above Komatsu's own fiscal-year-end average of about 11.2x. What you get is a high-quality, low-leverage global #2 with active buybacks and clean governance (no cross-shareholdings), but no insider ownership and a valuation that has already priced in a good part of the cycle.
+  </div>
+
+  <div class="callout">
+    <b>JPY note &mdash; read every yen figure with this in mind:</b> all amounts on this dashboard are in Japanese yen (&yen;) as reported, and the fiscal year ends March 31. Over FY2022&ndash;FY2026 the yen weakened from roughly &yen;112 to roughly &yen;150 per US dollar (the rate Komatsu itself assumes for FY2027), so yen-reported growth is inflated relative to growth in dollar or euro terms. As an illustration, revenue growth of +10.2% a year in yen terms would be only about 2&ndash;3% a year in dollar terms using those two approximate exchange rates. Treat the CAGR figures accordingly; the yen exchange rates used here are approximate, not sourced averages.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage &amp; labeling note:</b> figures refreshed through the April&ndash;June 2026 quarter (reported late July 2026) and spot price as of Sep 21, 2026. This dashboard labels fiscal years by the calendar year in which they end (FY2026 = year ended March 31, 2026), matching S&amp;P Global Market Intelligence's convention; Komatsu itself calls that same year &ldquo;FY2025&rdquo;. Operating income here uses S&amp;P's standardized figures (FY2026: &yen;570.5B), which differ slightly from the company-reported &yen;567.3B. The next earnings release is expected around Oct 29, 2026.
+  </div>
+
+  <div class="bignum-corner">5/14 CRITERIA MET</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">JPY billions as reported (U.S. GAAP; S&amp;P standardized). CAGR computed FY22&rarr;FY26 (4-year span). Fiscal year ends March 31. A cyclical earnings peak in FY2025, with FY2026 the first step down.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual (&yen;B)</div>
+    <div class="chart-sub">Revenue has risen every year but growth has faded to +0.7%; operating income peaked in FY2025 and fell in FY2026. Free cash flow is lumpy because working capital swings widely: FY2023 saw a huge inventory and receivables build (FCF only &yen;22.9B).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 290" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="250.0" x2="840" y2="250.0" stroke="#475569" stroke-width="1"/><text x="50" y="254.0" text-anchor="end" font-size="11" fill="#64748b">¥0B</text><line x1="60" y1="208.0" x2="840" y2="208.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.0" text-anchor="end" font-size="11" fill="#64748b">¥1,000B</text><line x1="60" y1="166.0" x2="840" y2="166.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.0" text-anchor="end" font-size="11" fill="#64748b">¥2,000B</text><line x1="60" y1="124.0" x2="840" y2="124.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="128.0" text-anchor="end" font-size="11" fill="#64748b">¥3,000B</text><line x1="60" y1="82.0" x2="840" y2="82.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.0" text-anchor="end" font-size="11" fill="#64748b">¥4,000B</text><line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">¥5,000B</text><rect x="75.6" y="132.3" width="22.5" height="117.7" rx="2" fill="#2dd4bf"/><text x="86.8" y="128.3" text-anchor="middle" font-size="10" fill="#cbd5e1">2,802</text><rect x="113.7" y="236.4" width="22.5" height="13.6" rx="2" fill="#60a5fa"/><text x="124.9" y="232.4" text-anchor="middle" font-size="10" fill="#cbd5e1">324</text><rect x="151.8" y="244.2" width="22.5" height="5.8" rx="2" fill="#fbbf24"/><text x="163.1" y="240.2" text-anchor="middle" font-size="10" fill="#cbd5e1">138</text><text x="125.0" y="272" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="238.1" y="101.2" width="22.5" height="148.8" rx="2" fill="#2dd4bf"/><text x="249.3" y="97.2" text-anchor="middle" font-size="10" fill="#cbd5e1">3,544</text><rect x="276.2" y="229.0" width="22.5" height="21.0" rx="2" fill="#60a5fa"/><text x="287.4" y="225.0" text-anchor="middle" font-size="10" fill="#cbd5e1">500</text><rect x="314.3" y="249.0" width="22.5" height="1.0" rx="2" fill="#fbbf24"/><text x="325.6" y="245.0" text-anchor="middle" font-size="10" fill="#cbd5e1">23</text><text x="287.5" y="272" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="400.6" y="87.7" width="22.5" height="162.3" rx="2" fill="#2dd4bf"/><text x="411.9" y="83.7" text-anchor="middle" font-size="10" fill="#cbd5e1">3,865</text><rect x="438.7" y="224.2" width="22.5" height="25.8" rx="2" fill="#60a5fa"/><text x="450.0" y="220.2" text-anchor="middle" font-size="10" fill="#cbd5e1">614</text><rect x="476.8" y="240.3" width="22.5" height="9.7" rx="2" fill="#fbbf24"/><text x="488.1" y="236.3" text-anchor="middle" font-size="10" fill="#cbd5e1">232</text><text x="450.0" y="272" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="563.1" y="77.6" width="22.5" height="172.4" rx="2" fill="#2dd4bf"/><text x="574.4" y="73.6" text-anchor="middle" font-size="10" fill="#cbd5e1">4,104</text><rect x="601.2" y="222.1" width="22.5" height="27.9" rx="2" fill="#60a5fa"/><text x="612.5" y="218.1" text-anchor="middle" font-size="10" fill="#cbd5e1">663</text><rect x="639.3" y="236.9" width="22.5" height="13.1" rx="2" fill="#fbbf24"/><text x="650.6" y="232.9" text-anchor="middle" font-size="10" fill="#cbd5e1">311</text><text x="612.5" y="272" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="725.6" y="76.4" width="22.5" height="173.6" rx="2" fill="#2dd4bf"/><text x="736.9" y="72.4" text-anchor="middle" font-size="10" fill="#cbd5e1">4,133</text><rect x="763.7" y="226.0" width="22.5" height="24.0" rx="2" fill="#60a5fa"/><text x="775.0" y="222.0" text-anchor="middle" font-size="10" fill="#cbd5e1">570</text><rect x="801.8" y="240.1" width="22.5" height="9.9" rx="2" fill="#fbbf24"/><text x="813.1" y="236.1" text-anchor="middle" font-size="10" fill="#cbd5e1">237</text><text x="775.0" y="272" text-anchor="middle" font-size="11" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#fbbf24;">+10.2%*</div><div class="sub">&yen;2,802.3B &rarr; &yen;4,132.8B &mdash; *flattered by the weak yen (see note)</div></div>
+    <div class="cagr-card"><div class="label">Operating Income CAGR</div><div class="val" style="color:#34d399;">+15.2%*</div><div class="sub">&yen;324.2B &rarr; &yen;570.5B &mdash; clears the bar only just; also yen-inflated</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#fbbf24;">+14.4%*</div><div class="sub">&yen;138.0B &rarr; &yen;236.7B &mdash; endpoint-sensitive; also yen-inflated</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as dashed reference line &mdash; Komatsu has never reached it in this window. Margin expanded from 11.6% to a 16.2% peak in FY2025, then fell 2.4pp in FY2026.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="14.0" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text><path d="M50.0,104.3 L247.5,78.9 L445.0,61.2 L642.5,58.4 L840.0,82.0 L840.0,220.0 L50.0,220.0 Z" fill="#2dd4bf" opacity="0.14"/><path d="M50.0,104.3 L247.5,78.9 L445.0,61.2 L642.5,58.4 L840.0,82.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50" cy="104.3" r="3" fill="#2dd4bf"/><text x="50" y="93.3" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">11.57%</text><text x="50" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="78.9" r="3" fill="#2dd4bf"/><text x="247.5" y="67.9" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.11%</text><text x="247.5" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445" cy="61.2" r="3" fill="#2dd4bf"/><text x="445" y="50.2" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.88%</text><text x="445" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="58.4" r="3" fill="#2dd4bf"/><text x="642.5" y="47.4" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.16%</text><text x="642.5" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840" cy="82.0" r="3" fill="#2dd4bf"/><text x="848" y="71.0" text-anchor="end" font-size="10.5" fill="#e2e8f0" font-weight="700">13.80%</text><text x="840" y="240" text-anchor="end" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year (&yen;B)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>2,802.3</td><td>324.2</td><td>11.57%</td><td>224.7</td><td>138.0</td><td>42.6%</td></tr>
+    <tr><td>FY2023</td><td>3,543.5</td><td>499.9</td><td>14.11%</td><td>326.1</td><td>22.9</td><td>4.6%</td></tr>
+    <tr><td>FY2024</td><td>3,865.1</td><td>613.8</td><td>15.88%</td><td>393.1</td><td>231.8</td><td>37.8%</td></tr>
+    <tr><td>FY2025</td><td>4,104.4</td><td>663.1</td><td>16.16%</td><td>439.3</td><td>311.3</td><td>46.9%</td></tr>
+    <tr><td>FY2026</td><td>4,132.8</td><td>570.5</td><td>13.80%</td><td>376.2</td><td>236.7</td><td>41.5%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>Reading the table:</b> revenue growth by year was +26.5% (FY2023), +9.1% (FY2024), +6.2% (FY2025) and +0.7% (FY2026) &mdash; a clear deceleration. Free cash flow is operating cash flow minus capital expenditure as standardized by S&amp;P; it includes the cash absorbed by growth in customer-finance receivables and inventory, so it understates the &ldquo;industrial&rdquo; free cash flow Komatsu reports for management purposes (not verified here). Net income is attributable to Komatsu shareholders.</div>
+  <div class="footer-note" style="text-align:left;">Sources: stockanalysis.com (TYO:6301 financials, cash flow, ratios; S&amp;P Global Market Intelligence); Komatsu FY2026 (year ended Mar 31, 2026) results release, Apr 28, 2026.</div>
+</div>
+
+<!-- ============ PAGE 3 — RECENT PERFORMANCE & GUIDANCE ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter &amp; FY2027 Guidance</div></div>
+  <div class="sec-sub">Komatsu's fiscal quarters run Apr&ndash;Jun, Jul&ndash;Sep, Oct&ndash;Dec, Jan&ndash;Mar. Latest reported period: Q1 FY2027 (three months to June 30, 2026; Komatsu labels it &ldquo;Q1 FY2026&rdquo;), reported late July 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">Q1 FY2027 headlines</div>
+    <p>Net sales were a record-for-a-first-quarter <b style="color:#f8fafc;">&yen;1,043.1B</b>, up <b style="color:#34d399;">+14.7% YoY</b>. Operating income rose <b style="color:#34d399;">+8.0%</b> to <b style="color:#f8fafc;">&yen;151.6B</b>, but the operating margin slipped 0.9pp to <b style="color:#fbbf24;">14.5%</b> as U.S. tariffs, higher shipping costs linked to Middle East disruption and rising material prices offset the volume gains. On the back of the beat, Komatsu raised its full-year FY2027 (year ending Mar 2027) outlook: sales to &yen;4,302B (+4.1% YoY, revised up &yen;184B) and operating income to &yen;555B (-2.2% YoY, revised up &yen;47B). Even after the upgrade, guided profit is below FY2026's, implying a margin near 12.9%.</p>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>FY2026 Actual (yr to Mar 2026)</th><th>FY2027 Guidance (yr to Mar 2027)</th></tr>
+    <tr><td>Net sales</td><td>&yen;4,132.8B (+0.7%)</td><td>&yen;4,302B (+4.1%), raised by &yen;184B after Q1</td></tr>
+    <tr><td>Operating income</td><td>&yen;567.3B company-reported (-13.7%); &yen;570.5B S&amp;P-standardized</td><td>&yen;555B (-2.2%), raised by &yen;47B after Q1</td></tr>
+    <tr><td>Operating margin</td><td>13.7% company / 13.8% S&amp;P</td><td>&asymp;12.9% implied</td></tr>
+    <tr><td>Net income (attributable)</td><td>&yen;376.4B (-14.4%)</td><td>Guided lower; payout ratio implied about 53.8% on the &yen;190 dividend</td></tr>
+    <tr><td>Dividend per share</td><td>&yen;190 (payout 45.9%)</td><td>&yen;190 planned (unchanged)</td></tr>
+    <tr><td>FX assumption</td><td>&mdash;</td><td>&yen;150/US$, &yen;174/&euro;, &yen;106/A$ (April 2026 assumption)</td></tr>
+  </table>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Gross Margin Trend (FY2022&ndash;FY2026)</div>
+    <div class="chart-sub">Gross margin expanded from 27.8% to a 32.2% peak in FY2025 on pricing and mix, then gave back 1.7pp in FY2026. Versus FY2023's 29.3% (the window used for criterion #14) it is still +1.16pp higher.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">27.5%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">32.5%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35%</text><path d="M50.0,163.6 L247.5,133.6 L445.0,93.8 L642.5,75.6 L840.0,110.4 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.14"/><path d="M50.0,163.6 L247.5,133.6 L445.0,93.8 L642.5,75.6 L840.0,110.4" fill="none" stroke="#34d399" stroke-width="2.5"/><circle cx="50" cy="163.6" r="3" fill="#34d399"/><text x="50" y="152.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">27.82%</text><text x="50" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="133.6" r="3" fill="#34d399"/><text x="247.5" y="122.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">29.32%</text><text x="247.5" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445" cy="93.8" r="3" fill="#34d399"/><text x="445" y="82.8" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">31.31%</text><text x="445" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="75.6" r="3" fill="#34d399"/><text x="642.5" y="64.6" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">32.22%</text><text x="642.5" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840" cy="110.4" r="3" fill="#34d399"/><text x="848" y="99.4" text-anchor="end" font-size="10.5" fill="#e2e8f0" font-weight="700">30.48%</text><text x="840" y="240" text-anchor="end" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <div class="callout">
+    <b>Market position, honestly stated:</b> Komatsu is a clear #2 to Caterpillar in both construction and mining equipment; industry reports put the two together at over 30% of the global mining-equipment market. I could not verify exact global share percentages from a primary source, so criterion #5 rests on the widely reported ranking rather than a hard figure. In mining, Komatsu's large haul trucks and autonomous haulage systems are a genuine strength; in mid-size construction equipment it is contested by Volvo CE, Hitachi, Liebherr, JCB and increasingly cost-competitive Chinese makers. Customer and geographic concentration figures were not pulled for this dashboard and are flagged as unverified.
+  </div>
+  <div class="callout blue">
+    <b>What management says about the outlook:</b> demand is expected to soften in regions affected by Middle East instability and for mining equipment, and rising costs (tariffs, fixed costs) should weigh on profit even as selling prices improve. Q1's beat was largely a North America and pricing story; margin, not sales, is where the debate sits. Note that revenue growth in the latest quarter (+14.7%) is well above the full-year guide (+4.1%), so growth is guided to fade again through the year.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E used as the entry-multiple signal, measured at each fiscal year-end (March 31) versus today's price. WACC of 8.1% is S&amp;P's estimate; beta is about 0.98.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E of 16.61x (TTM EPS &yen;422.04) sits well above the FY22-26 fiscal-year-end average of 11.15x; forward P/E of about 15.6x compares with a 11.41x average. The multiple has re-rated ~50% in a year while earnings were flat &mdash; Komatsu is no longer &ldquo;cheap for a cyclical&rdquo;.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span><span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span></div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220" x2="840" y2="220" stroke="#1e293b" stroke-width="1"/><text x="42" y="224" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170" x2="840" y2="170" stroke="#1e293b" stroke-width="1"/><text x="42" y="174" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="120" x2="840" y2="120" stroke="#1e293b" stroke-width="1"/><text x="42" y="124" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="70" x2="840" y2="70" stroke="#1e293b" stroke-width="1"/><text x="42" y="74" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="20" x2="840" y2="20" stroke="#1e293b" stroke-width="1"/><text x="42" y="24" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="108.50" x2="840" y2="108.50" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="122.50" text-anchor="end" font-size="10" fill="#94a3b8">FY22-26 trailing avg: 11.15x</text><path d="M 50,96.20 L 208,125.00 L 366,113.60 L 524,129.50 L 682,78.20 L 840,53.85" fill="none" stroke="#a78bfa" stroke-width="2.5"/><path d="M 50,98.40 L 208,118.30 L 366,112.10 L 524,116.40 L 682,84.40 L 840,64.00" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50" cy="96.20" r="3" fill="#a78bfa"/><circle cx="50" cy="98.40" r="3" fill="#c4b5fd"/><text x="50" y="86.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.38x</text><text x="50" y="114.40" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">12.16x</text><text x="50" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="208" cy="125.00" r="3" fill="#a78bfa"/><circle cx="208" cy="118.30" r="3" fill="#c4b5fd"/><text x="208" y="141.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">9.50x</text><text x="208" y="108.30" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">10.17x</text><text x="208" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="366" cy="113.60" r="3" fill="#a78bfa"/><circle cx="366" cy="112.10" r="3" fill="#c4b5fd"/><text x="366" y="129.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.64x</text><text x="366" y="102.10" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">10.79x</text><text x="366" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="524" cy="129.50" r="3" fill="#a78bfa"/><circle cx="524" cy="116.40" r="3" fill="#c4b5fd"/><text x="524" y="145.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">9.05x</text><text x="524" y="106.40" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">10.36x</text><text x="524" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="682" cy="78.20" r="3" fill="#a78bfa"/><circle cx="682" cy="84.40" r="3" fill="#c4b5fd"/><text x="682" y="68.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">14.18x</text><text x="682" y="100.40" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">13.56x</text><text x="682" y="240" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY26</text><circle cx="840" cy="53.85" r="3" fill="#a78bfa"/><circle cx="840" cy="64.00" r="3" fill="#c4b5fd"/><text x="840" y="43.85" text-anchor="end" font-size="10" fill="#e2e8f0" font-weight="700">16.61x</text><text x="840" y="80.00" text-anchor="end" font-size="10" fill="#c4b5fd" font-weight="700">15.60x</text><text x="840" y="240" text-anchor="end" font-size="10.5" fill="#f8fafc">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> the current trailing P/E is today's price divided by the last twelve months of reported earnings; the fiscal-year-end series is the same ratio at each March 31. Forward P/E divides the price by analysts' expected next-twelve-month earnings and is generally the more useful lens &mdash; here it is about 15.6x (I scaled the ~16.5x reported by S&amp;P on Sep 2 to today's lower price, so treat it as approximate). The PEG ratio is around 2.7x&ndash;3.3x, which says the market is paying a lot for modest expected earnings growth. Because the earnings base (FY2026 net income &yen;376B) is actually below its FY2025 peak, part of the higher multiple is simply depressed near-term earnings rather than a pure re-rating, but even on a forward basis the premium to Komatsu's own history is about 37%. Cyclical machinery stocks are usually cheapest on peak earnings, so a rising multiple on falling earnings is a mild warning sign.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet &amp; approach to leverage:</b> Consolidated net debt was &yen;987.2B at FY2026 year-end (&yen;1,159.6B after the June 2026 quarter) against EBITDA of about &yen;729B (operating income &yen;570.5B plus depreciation and amortization of &yen;158.6B), giving <b>1.35x</b> (1.55x on trailing figures). I use the consolidated figure, which is conservative: Komatsu's captive retail-finance arm borrows to fund customer loans, so the industrial business alone would show noticeably lower leverage. Komatsu reports its own net debt-to-equity ratio of 0.26x, an equity ratio of 54.7% and ROE of 11.3% (above its 10% target); the separate industrial-only ratio was not independently verified. Interest coverage is about 10.6x.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (&yen;B) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Steady at 5.0&ndash;5.8% of revenue every year (percent shown inside each bar) &mdash; moderate for a heavy-equipment maker and above depreciation (&yen;158.6B in FY2026 vs capex of &yen;212.3B), so this is not an asset-light model.</div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="140" x2="690" y2="140" stroke="#263049" stroke-width="1"/><rect x="40" y="68.3" width="60" height="71.7" fill="#60a5fa"/><text x="70" y="63.3" text-anchor="middle" font-size="9" fill="#cbd5e1">¥163.0B</text><text x="70" y="154" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY22</text><text x="70" y="82.3" text-anchor="middle" font-size="9.5" fill="#052e2a" font-weight="700">5.82%</text><rect x="175" y="59.3" width="60" height="80.7" fill="#60a5fa"/><text x="205" y="54.3" text-anchor="middle" font-size="9" fill="#cbd5e1">¥183.5B</text><text x="205" y="154" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY23</text><text x="205" y="73.3" text-anchor="middle" font-size="9.5" fill="#052e2a" font-weight="700">5.18%</text><rect x="310" y="50.7" width="60" height="89.3" fill="#60a5fa"/><text x="340" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">¥202.9B</text><text x="340" y="154" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY24</text><text x="340" y="64.7" text-anchor="middle" font-size="9.5" fill="#052e2a" font-weight="700">5.25%</text><rect x="445" y="49.4" width="60" height="90.6" fill="#60a5fa"/><text x="475" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">¥205.9B</text><text x="475" y="154" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY25</text><text x="475" y="63.4" text-anchor="middle" font-size="9.5" fill="#052e2a" font-weight="700">5.02%</text><rect x="580" y="46.6" width="60" height="93.4" fill="#60a5fa"/><text x="610" y="41.6" text-anchor="middle" font-size="9" fill="#cbd5e1">¥212.3B</text><text x="610" y="154" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY26</text><text x="610" y="60.6" text-anchor="middle" font-size="9.5" fill="#052e2a" font-weight="700">5.14%</text></svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="170.5 143.7" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="0.6 313.6" stroke-dashoffset="-314" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">0.07%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp; 54.3%</div>
+          <div><span class="dot" style="background:#1a2236;border:1px solid #475569;"></span>Retail / other / nominee accounts &asymp; 45.6%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Insiders &asymp; 0.07%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count Trend</div>
+      <p>Shares outstanding are down from about 944M (FY2022) to 891.5M today, roughly -5.6%, including -2.1% over the past year. Komatsu authorized up to &yen;100B of buybacks (about &yen;48.9B and 7.6M shares had been repurchased by May 31, 2026), and buyback yield is about 2.1% on top of a 2.7% dividend yield.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Governance &amp; ownership note:</b> Komatsu is a widely held Japanese large cap with no founder or family stake; S&amp;P shows insiders at roughly 0.07%, so criterion #12 is a clean Not met. On the plus side, Komatsu reports having sold all of its strategic (cross) shareholdings by FY2017 &mdash; a governance strength versus many Japanese peers &mdash; and it returns cash through both dividends and buybacks. The list of largest holders was not pulled for this dashboard; Japanese registers of this size are typically led by trust-bank nominee accounts, but I did not verify that for Komatsu.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Each criterion is scored 0&ndash;5 on a graduated scale and weighted (weights sum to 105); Martinero Index = &Sigma;(score &times; weight) / (105 &times; 5) &times; 100. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable &mdash; no N/A cases. Criterion #14 compares FY2026 gross margin to FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Komatsu</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>≥15%</td><td>+10.2% — ¥2,802.3B → ¥4,132.8B, but flattered by a much weaker yen (roughly ¥112/$ → ¥150/$); illustrative USD-terms growth is only ~2-3%/yr, and FY2026 revenue grew just +0.7% (score 3/5, weight 13)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>≥15%</td><td>+15.2% — ¥324.2B → ¥570.5B (S&P data; +15.0% on company-reported ¥567.3B); clears the bar only just, and FY2026 EBIT fell 14% from the FY2025 peak of ¥663.1B (score 4/5, weight 11)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>≥20%</td><td>13.8% (FY2026), down from a 16.2% peak in FY2025; company guides FY2027 to roughly 12.9% (¥555B on ¥4,302B) (score 2/5, weight 10)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>≥15%</td><td>+14.4% — ¥138.0B → ¥236.7B; a hair below the bar, and the result is highly sensitive to the endpoints (FY2023 FCF was only ¥22.9B after a huge inventory build) (score 4/5, weight 8)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Firm #2 globally in construction and mining equipment behind Caterpillar (confirmed qualitatively across several industry sources; exact share % not verified) (score 4/5, weight 7)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration — 1–2 = Met, 3–5 = Not met</td><td>1 (mono) – 5 (open)</td><td>3 — Caterpillar and Komatsu dominate the top of mining and large construction equipment, but the wider construction market is contested by Volvo CE, Hitachi Construction Machinery, Liebherr, JCB, Doosan and fast-growing Chinese makers (XCMG, Sany, Zoomlion) (score 3/5, weight 6)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC ≥15%, clears WACC</td><td>ROIC 9.4% (FY2026, S&P; peak 12.3% in FY2025) vs a 8.1% WACC (S&P estimate) — a thin +1.3pp spread, with the retail-finance balance sheet diluting industrial returns (score 2/5, weight 10)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td><2x</td><td>1.35x consolidated at FY2026 year-end (net debt ¥987.2B ÷ EBITDA ≈ ¥729B); 1.55x on a trailing basis after the June 2026 quarter as debt rose. Consolidated basis includes debt funding customer-finance receivables, so industrial-only leverage is lower (score 4/5, weight 6)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>≥80%</td><td>41.5% (FY2026); five-year range 4.6%–46.9%, average about 35%. Working capital (receivables, inventory) absorbs a large share of operating cash (score 2/5, weight 8)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ≈16.6x vs a FY22-26 fiscal-year-end average of ≈11.2x (about 49% above); forward P/E ≈15.6x vs ≈11.4x average (score 1/5, weight 8)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Shares down 2.1% over the past year and about 5.6% since FY2022 (≈944M → 891.5M); ¥100B buyback authorization in progress (score 5/5, weight 4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (≈5%+)</td><td>None — insiders hold ≈0.07%, no founder or family stake, and Komatsu reports having unwound all cross-shareholdings (score 0/5, weight 5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.1% of FY2026 revenue (¥212.3B), steady at 5.0–5.8% every year; moderate for a heavy-equipment manufacturer but not asset-light, and capex exceeds depreciation (¥158.6B) (score 3/5, weight 4)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability & Structural Profitability</td><td>Δ ≥ -2.5pp (3-yr)</td><td>Gross margin 30.48% (FY2026) vs 29.32% (FY2023), +1.16pp — clears the bar, though FY2026 gave back 1.74pp from the 32.22% FY2025 peak on tariffs and cost inflation (score 4/5, weight 5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;text-align:left;">Weighted score 301 of a possible 525 = <b>57.3/100</b> (shown as 57/100). 5 of 14 criteria met. CAGR-based criteria (#1, #2, #4) are inflated by yen weakness and should be read with the JPY note on page 1.</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A firm #2 position in construction and mining equipment, with a real edge in mining trucks and autonomous haulage. Operating income has grown about 15% a year since FY2022 (even if yen-inflated), the balance sheet is sturdy (net debt/EBITDA 1.35x, equity ratio 54.7%), and the share count is falling on a &yen;100B buyback alongside a &yen;190 dividend. There are no cross-shareholdings, gross margin is still above its FY2023 level, and the latest quarter beat expectations (sales +14.7%, guidance raised), showing demand is holding up better than feared.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Margins are off their peak (16.2% to 13.8%, guided to about 12.9%) because of tariffs and cost inflation, and management's own plan shows falling operating income in FY2027. ROIC of 9.4% barely clears an 8.1% WACC, free cash flow converts only about 40% of EBIT, and the stock trades roughly 49% above its own five-year fiscal-year-end P/E average after a ~49% one-year run. Yen weakness flatters every reported growth number, and a yen rebound would reverse that tailwind. Mining demand is guided softer, and there is zero insider ownership to align management with holders.</p>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <div class="title">Maarten's note</div>
+    <p>I keep Komatsu next to Caterpillar because they are the two names I would use to sanity-check anything in heavy machinery. Where Komatsu genuinely competes is mining: its haul trucks and long-running autonomous haulage systems are a real differentiator, and I like that it is not just a me-too construction-equipment maker. Caterpillar, as far as I can tell, earns higher margins and has a bigger services and aftermarket business, so on quality of earnings I still lean toward Caterpillar; Komatsu is the more exposed to the yen and to Asian and mining-cycle swings.</p>
+    <p>The interesting angle is Japan itself. Komatsu is a good example of the governance story I find appealing: it has unwound its cross-shareholdings, it buys back stock and it pays a decent dividend. The usual &ldquo;Japan discount&rdquo; argument would say it should trade cheaper than its US peer, and historically it did, but at about 16.6x trailing earnings it is now well above its own five-year average, so I do not see an obvious bargain. I would rather watch how margins hold up through FY2027 than chase the re-rating. Not a recommendation, just how I think about it.</p>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (TYO:6301 financials, cash flow, ratios and statistics; S&amp;P Global Market Intelligence, last updated Jul&ndash;Sep 2026); Komatsu &ldquo;Consolidated business results for the fiscal year ended March 31, 2026&rdquo; (Apr 28, 2026) and Q1 FY2027 results coverage (Investing.com, Quartr, BigGo Finance, late July 2026); Komatsu share-buyback status notice (Jun 1, 2026); Komatsu Corporate Governance Report (Jun 30, 2026) for cross-shareholdings; Grand View / Yahoo Finance industry articles on Caterpillar vs Komatsu ranking; price quote Sep 21, 2026 via web aggregators. WACC (8.1%) and ROIC are S&amp;P Global estimates, not company-disclosed. Exact market-share percentages, industrial-only net debt, top shareholders and customer/geographic concentration were <b>not verified</b>.<br>
+    <b>Disclaimer:</b> all figures are derived from third-party data and function as indicators only, not verified facts or a basis for investment decisions. Komatsu reports in JPY under U.S. GAAP; USD conversions are approximate. This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Verify before acting. This is a competitor dashboard, not the daily pick.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Komatsu &mdash; Tokyo (6301), JPY share price trend at fiscal year-ends (March 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Komatsu &mdash; Fiscal Year-End Close (Tokyo, JPY)</div>
+    <div class="chart-sub">*Approximate price-only trend: about +21.3% a year from the FY2022 close (&asymp;&yen;2,950) to today (&yen;7,012), roughly 4.5 years, excluding dividends. The stock has more than doubled, with the last leg driven by a P/E re-rating rather than earnings growth. Fiscal year-end closes are approximations derived from S&amp;P market caps and period-end share counts (&plusmn;2%), except FY2026 which is S&amp;P's last close; only the current quote is a direct closing price.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="42" y="31.5" text-anchor="end" font-size="8.5" fill="#64748b">¥8,000</text><line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/><text x="42" y="82.2" text-anchor="end" font-size="8.5" fill="#64748b">¥6,000</text><line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/><text x="42" y="132.8" text-anchor="end" font-size="8.5" fill="#64748b">¥4,000</text><line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><text x="42" y="183.5" text-anchor="end" font-size="8.5" fill="#64748b">¥2,000</text><path d="M 46,155.93 L 172.8,147.57 L 299.6,118.44 L 426.4,122.24 L 553.2,78.41 L 680.0,53.03 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="155.93" x2="680.0" y2="53.03" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="150" y="66" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+21.3%*</text><path d="M 46,155.93 L 172.8,147.57 L 299.6,118.44 L 426.4,122.24 L 553.2,78.41 L 680.0,53.03" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46" cy="155.93" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46" y="171.93" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~¥2,950</text><text x="46" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text><circle cx="172.8" cy="147.57" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="162.57" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~¥3,280</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text><circle cx="299.6" cy="118.44" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="133.44" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~¥4,430</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text><circle cx="426.4" cy="122.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="137.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~¥4,280</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text><circle cx="553.2" cy="78.41" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="575.2" y="99.41" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">~¥6,010</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text><circle cx="680.0" cy="53.03" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="678" y="43.03" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">¥7,012</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="end">Now</text></svg>
+  </div>
+
+  <div class="footer-note">
+    Price data via stockanalysis.com / S&amp;P Global Market Intelligence and web quote aggregators. Currency: JPY throughout (Komatsu reports and trades in yen; the OTC ADR KMTUY is not charted). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
