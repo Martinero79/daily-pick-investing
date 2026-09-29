@@ -2175,6 +2175,96 @@ const COMPANIES = [
     personalNote: "I built four competitor dashboards alongside this one on purpose, because the alarm-monitoring industry has genuinely different business models hiding under one label, and Verisure sits in an interesting spot among them. ADT is the leveraged US incumbent with similar economics but slower growth. Securitas is actually Verisure's own former parent — it spun the alarm-monitoring business out in 2006 as 'Securitas Direct,' and what's left at Securitas today is a much lower-margin guarding business, which tells you how much better the subscriber-monitoring model is than the labor-intensive one. Prosegur Alarmas is Verisure's most direct rival in Spain and Latin America, but it's a small piece of a diversified, family-run conglomerate. And Alarm.com is the odd one out — a capital-light software platform sitting a level above the subscriber relationship entirely, with better margins than any of the hardware-and-monitoring players including this one. Verisure itself is the purest expression of the direct-to-consumer subscriber model: #1 position in 13 of 17 markets, expanding margins, real double-digit growth. The reason it's not screening better is straightforward and worth being honest about — it's still carrying private-equity-era leverage (net debt/EBITDA around 2.7x, down from roughly 5x before the IPO) and it's trading nearly 40% below where Hellman & Friedman priced it just under a year ago, which reads to me as a fresh-IPO sponsor overhang more than a verdict on the business. I don't own this one yet. A single year of public trading history isn't much to judge a stock on, and I'd want to see the leverage keep coming down before I'd treat this as anything other than 'interesting and worth watching closely.'"
   }
 
+  ,
+
+  {
+    slug: "deere",
+    name: "Deere & Company",
+    ticker: "NYSE: DE",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Agricultural & Farm Machinery",
+    tags: ["Cyclical", "Precision Ag", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "$689.59",
+    score: "6 / 14",
+    martinero: 45,
+    quarterYoY: { period: "Q3 FY2026", growth: 4.9 },
+    blurb: "The world's #1 agricultural equipment maker, with an almost debt-free equipment business and ROIC well above its cost of capital, but growth and margins are still near the cycle trough. At 38x trailing earnings against a 17x five-year average, the stock has already priced in the 2027 recovery.",
+    file: "companies/deere.html"
+  },
+
+  {
+    slug: "komatsu",
+    name: "Komatsu Ltd.",
+    ticker: "TYO: 6301",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Construction & Mining Equipment",
+    tags: ["Japan", "Mining", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "¥7,012",
+    score: "5 / 14",
+    martinero: 57,
+    momentum: { status: "decelerating", recent: 0.7, prior: 6.2 },
+    quarterYoY: { period: "Q1 FY2027", growth: 14.7 },
+    blurb: "World #2 in construction and mining equipment with a clean balance sheet, a shrinking share count and no cross-shareholdings. Margins are off their peak and the stock now trades about 49% above its own 5-year average P/E. Reported growth is flattered by a weak yen.",
+    file: "companies/komatsu.html"
+  },
+
+  {
+    slug: "volvo-group",
+    name: "AB Volvo (Volvo Group)",
+    ticker: "STO: VOLV B",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Heavy Trucks & Construction Equipment",
+    tags: ["Nordic", "Dividend Payer", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "SEK 321.20",
+    score: "5 / 14",
+    martinero: 48,
+    quarterYoY: { period: "Q2 2026", growth: 2.8 },
+    blurb: "Trucks-heavy Nordic cyclical (Volvo CE is a Caterpillar rival): net-cash industrial core, Industrivärden-anchored register, ~4% variable dividend. Sales are off the 2023 peak, but Q2 2026 truck orders rose 33%.",
+    file: "companies/volvo-group.html"
+  },
+
+  {
+    slug: "cnh",
+    name: "CNH Industrial N.V.",
+    ticker: "NYSE: CNH",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Agricultural & Construction Machinery",
+    tags: ["Cyclical", "Exor-Controlled", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "$13.17",
+    score: "4 / 14",
+    martinero: 24,
+    quarterYoY: { period: "Q2 2026", growth: 2.0 },
+    blurb: "The #2–#3 global ag-equipment maker (Case IH, New Holland) sits in a trough year, with Industrial EBIT margin down to 4.3% from 12.4% in 2023 and a rebound not guided until 2027. A rich P/E on depressed earnings and negative ROIC-versus-WACC keep the score low.",
+    file: "companies/cnh.html"
+  },
+
+  {
+    slug: "caterpillar",
+    name: "Caterpillar Inc.",
+    ticker: "NYSE: CAT",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Heavy Machinery & Power Systems",
+    tags: ["Cyclical Compounder", "AI Data-Center Power", "Buybacks"],
+    dateFeatured: "2026-09-29",
+    price: "$819.95",
+    score: "7 / 14",
+    martinero: 59,
+    momentum: { status: "accelerating", recent: 4.3, prior: -3.4 },
+    quarterYoY: { period: "Q2 2026", growth: 24.0 },
+    blurb: "Cyclical compounder with a record $72B backlog and an AI data-center power tailwind: services-rich, buyback-shrunk share count (-16% since FY21) and a 20.9% Q2'26 operating margin, but priced at ~1.8x its own 5-year average P/E.",
+    file: "companies/caterpillar.html",
+    personalNote: "Caterpillar is the classic 'good business, demanding price' problem. The scorecard likes the things that make it durable: a services and aftermarket business that smooths the cycle, a share count that has shrunk about 16% in five years through buybacks, ME&T free cash flow around $9.5B a year, and a genuinely new demand source in data-center power generation. What it does not like is the entry price. The stock trades at roughly 1.8x its own five-year average P/E, and revenue growth over five years is single-digit, well below the 15% bar this site uses. That is why it lands at 7 of 14 rather than higher. I built Deere, Komatsu, Volvo and CNH alongside it on purpose: Deere and CNH are the same cycle seen from agriculture, Komatsu is the closest like-for-like rival, and Volvo shows the trucks-heavy version. Caterpillar scores best of the five, but 'best of a cyclical peer group' is a low bar, and the honest read is that a lot of the good news is already in the price. I don't own it."
+  }
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
