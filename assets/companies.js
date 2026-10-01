@@ -2268,6 +2268,78 @@ const COMPANIES = [
   ,
 
   {
+    slug: "kuehne-nagel",
+    name: "Kuehne+Nagel International AG",
+    ticker: "SIX: KNIN",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Controlling Shareholder"],
+    dateFeatured: "2026-10-01",
+    price: "CHF 220.30",
+    score: "7 / 14",
+    martinero: 42,
+    momentum: { status: "decelerating", recent: -1.3, prior: 4.0 },
+    quarterYoY: { period: "Q2 2026", growth: 7.6 },
+    blurb: "Swiss asset-light freight forwarder and global #1 in sea and air volumes. Earnings are still about two-thirds below the FY2022 peak, but Q2 2026 EBIT rose 11% and guidance was raised. Strong ROIC and a 53% controlling holder offset negative growth CAGRs and a rich trailing multiple.",
+    file: "companies/kuehne-nagel.html"
+  },
+
+  {
+    slug: "dhl-group",
+    name: "DHL Group",
+    ticker: "XETRA: DHL",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Recovery", "Buybacks"],
+    dateFeatured: "2026-10-01",
+    price: "€57.00",
+    score: "4 / 14",
+    martinero: 38,
+    momentum: { status: "decelerating", recent: -1.6, prior: 3.0 },
+    quarterYoY: { period: "Q2 2026", growth: 12.8 },
+    blurb: "Global logistics leader spanning express, forwarding, contract logistics and German mail. Earnings are recovering strongly (Q2 EBIT +30%, FY26 guidance raised, buyback up to €6.5B), but flat FY21–25 growth, 2.8x leverage and a re-rated 17x P/E keep the score modest.",
+    file: "companies/dhl-group.html"
+  },
+
+  {
+    slug: "ch-robinson",
+    name: "C.H. Robinson Worldwide",
+    ticker: "NASDAQ: CHRW",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Dividend Grower"],
+    dateFeatured: "2026-10-01",
+    price: "$147.96",
+    score: "8 / 14",
+    martinero: 48,
+    momentum: { status: "decelerating", recent: -8.4, prior: 0.7 },
+    quarterYoY: { period: "Q2 2026", growth: 19.3 },
+    blurb: "Asset-light US freight broker and #1 US brokerage by gross revenue. Its Lean AI automation has cut headcount about 11% and lifted operating income even as revenue and gross profit shrank. Returns are excellent (ROIC 21.9%), but the stock trades at about 28x trailing earnings against a ~23.5x five-year average.",
+    file: "companies/ch-robinson.html"
+  },
+
+  {
+    slug: "expeditors",
+    name: "Expeditors International of Washington",
+    ticker: "NYSE: EXPD",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Net Cash", "Buybacks"],
+    dateFeatured: "2026-10-01",
+    price: "$184.64",
+    score: "6 / 14",
+    martinero: 46,
+    momentum: { status: "decelerating", recent: 4.4, prior: 14.0 },
+    quarterYoY: { period: "Q2 2026", growth: 32.1 },
+    blurb: "Asset-light, net-cash freight forwarder with a 57% ROIC, capex under 0.5% of revenue and a share count down 24% since 2021. Q2 2026 revenue jumped 32%, but revenue is still 33% below its FY2021 peak and the stock trades at 27x earnings versus a 19x five-year average.",
+    file: "companies/expeditors.html"
+  },
+
+  {
     slug: "dsv",
     name: "DSV A/S",
     ticker: "CPH: DSV",
