@@ -2265,6 +2265,26 @@ const COMPANIES = [
     personalNote: "Caterpillar is the classic 'good business, demanding price' problem. The scorecard likes the things that make it durable: a services and aftermarket business that smooths the cycle, a share count that has shrunk about 16% in five years through buybacks, ME&T free cash flow around $9.5B a year, and a genuinely new demand source in data-center power generation. What it does not like is the entry price. The stock trades at roughly 1.8x its own five-year average P/E, and revenue growth over five years is single-digit, well below the 15% bar this site uses. That is why it lands at 7 of 14 rather than higher. I built Deere, Komatsu, Volvo and CNH alongside it on purpose: Deere and CNH are the same cycle seen from agriculture, Komatsu is the closest like-for-like rival, and Volvo shows the trucks-heavy version. Caterpillar scores best of the five, but 'best of a cyclical peer group' is a low bar, and the honest read is that a lot of the good news is already in the price. I don't own it."
   }
 
+  ,
+
+  {
+    slug: "dsv",
+    name: "DSV A/S",
+    ticker: "CPH: DSV",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Acquisition-Driven", "Asset-Light"],
+    dateFeatured: "2026-10-01",
+    price: "DKK 1,215.50",
+    score: "7 / 14",
+    martinero: 48,
+    momentum: { status: "accelerating", recent: 48.0, prior: 10.8 },
+    quarterYoY: { period: "Q2 2026", growth: 23.7 },
+    blurb: "The world's largest freight forwarder after the DB Schenker deal, asset-light with about 1% capex and 83% FCF conversion, but FY2025's 48% revenue jump is mostly acquired. Post-deal ROIC is below WACC (7.2% vs 7.9%), leverage is 2.7x with buybacks paused, and the stock sits 36% below its 52-week high.",
+    file: "companies/dsv.html"
+  }
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
