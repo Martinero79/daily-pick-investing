@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kuehne+Nagel International AG — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/kuehne-nagel.html">
+<meta property="og:title" content="Kuehne+Nagel International AG — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kuehne+Nagel International AG — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Kuehne+Nagel International AG</h1>
+  <div class="badges">
+    <div class="badge">SIX Swiss Exchange: KNIN</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Schindellegi, Switzerland</div>
+    <div class="badge">Reports &amp; trades in CHF</div>
+    <div class="badge warn">Near 52-Wk High After a Sharp Rebound &mdash; Yet EBIT Is Still ~67% Below the FY2022 Peak</div>
+  </div>
+
+  <div class="price">CHF 220.30</div>
+  <div class="price-sub">Sep 30, 2026 close (latest verified close; CHF 221.00 intraday on Oct 1) &middot; Market cap &asymp; CHF 26.2B (118.8M shares) &middot; 52-wk range CHF ~147 &ndash; 233 &middot; 1-yr price change &asymp; +49% (from ~CHF 148 on Sep 30, 2025, implied from S&amp;P P/E data) &middot; Beta 0.64 &middot; Analyst consensus: Hold (18 analysts), avg PT CHF 198.61 (about 10% below the price) &middot; Next report (nine months 2026): Oct 22, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Kuehne+Nagel describes itself as the global number one in both sea and air freight by volume (4.3M TEU in sea and 2.2M tonnes in air in FY2025), with strong positions in road and contract logistics. By total forwarding revenue it ranks third behind DSV and DHL in the Armstrong &amp; Associates 2025 list (USD 33.8B vs DSV 37.4B and DHL 35.5B), so the #1/#2 test is met on volume but contested on revenue &mdash; see Section 4. DSV (<a href="dsv.html" style="color:#5eead4;">dashboard</a>) is its closest competitor.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure on this page is in Swiss francs (CHF). &ldquo;Revenue&rdquo; means Kuehne+Nagel's <b>net turnover</b> (gross turnover less customs duties and taxes it passes through); &ldquo;Op. Income / EBIT&rdquo; is <b>reported EBIT</b>, which in FY2025 is after CHF ~138m of cost-programme expenses (recurring EBIT: CHF 1,380m), the company's guidance measure. &ldquo;Free cash flow&rdquo; is the company's own definition (after lease payments), which is far lower than the standardised S&amp;P figure (FY2025: CHF 917m vs CHF 1,549m) because the latter does not deduct lease repayments.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Net Turnover (FY2025)</div>
+      <div class="val">CHF 24.5B</div>
+      <div class="sub green" style="color:#f87171;">-1.3% YoY (FY2024: +4.0%)</div>
+      <div class="note">Back near FY2023's CHF 23.8B after the COVID freight-rate bubble (FY2022: CHF 39.4B). 4-yr CAGR FY2021-25 is -7.1%, mostly the unwinding of that bubble. Q2 2026 was the first quarterly YoY increase (+7.6%) in five quarters.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (EBIT / net turnover)</div>
+      <div class="val" style="color:#f87171;">5.07%</div>
+      <div class="sub">FY2025, down from 9.55% in FY2022</div>
+      <div class="note">Gross-profit conversion rate (EBIT / gross profit) was 14% reported and 16% recurring in FY2025, versus 34% in FY2022. Net-turnover margins look low because turnover includes pass-through carrier costs; the conversion rate is the better yardstick.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">16.3% vs ~6.9%</div>
+      <div class="sub">Spread of ~9.5pp (S&amp;P Global)</div>
+      <div class="note">Third-party (S&amp;P) estimates, not the company's own ROCE. Asset-light model with capex under 1.3% of net turnover keeps returns high even at trough earnings.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">~1.6x</div>
+      <div class="sub">Jun 2026, incl. leases (~0.5x excl.)</div>
+      <div class="note">Net debt CHF 3.47B incl. leases (S&amp;P) or CHF 1.18B excl. leases (company), versus EBITDA of roughly CHF 2.2B (my estimate from FY2025 CHF 2.15B). Net cash as recently as FY2023; the move into debt reflects acquisitions, the Apex minority buyout and dividends.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">42/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong on returns, control and asset-light cash generation; held back by four growth/cash-growth criteria that start from the COVID peak and by an expensive entry multiple on depressed earnings.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="-157.1" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">7/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>7 criteria fully met</b> &mdash; market position (#1/#2 on volume), ROIC above WACC, net debt/EBITDA under 2x, share count (flat), insider/controlling ownership (Kühne Holding ~53%), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>7 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market concentration (fragmented industry), FCF conversion (74% vs 80% bar) and entry multiple versus own history</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Kuehne+Nagel International AG is a Swiss global logistics group founded in Bremen in 1890 and run from Schindellegi near Zurich, with roughly 88,000 employees at 1,300+ sites in close to 100 countries. It earns its money in four units: Sea Logistics (CHF 8.8B net turnover in FY2025, 4.3M TEU), Air Logistics (CHF 7.3B, 2.2M tonnes), Road Logistics (CHF 3.5B, mainly European groupage) and Contract Logistics (CHF 4.8B, warehousing). Like DSV it is asset-light: it charters rather than owns ships and aircraft, so capex is about 1% of net turnover, and the economics are driven by the gross profit it keeps per container or kilo (the &ldquo;conversion rate&rdquo; of EBIT to gross profit) rather than by freight rates themselves. The share price tells a story of the freight cycle. EBIT peaked at CHF 3.8B in FY2022, fell to CHF 1.2B in FY2025 as yields normalised and the Red Sea, tariff and European-demand shocks hit, and the dividend was cut from CHF 14.00 to CHF 6.00. Management responded with a cost programme of more than CHF 200m (fully in place by Q4 2025), a push into small and medium-sized customers (now about half of sea volumes), and AI-driven automation it expects to add CHF 100-150m of EBIT by 2027. Q2 2026 was the first clear sign it is working: net turnover CHF 6.6B (+7.6% YoY), EBIT CHF 381m (+11%), Air Logistics EBIT +35% on cloud and data-centre freight, and 2026 recurring EBIT guidance raised to CHF 1.35-1.55B (initially CHF 1.2-1.4B). The shares have re-rated about 49% in a year and now sit about 5% below their September high, so the market is already paying for a recovery that is still early.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>COVID base effect</b> &mdash; FY2021-22 net turnover (CHF 32.8B / 39.4B) and EBIT (CHF 2.9B / 3.8B) were inflated by extraordinary freight rates, so every FY2021-25 CAGR here is negative largely because of the starting point, not only because the business shrank; I did not verify pre-2020 earnings levels. (2) <b>Control</b> &mdash; Klaus-Michael K&uuml;hne, the long-time majority owner (through K&uuml;hne Holding AG, ~53%), died on Aug 23, 2026 at 89; press reports say his stake passes to the K&uuml;hne Foundation, which should keep control stable but is a change worth watching. (3) <b>Earnings-based multiples</b> look high (trailing P/E ~30x) because EPS is near a cyclical low; that is a feature of the trough, not necessarily of the price paid for normal earnings.
+  </div>
+
+  <div class="bignum-corner">KNIN</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, CHF millions as reported by Kuehne+Nagel (Revenue = net turnover; Op. Income = reported EBIT; Free Cash Flow = company definition, after lease payments). Two flags: FY2021-22 sit inside the COVID freight boom, and FY2023-25 show the normalisation and then the squeeze on yields.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (CHFm)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in CHF billions). Net turnover swings with freight rates (FY2022 peak, FY2023 -39%), so EBIT and FCF are the more stable lens. EBIT fell for three straight years after FY2022 (FY2023 1,903; FY2024 1,654; FY2025 1,242). FCF was strong in FY2022 on working-capital release and has since run at CHF 0.6-1.0B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue (net turnover)</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (reported)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (company-defined)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="191.1" x2="840" y2="191.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.1" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+    <line x1="60" y1="142.2" x2="840" y2="142.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="146.2" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+    <line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+    <line x1="60" y1="44.4" x2="840" y2="44.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="48.4" text-anchor="end" font-size="11" fill="#64748b">40bn</text>
+    <line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+    <rect x="85.0" y="79.6" width="30" height="160.4" rx="2" fill="#2dd4bf"/>
+    <text x="100.0" y="74.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">32,801</text>
+    <rect x="123.0" y="225.6" width="30" height="14.4" rx="2" fill="#60a5fa"/>
+    <text x="138.0" y="220.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,946</text>
+    <rect x="161.0" y="231.2" width="30" height="8.8" rx="2" fill="#fbbf24"/>
+    <text x="176.0" y="226.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,793</text>
+    <text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+    <rect x="241.0" y="47.4" width="30" height="192.6" rx="2" fill="#2dd4bf"/>
+    <text x="256.0" y="42.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">39,398</text>
+    <rect x="279.0" y="221.6" width="30" height="18.4" rx="2" fill="#60a5fa"/>
+    <text x="294.0" y="216.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,763</text>
+    <rect x="317.0" y="221.7" width="30" height="18.3" rx="2" fill="#fbbf24"/>
+    <text x="332.0" y="216.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,751</text>
+    <text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+    <rect x="397.0" y="123.4" width="30" height="116.6" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="118.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">23,849</text>
+    <rect x="435.0" y="230.7" width="30" height="9.3" rx="2" fill="#60a5fa"/>
+    <text x="450.0" y="225.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,903</text>
+    <rect x="473.0" y="235.3" width="30" height="4.7" rx="2" fill="#fbbf24"/>
+    <text x="488.0" y="230.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">970</text>
+    <text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+    <rect x="553.0" y="118.7" width="30" height="121.3" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="113.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">24,802</text>
+    <rect x="591.0" y="231.9" width="30" height="8.1" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="226.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,654</text>
+    <rect x="629.0" y="237.0" width="30" height="3.0" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="232.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">618</text>
+    <text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+    <rect x="709.0" y="120.3" width="30" height="119.7" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="115.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">24,476</text>
+    <rect x="747.0" y="233.9" width="30" height="6.1" rx="2" fill="#60a5fa"/>
+    <text x="762.0" y="228.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,242</text>
+    <rect x="785.0" y="235.5" width="30" height="4.5" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="230.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">917</text>
+    <text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-7.1%</div>
+      <div class="sub">CHF 32.8B &rarr; 24.5B &mdash; FY2022 peak (+20%) then FY2023 -39%; FY2024 +4.0%, FY2025 -1.3%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-19.4%</div>
+      <div class="sub">CHF 2,946m &rarr; 1,242m &mdash; FY2025 EBIT is 42% of FY2021, with ~CHF 138m of cost-programme charges inside it</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-15.4%</div>
+      <div class="sub">CHF 1,793m &rarr; 917m &mdash; path 1,793 / 3,751 / 970 / 618 / 917; FY2025 FCF rose 48% on FY2024</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; EBIT / net turnover</div>
+    <div class="chart-sub">Margin peaked at 9.6% in FY2022 and has fallen to 5.1% in FY2025. Part of the optics is that net turnover includes carrier costs that rise and fall with freight rates; the gross-profit conversion rate is the cleaner view: 29.8% (FY2021), 33.9% (FY2022), 21.7% (FY2023), 19.1% (FY2024) and 14.1% (FY2025, 16% recurring).</div>
+    <svg viewBox="0 0 700 107">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text>
+      <text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+      <polyline points="60,56.3 205,54.2 350,60.1 495,65.0 640,71.0" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="56.3" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="49.3" text-anchor="middle" font-size="8" fill="#cbd5e1">9.0%</text>
+      <circle cx="205" cy="54.2" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="47.2" text-anchor="middle" font-size="8" fill="#cbd5e1">9.6%</text>
+      <circle cx="350" cy="60.1" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="53.1" text-anchor="middle" font-size="8" fill="#cbd5e1">8.0%</text>
+      <circle cx="495" cy="65.0" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="58.0" text-anchor="middle" font-size="8" fill="#cbd5e1">6.7%</text>
+      <circle cx="640" cy="71.0" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="64.0" text-anchor="middle" font-size="8" fill="#cbd5e1">5.1%</text>
+
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (CHF m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Earnings</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>32,801</td><td>2,946</td><td>9.0%</td><td>2,032</td><td>1,793</td><td>60.9%</td></tr>
+    <tr><td>FY2022</td><td>39,398</td><td>3,763</td><td>9.6%</td><td>2,644</td><td>3,751</td><td>99.7%</td></tr>
+    <tr><td>FY2023</td><td>23,849</td><td>1,903</td><td>8.0%</td><td>1,431</td><td>970</td><td>51.0%</td></tr>
+    <tr><td>FY2024</td><td>24,802</td><td>1,654</td><td>6.7%</td><td>1,181</td><td>618</td><td>37.4%</td></tr>
+    <tr><td>FY2025</td><td>24,476</td><td>1,242</td><td>5.1%</td><td>882</td><td>917</td><td>73.8%</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>24,216</td><td>1,221</td><td>5.0%</td><td>864</td><td>932</td><td>76.3%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">EPS (CHF): 16.88 / 22.03 / 12.06 / 9.97 / 7.42; dividend per share paid (CHF): 10.00 / 14.00 / 10.00 (incl. 1.75 from capital-contribution reserves) / 8.25 / 6.00. Net Earnings is the amount attributable to shareholders (FY2025 total earnings incl. minorities: CHF 925m). Op. Income is reported EBIT as in the company's releases and analyst decks (FY2021 and FY2022 per FY2022 release; other S&amp;P-standardised EBIT figures differ by up to CHF 50m). FCF is the company's published figure; FY2024 is the restated CHF 618m shown in the FY2025 release (originally CHF 643m); FY2023's CHF 970m is from the FY2024 analyst deck, FY2021-22 from the FY2022 release. TTM EBIT is FY2025 less H1 2025 (402+343) plus H1 2026 (343+381); TTM FCF is FY2025 less H1 2025 (295) plus H1 2026 (310). TTM earnings are S&amp;P Global's.</div>
+  <div class="footer-note">Source: Kuehne+Nagel ad hoc announcements (FY2025, Mar 2026; Q2 2026, Jul 23, 2026), FY2024 analyst presentation (Mar 4, 2025), FY2022 results release; stockanalysis.com (S&amp;P Global Market Intelligence) for net earnings, EPS, capex and cross-checks. All figures CHF.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Turnaround Evidence &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">The investment case for the next 12 months is whether cost cuts, market-share gains in air freight and AI productivity can lift EBIT back toward CHF 1.5B without a new yield shock. Reported on Jul 23, 2026; the nine-month report is due Oct 22, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 net turnover was CHF 6,616m (+7.6% YoY; the company cites +8%, or +11% in constant currencies, because the Swiss franc strengthened) and EBIT was CHF 381m (+11%, or +17% at constant currency), the best quarter since Q1 2025 (CHF 402m), against a Q2 2025 that was itself weak. Recurring EBIT rose about 6% YoY and about 24% on Q1, and the H1 2026 total of CHF 724m reported (CHF 689m recurring) was enough for management to lift 2026 guidance to CHF 1.35-1.55B. Air Logistics was the star: net turnover +20% and EBIT +35% to CHF 154m on market-share gains in the technology sector (including cloud-infrastructure equipment moves for Google) and a better customer mix. Sea Logistics EBIT was CHF 140m with a 29% conversion rate, four points higher than Q1, though container volumes were about 1% lower YoY and European export demand stayed weak. Road EBIT rose 29% to CHF 36m and Contract Logistics 21% to CHF 51m. Free cash flow in H1 was CHF 310m (vs CHF 295m), fine but not a surge. Gross profit grew only about 3% YoY, so the EBIT gain is mostly cost discipline rather than stronger yields.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Turnover &mdash; Last 7 Quarters (CHF bn)</div>
+    <div class="chart-sub">Net turnover fell YoY for four straight quarters (Q3'25 -6.8%, Q4'25 -11.9%, Q1'26 -11.5%) as lower freight rates and the stronger franc outweighed volume gains, then turned positive in Q2'26 (+7.6%). Q2'25 was +1.7% and Q1'25 +14.9%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly net turnover, CHF bn</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="40" y="40.1" width="60" height="89.9" fill="#2dd4bf"/><text x="70" y="35.1" text-anchor="middle" font-size="9" fill="#cbd5e1">6.76</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="130" y="45.8" width="60" height="84.2" fill="#2dd4bf"/><text x="160" y="40.8" text-anchor="middle" font-size="9" fill="#cbd5e1">6.33</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="220" y="48.2" width="60" height="81.8" fill="#2dd4bf"/><text x="250" y="43.2" text-anchor="middle" font-size="9" fill="#cbd5e1">6.15</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="310" y="49.6" width="60" height="80.4" fill="#2dd4bf"/><text x="340" y="44.6" text-anchor="middle" font-size="9" fill="#cbd5e1">6.04</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="400" y="50.8" width="60" height="79.2" fill="#2dd4bf"/><text x="430" y="45.8" text-anchor="middle" font-size="9" fill="#cbd5e1">5.95</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="490" y="55.5" width="60" height="74.5" fill="#2dd4bf"/><text x="520" y="50.5" text-anchor="middle" font-size="9" fill="#cbd5e1">5.60</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="580" y="42.0" width="60" height="88.0" fill="#2dd4bf"/><text x="610" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">6.62</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT &mdash; Last 7 Quarters (CHFm, reported)</div>
+    <div class="chart-sub">EBIT slid from CHF 421m in Q4'24 to a low of CHF 213m in Q4'25 (CHF 335m recurring, before cost-programme charges), then recovered to CHF 343m in Q1'26 (H1 reported EBIT of 724 exceeded recurring EBIT of 689, implying about CHF 35m of one-off gains) and CHF 381m in Q2'26.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>EBIT (reported), CHF m</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="40" y="45.8" width="60" height="84.2" fill="#60a5fa"/><text x="70" y="40.8" text-anchor="middle" font-size="9" fill="#cbd5e1">421</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="130" y="49.6" width="60" height="80.4" fill="#60a5fa"/><text x="160" y="44.6" text-anchor="middle" font-size="9" fill="#cbd5e1">402</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="220" y="61.4" width="60" height="68.6" fill="#60a5fa"/><text x="250" y="56.4" text-anchor="middle" font-size="9" fill="#cbd5e1">343</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="310" y="73.0" width="60" height="57.0" fill="#60a5fa"/><text x="340" y="68.0" text-anchor="middle" font-size="9" fill="#cbd5e1">285</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="400" y="87.4" width="60" height="42.6" fill="#60a5fa"/><text x="430" y="82.4" text-anchor="middle" font-size="9" fill="#cbd5e1">213</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="490" y="61.4" width="60" height="68.6" fill="#60a5fa"/><text x="520" y="56.4" text-anchor="middle" font-size="9" fill="#cbd5e1">343</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="580" y="53.8" width="60" height="76.2" fill="#60a5fa"/><text x="610" y="48.8" text-anchor="middle" font-size="9" fill="#cbd5e1">381</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric (CHF m)</th><th>Prior-year quarter</th><th>Latest quarter</th><th>Change</th></tr>
+    <tr><td>Net turnover</td><td>6,149</td><td>6,616</td><td>+7.6%</td></tr>
+    <tr><td>Gross profit</td><td>2,187</td><td>2,249</td><td>+2.8%</td></tr>
+    <tr><td>EBIT (reported, group)</td><td>343</td><td>381</td><td>+11.1%</td></tr>
+    <tr><td>&nbsp;&nbsp;Air Logistics EBIT</td><td>~114</td><td>154</td><td>+35%</td></tr>
+    <tr><td>&nbsp;&nbsp;Road Logistics EBIT</td><td>~28</td><td>36</td><td>+29%</td></tr>
+    <tr><td>&nbsp;&nbsp;Contract Logistics EBIT</td><td>~42</td><td>51</td><td>+21%</td></tr>
+    <tr><td>Air Logistics net turnover</td><td>1,867</td><td>2,238</td><td>+19.9%</td></tr>
+    <tr><td>Sea Logistics net turnover</td><td>2,212</td><td>2,171</td><td>-1.9%</td></tr>
+    <tr><td>Free cash flow (H1)</td><td>295</td><td>310</td><td>+5.1%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Prior-year divisional EBIT figures marked ~ are back-calculated from the company's stated growth rates and are approximate; group totals, net turnover and gross profit are as reported (S&amp;P Global quarterly data for Q2'25). Sea Logistics' Q2'25 EBIT was not separately verified. The Q2'26 recurring-EBIT growth (+6%) and the cost/AI targets come from the company call summaries.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026):</b> recurring EBIT CHF 1.35-1.55B (raised at H1; initial range CHF 1.2-1.4B). FY2025 recurring EBIT was CHF 1,380m, so the midpoint implies roughly +5% growth. The savings from the cost programme (more than CHF 200m, fully implemented in Q4 2025) and AI deployment (CHF 100-150m EBIT impact targeted by 2027) are the stated bridge.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>2030 ambitions (Capital Markets Day, Mar 25, 2025):</b> grow at about 1.5x global GDP through 2030, mostly organically with selective bolt-on M&amp;A, with a dividend payout of about 80% of earnings. These are management targets, not forecasts; the CHF 6.00 dividend for FY2025 was an 80% payout of a much lower earnings base.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Why this matters for the thesis:</b> the quality of the turnaround is the key question. Q2 EBIT grew 11% on only 3% gross-profit growth, which means cost cuts and mix (more high-yield air freight) did the work. That is sustainable only as long as air-freight demand from technology customers holds and Sea yields stop falling.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on reported EPS (S&amp;P Global). Earnings are close to a cyclical low, so trailing multiples look elevated; the forward view and the dividend are the other lenses. The balance sheet moved from net cash to net debt since FY2023.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on Reported EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~30.3x = CHF 220.30 / LTM EPS of CHF 7.27) is about 1.59x the FY2021-25 average of ~19.1x. Year-end ratios are S&amp;P Global's (EPS 16.88, 22.03, 12.02, 10.00, 7.42 on year-end prices of ~CHF 294, 215, 290, 208 and 171). The FY2022 low reflects peak-cycle earnings, and the current high reflects trough earnings, so the comparison flatters neither end.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="66.4" width="70" height="43.6" fill="#60a5fa"/><text x="55" y="61.4" text-anchor="middle" font-size="9" fill="#cbd5e1">17.4x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="115" y="85.5" width="70" height="24.5" fill="#60a5fa"/><text x="150" y="80.5" text-anchor="middle" font-size="9" fill="#cbd5e1">9.8x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="210" y="49.4" width="70" height="60.6" fill="#60a5fa"/><text x="245" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">24.2x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="305" y="58.0" width="70" height="52.0" fill="#60a5fa"/><text x="340" y="53.0" text-anchor="middle" font-size="9" fill="#cbd5e1">20.8x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="400" y="52.4" width="70" height="57.6" fill="#60a5fa"/><text x="435" y="47.4" text-anchor="middle" font-size="9" fill="#cbd5e1">23.1x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="495" y="34.2" width="70" height="75.8" fill="#2dd4bf"/><text x="530" y="29.2" text-anchor="middle" font-size="9" fill="#cbd5e1">30.3x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="62.3" x2="690" y2="62.3" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="58.3" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 19.1x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus EPS of ~CHF 8.8, implied from S&amp;P data) is ~25.0x versus a FY-end forward average of ~21.0x (ratio about 1.19; 1/5 on the scoring bands). S&amp;P lists the PEG at ~3.0, reflecting modest forecast EPS growth (about 11% a year over three years). The scorecard uses the trailing figure (ratio 1.59 = 0/5). Dividend yield is ~2.7% on the CHF 6.00 dividend, well below the 4-8% yields of FY2021-22. Average analyst price target CHF 198.61 (18 analysts, Hold) sits about 10% below the current price, so the street sees the recovery as largely priced in.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (CHFm) &amp; CapEx Intensity (% of Net Turnover)</div>
+    <div class="chart-sub">Asset-light is verified: capex has been 0.6%-1.3% of net turnover every year (S&amp;P Global data, excludes leased assets). Lease payments are additional and material: they are the main gap between S&amp;P's standardised FCF (CHF 1,549m in FY2025) and the company's CHF 917m. Intensity rose in FY2023-24 as turnover fell, not because spending doubled.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (CHFm, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Net turnover % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="147.8" width="60" height="12.2" fill="#60a5fa"/><text x="60" y="142.8" text-anchor="middle" font-size="8" fill="#cbd5e1">197</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="145.2" width="60" height="14.8" fill="#60a5fa"/><text x="200" y="140.2" text-anchor="middle" font-size="8" fill="#cbd5e1">239</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="141.0" width="60" height="19.0" fill="#60a5fa"/><text x="340" y="136.0" text-anchor="middle" font-size="8" fill="#cbd5e1">306</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="141.4" width="60" height="18.6" fill="#60a5fa"/><text x="480" y="136.4" text-anchor="middle" font-size="8" fill="#cbd5e1">300</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="145.6" width="60" height="14.4" fill="#60a5fa"/><text x="620" y="140.6" text-anchor="middle" font-size="8" fill="#cbd5e1">232</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,136.1 200,135.8 340,108.9 480,111.8 620,122.2" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="136.1" r="3" fill="#fbbf24"/><text x="60" y="126.1" text-anchor="middle" font-size="7.5" fill="#fde68a">0.60%</text>
+      <circle cx="200" cy="135.8" r="3" fill="#fbbf24"/><text x="200" y="125.8" text-anchor="middle" font-size="7.5" fill="#fde68a">0.61%</text>
+      <circle cx="340" cy="108.9" r="3" fill="#fbbf24"/><text x="340" y="98.9" text-anchor="middle" font-size="7.5" fill="#fde68a">1.28%</text>
+      <circle cx="480" cy="111.8" r="3" fill="#fbbf24"/><text x="480" y="101.8" text-anchor="middle" font-size="7.5" fill="#fde68a">1.21%</text>
+      <circle cx="620" cy="122.2" r="3" fill="#fbbf24"/><text x="620" y="112.2" text-anchor="middle" font-size="7.5" fill="#fde68a">0.95%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (anchor holder)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="167.4 146.7" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="146.7 167.4" stroke-dashoffset="-167.4" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~53%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>K&uuml;hne Holding AG (Klaus-Michael K&uuml;hne; stake reported to pass to the K&uuml;hne Foundation) ~53.3%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Free float ~47% (institutions ~18% of shares per S&amp;P; float 52.9M shares)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count, Dividend &amp; Balance Sheet</div>
+      <p>Registered shares are unchanged at 120.754M since 2021 (118.8M outstanding after treasury shares; about -1.7% from the 120.75M at end-2021, i.e. flat), with buybacks of CHF 646m in FY2022 and CHF 716m in FY2023, then almost none. The dividend fell from CHF 14.00 (FY2022) to 6.00 (FY2025). Cash was CHF 617m at Jun 30, 2026 against CHF 4.08B of debt (mostly lease liabilities), a net debt of CHF 3.47B including leases (CHF 1.18B excluding), up from net cash of CHF 248m at end-2023 after acquisitions (CHF 559m in FY2025) and dividends.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Controlling shareholder &amp; honest caveats:</b> Kühne Holding AG, controlled by Klaus-Michael Kühne (honorary chairman, died Aug 23, 2026), owned ~53.3% of the shares; press reports say the stake passes to the Kühne Foundation. A controlling holder is good for long-term alignment and makes a hostile bid impossible, but it also means minority holders have little influence and the free float is only ~47%. I did not verify management or board shareholdings, and S&amp;P's &ldquo;insiders 0.13%&rdquo; figure excludes the Kühne holding, so the control score rests on the ~53% disclosure, not on that data point. CEO Stefan Paul and Chairman Dr. Joerg Wolle are professional managers.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Leverage path:</b> net debt excluding leases (the company's headline measure) was CHF 1.18B at Jun 30, 2026; including leases it was CHF 3.47B, or ~1.6x my estimate of LTM EBITDA of ~CHF 2.2B. S&amp;P's Debt/EBITDA of 1.97x uses gross debt and its own EBITDA definition. The Apex minority buyout (Partners Group's 24.9%) raises net debt but, per management, is earnings-accretive. With the dividend at ~80% of earnings and capex under 1% of turnover, leverage is not a constraint, though it is no longer the net-cash cushion of 2022.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25) and are all negative because the base year sits in the COVID freight boom. Criterion #14 compares FY2025 gross margin (gross profit / net turnover) with FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Kuehne+Nagel</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-7.1% &mdash; CHF 32.8B &rarr; 24.5B net turnover, unwinding the FY2021-22 freight bubble (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-19.4% &mdash; reported EBIT CHF 2,946m &rarr; 1,242m (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>5.07% (FY2025), down from 9.55% in FY2022 &mdash; structurally low because net turnover includes pass-through carrier costs; conversion rate 14% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-15.4% &mdash; company FCF CHF 1,793m &rarr; 917m after lease payments; S&amp;P-standardised FCF is -9.0% (CHF 2,265m &rarr; 1,549m), also a 0 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Global #1 in sea (4.3M TEU) and air (2.2M tonnes) by volume per the company; #3 by total forwarding revenue in the Armstrong &amp; Associates 2025 list (USD 33.8B vs DSV 37.4B, DHL 35.5B), and marginally ahead of DSV in sea TEU. No verified global %-share (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; global freight forwarding is fragmented; the top three hold a minority of a market with thousands of forwarders. I could not verify a precise top-N share (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 16.3% vs est. WACC 6.85% (S&amp;P Global), a +9.5pp spread even at near-trough earnings (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~1.6x incl. leases (net debt CHF 3.47B vs est. EBITDA ~CHF 2.2B); ~0.5x excluding leases (company basis, CHF 1.18B). Was net cash at end-2023 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>73.8% (FY2025); 5-year path 61% / 100% / 51% / 37% / 74%, TTM ~76%. Company FCF is after lease payments; the company's own cash-conversion measure (FCF vs earnings) was 86% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~30.3x vs FY21-25 average ~19.1x (ratio 1.59); forward ~25.0x vs ~21.0x (1.19) &mdash; scored on trailing basis, which exaggerates because EPS is near a trough (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>120.75M registered shares unchanged; ~118.8M outstanding vs 120.75M at end-2021, -1.7% (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>K&uuml;hne Holding AG ~53.3% (family/foundation control). Management holdings unverified (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.6-1.3% of net turnover every year FY21-25 (FY2025: 0.95%); owns no ships or aircraft. Lease payments are extra (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin 36.84% (FY2023) &rarr; 35.95% (FY2025), -0.89pp &mdash; comfortably inside the threshold, though EBIT margin fell 7.98% &rarr; 5.07% as operating costs absorbed the lower yields (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 0&times;13=0.0 &middot; #2 0&times;11=0.0 &middot; #3 2&times;10=4.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 4&times;10=8.0 &middot; #8 3&times;6=3.6 &middot; #9 3&times;8=4.8 &middot; #10 0&times;8=0.0 &middot; #11 3&times;4=2.4 &middot; #12 5&times;5=5.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 43.6 / 105 = <b>42/100</b>. Criteria met: 7/14 on the original binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses third-party ROIC/WACC estimates; #8 uses an estimated EBITDA; #9 uses the company's lease-burdened FCF (on S&amp;P's standardised FCF conversion would be far above 100%, which would be 5/5 and add 3.2 points, i.e. an index of about 45); #12 relies on a reported ~53% holder; #14's 5/5 is chosen because the shortfall is under 1pp.
+  </div>
+
+  <div class="callout blue" style="margin-top:6px;">
+    <b>Versus the closest peers on this site:</b> DSV 48/100 (7/14 met), Kuehne+Nagel 42/100 (7/14), DFDS 42/100 (5/14), Maersk 37/100 (5/14). Kuehne+Nagel and DSV tie on criteria met but DSV scores six points higher because its 4-year growth, FCF CAGR and entry multiple are less punished (Schenker-driven revenue, a cheaper multiple vs its own history) while K+N wins on ROIC, leverage and ownership: its ROIC beats WACC by 9.5pp where DSV's is 0.7pp below, and it has a controlling holder where DSV has none. Both are asset-light forwarders; Maersk and DFDS own ships and ferries and score lower on capital intensity and returns.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A high-return, asset-light franchise at trough earnings: ROIC of 16.3% against a ~6.9% WACC, capex under 1% of net turnover, and FY2025 FCF up 48% even as EBIT fell. Q2 2026 delivered EBIT +11% and Air Logistics EBIT +35% on genuine market-share gains in technology freight, the cost programme (over CHF 200m) is fully in place, and guidance was lifted to CHF 1.35-1.55B. Net turnover turned positive YoY for the first time in five quarters. The balance sheet is sound (about 1.6x including leases, 0.5x without), the controlling holder gives long-term stability, and Kuehne+Nagel remains the global volume leader in both sea and air freight with SMEs, who pay higher yields, now about half of sea volumes. Management has a clear lever (AI-driven productivity, CHF 100-150m by 2027) that is measurable.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Every growth criterion is negative: FY2021-25 net turnover CAGR is -7.1%, EBIT -19.4% and FCF -15.4%, and EBIT is still about 67% below the FY2022 peak. The stock is up about 49% in a year and trades at ~30x trailing and ~25x forward earnings, with the average analyst target about 10% below the price, so a lot of recovery is priced in while gross profit grew only about 3% in Q2. Sea yields are still under pressure and European export demand is weak, Q2's gain leans on cost cuts and air-freight mix from a few technology customers, and Q1 2026 EBIT appears to include one-off gains. Klaus-Michael K&uuml;hne's death in August 2026 changes the shareholder picture even though control should pass to the foundation. The market-share claim is contested (third by revenue behind DSV and DHL), and several inputs could not be verified: management shareholdings, an exact market-share percentage, and company-defined EBITDA for the leverage ratio.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Kuehne+Nagel ad hoc announcements for FY2025 (Mar 2026) and Q2 2026 (Jul 23, 2026) via assets.kuehne-nagel.com; FY2024 analyst presentation (Mar 4, 2025) and FY2022 results release via newsroom.kuehne-nagel.com; stockanalysis.com (S&amp;P Global Market Intelligence: price, shares, quarterly and annual financials, ROIC/WACC, P/E history, consensus); Armstrong &amp; Associates Top 25 Global Freight Forwarders 2025 (via SupplyChain247, as cited on the DSV dashboard); press reports (Stattimes, B&ouml;rsen-Zeitung, cargoforwarder.eu) for the Aug 2026 death of Klaus-Michael K&uuml;hne and the ~53% holding; Q2 2026 call summaries (Quartr / stockanalysis transcripts) for recurring EBIT growth and AI targets. Year-end share prices are from the company's FY2024 deck (2020-24) and derived from S&amp;P P/E data (2025); WACC, ROIC and EBITDA for leverage are third-party or approximate and flagged as such. All figures CHF. Price as of Sep 30, 2026 close; prepared Oct 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Kuehne+Nagel International AG &mdash; CHF share price trend. A COVID-era peak at end-2021, a 2022 drawdown, a rebound into end-2023, then a long de-rating through 2025 as freight yields normalised and tariffs hit trade, followed by a sharp re-rating in 2026 as earnings stabilised and guidance was raised twice.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Kuehne+Nagel &mdash; Year-End Close (Approximate), CHF</div>
+    <div class="chart-sub">Year-end closing prices for 2021-2024 are from the company's FY2024 analyst deck (CHF 294.40, 215.20, 289.80, 207.80); the 2025 point (~CHF 171) is derived from S&amp;P's year-end P/E and EPS and is approximate; the last point is the Sep 30, 2026 close (CHF 220.30). The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Sep 2026 (4.75 years), excluding dividends (CHF 6.00/share now, ~2.7% yield; CHF 10.00-14.00 in 2021-23). Intra-period highs and lows are not shown: the 52-week range is roughly CHF 147 &ndash; 233.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,32.3 L 172.8,92.4 L 299.6,35.8 L 426.4,98.1 L 553.2,126.0 L 680.0,88.6 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="32.3" x2="680.0" y2="88.6" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">-5.9%*</text>
+<path d="M 46.0,32.3 L 172.8,92.4 L 299.6,35.8 L 426.4,98.1 L 553.2,126.0 L 680.0,88.6" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="32.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="20.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 294</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="92.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="107.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 215</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="35.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="23.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 290</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="98.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="113.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 208</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="126.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="141.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 171</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="88.6" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678.0" y="76.6" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">CHF 220</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the Dec 2021 freight-cycle peak and ends about 5% below the September 2026 high, so the negative CAGR (-5.9%) is largely a starting-point effect and understates the move from the end-2025 level (~CHF 171) of roughly +29%; including dividends of CHF 10.00-6.00 per year the total return is less negative. Over the same period reported EBIT fell about 58% (CHF 2,946m &rarr; 1,242m), so the share price has held up better than earnings, which is why the trailing P/E is high. Last stock split: 5-for-1 in 2006. Currency: CHF throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

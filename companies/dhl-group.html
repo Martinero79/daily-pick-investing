@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DHL Group — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/dhl-group.html">
+<meta property="og:title" content="DHL Group — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DHL Group — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>DHL Group</h1>
+  <div class="badges">
+    <div class="badge">XETRA: DHL</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Bonn, Germany</div>
+    <div class="badge">Reports &amp; trades in EUR</div>
+    <div class="badge warn">Near 52-Wk High (+~51% in 1 Yr) &mdash; Earnings Recovering, But Multiple Is Above Its Own History</div>
+  </div>
+
+  <div class="price">&euro;57.00</div>
+  <div class="price-sub">Sep 30, 2026 close (XETRA) &middot; Market cap &asymp; &euro;63.1B (~1.107B shares outstanding) &middot; 52-wk range &euro;36.99 &ndash; 58.30 &middot; 1-yr price change &asymp; +51% &middot; Beta 1.13 &middot; Analyst consensus: Hold (20 analysts), avg PT &euro;55.12 (-3.6%) &middot; Next report (Q3 2026): Nov 5, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> DHL Group is a leading international express operator in industry rankings, a top-two global contract logistics provider, and #2 among global freight forwarders by revenue (Armstrong &amp; Associates 2025: DSV USD 37.4B, DHL 35.5B, Kuehne+Nagel 33.8B). The listed parent was renamed DHL AG on Sep 1, 2026 after a legal restructuring; the group brand is unchanged. See Section 4 for how this was scored.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure on this page is in euros (EUR), DHL's reporting and trading currency. &ldquo;Op. Income / EBIT&rdquo; is DHL's reported <b>EBIT</b> (profit from operating activities). &ldquo;Free cash flow&rdquo; is DHL's own <b>free cash flow excluding net M&amp;A</b>, which is after lease payments and interest and is therefore lower than the operating-cash-flow-minus-capex figure that data vendors show (FY2025: &euro;3.2B vs &asymp;&euro;6.3B). DHL publishes FCF rounded to &euro;0.1B in its press releases, so the FCF figures below are rounded to the nearest &euro;100m.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;82.9B</div>
+      <div class="sub" style="color:#fbbf24;">-1.6% YoY &mdash; FX and US-trade drag</div>
+      <div class="note">FY2024 was +3.0%. 4-yr CAGR FY2021-25 is only +0.3%: FY2021-22 were boosted by COVID-era freight rates and e-commerce volumes (FY2022 peak &euro;94.4B), then revenue fell 13.4% in FY2023.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (FY2025)</div>
+      <div class="val" style="color:#f87171;">7.37%</div>
+      <div class="sub">EBIT &euro;6.1B, +3.7% YoY; was 9.8% in FY2021</div>
+      <div class="note">Margin is structurally modest because revenue includes pass-through freight, fuel and postal costs. Express runs at ~13% and Forwarding at ~4%; the group blends them with Supply Chain, eCommerce and German mail.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">9.2% vs ~8.2%</div>
+      <div class="sub">S&amp;P Global; DHL's own ROIC is 13.9% (FY2025)</div>
+      <div class="note">Clears WACC on both definitions. DHL's own ROIC rose 20bp to 13.9% in FY2025 and uses a different capital base, so it is not directly comparable with the S&amp;P figure used in the scorecard.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#fbbf24;">2.8x</div>
+      <div class="sub">Jun 2026 TTM, incl. leases (S&amp;P)</div>
+      <div class="note">Net debt &asymp; &euro;23.7B (total debt &euro;28.0B incl. lease liabilities, less &euro;4.3B cash) on TTM EBITDA of &euro;8.4B. Above this site's 2x bar, but lease liabilities are a large part of it.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">38/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Below DSV (48) and DFDS (42), just above Maersk (37): a scaled, cash-generative market leader with real ROIC, but no growth over the window, a modest margin, 2.8x leverage and a multiple above its own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="89.8 224.4" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="224.4 89.8" stroke-dashoffset="-89.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">4/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>4 criteria fully met</b> &mdash; market position (#1/#2), ROIC above WACC, shrinking share count (buybacks) and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>10 not met</b> &mdash; revenue, EBIT and FCF CAGRs (all flat to negative from a COVID-boosted FY2021 base), EBIT margin, market concentration (fragmented), leverage above 2x, FCF conversion (~52%), entry multiple above own history, no insider/founder block, and capex intensity (3.6% of revenue)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    DHL Group (listed parent DHL AG, formerly Deutsche Post AG) describes itself as the world's leading logistics company, operating in over 220 countries and territories with about 584,000 people. It has five divisions: Express (time-definite international parcels and documents, the profit engine at &euro;3.2B of FY2025 EBIT), Global Forwarding, Freight (air, ocean and road forwarding, &euro;0.8B), Supply Chain (contract logistics and warehousing, &euro;1.2B), eCommerce (&euro;0.4B) and Post &amp; Parcel Germany (the domestic mail and parcel business, &euro;1.0B). Unlike DSV, DHL is not asset-light: it owns an air fleet and hubs, runs a large last-mile network with its own drivers and sorters, so capex runs at about 3.6% of revenue rather than 1%. In return it owns the integrated express network that competitors cannot replicate, and that network is where the earnings sit. The last four years were a round trip: COVID pushed EBIT to a record &euro;8.4B in FY2022, normalisation took it down to &euro;5.9B in FY2024, and the &ldquo;Fit for Growth&rdquo; cost programme has since pulled it back to &euro;6.1B on lower revenue. Q2 2026 was the strongest quarter in this recovery: revenue &euro;22.4B (+12.8% YoY) and EBIT &euro;1.86B (+30.0%, margin 8.3%), with Express EBIT up 64% on higher shipment weight and tight air-freight capacity. FY2026 EBIT guidance was raised in July to more than &euro;6.5B, free cash flow guidance is about &euro;3.0B, and the buyback programme was lifted to up to &euro;6.5B and extended to the end of 2027. The shares have rallied about 51% in a year, so a company that looked cheap at ~11.8x earnings at end-2024 now trades at ~17.3x, above its own five-year average.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>COVID boom</b> &mdash; FY2021-22 revenue and EBIT were inflated by extraordinary freight rates, e-commerce volumes and a record Forwarding year (FY2022 Forwarding revenue &euro;30.2B vs &euro;18.6B in FY2025), so every CAGR measured from FY2021 is negative or flat even though FY2025 EBIT is well above the pre-pandemic level. (2) <b>Currency and tariffs</b> &mdash; FY2025 revenue (-1.6%) was hit by FX and by lower volumes into the US after the end of the de-minimis exemption; Q2 2026 is compared with a prior-year quarter already depressed by tariffs, and part of its +12.8% is fuel pass-through and a temporary air-capacity squeeze (~&euro;150m EBIT benefit at Express), so it is not a clean run-rate. (3) <b>Reported vs data-vendor figures</b> &mdash; S&amp;P/stockanalysis show FY2025 revenue of &euro;83.4B and EBIT of &euro;5.4B because they standardise definitions; this page uses DHL's own reported figures throughout.
+  </div>
+
+  <div class="callout blue" style="margin-top:10px;">
+    <b>Compared with DSV, DFDS and Maersk on this site:</b> DSV scores 48 (7/14), DFDS 42 and Maersk 37; DHL scores 38 (4/14). DHL beats DSV on the things that matter most right now &mdash; ROIC above WACC (9.2% vs 7.2% vs 7.9% for DSV), a shrinking share count where DSV's is flat after an equity issue, and a more stable margin. DSV beats DHL on asset-light capital intensity (~1% vs ~3.6% of revenue), FCF conversion (83% vs ~52%), FCF growth and a cheaper entry multiple versus its own history (0.95x vs 1.38x). DHL's score is held back mainly by the flat-to-negative FY2021-25 growth CAGRs, which weigh 32 of the 105 index points.
+  </div>
+
+  <div class="bignum-corner">DHL</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, EUR millions as reported by DHL Group (Op. Income = reported EBIT; Free Cash Flow = DHL's free cash flow excluding net M&amp;A, rounded to the nearest &euro;100m as published). FY2021-22 sit inside the COVID freight and e-commerce boom.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (EURm)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in EUR billions). Revenue peaked in FY2022 (+15.5%) and fell 13.4% in FY2023 as freight rates and volumes normalised; EBIT and FCF are the steadier lens. FCF has settled at &euro;3.0-3.3B for three years while EBIT recovered, so conversion has been remarkably stable at about 52% of EBIT.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (reported)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (excl. net M&amp;A, rounded)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+    <line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">50bn</text>
+    <line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">75bn</text>
+    <line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">100bn</text>
+    <line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+    <rect x="85.0" y="60.2" width="30" height="179.8" rx="2" fill="#2dd4bf"/>
+    <text x="100.0" y="55.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">81,747</text>
+    <rect x="123.0" y="222.4" width="30" height="17.6" rx="2" fill="#60a5fa"/>
+    <text x="138.0" y="217.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">7,978</text>
+    <rect x="161.0" y="231.0" width="30" height="9.0" rx="2" fill="#fbbf24"/>
+    <text x="176.0" y="226.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">~4,100</text>
+    <text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+    <rect x="241.0" y="32.2" width="30" height="207.8" rx="2" fill="#2dd4bf"/>
+    <text x="256.0" y="27.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">94,436</text>
+    <rect x="279.0" y="221.4" width="30" height="18.6" rx="2" fill="#60a5fa"/>
+    <text x="294.0" y="216.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">8,436</text>
+    <rect x="317.0" y="229.9" width="30" height="10.1" rx="2" fill="#fbbf24"/>
+    <text x="332.0" y="224.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">~4,600</text>
+    <text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+    <rect x="397.0" y="60.1" width="30" height="179.9" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="55.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">81,758</text>
+    <rect x="435.0" y="226.0" width="30" height="14.0" rx="2" fill="#60a5fa"/>
+    <text x="450.0" y="221.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">6,345</text>
+    <rect x="473.0" y="232.7" width="30" height="7.3" rx="2" fill="#fbbf24"/>
+    <text x="488.0" y="227.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">~3,300</text>
+    <text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+    <rect x="553.0" y="54.8" width="30" height="185.2" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="49.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">84,186</text>
+    <rect x="591.0" y="227.1" width="30" height="12.9" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="222.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,886</text>
+    <rect x="629.0" y="233.4" width="30" height="6.6" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="228.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">~3,000</text>
+    <text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+    <rect x="709.0" y="57.7" width="30" height="182.3" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="52.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">82,855</text>
+    <rect x="747.0" y="226.6" width="30" height="13.4" rx="2" fill="#60a5fa"/>
+    <text x="762.0" y="221.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">6,103</text>
+    <rect x="785.0" y="233.0" width="30" height="7.0" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="228.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">~3,200</text>
+    <text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+0.3%</div>
+      <div class="sub">&euro;81.7B &rarr; &euro;82.9B &mdash; FY2022 peak (&euro;94.4B) and FY2023 drop (-13.4%) dominate the path; FY2025 is -1.6%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-6.5%</div>
+      <div class="sub">&euro;8.0B &rarr; &euro;6.1B &mdash; FY2025 EBIT is 23% below the FY2021 COVID-boosted base but +3.7% on FY2024</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-6.0%</div>
+      <div class="sub">&euro;4.1B &rarr; &euro;3.2B &mdash; but up from &euro;3.0B in FY2024, with a TTM of ~&euro;3.9B after a strong H1 2026</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; EBIT / revenue</div>
+    <div class="chart-sub">Margin fell from 9.8% in FY2021 to 7.0% in FY2024 as high-margin COVID volumes and freight rates normalised and German mail costs rose, then recovered to 7.4% in FY2025 on cost savings (&ldquo;Fit for Growth&rdquo;) and active capacity management. H1 2026 EBIT margin is 7.8% and Q2 2026 is 8.3%. Part of the level is structural: revenue includes freight, fuel and postal pass-through.</div>
+    <svg viewBox="0 0 700 107">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text>
+      <text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+      <polyline points="60,53.4 205,56.5 350,60.9 495,63.8 640,62.4" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="53.4" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="46.4" text-anchor="middle" font-size="8" fill="#cbd5e1">9.8%</text>
+      <circle cx="205" cy="56.5" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="49.5" text-anchor="middle" font-size="8" fill="#cbd5e1">8.9%</text>
+      <circle cx="350" cy="60.9" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="53.9" text-anchor="middle" font-size="8" fill="#cbd5e1">7.8%</text>
+      <circle cx="495" cy="63.8" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="56.8" text-anchor="middle" font-size="8" fill="#cbd5e1">7.0%</text>
+      <circle cx="640" cy="62.4" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="55.4" text-anchor="middle" font-size="8" fill="#cbd5e1">7.4%</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (EUR m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>81,747</td><td>7,978</td><td>9.8%</td><td>5,053</td><td>~4,100</td><td>51.4%</td></tr>
+    <tr><td>FY2022</td><td>94,436</td><td>8,436</td><td>8.9%</td><td>5,359</td><td>~4,600</td><td>54.5%</td></tr>
+    <tr><td>FY2023</td><td>81,758</td><td>6,345</td><td>7.8%</td><td>3,677</td><td>~3,300</td><td>52.0%</td></tr>
+    <tr><td>FY2024</td><td>84,186</td><td>5,886</td><td>7.0%</td><td>3,332</td><td>~3,000</td><td>51.0%</td></tr>
+    <tr><td>FY2025</td><td>82,855</td><td>6,103</td><td>7.4%</td><td>3,501</td><td>~3,200</td><td>52.4%</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>85,008</td><td>6,639</td><td>7.8%</td><td>3,717</td><td>~3,900</td><td>58.7%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net income is consolidated net profit after non-controlling interests. FCF is DHL's published free cash flow excluding net M&amp;A (after lease payments and interest), rounded by DHL to &euro;0.1B; FY2021 and FY2022 are the figures reported in the FY2022 release (&euro;4.1B and &euro;4.6B; FY2022 including M&amp;A was &euro;3.1B). TTM is derived as FY2025 + H1 2026 &minus; H1 2025 (revenue 82,855 + 42,787 &minus; 40,634; EBIT 6,103 + 3,335 &minus; 2,799; FCF 3.2 + 1.8 &minus; 1.1 &asymp; 3.9B); TTM net income is the S&amp;P Global figure and matches the derivation. Data vendors report different revenue (FY2025: &euro;83.4B) and EBIT (&euro;5.4B) after standardisation.</div>
+  <div class="footer-note">Source: DHL Group press releases of Mar 9, 2023 (FY2022, incl. FY2021 comparatives), Mar 6, 2024 (FY2023), Mar 5, 2026 (FY2025, incl. FY2024) and Aug 5, 2026 (H1 2026); stockanalysis.com (S&amp;P Global Market Intelligence) for cross-checks. All figures in EUR.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Strategy 2030 &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">The case for the next 18 months is whether Express and Forwarding can hold the margin gains once the tariff-distorted comparisons and the air-capacity squeeze fade. Reported on Aug 5, 2026; Q3 2026 is due Nov 5, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was &euro;22,367m (+12.8% YoY; DHL rounds to +13%) and EBIT &euro;1,858m (+30.0%), with the EBIT margin up 1.1pp to 8.3%. Growth came from higher shipment weight at Express, constrained international air-freight capacity and the pass-through of higher fuel costs, against a prior-year quarter hit by tariffs. Express revenue rose 21.5% and EBIT 64.3% to &euro;1,200m (margin 16.8%), including about &euro;150m of temporary benefit from the air-capacity squeeze. Global Forwarding EBIT grew 21.9% to &euro;240m on revenue +17.9%. Supply Chain revenue grew 12.9% but EBIT fell 12.1% against a prior quarter flattered by one-offs. eCommerce revenue fell 3.7% (the Evri merger removed UK revenue from consolidation) and Post &amp; Parcel Germany EBIT fell 18.7% on higher transport and personnel costs. Free cash flow excluding M&amp;A was &euro;569m (Q2 2025: &euro;329m) despite a working-capital outflow, helped in June by refunds of US IEEPA tariffs that DHL is passing on to customers; H1 FCF was &euro;1.8B vs &euro;1.1B. Net profit after minorities rose 23.9% to &euro;1.01B.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters (EUR bn)</div>
+    <div class="chart-sub">Revenue is seasonal (Q4 peak) and was down year on year for four straight quarters (Q4'25 -2.7%, Q1'26 -1.9% on FX, organic about +2%) before Q2'26 jumped +12.8%. Q1'25 and Q3'25 are derived from reported H1 and Q3 figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, EUR bn</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="40" y="44.9" width="60" height="85.1" fill="#2dd4bf"/><text x="70" y="39.9" text-anchor="middle" font-size="9" fill="#cbd5e1">22.7</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="130" y="52.0" width="60" height="78.0" fill="#2dd4bf"/><text x="160" y="47.0" text-anchor="middle" font-size="9" fill="#cbd5e1">20.8</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="220" y="55.7" width="60" height="74.3" fill="#2dd4bf"/><text x="250" y="50.7" text-anchor="middle" font-size="9" fill="#cbd5e1">19.8</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="310" y="54.5" width="60" height="75.5" fill="#2dd4bf"/><text x="340" y="49.5" text-anchor="middle" font-size="9" fill="#cbd5e1">20.1</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="400" y="47.2" width="60" height="82.8" fill="#2dd4bf"/><text x="430" y="42.2" text-anchor="middle" font-size="9" fill="#cbd5e1">22.1</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="490" y="53.4" width="60" height="76.6" fill="#2dd4bf"/><text x="520" y="48.4" text-anchor="middle" font-size="9" fill="#cbd5e1">20.4</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="580" y="46.1" width="60" height="83.9" fill="#2dd4bf"/><text x="610" y="41.1" text-anchor="middle" font-size="9" fill="#cbd5e1">22.4</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT &mdash; Last 7 Quarters (EURm)</div>
+    <div class="chart-sub">Quarterly EBIT has been above &euro;1.37B every quarter and Q2 2026 (&euro;1,858m) is the highest in this window, slightly above Q4 2025 (&euro;1,827m, the seasonal peak). Q1'26 is as reported by DHL (+8.3% YoY); derived from H1 less Q2 it rounds to about &euro;1,477m, a small restatement difference.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>EBIT, EUR m</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="40" y="46.7" width="60" height="83.3" fill="#60a5fa"/><text x="70" y="41.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,851</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="130" y="68.3" width="60" height="61.6" fill="#60a5fa"/><text x="160" y="63.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,370</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="220" y="65.7" width="60" height="64.3" fill="#60a5fa"/><text x="250" y="60.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,429</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="310" y="63.5" width="60" height="66.5" fill="#60a5fa"/><text x="340" y="58.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,477</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="400" y="47.8" width="60" height="82.2" fill="#60a5fa"/><text x="430" y="42.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,827</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="490" y="63.3" width="60" height="66.7" fill="#60a5fa"/><text x="520" y="58.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,483</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="580" y="46.4" width="60" height="83.6" fill="#60a5fa"/><text x="610" y="41.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,858</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric (EUR m)</th><th>Prior-year quarter</th><th>Latest quarter</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>19,826</td><td>22,367</td><td>+12.8%</td></tr>
+    <tr><td>EBIT (group)</td><td>1,429</td><td>1,858</td><td>+30.0%</td></tr>
+    <tr><td>&nbsp;&nbsp;Express</td><td>730</td><td>1,200</td><td>+64.3%</td></tr>
+    <tr><td>&nbsp;&nbsp;Global Forwarding, Freight</td><td>196</td><td>240</td><td>+21.9%</td></tr>
+    <tr><td>&nbsp;&nbsp;Supply Chain</td><td>348</td><td>305</td><td>-12.1%</td></tr>
+    <tr><td>&nbsp;&nbsp;eCommerce</td><td>56</td><td>54</td><td>-4.0%</td></tr>
+    <tr><td>&nbsp;&nbsp;Post &amp; Parcel Germany</td><td>166</td><td>135</td><td>-18.7%</td></tr>
+    <tr><td>Net profit (after minorities)</td><td>815</td><td>1,010</td><td>+23.9%</td></tr>
+    <tr><td>Free cash flow excl. M&amp;A</td><td>329</td><td>569</td><td>+73.0%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Divisional EBIT excludes Group Functions/Consolidation (&euro;-67m vs &euro;-76m). DHL's release shows Post &amp; Parcel Germany Q2 2025 EBIT as 160 in the text table and 166 in the group highlights; 166 is used here. FCF change is calculated from the rounded published figures.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026):</b> EBIT of more than &euro;6.5B (raised in July from more than &euro;6.2B; FY2025: &euro;6.1B, so at least +7%). Divisions: DHL divisions above &euro;5.9B, Post &amp; Parcel Germany above &euro;0.9B, Group Functions about &euro;-0.4B. Free cash flow excluding M&amp;A about &euro;3.0B (confirmed). H1 2026 EBIT is already &euro;3.3B (+19.1%), so the guidance looks conservative if H2 holds, but the Q2 air-capacity benefit is temporary.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Capital returns &amp; investment:</b> the share buyback programme (launched 2022) was raised by &euro;500m to up to &euro;6.5B and extended to the end of 2027; &euro;1.4B was bought back in 2025. The dividend was raised to &euro;1.90 (FY2025, ~3.3% yield, 60.6% payout, slightly above the 40-60% target band). H1 2026 capex was &euro;1.3B (+25% YoY) for Express fleet renewal, automation and growth areas such as Life Sciences &amp; Healthcare, batteries and data-centre logistics.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Strategy 2030:</b> introduced in September 2024 around four goals (people, customers, investors and green logistics), with a push into higher-margin B2B and specialty verticals and continued cost discipline. Management commentary at the Capital Markets Day in September 2026 (per the published transcript summary) targets mid-teens EBIT margins at Express and aims to double Heavy Weight Express over five years. An earlier 2026 EBIT ambition of &euro;7.5-8.5B (set in March 2024) is now above the &euro;6.5B+ guidance, so the group is still working toward it. These are management targets, not forecasts.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on diluted EPS (S&amp;P Global basis). Unlike a pure asset-light forwarder, DHL carries aircraft, hubs and leases, so leverage and capex intensity matter more here.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on Diluted EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~17.3x = &euro;57.00 / LTM diluted EPS of &euro;3.28) is ~138% of DHL's FY2021-25 average (~12.6x), the highest reading in the window. FY-end multiples were low because the market priced the FY2022 earnings peak and the FY2024 trough as cyclical; the re-rating since end-2024 (11.8x) reflects both higher earnings and a higher price. Year-end prices are approximate (S&amp;P/stockanalysis); EPS (diluted) is &euro;4.01, 4.33, 3.04, 2.81, 3.04.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="52.5" width="70" height="57.5" fill="#60a5fa"/><text x="55" y="47.5" text-anchor="middle" font-size="9" fill="#cbd5e1">13.7x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="115" y="76.8" width="70" height="33.2" fill="#60a5fa"/><text x="150" y="71.8" text-anchor="middle" font-size="9" fill="#cbd5e1">7.9x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="210" y="49.4" width="70" height="60.6" fill="#60a5fa"/><text x="245" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">14.4x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="305" y="60.6" width="70" height="49.4" fill="#60a5fa"/><text x="340" y="55.6" text-anchor="middle" font-size="9" fill="#cbd5e1">11.8x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="400" y="47.1" width="70" height="62.9" fill="#60a5fa"/><text x="435" y="42.1" text-anchor="middle" font-size="9" fill="#cbd5e1">15.0x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="495" y="37.2" width="70" height="72.8" fill="#2dd4bf"/><text x="530" y="32.2" text-anchor="middle" font-size="9" fill="#cbd5e1">17.3x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="57.3" x2="690" y2="57.3" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="53.3" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 12.6x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is ~15.5x versus a FY21-25 year-end average of ~13.3x (about 117% of its own average). PEG is ~1.59 per S&amp;P data, and consensus 3-year EPS growth is ~10.6% a year. The scorecard uses the trailing figure (ratio 1.38, scored 1/5); on the forward basis the ratio would be 1.17 (2/5). The average analyst price target is &euro;55.12 (20 analysts, consensus Hold), about 3.6% below the current price, and several brokers raised targets in recent weeks (Deutsche Bank &euro;62, JPMorgan &euro;65, Morgan Stanley &euro;56; Citi moved to Neutral citing a more balanced risk/reward after the rally). Dividend yield is ~3.3% and buyback plus dividend yield ~7.3%.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (EURm, gross capex on owned assets) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">DHL invests 3.6-4.8% of revenue every year in aircraft, hubs, vehicles and automation (FY2025: &euro;3.0B, 3.6%), well above an asset-light forwarder. Lease payments are additional and are already deducted in DHL's FCF. Capex was 3.8% lower in FY2025 but H1 2026 capex is up 25% YoY at &euro;1.3B. FY2024 capex is derived from DHL's statement that FY2025 was 3.8% below the prior year.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (EURm, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="37.2" width="60" height="122.8" fill="#60a5fa"/><text x="60" y="32.2" text-anchor="middle" font-size="8" fill="#cbd5e1">3,900</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="30.8" width="60" height="129.2" fill="#60a5fa"/><text x="200" y="25.8" text-anchor="middle" font-size="8" fill="#cbd5e1">4,100</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="52.9" width="60" height="107.1" fill="#60a5fa"/><text x="340" y="47.9" text-anchor="middle" font-size="8" fill="#cbd5e1">3,400</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="61.7" width="60" height="98.3" fill="#60a5fa"/><text x="480" y="56.7" text-anchor="middle" font-size="8" fill="#cbd5e1">3,120</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="65.5" width="60" height="94.5" fill="#60a5fa"/><text x="620" y="60.5" text-anchor="middle" font-size="8" fill="#cbd5e1">3,000</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,55.0 200,64.5 340,68.5 480,78.5 620,80.3" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="55.0" r="3" fill="#fbbf24"/><text x="60" y="45.0" text-anchor="middle" font-size="7.5" fill="#fde68a">4.77%</text>
+      <circle cx="200" cy="64.5" r="3" fill="#fbbf24"/><text x="200" y="54.5" text-anchor="middle" font-size="7.5" fill="#fde68a">4.34%</text>
+      <circle cx="340" cy="68.5" r="3" fill="#fbbf24"/><text x="340" y="58.5" text-anchor="middle" font-size="7.5" fill="#fde68a">4.16%</text>
+      <circle cx="480" cy="78.5" r="3" fill="#fbbf24"/><text x="480" y="68.5" text-anchor="middle" font-size="7.5" fill="#fde68a">3.71%</text>
+      <circle cx="620" cy="80.3" r="3" fill="#fbbf24"/><text x="620" y="70.3" text-anchor="middle" font-size="7.5" fill="#fde68a">3.62%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (as of Sep 30, 2026)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="55.7 258.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="11.1 303.1" stroke-dashoffset="-55.7" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="247.4 66.8" stroke-dashoffset="-66.8" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">17.7%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>KfW Bankengruppe (German state-owned development bank) 17.73% (~204M shares)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Treasury shares (held by DHL itself) 3.53%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Free float 78.74% (private investors 16.87%; institutions overall ~36%; 490,000+ shareholders)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Issued share capital is 1,150M shares; after treasury shares about 1.107B are outstanding, down roughly 10% from ~1.24B at end-2021 and down 3.9% in the last year alone (S&amp;P). The buyback programme, launched in 2022, is now sized at up to &euro;6.5B through the end of 2027 (&euro;0.9B bought in 2023, &euro;1.4B in 2025). Dividend per share was &euro;1.80 (FY2021), 1.85 (FY2022-24) and 1.90 (FY2025), a 60.6% payout of FY2025 net profit, slightly above DHL's 40-60% target range.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> DHL has no founder or controlling family; it was created from the privatisation of the German state postal service, and the CEO (Tobias Meyer, since 2022), CFO (Melanie Kreis) and the board are professional managers. The largest holder, KfW (17.73%), is a state-owned bank holding the legacy federal stake, a strategic anchor but not an insider or founder block, so S&amp;P shows no insider percentage. Directors' dealings in September 2026 were small share-plan purchases by executives. I could not verify the combined management and board holding, so I make no claim about it.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Leverage:</b> total debt including lease liabilities is &euro;28.0B against &euro;4.3B cash (Jun 2026, S&amp;P Global), a net debt of ~&euro;23.7B or 2.8x TTM EBITDA of &euro;8.4B (gross debt/EBITDA 2.57x); interest cover is ~4.9x and the current ratio 1.03. Net debt has risen every year since FY2021 (&euro;13.3B on the same S&amp;P basis) as buybacks and dividends (~&euro;3.5B a year combined) have run slightly ahead of FCF after M&amp;A. DHL's own definition of net debt differs (it treats pension and some lease items differently) and I could not retrieve its latest figure, so the scorecard uses the S&amp;P number consistently with the DSV page.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25) and start from the COVID-boosted FY2021 base. Criterion #14 compares FY2025 gross margin (S&amp;P basis) with FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>DHL Group</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+0.3% &mdash; &euro;81.7B &rarr; &euro;82.9B; a FY2022 spike and FY2023 fall in between, no net growth (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-6.5% &mdash; EBIT &euro;8.0B &rarr; &euro;6.1B, a decline from the COVID-boosted base (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>7.37% (FY2025), up from 7.0% in FY2024; low because revenue includes freight, fuel and postal pass-through (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-6.0% &mdash; FCF excl. M&amp;A ~&euro;4.1B &rarr; ~&euro;3.2B; recovering from &euro;3.0B in FY2024 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>#2 global freight forwarder by revenue (A&amp;A 2025: DSV USD 37.4B, DHL 35.5B, Kuehne+Nagel 33.8B), and a leading international express and contract logistics operator in industry rankings; no verified global %-share for any segment (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; international express is a tight oligopoly (DHL, FedEx, UPS and a few regionals) but forwarding, contract logistics and eCommerce parcels are fragmented, and German mail is declining; I could not verify a precise top-N share (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 9.24% vs est. WACC 8.22% (S&amp;P Global), a +1.0pp spread; DHL's own ROIC is 13.9% (FY2025, +20bp YoY) on a different capital base. Clears WACC but narrowly on the S&amp;P definition (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>2.8x (Jun 2026, net debt ~&euro;23.7B incl. leases / TTM EBITDA &euro;8.4B); gross debt/EBITDA 2.57x (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>52.4% (FY2025); five-year range 51-55%, TTM ~59%. Consistent, but DHL's FCF is after leases, interest and tax-like items and the business reinvests ~3.6% of revenue in capex (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 17.3x vs FY21-25 average ~12.6x (ratio 1.38); forward P/E 15.5x vs ~13.3x (1.17) &mdash; scored on trailing basis, above own history (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~1.24B (end-2021) to ~1.107B now, about -10%, with -3.9% in the last year; ongoing buyback of up to &euro;6.5B through 2027 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>No founder or management block; management holdings unverified. KfW (17.73%) is a state-owned strategic anchor, not an insider. Partial credit for the anchor, flagged as judgment (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.6% of revenue in FY2025 (&euro;3.0B), 3.6-4.8% across FY21-25; owns aircraft, hubs and a large delivery fleet. Moderate, not asset-light (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin (S&amp;P basis) 16.79% (FY2023) &rarr; 17.30% (FY2025), +0.5pp; reported EBIT margin 7.76% &rarr; 7.37%, -0.4pp. Stable-to-improving over the window (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 0&times;13=0.0 &middot; #2 0&times;11=0.0 &middot; #3 2&times;10=4.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 2&times;6=2.4 &middot; #7 3&times;10=6.0 &middot; #8 2&times;6=2.4 &middot; #9 3&times;8=4.8 &middot; #10 1&times;8=1.6 &middot; #11 4&times;4=3.2 &middot; #12 2&times;5=2.0 &middot; #13 3&times;4=2.4 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 39.4 / 105 = <b>38/100</b> (37.5 before rounding). Criteria met: 4/14 on the original binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses third-party ROIC/WACC estimates and a narrow spread; #9 is scored proportionally to the 80% threshold; #10's 1/5 reflects the trailing ratio of 1.38; #12's partial credit is a judgment; the CAGR criteria score 0 because the FY2021 base was the COVID peak, so a different start year would score DHL higher.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The earnings engine has turned. EBIT recovered from &euro;5.9B (FY2024) to &euro;6.1B (FY2025) on lower revenue, H1 2026 EBIT is up 19%, Q2 2026 delivered a record margin for this recovery (8.3%) and FY2026 guidance was raised to more than &euro;6.5B. Express is the standout, with a 16.8% margin in Q2 and a network competitors cannot replicate, and cost programmes have made earnings less dependent on freight rates. Cash generation is steady (FCF about &euro;3B a year, 52% of EBIT in every year of the window), ROIC clears WACC on both company and S&amp;P definitions, and shareholders are paid through a growing dividend (&euro;1.90) plus a buyback now sized at up to &euro;6.5B through 2027 that has cut the share count about 10% since 2021. Gross margin has been stable and the business is far more diversified than a pure forwarder: contract logistics, German parcels and eCommerce give ballast when freight rates swing.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth over the window is nil: revenue CAGR +0.3% and EBIT CAGR -6.5% from the FY2021 base, with FY2025 revenue down 1.6%. Part of the Q2 2026 surge is temporary (a ~&euro;150m air-capacity benefit, fuel pass-through and a weak tariff-hit comparison), Supply Chain and German mail earnings fell in the quarter, and the stock has re-rated from ~11.8x to ~17.3x trailing earnings, above its own average, with the average analyst target below the price. Net debt including leases is ~2.8x EBITDA and has risen every year, H1 capex is up 25%, and conversion of EBIT to FCF is only about 52% because the model is capital- and lease-heavy. Exposure to global trade policy (US tariffs, the end of de-minimis), geopolitics and fuel is large, and Forwarding margins (4.1% in FY2025) show how thin the freight business is. There is no founder or insider block (KfW is a state-owned anchor). Several inputs could not be verified: market-share percentages, management shareholdings, DHL's own latest net debt figure and exact FCF to the nearest million.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> DHL Group press releases and financial highlights: FY2022 (Mar 9, 2023), FY2023 (Mar 6, 2024), FY2025 (Mar 5, 2026), H1/Q2 2026 (Aug 5, 2026) via group.dhl.com; DHL shareholder-structure page (Sep 30, 2026); stockanalysis.com (S&amp;P Global Market Intelligence: price, shares, ratios, ROIC/WACC, balance sheet, historical P/E and gross margin, analyst consensus); Q1 2026 and Q3 2025 quarterly figures via trade-press summaries of DHL's releases; Armstrong &amp; Associates Top 25 Global Freight Forwarders 2025 (as cited on the DSV page). Year-end share prices, WACC, ROIC and gross margins are third-party or approximate and flagged as such. All figures EUR. Price as of Sep 30, 2026 close; prepared Oct 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">DHL Group (XETRA: DHL) &mdash; EUR share price trend. A pandemic-era high in 2021, a 2022-23 round trip, a trough around end-2024 on tariff and freight worries, and a sharp 2025-26 rally on cost savings, margin recovery and a larger buyback.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">DHL Group &mdash; Year-End Close (Approximate), EUR</div>
+    <div class="chart-sub">Year-end closing prices FY2021-FY2025 (derived from S&amp;P Global year-end P/E multiples and diluted EPS, so approximate to about &euro;1) plus the Sep 30, 2026 close of &euro;57.00 from stockanalysis.com. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Sep 2026 (4.75 years), excluding dividends (&euro;1.90/share, ~3.3% yield). Intra-period highs and lows are not shown: the 52-week range is &euro;36.99 &ndash; 58.30.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,62.1 L 172.8,131.7 L 299.6,99.3 L 426.4,136.1 L 553.2,93.9 L 680.0,55.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="62.1" x2="680.0" y2="55.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+0.8%*</text>
+<path d="M 46.0,62.1 L 172.8,131.7 L 299.6,99.3 L 426.4,136.1 L 553.2,93.9 L 680.0,55.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="62.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="46.0" y="50.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;54.9</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="131.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="172.8" y="146.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;34.3</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="99.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="299.6" y="114.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;43.9</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="136.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="426.4" y="151.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;33.0</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="93.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="553.2" y="81.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;45.5</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="55.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/><text x="678.0" y="43.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&euro;57.0</text><text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the Dec 2021 pandemic-era price and ends at a multi-year high, so the +0.8% CAGR hides a deep round trip: the shares fell roughly 40% in 2022, recovered in 2023, fell back in 2024 and have risen about 70% from the end-2024 level to now. Over the same window EBIT fell 23% and the share count fell about 10%, so the price recovery since 2024 is mostly earnings recovery plus a higher multiple, not a verdict on long-term growth. No stock split on record. Currency: EUR throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
