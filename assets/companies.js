@@ -2355,7 +2355,116 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: 23.7 },
     blurb: "The world's largest freight forwarder after the DB Schenker deal, asset-light with about 1% capex and 83% FCF conversion, but FY2025's 48% revenue jump is mostly acquired. Post-deal ROIC is below WACC (7.2% vs 7.9%), leverage is 2.7x with buybacks paused, and the stock sits 36% below its 52-week high.",
     file: "companies/dsv.html"
+  },
+
+  {
+    slug: "nu-holdings",
+    name: "Nu Holdings Ltd.",
+    ticker: "NYSE: NU",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Digital Banking",
+    tags: ["FinTech", "Digital Bank", "Emerging Markets"],
+    dateFeatured: "2026-10-05",
+    price: "$12.66",
+    score: "10 / 14",
+    martinero: 91,
+    momentum: { status: "decelerating", recent: 26.8, prior: 48.7 },
+    quarterYoY: { period: "Q2 2026", growth: 52.2 },
+    blurb: "Latin America's largest digital bank, with 139M customers across Brazil, Mexico and Colombia. Net income topped $1B in a single quarter, ROE is 33%, and the stock trades near 17x trailing earnings. Credit risk on an unsecured loan book and the cash-flow checklist items that don't fit a bank are the main caveats.",
+    file: "companies/nu-holdings.html"
+  },
+
+  {
+    slug: "toast",
+    name: "Toast, Inc.",
+    ticker: "NYSE: TOST",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Restaurant POS & Payments Platform",
+    tags: ["FinTech", "Restaurant Tech"],
+    dateFeatured: "2026-10-05",
+    price: "$28.99",
+    score: "9 / 14",
+    martinero: 74,
+    momentum: { status: "decelerating", recent: 24.05, prior: 28.33 },
+    quarterYoY: { period: "Q2 2026", growth: 23.1 },
+    blurb: "Restaurant POS and payments platform that has swung from a $384M operating loss in 2022 to $305M profit and $608M free cash flow, with $1.7B net cash and ~23% growth. The share price has de-rated about 27% off its high despite raised guidance; GAAP margin is only 5%.",
+    file: "companies/toast.html"
+  },
+
+  {
+    slug: "block",
+    name: "Block, Inc.",
+    ticker: "NYSE: XYZ",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payments & Fintech",
+    tags: ["FinTech", "Bitcoin Exposure", "Dual-Class"],
+    dateFeatured: "2026-10-05",
+    price: "$73.53",
+    score: "9 / 14",
+    martinero: 66,
+    momentum: { status: "decelerating", recent: 0.3, prior: 10.1 },
+    quarterYoY: { period: "Q2 2026", growth: 9.3 },
+    blurb: "Square plus Cash App: gross profit has more than doubled since 2021 and is still growing 20%+, with strong free cash flow, near-zero net debt and a 16x forward P/E. Reported revenue is distorted by bitcoin pass-through, GAAP margins are thin, and ROIC sits below cost of capital.",
+    file: "companies/block.html"
+  },
+
+  {
+    slug: "paypal",
+    name: "PayPal Holdings, Inc.",
+    ticker: "NASDAQ: PYPL",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payment Processing",
+    tags: ["FinTech", "Turnaround"],
+    dateFeatured: "2026-10-05",
+    price: "$52.53",
+    score: "8 / 14",
+    martinero: 65,
+    momentum: { status: "decelerating", recent: 4.32, prior: 6.8 },
+    quarterYoY: { period: "Q2 2026", growth: 4.75 },
+    blurb: "Global digital-payments platform (PayPal, Venmo, Braintree) with 439M accounts, ROIC far above cost of capital, and a share count down 27% since 2021. Growth has stalled at about 4-5%, insiders own almost nothing, and at roughly 10x earnings the stock is also moving on reported, unconfirmed takeover bids.",
+    file: "companies/paypal.html"
+  },
+
+  {
+    slug: "affirm",
+    name: "Affirm Holdings, Inc.",
+    ticker: "NASDAQ: AFRM",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Buy Now Pay Later / Consumer Installment Lending",
+    tags: ["FinTech", "Founder-Controlled", "Turnaround"],
+    dateFeatured: "2026-10-05",
+    price: "$69.23",
+    score: "8 / 14",
+    martinero: 62,
+    momentum: { status: "decelerating", recent: 32.2, prior: 38.8 },
+    quarterYoY: { period: "Q4 FY2026", growth: 33.0 },
+    blurb: "Largest US buy-now-pay-later network, with revenue compounding about 37% a year and GAAP operating profit only arriving in FY2026. Growth, liquidity and margin trend score well. Thin 9.8% margins, returns far below cost of capital, steady dilution and a funding-debt-financed loan book hold it back.",
+    file: "companies/affirm.html"
+  },
+
+  {
+    slug: "adyen",
+    name: "Adyen N.V.",
+    ticker: "Euronext: ADYEN",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payment Processing",
+    tags: ["FinTech", "Founder-Led", "Net Cash"],
+    dateFeatured: "2026-10-05",
+    price: "€881.50",
+    score: "11 / 14",
+    martinero: 76,
+    momentum: { status: "decelerating", recent: 18.4, prior: 22.8 },
+    quarterYoY: { period: "H1 2026", growth: 19.1 },
+    blurb: "Amsterdam-based global payments platform running online, in-store and embedded finance on one stack. Growth near 20%, 47% EBIT margins, almost no debt and high cash conversion; but the stock is down about 35% in a year on cooler guidance, a CFO exit and rising capex.",
+    file: "companies/adyen.html"
   }
+
 
   // Add the next company below this line, as a new {...} block ⬇
 
