@@ -34,7 +34,7 @@ function labelChipsHTML(c) {
 }
 
 // ============================================================
-// Live price / P/E — see worker.js and HOW-TO-LIVE-PRICES.md.
+// Live price / P/E — reads assets/prices.json (daily GitHub Action). See HOW-TO-LIVE-PRICES.md.
 // Deliberately scoped to just the homepage hero + the up-to-4
 // "recently featured" cards (5 tickers max), not the full archive —
 // that's what keeps this light on the free API tier. Every element
@@ -99,23 +99,27 @@ function applyLiveQuote(sym, data) {
 async function hydrateLiveQuotes() {
   const els = document.querySelectorAll("[data-ticker]");
   if (!els.length) return;
-
-  const symbols = new Set();
-  els.forEach(el => { if (el.dataset.ticker) symbols.add(el.dataset.ticker); });
-
-  await Promise.allSettled([...symbols].map(async (sym) => {
-    try {
-      const r = await fetch(`/api/quote?symbol=${encodeURIComponent(sym)}`);
-      if (!r.ok) return;
-      const data = await r.json();
-      if (data.error || data.price == null) return; // static fallback already showing — nothing to do
-      applyLiveQuote(sym, data);
-    } catch (e) {
-      // Network hiccup, ticker not covered by the API, etc. — the
-      // static price from companies.js is already showing, so there's
-      // nothing more to do here.
-    }
-  }));
+  try {
+    // assets/prices.json is refreshed once per weekday by the GitHub Action (see HOW-TO-LIVE-PRICES.md)
+    const r = await fetch("assets/prices.json?v=" + Math.floor(Date.now() / 600000), { cache: "no-store" });
+    if (!r.ok) return;
+    const file = await r.json();
+    if (!file || !file.quotes || !file.asOf) return;
+    if ((Date.now() - Date.parse(file.asOf)) / 86400000 > 10) return; // stale: keep static values
+    const bySym = {};
+    (typeof COMPANIES !== "undefined" ? COMPANIES : []).forEach(c => { bySym[tickerSymbol(c.ticker)] = c.slug; });
+    const seen = new Set();
+    els.forEach(el => {
+      const sym = el.dataset.ticker;
+      if (!sym || seen.has(sym)) return;
+      seen.add(sym);
+      const q = file.quotes[bySym[sym]];
+      if (!q || q.p == null) return;
+      applyLiveQuote(sym, { price: q.p, pe: q.pe != null ? q.pe : null, asOf: file.asOf });
+    });
+  } catch (e) {
+    // static price from companies.js stays visible
+  }
 }
 
 // Annual revenue growth trend — non-scored, not part of the Martinero Index.
