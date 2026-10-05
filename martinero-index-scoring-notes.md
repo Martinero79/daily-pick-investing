@@ -175,3 +175,17 @@ Retrofitted across all 18 existing dashboards, not just new ones going forward. 
 Sanity check on compression: range went from 21-90 (spread 69, stdev ~21) to 42-92 (spread 50, stdev ~14). Real compression, but ranking order held up — same names anchor the top (Palantir, NVIDIA) and bottom (DFDS, NN Group). Two companies moved down despite nothing changing about them (Microsoft 75→67, SanDisk 76→75) because they were getting full binary credit on criteria they only moderately cleared — a sign the graduated system is working in both directions, not just inflating scores.
 
 The About page methodology section and each dashboard's Martinero Index card were updated to match. FCF CAGR was folded into the same unified growth/margin band as revenue and EBIT CAGR (same metric type, same old 15% bar).
+
+## 14. Margin Stability & Structural Profitability — weight 5 (added Oct 2026, bands tightened 5 Oct 2026)
+*Confirmed. Best score = margin improving; second best = near flat; erosion is penalised quickly. Measures the 3-year change in margin (FY22 to FY25 or latest equivalent), in percentage points. **Gross margin** where a gross-profit line exists; **EBIT (operating) margin as a proxy** only where it does not (payment networks, banks/insurers, shipping lines, some conglomerates; EBITDA margin for Adyen and Savills). The dashboard row names the basis. Binary "Met" = margin down no more than 1.0pp. Total weight is 105; Martinero Index = weighted points / 105 x 100 (drop weights of truly N/A criteria from the denominator, see ionq.html).*
+
+| 3-yr margin change | Points |
+|---|---|
+| Improving: up 0.5pp or more | 5 |
+| Near flat: between -0.5pp and +0.5pp | 4 |
+| Down 0.5-1.0pp (still "Met") | 3 |
+| Down 1.0-1.5pp | 2 |
+| Down 1.5-2.5pp | 1 |
+| Down more than 2.5pp | 0 |
+
+Examples: Broadcom +2.2pp = 5; Nestle +0.4pp = 4; Microsoft -1.0pp = 3 (edge); Demant-style fall 75% -> 71% (-4pp) = 0.
