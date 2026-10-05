@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nu Holdings Ltd — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/nu-holdings.html">
+<meta property="og:title" content="Nu Holdings Ltd — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nu Holdings Ltd — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1a2030; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Nu Holdings Ltd (Nubank)</h1>
+  <div class="badges">
+    <div class="badge">NYSE: NU</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: S&atilde;o Paulo, Brazil (Cayman-incorporated)</div>
+    <div class="badge">Reports in USD (IFRS)</div>
+    <div class="badge">IPO: Dec 9, 2021 at $9.00</div>
+    <div class="badge warn">~21% Below Its 2025 Year-End Close &mdash; Fastest Growth Is Behind It; Monzo Report Hit the Stock on Sep 28</div>
+  </div>
+
+  <div class="price">$12.66</div>
+  <div class="price-sub">Sep 30, 2026 close &middot; Market cap &asymp; $61.2B (~4.83B shares) &middot; 52-week price change -20.6% &middot; Beta 0.94 &middot; Analyst consensus: Buy (22 analysts), avg PT $18.69 (+48%) &middot; Next report (Q3 2026): Nov 12, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> the largest digital bank in Latin America with 139M customers (Brazil ~118M, Mexico ~16M, Colombia 5M+). It is a lender and deposit-taker, so several checklist items (free cash flow, net debt/EBITDA, ROIC) do not translate and are scored N/A or by bank-appropriate proxies &mdash; see Section 4.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definitions &amp; currency:</b> all figures are in US dollars as reported by Nu under IFRS. &ldquo;Revenue&rdquo; follows S&amp;P Global's presentation, which equals Nu's <i>gross profit</i> (interest and fee income after funding costs, credit-loss provisions and transaction costs); Nu's own &ldquo;gross revenue&rdquo; is much larger ($5.9B in Q2 2026 alone). &ldquo;EBIT&rdquo; is pre-tax income, since a bank has no meaningful EBIT before interest. Nu listed in December 2021, so this is a 4-year (FY2021-25) window, not five full years of public trading.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$6.99B</div>
+      <div class="sub green" style="color:#34d399;">+26.8% YoY</div>
+      <div class="note">FY2024 was +48.7%; Q2 2026 re-accelerated to +52.2% YoY (reported USD, helped by a stronger real). FY2021-25 CAGR +69.3% from a tiny base.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Pre-Tax Margin (FY2025)</div>
+      <div class="val green">55.3%</div>
+      <div class="sub">Up from 41.5% in FY2023; loss-making in FY2021-22</div>
+      <div class="note">Margin is measured on revenue that is already net of credit costs, so it overstates comparability with non-bank peers.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Return on Equity</div>
+      <div class="val green">31.6%</div>
+      <div class="sub">TTM; 33% in Q2 2026</div>
+      <div class="note">Against an estimated ~17% cost of equity for a Brazil-exposed bank. Efficiency ratio 19.5% in Q2 2026.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Cash Flow</div>
+      <div class="val" style="color:#fbbf24;">-$9.4B</div>
+      <div class="sub">FY2025; negative every year</div>
+      <div class="note">Not a warning sign for a lender: loan growth sits in operating cash flow. Scorecard #4, #8 and #9 are therefore N/A.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">91/100</div>
+      <div class="sub">Weighted score on 83 of 105 points (see About)</div>
+      <div class="note">Very high on growth, margin, returns and valuation. Three cash-flow criteria are N/A (weights removed from the denominator); if scored zero instead, the index would be 72.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="224.4 314.2" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="22.4 314.2" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="67.3 314.2" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria fully met</b> &mdash; revenue CAGR, pre-tax income CAGR, margin, market position, ROE vs cost of equity, entry multiple, share count, insider ownership, capex and margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>1 not met</b> &mdash; market concentration (score 3)</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>3 N/A</b> &mdash; FCF CAGR, net debt/EBITDA and FCF conversion (structurally not meaningful for a bank)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Nu Holdings is the parent of Nubank, founded in 2013 by David V&eacute;lez, Cristina Junqueira and Edward Wible and built around a purple credit card with no annual fee and no branches. It now serves 139 million customers in Brazil, Mexico and Colombia and earns money from three sources: credit (cards, unsecured and secured lending, 41% of Q2 2026 gross profit), float on $45.3B of deposits (34%) and fees (25%). The credit book is $39.4B (+37% YoY). In August 2026 Nu launched its bank in Mexico and is adding a full banking licence in Brazil, and in July it launched &ldquo;Croma&rdquo; for a more affluent customer tier.
+  </div>
+
+  <div class="callout">
+    <b>What to keep in mind:</b> (1) <b>Credit cycle</b> &mdash; Nu lends mostly unsecured to a customer base that includes many first-time borrowers in a high-rate economy; 90+ day NPLs rose to 6.9% in Q2 2026 and management is deliberately expanding into higher-risk, higher-return segments. (2) <b>FX</b> &mdash; earnings are in reais and pesos, reported in dollars, so the USD growth rate swings with the currency (Q2 2025 revenue growth was only +14% reported). (3) <b>M&amp;A noise</b> &mdash; on Sep 28, 2026 the stock fell 10% on reports of talks to buy UK bank Monzo; Nu said on Sep 30 it is not pursuing a deal and the shares rebounded in after-hours trading. The Sep 30 close of $12.66 is before that rebound.
+  </div>
+
+  <div class="bignum-corner">NU</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD millions (S&amp;P Global Market Intelligence data, Nu IFRS filings). Nu went public in December 2021, so FY2021 is the IPO year and the first two years are loss-making.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Pre-Tax Income (EBIT proxy) &amp; Net Income (FCF proxy) &mdash; Annual (USD m)</div>
+    <div class="chart-sub">Bank adaptation: the middle bar is pre-tax income (a bank has no clean EBIT) and the third bar is net income, used as a stand-in for free cash flow because Nu's reported operating cash flow is negative every year (-$6.9B, -$5.5B, -$6.4B, -$3.5B, -$9.4B) as loan growth is classed as an operating outflow. FY2021-22 are losses.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Pre-tax income (EBIT proxy)</span><span><span class="dot" style="background:#fbbf24;"></span>Net income (FCF proxy)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="215.0" x2="840" y2="215.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="219.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="187.1" x2="840" y2="187.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="191.1" text-anchor="end" font-size="11" fill="#64748b">1bn</text>
+<line x1="60" y1="159.3" x2="840" y2="159.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="163.3" text-anchor="end" font-size="11" fill="#64748b">2bn</text>
+<line x1="60" y1="131.4" x2="840" y2="131.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="135.4" text-anchor="end" font-size="11" fill="#64748b">3bn</text>
+<line x1="60" y1="103.6" x2="840" y2="103.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="107.6" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="75.7" x2="840" y2="75.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.7" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="47.9" x2="840" y2="47.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="51.9" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">7bn</text>
+<line x1="60" y1="215.0" x2="840" y2="215.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="191.3" width="30" height="23.7" rx="2" fill="#2dd4bf"/>
+<text x="100" y="186.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">850</text>
+<rect x="123" y="215.0" width="30" height="4.7" rx="2" fill="#60a5fa"/>
+<text x="138" y="232.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-170</text>
+<rect x="161" y="215.0" width="30" height="4.6" rx="2" fill="#fbbf24"/>
+<text x="176" y="232.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-165</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="163.8" width="30" height="51.2" rx="2" fill="#2dd4bf"/>
+<text x="256" y="158.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,839</text>
+<rect x="279" y="215.0" width="30" height="8.6" rx="2" fill="#60a5fa"/>
+<text x="294" y="236.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-309</text>
+<rect x="317" y="215.0" width="30" height="10.2" rx="2" fill="#fbbf24"/>
+<text x="332" y="238.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-365</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="111.7" width="30" height="103.3" rx="2" fill="#2dd4bf"/>
+<text x="412" y="106.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,707</text>
+<rect x="435" y="172.1" width="30" height="42.9" rx="2" fill="#60a5fa"/>
+<text x="450" y="167.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,539</text>
+<rect x="473" y="186.3" width="30" height="28.7" rx="2" fill="#fbbf24"/>
+<text x="488" y="181.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,031</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="61.4" width="30" height="153.6" rx="2" fill="#2dd4bf"/>
+<text x="568" y="56.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,513</text>
+<rect x="591" y="137.1" width="30" height="77.9" rx="2" fill="#60a5fa"/>
+<text x="606" y="132.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,795</text>
+<rect x="629" y="160.1" width="30" height="54.9" rx="2" fill="#fbbf24"/>
+<text x="644" y="155.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,972</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="20.3" width="30" height="194.7" rx="2" fill="#2dd4bf"/>
+<text x="724" y="15.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">6,991</text>
+<rect x="747" y="107.2" width="30" height="107.8" rx="2" fill="#60a5fa"/>
+<text x="762" y="102.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,868</text>
+<rect x="785" y="135.1" width="30" height="79.9" rx="2" fill="#fbbf24"/>
+<text x="800" y="130.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,869</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+69.3%</div>
+      <div class="sub">$850M &rarr; $6,991M &mdash; off a tiny, IPO-year base; FY2025 growth was +26.8%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Pre-tax income CAGR (FY23-25)</div>
+      <div class="val" style="color:#34d399;">+58.6%</div>
+      <div class="sub">$1,539M &rarr; $3,868M &mdash; a 4-year CAGR is undefined because FY2021 and FY2022 were losses</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net income CAGR (FY23-25, FCF proxy)</div>
+      <div class="val" style="color:#34d399;">+66.8%</div>
+      <div class="sub">$1,031M &rarr; $2,869M &mdash; proxy only; reported FCF is negative so criterion #4 is N/A</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Pre-Tax Margin Trend &mdash; pre-tax income / revenue</div>
+    <div class="chart-sub">Margin swung from -20% to +55% in four years as the loan book matured, funding costs fell relative to yields and operating costs were spread over far more customers. Revenue here is already net of credit-loss provisions.</div>
+    <svg viewBox="0 0 700 128" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="95" x2="690" y2="95" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="34" y="98" text-anchor="end" font-size="7.5" fill="#64748b">-20%</text>
+<line x1="40" y1="75" x2="690" y2="75" stroke="#263049" stroke-width="1"/><text x="34" y="78" text-anchor="end" font-size="7.5" fill="#64748b">0%</text>
+<line x1="40" y1="55" x2="690" y2="55" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="34" y="58" text-anchor="end" font-size="7.5" fill="#64748b">20%</text>
+<line x1="40" y1="35" x2="690" y2="35" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="34" y="38" text-anchor="end" font-size="7.5" fill="#64748b">40%</text>
+<line x1="40" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="34" y="18" text-anchor="end" font-size="7.5" fill="#64748b">60%</text>
+<polyline points="80,95.0 225,91.8 370,33.5 515,24.3 660,19.7" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="80" cy="95.0" r="3.2" fill="#34d399"/><text x="80" y="108.0" text-anchor="middle" font-size="8" fill="#cbd5e1">-20.0%</text><text x="80" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<circle cx="225" cy="91.8" r="3.2" fill="#34d399"/><text x="225" y="104.8" text-anchor="middle" font-size="8" fill="#cbd5e1">-16.8%</text><text x="225" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<circle cx="370" cy="33.5" r="3.2" fill="#34d399"/><text x="370" y="26.5" text-anchor="middle" font-size="8" fill="#cbd5e1">41.5%</text><text x="370" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<circle cx="515" cy="24.3" r="3.2" fill="#34d399"/><text x="515" y="17.3" text-anchor="middle" font-size="8" fill="#cbd5e1">50.7%</text><text x="515" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<circle cx="660" cy="19.7" r="3.2" fill="#34d399"/><text x="660" y="12.7" text-anchor="middle" font-size="8" fill="#cbd5e1">55.3%</text><text x="660" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue</th><th>Pre-tax Income</th><th>Pre-tax Margin</th><th>Net Income</th><th>EPS (dil.)</th><th>Op. Cash Flow</th><th>Capex</th></tr>
+    <tr><td>FY2021</td><td>850</td><td>-170</td><td>-20.0%</td><td>-165</td><td>-0.10</td><td>-6,931</td><td>6</td></tr>
+    <tr><td>FY2022</td><td>1,839</td><td>-309</td><td>-16.8%</td><td>-365</td><td>-0.08</td><td>-5,523</td><td>20</td></tr>
+    <tr><td>FY2023</td><td>3,707</td><td>1,539</td><td>41.5%</td><td>1,031</td><td>0.21</td><td>-6,399</td><td>20</td></tr>
+    <tr><td>FY2024</td><td>5,513</td><td>2,795</td><td>50.7%</td><td>1,972</td><td>0.40</td><td>-3,512</td><td>5</td></tr>
+    <tr><td>FY2025</td><td>6,991</td><td>3,868</td><td>55.3%</td><td>2,869</td><td>0.58</td><td>-9,361</td><td>7</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>8,442</td><td>4,383</td><td>51.9%</td><td>3,607</td><td>0.73</td><td>-10,305</td><td>19</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Revenue growth: FY2022 +116%, FY2023 +102%, FY2024 +49%, FY2025 +27%. Pre-tax income FY2025 is derived from the reported 55.33% pre-tax margin; FY2021-22 pre-tax equals operating income as reported by S&amp;P. TTM pre-tax income is derived from the 51.94% TTM margin. Dividends: none.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) income statement, cash flow and ratios pages, last updated Aug 13, 2026; Nu Holdings Q2 2026 earnings release (Aug 13, 2026).</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">Reported Aug 13, 2026: the first quarter with net income above $1 billion. Next report (Q3 2026): Nov 12, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue (gross-profit basis) was $2,474M, +52.2% YoY in reported dollars (Nu cites +43% on an FX-neutral basis), and net income was $1,060M (+66.5% reported, +49% FX-neutral), with ROE at 33%. Nu's gross revenue was nearly $5.9B (+39% FX-neutral). Net interest margin expanded 180 bps to 22.9% and risk-adjusted NIM to 12.4% (from 9.5% in Q1) as the mix shifted toward unsecured lending and early delinquencies improved seasonally. The efficiency ratio worsened to 19.5% from 17.6% as marketing and real-estate spend moved into the quarter. The 15-90 day NPL ratio improved to 4.8%, but 90+ day NPLs rose to 6.9%. The effective tax rate was a low 14.2%, which flatters net income relative to pre-tax income (+41% YoY at $1,236M).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">YoY: Q3'24 +45%, Q4'24 +19%, Q1'25 +11%, Q2'25 +14% (the dip was largely a weaker real in reported USD), then Q3'25 +36%, Q4'25 +44%, Q1'26 +44%, Q2'26 +52%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, USD m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="81.3" width="56" height="48.7" fill="#2dd4bf"/><text x="53" y="76.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,408</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="80.3" width="56" height="49.7" fill="#2dd4bf"/><text x="135" y="75.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,437</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="82.3" width="56" height="47.7" fill="#2dd4bf"/><text x="217" y="77.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,378</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="73.7" width="56" height="56.3" fill="#2dd4bf"/><text x="299" y="68.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,626</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="63.5" width="56" height="66.5" fill="#2dd4bf"/><text x="381" y="58.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,920</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="58.5" width="56" height="71.5" fill="#2dd4bf"/><text x="463" y="53.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,067</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="61.4" width="56" height="68.6" fill="#2dd4bf"/><text x="545" y="56.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,981</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="44.4" width="56" height="85.6" fill="#2dd4bf"/><text x="627" y="39.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,474</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Income &mdash; Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">Net income has risen in all but two of the last eight quarters (Q4'24 and Q1'26 dipped slightly) and has roughly doubled in two years.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, USD m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="86.7" width="56" height="43.3" fill="#60a5fa"/><text x="53" y="81.7" text-anchor="middle" font-size="9" fill="#cbd5e1">553</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="86.8" width="56" height="43.2" fill="#60a5fa"/><text x="135" y="81.8" text-anchor="middle" font-size="9" fill="#cbd5e1">553</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="86.4" width="56" height="43.6" fill="#60a5fa"/><text x="217" y="81.4" text-anchor="middle" font-size="9" fill="#cbd5e1">557</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="80.2" width="56" height="49.8" fill="#60a5fa"/><text x="299" y="75.2" text-anchor="middle" font-size="9" fill="#cbd5e1">637</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="68.8" width="56" height="61.2" fill="#60a5fa"/><text x="381" y="63.8" text-anchor="middle" font-size="9" fill="#cbd5e1">782</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="60.2" width="56" height="69.8" fill="#60a5fa"/><text x="463" y="55.2" text-anchor="middle" font-size="9" fill="#cbd5e1">892</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="61.7" width="56" height="68.3" fill="#60a5fa"/><text x="545" y="56.7" text-anchor="middle" font-size="9" fill="#cbd5e1">872</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="47.0" width="56" height="83.0" fill="#60a5fa"/><text x="627" y="42.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,060</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric (USD m)</th><th>Prior-year quarter (Q2 of FY25)</th><th>Latest quarter (Q2 of FY26)</th><th>Change (reported)</th></tr>
+    <tr><td>Revenue (gross-profit basis)</td><td>1,626</td><td>2,474</td><td>+52.2%</td></tr>
+    <tr><td>Operating expenses</td><td>746</td><td>1,233</td><td>+65.3%</td></tr>
+    <tr><td>Pre-tax income</td><td>879</td><td>1,236</td><td>+40.6%</td></tr>
+    <tr><td>Net income</td><td>637</td><td>1,060</td><td>+66.5%</td></tr>
+    <tr><td>Diluted EPS ($)</td><td>0.13</td><td>0.22</td><td>+66%</td></tr>
+    <tr><td>Operating margin (revenue basis)</td><td>54.1%</td><td>50.2%</td><td>-3.9pp</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Operating income and the margin on this table are before the tax line; opex growth (+65%) outpaced revenue growth (+52%) in the quarter, which is why the margin dipped even as net income rose on a lower tax rate.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Customers &amp; balance sheet:</b> 139M customers (+~4M in the quarter), monthly activity rate 83.5%, ARPAC ~$17. Credit portfolio $39.4B (+37% YoY: cards $26.0B, unsecured $10.3B, secured $3.1B). Deposits $45.3B (+18% YoY): Brazil $36.4B, Mexico $5.7B, Colombia $3.3B. Cost of deposits 88% of the interbank rate.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Strategy:</b> Mexico bank launched in August 2026 (16M customers, 16.5% of adults); a full Brazilian banking licence is being added; the &ldquo;NuFormer&rdquo; foundation model now runs underwriting for cards and unsecured loans. Nu has not issued numeric multi-year guidance in the material reviewed.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing and forward P/E from S&amp;P Global; P/FCF is not usable because free cash flow is structurally negative. Only three year-ends (FY2023-25) have positive earnings.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing vs Forward P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current trailing P/E 17.3x ($12.66 / TTM EPS $0.73) is about 56% of the FY2023-25 year-end average of 30.7x; forward P/E 13.0x vs a 22.5x average. PEG is ~0.45 (S&amp;P). The comparison is thin: FY2021-22 had losses, and a share that has fallen 24% from its 2025 year-end price will look cheaper on any ratio.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#a78bfa;"></span>Forward P/E</span>
+    </div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="115" x2="690" y2="115" stroke="#263049" stroke-width="1"/>
+<rect x="60" y="38.2" width="56" height="76.8" fill="#60a5fa"/><text x="88" y="33.2" text-anchor="middle" font-size="9" fill="#cbd5e1">38.4x</text>
+<rect x="122" y="62.0" width="56" height="53.0" fill="#a78bfa"/><text x="150" y="57.0" text-anchor="middle" font-size="9" fill="#cbd5e1">26.5x</text>
+<text x="119" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="64.4" width="56" height="50.6" fill="#60a5fa"/><text x="238" y="59.4" text-anchor="middle" font-size="9" fill="#cbd5e1">25.3x</text>
+<rect x="272" y="75.4" width="56" height="39.6" fill="#a78bfa"/><text x="300" y="70.4" text-anchor="middle" font-size="9" fill="#cbd5e1">19.8x</text>
+<text x="269" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="360" y="58.4" width="56" height="56.6" fill="#60a5fa"/><text x="388" y="53.4" text-anchor="middle" font-size="9" fill="#cbd5e1">28.3x</text>
+<rect x="422" y="72.6" width="56" height="42.4" fill="#a78bfa"/><text x="450" y="67.6" text-anchor="middle" font-size="9" fill="#cbd5e1">21.2x</text>
+<text x="419" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="510" y="80.4" width="56" height="34.6" fill="#2dd4bf"/><text x="538" y="75.4" text-anchor="middle" font-size="9" fill="#cbd5e1">17.3x</text>
+<rect x="572" y="89.0" width="56" height="26.0" fill="#a78bfa"/><text x="600" y="84.0" text-anchor="middle" font-size="9" fill="#cbd5e1">13.0x</text>
+<text x="569" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="53.6" x2="690" y2="53.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="49.6" text-anchor="end" font-size="9" fill="#fbbf24">FY23-25 avg trailing 30.7x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Book value &amp; other multiples:</b> price/book is 4.6x (vs 7.2x at FY2025 year-end and 6.5x at FY2024), price/sales 7.2x TTM, equity $13.25B, book value $2.74 per share. A 4.6x P/B is only supportable by a ~30% ROE that persists; if returns revert toward a typical bank's mid-teens, the multiple has little cushion.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Why capex and net debt do not tell the story</div>
+    <div class="chart-sub">Capex was $7M in FY2025 (about 0.1% of revenue) and capitalised intangibles $334M; Nu is genuinely asset-light. Reported &ldquo;total debt&rdquo; of $5.9B (Jun 2026) against $15.2B cash and investments is a funding-mix detail beside $45.3B of customer deposits and a $39.4B loan book. Net debt/EBITDA is therefore N/A rather than &ldquo;net cash = full marks&rdquo;.</div>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P estimate)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="71.6 314.2" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="193.5 314.2" stroke-dashoffset="-71.6" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="49.0 314.2" stroke-dashoffset="-265.2" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">22.8%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~22.8% (founder-CEO and early backers; Class B high-vote shares)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~61.6%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~15.6%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Basic shares were ~4.66B in Q1 2022 (the first full post-IPO quarter) and ~4.86B in Q2 2026, up about 4% from stock compensation, with +0.26% in the last year. Nu began buying back stock (about $500M over the last twelve months) and pays no dividend. Short interest is 2.7% of shares.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Honest caveats:</b> insider ownership is a third-party figure and I did not verify the exact split between Mr. V&eacute;lez, Sequoia-linked and other early holders, or the precise voting power of the Class B shares. The 52-week high/low range is not shown because I could not verify it; the stock is -20.6% over 52 weeks and below its 50-day (14.29) and 200-day (14.74) moving averages. Itau BBA downgraded Nu to Market Perform in mid-September 2026 citing medium-term uncertainty, while Needham reiterated Buy after the Monzo-related drop.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist, adapted for a bank: pre-tax income stands in for EBIT, ROE vs cost of equity for ROIC vs WACC, and three cash-flow-based criteria (#4, #8, #9) are marked N/A and removed from the weighting denominator. Growth CAGRs are 4-year (FY2021-25) where defined. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Nu Holdings</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+69.3% &mdash; $850M &rarr; $6,991M (revenue on S&amp;P's basis, i.e. after funding, credit-loss and transaction costs); off a very small post-IPO base, so the rate will fall mechanically (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (pre-tax income proxy)</td><td>&ge;15%</td><td>+58.6% over FY23-25 ($1,539M &rarr; $3,868M pre-tax). FY2021 and FY2022 were loss-making, so a 4-year CAGR is undefined; scored on the first profitable year (score 5/5, judgment call)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY (pre-tax margin)</td><td>&ge;20%</td><td>55.3% (FY2025) on S&amp;P's revenue basis. Flattered because credit-loss cost is already netted out of revenue; even against Nu's far larger gross revenue it would clear 20% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>Not meaningful for a lender: reported operating cash flow is negative every year (-$9.4B in FY2025) because loan growth is booked as an operating outflow. Net income is shown in the chart as a proxy only and is not scored</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Largest digital bank in Latin America and #1 by customers in Brazil (~118M of 139M total). Not #1 by assets or profit: Ita&uacute; and the large incumbents remain bigger (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; Brazilian retail banking is concentrated among five incumbents plus Nu, but Mexico and Colombia are more open and fintech/Pix competition is intense (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC (ROE vs cost of equity for a bank)</td><td>ROIC clears WACC</td><td>ROE 31.6% (33% in Q2 2026) vs an estimated ~17% cost of equity for a Brazil-exposed bank: spread &asymp;+15pp. S&amp;P's 106% ROIC and 8.6% WACC are not meaningful for a bank (score 5/5, cost of equity is my estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Not applicable &mdash; for a bank, deposits ($45.3B) and borrowings are operating funding, not leverage in the industrial sense. Capital ratios would be the right test but are not part of the fixed checklist</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Not meaningful &mdash; operating and free cash flow are structurally negative while the loan book grows (FCF/EBIT would be roughly -240% in FY2025). Not scored</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 17.3x vs a FY23-25 year-end average of 30.7x (ratio 0.56); forward P/E 13.0x vs 22.5x (0.58). Only three positive-earnings year-ends exist, so the &ldquo;average&rdquo; is thin (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~4.66B basic shares (Q1 2022, first post-IPO quarter) to ~4.86B (Q2 2026), +4.2%: roughly flat despite stock compensation. First buyback (~$500M TTM) started recently (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>~22.8% owned by insiders (S&amp;P), led by founder-CEO David V&eacute;lez and early backers, with high-vote Class B shares (score 4/5, third-party estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>$7M of capex in FY2025 &mdash; about 0.1% of revenue; capitalised software ($334M) is larger but still ~5% of revenue (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Pre-tax margin 41.5% (FY2023) &rarr; 55.3% (FY2025), +13.8pp. Nu has no conventional gross margin, so pre-tax margin is used (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; adjusted denominator &times; 100):</b> #1 5&times;13=13.0 &middot; #2 5&times;11=11.0 &middot; #3 5&times;10=10.0 &middot; #4 N/A &middot; #5 4&times;7=5.6 &middot; #6 2&times;6=2.4 &middot; #7 5&times;10=10.0 &middot; #8 N/A &middot; #9 N/A &middot; #10 5&times;8=8.0 &middot; #11 3&times;4=2.4 &middot; #12 4&times;5=4.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0. Total 75.4 / 83 (105 minus N/A weights 8+6+8 = 22) = <b>91/100</b>. Criteria met: 10/14 (11 scored, 3 N/A). <b>Judgment calls:</b> #2 uses the FY23-25 window because earlier years were losses; #5 and #6 are qualitative; #7 uses my ~17% cost-of-equity estimate (the result is 5/5 for any estimate below ~19%); #12 is a third-party estimate. <b>Sensitivity:</b> if the three N/A criteria were scored 0 instead, the index would be 75.4/105 = 72. Removing the weights rather than zeroing them is the site's rule for truly N/A criteria, but it is the reason Nu lands above Visa.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FinTech Peer Comparison &mdash; Martinero Index</div>
+    <div class="chart-sub">Existing dashboards on this site. Different business models: Visa and Mastercard are asset-light payment networks, Shopify is commerce software, Nu is a balance-sheet lender with credit risk. Growth figures are revenue growth in the most recent fiscal year and in the latest reported quarter (each company's own definition of revenue).</div>
+    <table class="datatable">
+      <tr><th>Company</th><th>Martinero</th><th>Criteria met</th><th>Revenue growth (latest FY)</th><th>Latest quarter YoY</th></tr>
+      <tr><td>Nu Holdings (NU)</td><td><b style="color:#c4b5fd;">91</b> (83-pt base; 72 if N/A scored 0)</td><td>10 / 14 (3 N/A)</td><td>+26.8%</td><td>+52.2% (Q2 2026)</td></tr>
+      <tr><td>Mastercard (MA)</td><td>83</td><td>12 / 14</td><td>+14.8%</td><td>+14.1% (Q2 2026)</td></tr>
+      <tr><td>Shopify (SHOP)</td><td>83</td><td>12 / 14</td><td>+30.1%</td><td>+34.0% (Q2 2026)</td></tr>
+      <tr><td>Visa (V)</td><td>73</td><td>9 / 13</td><td>+11.3%</td><td>+14.0% (Q3 FY2026)</td></tr>
+    </table>
+    <div class="footer-note" style="margin-top:6px;">Read the comparison with care: Nu's 91 is not directly comparable with the others because three criteria were removed rather than scored, and Visa was scored on the earlier 13-criterion checklist. On the strict criteria-met count, Mastercard and Shopify (12/14) are ahead of Nu (10/14). Nu's edge is growth and valuation; its gap is that its cash earnings cannot be verified the way a payment network's can, and credit losses can move the whole picture.</div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Scale and unit economics are compounding: 139M customers, ARPAC rising to ~$17, an efficiency ratio below 20% and ROE of 33%. Net income went from a $365M loss in FY2022 to $2.9B in FY2025 and $1.06B in a single quarter, with deposits funding the loan book at 88% of the interbank rate. Revenue growth re-accelerated to +52% in Q2 2026, the Mexican bank launch removes a structural constraint, and the stock trades at 17x trailing and 13x forward earnings, against 30x and 22x at recent year-ends, with a PEG near 0.45.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is an unsecured-credit business: 90+ day NPLs are 6.9% and management is deliberately taking more risk, so a Brazilian downturn or a regulatory change to interest or card rules would hit revenue and provisions together. Growth has already slowed from +116% to +27% annually, FX can swing reported results by double digits, and the 55% margin is on revenue that has credit costs netted out. The recent Monzo story shows capital-allocation risk, and the stock is down about 21% from its 2025 year-end price. Several inputs are estimates (cost of equity, insider split, the FY23-25 averages) and cash-flow criteria cannot be tested.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Nu Holdings Ltd. Q2 2026 results press release (Aug 13, 2026, international.nubank.com.br); stockanalysis.com / S&amp;P Global Market Intelligence (income statement, cash flow, balance sheet, ratios, statistics, price history; prices as of the Sep 30, 2026 close); Reuters / TheFly headlines on the Monzo reports (Sep 28-30, 2026); peer figures from this site's own companies.js. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Since the Dec 2021 IPO</div></div>
+  <div class="sec-sub">Nu Holdings listed on the NYSE on Dec 9, 2021 at $9.00 per share, so there is no full five-year trading history yet &mdash; this chart covers the roughly 4.8 years since listing. A 2022 collapse to ~$4, a rebound into 2025, then a fall in 2026 as growth normalised and the Monzo reports hit sentiment.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Nu Holdings &mdash; Year-End Close, USD</div>
+    <div class="chart-sub">Year-end closes for 2021-2025 and the Sep 30, 2026 close from stockanalysis.com (S&amp;P Global). *The dashed line is the annualised price CAGR from the Dec 2021 year-end close ($9.38) to Sep 30, 2026 (4.75 years), excluding dividends (none paid). Intra-year highs and lows are not shown; the Sep 28, 2026 one-day drop was -10.0%.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28" x2="680" y2="28" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,115.3 L 172.8,169.2 L 299.6,126.0 L 426.4,105.4 L 553.2,40.8 L 680.0,82.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="115.3" x2="680.0" y2="82.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="90.7" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+6.5%/yr*</text>
+<path d="M 46.0,115.3 L 172.8,169.2 L 299.6,126.0 L 426.4,105.4 L 553.2,40.8 L 680.0,82.1" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="115.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="46.0" y="103.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$9.38</text><text x="46.0" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021*</text>
+<circle cx="172.8" cy="169.2" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="172.8" y="186.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$4.07</text><text x="172.8" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="126.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="299.6" y="114.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$8.33</text><text x="299.6" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="105.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="426.4" y="93.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$10.36</text><text x="426.4" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="40.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="553.2" y="28.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$16.74</text><text x="553.2" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="82.1" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/><text x="678.0" y="70.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$12.66</text><text x="680.0" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts a few weeks after the IPO and runs through the 2022 trough, so the +6.5% annualised figure hides a +311% rally from the Dec 2022 low ($4.07) to the Dec 2025 close ($16.74) and a -24% fall since. Share count is roughly unchanged net. The 2021 label shows the first year-end after listing.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

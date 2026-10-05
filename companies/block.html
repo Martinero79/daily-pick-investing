@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Block, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/block.html">
+<meta property="og:title" content="Block, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Block, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1a2030; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Block, Inc.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: XYZ</div>
+    <div class="badge">Formerly Square, Inc. (renamed Dec 2021)</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Bitcoin pass-through revenue (~35% of FY2025 revenue) distorts margins &mdash; read gross profit alongside revenue</div>
+  </div>
+
+  <div class="price">$73.53</div>
+  <div class="price-sub">Sep 30, 2026 close &middot; Market cap &asymp; $44.5B (604.5M shares, Class A + B) &middot; 52-wk range $48.21 &ndash; $86.92 (intraday) &middot; 1-yr price change -2.5% &middot; Beta 2.52 &middot; Analyst consensus: Buy (47 analysts), avg PT $98.36 (+33.8%) &middot; Next report (Q3 2026): Nov 3, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> two linked ecosystems &mdash; Square (seller point-of-sale, payments, loans, software; $3.9B of FY2025 gross profit) and Cash App (consumer payments, banking, Borrow and Afterpay buy-now-pay-later; $6.3B of FY2025 gross profit, +21%). Both look top-two in their US niches on my read, but neither dominates; see Section 4.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars. &ldquo;Op. Income / EBIT&rdquo; throughout means <b>GAAP operating income</b> as reported to the SEC; Block's own headline measure, <b>Adjusted Operating Income</b> ($2.08B in FY2025, $3.47B guided for FY2026), excludes items such as acquired-intangible amortisation, restructuring and some stock-based charges and is shown only where labelled. <b>Gross profit</b> is revenue minus cost of revenue and is the cleaner size measure for Block, because bitcoin sold to Cash App customers is booked as revenue at nearly full price (about $8.5B in FY2025) but earns only a few percent of that as gross profit.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$24.2B</div>
+      <div class="sub green" style="color:#fbbf24;">+0.3% YoY &mdash; bitcoin-distorted</div>
+      <div class="note">Gross profit was $10.4B, +16.3% YoY (FY2024: +18.2%). Bitcoin revenue fell $1.9B in FY2025 while its gross profit is only a few percent of that, so revenue growth understates the business. 4-yr revenue CAGR +8.2% vs gross-profit CAGR +23.7%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#f87171;">7.27%</div>
+      <div class="sub">16.9% of gross profit, FY2025</div>
+      <div class="note">Up from -3.5% of revenue in FY2022. Q2 2026 adjusted operating margin reached a record 27% of gross profit; GAAP is lower because of stock comp, amortisation and bitcoin remeasurement swings.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">2.7% vs ~16.0%</div>
+      <div class="sub">Third-party (S&amp;P) estimates</div>
+      <div class="note">The WACC is inflated by a 2.5 beta; against any realistic 9-10% hurdle ROIC is still below cost of capital. Goodwill from the Afterpay deal and a thin GAAP profit base keep it low.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.3x</div>
+      <div class="sub">Jun 30, 2026; TTM GAAP EBITDA</div>
+      <div class="note">Net debt $0.43B (incl. leases). Gross debt $7.2B vs cash and investments $6.7B. Clears the 2x bar comfortably.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">66/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Upper-middle: strong FCF, balance sheet, asset-light model and a cheap forward multiple, offset by thin GAAP margins, ROIC below cost of capital and acquisition-driven dilution.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="201.96 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="112.2 314.16" stroke-dashoffset="-201.96" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">9/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 criteria fully met</b> &mdash; EBIT CAGR (low base), FCF CAGR, market position (#1/#2), net debt/EBITDA, FCF conversion, entry multiple vs own history, insider/founder ownership, capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>5 not met</b> &mdash; revenue CAGR (bitcoin-distorted), EBIT margin, market concentration (contested field), ROIC vs WACC, and share count (up ~22% since FY2021 on the Afterpay deal)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Block, Inc. is a US financial-technology company founded by Jack Dorsey and Jim McKelvey in 2009 as Square and renamed in December 2021. It runs Square, which sells point-of-sale hardware, payment processing, software and working-capital loans to small and mid-sized sellers, and Cash App, which lets about 59 million monthly users send money, spend through a debit card, bank, buy and sell bitcoin, borrow short-term and use Afterpay buy-now-pay-later (acquired January 2022). Reported revenue splits into Commerce Enablement ($11.5B in FY2025), Financial Solutions ($4.2B) and the Bitcoin ecosystem ($8.5B). That last line is low-margin pass-through, so gross profit is the better yardstick: it has grown from $4.4B in FY2021 to $10.4B in FY2025, and Block guides for $12.5B in FY2026 (+21%).
+  </div>
+
+  <div class="callout">
+    <b>Four distortions to keep in mind:</b> (1) <b>Bitcoin revenue</b> &mdash; roughly a third of revenue but only ~2% of Q2 2026 gross profit, so margins on revenue look low and revenue growth looks weak. (2) <b>Low base</b> &mdash; GAAP operating income was $161M in FY2021 and negative in FY2022-23, so the +82% EBIT CAGR is a base effect, not a run-rate. (3) <b>Cash-flow quality</b> &mdash; free cash flow here is operating cash flow minus capex and benefits from stock-based compensation add-backs (about $1.2B a year) and swings in settlement balances. (4) <b>Afterpay</b> &mdash; the all-stock deal that closed in January 2022 explains the higher share count and the large goodwill base that depresses ROIC.
+  </div>
+
+  <div class="bignum-corner">XYZ</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, US$ millions as reported (S&amp;P Global Market Intelligence data; Op. Income = GAAP operating income; Free Cash Flow = operating cash flow less capex). Flag: revenue includes bitcoin sold to Cash App customers at close to cost, so gross profit is shown as the cleaner alternative.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in US$ billions). Revenue is dominated by bitcoin pass-through and barely moved in FY2025 (+0.3%) while GAAP operating income reached a five-year high of $1,758M. Negative bars are drawn below the zero line: EBIT was -$608M in FY2022 and -$213M in FY2023; FCF was -$50M in FY2023.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="250.0" x2="840" y2="250.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="254.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="204.0" x2="840" y2="204.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="208.0" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="158.0" x2="840" y2="158.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="162.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="112.0" x2="840" y2="112.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="116.0" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+<line x1="60" y1="66.0" x2="840" y2="66.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="70.0" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+<line x1="60" y1="250.0" x2="840" y2="250.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="87.5" width="30" height="162.5" rx="2" fill="#2dd4bf"/>
+<text x="100" y="82.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">17,661</text>
+<rect x="123" y="248.5" width="30" height="1.5" rx="2" fill="#60a5fa"/>
+<text x="138" y="243.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">161</text>
+<rect x="161" y="243.4" width="30" height="6.6" rx="2" fill="#fbbf24"/>
+<text x="176" y="238.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">714</text>
+<text x="138" y="291" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="88.7" width="30" height="161.3" rx="2" fill="#2dd4bf"/>
+<text x="256" y="83.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">17,532</text>
+<rect x="279" y="250.0" width="30" height="5.6" rx="2" fill="#60a5fa"/>
+<text x="294" y="267.6" text-anchor="middle" font-size="10" fill="#f87171" font-weight="700">-608</text>
+<rect x="317" y="249.0" width="30" height="1.0" rx="2" fill="#fbbf24"/>
+<text x="332" y="244.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5</text>
+<text x="294" y="291" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="48.4" width="30" height="201.6" rx="2" fill="#2dd4bf"/>
+<text x="412" y="43.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">21,916</text>
+<rect x="435" y="250.0" width="30" height="2.0" rx="2" fill="#60a5fa"/>
+<text x="450" y="264.0" text-anchor="middle" font-size="10" fill="#f87171" font-weight="700">-213</text>
+<rect x="473" y="250.0" width="30" height="1.0" rx="2" fill="#fbbf24"/>
+<text x="488" y="263.0" text-anchor="middle" font-size="10" fill="#f87171" font-weight="700">-50</text>
+<text x="450" y="291" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="28.1" width="30" height="221.9" rx="2" fill="#2dd4bf"/>
+<text x="568" y="23.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">24,121</text>
+<rect x="591" y="240.5" width="30" height="9.5" rx="2" fill="#60a5fa"/>
+<text x="606" y="235.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,038</text>
+<rect x="629" y="235.7" width="30" height="14.3" rx="2" fill="#fbbf24"/>
+<text x="644" y="230.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,553</text>
+<text x="606" y="291" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="27.4" width="30" height="222.6" rx="2" fill="#2dd4bf"/>
+<text x="724" y="22.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">24,194</text>
+<rect x="747" y="233.8" width="30" height="16.2" rx="2" fill="#60a5fa"/>
+<text x="762" y="228.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,758</text>
+<rect x="785" y="227.7" width="30" height="22.3" rx="2" fill="#fbbf24"/>
+<text x="800" y="222.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,425</text>
+<text x="762" y="291" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Alternative Lens: Gross Profit &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">Gross profit strips out most of the bitcoin distortion and has compounded at +23.7% a year. Bitcoin as a share of reported revenue is shown under each year (*FY2021-22 shares from company filings as recalled, unverified in this build). Block's own definition of gross profit differs slightly (FY2025: $10.36B vs $10.42B here).</div>
+    <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="150.0" x2="840" y2="150.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="154.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="113.3" x2="840" y2="113.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="117.3" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="76.7" x2="840" y2="76.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="80.7" text-anchor="end" font-size="11" fill="#64748b">8bn</text>
+<line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">12bn</text>
+<line x1="60" y1="150.0" x2="840" y2="150.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="120" y="109.3" width="60" height="40.7" rx="2" fill="#a78bfa"/>
+<text x="150" y="104.3" text-anchor="middle" font-size="10.5" fill="#ddd6fe" font-weight="700">4,442</text>
+<text x="150" y="166.0" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<text x="150" y="182.0" text-anchor="middle" font-size="9.5" fill="#fbbf24">bitcoin 60%* of rev</text>
+<rect x="270" y="94.4" width="60" height="55.6" rx="2" fill="#a78bfa"/>
+<text x="300" y="89.4" text-anchor="middle" font-size="10.5" fill="#ddd6fe" font-weight="700">6,062</text>
+<text x="300" y="166.0" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<text x="300" y="182.0" text-anchor="middle" font-size="9.5" fill="#fbbf24">bitcoin 44%* of rev</text>
+<rect x="420" y="80.5" width="60" height="69.5" rx="2" fill="#a78bfa"/>
+<text x="450" y="75.5" text-anchor="middle" font-size="10.5" fill="#ddd6fe" font-weight="700">7,578</text>
+<text x="450" y="166.0" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<text x="450" y="182.0" text-anchor="middle" font-size="9.5" fill="#fbbf24">bitcoin 44% of rev</text>
+<rect x="570" y="67.9" width="60" height="82.1" rx="2" fill="#a78bfa"/>
+<text x="600" y="62.9" text-anchor="middle" font-size="10.5" fill="#ddd6fe" font-weight="700">8,957</text>
+<text x="600" y="166.0" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<text x="600" y="182.0" text-anchor="middle" font-size="9.5" fill="#fbbf24">bitcoin 43% of rev</text>
+<rect x="720" y="54.5" width="60" height="95.5" rx="2" fill="#a78bfa"/>
+<text x="750" y="49.5" text-anchor="middle" font-size="10.5" fill="#ddd6fe" font-weight="700">10,417</text>
+<text x="750" y="166.0" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+<text x="750" y="182.0" text-anchor="middle" font-size="9.5" fill="#fbbf24">bitcoin 35% of rev</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+8.2%</div>
+      <div class="sub">$17.7B &rarr; $24.2B &mdash; flat in FY2025 (+0.3%)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Gross Profit CAGR (alt.)</div>
+      <div class="val" style="color:#34d399;">+23.7%</div>
+      <div class="sub">$4.4B &rarr; $10.4B &mdash; the cleaner growth read</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+81.8%</div>
+      <div class="sub">$161M &rarr; $1,758M &mdash; tiny FY2021 base; losses in FY2022-23</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+35.8%</div>
+      <div class="sub">$714M &rarr; $2,425M &mdash; near zero in FY2022-23</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; GAAP operating income as % of revenue and % of gross profit</div>
+    <div class="chart-sub">On reported revenue the margin recovered from -3.5% (FY2022) to 7.3% (FY2025). Measured against gross profit, which is how Block frames its own targets, it is 16.9% (FY2025) and reached 27% on an adjusted basis in Q2 2026. The gap between the two lines is the bitcoin distortion.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>% of gross profit</span><span><span class="dot" style="background:#34d399;"></span>% of revenue</span></div>
+    <svg viewBox="0 0 700 150">
+<line x1="36" y1="15.0" x2="690" y2="15.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="18.0" font-size="8" fill="#64748b">20%</text>
+<line x1="36" y1="44.7" x2="690" y2="44.7" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="47.7" font-size="8" fill="#64748b">10%</text>
+<line x1="36" y1="74.4" x2="690" y2="74.4" stroke="#263049" stroke-width="1" /><text x="2" y="77.4" font-size="8" fill="#64748b">0%</text>
+<line x1="36" y1="104.1" x2="690" y2="104.1" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="107.1" font-size="8" fill="#64748b">-10%</text>
+<polyline points="60,63.7 205,104.1 350,82.7 495,39.9 640,24.2" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="63.7" r="3.2" fill="#60a5fa"/><text x="60" y="56.7" text-anchor="middle" font-size="8" fill="#cbd5e1">3.6%</text>
+<circle cx="205" cy="104.1" r="3.2" fill="#60a5fa"/><text x="205" y="97.1" text-anchor="middle" font-size="8" fill="#cbd5e1">-10.0%</text>
+<circle cx="350" cy="82.7" r="3.2" fill="#60a5fa"/><text x="350" y="75.7" text-anchor="middle" font-size="8" fill="#cbd5e1">-2.8%</text>
+<circle cx="495" cy="39.9" r="3.2" fill="#60a5fa"/><text x="495" y="32.9" text-anchor="middle" font-size="8" fill="#cbd5e1">11.6%</text>
+<circle cx="640" cy="24.2" r="3.2" fill="#60a5fa"/><text x="640" y="17.2" text-anchor="middle" font-size="8" fill="#cbd5e1">16.9%</text>
+<polyline points="60,71.7 205,84.8 350,77.3 495,61.6 640,52.7" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="71.7" r="3.2" fill="#34d399"/><text x="60" y="84.7" text-anchor="middle" font-size="8" fill="#cbd5e1">0.9%</text>
+<circle cx="205" cy="84.8" r="3.2" fill="#34d399"/><text x="205" y="97.8" text-anchor="middle" font-size="8" fill="#cbd5e1">-3.5%</text>
+<circle cx="350" cy="77.3" r="3.2" fill="#34d399"/><text x="350" y="90.3" text-anchor="middle" font-size="8" fill="#cbd5e1">-1.0%</text>
+<circle cx="495" cy="61.6" r="3.2" fill="#34d399"/><text x="495" y="74.6" text-anchor="middle" font-size="8" fill="#cbd5e1">4.3%</text>
+<circle cx="640" cy="52.7" r="3.2" fill="#34d399"/><text x="640" y="65.7" text-anchor="middle" font-size="8" fill="#cbd5e1">7.3%</text>
+<text x="60" y="143" text-anchor="middle" font-size="8.5" fill="#94a3b8">2021</text>
+<text x="205" y="143" text-anchor="middle" font-size="8.5" fill="#94a3b8">2022</text>
+<text x="350" y="143" text-anchor="middle" font-size="8.5" fill="#94a3b8">2023</text>
+<text x="495" y="143" text-anchor="middle" font-size="8.5" fill="#94a3b8">2024</text>
+<text x="640" y="143" text-anchor="middle" font-size="8.5" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (US$ m)</th><th>Revenue</th><th>Gross Profit</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>17,661</td><td>4,442</td><td>161</td><td>0.9%</td><td>166</td><td>714</td><td>443%</td></tr>
+    <tr><td>FY2022</td><td>17,532</td><td>6,062</td><td>-608</td><td>-3.5%</td><td>-541</td><td>5</td><td>n.m.</td></tr>
+    <tr><td>FY2023</td><td>21,916</td><td>7,578</td><td>-213</td><td>-1.0%</td><td>10</td><td>-50</td><td>n.m.</td></tr>
+    <tr><td>FY2024</td><td>24,121</td><td>8,957</td><td>1,038</td><td>4.3%</td><td>2,897</td><td>1,553</td><td>150%</td></tr>
+    <tr><td>FY2025</td><td>24,194</td><td>10,417</td><td>1,758</td><td>7.3%</td><td>1,306</td><td>2,425</td><td>138%</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>25,042</td><td>11,663</td><td>1,222</td><td>4.9%</td><td>357</td><td>3,882</td><td>318%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">FY2024 net income is flattered by a large Q4 2024 profit (~$1.9B, largely a one-off tax benefit, as best I can tell); TTM operating income is lower than FY2025 because Q1 2026 was a GAAP loss (-$172M) on restructuring and related charges. FY2022 includes Afterpay from January 31, 2022. n.m. = not meaningful (negative EBIT).</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) annual and TTM statements; Block Q2 2026 shareholder letter (8-K, Aug 2026) for company-reported cross-checks. All figures in US$.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">Quarter ended June 30, 2026, reported in early August 2026. The story has shifted from revenue (bitcoin-dragged) to gross profit and profitability. Q3 2026 is due November 3, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue was $6,618M (+9.3% YoY) but gross profit grew +25% to about $3.17B (Cash App +31%, Square +13%) and adjusted operating income rose 57% to a record $864M (27% of gross profit); adjusted EPS was $1.02 (+65%). GAAP operating income, by contrast, fell 8% to $447M because Q2 2025 had a larger bitcoin remeasurement gain. The shares still fell 6.2% on August 6 despite the beat and a raised guide, with the stock having rallied from February's low into the print. Bitcoin revenue fell 13% YoY to $1.9B and bitcoin gross profit fell 31% after Block cut the fee on some Cash App bitcoin transactions, which is a drag on revenue growth but not on profit. Square US payment volume growth accelerated to 10%, the best since Q2 2023.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters (US$ bn)</div>
+    <div class="chart-sub">YoY: Q4'25 +3.7%, Q1'26 +4.9%, Q2'26 +9.3%. Revenue growth is accelerating as the bitcoin line shrinks more slowly (bitcoin revenue: $2.46B in Q4'24 to $1.89B in Q2'26).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$ bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="45.5" width="60" height="84.5" fill="#2dd4bf"/><text x="70" y="40.5" text-anchor="middle" font-size="9" fill="#cbd5e1">6.03</text>
+<text x="70" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="49.2" width="60" height="80.8" fill="#2dd4bf"/><text x="160" y="44.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5.77</text>
+<text x="160" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="45.2" width="60" height="84.8" fill="#2dd4bf"/><text x="250" y="40.2" text-anchor="middle" font-size="9" fill="#cbd5e1">6.05</text>
+<text x="250" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="44.4" width="60" height="85.6" fill="#2dd4bf"/><text x="340" y="39.4" text-anchor="middle" font-size="9" fill="#cbd5e1">6.12</text>
+<text x="340" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="42.5" width="60" height="87.5" fill="#2dd4bf"/><text x="430" y="37.5" text-anchor="middle" font-size="9" fill="#cbd5e1">6.25</text>
+<text x="430" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="45.2" width="60" height="84.8" fill="#2dd4bf"/><text x="520" y="40.2" text-anchor="middle" font-size="9" fill="#cbd5e1">6.06</text>
+<text x="520" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="37.3" width="60" height="92.7" fill="#2dd4bf"/><text x="610" y="32.3" text-anchor="middle" font-size="9" fill="#cbd5e1">6.62</text>
+<text x="610" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Profit &mdash; Last 7 Quarters (US$ bn)</div>
+    <div class="chart-sub">Gross profit YoY: Q2'25 +14% (company), Q3'25 +18%, Q4'25 +24%, Q1'26 +27%, Q2'26 +25%. S&amp;P-basis figures shown (Block's own Q2 2026 gross profit is $3,166M).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#a78bfa;"></span>Quarterly gross profit, US$ bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="50.9" width="60" height="79.1" fill="#a78bfa"/><text x="70" y="45.9" text-anchor="middle" font-size="9" fill="#cbd5e1">2.33</text>
+<text x="70" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="51.7" width="60" height="78.3" fill="#a78bfa"/><text x="160" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">2.30</text>
+<text x="160" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="43.3" width="60" height="86.7" fill="#a78bfa"/><text x="250" y="38.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2.55</text>
+<text x="250" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="39.1" width="60" height="90.9" fill="#a78bfa"/><text x="340" y="34.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2.67</text>
+<text x="340" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="31.9" width="60" height="98.1" fill="#a78bfa"/><text x="430" y="26.9" text-anchor="middle" font-size="9" fill="#cbd5e1">2.89</text>
+<text x="430" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="30.7" width="60" height="99.3" fill="#a78bfa"/><text x="520" y="25.7" text-anchor="middle" font-size="9" fill="#cbd5e1">2.92</text>
+<text x="520" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="21.9" width="60" height="108.1" fill="#a78bfa"/><text x="610" y="16.9" text-anchor="middle" font-size="9" fill="#cbd5e1">3.18</text>
+<text x="610" y="148" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 7 Quarters (US$ m)</div>
+    <div class="chart-sub">Q1'26 was a GAAP loss of $172M (restructuring costs and charges; adjusted operating income was a record $728M that quarter). Q2'25-Q2'26 are company-reported; Q4'24 and Q1'25 are S&amp;P figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating income, US$ m</span><span><span class="dot" style="background:#f87171;"></span>Loss quarter</span></div>
+    <svg viewBox="0 0 700 170">
+<line x1="10" y1="108" x2="690" y2="108" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="93.2" width="60" height="14.8" fill="#60a5fa"/><text x="70" y="88.2" text-anchor="middle" font-size="9" fill="#cbd5e1">106</text>
+<text x="70" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="59.8" width="60" height="48.2" fill="#60a5fa"/><text x="160" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">344</text>
+<text x="160" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="40.2" width="60" height="67.8" fill="#60a5fa"/><text x="250" y="35.2" text-anchor="middle" font-size="9" fill="#cbd5e1">484</text>
+<text x="250" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="50.7" width="60" height="57.3" fill="#60a5fa"/><text x="340" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">409</text>
+<text x="340" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="40.1" width="60" height="67.9" fill="#60a5fa"/><text x="430" y="35.1" text-anchor="middle" font-size="9" fill="#cbd5e1">485</text>
+<text x="430" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="108" width="60" height="24.1" fill="#f87171"/><text x="520" y="143.1" text-anchor="middle" font-size="9" fill="#fca5a5">-172</text>
+<text x="520" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="45.4" width="60" height="62.6" fill="#60a5fa"/><text x="610" y="40.4" text-anchor="middle" font-size="9" fill="#cbd5e1">447</text>
+<text x="610" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric (US$ m)</th><th>Prior-year quarter (Jun 2025)</th><th>Latest quarter (Jun 2026)</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>6,054</td><td>6,618</td><td>+9.3%</td></tr>
+    <tr><td>&nbsp;&nbsp;Bitcoin ecosystem revenue</td><td>2,172</td><td>1,894</td><td>-12.8%</td></tr>
+    <tr><td>Gross profit (company-reported)</td><td>2,537</td><td>3,166</td><td>+25%</td></tr>
+    <tr><td>&nbsp;&nbsp;Cash App gross profit</td><td>1,501</td><td>1,973</td><td>+31%</td></tr>
+    <tr><td>&nbsp;&nbsp;Square gross profit</td><td>1,027</td><td>1,160</td><td>+13%</td></tr>
+    <tr><td>GAAP operating income</td><td>484</td><td>447</td><td>-7.6%</td></tr>
+    <tr><td>Adjusted operating income</td><td>550</td><td>864</td><td>+57%</td></tr>
+    <tr><td>Adjusted diluted EPS</td><td>$0.62</td><td>$1.02</td><td>+65%</td></tr>
+    <tr><td>Free cash flow (S&amp;P basis)</td><td>343</td><td>967</td><td>+182%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">GAAP operating income per S&amp;P for Q2 2026 is $463M versus the company-reported $447M; the company figure is used above. Cash App and Square gross profit do not sum to the total because of rounding and other items.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (raised):</b> FY2026 gross profit $12.51B (+21% YoY), adjusted operating income $3.47B (28% margin, +67% YoY) and adjusted diluted EPS $4.02 (+70%). Q3 2026: gross profit $3.13B (+18%), adjusted operating income $875M, adjusted EPS $1.02 (+89%).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Operating signals:</b> Cash App monthly actives 59M (+3% YoY), primary banking actives 9.4M (+17%), consumer-lending originations $18.9B (+59%) with loss rates described as healthy; Square GPV +13% (US +10%, international +28%). The shares hit a $48 intraday low in mid-February 2026, then jumped ~17% on February 27 on the Q4 2025 results, a cost reset and higher guidance, so the 52-week range is wide.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing GAAP P/E is not a usable signal (about 125x on $0.59 of TTM EPS, and negative or meaningless in most of FY2021-23), so the entry-multiple criterion is scored on forward P/E against its own FY-end history. Leverage is low; the debates are returns on capital and dilution.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Forward P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current forward P/E of 16.1x (next-twelve-month consensus EPS) compares with a FY2021-25 year-end average of 43.0x, or 27.3x if the FY2021 growth-stock peak (105.8x) is excluded. Either way the ratio to history is well under 0.70. Forward P/E rests on adjusted EPS guidance ($4.02 for 2026); on GAAP earnings the stock looks far more expensive (trailing P/E 125x).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Forward P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Forward P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span></div>
+    <svg viewBox="0 0 700 150">
+<line x1="10" y1="120" x2="690" y2="120" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="35.4" width="70" height="84.6" fill="#60a5fa"/><text x="55" y="30.4" text-anchor="middle" font-size="9" fill="#cbd5e1">105.8x</text><text x="55" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="88.2" width="70" height="31.8" fill="#60a5fa"/><text x="150" y="83.2" text-anchor="middle" font-size="9" fill="#cbd5e1">39.8x</text><text x="150" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="98.0" width="70" height="22.0" fill="#60a5fa"/><text x="245" y="93.0" text-anchor="middle" font-size="9" fill="#cbd5e1">27.5x</text><text x="245" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="103.8" width="70" height="16.2" fill="#60a5fa"/><text x="340" y="98.8" text-anchor="middle" font-size="9" fill="#cbd5e1">20.3x</text><text x="340" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="102.8" width="70" height="17.2" fill="#60a5fa"/><text x="435" y="97.8" text-anchor="middle" font-size="9" fill="#cbd5e1">21.5x</text><text x="435" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="107.2" width="70" height="12.8" fill="#2dd4bf"/><text x="530" y="102.2" text-anchor="middle" font-size="9" fill="#cbd5e1">16.1x</text><text x="530" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="85.6" x2="690" y2="85.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="81.6" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 43.0x (27.3x ex-FY21)</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Other multiples:</b> price/free cash flow 11.5x (FY-end P/FCF was 16.3x in FY2025 and not meaningful before that), price/sales 1.77x vs a FY21-25 average of ~2.5x, EV/EBITDA 29x (GAAP) and PEG 0.49. Analyst consensus EPS growth over three years is ~39% a year, which is what the low PEG assumes. The low forward multiple is also a statement that investors discount adjusted earnings that exclude amortisation and restructuring, and that Cash App's lending book carries credit risk.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (US$ m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light is verified: capex has been 0.6%-1.0% of revenue every year (S&amp;P Global data). The business needs little physical capital, though the card, terminal and hardware lines carry inventory, and the Square lending and Cash App Borrow books consume balance-sheet capital that does not show up in capex.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (US$ m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="140" x2="690" y2="140" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="79.7" width="60" height="60.3" fill="#60a5fa"/><text x="60" y="74.7" text-anchor="middle" font-size="8" fill="#cbd5e1">134</text><text x="60" y="154" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="63.0" width="60" height="77.0" fill="#60a5fa"/><text x="200" y="58.0" text-anchor="middle" font-size="8" fill="#cbd5e1">171</text><text x="200" y="154" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="72.0" width="60" height="68.0" fill="#60a5fa"/><text x="340" y="67.0" text-anchor="middle" font-size="8" fill="#cbd5e1">151</text><text x="340" y="154" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="70.7" width="60" height="69.3" fill="#60a5fa"/><text x="480" y="65.7" text-anchor="middle" font-size="8" fill="#cbd5e1">154</text><text x="480" y="154" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="70.2" width="60" height="69.8" fill="#60a5fa"/><text x="620" y="65.2" text-anchor="middle" font-size="8" fill="#cbd5e1">155</text><text x="620" y="154" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,55.2 200,45.1 340,58.4 480,60.7 620,60.7" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="55.2" r="3" fill="#fbbf24"/><text x="60" y="47.2" text-anchor="middle" font-size="7.5" fill="#fde68a">0.76%</text>
+<circle cx="200" cy="45.1" r="3" fill="#fbbf24"/><text x="200" y="37.1" text-anchor="middle" font-size="7.5" fill="#fde68a">0.98%</text>
+<circle cx="340" cy="58.4" r="3" fill="#fbbf24"/><text x="340" y="50.4" text-anchor="middle" font-size="7.5" fill="#fde68a">0.69%</text>
+<circle cx="480" cy="60.7" r="3" fill="#fbbf24"/><text x="480" y="52.7" text-anchor="middle" font-size="7.5" fill="#fde68a">0.64%</text>
+<circle cx="620" cy="60.7" r="3" fill="#fbbf24"/><text x="620" y="52.7" text-anchor="middle" font-size="7.5" fill="#fde68a">0.64%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="33.4 280.8" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="231.6 82.6" stroke-dashoffset="-33.4" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="49.2 265" stroke-dashoffset="-265" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~10.6%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~10.6% of shares (incl. founder Jack Dorsey)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~73.7%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~15.7%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>The count rose from roughly 0.5B at end-2021 to ~577M after the Afterpay stock deal (January 2022), then drifted to ~622M at end-2025 on stock compensation before buybacks cut it to 604.5M (-3.7% over the past year). Net, it is up about 22% on the FY2021 base, which scores zero on the share-count criterion even though it has been falling for a year. Block pays no dividend.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founder control &amp; honest caveats:</b> Block has two share classes. Class B carries ten votes a share and is held almost entirely by insiders; per the 2026 proxy, Jack Dorsey holds ~47.8M Class B shares (about 80% of that class) plus ~1M Class A, which gives him roughly 42% of total voting power on an economic stake of about 8%. That is real alignment but also limited accountability to outside holders. The insider figure used for scoring (10.6%) is S&amp;P's; I have not independently reconciled it with the proxy table.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> cash and investments $6.74B against total debt (incl. leases) $7.17B at Jun 30, 2026, a net debt of $0.43B. Total debt was $9.0B at year-end 2025 and $8.1B at March 31, 2026, and has since been reduced. Block also holds bitcoin on its balance sheet, which is excluded from the cash figure and marked to market through the income statement (a source of GAAP volatility). It operates an industrial bank (Square Financial Services) and applied in September 2026 to charter a national trust bank for bitcoin and stablecoin custody.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is directly computable for Block, so there are no N/A cases and the index denominator stays at the full 105. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25) and are distorted by the bitcoin line (revenue) and by a near-zero starting base (EBIT, FCF). Criterion #14 compares FY2025 gross margin with FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Block, Inc.</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+8.2% &mdash; $17.7B &rarr; $24.2B; FY2025 was +0.3% because bitcoin pass-through revenue fell. On gross profit the CAGR is +23.7%, which would clear the bar (score 2/5 on reported revenue)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+81.8% &mdash; GAAP operating income $161M &rarr; $1,758M. Arithmetically a pass, but from a near-zero base with losses in FY2022-23 in between (score 5/5, flagged as base-effect flattered)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>7.27% of revenue (FY2025), 16.9% of gross profit. Revenue includes low-margin bitcoin sales, so the bar is structurally hard to reach on this basis (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+35.8% &mdash; $714M &rarr; $2,425M, with FY2022 ($5M) and FY2023 (-$50M) near zero in between; includes working-capital timing and stock-comp add-back (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Square is a top-two US small-business point-of-sale and acquiring brand and Cash App a top-two US consumer payments app by actives, but neither is a clear #1 and there is no verified single share figure (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; seller payments and consumer fintech are contested by PayPal/Venmo, Apple, Stripe, Toast, Fiserv Clover, Zelle and banks; no monopoly, but a handful of large players (score 2/5, judgment)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 2.7% vs S&P-estimated WACC 16.0% (inflated by a 2.5 beta); even against a 9-10% cost of capital the spread is negative. Heavy acquired goodwill (Afterpay) and thin GAAP EBIT (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.3x &mdash; net debt $0.43B (debt incl. leases $7.17B less cash and investments $6.74B) vs TTM GAAP EBITDA $1.55B; gross debt/EBITDA is 4.4x (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>138% (FY2025: FCF $2,425M vs EBIT $1,758M); 150% in FY2024; TTM 318%. Boosted by stock-comp add-back and settlement timing (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Forward P/E 16.1x vs FY21-25 year-end average 43.0x (27.3x excluding FY2021); ratio 0.37 (0.59 ex-FY21). Trailing GAAP P/E (125x) is not meaningful. P/S gives 1.77x vs 2.47x average, ratio 0.72 (score 5/5 on forward P/E)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~496M (S&P-implied, FY2021) &rarr; 604.5M now, about +22%, almost all from the Afterpay stock deal (Jan 2022). Since then net buybacks: -3.7% over the past year (score 0/5 on the FY21 window)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~10.6% of shares (S&P); founder Jack Dorsey holds ~47.8M Class B shares plus ~1M Class A, giving ~42% of voting power via 10-vote Class B stock (2026 proxy) (score 3/5 on the economic stake)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.64% of revenue (FY2025: $155M); 0.6&ndash;1.0% every year FY21-25 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin 34.58% (FY2023) &rarr; 43.06% (FY2025), +8.5pp &mdash; expanding, helped by mix shift from bitcoin towards lending and software (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13/5=5.2 &middot; #2 5&times;11/5=11.0 &middot; #3 2&times;10/5=4.0 &middot; #4 5&times;8/5=8.0 &middot; #5 4&times;7/5=5.6 &middot; #6 2&times;6/5=2.4 &middot; #7 0&times;10/5=0.0 &middot; #8 4&times;6/5=4.8 &middot; #9 5&times;8/5=8.0 &middot; #10 5&times;8/5=8.0 &middot; #11 0&times;4/5=0.0 &middot; #12 3&times;5/5=3.0 &middot; #13 5&times;4/5=4.0 &middot; #14 5&times;5/5=5.0. Total 69.0 / 105 = <b>66/100</b>. Criteria met: 9/14 on the original binary thresholds. <b>Judgment calls:</b> EBIT and FCF CAGRs score full marks off a very low base; the market-share (4/5) and concentration (3 &rarr; 2/5) scores are qualitative; the entry multiple uses forward P/E (scoring on price/sales would give 4/5 instead of 5/5, cutting the index by about 1.5 points); the WACC is a third-party estimate. Treating gross profit instead of revenue as the growth line would lift criterion #1 to full marks and the index by roughly 7 points.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Gross profit has more than doubled in four years and is still growing 20%+, with Cash App up 31% in Q2 2026 on lending and card usage while Square re-accelerated to +13%. Profitability has inflected: adjusted operating margin reached 27% of gross profit and guidance implies about $3.5B of adjusted operating income in FY2026, against GAAP operating income of $1.8B in FY2025. Free cash flow is strong ($2.4B in FY2025, $3.9B TTM), the model is asset-light (capex 0.6% of revenue), net debt is close to zero, and the forward P/E of 16x is well below its own history. Gross margin has expanded 8.5 points in two years.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>GAAP profits are thin and noisy: TTM operating income is $1.2B on $25B of revenue, net income is $357M, and bitcoin remeasurement and restructuring charges move the quarterly result. ROIC (2.7%) is below any reasonable cost of capital. Growth now depends on consumer lending (Borrow, Afterpay) where credit losses are untested in a downturn, on Cash App user growth that is only +3%, and on Square keeping its US momentum against Toast, Clover and Stripe. The share count is up ~22% since 2021, the Class B structure leaves control with the founder, the beta of 2.5 means large drawdowns (the stock was $48 in February), and the cheap forward multiple relies on adjusted EPS that excludes real costs.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Block, Inc. Q2 2026 Shareholder Letter (Form 8-K exhibit 99.1, Aug 2026); Block Form 10-K for FY2025 and FY2025 results release (gross profit, adjusted operating income); Block 2026 proxy statement (Dorsey beneficial ownership and voting power) via sec.gov and secondary summaries; stockanalysis.com (S&amp;P Global Market Intelligence: annual, quarterly and TTM statements, ratios, statistics, price history, ROIC/WACC, insider ownership, analyst targets); segment revenue from Fiscal.ai via stockanalysis.com.
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — PEER COMPARISON ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">FinTech Peer Comparison</div></div>
+  <div class="sec-sub">Block against the three payments and commerce-infrastructure names already scored on this site: Visa and Mastercard (card networks) and Shopify (commerce platform with its own payments arm). Same checklist, same Martinero Index; the businesses are different, so read it as a map of where Block sits rather than a ranking of like-for-like peers.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Martinero Index &mdash; Block vs. FinTech Peers</div>
+    <div class="chart-sub">Block sits below all three: it has the weakest return on capital and margin profile of the group, though it matches them on low capex and strong cash conversion.</div>
+    <svg viewBox="0 0 700 150">
+      <line x1="150" y1="14" x2="150" y2="132" stroke="#263049" stroke-width="1"/>
+      <text x="140" y="34" text-anchor="end" font-size="11" fill="#f8fafc" font-weight="700">Block</text><rect x="150" y="22" width="330" height="18" rx="2" fill="#a78bfa"/><text x="488" y="35" font-size="11" fill="#f8fafc" font-weight="700">66</text>
+      <text x="140" y="62" text-anchor="end" font-size="11" fill="#94a3b8">Visa</text><rect x="150" y="50" width="365" height="18" rx="2" fill="#2dd4bf"/><text x="523" y="63" font-size="11" fill="#cbd5e1">73</text>
+      <text x="140" y="90" text-anchor="end" font-size="11" fill="#94a3b8">Mastercard</text><rect x="150" y="78" width="415" height="18" rx="2" fill="#2dd4bf"/><text x="573" y="91" font-size="11" fill="#cbd5e1">83</text>
+      <text x="140" y="118" text-anchor="end" font-size="11" fill="#94a3b8">Shopify</text><rect x="150" y="106" width="415" height="18" rx="2" fill="#2dd4bf"/><text x="573" y="119" font-size="11" fill="#cbd5e1">83</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Company</th><th>Martinero</th><th>Criteria met</th><th>Price</th><th>Rev. growth (latest FY / prior FY)</th><th>Latest qtr YoY</th><th>Rev. CAGR (FY21-25)</th><th>Operating margin</th></tr>
+    <tr><td><b>Block (XYZ)</b></td><td><b>66</b></td><td>9 / 14</td><td>$73.53</td><td>+0.3% / +10.1%</td><td>+9.3% (Q2 2026)</td><td>+8.2%</td><td>7.3% (16.9% of GP)</td></tr>
+    <tr><td>Visa (V)</td><td>73</td><td>9 / 13*</td><td>$362.82</td><td>+11.3% / +10.0%</td><td>+14.0% (Q3 FY2026)</td><td>+13.5%</td><td>60.0%</td></tr>
+    <tr><td>Mastercard (MA)</td><td>83</td><td>12 / 14</td><td>$579.21</td><td>+14.8% / +13.0%</td><td>+14.1% (Q2 2026)</td><td>+14.8%</td><td>59.2%</td></tr>
+    <tr><td>Shopify (SHOP)</td><td>83</td><td>12 / 14</td><td>$128.79</td><td>+30.1% / +25.8%</td><td>+34.0% (Q2 2026)</td><td>+25.8%</td><td>16.4%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Peer figures are read from this site's own dashboards and index at the time of their build; prices are as listed on the site and may be older than Block's Sep 30, 2026 close. *Visa was scored on the earlier 13-criterion list (9/13) and has not been re-scored on the 14-criterion version.</div>
+
+  <div class="two-col" style="margin-top:10px;">
+    <div class="info-box working">
+      <div class="title">Where Block Compares Well</div>
+      <p>Cash conversion and balance sheet. Block's FCF conversion (138%) is above Visa (90%) and Mastercard (88%) and in line with Shopify (106%), and its net debt is near zero. On the forward multiple it is also the cheapest of the group relative to its own history (ratio 0.37, versus 0.88-0.99 on trailing P/E for Mastercard and Visa and ~0.70 on P/FCF for Shopify; different bases, so indicative only). On gross profit rather than revenue, its growth (+16% in FY2025, +25% in Q2 2026) is competitive with the card networks, though still behind Shopify.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">Where It Lags</div>
+      <p>Returns and moat. Visa and Mastercard earn ROICs of 45%+ and 90%+ on duopoly economics with 59-60% operating margins; Shopify earns 26% ROIC. Block's ROIC is 2.7% and its GAAP margin 7%. It also has no network-scale moat comparable to the card duopoly: it competes in contested markets, is exposed to consumer credit, and its share count has grown rather than shrunk. That is the main reason the index is 7-17 points below the peers despite the cheaper multiple.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Block (XYZ) &mdash; US$ share price trend. A pandemic-era high near $290 in 2021, a fall of about 85% from the 2021 peak to the October 2023 low as growth multiples reset, a recovery to ~$90 in January 2025, a slide to $49 in February 2026, and a rebound on the cost reset and raised profit guidance.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Block (XYZ) &mdash; Selected Closing Prices, US$</div>
+    <div class="chart-sub">Daily closing prices from S&amp;P Global Market Intelligence (via stockanalysis.com) at the dates shown: first trading day of the window (Oct 1, 2021), calendar year-ends, the Jun 2022 and Oct 2023 troughs, the Feb 12, 2026 low close and the Sep 30, 2026 close. The dashed line is the straight-line annualised price CAGR between Oct 1, 2021 and Sep 30, 2026 (5.0 years), excluding dividends (Block pays none). Intra-period highs and lows are not shown: the 52-week intraday range is $48.21 &ndash; $86.92.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><text x="42" y="183.0" font-size="9" fill="#64748b" text-anchor="end">$0</text>
+<line x1="46" y1="121.5" x2="680" y2="121.5" stroke="#1a2236" stroke-width="1"/><text x="42" y="124.5" font-size="9" fill="#64748b" text-anchor="end">$100</text>
+<line x1="46" y1="63.1" x2="680" y2="63.1" stroke="#1a2236" stroke-width="1"/><text x="42" y="66.1" font-size="9" fill="#64748b" text-anchor="end">$200</text>
+<path d="M 46.0,40.1 L 77.6,85.6 L 140.5,144.1 L 204.1,143.3 L 310.0,156.5 L 330.5,134.8 L 458.4,130.3 L 585.2,141.9 L 600.1,151.3 L 680.0,137.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="40.1" x2="680.0" y2="137.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="300" y="66" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">-21.0%*</text>
+<path d="M 46.0,40.1 L 77.6,85.6 L 140.5,144.1 L 204.1,143.3 L 310.0,156.5 L 330.5,134.8 L 458.4,130.3 L 585.2,141.9 L 600.1,151.3 L 680.0,137.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="40.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="52.0" y="31.1" font-size="10.5" fill="#e2e8f0" text-anchor="start" font-weight="700">$239.29</text>
+<circle cx="77.6" cy="85.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="77.6" y="76.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$161.51</text>
+<circle cx="140.5" cy="144.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="140.5" y="160.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$61.46</text>
+<circle cx="204.1" cy="143.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="204.1" y="134.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$62.84</text>
+<circle cx="310.0" cy="156.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="310.0" y="172.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$40.25</text>
+<circle cx="330.5" cy="134.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="330.5" y="125.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$77.35</text>
+<circle cx="458.4" cy="130.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="458.4" y="121.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$84.99</text>
+<circle cx="585.2" cy="141.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="579.2" y="132.9" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$65.09</text>
+<circle cx="600.1" cy="151.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="600.1" y="167.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$49.09</text>
+<circle cx="680.0" cy="137.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678.0" y="127.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$73.53</text>
+<text x="46" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="start">Oct 2021</text>
+<text x="204.8" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jan 2023</text>
+<text x="331.6" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jan 2024</text>
+<text x="458.7" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jan 2025</text>
+<text x="585.5" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jan 2026</text>
+<text x="680" y="202" font-size="9.5" fill="#7c8aa5" text-anchor="end">Sep 30, 2026</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the 2021 peak (the all-time closing high was around $289 in August 2021), so the -21.0% annualised figure largely reflects the valuation reset rather than business deterioration: over the same window gross profit grew from $4.4B to $10.4B and free cash flow from $0.7B to $2.4B. The Afterpay acquisition (stock, closed January 2022) is embedded in the 2022 prices. No stock split since the 2015 IPO. Currency: US$ throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

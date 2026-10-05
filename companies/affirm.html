@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Affirm Holdings, Inc. &mdash; Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/affirm.html">
+<meta property="og:title" content="Affirm Holdings, Inc. &mdash; Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Affirm Holdings, Inc. &mdash; Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1a2030; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Affirm Holdings, Inc.</h1>
+  <div class="badges">
+    <div class="badge">NASDAQ: AFRM</div>
+    <div class="badge">FY ends 30 June</div>
+    <div class="badge">HQ: San Francisco, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~23% Below 52-Wk High &mdash; First Full Year of GAAP Operating Profit; FY2026 Net Income Inflated by a $1.4B Tax Benefit</div>
+  </div>
+
+  <div class="price">$69.23</div>
+  <div class="price-sub">Sep 30, 2026 close &middot; Market cap &asymp; $23.4B (337.4M shares, Class A + B) &middot; 52-wk range $42.10 &ndash; $90.44 &middot; 52-wk price change &asymp; -9.6% &middot; Beta 3.82 &middot; Analyst consensus: Buy (34 analysts), avg PT $99.09 (+43%) &middot; Next report (fiscal Q1 2027): ~Nov 5, 2026 (estimated)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> the largest US-focused buy-now-pay-later (BNPL) network by volume (GMV $50.2B in FY2026, +37% YoY), and by my reading the #2 BNPL provider globally behind Klarna (2024 GMV $105B); Afterpay (Block), PayPal and Sezzle are the other scaled rivals. No verified market-share percentage is available &mdash; see Section 4.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars. Fiscal years end 30 June (FY2026 = July 2025 &ndash; June 2026; latest quarter = fiscal Q4 FY2026, April &ndash; June 2026). &ldquo;Op. Income / EBIT&rdquo; is <b>GAAP operating income</b>, not Affirm's &ldquo;adjusted operating income&rdquo; ($1.24B in FY2026), which adds back stock compensation, depreciation and partner warrants. &ldquo;Free cash flow&rdquo; is <b>operating cash flow minus additions to property, equipment and software</b>. <b>Funding-debt caveat:</b> Affirm funds its loan book with warehouse lines, securitizations and loan sales; loan originations (-$46.7B in FY2026) and repayments sit in investing cash flow, so FCF excludes the capital needed to grow the loan book, and net funding debt rose $2.2B during the year.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$4.26B</div>
+      <div class="sub green" style="color:#34d399;">+32.2% YoY</div>
+      <div class="note">GMV $50.2B (+37%). Five-year revenue CAGR is +37.4%, but growth is slowing: +38.8% in FY2025, +32.2% in FY2026, FY2027 GMV guided to more than $64B (+27%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#f87171;">9.79%</div>
+      <div class="sub">FY2026, from -2.7% in FY2025</div>
+      <div class="note">First positive year: operating income $417M vs -$87M. Below the 20% bar; management guides FY2027 to more than 14.5% GAAP.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">3.6% vs ~17.7%</div>
+      <div class="sub">Third-party (S&amp;P Global) estimates</div>
+      <div class="note">Both inputs are crude for a lender with a 3.8 beta, but the gap is wide. ROIC was -20.9% in FY2022, so direction is sharply up.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Corporate Net Cash</div>
+      <div class="val" style="color:#34d399;">$1.5B</div>
+      <div class="sub">Cash + securities $2.6B vs $1.13B converts</div>
+      <div class="note">Excludes $8.7B of funding debt and securitization notes backing a $9.6B loan book. Including them, S&amp;P shows total debt of $10.0B and net debt/EBITDA of 11.3x.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">62/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Growth, momentum toward profitability and net-cash liquidity score well; thin margins, returns far below cost of capital and steady dilution hold it back.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 314.2" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 314.2" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="44.9 314.2" stroke-dashoffset="-269.3" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; revenue CAGR, market position (#1/#2), net cash (corporate definition), FCF conversion, entry multiple vs own history (P/FCF), insider/founder ownership, capex intensity and margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; EBIT margin, market concentration (competitive field), ROIC vs WACC, and share count (rising ~19% since FY2022)</div>
+      <div><span class="dot" style="background:#fbbf24;"></span><b>2 partial (n.m.)</b> &mdash; EBIT CAGR and FCF CAGR, which start from negative bases and cannot be computed as a growth rate</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Affirm is a US buy-now-pay-later and consumer-installment network founded in 2012 by Max Levchin, a PayPal co-founder, and listed on Nasdaq in January 2021. It underwrites each purchase in real time, then earns money four ways: network fees from merchants and its Affirm Card ($1.44B in FY2026), interest on loans it holds ($2.05B), gains on loans sold to capital-markets partners ($0.60B) and servicing income ($0.17B). Volume is the engine: GMV crossed $50B in FY2026 with 27.8 million active consumers (+21%), 571 thousand active merchants (+51%) and 5.2 million Affirm Card holders, while the top five partners fell to 42% of GMV from 46%. The shift to profit has been rapid: GAAP operating income went from -$1.16B in FY2023 to +$417M in FY2026, helped by revenue less transaction costs growing faster than costs  and hiring discipline described in the shareholder letter. The stock, however, sits about 23% below its August spike: it reached $90.44 intraday on Aug 28, the day after fiscal Q4 results, closed that day at $77.76 and has drifted to $69.23. Q4 FY2026 was strong &mdash; GMV $14.1B (+36%), revenue $1,166M (+33%), operating income $147M (12.6% margin) &mdash; and FY2027 guidance calls for more than $64B GMV and a GAAP operating margin above 14.5%.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Tax benefit</b> &mdash; FY2026 net income of $1.93B (and Q4's $1.62B) includes a ~$1.46B deferred-tax benefit from releasing a valuation allowance; GAAP operating income ($417M) is the cleaner profit measure, and the reported 12.5x P/E is not meaningful. (2) <b>Funding model</b> &mdash; FCF of $993M looks like 238% of EBIT but excludes loan originations and the debt that funds them; Affirm is closer to a lender than a software company, and credit losses (provision $797M, 18.7% of revenue) rise with volume. (3) <b>Negative base years</b> &mdash; EBIT and FCF were negative in FY2021-23, so growth rates from FY2021 are not computable; read the trajectory, not a CAGR.
+  </div>
+
+  <div class="bignum-corner">AFRM</div>
+</div>
+
+<!-- ============ PAGE 2 — SIX-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Six-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2026 (fiscal years ending 30 June), US$ millions. Op. Income = GAAP operating income; Free Cash Flow = operating cash flow minus additions to property, equipment and software. FY2021-FY2023 sit in the cash-burn and rate-shock years; FY2026 is the first full year of positive GAAP operating income.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in US$ billions); negative bars extend below the zero line. EBIT was negative until FY2026 (peak loss -$1,162M in FY2023); FCF turned positive in FY2024. FCF excludes loan originations and funding-debt flows (see the definition note on the cover), so it overstates the cash available to shareholders.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (OCF - capex &amp; capitalized software)</span></div>
+<svg viewBox="0 0 860 295" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">-$1bn</text>
+<line x1="60" y1="200.0" x2="840" y2="200.0" stroke="#475569" stroke-width="1.3"/><text x="50" y="204.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="160.0" x2="840" y2="160.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="164.0" text-anchor="end" font-size="11" fill="#64748b">$1bn</text>
+<line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$2bn</text>
+<line x1="60" y1="80.0" x2="840" y2="80.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="84.0" text-anchor="end" font-size="11" fill="#64748b">$3bn</text>
+<line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">$4bn</text>
+<rect x="75" y="165.2" width="30" height="34.8" rx="2" fill="#2dd4bf"/>
+<text x="90" y="160.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">870</text>
+<rect x="113" y="200" width="30" height="15.2" rx="2" fill="#60a5fa"/>
+<text x="128" y="227.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-379</text>
+<rect x="151" y="200" width="30" height="8.5" rx="2" fill="#fbbf24"/>
+<text x="166" y="220.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-213</text>
+<text x="128" y="288" text-anchor="middle" font-size="11" fill="#94a3b8">FY2021</text>
+<rect x="205" y="146.0" width="30" height="54.0" rx="2" fill="#2dd4bf"/>
+<text x="220" y="141.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,349</text>
+<rect x="243" y="200" width="30" height="34.6" rx="2" fill="#60a5fa"/>
+<text x="258" y="246.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-866</text>
+<rect x="281" y="200" width="30" height="9.9" rx="2" fill="#fbbf24"/>
+<text x="296" y="221.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-248</text>
+<text x="258" y="288" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="335" y="136.5" width="30" height="63.5" rx="2" fill="#2dd4bf"/>
+<text x="350" y="131.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,588</text>
+<rect x="373" y="200" width="30" height="46.5" rx="2" fill="#60a5fa"/>
+<text x="388" y="258.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-1,162</text>
+<rect x="411" y="200" width="30" height="4.3" rx="2" fill="#fbbf24"/>
+<text x="426" y="216.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-109</text>
+<text x="388" y="288" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="465" y="107.1" width="30" height="92.9" rx="2" fill="#2dd4bf"/>
+<text x="480" y="102.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,323</text>
+<rect x="503" y="200" width="30" height="24.3" rx="2" fill="#60a5fa"/>
+<text x="518" y="236.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-607</text>
+<rect x="541" y="188.4" width="30" height="11.6" rx="2" fill="#fbbf24"/>
+<text x="556" y="183.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">291</text>
+<text x="518" y="288" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="595" y="71.0" width="30" height="129.0" rx="2" fill="#2dd4bf"/>
+<text x="610" y="66.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,224</text>
+<rect x="633" y="200" width="30" height="3.5" rx="2" fill="#60a5fa"/>
+<text x="648" y="215.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-87</text>
+<rect x="671" y="175.9" width="30" height="24.1" rx="2" fill="#fbbf24"/>
+<text x="686" y="170.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">602</text>
+<text x="648" y="288" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="725" y="29.6" width="30" height="170.4" rx="2" fill="#2dd4bf"/>
+<text x="740" y="24.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,261</text>
+<rect x="763" y="183.3" width="30" height="16.7" rx="2" fill="#60a5fa"/>
+<text x="778" y="178.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">417</text>
+<rect x="801" y="160.3" width="30" height="39.7" rx="2" fill="#fbbf24"/>
+<text x="816" y="155.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">993</text>
+<text x="778" y="288" text-anchor="middle" font-size="11" fill="#f8fafc">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#34d399;">+37.4%</div>
+      <div class="sub">$870.5M &rarr; $4,261.1M &mdash; growth has slowed from +55% (FY22) to +32% (FY26) but stays above 30%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#fbbf24;">n.m.</div>
+      <div class="sub">-$379M &rarr; +$417M &mdash; negative start year, so no growth rate; $796M absolute improvement</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#fbbf24;">n.m.</div>
+      <div class="sub">-$213M &rarr; +$993M &mdash; FY2024-26 growth is +85%/yr from a positive base; funding-debt caveat applies</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; GAAP operating income / revenue</div>
+    <div class="chart-sub">Margin troughed at -73.2% in FY2023 (rate shock, heavy provisioning and large stock compensation) and has risen every year since to +9.8% in FY2026.</div>
+<svg viewBox="0 0 700 150">
+<line x1="36" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<line x1="36" y1="35" x2="690" y2="35" stroke="#263049" stroke-width="1"/><text x="2" y="38" font-size="7.5" fill="#64748b">0%</text>
+<line x1="36" y1="75" x2="690" y2="75" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="78" font-size="7.5" fill="#64748b">-40%</text>
+<line x1="36" y1="115" x2="690" y2="115" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="118" font-size="7.5" fill="#64748b">-80%</text>
+<polyline points="60,78.6 176,99.2 292,108.2 408,61.1 524,37.7 640,25.2" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="78.6" r="3.2" fill="#f87171"/><text x="60" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text><text x="60" y="71.6" text-anchor="middle" font-size="8" fill="#cbd5e1">-43.6%</text>
+<circle cx="176" cy="99.2" r="3.2" fill="#f87171"/><text x="176" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text><text x="176" y="92.2" text-anchor="middle" font-size="8" fill="#cbd5e1">-64.2%</text>
+<circle cx="292" cy="108.2" r="3.2" fill="#f87171"/><text x="292" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text><text x="292" y="101.2" text-anchor="middle" font-size="8" fill="#cbd5e1">-73.2%</text>
+<circle cx="408" cy="61.1" r="3.2" fill="#f87171"/><text x="408" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text><text x="408" y="54.1" text-anchor="middle" font-size="8" fill="#cbd5e1">-26.1%</text>
+<circle cx="524" cy="37.7" r="3.2" fill="#f87171"/><text x="524" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text><text x="524" y="30.7" text-anchor="middle" font-size="8" fill="#cbd5e1">-2.7%</text>
+<circle cx="640" cy="25.2" r="3.2" fill="#34d399"/><text x="640" y="143" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text><text x="640" y="18.2" text-anchor="middle" font-size="8" fill="#cbd5e1">9.8%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (US$ m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Op. Cash Flow</th><th>Capex</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>870.5</td><td>-379.2</td><td>-43.6%</td><td>-430.9</td><td>-193.1</td><td>20.3</td><td>-213.4</td><td>n.m.</td></tr>
+    <tr><td>FY2022</td><td>1,349</td><td>-866.1</td><td>-64.2%</td><td>-707.4</td><td>-162.2</td><td>86.3</td><td>-248.5</td><td>n.m.</td></tr>
+    <tr><td>FY2023</td><td>1,588</td><td>-1,162</td><td>-73.2%</td><td>-985.4</td><td>12.2</td><td>120.8</td><td>-108.6</td><td>n.m.</td></tr>
+    <tr><td>FY2024</td><td>2,323</td><td>-607.3</td><td>-26.1%</td><td>-517.8</td><td>450.1</td><td>159.3</td><td>290.8</td><td>n.m.</td></tr>
+    <tr><td>FY2025</td><td>3,224</td><td>-87.3</td><td>-2.7%</td><td>52.2</td><td>793.9</td><td>192.2</td><td>601.7</td><td>n.m.</td></tr>
+    <tr><td>FY2026</td><td>4,261</td><td>417.0</td><td>9.8%</td><td>1,929.8*</td><td>1,231.0</td><td>238.3</td><td>992.6</td><td>238%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*FY2026 net income includes a ~$1.46B deferred income tax benefit (valuation-allowance release); pre-tax income was $492.7M. FY2026 is also the trailing twelve months (fiscal year ended Jun 30, 2026). FY2021 figures are from Affirm's FY2021 earnings release (operating loss, net cash used in operations -$193.1M, additions to PP&amp;E and software $20.3M); FY2022-FY2024 revenue, operating income, net income, operating cash flow and capex are S&amp;P Global standardized figures via stockanalysis.com and can differ from Affirm's reported GAAP lines by a few million dollars (e.g. FY2025 operating loss: -$87.5M standardized vs -$87.3M reported). FY2021 net loss of $430.9M was not confirmed in the sources fetched and should be checked against the 10-K. FCF/EBIT is not meaningful while EBIT is negative.</div>
+  <div class="footer-note">Source: Affirm Holdings FQ4'26 shareholder letter (Aug 27, 2026), FY2021 Q4 earnings release (8-K, Sep 9, 2021), stockanalysis.com (S&amp;P Global Market Intelligence). All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Fiscal Q4 FY2026, April &ndash; June 2026)</div></div>
+  <div class="sec-sub">The investment case now turns on whether 30%+ volume growth can hold while operating margin widens from 10% to more than 14.5%. Reported on Aug 27, 2026; fiscal Q1 2027 is due around Nov 5, 2026 (estimated).</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q4 FY2026 revenue was $1,166M (+33.0% YoY), the 11th consecutive quarter of 30%+ GMV growth (GMV $14.1B, +36%). Revenue less transaction costs (RLTC) grew 39% to $589M, GAAP operating income more than doubled to $147M (12.6% margin vs 6.6%) and adjusted operating income rose 49% to $353M (30.3% margin). Net income of $1.62B is mostly the $1.45B tax benefit and should be ignored for run-rate purposes. Affirm Card GMV grew 124% to $2.8B, Card holders passed 5.2 million (19% of active consumers) and transactions grew 41% to 52.9 million as lower-ticket Pay-in-X grew 41%. Two quality flags: a promotional event at a large enterprise partner shifted from FQ1 to FQ4, adding a low-single-digit benefit to the 36% GMV growth, and revenue as a share of GMV slipped 17 bps to 8.29% as direct-to-consumer volume (lower network revenue per dollar) grew faster than integrated checkout volume. The stock jumped intraday to $90.44 the next day, closed at $77.76 and has since given back about 11%.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (US$ m)</div>
+    <div class="chart-sub">YoY growth: Q1 FY26 +33.6%, Q2 FY26 +29.6%, Q3 FY26 +32.6%, Q4 FY26 +33.0% &mdash; remarkably steady at roughly a third. Seasonality: fiscal Q2 (Oct &ndash; Dec) is the holiday peak.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$ m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="70.6" width="56" height="59.4" fill="#2dd4bf"/>
+<text x="58" y="65.6" text-anchor="middle" font-size="9" fill="#cbd5e1">698</text>
+<text x="58" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="112" y="56.4" width="56" height="73.6" fill="#2dd4bf"/>
+<text x="140" y="51.4" text-anchor="middle" font-size="9" fill="#cbd5e1">866</text>
+<text x="140" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="194" y="63.4" width="56" height="66.6" fill="#2dd4bf"/>
+<text x="222" y="58.4" text-anchor="middle" font-size="9" fill="#cbd5e1">783</text>
+<text x="222" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="276" y="55.5" width="56" height="74.5" fill="#2dd4bf"/>
+<text x="304" y="50.5" text-anchor="middle" font-size="9" fill="#cbd5e1">876</text>
+<text x="304" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="358" y="50.7" width="56" height="79.3" fill="#2dd4bf"/>
+<text x="386" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">933</text>
+<text x="386" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="440" y="34.6" width="56" height="95.4" fill="#2dd4bf"/>
+<text x="468" y="29.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,123</text>
+<text x="468" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="41.7" width="56" height="88.3" fill="#2dd4bf"/>
+<text x="550" y="36.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,039</text>
+<text x="550" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="604" y="30.9" width="56" height="99.1" fill="#2dd4bf"/>
+<text x="632" y="25.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,166</text>
+<text x="632" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters (US$ m)</div>
+    <div class="chart-sub">The swing is clear: a -$133M loss in Q1 FY25 became a profit by Q4 FY25 and has risen to $147M in Q4 FY26 (12.6% margin). Q2 FY26 ($118M) benefited from holiday volume; Q3 FY26 dipped to $88M before Q4's $147M.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating income, US$ m</span></div>
+<svg viewBox="0 0 700 190">
+<line x1="10" y1="80" x2="690" y2="80" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="80" width="56" height="53.2" fill="#60a5fa"/>
+<text x="58" y="145.2" text-anchor="middle" font-size="9" fill="#cbd5e1">-133</text>
+<text x="58" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="112" y="80" width="56" height="1.7" fill="#60a5fa"/>
+<text x="140" y="93.7" text-anchor="middle" font-size="9" fill="#cbd5e1">-4</text>
+<text x="140" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="194" y="80" width="56" height="3.4" fill="#60a5fa"/>
+<text x="222" y="95.4" text-anchor="middle" font-size="9" fill="#cbd5e1">-8</text>
+<text x="222" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="276" y="56.8" width="56" height="23.2" fill="#60a5fa"/>
+<text x="304" y="51.8" text-anchor="middle" font-size="9" fill="#cbd5e1">58</text>
+<text x="304" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="358" y="54.5" width="56" height="25.5" fill="#60a5fa"/>
+<text x="386" y="49.5" text-anchor="middle" font-size="9" fill="#cbd5e1">64</text>
+<text x="386" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="440" y="33.0" width="56" height="47.0" fill="#60a5fa"/>
+<text x="468" y="28.0" text-anchor="middle" font-size="9" fill="#cbd5e1">118</text>
+<text x="468" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="44.6" width="56" height="35.4" fill="#60a5fa"/>
+<text x="550" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">88</text>
+<text x="550" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="604" y="21.1" width="56" height="58.9" fill="#60a5fa"/>
+<text x="632" y="16.1" text-anchor="middle" font-size="9" fill="#cbd5e1">147</text>
+<text x="632" y="182" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter (US$ m)</th><th>Q1 FY25</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th></tr>
+    <tr><td>Revenue</td><td>698.5</td><td>866.4</td><td>783.1</td><td>876.4</td><td>933.3</td><td>1,123</td><td>1,039</td><td>1,166.0</td></tr>
+    <tr><td>Revenue YoY</td><td>+40.7%</td><td>+46.6%</td><td>+35.9%</td><td>+33.0%</td><td>+33.6%</td><td>+29.6%</td><td>+32.6%</td><td>+33.0%</td></tr>
+    <tr><td>GAAP operating income</td><td>-132.9</td><td>-4.3</td><td>-8.4</td><td>58.1</td><td>63.7</td><td>117.6</td><td>88.4</td><td>147.3</td></tr>
+    <tr><td>Operating margin</td><td>-19.0%</td><td>-0.5%</td><td>-1.1%</td><td>6.6%</td><td>6.8%</td><td>10.5%</td><td>8.5%</td><td>12.6%</td></tr>
+    <tr><td>Free cash flow</td><td>152.7</td><td>268.1</td><td>157.4</td><td>23.5</td><td>320.2</td><td>118.0</td><td>325.1</td><td>229.3</td></tr>
+  </table>
+  <div class="footer-note" style="margin:4px 0 8px 0;">Q4 FY25 revenue YoY of +33.0% is as reported by S&amp;P Global (+32.95%).</div>
+
+  <table class="datatable">
+    <tr><th>Metric (US$ m unless noted)</th><th>Prior-year quarter (Apr-Jun 2025)</th><th>Latest quarter (Apr-Jun 2026)</th><th>Change</th></tr>
+    <tr><td>GMV ($bn)</td><td>10.4</td><td>14.1</td><td>+36%</td></tr>
+    <tr><td>Revenue</td><td>876.4</td><td>1,166.0</td><td>+33.0%</td></tr>
+    <tr><td>Revenue less transaction costs (non-GAAP)</td><td>425.1</td><td>589.1</td><td>+38.6%</td></tr>
+    <tr><td>GAAP operating income</td><td>58.1</td><td>147.3</td><td>+153.6%</td></tr>
+    <tr><td>Adjusted operating income (non-GAAP)</td><td>237.0</td><td>353.4</td><td>+49.1%</td></tr>
+    <tr><td>Net income</td><td>69.2</td><td>1,616.6</td><td>Tax benefit</td></tr>
+    <tr><td>Free cash flow (OCF less capex)</td><td>23.5</td><td>229.3</td><td>+876%</td></tr>
+    <tr><td>Active consumers (million)</td><td>23.0</td><td>27.8</td><td>+21%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly revenue for Q2 and Q3 FY26 is rounded from S&amp;P Global data ($1,123M and $1,039M); other quarters as reported. Q4 FY25 free cash flow is low partly because of accounts-receivable timing.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2027):</b> GMV more than $64.0B (+27%), GAAP operating margin above 14.5%, adjusted operating margin above 30.5%, revenue about 8.49% of GMV and RLTC about 4.16% of GMV. Fiscal Q1 2027: GMV $13.7&ndash;14.0B, revenue $1,190&ndash;1,220M (+27% to +31% YoY), operating margin 11.5&ndash;13.5%. Weighted diluted shares assumed at 353&ndash;356M.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Headwinds management flagged:</b> short-term rates are assumed to rise in FY2027 (funding costs), the FQ1 FY26 promotional event will not repeat, and an enterprise merchant that moved its Pay Later volume to its own wallet weighs on growth until the final month of fiscal Q1. International expansion (UK, Canada, Australia via Shop Pay Installments) is not expected to be a material FY2027 contributor.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Earnings-based multiples are distorted (losses until FY2025, a $1.4B tax benefit in FY2026), so the entry-multiple criterion is scored mainly on price-to-free-cash-flow, cross-checked against price-to-sales. Funding debt is the number to watch alongside credit quality.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Free Cash Flow &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/FCF of 23.5x ($69.23 on FY2026 FCF of $992.6M) is 73% of the FY2024-26 average of 32.2x (S&amp;P Global, fiscal year-end prices). Only three prior years exist because FCF was negative before FY2024, so this is a short history. The ratio is flattered by the funding-debt effect on FCF.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>P/FCF (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>P/FCF (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY24-26 average</span>
+    </div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="90" y="58.6" width="70" height="51.4" fill="#60a5fa"/><text x="125" y="53.6" text-anchor="middle" font-size="9" fill="#cbd5e1">32.1x</text><text x="125" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="240" y="50.6" width="70" height="59.4" fill="#60a5fa"/><text x="275" y="45.6" text-anchor="middle" font-size="9" fill="#cbd5e1">37.1x</text><text x="275" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="390" y="66.0" width="70" height="44.0" fill="#60a5fa"/><text x="425" y="61.0" text-anchor="middle" font-size="9" fill="#cbd5e1">27.5x</text><text x="425" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="540" y="72.4" width="70" height="37.6" fill="#2dd4bf"/><text x="575" y="67.4" text-anchor="middle" font-size="9" fill="#cbd5e1">23.5x</text><text x="575" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="58.5" x2="690" y2="58.5" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="54.5" text-anchor="end" font-size="9" fill="#fbbf24">FY24-26 avg 32.2x</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Sales &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/S of 5.5x is 114% of the FY2022-26 average of 4.8x &mdash; the cross-check points the other way, which is why criterion #10 is scored at the midpoint. FY2023's 2.9x was the post-rate-shock trough.</div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="47" y="75.5" width="70" height="34.5" fill="#60a5fa"/><text x="82" y="70.5" text-anchor="middle" font-size="9" fill="#cbd5e1">3.8x</text><text x="82" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="154" y="84.3" width="70" height="25.7" fill="#60a5fa"/><text x="189" y="79.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2.9x</text><text x="189" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="261" y="73.8" width="70" height="36.2" fill="#60a5fa"/><text x="296" y="68.8" text-anchor="middle" font-size="9" fill="#cbd5e1">4.0x</text><text x="296" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="369" y="47.7" width="70" height="62.3" fill="#60a5fa"/><text x="404" y="42.7" text-anchor="middle" font-size="9" fill="#cbd5e1">6.9x</text><text x="404" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="476" y="52.3" width="70" height="57.7" fill="#60a5fa"/><text x="511" y="47.3" text-anchor="middle" font-size="9" fill="#cbd5e1">6.4x</text><text x="511" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="583" y="60.7" width="70" height="49.3" fill="#2dd4bf"/><text x="618" y="55.7" text-anchor="middle" font-size="9" fill="#cbd5e1">5.5x</text><text x="618" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="66.7" x2="690" y2="66.7" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="62.7" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 4.8x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Other multiples &amp; PEG:</b> trailing P/E is 12.5x but based on $5.53 of diluted EPS that includes the tax benefit (about $4.2 per share); forward P/E (next-12-month consensus) is 34.75x versus 31.8x at FY2025 and 21.8x at FY2026 year-end. Reported PEG is 17.4x, i.e. earnings growth consensus is weak relative to the price once the one-off tax benefit rolls off. EV/sales is 7.4x (including funding debt). Average analyst target of $99.09 (34 analysts) implies +43%, with individual targets of $85&ndash;115 after the Q4 print.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CapEx (US$ m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Additions to property, equipment and software (mostly capitalized internal-use software). Intensity peaked at 7.6% of revenue in FY2023 and has fallen to 5.6% as revenue scaled. A further ~$180M a year of stock compensation is capitalized into software and is not in these figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (US$ m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+<svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="150.9" width="60" height="9.1" fill="#60a5fa"/><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text><text x="60" y="145.9" text-anchor="middle" font-size="8" fill="#cbd5e1">20</text>
+<rect x="142" y="121.2" width="60" height="38.8" fill="#60a5fa"/><text x="172" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text><text x="172" y="116.2" text-anchor="middle" font-size="8" fill="#cbd5e1">86</text>
+<rect x="254" y="105.6" width="60" height="54.4" fill="#60a5fa"/><text x="284" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text><text x="284" y="100.6" text-anchor="middle" font-size="8" fill="#cbd5e1">121</text>
+<rect x="366" y="88.3" width="60" height="71.7" fill="#60a5fa"/><text x="396" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text><text x="396" y="83.3" text-anchor="middle" font-size="8" fill="#cbd5e1">159</text>
+<rect x="478" y="73.5" width="60" height="86.5" fill="#60a5fa"/><text x="508" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text><text x="508" y="68.5" text-anchor="middle" font-size="8" fill="#cbd5e1">192</text>
+<rect x="590" y="52.8" width="60" height="107.2" fill="#60a5fa"/><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text><text x="620" y="47.8" text-anchor="middle" font-size="8" fill="#cbd5e1">238</text>
+<polyline points="60,134.3 172,89.6 284,76.3 396,84.6 508,94.4 620,98.5" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="134.3" r="3" fill="#fbbf24"/><text x="60" y="125.3" text-anchor="middle" font-size="7.5" fill="#fde68a">2.33%</text>
+<circle cx="172" cy="89.6" r="3" fill="#fbbf24"/><text x="172" y="80.6" text-anchor="middle" font-size="7.5" fill="#fde68a">6.40%</text>
+<circle cx="284" cy="76.3" r="3" fill="#fbbf24"/><text x="284" y="67.3" text-anchor="middle" font-size="7.5" fill="#fde68a">7.61%</text>
+<circle cx="396" cy="84.6" r="3" fill="#fbbf24"/><text x="396" y="75.6" text-anchor="middle" font-size="7.5" fill="#fde68a">6.86%</text>
+<circle cx="508" cy="94.4" r="3" fill="#fbbf24"/><text x="508" y="85.4" text-anchor="middle" font-size="7.5" fill="#fde68a">5.96%</text>
+<circle cx="620" cy="98.5" r="3" fill="#fbbf24"/><text x="620" y="89.5" text-anchor="middle" font-size="7.5" fill="#fde68a">5.59%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="28.1 286.0" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="230.0 84.1" stroke-dashoffset="-28.1" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~9.0%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~9.0% of shares (S&amp;P Global)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~81%; remainder retail and other</div>
+          <div><span class="dot" style="background:#64748b;"></span>Class B (15 votes/share): 40.5M shares, ~12% of count</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>Weighted basic shares rose from 282M (FY2022) to 335M (FY2026), +18.8%, driven mainly by stock compensation ($305M expensed in FY2026); shares outstanding were 337.2M at Jun 30, 2026 (+3.7% YoY). Affirm bought back $250M of stock in FY2025 and has paid $325M in FY2026 for taxes on net-settled awards, but dilution still exceeds repurchases. Guidance assumes 353&ndash;356M diluted shares in FY2027.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Balance sheet &amp; funding:</b> at Jun 30, 2026 Affirm held $1.63B of cash and $0.97B of securities (total liquidity ~$2.6B) against $1.13B of convertible notes (of which $221M is the 2026 series being repurchased), for corporate net cash of ~$1.5B (+$400M YoY). The loan book is financed separately: loans held for investment of $9.56B (allowance for credit losses $563M, 5.9%) are funded by $5.33B of securitization notes and $3.33B of warehouse and other funding debt, plus loan sales to partners such as CPP Investments (capacity raised from $1.4B to $1.7B). Stockholders' equity of $5.48B includes a new $1.47B deferred tax asset. Total liabilities are $10.3B on $15.8B of assets.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Founder control &amp; honest caveats:</b> Max Levchin is founder, CEO and chairman and holds Class B shares with 15 votes each; one secondary source puts his voting power at roughly 43&ndash;44%, which I could not verify against the proxy statement, and his exact economic stake was not confirmed. The S&amp;P Global &ldquo;insider&rdquo; figure of 9.0% is used for the scorecard. WACC (17.7%) and ROIC (3.4&ndash;3.6%) are third-party estimates for a high-beta lender and should be read as directional.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist, graduated 0&ndash;5 per criterion times its weight (weights total 105). No criterion is truly N/A, so the denominator stays 105 and the N/A pill (as used on ionq.html) is unused; criteria #2 and #4 are shown as partial (n.m.) because growth rates cannot be computed from negative bases. Growth CAGRs are 5-year (FY2021-26). Market concentration (#6) is scored 1&ndash;5 and folded into the tally (1&ndash;2 = Met, 3&ndash;5 = Not met).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Affirm</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>+37.4% &mdash; $870.5M &rarr; $4,261.1M; still +32.2% in FY2026, though decelerating from +38.8% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating income swung from -$379.2M (FY2021) to +$417.0M (FY2026); a CAGR from a negative base is undefined. Partial credit for a $796M improvement and the first full year of positive EBIT, but the profit is only 9.8% of revenue (score 3/5, judgment)</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>9.79% (FY2026), up from -2.7% in FY2025 and -73.2% in FY2023 &mdash; first positive year; adjusted operating margin of 29.0% excludes SBC, D&amp;A and partner warrants and is not used here (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>n.m. &mdash; FCF (OCF less capex and capitalized software) went from -$213M in FY2021 to +$993M in FY2026; FY2024-26 2-year growth is +85%/yr from a positive base. Partial credit and flagged: loan originations sit in investing cash flow, so this FCF is not comparable to an industrial company's (score 4/5, judgment)</td><td><span class="status-pill status-score">Partial (n.m.)</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Largest US-focused BNPL network by GMV ($50.2B in FY2026), and globally #2 behind Klarna by volume as far as I could verify (Klarna 2024 GMV $105B; Afterpay, PayPal and Sezzle are the other majors). No verified market-share percentage (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; a handful of scaled players (Klarna, Affirm, Afterpay, PayPal) plus bank card issuers' installment products and new entrants; merchants can and do multi-home (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 3.57% (FY2026) vs S&amp;P WACC estimate of 17.69% (beta 3.82) &mdash; a -14.1pp spread. Both inputs are crude for a lender with $10B of funding debt, but even a more modest 10% cost of capital would not be cleared (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Corporate net cash of $1.5B (cash and securities $2.6B vs $1.13B convertible notes, company definition). Excludes $8.7B of funding debt and securitization notes that finance the loan book; including everything, S&amp;P shows 11.3x. Credited as net cash with a one-band haircut for that structure (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>238% (FY2026: FCF $992.6M / EBIT $417.0M). Mechanically top band, but inflated by non-cash add-backs (SBC $305M, provision $797M) and by loan originations being classed as investing. Capped at the 80-100% band (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/FCF 23.5x vs FY24-26 average 32.2x (ratio 0.73, would score 4/5); but P/S 5.5x vs FY22-26 average 4.8x (ratio 1.14, would score 2/5). P/E is distorted by the tax benefit and FCF/earnings were negative before FY2024. Scored 3/5 as the midpoint, flagged as judgment</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Weighted basic shares 282M (FY2022) &rarr; 335M (FY2026), +18.8%; 337.4M outstanding now, +2.3% in the last year. SBC and net-settled awards keep diluting; the $250M FY2025 repurchase did not offset it (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>S&amp;P shows 9.0% insider ownership. Founder-CEO Max Levchin controls the company through 15-vote Class B shares (40.5M shares, about 12% of the share count); one secondary source puts his voting power at roughly 43-44%, which I could not confirm in a primary filing (score 3/5 on the economic stake)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.6% of revenue in FY2026 ($238M of PP&amp;E and capitalized software), down from 7.6% in FY2023; excludes $180M of capitalized stock compensation (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin (revenue less transaction costs, S&amp;P basis) 42.5% (FY2023) &rarr; 48.9% (FY2026), +6.4pp; operating margin improved even more (-73.2% &rarr; +9.8%) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 5&times;13=13.0 &middot; #2 3&times;11=6.6 &middot; #3 2&times;10=4.0 &middot; #4 4&times;8=6.4 &middot; #5 4&times;7=5.6 &middot; #6 2&times;6=2.4 &middot; #7 0&times;10=0.0 &middot; #8 4&times;6=4.8 &middot; #9 4&times;8=6.4 &middot; #10 3&times;8=4.8 &middot; #11 0&times;4=0.0 &middot; #12 3&times;5=3.0 &middot; #13 4&times;4=3.2 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 65.2 / 105 = <b>62/100</b>. Criteria met: 8/14 on the original binary thresholds (4 not met, 2 partial). <b>Judgment calls:</b> #2 and #4 partial credit (3/5 and 4/5) in place of an undefined CAGR; #5 and #6 are qualitative; #7 uses third-party ROIC and WACC; #8 and #9 are each held one band below their mechanical score (5/5 and 5/5) because funding debt and loan originations are outside the headline ratios; #10 is the midpoint of the P/FCF (4/5) and P/S (2/5) readings; #12 credits the economic stake only, not the voting control.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Growth plus a visible path to profit: revenue has compounded at +37% a year for five years, GMV has grown 30%+ for 11 straight quarters, and GAAP operating income swung from -$1.16B (FY2023) to +$417M (FY2026) with FY2027 guided above a 14.5% margin. Network effects are showing up in the numbers &mdash; 571 thousand active merchants (+51%), 27.8 million active consumers, Affirm Card GMV +124% and a top-five-partner share falling to 42% &mdash; and the customer mix is broadening beyond the original large e-commerce partners. Liquidity is solid (about $2.6B vs $1.13B of converts), funding capacity keeps growing, and margin stability scores well because gross margin has risen 6.4pp since FY2023. Forward-looking, the stock trades at 23.5x FCF versus a 32.2x three-year average, with analysts' average target about 43% above the price.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Credit and funding are the real risks: provisions were $797M in FY2026 (18.7% of revenue), the loan book is financed with $8.7B of funding debt and securitizations, and the guidance assumes rising short-term rates. Profit is thin and young &mdash; a 9.8% GAAP operating margin, ROIC of 3.6% against a 17.7% estimated cost of capital, and net income that is mostly a one-off tax benefit. Growth is decelerating (+38.8% to +32.2% revenue; FY2027 GMV guide of +27%), the share count has risen about 19% since FY2022, and revenue per dollar of GMV is drifting down as lower-yield direct-to-consumer volume grows. The stock is volatile (beta 3.8, a 52-week range of $42.10 to $90.44) and sold off about 11% after its post-earnings spike. Several inputs could not be fully verified: market-share percentages, Levchin's current voting power, WACC, and the Jun 2021 share price.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Affirm Holdings FQ4'26 shareholder letter and financial tables (Aug 27, 2026; investors.affirm.com); Affirm Q4/FY2021 earnings release (SEC 8-K, Sep 9, 2021); stockanalysis.com (S&amp;P Global Market Intelligence: annual and quarterly statements, ratios, share data, ROIC/WACC, 52-week range, analyst consensus, price history); CNBC, TipRanks/TheFly and Crowdfund Insider coverage of the Q4 print and analyst targets; Klarna 2024 GMV from published reporting; Class B voting terms from Affirm's SEC filings (via search summary). Fiscal-year-end prices, S&amp;P standardized figures, WACC and ROIC are third-party or approximate and flagged as such. All figures USD. Price as of Sep 30, 2026 close; prepared Oct 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — FINTECH PEERS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">FinTech Peer Comparison</div></div>
+  <div class="sec-sub">Affirm next to the three payments and commerce-infrastructure names already on this site. Martinero Index, criteria-met tally, growth momentum and latest-quarter growth are taken from the site's own data (assets/companies.js); operating margins are from each company's dashboard.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Martinero Index &mdash; Affirm vs. FinTech Peers</div>
+    <div class="chart-sub">Higher is better (max 100). Same 14-criterion scorecard and weights for all four (Visa is listed on the site at 9/13 criteria).</div>
+<svg viewBox="0 0 700 150">
+<text x="100" y="28" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Mastercard</text><rect x="110" y="12" width="465" height="22" rx="3" fill="#34d399"/><text x="583" y="28" font-size="11" fill="#f1f5f9" font-weight="700">83</text>
+<text x="100" y="62" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Shopify</text><rect x="110" y="46" width="465" height="22" rx="3" fill="#34d399"/><text x="583" y="62" font-size="11" fill="#f1f5f9" font-weight="700">83</text>
+<text x="100" y="96" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Visa</text><rect x="110" y="80" width="409" height="22" rx="3" fill="#34d399"/><text x="527" y="96" font-size="11" fill="#f1f5f9" font-weight="700">73</text>
+<text x="100" y="130" text-anchor="end" font-size="11" fill="#f8fafc" font-weight="700">Affirm</text><rect x="110" y="114" width="347" height="22" rx="3" fill="#fbbf24"/><text x="465" y="130" font-size="11" fill="#f1f5f9" font-weight="700">62</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Company</th><th>Martinero</th><th>Criteria met</th><th>Revenue growth (latest FY vs prior)</th><th>Latest quarter YoY</th><th>Op. margin (latest FY)</th></tr>
+    <tr><td><b>Affirm</b> (AFRM)</td><td><b>62</b></td><td>8 / 14</td><td>+32.2% vs +38.8%</td><td>+33.0% (Q4 FY2026)</td><td>9.8%</td></tr>
+    <tr><td>Visa (V)</td><td>73</td><td>9 / 13</td><td>+11.3% vs +10.0%</td><td>+14.0% (Q3 FY2026)</td><td>60.0%</td></tr>
+    <tr><td>Mastercard (MA)</td><td>83</td><td>12 / 14</td><td>+14.8% vs +13.0%</td><td>+14.1% (Q2 2026)</td><td>59.2%</td></tr>
+    <tr><td>Shopify (SHOP)</td><td>83</td><td>12 / 14</td><td>+30.1% vs +25.8%</td><td>+34.0% (Q2 2026)</td><td>16.4%</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:10px;">
+    <b>Reading the comparison:</b> Affirm grows about as fast as Shopify (+33% vs +34% latest quarter) and more than twice as fast as Visa and Mastercard, but sits well below all three on Martinero (62 vs 73&ndash;83). The gap is not growth; it is quality of earnings. Visa and Mastercard are asset-light toll booths with ~60% operating margins and return on capital far above their cost of capital, and Shopify has net cash with a near-zero capital burden. Affirm is a balance-sheet business: it takes credit risk and funds loans with $8.7B of debt, earns a 9.8% operating margin with ROIC of 3.6%, and is still diluting shareholders. The most relevant connection is that Shop Pay Installments, which Shopify offers, is powered by Affirm (launching in Australia, per the FQ4 letter), so Shopify is both a peer and a distribution partner. Affirm's momentum is accelerating toward profitability, not toward the stability the Visa/Mastercard scores reflect.
+  </div>
+  <div class="footer-note">Peer data read from assets/companies.js and the peer dashboards (visa.html, mastercard.html, shopify.html) on Oct 1, 2026; each peer uses its own fiscal calendar. Not investment advice.</div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Affirm Holdings (AFRM) &mdash; US$ share price at each fiscal year-end (30 June). A decline of about 77% from mid-2021 to mid-2023 as rates rose and growth names de-rated, a recovery on profitability from 2024, a peak near $90 in August 2026 after FY2026 results, and a pullback since.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Affirm Holdings &mdash; Fiscal Year-End Close (June 30), US$</div>
+    <div class="chart-sub">Closing prices at Jun 30 FY2022-FY2026 and the Sep 30, 2026 close, from S&amp;P Global via stockanalysis.com; the Jun 2021 point (~$67.18) is approximate and unverified. The dashed line is the straight-line annualised price CAGR between Jun 2021 and Sep 2026 (5.25 years), no dividends paid. Intra-period swings are far larger: the stock closed near $15 in June 2023 and traded as high as $90.44 intraday on Aug 28, 2026; the 52-week range is $42.10 &ndash; $90.44.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,66.5 L 151.7,149.5 L 257.3,154.1 L 363.0,129.0 L 468.7,63.2 L 574.3,42.3 L 680.0,63.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="66.5" x2="680.0" y2="63.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="58.8" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">+0.6%*</text>
+<path d="M 46.0,66.5 L 151.7,149.5 L 257.3,154.1 L 363.0,129.0 L 468.7,63.2 L 574.3,42.3 L 680.0,63.1" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="66.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="56.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$67.18</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2021</text>
+<circle cx="151.7" cy="149.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="151.7" y="166.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$18.06</text>
+<text x="151.7" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2022</text>
+<circle cx="257.3" cy="154.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="257.3" y="171.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.33</text>
+<text x="257.3" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2023</text>
+<circle cx="363.0" cy="129.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="363.0" y="146.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$30.21</text>
+<text x="363.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2024</text>
+<circle cx="468.7" cy="63.2" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="468.7" y="53.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$69.14</text>
+<text x="468.7" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2025</text>
+<circle cx="574.3" cy="42.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="574.3" y="32.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$81.55</text>
+<text x="574.3" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Jun 2026</text>
+<circle cx="680.0" cy="63.1" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678.0" y="53.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$69.23</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Jun 2021 to Sep 2026 is roughly flat (+0.6% a year), but the endpoints hide a path that fell about 77% and then rose about 4.5x from the Jun 2023 low ($15.33) to $69.23. The stock has never split. Beta of 3.8 means moves of this size are normal for it. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

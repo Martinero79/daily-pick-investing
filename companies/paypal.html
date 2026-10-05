@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PayPal Holdings, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/paypal.html">
+<meta property="og:title" content="PayPal Holdings, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PayPal Holdings, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>PayPal Holdings, Inc.</h1>
+  <div class="badges">
+    <div class="badge">NASDAQ: PYPL</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: San Jose, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~73% Below Dec-2021 Close &mdash; Slow Growth, Cheap Multiple, and a Failed Takeover Bid in the Price</div>
+  </div>
+
+  <div class="price">$52.53</div>
+  <div class="price-sub">Sep 30, 2026 close &middot; Market cap &asymp; $44.9B (855.5M shares) &middot; 52-wk range $38.46 &ndash; $79.22 &middot; 1-yr price change &asymp; -24.6% &middot; Beta 1.29 &middot; Analyst consensus: Hold (42 analysts), avg PT $56.92 (+8%) &middot; Next report (Q3 2026): Oct 27, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> one of the largest digital-payment platforms in the world &mdash; 439M active accounts and $486B of quarterly payment volume (Q2 2026), with the PayPal and Venmo wallets and the Braintree processing business. Leader in online branded checkout, but facing Apple Pay, Stripe, Adyen and others &mdash; see Section 4 for how that was scored.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars. &ldquo;Op. Income / EBIT&rdquo; is <b>GAAP operating income</b> as reported (non-GAAP operating income, which PayPal also reports, is ~5% higher in FY2025: $6.38B vs $6.07B). &ldquo;Free cash flow&rdquo; is operating cash flow less purchases of property and equipment; PayPal also reports an <i>adjusted</i> free cash flow ($6.41B in FY2025) that strips out the timing of buy-now-pay-later receivable sales.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$33.2B</div>
+      <div class="sub" style="color:#fbbf24;">+4.3% YoY &mdash; decelerating</div>
+      <div class="note">Growth has stepped down every year: +18.3% (FY21), +8.5%, +8.2%, +6.8%, +4.3%. Q2 2026 was +4.8% (+3% currency-neutral).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#fbbf24;">18.3%</div>
+      <div class="sub">FY2025, up from 13.9% in FY2022</div>
+      <div class="note">Cost cuts lifted margin, but TTM margin has slipped to 17.4% and Q2 2026 non-GAAP margin fell 248bp YoY to 17.4%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">22.3% vs 9.3%</div>
+      <div class="sub">Spread +13.0 points</div>
+      <div class="note">Third-party (S&amp;P Global) estimates, TTM. The business earns well above its cost of capital on a small invested-capital base.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.5x</div>
+      <div class="sub">Debt $14.2B (incl. leases) vs cash &amp; ST investments $11.3B</div>
+      <div class="note">On PayPal's own definition (incl. long-term investments: $15.3B vs debt $13.4B) it is a small net cash position. Customer funds ($39.7B) are excluded.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">65/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong returns, a 27% smaller share count and a very low multiple, held back by weak 5-year growth, no insider block and a contested market position.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 134.6" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="134.6 179.5" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; market position (#1/#2 in branded checkout), ROIC vs WACC, net debt/EBITDA, FCF conversion, entry multiple vs own history, share count (down 27%), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin (18.3% vs 20% bar), FCF CAGR, market concentration (moderate, score 3) and insider ownership (0.1%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    PayPal is the company that made online wallets mainstream. It was spun out of eBay in 2015 and now runs a two-sided network: roughly 439 million consumer and merchant accounts that move about $1.9 trillion a year through PayPal and Venmo checkout, plus Braintree, a lower-margin unbranded processing business for large merchants. Revenue is mostly transaction fees (90%), with the rest from interest on customer balances, credit and other value-added services. The story of the last five years is a growth stall: revenue grew 18% in 2021 but only 4% in 2025, branded checkout lost share to Apple Pay and others, and the share price fell from $188 at the end of 2021 to $52.53. Management has since pivoted to profitable growth &mdash; cost cuts, a focus on transaction margin dollars rather than raw volume, a first-ever dividend, and heavy buybacks (about $6B a year, which cut the share count by 27% since 2021). Q2 2026 showed the early shape of that plan: revenue +4.8%, payment volume +9.7%, transaction margin dollars +1.5% and operating income -5% as costs and investments rose. The stock sits at about 10x trailing and 9.5x forward earnings, a multiple that reflects both the stalled growth and a messy summer: in July a report of a $60.50-per-share bid from Stripe and Advent lifted the shares 17% in a day, and by August 28 the consortium had reportedly walked away, dropping them 12.7%.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Takeover noise</b> &mdash; the price since mid-July reflects press reports of bids and rumours (none confirmed by PayPal as agreed deals), so the current $52.53 is partly a bid-speculation price, not a clean read on the business. (2) <b>Definitions</b> &mdash; revenue includes pass-through processing costs, so operating margin and transaction margin dollars are the better profit lens than revenue growth alone; EBIT here is GAAP, and FY2023 GAAP operating income (~$5.0B) includes roughly $0.36B of one-off gains on asset sales. (3) <b>FY2021 base</b> &mdash; FY2021 included a pandemic e-commerce boom, so 5-year growth rates start from a high point.
+  </div>
+
+  <div class="bignum-corner">PYPL</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD millions as reported (Op. Income = GAAP operating income; Free Cash Flow = operating cash flow minus capex). Revenue growth is slow but steady, EBIT has grown faster on cost cuts, and FCF has been flat to lower.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (USD m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in USD billions). Revenue climbed 31% over four years; EBIT is up 42% from a low FY2022 (restructuring and investment write-downs) and FCF is up only 14%, with FY2024 ($6.8B) the high and FY2025 lower ($5.6B) on working-capital and receivable timing.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.6" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="177.1" x2="840" y2="177.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="181.1" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="145.7" x2="840" y2="145.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.7" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+<line x1="60" y1="114.3" x2="840" y2="114.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="118.3" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="82.9" x2="840" y2="82.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.9" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+<line x1="60" y1="51.4" x2="840" y2="51.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.4" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">35bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="80.5" width="30" height="159.5" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="75.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">25,371</text>
+<rect x="123.0" y="213.2" width="30" height="26.8" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="208.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,262</text>
+<rect x="161.0" y="209.3" width="30" height="30.7" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="204.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4,889</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="67.0" width="30" height="173.0" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="62.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">27,518</text>
+<rect x="279.0" y="215.9" width="30" height="24.1" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="210.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,837</text>
+<rect x="317.0" y="207.9" width="30" height="32.1" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="202.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5,107</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="52.9" width="30" height="187.1" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="47.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">29,771</text>
+<rect x="435.0" y="208.4" width="30" height="31.6" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="203.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,028</text>
+<rect x="473.0" y="213.5" width="30" height="26.5" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="208.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4,220</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="40.1" width="30" height="199.9" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="35.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">31,797</text>
+<rect x="591.0" y="206.5" width="30" height="33.5" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="201.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,325</text>
+<rect x="629.0" y="197.5" width="30" height="42.5" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="192.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6,767</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="31.5" width="30" height="208.5" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="26.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">33,172</text>
+<rect x="747.0" y="201.9" width="30" height="38.1" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="196.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">6,065</text>
+<rect x="785.0" y="205.0" width="30" height="35.0" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="200.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5,564</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+6.9%</div>
+      <div class="sub">$25.4B &rarr; $33.2B &mdash; below the 15% bar, and slowing each year</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+9.2%</div>
+      <div class="sub">$4.26B &rarr; $6.07B &mdash; better than revenue on cost control, still short of 15%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+3.3%</div>
+      <div class="sub">$4.89B &rarr; $5.56B &mdash; lumpy; FY2024 was $6.77B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; GAAP operating income / revenue</div>
+    <div class="chart-sub">Margin dipped to 13.9% in FY2022 on restructuring and a heavier cost base, then recovered to 18.3% by FY2025 as headcount and spending were cut. FY2023 (16.9%) includes about $0.36B of one-off gains; excluding them it was closer to 15.7%.</div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text><text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,27.0 205,37.7 350,26.7 495,27.2 640,21.4" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="27.0" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="20.0" text-anchor="middle" font-size="8" fill="#cbd5e1">16.8%</text>
+<circle cx="205" cy="37.7" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="30.7" text-anchor="middle" font-size="8" fill="#cbd5e1">13.9%</text>
+<circle cx="350" cy="26.7" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="19.7" text-anchor="middle" font-size="8" fill="#cbd5e1">16.9%</text>
+<circle cx="495" cy="27.2" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="20.2" text-anchor="middle" font-size="8" fill="#cbd5e1">16.7%</text>
+<circle cx="640" cy="21.4" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="14.4" text-anchor="middle" font-size="8" fill="#cbd5e1">18.3%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+<tr><th>FY (USD m)</th><th>Revenue</th><th>Op. Income (GAAP)</th><th>Op. Margin</th><th>Net Income</th><th>Diluted EPS</th><th>Free Cash Flow</th><th>FCF/EBIT</th></tr>
+<tr><td>FY2021</td><td>25,371</td><td>4,262</td><td>16.8%</td><td>4,169</td><td>$3.52</td><td>4,889</td><td>114.7%</td></tr>
+<tr><td>FY2022</td><td>27,518</td><td>3,837</td><td>13.9%</td><td>2,419</td><td>$2.09</td><td>5,107</td><td>133.1%</td></tr>
+<tr><td>FY2023</td><td>29,771</td><td>5,028</td><td>16.9%</td><td>4,246</td><td>$3.84</td><td>4,220</td><td>83.9%</td></tr>
+<tr><td>FY2024</td><td>31,797</td><td>5,325</td><td>16.7%</td><td>4,147</td><td>$3.99</td><td>6,767</td><td>127.1%</td></tr>
+<tr><td>FY2025</td><td>33,172</td><td>6,065</td><td>18.3%</td><td>5,233</td><td>$5.41</td><td>5,564</td><td>91.7%</td></tr>
+<tr><td>TTM (Jun'26)</td><td>34,128</td><td>5,946</td><td>17.4%</td><td>4,902</td><td>$5.30</td><td>6,586</td><td>110.8%</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">Operating income is GAAP as reported (FY2021: $4,262m, FY2022: $3,837m, FY2023: $5,028m, FY2024: $5,325m, FY2025: $6,065m); S&amp;P Global's standardised figures differ slightly because they exclude restructuring items. TTM operating income is derived as FY2025 plus H1 2026 minus H1 2025. Free cash flow in the table is unadjusted. FCF/EBIT above 100% in FY2021, FY2022 and FY2024 reflects customer-funds and working-capital timing and the fact that EBIT is struck after non-cash charges; it is not a sign of unusual earnings quality.</div>
+  <div class="footer-note">Source: PayPal Holdings earnings releases (Q4 2025, Q2 2026) and Forms 10-K; stockanalysis.com (S&amp;P Global Market Intelligence) for FY2021-23 revenue, net income, EPS, capex and TTM cross-checks. USD throughout. Dividend: first paid in 2025 ($0.14 per quarter, $0.56 annualised; FY2025 total $0.28).</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q2 2026) &amp; the Takeover Saga</div></div>
+  <div class="sec-sub">The operating story is steady-but-slow; the share price story since July is about bid reports. Q2 2026 was reported on Jul 28, 2026; Q3 2026 is due Oct 27, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was $8,682m (+4.8% YoY; +3% currency-neutral) on payment volume of $486.4B (+9.7%). Transaction margin dollars, PayPal's preferred profit lens, rose only 1.5% to $3,900m (+2.6% excluding interest on customer balances), because the transaction expense rate edged up and interest income fell. GAAP operating income was $1,427m (-5.1%) and non-GAAP operating margin contracted 248bp to 17.4% as customer support, technology and G&amp;A costs grew faster than revenue. Net income fell 12% to $1,104m, but EPS fell only 3% to $1.25 because the share count was 10% lower. Cash was the bright spot: free cash flow was $1,775m versus $692m a year ago. Active accounts were flat at 439M (+0.3%), while transactions per account rose 3%. Management raised full-year non-GAAP EPS guidance to about $5.38 from a prior range of low-single-digit decline to slightly positive.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters (USD bn)</div>
+    <div class="chart-sub">Revenue has been in a narrow $7.8-8.7B band; YoY growth was +4.8% in Q2 2026, +6.8% in Q1 2026 and +3.7% in Q4 2025. Q4'24 and Q1'25 are shown from PayPal's prior-year quarterly reports.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, USD bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="43.6" width="60" height="86.4" fill="#2dd4bf"/><text x="70" y="38.6" text-anchor="middle" font-size="9" fill="#cbd5e1">8.37</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="49.5" width="60" height="80.5" fill="#2dd4bf"/><text x="160" y="44.5" text-anchor="middle" font-size="9" fill="#cbd5e1">7.79</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="44.4" width="60" height="85.6" fill="#2dd4bf"/><text x="250" y="39.4" text-anchor="middle" font-size="9" fill="#cbd5e1">8.29</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="43.1" width="60" height="86.9" fill="#2dd4bf"/><text x="340" y="38.1" text-anchor="middle" font-size="9" fill="#cbd5e1">8.42</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="40.4" width="60" height="89.6" fill="#2dd4bf"/><text x="430" y="35.4" text-anchor="middle" font-size="9" fill="#cbd5e1">8.68</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="43.7" width="60" height="86.3" fill="#2dd4bf"/><text x="520" y="38.7" text-anchor="middle" font-size="9" fill="#cbd5e1">8.35</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="40.3" width="60" height="89.7" fill="#2dd4bf"/><text x="610" y="35.3" text-anchor="middle" font-size="9" fill="#cbd5e1">8.68</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 7 Quarters (USD m)</div>
+    <div class="chart-sub">Operating income has been essentially flat at $1.4-1.5B per quarter for seven quarters: revenue growth has not translated into profit growth. Q1'25 is derived from H1 2025 less Q2; Q3'25 from the FY2025 total less the other quarters; Q1'26 from H1 2026 less Q2.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating income, USD m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="49.5" width="60" height="80.5" fill="#60a5fa"/><text x="70" y="44.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,441</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="44.5" width="60" height="85.5" fill="#60a5fa"/><text x="160" y="39.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,530</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="46.0" width="60" height="84.0" fill="#60a5fa"/><text x="250" y="41.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,504</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="45.1" width="60" height="84.9" fill="#60a5fa"/><text x="340" y="40.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,520</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="45.6" width="60" height="84.4" fill="#60a5fa"/><text x="430" y="40.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,511</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="46.8" width="60" height="83.2" fill="#60a5fa"/><text x="520" y="41.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,488</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="50.3" width="60" height="79.7" fill="#60a5fa"/><text x="610" y="45.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,427</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric (USD m)</th><th>Prior-year quarter (Q2)</th><th>Latest quarter (Q2)</th><th>Change</th></tr>
+    <tr><td>Net revenues</td><td>8,288</td><td>8,682</td><td>+4.8%</td></tr>
+    <tr><td>Total payment volume</td><td>443,547</td><td>486,448</td><td>+9.7%</td></tr>
+    <tr><td>Transaction margin dollars</td><td>3,844</td><td>3,900</td><td>+1.5%</td></tr>
+    <tr><td>GAAP operating income</td><td>1,504</td><td>1,427</td><td>-5.1%</td></tr>
+    <tr><td>Non-GAAP operating income</td><td>1,644</td><td>1,507</td><td>-8.3%</td></tr>
+    <tr><td>GAAP net income</td><td>1,261</td><td>1,104</td><td>-12.4%</td></tr>
+    <tr><td>GAAP diluted EPS</td><td>$1.29</td><td>$1.25</td><td>-3.1%</td></tr>
+    <tr><td>Free cash flow</td><td>692</td><td>1,775</td><td>+156%</td></tr>
+    <tr><td>Share repurchases</td><td>1,551</td><td>1,552</td><td>flat (~33M shares bought)</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026):</b> non-GAAP EPS of about $5.38 (FY2025: $5.31); GAAP EPS reaffirmed at a mid-single-digit decline (FY2025: $5.41, which included about $0.14 from investment gains). Q3 2026 EPS guided to a low-single-digit decline. Per the company's July materials, transaction margin dollars are expected near $15.6B and adjusted free cash flow of $6B or more, with about $6B of buybacks planned for the year.
+    </div>
+    <div class="callout" style="flex:1;">
+      <b>The bid timeline (press reports; PayPal did not confirm an agreed deal):</b> Jul 15 &mdash; reports of a Stripe/Advent joint offer of $60.50 per share (~$53B), shares +17.2% to $55.52. Aug 28 &mdash; reports that the consortium had walked away after valuation talks stalled, shares -12.7% to $53.66. Sep 25 &mdash; unverified chatter about interest from another large technology company, shares +4.6% to $55.04. Sep 30 close: $52.53.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP / PEERS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on GAAP diluted EPS against PayPal's own FY2021-25 year-end average. The multiple has compressed from a growth-stock 53x to about 10x.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on GAAP Diluted EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~10.2x) is only ~38% of the FY2021-25 average of ~26.7x (S&amp;P Global data, fiscal year-end prices). The average is inflated by FY2021's 53x and FY2022's 34x, when earnings were depressed; against the more recent FY2023-25 average of ~15.6x, the current multiple is still ~35% lower. A low multiple is a sign of low growth expectations, not automatically a bargain.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="37.5" width="70" height="72.5" fill="#60a5fa"/><text x="55" y="32.5" text-anchor="middle" font-size="9" fill="#cbd5e1">53.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="64.2" width="70" height="45.8" fill="#60a5fa"/><text x="150" y="59.2" text-anchor="middle" font-size="9" fill="#cbd5e1">33.6x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="88.7" width="70" height="21.3" fill="#60a5fa"/><text x="245" y="83.7" text-anchor="middle" font-size="9" fill="#cbd5e1">15.6x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="81.9" width="70" height="28.1" fill="#60a5fa"/><text x="340" y="76.9" text-anchor="middle" font-size="9" fill="#cbd5e1">20.6x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="95.8" width="70" height="14.2" fill="#60a5fa"/><text x="435" y="90.8" text-anchor="middle" font-size="9" fill="#cbd5e1">10.4x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="96.1" width="70" height="13.9" fill="#2dd4bf"/><text x="530" y="91.1" text-anchor="middle" font-size="9" fill="#cbd5e1">10.2x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="73.6" x2="690" y2="73.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="69.6" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 26.7x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E is ~9.5-9.7x versus year-end forward multiples of 38.8x, 15.5x, 11.4x, 18.2x and 10.4x for FY2021-25 (average ~18.9x). PEG is ~1.34 (consensus 3-year EPS growth ~6%), and the price-to-FCF multiple is ~6.8x (FCF yield ~14.7%, TTM). The scorecard uses the trailing figure (ratio 0.38 = 5/5). Note that part of the low multiple is mechanical: buybacks shrink the denominator, but the market is paying little for earnings growth that analysts forecast at mid-single digits.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CapEx (USD m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has been 2.1%-3.6% of revenue every year (FY2025: 2.57%), so the business is asset-light even though it carries a large balance sheet of customer funds and loan receivables. Technology spending is mostly expensed through the P&amp;L (technology and development was ~$3.1B in FY2025).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (USD m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="96.4" width="60" height="63.6" fill="#60a5fa"/><text x="60" y="91.4" text-anchor="middle" font-size="8" fill="#cbd5e1">908</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="110.6" width="60" height="49.4" fill="#60a5fa"/><text x="200" y="105.6" text-anchor="middle" font-size="8" fill="#cbd5e1">706</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="116.4" width="60" height="43.6" fill="#60a5fa"/><text x="340" y="111.4" text-anchor="middle" font-size="8" fill="#cbd5e1">623</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="112.2" width="60" height="47.8" fill="#60a5fa"/><text x="480" y="107.2" text-anchor="middle" font-size="8" fill="#cbd5e1">683</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="100.4" width="60" height="59.6" fill="#60a5fa"/><text x="620" y="95.4" text-anchor="middle" font-size="8" fill="#cbd5e1">852</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,39.2 200,49.3 340,54.1 480,53.5 620,49.3" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="39.2" r="3" fill="#fbbf24"/><text x="60" y="31.2" text-anchor="middle" font-size="7.5" fill="#fde68a">3.58%</text>
+<circle cx="200" cy="49.3" r="3" fill="#fbbf24"/><text x="200" y="41.3" text-anchor="middle" font-size="7.5" fill="#fde68a">2.57%</text>
+<circle cx="340" cy="54.1" r="3" fill="#fbbf24"/><text x="340" y="46.1" text-anchor="middle" font-size="7.5" fill="#fde68a">2.09%</text>
+<circle cx="480" cy="53.5" r="3" fill="#fbbf24"/><text x="480" y="45.5" text-anchor="middle" font-size="7.5" fill="#fde68a">2.15%</text>
+<circle cx="620" cy="49.3" r="3" fill="#fbbf24"/><text x="620" y="41.3" text-anchor="middle" font-size="7.5" fill="#fde68a">2.57%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.5 312.7" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="249.0 65.1" stroke-dashoffset="-1.5" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~0.1%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders (officers &amp; directors) ~0.1%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~79.3% (large index and active funds)</div>
+          <div><span class="dot" style="background:#1a2236;border:1px solid #263049;"></span>Retail &amp; other ~20.6%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>PayPal has retired a lot of stock: ~1,174M basic weighted shares in FY2021 to 855.5M now (-27%), with buybacks of $4.4B (FY21), $4.5B, $5.3B, $6.4B and $6.4B (FY25), and a $6.0B trailing-12-month pace in mid-2026. A quarterly dividend of $0.14 began in 2025 (~1.1% yield). Share-based compensation (~$1.0B a year) offsets only part of this.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> at Jun 30, 2026 PayPal held $15.3B of cash and investments against $13.4B of debt (company definition), a small net cash position; on S&amp;P's narrower definition (cash and short-term investments of $11.3B vs $14.2B of debt including leases) net debt is ~$3.0B, or ~0.5x EBITDA. Separately the balance sheet holds ~$39.7B of customer funds receivable offset by $41.7B owed to customers, which is not corporate cash. Debt has risen by about $2B in 2026 to date. Altman Z-score is 1.95 (S&amp;P), which for a financial-flavoured balance sheet like this is not a reliable distress signal.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — FINTECH PEERS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">FinTech Peer Comparison</div></div>
+  <div class="sec-sub">PayPal against three other payments names already on this site, using this site's own published scores (Martinero values as shown on the site). Same framework, different business models: Visa and Mastercard are card networks that take a slice of volume with almost no credit risk; Shopify is a commerce platform with a payments business; PayPal is a two-sided wallet and processor that carries losses and funding costs.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Martinero Index &mdash; PayPal vs FinTech Peers (0-100)</div>
+    <div class="chart-sub">PayPal scores lowest of the four, almost entirely on growth: its 4-year revenue, EBIT and FCF CAGRs earn 1-2 points out of 5 where the peers are in the 4-5 range.</div>
+    <svg viewBox="0 0 700 150">
+<text x="10" y="29" font-size="12" fill="#cbd5e1" font-weight="400">Mastercard</text><rect x="110" y="12" width="398.4" height="24" rx="3" fill="#34d399"/><text x="516.4" y="29" font-size="12" fill="#f1f5f9" font-weight="700">83</text>
+<text x="10" y="63" font-size="12" fill="#cbd5e1" font-weight="400">Shopify</text><rect x="110" y="46" width="398.4" height="24" rx="3" fill="#34d399"/><text x="516.4" y="63" font-size="12" fill="#f1f5f9" font-weight="700">83</text>
+<text x="10" y="97" font-size="12" fill="#cbd5e1" font-weight="400">Visa</text><rect x="110" y="80" width="350.4" height="24" rx="3" fill="#60a5fa"/><text x="468.4" y="97" font-size="12" fill="#f1f5f9" font-weight="700">73</text>
+<text x="10" y="131" font-size="12" fill="#cbd5e1" font-weight="700">PayPal</text><rect x="110" y="114" width="312.0" height="24" rx="3" fill="#c4b5fd"/><text x="430.0" y="131" font-size="12" fill="#f1f5f9" font-weight="700">65</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Company</th><th>Martinero</th><th>Criteria met</th><th>Revenue growth, latest FY (vs prior FY)</th><th>Latest-quarter revenue YoY</th></tr>
+    <tr><td>Mastercard (MA)</td><td>83</td><td>12/14</td><td>+14.8% (vs +13.0%)</td><td>+14.1% (Q2 2026)</td></tr>
+    <tr><td>Shopify (SHOP)</td><td>83</td><td>12/14</td><td>+30.1% (vs +25.8%)</td><td>+34.0% (Q2 2026)</td></tr>
+    <tr><td>Visa (V)</td><td>73</td><td>9/13*</td><td>+11.3% (vs +10.0%)</td><td>+14.0% (Q3 FY2026)</td></tr>
+    <tr><td><b>PayPal (PYPL)</b></td><td><b>65</b></td><td><b>8/14</b></td><td><b>+4.3% (vs +6.8%)</b></td><td><b>+4.8% (Q2 2026)</b></td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*Visa's published tally on the site uses the earlier 13-criterion count. Growth and score figures for the peers are read directly from the site's company data file and not re-derived here.</div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Where PayPal is competitive:</b> ROIC (22.3%) is solid next to cost of capital, the share count has fallen 27% (Visa and Mastercard also buy back stock, Shopify has diluted slightly), and at ~10x earnings it trades at a fraction of the peer multiples. Capex intensity (2.6%) and FCF conversion (92%) are in the same asset-light league.
+    </div>
+    <div class="callout" style="flex:1;">
+      <b>Where it lags:</b> growth is a third to a seventh of the peers', the operating margin (18.3%) sits below Visa's and Mastercard's network-economics margins, and the market position is contested: Apple Pay, Stripe and Adyen all attack branded checkout, whereas Visa and Mastercard sit underneath those wallets. The peers' premium ratings reflect that gap; PayPal's discount reflects it too.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin (S&amp;P standardised) with FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>PayPal</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+6.9% &mdash; $25.4B &rarr; $33.2B, decelerating every year (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+9.2% &mdash; GAAP operating income $4.26B &rarr; $6.07B (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>18.3% (FY2025 GAAP); TTM 17.4% (score 4/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+3.3% &mdash; $4.89B &rarr; $5.56B; FY2024 peak $6.77B (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Leading online branded-checkout wallet with 439M accounts and ~$1.9T annual volume, but contested by Apple Pay, Stripe/Adyen and card networks; no verified global %-share. Judgment: strong #2-equivalent (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; payments is moderately concentrated (networks, large wallets, a few processors) but with real new entrants and multiple credible rivals (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 22.27% vs WACC 9.25% (S&amp;P Global), a +13.0pp spread (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~0.5x (net debt ~$3.0B incl. leases on cash and short-term investments; EBITDA $6.5B). On PayPal's own definition it is a small net cash position (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>91.7% (FY2025); 5-year path 115% / 133% / 84% / 127% / 92% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 10.2x vs FY21-25 average 26.7x (ratio 0.38); vs FY23-25 only avg 15.6x (0.65). Both well below history (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~1,174M &rarr; 855.5M shares, -27% over the window from sustained buybacks (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>~0.1% held by insiders; no founder or controlling holder, no large employee ownership plan (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.1-3.6% of revenue every year; FY2025 2.57% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>Gross margin 39.59% (FY2023) &rarr; 41.48% (FY2025), +1.9pp; GAAP operating margin also up. Capped at 4/5 because gross margin was 46.99% in FY2021 &mdash; structurally lower than the starting point of the window</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 2&times;11=4.4 &middot; #3 4&times;10=8.0 &middot; #4 1&times;8=1.6 &middot; #5 4&times;7=5.6 &middot; #6 2&times;6=2.4 &middot; #7 5&times;10=10.0 &middot; #8 4&times;6=4.8 &middot; #9 4&times;8=6.4 &middot; #10 5&times;8=8.0 &middot; #11 5&times;4=4.0 &middot; #12 0&times;5=0.0 &middot; #13 5&times;4=4.0 &middot; #14 4&times;5=4.0 (each = points/5 &times; weight). Total 68.4 / 105 = <b>65/100</b>. Criteria met: 8/14 on the original binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #7 uses third-party ROIC/WACC; #8 uses the narrower S&amp;P net-debt definition (on PayPal's own definition it would score 5/5, lifting the index by ~1 point); #10 benefits from an inflated FY2021-22 base (using FY2023-25 instead still scores 5/5 at ratio 0.65); #14's cap at 4/5 is my choice because the threshold has no published sub-bands.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Returns on capital are high (ROIC 22% vs WACC 9%), cash generation is strong (TTM FCF $6.6B, about 19% of revenue, a 14.7% FCF yield) and the balance sheet is close to net cash. Management has retired 27% of the share count since 2021 and still returns about $6B a year, with a dividend added on top. Operating margin is up from 13.9% in FY2022 to 18.3% and gross margin has improved for two straight years. Payment volume is growing about 10% a year, transactions per account are rising, Venmo and Braintree show momentum, and the raised FY2026 EPS guide suggests execution is on plan. At roughly 10x earnings, expectations are low, and a series of takeover reports shows that large strategic and financial buyers see value at a materially higher price ($60.50 per share was the reported bid).</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is the problem: revenue +4.3% in FY2025 and +4.8% in Q2 2026, transaction margin dollars +1.5%, and GAAP operating income has been flat for seven quarters (Q2 2026 -5%). Active accounts are flat at 439M, so growth relies on monetising existing users rather than adding new ones, and branded checkout is under pressure from Apple Pay and others. A low multiple is only a bargain if earnings stop shrinking per dollar of volume; Q3 EPS is guided down. There is no founder or insider block to align management with shareholders (0.1% insider ownership), debt has grown in 2026, and the share price now carries takeover speculation in both directions: the Aug 28 drop shows how much of the July gain was bid premium. Several inputs could not be verified: market-share percentages, the Q4'24 revenue figure (taken from PayPal's prior-year report, not re-checked) and the exact 52-week low.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> PayPal Holdings Form 8-K earnings releases for Q2 2026 (Jul 28, 2026) and Q4/FY2025 (Feb 3, 2026) on sec.gov; PayPal's FY2023 Form 10-K; stockanalysis.com (S&amp;P Global Market Intelligence: FY2021-25 financials, ratios, ROIC/WACC, shares, insider and institutional ownership, analyst targets, price history); financialcontent.com (daily closes); digrin.com (monthly closes, 52-week range); press reports on the Stripe/Advent bid (Bloomberg-attributed, via Peninsula Qatar, TipRanks, StockStory, TIKR); the site's own company data file for peer scores. Year-end prices, ROIC, WACC and ownership percentages are third-party and flagged as such. All figures USD. Price as of Sep 30, 2026 close; prepared Oct 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">PayPal Holdings (PYPL) &mdash; USD share price trend. The pandemic e-commerce peak (about $310 in mid-2021), a 2022 collapse as growth stalled, a 2023 low, a 2024 recovery on cost cuts to $85, then a slide through 2025-26 before the July 2026 bid reports.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">PayPal Holdings &mdash; Year-End Close, USD</div>
+    <div class="chart-sub">Year-end closes FY2021-FY2025 plus the Sep 30, 2026 close, from digrin.com / stockanalysis.com (S&amp;P Global); treat as approximate rather than archived exchange quotes. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Sep 2026 (4.75 years), excluding dividends (the $0.56 annual dividend began in 2025, ~1.1% yield). Intra-period highs and lows are not shown: the 52-week range is $38.46 &ndash; $79.22.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46,36.7 L 172.8,125.9 L 299.6,133.3 L 426.4,115.1 L 553.2,135.6 L 680,140.1 L 680,180 L 46,180 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46" y1="36.7" x2="680" y2="140.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="72" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">-23.6%*</text>
+<path d="M 46,36.7 L 172.8,125.9 L 299.6,133.3 L 426.4,115.1 L 553.2,135.6 L 680,140.1" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46" cy="36.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46" y="24.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$188.58</text>
+<text x="46" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="125.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="141.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$71.22</text>
+<text x="172.8" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="133.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="149.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$61.41</text>
+<text x="299.6" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="115.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="103.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$85.35</text>
+<text x="426.4" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="135.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="151.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$58.38</text>
+<text x="553.2" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680" cy="140.1" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="156.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$52.53</text>
+<text x="680" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the post-pandemic high and ends after a 73% drawdown, so the negative CAGR (-23.6% a year) reflects a collapse in the earnings multiple (53x to 10x) far more than a collapse in earnings: over the same period EPS rose from $3.52 to $5.41 and the share count fell 27%. Recent monthly closes: Jun 2026 $43.18, Jul $57.21, Aug $52.66, Sep $52.53 (Sep 30). No stock split on record.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>

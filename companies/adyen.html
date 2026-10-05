@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Adyen N.V. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/adyen.html">
+<meta property="og:title" content="Adyen N.V. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Adyen N.V. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Adyen N.V.</h1>
+  <div class="badges">
+    <div class="badge">Euronext Amsterdam: ADYEN</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Amsterdam, Netherlands</div>
+    <div class="badge">Reports &amp; trades in EUR</div>
+    <div class="badge warn">~50% Below Its 2025 High &mdash; Growth Cooled, CFO Exit, Capex Stepping Up</div>
+  </div>
+
+  <div class="price">&euro;881.50</div>
+  <div class="price-sub">Sep 30, 2026 close (month-end series; S&amp;P shows &euro;870.00 on Sep 29) &middot; Market cap &asymp; &euro;27.8B (31.57M shares) &middot; 52-wk range &euro;785 &ndash; 1,750 (intraday, third-party) &middot; 1-yr price change &asymp; -35% &middot; Beta (5Y) 1.88 &middot; Analyst consensus: Buy (35 analysts), avg PT &euro;1,382 (+57%) &middot; Next update: Q3 business update, Oct 28, 2026 (per S&amp;P calendar, not confirmed by the company)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Adyen is a single-platform global payments company (gateway, acquiring, risk, and card issuing and financial products) that processed &euro;1.39 trillion in FY2025 for enterprise customers such as Uber, Meta, H&amp;M, eBay and Microsoft. It competes with Stripe, Worldpay, Fiserv, JPMorgan Payments, PayPal and Checkout.com; see Section 4 for the peer comparison and Section 5 for how the #1/#2 test was scored.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure on this page is in euros. Adyen reports <b>net revenue</b> (gross fees less interchange and scheme fees) and <b>EBITDA</b>, not EBIT. &ldquo;EBIT&rdquo; throughout is <b>EBITDA less depreciation and amortisation</b> (D&amp;A from S&amp;P Global), calculated by this dashboard, and margins are shown on net revenue. &ldquo;Free cash flow&rdquo; is Adyen's own definition, derived as its reported FCF-conversion % times EBITDA where the euro figure is not published; S&amp;P's standardised FCF is far lower and noisy because it includes merchant settlement balances.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Net Revenue (FY2025)</div>
+      <div class="val">&euro;2,364M</div>
+      <div class="sub" style="color:#34d399;">+18.4% YoY (+21% constant currency)</div>
+      <div class="note">FY2024 was +22.8%. H1 2026 grew +19.1% reported (+21% cc) to &euro;1,303M. Guidance: +21-23% cc for 2026, including 1-2pp from two acquisitions.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (EBITDA less D&amp;A)</div>
+      <div class="val green">47.1%</div>
+      <div class="sub">FY2025; EBITDA margin 52.7%</div>
+      <div class="note">Up from 40.7% in FY2023 but below 59.4% in FY2021. Target: EBITDA margin above 55% by 2028; 2026 flat to 1pp lower including acquisitions.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#fbbf24;">13.4% vs 14.4%</div>
+      <div class="sub">S&amp;P Global estimates</div>
+      <div class="note">WACC is inflated by a 1.88 beta after the 2026 sell-off. Return on equity is 21%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">Net cash</div>
+      <div class="sub">Debt about 0.3x EBITDA (mostly leases)</div>
+      <div class="note">Reported cash is mostly merchant settlement money, so no &ldquo;excess cash&rdquo; figure is claimed here.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">76/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong growth, margins, cash conversion and balance sheet; held back by a contested market position, a fragmented industry and ROIC below a (high) WACC.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="246.8 314.2" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.3 314.2" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 criteria fully met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, net debt/EBITDA, FCF conversion, entry multiple vs own history, share count (roughly flat), insider ownership (founder-led), capex intensity and margin stability (borderline)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; market share (not verified #1/#2), market concentration (fragmented industry) and ROIC vs WACC (-1.0pp on S&amp;P's numbers)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Adyen is an Amsterdam-based payments company founded in 2006 that built one technology stack, rather than buying and stitching together local acquirers, so a merchant can take online, in-store and in-app payments in one integration and one set of reports. It earns a small fee on each euro processed (net revenue was about 17 basis points of &euro;1.39 trillion in FY2025, by this dashboard's calculation), and has added risk tools, card issuing and embedded financial products. Growth has settled near 20% a year, EBITDA margins are above 50%, capex is a few percent of revenue and the company carries almost no debt. The shares have not followed the business: from about &euro;2,300 at the end of 2021 and &euro;1,375 at the end of 2025 they closed September 2026 at &euro;881.50. The reasons are visible in the record. February 2026 guidance of +20-22% growth and a flat 2026 margin disappointed, the CFO resigned in May, analysts questioned European enterprise pricing in June, and capex is now guided to about 7% of net revenue. H1 2026 (reported Aug 13) then lifted the revenue outlook to 21-23% and the stock rose 16% in one day, before giving most of that back during September.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Definitions</b> &mdash; EBIT, FCF and some half-year splits on this page are derived by subtraction from Adyen's published headline numbers (see the estimates list in the sources footer). (2) <b>Volume vs revenue</b> &mdash; FY2025 volume grew only +8% including one large customer that scaled down (+21% excluding it), so volume headlines can differ sharply from net revenue growth. (3) <b>The P/E history is extreme</b> &mdash; year-end P/E ratios of 150x in 2021 make the current ~25x look cheap against own history, which says as much about 2021 as about today.
+  </div>
+
+  <div class="bignum-corner">ADYEN</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, EUR millions. Net revenue and EBITDA are as reported by Adyen; EBIT is EBITDA less D&amp;A (calculated, Adyen does not report it). Free cash flow is Adyen's own definition; FY2024 is reported, other years are derived from reported conversion % times EBITDA.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (&euro;m)</div>
+    <div class="chart-sub">Shown at true relative size. &ldquo;Revenue&rdquo; is net revenue; &ldquo;EBIT&rdquo; = EBITDA less D&amp;A (calculated, not an Adyen-reported measure); &ldquo;FCF&rdquo; = Adyen-defined free cash flow, about 83-91% of EBITDA each year. Revenue compounded 23.9% a year while EBIT and FCF grew about 17%, because margin fell from 59% to 47% as Adyen hired ahead of volume in 2022-23.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (EBITDA less D&amp;A)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (Adyen-defined)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">500</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">1,000</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">1,500</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">2,000</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">2,500</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="151.8" width="30" height="88.2" rx="2" fill="#2dd4bf"/><text x="100" y="146.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,002</text>
+<rect x="123" y="187.6" width="30" height="52.4" rx="2" fill="#60a5fa"/><text x="138" y="182.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">595</text>
+<rect x="161" y="189.8" width="30" height="50.2" rx="2" fill="#fbbf24"/><text x="176" y="184.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">571</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="123.0" width="30" height="117.0" rx="2" fill="#2dd4bf"/><text x="256" y="118.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,330</text>
+<rect x="279" y="181.0" width="30" height="59.0" rx="2" fill="#60a5fa"/><text x="294" y="176.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">670</text>
+<rect x="317" y="186.8" width="30" height="53.2" rx="2" fill="#fbbf24"/><text x="332" y="181.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">604</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="96.9" width="30" height="143.1" rx="2" fill="#2dd4bf"/><text x="412" y="91.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,626</text>
+<rect x="435" y="181.8" width="30" height="58.2" rx="2" fill="#60a5fa"/><text x="450" y="176.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">661</text>
+<rect x="473" y="183.5" width="30" height="56.5" rx="2" fill="#fbbf24"/><text x="488" y="178.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">642</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="64.3" width="30" height="175.7" rx="2" fill="#2dd4bf"/><text x="568" y="59.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,996</text>
+<rect x="591" y="161.6" width="30" height="78.4" rx="2" fill="#60a5fa"/><text x="606" y="156.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">891</text>
+<rect x="629" y="164.3" width="30" height="75.7" rx="2" fill="#fbbf24"/><text x="644" y="159.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">860</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="32.0" width="30" height="208.0" rx="2" fill="#2dd4bf"/><text x="724" y="27.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,364</text>
+<rect x="747" y="142.1" width="30" height="97.9" rx="2" fill="#60a5fa"/><text x="762" y="137.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,113</text>
+<rect x="785" y="144.6" width="30" height="95.4" rx="2" fill="#fbbf24"/><text x="800" y="139.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,084</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+23.9%</div>
+      <div class="sub">&euro;1.00B &rarr; &euro;2.36B net revenue; FY2025 +18.4%, the slowest year of the window</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+16.9%</div>
+      <div class="sub">&euro;595m &rarr; &euro;1,113m; EBITDA CAGR +18.7% (&euro;627m &rarr; &euro;1,246m)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+17.4%</div>
+      <div class="sub">About &euro;571m &rarr; &euro;1,084m (derived for four of five years)</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBITDA &amp; EBIT Margin Trend &mdash; % of net revenue</div>
+    <div class="chart-sub">Margins fell from 2021 as headcount grew faster than revenue, bottomed in FY2023 (EBITDA 45.7%, EBIT 40.7%) and have rebuilt every year since, with H2 2025 EBITDA margin at 55%. Adyen targets above 55% for the full year by 2028.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>EBITDA margin</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT margin (EBITDA less D&amp;A)</span></div>
+    <svg viewBox="0 0 700 130">
+<line x1="30" y1="100.0" x2="690" y2="100.0" stroke="#263049" stroke-width="1"/><text x="2" y="103.5" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="75.7" x2="690" y2="75.7" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="79.2" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="51.4" x2="690" y2="51.4" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="54.9" font-size="7.5" fill="#64748b">40%</text>
+<line x1="30" y1="27.1" x2="690" y2="27.1" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="30.6" font-size="7.5" fill="#64748b">60%</text>
+<polyline points="60,24.0 205,33.5 350,44.5 495,39.6 640,36.0" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="24.0" r="3.2" fill="#34d399"/><text x="60" y="16.0" text-anchor="middle" font-size="8" fill="#cbd5e1">62.6%</text>
+<circle cx="205" cy="33.5" r="3.2" fill="#34d399"/><text x="205" y="25.5" text-anchor="middle" font-size="8" fill="#cbd5e1">54.8%</text>
+<circle cx="350" cy="44.5" r="3.2" fill="#34d399"/><text x="350" y="36.5" text-anchor="middle" font-size="8" fill="#cbd5e1">45.7%</text>
+<circle cx="495" cy="39.6" r="3.2" fill="#34d399"/><text x="495" y="31.6" text-anchor="middle" font-size="8" fill="#cbd5e1">49.7%</text>
+<circle cx="640" cy="36.0" r="3.2" fill="#34d399"/><text x="640" y="28.0" text-anchor="middle" font-size="8" fill="#cbd5e1">52.7%</text>
+<polyline points="60,27.9 205,38.8 350,50.6 495,45.8 640,42.8" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="27.9" r="3.2" fill="#60a5fa"/><text x="60" y="40.9" text-anchor="middle" font-size="8" fill="#cbd5e1">59.4%</text>
+<circle cx="205" cy="38.8" r="3.2" fill="#60a5fa"/><text x="205" y="51.8" text-anchor="middle" font-size="8" fill="#cbd5e1">50.4%</text>
+<circle cx="350" cy="50.6" r="3.2" fill="#60a5fa"/><text x="350" y="63.6" text-anchor="middle" font-size="8" fill="#cbd5e1">40.6%</text>
+<circle cx="495" cy="45.8" r="3.2" fill="#60a5fa"/><text x="495" y="58.8" text-anchor="middle" font-size="8" fill="#cbd5e1">44.6%</text>
+<circle cx="640" cy="42.8" r="3.2" fill="#60a5fa"/><text x="640" y="55.8" text-anchor="middle" font-size="8" fill="#cbd5e1">47.1%</text>
+<text x="60" y="118" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<text x="205" y="118" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<text x="350" y="118" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<text x="495" y="118" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<text x="640" y="118" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (&euro;m)</th><th>Net Revenue</th><th>EBITDA</th><th>EBIT*</th><th>EBIT Margin</th><th>Net Income</th><th>Free Cash Flow</th><th>FCF/EBITDA</th></tr>
+    <tr><td>FY2021</td><td>1,002</td><td>627</td><td>595</td><td>59.4%</td><td>470</td><td>571</td><td>91%</td></tr>
+    <tr><td>FY2022</td><td>1,330</td><td>728</td><td>670</td><td>50.4%</td><td>564</td><td>604</td><td>83%</td></tr>
+    <tr><td>FY2023</td><td>1,626</td><td>743</td><td>661</td><td>40.6%</td><td>698</td><td>642</td><td>86%</td></tr>
+    <tr><td>FY2024</td><td>1,996</td><td>992</td><td>891</td><td>44.6%</td><td>925</td><td>860</td><td>87%</td></tr>
+    <tr><td>FY2025</td><td>2,364</td><td>1,246</td><td>1,113</td><td>47.1%</td><td>1,063</td><td>1,084</td><td>87%</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>2,574</td><td>1,344</td><td>~1,195</td><td>~46.4%</td><td>1,126</td><td>~1,156</td><td>~86%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*EBIT = EBITDA less D&amp;A, calculated here. EPS (S&amp;P diluted): 15.31, 18.17, 22.41, 29.59, 33.61; no dividend is paid. FY2021 EBITDA (&euro;627m) is derived (FY2022 &euro;728.3m is stated +16% YoY; S&amp;P operating income plus D&amp;A gives the same figure). FCF for FY2021 (91% conversion), FY2022 (83%), FY2023 (86%, implied by FY2024 FCF +34%) and FY2025 (87%) is derived. TTM EBITDA, EBIT and FCF are H2 2025 plus H1 2026 (FCF at 86% conversion, estimate). S&amp;P's standardised FCF (FY2025 &euro;907m; TTM negative) is not used because it nets merchant settlement movements and a &euro;0.8B TTM capex line that I could not reconcile to Adyen's reported ~5% capex.</div>
+  <div class="footer-note">Source: Adyen H2 2022, H2 2023, H2 2024, H2 2025 and H1 2026 press releases (adyen.com); stockanalysis.com (S&amp;P Global Market Intelligence) for net income, D&amp;A, capex, EPS and ratios. All figures EUR.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST PERIOD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Period &mdash; H1 2026 &amp; Half-Year Trend</div></div>
+  <div class="sec-sub">Adyen reports in half-years, so the last seven halves (H1 2023 to H1 2026) stand in for a quarterly view. H1 2026 was published on Aug 13, 2026; the next update is a Q3 business update expected Oct 28.</div>
+
+  <div class="headline-box">
+    <div class="title">What the half showed</div>
+    <p>H1 2026 net revenue was &euro;1,302.9M, up 19.1% reported and 21% in constant currency (a stronger euro against the dollar and other currencies trimmed the reported figure), on processed volume of &euro;803.8B (+24%). EBITDA was &euro;641.5M, a 49% margin (50% excluding one-time transaction costs) against 50% a year earlier, and free cash flow conversion was 86%. The margin step-down is seasonal and deal-related rather than structural: H2 has been the higher-margin half in each of the last three years. Capex was 5% of net revenue in H1 but management now expects about 7% for the full year because it is pulling data-centre spending forward from 2027 to lock in compute and storage supply. Two acquisitions closed on July 1 (Talon.One, loyalty and promotions; Orb, usage-based billing) and add 1-2pp to 2026 growth. Implied take rate fell to about 16.2 basis points in H1 2026 from about 17.0 in FY2025 (calculated here), consistent with fast growth in large, lower-priced volume.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Revenue &mdash; Last 7 Half-Years (&euro;m)</div>
+    <div class="chart-sub">YoY growth: H1'23 +21.5%, H2'23 +22.9%, H1'24 +23.6%, H2'24 +22.1%, H1'25 +19.7%, H2'25 +17.4%, H1'26 +19.1%. Growth bottomed in H2 2025 (when a US tariff-related volume hit and a large customer's scale-down weighed) and ticked up in H1 2026. Half-year splits for H1'23, H1'24, H1'25 are derived by subtracting the reported H2 from the full year.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenue, &euro;m</span></div>
+    <svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="79.8" width="60" height="50.2" fill="#2dd4bf"/><text x="70" y="74.8" text-anchor="middle" font-size="9" fill="#cbd5e1">739</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'23</text>
+<rect x="130" y="69.8" width="60" height="60.2" fill="#2dd4bf"/><text x="160" y="64.8" text-anchor="middle" font-size="9" fill="#cbd5e1">887</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'23</text>
+<rect x="220" y="68.0" width="60" height="62.0" fill="#2dd4bf"/><text x="250" y="63.0" text-anchor="middle" font-size="9" fill="#cbd5e1">913</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'24</text>
+<rect x="310" y="56.5" width="60" height="73.5" fill="#2dd4bf"/><text x="340" y="51.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,083</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'24</text>
+<rect x="400" y="55.8" width="60" height="74.2" fill="#2dd4bf"/><text x="430" y="50.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,094</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'25</text>
+<rect x="490" y="43.8" width="60" height="86.2" fill="#2dd4bf"/><text x="520" y="38.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,271</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'25</text>
+<rect x="580" y="41.6" width="60" height="88.4" fill="#2dd4bf"/><text x="610" y="36.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,303</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBITDA &mdash; Last 7 Half-Years (&euro;m)</div>
+    <div class="chart-sub">EBITDA margin: 43.3%, 47.7%, 46.3%, 52.6%, 49.7%, 55.3%, 49.2%. H2 2025 was the high-water mark; H1 2026 absorbed higher spending and one-off deal costs.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>EBITDA, &euro;m</span></div>
+    <svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="89.5" width="60" height="40.5" fill="#60a5fa"/><text x="70" y="84.5" text-anchor="middle" font-size="9" fill="#cbd5e1">320</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'23</text>
+<rect x="130" y="76.4" width="60" height="53.6" fill="#60a5fa"/><text x="160" y="71.4" text-anchor="middle" font-size="9" fill="#cbd5e1">423</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'23</text>
+<rect x="220" y="76.4" width="60" height="53.6" fill="#60a5fa"/><text x="250" y="71.4" text-anchor="middle" font-size="9" fill="#cbd5e1">423</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'24</text>
+<rect x="310" y="57.9" width="60" height="72.1" fill="#60a5fa"/><text x="340" y="52.9" text-anchor="middle" font-size="9" fill="#cbd5e1">569</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'24</text>
+<rect x="400" y="61.1" width="60" height="68.9" fill="#60a5fa"/><text x="430" y="56.1" text-anchor="middle" font-size="9" fill="#cbd5e1">544</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'25</text>
+<rect x="490" y="41.1" width="60" height="88.9" fill="#60a5fa"/><text x="520" y="36.1" text-anchor="middle" font-size="9" fill="#cbd5e1">702</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'25</text>
+<rect x="580" y="48.7" width="60" height="81.3" fill="#60a5fa"/><text x="610" y="43.7" text-anchor="middle" font-size="9" fill="#cbd5e1">642</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Half-year (&euro;m)</th><th>Net Revenue</th><th>YoY</th><th>EBITDA</th><th>EBITDA Margin</th></tr>
+    <tr><td>H1'23</td><td>739.1</td><td>+21.5%</td><td>320.0</td><td>43.3%</td></tr>
+    <tr><td>H2'23</td><td>887.0</td><td>+22.9%</td><td>423.0</td><td>47.7%</td></tr>
+    <tr><td>H1'24</td><td>913.4</td><td>+23.6%</td><td>423.1</td><td>46.3%</td></tr>
+    <tr><td>H2'24</td><td>1,082.7</td><td>+22.1%</td><td>569.2</td><td>52.6%</td></tr>
+    <tr><td>H1'25</td><td>1,093.5</td><td>+19.7%</td><td>543.6</td><td>49.7%</td></tr>
+    <tr><td>H2'25</td><td>1,270.7</td><td>+17.4%</td><td>702.1</td><td>55.3%</td></tr>
+    <tr><td>H1'26</td><td>1,302.9</td><td>+19.1%</td><td>641.5</td><td>49.2%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">H2 figures (H2'23 &euro;887.0m, H2'24 &euro;1,082.7m, H2'25 &euro;1,270.7m) and H1'26 are as reported; H1 figures for 2023-2025 are full year minus H2 (derived). YoY for H1'23 uses a derived H1'22 (&euro;608.3m = FY2022 less H2 2022 &euro;721.7m).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance:</b> 2026 net revenue growth of +21% to +23% in constant currency (raised from +20-22% in February), including 1-2pp from the two acquisitions. EBITDA margin above 55% by 2028; underlying 2026 margin in line with 2025 (about 53%) and about one point lower including the acquisitions. Capex about 7% of net revenue in 2026, returning toward historical levels afterwards.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Management change:</b> the CFO who presented the FY2025 results left in May 2026; an interim CFO (Hwa Tsao) presented H1 2026, and press reports in September name Klarna's CFO Niclas Neglen as the new finance chief (I could not confirm his start date). A new CFO during an investment step-up is an execution variable to watch, not a verdict.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on S&amp;P Global's reported EPS (Adyen has no adjusted EPS). Cash-rich balance sheet, but most reported cash belongs to merchants.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E of about 24.8x (&euro;881.50 / TTM EPS of &euro;35.57) against a FY2021-25 year-end average of 72.9x (median 51.8x), a ratio of 0.34. Year-end P/Es are S&amp;P Global figures. Forward P/E is about 20.6x versus a 59.5x average of year-end forward P/Es; PEG about 1.1. The decline reflects both earnings growth (EPS has more than doubled since 2021) and a lower share price.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140"><line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="35.0" width="70" height="75.0" fill="#60a5fa"/><text x="55" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">152.3x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="75.1" width="70" height="34.9" fill="#60a5fa"/><text x="150" y="70.1" text-anchor="middle" font-size="9" fill="#cbd5e1">70.8x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="84.5" width="70" height="25.5" fill="#60a5fa"/><text x="245" y="79.5" text-anchor="middle" font-size="9" fill="#cbd5e1">51.8x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="85.9" width="70" height="24.1" fill="#60a5fa"/><text x="340" y="80.9" text-anchor="middle" font-size="9" fill="#cbd5e1">48.9x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="89.9" width="70" height="20.1" fill="#60a5fa"/><text x="435" y="84.9" text-anchor="middle" font-size="9" fill="#cbd5e1">40.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="97.8" width="70" height="12.2" fill="#2dd4bf"/><text x="530" y="92.8" text-anchor="middle" font-size="9" fill="#cbd5e1">24.8x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="74.1" x2="690" y2="74.1" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="70.1" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 72.9x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>How to read the multiple:</b> the average is skewed by 2021, when the stock traded at 152x earnings. Against the 2023-2025 year-end range (41x to 52x), today's 24.8x is roughly half; against a mature payments company the multiple is no longer extreme, and consensus 3-year revenue growth of about 21% and EPS growth of about 20% are what it is paying for. Average analyst price target &euro;1,382 (35 analysts) implies +57%, but targets lag a falling price and S&amp;P shows ratings changes in both directions since February.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CapEx (&euro;m) &amp; CapEx Intensity (% of Net Revenue)</div>
+    <div class="chart-sub">Cash capex (S&amp;P) of 4.0-7.2% of net revenue every year, matching Adyen's reported 5%, 7%, 4%, 5%, 5%. Most of it is data centres and hardware. Guided to about 7% in 2026 (roughly &euro;180-190M at guided revenue growth, calculated), which is the first time since 2022 that intensity rises materially.</div>
+    <svg viewBox="0 0 700 150"><line x1="10" y1="120" x2="690" y2="120" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="88.8" width="70" height="31.2" fill="#60a5fa"/><text x="75" y="83.8" text-anchor="middle" font-size="9" fill="#cbd5e1">51 &middot; 5.1%</text><text x="75" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="62.0" width="70" height="58.0" fill="#60a5fa"/><text x="205" y="57.0" text-anchor="middle" font-size="9" fill="#cbd5e1">96 &middot; 7.2%</text><text x="205" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="300" y="80.2" width="70" height="39.8" fill="#60a5fa"/><text x="335" y="75.2" text-anchor="middle" font-size="9" fill="#cbd5e1">66 &middot; 4.0%</text><text x="335" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="430" y="60.4" width="70" height="59.6" fill="#60a5fa"/><text x="465" y="55.4" text-anchor="middle" font-size="9" fill="#cbd5e1">98 &middot; 4.9%</text><text x="465" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="560" y="44.9" width="70" height="75.1" fill="#60a5fa"/><text x="595" y="39.9" text-anchor="middle" font-size="9" fill="#cbd5e1">124 &middot; 5.2%</text><text x="595" y="136" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="14.1 300.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="133.0 181.2" stroke-dashoffset="-14.1" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="167.1 147.1" stroke-dashoffset="-147.1" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~4.5%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders 4.49% (S&amp;P; includes the co-founders)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions 42.3%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other holders ~53.2% (derived; float 28.2M shares)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>About 30.7M shares at end-2021 (derived from S&amp;P net cash per share) and 31.57M now, up 3% in four years and +0.5% in the last twelve months, all from employee share plans. Adyen pays no dividend and has no buyback programme that I could verify. The co-founders have sold a minority of their holdings in the past (a 15% sale by four management board members was announced in earlier years) but remain the best-known insiders.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet caveat:</b> S&amp;P reports &euro;12.4B of cash and investments against &euro;0.4B of debt (mostly leases), a net cash figure of &euro;12.0B. Most of that cash is owed to merchants awaiting settlement and is not available to shareholders. Adyen's equity is &euro;5.9B (book value &euro;187 per share), so the market value is about 4.7x book. The net-debt criterion is scored on the debt side (0.3x EBITDA), and I make no claim about distributable cash.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — PEERS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">FinTech Peer Comparison</div></div>
+  <div class="sec-sub">Three payments-adjacent companies already on this site, scored on the same fixed checklist. Peer figures come from the site's own company records (assets/companies.js) and may use a different fiscal-year end than Adyen. Peers differ in business model, so read this as context, not a like-for-like ranking.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Martinero Index &mdash; Adyen vs. FinTech Peers (0-100)</div>
+    <div class="chart-sub">Adyen 76 versus Mastercard 83, Shopify 83 and Visa 73.</div>
+    <svg viewBox="0 0 700 150">
+<text x="100" y="30" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Mastercard</text><rect x="110" y="14" width="432" height="22" rx="2" fill="#60a5fa"/><text x="550" y="30" font-size="11" fill="#f8fafc" font-weight="700">83</text>
+<text x="100" y="62" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Shopify</text><rect x="110" y="46" width="432" height="22" rx="2" fill="#60a5fa"/><text x="550" y="62" font-size="11" fill="#f8fafc" font-weight="700">83</text>
+<text x="100" y="94" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="700">Adyen</text><rect x="110" y="78" width="395" height="22" rx="2" fill="#2dd4bf"/><text x="513" y="94" font-size="11" fill="#f8fafc" font-weight="700">76</text>
+<text x="100" y="126" text-anchor="end" font-size="11" fill="#cbd5e1" font-weight="400">Visa</text><rect x="110" y="110" width="380" height="22" rx="2" fill="#60a5fa"/><text x="498" y="126" font-size="11" fill="#f8fafc" font-weight="700">73</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Company</th><th>Business model</th><th>Martinero</th><th>Criteria met</th><th>Latest-FY revenue growth</th><th>Latest period YoY</th></tr>
+    <tr><td><b>Adyen</b></td><td>Single-stack acquirer / processor</td><td>76</td><td>11 / 14</td><td>+18.4% (FY2025; prior +22.8%)</td><td>+19.1% (H1 2026)</td></tr>
+    <tr><td>Visa</td><td>Card network</td><td>73</td><td>9 / 13 (older 13-criterion count)</td><td>+11.3% (prior +10.0%)</td><td>+14.0% (Q3 FY2026)</td></tr>
+    <tr><td>Mastercard</td><td>Card network</td><td>83</td><td>12 / 14</td><td>+14.8% (prior +13.0%)</td><td>+14.1% (Q2 2026)</td></tr>
+    <tr><td>Shopify</td><td>Commerce platform + payments</td><td>83</td><td>12 / 14</td><td>+30.1% (prior +25.8%)</td><td>+34.0% (Q2 2026)</td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">Where Adyen compares well</div>
+      <p>Adyen grows faster than the two card networks (about 18-19% against 11-15%) and sits between them and Shopify. It has a founder-led culture, essentially no debt and cash conversion in the high 80s, and its valuation against its own history is the widest discount of the four. Unlike Visa and Mastercard, Adyen sells a full processing service rather than only the rails, so it earns a fee on more of the payment value chain per euro processed.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">Where it lags</div>
+      <p>The networks have a verified duopoly position that Adyen does not; Adyen pays scheme and interchange fees to them (net revenue is stated after those costs) and competes against acquirers and platforms with similar capabilities. Adyen scores lower than Mastercard and Shopify mainly on market share, concentration and ROIC vs WACC. Its net revenue and volume are also more exposed to individual large customers, and its share price has been far more volatile (beta 1.88).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases and the denominator stays at 105. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). EBIT is EBITDA less D&amp;A because Adyen does not report EBIT.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Adyen N.V.</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+23.9% &mdash; net revenue &euro;1,002m &rarr; &euro;2,364m; growth has cooled from +33% (FY2022) to +18% (FY2025) but stays well above the bar (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+16.9% &mdash; EBIT (EBITDA less D&amp;A) &euro;595m &rarr; &euro;1,113m; the FY2021 base was inflated by a 59% margin before the 2022-23 hiring wave, so the CAGR clears the bar but by a narrow margin (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>47.1% of net revenue (EBITDA margin 52.7%), down from 59.4% in FY2021 but recovering from a 40.7% trough in FY2023 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+17.4% &mdash; Adyen-defined FCF about &euro;571m &rarr; &euro;1,084m. FY2021, FY2022, FY2023 and FY2025 values are derived from Adyen's reported conversion % times EBITDA (estimate); FY2024 (&euro;859.8m) is as reported (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Not verified as #1 or #2. Adyen processed &euro;1.39 trillion in FY2025, but global merchant acquiring and processing also includes Stripe, Fiserv, JPMorgan Payments, PayPal and Worldpay at similar or larger scale. Judged a top-tier but not #1/#2 player overall; clearer leadership in enterprise unified commerce (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; merchant acquiring is fragmented across banks, processors and platforms with no dominant share; no verified top-N share figure (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 13.4% vs WACC 14.4% (S&amp;P Global), a -1.0pp spread. The WACC is lifted by a 5-year beta of 1.88 after the 2026 sell-off; at a more normal 9-10% cost of capital Adyen would clear comfortably. Scored on the published figures, no credit for the adjustment (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash. Debt (mostly leases) about &euro;0.4B, 0.3x EBITDA. S&amp;P's &euro;12B net cash figure includes merchant settlement balances and is not free cash, so it is not relied on (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>FY2025 about 97% on Adyen-defined FCF (&euro;1,084m derived / EBIT &euro;1,113m); Adyen itself reports 87% of EBITDA. S&amp;P-standardised FCF (&euro;907m) gives 81%, so it passes on both bases (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 24.8x vs FY21-25 year-end average 72.9x (ratio 0.34); forward P/E about 20.6x vs 59.5x average. The average is dominated by 2021-22 growth-stock multiples, so the discount overstates cheapness; against the median (51.8x) the ratio is 0.48, still a clear Met (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>About 30.7M (end-2021, derived) to 31.6M now, +3% over four years (+0.5% in the last year) from share-based pay; no buybacks. Roughly flat, small dilution (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Founder-led (co-founder Pieter van der Does is Co-CEO). S&amp;P shows 4.49% insider ownership; aggregator data puts the two co-founders at roughly 2.9% and 4.5% but those figures are dated and unverified. Meaningful rather than controlling (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4-7% of net revenue every year FY21-25 (FY2025: 5.2%); guided to about 7% in 2026 because data-centre spend is pulled forward from 2027, then back toward historical levels. Light, but rising (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability (&Delta; &ge; -2.5pp, 3-yr)</td><td>&Delta; &ge; -2.5pp</td><td>EBITDA margin 54.8% (FY2022) &rarr; 52.7% (FY2025), -2.1pp, inside the threshold. Caveat: S&amp;P's gross margin falls 71.3% &rarr; 68.1% (-3.3pp), which would fail, so this is a borderline call and the metric choice is a judgment (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 5&times;13=13.0 &middot; #2 4&times;11=8.8 &middot; #3 5&times;10=10.0 &middot; #4 4&times;8=6.4 &middot; #5 2&times;7=2.8 &middot; #6 1&times;6=1.2 &middot; #7 2&times;10=4.0 &middot; #8 5&times;6=6.0 &middot; #9 5&times;8=8.0 &middot; #10 5&times;8=8.0 &middot; #11 3&times;4=2.4 &middot; #12 3&times;5=3.0 &middot; #13 4&times;4=3.2 &middot; #14 3&times;5=3.0 (each = points/5 &times; weight). Total 79.8 / 105 = <b>76/100</b>. Criteria met: 11/14 on the original binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses S&amp;P's ROIC/WACC and does not adjust the WACC; #12's 3/5 is a judgment on unverified founder holdings; #14 uses EBITDA margin (gross margin would fail); #10's ratio is flattered by 2021-22 multiples; FCF figures for four of five years are derived.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Growth at scale: net revenue compounded about 24% a year over four years and still grew 18% in FY2025 and 19% in H1 2026, with guidance raised to 21-23% in constant currency. Margins have rebuilt from the 2023 trough (EBIT 40.7% to 47.1%, with a stated goal of EBITDA above 55% by 2028), cash conversion is in the high 80s, the balance sheet carries almost no debt and capex is a modest share of revenue. The company has a single global platform, a roster of blue-chip enterprise customers, new products (issuing, embedded finance, agentic payments), and a share price that has already compressed to about 25x trailing earnings from over 150x in 2021.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Adyen is not a verified #1 or #2 in a fragmented market and pays the card schemes as an input cost, ROIC is below a high WACC on S&amp;P's numbers, and the valuation discount is partly a product of the 2021 bubble. The stock has fallen about 50% from its 2025 high on a slowing growth rate, the CFO's exit, European enterprise pricing worries and capex rising to about 7% of net revenue. Single large customers can swing volume (FY2025 volume +8% including one, +21% without), the margin goal slips if investment continues, and the first two acquisitions are new territory for a historically organic company. Several inputs are estimated: FCF for four years, FY2021 EBITDA, the last-12-month figures, founder holdings and the market-share ranking.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Adyen press releases and shareholder-letter headlines for H2 2022, H2 2023, H2 2024, H2 2025 (Feb 12, 2026) and H1 2026 (Aug 13, 2026) via adyen.com; stockanalysis.com (S&amp;P Global Market Intelligence: financials, ratios, ownership, ROIC/WACC, analyst targets, price history); Digrin monthly price series for year-end and Sep 30, 2026 closes; press coverage of the 2026 share-price decline and CFO change (Techleap, Crowdfund Insider, PYMNTS); third-party shareholder aggregators for founder stakes (unverified). <b>Flagged estimates:</b> Sep 30 close (month-end series; Sep 29 close was &euro;870.00 per S&amp;P); 52-week range; FY2021 EBITDA; FCF for FY2021, 2022, 2023, 2025 and TTM; all half-year splits for H1 periods; EBIT and margins on EBIT; the 2026 capex euro figure; founder stakes; the Oct 28 report date. Prepared Oct 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Adyen N.V. &mdash; EUR share price trend. A 2021 peak above &euro;2,700, a 2022 de-rating, a one-day collapse in August 2023 that took the stock to roughly &euro;630 at the October month-end, a recovery to a 2025 high near &euro;1,700, and a sharp fall through 2026 on cooler guidance, the CFO's exit and the capex step-up.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Adyen N.V. &mdash; Selected Month-End Closes, EUR</div>
+    <div class="chart-sub">Month-end closes at Dec 2021, Dec 2022, Oct 2023 (trough), Dec 2024, May 2025 (2025 peak), Dec 2025 and Sep 30, 2026, from the Digrin monthly series; treat as approximate and not as intraday highs or lows. The dashed line is the straight-line annualised price change between the Dec 2021 and Sep 2026 points (4.75 years), excluding dividends (none are paid). The 52-week range (intraday, third-party) is &euro;785 &ndash; 1,750.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28" x2="680" y2="28" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,56.6 L 179.5,116.4 L 290.7,154.6 L 446.4,107.7 L 502.0,92.9 L 579.9,111.3 L 680.0,140.2 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="56.6" x2="680.0" y2="140.2" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="300" y="86" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">-18.4%/yr*</text>
+<path d="M 46.0,56.6 L 179.5,116.4 L 290.7,154.6 L 446.4,107.7 L 502.0,92.9 L 579.9,111.3 L 680.0,140.2" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="56.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="46.0" y="44.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;2,312</text><text x="46.0" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 21</text>
+<circle cx="179.5" cy="116.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="179.5" y="104.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,288</text><text x="179.5" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 22</text>
+<circle cx="290.7" cy="154.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="290.7" y="170.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;634</text><text x="290.7" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Oct 23</text>
+<circle cx="446.4" cy="107.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="446.4" y="95.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,437</text><text x="446.4" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 24</text>
+<circle cx="502.0" cy="92.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="502.0" y="80.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,690</text><text x="502.0" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">May 25</text>
+<circle cx="579.9" cy="111.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="579.9" y="127.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;1,375</text><text x="579.9" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 25</text>
+<circle cx="680.0" cy="140.2" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/><text x="678.0" y="156.2" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&euro;882</text><text x="680.0" y="198" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the post-COVID high and ends close to the 52-week low, so the -18.4% a year understates the earlier gains and is not a verdict on the business: over the same period net revenue grew about 24% a year and EBIT about 17%, which is why the trailing P/E fell from about 150x to about 25x. No stock split on record. Currency: EUR throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+</body>
+</html>
