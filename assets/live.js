@@ -196,9 +196,9 @@
 
     var line = document.createElement("div");
     line.className = "live-line";
-    line.innerHTML = '<span class="live-dot-g"></span><b>Live</b> · close ' + (q.d || "") +
+    line.innerHTML = '<span class="live-dot-g"></span><b>Latest</b> · close ' + (q.d || "") +
       (parts.length ? " · " + parts.join(" · ") : "") +
-      '<span class="live-fine"> · P/E from Yahoo Finance, so it can differ from the valuation figures below (as of this page’s build date: ' +
+      '<span class="live-fine"> · Yahoo Finance daily close, refreshed each weekday evening (not real-time). P/E is trailing and can differ from the valuation figures below (as of this page’s build date: ' +
       snapshot + ')</span>';
     priceEl.parentNode.insertBefore(line, priceEl.nextSibling);
   }

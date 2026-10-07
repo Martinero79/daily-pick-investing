@@ -71,17 +71,30 @@ function formatLivePrice(rawNumber, originalText) {
   return prefix + formatted;
 }
 
+function fmtCloseDate(d) {
+  const t = Date.parse(d);
+  return isNaN(t) ? "" : new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}
+
 function applyLiveQuote(sym, data) {
+  const closeTxt = fmtCloseDate(data.close) || fmtCloseDate(data.asOf);
   const heroPriceEl = document.getElementById("hero-live-price");
   if (heroPriceEl && heroPriceEl.dataset.ticker === sym && data.price != null) {
     heroPriceEl.textContent = formatLivePrice(data.price, heroPriceEl.textContent);
     const dot = document.getElementById("hero-live-dot");
-    if (dot) { dot.classList.add("is-live"); dot.title = "Live price, as of " + new Date(data.asOf).toLocaleString(); }
+    if (dot) { dot.classList.add("is-live"); dot.title = "Latest daily close" + (closeTxt ? " (" + closeTxt + ")" : "") + ", from Yahoo Finance. Not real-time."; }
     if (data.pe != null) {
       const peStat = document.getElementById("hero-pe-stat");
       const peEl = document.getElementById("hero-live-pe");
       if (peStat) peStat.style.display = "";
       if (peEl) peEl.textContent = data.pe.toFixed(1) + "x";
+    }
+    const note = document.getElementById("hero-live-note");
+    if (note) {
+      note.style.display = "";
+      note.textContent = "Price" + (data.pe != null ? " and P/E" : "") + ": latest daily close" + (closeTxt ? " (" + closeTxt + ")" : "") +
+        " from Yahoo Finance, refreshed each weekday evening. Not real-time." +
+        (data.pe != null ? " P/E is trailing and can differ from the valuation figures on the dashboard." : "");
     }
   }
 
@@ -92,7 +105,7 @@ function applyLiveQuote(sym, data) {
     const dot = block.querySelector(".live-dot");
     if (priceEl) priceEl.textContent = formatLivePrice(data.price, priceEl.textContent);
     if (peEl && data.pe != null) peEl.textContent = " · P/E " + data.pe.toFixed(1) + "x";
-    if (dot) { dot.classList.add("is-live"); dot.title = "Live price, as of " + new Date(data.asOf).toLocaleString(); }
+    if (dot) { dot.classList.add("is-live"); dot.title = "Latest daily close" + (closeTxt ? " (" + closeTxt + ")" : "") + ", from Yahoo Finance. Not real-time."; }
   });
 }
 
@@ -115,7 +128,7 @@ async function hydrateLiveQuotes() {
       seen.add(sym);
       const q = file.quotes[bySym[sym]];
       if (!q || q.p == null) return;
-      applyLiveQuote(sym, { price: q.p, pe: q.pe != null ? q.pe : null, asOf: file.asOf });
+      applyLiveQuote(sym, { price: q.p, pe: q.pe != null ? q.pe : null, asOf: file.asOf, close: q.d || null });
     });
   } catch (e) {
     // static price from companies.js stays visible
@@ -213,10 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="hero-blurb">${c.blurb}</p>
         <div class="hero-stats">
           <div class="hero-stat"><div class="stat-label">Price</div><div class="stat-value"><span id="hero-live-price" data-ticker="${tickerSymbol(c.ticker)}">${c.price}</span><span class="live-dot" id="hero-live-dot" title="Live price not loaded yet"></span></div></div>
-          <div class="hero-stat" id="hero-pe-stat" style="display:none;"><div class="stat-label">P/E (live)</div><div class="stat-value" id="hero-live-pe">—</div></div>
+          <div class="hero-stat" id="hero-pe-stat" style="display:none;"><div class="stat-label">P/E (latest)</div><div class="stat-value" id="hero-live-pe">—</div></div>
           <div class="hero-stat"><div class="stat-label">Screen Score</div><div class="stat-value">${c.score}</div></div>
           ${c.martinero !== undefined ? `<div class="hero-stat"><div class="stat-label">Martinero Index</div><div class="stat-value stat-value-martinero">${c.martinero}/100</div></div>` : ""}
         </div>
+        <div id="hero-live-note" style="display:none;font-size:11.5px;color:#7c8aa5;margin:4px 0 8px;line-height:1.4;"></div>
         ${(c.momentum || c.quarterYoY) ? `<div style="margin:2px 0 4px 0;display:flex;gap:6px;flex-wrap:wrap;">${momentumChipHTML(c)}${quarterYoYHTML(c)}</div>` : ""}
         ${personalNoteHTML(c)}
         <a class="btn" href="view.html?c=${encodeURIComponent(c.slug)}">View full dashboard →</a>`;
