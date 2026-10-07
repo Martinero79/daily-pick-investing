@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hyundai Motor Company — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/hyundai-motor.html">
+<meta property="og:title" content="Hyundai Motor Company — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hyundai Motor Company — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Hyundai Motor Company</h1>
+  <div class="badges">
+    <div class="badge">KRX: 005380 (common shares)</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Seoul, South Korea</div>
+    <div class="badge">Reports &amp; trades in KRW</div>
+    <div class="badge warn">~56% Below 52-Wk High &mdash; Early-2026 Rally Has Unwound While Profit Is Falling</div>
+  </div>
+
+  <div class="price">₩348,000</div>
+  <div class="price-sub">Close Oct 6, 2026 (KRX, Seoul) &middot; Market cap &asymp; ₩81T (S&amp;P basis, common + preferred) &middot; 52-wk range ₩214,000 &ndash; 783,000 &middot; 1-yr price change &asymp; +62% &middot; Beta 1.73 &middot; Analyst consensus: Buy (32 analysts), avg PT ₩641,504 (+84%) &middot; Next report (Q3 2026): est. Oct 23, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Peer on this site:</b> Hyundai Motor Company holds roughly one-third of Kia (third-party figure, ~34%; equity-method affiliate, not consolidated), and the two are run together as Hyundai Motor Group. Kia has its own dashboard (<a href="kia.html" style="color:#5eead4;">Kia</a>, built separately) &mdash; do not add the two together.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in Korean won (KRW). Financials are consolidated K-IFRS as standardised by S&amp;P Global (via stockanalysis.com), so they include Hyundai's captive finance arm (Hyundai Capital and Hyundai Card) alongside the carmaker. That inflates revenue-side debt and makes <b>consolidated free cash flow and net debt/EBITDA look far worse than the industrial business</b>, because growth in customer loans and leases is booked inside operating cash flow and the debt funding them sits in net debt. Neither an industrial FCF nor an industrial net-debt series could be verified, so the scorecard uses the consolidated figures and flags every place it matters. &ldquo;Net income&rdquo; is S&amp;P's common-shareholder figure (company-reported FY2025 net profit incl. non-controlling interests: ₩10.36T).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">₩186.3T</div>
+      <div class="sub green" style="color:#fbbf24;">+6.3% YoY &mdash; slowing</div>
+      <div class="note">FY2024 was +7.7%, FY2023 +14.4%. Latest quarter (Q2 2026) is a record ₩49.2T but only +1.9% YoY, on volume -6.9%. 4-yr CAGR FY21-25: +12.2%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin</div>
+      <div class="val" style="color:#f87171;">6.16%</div>
+      <div class="sub">FY2025, down from 9.30% in FY2023</div>
+      <div class="note">U.S. tariffs, incentives and raw-material costs. FY2026 guidance is a 6.3-7.3% margin, but H1 2026 ran at 5.6%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">3.1% vs ~4.3%</div>
+      <div class="sub">Below WACC (S&amp;P estimates)</div>
+      <div class="note">Third-party estimates on consolidated capital, which includes the finance book. The spread was also negative in FY2021 and FY2025.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#f87171;">7.8x</div>
+      <div class="sub">Consolidated, incl. captive finance</div>
+      <div class="note">Net debt ₩102.6T (Jun 2026). Overstates the carmaker's own leverage; the industrial figure could not be verified here.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">31/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Low-middle: decent growth over the window and a controlling-family anchor, offset by thin margins, negative consolidated cash flow, returns below WACC and a multiple far above its own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="67.3 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="246.9 314.16" stroke-dashoffset="-67.3" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">3/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>3 criteria fully met</b> &mdash; share count (flat), controlling-family/affiliate ownership, and capex intensity (4.5% of revenue)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>11 not met</b> &mdash; revenue and EBIT CAGR (both below 15%), EBIT margin, FCF CAGR, market share (#3 as a group), market concentration, ROIC vs WACC, leverage, FCF conversion, entry multiple, and gross-margin stability (-1.52pp)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Hyundai Motor Company is South Korea's largest carmaker, founded in 1967 and headquartered in Seoul. It sold 4,138,389 vehicles in 2025 under the Hyundai and Genesis brands, and reports three segments: Vehicle (₩145.6T of FY2025 revenue), Finance (₩30.2T, the captive lending arm) and Other (₩10.4T, including rolling stock). Together with Kia it forms Hyundai Motor Group, usually ranked the world's third-largest automaker by units. Between FY2021 and FY2023 revenue grew from ₩117.6T to ₩162.7T and operating profit more than doubled to ₩15.1T on strong pricing, SUV and hybrid mix and a weak won. Since then the trend has turned: FY2025 operating profit fell 19.5% to ₩11.5T (6.2% margin) on U.S. import tariffs, higher incentives and raw-material costs, and TTM profit to June 2026 is ₩9.6T. The latest quarter (Q2 2026) delivered record revenue of ₩49.2T but operating profit of ₩2.85T (-20.8% YoY) as wholesale volume fell 6.9% on supplier-related production constraints in Korea; management kept its FY2026 guidance of 1-2% revenue growth and a 6.3-7.3% operating margin, which implies a second-half recovery after a 5.6% H1 margin. The share price roughly doubled from ₩296,500 at end-2025 to ₩677,000 on May 28, 2026 (S&amp;P/Yahoo closes), then fell about 49% to ₩348,000 today with daily moves of 5-10% in July-August; I did not verify what drove either leg. On trailing earnings the stock now trades at ~12.9x versus a ~6x FY2021-25 average, so the multiple, not the business, has done most of the moving.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Captive finance</b> &mdash; consolidated FCF is negative every year except FY2022 and net debt/EBITDA is 7-10x because customer-loan growth and its funding run through the consolidated cash-flow statement and balance sheet; the carmaker alone looks very different, but I could not verify an industrial series, so these criteria are scored on the consolidated numbers and are probably too harsh. (2) <b>Preferred shares and share-class blending</b> &mdash; Hyundai has common and several preferred share classes; S&amp;P per-share figures and market cap blend them, so P/E and EPS are approximate. (3) <b>S&amp;P FY2025 balance-sheet cash</b> shows &#8361;26.4T at Dec 2025 versus &#8361;78-88T in the neighbouring quarters, a classification break, so FY2025 net debt (&#8361;150.1T) is not comparable with the quarterly path (Jun 2026: &#8361;102.6T).
+  </div>
+
+  <div class="bignum-corner">HMC</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, KRW billions, consolidated K-IFRS as standardised by S&amp;P Global (stockanalysis.com). Operating income = reported operating profit (EBIT). Free cash flow is consolidated (operating cash flow less capex) and includes finance-arm receivable growth; see the cover note.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (KRW trillions)</div>
+    <div class="chart-sub">Revenue rose every year, EBIT peaked in FY2023 (₩15.1T) and has fallen since. Consolidated FCF was positive only in FY2022 and has been -₩10T to -₩14T in each of the last three years, driven by finance-receivable growth rather than the vehicle business alone (not separately verifiable here).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (operating profit)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (consolidated)</span></div>
+    <svg viewBox="0 0 860 262" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="200.0" x2="840" y2="200.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="204.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="157.5" x2="840" y2="157.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="161.5" text-anchor="end" font-size="11" fill="#64748b">50T</text>
+<line x1="60" y1="115.0" x2="840" y2="115.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="119.0" text-anchor="end" font-size="11" fill="#64748b">100T</text>
+<line x1="60" y1="72.5" x2="840" y2="72.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="76.5" text-anchor="end" font-size="11" fill="#64748b">150T</text>
+<line x1="60" y1="30.0" x2="840" y2="30.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="34.0" text-anchor="end" font-size="11" fill="#64748b">200T</text>
+<line x1="60" y1="200.0" x2="840" y2="200.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="100.0" width="30" height="100.0" rx="2" fill="#2dd4bf"/><text x="100" y="95.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400"></text>
+<rect x="123" y="194.3" width="30" height="5.7" rx="2" fill="#60a5fa"/><text x="138" y="189.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">6,679</text>
+<rect x="161" y="200.0" width="30" height="4.7" rx="2" fill="#fbbf24"/><text x="176" y="216.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-5,481</text>
+<text x="138" y="248" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="79.2" width="30" height="120.8" rx="2" fill="#2dd4bf"/><text x="256" y="74.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">142,151</text>
+<rect x="279" y="191.6" width="30" height="8.4" rx="2" fill="#60a5fa"/><text x="294" y="186.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">9,825</text>
+<rect x="317" y="194.4" width="30" height="5.6" rx="2" fill="#fbbf24"/><text x="332" y="189.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6,612</text>
+<text x="294" y="248" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="61.7" width="30" height="138.3" rx="2" fill="#2dd4bf"/><text x="412" y="56.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">162,664</text>
+<rect x="435" y="187.1" width="30" height="12.9" rx="2" fill="#60a5fa"/><text x="450" y="182.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">15,127</text>
+<rect x="473" y="200.0" width="30" height="8.2" rx="2" fill="#fbbf24"/><text x="488" y="220.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-9,590</text>
+<text x="450" y="248" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="51.1" width="30" height="148.9" rx="2" fill="#2dd4bf"/><text x="568" y="46.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">175,231</text>
+<rect x="591" y="187.9" width="30" height="12.1" rx="2" fill="#60a5fa"/><text x="606" y="182.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">14,240</text>
+<rect x="629" y="200.0" width="30" height="11.7" rx="2" fill="#fbbf24"/><text x="644" y="223.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-13,723</text>
+<text x="606" y="248" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="41.7" width="30" height="158.3" rx="2" fill="#2dd4bf"/><text x="724" y="36.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">186,254</text>
+<rect x="747" y="190.3" width="30" height="9.7" rx="2" fill="#60a5fa"/><text x="762" y="185.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">11,468</text>
+<rect x="785" y="200.0" width="30" height="12.2" rx="2" fill="#fbbf24"/><text x="800" y="224.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-14,358</text>
+<text x="762" y="248" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">+12.2%</div><div class="sub">₩117.6T &rarr; ₩186.3T &mdash; strong in FY22-23 (+20.9%, +14.4%), then +7.7% and +6.3%</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">+14.5%</div><div class="sub">₩6.7T &rarr; ₩11.5T &mdash; just under the 15% bar, but FY2025 is -19.5% on FY2024 and TTM is lower still</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">n/m</div><div class="sub">-₩5.5T &rarr; -₩14.4T: both endpoints negative on the consolidated basis, so no meaningful growth rate</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Both margins peaked in FY2023 (gross 20.6%, EBIT 9.3%) and have fallen since; gross margin is down 1.5pp from FY2022 and 2.2pp from FY2023. Gross margin here is S&amp;P-standardised (revenue less cost of sales, consolidated incl. finance), TTM Jun 2026 gross margin is 17.4%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>EBIT margin</span></div>
+    <svg viewBox="0 0 700 120">
+<line x1="30" y1="105" x2="690" y2="105" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="65" x2="690" y2="65" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="25" x2="690" y2="25" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="108" font-size="7.5" fill="#64748b">0%</text><text x="2" y="68" font-size="7.5" fill="#64748b">10%</text><text x="2" y="28" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,30.4 205,25.4 350,22.6 495,23.4 640,31.5" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="30.4" r="3.2" fill="#60a5fa"/><text x="60" y="23.4" text-anchor="middle" font-size="8" fill="#cbd5e1">18.6%</text>
+<circle cx="205" cy="25.4" r="3.2" fill="#60a5fa"/><text x="205" y="18.4" text-anchor="middle" font-size="8" fill="#cbd5e1">19.9%</text>
+<circle cx="350" cy="22.6" r="3.2" fill="#60a5fa"/><text x="350" y="15.6" text-anchor="middle" font-size="8" fill="#cbd5e1">20.6%</text>
+<circle cx="495" cy="23.4" r="3.2" fill="#60a5fa"/><text x="495" y="16.4" text-anchor="middle" font-size="8" fill="#cbd5e1">20.4%</text>
+<circle cx="640" cy="31.5" r="3.2" fill="#60a5fa"/><text x="640" y="24.5" text-anchor="middle" font-size="8" fill="#cbd5e1">18.4%</text>
+<polyline points="60,82.3 205,77.4 350,67.8 495,72.5 640,80.4" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="82.3" r="3.2" fill="#34d399"/><text x="60" y="75.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.7%</text>
+<text x="60" y="116" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<circle cx="205" cy="77.4" r="3.2" fill="#34d399"/><text x="205" y="70.4" text-anchor="middle" font-size="8" fill="#cbd5e1">6.9%</text>
+<text x="205" y="116" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<circle cx="350" cy="67.8" r="3.2" fill="#34d399"/><text x="350" y="60.8" text-anchor="middle" font-size="8" fill="#cbd5e1">9.3%</text>
+<text x="350" y="116" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<circle cx="495" cy="72.5" r="3.2" fill="#34d399"/><text x="495" y="65.5" text-anchor="middle" font-size="8" fill="#cbd5e1">8.1%</text>
+<text x="495" y="116" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<circle cx="640" cy="80.4" r="3.2" fill="#34d399"/><text x="640" y="73.4" text-anchor="middle" font-size="8" fill="#cbd5e1">6.2%</text>
+<text x="640" y="116" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+<tr><th>FY (KRW bn)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>EPS (KRW)</th><th>FCF (consol.)</th><th>Capex</th><th>Net debt (consol.)</th><th>DPS (KRW)</th></tr>
+<tr><td>FY2021</td><td>117,611</td><td>6,679</td><td>5.7%</td><td>18.6%</td><td>4,942</td><td>18,992</td><td>-5,481</td><td>4,304</td><td>76,698</td><td>5,000</td></tr>
+<tr><td>FY2022</td><td>142,151</td><td>9,825</td><td>6.9%</td><td>19.9%</td><td>7,364</td><td>28,456</td><td>6,612</td><td>4,015</td><td>81,186</td><td>7,000</td></tr>
+<tr><td>FY2023</td><td>162,664</td><td>15,127</td><td>9.3%</td><td>20.6%</td><td>11,962</td><td>45,672</td><td>-9,590</td><td>7,071</td><td>96,807</td><td>11,400</td></tr>
+<tr><td>FY2024</td><td>175,231</td><td>14,240</td><td>8.1%</td><td>20.4%</td><td>12,527</td><td>47,567</td><td>-13,723</td><td>8,061</td><td>127,453</td><td>12,000</td></tr>
+<tr><td>FY2025</td><td>186,254</td><td>11,468</td><td>6.2%</td><td>18.4%</td><td>9,446</td><td>36,225</td><td>-14,358</td><td>8,367</td><td>150,116</td><td>10,000</td></tr>
+<tr><td>TTM (Jun'26)</td><td>188,714</td><td>9,598</td><td>5.1%</td><td>17.4%</td><td>7,043</td><td>26,940</td><td>-10,615</td><td>8,514</td><td>102,580</td><td>10,000</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">Net income is S&amp;P's common-shareholder figure and EPS is per common-equivalent share (blends preferred classes); company-reported FY2025 net profit incl. non-controlling interests was ₩10.36T. DPS is the dividend declared for the fiscal year (FY2025: four &#8361;2,500 payments). FCF and net debt are consolidated and include the captive finance arm; FY2025 net debt carries an S&amp;P classification break (see cover). FY2023 and FY2022 Q4 quarterly lines are not provided separately by S&amp;P.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) annual and TTM financial statements and ratios, retrieved Oct 2026; Hyundai Motor Company FY2025 results release (revenue ₩186.3T, operating profit ₩11.47T, 4,138,389 units).</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q2 2026) &amp; Eight-Quarter Trend</div></div>
+  <div class="sec-sub">Reported Jul 23, 2026; Q3 2026 results are expected around Oct 23, 2026. Revenue is growing slowly while operating profit has lagged the prior-year quarters for four quarters running.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was a record ₩49,215bn (+1.9% YoY) but operating profit fell 20.8% to ₩2,851bn (5.8% margin) and net profit incl. non-controlling interests fell 11.2% to ₩2,888bn. Wholesale volume was 991,885 units (-6.9%): Korea -16.4% on supplier-related production constraints, rest of world -4.9%, while U.S. wholesale grew 0.9% (about a 6% U.S. share for a fifth straight quarter). Hybrids set a record at 187,661 units (18.9% of sales), and electrified vehicles reached 26.9% of the mix. Management cited higher incentives, raw-material costs, tariff costs and supply disruption for the margin squeeze. Revenue growth is helped by a weaker won and by Finance-segment revenue (₩9.5T, +15.7% YoY), while Vehicle-segment revenue fell 2.1%. A union wage deal ending weeks of strikes was approved on Aug 31, 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (KRW trillion)</div>
+    <div class="chart-sub">YoY: Q3'25 +8.8%, Q4'25 +0.5%, Q1'26 +3.5%, Q2'26 +1.9%. Q4'24 and Q4'23 quarterly growth rates are not provided by S&amp;P.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, KRW trillion</span></div>
+    <svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="52.7" width="60" height="77.3" fill="#2dd4bf"/><text x="60" y="47.7" text-anchor="middle" font-size="9" fill="#cbd5e1">42.9</text><text x="60" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="110" y="46.1" width="60" height="83.9" fill="#2dd4bf"/><text x="140" y="41.1" text-anchor="middle" font-size="9" fill="#cbd5e1">46.6</text><text x="140" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="190" y="50.1" width="60" height="79.9" fill="#2dd4bf"/><text x="220" y="45.1" text-anchor="middle" font-size="9" fill="#cbd5e1">44.4</text><text x="220" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="270" y="43.1" width="60" height="86.9" fill="#2dd4bf"/><text x="300" y="38.1" text-anchor="middle" font-size="9" fill="#cbd5e1">48.3</text><text x="300" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="350" y="45.9" width="60" height="84.1" fill="#2dd4bf"/><text x="380" y="40.9" text-anchor="middle" font-size="9" fill="#cbd5e1">46.7</text><text x="380" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="430" y="45.7" width="60" height="84.3" fill="#2dd4bf"/><text x="460" y="40.7" text-anchor="middle" font-size="9" fill="#cbd5e1">46.8</text><text x="460" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="510" y="47.3" width="60" height="82.7" fill="#2dd4bf"/><text x="540" y="42.3" text-anchor="middle" font-size="9" fill="#cbd5e1">45.9</text><text x="540" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="590" y="41.4" width="60" height="88.6" fill="#2dd4bf"/><text x="620" y="36.4" text-anchor="middle" font-size="9" fill="#cbd5e1">49.2</text><text x="620" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Profit &mdash; Last 8 Quarters (KRW bn)</div>
+    <div class="chart-sub">Q4'25 (₩1,695bn, 3.6% margin) was the low point; Q1'26 and Q2'26 recovered to 5.5% and 5.8% but remain below the 7.5-8.2% margins of Q1-Q2 2025.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating profit, KRW bn</span></div>
+    <svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="49.4" width="60" height="80.6" fill="#60a5fa"/><text x="60" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">3,581</text><text x="60" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="110" y="66.5" width="60" height="63.5" fill="#60a5fa"/><text x="140" y="61.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,822</text><text x="140" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="190" y="48.2" width="60" height="81.8" fill="#60a5fa"/><text x="220" y="43.2" text-anchor="middle" font-size="9" fill="#cbd5e1">3,634</text><text x="220" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="270" y="49.0" width="60" height="81.0" fill="#60a5fa"/><text x="300" y="44.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3,602</text><text x="300" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="350" y="72.9" width="60" height="57.1" fill="#60a5fa"/><text x="380" y="67.9" text-anchor="middle" font-size="9" fill="#cbd5e1">2,537</text><text x="380" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="430" y="91.9" width="60" height="38.1" fill="#60a5fa"/><text x="460" y="86.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,695</text><text x="460" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="510" y="73.4" width="60" height="56.6" fill="#60a5fa"/><text x="540" y="68.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,515</text><text x="540" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="590" y="65.9" width="60" height="64.1" fill="#60a5fa"/><text x="620" y="60.9" text-anchor="middle" font-size="9" fill="#cbd5e1">2,851</text><text x="620" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable"><tr><th>Quarter</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr><tr><td>Revenue (KRW bn)</td><td>42,928</td><td>46,624</td><td>44,408</td><td>48,287</td><td>46,721</td><td>46,838</td><td>45,939</td><td>49,215</td></tr><tr><td>Operating profit (KRW bn)</td><td>3,581</td><td>2,822</td><td>3,634</td><td>3,602</td><td>2,537</td><td>1,695</td><td>2,515</td><td>2,851</td></tr><tr><td>Operating margin</td><td>8.3%</td><td>6.1%</td><td>8.2%</td><td>7.5%</td><td>5.4%</td><td>3.6%</td><td>5.5%</td><td>5.8%</td></tr><tr><td>Net income, S&amp;P common basis (KRW bn)</td><td>3,046</td><td>2,280</td><td>3,157</td><td>2,998</td><td>1,754</td><td>1,029</td><td>1,804</td><td>1,948</td></tr></table>
+  <div class="footer-note" style="margin-top:4px;">Net income here is S&amp;P's common-shareholder figure and is lower than the company's reported net profit incl. non-controlling interests (Q2'26: ₩2,888bn reported).</div>
+
+  <table class="datatable" style="margin-top:6px;">
+    <tr><th>Metric (KRW bn unless stated)</th><th>Q2 2025</th><th>Q2 2026</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>48,287</td><td>49,215</td><td>+1.9%</td></tr>
+    <tr><td>Gross profit (S&amp;P)</td><td>9,110</td><td>8,736</td><td>-4.1%</td></tr>
+    <tr><td>Operating profit</td><td>3,602</td><td>2,851</td><td>-20.8%</td></tr>
+    <tr><td>Net profit (incl. NCI, as reported)</td><td>3,250</td><td>2,888</td><td>-11.2%</td></tr>
+    <tr><td>Wholesale volume (units)</td><td>1,065,843</td><td>991,885</td><td>-6.9%</td></tr>
+    <tr><td>&nbsp;&nbsp;Korea (units)</td><td>188,540</td><td>157,647</td><td>-16.4%</td></tr>
+    <tr><td>&nbsp;&nbsp;Rest of world (units)</td><td>877,303</td><td>834,238</td><td>-4.9%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, held at the Q2 report):</b> consolidated revenue growth of 1-2%, operating margin of 6.3-7.3%, wholesale volume of 4.16 million units. H1 2026 operating margin was about 5.6% (₩5.37T on ₩95.2T revenue), so the range requires a second-half margin of roughly 7-9%; management flagged a possible volume shortfall and promised more detail at its late-August Capital Markets Day (I did not verify what was said there).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Capital plans:</b> 2026 investment plan of ₩17.8T (₩9.0T capex, ₩7.4T R&amp;D, ₩1.4T strategic); a ₩400.7bn share buyback announced with FY2025 results; quarterly dividend held at ₩2,500 per common share. Hyundai Motor Group's announced U.S. commitment is $26B, including a $5.8B Louisiana steel mill (production from 2029).
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E from S&amp;P (blends common and preferred share classes). Year-end P/Es are low because Korean automakers have historically traded at low multiples; the current multiple is high against that history because the price rose while earnings fell.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~12.9x, ₩348,000 against TTM EPS of ₩26,940 on S&amp;P's blended basis) is about 2.1x the FY2021-25 year-end average (~6.1x). FY2023-24 lows (4.0x, 4.2x) coincided with peak earnings. Source: S&amp;P Global via stockanalysis.com.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140"><line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="61.5" width="70" height="48.5" fill="#60a5fa"/><text x="55" y="56.5" text-anchor="middle" font-size="9" fill="#cbd5e1">9.7x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="86.5" width="70" height="23.6" fill="#60a5fa"/><text x="150" y="81.5" text-anchor="middle" font-size="9" fill="#cbd5e1">4.7x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="90.0" width="70" height="20.0" fill="#60a5fa"/><text x="245" y="85.0" text-anchor="middle" font-size="9" fill="#cbd5e1">4.0x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="89.1" width="70" height="20.9" fill="#60a5fa"/><text x="340" y="84.1" text-anchor="middle" font-size="9" fill="#cbd5e1">4.2x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="71.8" width="70" height="38.2" fill="#60a5fa"/><text x="435" y="66.8" text-anchor="middle" font-size="9" fill="#cbd5e1">7.6x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="45.5" width="70" height="64.5" fill="#2dd4bf"/><text x="530" y="40.5" text-anchor="middle" font-size="9" fill="#cbd5e1">12.9x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="79.8" x2="690" y2="79.8" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="75.8" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 6.0x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is ~8.1x versus a FY2021-25 year-end average of ~5.3x (ratio ~1.5); S&amp;P's PEG is ~0.85. The scorecard uses the trailing figure (ratio ~2.1, 0/5); on the forward basis the ratio would still be above 1.30 (0/5). Average analyst price target ₩641,504 (32 analysts, +84%) sits close to the price the stock traded at in May 2026, so it reflects pre-sell-off assumptions that may be stale. Price/book is ~0.6x.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (KRW bn) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex is 2.8-4.6% of revenue (S&amp;P figure; excludes capitalised development cost and lease assets). It has risen with EV, battery and U.S. plant investment; the 2026 plan is ₩9.0T. This is moderate for an automaker but not asset-light.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (KRW bn; % of revenue in brackets)</span></div>
+    <svg viewBox="0 0 700 183"><line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="114.8" width="60" height="45.2" fill="#60a5fa"/><text x="60" y="109.8" text-anchor="middle" font-size="8" fill="#cbd5e1">4,304 (3.7%)</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="117.8" width="60" height="42.2" fill="#60a5fa"/><text x="200" y="112.8" text-anchor="middle" font-size="8" fill="#cbd5e1">4,015 (2.8%)</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="85.8" width="60" height="74.2" fill="#60a5fa"/><text x="340" y="80.8" text-anchor="middle" font-size="8" fill="#cbd5e1">7,071 (4.3%)</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="75.4" width="60" height="84.6" fill="#60a5fa"/><text x="480" y="70.4" text-anchor="middle" font-size="8" fill="#cbd5e1">8,061 (4.6%)</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="72.1" width="60" height="87.9" fill="#60a5fa"/><text x="620" y="67.1" text-anchor="middle" font-size="8" fill="#cbd5e1">8,367 (4.5%)</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (third-party, approximate)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="64.4 249.8" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="21.0 293.2" stroke-dashoffset="-64.4" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="16.0 298.2" stroke-dashoffset="-85.4" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="7.9 306.3" stroke-dashoffset="-101.4" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="204.9 109.3" stroke-dashoffset="-109.3" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~28%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Hyundai Mobis (group affiliate) ~20.5%</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>National Pension Service ~6.7%</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>Chung Mong-koo (Chairman Emeritus) ~5.1%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Chung Eui-sun (Executive Chairman) ~2.5%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders ~65% (institutions ~23%, retail ~46% per Simply Wall St, which overlaps the above)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Dividends</div>
+      <p>Share-equivalents have been roughly flat (~260M in FY2021, ~262M now; -0.33% over the last year per S&amp;P) with small buybacks (₩400.7bn announced in Feb 2026). The dividend has been paid quarterly at ₩2,500 per common share since 2025 (₩10,000 a year, ~2.9% yield, ~34-39% payout), down from ₩12,000 for FY2024 and ₩11,400 for FY2023.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Control &amp; honest caveats:</b> the Chung family controls Hyundai Motor Group through circular cross-holdings (Hyundai Mobis, Hyundai Motor and Kia hold stakes in one another), so the ~28% shown (Mobis plus the two family members) is a control estimate rather than a clean founder stake; S&amp;P's narrower 'insider' figure is 6.5%. Holdings figures come from a third-party summary and were not checked against the latest regulatory filings.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> consolidated debt of ₩190.5T against ₩87.9T of cash and investments (Jun 2026; net debt ₩102.6T, debt/equity 1.41x). The majority of this funds the captive finance arm's loans and leases, which is self-liquidating but still exposed to credit and funding conditions. A separate industrial net-cash figure may exist in company materials, but I could not verify it.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist, with no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022's (3-year change). Several cash-flow and leverage criteria rest on consolidated numbers that include the captive finance arm (see cover).</div>
+
+  <table class="datatable criteria-table">
+<tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Hyundai Motor</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+12.2% &mdash; ₩117.6T &rarr; ₩186.3T (S&amp;P, consolidated incl. the finance arm); FY2025 growth slowed to +6.3% and the latest quarter to +1.9% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+14.5% &mdash; operating profit ₩6.68T &rarr; ₩11.47T, but it peaked at ₩15.13T in FY2023 and has fallen two years running (-24% from peak); TTM is ₩9.6T (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>6.16% (FY2025), down from 9.30% in FY2023; TTM Jun 2026 is 5.09%. Mass-market automaker margin, structurally thin (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>Not computable &mdash; consolidated FCF is negative at both ends (-₩5.5T in FY2021, -₩14.4T in FY2025). S&amp;P classifies growth in finance-arm receivables inside operating cash flow, so this overstates the industrial cash burn; no verified industrial FCF series was available. Scored 0/5 mechanically (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Hyundai Motor Group (with Kia) is generally ranked #3 globally by units behind Toyota and Volkswagen group (industry rankings, not re-verified for 2026); Hyundai Motor Company alone sold 4.14M vehicles in 2025, and holds ~6% of the U.S. market (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; global autos are fragmented; no maker holds more than ~10-11% of units and Chinese makers are taking share (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 3.10% vs WACC 4.28% (S&amp;P Global estimates), spread -1.2pp; ROIC peaked at 6.0% in FY2023 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>7.8x on S&amp;P's consolidated net debt (₩102.6T at Jun 2026), but this includes the debt that funds the captive finance book. No industrial (ex-finance) net debt was verifiable here, so it is scored as reported and overstated for the carmaker alone (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Negative: consolidated FCF -₩14.4T vs EBIT ₩11.5T in FY2025 (same finance-receivable caveat as #4); positive only in FY2022 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~12.9x vs FY21-25 year-end average ~6.1x (ratio ~2.1); forward ~8.1x vs ~5.3x (ratio ~1.5). Share price is up sharply while earnings fell, so the multiple is well above its own history on either basis (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~260M share-equivalents (FY2021) to ~262M (now), roughly flat (+0.6%); S&amp;P shows -0.33% over the last year. A ₩400.7B buyback was announced in Feb 2026 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Chung family directly ~7.6% (Chung Mong-koo ~5.1%, Chung Eui-sun ~2.5%) plus Hyundai Mobis ~20.5%, a group affiliate in the family-controlled circular structure: ~28% for the controlling group. S&amp;P's narrow 'insider' figure is 6.5%. Scored at the 15-30% band as a judgment (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.5% of revenue in FY2025 (₩8.4T; S&amp;P figure, excludes capitalised development cost); 2.8-4.6% over FY21-25. Company plans ₩9T capex in 2026 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin basis (S&amp;P standardised gross profit / revenue, consolidated): 19.89% (FY2022) &rarr; 18.37% (FY2025), -1.52pp; TTM is 17.4%. EBIT margin moved 6.9% &rarr; 6.2% over the same span (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+</table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13=7.8 &middot; #2 3&times;11=6.6 &middot; #3 2&times;10=4.0 &middot; #4 0&times;8=0.0 &middot; #5 2&times;7=2.8 &middot; #6 1&times;6=1.2 &middot; #7 0&times;10=0.0 &middot; #8 0&times;6=0.0 &middot; #9 0&times;8=0.0 &middot; #10 0&times;8=0.0 &middot; #11 3&times;4=2.4 &middot; #12 4&times;5=4.0 &middot; #13 4&times;4=3.2 &middot; #14 1&times;5=1.0 (each = points/5 &times; weight). Total 33.0 / 105 = <b>31/100</b>. Criteria met: 3/14 on the binary thresholds. <b>Judgment calls &amp; harsh-by-construction items:</b> #4, #8 and #9 use consolidated S&amp;P figures that include the finance arm (probably too harsh for the carmaker alone; no verified industrial series exists in my sources); #5 uses group-level ranking; #6 is qualitative; #7 uses third-party ROIC/WACC; #12's 4/5 is a judgment on the controlling group's ~28%; #14 is on gross margin (S&amp;P standardised). The mechanical bands were applied without rounding up.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue is at a record and has compounded at 12% for four years, led by a hybrid-heavy mix (record 187,661 hybrids in Q2, 26.9% electrified) and a steady ~6% U.S. market share (fifth straight quarter). Operating profit is still 72% above FY2021, capex is moderate (4.5% of revenue), the share count is flat with a new buyback, and a controlling-family group provides long-term continuity. The Korea strike season ended with a wage deal on Aug 31, guidance has been held, and a large U.S. manufacturing commitment (Georgia plant, ~$26B group programme) reduces tariff exposure over time.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Profit is falling while the price has run: operating profit is down 24% from the FY2023 peak, Q2 2026 EBIT fell 20.8% on volume -6.9%, and the multiple (~12.9x trailing) is about double its own five-year average. Margins are thin (6.2%) and gross margin is down 1.5pp in three years under tariffs, incentives and raw-material costs. H1 2026 margin (5.6%) is below the 6.3-7.3% guidance range, so the second half has to deliver. Chinese makers are gaining share globally, the in-house driver-assist system has slipped to 2029 (Nvidia interim), and the stock moves 5-10% in a day. Consolidated cash flow and leverage figures look poor mainly because of the finance arm, but that also means credit-cycle exposure. Unverified: industrial FCF and net debt, the drivers of the 2026 price swing, and the latest ownership filings.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence): annual, quarterly and TTM financials, ratios, statistics, dividend history, analyst consensus and price history; Yahoo Finance (005380.KS) daily closes for fiscal year-end prices and cross-check of the Oct 6, 2026 close; Hyundai Motor Company press releases for FY2025 results (revenue ₩186.3T, operating profit ₩11.47T, ₩10,000 dividend, ₩400.7bn buyback, 2026 investment plan) and Q2 2026 results (Jul 23, 2026; volume, segment and guidance data); Investing.com Q2 2026 call summary (guidance commentary only; its price quotes were not used); Simply Wall St via search summary (ownership, approximate). Estimates, WACC/ROIC, ownership and group-level market share are third-party or approximate and flagged as such. All figures KRW. Price as of Oct 6, 2026 close; prepared Oct 6, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Hyundai Motor Company (common) &mdash; KRX, KRW. A low in 2022, a steady rise to 2025, a sharp run in the first half of 2026 to a ₩783,000 52-week high, then a roughly 50% fall back to ₩348,000.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Hyundai Motor Company &mdash; Year-End Close (KRX, KRW)</div>
+    <div class="chart-sub">Fiscal year-end closing prices (last KRX trading day of each year, raw unadjusted closes from Yahoo Finance) plus the Oct 6, 2026 close. The dashed line is the straight-line annualised price CAGR from the Dec 2021 close, using a naive 5-year span, excluding dividends (₩10,000/share in FY2025, ~2.9% yield). The year-end series misses the 2026 swings: the stock closed at ₩677,000 on May 28, 2026 and ₩609,000 on Feb 26, 2026; the 52-week range is ₩214,000 &ndash; 783,000.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +10.7%</text>
+<line x1="46.0" y1="117.8" x2="680.0" y2="38.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,117.8 L 172.8,150.9 L 299.6,120.9 L 426.4,116.0 L 553.2,67.8 L 680.0,38.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,117.8 L 172.8,150.9 L 299.6,120.9 L 426.4,116.0 L 553.2,67.8 L 680.0,38.4" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="117.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46" y="105.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩209,000</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="150.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="165.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩151,000</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="120.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="108.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩203,500</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="116.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="104.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩212,000</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="67.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="55.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₩296,500</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="38.4" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="678" y="26.4" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">₩348,000</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Year-end points hide the volatility: the stock more than doubled in H1 2026 and then lost about half of its May 28 close, so the +10.7% annualised figure depends heavily on where the end-points fall and is not a verdict on the business. No stock splits in the window. Prices are common shares only (005380.KS); preferred shares trade separately. Currency: KRW throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Xiaomi Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/xiaomi.html">
+<meta property="og:title" content="Xiaomi Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Xiaomi Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Consumer Electronics, IoT &amp; Smart EVs</div>
+  <h1>Xiaomi Corporation</h1>
+  <div class="badges">
+    <span class="badge">HKEX: 1810 &middot; OTC ADR: XIACY &middot; Yahoo: 1810.HK &middot; reports in RMB (&yen;) under IFRS; share price in HKD</span>
+    <span class="badge">FY ends Dec 31 &middot; reports quarterly</span>
+    <span class="badge">Founded 2010 &middot; Beijing, China (HQ) &middot; dual-class share structure</span>
+    <span class="badge warn">Q2 2026 non-IFRS adjusted net profit fell 42.6% YoY to &yen;6.2B as memory-cost pressure hit smartphone margins, and the EV segment is loss-making again in 2026 (&yen;3.1B loss in Q1, &yen;2.6B in Q2).</span>
+  </div>
+  <div class="price">HK$23.88</div>
+  <div class="price-sub">HKEX: 1810 close Oct 5, 2026 (HKD) &middot; Mkt cap &asymp;HK$615B (&asymp;25.7B shares) &middot; 52-wk range HK$21.30 &ndash; 54.80 &middot; average analyst target HK$36.5 (31 analysts, third-party consensus, Sep 2026)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in smartphones &mdash; Apple, Samsung, Transsion, OPPO/vivo, Honor, Huawei &middot; in smart EVs &mdash; BYD, Tesla, Geely/Zeekr, XPeng, Li Auto, NIO and Huawei-backed brands &middot; in IoT/consumer electronics &mdash; Huawei, Haier, Midea, Apple and a long tail of regional brands.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&yen;457.29B</div>
+      <div class="sub" style="color:#fbbf24;">+24.97% YoY (IFRS) &mdash; down from +35.04% in FY2024; Q2 2026 fell 6.1% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (FY2025)</div>
+      <div class="val red">7.10%</div>
+      <div class="note">S&amp;P-standardised operating income (&yen;32.5B), which strips out investment fair-value gains; Xiaomi's own IFRS &quot;operating profit&quot; (&yen;47.9B) is higher because it includes them. Gross margin 22.26%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (S&amp;P est.)</div>
+      <div class="val" style="color:#fbbf24;">9.03% / 7.87%</div>
+      <div class="note">TTM basis; clears WACC by only &asymp;1.2pp, and that WACC estimate is low for a China hardware/EV name.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val green">&asymp;&yen;77B</div>
+      <div class="sub">Jun 30, 2026 (S&amp;P: cash &amp; investments &yen;121.7B vs debt &yen;44.3B)</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">62/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met, 7 not met, 0 N/A &mdash; net cash, founder super-voting control, low capex and a P/E below its own history, offset by thin consolidated margins, a mid-single-digit revenue CAGR and a weakening smartphone core.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 110.00,205.00 L110.00,168.00 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M110.00,205.00 A95,95 0 0 1 110.00,15.00 L110.00,52.00 A58,58 0 0 0 110.00,168.00 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 7 (FCF CAGR, ROIC/WACC, net debt/EBITDA, entry multiple, insider/founder ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 7 (revenue CAGR, EBIT CAGR, operating margin, market share, market concentration, FCF conversion, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">3 / 5</b> &mdash; moderately concentrated in smartphones, fragmented in EVs and IoT</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Xiaomi is a smartphone, consumer-IoT and internet-services group that launched an electric-vehicle business in 2024 (SU7, then YU7). The EV bet drove the last two years of growth: revenue rose 35.0% in FY2024 and 25.0% in FY2025 to &yen;457.3B, EV-and-other revenue reached &yen;106.1B in 2025 (411,000 vehicles delivered), and the segment posted its first full-year operating profit. But the five-year view is far less dramatic: revenue CAGR from FY2021 is only 8.6% because FY2022-23 were down years, and the core is weakening in 2026. Smartphone shipments fell 26% YoY in Q2 2026 (to 31.2M units, still #3 globally at &asymp;11.5% share) as memory-chip costs surged, group gross margin slipped to 19.8%, and the EV segment swung back to a quarterly operating loss (&yen;3.1B in Q1, &yen;2.6B in Q2 2026) as a new SU7 generation ramped. The share price has fallen by more than half from its mid-2025 peak, to HK$23.88. This page uses IFRS figures unless labelled &quot;adjusted&quot;: Xiaomi's non-IFRS adjusted net profit (&yen;39.2B in FY2025) strips out share-based pay and investment gains, and is lower than IFRS net profit in 2026 because IFRS includes large investment fair-value gains. 7 of 14 criteria met, Martinero Index 62/100.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials refreshed through Q2 2026 (reported Aug 18, 2026); the share price is the HKEX close on Oct 5, 2026 in HKD. All financial figures are in RMB (&yen;) as reported under IFRS (EBIT and free cash flow as standardised by S&amp;P Global) and have not been converted to HKD. Where a figure is Xiaomi's own non-IFRS &quot;adjusted&quot; measure it is labelled as such.
+  </div>
+
+  <div class="bignum-corner">7/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in RMB (&yen;) billions, IFRS basis (EBIT and FCF as standardised by S&amp;P Global; adjusted net income is Xiaomi's non-IFRS measure, rounded, for reference only). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income (EBIT) &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Shared axis to keep the scale honest. Revenue dipped in FY2022-23 (smartphone downcycle) and then surged with the EV launch; EBIT and FCF are thin slivers next to it. FY2025 FCF fell from FY2024 even as EBIT rose, as EV inventory and capex absorbed cash.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating income (S&amp;P std.)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="205.0" x2="840" y2="205.0" stroke="#475569" stroke-width="1.3"/><text x="50" y="209.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="170.3" x2="840" y2="170.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.3" text-anchor="end" font-size="11" fill="#64748b">&yen;100B</text><line x1="60" y1="135.6" x2="840" y2="135.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="139.6" text-anchor="end" font-size="11" fill="#64748b">&yen;200B</text><line x1="60" y1="100.9" x2="840" y2="100.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.9" text-anchor="end" font-size="11" fill="#64748b">&yen;300B</text><line x1="60" y1="66.2" x2="840" y2="66.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="70.2" text-anchor="end" font-size="11" fill="#64748b">&yen;400B</text><line x1="60" y1="31.5" x2="840" y2="31.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="35.5" text-anchor="end" font-size="11" fill="#64748b">&yen;500B</text><rect x="93.6" y="91.08" width="22.5" height="113.92" rx="2" fill="#2dd4bf"/><text x="104.85" y="86.08" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;328.3B</text><rect x="131.7" y="198.05" width="22.5" height="6.95" rx="2" fill="#60a5fa"/><text x="142.95" y="193.05" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;20.0B</text><rect x="169.9" y="204.09" width="22.5" height="1.00" rx="2" fill="#fbbf24"/><text x="181.15" y="199.09" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;2.6B</text><text x="138.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text><rect x="249.6" y="107.82" width="22.5" height="97.18" rx="2" fill="#2dd4bf"/><text x="260.85" y="102.82" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;280.0B</text><rect x="287.7" y="202.89" width="22.5" height="2.11" rx="2" fill="#60a5fa"/><text x="298.95" y="197.89" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;6.1B</text><rect x="325.9" y="205.00" width="22.5" height="3.54" rx="1" fill="#f87171"/><text x="337.15" y="220.54" text-anchor="middle" font-size="7.5" fill="#fca5a5" font-weight="700">-&yen;10.2B</text><text x="294.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="405.6" y="110.97" width="22.5" height="94.03" rx="2" fill="#2dd4bf"/><text x="416.85" y="105.97" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;271.0B</text><rect x="443.7" y="199.88" width="22.5" height="5.12" rx="2" fill="#60a5fa"/><text x="454.95" y="194.88" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;14.8B</text><rect x="481.9" y="192.84" width="22.5" height="12.16" rx="2" fill="#fbbf24"/><text x="493.15" y="187.84" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;35.0B</text><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="561.6" y="78.03" width="22.5" height="126.97" rx="2" fill="#2dd4bf"/><text x="572.85" y="73.03" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;365.9B</text><rect x="599.7" y="197.12" width="22.5" height="7.88" rx="2" fill="#60a5fa"/><text x="610.95" y="192.12" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;22.7B</text><rect x="637.9" y="193.90" width="22.5" height="11.10" rx="2" fill="#fbbf24"/><text x="649.15" y="188.90" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;32.0B</text><text x="606.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="717.6" y="46.32" width="22.5" height="158.68" rx="2" fill="#2dd4bf"/><text x="728.85" y="41.32" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;457.3B</text><rect x="755.7" y="193.73" width="22.5" height="11.27" rx="2" fill="#60a5fa"/><text x="766.95" y="188.73" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;32.5B</text><rect x="793.9" y="197.58" width="22.5" height="7.42" rx="2" fill="#fbbf24"/><text x="805.15" y="192.58" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;21.4B</text><text x="762.0" y="258" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+8.6%</div><div class="sub">&yen;328.3B &rarr; &yen;457.3B; below the 15% bar (FY24-25 alone: +35% / +25%)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR</div><div class="val" style="color:#fbbf24;">+12.8%</div><div class="sub">&yen;20.0B &rarr; &yen;32.5B; FY2022 trough of &yen;6.1B in between</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+69.1%</div><div class="sub">&yen;2.6B &rarr; &yen;21.4B; a tiny FY2021 base flatters it &mdash; the FY2023 peak was &yen;35.0B, TTM is negative</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; EBIT Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as a dashed reference line. Gross margin recovered from 17.0% (FY2022) to 22.3% (FY2025) on a richer mix and EV scale, but EBIT margin stays in a 2&ndash;7% range &mdash; far below the 20% bar.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>EBIT margin (S&amp;P std.)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#94a3b8">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><path d="M 50.0,78.03 L 247.5,84.09 L 445.0,50.31 L 642.5,52.61 L 840.0,41.90" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="78.03" r="3" fill="#2dd4bf"/><text x="50.0" y="68.03" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.75%</text><circle cx="247.5" cy="84.09" r="3" fill="#2dd4bf"/><text x="247.5" y="74.09" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.99%</text><circle cx="445.0" cy="50.31" r="3" fill="#2dd4bf"/><text x="445.0" y="40.31" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.21%</text><circle cx="642.5" cy="52.61" r="3" fill="#2dd4bf"/><text x="642.5" y="42.61" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.92%</text><circle cx="840.0" cy="41.90" r="3" fill="#2dd4bf"/><text x="840.0" y="31.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">22.26%</text><path d="M 50.0,171.21 L 247.5,202.64 L 445.0,176.41 L 642.5,170.37 L 840.0,163.20" fill="none" stroke="#60a5fa" stroke-width="2.5"/><circle cx="50.0" cy="171.21" r="3" fill="#60a5fa"/><text x="50.0" y="161.21" text-anchor="middle" font-size="10.5" fill="#93c5fd" font-weight="700">6.10%</text><circle cx="247.5" cy="202.64" r="3" fill="#60a5fa"/><text x="247.5" y="192.64" text-anchor="middle" font-size="10.5" fill="#93c5fd" font-weight="700">2.17%</text><circle cx="445.0" cy="176.41" r="3" fill="#60a5fa"/><text x="445.0" y="166.41" text-anchor="middle" font-size="10.5" fill="#93c5fd" font-weight="700">5.45%</text><circle cx="642.5" cy="170.37" r="3" fill="#60a5fa"/><text x="642.5" y="160.37" text-anchor="middle" font-size="10.5" fill="#93c5fd" font-weight="700">6.20%</text><circle cx="840.0" cy="163.20" r="3" fill="#60a5fa"/><text x="840.0" y="153.20" text-anchor="middle" font-size="10.5" fill="#93c5fd" font-weight="700">7.10%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+<table class="datatable">
+    <tr><th>Metric (RMB B, IFRS unless noted)</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+    <tr><td>Revenue</td><td>&yen;328.31B</td><td>&yen;280.04B</td><td>&yen;270.97B</td><td>&yen;365.91B</td><td>&yen;457.29B</td></tr>
+    <tr><td>Gross profit / gross margin</td><td>&yen;58.3B / 17.75%</td><td>&yen;47.6B / 16.99%</td><td>&yen;57.5B / 21.21%</td><td>&yen;76.6B / 20.92%</td><td>&yen;101.8B / 22.26%</td></tr>
+    <tr><td>Operating income (S&amp;P-standardised EBIT)</td><td>&yen;20.02B</td><td>&yen;6.08B</td><td>&yen;14.77B</td><td>&yen;22.70B</td><td>&yen;32.47B</td></tr>
+    <tr><td>EBIT margin</td><td>6.10%</td><td>2.17%</td><td>5.45%</td><td>6.20%</td><td>7.10%</td></tr>
+    <tr><td>Net income (IFRS, attributable)</td><td>&yen;19.34B</td><td>&yen;2.47B</td><td>&yen;17.48B</td><td>&yen;23.66B</td><td>&yen;41.64B</td></tr>
+    <tr><td>Adjusted net income (non-IFRS, company; &asymp;)</td><td>&yen;22.0B</td><td>&yen;8.5B</td><td>&yen;19.3B</td><td>&yen;27.2B</td><td>&yen;39.2B</td></tr>
+    <tr><td>EPS (IFRS, basic, RMB)</td><td>&yen;0.76</td><td>&yen;0.10</td><td>&yen;0.69</td><td>&yen;0.93</td><td>&yen;1.56</td></tr>
+    <tr><td>Free cash flow (OCF &minus; capex)</td><td>&yen;2.62B</td><td>-&yen;10.19B</td><td>&yen;35.03B</td><td>&yen;32.00B</td><td>&yen;21.37B</td></tr>
+    <tr><td>Capex</td><td>&yen;7.17B</td><td>&yen;5.80B</td><td>&yen;6.27B</td><td>&yen;7.30B</td><td>&yen;12.77B</td></tr>
+    <tr><td>Net cash (cash &amp; investments &minus; debt)</td><td>&yen;55.5B</td><td>&yen;41.7B</td><td>&yen;77.9B</td><td>&yen;64.5B</td><td>&yen;65.9B</td></tr>
+    <tr><td>Dividend per share</td><td>None</td><td>None</td><td>None</td><td>None</td><td>None</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>IFRS vs adjusted:</b> IFRS net income (e.g. &yen;41.6B in FY2025) includes fair-value gains and losses on Xiaomi's investment portfolio; the company's non-IFRS adjusted net income (&yen;39.2B) removes those and share-based compensation. EBIT here is S&amp;P-standardised operating income, which excludes investment gains &mdash; Xiaomi's own reported IFRS operating profit for FY2025 (&yen;47.9B) is higher.<br><b>On free cash flow and net cash:</b> FCF is operating cash flow less capex as standardised by S&amp;P; Xiaomi's cash flow is lumpy with supplier-payable timing. Net cash uses S&amp;P's cash-and-investments definition and may differ from Xiaomi's own liquidity figure. Xiaomi has never paid a dividend.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; the EV / Smartphone Split</div></div>
+  <div class="sec-sub">Eight quarters, Q3 2024 &ndash; Q2 2026 (latest reported: three months to June 30, 2026, published Aug 18, 2026). Revenue and gross margin as reported (IFRS); operating income per S&amp;P standardisation.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">&yen;108.92B</b>, down <b style="color:#f87171;">6.1% YoY</b> (up 9.9% QoQ). Gross margin <b style="color:#f87171;">19.8%</b> vs 22.5% a year earlier. Non-IFRS adjusted net profit <b style="color:#f8fafc;">&yen;6.22B</b>, down <b style="color:#f87171;">42.6% YoY</b> (below analyst estimates per Reuters); IFRS net income was higher at &yen;9.46B because it includes investment fair-value gains. <b style="color:#f8fafc;">Smartphones:</b> 31.2M units shipped (-26% YoY, #3 globally, &asymp;11.5% share) at a record average selling price as pricier memory chips and reduced subsidies hit volumes and margins; smartphone revenue &yen;42.1B. <b style="color:#f8fafc;">EV:</b> 104,199 vehicles delivered (+28.2% YoY), segment revenue &yen;24.9B (+17.1%), average selling price down 9.6% to &yen;229k as the new-generation SU7 ramped, EV gross margin 19.2% (-7.2pp YoY), and an operating loss of &yen;2.6B (Q1 2026: &yen;3.1B loss). Xiaomi's 2026 delivery target is 550,000 vehicles vs 411,000 in 2025.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (&yen;B) &amp; YoY Growth</div>
+    <div class="chart-sub">Growth peaked at +48.8% in Q4'24 as EV deliveries began and has slowed every quarter since; Q1'26 and Q2'26 are the first YoY declines since FY2023 (red bars).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="194.3" x2="840" y2="194.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="198.3" text-anchor="end" font-size="11" fill="#64748b">&yen;20B</text><line x1="60" y1="168.6" x2="840" y2="168.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="172.6" text-anchor="end" font-size="11" fill="#64748b">&yen;40B</text><line x1="60" y1="142.9" x2="840" y2="142.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="146.9" text-anchor="end" font-size="11" fill="#64748b">&yen;60B</text><line x1="60" y1="117.1" x2="840" y2="117.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="121.1" text-anchor="end" font-size="11" fill="#64748b">&yen;80B</text><line x1="60" y1="91.4" x2="840" y2="91.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="95.4" text-anchor="end" font-size="11" fill="#64748b">&yen;100B</text><line x1="60" y1="65.7" x2="840" y2="65.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="69.7" text-anchor="end" font-size="11" fill="#64748b">&yen;120B</text><line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">&yen;140B</text><rect x="78.8" y="101.06" width="60" height="118.94" rx="2" fill="#2dd4bf"/><text x="108.8" y="85.06" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;92.5B</text><text x="108.8" y="97.06" text-anchor="middle" font-size="9" fill="#99f6e4">+30.5% YoY</text><text x="108.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'24</text><rect x="176.2" y="79.85" width="60" height="140.15" rx="2" fill="#2dd4bf"/><text x="206.2" y="63.85" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;109.0B</text><text x="206.2" y="75.85" text-anchor="middle" font-size="9" fill="#99f6e4">+48.8% YoY</text><text x="206.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'24</text><rect x="273.8" y="76.91" width="60" height="143.09" rx="2" fill="#2dd4bf"/><text x="303.8" y="60.91" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;111.3B</text><text x="303.8" y="72.91" text-anchor="middle" font-size="9" fill="#99f6e4">+47.4% YoY</text><text x="303.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'25</text><rect x="371.2" y="70.91" width="60" height="149.09" rx="2" fill="#2dd4bf"/><text x="401.2" y="54.91" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;116.0B</text><text x="401.2" y="66.91" text-anchor="middle" font-size="9" fill="#99f6e4">+30.4% YoY</text><text x="401.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'25</text><rect x="468.8" y="74.56" width="60" height="145.44" rx="2" fill="#2dd4bf"/><text x="498.8" y="58.56" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;113.1B</text><text x="498.8" y="70.56" text-anchor="middle" font-size="9" fill="#99f6e4">+22.3% YoY</text><text x="498.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'25</text><rect x="566.2" y="69.68" width="60" height="150.32" rx="2" fill="#2dd4bf"/><text x="596.2" y="53.68" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;116.9B</text><text x="596.2" y="65.68" text-anchor="middle" font-size="9" fill="#99f6e4">+7.3% YoY</text><text x="596.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'25</text><rect x="663.8" y="92.53" width="60" height="127.47" rx="2" fill="#f87171"/><text x="693.8" y="76.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;99.1B</text><text x="693.8" y="88.53" text-anchor="middle" font-size="9" fill="#fca5a5">-10.9% YoY</text><text x="693.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'26</text><rect x="761.2" y="79.96" width="60" height="140.04" rx="2" fill="#f87171"/><text x="791.2" y="63.96" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;108.9B</text><text x="791.2" y="75.96" text-anchor="middle" font-size="9" fill="#fca5a5">-6.1% YoY</text><text x="791.2" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income vs IFRS Net Income (&yen;B)</div>
+    <div class="chart-sub">Operating income (blue, S&amp;P-standardised) has fallen from &yen;10.2B in Q1'25 to &yen;4.4B in Q2'26. IFRS net income (amber) runs above it when investment gains are large (Q2'26: &yen;9.5B vs &yen;4.4B EBIT), so headline net profit overstates operating momentum.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net income (IFRS)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="194.3" x2="840" y2="194.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="198.3" text-anchor="end" font-size="11" fill="#64748b">&yen;2B</text><line x1="60" y1="168.6" x2="840" y2="168.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="172.6" text-anchor="end" font-size="11" fill="#64748b">&yen;4B</text><line x1="60" y1="142.9" x2="840" y2="142.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="146.9" text-anchor="end" font-size="11" fill="#64748b">&yen;6B</text><line x1="60" y1="117.1" x2="840" y2="117.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="121.1" text-anchor="end" font-size="11" fill="#64748b">&yen;8B</text><line x1="60" y1="91.4" x2="840" y2="91.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="95.4" text-anchor="end" font-size="11" fill="#64748b">&yen;10B</text><line x1="60" y1="65.7" x2="840" y2="65.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="69.7" text-anchor="end" font-size="11" fill="#64748b">&yen;12B</text><line x1="60" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="44.0" text-anchor="end" font-size="11" fill="#64748b">&yen;14B</text><rect x="74.8" y="149.86" width="32" height="70.14" rx="2" fill="#60a5fa"/><text x="90.8" y="144.86" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">5.5</text><rect x="110.8" y="151.19" width="32" height="68.81" rx="2" fill="#fbbf24"/><text x="126.8" y="146.19" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">5.4</text><text x="108.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'24</text><rect x="172.2" y="144.91" width="32" height="75.09" rx="2" fill="#60a5fa"/><text x="188.2" y="139.91" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">5.8</text><rect x="208.2" y="103.95" width="32" height="116.05" rx="2" fill="#fbbf24"/><text x="224.2" y="98.95" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">9.0</text><text x="206.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'24</text><rect x="269.8" y="88.41" width="32" height="131.59" rx="2" fill="#60a5fa"/><text x="285.8" y="83.41" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">10.2</text><rect x="305.8" y="79.55" width="32" height="140.45" rx="2" fill="#fbbf24"/><text x="321.8" y="74.55" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">10.9</text><text x="303.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'25</text><rect x="367.2" y="91.61" width="32" height="128.39" rx="2" fill="#60a5fa"/><text x="383.2" y="86.61" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">10.0</text><rect x="403.2" y="66.95" width="32" height="153.05" rx="2" fill="#fbbf24"/><text x="419.2" y="61.95" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">11.9</text><text x="401.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'25</text><rect x="464.8" y="96.55" width="32" height="123.45" rx="2" fill="#60a5fa"/><text x="480.8" y="91.55" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">9.6</text><rect x="500.8" y="62.23" width="32" height="157.77" rx="2" fill="#fbbf24"/><text x="516.8" y="57.23" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">12.3</text><text x="498.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'25</text><rect x="562.2" y="185.98" width="32" height="34.02" rx="2" fill="#60a5fa"/><text x="578.2" y="180.98" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">2.6</text><rect x="598.2" y="135.86" width="32" height="84.14" rx="2" fill="#fbbf24"/><text x="614.2" y="130.86" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">6.5</text><text x="596.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'25</text><rect x="659.8" y="163.17" width="32" height="56.83" rx="2" fill="#60a5fa"/><text x="675.8" y="158.17" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">4.4</text><rect x="695.8" y="159.28" width="32" height="60.72" rx="2" fill="#fbbf24"/><text x="711.8" y="154.28" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">4.7</text><text x="693.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'26</text><rect x="757.2" y="163.81" width="32" height="56.19" rx="2" fill="#60a5fa"/><text x="773.2" y="158.81" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700">4.4</text><rect x="793.2" y="98.35" width="32" height="121.65" rx="2" fill="#fbbf24"/><text x="809.2" y="93.35" text-anchor="middle" font-size="9.5" fill="#fde68a" font-weight="700">9.5</text><text x="791.2" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+<table class="datatable">
+    <tr><th>Metric (RMB B)</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Revenue</td><td>92.5</td><td>109.0</td><td>111.3</td><td>116.0</td><td>113.1</td><td>116.9</td><td>99.1</td><td>108.9</td></tr>
+    <tr><td>YoY growth</td><td>+30.5%</td><td>+48.8%</td><td>+47.4%</td><td>+30.4%</td><td>+22.3%</td><td>+7.3%</td><td>-10.9%</td><td>-6.1%</td></tr>
+    <tr><td>Gross margin</td><td>20.4%</td><td>20.6%</td><td>22.8%</td><td>22.5%</td><td>22.9%</td><td>20.8%</td><td>22.0%</td><td>19.8%</td></tr>
+    <tr><td>Operating income (S&amp;P std.)</td><td>5.46</td><td>5.84</td><td>10.23</td><td>9.99</td><td>9.60</td><td>2.65</td><td>4.42</td><td>4.37</td></tr>
+    <tr><td>Net income (IFRS)</td><td>5.35</td><td>9.03</td><td>10.92</td><td>11.90</td><td>12.27</td><td>6.54</td><td>4.72</td><td>9.46</td></tr>
+    <tr><td>Adj. net income (non-IFRS; &asymp;)</td><td>n/a</td><td>n/a</td><td>10.7</td><td>10.8</td><td>11.3</td><td>6.3</td><td>6.1</td><td>6.2</td></tr>
+    <tr><td>Free cash flow</td><td>15.13</td><td>16.61</td><td>4.51</td><td>18.46</td><td>-2.44</td><td>0.84</td><td>-3.89</td><td>2.17</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Adjusted net income by quarter is Xiaomi's non-IFRS measure from earnings releases and press coverage, rounded; Q3'24 and Q4'24 adjusted figures were not verified and are shown as n/a; Q1'25&ndash;Q2'26 are rounded and approximate. Quarterly FCF is volatile on working-capital timing.</div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Business mix, Q2 2026 (S&amp;P/Fiscal.ai segment data):</b> smartphones &yen;42.1B (-7.5% YoY), IoT &amp; lifestyle &yen;31.3B (-19.2% YoY), smart EV, AI &amp; other new initiatives &yen;24.9B (+17.1% YoY), internet services &yen;9.0B, other &yen;1.6B. EV is now about 23% of revenue but loss-making again, so group profit still depends on a smartphone and IoT base that is shrinking in 2026.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E (IFRS EPS) used as the entry-multiple signal, taken at each fiscal year-end per S&amp;P Global, with the current value computed from the Oct 5, 2026 close (HK$23.88) over trailing EPS of HK$1.42 (&yen;1.23 at &asymp;1.15 HKD/RMB). FY2022 (97.55x) is excluded as not meaningful: IFRS net income was only &yen;2.5B that year on investment losses. No dividend is paid.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21, FY23-25 (n/m FY22) &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E (&asymp;16.8x) sits about 30% below the &asymp;24.1x average of the four meaningful year-ends. But the forward P/E (&asymp;19.9x, derived from the S&amp;P consensus forward multiple) is above trailing, meaning analysts expect earnings to fall from the TTM level &mdash; the trailing multiple looks cheaper than the forward one.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (current only)</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><text x="148.0" y="212" font-size="10" fill="#64748b">FY22: n/m (97.55x, trough earnings)</text><line x1="50.0" y1="99.31" x2="840.0" y2="99.31" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="95.31" text-anchor="end" font-size="10" fill="#94a3b8">FY21/23-25 avg: 24.1x</text><path d="M 366.0,118.50 L 524.0,48.05 L 682.0,110.10 L 840.0,135.92" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="120.60" r="3" fill="#a78bfa"/><text x="50.0" y="110.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.88x</text><circle cx="366.0" cy="118.50" r="3" fill="#a78bfa"/><text x="366.0" y="133.50" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.30x</text><circle cx="524.0" cy="48.05" r="3" fill="#a78bfa"/><text x="524.0" y="38.05" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">34.39x</text><circle cx="682.0" cy="110.10" r="3" fill="#a78bfa"/><text x="682.0" y="125.10" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.98x</text><circle cx="840.0" cy="135.92" r="3.5" fill="#a78bfa"/><text x="840.0" y="150.92" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">16.82x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><circle cx="840.0" cy="120.50" r="4" fill="#c4b5fd" stroke="#0e1626" stroke-width="1.2"/><text x="805.0" y="117.50" text-anchor="end" font-size="10" fill="#c4b5fd" font-weight="700">Fwd 19.9x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the P/E numbers:</b> trailing P/E divides the price by the last 12 months of IFRS earnings; Xiaomi's IFRS earnings include volatile fair-value gains on its investment portfolio (TTM IFRS net income &yen;33.0B vs roughly &yen;29.9B of non-IFRS adjusted profit, an approximation summed from the last four quarters), so the trailing multiple is flattered. Forward P/E (price over the consensus estimate for the next 12 months, &asymp;HK$1.20 per share, below the trailing HK$1.42) is the more cautious lens: the market is paying &asymp;20x for earnings that are expected to be lower than last year's. With consensus three-year EPS growth of only &asymp;4% a year (third-party estimate), the PEG ratio is well above 1.0 &mdash; not a cheap-growth profile on that basis. Provider forward-P/E at fiscal year-ends was 16.5x (FY21), 22.4x (FY22), 21.8x (FY23), 31.6x (FY24) and 22.0x (FY25).
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> at year-end FY2025 Xiaomi held &yen;107.7B in cash &amp; investments against &yen;41.8B of debt, a net cash position of &yen;65.9B; by Jun 30, 2026 that was &yen;121.7B vs &yen;44.3B (&asymp;&yen;77.4B net cash, S&amp;P definitions, which may not match Xiaomi's own liquidity figure). TTM EBITDA is roughly &yen;28.6B, so net debt/EBITDA is negative (net cash) and auto-qualifies. TTM free cash flow, though, is negative (-&yen;4.6B), and capex nearly doubled in FY2025 (&yen;12.8B vs &yen;7.3B) as EV capacity and models expand. ROIC of 9.03% (TTM) vs a data-provider WACC of 7.87% clears by only &asymp;1.2pp; both are third-party estimates.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure (approximate)</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="102.48 337.34" stroke-dashoffset="0.00"/><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="29.47 410.35" stroke-dashoffset="-102.48"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="307.88 131.95" stroke-dashoffset="-131.95"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Lei Jun, founder, chairman &amp; CEO &asymp; 23.3% of shares (&asymp;64% of votes via super-voting Class B shares)</div>
+        <div><span class="dot" style="background:#60a5fa;"></span>Lin Bin, co-founder &amp; vice chairman &asymp; 6.7% (third-party summary of HKEX filings; verify before relying)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Institutions &amp; public float &asymp; 70% (S&amp;P lists total insider ownership at &asymp;33%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note:</b> Xiaomi has a dual-class structure under which the two co-founders' Class B shares carry 10 votes each. Lei Jun holds about 23% of the economic interest but roughly 64% of the votes (after the March 2025 placement), and has added to his position in the open market (including purchases in late 2025). That alignment supports long-term decisions &mdash; and is a minority-shareholder risk, since public holders cannot outvote the founders on strategy or capital allocation. Separately, India's Serious Fraud Office recommended a detailed probe into Xiaomi's India business in September 2026 (Reuters); the outcome is unknown.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are directly computable here &mdash; no N/A cases. Criterion #14 (Margin Stability) compares FY2025 gross margin to FY2022's, three fiscal years earlier; Xiaomi reports a gross-profit line, so gross margin is the basis. This is a consolidated company: the EV segment is early-stage and loss-making in 2026, and is blended into every figure below.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Xiaomi</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+8.6% &mdash; &yen;328.3B &rarr; &yen;457.3B (IFRS); revenue fell 14.7% in FY2022 and 3.2% in FY2023 before the EV launch drove +35.0% and +25.0% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+12.8% &mdash; &yen;20.0B &rarr; &yen;32.5B (S&amp;P-standardised operating income, excl. investment gains); FY2022 trough of &yen;6.1B in between (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>7.10% (FY2025, S&amp;P-standardised EBIT margin); the TTM figure to Jun 2026 has already fallen to 4.80% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+69.1% &mdash; &yen;2.6B &rarr; &yen;21.4B, but off a very small FY2021 base; FCF has fallen from a &yen;35.0B FY2023 peak and TTM FCF is -&yen;4.6B (score 5/5, flattered by the base effect)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#3 globally in smartphones (Q2 2026: 31.2M units, &asymp;11.5% share per a third-party tracker, shipments -26% YoY); sub-scale in EVs (411k deliveries in 2025) &mdash; no #1/#2 core position (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>3 &mdash; smartphones are a moderately concentrated oligopoly (Apple, Samsung, Xiaomi, Transsion, OPPO/vivo), while EVs, smart home/IoT and wearables are fragmented and contested (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 9.03% vs S&amp;P-estimated WACC 7.87% (TTM), a +1.2pp spread &mdash; clears, but narrowly: at a 10% WACC (plausible for a China hardware name) the spread would be negative (score 1/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash &asymp;&yen;77.4B at Jun 30, 2026 (S&amp;P: cash &amp; investments &yen;121.7B vs debt &yen;44.3B); auto-qualifies (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>66% (FY2025: FCF &yen;21.4B vs S&amp;P EBIT &yen;32.5B); TTM FCF is negative as EV working capital and capex absorb cash (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E &asymp;16.8x (IFRS EPS) vs FY21/23/24/25 average of &asymp;24.1x (FY22 excluded as n/m at 97.55x) &mdash; ratio 0.70, a discount; the forward P/E (&asymp;19.9x) is higher than trailing because consensus expects earnings to fall (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;+4.9% FY21-FY25 (implied from net income/EPS: &asymp;25.4B &rarr; &asymp;26.7B), mostly the March 2025 HK$42.5B share placement; +2.8% over the last 12 months (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (&asymp;5%+)</td><td>Lei Jun (founder, chairman &amp; CEO) &asymp;23.3% of shares and &asymp;64% of votes via super-voting Class B shares; co-founder Lin Bin a further &asymp;6.7% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.8% of FY2025 revenue (&yen;12.8B, S&amp;P cash-flow capex); low so far, but it nearly doubled in FY2025 as EV capacity and new models expand (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (Xiaomi reports a gross-profit line). 22.26% (FY2025) vs 16.99% (FY2022), +5.27pp over three fiscal years &mdash; but FY2022 was a trough and Q2 2026 gross margin has already slipped to 19.8% on memory-cost pressure (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Net cash of roughly &yen;77B, a founder who owns about 23% of the shares and controls about 64% of the votes, low capex intensity (&asymp;2.8% of revenue), gross margin up about 5pp over three years, and a trailing P/E (&asymp;16.8x) below its own year-end average. The EV segment turned a full-year operating profit in 2025, deliveries are growing (+28% YoY in Q2 2026; 2026 target 550k), and Xiaomi is building in-house chips and an overseas push that could diversify it away from handsets.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Consolidated EBIT margin (7.1%) is far below the 20% bar and the TTM figure has already dropped to 4.8%. Q2 2026 adjusted net profit fell 42.6% YoY, smartphone shipments fell 26% on memory-cost pressure, IoT revenue fell 19%, and the EV segment is back to a &yen;2.6B quarterly loss (Q1: &yen;3.1B) amid an intense China price war and falling domestic car sales. TTM free cash flow is negative, the share count has risen about 5% over five years, and the stock is down about 60% from its mid-2025 high. IFRS earnings include volatile investment gains, so the headline P/E overstates how cheap the shares are on operating earnings, and the forward P/E is higher than trailing. India regulatory scrutiny is an additional unquantified risk.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Aug 18 &ndash; Oct 6, 2026. Sources: stockanalysis.com (Xiaomi annual and quarterly financials, ratios and statistics; S&amp;P Global Market Intelligence and Fiscal.ai segment data), Yahoo Finance (1810.HK monthly and daily closes), Xiaomi FY2025 and Q1/Q2 2026 results as reported by press (Reuters, CnEVPost, Gasgoo, Caixin, kr-asia), HKEX filings as summarised by press (Lei Jun and Lin Bin holdings), third-party smartphone trackers as reported by press (Q2 2026 share).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Xiaomi reports in RMB under IFRS; no currency conversion has been applied except where explicitly marked (HKD price; an approximate 1.15 HKD/RMB rate is used for P/E). Adjusted net income figures are Xiaomi's non-IFRS measure, rounded; the S&amp;P WACC and ROIC are data-provider estimates; the FY22-to-FY25 gross-margin comparison starts from a trough year; the ownership split is approximate.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">HKEX: 1810, HKD. Points shown are calendar year-end (December) closes plus the current price (Oct 5, 2026 close).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Xiaomi &mdash; Year-End Close (HKEX, HKD)</div>
+    <div class="chart-sub">A round trip with a spike: the shares fell about 42% through 2022, rallied more than 3.5x from end-2022 to end-2025 on the EV launch and a profit surge (peaking near HK$60 in mid-2025), then fell back in 2026 as smartphone margins and EV losses disappointed &mdash; the price is above its end-2021 level (HK$18.90) but about 39% below end-2025 (HK$39.20). Monthly closes from Yahoo Finance; the CAGR excludes dividends (none paid).</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46.0" y1="112.5" x2="680.0" y2="94.7" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5,4" opacity="0.7"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +4.8%</text>
+<path d="M 46.0,112.5 L 172.8,140.9 L 299.6,124.3 L 426.4,56.2 L 553.2,40.0 L 680.0,94.7 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,112.5 L 172.8,140.9 L 299.6,124.3 L 426.4,56.2 L 553.2,40.0 L 680.0,94.7" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="112.5" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="102.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$18.90</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="140.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="154.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$10.94</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="124.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="138.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$15.60</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="56.2" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="46.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$34.65</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="40.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="30.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$39.20</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="94.7" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="84.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$23.88</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for FY2021-2025 (Yahoo Finance monthly closes, Dec 2021 &ndash; Dec 2025) and the current price (HK$23.88, Oct 5, 2026 close) are 1810.HK HKEX prices in HKD. 5-Yr CAGR is computed FY21-close to current over 5 years (about 4.8 calendar years) and excludes dividends (none paid). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ford Motor Company — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/ford.html">
+<meta property="og:title" content="Ford Motor Company — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ford Motor Company — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Ford Motor Company</h1>
+  <div class="badges">
+    <div class="badge">NYSE: F</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Dearborn, Michigan, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Family-Controlled (Class B, 40% of Votes) &mdash; Captive Finance Arm Distorts Consolidated Cash Flow &amp; Debt</div>
+  </div>
+
+  <div class="price">$12.15</div>
+  <div class="price-sub">NYSE close, Oct 5, 2026 (USD) &middot; Market cap &asymp; $48.5B (3.99B shares) &middot; 52-wk range $11.11 &ndash; 17.78 &middot; Beta 1.94 &middot; Analyst consensus: Buy (20 analysts), avg PT $16.03 (+32%) &middot; Regular dividend $0.15/qtr ($0.60/yr, ~4.9% yield) &middot; Next report (Q3 2026): Oct 28, 2026</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definitions used on this page:</b> &ldquo;EBIT&rdquo; is <b>Ford's Company Adjusted EBIT</b> (excludes interest on Company debt, taxes and pre-tax special items; includes Ford Credit's pre-tax profit). &ldquo;Free cash flow&rdquo; is <b>Ford's Company Adjusted FCF</b> (excludes Ford Credit's operating cash flows, counts Ford Credit distributions to the parent and Company capital spending, and excludes funded pension contributions and restructuring cash). Consolidated (GAAP) operating cash flow is much larger (FY2025: $21.3B vs Company Adjusted FCF of $3.5B) because it includes Ford Credit, so it is <i>not</i> used. Net debt/EBITDA uses <b>industrial (ex-Ford Credit) net debt</b>. Adjusted figures exclude large special items ($17.4B pre-tax in FY2025, $4.4B in H1 2026); GAAP results are shown alongside wherever they differ materially.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$187.3B</div>
+      <div class="sub">+1.2% YoY (FY2024: +5.0%)</div>
+      <div class="note">Record revenue, fifth straight annual increase, but growth is slowing. FY2021-25 CAGR is +8.3%. Q2 2026 revenue was $48.3B, down 3.8% YoY on discontinued models, aluminum supply constraints and a smaller Gen-1 EV business.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Adj. EBIT Margin (Company)</div>
+      <div class="val" style="color:#f87171;">3.6%</div>
+      <div class="sub">FY2025, down from 7.3% in FY2021</div>
+      <div class="note">FY2025 adj. EBIT $6.8B vs $10.2B in FY2024 (tariffs, Novelis aluminum plant fire, Model e losses of $4.8B). H1 2026 margin 6.5% on a $1.3B one-off tariff reimbursement; FY2026 guide $10-11B. GAAP net loss FY2025: -$8.2B.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Adj. ROIC vs Est. WACC</div>
+      <div class="val" style="color:#fbbf24;">13.2% vs ~9%</div>
+      <div class="sub">TTM Jun 2026, Ford-defined adjusted ROIC</div>
+      <div class="note">Adjusted ROIC excludes $19.8B of special items; GAAP-basis ROIC on Ford's own table is -16.7%. WACC is my estimate (no company figure). FY2025 adjusted ROIC was only 8.8%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Industrial Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">~0.1x</div>
+      <div class="sub">Jun 2026, ex-Ford Credit</div>
+      <div class="note">Company debt $23.6B vs $22.1B cash &amp; securities. Ford Credit carries a further $137B of debt, funded by its receivables and leases, and is excluded here. Net pension/OPEB liability $3.8B not included.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">36/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Lower-middle of the pack: cheap on its own history and unlevered at the industrial level, but growth in earnings and cash flow is negative, margins are thin and gross margin has compressed 5.1pp in three years.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; ROIC above est. WACC (adjusted basis), industrial net debt/EBITDA under 2x, entry multiple at/below own average (adjusted EPS), flat share count, family control (Class B), and capex intensity under 6% of revenue</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market position (#3 in the U.S., not top-2), market concentration (competitive and fragmented), FCF conversion (52%) and gross-margin stability (-5.1pp)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Ford Motor Company, founded in 1903 and run from Dearborn, Michigan, sells Ford and Lincoln trucks, SUVs and vans through three operating segments plus a captive lender. <b>Ford Blue</b> (gas and hybrid vehicles, $101B of FY2025 revenue, $3.0B EBIT) and <b>Ford Pro</b> (commercial vehicles and software, $66B revenue, $6.8B EBIT, 10.3% margin) are the profit engines. <b>Ford Model e</b> (electric vehicles) lost $4.8B in FY2025 on $6.7B of revenue, and <b>Ford Credit</b> earned $2.6B before tax. The Ford family still controls the company through Class B shares worth 40% of the votes while owning only about 2% of the equity. FY2025 was messy: adjusted EBIT fell 34% to $6.8B on tariffs and the Novelis aluminum plant fire, and the GAAP net loss of $8.2B reflected $17.4B of special items, mostly EV program cancellations announced in December 2025. 2026 looks better on adjusted numbers: H1 adjusted EBIT was $6.0B (vs $3.2B), guidance was raised to $10-11B and adjusted FCF to $6-7B, helped by Ford Blue pricing and a $1.3B tariff reimbursement booked in Q1. But the GAAP picture is still red, with a $3.6B largely non-cash charge in Q2 for the disposal of the BlueOval SK battery joint venture, a trailing net loss of $7.4B and Model e still guided to lose about $4B this year. The stock sits about 32% below the average analyst target and about 32% below its 52-week high.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Adjusted vs GAAP</b> &mdash; Ford's headline EBIT and FCF strip out special items that recur nearly every year (restructuring, program cancellations, recalls), so adjusted figures flatter the underlying economics; FY2025 GAAP net income was -$8.2B against adjusted EBIT of +$6.8B. (2) <b>Captive finance</b> &mdash; Ford Credit adds $10.3B of revenue and $137B of debt to the consolidated statements; consolidated net debt (~$141B) and consolidated operating cash flow are not comparable with industrial peers. (3) <b>Cyclical, policy-driven earnings</b> &mdash; tariffs and their reimbursement (a $1.3B IEEPA refund in Q1 2026), the Novelis supply shock (about $1B swing in 2026) and EV subsidies all moved EBIT by billions, so single-year figures are noisy.
+  </div>
+
+  <div class="bignum-corner">FORD</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD billions (revenue, net income, capex per S&amp;P Global/Ford filings; EBIT = Ford's Company Adjusted EBIT; FCF = Ford's Company Adjusted FCF as reported in each year's Q4 release). Adjusted EPS for FY2021-23 is taken from Ford's SEC filings via a secondary search and is approximate.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Adjusted EBIT &amp; Adjusted Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">Shown at true relative size. Revenue has grown every year, but adjusted EBIT peaked at $10.4B in FY2022-23 and fell to $6.8B in FY2025; Company Adjusted FCF halved from its FY2022 peak of $9.1B to $3.5B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Adjusted EBIT (Company)</span><span><span class="dot" style="background:#fbbf24;"></span>Adjusted FCF (Company)</span></div>
+<svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">50bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">100bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">150bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">200bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="120.1" width="30" height="119.9" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="115.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">136.3</text>
+<rect x="123.0" y="231.2" width="30" height="8.8" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="226.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">10.0</text>
+<rect x="161.0" y="236.0" width="30" height="4.0" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="231.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4.6</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="100.9" width="30" height="139.1" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="95.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">158.1</text>
+<rect x="279.0" y="230.8" width="30" height="9.2" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="225.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">10.4</text>
+<rect x="317.0" y="232.0" width="30" height="8.0" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="227.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">9.1</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="84.9" width="30" height="155.1" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="79.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">176.2</text>
+<rect x="435.0" y="230.8" width="30" height="9.2" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="225.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">10.4</text>
+<rect x="473.0" y="234.0" width="30" height="6.0" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="229.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6.8</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="77.2" width="30" height="162.8" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="72.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">185.0</text>
+<rect x="591.0" y="231.0" width="30" height="9.0" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="226.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">10.2</text>
+<rect x="629.0" y="234.1" width="30" height="5.9" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="229.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6.7</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="75.2" width="30" height="164.8" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="70.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">187.3</text>
+<rect x="747.0" y="234.0" width="30" height="6.0" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="229.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">6.8</text>
+<rect x="785.0" y="236.9" width="30" height="3.1" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="231.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3.5</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+8.3%</div>
+      <div class="sub">$136.3B &rarr; $187.3B &mdash; steady, but FY2025 growth was only +1.2%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Adj. EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-9.2%</div>
+      <div class="sub">$10.0B &rarr; $6.8B &mdash; revenue up 37%, adjusted EBIT down 32%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Adj. FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-6.6%</div>
+      <div class="sub">$4.6B &rarr; $3.5B &mdash; path 4.6 / 9.1 / 6.8 / 6.7 / 3.5</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Margin Trend &mdash; Adjusted EBIT Margin vs Gross Margin (S&amp;P standardised)</div>
+    <div class="chart-sub">Adjusted EBIT margin (green) fell from 7.3% to 3.6%. Gross margin (blue; revenue less cost of revenue as standardised by S&amp;P Global, which includes Ford Credit's interest and operating costs) fell from 12.1% to 5.8%; FY2025 also absorbs some special-item charges, so the drop is partly one-off. Gross margin is the basis for criterion 14.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Adjusted EBIT margin</span></div>
+<svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text><text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,44.8 205,49.1 350,55.6 495,58.6 640,68.2" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="44.8" r="3.2" fill="#60a5fa"/><text x="60" y="37.8" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1%</text>
+<circle cx="205" cy="49.1" r="3.2" fill="#60a5fa"/><text x="205" y="42.1" text-anchor="middle" font-size="8" fill="#cbd5e1">10.9%</text>
+<circle cx="350" cy="55.6" r="3.2" fill="#60a5fa"/><text x="350" y="48.6" text-anchor="middle" font-size="8" fill="#cbd5e1">9.2%</text>
+<circle cx="495" cy="58.6" r="3.2" fill="#60a5fa"/><text x="495" y="51.6" text-anchor="middle" font-size="8" fill="#cbd5e1">8.4%</text>
+<circle cx="640" cy="68.2" r="3.2" fill="#60a5fa"/><text x="640" y="61.2" text-anchor="middle" font-size="8" fill="#cbd5e1">5.8%</text>
+<polyline points="60,62.5 205,65.3 350,67.9 495,69.3 640,76.4" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="62.5" r="3.2" fill="#34d399"/><text x="60" y="74.5" text-anchor="middle" font-size="8" fill="#cbd5e1">7.3%</text>
+<circle cx="205" cy="65.3" r="3.2" fill="#34d399"/><text x="205" y="77.3" text-anchor="middle" font-size="8" fill="#cbd5e1">6.6%</text>
+<circle cx="350" cy="67.9" r="3.2" fill="#34d399"/><text x="350" y="79.9" text-anchor="middle" font-size="8" fill="#cbd5e1">5.9%</text>
+<circle cx="495" cy="69.3" r="3.2" fill="#34d399"/><text x="495" y="81.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.5%</text>
+<circle cx="640" cy="76.4" r="3.2" fill="#34d399"/><text x="640" y="88.4" text-anchor="middle" font-size="8" fill="#cbd5e1">3.6%</text>
+<text x="60" y="104" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<text x="205" y="104" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<text x="350" y="104" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<text x="495" y="104" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<text x="640" y="104" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($B unless stated)</th><th>Revenue</th><th>Adj. EBIT</th><th>Adj. Margin</th><th>Net Income (GAAP)</th><th>Adj. EPS / GAAP EPS ($)</th><th>Adj. FCF</th><th>Capex</th><th>DPS ($)</th></tr>
+    <tr><td>FY2021</td><td>136.3</td><td>10.0</td><td>7.3%</td><td>17.9</td><td>1.59 / 4.45</td><td>4.6</td><td>6.2</td><td>0.10</td></tr>
+    <tr><td>FY2022</td><td>158.1</td><td>10.4</td><td>6.6%</td><td>-2.0</td><td>1.88 / -0.49</td><td>9.1</td><td>6.9</td><td>0.50</td></tr>
+    <tr><td>FY2023</td><td>176.2</td><td>10.4</td><td>5.9%</td><td>4.3</td><td>2.01 / 1.08</td><td>6.8</td><td>8.2</td><td>0.60</td></tr>
+    <tr><td>FY2024</td><td>185.0</td><td>10.2</td><td>5.5%</td><td>5.9</td><td>1.84 / 1.46</td><td>6.7</td><td>8.7</td><td>0.60</td></tr>
+    <tr><td>FY2025</td><td>187.3</td><td>6.8</td><td>3.6%</td><td>-8.2</td><td>1.09 / -2.06</td><td>3.5</td><td>8.8</td><td>0.60</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>188.0</td><td>9.6</td><td>5.1%</td><td>-7.4</td><td>1.66 / -1.86</td><td>2.4</td><td>9.7</td><td>0.60</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">FY2021 adjusted EBIT reflects Ford's restated definition (excludes the $8.2B Rivian gain). TTM adjusted EBIT, EPS and FCF are derived as FY2025 minus H1 2025 plus H1 2026 from Ford's Q2 2026 release (adj. EBIT 6,780 - 3,159 + 5,991 = $9.6B; adj. FCF 3.5 - 1.3 + 0.2 = $2.4B; adj. EPS 1.09 - 0.51 + 1.08 = $1.66). TTM adj. EBIT includes the $1.3B Q1 2026 tariff reimbursement; TTM capex is S&amp;P Global's figure. Dividends are regular dividends per S&amp;P Global; supplemental dividends in some years are not included. Consolidated FCF as standardised by S&amp;P (FY2025: $12.5B) includes Ford Credit and is not used.</div>
+  <div class="footer-note">Source: Ford Motor Company Q4 2025 and Q2 2026 earnings releases (SEC 8-K), Q4 2021-2023 releases (summarised via secondary sources), stockanalysis.com (S&amp;P Global Market Intelligence). All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">Seven quarters, Q4 2024 to Q2 2026. Reported on Jul 28, 2026; Q3 2026 results are due Oct 28, 2026. Q3 2026 U.S. sales fell 6.6% to 509,764 units as Escape and Corsair were phased out and an aluminum supplier issue hit F-150 output.</div>
+
+  <div class="headline-box">
+    <div class="title">What actually moved the stock</div>
+    <p>Q2 2026 revenue was $48.3B (-3.8% YoY) with adjusted EBIT of $2.5B (+17% YoY, 5.2% margin) and adjusted FCF of $2.1B, and Ford raised full-year guidance to adjusted EBIT $10-11B and adjusted FCF $6-7B. Ford Blue earned $1.1B (+72%) on pricing and mix, Ford Pro earned $1.7B (9.7% margin, down from 12.3%) as it recovered from the Novelis aluminum shortage, and Model e lost $0.9B. Q1 2026 was the standout quarter ($3.5B adjusted EBIT) because it included a $1.3B IEEPA tariff reimbursement, so H1 2026 adjusted EBIT of $6.0B overstates the run-rate. The headline GAAP result was a $1.3B net loss because of $4.2B of special items, mainly a $3.6B largely non-cash charge for disposing of the BlueOval SK battery venture. The stock nevertheless fell from $15.28 on Jul 29 to $12.15 by Oct 5 as U.S. market share softened and investors weighed 2026 guidance quality.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters ($B)</div>
+    <div class="chart-sub">Revenue is seasonally weakest in Q1 and has been flat to down for three quarters on a YoY basis: Q4'25 -4.8%, Q1'26 +6.2%, Q2'26 -3.8%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $B</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="52.9" width="60" height="77.1" fill="#2dd4bf"/><text x="70" y="47.9" text-anchor="middle" font-size="9" fill="#cbd5e1">48.2</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="64.9" width="60" height="65.1" fill="#2dd4bf"/><text x="160" y="59.9" text-anchor="middle" font-size="9" fill="#cbd5e1">40.7</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="49.7" width="60" height="80.3" fill="#2dd4bf"/><text x="250" y="44.7" text-anchor="middle" font-size="9" fill="#cbd5e1">50.2</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="49.2" width="60" height="80.8" fill="#2dd4bf"/><text x="340" y="44.2" text-anchor="middle" font-size="9" fill="#cbd5e1">50.5</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="56.6" width="60" height="73.4" fill="#2dd4bf"/><text x="430" y="51.6" text-anchor="middle" font-size="9" fill="#cbd5e1">45.9</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="60.9" width="60" height="69.1" fill="#2dd4bf"/><text x="520" y="55.9" text-anchor="middle" font-size="9" fill="#cbd5e1">43.2</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="52.7" width="60" height="77.3" fill="#2dd4bf"/><text x="610" y="47.7" text-anchor="middle" font-size="9" fill="#cbd5e1">48.3</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Company Adjusted EBIT &mdash; Last 7 Quarters ($M)</div>
+    <div class="chart-sub">Q1'25 ($1.0B) was depressed by tariffs; Q3'25 is derived (FY less 9M). Q1'26 includes the $1.3B tariff reimbursement; excluding it Q1'26 would be about $2.2B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Company adjusted EBIT, $M</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="78.1" width="60" height="51.9" fill="#60a5fa"/><text x="70" y="73.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2,138</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="130" y="105.3" width="60" height="24.7" fill="#60a5fa"/><text x="160" y="100.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,019</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="220" y="78.0" width="60" height="52.0" fill="#60a5fa"/><text x="250" y="73.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2,140</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="310" y="67.2" width="60" height="62.8" fill="#60a5fa"/><text x="340" y="62.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,586</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="400" y="104.9" width="60" height="25.1" fill="#60a5fa"/><text x="430" y="99.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,035</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="490" y="45.3" width="60" height="84.7" fill="#60a5fa"/><text x="520" y="40.3" text-anchor="middle" font-size="9" fill="#cbd5e1">3,488</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="580" y="69.2" width="60" height="60.8" fill="#60a5fa"/><text x="610" y="64.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,503</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric ($M), latest quarter vs prior year</th><th>Prior-year quarter</th><th>Latest quarter</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>50,184</td><td>48,296</td><td>-3.8%</td></tr>
+    <tr><td>Company adjusted EBIT</td><td>2,140</td><td>2,503</td><td>+17.0%</td></tr>
+    <tr><td>&nbsp;&nbsp;Ford Blue EBIT</td><td>661</td><td>1,135</td><td>+71.7%</td></tr>
+    <tr><td>&nbsp;&nbsp;Ford Pro EBIT</td><td>2,318</td><td>1,718</td><td>-25.9%</td></tr>
+    <tr><td>&nbsp;&nbsp;Ford Model e EBIT</td><td>(1,329)</td><td>(919)</td><td>Loss narrowed</td></tr>
+    <tr><td>&nbsp;&nbsp;Ford Credit EBT</td><td>645</td><td>757</td><td>+17.4%</td></tr>
+    <tr><td>Special items (pre-tax)</td><td>(1,302)</td><td>(4,179)</td><td>BOSK, EV cancellations</td></tr>
+    <tr><td>Net income / (loss), GAAP</td><td>(36)</td><td>(1,327)</td><td>BOSK charge</td></tr>
+    <tr><td>Company adjusted FCF</td><td>2,826</td><td>2,094</td><td>-25.9%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly adjusted FCF ($M): Q1'25 -1,478 &middot; Q2'25 2,826 &middot; Q3'25 4,309 &middot; Q4'25 -2,144 &middot; Q1'26 -1,874 &middot; Q2'26 2,094 (Q4'24: about $0.7B). Q4'24 and Q3'25 revenue from Ford's quarterly releases (Q3'25 rounded). Segment Q1'26 EBIT (derived from H1 less Q2): Blue 1,942, Pro 1,685, Model e (777).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, raised Jul 28):</b> adjusted EBIT $10.0-11.0B (from $8.5-10.5B); adjusted FCF $6.0-7.0B (includes ~$0.5B of the IEEPA reimbursement); capex $9.5-10.5B. Segments: Blue $5.0-5.5B, Pro $7.0-7.5B, Model e about -$4.0B (incl. ~$1B for the Universal EV platform and Ford Energy), Ford Credit EBT above $2.5B. Excludes any Middle East escalation or new tariff changes.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Longer-term target:</b> management targets an 8% adjusted EBIT margin by 2029 (FY2025: 3.6%; FY2026 guide implies about 5.5%). This is a company ambition, not a forecast, and the Novelis recovery (about +$1B EBIT in 2026) and cost cuts (~$1B material and warranty) must outrun tariffs, pricing pressure and Model e investment.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">GAAP trailing P/E is not meaningful (TTM EPS -$1.86; FY2022 and FY2025 were also losses), so valuation uses year-end price over Ford's adjusted diluted EPS. Treat the multiples as low-quality because adjusted EPS excludes recurring special items.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on Adjusted Diluted EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E of ~7.3x ($12.15 / TTM adjusted EPS $1.66) is ~86% of Ford's FY2021-25 average (~8.5x). Year-end prices: $20.77, $11.63, $12.19, $9.90, $13.12; adjusted EPS $1.59, $1.88, $2.01, $1.84, $1.09. The FY2021 and FY2025 bars are high for different reasons: a post-Rivian-gain peak price and a trough in adjusted EPS.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="38.2" width="70" height="71.8" fill="#60a5fa"/><text x="55" y="33.2" text-anchor="middle" font-size="9" fill="#cbd5e1">13.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="76.0" width="70" height="34.0" fill="#60a5fa"/><text x="150" y="71.0" text-anchor="middle" font-size="9" fill="#cbd5e1">6.2x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="76.6" width="70" height="33.4" fill="#60a5fa"/><text x="245" y="71.6" text-anchor="middle" font-size="9" fill="#cbd5e1">6.1x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="80.4" width="70" height="29.6" fill="#60a5fa"/><text x="340" y="75.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5.4x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="43.8" width="70" height="66.2" fill="#60a5fa"/><text x="435" y="38.8" text-anchor="middle" font-size="9" fill="#cbd5e1">12.0x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="69.7" width="70" height="40.3" fill="#2dd4bf"/><text x="530" y="64.7" text-anchor="middle" font-size="9" fill="#cbd5e1">7.3x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="63.0" x2="690" y2="63.0" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="59.0" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 8.5x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; GAAP caveat:</b> forward P/E is ~6.8x (S&amp;P/stockanalysis.com) versus a FY-end average of ~8.4x over FY2021-25 (10.8, 5.9, 8.1, 5.8, 11.3), about 82% of its own average. Trailing GAAP P/E is not meaningful: TTM GAAP EPS is -$1.86 on $7.4B of net losses driven by special items, so an investor paying $12.15 is relying on adjusted earnings being the right measure. The scorecard uses the trailing adjusted ratio (0.86 = 3/5). Price/sales is about 0.26x and the dividend yield about 4.9%; the average analyst target of $16.03 is ~32% above the current price, though Goldman Sachs cut its target to $14 (Neutral) on Oct 5.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capex ($B) &amp; Capex Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has been 4.3-4.7% of revenue every year (S&amp;P Global, consolidated; FY2026 guide $9.5-10.5B incl. ~$1.5B to start Ford Energy). This excludes Ford Credit's purchases of operating-lease vehicles (about $13B a year), which are an additional, financing-funded form of investment.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($B, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+<svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="94.9" width="60" height="65.1" fill="#60a5fa"/><text x="60" y="89.9" text-anchor="middle" font-size="8" fill="#cbd5e1">6.2B</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="87.5" width="60" height="72.5" fill="#60a5fa"/><text x="200" y="82.5" text-anchor="middle" font-size="8" fill="#cbd5e1">6.9B</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="73.9" width="60" height="86.1" fill="#60a5fa"/><text x="340" y="68.9" text-anchor="middle" font-size="8" fill="#cbd5e1">8.2B</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="68.7" width="60" height="91.3" fill="#60a5fa"/><text x="480" y="63.7" text-anchor="middle" font-size="8" fill="#cbd5e1">8.7B</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="67.6" width="60" height="92.4" fill="#60a5fa"/><text x="620" y="62.6" text-anchor="middle" font-size="8" fill="#cbd5e1">8.8B</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,82.7 200,85.8 340,80.9 480,80.1 620,80.1" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="82.7" r="3" fill="#fbbf24"/><text x="60" y="72.7" text-anchor="middle" font-size="7.5" fill="#fde68a">4.5%</text>
+<circle cx="200" cy="85.8" r="3" fill="#fbbf24"/><text x="200" y="75.8" text-anchor="middle" font-size="7.5" fill="#fde68a">4.4%</text>
+<circle cx="340" cy="80.9" r="3" fill="#fbbf24"/><text x="340" y="70.9" text-anchor="middle" font-size="7.5" fill="#fde68a">4.7%</text>
+<circle cx="480" cy="80.1" r="3" fill="#fbbf24"/><text x="480" y="70.1" text-anchor="middle" font-size="7.5" fill="#fde68a">4.7%</text>
+<circle cx="620" cy="80.1" r="3" fill="#fbbf24"/><text x="620" y="70.1" text-anchor="middle" font-size="7.5" fill="#fde68a">4.7%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Control: Voting Power (not economic stake)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="125.7 188.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="188.5 125.7" stroke-dashoffset="-125.7" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">40%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Class B (Ford family) &mdash; fixed 40% of votes; 71M shares &asymp; 1.8% of ~3.99B shares</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Common stock holders &mdash; 60% of votes (institutions hold most of the float; breakdown not verified here)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Roughly flat: ~4.0B basic shares in FY2021 to ~3.99B now (-1%). Diluted count is ~4.07B. Ford resumed small buybacks in 2026 ($311M in H1) after none in 2025; dividends of $1.2B were paid in H1 2026. Regular dividend $0.15/qtr, plus supplemental dividends in earlier years that are not in the table.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> the Ford family (descendants of Henry Ford; Executive Chair Bill Ford) holds all of the Class B stock, giving it a fixed 40% of the voting power regardless of its economic stake. I could not verify the family's total economic ownership beyond Class B (about 1.8% of shares; total family holdings are commonly cited near 2%, unverified here). The scorecard treats this as controlling-family influence (4/5) rather than a &gt;30% economic stake, which is a judgment call.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet (Jun 30, 2026):</b> industrial (ex-Ford Credit) cash and marketable securities $22.1B ($22.3B per Ford, incl. restricted cash) against $23.6B of Company debt: net debt about $1.5B, versus net cash of about $6.5B at end-2025. Liquidity $43.4B. Ford Credit holds $137B of debt against $115.5B of finance receivables and $27.6B of operating leases, with $14.6B of equity; consolidated total debt is $163B. Industrial EBITDA is estimated at ~$14B (TTM adjusted EBIT $9.6B plus ~$4.7B of industrial depreciation and tooling amortization, which is my annualisation of H1's $2.3B), giving ~0.1x. Pension/OPEB net liability is $3.8B.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist using Ford's Company Adjusted EBIT and Company Adjusted FCF where disclosed. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022's (S&amp;P standardised). No criteria are N/A.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Ford Motor Company</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+8.3% &mdash; $136.3B &rarr; $187.3B; growth slowed to +1.2% in FY2025 (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-9.2% &mdash; Company Adjusted EBIT $10.0B &rarr; $6.8B (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>3.6% Company Adjusted EBIT margin (FY2025); GAAP operating margin was -0.3% per S&amp;P (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-6.6% &mdash; Company Adjusted FCF $4.6B &rarr; $3.5B; consolidated FCF (incl. Ford Credit) not used (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>#3 U.S. seller in Q3 2026 (narrowly ahead of Hyundai) behind GM and Toyota; #1 in U.S. full-size pickups (F-Series) and commercial vans, but not top-5 globally. Scored on U.S. rank (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; global autos are fragmented with structural overcapacity and rising Chinese competition; even in the U.S. the top three hold only about 45% (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>Adjusted ROIC 13.2% (Ford-defined, TTM Jun 2026) vs my est. WACC ~9%, a ~+4pp spread. GAAP-basis ROIC is -16.7% and FY2025 adjusted ROIC was 8.8%, so this is adjusted-basis dependent (score 2/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~0.1x industrial (ex-Ford Credit): $1.5B net debt, est. ~$14B EBITDA. Excludes $137B Ford Credit debt and $3.8B pension/OPEB (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>51.6% (FY2025: $3.5B / $6.8B); 5-year path 46% / 88% / 65% / 66% / 52% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing adjusted P/E ~7.3x vs FY21-25 average ~8.5x (ratio 0.86); forward ~6.8x vs ~8.4x. GAAP P/E n/m (losses). Close to the 0.85 band edge (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~4.0B (FY2021) to ~3.99B now, about -1%; diluted ~4.07B; buybacks only resumed in 2026 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Ford family holds all Class B shares = 40% of votes (controlling) but only ~2% of equity; scored 4/5 as a judgment between the voting and economic readings (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.7% of revenue in FY2025 ($8.8B), 4.3-4.7% over five years; excludes Ford Credit lease-vehicle purchases (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 10.90% (FY2022) &rarr; 5.81% (FY2025), -5.09pp (S&amp;P standardised; FY2025 includes some special-item charges). Basis: gross margin (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 0&times;11=0.0 &middot; #3 1&times;10=2.0 &middot; #4 0&times;8=0.0 &middot; #5 2&times;7=2.8 &middot; #6 1&times;6=1.2 &middot; #7 2&times;10=4.0 &middot; #8 4&times;6=4.8 &middot; #9 2&times;8=3.2 &middot; #10 3&times;8=4.8 &middot; #11 3&times;4=2.4 &middot; #12 4&times;5=4.0 &middot; #13 4&times;4=3.2 &middot; #14 0&times;5=0.0. Total 37.6 / 105 = <b>36/100</b>. Criteria met: 6/14. <b>Judgment calls:</b> #5 uses U.S. rank; #6 and #12 are qualitative; #7 relies on Ford's adjusted ROIC and my WACC estimate (on GAAP ROIC it would score 0 and the index would be ~32); #10 uses adjusted EPS (GAAP is negative); FY2021-23 adjusted EPS is approximate.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Ford Pro is a real franchise (FY2025 $6.8B EBIT, 10.3% margin, paid software subscriptions +30%), Ford Blue is earning on pricing and hybrids (Q2 EBIT +72%), and Ford Credit is steady ($2.6B EBT in FY2025, above $2.5B guided for 2026). Industrial balance sheet is near net-debt-neutral with $43B of liquidity, 2026 guidance was raised, Model e losses are narrowing for the third straight quarter, and quality is cited as improving. Capex is a moderate 4-5% of revenue, the multiple is below Ford's own five-year average (on adjusted earnings), the dividend yields ~4.9%, and the family's Class B control gives long-horizon stewardship.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Earnings and cash flow have shrunk while revenue grew: adjusted EBIT -32% and adjusted FCF -24% since FY2021, gross margin down 5pp in three years, and GAAP results were deeply negative in FY2022 and FY2025 and in the trailing twelve months, so &ldquo;adjusted&rdquo; metrics carry a lot of weight. Model e still burns about $4B a year, the BOSK battery venture is being disposed of at a $3.6B charge, tariffs and the Novelis aluminum shock moved EBIT by billions, and U.S. share is under pressure from Asian rivals (Q3 sales -6.6%). Q1 2026 included a one-off $1.3B tariff refund, so the H1 run-rate is flattered. Consolidated debt is ~$163B because of Ford Credit, ROIC clears WACC only on the adjusted basis, and some inputs are unverified (family economic stake, institutional holders, FY2021-23 adjusted EPS, my WACC estimate).</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Ford Motor Company Q2 2026 earnings release (Jul 28, 2026) and Q4/FY2025 earnings release (Feb 10, 2026) via SEC 8-K / Ford investor relations; Ford Q4 2021, 2022 and 2023 releases (summarised via secondary sources); stockanalysis.com (S&amp;P Global Market Intelligence: price, market cap, analyst target, gross margin, capex, standardised financials, year-end prices); CNBC and Reuters (Q3 2026 U.S. sales and rank, Oct 2, 2026); TipRanks/TheFly (Goldman target). WACC, industrial EBITDA and family equity stake are my own estimates or unverified and flagged as such. Price as of Oct 5, 2026 close; prepared Oct 6, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Ford Motor Company (NYSE: F) &mdash; USD share price trend. A post-pandemic, Rivian-gain and EV-optimism peak at the end of 2021, a halving through 2022-24 as EV losses, warranty costs and tariffs mounted, a rebound in 2025, and a drift lower in 2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ford Motor Company &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Year-end closing prices FY2021-FY2025 (approximate, stockanalysis.com / S&amp;P Global and press reports) plus the Oct 5, 2026 close of $12.15. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (about 4.76 years), excluding dividends (regular $0.60/share a year, ~4.9% yield, plus supplemental payments in some years). The 52-week range is $11.11 &ndash; 17.78.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="148.0" x2="680" y2="148.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="116.0" x2="680" y2="116.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="84.0" x2="680" y2="84.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="52.0" x2="680" y2="52.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,47.1 L 172.8,105.6 L 299.6,102.0 L 426.4,116.6 L 553.2,96.0 L 680.0,102.2 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="47.1" x2="680.0" y2="102.2" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -10.7%</text>
+<path d="M 46.0,47.1 L 172.8,105.6 L 299.6,102.0 L 426.4,116.6 L 553.2,96.0 L 680.0,102.2" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="47.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="35.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$20.77</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="105.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="121.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$11.63</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="102.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="90.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$12.19</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="116.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="132.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$9.90</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="96.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="84.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$13.12</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="102.2" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="90.2" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$12.15</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts at a December 2021 peak ($20.77, when Ford held a large Rivian stake and EV enthusiasm was at its height), so the negative price CAGR (-10.7%) exaggerates the damage and is not a verdict on the business; dividends (about 4-5% a year recently) are not included, and the share count is roughly unchanged. Ford stopped holding Rivian shares in 2022-23. Prices are USD, NYSE.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

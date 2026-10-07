@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Volkswagen Group — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/volkswagen.html">
+<meta property="og:title" content="Volkswagen Group — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Volkswagen Group — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Volkswagen AG (Volkswagen Group)</h1>
+  <div class="badges">
+    <div class="badge">Xetra: VOW3 (preferred shares) &middot; Yahoo: VOW3.DE</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Wolfsburg, Germany</div>
+    <div class="badge">Reports &amp; trades in EUR</div>
+    <div class="badge warn">Sep 18, 2026 profit warning: 2026 operating margin now guided to &le;1% (from 4-5.5%) after ~&euro;10B of one-offs incl. a ~&euro;6B Porsche write-down &mdash; shares ~34% below year-end 2025</div>
+  </div>
+
+  <div class="price">&euro;68.54</div>
+  <div class="price-sub">Oct 5, 2026 Xetra close (VOW3 preferred shares) &middot; Market cap &asymp; &euro;34B (S&amp;P Global; 501.3M ordinary + preferred shares, the two classes trade at different prices so this is approximate) &middot; 52-wk range &euro;67.02 &ndash; 109.15 &middot; Beta 1.01 &middot; Analyst consensus: Buy (18 analysts), avg PT &euro;104.33 (+52%; third-party, partly pre-dates the Sep 18 warning) &middot; Dividend &euro;5.26/preferred share (&asymp;7.7% yield on this price) &middot; Next report (Q3 2026): Oct 29, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Share classes &amp; brands:</b> VW AG has two listed classes: ordinary shares (VOW, voting) and preferred shares (VOW3, no vote, slightly higher dividend). This page tracks the preferred shares, which are the more liquid line and the one in the Euro Stoxx 50 until its removal in September 2026. Group brands include Volkswagen, Audi, Porsche (VW holds roughly 75% of Porsche AG, listed since Sep 2022), Skoda, SEAT/Cupra, Bentley, Lamborghini, Ducati, Traton (trucks/buses) and Volkswagen Financial Services.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> everything is in euros. VW consolidates a very large captive finance arm (Volkswagen Financial Services), so consolidated debt (&euro;264.7B at FY2025) and consolidated cash flow are distorted: consolidated net debt is about &euro;178.5B on VW's own definition and consolidated free cash flow (S&amp;P) was roughly zero or negative in FY2024-25. This page therefore uses <b>Automotive Division net cash flow</b> (VW-reported, excludes Financial Services; the closest VW equivalent to free cash flow) and <b>Automotive Division net liquidity</b> (&euro;34.5B net cash at YE2025) where VW discloses them, and says so wherever used. &ldquo;EBIT&rdquo; is VW's reported group <b>operating result</b> (after special items), not S&amp;P's &ldquo;operating income&rdquo; (&euro;13.2B for FY2025), which excludes some items. Gross margin is S&amp;P's gross profit divided by revenue (VW reports a cost-of-sales line).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;321.9B</div>
+      <div class="sub" style="color:#fbbf24;">-0.8% YoY (FY2024 +0.7%)</div>
+      <div class="note">Flat for three years since the FY2023 post-COVID peak of &euro;322.3B. 4-yr CAGR FY2021-25 is +6.5%. H1 2026 revenue was &euro;158.1B (flat); Q2 2026 +2.0% YoY.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (group)</div>
+      <div class="val" style="color:#f87171;">2.8%</div>
+      <div class="sub">FY2025 operating result &euro;8.9B; Automotive Division 1.8%</div>
+      <div class="note">Down from 7.0% in FY2023 and 5.9% in FY2024. FY2025 absorbed ~&euro;7.5B of special effects (9M: US tariffs, Porsche goodwill and realignment). 2026 is guided to &le;1%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">2.4% vs ~8%</div>
+      <div class="sub">TTM, S&amp;P Global</div>
+      <div class="note">ROIC is third-party and consolidated (the finance arm's balance sheet drags it); WACC is my estimate (~8%), not a sourced figure. The spread is clearly negative under any plausible WACC.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">Automotive net liquidity &euro;34.5B (YE2025); &euro;32.7B at Jun 30, 2026</div>
+      <div class="note">Industrial (Automotive Division) basis, as VW discloses it. Consolidated net debt of ~&euro;178.5B (incl. Financial Services funding) is not used for scoring.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">38/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Held up by Automotive net cash, the Porsche SE family-controlled stake, a #2 global volume position and strong FY2025 cash conversion; held down by collapsing EBIT, margins and returns below cost of capital.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; #2 global volume position, Automotive net cash, Automotive cash conversion (&gt;100% in FY2025, flattered by non-cash impairments), flat share count (501.3M), Porsche SE family control (~32% of capital, ~53% of ordinary votes) and capex intensity (5.1% of Automotive revenue)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR (+6.5%), EBIT CAGR (-17.6%), operating margin (2.8%), cash-flow CAGR (-7.0%), market concentration (fragmented), ROIC vs WACC, entry multiple (P/E ~1.25x its own average) and gross-margin stability (-3.65pp over three years)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Volkswagen Group is the world's second-largest carmaker by volume (behind Toyota), selling mass-market (Volkswagen, Skoda, SEAT/Cupra), premium (Audi) and luxury (Porsche, Bentley, Lamborghini) cars, vans and, through Traton, trucks and buses, plus a captive finance and leasing arm. It delivered about 9.0M vehicles in FY2025, earned &euro;321.9B revenue and an &euro;8.9B operating result (2.8% margin, down 53% from &euro;19.1B), and generated &euro;6.4B of Automotive net cash flow (+24% YoY, helped by lower investment and a year-end working-capital release). Net profit attributable to shareholders was &euro;6.7B and the preferred dividend was cut to &euro;5.26 from &euro;6.36. 2026 has gone worse: H1 operating result fell 11.6% to &euro;5.9B (3.8% margin) with China deliveries down 32%; on September 18 VW cut guidance to an operating return on sales of up to 1% (from 4-5.5%) and revenue of about &euro;315B, flagging ~&euro;10B of negative one-offs (about &euro;0.9B booked in H1, most of the rest in Q3) including a ~&euro;6B non-cash Porsche goodwill impairment and ~&euro;2B of early-retirement and Osnabr&uuml;ck-sale costs tied to a restructuring that now targets about 100,000 job cuts worldwide. The shares fell as much as 7.5% that day and VW was removed from the Euro Stoxx 50 on Sep 21. The next catalyst is the Q3 report on Oct 29, 2026.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Captive finance</b> &mdash; consolidated debt, cash flow and ROIC are dominated by Financial Services, so Automotive-Division net cash flow and net liquidity are used where disclosed. (2) <b>Special items</b> &mdash; FY2025 and 2026 operating results include very large non-cash and restructuring items (Porsche impairments, tariffs, job-cut provisions); the group's own &ldquo;before special items&rdquo; figure was &euro;6.9B in H1 2026 versus &euro;5.9B reported. Scoring here uses the reported (after special items) figures. (3) <b>A trailing P/E of ~6.5x</b> on TTM EPS of &euro;10.46 is not a measure of cheapness: TTM earnings do not yet include the Q3 2026 one-offs, so trailing EPS will probably fall further, and the S&amp;P forward P/E (~2.6x) reflects stale consensus that pre-dates the warning and should not be relied on.
+  </div>
+
+  <div class="bignum-corner">VOW3</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, &euro; billions. Revenue, operating result, Automotive net cash flow and Automotive net liquidity as reported by Volkswagen Group (annual reports/press releases); net income, EPS (preferred), gross profit and dividends from S&amp;P Global data. &ldquo;EBIT&rdquo; = VW's reported group operating result.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Group Operating Result &amp; Automotive Net Cash Flow &mdash; Annual (&euro;bn axis)</div>
+    <div class="chart-sub">Revenue has been flat at &euro;322-325B for three years while the operating result fell from &euro;22.5B (FY2023) to &euro;8.9B. Automotive net cash flow is VW's industrial-segment figure and excludes Financial Services (*FY2024 shown as restated in the FY2025 report: &euro;5.2B; originally &euro;5.0B). It is used here instead of consolidated free cash flow, which is distorted by finance-arm lease and loan growth.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Group operating result (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Automotive net cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">100bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">200bn</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">300bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">400bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="102.4" width="30" height="137.6" rx="2" fill="#2dd4bf"/>
+<text x="100" y="97.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">250.2</text>
+<rect x="123" y="229.4" width="30" height="10.6" rx="2" fill="#60a5fa"/>
+<text x="138" y="224.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">19.3</text>
+<rect x="161" y="235.3" width="30" height="4.7" rx="2" fill="#fbbf24"/>
+<text x="176" y="230.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">8.6</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="86.4" width="30" height="153.6" rx="2" fill="#2dd4bf"/>
+<text x="256" y="81.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">279.2</text>
+<rect x="279" y="227.8" width="30" height="12.2" rx="2" fill="#60a5fa"/>
+<text x="294" y="222.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">22.1</text>
+<rect x="317" y="237.4" width="30" height="2.6" rx="2" fill="#fbbf24"/>
+<text x="332" y="232.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4.8</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="62.7" width="30" height="177.3" rx="2" fill="#2dd4bf"/>
+<text x="412" y="57.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">322.3</text>
+<rect x="435" y="227.6" width="30" height="12.4" rx="2" fill="#60a5fa"/>
+<text x="450" y="222.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">22.5</text>
+<rect x="473" y="234.1" width="30" height="5.9" rx="2" fill="#fbbf24"/>
+<text x="488" y="229.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">10.7</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="61.4" width="30" height="178.6" rx="2" fill="#2dd4bf"/>
+<text x="568" y="56.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">324.7</text>
+<rect x="591" y="229.5" width="30" height="10.5" rx="2" fill="#60a5fa"/>
+<text x="606" y="224.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">19.1</text>
+<rect x="629" y="237.1" width="30" height="2.9" rx="2" fill="#fbbf24"/>
+<text x="644" y="232.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5.2*</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="63.0" width="30" height="177.0" rx="2" fill="#2dd4bf"/>
+<text x="724" y="58.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">321.9</text>
+<rect x="747" y="235.1" width="30" height="4.9" rx="2" fill="#60a5fa"/>
+<text x="762" y="230.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">8.9</text>
+<rect x="785" y="236.5" width="30" height="3.5" rx="2" fill="#fbbf24"/>
+<text x="800" y="231.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6.4</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+6.5%</div>
+      <div class="sub">&euro;250.2B &rarr; &euro;321.9B &mdash; all of it earned by FY2023; flat since</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-17.6%</div>
+      <div class="sub">&euro;19.3B &rarr; &euro;8.9B &mdash; group operating result is 54% below FY2021</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Auto net cash flow CAGR (4yr)</div>
+      <div class="val" style="color:#f87171;">-7.0%</div>
+      <div class="sub">&euro;8.6B &rarr; &euro;6.4B (Automotive Division, VW-reported); consolidated FCF (S&amp;P) went from &euro;28.0B to about zero</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend (group)</div>
+    <div class="chart-sub">Gross margin fell from 17.7% (FY2022) to 14.1% (FY2025), -3.65pp over the three years that criterion #14 measures. FY2025 cost of sales includes Porsche impairments and US tariff costs; part of the drop is therefore one-off, but the underlying trend of price/mix pressure and rising depreciation from the EV investment cycle is also visible in FY2024. The operating margin fell from 7.9% to 2.8%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin (S&amp;P)</span><span><span class="dot" style="background:#34d399;"></span>Operating margin (VW-reported)</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text><text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,23.2 205,23.6 350,22.1 495,25.5 640,37.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,61.1 205,60.4 350,63.8 495,67.9 640,79.5" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="23.2" r="3.2" fill="#60a5fa"/><text x="60" y="17.2" text-anchor="middle" font-size="8" fill="#bfdbfe">17.8%</text>
+<circle cx="60" cy="61.1" r="3.2" fill="#34d399"/><text x="60" y="73.1" text-anchor="middle" font-size="8" fill="#cbd5e1">7.7%</text><text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<circle cx="205" cy="23.6" r="3.2" fill="#60a5fa"/><text x="205" y="17.6" text-anchor="middle" font-size="8" fill="#bfdbfe">17.7%</text>
+<circle cx="205" cy="60.4" r="3.2" fill="#34d399"/><text x="205" y="72.4" text-anchor="middle" font-size="8" fill="#cbd5e1">7.9%</text><text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<circle cx="350" cy="22.1" r="3.2" fill="#60a5fa"/><text x="350" y="16.1" text-anchor="middle" font-size="8" fill="#bfdbfe">18.1%</text>
+<circle cx="350" cy="63.8" r="3.2" fill="#34d399"/><text x="350" y="75.8" text-anchor="middle" font-size="8" fill="#cbd5e1">7.0%</text><text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<circle cx="495" cy="25.5" r="3.2" fill="#60a5fa"/><text x="495" y="19.5" text-anchor="middle" font-size="8" fill="#bfdbfe">17.2%</text>
+<circle cx="495" cy="67.9" r="3.2" fill="#34d399"/><text x="495" y="79.9" text-anchor="middle" font-size="8" fill="#cbd5e1">5.9%</text><text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<circle cx="640" cy="37.1" r="3.2" fill="#60a5fa"/><text x="640" y="31.1" text-anchor="middle" font-size="8" fill="#bfdbfe">14.1%</text>
+<circle cx="640" cy="79.5" r="3.2" fill="#34d399"/><text x="640" y="91.5" text-anchor="middle" font-size="8" fill="#cbd5e1">2.8%</text><text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (&euro;bn)</th><th>Revenue</th><th>Op. result</th><th>Op. Mgn</th><th>Gross Mgn</th><th>Net Income*</th><th>EPS pref (&euro;)</th><th>Auto net CF</th><th>Auto net liquidity</th><th>DPS pref (&euro;)</th></tr>
+<tr><td>FY2021</td><td>250.2</td><td>19.3</td><td>7.7%</td><td>17.8%</td><td>14.8</td><td>29.61</td><td>8.6</td><td>26.7</td><td>7.56</td></tr>
+<tr><td>FY2022</td><td>279.2</td><td>22.1</td><td>7.9%</td><td>17.7%</td><td>14.9</td><td>29.69</td><td>4.8</td><td>43.0</td><td>8.76</td></tr>
+<tr><td>FY2023</td><td>322.3</td><td>22.5</td><td>7.0%</td><td>18.1%</td><td>15.9</td><td>31.81</td><td>10.7</td><td>40.3</td><td>9.06</td></tr>
+<tr><td>FY2024</td><td>324.7</td><td>19.1</td><td>5.9%</td><td>17.2%</td><td>10.7</td><td>21.39</td><td>5.2**</td><td>34.4**</td><td>6.36</td></tr>
+<tr><td>FY2025</td><td>321.9</td><td>8.9</td><td>2.8%</td><td>14.1%</td><td>6.7</td><td>13.31</td><td>6.4</td><td>34.5</td><td>5.26</td></tr>
+<tr><td>TTM (Jun'26)</td><td>321.7</td><td>H1'26: 5.9</td><td>H1'26: 3.8%</td><td>13.8%</td><td>5.2</td><td>10.46</td><td>H1'26: 3.2</td><td>Jun'26: 32.7</td><td>&mdash;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*Net income attributable to shareholders (S&amp;P). EPS and DPS are for preferred shares (ordinary shares: slightly lower DPS, e.g. &euro;5.20 for FY2025). **FY2024 net cash flow and net liquidity as restated in the FY2025 annual report (originally &euro;5.0B and &euro;36.1B). FY2022 operating result is after special items (&euro;22.1B; &euro;22.5B before special items); FY2022 Automotive net liquidity includes &euro;16.1B of Porsche IPO proceeds, of which &euro;9.5B was paid out as a special dividend in January 2023 (FY2023 net liquidity is after it). FY2023 operating result is rounded (&euro;22.5B as stated in the FY2024 report). Gross margin from S&amp;P gross profit (&euro;44.5B, 49.5B, 58.2B, 56.0B, 45.3B). Consolidated net debt (VW definition, incl. Financial Services): &minus;&euro;169.1B at FY2024, &minus;&euro;178.5B at FY2025. Automotive capex (excl. capitalised development): &euro;10.5B, 12.7B, ~14.3B, 16.9B, 15.0B (5.1%, 5.5%, 5.4%, 5.8%*, 5.1% of Automotive revenue; FY2024 ratio as restated, 6.4% originally).</div>
+  <div class="footer-note">Source: Volkswagen Group annual reports and results releases (FY2022 release Mar 2023; Annual Report 2024 and 2025), Volkswagen Group H1 2026 results release (Jul 2026); stockanalysis.com (S&amp;P Global Market Intelligence). All figures EUR.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Restructuring, China &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">The near-term case rests on whether job cuts and cost programmes can offset China volume losses, US tariffs and Porsche's decline. Q2 2026 was reported Jul 24, 2026; guidance was cut again on Sep 18; Q3 2026 is due Oct 29, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was &euro;82.4B (+2.0% YoY) and the operating result &euro;3.46B (-9.5% YoY; 4.2% margin). H1 2026 operating result was &euro;5.9B (-11.6%; 3.8% margin; &euro;6.9B before special items), held back by about &euro;0.5B of costs for ending US ID.4 production and by negative mix. Deliveries fell 6.3% to 4.13M in H1, with China -31.6%, partly offset by growth elsewhere. Automotive net cash flow was a better &euro;3.2B in H1 (H1 2025: -&euro;1.4B) and Automotive net liquidity was &euro;32.7B at June 30. The bigger event came afterwards: on Sep 18 VW guided to a 2026 operating return on sales of up to 1% and revenue of about &euro;315B, citing ~&euro;10B of one-offs (a ~&euro;6B non-cash Porsche goodwill impairment, ~&euro;2B for expanded early-retirement schemes and the planned sale of Volkswagen Osnabr&uuml;ck, plus other restructuring), a further deterioration in China and a faster shift to battery-electric demand. The Q3 2026 operating result will therefore likely be very weak or negative.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (&euro;bn)</div>
+    <div class="chart-sub">Revenue has been range-bound at &euro;76-87B per quarter. Q3'25 +2.3% YoY, Q4'25 -4.7%, Q1'26 about -2.4% (Q1 is seasonally the weakest quarter), Q2'26 +2.0%. Quarters other than Q3'25, Q4'25, Q1'26 and Q2'26 are derived from the reported YoY changes and rounded.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly group revenue, &euro;bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="43.6" width="58" height="86.4" fill="#2dd4bf"/><text x="59" y="38.6" text-anchor="middle" font-size="9" fill="#cbd5e1">78.5</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="112" y="33.9" width="58" height="96.1" fill="#2dd4bf"/><text x="141" y="28.9" text-anchor="middle" font-size="9" fill="#cbd5e1">87.4</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="194" y="44.6" width="58" height="85.4" fill="#2dd4bf"/><text x="223" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">77.6</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="276" y="41.1" width="58" height="88.9" fill="#2dd4bf"/><text x="305" y="36.1" text-anchor="middle" font-size="9" fill="#cbd5e1">80.8</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="358" y="41.7" width="58" height="88.3" fill="#2dd4bf"/><text x="387" y="36.7" text-anchor="middle" font-size="9" fill="#cbd5e1">80.3</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="440" y="38.5" width="58" height="91.5" fill="#2dd4bf"/><text x="469" y="33.5" text-anchor="middle" font-size="9" fill="#cbd5e1">83.2</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="522" y="46.7" width="58" height="83.3" fill="#2dd4bf"/><text x="551" y="41.7" text-anchor="middle" font-size="9" fill="#cbd5e1">75.7</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="604" y="39.4" width="58" height="90.6" fill="#2dd4bf"/><text x="633" y="34.4" text-anchor="middle" font-size="9" fill="#cbd5e1">82.4</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Group Operating Result &mdash; Last 8 Quarters (&euro;bn)</div>
+    <div class="chart-sub">Q3'25 was an operating loss of &euro;1.3B (US tariffs ~&euro;2.1B, Porsche goodwill impairment ~&euro;2.7B and Porsche realignment ~&euro;2.0B were booked as special effects over the first nine months). Q4'24 was boosted by a strong year-end mix (its &euro;6.2B is derived from the reported -44.6% YoY decline in Q4'25 to &euro;3.46B, so treat as approximate).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating result after special items, &euro;bn</span><span><span class="dot" style="background:#f87171;"></span>Operating loss</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="75.2" width="58" height="34.8" fill="#60a5fa"/><text x="59" y="70.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2.9</text><text x="59" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="112" y="35.6" width="58" height="74.4" fill="#60a5fa"/><text x="141" y="30.6" text-anchor="middle" font-size="9" fill="#cbd5e1">6.2</text><text x="141" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="194" y="75.2" width="58" height="34.8" fill="#60a5fa"/><text x="223" y="70.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2.9</text><text x="223" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="276" y="64.4" width="58" height="45.6" fill="#60a5fa"/><text x="305" y="59.4" text-anchor="middle" font-size="9" fill="#cbd5e1">3.8</text><text x="305" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="358" y="110" width="58" height="15.6" fill="#f87171"/><text x="387" y="136.6" text-anchor="middle" font-size="9" fill="#fca5a5">-1.3</text><text x="387" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="440" y="68.0" width="58" height="42.0" fill="#60a5fa"/><text x="469" y="63.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3.5</text><text x="469" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="522" y="80.0" width="58" height="30.0" fill="#60a5fa"/><text x="551" y="75.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2.5</text><text x="551" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="604" y="68.0" width="58" height="42.0" fill="#60a5fa"/><text x="633" y="63.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3.5</text><text x="633" y="152" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+<tr><th>Metric (&euro;bn)</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+<tr><td>Revenue</td><td>78.5</td><td>87.4</td><td>77.6</td><td>80.8</td><td>80.3</td><td>83.2</td><td>75.7</td><td>82.4</td></tr>
+<tr><td>Revenue YoY</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>+2.3%</td><td>-4.7%</td><td>-2.4%</td><td>+2.0%</td></tr>
+<tr><td>Operating result</td><td>2.9</td><td>6.2</td><td>2.9</td><td>3.8</td><td>-1.3</td><td>3.5</td><td>2.5</td><td>3.5</td></tr>
+<tr><td>Operating margin</td><td>3.7%</td><td>7.1%</td><td>3.7%</td><td>4.7%</td><td>-1.6%</td><td>4.2%</td><td>3.3%</td><td>4.2%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Group operating result after special items, rounded to &euro;0.1B. Q3'25 (-&euro;1.3B), Q4'25 (&euro;3.46B), Q1'26 (&euro;2.5B, -14.3% YoY), Q2'26 (&euro;3.46B) and H1 totals are from VW releases; Q3'24, Q4'24, Q1'25 and Q2'25 revenue and results are derived from the reported YoY changes and H1 2025 totals (&euro;158.4B revenue, &euro;6.7B operating result) and may differ from VW's own quarterly figures by about &euro;0.1B. Quarters sum to FY2025: revenue &euro;321.9B, operating result &euro;8.9B.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, cut Sep 18):</b> operating return on sales up to 1% (July guidance and the March outlook were 4-5.5%); revenue about &euro;315B (earlier +0-3% growth, then cut); one-off effects of ~&euro;10B (about &euro;0.9B in H1; ~&euro;6B Porsche goodwill impairment; ~&euro;2B early retirement/Osnabr&uuml;ck). Management also warned of further deterioration in China and a faster shift to battery-electric demand. Automotive net cash flow and net liquidity guidance for 2026 were not re-verified in this pass.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Restructuring &amp; portfolio moves:</b> an agreement with works councils in September roughly doubles planned job cuts to about 100,000 worldwide (50,000 in Germany by 2030 under the 2024 deal), with provisions now booked. VW announced a deepened battery partnership with Gotion and the sale of a 5.3% Gotion stake (Sep 28), delayed its Ontario battery plant by two years, and its Indian venture talks with JSW are ongoing; Italy's industry minister said VW has no current plan to sell Ducati. Union IG Metall has threatened escalation over wage-agreement terminations (Sep 30).
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Shareholder returns:</b> the FY2025 dividend was &euro;5.26 per preferred share (&euro;5.20 ordinary), down 17% from &euro;6.36; payout about 57% of TTM EPS. With 2026 earnings guided to near zero before and after one-offs, the FY2026 dividend is not assured at this level; I make no forecast. VW has not run a regular buyback programme; the share count has been unchanged at 501.3M for years.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on reported preferred-share EPS (S&amp;P) at year-end Xetra closes (FY2021 &euro;177.48 from VW's annual report; FY2022-25 closes derived from S&amp;P's year-end P/E multiplied by EPS and so approximate). For a cyclical automaker with collapsing earnings, a low P/E can signal peak earnings rather than cheapness.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~6.6x = &euro;68.54 / TTM EPS &euro;10.46) is ~1.25x VW's FY2021-25 year-end average (~5.3x), a ~25% premium. Year-end closes (approximate): &euro;177.48, ~134.8, ~115.8, ~90.9, ~104.5; EPS: 29.61, 29.69, 31.81, 21.39, 13.31. The low FY2022-24 multiples reflect peak earnings, not cheapness; the FY2025 multiple jumped as EPS halved.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="58.9" width="70" height="51.1" fill="#60a5fa"/><text x="55" y="53.9" text-anchor="middle" font-size="9" fill="#cbd5e1">6.0x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="71.3" width="70" height="38.7" fill="#60a5fa"/><text x="150" y="66.3" text-anchor="middle" font-size="9" fill="#cbd5e1">4.5x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="78.9" width="70" height="31.1" fill="#60a5fa"/><text x="245" y="73.9" text-anchor="middle" font-size="9" fill="#cbd5e1">3.6x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="73.8" width="70" height="36.2" fill="#60a5fa"/><text x="340" y="68.8" text-anchor="middle" font-size="9" fill="#cbd5e1">4.2x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="43.0" width="70" height="67.0" fill="#60a5fa"/><text x="435" y="38.0" text-anchor="middle" font-size="9" fill="#cbd5e1">7.9x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="54.1" width="70" height="55.9" fill="#2dd4bf"/><text x="530" y="49.1" text-anchor="middle" font-size="9" fill="#cbd5e1">6.6x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="65.2" x2="690" y2="65.2" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="61.2" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 5.3x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> S&amp;P shows a forward P/E of ~2.6x (consensus EPS of about &euro;26), but this cannot be reconciled with VW's own guidance of an operating return on sales of up to 1% (a ~&euro;3B operating result on &euro;315B revenue) and almost certainly reflects stale analyst estimates from before the Sep 18 warning. I do not score or rely on it; its own FY2021-25 year-end average is ~4.5x, so even on that basis the multiple is not stretched, but the earnings it implies are unlikely. PEG (0.12 per S&amp;P) is not meaningful. Average analyst target &euro;104.33 (18 analysts, consensus Buy; Kepler Cheuvreux cut to Hold on Sep 21) implies ~52% upside; targets are third-party and may lag the warning.
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet, Automotive vs consolidated:</b> VW's Automotive Division had net liquidity of &euro;34.5B at YE2025 (&euro;34.4B restated at YE2024; &euro;32.7B at Jun 30, 2026), after paying the &euro;9.5B Porsche-IPO special dividend in 2023. The consolidated balance sheet (VW definition) shows third-party borrowings of &euro;264.7B against &euro;86.2B of gross liquidity, i.e. net liquidity of &minus;&euro;178.5B, but &euro;247.5B of those borrowings sit in Financial Services, which funds a matched lease and loan book. S&amp;P's consolidated net debt is &euro;214B at Jun 2026 and book equity &euro;202B. I use the Automotive figure for net debt/EBITDA and say so in the scorecard. Capex: Automotive capex excluding capitalised development was &euro;15.0B (5.1% of Automotive revenue) in FY2025, down from &euro;16.9B; capitalised development costs add another &euro;9.0B (&euro;10.2B in FY2024). Including them, total investment is roughly 8% of Automotive revenue.
+  </div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (share capital, approx.)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="100.2 214" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="37.1 277" stroke-dashoffset="-100.2" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f472b6" stroke-width="18" stroke-dasharray="31.4 283" stroke-dashoffset="-137.3" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="145.5 169" stroke-dashoffset="-168.7" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~32%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Porsche Automobil Holding SE (Porsche and Pi&euml;ch families) ~32% of capital, ~53% of ordinary voting rights</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>State of Lower Saxony ~12% of capital, ~20% of voting rights (veto on key decisions)</div>
+          <div><span class="dot" style="background:#f472b6;"></span>Qatar Holding ~10% of capital (~17% of ordinary shares)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Free float ~46% (mostly preferred shares)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>VW has had 295.1M ordinary and 206.2M preferred shares (501.3M in total) outstanding for years; the count was identical at year-end 2021 and today, so it is flat, not declining. There is no regular buyback programme. Treat the capital percentages above as approximate: they come from VW's investor-relations shareholder structure and Porsche SE disclosures and I did not re-verify them as of October 2026.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Control, insiders &amp; honest caveats:</b> Volkswagen is effectively controlled by Porsche SE (the Porsche and Pi&euml;ch family holding), together with the State of Lower Saxony's special veto rights, so minority holders of the non-voting preferred shares (VOW3) have no vote. I could not verify management's own shareholdings. Separately, VW faces a UK motor-finance redress scheme (reported ~&pound;9B industry-wide cost; VW's share not verified here) and an ongoing dispute with JSW over a reported $1.4B Indian tax liability &mdash; both unquantified in the figures above.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Cash flow (#4, #9) and net debt (#8) use VW's <b>Automotive Division</b> figures; EBIT-based criteria use the group operating result. Criterion #14 compares FY2025 gross margin with FY2022's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Volkswagen Group</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+6.5% &mdash; &euro;250.2B &rarr; &euro;321.9B; flat since FY2023 (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-17.6% &mdash; group operating result &euro;19.3B &rarr; &euro;8.9B, after special items (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>2.8% (group, FY2025); Automotive Division 1.8%. S&amp;P's operating income gives 4.1%; scored on VW's reported figure (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-7.0% &mdash; <b>Automotive Division net cash flow</b> &euro;8.6B &rarr; &euro;6.4B (VW-reported). Consolidated FCF (S&amp;P) fell from &euro;28.0B to about -&euro;0.3B and is not used (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>World #2 by vehicle deliveries (about 9.0M in FY2025, behind Toyota and ahead of Hyundai-Kia and Stellantis); #1 in Europe. Global share is roughly 10%. Based on reported delivery rankings; no single verified share figure (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; the global car industry is fragmented with structural overcapacity; Chinese entrants are taking share (VW China deliveries -32% in H1 2026) (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 2.35% (TTM, S&amp;P) vs est. WACC ~8% (my estimate; S&amp;P's own 1.8% WACC figure is not credible for a cyclical automaker): spread about -5.6pp. VW's own Automotive ROI metric differs in definition and is not used (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash on the <b>industrial (Automotive Division) basis</b>: net liquidity &euro;34.5B at YE2025. Consolidated net debt (~&euro;178.5B incl. Financial Services; S&amp;P debt/EBITDA ~13.5x) is not used because it is dominated by the finance arm (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>~122% (FY2025): Automotive net cash flow &euro;6.4B / Automotive Division operating result &euro;5.3B (VW's own &ldquo;cash conversion rate&rdquo; basis). Flattered by a year-end working-capital release and by the Porsche impairments that depress the denominator without costing cash; the FY2024 equivalent was ~32% and on group EBIT FY2025 would be ~73% (score 5/5 as defined)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~6.6x vs FY21-25 year-end average ~5.3x (ratio ~1.25); the average is built from partly derived year-end closes. Scored on the trailing basis, which still flatters because TTM EPS excludes the Q3 2026 one-offs (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>501.3M shares (295.1M ordinary + 206.2M preferred) at both YE2021 and today, no buyback programme: flat (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Porsche SE (Porsche/Pi&euml;ch families) ~32% of capital and ~53% of ordinary votes, plus Lower Saxony ~12% of capital with veto rights: a controlling holder. Percentages approximate, not re-verified for Oct 2026 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.1% of Automotive revenue in FY2025 (Automotive capex &euro;15.0B excluding capitalised development, VW-reported; 5.8% in FY2024 as restated). Including capitalised development (&euro;9.0B) investment is ~8% of Automotive revenue, still in the 6-10% band; using VW's own capex definition (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin basis: 17.74% (FY2022) &rarr; 14.09% (FY2025), -3.65pp (VW reports a cost-of-sales line, so gross margin is used rather than the EBIT proxy; S&amp;P gross profit). Worse than -2.5pp (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 0&times;11=0.0 &middot; #3 1&times;10=2.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 0&times;10=0.0 &middot; #8 5&times;6=6.0 &middot; #9 5&times;8=8.0 &middot; #10 1&times;8=1.6 &middot; #11 3&times;4=2.4 &middot; #12 5&times;5=5.0 &middot; #13 4&times;4=3.2 &middot; #14 0&times;5=0.0 (each = points/5 &times; weight). Total 40.2 / 105 = <b>38/100</b>. Criteria met: 6/14 on the binary thresholds. <b>Judgement calls:</b> #5 and #6 are qualitative; #7 uses a third-party ROIC and my own WACC estimate; #4, #8 and #9 use VW's Automotive Division figures rather than consolidated ones, and #9 would score 3/5 (73%) on group EBIT instead of 5/5; #10 uses the trailing P/E with partly derived closes; #12 uses approximate holdings.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The industrial business is a net-cash position (Automotive net liquidity &euro;34.5B) despite a very heavy investment programme, Automotive net cash flow improved to &euro;6.4B in FY2025 and &euro;3.2B in H1 2026 on investment discipline and lower working capital, and the group still earned a profit in FY2025 (net income &euro;6.7B). VW is the world's #2 carmaker by volume with a broad brand portfolio (Audi, Skoda, Cupra, Traton and the finance arm all remained profitable), the Porsche SE family holding and Lower Saxony provide a stable anchor, capex intensity is moderate at ~5% of revenue, and the share count has not been diluted. Revenue held at &euro;322B, and management is acting with a restructuring programme of roughly 100,000 job cuts and portfolio moves (Gotion, Osnabr&uuml;ck, Porsche reset).</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Earnings, margins and returns have all collapsed: the operating result is 54% below FY2021, gross margin has lost 3.65 points in three years, the 2026 margin is guided to at most 1%, and ROIC (2.4%) is far below any reasonable cost of capital. China deliveries are down about a third and Chinese competition is intensifying in other regions, US tariffs cost billions, Porsche has needed about &euro;4.7B of goodwill and realignment charges in 2025 (&euro;2.7B and &euro;2.0B over nine months) and ~&euro;6B more in 2026, and a restructuring of this scale carries union-conflict and execution risk. The dividend was cut 17% and may be cut again, the cheap-looking trailing P/E is based on earnings that do not yet reflect the Q3 one-offs, and non-voting preferred holders have no say in control. Several inputs are approximate or third-party: year-end closes for FY2022-25, ROIC/WACC, ownership percentages, derived quarterly figures, and the #2 delivery ranking; FY2025 cash conversion benefits from non-cash impairments.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Volkswagen Group Annual Report 2025 (results of operations, financial position, summary), Annual Report 2024 and 2021 (share key figures), FY2022 results press release (Mar 3, 2023), H1 2026 results release (Jul 24, 2026), Q1 2026 and Q3 2025 releases, Sep 18, 2026 guidance update as reported by Il Sole 24 Ore, Reuters and Just Auto; stockanalysis.com (S&amp;P Global Market Intelligence: price, financials, EPS, ROIC, ratios, analyst targets). ROIC, WACC, derived year-end closes and quarterly figures, ownership percentages and market-share rankings are third-party or approximate and flagged as such. All figures EUR. Price as of Oct 5, 2026 close; prepared Oct 6, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Volkswagen Group &mdash; EUR share price trend (Xetra, preferred shares VOW3). A steady decline through 2022-24 from the post-Porsche-IPO high, a partial recovery in 2025, then a sharp fall in 2026 on the H1 results, the September profit warning and the Euro Stoxx 50 removal.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Volkswagen Group &mdash; Year-End Close (Xetra, EUR, preferred shares)</div>
+    <div class="chart-sub">FY2021 close is from VW's Annual Report 2021 (&euro;177.48); FY2022-25 year-end closes are approximate, derived from S&amp;P's year-end P/E multiplied by EPS (checked against VW's reported +16% price performance in 2025); the &ldquo;Now&rdquo; point is the Oct 5, 2026 close. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (4.76 years), excluding dividends (&euro;5.26/share, ~7.7% yield at this price). The 52-week range is &euro;67.02 &ndash; 109.15.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,35.0 L 172.8,84.0 L 299.6,105.8 L 426.4,134.3 L 553.2,118.7 L 680.0,160.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="35.0" x2="680.0" y2="160.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="172.0" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): -18.1%*</text>
+<path d="M 46.0,35.0 L 172.8,84.0 L 299.6,105.8 L 426.4,134.3 L 553.2,118.7 L 680.0,160.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46" cy="35.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="23.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;177.48</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="173" cy="84.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="72.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;134.8</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="300" cy="105.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="93.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;115.8</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426" cy="134.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="122.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;90.9</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553" cy="118.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="106.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;104.5</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680" cy="160.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="176.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&euro;68.54</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window ends near the 52-week low, so the negative CAGR is partly a function of the end date and is not a verdict on the business; the start point (Dec 2021, &euro;177.48) was itself after a +16% year for the preferred shares. Dividends of &euro;7.56, 8.76 (plus a &euro;7.50 special dividend paid in Jan 2023 after the Porsche IPO), 9.06, 6.36 and 5.26 per preferred share were declared for FY2021-25 and would narrow the gap in total-return terms. The ordinary shares (VOW) trade at a different price. Currency: EUR throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

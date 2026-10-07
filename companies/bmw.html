@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BMW Group — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/bmw.html">
+<meta property="og:title" content="BMW Group — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BMW Group — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Bayerische Motoren Werke AG (BMW Group)</h1>
+  <div class="badges">
+    <div class="badge">Xetra: BMW</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Munich, Germany</div>
+    <div class="badge">Reports &amp; trades in EUR</div>
+    <div class="badge warn">~42% Below Year-End 2025 Close &mdash; 2026 Auto EBIT Margin Guidance Cut to 1-3%</div>
+  </div>
+
+  <div class="price">&euro;54.22</div>
+  <div class="price-sub">Oct 5, 2026 Xetra close (ordinary shares) &middot; Market cap &asymp; &euro;32.5B (598.9M shares, S&amp;P Global) &middot; 52-wk range &euro;52.36 &ndash; 97.92 &middot; Market cap -38% YoY (S&amp;P) &middot; Beta 0.77 &middot; Analyst consensus: Hold (21 analysts), avg PT &euro;71.23 (+31%) &middot; Dividend &euro;4.40/share (&asymp;8.1% yield on this price) &middot; Next report (Q3 2026): Nov 4, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Share classes:</b> BMW's preferred shares were converted into ordinary shares on June 30, 2026 (approved at the May 13 AGMs), so there is now a single listed class, ticker BMW (Yahoo: BMW.DE). Historical per-share figures are for ordinary shares.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> everything is in euros. BMW consolidates a large captive finance arm (Financial Services), which inflates consolidated debt (~&euro;95B at FY2025, S&amp;P) and makes consolidated free cash flow negative (&minus;&euro;2.7B in FY2025 per S&amp;P) because new leases and loans are cash outflows. This page therefore uses <b>Automotive-segment free cash flow</b> (BMW-reported, excludes Financial Services) and <b>Automotive net financial assets</b> (net cash of the industrial business) where BMW discloses them. &ldquo;EBIT&rdquo; is group profit before financial result (S&amp;P &ldquo;operating income&rdquo;); the Automotive segment EBIT margin (5.3% in FY2025) is shown separately. Gross margin is gross profit divided by revenue (BMW reports a cost-of-sales line).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&euro;133.5B</div>
+      <div class="sub" style="color:#f87171;">-6.3% YoY (-3.9% ex-currency)</div>
+      <div class="note">Second straight decline (FY2024 -8.4%). Deliveries were flat at 2.46M units, so the drop is price/mix, FX and China. 4-yr CAGR FY2021-25 is +4.7%, flattered by the FY2022-23 post-COVID peak and the 2022 BBA (China JV) consolidation.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (group)</div>
+      <div class="val" style="color:#f87171;">7.43%</div>
+      <div class="sub">FY2025; Automotive segment 5.3%</div>
+      <div class="note">Group margin was 11.8% in FY2023. H1 2026 Automotive margin was only 3.6%; full-year 2026 guidance is 1-3% (cut from 4-6% in March).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">3.8% vs ~7.5%</div>
+      <div class="sub">FY2025; TTM ROIC 2.9% (S&amp;P)</div>
+      <div class="note">ROIC is third-party and consolidated (the finance arm's large balance sheet drags it); WACC is my estimate, not a sourced figure. Under any plausible WACC the spread is negative.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">Automotive net financial assets &gt;&euro;44B (YE2025)</div>
+      <div class="note">Industrial basis, as BMW discloses it (~&euro;46B at YE2024). Consolidated net debt of &euro;94.8B includes Financial Services funding and is not used for scoring.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">38/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Held up by net cash, the Quandt family stake, premium-volume position and buybacks; held down by falling EBIT, FCF and margins, and returns below cost of capital.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; premium market position (#1/#2), Automotive net cash, entry multiple vs own history (trailing), share count (down ~9%), Quandt family control (~47%) and capex intensity (5.4% of revenue)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market concentration (fragmented industry), ROIC vs WACC, FCF conversion (~51%), and gross-margin stability (-2.40pp over three years)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    BMW Group is one of the three German premium car makers, with three brands (BMW, MINI, Rolls-Royce), a motorcycle business (BMW Motorrad) and a captive finance arm (Financial Services). It delivered 2.46M vehicles in FY2025 (flat YoY; 17.9% fully electric), earned &euro;133.5B revenue and &euro;10.2B group earnings before tax (7.7% margin), and returned about &euro;4B to shareholders through the dividend and buybacks. Since then the picture has deteriorated quickly: on June 16, 2026 BMW cut guidance after a sharp downturn in China (H1 retail sales -20%, Q2 -30%) and rising Chinese exports that increased competition elsewhere, and the Automotive EBIT margin guidance fell from 4-6% to 1-3%. Q2 2026 group EBIT was &euro;1.6B (-38% YoY) and the Automotive margin was 2.3%, including about 1.25 points of tariff burden and 1.2 points of depreciation from the China JV (BBA) purchase accounting. At its September 30 Capital Market Day, new CEO Milan Nedeljkovi&#263; did not give a 2026-27 recovery date; the company aims to return to its 8-10% Automotive margin corridor by the early 2030s, with a 3-5% interim range in 2028, and Automotive FCF of at least &euro;7B at that point; further decisions are expected by spring 2027. The shares have fallen from &euro;93.14 at the end of 2025 to &euro;54.22.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Captive finance</b> &mdash; consolidated debt, FCF and ROIC are distorted by Financial Services, so Automotive-segment FCF and net financial assets are used where disclosed (see the definition note above). (2) <b>One-offs in FY2022</b> &mdash; FY2022 net income (&euro;17.9B) and Automotive FCF (~&euro;11B) include a ~&euro;7.7B remeasurement gain and roughly &euro;5B of cash acquired on consolidating BMW Brilliance Automotive (BBA); these distort FY2022 comparisons rather than the FY2021 and FY2025 end-points used for the CAGRs. (3) <b>Earnings are cyclical and falling</b> &mdash; a trailing P/E of ~5x on FY2025-TTM earnings reflects peak-to-trough risk, not a guarantee of cheapness; 2026 group EBT is guided &ldquo;significantly lower&rdquo;.
+  </div>
+
+  <div class="bignum-corner">BMW</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, &euro; millions (revenue, EBIT, gross profit, net income and EPS from S&amp;P Global data, which match BMW's reported IFRS figures; Automotive FCF and Automotive EBIT margin as reported by BMW). EBIT = group profit before financial result.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Group EBIT &amp; Automotive Free Cash Flow &mdash; Annual (&euro;bn axis)</div>
+    <div class="chart-sub">Revenue peaked in FY2023 at &euro;155.5B and has fallen two years running. Group EBIT fell from &euro;18.4B (FY2023) to &euro;9.9B. Automotive FCF is BMW's industrial-segment figure (*rounded as reported by BMW in &euro;bn; FY2023 &euro;6,942m; FY2022 includes ~&euro;5B of net cash acquired with BBA). Consolidated FCF (S&amp;P) was negative in FY2024-25 and is not shown.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Group EBIT</span><span><span class="dot" style="background:#fbbf24;"></span>Automotive FCF (&euro;bn)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">40bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">80bn</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">120bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">160bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="87.0" width="30" height="153.0" rx="2" fill="#2dd4bf"/>
+<text x="100" y="82.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">111,239</text>
+<rect x="123" y="221.5" width="30" height="18.5" rx="2" fill="#60a5fa"/>
+<text x="138" y="216.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">13,487</text>
+<rect x="161" y="231.2" width="30" height="8.8" rx="2" fill="#fbbf24"/>
+<text x="176" y="226.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6.4bn*</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="43.9" width="30" height="196.1" rx="2" fill="#2dd4bf"/>
+<text x="256" y="38.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">142,610</text>
+<rect x="279" y="220.7" width="30" height="19.3" rx="2" fill="#60a5fa"/>
+<text x="294" y="215.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">14,059</text>
+<rect x="317" y="224.9" width="30" height="15.1" rx="2" fill="#fbbf24"/>
+<text x="332" y="219.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">11.0bn*</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="26.2" width="30" height="213.8" rx="2" fill="#2dd4bf"/>
+<text x="412" y="21.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">155,498</text>
+<rect x="435" y="214.8" width="30" height="25.2" rx="2" fill="#60a5fa"/>
+<text x="450" y="209.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">18,361</text>
+<rect x="473" y="230.5" width="30" height="9.5" rx="2" fill="#fbbf24"/>
+<text x="488" y="225.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6.9bn</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="44.2" width="30" height="195.8" rx="2" fill="#2dd4bf"/>
+<text x="568" y="39.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">142,380</text>
+<rect x="591" y="224.4" width="30" height="15.6" rx="2" fill="#60a5fa"/>
+<text x="606" y="219.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">11,319</text>
+<rect x="629" y="233.3" width="30" height="6.7" rx="2" fill="#fbbf24"/>
+<text x="644" y="228.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4.9bn*</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="56.5" width="30" height="183.5" rx="2" fill="#2dd4bf"/>
+<text x="724" y="51.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">133,453</text>
+<rect x="747" y="226.4" width="30" height="13.6" rx="2" fill="#60a5fa"/>
+<text x="762" y="221.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">9,915</text>
+<rect x="785" y="235.6" width="30" height="4.4" rx="2" fill="#fbbf24"/>
+<text x="800" y="230.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3.2bn*</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+4.7%</div>
+      <div class="sub">&euro;111.2B &rarr; &euro;133.5B &mdash; up 20% in total, but down 14% from the FY2023 peak</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-7.4%</div>
+      <div class="sub">&euro;13.5B &rarr; &euro;9.9B &mdash; group EBIT is 26% below FY2021</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Auto FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-15.7%</div>
+      <div class="sub">&asymp;&euro;6.4B &rarr; &euro;3.2B (Automotive segment, BMW-reported) &mdash; and FY2022's ~&euro;11B was flattered by ~&euro;5B acquired BBA cash</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; EBIT Margin Trend (group)</div>
+    <div class="chart-sub">Gross margin fell from 18.5% (FY2021) to 13.8% (FY2025), -2.40pp over the three years since FY2022 (16.2%), the basis of criterion #14. Pricing pressure (about -&euro;2B in FY2025 alone), tariffs (~1.5 points of Automotive margin in FY2025) and higher depreciation from the Neue Klasse investment cycle are the main drivers; 2026 guidance implies a further step down.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>EBIT margin</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text><text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,20.5 205,29.3 350,22.5 495,34.7 640,38.3" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,44.5 205,53.0 350,45.7 495,60.2 640,62.1" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="20.5" r="3.2" fill="#60a5fa"/><text x="60" y="14.5" text-anchor="middle" font-size="8" fill="#bfdbfe">18.5%</text>
+<circle cx="60" cy="44.5" r="3.2" fill="#34d399"/><text x="60" y="56.5" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1%</text><text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<circle cx="205" cy="29.3" r="3.2" fill="#60a5fa"/><text x="205" y="23.3" text-anchor="middle" font-size="8" fill="#bfdbfe">16.2%</text>
+<circle cx="205" cy="53.0" r="3.2" fill="#34d399"/><text x="205" y="65.0" text-anchor="middle" font-size="8" fill="#cbd5e1">9.9%</text><text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<circle cx="350" cy="22.5" r="3.2" fill="#60a5fa"/><text x="350" y="16.5" text-anchor="middle" font-size="8" fill="#bfdbfe">18.0%</text>
+<circle cx="350" cy="45.7" r="3.2" fill="#34d399"/><text x="350" y="57.7" text-anchor="middle" font-size="8" fill="#cbd5e1">11.8%</text><text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<circle cx="495" cy="34.7" r="3.2" fill="#60a5fa"/><text x="495" y="28.7" text-anchor="middle" font-size="8" fill="#bfdbfe">14.7%</text>
+<circle cx="495" cy="60.2" r="3.2" fill="#34d399"/><text x="495" y="72.2" text-anchor="middle" font-size="8" fill="#cbd5e1">7.9%</text><text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<circle cx="640" cy="38.3" r="3.2" fill="#60a5fa"/><text x="640" y="32.3" text-anchor="middle" font-size="8" fill="#bfdbfe">13.8%</text>
+<circle cx="640" cy="62.1" r="3.2" fill="#34d399"/><text x="640" y="74.1" text-anchor="middle" font-size="8" fill="#cbd5e1">7.4%</text><text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (&euro;m)</th><th>Revenue</th><th>Group EBIT</th><th>EBIT Mgn</th><th>Gross Mgn</th><th>Net Income*</th><th>EPS (&euro;)</th><th>Auto FCF (&euro;bn)</th><th>Auto EBIT Mgn</th><th>DPS (&euro;)</th></tr>
+<tr><td>FY2021</td><td>111,239</td><td>13,487</td><td>12.1%</td><td>18.5%</td><td>12,382</td><td>18.77</td><td>~6.4</td><td>10.3%</td><td>5.80</td></tr>
+<tr><td>FY2022</td><td>142,610</td><td>14,059</td><td>9.9%</td><td>16.2%</td><td>17,941</td><td>27.31</td><td>~11.0</td><td>9.8%</td><td>8.50</td></tr>
+<tr><td>FY2023</td><td>155,498</td><td>18,361</td><td>11.8%</td><td>18.0%</td><td>11,290</td><td>17.68</td><td>6.9</td><td>9.8%</td><td>6.00</td></tr>
+<tr><td>FY2024</td><td>142,380</td><td>11,319</td><td>7.9%</td><td>14.7%</td><td>7,290</td><td>11.62</td><td>~4.9</td><td>6.3%</td><td>4.30</td></tr>
+<tr><td>FY2025</td><td>133,453</td><td>9,915</td><td>7.4%</td><td>13.8%</td><td>7,294</td><td>11.89</td><td>~3.2</td><td>5.3%</td><td>4.40</td></tr>
+<tr><td>TTM (Jun'26)</td><td>128,034</td><td>7,806</td><td>6.1%</td><td>12.4%</td><td>6,303</td><td>10.52</td><td>H1'26: 1.3</td><td>H1'26: 3.6%</td><td>&mdash;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*Net income attributable to shareholders of BMW AG. EPS is per ordinary share (S&amp;P); DPS is the dividend for the fiscal year on ordinary shares. FY2022 net income includes a ~&euro;7.7B one-off gain from consolidating BBA. Auto FCF values marked ~ are rounded in BMW's releases (FY2021 &asymp;6.4, FY2022 &asymp;11.0, FY2024 &asymp;4.85, FY2025 3.24); FY2023 is &euro;6,942m. Automotive EBIT margins for FY2021-23 are BMW's reported figures from earlier annual reports and were not re-checked in this pass. Consolidated net debt (S&amp;P, incl. Financial Services): FY2021 &euro;90.9B, FY2022 &euro;80.9B, FY2023 &euro;80.8B, FY2024 &euro;95.1B, FY2025 &euro;94.8B. Cash capex (S&amp;P, broader than BMW's own 'capex' definition): &euro;6.6B, 9.1B, 10.9B, 12.2B, 11.0B.</div>
+  <div class="footer-note">Source: BMW Group annual conference statements (Mar 2026 and Mar 2025) and quarterly statements; BMW press releases; stockanalysis.com (S&amp;P Global Market Intelligence). All figures EUR.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">China Downturn &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">The near-term case rests on whether cost cuts, the Neue Klasse ramp and Europe/US strength can offset China and tariffs. Reported July 30, 2026; Q3 2026 is due Nov 4, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was &euro;31.26B (-7.9% YoY) and group EBIT &euro;1.61B (-38% YoY; BMW cites ~&euro;1.63B); group earnings before tax were &euro;1.7B (-35%). The Automotive segment earned &euro;629M, a 2.3% margin versus 5.4% a year earlier, including about 1.25 points of tariff burden and 1.2 points of BBA purchase-price depreciation. Volume, mix and pricing took about &euro;1.8B off EBIT (mostly China) and currencies about &euro;0.4B, partly offset by &euro;1.2B of positive other cost items; expenses were cut by ~&euro;0.4B in the quarter. Deliveries fell 4.9% to ~591,000: Europe +7.6%, US +11.9%, China -30.2%. Automotive FCF was only ~&euro;0.5B (Q2 2025: ~&euro;1.9B) after a ~&euro;1.3B inventory build, and H1 FCF was &euro;1.3B (-45%). Financial Services earnings rose 15.7% in the quarter and Motorcycles earned a 15.2% margin.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (&euro;bn)</div>
+    <div class="chart-sub">Revenue has fallen YoY in all eight of the last eight quarters (Q3'24 -15.7%, Q4'24 -15.3%, Q1'25 -7.8%, Q2'25 -8.2%, Q3'25 -0.3%, Q4'25 -8.1%, Q1'26 -8.2%, Q2'26 -7.9%); the FY2023 comparison base was inflated by post-COVID order backlogs.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly group revenue, &euro;bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="-97088.0" width="58" height="97218.0" fill="#2dd4bf"/><text x="59" y="-97093.0" text-anchor="middle" font-size="9" fill="#cbd5e1">32.4</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="112" y="-109118.0" width="58" height="109248.0" fill="#2dd4bf"/><text x="141" y="-109123.0" text-anchor="middle" font-size="9" fill="#cbd5e1">36.4</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="194" y="-101144.0" width="58" height="101274.0" fill="#2dd4bf"/><text x="223" y="-101149.0" text-anchor="middle" font-size="9" fill="#cbd5e1">33.8</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="276" y="-101651.0" width="58" height="101781.0" fill="#2dd4bf"/><text x="305" y="-101656.0" text-anchor="middle" font-size="9" fill="#cbd5e1">33.9</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="358" y="-96812.0" width="58" height="96942.0" fill="#2dd4bf"/><text x="387" y="-96817.0" text-anchor="middle" font-size="9" fill="#cbd5e1">32.3</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="440" y="-100232.0" width="58" height="100362.0" fill="#2dd4bf"/><text x="469" y="-100237.0" text-anchor="middle" font-size="9" fill="#cbd5e1">33.5</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="522" y="-92891.0" width="58" height="93021.0" fill="#2dd4bf"/><text x="551" y="-92896.0" text-anchor="middle" font-size="9" fill="#cbd5e1">31.0</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="604" y="-93647.0" width="58" height="93777.0" fill="#2dd4bf"/><text x="633" y="-93652.0" text-anchor="middle" font-size="9" fill="#cbd5e1">31.3</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Group EBIT &mdash; Last 8 Quarters (&euro;m)</div>
+    <div class="chart-sub">Group EBIT has fallen from &euro;3.1B (Q1'25) to &euro;1.6B (Q2'26). Q3'24 and Q4'24 were already depressed by a brake-system (Continental) recall provision and weak China.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Group EBIT, &euro;m (profit before financial result)</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="74.0" width="58" height="56.0" fill="#60a5fa"/><text x="59" y="69.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,601</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="112" y="68.9" width="58" height="61.1" fill="#60a5fa"/><text x="141" y="63.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,745</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="194" y="20.1" width="58" height="109.9" fill="#60a5fa"/><text x="223" y="15.1" text-anchor="middle" font-size="9" fill="#cbd5e1">3,140</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="276" y="38.6" width="58" height="91.4" fill="#60a5fa"/><text x="305" y="33.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2,612</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="358" y="50.2" width="58" height="79.8" fill="#60a5fa"/><text x="387" y="45.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,281</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="440" y="64.1" width="58" height="65.9" fill="#60a5fa"/><text x="469" y="59.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,882</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="522" y="58.9" width="58" height="71.1" fill="#60a5fa"/><text x="551" y="53.9" text-anchor="middle" font-size="9" fill="#cbd5e1">2,032</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="604" y="73.6" width="58" height="56.4" fill="#60a5fa"/><text x="633" y="68.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,611</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+<tr><th>Metric (&euro;m)</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+<tr><td>Revenue</td><td>32,406</td><td>36,416</td><td>33,758</td><td>33,927</td><td>32,314</td><td>33,454</td><td>31,007</td><td>31,259</td></tr>
+<tr><td>Gross profit</td><td>3,750</td><td>4,711</td><td>5,089</td><td>4,990</td><td>4,108</td><td>4,211</td><td>3,860</td><td>3,708</td></tr>
+<tr><td>Group EBIT</td><td>1,601</td><td>1,745</td><td>3,140</td><td>2,612</td><td>2,281</td><td>1,882</td><td>2,032</td><td>1,611</td></tr>
+<tr><td>EBIT margin</td><td>4.9%</td><td>4.8%</td><td>9.3%</td><td>7.7%</td><td>7.1%</td><td>5.6%</td><td>6.6%</td><td>5.2%</td></tr>
+<tr><td>Net income</td><td>389</td><td>1,497</td><td>2,097</td><td>1,752</td><td>1,674</td><td>1,771</td><td>1,622</td><td>1,236</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly revenue, gross profit, EBIT and net income from S&amp;P Global data; they sum to the FY2025 totals shown on page 1. Q3'24 net income (&euro;389m) includes the brake-system recall provision.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, confirmed Jul 30):</b> Automotive EBIT margin 1-3% (includes up to 1.25 points for a workforce restructuring programme agreed with the works council; March guidance was 4-6%); Automotive FCF above &euro;2.5B (March: above &euro;4.5B); group EBT to &ldquo;decrease significantly&rdquo;; deliveries slightly lower; Motorcycles margin 4-6%; Financial Services ROE 13-16%. Tariffs are assumed to cost ~1.25 points of Automotive margin.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Capital Market Day (Sep 30, 2026):</b> target to return to the long-term 8-10% Automotive EBIT margin by the early 2030s (3-5% as a first step in 2028), Automotive FCF of at least &euro;7B at that point, 20% leaner management structures, a more focused portfolio and more regionalised production. Further measures are to be decided by spring 2027. These are management targets, not forecasts.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Shareholder returns:</b> the third buyback programme (&euro;2B in total) was accelerated; its final tranche started July 1 and is due to complete by November 30, 2026. The FY2025 dividend was &euro;4.40 per share (payout 36.6%, upper half of the 30-40% target range). Because 2026 earnings are guided much lower, the FY2026 dividend is not assured at this level; I make no forecast.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on reported EPS (ordinary shares) at unadjusted Xetra year-end closes. For a cyclical automaker with falling earnings, a low P/E can signal peak earnings rather than cheapness; read it with the forward P/E below.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~5.2x = &euro;54.22 / TTM EPS &euro;10.52) is ~92% of BMW's FY2021-25 year-end average (~5.6x). Year-end closes (Xetra): &euro;88.49, 83.38, 100.78, 78.98, 93.14; EPS: 18.77, 27.31, 17.68, 11.62, 11.89. The FY2022 low reflects peak earnings (including the BBA gain), not cheapness.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="69.9" width="70" height="40.1" fill="#60a5fa"/><text x="55" y="64.9" text-anchor="middle" font-size="9" fill="#cbd5e1">4.7x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="84.0" width="70" height="26.0" fill="#60a5fa"/><text x="150" y="79.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3.1x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="61.5" width="70" height="48.5" fill="#60a5fa"/><text x="245" y="56.5" text-anchor="middle" font-size="9" fill="#cbd5e1">5.7x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="52.2" width="70" height="57.8" fill="#60a5fa"/><text x="340" y="47.2" text-anchor="middle" font-size="9" fill="#cbd5e1">6.8x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="43.4" width="70" height="66.6" fill="#60a5fa"/><text x="435" y="38.4" text-anchor="middle" font-size="9" fill="#cbd5e1">7.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="66.2" width="70" height="43.8" fill="#2dd4bf"/><text x="530" y="61.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5.2x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="62.2" x2="690" y2="62.2" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="58.2" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 5.6x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus, S&amp;P) is ~7.6x, which implies consensus EPS of roughly &euro;7.1, about a third below FY2025's &euro;11.89. S&amp;P's year-end forward P/E series averages ~6.4x for FY2021-25 (it may use dividend-adjusted prices, so treat it as approximate), putting today's forward multiple at ~1.2x its own average. The scorecard scores the trailing ratio (0.92 = 3/5) for consistency with the rest of the site; on the forward basis the ratio would score 1/5. PEG is ~2.3 per S&amp;P but not meaningful with earnings falling. Average analyst target &euro;71.23 (21 analysts, consensus Hold) implies ~31% upside; targets are third-party and may lag the latest guidance cut.
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet, Automotive vs consolidated:</b> BMW reports Automotive net financial assets of more than &euro;44B at year-end 2025 (almost &euro;46B at year-end 2024), meaning the industrial business is a large net-cash position. The consolidated balance sheet (S&amp;P) shows &euro;110.5B of total debt against &euro;15.6B of cash and investments at FY2025 (&euro;101.1B net debt at June 30, 2026), but most of that funds the Financial Services lease and loan book, which is matched by receivables. I use the Automotive figure for net debt/EBITDA and say so in the scorecard. Capex ratio: 5.4% of revenue in FY2025 (&euro;7.2B, down 20% from the 2024 peak of &euro;9.1B, 6.4%); management's strategic corridor is below 5% by 2027, and R&amp;D at 4-5%.
+  </div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (anchor holders)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="147.7 166.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="166.5 147.7" stroke-dashoffset="-147.7" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~47%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Quandt family (Stefan Quandt and Susanne Klatten, long-term controlling shareholders) ~47%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Free float ~53% (institutions: US ~39% and UK ~21% of institutional holdings, per BMW IR, Dec 2025)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>The share count fell from about 657M (end-2021, ordinary + preferred) to about 599M now (S&amp;P), roughly -9%, through three buyback programmes (the third, &euro;2B, runs to April 2027 at the latest but its final tranche is due to finish Nov 30, 2026). The 2026 preferred-to-ordinary conversion does not change the number of shares. I derived the end-2021 figure from S&amp;P's net-debt-per-share data and BMW's reported share capital, so treat it as approximate.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> BMW is controlled by the Quandt family (~47%, an approximate figure; I did not verify the exact current percentages for each holder). That is a genuine long-term anchor and a reason the company has rarely been a takeover target, but it also means minority shareholders have limited influence over strategy and dividends. CEO Oliver Zipse handed over to Milan Nedeljkovi&#263; in 2026; I could not verify management's own shareholdings.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Free cash flow (#4, #9) and net debt (#8) use BMW's <b>Automotive segment</b> figures; EBIT-based criteria use the group. Criterion #14 compares FY2025 gross margin with FY2022's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>BMW Group</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+4.7% &mdash; &euro;111.2B &rarr; &euro;133.5B; two straight annual declines since the FY2023 peak (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-7.4% &mdash; group EBIT &euro;13.5B &rarr; &euro;9.9B (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>7.43% (group, FY2025); Automotive segment 5.3% &mdash; the cost of an auto-industry business model with thin margins (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-15.7% &mdash; <b>Automotive-segment FCF</b> &asymp;&euro;6.4B &rarr; &euro;3.24B (BMW-reported; FY2021 rounded). Consolidated FCF was negative in FY2025 (&minus;&euro;2.7B, S&amp;P) and is not used (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Among the top premium car groups by volume (2.46M units in FY2025, alongside Mercedes-Benz, Audi and Tesla), a contested #1/#2 position; share of the total global car market is only a low-single-digit percentage. No verified single share figure; judgement call (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; the global car industry is fragmented with structural overcapacity; the premium segment is more concentrated but contested by Chinese entrants and Tesla (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 3.8% (FY2025; TTM 2.9%, S&amp;P) vs est. WACC ~7.5% (my estimate): spread about -3.7pp. BMW's March 2026 guidance for 2026 Automotive RoCE was 6-10% (before the June cut) (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash on the <b>industrial (Automotive) basis</b>: net financial assets &gt;&euro;44B at YE2025. Consolidated net debt (&euro;94.8B incl. Financial Services, ~6.0x EBITDA per S&amp;P) is not used because it is dominated by the finance arm (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>~51% (FY2025): Automotive FCF &euro;3.24B / Automotive segment EBIT ~&euro;6.3B. Down from FY2023's &euro;6.9B FCF; H1 2026 FCF &euro;1.3B (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 5.2x vs FY21-25 average 5.6x (ratio 0.92); forward P/E ~7.6x vs ~6.4x (ratio ~1.2) &mdash; scored on trailing basis, which flatters because earnings are guided sharply lower (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~657M (end-2021) to ~599M now, about -9% via buybacks (approximate; derived from S&amp;P per-share data) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Quandt family (Stefan Quandt, Susanne Klatten) ~47% &mdash; a controlling family stake (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>5.4% of revenue in FY2025 (BMW-reported group capex &euro;7.2B; 6.4% in the FY2024 peak). S&amp;P's broader cash-capex figure gives ~8.2% (still within the 6-10% band); using BMW's own definition (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin basis: 16.19% (FY2022) &rarr; 13.79% (FY2025), -2.40pp (BMW reports a cost-of-sales line, so gross margin is used rather than the EBIT proxy). Misses the -1.0pp bar; falls in the -1.5 to -2.5pp band (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 1&times;13=2.6 &middot; #2 0&times;11=0.0 &middot; #3 2&times;10=4.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 0&times;10=0.0 &middot; #8 5&times;6=6.0 &middot; #9 2&times;8=3.2 &middot; #10 3&times;8=4.8 &middot; #11 4&times;4=3.2 &middot; #12 5&times;5=5.0 &middot; #13 4&times;4=3.2 &middot; #14 1&times;5=1.0 (each = points/5 &times; weight). Total 39.8 / 105 = <b>38/100</b>. Criteria met: 6/14 on the binary thresholds. <b>Judgement calls:</b> #5 and #6 are qualitative; #7 uses a third-party ROIC and my own WACC estimate; #8, #4 and #9 use BMW's Automotive-segment figures rather than consolidated ones; #10 uses the trailing P/E.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The industrial business is a net-cash position (Automotive net financial assets over &euro;44B), the Quandt family has kept BMW stable and independent for decades, and the group still earns a profit through the cycle (FY2025 net income &euro;7.3B). Volumes held at 2.46M in FY2025, Europe and the US are growing in 2026 (Q2 +7.6% and +11.9%), the Neue Klasse (iX3, i3) ramp is under way with strong early demand, and Financial Services and Motorcycles remain profitable. The share count is down ~9% since 2021, cost reductions of &euro;2.5B were delivered in FY2025, capex is falling toward the below-5% corridor, and the stock trades at about 5x trailing earnings with an ~8% dividend yield.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Earnings, margins and cash flow have all turned down: group EBIT is 26% below FY2021, gross margin has lost 2.4 points in three years, the Automotive margin is guided to just 1-3% in 2026, and Automotive FCF has more than halved since FY2021. China is the swing factor (retail -30% in Q2) and Chinese exports are intensifying competition in Europe and Asia-Pacific, tariffs cost ~1.25 points of margin, and returns on capital are below the cost of capital. The Capital Market Day pushed the 8-10% margin target to the early 2030s with decisions not due until spring 2027. The cheap-looking trailing P/E is based on earnings that are guided significantly lower, the dividend is covered by a falling profit, and the Quandt stake limits minority influence. Several inputs are approximate or third-party: FY2021 Automotive FCF, the share count history, ROIC/WACC, and rival unit volumes.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> BMW Group Annual Conference 2026 (Mar 12, 2026: statements by Oliver Zipse and Walter Mertl, press release), Quarterly Statement/Half-Year statement to Jun 30, 2026 (Jul 30, 2026), Half-Year Report 2025 statement, Capital Market Day 2026 release (Sep 30, 2026), BMW IR share and shareholder pages (as of Jun 30, 2026), BMW 2023 results release (Automotive FCF), BMW 2024 financial-year communications (Automotive net financial assets); stockanalysis.com (S&amp;P Global Market Intelligence: price, financials, EPS, ROIC, ratios, analyst targets); boersengefluester.de (Xetra year-end closes). ROIC, WACC, share-count history and rival volumes are third-party or approximate and flagged as such. All figures EUR. Price as of Oct 5, 2026 close; prepared Oct 6, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">BMW Group &mdash; EUR share price trend (Xetra, ordinary shares). A flat-to-higher 2021-23, a pullback in 2024, a rally to a ~&euro;98 high in 2025 and January 2026, then a sharp fall after the June 2026 profit warning and the September Capital Market Day.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">BMW Group &mdash; Year-End Close (Xetra, EUR)</div>
+    <div class="chart-sub">Unadjusted Xetra year-end closes FY2021-FY2025 (boersengefluester.de) plus the Oct 5, 2026 close. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (4.76 years), excluding dividends (&euro;4.40/share, ~8% yield at this price, which would narrow the gap in total-return terms). The 52-week range is &euro;52.36 &ndash; 97.92.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,75.4 L 172.8,88.0 L 299.6,45.0 L 426.4,98.8 L 553.2,63.9 L 680.0,160.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="75.4" x2="680.0" y2="160.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="151.7" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): -9.8%*</text>
+<path d="M 46.0,75.4 L 172.8,88.0 L 299.6,45.0 L 426.4,98.8 L 553.2,63.9 L 680.0,160.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46" cy="75.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="63.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;88.49</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="173" cy="88.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="76.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;83.38</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="300" cy="45.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="33.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;100.78</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426" cy="98.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="113.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;78.98</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553" cy="63.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="51.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&euro;93.14</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680" cy="160.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="176.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">&euro;54.22</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window ends near the 52-week low (the Sep 29, 2026 intraday low was &euro;52.36, the day before the Capital Market Day), so the negative CAGR is partly a function of the end date and is not a verdict on the business. Dividends of &euro;5.80, 8.50, 6.00, 4.30 and 4.40 per share were declared for FY2021-25. The one-class share structure (preferred converted Jun 30, 2026) means earlier prices are for ordinary shares only. Currency: EUR throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

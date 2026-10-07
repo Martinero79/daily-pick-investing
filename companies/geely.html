@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Geely Automobile Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/geely.html">
+<meta property="og:title" content="Geely Automobile Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Geely Automobile Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Chinese Autos &amp; EVs (Geely, Lynk &amp; Co, Zeekr, Galaxy)</div>
+  <h1>Geely Automobile Holdings Limited</h1>
+  <div class="badges">
+    <span class="badge">HKEX: 0175 &middot; Yahoo: 0175.HK &middot; share price in HKD (HK$), financials reported in RMB (&yen;)</span>
+    <span class="badge">FY ends Dec 31 &middot; reports semi-annually &amp; quarterly</span>
+    <span class="badge">Listed Geely Auto only &mdash; not unlisted parent Geely Holding Group (owner of the Volvo Cars stake, Polestar, Lotus)</span>
+    <span class="badge warn">Domestic China car market is shrinking (CPCA: H1 2026 sales -20.2% YoY) &mdash; Geely is growing through exports (+158% in H1 2026), but the share price has fallen about 42% from its 52-week high.</span>
+  </div>
+  <div class="price">HK$14.95</div>
+  <div class="price-sub">0175.HK (HKEX, HKD) close Oct 6, 2026 &middot; Mkt cap &asymp;HK$161B (10.79B shares &times; close; estimate) &middot; 52-wk range HK$14.33 (Oct 2 intraday) &ndash; HK$25.62 &middot; Consensus target HK$29.03 (27 analysts, S&amp;P data via stockanalysis.com; JPMorgan cut to Neutral in late Sep 2026)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in China &mdash; BYD (larger by volume), Chery, SAIC, Changan, Great Wall, Xiaomi, Leapmotor, NIO, XPeng, Li Auto, Tesla and VW/Toyota/Honda joint ventures; overseas &mdash; BYD, Chery, MG (SAIC), Toyota, VW, Hyundai-Kia and European/Japanese incumbents defending against Chinese exporters.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">&yen;345.23B</div>
+      <div class="sub" style="color:#fbbf24;">+25.1% YoY, down from +54.0% in FY2024; latest quarter (Q2 2026) +13.9% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val red">3.32%</div>
+      <div class="note">Up from 0.73% (FY2022) but a thin auto-industry margin, far below this framework's 20% bar. S&amp;P-defined operating income; reported pre-tax margin was 5.86%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val" style="color:#34d399;">16.56% / 10%</div>
+      <div class="note">ROIC (S&amp;P) has risen from 2.1% in FY2022. WACC is our assumption, not a company figure.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash Position</div>
+      <div class="val green">&yen;51.8B</div>
+      <div class="sub">At Jun 30, 2026 (&yen;42.2B at FY2025); cash &yen;64.8B vs debt &yen;13.0B</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">80/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">11/14 criteria met, 3 not met, 0 N/A &mdash; strong growth, net cash, cheap multiple and a controlling founder-linked holder, offset by razor-thin margins, a fragmented market and some share dilution.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 1 1 17.38,88.86 L53.45,97.09 A58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M17.38,88.86 A95,95 0 0 1 109.98,15.00 L109.99,52.00 A58,58 0 0 0 53.45,97.09 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">11/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 11 (revenue CAGR, EBIT CAGR, FCF CAGR, market share, ROIC/WACC, net debt/EBITDA, FCF conversion, entry multiple, insider/controlling ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 3 (operating margin, market concentration, share count trend)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; a fragmented, overcapacity-laden Chinese market with 100+ brands and an ongoing price war</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    This page covers the HKEX-listed Geely Automobile Holdings (0175), which owns the Geely, Lynk &amp; Co, Zeekr and Galaxy brands. It is not the unlisted parent Geely Holding Group, which also owns the Volvo Cars stake, Polestar and Lotus. Revenue grew from &yen;101.6B (FY2021) to &yen;345.2B (FY2025), roughly 35.8% a year, and net profit rose from &yen;4.7B to &yen;16.9B. Part of that jump reflects perimeter changes: FY2024 onward appears to include the Zeekr business after its merger into Geely Auto, while FY2021-23 are as originally reported, so the CAGRs overstate organic growth (our reading of S&amp;P's presentation; not verified against the annual report). The earnings quality is mixed: FY2024 net income was lifted by a one-off gain visible in Q2 2024 (net margin 13.8% that quarter), and operating margin is only 3.3%. Cash generation is strong (FY2025 free cash flow &yen;43.1B on &yen;4.1B reported capex), though the S&amp;P capex figure likely excludes capitalised development costs and the cash flow benefits from supplier payables. H1 2026 revenue rose 15% to &yen;173.6B and core net profit (ex FX and impairments, company-defined) rose 46%, while reported attributable profit slipped 1.8% to &yen;9.09B. Exports (474,000 units, +158%) are carrying growth as China's domestic market contracts. The shares trade at about 8.3x trailing earnings, below their five-year average, and have fallen sharply since the summer &mdash; 11 of 14 criteria met, Martinero Index 80/100.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> financials through Q2/H1 2026 (reported Aug 17, 2026) from S&amp;P Global Market Intelligence via stockanalysis.com; price is the HKEX close on Oct 6, 2026. Share price is in HKD; all financials are in RMB (&yen;) and have not been converted. P/E multiples are computed by the data provider on a HKD price basis and RMB earnings converted by the provider.
+  </div>
+
+  <div class="bignum-corner">11/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in RMB (&yen;) billions, as reported (S&amp;P Global Market Intelligence data). CAGR computed FY21&rarr;FY25 (4-year span). Fiscal year = calendar year. FY2024 onward appears to include Zeekr (merged into Geely Auto); FY2021-23 as originally reported.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual</div>
+    <div class="chart-sub">Shared axis keeps the scale honest: operating income is a thin sliver of revenue, while free cash flow is far larger than operating income (working-capital inflows and low reported capex).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 250" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="214.8" x2="840" y2="214.8" stroke="#475569" stroke-width="1.3"/><text x="50" y="218.8" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text>
+<line x1="60" y1="169.0" x2="840" y2="169.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="173.0" text-anchor="end" font-size="11" fill="#64748b">&yen;100B</text>
+<line x1="60" y1="123.2" x2="840" y2="123.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="127.2" text-anchor="end" font-size="11" fill="#64748b">&yen;200B</text>
+<line x1="60" y1="77.3" x2="840" y2="77.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.3" text-anchor="end" font-size="11" fill="#64748b">&yen;300B</text>
+<line x1="60" y1="31.5" x2="840" y2="31.5" stroke="#1e293b" stroke-width="1"/><text x="50" y="35.5" text-anchor="end" font-size="11" fill="#64748b">&yen;400B</text>
+<rect x="75.6" y="168.24" width="22.5" height="46.56" rx="1.5" fill="#2dd4bf"/><text x="86.85" y="163.24" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;101.6B</text>
+<rect x="113.8" y="213.96" width="22.5" height="0.84" rx="1.5" fill="#60a5fa"/><text x="125.00" y="208.96" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;1.8B</text>
+<rect x="151.9" y="209.07" width="22.5" height="5.73" rx="1.5" fill="#fbbf24"/><text x="163.15" y="204.07" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;12.5B</text>
+<text x="125.5" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text>
+<rect x="237.8" y="147.00" width="22.5" height="67.80" rx="1.5" fill="#2dd4bf"/><text x="249.10" y="142.00" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;148.0B</text>
+<rect x="276.0" y="214.30" width="22.5" height="0.50" rx="1.5" fill="#60a5fa"/><text x="287.25" y="209.30" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;1.1B</text>
+<rect x="314.1" y="209.07" width="22.5" height="5.73" rx="1.5" fill="#fbbf24"/><text x="325.40" y="204.07" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;12.5B</text>
+<text x="287.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+<rect x="400.1" y="132.68" width="22.5" height="82.12" rx="1.5" fill="#2dd4bf"/><text x="411.35" y="127.68" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;179.2B</text>
+<rect x="438.2" y="213.65" width="22.5" height="1.15" rx="1.5" fill="#60a5fa"/><text x="449.50" y="208.65" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;2.5B</text>
+<rect x="476.4" y="207.18" width="22.5" height="7.62" rx="1.5" fill="#fbbf24"/><text x="487.65" y="202.18" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;16.6B</text>
+<text x="450.0" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+<rect x="562.4" y="88.36" width="22.5" height="126.44" rx="1.5" fill="#2dd4bf"/><text x="573.60" y="83.36" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;275.9B</text>
+<rect x="600.5" y="211.60" width="22.5" height="3.20" rx="1.5" fill="#60a5fa"/><text x="611.75" y="206.60" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;7.0B</text>
+<rect x="638.6" y="199.83" width="22.5" height="14.97" rx="1.5" fill="#fbbf24"/><text x="649.90" y="194.83" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;32.7B</text>
+<text x="612.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+<rect x="724.6" y="56.60" width="22.5" height="158.20" rx="1.5" fill="#2dd4bf"/><text x="735.85" y="51.60" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;345.2B</text>
+<rect x="762.8" y="209.54" width="22.5" height="5.26" rx="1.5" fill="#60a5fa"/><text x="774.00" y="204.54" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;11.5B</text>
+<rect x="800.9" y="195.03" width="22.5" height="19.77" rx="1.5" fill="#fbbf24"/><text x="812.15" y="190.03" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;43.1B</text>
+<text x="774.5" y="238" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#34d399;">+35.8%</div><div class="sub">&yen;101.6B &rarr; &yen;345.2B; partly perimeter change (Zeekr)</div></div>
+    <div class="cagr-card"><div class="label">Operating Income CAGR</div><div class="val" style="color:#34d399;">+58.0%</div><div class="sub">&yen;1.8B &rarr; &yen;11.5B off a very low base</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#34d399;">+36.3%</div><div class="sub">&yen;12.5B &rarr; &yen;43.1B; flattered by payables</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin Trend</div>
+    <div class="chart-sub">Teal = gross margin, blue = operating margin (S&amp;P definition). The 20% screen threshold is the dashed line. Gross margin dipped to 14.1% in FY2022, then recovered to 16.6%; operating margin has more than quadrupled from a tiny base.</div>
+    <svg viewBox="0 0 860 255" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220" x2="840" y2="220" stroke="#1e293b" stroke-width="1"/><text x="42" y="224" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170" x2="840" y2="170" stroke="#1e293b" stroke-width="1"/><text x="42" y="174" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="120" x2="840" y2="120" stroke="#1e293b" stroke-width="1"/><text x="42" y="124" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="70" x2="840" y2="70" stroke="#1e293b" stroke-width="1"/><text x="42" y="74" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="20" x2="840" y2="20" stroke="#1e293b" stroke-width="1" stroke-dasharray="6,5"/><text x="42" y="24" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M 50.0,48.60 L 247.5,78.80 L 445.0,68.40 L 642.5,55.30 L 840.0,54.00" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="48.60" r="3" fill="#2dd4bf"/><text x="50.0" y="39.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">17.14%</text><circle cx="247.5" cy="78.80" r="3" fill="#2dd4bf"/><text x="247.5" y="69.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">14.12%</text><circle cx="445.0" cy="68.40" r="3" fill="#2dd4bf"/><text x="445.0" y="59.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">15.16%</text><circle cx="642.5" cy="55.30" r="3" fill="#2dd4bf"/><text x="642.5" y="46.30" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.47%</text><circle cx="840.0" cy="54.00" r="3" fill="#2dd4bf"/><text x="840.0" y="45.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.60%</text><path d="M 50.0,201.90 L 247.5,212.70 L 445.0,206.00 L 642.5,194.70 L 840.0,186.80" fill="none" stroke="#60a5fa" stroke-width="2.5"/><circle cx="50.0" cy="201.90" r="3" fill="#60a5fa"/><text x="50.0" y="218.90" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.81%</text><circle cx="247.5" cy="212.70" r="3" fill="#60a5fa"/><text x="247.5" y="229.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">0.73%</text><circle cx="445.0" cy="206.00" r="3" fill="#60a5fa"/><text x="445.0" y="223.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">1.40%</text><circle cx="642.5" cy="194.70" r="3" fill="#60a5fa"/><text x="642.5" y="211.70" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">2.53%</text><circle cx="840.0" cy="186.80" r="3" fill="#60a5fa"/><text x="840.0" y="203.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">3.32%</text><text x="50.0" y="244" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="244" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="244" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="244" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="244" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>EPS (RMB)</th><th>FCF</th><th>Capex</th><th>Net Cash</th><th>DPS (RMB)</th></tr>
+    <tr><td>FY2021</td><td>&yen;101.61B</td><td>&yen;1.84B</td><td>1.81%</td><td>17.14%</td><td>&yen;4.72B</td><td>0.48</td><td>&yen;12.52B</td><td>&yen;2.83B</td><td>&yen;23.5B</td><td>0.171</td></tr>
+    <tr><td>FY2022</td><td>&yen;147.97B</td><td>&yen;1.08B</td><td>0.73%</td><td>14.12%</td><td>&yen;5.12B</td><td>0.50</td><td>&yen;12.50B</td><td>&yen;3.52B</td><td>&yen;20.2B</td><td>0.186</td></tr>
+    <tr><td>FY2023</td><td>&yen;179.20B</td><td>&yen;2.51B</td><td>1.40%</td><td>15.16%</td><td>&yen;5.17B</td><td>0.51</td><td>&yen;16.63B</td><td>&yen;5.71B</td><td>&yen;27.6B</td><td>0.200</td></tr>
+    <tr><td>FY2024</td><td>&yen;275.91B</td><td>&yen;6.98B</td><td>2.53%</td><td>16.47%</td><td>&yen;16.67B</td><td>1.65</td><td>&yen;32.67B</td><td>&yen;4.19B</td><td>&yen;31.5B</td><td>0.310</td></tr>
+    <tr><td>FY2025</td><td>&yen;345.23B</td><td>&yen;11.47B</td><td>3.32%</td><td>16.60%</td><td>&yen;16.85B</td><td>1.63</td><td>&yen;43.15B</td><td>&yen;4.13B</td><td>&yen;42.2B</td><td>0.449</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>On free cash flow:</b> Geely has no large captive finance arm, so consolidated FCF (operating cash flow less capex, as computed by S&amp;P) is used throughout; it is not an industrial/finance split. FCF/EBIT of 376% in FY2025 is unusually high because S&amp;P operating income excludes other income, capex excludes capitalised development costs, and payables grew faster than receivables. <b>On net income:</b> FY2024 includes a one-off gain (Q2 2024). <b>Share count:</b> implied ~9.8B (FY2021 EPS-based) rising to 10.79B now, partly from the Zeekr merger.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; the Export Pivot</div></div>
+  <div class="sec-sub">Six latest quarters, RMB (&yen;), S&amp;P Global Market Intelligence data. Latest reported period: Q2 2026 (three months to June 30, 2026, reported Aug 17, 2026). Next earnings expected Nov 13, 2026 (per data provider).</div>
+
+  <div class="headline-box">
+    <div class="title">H1 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">&yen;173.6B</b>, up <b style="color:#34d399;">15% YoY</b> on volume of 1.423M vehicles (+1%), with NEVs 799,000 units (+10%, 56.2% of sales). Profit attributable to owners was <b style="color:#f8fafc;">&yen;9.09B</b>, down <b style="color:#f87171;">1.8%</b>; the company's adjusted core net profit (excluding FX and impairments) rose <b style="color:#34d399;">46%</b> to &yen;9.68B. Exports jumped <b style="color:#34d399;">158%</b> to 474,000 units and Zeekr deliveries doubled (+97% to 178,370). Q2 2026 net profit of &yen;4.93B was up 37% on Q2 2025 and gross margin reached 18.35%, the highest in this six-quarter window. September 2026 group sales were 292,168 vehicles with NEVs at a record. Offsetting that, China's market is contracting (CPCA expects 2026 sales to fall about 14%), and the shares dropped 7.4% on Sep 29 amid a JPMorgan downgrade to Neutral.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (&yen;B)</div>
+    <div class="chart-sub">Q4 2025 includes the seasonal year-end peak and the Zeekr merger perimeter; Q1 2026 stepped back down seasonally but still grew 15.6% YoY. Latest quarter highlighted in amber.</div>
+    <svg viewBox="0 0 860 255" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="186.7" x2="840" y2="186.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="190.7" text-anchor="end" font-size="11" fill="#64748b">&yen;20B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">&yen;40B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">&yen;60B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">&yen;80B</text><line x1="60" y1="53.3" x2="840" y2="53.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="57.3" text-anchor="end" font-size="11" fill="#64748b">&yen;100B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;120B</text><rect x="88" y="99.17" width="70" height="120.83" rx="2" fill="#2dd4bf"/><text x="123" y="92.17" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;72.5B</text><text x="123" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'25</text><rect x="213" y="88.51" width="70" height="131.49" rx="2" fill="#2dd4bf"/><text x="248" y="81.51" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;78.9B</text><text x="248" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'25</text><rect x="338" y="71.35" width="70" height="148.65" rx="2" fill="#2dd4bf"/><text x="373" y="64.35" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;89.2B</text><text x="373" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'25</text><rect x="463" y="43.74" width="70" height="176.26" rx="2" fill="#2dd4bf"/><text x="498" y="36.74" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;105.8B</text><text x="498" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'25</text><rect x="588" y="80.37" width="70" height="139.63" rx="2" fill="#2dd4bf"/><text x="623" y="73.37" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;83.8B</text><text x="623" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'26</text><rect x="713" y="70.29" width="70" height="149.71" rx="2" fill="#fbbf24"/><text x="748" y="63.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;89.8B</text><text x="748" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Net Income (&yen;B) &amp; Net Margin</div>
+    <div class="chart-sub">Q1 2025 included non-recurring items (net margin 7.8%); excluding it, net margin has been in a 3.5-5.5% band and trending up through H1 2026.</div>
+    <svg viewBox="0 0 860 255" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="157.3" text-anchor="end" font-size="11" fill="#64748b">&yen;2B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">&yen;4B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;6B</text><rect x="88" y="30.93" width="70" height="189.07" rx="2" fill="#a78bfa"/><text x="123" y="23.93" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5.7B</text><text x="123" y="41.93" text-anchor="middle" font-size="9" fill="#0a0e1a">7.82%</text><text x="123" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'25</text><rect x="213" y="100.53" width="70" height="119.47" rx="2" fill="#a78bfa"/><text x="248" y="93.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;3.6B</text><text x="248" y="111.53" text-anchor="middle" font-size="9" fill="#0a0e1a">4.54%</text><text x="248" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'25</text><rect x="338" y="92.67" width="70" height="127.33" rx="2" fill="#a78bfa"/><text x="373" y="85.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;3.8B</text><text x="373" y="103.67" text-anchor="middle" font-size="9" fill="#0a0e1a">4.28%</text><text x="373" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q3'25</text><rect x="463" y="95.27" width="70" height="124.73" rx="2" fill="#a78bfa"/><text x="498" y="88.27" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;3.7B</text><text x="498" y="106.27" text-anchor="middle" font-size="9" fill="#0a0e1a">3.54%</text><text x="498" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q4'25</text><rect x="588" y="81.13" width="70" height="138.87" rx="2" fill="#a78bfa"/><text x="623" y="74.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;4.2B</text><text x="623" y="92.13" text-anchor="middle" font-size="9" fill="#0a0e1a">4.97%</text><text x="623" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q1'26</text><rect x="713" y="55.83" width="70" height="164.17" rx="2" fill="#fbbf24"/><text x="748" y="48.83" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;4.9B</text><text x="748" y="66.83" text-anchor="middle" font-size="9" fill="#0a0e1a">5.48%</text><text x="748" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Revenue (&yen;B)</td><td>72.5</td><td>78.9</td><td>89.2</td><td>105.8</td><td>83.8</td><td>89.8</td></tr>
+    <tr><td>Revenue YoY</td><td>+38.6%</td><td>+18.7%</td><td>+47.7%</td><td>-2.3%*</td><td>+15.6%</td><td>+13.9%</td></tr>
+    <tr><td>Gross margin</td><td>15.78%</td><td>16.91%</td><td>16.59%</td><td>16.82%</td><td>17.50%</td><td>18.35%</td></tr>
+    <tr><td>Operating margin</td><td>3.66%</td><td>3.43%</td><td>3.79%</td><td>2.57%</td><td>4.99%</td><td>5.24%</td></tr>
+    <tr><td>Net income (&yen;B)</td><td>5.67</td><td>3.58</td><td>3.82</td><td>3.74</td><td>4.17</td><td>4.92</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*Q4 2025 YoY (-2.3%) is computed by the data provider against a Q4 2024 base that appears to be restated for the Zeekr merger, so it is not like-for-like; Q1-Q3 2025 growth rates are against originally reported quarters. Q2 2026 YoY of +13.9% (latest quarter) is on a comparable basis.</div>
+
+  <div class="callout blue">
+    <b>Market position, honestly stated:</b> Geely Auto is China's second-largest NEV/EV maker by group volume according to press coverage (behind BYD) and, by sales, one of the larger Chinese automakers; its overseas business is growing from a low base. The industry backdrop is poor: China's passenger-car sales have fallen year-on-year for ten straight months through July 2026, the Chinese market is oversupplied with 100+ brands, and exporters from China are drawing political and tariff scrutiny in Europe, the US (connected-car rules) and Mexico. Partnerships (Renault in Brazil, Ford's Spanish plant, a 30% stake in NIO's battery-swap unit) extend reach but also add capital commitments.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end (HKD price, S&amp;P data) used as the entry-multiple signal; the current figure is an estimate at the Oct 6, 2026 close of HK$14.95. WACC assumed at 10% (our estimate for a net-cash, low-beta (0.49) but China-exposed carmaker); S&amp;P's own model shows 6.6%.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY21-25 &amp; Current</div>
+    <div class="chart-sub">Current trailing P/E (&asymp;8.3x, estimate) is below the FY21-25 average of &asymp;18.1x (ratio &asymp;0.46); even excluding the inflated FY2021 (36.8x, thin earnings base), the four-year average of &asymp;13.5x gives a ratio of &asymp;0.62. Forward P/E &asymp;5.9x (consensus, estimate).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E (current only)</span>
+    </div>
+    <svg viewBox="0 0 860 255" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="175.6" x2="840" y2="175.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="179.6" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="131.2" x2="840" y2="131.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="135.2" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="86.9" x2="840" y2="86.9" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.9" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="42.5" x2="840" y2="42.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="46.5" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="139.57" x2="840" y2="139.57" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="135.57" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 18.1x</text><path d="M 50.0,56.57 L 208.0,132.14 L 366.0,152.59 L 524.0,182.64 L 682.0,173.94 L 840.0,183.04" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="56.57" r="3" fill="#a78bfa"/><text x="50.0" y="46.57" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">36.83x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><circle cx="208.0" cy="132.14" r="3" fill="#a78bfa"/><text x="208.0" y="122.14" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.80x</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="366.0" cy="152.59" r="3" fill="#a78bfa"/><text x="366.0" y="142.59" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">15.19x</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="524.0" cy="182.64" r="3" fill="#a78bfa"/><text x="524.0" y="198.64" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.42x</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="682.0" cy="173.94" r="3" fill="#a78bfa"/><text x="682.0" y="189.94" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.38x</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="183.04" r="3.5" fill="#a78bfa"/><text x="840.0" y="199.04" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.33x</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text><circle cx="840.0" cy="193.82" r="3.5" fill="#c4b5fd"/><text x="832.0" y="207.82" text-anchor="end" font-size="10" fill="#c4b5fd" font-weight="700">fwd 5.9x</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> trailing P/E is today's price over the last 12 months of reported earnings (&asymp;8.3x); the series above is the same ratio at each year-end. Forward P/E divides price by consensus next-12-month earnings (&asymp;5.9x) &mdash; analysts expect earnings to keep growing, but forward estimates for Chinese autos have been revised frequently as the domestic price war and subsidy changes evolve. The data provider's PEG is about 0.7-0.9, which would normally read as inexpensive, though a low multiple in a cyclical, low-margin industry can reflect the market pricing in margin risk rather than a bargain. The multiple has de-rated sharply since FY2021 as earnings rose faster than the share price: net income grew about 3.6x while the share price fell.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> Geely had &yen;64.8B of cash and investments against &yen;13.0B of debt at Jun 30, 2026, a net cash position of &yen;51.8B (net cash/EBITDA is negative; the S&amp;P ratio was about -2.7x at FY2025), well inside this framework's bar. Working capital is negative (current ratio about 0.9): the business funds itself in part from suppliers, which helps cash flow in growth years and would reverse if volumes fall. ROIC (S&amp;P) was 16.56% in FY2025, up from 2.09% in FY2022; the 24.4% current figure is a trailing S&amp;P calculation and is not used for scoring.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure (approximate)</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="184.73 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="255.10 439.82" stroke-dashoffset="-184.73"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Li Shufu / Geely Holding Group (via Proper Glory) and other non-float holders &asymp; 42% (estimate: 100% less the 6.21B-share float on 10.79B shares; the exact Geely Holding stake changed with the Zeekr share issuance and should be checked against HKEX filings)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Public float (institutions &amp; retail) &asymp; 58%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <b>Governance note:</b> Founder and chairman Li Shufu controls the company through Geely Holding Group, which also owns Volvo Cars, Polestar, Lotus and other assets. This brings aligned, long-term ownership but also related-party complexity: Geely Auto buys from, sells to and co-develops with sister companies (platforms, powertrains, Zeekr, Volvo-related technology), so minority holders should read the related-party disclosures. Scored on the controlling stake (&gt;30%); directors' own direct holdings are only about 2.6% per the data provider. The scored figure is an estimate.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are computable; no N/A. Criterion #14 compares FY2025 gross margin to FY2022's (three fiscal years earlier).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Geely Auto</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY21-25)</td><td>&ge;15%</td><td>+35.8% &mdash; &yen;101.6B &rarr; &yen;345.2B; inflated by the Zeekr perimeter change; FY2025 growth +25.1%</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY21-25)</td><td>&ge;15%</td><td>+58.0% &mdash; &yen;1.84B &rarr; &yen;11.47B off a very low base</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>3.32% (FY2025) &mdash; typical thin auto margin; 1 point on the graduated scale</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY21-25)</td><td>&ge;15%</td><td>+36.3% &mdash; &yen;12.5B &rarr; &yen;43.1B (consolidated, no captive-finance split; payables-assisted)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>#2 among Chinese NEV/EV makers by group volume behind BYD (press-based; strong #2 = 4 points); a mid-sized player globally</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; fragmented, overcapacity-heavy Chinese market with a price war</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>16.56% (FY2025, S&amp;P) vs assumed 10% WACC &mdash; spread &asymp;6.6 pts (3 points)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash (&yen;42.2B at FY2025; &yen;51.8B at Jun 2026), consolidated basis</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>376% (FY2025) &mdash; FCF &yen;43.1B vs EBIT &yen;11.5B; flattered by working capital and narrow EBIT definition</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Current trailing P/E &asymp;8.3x vs FY21-25 average &asymp;18.1x (ratio &asymp;0.46); ratio &asymp;0.62 even excluding FY2021 &mdash; earnings are not depressed, so the discount is genuine rather than a trough artefact</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>About +9-10% (&asymp;9.8B implied in FY2021 to 10.79B now; estimate), including Zeekr merger share issuance</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (&asymp;5%+)</td><td>Li Shufu / Geely Holding &asymp;40%+ (estimate, non-float &asymp;42%) &mdash; controlling stake</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.2% of FY2025 revenue (&yen;4.1B) as reported by S&amp;P; likely understated because capitalised R&amp;D is excluded</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability &mdash; gross margin</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 16.60% (FY2025) vs 14.12% (FY2022), +2.48pp (5 points); gross profit line reported, so gross margin basis</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue and cash flow have compounded at 35%+ a year (partly via the Zeekr merger), gross margin has recovered 2.5 points in three years, and the company holds &yen;51.8B net cash. Exports are surging (+158% in H1 2026), Zeekr volumes have doubled, and the shares trade at about 8x earnings, well below their own five-year average, with a growing dividend (RMB 0.449 per share for FY2025, +45%). A controlling founder-linked holder aligns long-term interests.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Operating margin is only 3.3% and reported attributable profit slipped 1.8% in H1 2026. China's car market is shrinking and heavily oversupplied, so growth depends on exports that face tariffs and political scrutiny. Financial comparisons across the Zeekr merger are not like-for-like, FCF is flattered by supplier credit, and capex looks understated. Dilution (~9-10%) and related-party dealings with the wider Geely Holding group are structural concerns. The share price is near its 52-week low after a JPMorgan downgrade.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Oct 6, 2026. Sources: stockanalysis.com / S&amp;P Global Market Intelligence (annual and quarterly financials, ratios, statistics, price history, consensus), Geely Auto H1 2026 results coverage (Gasgoo, ChinaEVHome, The Standard, HKEXnews Aug 17, 2026 announcement), CNBC/Reuters/WSJ (China market data, Ford and Renault partnerships), GlobeNewswire (September 2026 sales).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Estimates are flagged: current P/E, forward P/E, market cap, ownership percentage, share-count change, WACC (10%). Financials are RMB; the share price is HKD; no currency conversion has been applied.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Geely Automobile Holdings &mdash; HKEX: 0175, HKD share price. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Geely Automobile &mdash; Year-End Close (HKEX, HKD)</div>
+    <div class="chart-sub">The shares fell 58% from end-2021 to a low at end-2023 (HK$8.02) as margins compressed, then rallied through 2024-25 as profits tripled, and have since given back part of the gain on China market weakness &mdash; five years on, the price is below its end-2021 level even though revenue has more than tripled and earnings per share have risen from RMB 0.48 to 1.63.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="46.6" x2="680" y2="80.4" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5,4" opacity="0.7"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -4.9%</text>
+<path d="M 46.0,46.6 L 172.8,116.7 L 299.6,135.8 L 426.4,86.6 L 553.2,60.5 L 680.0,80.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,46.6 L 172.8,116.7 L 299.6,135.8 L 426.4,86.6 L 553.2,60.5 L 680.0,80.4" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="46.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="36.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$19.18</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="116.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="106.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$10.41</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="135.8" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="149.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$8.02</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="86.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="76.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$14.17</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="60.5" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="50.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$17.44</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="80.4" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="70.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">HK$14.95</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for FY2021-2025 (HK$19.18, 10.41, 8.02, 14.17, 17.44) and the current price (HK$14.95, Oct 6, 2026) are HKEX closing prices from S&amp;P Global Market Intelligence via stockanalysis.com. 5-Yr CAGR is computed FY21-close to current over 5 years and excludes dividends (about 2-3% yield). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

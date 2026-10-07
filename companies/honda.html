@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Honda Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/honda.html">
+<meta property="og:title" content="Honda Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Honda Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; }
+  .callout.green b { color:#4ade80; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2236; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Motorcycles, Automobiles &amp; Financial Services</div>
+  <h1>Honda Motor Co., Ltd.</h1>
+  <div class="badges">
+    <span class="badge">TSE: 7267 &middot; NYSE ADR: HMC &middot; reports in JPY (&yen;) under IFRS</span>
+    <span class="badge">FY ends Mar 31 (FY2026 = year ended Mar 31, 2026) &middot; reports quarterly</span>
+    <span class="badge">Founded 1948 &middot; Tokyo, Japan (HQ)</span>
+    <span class="badge warn">FY2026 was Honda's first annual operating loss since its 1957 listing (&minus;&yen;414.3B), driven by &yen;1,577.8B of EV-related losses &mdash; yet the underlying business earned &yen;1,039.3B excluding them, and Q1 FY2027 delivered a record quarterly operating profit of &yen;530.7B.</span>
+  </div>
+  <div class="price">&yen;1,687.5</div>
+  <div class="price-sub">TSE close Oct 6, 2026 &middot; Mkt cap &asymp;&yen;6.6T &middot; 52-week range &yen;1,238&ndash;&yen;1,762.5 &middot; consensus price target &asymp;&yen;1,785 (17 analysts, stockanalysis.com, Sep 25, 2026)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> in motorcycles, the world's largest maker (22.1M units in FY2026) &mdash; Hero MotoCorp, TVS, Bajaj, Yamaha, Suzuki and a long tail of Chinese and Indian brands &middot; in automobiles, a mid-sized global player outside the top five by volume, up against Toyota, Volkswagen Group, Hyundai-Kia, GM, Ford, Nissan (a software-development partner since Aug 2026) and, increasingly in China and Southeast Asia, BYD and other Chinese EV makers &middot; in financial services, captive auto/motorcycle finance (American Honda Finance and peers) competing with other captives and banks.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">&yen;21,796.6B</div>
+      <div class="sub" style="color:#fbbf24;">+0.50% YoY, slowing from +6.17% in FY2025; Q1 FY2027 revenue then rose +13.5% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2026)</div>
+      <div class="val red">&minus;1.90%</div>
+      <div class="note">Company-reported operating loss of &yen;414.3B on consolidated revenue (incl. financial services). Excluding &yen;1,577.8B of EV-related losses the margin would have been about 4.8% &mdash; still far below this framework's 20% bar.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC (assumed)</div>
+      <div class="val" style="color:#f87171;">&minus;0.4% / 6.5%</div>
+      <div class="note">TTM ROIC is slightly negative after the FY2026 loss (S&amp;P Global); WACC of 6.5% is an assumed estimate &mdash; the spread is negative either way.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash (ex-Financial Services)</div>
+      <div class="val green">&yen;3,324.5B</div>
+      <div class="sub">At Mar 31, 2026, industrial (non-financial-services) basis, as disclosed by Honda. Consolidated net debt is &yen;8.4T because captive-finance borrowings fund customer loans and leases.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">33/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">4/14 criteria met, 10 not met, 0 N/A &mdash; a world-#1 motorcycle franchise, an industrial net-cash balance sheet and a shrinking share count, set against a loss-making year, thin auto margins and a negative ROIC spread.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 202.62,131.14 L166.55,122.91 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M202.62,131.14 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 166.55,122.91 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">4/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 4 (market share, net debt/EBITDA, share count trend, capex intensity)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 10 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC, FCF conversion, entry multiple, insider/founder ownership, margin stability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; global auto manufacturing is fragmented and structurally over-capacity; motorcycles are more concentrated at the top but still contested</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Honda is two very different businesses under one roof. The motorcycle division is the best in its industry: world #1 by volume (22.1M units in FY2026), a record &yen;731.9B segment profit on &yen;4,018.8B of revenue (an 18.2% margin), and a Q1 FY2027 margin of 20.5% on strength in India and Brazil. The automobile division, which is about two-thirds of revenue, is the opposite: it swung to a &yen;1,411.1B segment loss in FY2026 after &yen;1,453.6B of EV-related charges (Honda booked &yen;1,577.8B of EV-related losses in total), and tariffs, China price competition and over-capacity continue to squeeze margins. Financial services added &yen;275.5B. The result was a consolidated operating loss of &yen;414.3B (&minus;1.90% margin), net loss of &yen;423.9B and, on the framework's numbers, a long list of unmet criteria: revenue grew just +10.6% a year over FY2022-26, operating income is negative, ROIC is below any reasonable cost of capital, and trailing earnings are too depressed to give a meaningful P/E. What the framework does credit: Honda is genuinely #1 in motorcycles, the industrial (non-finance) balance sheet holds &yen;3.3T of net cash, the share count is down roughly a quarter since FY2022 through large buybacks, and capex runs at a modest 3.4% of revenue. The recovery has started &mdash; Q1 FY2027 operating profit hit a record &yen;530.7B with no EV charges, and management raised full-year operating-profit guidance from &yen;500B to &yen;650B (net income &yen;400B) &mdash; but this checklist scores reported history, not guidance. 4 of 14 criteria met, Martinero Index 33/100.
+  </div>
+
+  <div class="callout blue">
+    <b>Data vintage note:</b> figures refreshed through Q1 FY2027 (three months to Jun 30, 2026, reported Aug 5, 2026) and FY2026 annual results (year ended Mar 31, 2026, reported May 14, 2026); spot price is the Oct 6, 2026 TSE close. Honda's fiscal year runs April-March and this dashboard labels years by the calendar year in which they end (FY2026 = year ended Mar 31, 2026). All figures are in JPY under IFRS. Annual operating income, segment data and non-financial-services free cash flow are taken from Honda's investor-relations data; quarterly figures, EPS, gross margin and valuation ratios come from S&amp;P Global Market Intelligence via stockanalysis.com, which standardises some line items (its FY2026 operating income of &minus;&yen;366.0B differs from Honda's reported &minus;&yen;414.3B, so the quarterly table will not sum exactly to the annual figure).
+  </div>
+
+  <div class="bignum-corner">4/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2022&ndash;FY2026)</div></div>
+  <div class="sec-sub">All figures in JPY (&yen;) billions, IFRS. CAGR computed FY22&rarr;FY26 (4-year span). Fiscal year ends March 31 (FY2026 = April 2025&ndash;March 2026). Free cash flow is Honda's disclosed <b>non-financial-services (industrial)</b> figure, which excludes the captive-finance arm's lending and lease flows.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow (ex-Financial Services) &mdash; Annual</div>
+    <div class="chart-sub">Revenue rose through FY2025 and stalled in FY2026 (+0.50%). Operating income peaked at &yen;1,382.0B in FY2024, slipped in FY2025 on tariffs and EV costs, then turned to a &yen;414.3B loss in FY2026 on EV-related charges. Industrial free cash flow stayed positive every year, helped in FY2026 by the fact that much of the EV charge is non-cash.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow (ex-Fin. Services)</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="214.8" x2="840" y2="214.8" stroke="#475569" stroke-width="1.3"/><text x="50" y="218.8" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="175.8" x2="840" y2="175.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="179.8" text-anchor="end" font-size="11" fill="#64748b">&yen;5,000B</text><line x1="60" y1="136.9" x2="840" y2="136.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="140.9" text-anchor="end" font-size="11" fill="#64748b">&yen;10,000B</text><line x1="60" y1="97.9" x2="840" y2="97.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="101.9" text-anchor="end" font-size="11" fill="#64748b">&yen;15,000B</text><line x1="60" y1="59.0" x2="840" y2="59.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="63.0" text-anchor="end" font-size="11" fill="#64748b">&yen;20,000B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">&yen;25,000B</text><rect x="75.6" y="101.41" width="22.5" height="113.39" rx="2" fill="#2dd4bf"/><text x="86.85" y="96.41" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;14,552.7B</text><rect x="113.7" y="208.01" width="22.5" height="6.79" rx="1" fill="#60a5fa"/><text x="124.95" y="203.01" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;871.2B</text><rect x="151.9" y="209.52" width="22.5" height="5.28" rx="1" fill="#fbbf24"/><text x="163.15" y="204.52" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;678.1B</text><text x="125.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text><rect x="238.1" y="83.06" width="22.5" height="131.74" rx="2" fill="#2dd4bf"/><text x="249.35" y="78.06" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;16,907.7B</text><rect x="276.2" y="208.72" width="22.5" height="6.08" rx="1" fill="#60a5fa"/><text x="287.45" y="203.72" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;780.8B</text><rect x="314.4" y="209.46" width="22.5" height="5.34" rx="1" fill="#fbbf24"/><text x="325.65" y="204.46" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;685.9B</text><text x="287.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text><rect x="400.6" y="55.62" width="22.5" height="159.18" rx="2" fill="#2dd4bf"/><text x="411.85" y="50.62" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;20,428.8B</text><rect x="438.7" y="204.03" width="22.5" height="10.77" rx="1" fill="#60a5fa"/><text x="449.95" y="199.03" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;1,382.0B</text><rect x="476.9" y="203.42" width="22.5" height="11.38" rx="1" fill="#fbbf24"/><text x="488.15" y="198.42" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;1,461.0B</text><text x="450.0" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text><rect x="563.1" y="45.80" width="22.5" height="169.00" rx="2" fill="#2dd4bf"/><text x="574.35" y="40.80" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;21,688.8B</text><rect x="601.2" y="205.34" width="22.5" height="9.46" rx="1" fill="#60a5fa"/><text x="612.45" y="200.34" text-anchor="middle" font-size="7.5" fill="#93c5fd" font-weight="700">&yen;1,213.5B</text><rect x="639.4" y="209.61" width="22.5" height="5.19" rx="1" fill="#fbbf24"/><text x="650.65" y="204.61" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;665.9B</text><text x="612.5" y="258" text-anchor="middle" font-size="11" fill="#94a3b8">FY25</text><rect x="725.6" y="44.96" width="22.5" height="169.84" rx="2" fill="#2dd4bf"/><text x="736.85" y="39.96" text-anchor="middle" font-size="9" fill="#e2e8f0" font-weight="700">&yen;21,796.6B</text><rect x="763.7" y="214.80" width="22.5" height="3.23" rx="1" fill="#f87171"/><text x="774.95" y="229.03" text-anchor="middle" font-size="7.5" fill="#fca5a5" font-weight="700">-&yen;414.3B</text><rect x="801.9" y="206.56" width="22.5" height="8.24" rx="1" fill="#fbbf24"/><text x="813.15" y="201.56" text-anchor="middle" font-size="7.5" fill="#fde68a" font-weight="700">&yen;1,058.0B</text><text x="775.0" y="258" text-anchor="middle" font-size="11" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+10.6%</div><div class="sub">&yen;14,552.7B &rarr; &yen;21,796.6B; strong FY2023-24 (yen weakness, volume) then flat</div></div>
+    <div class="cagr-card"><div class="label">Operating Income CAGR</div><div class="val" style="color:#f87171;">n/m</div><div class="sub">&yen;871.2B &rarr; &minus;&yen;414.3B; negative in FY2026 (about +4.5% a year if the &yen;1,577.8B EV losses were excluded &mdash; shown for context only, not scored)</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (ex-Fin. Services)</div><div class="val" style="color:#f87171;">+11.8%</div><div class="sub">&yen;678.1B &rarr; &yen;1,058.0B, with a &yen;1,461.0B peak in FY2024</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend</div>
+    <div class="chart-sub">20% screen threshold shown as a dashed reference line. Honda's consolidated margin has run in a 4.6-6.8% band for four years and then fell below zero in FY2026 on the EV charges; margins include the lower-margin financial-services arm in revenue.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="200.0" x2="840" y2="200.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="204.0" text-anchor="end" font-size="11" fill="#64748b">-5%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">5%</text><line x1="50" y1="110.0" x2="840" y2="110.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="114.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="80.0" x2="840" y2="80.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="84.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="50.0" x2="840" y2="50.0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/><text x="42" y="54.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><path d="M50.0,134.08 L247.5,142.29 L445.0,129.41 L642.5,136.43 L840.0,181.40 L840.0,170.0 L50.0,170.0 Z" fill="#2dd4bf" opacity="0.15"/><path d="M50.0,134.08 L247.5,142.29 L445.0,129.41 L642.5,136.43 L840.0,181.40" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.0" cy="134.08" r="3" fill="#2dd4bf"/><text x="50.0" y="124.08" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.99%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="142.29" r="3" fill="#2dd4bf"/><text x="247.5" y="132.29" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">4.62%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="129.41" r="3" fill="#2dd4bf"/><text x="445.0" y="119.41" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">6.76%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="136.43" r="3" fill="#2dd4bf"/><text x="642.5" y="126.43" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">5.60%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="181.40" r="3" fill="#f87171"/><text x="840.0" y="199.40" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">-1.90%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text><text x="835" y="45" text-anchor="end" font-size="10" fill="#94a3b8">20% screen threshold</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Fiscal Year</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>FCF (ex-FS)</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2022</td><td>&yen;14,552.7B</td><td>&yen;871.2B</td><td>5.99%</td><td>&yen;707.1B</td><td>&yen;678.1B</td><td>77.8%</td></tr>
+    <tr><td>FY2023</td><td>&yen;16,907.7B</td><td>&yen;780.8B</td><td>4.62%</td><td>&yen;651.4B</td><td>&yen;685.9B</td><td>87.8%</td></tr>
+    <tr><td>FY2024</td><td>&yen;20,428.8B</td><td>&yen;1,382.0B</td><td>6.76%</td><td>&yen;1,107.2B</td><td>&yen;1,461.0B</td><td>105.7%</td></tr>
+    <tr><td>FY2025</td><td>&yen;21,688.8B</td><td>&yen;1,213.5B</td><td>5.60%</td><td>&yen;835.8B</td><td>&yen;665.9B</td><td>54.9%</td></tr>
+    <tr><td>FY2026</td><td>&yen;21,796.6B</td><td>-&yen;414.3B</td><td>-1.90%</td><td>-&yen;423.9B</td><td>&yen;1,058.0B</td><td>n/m</td></tr>
+  </table>
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Fiscal Year</th><th>EPS (split-adj.)</th><th>Dividend / share</th><th>Capex</th><th>Consolidated FCF</th><th>Gross margin</th></tr>
+    <tr><td>FY2022</td><td>&yen;137.03</td><td>&yen;40</td><td>&yen;278.4B (1.9%)</td><td>&yen;1,411.5B</td><td>20.51%</td></tr>
+    <tr><td>FY2023</td><td>&yen;128.01</td><td>&yen;40</td><td>&yen;493.9B (2.9%)</td><td>&yen;1,654.0B</td><td>19.71%</td></tr>
+    <tr><td>FY2024</td><td>&yen;225.88</td><td>&yen;68</td><td>&yen;387.9B (1.9%)</td><td>&yen;398.6B</td><td>21.60%</td></tr>
+    <tr><td>FY2025</td><td>&yen;178.93</td><td>&yen;68</td><td>&yen;537.4B (2.5%)</td><td>-&yen;218.7B</td><td>21.50%</td></tr>
+    <tr><td>FY2026</td><td>-&yen;106.06</td><td>&yen;70</td><td>&yen;751.3B (3.4%)</td><td>&yen;523.2B</td><td>16.75%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;"><b>Which free cash flow:</b> the headline FCF column is Honda's own disclosed free cash flow for its non-financial-services businesses (operating minus investing cash flow, excluding captive finance), which is the more meaningful measure for an automaker. Consolidated FCF (operating cash flow minus capex, per S&amp;P Global) is shown separately and is distorted by the finance arm. FCF/EBIT divides industrial FCF by consolidated operating income. EPS is adjusted for the 3-for-1 split of Sep 2023. Capex is Honda's reported figure (excluding operating-lease assets, right-of-use assets and intangibles); R&amp;D runs a further &asymp;5.4% of revenue (&yen;1,174.8B in FY2026). Non-financial-services operating profit (segment total minus financial services) was &yen;897.9B in FY2025 and &minus;&yen;689.9B in FY2026.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; the EV Reset</div></div>
+  <div class="sec-sub">Honda's fiscal quarters run Apr-Jun (Q1), Jul-Sep (Q2), Oct-Dec (Q3), Jan-Mar (Q4). Latest reported period: Q1 FY2027 (three months to Jun 30, 2026, reported Aug 5, 2026). Quarterly figures are S&amp;P Global standardised (they differ slightly from Honda's own reported operating income in some quarters, e.g. the FY2026 total of &minus;&yen;366.0B vs &minus;&yen;414.3B reported).</div>
+
+  <div class="headline-box">
+    <div class="title">What actually moved the numbers</div>
+    <p>Q4 FY2026 (Jan-Mar 2026) carried the EV reset: Honda cut its EV plans and booked &yen;1,577.8B of EV-related losses for the full year (&yen;1,453.6B inside the automobile segment), producing a quarterly operating loss of about &yen;958B (S&amp;P basis) and Honda's first annual operating loss since its 1957 listing. Q1 FY2027 then rebounded sharply: revenue <b style="color:#34d399;">&yen;6,061.5B (+13.5% YoY)</b>, operating profit <b style="color:#34d399;">&yen;530.7B, a record for any quarter and up 117% YoY</b>, with <b style="color:#f8fafc;">no EV-related charges</b>. Motorcycles earned a record &yen;233.9B (20.5% margin) on India and Brazil, and automobiles swung to a &yen;192.1B profit from a &yen;29.6B loss a year earlier as North American hybrid demand held up while China sales kept falling.</p>
+  </div>
+
+  <div class="callout">
+    <b>Guidance:</b> Honda raised its FY2027 operating-profit forecast from &yen;500B to &yen;650B (net income &yen;400B vs a &yen;423.9B loss in FY2026). Earlier guidance had assumed about &yen;500B of further EV-related losses, which management said would take adjusted profit to roughly &yen;1.0T. Separately, Honda is reported to be pushing suppliers for more than $9B of cost cuts over four years, and agreed with Nissan (Aug 31, 2026) to jointly develop core vehicle software and ECUs for cars from FY2029. Tariffs and the Chinese price war remain headwinds. Guidance is management's estimate, not a reported result, and is not scored.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (&yen;B) &amp; YoY Growth &mdash; Q2 FY25 to Q1 FY27</div>
+    <div class="chart-sub">Revenue was flat to slightly down YoY for four straight quarters (Q4 FY25 to Q3 FY26) before re-accelerating to +8.6% and +13.5% as motorcycle strength and US hybrid sales fed through.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">&yen;2,000B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">&yen;4,000B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">&yen;6,000B</text><rect x="80.8" y="65.92" width="56" height="154.08" rx="2" fill="#2dd4bf"/><text x="108.8" y="59.92" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,392.8B</text><text x="108.8" y="79.92" text-anchor="middle" font-size="9" fill="#34d399" font-weight="700">+8.2%</text><text x="108.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2 FY25</text><rect x="178.2" y="61.97" width="56" height="158.03" rx="2" fill="#2dd4bf"/><text x="206.2" y="55.97" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,531.1B</text><text x="206.2" y="75.97" text-anchor="middle" font-size="9" fill="#34d399" font-weight="700">+2.6%</text><text x="206.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3 FY25</text><rect x="275.8" y="66.86" width="56" height="153.14" rx="2" fill="#2dd4bf"/><text x="303.8" y="60.86" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,360.0B</text><text x="303.8" y="80.86" text-anchor="middle" font-size="9" fill="#fca5a5" font-weight="700">-1.3%</text><text x="303.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4 FY25</text><rect x="373.2" y="67.42" width="56" height="152.58" rx="2" fill="#2dd4bf"/><text x="401.2" y="61.42" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,340.3B</text><text x="401.2" y="81.42" text-anchor="middle" font-size="9" fill="#fca5a5" font-weight="700">-1.2%</text><text x="401.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1 FY26</text><rect x="470.8" y="68.79" width="56" height="151.21" rx="2" fill="#2dd4bf"/><text x="498.8" y="62.79" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,292.4B</text><text x="498.8" y="82.79" text-anchor="middle" font-size="9" fill="#fca5a5" font-weight="700">-1.9%</text><text x="498.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2 FY26</text><rect x="568.2" y="67.34" width="56" height="152.66" rx="2" fill="#2dd4bf"/><text x="596.2" y="61.34" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,343.0B</text><text x="596.2" y="81.34" text-anchor="middle" font-size="9" fill="#fca5a5" font-weight="700">-3.4%</text><text x="596.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3 FY26</text><rect x="665.8" y="53.69" width="56" height="166.31" rx="2" fill="#2dd4bf"/><text x="693.8" y="47.69" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;5,820.9B</text><text x="693.8" y="67.69" text-anchor="middle" font-size="9" fill="#34d399" font-weight="700">+8.6%</text><text x="693.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4 FY26</text><rect x="763.2" y="46.81" width="56" height="173.19" rx="2" fill="#34d399"/><text x="791.2" y="40.81" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;6,061.5B</text><text x="791.2" y="60.81" text-anchor="middle" font-size="9" fill="#34d399" font-weight="700">+13.5%</text><text x="791.2" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q1 FY27</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income (&yen;B) &amp; Margin &mdash; Q2 FY25 to Q1 FY27</div>
+    <div class="chart-sub">Quarterly operating margin ran 1.4-7.2% before the Q4 FY26 EV charge (&minus;16.5%), then jumped to 8.8% in Q1 FY27, the highest in this window.</div>
+    <svg viewBox="0 0 860 262" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="197.8" x2="840" y2="197.8" stroke="#1e293b" stroke-width="1"/><text x="50" y="201.8" text-anchor="end" font-size="11" fill="#64748b">-&yen;1,000B</text><line x1="60" y1="142.2" x2="840" y2="142.2" stroke="#1e293b" stroke-width="1"/><text x="50" y="146.2" text-anchor="end" font-size="11" fill="#64748b">-&yen;500B</text><line x1="60" y1="86.7" x2="840" y2="86.7" stroke="#475569" stroke-width="1.3"/><text x="50" y="90.7" text-anchor="end" font-size="11" fill="#64748b">&yen;0B</text><line x1="60" y1="31.1" x2="840" y2="31.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="35.1" text-anchor="end" font-size="11" fill="#64748b">&yen;500B</text><rect x="80.8" y="58.01" width="56" height="28.66" rx="2" fill="#60a5fa"/><text x="108.8" y="52.01" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;257.9B</text><text x="108.8" y="71.01" text-anchor="middle" font-size="9" fill="#dbeafe">4.8%</text><text x="108.8" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY25</text><rect x="178.2" y="42.52" width="56" height="44.14" rx="2" fill="#60a5fa"/><text x="206.2" y="36.52" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;397.3B</text><text x="206.2" y="55.52" text-anchor="middle" font-size="9" fill="#dbeafe">7.2%</text><text x="206.2" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY25</text><rect x="275.8" y="78.49" width="56" height="8.18" rx="2" fill="#60a5fa"/><text x="303.8" y="72.49" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;73.6B</text><text x="303.8" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY25</text><rect x="373.2" y="59.53" width="56" height="27.13" rx="2" fill="#60a5fa"/><text x="401.2" y="53.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;244.2B</text><text x="401.2" y="72.53" text-anchor="middle" font-size="9" fill="#dbeafe">4.6%</text><text x="401.2" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q1 FY26</text><rect x="470.8" y="65.11" width="56" height="21.56" rx="2" fill="#60a5fa"/><text x="498.8" y="59.11" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;194.0B</text><text x="498.8" y="78.11" text-anchor="middle" font-size="9" fill="#dbeafe">3.7%</text><text x="498.8" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q2 FY26</text><rect x="568.2" y="69.62" width="56" height="17.04" rx="2" fill="#60a5fa"/><text x="596.2" y="63.62" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;153.4B</text><text x="596.2" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q3 FY26</text><rect x="665.8" y="86.67" width="56" height="106.39" rx="2" fill="#f87171"/><text x="693.8" y="207.06" text-anchor="middle" font-size="10.5" fill="#fca5a5" font-weight="700">-&yen;957.5B</text><text x="693.8" y="220.06" text-anchor="middle" font-size="9" fill="#fca5a5">-16.4%</text><text x="693.8" y="250" text-anchor="middle" font-size="11" fill="#94a3b8">Q4 FY26</text><rect x="763.2" y="27.69" width="56" height="58.98" rx="2" fill="#60a5fa"/><text x="791.2" y="21.69" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">&yen;530.8B</text><text x="791.2" y="40.69" text-anchor="middle" font-size="9" fill="#dbeafe">8.8%</text><text x="791.2" y="250" text-anchor="middle" font-size="11" fill="#f8fafc">Q1 FY27</text></svg>
+  </div>
+
+  <table class="datatable" style="font-size:11.5px;"><tr><th>Quarter</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th></tr><tr><td>Revenue</td><td>&yen;5,393B</td><td>&yen;5,531B</td><td>&yen;5,360B</td><td>&yen;5,340B</td><td>&yen;5,292B</td><td>&yen;5,343B</td><td>&yen;5,821B</td><td>&yen;6,062B</td></tr><tr><td>Revenue YoY</td><td>+8.2%</td><td>+2.6%</td><td>-1.3%</td><td>-1.2%</td><td>-1.9%</td><td>-3.4%</td><td>+8.6%</td><td>+13.5%</td></tr><tr><td>Op. income</td><td>&yen;258B</td><td>&yen;397B</td><td>&yen;74B</td><td>&yen;244B</td><td>&yen;194B</td><td>&yen;153B</td><td>-&yen;958B</td><td>&yen;531B</td></tr><tr><td>Op. margin</td><td>4.8%</td><td>7.2%</td><td>1.4%</td><td>4.6%</td><td>3.7%</td><td>2.9%</td><td>-16.4%</td><td>8.8%</td></tr><tr><td>Net income</td><td>&yen;100B</td><td>&yen;311B</td><td>&yen;31B</td><td>&yen;197B</td><td>&yen;115B</td><td>&yen;154B</td><td>-&yen;889B</td><td>&yen;451B</td></tr><tr><td>Gross margin</td><td>21.3%</td><td>21.3%</td><td>21.2%</td><td>20.1%</td><td>20.4%</td><td>20.2%</td><td>7.2%</td><td>22.2%</td></tr></table>
+
+  <div class="chart-card" style="margin-top:10px;">
+    <div class="chart-title">Gross Margin Trend (FY2022-FY2026)</div>
+    <div class="chart-sub">Gross margin held at 19.7-21.6% for four years, then fell to 16.75% in FY2026 because EV write-downs hit cost of sales (Q4 FY26 gross margin was just 7.2%). It rebounded to 22.2% in Q1 FY27. Criterion #14 compares FY2026 with FY2023: &minus;2.96pp.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25%</text><path d="M50.0,79.87 L247.5,90.53 L445.0,65.33 L642.5,66.67 L840.0,130.00 L840.0,220.0 L50.0,220.0 Z" fill="#34d399" opacity="0.12"/><path d="M50.0,79.87 L247.5,90.53 L445.0,65.33 L642.5,66.67 L840.0,130.00" fill="none" stroke="#34d399" stroke-width="2.5"/><circle cx="50.0" cy="79.87" r="3" fill="#34d399"/><text x="50.0" y="69.87" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.51%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><circle cx="247.5" cy="90.53" r="3" fill="#34d399"/><text x="247.5" y="108.53" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">19.71%</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><circle cx="445.0" cy="65.33" r="3" fill="#34d399"/><text x="445.0" y="55.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.60%</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><circle cx="642.5" cy="66.67" r="3" fill="#34d399"/><text x="642.5" y="56.67" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">21.50%</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><circle cx="840.0" cy="130.00" r="3" fill="#34d399"/><text x="840.0" y="120.00" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">16.75%</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY26</text></svg>
+  </div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Segment profit (company-reported)</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr>
+    <tr><td>Motorcycle</td><td>&yen;311.5B</td><td>&yen;488.7B</td><td>&yen;556.2B</td><td>&yen;663.4B</td><td>&yen;731.9B</td></tr>
+    <tr><td>Automobile</td><td>&yen;236.2B</td><td>-&yen;16.6B</td><td>&yen;560.6B</td><td>&yen;243.9B</td><td>-&yen;1,411.1B</td></tr>
+    <tr><td>Financial services</td><td>&yen;333.0B</td><td>&yen;285.9B</td><td>&yen;274.0B</td><td>&yen;315.6B</td><td>&yen;275.5B</td></tr>
+    <tr><td>Power products &amp; other</td><td>-&yen;9.5B</td><td>&yen;22.8B</td><td>-&yen;8.9B</td><td>-&yen;9.4B</td><td>-&yen;10.7B</td></tr>
+    <tr><td><b>Total operating profit</b></td><td>&yen;871.2B</td><td>&yen;780.8B</td><td>&yen;1,382.0B</td><td>&yen;1,213.5B</td><td>-&yen;414.3B</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:10px;">
+    <b>Market position, honestly stated:</b> Honda is the world's largest motorcycle maker (22.1M units in FY2026, a record &yen;731.9B segment profit) and that business, plus financial services, now carries the group. In cars it is a mid-sized global player outside the top five by volume, strongest in North America (where hybrid demand has held up) and Japan, and weakest in China where local EV brands have taken share. That mix is why criterion #5 (market share) scores Met on the strength of motorcycles while market concentration (#6) scores a 4/5: the automotive market is fragmented, over-built and, in EVs, being reshaped by Chinese entrants.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E is not meaningful today because FY2026 and TTM net income are negative, so the entry-multiple criterion is tested on forward P/E against Honda's own FY22-26 forward P/E history (S&amp;P Global consensus data via stockanalysis.com). WACC is assumed at 6.5%, reflecting Honda's investment-grade, low-beta profile and Japanese rates; S&amp;P's own model shows an unrealistically low 2.2%.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; FY22-26 &amp; Current</div>
+    <div class="chart-sub">Trailing P/E sat at 7.1-9.0x through FY25 (Honda has traded at a persistent low multiple, 0.3-0.5x sales) and is not meaningful in FY26 and now. Forward P/E is about 9.9x at &yen;1,687.5, versus an FY22-26 average of 7.99x &mdash; a ratio of 1.24x, i.e. a modest premium to its own history.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+      <span><span class="dot" style="background:#c4b5fd;"></span>Forward P/E</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="160.0" x2="840" y2="160.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="164.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="40.0" x2="840" y2="40.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="44.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50.0" y1="124.12" x2="840.0" y2="124.12" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="138.12" text-anchor="end" font-size="10" fill="#94a3b8">Fwd FY22-26 avg: 7.99x</text><path d="M 50.0,118.72 L 208.0,111.76 L 366.0,120.64 L 524.0,135.04" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="118.72" r="3" fill="#a78bfa"/><text x="50.0" y="108.72" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.44x</text><circle cx="208.0" cy="111.76" r="3" fill="#a78bfa"/><text x="208.0" y="101.76" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">9.02x</text><circle cx="366.0" cy="120.64" r="3" fill="#a78bfa"/><text x="366.0" y="135.64" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">8.28x</text><circle cx="524.0" cy="135.04" r="3" fill="#a78bfa"/><text x="524.0" y="125.04" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.08x</text><path d="M 50.0,129.40 L 208.0,132.76 L 366.0,113.08 L 524.0,136.60 L 682.0,108.76 L 840.0,100.84" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-dasharray="4,3"/><circle cx="50.0" cy="129.40" r="3" fill="#c4b5fd"/><text x="50.0" y="145.40" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">7.55x</text><circle cx="208.0" cy="132.76" r="3" fill="#c4b5fd"/><text x="208.0" y="148.76" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">7.27x</text><circle cx="366.0" cy="113.08" r="3" fill="#c4b5fd"/><text x="366.0" y="103.08" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">8.91x</text><circle cx="524.0" cy="136.60" r="3" fill="#c4b5fd"/><text x="524.0" y="153.60" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">6.95x</text><circle cx="682.0" cy="108.76" r="3" fill="#c4b5fd"/><text x="682.0" y="98.76" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">9.27x</text><circle cx="840.0" cy="100.84" r="3.5" fill="#c4b5fd"/><text x="840.0" y="90.84" text-anchor="middle" font-size="10" fill="#c4b5fd" font-weight="700">9.93x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY26</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><text x="761" y="205" text-anchor="middle" font-size="10" fill="#94a3b8">FY26 &amp; Now trailing P/E: n/m (net loss)</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers, and why this one is awkward:</b> current P/E is today's price divided by the last 12 months of actual earnings; the trailing series above is that ratio at each fiscal year-end. Forward P/E divides today's price by analysts' consensus estimate of the <i>next</i> 12 months of earnings. For Honda the trailing number does not exist right now (TTM net income is &minus;&yen;169.7B), so the framework falls back on forward vs forward: &asymp;9.9x now against a 7.99x average, ratio &asymp;1.24, which lands in the 1.15-1.30 band (1/5, Not met). Two cautions: the consensus forward P/E series is third-party data, and it sits well below what Honda's own guidance implies &mdash; net income guidance of &yen;400B on a &asymp;&yen;6.6T market cap is about 16x. Honda's low multiples historically reflect cyclicality, thin auto margins and large cash tied up in captive finance. A single PEG figure is not meaningful with trailing earnings negative and consensus growth driven by a rebound from an impaired base.
+  </div>
+
+  <div class="callout">
+    <b>Balance sheet:</b> on an industrial (non-financial-services) basis Honda held net cash of &yen;3,324.5B at Mar 31, 2026 (company-disclosed), which auto-qualifies the net-debt/EBITDA criterion. Consolidated total debt was &yen;13.8T against &yen;5.4T of cash and investments (net debt &yen;8.4T at FY2026 and &yen;8.9T at Jun 30, 2026), but most of that funds customer loans and leases in the captive-finance arm and is matched by receivables. Net debt has risen steadily from &yen;4.5T in FY2022 as the finance book grew. Industrial free cash flow was &yen;1,058.0B in FY2026, and dividends of &yen;70 a share (&asymp;4.1% yield) plus buybacks returned cash even in a loss year. Quarterly capex jumped to &yen;579.7B in Q1 FY27 on S&amp;P's measure (which includes vehicles on operating lease), so FY2027 capital intensity is worth watching.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#a78bfa" stroke-width="40" stroke-dasharray="240.05 439.82" stroke-dashoffset="0"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="199.77 439.82" stroke-dashoffset="-240.05"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#a78bfa;"></span>Institutions &asymp; 54.6% of shares (stockanalysis.com / S&amp;P Global)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail, other corporates and remaining holders &asymp; 45.4% (largest named holders are Japanese trust-bank nominee accounts, not beneficial owners)</div>
+        <div>Insiders (directors and officers): &asymp;0.03%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note, honestly stated:</b> Honda was founded by Soichiro Honda and Takeo Fujisawa but today has no founder, family or executive shareholder with a meaningful stake (insiders hold about 0.03%), so criterion #12 scores a clean Not met. Honda also has no controlling parent after its planned 2025 merger with Nissan was called off; the two companies instead signed a narrower software/ECU development agreement in Aug 2026. The share count has fallen roughly a quarter since FY2022, through large buybacks (about 13% in the last year alone per S&amp;P).
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. All 14 criteria are computable here &mdash; no N/A cases, though #10 uses forward P/E because trailing earnings are negative, and #4, #8 use Honda's non-financial-services (industrial) disclosures. Criterion #14 (Margin Stability &amp; Structural Profitability) compares FY2026 gross margin to FY2023's, three fiscal years earlier.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Honda</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-26)</td><td>&ge;15%</td><td>+10.6% &mdash; &yen;14,552.7B &rarr; &yen;21,796.6B; solid through FY2024 but only +0.50% in FY2026 (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income (EBIT) CAGR (FY22-26)</td><td>&ge;15%</td><td>n/m &mdash; &yen;871.2B &rarr; &minus;&yen;414.3B (company-reported operating loss); negative end-point scores 0/5. Excluding &yen;1,577.8B of EV-related losses the FY2026 figure would be &yen;1,039.3B (about +4.5% a year), shown for context only</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>&minus;1.90% (FY2026), company-reported; about 4.8% excluding EV-related losses; non-financial-services operating loss was &minus;&yen;689.9B (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-26)</td><td>&ge;15%</td><td>+11.8% &mdash; non-financial-services FCF &yen;678.1B &rarr; &yen;1,058.0B (Honda-disclosed, ex-captive finance); consolidated FCF would be &yen;1,411.5B &rarr; &yen;523.2B (a decline); industrial basis used (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>World #1 in motorcycles (22.1M units FY2026, record &yen;731.9B segment profit); a mid-sized, outside-top-five player in automobiles, which are about two-thirds of revenue. Scored 4/5 on the motorcycle leadership, discounted for cars</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global autos are fragmented and structurally over-capacity (Toyota, VW, Hyundai-Kia, GM, Ford, Stellantis, BYD and many more); motorcycles are more concentrated but contested (Hero, TVS, Bajaj, Yamaha, Chinese makers)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>ROIC about &minus;0.4% (TTM, S&amp;P Global) vs an assumed 6.5% WACC &mdash; negative spread, 0/5</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Industrial net cash of &yen;3,324.5B at Mar 31, 2026 (non-financial-services basis, company-disclosed) &mdash; auto-qualifies, 5/5. Consolidated net debt is &yen;8.4T but is captive-finance funding</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>Not meaningful &mdash; FY2026 operating income is negative (industrial FCF &yen;1,058.0B vs EBIT &minus;&yen;414.3B), so the ratio cannot clear any band: 0/5. (FY2025: 54.9%; FY2024: 105.7%)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E n/m (net loss). Tested on forward P/E: &asymp;9.9x now vs FY22-26 average 7.99x, ratio &asymp;1.24 (score 1/5). Third-party consensus; on Honda's own &yen;400B net-income guide the multiple would be about 16x</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>Declining about 25%: roughly 5.16B shares (FY2022) to 3.89B now, through large buybacks (S&amp;P derived; 3-for-1 split adjusted), 5/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful (&asymp;5%+)</td><td>Insiders hold about 0.03%; no founder, family or controlling shareholder and no notable employee plan on record (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.4% of FY2026 revenue (&yen;751.3B, Honda-reported, excl. leases and intangibles); R&amp;D is a further 5.4% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &amp; Structural Profitability &mdash; gross margin</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 16.75% (FY2026) vs 19.71% (FY2023), a &minus;2.96pp fall (worse than &minus;2.5pp, score 0/5). Basis is gross margin (revenue minus cost of sales, S&amp;P Global); EV write-downs in cost of sales drive the drop, and Q1 FY2027 recovered to 22.2%</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Honda is the world's #1 motorcycle maker and that franchise is at record profit (&yen;731.9B in FY2026, 20.5% margin in Q1 FY2027). The industrial balance sheet is net cash (&yen;3.3T), industrial free cash flow stayed positive every year of the window (&yen;1,058.0B in FY2026), the share count is down about a quarter since FY2022, and capex is modest at 3.4% of revenue. Q1 FY2027 delivered a record &yen;530.7B operating profit with no EV charges, revenue growth re-accelerated to +13.5%, and guidance was raised to &yen;650B.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>FY2026 was a loss-making year (operating margin &minus;1.90%), and the reported-history scorecard is correspondingly weak: negative EBIT, negative ROIC spread, no conversion band cleared and a gross margin 3pp below FY2023. Automobiles, two-thirds of revenue, face US tariffs, Chinese price competition and structural over-capacity, and the EV strategy has been reset at a cost of &yen;1.58T with roughly another &yen;500B of EV-related charges flagged in earlier FY2027 guidance. Consolidated debt keeps growing with the finance book, the multiple depends on a rebound that guidance (not yet history) describes, and there is no founder or controlling holder. Whether Q1 FY2027's record quarter proves durable once tariffs and the EV transition bite is the central open question.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of May 14 &ndash; Oct 6, 2026. Sources: Honda Motor Co. investor-relations data (segment information, non-financial-services cash flows, capex/R&amp;D pages, FY2026 and Q1 FY2027 results), stockanalysis.com (TYO:7267 quarterly financials, ratios, statistics and price history, sourced from S&amp;P Global Market Intelligence), and press coverage of the FY2026 and Q1 FY2027 results (Reuters, Nasdaq, CBT News, just-auto).<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Honda reports in JPY under IFRS. WACC (6.5%) is an assumed estimate. Quarterly figures, gross margin, ROIC, share-count change, ownership and forward P/E are S&amp;P Global / stockanalysis.com data that may differ from Honda's own reporting. Ownership split and the forward P/E are third-party estimates.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Honda &mdash; TSE: 7267, JPY share price trend (split-adjusted for the Sep 2023 3-for-1 split). Points shown are approximate fiscal year-end closes (Mar 31) plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Honda &mdash; Fiscal Year-End Close (Approximate, TSE, JPY)</div>
+    <div class="chart-sub">Shares rose about 60% from the FY2023 close to the FY2024 close on record earnings and buybacks, then gave back about a third through FY2025-26 on tariffs and the EV write-downs. At &yen;1,687.5 they sit about 10% below the FY2024 close but roughly 36% above the FY2026 close, with the post-loss recovery in Q1 FY2027 as the main driver.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="18" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +7.8%</text>
+<path d="M 46.0,169.7 L172.8,170.0 L299.6,48.0 L426.4,150.9 L553.2,155.5 L680.0,79.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="169.7" x2="680.0" y2="79.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,169.7 L172.8,170.0 L299.6,48.0 L426.4,150.9 L553.2,155.5 L680.0,79.1" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="169.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="159.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,157</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="170.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="185.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,155</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="48.0" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="38.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,870</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="150.9" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="140.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,267</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="155.5" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="145.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,240</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="79.1" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="69.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">&yen;1,687.5</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal year-end closes (Mar 31) for FY2022-2026 are approximate: derived from S&amp;P Global fiscal-year-end trailing P/E &times; EPS (FY2022-FY2025, split-adjusted) and, for FY2026 where trailing P/E is not meaningful, from the year-end dividend yield and price-to-sales cross-checked against the 52-week low of &yen;1,238 (&asymp;&yen;1,240). The current price (&yen;1,687.5) is the Oct 6, 2026 TSE close from stockanalysis.com. The 5-Yr CAGR uses the site's five-year convention; the actual span from Mar 2022 is about 4.5 years, which would give about +8.7% a year. Dividends are not included. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
