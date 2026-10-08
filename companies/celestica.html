@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Celestica — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/celestica.html">
+<meta property="og:title" content="Celestica — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Celestica — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Celestica</h1>
+  <div class="badges">
+    <div class="badge">NYSE: CLS (also TSX)</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Toronto, Canada</div>
+    <div class="badge">Reports in USD</div>
+    <div class="badge">ODM / EMS &middot; AI &amp; cloud hardware</div>
+    <div class="badge warn">AI Build-Out Priced In &mdash; ~39x Trailing Earnings, ~88% Above Its Own FY21-25 Average Multiple</div>
+  </div>
+
+  <div class="price">$371.57</div>
+  <div class="price-sub">Oct 7, 2026 close, NYSE (USD) &middot; Market cap &asymp; $42.7B (114.98M shares outstanding, basic; ~$43.2B on ~116.2M diluted shares) &middot; 52-wk range $230.24 &ndash; 474.03 (price ~22% below the high) &middot; Analyst consensus price target ~$474 (+27.5%) &middot; Next report (Q3 2026): Oct 26, 2026, Investor Day Oct 27 &middot; Celestica also trades on the TSX in C$; this page uses the NYSE USD line throughout &middot; Last stock split 1999, so no split adjustment is needed</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Celestica is a design-and-manufacturing partner, not a branded switch vendor. Its Connectivity &amp; Cloud Solutions (CCS) segment builds 800G/1.6T Ethernet switches, servers and storage to hyperscalers' specifications (the &ldquo;white-box&rdquo; or ODM model), so IDC's vendor tables show no Celestica line. For context, IDC puts Arista at ~20.7% of data-centre Ethernet switching in Q1 2026, behind NVIDIA (21.5%) and ahead of Cisco (17.8%); Celestica is both an alternative to those branded vendors and a supplier to the customers that buy them.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars. The annual table uses an S&amp;P-standardised &ldquo;operating income&rdquo; as EBIT (it excludes restructuring items); Celestica's own GAAP earnings from operations were $1,040.7M (8.4% margin) in FY2025 and $599.3M (6.2%) in FY2024, and its adjusted (non-GAAP) operating margin was 7.5% in FY2025. GAAP operating earnings include mark-to-market gains on a total return swap tied to Celestica's own share price, which the company strips out of its adjusted figures. &ldquo;Free cash flow&rdquo; is the company's definition: operating cash flow minus purchases of property, plant and equipment (net of asset-sale proceeds). FY2021-FY2023 figures are from S&amp;P Global data via StockAnalysis.com (rounded); FY2024-FY2025 and 2026 quarters tie to Celestica's earnings releases.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$12.39B</div>
+      <div class="sub green" style="color:#34d399;">+28.5% YoY (FY2024: +21.2%)</div>
+      <div class="note">4-yr CAGR FY2021-25 is +21.8%. Growth is accelerating: Q2 2026 revenue was $4.70B (+62% YoY), the 2026 outlook is ~$20.5B (+65%) and management expects 2027 growth to be faster still.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin</div>
+      <div class="val" style="color:#fbbf24;">8.6%</div>
+      <div class="sub">FY2025 (S&amp;P basis); company GAAP 8.4%, adjusted 7.5%</div>
+      <div class="note">A thin-margin model: gross margin was 12.1% in FY2025 (9.0% in FY2022) and 12.3% in Q2 2026. The 2026 adjusted operating margin guide is 8.4%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">37% vs 12%</div>
+      <div class="sub">~+25pp spread</div>
+      <div class="note">Company-reported adjusted ROIC 37.1% (FY2025); WACC ~12.2% is a third-party (S&amp;P/StockAnalysis) estimate. ROIC is high because suppliers and customers fund most of the working capital, leaving little net invested capital.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">~0.15x</div>
+      <div class="sub">Net debt ~$181M, Dec 2025</div>
+      <div class="note">Gross debt $776.5M (credit-facility borrowings plus finance leases; operating leases excluded) less $595.6M cash, over EBITDA of $1,243M. Including operating leases it is ~0.26x. At Jun 30, 2026: debt $810M, cash $536M.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">66/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Excellent growth and returns on capital, held back by thin margins, a fragmented market with no leading share, weak cash conversion and a rich entry multiple (0 of 5 points).</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; revenue, EBIT and FCF CAGR, ROIC vs WACC, net debt/EBITDA, share count (down ~9%), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 not met</b> &mdash; EBIT margin (8.6% vs a 20% bar), market share (no #1/#2 position), market concentration (a fragmented field), FCF conversion (~43% of EBIT), entry multiple (~39x trailing vs a ~21x own average) and insider ownership (&lt;1%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Celestica, headquartered in Toronto and led by CEO Rob Mionis, designs and manufactures electronics for other companies. Its Connectivity &amp; Cloud Solutions segment (Communications plus Enterprise, about 74% of FY2025 revenue per S&amp;P segment data) makes the networking switches, servers and storage that hyperscalers deploy for AI and cloud; its Advanced Technology Solutions segment (aerospace and defence, industrial, health-tech and capital equipment, about 26%) is slower and steadier. Revenue grew from $5.6B in FY2021 to $12.4B in FY2025 (+22% a year), gross margin widened from 8.9% to 12.1% and EBIT margin from 3.4% to 8.6%, which drove EBIT up about 5.7x and net income about 8x. Q2 2026 revenue reached $4.70B (+62% YoY, CCS +84%), with a record 8.2% adjusted operating margin and adjusted EPS of $2.54; the 2026 outlook was raised to ~$20.5B revenue, $11.30 adjusted EPS and $600M of free cash flow. The flip side is that this is a low-margin, working-capital-heavy business with extreme customer concentration: the three largest customers were 32%, 14% and 12% of FY2025 revenue (58% together) and the top ten were 79%. The stock has risen from $11.13 at the end of 2021 to $371.57, roughly 33x, while trailing EPS rose about 12x, so most of the move is earnings growth but the P/E has also expanded from ~14x to ~39x.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Customer concentration</b> &mdash; three customers (all in CCS) were 58% of FY2025 revenue and the top ten 79%, up from 64% in FY2023; the 10-K names Amazon, Meta, Google, Ciena, Dell, HPE and IBM among CCS customers but does not say which is the 32% customer. (2) <b>Thin margins and heavy working capital</b> &mdash; a 12% gross margin leaves little room for error, inventories rose from $2.2B to $3.4B in the first half of 2026, and FCF was only ~43% of EBIT in FY2025 while capex steps up toward ~$1B in 2026 (company plan from January). (3) <b>Valuation and volatility</b> &mdash; ~39x trailing earnings is about 1.9x the stock's own FY21-25 average, and the shares move sharply (beta ~1.5; -13.3% on Aug 6, +11.6% on Sep 3 and -4.3% on Oct 7, 2026).
+  </div>
+
+  <div class="bignum-corner">CLS</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (fiscal year = calendar year), $ millions. EBIT = S&amp;P-standardised operating income (excludes restructuring; includes total-return-swap gains); FCF = operating cash flow minus capex (company definition). FY2021-FY2023 are rounded S&amp;P Global figures; FY2024-FY2025 tie to Celestica's releases (FY2025 company GAAP earnings from operations: $1,040.7M).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true relative size (axis in $ billions). Revenue has compounded at ~22% a year and EBIT at ~54% as margins widened from a low base; FCF grew more slowly (~27% a year) because working capital and capex absorbed much of the profit, and it fell in FY2022 when inventories built.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.6" text-anchor="end" font-size="11" fill="#64748b">2bn</text>
+<line x1="60" y1="177.1" x2="840" y2="177.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="181.1" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="145.7" x2="840" y2="145.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.7" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="114.3" x2="840" y2="114.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="118.3" text-anchor="end" font-size="11" fill="#64748b">8bn</text>
+<line x1="60" y1="82.9" x2="840" y2="82.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.9" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="51.4" x2="840" y2="51.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.4" text-anchor="end" font-size="11" fill="#64748b">12bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">14bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="151.4" width="30" height="88.5" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="146.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,635</text>
+<rect x="123.0" y="237.0" width="30" height="3.0" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="232.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">189</text>
+<rect x="161.0" y="237.3" width="30" height="2.7" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="232.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">175</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="126.1" width="30" height="113.9" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="121.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">7,250</text>
+<rect x="279.0" y="233.9" width="30" height="6.1" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="228.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">388</text>
+<rect x="317.0" y="238.4" width="30" height="1.6" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="233.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">102</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="114.9" width="30" height="125.1" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="109.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">7,961</text>
+<rect x="435.0" y="234.5" width="30" height="5.5" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="229.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">348</text>
+<rect x="473.0" y="236.8" width="30" height="3.2" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="231.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">201</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="88.4" width="30" height="151.6" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="83.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">9,646</text>
+<rect x="591.0" y="230.3" width="30" height="9.7" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="225.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">615</text>
+<rect x="629.0" y="235.2" width="30" height="4.8" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="230.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">306</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="45.3" width="30" height="194.7" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="40.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">12,391</text>
+<rect x="747.0" y="223.2" width="30" height="16.8" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="218.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,067</text>
+<rect x="785.0" y="232.8" width="30" height="7.2" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="227.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">458</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+21.8%</div>
+      <div class="sub">$5.63B &rarr; $12.39B &mdash; 2.2x in four years</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+54.2%</div>
+      <div class="sub">~$189M &rarr; ~$1,067M &mdash; operating leverage on a low base</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+27.3%</div>
+      <div class="sub">$175M &rarr; $458M; FY2022 dipped to $102M</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of revenue</div>
+    <div class="chart-sub">Gross margin (blue, revenue minus cost of sales) rose every year from 8.9% to 12.1%, helped by mix shift toward higher-value data-centre programs; EBIT margin (green, S&amp;P basis) rose from 3.4% to 8.6% with a dip in FY2023. Both remain low in absolute terms, which is normal for contract manufacturing. The FY2022 EBIT point includes a ~$95M other operating item that S&amp;P offsets below the operating line.</div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="68.0" x2="690" y2="68.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="4" y="71.0" font-size="7.5" fill="#64748b">5%</text>
+<line x1="30" y1="46.0" x2="690" y2="46.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="4" y="49.0" font-size="7.5" fill="#64748b">10%</text>
+<line x1="30" y1="24.0" x2="690" y2="24.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="4" y="27.0" font-size="7.5" fill="#64748b">15%</text>
+<text x="12" y="93" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,50.9 205,50.6 350,48.3 495,42.8 640,36.9" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,75.3 205,66.5 350,70.8 495,62.0 640,52.1" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="50.9" r="3.2" fill="#60a5fa"/><text x="60" y="43.9" text-anchor="middle" font-size="8" fill="#cbd5e1">8.9%</text>
+<circle cx="60" cy="75.3" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="86.3" text-anchor="middle" font-size="8" fill="#cbd5e1">3.4%</text>
+<circle cx="205" cy="50.6" r="3.2" fill="#60a5fa"/><text x="205" y="43.6" text-anchor="middle" font-size="8" fill="#cbd5e1">9.0%</text>
+<circle cx="205" cy="66.5" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="77.5" text-anchor="middle" font-size="8" fill="#cbd5e1">5.3%</text>
+<circle cx="350" cy="48.3" r="3.2" fill="#60a5fa"/><text x="350" y="41.3" text-anchor="middle" font-size="8" fill="#cbd5e1">9.5%</text>
+<circle cx="350" cy="70.8" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="81.8" text-anchor="middle" font-size="8" fill="#cbd5e1">4.4%</text>
+<circle cx="495" cy="42.8" r="3.2" fill="#60a5fa"/><text x="495" y="35.8" text-anchor="middle" font-size="8" fill="#cbd5e1">10.7%</text>
+<circle cx="495" cy="62.0" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="73.0" text-anchor="middle" font-size="8" fill="#cbd5e1">6.4%</text>
+<circle cx="640" cy="36.9" r="3.2" fill="#60a5fa"/><text x="640" y="29.9" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1%</text>
+<circle cx="640" cy="52.1" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="63.1" text-anchor="middle" font-size="8" fill="#cbd5e1">8.6%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($ m)</th><th>Revenue</th><th>EBIT</th><th>EBIT Margin</th><th>Gross Margin</th><th>Net Income</th><th>Dil. EPS ($)</th><th>FCF</th><th>FCF/EBIT</th></tr>
+    <tr><td>FY2021</td><td>5,635</td><td>189</td><td>3.4%</td><td>8.9%</td><td>104</td><td>0.82</td><td>175</td><td>93%</td></tr>
+    <tr><td>FY2022</td><td>7,250</td><td>388</td><td>5.4%</td><td>9.0%</td><td>180</td><td>1.46</td><td>102</td><td>26%</td></tr>
+    <tr><td>FY2023</td><td>7,961</td><td>348</td><td>4.4%</td><td>9.5%</td><td>244</td><td>2.03</td><td>201</td><td>58%</td></tr>
+    <tr><td>FY2024</td><td>9,646</td><td>615</td><td>6.4%</td><td>10.7%</td><td>428</td><td>3.61</td><td>306</td><td>50%</td></tr>
+    <tr><td>FY2025</td><td>12,391</td><td>1,067</td><td>8.6%</td><td>12.1%</td><td>833</td><td>7.16</td><td>458</td><td>43%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Revenue growth: -2.0% / +28.7% / +9.8% / +21.2% / +28.5% (FY2021-25). Capex $52M / $109M / $125M / $171M / $201M and operating cash flow $227M / $211M / $326M / $474M / $660M. Net debt (S&amp;P basis, incl. leases) $408M / $412M / $411M / $502M / $323M; on the company's balance sheet FY2025 net debt is $181M (borrowings and finance leases $776.5M less cash $595.6M). No dividend is paid. Adjusted (non-GAAP) EPS was $3.88 in FY2024 and $6.05 in FY2025. Diluted shares ~127M (FY2021) to ~116M (FY2025). FY2025 GAAP earnings from operations $1,040.7M vs the $1,067M S&amp;P figure shown (difference is restructuring and other charges).</div>
+  <div class="footer-note">Source: Celestica Q4/FY2025 and Q2 2026 earnings releases (Form 8-K, sec.gov); S&amp;P Global Market Intelligence data as shown on StockAnalysis.com for FY2021-FY2023 and the standardised EBIT series.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend (Q3 2024 &ndash; Q2 2026)</div></div>
+  <div class="sec-sub">Eight quarters. YoY revenue growth has stepped up from ~20% to 62% as hyperscale networking and compute programs ramped, while gross margin has stayed in a 10&ndash;13% band. Q3 2026 results are due Oct 26, 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was $4,699M (+62% YoY, +16% on Q1), against a guide of $4.15&ndash;4.45B. CCS revenue was $3.81B (+84%, segment margin 8.7%), of which Hardware Platform Solutions (the switch and platform business) was ~$1.9B (+58%); ATS was $0.89B (+8%, segment margin 6.3%). GAAP earnings from operations were $458M (9.8% of revenue, including a $104M total-return-swap gain); the adjusted operating margin of 8.2% was a company record. Adjusted EPS was $2.54 (guide $2.14&ndash;2.34) and GAAP EPS $3.17. Free cash flow was only $147M because capex jumped to $264M and inventories rose by $729M in the quarter. The 2026 outlook was raised to ~$20.5B revenue (from $19.0B), $11.30 adjusted EPS (from $10.15), 8.4% adjusted operating margin and $600M free cash flow, and management expects 2027 growth to exceed the 65% anticipated for 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Every quarter higher than the last. YoY: Q3'25 +27.8%, Q4'25 +43.6%, Q1'26 +52.8%, Q2'26 +62.4%. Revenue rounded to the nearest $1M from S&amp;P data; Q4'25 and Q2'26 tie to the company releases.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="79.5" width="60" height="50.5" fill="#2dd4bf"/><text x="50" y="74.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,500</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="103" y="78.5" width="60" height="51.5" fill="#2dd4bf"/><text x="133" y="73.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,546</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="186" y="76.4" width="60" height="53.6" fill="#2dd4bf"/><text x="216" y="71.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,649</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="269" y="71.5" width="60" height="58.5" fill="#2dd4bf"/><text x="299" y="66.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,893</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="352" y="65.4" width="60" height="64.6" fill="#2dd4bf"/><text x="382" y="60.4" text-anchor="middle" font-size="9" fill="#cbd5e1">3,194</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="56.1" width="60" height="73.9" fill="#2dd4bf"/><text x="465" y="51.1" text-anchor="middle" font-size="9" fill="#cbd5e1">3,655</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="518" y="48.2" width="60" height="81.8" fill="#2dd4bf"/><text x="548" y="43.2" text-anchor="middle" font-size="9" fill="#cbd5e1">4,047</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="601" y="35.0" width="60" height="95.0" fill="#2dd4bf"/><text x="631" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">4,699</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Gross Margin &mdash; Last 8 Quarters (%)</div>
+    <div class="chart-sub">Axis runs 9&ndash;14% (not from zero) so the swings are visible. GAAP gross margin includes total-return-swap gains and losses booked in cost of sales, which explains part of the quarter-to-quarter noise (Q2'26 adjusted gross margin was 11.5% vs 12.3% GAAP).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP gross margin</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="10" y1="45" x2="690" y2="45" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="12" y="125" font-size="8" fill="#64748b">9%</text><text x="12" y="41" font-size="8" fill="#64748b">14%</text>
+<polyline points="50,105.7 133,84.4 216,107.2 299,65.1 382,61.5 465,81.6 548,99.4 631,74.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="50" cy="105.7" r="3.2" fill="#60a5fa"/><text x="50" y="97.7" text-anchor="middle" font-size="9" fill="#cbd5e1">10.4%</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<circle cx="133" cy="84.4" r="3.2" fill="#60a5fa"/><text x="133" y="76.4" text-anchor="middle" font-size="9" fill="#cbd5e1">11.7%</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<circle cx="216" cy="107.2" r="3.2" fill="#60a5fa"/><text x="216" y="99.2" text-anchor="middle" font-size="9" fill="#cbd5e1">10.3%</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<circle cx="299" cy="65.1" r="3.2" fill="#60a5fa"/><text x="299" y="57.1" text-anchor="middle" font-size="9" fill="#cbd5e1">12.8%</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<circle cx="382" cy="61.5" r="3.2" fill="#60a5fa"/><text x="382" y="53.5" text-anchor="middle" font-size="9" fill="#cbd5e1">13.0%</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<circle cx="465" cy="81.6" r="3.2" fill="#60a5fa"/><text x="465" y="73.6" text-anchor="middle" font-size="9" fill="#cbd5e1">11.8%</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<circle cx="548" cy="99.4" r="3.2" fill="#60a5fa"/><text x="548" y="91.4" text-anchor="middle" font-size="9" fill="#cbd5e1">10.8%</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<circle cx="631" cy="74.1" r="3.2" fill="#60a5fa"/><text x="631" y="66.1" text-anchor="middle" font-size="9" fill="#cbd5e1">12.3%</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue ($m)</th><th>YoY</th><th>GAAP gross margin</th><th>Operating margin (S&amp;P basis)</th></tr>
+    <tr><td>Q3'24</td><td>2,500</td><td>+22.3%</td><td>10.4%</td><td>5.5%</td></tr>
+    <tr><td>Q4'24</td><td>2,546</td><td>+18.9%</td><td>11.7%</td><td>7.9%</td></tr>
+    <tr><td>Q1'25</td><td>2,649</td><td>+19.9%</td><td>10.3%</td><td>5.0%</td></tr>
+    <tr><td>Q2'25</td><td>2,893</td><td>+21.0%</td><td>12.8%</td><td>9.9%</td></tr>
+    <tr><td>Q3'25</td><td>3,194</td><td>+27.8%</td><td>13.0%</td><td>10.3%</td></tr>
+    <tr><td>Q4'25</td><td>3,655</td><td>+43.6%</td><td>11.8%</td><td>8.7%</td></tr>
+    <tr><td>Q1'26</td><td>4,047</td><td>+52.8%</td><td>10.8%</td><td>6.6%</td></tr>
+    <tr><td>Q2'26</td><td>4,699</td><td>+62.4%</td><td>12.3%</td><td>9.8%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Operating margin uses S&amp;P's standardised operating income, which excludes restructuring; company GAAP earnings from operations were 9.4% in Q2'25 and 9.8% in Q2'26 (the Q2'25 and Q2'26 figures include swap gains of ~$97M and ~$104M). The company's adjusted operating margin was 6.8% (Q4'24), 7.4% (Q2'25), 7.7% (Q4'25) and 8.2% (Q2'26). Q1'26 gross profit and operating margin are derived from S&amp;P quarterly data and the six-month totals in the Q2 release.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (raised Jul 27):</b> Q3 2026 revenue $5.25&ndash;5.55B, adjusted operating margin ~8.4%, adjusted EPS $2.88&ndash;3.08 (excludes $0.27&ndash;0.33 per share of stock-comp, amortisation and restructuring). FY2026: revenue ~$20.5B, adjusted EPS $11.30, adjusted operating margin 8.4%, free cash flow $600M; no share repurchases assumed for the rest of 2026.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Leadership &amp; events:</b> CFO Mandeep Chawla became Group President, Global Markets on Oct 1, 2026, with Todd Ankenmann named CFO. Q3 results are due Oct 26 and a 2026 Investor and Analyst Day is scheduled for Oct 27, where longer-term targets may be updated.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E. Year-end P/Es are the NYSE year-end close divided by GAAP diluted EPS; the current figure is $371.57 divided by trailing-twelve-month diluted EPS of $9.62 (to Jun 2026). GAAP EPS includes swap gains, so third-party P/Es differ by a few turns.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~38.6x) is ~1.88x Celestica's FY2021-25 year-end average (20.5x), the second-highest reading in the window after FY2025. EPS rose ~8.7x from end-2021 to end-2025 and ~11.7x to the trailing figure, while the share price rose ~33x. Low P/Es in FY2021-23 reflect a market that treated it as a cyclical contract manufacturer.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="84.2" width="70" height="25.8" fill="#60a5fa"/><text x="55" y="79.2" text-anchor="middle" font-size="9" fill="#cbd5e1">13.6x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="95.3" width="70" height="14.7" fill="#60a5fa"/><text x="150" y="90.3" text-anchor="middle" font-size="9" fill="#cbd5e1">7.7x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="82.6" width="70" height="27.4" fill="#60a5fa"/><text x="245" y="77.6" text-anchor="middle" font-size="9" fill="#cbd5e1">14.4x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="61.4" width="70" height="48.6" fill="#60a5fa"/><text x="340" y="56.4" text-anchor="middle" font-size="9" fill="#cbd5e1">25.6x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="31.6" width="70" height="78.4" fill="#60a5fa"/><text x="435" y="26.6" text-anchor="middle" font-size="9" fill="#cbd5e1">41.3x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="36.6" width="70" height="73.4" fill="#2dd4bf"/><text x="530" y="31.6" text-anchor="middle" font-size="9" fill="#cbd5e1">38.6x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="71.0" x2="690" y2="71.0" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="67.0" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 20.5x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> S&amp;P Global shows a forward P/E of ~24.9x (consensus next-twelve-month EPS of roughly $15, a derived figure). On the company's own 2026 adjusted EPS outlook of $11.30 the price is ~32.9x, and on adjusted trailing EPS of ~$8.16 (FY2025 $6.05 less H1 2025 $2.59 plus H1 2026 $4.70, my derivation) it is ~45.5x. Adjusted EPS excludes stock compensation and swap gains. A PEG is not shown by the data provider and I have not computed one, because year-ahead growth of ~87% makes the ratio unstable. The scorecard uses the trailing GAAP figure (ratio 1.88, 0/5 points). The consensus target (~$474, 22 analysts) sits ~27% above the price.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has stayed at ~1&ndash;2% of revenue, but it is now stepping up: purchases of PP&amp;E were $493M in H1 2026 (trailing twelve months $625M, ~4% of revenue) and the company planned about $1B for 2026 to build data-centre manufacturing capacity. FY2025 was $201M (1.6%).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="144.3" width="60" height="15.7" fill="#60a5fa"/><text x="60" y="139.3" text-anchor="middle" font-size="8" fill="#cbd5e1">52</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="127.3" width="60" height="32.7" fill="#60a5fa"/><text x="200" y="122.3" text-anchor="middle" font-size="8" fill="#cbd5e1">109</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="122.5" width="60" height="37.5" fill="#60a5fa"/><text x="340" y="117.5" text-anchor="middle" font-size="8" fill="#cbd5e1">125</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="108.7" width="60" height="51.3" fill="#60a5fa"/><text x="480" y="103.7" text-anchor="middle" font-size="8" fill="#cbd5e1">171</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="99.6" width="60" height="60.4" fill="#60a5fa"/><text x="620" y="94.6" text-anchor="middle" font-size="8" fill="#cbd5e1">201</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,113.7 200,84.8 340,81.4 480,71.4 620,78.8" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="113.7" r="3" fill="#fbbf24"/><text x="60" y="105.7" text-anchor="middle" font-size="7.5" fill="#fde68a">0.9%</text>
+<circle cx="200" cy="84.8" r="3" fill="#fbbf24"/><text x="200" y="76.8" text-anchor="middle" font-size="7.5" fill="#fde68a">1.5%</text>
+<circle cx="340" cy="81.4" r="3" fill="#fbbf24"/><text x="340" y="73.4" text-anchor="middle" font-size="7.5" fill="#fde68a">1.6%</text>
+<circle cx="480" cy="71.4" r="3" fill="#fbbf24"/><text x="480" y="63.4" text-anchor="middle" font-size="7.5" fill="#fde68a">1.8%</text>
+<circle cx="620" cy="78.8" r="3" fill="#fbbf24"/><text x="620" y="70.8" text-anchor="middle" font-size="7.5" fill="#fde68a">1.6%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="226.9 87.3" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="2.4 311.8" stroke-dashoffset="-226.9" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="84.9 229.3" stroke-dashoffset="-229.3" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">&lt;1%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders (directors &amp; officers) ~0.75%</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~72% (FMR/Fidelity the largest disclosed holder)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other (retail and unclassified) ~27%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>Basic shares fell from ~127M (FY2021) to ~115M (FY2025), about -9%, on buybacks of $57M / $80M / $118M / $272M / $375M (FY2021-25); the count has been flat at ~115M since mid-2025, only $23M was repurchased in H1 2026 and guidance assumes no further buybacks in 2026. Celestica also spent $326M in H1 2026 cash-settling stock-based compensation. There is no dividend.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership caveats:</b> the ~0.75% insider figure and ~72% institutional figure are S&amp;P Global data as shown on StockAnalysis.com; other trackers show insiders between ~0.5% and ~1.1% and institutions between ~41% and ~70%, so treat them as approximate. I did not retrieve the 2026 management circular. Insiders have been net sellers recently (reported sales by executives including the CEO and the President in August-September 2026). There is no controlling or founder shareholder.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; customers:</b> at Jun 30, 2026 cash was $536M against $810M of borrowings and finance leases (net debt ~$275M), equity $2.48B, inventories $3.4B (Dec 2025: $2.2B), receivables $3.3B and payables $3.8B. Net invested capital was only $2.9B on $15.6B of trailing revenue, which is why ROIC is high but also why a slowdown in payables or customer payments could swing cash flow sharply. Customer concentration: the three largest customers (all in CCS) were 32%, 14% and 12% of FY2025 revenue (36%, 15% and 12% in Q4 2025); top ten 79% (73% in FY2024, 64% in FY2023).
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Celestica</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+21.8% &mdash; $5.63B &rarr; $12.39B; accelerating in 2026 (score 5/5, above the 20% band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+54.2% &mdash; ~$189M &rarr; ~$1,067M (S&amp;P standardised operating income); a low FY2021 base flatters the rate (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>8.6% (FY2025, S&amp;P basis; company GAAP 8.4%, adjusted 7.5%; gross margin 12.1%). Structurally thin for contract manufacturing (score 2/5, 5&ndash;10% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+27.3% &mdash; $175M &rarr; $458M (operating cash flow less capex); FY2022 dipped to $102M (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>No verified #1/#2 position. Among electronics-manufacturing-services groups Celestica is roughly #4 by revenue behind Foxconn, Jabil and Flex (my estimate from reported revenues, not a published ranking); in AI back-end Ethernet switching, Dell'Oro (as cited on Celestica's own blog, so promotional) names it among the leaders with Accton, Arista, Cisco and NVIDIA, but I found no published share figure. Scored conservatively (score 1/5, #4&ndash;5 band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; the manufacturing-services and ODM field is fragmented (Foxconn, Jabil, Flex, Sanmina, Accton, Quanta, Wiwynn and others) and customers can dual-source; judgment, not a measured index (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>Company adjusted ROIC 37.1% (FY2025) vs WACC ~12.2% (third-party estimate), a ~+25pp spread; GAAP ROIC and S&amp;P's 36.6% give the same conclusion. Small net invested capital inflates the ratio (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~0.15x (FY2025): net debt $181M (borrowings and finance leases $776.5M less cash $595.6M) over EBITDA $1,243M; ~0.26x including operating leases (score 4/5, 0&ndash;1x band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>43% (FY2025: FCF $458M / EBIT $1,067M). Five-year path 93% / 26% / 58% / 50% / 43%: growth consumes working capital and capex (score 2/5, 40&ndash;60% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~38.6x ($371.57 / TTM diluted EPS $9.62) vs FY21-25 year-end average 20.5x (ratio 1.88); forward P/E ~24.9x. Far above its own average, although earnings have risen ~12x (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Basic shares ~127M (FY2021) to ~115M (FY2025), about -9%, through buybacks that more than offset stock compensation; flat since mid-2025 (score 4/5, declining 5&ndash;15% band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders hold ~0.75% (S&amp;P; other trackers 0.5&ndash;1.1%), no founder or controlling holder, and no disclosed broad employee-ownership plan of 5%+ (score 0/5, below 1% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.6% of revenue in FY2025 ($201M); 0.9&ndash;1.8% in every year FY2021-25. Rising toward ~4&ndash;5% of revenue in 2026 on the ~$1B capacity build-out (score 5/5 on the FY2025 basis)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability — gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin (revenue minus cost of sales) 8.96% (FY2022) &rarr; 12.06% (FY2025), +3.1pp; basis is gross margin, which Celestica reports. EBIT margin also rose (5.4% to 8.6%) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 5/5&times;13=13.0 &middot; #2 5/5&times;11=11.0 &middot; #3 2/5&times;10=4.0 &middot; #4 5/5&times;8=8.0 &middot; #5 1/5&times;7=1.4 &middot; #6 1/5&times;6=1.2 &middot; #7 5/5&times;10=10.0 &middot; #8 4/5&times;6=4.8 &middot; #9 2/5&times;8=3.2 &middot; #10 0/5&times;8=0.0 &middot; #11 4/5&times;4=3.2 &middot; #12 0/5&times;5=0.0 &middot; #13 5/5&times;4=4.0 &middot; #14 5/5&times;5=5.0 (each = points/5 &times; weight). Total 68.8 / 105 = <b>66/100</b>. Criteria met: 8/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative and the EMS ranking in #5 is my estimate; #7 uses the company's adjusted ROIC with a third-party WACC; #9 and #3 use S&amp;P standardised EBIT, which includes swap gains (on the company's adjusted operating earnings of $927M, FCF conversion would be ~49%, still 2/5, and margin 7.5%, still 2/5); #10 uses GAAP EPS that includes swap gains; #12 relies on an aggregator's insider percentage; FY2021-FY2023 figures are rounded S&amp;P data. #13 would fall to 4/5 on a 2026 basis (~4&ndash;5% of revenue).
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue is accelerating (+62% in Q2 2026) as AI and cloud customers order 800G and 1.6T networking and compute programs, gross margin has risen four years in a row, and adjusted operating margin reached a record 8.2%. Return on invested capital is ~37% with almost no net debt, the share count is ~9% lower than in FY2021, and management has raised the 2026 outlook several times this year and guides to faster growth in 2027.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The valuation: ~39x trailing and ~25&ndash;33x forward earnings versus a ~21x trailing average, with the stock volatile. Concentration: three customers were 58% of FY2025 revenue. Margins are thin (12% gross, 8.6% EBIT) and free cash flow lags profit (43% of EBIT) as inventories, receivables and a ~$1B capex program absorb cash. A pause in hyperscaler AI spending or a program loss would hit a business with little pricing power. Several inputs are third-party or derived: FY2021-FY2023 financials, WACC, ownership percentages, the EMS ranking and forward EPS.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Celestica earnings releases (Form 8-K, sec.gov): Q4/FY2025 (Jan 28, 2026) and Q2 2026 (Jul 27, 2026); Celestica FY2025 Form 10-K (customer concentration); S&amp;P Global Market Intelligence data via StockAnalysis.com (FY2021-FY2023 financials, quarterly series, year-end prices, ratios, ownership, consensus target, WACC, share price); Dell'Oro/Celestica blog and IDC Ethernet Switch Tracker (market context, via the Arista dashboard); press coverage of the Sep 2026 leadership change. Year-end prices, WACC, ownership, forward EPS and the market-share and concentration judgments are third-party or approximate and flagged as such. All figures USD (NYSE listing). Price as of Oct 7, 2026 close; prepared Oct 8, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Celestica &mdash; NYSE share price in USD. A flat 2021-22, then a steep climb as AI and cloud networking demand lifted revenue and margins: roughly 33x since the end of 2021, with most of the gain in 2024-26.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Celestica &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Year-end closes FY2021-FY2025 are from S&amp;P Global data via StockAnalysis.com (the stock was last split in 1999, so no adjustment is needed; the TSX line trades in C$ at a different level); the Now point is the Oct 7, 2026 close of $371.57. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (4.77 years). 52-week range: $230.24 &ndash; 474.03.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,175.7 L 172.8,175.7 L 299.6,168.8 L 426.4,144.6 L 553.2,66.6 L 680.0,37.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="175.7" x2="680.0" y2="37.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="60" y="44" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +108.6%*</text>
+<path d="M 46.0,175.7 L 172.8,175.7 L 299.6,168.8 L 426.4,144.6 L 553.2,66.6 L 680.0,37.4" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="175.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="163.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$11.13</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="175.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="163.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$11.27</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="168.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="156.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$29.28</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="144.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="132.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$92.30</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="66.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="54.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$295.61</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="37.4" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="25.4" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$371.57</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR (no dividends are paid). The 5-year start point is a low base of $11.13, so the annualised figure is extreme and should be read with that in mind. Over the same window trailing GAAP EPS rose ~12x ($0.82 to $9.62), so most of the price gain is earnings growth and the rest is a higher multiple (P/E ~14x to ~39x).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hewlett Packard Enterprise — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/hewlett-packard-enterprise.html">
+<meta property="og:title" content="Hewlett Packard Enterprise — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hewlett Packard Enterprise — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 &mdash; COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Hewlett Packard Enterprise</h1>
+  <div class="badges">
+    <div class="badge">NYSE: HPE</div>
+    <div class="badge">FY ends Oct 31 (FY2025 = Nov 2024&ndash;Oct 2025)</div>
+    <div class="badge">HQ: Houston, Texas</div>
+    <div class="badge">Reports in USD</div>
+    <div class="badge">Servers &middot; AI &middot; Networking (Aruba + Juniper)</div>
+    <div class="badge warn">Record High After a Juniper-Distorted FY2025 &mdash; ~37x Trailing Earnings vs ~12x Own Average</div>
+  </div>
+
+  <div class="price">$72.09</div>
+  <div class="price-sub">Oct 7, 2026 close, NYSE (USD) &middot; Market cap &asymp; $95.7B (~1.33B shares) &middot; 52-wk range $19.84 &ndash; 73.28 (within ~2% of the high; up ~3.6x from the low) &middot; Analyst consensus price target ~$72 (24 analysts, rating &ldquo;Buy&rdquo;; individual targets $63&ndash;92) &middot; Next report (Q4 and FY2026): early Dec 2026 (date not confirmed) &middot; Dividend $0.1425 per quarter</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> HPE is a three-in-one company: AI/enterprise servers, storage and a financing arm (HPE Financial Services) inside the &ldquo;Cloud &amp; AI&rdquo; segment, plus Networking, which more than doubled after it bought Juniper Networks for ~$14B (closed Jul 2, 2025). Networking revenue was $2.9B in the July 2026 quarter, similar in size to Arista's $3.0B quarter, but roughly half campus/branch, the rest routing, security and data-centre switching (data-centre networking was only $382M). IDC does not break out HPE; for reference it puts Arista at ~20.7% of data-centre Ethernet (Q1 2026), behind NVIDIA (21.5%) and just ahead of Cisco (17.8%), with Cisco at 29.3% of all Ethernet switching.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars on HPE's own fiscal year (ends Oct 31). &ldquo;EBIT&rdquo; is S&amp;P Global's standardised operating income (as shown by stockanalysis.com), which excludes unusual items such as the $1.6B FY2025 impairment and merger/restructuring charges; HPE's own GAAP &ldquo;earnings from operations&rdquo; was $2,190M in FY2024 and a <b>loss of $437M</b> in FY2025, and non-GAAP was $3,168M and $3,353M. &ldquo;Free cash flow&rdquo; here is operating cash flow minus capex (S&amp;P basis); HPE's own definition also nets PP&amp;E sale proceeds and gave $986M for FY2025 and $2,297M for FY2024. <b>FY2021-25 growth is affected by Juniper</b> (acquired Jul 2025; consolidated for only ~4 months of FY2025), by the H3C and Communications Technology Group disposals, and by HPE Financial Services (see page 4). Several lines are third-party or my own estimates and are flagged as such.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$34.30B</div>
+      <div class="sub green" style="color:#34d399;">+13.8% YoY (FY2024: +3.4%)</div>
+      <div class="note">4-yr CAGR FY2021-25 is only +5.4%. The Juniper step-up arrives in FY2026: Q3 FY26 revenue was a record $12.2B (+33.7% YoY), trailing 12 months $41.9B (+26.6%), and FY2026 guidance is +34-37%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (FY2025)</div>
+      <div class="val" style="color:#f87171;">5.1%</div>
+      <div class="sub">S&amp;P-standardised; trailing 8.1%</div>
+      <div class="note">Gross margin fell to 30.3% (33.4% in FY22) on AI-server mix and Juniper accounting, then rebounded to 40.1% in Q3 FY26. Non-GAAP operating margin: 9.8% in FY2025, 16.2% in Q3 FY26.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">4.8% vs ~9%</div>
+      <div class="sub">~&minus;4pp spread (FY2025)</div>
+      <div class="note">ROIC is S&amp;P's figure (8.3% trailing); WACC is my estimate. Goodwill and intangibles are now $30B, 40% of assets, after Juniper.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#f87171;">3.7x</div>
+      <div class="sub">$22.4B debt, $5.8B cash (Oct 2025)</div>
+      <div class="note">Includes the debt that funds HPE Financial Services leases (~$11-12B, my estimate). Trailing ~2.0x at Jul 2026. Leases excluded.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">18/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Scored on the latest completed year (FY2025), a Juniper-integration trough: low growth, thin margins, and an inflated multiple. The FY2026 recovery is not in these numbers.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="291.7 314.16" stroke-dashoffset="-22.4" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">1/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>1 criterion fully met</b> &mdash; share count (basic shares up only ~1% over FY2021-25)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>13 not met</b> &mdash; revenue, EBIT and FCF growth, EBIT margin, market position, concentration, ROIC vs WACC, leverage, FCF conversion, entry multiple, insider ownership, capex intensity and gross-margin stability</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Hewlett Packard Enterprise was split off from Hewlett-Packard in 2015 and is led by CEO Antonio Neri. It sells servers (including AI systems), storage and the GreenLake hybrid-cloud platform, finances customer purchases through HPE Financial Services, and, since Juniper, runs a large networking business (Aruba campus and Wi-Fi, Juniper routing, security and data-centre switching). Revenue grew only from $27.8B in FY2021 to $34.3B in FY2025 (+5% a year), EBIT slipped, and FY2025 was a messy year: a $1.6B impairment, Juniper deal costs, higher debt (net debt rose from $5.5B to $19.0B) and a thin $0.6B of free cash flow. FY2026 looks very different. Q3 FY26 revenue was $12.2B (+34%), gross margin 40.1% (up 10.9 points), non-GAAP EPS $1.11 and guidance was raised to $3.75&ndash;3.85 non-GAAP EPS and at least $3.75B of free cash flow, helped by AI server orders, Juniper's higher-margin networking and cost synergies now targeted at $800M. The shares have risen from ~$52 at the Sep 2 print to $72 and a record, so the market is already pricing the recovery: ~37x trailing GAAP and ~15-19x forward earnings.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Past growth is not like-for-like</b> &mdash; FY2021-25 numbers mix a stagnant legacy business, divestitures (H3C, CTG) and ~4 months of Juniper; the FY2026-27 jump is largely acquired and AI-server volume. Networking's +75% YoY in Q3 FY26 still compares against a quarter with only one month of Juniper; Q4 FY26 guidance is +11-13%. (2) <b>The finance arm distorts cash flow and debt</b> &mdash; HPE Financial Services' lease equipment runs through capex and its borrowings through net debt, so headline FCF and leverage look weaker than an industrial peer with no financing arm. (3) <b>Server margins and inventory</b> &mdash; inventory was $11.8B at Jul 2026 (vs $6.4B at Oct 2025) as AI systems and component prices rise; the recovery depends on AI-server margins holding.
+  </div>
+
+  <div class="bignum-corner">HPE</div>
+</div>
+
+<!-- ============ PAGE 2 &mdash; FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (years to Oct 31), $ millions. EBIT = S&amp;P-standardised operating income; FCF = operating cash flow minus capex; net debt is S&amp;P's figure including leases and the financing arm. Juniper is consolidated only from Jul 2, 2025.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true relative size (axis in $ billions). Revenue crept up 5% a year; EBIT was flat at ~$2.3-2.5B until it fell to $1.76B in FY2025; free cash flow dropped from $3.4B (FY21, boosted by working capital) to $0.6B as HPE built inventory, absorbed Juniper and paid deal costs.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (S&amp;P-standardised)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="87.2" width="30" height="152.8" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="82.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">27,784</text>
+<rect x="123.0" y="227.6" width="30" height="12.4" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="222.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,256</text>
+<rect x="161.0" y="221.5" width="30" height="18.5" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="216.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,369</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="83.3" width="30" height="156.7" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="78.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">28,496</text>
+<rect x="279.0" y="226.9" width="30" height="13.1" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="221.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,378</text>
+<rect x="317.0" y="231.9" width="30" height="8.1" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="226.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,471</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="79.8" width="30" height="160.2" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="74.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">29,135</text>
+<rect x="435.0" y="226.5" width="30" height="13.5" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="221.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,451</text>
+<rect x="473.0" y="231.2" width="30" height="8.8" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="226.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,600</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="74.3" width="30" height="165.7" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="69.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">30,127</text>
+<rect x="591.0" y="226.3" width="30" height="13.7" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="221.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,499</text>
+<rect x="629.0" y="229.1" width="30" height="10.9" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="224.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,974</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="51.4" width="30" height="188.6" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="46.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">34,296</text>
+<rect x="747.0" y="230.3" width="30" height="9.7" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="225.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,764</text>
+<rect x="785.0" y="236.6" width="30" height="3.4" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="231.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">627</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+5.4%</div>
+      <div class="sub">$27.8B &rarr; $34.3B; ~2-3% a year before Juniper</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">&minus;6.0%</div>
+      <div class="sub">$2.26B &rarr; $1.76B; GAAP incl. impairment is a loss</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">&minus;34.3%</div>
+      <div class="sub">$3,369M &rarr; $627M; trailing 12m ~$4.2B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of revenue</div>
+    <div class="chart-sub">Gross margin (blue, GAAP revenue minus cost of sales) peaked at 35.1% in FY2023 and fell to 30.3% in FY2025 as lower-margin AI servers grew and Juniper inventory was marked up; EBIT margin (green) held ~8% until FY2025's 5.1%.</div>
+    <svg viewBox="0 0 700 120">
+<line x1="30" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="62.0" x2="690" y2="62.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="24.0" x2="690" y2="24.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="103" font-size="7.5" fill="#64748b">0%</text><text x="2" y="65.0" font-size="7.5" fill="#64748b">20%</text><text x="2" y="27.0" font-size="7.5" fill="#64748b">40%</text>
+<polyline points="60,36.0 205,36.5 350,33.3 495,37.7 640,42.4" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,84.6 205,84.2 350,84.0 495,84.2 640,90.3" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="36.0" r="3.2" fill="#60a5fa"/><text x="60" y="29.0" text-anchor="middle" font-size="8" fill="#cbd5e1">33.7%</text>
+<circle cx="60" cy="84.6" r="3.2" fill="#34d399"/><text x="60" y="77.6" text-anchor="middle" font-size="8" fill="#cbd5e1">8.1%</text>
+<text x="60" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<circle cx="205" cy="36.5" r="3.2" fill="#60a5fa"/><text x="205" y="29.5" text-anchor="middle" font-size="8" fill="#cbd5e1">33.4%</text>
+<circle cx="205" cy="84.2" r="3.2" fill="#34d399"/><text x="205" y="77.2" text-anchor="middle" font-size="8" fill="#cbd5e1">8.3%</text>
+<text x="205" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<circle cx="350" cy="33.3" r="3.2" fill="#60a5fa"/><text x="350" y="26.3" text-anchor="middle" font-size="8" fill="#cbd5e1">35.1%</text>
+<circle cx="350" cy="84.0" r="3.2" fill="#34d399"/><text x="350" y="77.0" text-anchor="middle" font-size="8" fill="#cbd5e1">8.4%</text>
+<text x="350" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<circle cx="495" cy="37.7" r="3.2" fill="#60a5fa"/><text x="495" y="30.7" text-anchor="middle" font-size="8" fill="#cbd5e1">32.8%</text>
+<circle cx="495" cy="84.2" r="3.2" fill="#34d399"/><text x="495" y="77.2" text-anchor="middle" font-size="8" fill="#cbd5e1">8.3%</text>
+<text x="495" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<circle cx="640" cy="42.4" r="3.2" fill="#60a5fa"/><text x="640" y="35.4" text-anchor="middle" font-size="8" fill="#cbd5e1">30.3%</text>
+<circle cx="640" cy="90.3" r="3.2" fill="#34d399"/><text x="640" y="83.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.1%</text>
+<text x="640" y="112" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($ m)</th><th>Revenue</th><th>EBIT</th><th>EBIT Mgn</th><th>Gross Mgn</th><th>Net Inc. (common)</th><th>Dil. EPS ($)</th><th>FCF</th><th>FCF/EBIT</th><th>Capex</th><th>Net debt</th><th>DPS ($)</th></tr>
+    <tr><td>FY2021</td><td>27,784</td><td>2,256</td><td>8.1%</td><td>33.7%</td><td>3,427</td><td>2.58</td><td>3,369</td><td>149%</td><td>2,502</td><td>11,465</td><td>0.48</td></tr>
+    <tr><td>FY2022</td><td>28,496</td><td>2,378</td><td>8.3%</td><td>33.4%</td><td>868</td><td>0.66</td><td>1,471</td><td>62%</td><td>3,122</td><td>10,422</td><td>0.48</td></tr>
+    <tr><td>FY2023</td><td>29,135</td><td>2,451</td><td>8.4%</td><td>35.1%</td><td>2,025</td><td>1.54</td><td>1,600</td><td>65%</td><td>2,828</td><td>10,096</td><td>0.48</td></tr>
+    <tr><td>FY2024</td><td>30,127</td><td>2,499</td><td>8.3%</td><td>32.8%</td><td>2,554</td><td>1.93</td><td>1,974</td><td>79%</td><td>2,367</td><td>5,503</td><td>0.52</td></tr>
+    <tr><td>FY2025</td><td>34,296</td><td>1,764</td><td>5.1%</td><td>30.3%</td><td>(59)</td><td>(0.04)</td><td>627</td><td>36%</td><td>2,292</td><td>19,031</td><td>0.52</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">EPS is GAAP diluted; FY2021 net income ($3.4B) includes a $2.35B legal-settlement gain, and FY2022 includes a $0.9B goodwill impairment. FY2025 net loss to common after $116M preferred dividends. Operating cash flow was $5,871M / $4,593M / $4,428M / $4,341M / $2,919M (FY2021-25). Net debt: FY2024 was low because HPE held $14.8B of cash raised ahead of the Juniper close. DPS is declared per share; it was raised 9.6% to $0.57 a year in FY2026. Company-defined FCF: FY2023 ~$2.2B, FY2024 $2,297M, FY2025 $986M.</div>
+  <div class="footer-note">Source: HPE earnings releases (Q4 FY2025, Q3 FY2026) and Form 10-K; S&amp;P Global Market Intelligence via stockanalysis.com for FY2021-23 and standardised lines. The company's own GAAP operating profit differs from S&amp;P's EBIT.</div>
+</div>
+
+<!-- ============ PAGE 3 &mdash; QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend (Q4'24 &ndash; Q3'26)</div></div>
+  <div class="sec-sub">Eight fiscal quarters (FY ends Oct 31, so Q3'26 = May&ndash;Jul 2026). Juniper joined on Jul 2, 2025: Networking revenue stepped from ~$1.1B to ~$2.7B a quarter, and AI servers drove the second leg. Q4'26 is due in early December 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 FY26 (reported Sep 2, 2026): revenue $12,213M, up 33.7% (company: &ldquo;34%&rdquo;) and a record; Server $6.8B (+35%), Networking $2.9B (+74.9%; Routing +270%, Data Center Networking +112%, Campus &amp; Branch +31%), Financial Services $0.9B (flat). GAAP gross margin 40.1% (+10.9pp YoY), GAAP operating margin 11.4% (non-GAAP 16.2%), GAAP EPS $1.06 (includes a $444M, ~$0.31 a share gain on selling the rest of the H3C stake) and non-GAAP EPS $1.11 versus $0.44 a year ago. Networking's segment margin was 22.0% (flat), while Cloud &amp; AI reached 17.0% from 7.0%. Operating cash flow was $1.6B and company-defined FCF $958M. HPE raised FY26 to non-GAAP EPS $3.75&ndash;3.85 and FCF of at least $3.75B, and plans to return at least 75% of FCF to shareholders in Q4. The shares then climbed from ~$52 to a record ~$72, helped by a Sep 30 Networking Investor Day (cost-synergy target raised to $800M by 2028) and a $1.2B Vultr order for AMD Helios racks, per press coverage.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m): Networking vs the rest</div>
+    <div class="chart-sub">Teal = Networking (restated segments, includes Juniper from Jul 2, 2025); blue = Cloud &amp; AI plus Corporate Investments. YoY: Q4'25 +14.4%, Q1'26 +18.4%, Q2'26 +40.0%, Q3'26 +33.7%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Networking</span><span><span class="dot" style="background:#60a5fa;"></span>Cloud &amp; AI + other</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="60.7" width="60" height="60.7" fill="#60a5fa"/><rect x="20" y="121.4" width="60" height="8.6" fill="#2dd4bf"/><text x="50" y="55.7" text-anchor="middle" font-size="9" fill="#cbd5e1">8,458</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="103" y="65.7" width="60" height="55.5" fill="#60a5fa"/><rect x="103" y="121.2" width="60" height="8.8" fill="#2dd4bf"/><text x="133" y="60.7" text-anchor="middle" font-size="9" fill="#cbd5e1">7,854</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="186" y="67.6" width="60" height="53.6" fill="#60a5fa"/><rect x="186" y="121.1" width="60" height="8.9" fill="#2dd4bf"/><text x="216" y="62.6" text-anchor="middle" font-size="9" fill="#cbd5e1">7,627</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="269" y="55.2" width="60" height="61.3" fill="#60a5fa"/><rect x="269" y="116.5" width="60" height="13.5" fill="#2dd4bf"/><text x="299" y="50.2" text-anchor="middle" font-size="9" fill="#cbd5e1">9,136</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="352" y="50.7" width="60" height="57.0" fill="#60a5fa"/><rect x="352" y="107.7" width="60" height="22.3" fill="#2dd4bf"/><text x="382" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">9,679</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="53.8" width="60" height="54.0" fill="#60a5fa"/><rect x="435" y="107.8" width="60" height="22.2" fill="#2dd4bf"/><text x="465" y="48.8" text-anchor="middle" font-size="9" fill="#cbd5e1">9,301</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="518" y="42.6" width="60" height="65.4" fill="#60a5fa"/><rect x="518" y="108.0" width="60" height="22.0" fill="#2dd4bf"/><text x="548" y="37.6" text-anchor="middle" font-size="9" fill="#cbd5e1">10,678</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="601" y="30.0" width="60" height="76.3" fill="#60a5fa"/><rect x="601" y="106.3" width="60" height="23.7" fill="#2dd4bf"/><text x="631" y="25.0" text-anchor="middle" font-size="9" fill="#cbd5e1">12,213</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &mdash; Last 8 Quarters (%)</div>
+    <div class="chart-sub">Axis runs 25&ndash;45% (not from zero) so the swing is visible. Margins bottomed near 29% in the first half of FY2025, then climbed to 40% on Juniper's higher-margin networking, AI-server pricing and mix. S&amp;P-standardised; HPE's GAAP figures are within ~0.6pp (e.g. 29.2% in Q3'25, 40.1% in Q3'26).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="10" y1="45" x2="690" y2="45" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="12" y="125" font-size="8" fill="#64748b">25%</text><text x="12" y="41" font-size="8" fill="#64748b">45%</text>
+<polyline points="50,103.8 133,112.2 216,111.9 299,109.6 382,98.8 465,81.8 548,80.7 631,65.4" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="50" cy="103.8" r="3.2" fill="#60a5fa"/><text x="50" y="95.8" text-anchor="middle" font-size="9" fill="#cbd5e1">31.2%</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<circle cx="133" cy="112.2" r="3.2" fill="#60a5fa"/><text x="133" y="104.2" text-anchor="middle" font-size="9" fill="#cbd5e1">29.2%</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<circle cx="216" cy="111.9" r="3.2" fill="#60a5fa"/><text x="216" y="103.9" text-anchor="middle" font-size="9" fill="#cbd5e1">29.2%</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<circle cx="299" cy="109.6" r="3.2" fill="#60a5fa"/><text x="299" y="101.6" text-anchor="middle" font-size="9" fill="#cbd5e1">29.8%</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<circle cx="382" cy="98.8" r="3.2" fill="#60a5fa"/><text x="382" y="90.8" text-anchor="middle" font-size="9" fill="#cbd5e1">32.4%</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<circle cx="465" cy="81.8" r="3.2" fill="#60a5fa"/><text x="465" y="73.8" text-anchor="middle" font-size="9" fill="#cbd5e1">36.3%</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<circle cx="548" cy="80.7" r="3.2" fill="#60a5fa"/><text x="548" y="72.7" text-anchor="middle" font-size="9" fill="#cbd5e1">36.6%</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<circle cx="631" cy="65.4" r="3.2" fill="#60a5fa"/><text x="631" y="57.4" text-anchor="middle" font-size="9" fill="#cbd5e1">40.2%</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue ($m)</th><th>YoY</th><th>Networking ($m)</th><th>Gross margin</th><th>Op. margin</th><th>FCF ($m)</th></tr>
+    <tr><td>Q4'24</td><td>8,458</td><td>+15.1%</td><td>1,050</td><td>31.2%</td><td>9.9%</td><td>1,422</td></tr>
+    <tr><td>Q1'25</td><td>7,854</td><td>+16.3%</td><td>1,076</td><td>29.2%</td><td>7.5%</td><td>(918)</td></tr>
+    <tr><td>Q2'25</td><td>7,627</td><td>+5.9%</td><td>1,084</td><td>29.2%</td><td>6.3%</td><td>(1,008)</td></tr>
+    <tr><td>Q3'25</td><td>9,136</td><td>+18.5%</td><td>1,654</td><td>29.8%</td><td>5.4%</td><td>729</td></tr>
+    <tr><td>Q4'25</td><td>9,679</td><td>+14.4%</td><td>2,722</td><td>32.4%</td><td>3.5%</td><td>1,824</td></tr>
+    <tr><td>Q1'26</td><td>9,301</td><td>+18.4%</td><td>2,706</td><td>36.3%</td><td>7.6%</td><td>609</td></tr>
+    <tr><td>Q2'26</td><td>10,678</td><td>+40.0%</td><td>2,690</td><td>36.6%</td><td>8.7%</td><td>827</td></tr>
+    <tr><td>Q3'26</td><td>12,213</td><td>+33.7%</td><td>2,893</td><td>40.2%</td><td>12.6%</td><td>896</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Operating margin is S&amp;P-standardised (company GAAP: 11.4% in Q3'26, 7.0% in Q2'26, 2.7% in Q3'25, &minus;0.1% in Q4'25, 8.2% in Q4'24; non-GAAP 16.2% / 13.3% / 8.5% / 12.2% / 11.1%). Networking revenue uses HPE's FY2026 segment structure (Telco and Instant On moved to Corporate Investments). FCF here is operating cash flow minus capex; quarterly FCF swings with working capital and the financing arm.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance:</b> Q4 FY26 revenue $13.9&ndash;14.8B, GAAP EPS $1.12&ndash;1.22, non-GAAP $1.20&ndash;1.30; networking growth 11&ndash;13%. FY2026: revenue +34&ndash;37% (~$46&ndash;47B), non-GAAP EPS $3.75&ndash;3.85, FCF at least $3.75B. FY2027 framework: revenue +13&ndash;17%, non-GAAP EPS +16&ndash;20%, non-GAAP operating margin 14&ndash;15%, FCF at least $5.0B.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Juniper effect:</b> the first like-for-like networking quarter is Q4 FY26, when the +11&ndash;13% guide shows organic growth. Q3 FY26's +75% still compares against a quarter that had only one month of Juniper. Management says order backlog is at a record.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 &mdash; VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E. Year-end P/Es are computed from actual (unadjusted) Oct 31 closes and GAAP diluted EPS; the current figure is $72.09 / TTM EPS $1.96. FY2021's 5.7x is flattered by a one-off legal gain and FY2025 has a loss, so GAAP P/E is a poor guide for HPE; forward P/E is shown alongside.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current ~36.8x is about 3.1x HPE's FY2021-24 year-end average of 11.8x (FY2025 excluded: net loss). Earnings are still depressed by amortisation, interest and deal costs, while the price has risen ~3x in a year.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-24 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="95.4" width="70" height="14.6" fill="#60a5fa"/><text x="55" y="90.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5.7x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="54.8" width="70" height="55.2" fill="#60a5fa"/><text x="150" y="49.8" text-anchor="middle" font-size="9" fill="#cbd5e1">21.6x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="84.4" width="70" height="25.6" fill="#60a5fa"/><text x="245" y="79.4" text-anchor="middle" font-size="9" fill="#cbd5e1">10.0x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="84.2" width="70" height="25.8" fill="#60a5fa"/><text x="340" y="79.2" text-anchor="middle" font-size="9" fill="#cbd5e1">10.1x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<text x="435" y="100" text-anchor="middle" font-size="9" fill="#94a3b8">n/m (loss)</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="15.9" width="70" height="94.1" fill="#2dd4bf"/><text x="530" y="10.9" text-anchor="middle" font-size="9" fill="#cbd5e1">36.8x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="79.8" x2="690" y2="79.8" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="75.8" text-anchor="end" font-size="9" fill="#fbbf24">FY21-24 avg 11.8x (FY25 n/m)</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> S&amp;P shows a forward P/E of ~15.5x now versus 7.1&ndash;10.8x at the last five fiscal year-ends (average ~8.5x, ratio ~1.8). On HPE's own FY26 non-GAAP EPS guidance midpoint ($3.80) the multiple is ~19x, and ~16x on an FY27 growth-adjusted ~$4.50 (my calculation). Stockanalysis shows a PEG of ~0.5 on its consensus growth. The scorecard uses the trailing GAAP ratio (3.1, 0/5 points); the forward ratio would also score 0/5. Consensus target ~$72 equals the price, so the move already reflects the recovery.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex includes equipment HPE buys to lease through HPE Financial Services as well as data-centre and lab spending. Intensity fell from 11.0% (FY22) to 6.7% (FY25) as revenue grew; net of $380M PP&amp;E sale proceeds, FY2025 is 5.6%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="83.9" width="60" height="76.1" fill="#60a5fa"/><text x="60" y="78.9" text-anchor="middle" font-size="8" fill="#cbd5e1">2,502</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="65.0" width="60" height="95.0" fill="#60a5fa"/><text x="200" y="60.0" text-anchor="middle" font-size="8" fill="#cbd5e1">3,122</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="73.9" width="60" height="86.1" fill="#60a5fa"/><text x="340" y="68.9" text-anchor="middle" font-size="8" fill="#cbd5e1">2,828</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="88.0" width="60" height="72.0" fill="#60a5fa"/><text x="480" y="83.0" text-anchor="middle" font-size="8" fill="#cbd5e1">2,367</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="90.3" width="60" height="69.7" fill="#60a5fa"/><text x="620" y="85.3" text-anchor="middle" font-size="8" fill="#cbd5e1">2,292</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,65.5 200,44.5 340,58.2 480,77.0 620,89.6" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="65.5" r="3" fill="#fbbf24"/><text x="60" y="57.5" text-anchor="middle" font-size="7.5" fill="#fde68a">9.0%</text>
+<circle cx="200" cy="44.5" r="3" fill="#fbbf24"/><text x="200" y="36.5" text-anchor="middle" font-size="7.5" fill="#fde68a">11.0%</text>
+<circle cx="340" cy="58.2" r="3" fill="#fbbf24"/><text x="340" y="50.2" text-anchor="middle" font-size="7.5" fill="#fde68a">9.7%</text>
+<circle cx="480" cy="77.0" r="3" fill="#fbbf24"/><text x="480" y="69.0" text-anchor="middle" font-size="7.5" fill="#fde68a">7.9%</text>
+<circle cx="620" cy="89.6" r="3" fill="#fbbf24"/><text x="620" y="81.6" text-anchor="middle" font-size="7.5" fill="#fde68a">6.7%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (anchor holders)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="37.7 276.4" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="31.4 282.8" stroke-dashoffset="-37.7" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="17.1 297.0" stroke-dashoffset="-69.1" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="1.4 312.8" stroke-dashoffset="-86.2" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="226.5 87.6" stroke-dashoffset="-87.6" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~27.5%</text>
+</svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Vanguard 12.0%</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>BlackRock 10.0%</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>State Street 5.5%</div>
+          <div><span class="dot" style="background:#f87171;"></span>All directors &amp; officers (22) ~0.4%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders ~72%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Dividend</div>
+      <p>Basic shares were 1,309M (FY21), 1,324M (FY25) and 1,333M (Dec 2025): essentially flat, with small repurchases ($202M in FY25, $447M in the nine months to Jul 2026) offsetting stock compensation. A $1.5B 7.625% Series C mandatory convertible preferred (issued for Juniper) converts into ~76M shares, lifting the diluted count to ~1.45B. Dividend $0.57 a year (about 0.8% yield).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership caveats:</b> percentages come from the Feb 2026 proxy (holdings as of Dec 31, 2025, based on 1,332.6M shares); the three index-fund holdings come from 13G filings dated Jan&ndash;Feb 2024, so they may be stale. Insiders (22 people) hold 5.8M shares, ~0.4%; no founder or controlling holder.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; HPE Financial Services:</b> at Oct 31, 2025 borrowings were $22.4B ($4.6B current, $17.8B long-term) against $5.8B cash, so net debt of $16.6B (S&amp;P, including leases: $19.0B, up from $5.5B a year earlier as Juniper was paid for in cash). By Jul 31, 2026 debt was $20.2B and cash $6.2B (net $14.0B, ~2.0x trailing EBITDA). <b>Finance arm:</b> HPE Financial Services (FS) had $13.2B of net portfolio assets, 20.8% ROE and $889M of Q4 revenue; it is funded with debt at high leverage, which I estimate at roughly $11-12B of the total (HPE does not give one clean figure in the release; this assumes ~7:1 leverage on the portfolio). Ex-FS net debt is therefore roughly $5B, about 1x EBITDA, but the scorecard uses the reported total. The finance arm also flatters or depresses FCF: equipment bought for leases is in capex (a cash outflow) while the matching borrowing is in financing flows. Goodwill and intangibles are $30B (40% of assets) after Juniper.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 &mdash; SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist on the latest completed fiscal year (FY2025, ended Oct 31, 2025); every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). CAGRs are 4-year (FY2021-25) and are affected by Juniper (closed Jul 2025) and by disposals. Criterion #14 compares FY2025 gross margin with FY2022's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Hewlett Packard Enterprise</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+5.4% &mdash; $27.8B &rarr; $34.3B, but FY2025 includes only ~4 months of Juniper (closed Jul 2, 2025); FY2021-24 were ~+2-3% a year organically (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>&minus;6.0% &mdash; operating income $2,256M &rarr; $1,764M (S&amp;P-standardised, excludes the $1.6B FY25 impairment). Company GAAP earnings from operations were $2,190M in FY24 and a loss of $437M in FY25 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>5.1% (FY2025, S&amp;P-standardised); GAAP incl. impairments &minus;1.3%; non-GAAP 9.8%. Trailing 12 months to Jul 2026: 8.1% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>&minus;34.3% &mdash; $3,369M &rarr; $627M (operating cash flow minus capex). HPE's own FCF definition (net of PP&amp;E sale proceeds) gives $986M for FY25. FY21 was flattered by working capital; TTM FCF to Jul 2026 is ~$4.2B (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Networking (Aruba + Juniper) is a top-5 Ethernet/campus vendor behind Cisco, with Huawei, Arista and NVIDIA ahead in some segments; no IDC rank for HPE was available, so #4-5 is assumed. #3 would be 2/5. In servers HPE is a leading but not #1-2 vendor (score 1/5, rank unverified)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; networking is contested (Cisco, Huawei, Arista, NVIDIA, HPE/Juniper, plus white-box) and servers have Dell, Supermicro, Lenovo and ODMs. Judgment, not a measured index (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 4.8% (FY2025; S&amp;P via stockanalysis, 8.3% trailing) vs WACC ~9% (my estimate: beta 1.4, ~15-20% debt weighting). Spread about &minus;4pp: below cost of capital in the latest FY (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>3.7x at Oct 31, 2025: borrowings $22.4B (current $4.6B + long-term $17.8B) less cash $5.8B = $16.6B net, on EBITDA $4.5B (S&amp;P). Excludes lease liabilities; includes the HPE Financial Services debt (a rough ~$11-12B, my estimate). Eased to ~2.0x trailing by Jul 2026 (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>36% (FY2025: FCF $627M / EBIT $1,764M). Five-year path 149% / 62% / 65% / 79% / 36% (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E ~36.8x ($72.09 / TTM EPS $1.96) vs FY21-24 year-end average ~11.8x (FY25 loss, excluded): ratio ~3.1. Forward P/E ~15.5x vs ~8.5x FY21-25 average (ratio ~1.8). Both far above own history (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Basic weighted shares 1,309M (FY21) &rarr; 1,324M (FY25), about +1%; 1,333M at Dec 2025. Diluted count is ~1.45B incl. ~76M shares from the mandatory convertible preferred (score 3/5, within the &plusmn;5% flat band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>All 22 directors and executive officers hold 5.8M shares, ~0.4% (Dec 2025 proxy); CEO Antonio Neri 2.1M. No founder or controlling holder; Vanguard 12.0%, BlackRock 10.0% are index holders. No notable broad employee-ownership plan identified (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>6.7% of revenue in FY2025 ($2.29B), down from 9-11% in FY21-23. Includes equipment bought for HPE Financial Services leases; net of PP&amp;E sale proceeds ($380M) it is 5.6% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin (revenue minus cost of sales, GAAP) 33.4% (FY2022) &rarr; 30.3% (FY2025), &minus;3.1pp; basis is gross margin. Dilution from AI servers and Juniper purchase accounting; it recovered to 36.6% trailing and 40.1% in Q3 FY26 (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13/5=5.2 &middot; #2 0&times;11/5=0.0 &middot; #3 2&times;10/5=4.0 &middot; #4 0&times;8/5=0.0 &middot; #5 1&times;7/5=1.4 &middot; #6 1&times;6/5=1.2 &middot; #7 0&times;10/5=0.0 &middot; #8 1&times;6/5=1.2 &middot; #9 1&times;8/5=1.6 &middot; #10 0&times;8/5=0.0 &middot; #11 3&times;4/5=2.4 &middot; #12 0&times;5/5=0.0 &middot; #13 3&times;4/5=2.4 &middot; #14 0&times;5/5=0.0. Total 19.4 / 105 = <b>18/100</b>. Criteria met: 1/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no IDC rank for HPE; a #3 rank would add ~1.3 index points); #7 mixes S&amp;P's ROIC with my WACC estimate; #3 and #2 use S&amp;P-standardised operating income, which is more favourable than HPE's GAAP loss in FY2025; #8 treats the finance arm's debt as debt and excludes leases; #10 uses GAAP P/E that is distorted by one-offs. <b>Timing:</b> the index reflects FY2025, a trough year; trailing-12-month metrics (revenue +27%, EBIT margin 8.1%, gross margin 36.6%, FCF $4.2B, net debt ~2.0x) would score higher on #1, #3, #4, #8, #9 and #14 (very roughly 15-20 more index points, my estimate), but the multiple would still score 0.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The business is growing fast again: revenue +34% and gross margin 40% in the July 2026 quarter, FY2026 EPS guidance raised, FCF guided to at least $3.75B and $5B in FY2027. Networking is now a scaled, ~22%-margin business with AI-driven networking software (Mist, Marvis) and a path to $800M of synergies; AI-server demand and a record backlog support the top line. Debt is already falling (net ~$14B from $19B), the capex burden is easing, shareholders get ~75% of Q4 FCF, and the share count is flat.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>History: five years of ~2-5% organic growth, falling EBIT and a FY2025 GAAP loss; 13 of 14 criteria fail on reported FY2025 numbers. Valuation: ~37x trailing, ~15-19x forward and a price equal to the consensus target after a ~3.6x move off the low. Execution: Juniper integration, server margins, $11.8B of inventory, and AI-server demand tied to a few large orders. The finance arm and ~$20B of debt add leverage, and index funds, not insiders, own the stock. Several inputs are third-party or my estimates: ROIC/WACC, FY2021-23 operating income (S&amp;P basis), finance-arm debt and HPE's market-share rank.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> HPE earnings releases and financial tables (Q4 FY2025, Dec 2025; Q3 FY2026, Sep 2, 2026), HPE 2026 proxy statement (ownership), S&amp;P Global Market Intelligence via stockanalysis.com (annual and quarterly financials, ratios, price, targets), Digrin (month-end closes), IDC Ethernet Switch Tracker (Q1/Q2 2026) via press summaries, press coverage of the Sep 30, 2026 Networking Investor Day. Year-end prices, ROIC, WACC, finance-arm debt and market-share/concentration judgments are third-party or approximate and flagged as such. All figures USD. Price as of Oct 7, 2026 close; prepared Oct 8, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Hewlett Packard Enterprise &mdash; NYSE share price in USD, fiscal year-end (Oct 31) closes. Flat at $14-15 through FY2023, a steady climb to $24 by Oct 2025, then a ~3x surge in the year since as AI servers and the Juniper networking business took off.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">HPE &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Fiscal year-end closes (last trading day of October, 2021-2025) are actual unadjusted month-end closes from Digrin; the Now point is the Oct 7, 2026 close of $72.09. The dashed line is the straight-line annualised price CAGR between the Oct 2021 point and Oct 2026 (4.94 years). 52-week range: $19.84 &ndash; 73.28. HPE has not split since its 2015 spin-off.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,151.0 L 172.8,151.8 L 299.6,149.6 L 426.4,141.4 L 553.2,131.7 L 680.0,37.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="151.0" x2="680.0" y2="37.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="330" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +38.1%*</text>
+<path d="M 46.0,151.0 L 172.8,151.8 L 299.6,149.6 L 426.4,141.4 L 553.2,131.7 L 680.0,37.4" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="151.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="139.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$14.65</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="151.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="139.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$14.27</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="149.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="137.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$15.38</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="141.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="129.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$19.49</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="131.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="119.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$24.42</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="37.4" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="25.4" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$72.09</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR; HPE paid $0.48&ndash;0.57 a share a year in dividends (about 2-3% yield over most of the period), which would add to the total return. About 80% of the five-year price gain came in the last 12 months, after the Juniper deal closed and AI-server demand surged, while FY2021-25 EBIT fell.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
