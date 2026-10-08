@@ -2720,6 +2720,76 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: 8.4 },
     blurb: "Ferrari builds around 13,600 cars a year on purpose, with an order book that covers 2027, and earns a 29.5% EBIT margin and a 31% ROIC. Industrial net debt is close to zero, and Exor and the Piero Ferrari family hold about 32% of the shares. Growth is slowing (FY2025 revenue +7.0%), and capex runs at about 13% of revenue.",
     file: "companies/ferrari.html"
+  },
+
+  {
+    slug: "cisco",
+    name: "Cisco Systems",
+    ticker: "NASDAQ: CSCO",
+    sector: "Information Technology",
+    industry: "Communications Equipment",
+    subIndustry: "Networking & Communications Equipment",
+    tags: ["Networking", "AI Infrastructure", "Dividend", "Cybersecurity"],
+    dateFeatured: "2026-10-08",
+    price: "$117.39",
+    score: "7 / 14",
+    martinero: 53,
+    momentum: { status: "accelerating", recent: 11.8, prior: 5.3 },
+    quarterYoY: { period: "Q4 FY2026", growth: 17.6 },
+    blurb: "Cisco is the largest Ethernet switch and enterprise networking vendor, with security, observability (Splunk, acquired 2024) and a $15B services business. Revenue grew 11.8% in FY2026 after a slow FY2022-26 (+5.3% a year), and AI infrastructure orders reached $9.3B. The shares trade at about 35x trailing earnings against a roughly 23x own five-year average.",
+    file: "companies/cisco.html"
+  },
+  {
+    slug: "hewlett-packard-enterprise",
+    name: "Hewlett Packard Enterprise",
+    ticker: "NYSE: HPE",
+    sector: "Information Technology",
+    industry: "Technology Hardware",
+    subIndustry: "Enterprise Networking, Servers & AI Infrastructure",
+    tags: ["Networking", "Servers", "AI Infrastructure", "Juniper Acquisition"],
+    dateFeatured: "2026-10-08",
+    price: "$72.09",
+    score: "1 / 14",
+    martinero: 18,
+    momentum: { status: "accelerating", recent: 13.8, prior: 3.4 },
+    quarterYoY: { period: "Q3 FY2026", growth: 33.7 },
+    blurb: "Hewlett Packard Enterprise sells AI and enterprise servers, storage and a financing arm. Since buying Juniper Networks (closed July 2025) it also runs a large networking business. FY2021-25 revenue grew only about 5% a year and FY2025 was a Juniper-distorted trough. The July 2026 quarter showed revenue up 34%, and the stock trades near a record at about 37x trailing earnings.",
+    file: "companies/hewlett-packard-enterprise.html"
+  },
+  {
+    slug: "celestica",
+    name: "Celestica",
+    ticker: "NYSE: CLS",
+    sector: "Information Technology",
+    industry: "Electronic Equipment",
+    subIndustry: "Electronic Manufacturing Services (ODM Networking Hardware)",
+    tags: ["AI Infrastructure", "Networking", "Contract Manufacturing", "Customer Concentration"],
+    dateFeatured: "2026-10-08",
+    price: "$371.57",
+    score: "8 / 14",
+    martinero: 66,
+    momentum: { status: "accelerating", recent: 28.5, prior: 21.2 },
+    quarterYoY: { period: "Q2 2026", growth: 62.4 },
+    blurb: "Toronto-based design and manufacturing partner that builds 800G/1.6T Ethernet switches, servers and storage for hyperscalers, with revenue up from $5.6B in FY2021 to $12.4B in FY2025 and +62% YoY in Q2 2026. Margins are thin (12.1% gross, 8.6% EBIT) but ROIC is about 37% with almost no net debt. The shares trade at about 39x trailing earnings versus a ~21x own average, and three customers were 58% of FY2025 revenue.",
+    file: "companies/celestica.html"
+  },
+
+  {
+    slug: "arista-networks",
+    name: "Arista Networks",
+    ticker: "NYSE: ANET",
+    sector: "Information Technology",
+    industry: "Communications Equipment",
+    subIndustry: "Data-Center Networking",
+    tags: ["AI Infrastructure", "Networking", "Founder-Led", "Net Cash"],
+    dateFeatured: "2026-10-08",
+    price: "$215.83",
+    score: "12 / 14",
+    martinero: 84,
+    momentum: { status: "accelerating", recent: 28.6, prior: 19.5 },
+    quarterYoY: { period: "Q2 2026", growth: 37.7 },
+    blurb: "Ethernet switches and software for the biggest cloud and AI data centers; second to NVIDIA in data-center Ethernet at about 21% share. Revenue has compounded at 32% a year to $9.0B, with a 43% GAAP operating margin, $4.3B of free cash flow and net cash. The shares trade at about 67x trailing earnings, well above their own 43x average, and Microsoft and Meta were roughly 42% of FY2025 revenue.",
+    file: "companies/arista-networks.html"
   }
 
 
