@@ -2790,6 +2790,23 @@ const COMPANIES = [
     quarterYoY: { period: "Q2 2026", growth: 37.7 },
     blurb: "Ethernet switches and software for the biggest cloud and AI data centers; second to NVIDIA in data-center Ethernet at about 21% share. Revenue has compounded at 32% a year to $9.0B, with a 43% GAAP operating margin, $4.3B of free cash flow and net cash. The shares trade at about 67x trailing earnings, well above their own 43x average, and Microsoft and Meta were roughly 42% of FY2025 revenue.",
     file: "companies/arista-networks.html"
+  },
+  {
+    slug: "kweichow-moutai",
+    name: "Kweichow Moutai",
+    ticker: "Shanghai: 600519",
+    sector: "Consumer Staples",
+    industry: "Beverages",
+    subIndustry: "Premium Baijiu (Chinese Liquor)",
+    tags: ["Baijiu", "Luxury & Scarcity", "State-Controlled", "China Consumer", "Dividend Payer"],
+    dateFeatured: "2026-10-09",
+    price: "¥1,255.79",
+    score: "10 / 14",
+    martinero: 74,
+    momentum: { status: "decelerating", recent: -1.2, prior: 15.7 },
+    quarterYoY: { period: "Q2 2026", growth: -5.1 },
+    blurb: "Kweichow Moutai makes Feitian Moutai, China's most prestigious premium baijiu (liquor), and earns a roughly 66% operating margin with almost no debt. FY2025 brought its first annual decline in revenue (¥168.8B, -1.2%) and net profit (-4.5%), and H1 2026 profit fell another 2.0%. The state (Guizhou SASAC) holds a controlling stake of about 54%, and foreign investors reach the shares through Stock Connect or A-share ETFs.",
+    file: "companies/kweichow-moutai.html"
   }
 
 
