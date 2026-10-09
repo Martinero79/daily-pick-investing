@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kweichow Moutai — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/kweichow-moutai.html">
+<meta property="og:title" content="Kweichow Moutai — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kweichow Moutai — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Kweichow Moutai</h1>
+  <div class="badges">
+    <div class="badge">Shanghai: 600519 (Yahoo 600519.SS)</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Maotai town, Guizhou, China</div>
+    <div class="badge">Reports in CNY</div>
+    <div class="badge">State-controlled (Guizhou SASAC, ~54% via Moutai Group) &middot; Premium baijiu</div>
+    <div class="badge warn">First-Ever Annual Revenue &amp; Profit Decline (FY2025) &mdash; H1 2026 Profit Down Again; ~19x Earnings vs ~31x Own FY21-25 Average</div>
+  </div>
+
+  <div class="price">¥1,255.79</div>
+  <div class="price-sub">Oct 8, 2026 close, Shanghai Stock Exchange A-share (CNY) &middot; Market cap &asymp; ¥1.57 trillion (~1.25B shares) &middot; 52-wk range ¥1,151.01 &ndash; 1,568.00 &middot; Analyst consensus price target ~¥1,668 (+33%, 25 analysts per StockAnalysis) &middot; Next report (Q3 2026) expected around Oct 31, 2026 (data-provider date) &middot; Price-only figures; the dividend yield is ~4%</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">How to own it:</b> there is no ADR. Foreign investors reach Moutai through Shanghai-Hong Kong Stock Connect (northbound; Hong Kong Securities Clearing is a top-3 holder at ~4.8%), through QFII/RQFII, or through A-share/China ETFs. Dividends are paid in CNY and subject to withholding tax for foreign holders.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in Chinese yuan (CNY), fiscal year = calendar year. &ldquo;EBIT&rdquo; is operating income as shown by the data provider (S&amp;P Global via StockAnalysis): revenue less cost of sales, consumption tax and surcharges, selling, admin and R&amp;D costs, before interest and investment income. It runs about 2-3 points of margin below the company&rsquo;s pre-tax profit. &ldquo;Free cash flow&rdquo; is operating cash flow minus capex and <b>includes flows at Moutai&rsquo;s in-house finance company (deposits from group members)</b>, which makes it lumpy. <b>ROIC and WACC, the P/E history and the analyst target are third-party estimates</b>, not company-reported. Financials come from the data provider and were cross-checked to the company&rsquo;s FY2025 headline numbers (revenue ¥168.8B, net profit ¥82.3B) and H1 2026 results (revenue ¥90.7B, net profit ¥44.5B).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">¥168.8B</div>
+      <div class="sub" style="color:#f87171;">-1.2% YoY (FY2024: +15.7%)</div>
+      <div class="note">First annual decline since the 2001 listing. 4-yr CAGR FY2021-25 is +12.3%. H1 2026 revenue ¥90.7B (+1.5%), but Q2 2026 was -5.1% YoY.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin</div>
+      <div class="val" style="color:#34d399;">65.7%</div>
+      <div class="sub">FY2025; Q2 2026 was 62.3%</div>
+      <div class="note">Gross margin 91.2% (FY2022: 91.9%), softer at 89.3% in Q2 2026. Net margin 48.8%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">37-46% vs ~9%</div>
+      <div class="sub">~+28pp spread or more</div>
+      <div class="note">Third-party estimates: ROIC 46.1% (FY2025) and 37.3% (current) per StockAnalysis; WACC ~9% is my assumption for a China A-share. Any plausible WACC leaves a very wide spread.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">~¥55B cash &amp; investments, Jun 2026</div>
+      <div class="note">Gross debt is only ~¥0.24B (mostly leases). Cash includes funds of the in-house finance arm, so net cash overstates distributable cash.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">74/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Elite margins, returns, scarcity pricing and a low entry multiple vs its own history. Held back by growth that has stalled (CAGRs ~12%), a flat-to-falling FCF line and moderate cash conversion.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="224.4 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 314.16" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria fully met</b> &mdash; EBIT margin, market position (#1 in premium baijiu), concentration, ROIC vs WACC, net cash, entry multiple vs own history, share count, controlling-shareholder ownership (the state), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; revenue CAGR (+12.3%), EBIT CAGR (+11.9%), FCF CAGR (-0.9%) and FCF conversion (52.7% of EBIT)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Kweichow Moutai, founded in 1951 and listed in Shanghai in 2001, makes Feitian Moutai and the rest of China&rsquo;s most prestigious premium baijiu (a distilled sorghum liquor). Production is slow (a roughly five-year cycle) and tied to one place, which is the scarcity story: like Hermès or Ferrari, the company sells fewer bottles than the market would take at the official price, and the gap between the ex-factory price and the street price has been its pricing power. Revenue grew from ¥106.2B in FY2021 to ¥168.8B in FY2025 (+12.3% a year) with an EBIT margin of 65-67% and a net margin near 50%. Then the cycle turned: FY2025 revenue fell 1.2% and net profit 4.5% to ¥82.3B, the first declines since the listing, as official anti-extravagance rules and weaker business and gift demand hit high-end baijiu. In 2026 management began moving sales away from wholesalers towards its own channels (the i-Moutai app and company-run stores), raised the ex-factory price of Feitian from ¥1,169 to ¥1,269 and then ¥1,369 (reported), and delivered H1 2026 revenue of ¥90.7B (+1.5%) with net profit of ¥44.5B (-2.0%); the second quarter alone was -5.1% on revenue. The shares are down more than 40% from their 2021 peak, and the price-to-earnings ratio has compressed from ~49x (end-2021) to ~19x, which is why this page scores the entry multiple well while also flagging that earnings are no longer growing. The state (Guizhou SASAC) is the controlling shareholder via Moutai Group (~54%).
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Policy and consumption are the swing factors</b> &mdash; baijiu is taxed with a consumption tax, official banquet and gifting restrictions have repeatedly hit demand, and the 2026 channel reform is explicitly aimed at curbing speculation, not at growth. (2) <b>The controlling holder is the state</b> &mdash; Guizhou SASAC, via China Kweichow Moutai Distillery (Group), holds ~54%; that aligns the company with a stable dividend (payout ~79% for FY2025) but its objectives can differ from minority holders&rsquo;. (3) <b>Wholesale vs ex-factory price</b> &mdash; Feitian has traded at roughly ¥1,600-1,720 on third-party wholesale quotes in 2026 against a ¥1,269-1,369 ex-factory price; if that premium narrows further, the logic of the scarcity model weakens (a comparable model to <a href="hermes.html" style="color:#60a5fa;">Hermès</a> and <a href="ferrari.html" style="color:#60a5fa;">Ferrari</a> on this site, but with far less evidence of demand growth right now).
+  </div>
+
+  <div class="bignum-corner">600519</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, ¥ billions in the chart and ¥ millions in the table, fiscal year = calendar year. EBIT = operating income as defined by the data provider; FCF = operating cash flow minus capex (includes in-house finance-company flows).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (¥ bn)</div>
+    <div class="chart-sub">Shown at true relative size. Revenue compounded at ~12% a year through FY2024 and then slipped 1.2% in FY2025; EBIT peaked at ¥115.0B in FY2024. FCF has been volatile (¥31B in FY2022, ¥88B in FY2024, ¥58B in FY2025) because of working-capital and finance-company deposit swings.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">50bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">100bn</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">150bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">200bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="123.2" width="30" height="116.8" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="118.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">106.2</text>
+<rect x="123.0" y="162.3" width="30" height="77.7" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="157.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">70.7</text>
+<rect x="161.0" y="173.3" width="30" height="66.7" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="168.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">60.6</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="103.5" width="30" height="136.5" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="98.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">124.1</text>
+<rect x="279.0" y="148.6" width="30" height="91.4" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="143.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">83.1</text>
+<rect x="317.0" y="205.5" width="30" height="34.5" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="200.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">31.4</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="77.5" width="30" height="162.5" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="72.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">147.7</text>
+<rect x="435.0" y="131.0" width="30" height="109.0" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="126.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">99.1</text>
+<rect x="473.0" y="169.6" width="30" height="70.4" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="164.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">64.0</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="52.0" width="30" height="188.0" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="47.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">170.9</text>
+<rect x="591.0" y="113.5" width="30" height="126.5" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="108.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">115.0</text>
+<rect x="629.0" y="143.4" width="30" height="96.6" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="138.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">87.8</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="54.3" width="30" height="185.7" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="49.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">168.8</text>
+<rect x="747.0" y="118.0" width="30" height="122.0" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="113.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">110.9</text>
+<rect x="785.0" y="175.8" width="30" height="64.2" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="170.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">58.4</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+12.3%</div>
+      <div class="sub">¥106.2B &rarr; ¥168.8B, but FY2025 was -1.2%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+11.9%</div>
+      <div class="sub">¥70.7B &rarr; ¥110.9B; peak ¥115.0B in FY2024</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-0.9%</div>
+      <div class="sub">¥60.6B &rarr; ¥58.4B; start and end years both distorted by working capital</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of revenue</div>
+    <div class="chart-sub">Axis starts at 50% so the movement is visible. Gross margin (blue, revenue minus cost of sales) held at 91.5-92.0% for four years, then eased to 91.2% in FY2025; EBIT margin (green) peaked at 67.3% in FY2024 and fell 1.6 points in FY2025 as costs and taxes grew faster than revenue. Gross margin comes from the data provider (S&amp;P Global) and can differ slightly from the company&rsquo;s reported figure.</div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="76.0" x2="690" y2="76.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="79.0" font-size="7.5" fill="#64748b">60%</text>
+<line x1="30" y1="48.0" x2="690" y2="48.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="51.0" font-size="7.5" fill="#64748b">80%</text>
+<line x1="30" y1="20.0" x2="690" y2="20.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="23.0" font-size="7.5" fill="#64748b">100%</text>
+<text x="2" y="93" font-size="7.5" fill="#64748b">50%</text>
+<polyline points="60,31.8 205,31.4 350,31.2 495,31.3 640,32.3" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,66.8 205,66.3 350,66.0 495,65.8 640,68.1" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="31.8" r="3.2" fill="#60a5fa"/><text x="60" y="24.8" text-anchor="middle" font-size="8" fill="#cbd5e1">91.5%</text>
+<circle cx="60" cy="66.8" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="78.8" text-anchor="middle" font-size="8" fill="#cbd5e1">66.5%</text>
+<circle cx="205" cy="31.4" r="3.2" fill="#60a5fa"/><text x="205" y="24.4" text-anchor="middle" font-size="8" fill="#cbd5e1">91.8%</text>
+<circle cx="205" cy="66.3" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="78.3" text-anchor="middle" font-size="8" fill="#cbd5e1">66.9%</text>
+<circle cx="350" cy="31.2" r="3.2" fill="#60a5fa"/><text x="350" y="24.2" text-anchor="middle" font-size="8" fill="#cbd5e1">92.0%</text>
+<circle cx="350" cy="66.0" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="78.0" text-anchor="middle" font-size="8" fill="#cbd5e1">67.1%</text>
+<circle cx="495" cy="31.3" r="3.2" fill="#60a5fa"/><text x="495" y="24.3" text-anchor="middle" font-size="8" fill="#cbd5e1">91.9%</text>
+<circle cx="495" cy="65.8" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="77.8" text-anchor="middle" font-size="8" fill="#cbd5e1">67.3%</text>
+<circle cx="640" cy="32.3" r="3.2" fill="#60a5fa"/><text x="640" y="25.3" text-anchor="middle" font-size="8" fill="#cbd5e1">91.2%</text>
+<circle cx="640" cy="68.1" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="80.1" text-anchor="middle" font-size="8" fill="#cbd5e1">65.7%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (¥ m)</th><th>Revenue</th><th>EBIT</th><th>EBIT Margin</th><th>Gross Margin</th><th>Net Income</th><th>EPS (¥)</th><th>FCF</th><th>FCF/EBIT</th><th>DPS (¥)</th></tr>
+    <tr><td>FY2021</td><td>106,190</td><td>70,655</td><td>66.5%</td><td>91.5%</td><td>52,460</td><td>41.76</td><td>60,620</td><td>86%</td><td>21.68</td></tr>
+    <tr><td>FY2022</td><td>124,100</td><td>83,059</td><td>66.9%</td><td>91.8%</td><td>62,717</td><td>49.93</td><td>31,392</td><td>38%</td><td>25.91</td></tr>
+    <tr><td>FY2023</td><td>147,694</td><td>99,125</td><td>67.1%</td><td>92.0%</td><td>74,734</td><td>59.49</td><td>63,973</td><td>65%</td><td>30.88</td></tr>
+    <tr><td>FY2024</td><td>170,899</td><td>115,012</td><td>67.3%</td><td>91.9%</td><td>86,228</td><td>68.64</td><td>87,785</td><td>76%</td><td>51.51</td></tr>
+    <tr><td>FY2025</td><td>168,838</td><td>110,866</td><td>65.7%</td><td>91.2%</td><td>82,320</td><td>65.66</td><td>58,395</td><td>53%</td><td>51.95</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net cash (cash &amp; investments less debt): ¥51.4B / ¥57.8B / ¥69.1B / ¥60.3B / ¥78.3B (FY2021-25); gross debt only ¥0.2-0.4B. Operating cash flow ¥64.0B / ¥36.7B / ¥66.6B / ¥92.5B / ¥61.5B, capex ¥3.4B / ¥5.3B / ¥2.6B / ¥4.7B / ¥3.1B. DPS is the total declared for the year as shown by the data provider (FY2025: interim ¥23.957 + final ¥27.993; FY2024 interim ¥23.882 + final ¥27.624), gross of withholding tax. FY2025 payout ~79% of net profit; dividends of ~¥65B were paid in the last twelve months.</div>
+  <div class="footer-note">Source: Kweichow Moutai annual and interim reports as summarised by Yicai, Dow Jones/Morningstar and company filings; S&amp;P Global Market Intelligence via StockAnalysis.com for the line items, cash flows and ratios. Third-party aggregator numbers can differ slightly from the filings.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend (Q3 2024 &ndash; Q2 2026)</div></div>
+  <div class="sec-sub">Eight quarters. Revenue growth fell from +15% YoY to roughly zero by Q3 2025, dropped 19% in Q4 2025, recovered to +6.5% in Q1 2026 and turned negative again (-5.1%) in Q2 2026. Moutai&rsquo;s sales are seasonal (Q1 and Q4 are the strongest), so compare YoY, not quarter to quarter.</div>
+
+  <div class="headline-box">
+    <div class="title">What the half-year actually showed</div>
+    <p>H1 2026 revenue was about ¥90.7B (+1.5% YoY) and net profit attributable to shareholders ¥44.5B (-2.0%); basic EPS ¥35.57 (-1.7%). The weakness was in Q2: revenue ¥36.8B (-5.1%) and net profit ¥17.3B (about -6.9% on the data provider&rsquo;s figures) missed expectations according to broker commentary. Gross margin was 89.3% in Q2 versus 90.4% a year earlier. Chairman Chen Hua described the half as stable and said the company began market-based reforms in 2026 to counter weak demand; he also acknowledged that the average unit price and profit per tonne of wine declined year on year. Operating cash flow jumped to ¥70.7B in H1, but the company attributes this mainly to higher deposits from group members and lower interbank deposits at its finance arm, so it is not a sign of stronger earnings. Direct sales (including i-Moutai) were reported by broker commentary to be roughly half of Q2 revenue. Management gave no formal full-year earnings guidance.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (¥m)</div>
+    <div class="chart-sub">Seasonality is strong (Q1 and Q4 high). YoY: Q3'24 +15.3%, Q4'24 +12.8%, Q1'25 +10.5%, Q2'25 +7.3%, Q3'25 +0.6%, Q4'25 -19.4%, Q1'26 +6.5%, Q2'26 -5.1%. Quarterly figures are the data provider&rsquo;s; the company&rsquo;s own &ldquo;total operating revenue&rdquo; (e.g. Q1 2026 ¥54.7B, +6.3%) differs slightly.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, ¥m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="65.1" width="60" height="64.9" fill="#2dd4bf"/><text x="50" y="60.1" text-anchor="middle" font-size="9" fill="#cbd5e1">38,845</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="103" y="46.3" width="60" height="83.7" fill="#2dd4bf"/><text x="133" y="41.3" text-anchor="middle" font-size="9" fill="#cbd5e1">50,123</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="186" y="45.5" width="60" height="84.5" fill="#2dd4bf"/><text x="216" y="40.5" text-anchor="middle" font-size="9" fill="#cbd5e1">50,601</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="269" y="65.2" width="60" height="64.8" fill="#2dd4bf"/><text x="299" y="60.2" text-anchor="middle" font-size="9" fill="#cbd5e1">38,788</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="352" y="64.8" width="60" height="65.2" fill="#2dd4bf"/><text x="382" y="59.8" text-anchor="middle" font-size="9" fill="#cbd5e1">39,064</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="62.6" width="60" height="67.4" fill="#2dd4bf"/><text x="465" y="57.6" text-anchor="middle" font-size="9" fill="#cbd5e1">40,384</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="518" y="40.0" width="60" height="90.0" fill="#2dd4bf"/><text x="548" y="35.0" text-anchor="middle" font-size="9" fill="#cbd5e1">53,909</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="601" y="68.6" width="60" height="61.4" fill="#2dd4bf"/><text x="631" y="63.6" text-anchor="middle" font-size="9" fill="#cbd5e1">36,794</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &mdash; Last 8 Quarters (%)</div>
+    <div class="chart-sub">Axis runs 88&ndash;94% (not from zero) so the drift is visible. Gross margin eased from 92.9% in Q4'24 to 89.3% in Q2'26, the lowest in this window, as the product mix shifted and unit prices softened.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="10" y1="45" x2="690" y2="45" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="12" y="125" font-size="8" fill="#64748b">88%</text><text x="12" y="41" font-size="8" fill="#64748b">94%</text>
+<polyline points="50,86.8 133,61.0 216,73.7 299,95.7 382,83.4 465,89.3 548,105.1 631,112.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="50" cy="86.8" r="3.2" fill="#60a5fa"/><text x="50" y="78.8" text-anchor="middle" font-size="9" fill="#cbd5e1">91.0%</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<circle cx="133" cy="61.0" r="3.2" fill="#60a5fa"/><text x="133" y="53.0" text-anchor="middle" font-size="9" fill="#cbd5e1">92.9%</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<circle cx="216" cy="73.7" r="3.2" fill="#60a5fa"/><text x="216" y="65.7" text-anchor="middle" font-size="9" fill="#cbd5e1">92.0%</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<circle cx="299" cy="95.7" r="3.2" fill="#60a5fa"/><text x="299" y="87.7" text-anchor="middle" font-size="9" fill="#cbd5e1">90.4%</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<circle cx="382" cy="83.4" r="3.2" fill="#60a5fa"/><text x="382" y="75.4" text-anchor="middle" font-size="9" fill="#cbd5e1">91.3%</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<circle cx="465" cy="89.3" r="3.2" fill="#60a5fa"/><text x="465" y="81.3" text-anchor="middle" font-size="9" fill="#cbd5e1">90.9%</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<circle cx="548" cy="105.1" r="3.2" fill="#60a5fa"/><text x="548" y="97.1" text-anchor="middle" font-size="9" fill="#cbd5e1">89.8%</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<circle cx="631" cy="112.1" r="3.2" fill="#60a5fa"/><text x="631" y="104.1" text-anchor="middle" font-size="9" fill="#cbd5e1">89.3%</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue (¥m)</th><th>YoY</th><th>Gross margin</th><th>Operating margin</th><th>Net income (¥m)</th></tr>
+    <tr><td>Q3'24</td><td>38,845</td><td>+15.3%</td><td>91.0%</td><td>65.2%</td><td>19,132</td></tr>
+    <tr><td>Q4'24</td><td>50,123</td><td>+12.8%</td><td>92.9%</td><td>68.8%</td><td>25,401</td></tr>
+    <tr><td>Q1'25</td><td>50,601</td><td>+10.5%</td><td>92.0%</td><td>71.1%</td><td>26,847</td></tr>
+    <tr><td>Q2'25</td><td>38,788</td><td>+7.3%</td><td>90.4%</td><td>63.7%</td><td>18,555</td></tr>
+    <tr><td>Q3'25</td><td>39,064</td><td>+0.6%</td><td>91.3%</td><td>66.2%</td><td>19,224</td></tr>
+    <tr><td>Q4'25</td><td>40,384</td><td>-19.4%</td><td>90.9%</td><td>60.2%</td><td>17,693</td></tr>
+    <tr><td>Q1'26</td><td>53,909</td><td>+6.5%</td><td>89.8%</td><td>68.0%</td><td>27,243</td></tr>
+    <tr><td>Q2'26</td><td>36,794</td><td>-5.1%</td><td>89.3%</td><td>62.3%</td><td>17,274</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Q2 2026 vs Q2 2025: revenue 36,794 vs 38,788 (-5.1%); gross margin 89.3% vs 90.4%; operating margin 62.3% vs 63.7%; net income 17,274 vs 18,555 (-6.9%). Source: S&amp;P Global Market Intelligence via StockAnalysis.com; H1 2026 totals from the company&rsquo;s interim report as reported by FilingReader, Quartr and CNBC.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Pricing &amp; channel (2026):</b> the company moved non-standard distribution into self-operated channels and opened regular Feitian sales to consumers on the i-Moutai app at ¥1,499 (reported). The ex-factory price of 53% vol 500ml Feitian was raised from ¥1,169 to ¥1,269 in March and the sales contract price to ¥1,369 from July 18 (reported). Third-party wholesale quotes for Feitian were ~¥1,600-1,770 in Q1 and ~¥1,650-1,720 after the July increase; these quotes differ by platform and I found no October level.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Demand backdrop:</b> Wuliangye, the second-largest listed producer, also reported its slowest earnings growth in a decade in 2025 (SCMP), and state-backed funds were reported to be trimming Moutai in 2026. The next report (Q3 2026) is expected around Oct 31.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E. Year-end P/Es are market capitalisation divided by fiscal-year net income, as calculated by StockAnalysis (S&amp;P Global); these are <b>third-party estimates</b> and other sites differ by a few turns. The current figure is price ¥1,255.79 divided by trailing-twelve-month EPS of ¥65.04.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~19.3x) is ~62% of Moutai&rsquo;s FY2021-25 year-end average (31.2x). The multiple has fallen every year while earnings rose until FY2024: EPS is up ~57% since end-2021 but the share price is down ~39% (from ¥2,050 to ¥1,256), so the entire de-rating is the market pricing in lower future growth. A low multiple on falling earnings is not necessarily cheap.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="41.3" width="70" height="68.7" fill="#60a5fa"/><text x="55" y="36.3" text-anchor="middle" font-size="9" fill="#cbd5e1">49.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="61.6" width="70" height="48.4" fill="#60a5fa"/><text x="150" y="56.6" text-anchor="middle" font-size="9" fill="#cbd5e1">34.6x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="69.4" width="70" height="40.6" fill="#60a5fa"/><text x="245" y="64.4" text-anchor="middle" font-size="9" fill="#cbd5e1">29.0x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="78.9" width="70" height="31.1" fill="#60a5fa"/><text x="340" y="73.9" text-anchor="middle" font-size="9" fill="#cbd5e1">22.2x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="80.7" width="70" height="29.3" fill="#60a5fa"/><text x="435" y="75.7" text-anchor="middle" font-size="9" fill="#cbd5e1">20.9x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="83.0" width="70" height="27.0" fill="#2dd4bf"/><text x="530" y="78.0" text-anchor="middle" font-size="9" fill="#cbd5e1">19.3x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="66.4" x2="690" y2="66.4" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="62.4" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 31.2x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> on consensus forward earnings the forward P/E is ~18x (data provider, Oct 2026), and the dividend yield is ~4.1% (¥51.95 per share). PEG is not meaningful while earnings are falling (aggregators show ~3.4x on stale growth rates). The scorecard uses the trailing figure (ratio 0.62, 5/5 points). The analyst consensus target (~¥1,668) implies ~33% upside, but Chinese consumer-staples targets have been revised down repeatedly since 2021, so treat it as indicative only.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (¥m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Distilling and ageing capacity is the main spend, but capex stays at 2-4% of revenue: ¥3.1B (1.9%) in FY2025. The lumpy years (FY2022: ¥5.3B, FY2024: ¥4.7B) include new production and storage buildings.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (¥m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="115.0" width="60" height="45.0" fill="#60a5fa"/><text x="60" y="110.0" text-anchor="middle" font-size="8" fill="#cbd5e1">3,409</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="90.0" width="60" height="70.0" fill="#60a5fa"/><text x="200" y="85.0" text-anchor="middle" font-size="8" fill="#cbd5e1">5,307</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="125.4" width="60" height="34.6" fill="#60a5fa"/><text x="340" y="120.4" text-anchor="middle" font-size="8" fill="#cbd5e1">2,620</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="98.3" width="60" height="61.7" fill="#60a5fa"/><text x="480" y="93.3" text-anchor="middle" font-size="8" fill="#cbd5e1">4,679</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="118.7" width="60" height="41.3" fill="#60a5fa"/><text x="620" y="113.7" text-anchor="middle" font-size="8" fill="#cbd5e1">3,128</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,34.3 200,25.8 340,45.8 480,38.1 620,45.2" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="34.3" r="3" fill="#fbbf24"/><text x="60" y="26.3" text-anchor="middle" font-size="7.5" fill="#fde68a">3.2%</text>
+<circle cx="200" cy="25.8" r="3" fill="#fbbf24"/><text x="200" y="17.8" text-anchor="middle" font-size="7.5" fill="#fde68a">4.3%</text>
+<circle cx="340" cy="45.8" r="3" fill="#fbbf24"/><text x="340" y="37.8" text-anchor="middle" font-size="7.5" fill="#fde68a">1.8%</text>
+<circle cx="480" cy="38.1" r="3" fill="#fbbf24"/><text x="480" y="30.1" text-anchor="middle" font-size="7.5" fill="#fde68a">2.7%</text>
+<circle cx="620" cy="45.2" r="3" fill="#fbbf24"/><text x="620" y="37.2" text-anchor="middle" font-size="7.5" fill="#fde68a">1.9%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (anchor holders)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="170.7 143.4" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="14.3 299.9" stroke-dashoffset="-170.7" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="18" stroke-dasharray="15.0 299.2" stroke-dashoffset="-185.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="114.2 200.0" stroke-dashoffset="-200.0" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~59%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>China Kweichow Moutai Distillery (Group) 54.3% (state-owned; ultimately Guizhou SASAC)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Guizhou State-owned Capital Operation 4.5% (state)</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>Hong Kong Securities Clearing (Stock Connect northbound) 4.8%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders ~36% (mostly A-share institutions and retail)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>Shares outstanding are essentially flat at ~1.25B (1.256B in 2021; ~1.251B implied in mid-2026). Moutai ran its first-ever buyback in 2024-25 (¥6.1B repurchased in 2025 per the cash flow statement; ¥3.8B in the last twelve months), but repurchases so far offset little: the net change is about -0.4%. The dividend (payout ~79%) is the main return of capital.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Ownership caveats:</b> percentages are from the company&rsquo;s November 2025 top-shareholder disclosures (as reported by FilingReader); other sites show slightly different figures (e.g. 56.3% on Simply Wall St) and the stake can move with share cancellations. The ~59% in the donut centre is the combined state-linked stake (Group + Guizhou State-owned Capital Operation). Whether the Group stake is counted as &ldquo;insider&rdquo; ownership is a judgment: it is a controlling shareholder, not a founder family.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; the finance arm:</b> cash and investments were ~¥55.3B at Jun 30, 2026 (¥78.6B at Dec 2025) against gross debt of ~¥0.24B, mostly lease liabilities, so there is no meaningful financial debt and no leverage. Moutai also runs a finance company that takes deposits from group members; consolidated cash and the operating cash flow line include those deposits (H1 2026 operating cash flow was ¥70.7B for that reason), so net cash and FCF are less clean than for a typical consumer company. Net debt / EBITDA is about -0.7x on FY2025 figures (EBITDA ~¥113B) according to the data provider.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022&rsquo;s.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Kweichow Moutai</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+12.3% &mdash; ¥106.2B &rarr; ¥168.8B; FY2025 was -1.2% (score 3/5, 10&ndash;15% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+11.9% &mdash; operating income ¥70.7B &rarr; ¥110.9B; down from ¥115.0B in FY2024 (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>65.7% (FY2025); 62.3% in Q2 2026 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-0.9% &mdash; ¥60.6B &rarr; ¥58.4B (operating cash flow less capex; includes finance-arm deposit swings; FY2022 was ¥31.4B and FY2024 ¥87.8B). Negative CAGR (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear #1 in premium baijiu by revenue and profit among listed producers (H1 2026 net profit ¥44.5B), ahead of Wuliangye and Luzhou Laojiao. I did not verify an exact market-share percentage; the overall baijiu market is much more fragmented (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; in the super-premium segment Moutai has no close substitute and sets the price others follow, but the broader baijiu market has many players and demand is cyclical. Judgment, not a measured index (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC ~46% (FY2025) / ~37% (current) per StockAnalysis, vs WACC ~9% (my assumption). <b>Both are third-party estimates.</b> Spread ~28pp or more under any reasonable WACC (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: ~¥55B cash &amp; investments (Jun 2026) vs gross debt ~¥0.24B (leases). Includes finance-arm funds, so overstated (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>52.7% (FY2025: FCF ¥58.4B / EBIT ¥110.9B). Five-year path 86% / 38% / 65% / 76% / 53%; working capital and finance-arm flows swing it (score 2/5, 40&ndash;60% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~19.3x (¥1,255.79 / TTM EPS ¥65.04) vs FY21-25 year-end average 31.2x (ratio 0.62); forward ~18x. Third-party P/E history. Cheap versus its own history, but earnings are now falling (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~1.256B (2021) to ~1.251B (mid-2026), about -0.4%: buybacks have started but are small (score 3/5, within the &plusmn;5% flat band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Controlling stake held by the state: China Kweichow Moutai Distillery (Group) ~54.3%, ultimately Guizhou SASAC, plus Guizhou State-owned Capital Operation ~4.5% (Nov 2025 disclosures). Counted in the &gt;30% controlling band; it is state, not founder or management ownership, so alignment with minority holders is not guaranteed (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.9% of revenue in FY2025 (¥3.1B); 1.8&ndash;4.3% in every year (score 5/5, under 3%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin (revenue minus cost of sales; data-provider figure) 91.85% (FY2022) &rarr; 91.19% (FY2025), -0.66pp; basis is gross margin. Q2 2026 slipped further to 89.3% (score 3/5, down 0.5&ndash;1.0pp band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13=7.8 &middot; #2 3&times;11=6.6 &middot; #3 5&times;10=10.0 &middot; #4 0&times;8=0.0 &middot; #5 5&times;7=7.0 &middot; #6 4&times;6=4.8 &middot; #7 5&times;10=10.0 &middot; #8 5&times;6=6.0 &middot; #9 2&times;8=3.2 &middot; #10 5&times;8=8.0 &middot; #11 3&times;4=2.4 &middot; #12 5&times;5=5.0 &middot; #13 5&times;4=4.0 &middot; #14 3&times;5=3.0 (each = points/5 &times; weight). Total 77.8 / 105 = <b>74/100</b>. Criteria met: 10/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #7 uses third-party ROIC and an assumed WACC; #10 relies on a third-party P/E history and passes because the multiple has de-rated, not because earnings are growing; #12 counts the state&rsquo;s controlling stake; #4 and #9 are affected by finance-arm cash flows; #14 uses gross margin from an aggregator.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A 65%+ EBIT margin, ~49% net margin, ROIC far above any plausible cost of capital, almost no debt and capex of under 2% of revenue: few consumer companies earn this much on so little capital. Moutai is the clear leader in premium baijiu, still raised its dividend (¥51.95, ~4.1% yield, ~79% payout), has started buying back stock, and the multiple has fallen to ~19x trailing from ~49x at end-2021, below its own average. Ex-factory price increases in 2026 and a larger direct-sales share give it more control over pricing than in the wholesaler era.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth has stopped: FY2025 revenue and profit fell for the first time since the listing, H1 2026 profit fell again and Q2 revenue was -5.1%. Policy risk is structural (anti-extravagance and official-banquet rules, consumption tax) and the consumer backdrop is weak. The channel reform lowers the wholesaler&rsquo;s role and the street-price premium may narrow, which is the core of the scarcity model. The state is the controlling holder, and state-backed funds were reported to be reducing exposure. FCF and cash conversion are noisy because of the in-house finance company. ROIC/WACC, the P/E history and the analyst target are third-party estimates, and Q3 results are due around Oct 31.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Kweichow Moutai FY2025 annual report and H1 2026 interim report as reported by Yicai Global, Dow Jones/Morningstar, WSJ, CNBC, Quartr and FilingReader; S&amp;P Global Market Intelligence via StockAnalysis.com (annual and quarterly line items, ROIC, P/E, price target, Oct 8-9, 2026); Digrin (month-end closes); FilingReader (Nov 2025 top-shareholder filings); Caixin, 36Kr, The Drinks Business and Dolphin Research (2026 pricing and channel reform); SCMP (demand and fund-flow commentary). ROIC, WACC, P/E history, consensus target and the market-share and concentration judgments are third-party or approximate and flagged as such. All figures CNY. Price as of Oct 8, 2026 close; prepared Oct 9, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Kweichow Moutai &mdash; Shanghai A-share price in CNY. The shares peaked around early 2021 and have trended lower since: down roughly 39% from the end of 2021 as growth slowed, with a bounce in July 2026 and a retreat since.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Kweichow Moutai &mdash; Year-End Close (Shanghai, CNY)</div>
+    <div class="chart-sub">Year-end closes are unadjusted month-end prices from Digrin (FY2021 ¥2,050.00, FY2022 ¥1,727.00, FY2023 ¥1,726.00, FY2024 ¥1,524.00, FY2025 ¥1,377.18); the Now point is the Oct 8, 2026 close of ¥1,255.79. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (4.77 years). 52-week range: ¥1,151.01 &ndash; 1,568.00.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,38.4 L 172.8,60.7 L 299.6,60.7 L 426.4,74.7 L 553.2,84.8 L 680.0,93.2 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="38.4" x2="680.0" y2="93.2" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="330" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -9.8%*</text>
+<path d="M 46.0,38.4 L 172.8,60.7 L 299.6,60.7 L 426.4,74.7 L 553.2,84.8 L 680.0,93.2" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="38.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="26.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">¥2,050.00</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="60.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="48.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">¥1,727.00</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="60.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="48.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">¥1,726.00</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="74.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="62.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">¥1,524.00</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="84.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="72.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">¥1,377.18</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="93.2" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="81.2" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">¥1,255.79</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR; it excludes dividends, which are large (~3-4% a year, ¥51.95 per share for FY2025), so total return is better than the price line by several points a year. Over the same window EPS rose ~57% (¥41.76 to ¥65.66), so the price fall is entirely a lower multiple (49x to 19x).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
