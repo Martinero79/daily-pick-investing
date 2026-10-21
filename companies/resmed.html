@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ResMed — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/resmed.html">
+<meta property="og:title" content="ResMed — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ResMed — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>ResMed</h1>
+  <div class="badges">
+    <div class="badge">NYSE: RMD (also ASX CDIs)</div>
+    <div class="badge">FY ends June 30 (own fiscal year)</div>
+    <div class="badge">HQ: San Diego, California</div>
+    <div class="badge">Reports in USD</div>
+    <div class="badge">Sleep apnea &amp; respiratory care devices</div>
+    <div class="badge warn">Sept-2026 Quarter (Q1 FY2027) Not Yet Reported &mdash; Due Oct 29, 2026</div>
+  </div>
+
+  <div class="price">$245.50</div>
+  <div class="price-sub">Oct 20, 2026 close, NYSE (USD) &middot; Market cap &asymp; $34.5B (S&amp;P Global data via StockAnalysis, ~140.6M shares) &middot; 52-wk range $180.27 &ndash; 277.67 (low Jun 2, 2026; high Feb 10, 2026) &middot; Analyst consensus price target ~$252 (+2.6%; 20 analysts, range $175&ndash;320, rating &ldquo;Buy&rdquo;) &middot; Next report (Q1 FY2027, quarter to Sept 30, 2026): Oct 29, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Sleep theme &mdash; what ResMed sells:</b> CPAP and other positive-airway-pressure machines (&ldquo;devices&rdquo;), the masks, tubing and accessories that patients replace every few months (&ldquo;masks and other&rdquo;), cloud software for sleep clinics and home-care providers, and a Residential Care Software unit for senior-living and home-health operators. <b>Sleep and Breathing Health was $4,978M, or 88%, of FY2026 revenue</b> ($5,653M); within it devices were $2,892M (51% of group) and masks &amp; other $2,085M (37%), the recurring part. ResMed does not split sleep apnea from other breathing care (e.g. ventilators), so the pure sleep-apnea share is <b>my estimate of roughly 75&ndash;85%</b> of revenue. The remaining 12% is software, and the MatrixCare part of it has just been sold.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars and on ResMed&rsquo;s own fiscal year (July&ndash;June; FY2026 = year to June 30, 2026). &ldquo;EBIT&rdquo; is <b>GAAP</b> income from operations; the company&rsquo;s non-GAAP operating margin (36.1% in FY2026) is higher and shown separately. &ldquo;Free cash flow&rdquo; is operating cash flow minus purchases of property, plant and equipment (the company&rsquo;s own definition). FY2022&ndash;FY2026 figures come from ResMed&rsquo;s earnings releases (8-K exhibits); FY2023 and FY2024 EBIT, FCF and net debt are computed by me from those releases. Third-party data (S&amp;P Global via StockAnalysis, Yahoo Finance) is used for price, ROIC/WACC, ownership and consensus and is flagged where used.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$5.65B</div>
+      <div class="sub green" style="color:#34d399;">+9.9% YoY (FY2025: +9.8%)</div>
+      <div class="note">4-yr CAGR FY2022-26 is +12.1%. Growth is steady near 10% (8% in constant currency). Q4 FY2026 was a record $1.46B (+8.6%). Management has guided FY2027 core revenue growth of 5-7% (per a summary of the Q4 call; the MatrixCare sale and Astral ventilator pause weigh on reported growth).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">33.4%</div>
+      <div class="sub">FY2026; gross margin 61.1%</div>
+      <div class="note">Gross margin rose 5.3pp in three years (55.8% to 61.1%) on freight, component and manufacturing savings. Q4 GAAP gross margin dipped to 58.8% on a $42M Astral field-safety charge (non-GAAP 62.3%). Non-GAAP operating margin 36.1%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">26% vs 8%</div>
+      <div class="sub">~+18pp spread</div>
+      <div class="note">Third-party (S&amp;P Global via StockAnalysis: ROIC 26.2%, WACC 8.2%). Definitions vary by provider; it clears the cost of capital on any version.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">~$810M net cash, Jun 30, 2026</div>
+      <div class="note">Cash $1,469M vs borrowings $659M ($260M short-term + $399M long-term); excludes ~$167M operating leases. Gross debt/EBITDA ~0.3x (EBITDA ~$2.09B = GAAP EBIT + D&amp;A).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">82/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High margins, returns, cash conversion and market leadership. Held back by ~12% revenue growth (3 of 5 points), almost no insider ownership (0 of 5) and a 4-yr FCF CAGR flattered by a weak FY2022 base.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="269.3 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="44.9 314.16" stroke-dashoffset="-269.3" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">12/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>12 criteria fully met</b> &mdash; EBIT and FCF CAGR, EBIT margin, market position (clear #1 in CPAP), market concentration, ROIC vs WACC, net cash, FCF conversion, entry multiple vs own history, flat share count, capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>2 not met</b> &mdash; revenue CAGR (+12.1% a year vs the 15% bar) and insider/founder ownership (~0.6%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    ResMed, founded in Sydney in 1989 and led by Chairman and CEO Mick Farrell, is the world&rsquo;s largest maker of CPAP (continuous positive airway pressure) machines, the standard treatment for obstructive sleep apnea, in which the airway repeatedly collapses during sleep. Revenue grew from $3.58B in FY2022 to $5.65B in FY2026 (+12% a year), GAAP operating margin rose from 28.0% to 33.4%, and free cash flow reached $1.65B in FY2026. The model is a razor-and-blades one: a patient buys a device once, then re-buys masks and accessories regularly, which is why masks &amp; other grew faster than devices in FY2026 (+13% vs +9%). Its main rivals are Philips Respironics (hit by a 2021 foam recall and, since 2024, restricted from selling new sleep devices in the US under a consent decree, per public reporting; see the Philips dashboard), Fisher &amp; Paykel Healthcare (strong in masks) and smaller makers such as React Health, BMC and L&ouml;wenstein. Shareholder returns are a pillar: ~$1.05B was paid out in FY2026 (about $700M of buybacks plus $350M of dividends), the quarterly dividend was raised 10% to $0.66, and management plans to return more than $1.85B in FY2027. The open debate is GLP-1 weight-loss drugs: Eli Lilly&rsquo;s Zepbound won US approval for moderate-to-severe sleep apnea in obese adults in December 2024. Bears see a shrinking long-term patient pool; ResMed says the drugs are widening the funnel by getting more people diagnosed and into therapy. So far the reported numbers show no volume damage, but the share price has been range-bound: $246.52 at the end of June 2021 and $245.50 now.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>The GLP-1 question is unresolved</b> &mdash; evidence so far (ResMed&rsquo;s own claims-data analyses, which are company-sponsored, and its commentary) points to GLP-1 users entering CPAP therapy at least as often as before, but multi-year effects of weight loss on sleep-apnea severity are not yet visible in the results. (2) <b>FY2027 growth is guided lower</b> &mdash; core revenue growth of 5-7%, with Reuters reporting a below-consensus outlook that sent shares down ~6% on Aug 7, 2026, linked to suspended Astral ventilator sales and costs. (3) <b>Competitor setbacks flatter today&rsquo;s share</b> &mdash; Philips&rsquo; US restrictions are a large part of ResMed&rsquo;s clear #1 position; if Philips returns at scale, pricing and share could tighten.
+  </div>
+
+  <div class="bignum-corner">RMD</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending June 30), $ millions, GAAP (EBIT = income from operations; FCF = operating cash flow minus purchases of property, plant and equipment). CAGRs are 4-year, FY2022&rarr;FY2026. FY2021 (not shown): revenue $3,197M, EBIT $904M, net income $475M (depressed by a $409M tax charge), FCF $634M.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Axis in $ billions, true relative size. Revenue compounded ~12% a year and EBIT ~17% as margins widened. FCF jumped from $216M in FY2022, when ResMed built inventory during the supply crunch, to $1.65B, so the FCF growth rate is flattered by a weak base year.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+<svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="203.3" x2="840" y2="203.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.3" text-anchor="end" font-size="11" fill="#64748b">1bn</text>
+<line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">2bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">3bn</text>
+<line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="56.7" x2="840" y2="56.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.7" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="108.8" width="30" height="131.2" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="103.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,578</text>
+<rect x="123.0" y="203.3" width="30" height="36.7" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="198.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,000</text>
+<rect x="161.0" y="232.1" width="30" height="7.9" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="227.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">216</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="241.0" y="85.2" width="30" height="154.8" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="80.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,223</text>
+<rect x="279.0" y="198.5" width="30" height="41.5" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="193.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,132</text>
+<rect x="317.0" y="219.0" width="30" height="21.0" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="214.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">574</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="397.0" y="68.2" width="30" height="171.8" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="63.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,685</text>
+<rect x="435.0" y="191.6" width="30" height="48.4" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="186.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,320</text>
+<rect x="473.0" y="192.3" width="30" height="47.7" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="187.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,302</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="553.0" y="51.3" width="30" height="188.7" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="46.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,146</text>
+<rect x="591.0" y="178.2" width="30" height="61.8" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="173.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,685</text>
+<rect x="629.0" y="179.1" width="30" height="60.9" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="174.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,662</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2025</text>
+<rect x="709.0" y="32.7" width="30" height="207.3" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="27.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,653</text>
+<rect x="747.0" y="170.8" width="30" height="69.2" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="165.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,887</text>
+<rect x="785.0" y="179.5" width="30" height="60.5" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="174.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,650</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#fbbf24;">+12.1%</div>
+      <div class="sub">$3.58B &rarr; $5.65B &mdash; steady, below the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+17.2%</div>
+      <div class="sub">$1.00B &rarr; $1.89B &mdash; margin expansion plus scale</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+66.2%</div>
+      <div class="sub">$216M &rarr; $1,650M; FY2022 base was depressed (inventory build)</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of revenue (GAAP)</div>
+    <div class="chart-sub">Gross margin (blue, revenue minus cost of sales) dipped to 55.8% in FY2023, then rose every year to 61.1% as freight and component costs eased and ResMed&rsquo;s manufacturing productivity programme delivered; EBIT margin (green) went from 28.0% to 33.4%. These are the company&rsquo;s reported GAAP figures; third-party sites show slightly different gross margins.</div>
+<svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="57.0" x2="690" y2="57.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="24.0" x2="690" y2="24.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="60.0" font-size="7.5" fill="#64748b">30%</text><text x="2" y="27.0" font-size="7.5" fill="#64748b">60%</text>
+<polyline points="60,27.7 205,28.6 350,27.6 495,24.7 640,22.8" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,59.2 205,60.5 350,59.0 495,54.0 640,53.3" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="27.7" r="3.2" fill="#60a5fa"/><text x="60" y="20.7" text-anchor="middle" font-size="8" fill="#cbd5e1">56.6%</text>
+<circle cx="60" cy="59.2" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="60" y="71.2" text-anchor="middle" font-size="8" fill="#cbd5e1">28.0%</text>
+<circle cx="205" cy="28.6" r="3.2" fill="#60a5fa"/><text x="205" y="21.6" text-anchor="middle" font-size="8" fill="#cbd5e1">55.8%</text>
+<circle cx="205" cy="60.5" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="205" y="72.5" text-anchor="middle" font-size="8" fill="#cbd5e1">26.8%</text>
+<circle cx="350" cy="27.6" r="3.2" fill="#60a5fa"/><text x="350" y="20.6" text-anchor="middle" font-size="8" fill="#cbd5e1">56.7%</text>
+<circle cx="350" cy="59.0" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="350" y="71.0" text-anchor="middle" font-size="8" fill="#cbd5e1">28.2%</text>
+<circle cx="495" cy="24.7" r="3.2" fill="#60a5fa"/><text x="495" y="17.7" text-anchor="middle" font-size="8" fill="#cbd5e1">59.4%</text>
+<circle cx="495" cy="54.0" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="495" y="66.0" text-anchor="middle" font-size="8" fill="#cbd5e1">32.7%</text>
+<circle cx="640" cy="22.8" r="3.2" fill="#60a5fa"/><text x="640" y="15.8" text-anchor="middle" font-size="8" fill="#cbd5e1">61.1%</text>
+<circle cx="640" cy="53.3" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2026</text><text x="640" y="65.3" text-anchor="middle" font-size="8" fill="#cbd5e1">33.4%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($ m)</th><th>Revenue</th><th>EBIT</th><th>EBIT Margin</th><th>Gross Margin</th><th>Net Income</th><th>Dil. EPS ($)</th><th>FCF</th><th>FCF/EBIT</th><th>Net debt / (cash)</th><th>DPS ($)</th></tr>
+    <tr><td>FY2022</td><td>3,578</td><td>1,000</td><td>28.0%</td><td>56.6%</td><td>779</td><td>5.30</td><td>216</td><td>22%</td><td>502 debt</td><td>1.68</td></tr>
+    <tr><td>FY2023</td><td>4,223</td><td>1,132</td><td>26.8%</td><td>55.8%</td><td>898</td><td>6.09</td><td>574</td><td>51%</td><td>1,213 debt</td><td>1.76</td></tr>
+    <tr><td>FY2024</td><td>4,685</td><td>1,320</td><td>28.2%</td><td>56.7%</td><td>1,021</td><td>6.92</td><td>1,302</td><td>99%</td><td>469 debt</td><td>1.92</td></tr>
+    <tr><td>FY2025</td><td>5,146</td><td>1,685</td><td>32.7%</td><td>59.4%</td><td>1,401</td><td>9.51</td><td>1,662</td><td>99%</td><td>(541) cash</td><td>2.12</td></tr>
+    <tr><td>FY2026</td><td>5,653</td><td>1,887</td><td>33.4%</td><td>61.1%</td><td>1,523</td><td>10.43</td><td>1,650</td><td>87%</td><td>(810) cash</td><td>2.40</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Dividend per share is declared/paid in the fiscal year; the quarterly rate is now $0.66 ($2.64 annualised). Operating cash flow $351M / $693M / $1,401M / $1,752M / $1,806M and capex (PP&amp;E) $135M / $120M / $99M / $90M / $156M (FY2022-26). Net debt = short- plus long-term borrowings minus cash, excluding operating leases (~$167M); FY2023&rsquo;s spike followed the ~$1.0B Medifox Dan acquisition. FY2023-FY2024 EBIT, FCF and net debt are computed by me from the company&rsquo;s releases.</div>
+  <div class="footer-note">Source: ResMed Form 8-K earnings releases for Q4 FY2022, FY2024 and FY2026 (sec.gov) and Q2/Q3 FY2026; StockAnalysis (S&amp;P Global) for cross-checks of FY2023 and FY2025.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend (Q1 FY2025 &ndash; Q4 FY2026)</div></div>
+  <div class="sec-sub">Eight fiscal quarters (Sept-2024 to June-2026 quarter ends). The Sept-2026 quarter (Q1 FY2027) is due Oct 29, 2026 and is not yet reported. Revenue growth has held near 9-11% while gross margin climbed ~3.6pp before an Astral charge in the latest quarter.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q4 FY2026 revenue was a record $1,464M (+8.6% YoY, +8% constant currency): Americas Sleep and Breathing +8%, rest of world +10% in constant currency, software +2%. GAAP gross margin fell to 58.8% (from 60.8%) because of $42M of Astral field-safety-notification expenses; excluding that and amortisation, non-GAAP gross margin rose 90bps to 62.3%. GAAP operating income was $449M (30.7% margin, down from 33.7%); non-GAAP EPS was $2.95 (+16%) vs GAAP $2.64 (+2%). The stock fell about 6% the next morning (Reuters) after FY2027 revenue guidance came in below expectations; it hit its 52-week low of $180.27 on June 2, 2026, before the results.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">YoY: Q1 FY26 +9.1%, Q2 +11.0%, Q3 +10.8%, Q4 +8.6%. Q1 FY25 and Q1 FY26 are derived from the six-month totals minus the December quarter (&plusmn;$1M).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="52.4" width="60" height="77.6" fill="#2dd4bf"/><text x="50" y="47.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,224</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="103" y="48.8" width="60" height="81.2" fill="#2dd4bf"/><text x="133" y="43.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,282</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="186" y="48.2" width="60" height="81.8" fill="#2dd4bf"/><text x="216" y="43.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,292</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="269" y="44.6" width="60" height="85.4" fill="#2dd4bf"/><text x="299" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,348</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="352" y="45.4" width="60" height="84.6" fill="#2dd4bf"/><text x="382" y="40.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,336</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="435" y="39.9" width="60" height="90.1" fill="#2dd4bf"/><text x="465" y="34.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,423</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="518" y="39.3" width="60" height="90.7" fill="#2dd4bf"/><text x="548" y="34.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,431</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="601" y="37.3" width="60" height="92.7" fill="#2dd4bf"/><text x="631" y="32.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,464</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Gross Margin &mdash; Last 8 Quarters (%)</div>
+    <div class="chart-sub">Axis runs 57&ndash;63% (not from zero) so the drift is visible. Gross margin rose from 58.6% to 62.2% on component and logistics efficiencies, then dropped to 58.8% in Q4 FY26 on the Astral charge.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP gross margin</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="10" y1="45" x2="690" y2="45" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="12" y="125" font-size="8" fill="#64748b">57%</text><text x="12" y="41" font-size="8" fill="#64748b">63%</text>
+<polyline points="50,107.3 133,107.3 216,97.4 299,76.2 382,66.2 465,62.0 548,56.3 631,104.5" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="50" cy="107.3" r="3.2" fill="#60a5fa"/><text x="50" y="99.3" text-anchor="middle" font-size="9" fill="#cbd5e1">58.6%</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<circle cx="133" cy="107.3" r="3.2" fill="#60a5fa"/><text x="133" y="99.3" text-anchor="middle" font-size="9" fill="#cbd5e1">58.6%</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<circle cx="216" cy="97.4" r="3.2" fill="#60a5fa"/><text x="216" y="89.4" text-anchor="middle" font-size="9" fill="#cbd5e1">59.3%</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<circle cx="299" cy="76.2" r="3.2" fill="#60a5fa"/><text x="299" y="68.2" text-anchor="middle" font-size="9" fill="#cbd5e1">60.8%</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<circle cx="382" cy="66.2" r="3.2" fill="#60a5fa"/><text x="382" y="58.2" text-anchor="middle" font-size="9" fill="#cbd5e1">61.5%</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<circle cx="465" cy="62.0" r="3.2" fill="#60a5fa"/><text x="465" y="54.0" text-anchor="middle" font-size="9" fill="#cbd5e1">61.8%</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<circle cx="548" cy="56.3" r="3.2" fill="#60a5fa"/><text x="548" y="48.3" text-anchor="middle" font-size="9" fill="#cbd5e1">62.2%</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<circle cx="631" cy="104.5" r="3.2" fill="#60a5fa"/><text x="631" y="96.5" text-anchor="middle" font-size="9" fill="#cbd5e1">58.8%</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue ($m)</th><th>YoY</th><th>GAAP gross margin</th><th>GAAP operating margin</th></tr>
+    <tr><td>Q1 FY25</td><td>1,224.5</td><td>&mdash;</td><td>58.6%</td><td>31.6%</td></tr>
+    <tr><td>Q2 FY25</td><td>1,282.1</td><td>&mdash;</td><td>58.6%</td><td>32.5%</td></tr>
+    <tr><td>Q3 FY25</td><td>1,291.7</td><td>&mdash;</td><td>59.3%</td><td>33.0%</td></tr>
+    <tr><td>Q4 FY25</td><td>1,348.0</td><td>&mdash;</td><td>60.8%</td><td>33.7%</td></tr>
+    <tr><td>Q1 FY26</td><td>1,335.6</td><td>+9.1%</td><td>61.5%</td><td>33.4%</td></tr>
+    <tr><td>Q2 FY26</td><td>1,422.8</td><td>+11.0%</td><td>61.8%</td><td>34.6%</td></tr>
+    <tr><td>Q3 FY26</td><td>1,431.4</td><td>+10.8%</td><td>62.2%</td><td>34.9%</td></tr>
+    <tr><td>Q4 FY26</td><td>1,463.6</td><td>+8.6%</td><td>58.8%</td><td>30.7%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Q4 FY26 vs Q4 FY25: revenue 1,464 vs 1,348 (+8.6%); GAAP gross margin 58.8% vs 60.8%; GAAP operating margin 30.7% vs 33.7%. YoY for FY2025 quarters is shown as &mdash; because FY2024 quarterly revenue was not collected. Margins for Q1 FY25 and Q1 FY26 are derived from six-month figures. Operating margin = GAAP income from operations / revenue.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Outlook (FY2027):</b> core revenue growth of 5-7%, further margin expansion from supply-chain productivity, and more than $1.85B returned to shareholders (company release). The growth and margin figures are from a published summary of the Q4 call, not the press release; check the transcript. Reuters reported the revenue outlook was below consensus, citing suspended ventilator sales and costs.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Portfolio changes:</b> the MatrixCare (software) sale to Frazier Healthcare Partners has completed, and ResMed bought Noctrix Health (a restless-legs wearable) and VirtuOx (home sleep testing). New products include AirSense 11, AirTouch F30i/F40 masks and an AI &ldquo;Smart Comfort&rdquo; feature, and a partnership with &Ocirc;URA on sleep health education.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E: fiscal-year-end closes (June 30) divided by that year&rsquo;s GAAP diluted EPS; the current figure is the Oct 20, 2026 close divided by FY2026 GAAP EPS of $10.43 (the first fiscal quarter of FY2027 is not yet reported). Closing prices are Yahoo Finance daily closes.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~23.5x = $245.50 / $10.43) is ~79% of ResMed&rsquo;s FY2022-26 year-end average (29.8x). The multiple fell from ~40x in 2022 to 18.7x at June 2026 (the 52-week low area), and has since recovered. FY2021 (not charted) was ~76x on a tax-depressed EPS of $3.24; including it would lift the average to ~41x and make today&rsquo;s ratio look even lower, so the 5-year window used here is the more conservative reading.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY22-26 average</span>
+    </div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="54.7" width="70" height="55.3" fill="#60a5fa"/><text x="55" y="49.7" text-anchor="middle" font-size="9" fill="#cbd5e1">39.6x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="59.8" width="70" height="50.2" fill="#60a5fa"/><text x="150" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">35.9x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="71.3" width="70" height="38.7" fill="#60a5fa"/><text x="245" y="66.3" text-anchor="middle" font-size="9" fill="#cbd5e1">27.7x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="72.1" width="70" height="37.9" fill="#60a5fa"/><text x="340" y="67.1" text-anchor="middle" font-size="9" fill="#cbd5e1">27.1x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="83.9" width="70" height="26.1" fill="#60a5fa"/><text x="435" y="78.9" text-anchor="middle" font-size="9" fill="#cbd5e1">18.7x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="77.1" width="70" height="32.9" fill="#2dd4bf"/><text x="530" y="72.1" text-anchor="middle" font-size="9" fill="#cbd5e1">23.5x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="68.4" x2="690" y2="68.4" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="64.4" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 29.8x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> on FY2027 consensus non-GAAP EPS of ~$12.08 (+8% on FY2026&rsquo;s $11.17) the forward P/E is ~20x. A rough PEG is ~2.5 on one year&rsquo;s growth (my calculation); StockAnalysis shows ~1.5 on a longer-term growth estimate. The scorecard uses the trailing figure (ratio 0.79, 4/5 points). The consensus target (~$252) is only ~3% above the price and the rating split is 9 Buy / 10 Hold / 1 Sell, so the market is not pricing in aggressive upside.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">ResMed owns its manufacturing in Singapore, Sydney and other sites but capex stays below 4% of revenue (2.8% in FY2026, $156M, as it adds a US distribution centre and capacity). Capex here is purchases of PP&amp;E only; adding patents and intangibles would lift FY2026 to ~3.1%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+<svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="92.6" width="60" height="67.4" fill="#60a5fa"/><text x="60" y="87.6" text-anchor="middle" font-size="8" fill="#cbd5e1">135</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="170" y="100.2" width="60" height="59.9" fill="#60a5fa"/><text x="200" y="95.2" text-anchor="middle" font-size="8" fill="#cbd5e1">120</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="310" y="110.2" width="60" height="49.8" fill="#60a5fa"/><text x="340" y="105.2" text-anchor="middle" font-size="8" fill="#cbd5e1">100</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="450" y="115.0" width="60" height="45.0" fill="#60a5fa"/><text x="480" y="110.0" text-anchor="middle" font-size="8" fill="#cbd5e1">90</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<rect x="590" y="81.8" width="60" height="78.2" fill="#60a5fa"/><text x="620" y="76.8" text-anchor="middle" font-size="8" fill="#cbd5e1">156</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2026</text>
+<polyline points="60,17.1 200,37.6 340,53.3 480,61.6 620,39.2" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="17.1" r="3" fill="#fbbf24"/><text x="60" y="9.1" text-anchor="middle" font-size="7.5" fill="#fde68a">3.8%</text>
+<circle cx="200" cy="37.6" r="3" fill="#fbbf24"/><text x="200" y="29.6" text-anchor="middle" font-size="7.5" fill="#fde68a">2.8%</text>
+<circle cx="340" cy="53.3" r="3" fill="#fbbf24"/><text x="340" y="45.3" text-anchor="middle" font-size="7.5" fill="#fde68a">2.1%</text>
+<circle cx="480" cy="61.6" r="3" fill="#fbbf24"/><text x="480" y="53.6" text-anchor="middle" font-size="7.5" fill="#fde68a">1.7%</text>
+<circle cx="620" cy="39.2" r="3" fill="#fbbf24"/><text x="620" y="31.2" text-anchor="middle" font-size="7.5" fill="#fde68a">2.8%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.7 312.5" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="252.5 61.7" stroke-dashoffset="-1.7" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="60.0 254.2" stroke-dashoffset="-254.2" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~0.6%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~0.55% (S&amp;P Global via StockAnalysis)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~80.4% (index funds and active managers)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail and other ~19%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Returns</div>
+      <p>Diluted shares were ~147.0M in FY2022 and ~146.1M in FY2026 (Q4 FY26 basic: 144.7M), roughly flat: buybacks ($700M in FY2026, up from $300M in FY2025) are now offsetting stock compensation, and the pace is rising. Dividends of $350M in FY2026 give a payout of ~25% of earnings and a ~1.1% yield on a $2.64 annual rate, raised 10% in August; StockAnalysis counts 13 straight years of increases. FY2027 plans: more than $1.85B returned.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>GLP-1 and sleep-apnea demand &mdash; the two sides:</b> <b>Bear case:</b> obesity is a main risk factor for obstructive sleep apnea, and Zepbound (tirzepatide) is FDA-approved for moderate-to-severe OSA in adults with obesity; in Lilly&rsquo;s trials a large share of patients saw major falls in apnea severity, which could shrink the treated population over many years. <b>Bull case:</b> management says GLP-1s and consumer wearables are bringing more people into the diagnosis funnel, and ResMed&rsquo;s company-sponsored data analyses suggest GLP-1 users start and stay on CPAP at least as often as others; many patients still need a device, and masks (recurring) grew 13% in FY2026. <b>Reading the numbers:</b> devices +9% and masks +13% in FY2026 show no volume damage yet, but the FY2027 growth guide of 5-7% and a P/E that fell to 18.7x show investors remain cautious. This is a debate, not a verdict.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; competition:</b> cash $1,469M, borrowings $659M (a $260M short-term portion is due within a year), net cash ~$810M, current ratio ~3.1. $457M of assets and $41M of liabilities were held for sale at June 30 (MatrixCare), which is now closed. Direct competitors: <b>Philips Respironics</b> (restricted in the US for new sleep devices since 2024, per public reporting), <b>Fisher &amp; Paykel Healthcare</b> (masks and humidifiers) and smaller device makers (React Health, BMC, L&ouml;wenstein). ResMed does not publish market share; I treat it as a clear #1 in CPAP/flow generators on sell-side and press estimates (flagged as an estimate).
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist on ResMed&rsquo;s own fiscal year (June). Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). CAGRs are 4-year (FY2022-26). Criterion #14 compares FY2026 gross margin with FY2023&rsquo;s. All 14 criteria are testable, so there are no N/A cases.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>ResMed</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+12.1% &mdash; $3.58B &rarr; $5.65B; steady ~10% growth (score 3/5, 10&ndash;15% band)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+17.2% &mdash; GAAP income from operations $1.00B &rarr; $1.89B (score 4/5, 15&ndash;20% band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>33.4% GAAP (FY2026); 36.1% non-GAAP; Q4 FY26 30.7% after the Astral charge (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+66.2% &mdash; $216M &rarr; $1,650M (operating cash flow less PP&amp;E capex). The FY2022 base was depressed by an inventory build; FY2026 FCF was flat on FY2025 ($1,662M) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear #1 in CPAP / flow generators for sleep apnea. The company does not publish share; this rests on press and sell-side estimates, so treat as an estimate. Ahead of Philips Respironics, Fisher &amp; Paykel (masks) and smaller makers (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; a leader with light competition: Philips is restricted in the US (per public reporting) and Fisher &amp; Paykel is mainly in masks. A judgment, not a measured index; risk that Philips returns (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC ~26.2% vs WACC ~8.2% (S&amp;P Global via StockAnalysis, third-party), ~+18pp spread (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash ~$810M: cash $1,469M vs borrowings $659M (gross debt ~0.3x EBITDA of ~$2.09B). Excludes ~$167M operating leases; no finance arm (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>87% (FY2026: FCF $1,650M / GAAP EBIT $1,887M). Path FY22-26: 22% / 51% / 99% / 99% / 87% (score 4/5, 80&ndash;100% band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~23.5x ($245.50 / $10.43) vs FY22-26 year-end average 29.8x (ratio 0.79); forward P/E ~20x. Using FY2021 as well would give a lower ratio, so this is the conservative window (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Diluted shares ~147.0M (FY2022) to ~146.1M (FY2026), about -0.7%; buybacks of $700M in FY2026 are now outpacing dilution (score 3/5, within the &plusmn;5% flat band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~0.55% (S&amp;P Global via StockAnalysis); the founder is no longer involved and no broad employee-ownership plan is disclosed beyond standard stock plans (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.8% of revenue in FY2026 ($156M); 1.7&ndash;3.8% in every year of the window. Manufacturing is in-house, but spending is modest (score 5/5, &lt;3% band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 55.8% (FY2023) &rarr; 61.1% (FY2026), +5.3pp; basis is gross margin (revenue minus cost of sales, company-reported GAAP). Q4 FY26 dipped to 58.8% on the Astral charge (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13/5=7.8 &middot; #2 4&times;11/5=8.8 &middot; #3 5&times;10/5=10.0 &middot; #4 5&times;8/5=8.0 &middot; #5 5&times;7/5=7.0 &middot; #6 4&times;6/5=4.8 &middot; #7 5&times;10/5=10.0 &middot; #8 5&times;6/5=6.0 &middot; #9 4&times;8/5=6.4 &middot; #10 4&times;8/5=6.4 &middot; #11 3&times;4/5=2.4 &middot; #12 0&times;5/5=0.0 &middot; #13 5&times;4/5=4.0 &middot; #14 5&times;5/5=5.0. Total 86.6 / 105 = <b>82/100</b>. Criteria met: 12/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative and rest on estimates; #7 uses third-party ROIC/WACC; #4 is flattered by a weak FY2022 base (on a FY2023 base the CAGR would still exceed 20%, so the score holds); #10 uses the five most recent fiscal-year-end P/Es (using FY2021&rsquo;s tax-distorted 76x would push the ratio to ~0.57 and 5/5 points); #12 is a strict 0 as no meaningful insider or employee ownership is evidenced.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A clear leader in a recurring-revenue medical niche: a 33% GAAP operating margin, gross margin up 5.3pp in three years, $1.65B of free cash flow, net cash, and low capex. Masks and accessories (+13%) give a recurring base behind the devices. Competitor setbacks have supported share, awareness of sleep health keeps widening the patient funnel, and the capital return programme is growing fast: a 10% dividend raise and more than $1.85B planned for FY2027. The shares trade at a lower multiple than their own five-year average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The GLP-1 debate, the sustainability of share gains if Philips returns, and slowing growth: FY2027 is guided at 5-7% core revenue growth, with Astral ventilator sales suspended. Q4 gross margin showed how field-safety charges can hit results. Insider ownership is almost nil. Several inputs are third-party or estimated: ROIC/WACC, ownership, consensus, market share and the sleep-apnea share of revenue (~75-85% is my estimate). The Sept-2026 quarter (Oct 29) will be the first read on FY2027.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> ResMed Form 8-K earnings releases: Q4 FY2022, Q4 FY2024, Q2/Q3/Q4 FY2026 (sec.gov, investor.resmed.com); Yahoo Finance and StockAnalysis (S&amp;P Global Market Intelligence) for prices, statistics, ownership, ROIC/WACC and consensus; Reuters (Aug 7, 2026) and TheFly (analyst actions, MatrixCare closing) for news; a published summary of ResMed&rsquo;s Q4 FY2026 call and Morgan Stanley conference (FY2027 guidance, GLP-1 commentary). Sleep-apnea revenue share, market share and GLP-1 reads are estimates or company claims and are flagged as such. All figures USD. Price as of Oct 20, 2026 close; prepared Oct 21, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">ResMed &mdash; NYSE share price in USD, June fiscal-year-end closes (FY21&ndash;FY26) plus today. The stock rose to a record ~$300 in September 2021, slid to ~$180 by late 2022 and mid-2026, and ended almost exactly where it started: a flat share price while earnings per share rose ~3x.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">ResMed &mdash; Year-End Close (NYSE, USD, June 30 each year)</div>
+    <div class="chart-sub">Closes on June 30 (June 28 in 2024) of FY2021-FY2026 from Yahoo Finance, unadjusted for dividends; the Now point is the Oct 20, 2026 close of $245.50. The dashed line is the straight-line annualised price CAGR between the Jun 30, 2021 point and Oct 2026 (5.3 years). 52-week range: $180.27 &ndash; 277.67.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,55.1 L 151.7,73.8 L 257.3,69.3 L 363.0,83.0 L 468.7,49.3 L 574.3,81.3 L 680.0,55.6 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="55.1" x2="680.0" y2="55.6" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): -0.1%*</text>
+<path d="M 46.0,55.1 L 151.7,73.8 L 257.3,69.3 L 363.0,83.0 L 468.7,49.3 L 574.3,81.3 L 680.0,55.6" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="55.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="43.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$246.52</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="151.7" cy="73.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="151.7" y="61.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$209.63</text>
+<text x="151.7" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="257.3" cy="69.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="257.3" y="57.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$218.50</text>
+<text x="257.3" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="363.0" cy="83.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="363.0" y="71.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$191.42</text>
+<text x="363.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="468.7" cy="49.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="468.7" y="37.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$258.00</text>
+<text x="468.7" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="574.3" cy="81.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="574.3" y="69.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$194.88</text>
+<text x="574.3" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="55.6" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="43.6" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$245.50</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR; it excludes dividends (currently $2.64/share a year, ~1.1% yield, so total return was modestly positive). The window starts near the 2021 peak. Over the same period GAAP EPS rose from $3.24 (FY2021, tax-depressed) to $10.43, so the flat price came with a sharp compression of the P/E (about 76x to 23.5x on that basis; ~40x to ~24x from FY2022). No stock split since 2010.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
