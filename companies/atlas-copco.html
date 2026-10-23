@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Atlas Copco — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/atlas-copco.html">
+<meta property="og:title" content="Atlas Copco — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Atlas Copco — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Atlas Copco</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq Stockholm: ATCO A</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Nacka (Stockholm), Sweden</div>
+    <div class="badge">Reports in SEK</div>
+    <div class="badge">Compressors, vacuum, industrial tools &middot; Wallenberg-anchored (Investor AB)</div>
+    <div class="badge warn">Currency Theme &mdash; Listed in SEK, Earns Almost All Revenue Abroad</div>
+    <div class="badge warn">~35x Trailing Earnings, ~13% Above Its Own FY21-25 Average Multiple</div>
+  </div>
+
+  <div class="price">SEK 192.85</div>
+  <div class="price-sub">Oct 21, 2026 close, Nasdaq Stockholm A share (SEK; derived from the previous close implied by the Oct 22 pre-report quotes, &plusmn;SEK 0.05) &middot; Market cap &asymp; SEK 902bn (&asymp;US$91bn at 9.92 SEK/USD; 3.31bn A + 1.56bn B shares outstanding, B share &asymp; SEK 168.85; my calculation) &middot; 52-wk range &asymp; SEK 145 &ndash; 212.60 (the high is the intraday record of Oct 6, 2026; the low is a third-party aggregator figure, approximate) &middot; Analyst target: Handelsbanken SEK 240 (Buy, Oct 7); a consensus target was not retrieved &middot; Q3 2026 report: Oct 22, 2026, 12:00 CEST (not yet reflected below) &middot; Prices are split-adjusted (4-for-1 split plus redemption share in 2022; the Epiroc distribution of June 2018 sits before the 5-year window)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Atlas Copco says it holds a leading market position globally in most of its operations; its annual report names Ingersoll Rand (which absorbed Gardner Denver), Kaeser (private) and Hitachi (Sullair) as the principal competitors in industrial compressors, Ebara, Busch and Shimadzu in semiconductor vacuum, and Apex Tool Group, Ingersoll Rand and Bosch in industrial tools. Four business areas: Compressor Technique (46% of segment revenue), Vacuum Technique (22%), Power Technique (17%) and Industrial Technique (16%); service is 38% of Group revenue.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in Swedish kronor (SEK million unless stated). &ldquo;EBIT&rdquo; is reported IFRS operating profit (after items affecting comparability). &ldquo;Free cash flow&rdquo; is net cash from operating activities (which already deducts investment in the rental fleet) minus investment in property, plant and equipment and intangible assets; it ignores IFRS 16 lease repayments and acquisitions, and it is not the company&rsquo;s own &ldquo;operating cash flow&rdquo; KPI (SEK 26,796m in FY2025). &ldquo;Net debt&rdquo; is the company&rsquo;s &ldquo;net indebtedness&rdquo; (includes leases and pensions). Gross margin = gross profit (revenue less cost of sales, as reported) &divide; revenue. Latest completed quarter used: Q2 2026 (the Q3 2026 report was due at 12:00 CEST on the day this was prepared). Figures come from Atlas Copco&rsquo;s own interim and annual reports; derived or third-party items are labelled.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">SEK 168.3bn</div>
+      <div class="sub" style="color:#f87171;">-4.8% YoY (FY2024: +2.4%)</div>
+      <div class="note">Organic -1%, currency -6%, acquisitions +2%. 4-yr CAGR FY2021-25 is +11.0%. Q2 2026 revenue SEK 45.0bn was +9.1% (organic +8%) and orders a record SEK 51.0bn (+27%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (reported)</div>
+      <div class="val" style="color:#34d399;">20.3%</div>
+      <div class="sub">FY2025; Q2 2026 was 20.6% (adjusted 21.0%)</div>
+      <div class="note">Gross margin 42.9% (FY2022: 42.0%). Currency cut FY2025 operating profit by about SEK 3.4bn, roughly 0.6 points of margin, per the company.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">20.4% vs 8.0%</div>
+      <div class="sub">~+12.4pp spread</div>
+      <div class="note">My calculation: FY2025 EBIT after 21.5% tax over average equity plus net debt. The 8.0% is Atlas Copco&rsquo;s own WACC benchmark. The company&rsquo;s pre-tax ROCE is 24%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.5x</div>
+      <div class="sub">Net indebtedness SEK 22.3bn, Jun 2026</div>
+      <div class="note">Company-reported ratio, including leases and pensions. Net debt/equity was 19% at Dec 2025.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">69/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Top-tier returns, a #1 market position and a controlling anchor owner. Held back by growth that has slowed to a 9&ndash;11% CAGR, 77% cash conversion and a 13% premium to its own multiple.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 134.6" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="134.6 179.5" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; EBIT margin (20.3%), market position (#1 in compressors), ROIC vs WACC, net debt/EBITDA, flat share count, anchor ownership (Investor AB), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 not met</b> &mdash; revenue, EBIT and FCF CAGR (all below 15%), market concentration (a few global rivals plus many local ones), FCF conversion (77%) and entry multiple (~35x vs ~31x own average)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Atlas Copco, founded in 1873 and headquartered in Nacka outside Stockholm, makes compressors, vacuum pumps and abatement systems, industrial power tools and assembly systems, and portable power and pumping equipment. Its mining and infrastructure arm was split off as Epiroc in 2018. Revenue grew from SEK 110.9bn in FY2021 to SEK 168.3bn in FY2025 (+11% a year, helped by acquisitions), with a reported EBIT margin steady at 20&ndash;21.6%, and a dividend payout of roughly half of earnings (SEK 3.00 ordinary plus an SEK 2.00 extra distribution for 2025). The business is about 60% equipment and 40% aftermarket: service (spare parts, maintenance, repairs) was 38% of FY2025 revenue and 43% in Compressor Technique. 2025 was a soft year for reported numbers (revenue -5%, EBIT -11%) mostly because a strong krona shaved about 6% off revenue. In 2026 demand turned: Q2 orders hit a record SEK 51.0bn (+27%, organic +26%), led by a +60% jump in Vacuum Technique orders on semiconductors, and the share price reached a record SEK 212.60 on Oct 6, 2026. The flip side is price: the stock trades at ~35x trailing earnings against a ~31x own average, and organic growth has been low single digit.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>The currency is part of the return</b> &mdash; Atlas Copco books revenue in dozens of currencies and reports in SEK, so a strong krona (as in 2025) lowers reported revenue and profit, and a euro, dollar or Danish-krone investor also takes the SEK exchange rate on the share price itself (see the Currency Exposure page). (2) <b>Order strength is cyclical and concentrated</b> &mdash; the 2026 order surge is led by semiconductor vacuum equipment, a famously cyclical end market; service (38% of revenue) cushions downturns but is not immune. (3) <b>Valuation has re-rated</b> &mdash; ~35x trailing against ~31x average, with the A share about 9% below its Oct 6 record and management guiding only that customer activity will &ldquo;remain at the current level&rdquo;.
+  </div>
+
+  <div class="bignum-corner">ATCO A</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, SEK millions, IFRS as reported (EBIT = operating profit; FCF = net cash from operating activities minus PP&amp;E and intangible investment). All lines come from Atlas Copco&rsquo;s year-end reports; FCF, margins and conversion ratios are my calculations from the reported cash-flow lines.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (SEK m)</div>
+    <div class="chart-sub">Shown at true relative size (axis in SEK billions). Revenue rose 52% in four years but fell 4.8% in FY2025 (organic -1%, currency -6%); EBIT peaked at SEK 38.2bn in FY2024, and FCF peaked at SEK 30.9bn the same year after dipping to SEK 16.3bn in FY2022 when capex rose and operating cash flow slipped.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (reported)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">40bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">80bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">120bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">160bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">200bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="118.0" width="30" height="122.0" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="113.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">110,912</text>
+<rect x="123.0" y="214.1" width="30" height="25.9" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="209.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">23,559</text>
+<rect x="161.0" y="218.2" width="30" height="21.8" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="213.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">19,793</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="84.5" width="30" height="155.5" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="79.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">141,325</text>
+<rect x="279.0" y="206.8" width="30" height="33.2" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="201.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">30,216</text>
+<rect x="317.0" y="222.0" width="30" height="18.0" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="217.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">16,346</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="50.1" width="30" height="189.9" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="45.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">172,664</text>
+<rect x="435.0" y="199.2" width="30" height="40.8" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="194.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">37,091</text>
+<rect x="473.0" y="215.1" width="30" height="24.9" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="210.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">22,633</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="45.6" width="30" height="194.4" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="40.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">176,771</text>
+<rect x="591.0" y="198.0" width="30" height="42.0" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="193.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">38,166</text>
+<rect x="629.0" y="206.1" width="30" height="33.9" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="201.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">30,863</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="54.8" width="30" height="185.2" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="49.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">168,343</text>
+<rect x="747.0" y="202.5" width="30" height="37.5" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="197.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">34,114</text>
+<rect x="785.0" y="211.0" width="30" height="29.0" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="206.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">26,379</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+11.0%</div>
+      <div class="sub">SEK 110.9bn &rarr; 168.3bn &mdash; includes ~2% a year from acquisitions</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+9.7%</div>
+      <div class="sub">SEK 23.6bn &rarr; 34.1bn &mdash; margin held ~20&ndash;21.6%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+7.4%</div>
+      <div class="sub">SEK 19.8bn &rarr; 26.4bn; FY2022 dipped to SEK 16.3bn</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of revenue (reported)</div>
+    <div class="chart-sub">Gross margin (blue, revenue minus cost of sales) rose from 42.0% in FY2022 to a 43.5% peak in FY2023 and has settled near 42.9%; EBIT margin (green) was 21.2&ndash;21.6% for four years before slipping to 20.3% in FY2025 on currency, tariff costs, acquisition dilution and restructuring (SEK 0.8bn of items affecting comparability).</div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="57.0" x2="690" y2="57.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="24.0" x2="690" y2="24.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+<text x="2" y="60.0" font-size="7.5" fill="#64748b">30%</text>
+<text x="2" y="27.0" font-size="7.5" fill="#64748b">60%</text>
+<polyline points="60,43.9 205,43.8 350,42.1 495,42.9 640,42.8" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="60,66.6 205,66.5 350,66.4 495,66.3 640,67.7" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="43.9" r="3.2" fill="#60a5fa"/><text x="60" y="36.9" text-anchor="middle" font-size="8" fill="#cbd5e1">42.0%</text>
+<circle cx="60" cy="66.6" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="78.6" text-anchor="middle" font-size="8" fill="#cbd5e1">21.2%</text>
+<circle cx="205" cy="43.8" r="3.2" fill="#60a5fa"/><text x="205" y="36.8" text-anchor="middle" font-size="8" fill="#cbd5e1">42.0%</text>
+<circle cx="205" cy="66.5" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="78.5" text-anchor="middle" font-size="8" fill="#cbd5e1">21.4%</text>
+<circle cx="350" cy="42.1" r="3.2" fill="#60a5fa"/><text x="350" y="35.1" text-anchor="middle" font-size="8" fill="#cbd5e1">43.5%</text>
+<circle cx="350" cy="66.4" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="78.4" text-anchor="middle" font-size="8" fill="#cbd5e1">21.5%</text>
+<circle cx="495" cy="42.9" r="3.2" fill="#60a5fa"/><text x="495" y="35.9" text-anchor="middle" font-size="8" fill="#cbd5e1">42.8%</text>
+<circle cx="495" cy="66.3" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="78.3" text-anchor="middle" font-size="8" fill="#cbd5e1">21.6%</text>
+<circle cx="640" cy="42.8" r="3.2" fill="#60a5fa"/><text x="640" y="35.8" text-anchor="middle" font-size="8" fill="#cbd5e1">42.9%</text>
+<circle cx="640" cy="67.7" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="79.7" text-anchor="middle" font-size="8" fill="#cbd5e1">20.3%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (SEK m)</th><th>Revenue</th><th>EBIT</th><th>EBIT Margin</th><th>Gross Margin</th><th>Net Income</th><th>Basic EPS (SEK)</th><th>FCF</th><th>FCF/EBIT</th><th>Net debt</th><th>DPS (SEK)</th></tr>
+    <tr><td>FY2021</td><td>110,912</td><td>23,559</td><td>21.2%</td><td>42.0%</td><td>18,134</td><td>3.72</td><td>19,793</td><td>84%</td><td>8,151</td><td>1.90</td></tr>
+    <tr><td>FY2022</td><td>141,325</td><td>30,216</td><td>21.4%</td><td>42.0%</td><td>23,482</td><td>4.82</td><td>16,346</td><td>54%</td><td>26,570</td><td>2.30</td></tr>
+    <tr><td>FY2023</td><td>172,664</td><td>37,091</td><td>21.5%</td><td>43.5%</td><td>28,052</td><td>5.76</td><td>22,633</td><td>61%</td><td>23,441</td><td>2.80</td></tr>
+    <tr><td>FY2024</td><td>176,771</td><td>38,166</td><td>21.6%</td><td>42.8%</td><td>29,794</td><td>6.11</td><td>30,863</td><td>81%</td><td>18,102</td><td>3.00</td></tr>
+    <tr><td>FY2025</td><td>168,343</td><td>34,114</td><td>20.3%</td><td>42.9%</td><td>26,425</td><td>5.43</td><td>26,379</td><td>77%</td><td>20,665</td><td>3.00</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">EPS and DPS are adjusted for the 2022 4-for-1 split. DPS is the ordinary dividend; extra distributions are excluded (SEK 8 per pre-split share via the 2022 redemption share, i.e. SEK 2 per post-split share, and SEK 2.00 for FY2025, paid with the ordinary dividend in two instalments of SEK 2.50 in 2026). Net cash from operating activities: SEK 23,152m / 21,377m / 28,084m / 36,887m / 32,566m; PP&amp;E investment 1,970 / 3,660 / 3,987 / 4,236 / 4,284; intangibles 1,389 / 1,371 / 1,464 / 1,788 / 1,903; rental-fleet investment 510 / 884 / 1,814 / 2,526 / 2,032 (FY2021-25). Total capex (all three lines) is 3.5% / 4.2% / 4.2% / 4.8% / 4.9% of revenue. Net debt is the company&rsquo;s net indebtedness at year-end.</div>
+
+  <div class="sec-sub" style="margin-top:10px;margin-left:0;"><b style="color:#5eead4;">Business areas and the aftermarket (FY2025)</b> &mdash; the four divisions, their profitability and how much of each is service.</div>
+  <table class="datatable">
+    <tr><th>Business area</th><th>Revenue (SEK m)</th><th>vs FY2024</th><th>Operating margin</th><th>ROCE</th><th>Service share of revenue</th><th>Q2 2026 orders YoY</th></tr>
+    <tr><td>Compressor Technique</td><td>77,140</td><td>-1%</td><td>24.7%</td><td>78%</td><td>43%</td><td>+19%</td></tr>
+    <tr><td>Vacuum Technique</td><td>36,727</td><td>-9%</td><td>18.4%</td><td>17%</td><td>29%</td><td>+60%</td></tr>
+    <tr><td>Industrial Technique (tools, assembly, vision)</td><td>26,384</td><td>-11%</td><td>17.8%</td><td>17%</td><td>28%</td><td>+9%</td></tr>
+    <tr><td>Power Technique (portable air &amp; power, pumps, rental)</td><td>28,972</td><td>-2%</td><td>16.7%</td><td>14%</td><td>~46% (my estimate from quarterly %)</td><td>+22%</td></tr>
+    <tr><td><b>Group</b> (after common items and eliminations)</td><td><b>168,343</b></td><td>-5%</td><td><b>20.3%</b></td><td>24%</td><td><b>38%</b> (equipment 62%)</td><td>+27%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Business-area revenues before eliminations (SEK 880m); ROCE is the last-twelve-month figure at Dec 2025. Group service share (38%) and the Compressor, Vacuum and Industrial Technique shares are from the 2025 annual report; Power Technique&rsquo;s service share is not stated for the full year in the material I reviewed, so ~46% is computed from the quarterly shares (45%, 44%, 47%, 50%) weighted by revenue. Service includes spare parts, maintenance, repairs, consumables and specialty rental in Power Technique; service orders grew 7% in comparable currencies in 2025 while equipment orders grew 2%. Vacuum Technique&rsquo;s service share has climbed from 22% (Q4 2023) to 29% (Q4 2025) as its equipment business fell and then recovered.</div>
+  <div class="footer-note">Source: Atlas Copco Group interim reports on Q4 2022, Q4 2023, Q4 2025, Q2 2026 and the 2025 Annual Report (atlascopcogroup.com); share data from the company&rsquo;s Share information page.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend (Q3 2024 &ndash; Q2 2026)</div></div>
+  <div class="sec-sub">Eight quarters. Reported revenue shrank for five straight quarters on a strong krona, then grew +9.1% in Q2 2026 as orders surged. The Q3 2026 report (due Oct 22, 2026) is not reflected here.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 orders were a record SEK 50,951m (+27%, organic +26%; currency -4%), well above the SEK 44.9bn analyst average, with management citing double-digit order growth in every business area and a +60% jump in Vacuum Technique (semiconductors). Revenue was SEK 44,974m (+9.1%; organic +8%, acquisitions +4%, currency -3%). Operating profit was SEK 9,249m, a 20.6% margin (flat year on year), or 21.0% adjusted (20.4% a year earlier). Basic EPS was SEK 1.45 (Q2 2025: 1.34). The CEO said demand &ldquo;improved significantly, particularly from the semiconductor industry&rdquo;; the A share rose 4.4% on the report day. Orders are running ahead of revenue (a book-to-bill above 1.1), so Q3 and Q4 revenue should lean on the order backlog, but reported SEK figures stay exposed to the exchange rate. Net indebtedness was SEK 22.3bn (net debt/EBITDA 0.5x).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue vs Orders Received &mdash; Last 8 Quarters (SEK bn)</div>
+    <div class="chart-sub">Teal = revenue, blue = orders received (SEK billions, labels rounded). Orders ran below revenue in Q3 and Q4 2025, then back above it in Q1 2026 (the seasonal pattern also showed in Q1 2025) and by SEK 6.0bn in Q2 2026. Reported revenue YoY: Q3'25 -3.4%, Q4'25 -7.0%, Q1'26 -5.1%, Q2'26 +9.1%; organic growth was +1%, 0%, +3%, +8% respectively.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Orders received</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="19" y="47.1" width="29" height="82.9" fill="#2dd4bf"/><text x="33.5" y="42.1" text-anchor="middle" font-size="8.5" fill="#cbd5e1">43.1</text>
+<rect x="52" y="49.1" width="29" height="80.9" fill="#60a5fa"/><text x="66.5" y="44.1" text-anchor="middle" font-size="8.5" fill="#cbd5e1">42.1</text>
+<text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="102" y="41.6" width="29" height="88.4" fill="#2dd4bf"/><text x="116.5" y="36.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">46.0</text>
+<rect x="135" y="53.6" width="29" height="76.4" fill="#60a5fa"/><text x="149.5" y="48.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">39.7</text>
+<text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="185" y="47.8" width="29" height="82.2" fill="#2dd4bf"/><text x="199.5" y="42.8" text-anchor="middle" font-size="8.5" fill="#cbd5e1">42.7</text>
+<rect x="218" y="40.4" width="29" height="89.6" fill="#60a5fa"/><text x="232.5" y="35.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">46.6</text>
+<text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="268" y="50.8" width="29" height="79.2" fill="#2dd4bf"/><text x="282.5" y="45.8" text-anchor="middle" font-size="8.5" fill="#cbd5e1">41.2</text>
+<rect x="301" y="52.9" width="29" height="77.1" fill="#60a5fa"/><text x="315.5" y="47.9" text-anchor="middle" font-size="8.5" fill="#cbd5e1">40.1</text>
+<text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="351" y="50.0" width="29" height="80.0" fill="#2dd4bf"/><text x="365.5" y="45.0" text-anchor="middle" font-size="8.5" fill="#cbd5e1">41.6</text>
+<rect x="384" y="52.1" width="29" height="77.9" fill="#60a5fa"/><text x="398.5" y="47.1" text-anchor="middle" font-size="8.5" fill="#cbd5e1">40.5</text>
+<text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="434" y="47.7" width="29" height="82.3" fill="#2dd4bf"/><text x="448.5" y="42.7" text-anchor="middle" font-size="8.5" fill="#cbd5e1">42.8</text>
+<rect x="467" y="55.8" width="29" height="74.2" fill="#60a5fa"/><text x="481.5" y="50.8" text-anchor="middle" font-size="8.5" fill="#cbd5e1">38.6</text>
+<text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="52.0" width="29" height="78.0" fill="#2dd4bf"/><text x="531.5" y="47.0" text-anchor="middle" font-size="8.5" fill="#cbd5e1">40.5</text>
+<rect x="550" y="42.7" width="29" height="87.3" fill="#60a5fa"/><text x="564.5" y="37.7" text-anchor="middle" font-size="8.5" fill="#cbd5e1">45.4</text>
+<text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="600" y="43.5" width="29" height="86.5" fill="#2dd4bf"/><text x="614.5" y="38.5" text-anchor="middle" font-size="8.5" fill="#cbd5e1">45.0</text>
+<rect x="633" y="32.0" width="29" height="98.0" fill="#60a5fa"/><text x="647.5" y="27.0" text-anchor="middle" font-size="8.5" fill="#cbd5e1">51.0</text>
+<text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin &mdash; Last 8 Quarters (%)</div>
+    <div class="chart-sub">Axis runs 15&ndash;47% (not from zero) so the moves are visible. Gross margin (blue) swings 41.5&ndash;44.0% with mix and currency; reported operating margin (green) has held between 19.8% and 21.8% through the currency swings.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating margin (reported)</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="10" y1="61.2" x2="690" y2="61.2" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="10" y1="116.2" x2="690" y2="116.2" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="12" y="58.2" font-size="8" fill="#64748b">40%</text><text x="12" y="113.2" font-size="8" fill="#64748b">20%</text>
+<polyline points="50,51.8 133,57.2 216,52.3 299,50.2 382,55.0 465,55.7 548,55.1 631,55.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<polyline points="50,111.7 133,111.3 216,115.9 299,114.6 382,114.8 465,116.8 548,115.2 631,114.7" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="50" cy="51.8" r="3.2" fill="#60a5fa"/><text x="50" y="43.8" text-anchor="middle" font-size="9" fill="#cbd5e1">43.5%</text>
+<circle cx="50" cy="111.7" r="3.2" fill="#34d399"/><text x="50" y="103.7" text-anchor="middle" font-size="9" fill="#cbd5e1">21.7%</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<circle cx="133" cy="57.2" r="3.2" fill="#60a5fa"/><text x="133" y="49.2" text-anchor="middle" font-size="9" fill="#cbd5e1">41.5%</text>
+<circle cx="133" cy="111.3" r="3.2" fill="#34d399"/><text x="133" y="103.3" text-anchor="middle" font-size="9" fill="#cbd5e1">21.8%</text><text x="133" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<circle cx="216" cy="52.3" r="3.2" fill="#60a5fa"/><text x="216" y="44.3" text-anchor="middle" font-size="9" fill="#cbd5e1">43.3%</text>
+<circle cx="216" cy="115.9" r="3.2" fill="#34d399"/><text x="216" y="107.9" text-anchor="middle" font-size="9" fill="#cbd5e1">20.1%</text><text x="216" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<circle cx="299" cy="50.2" r="3.2" fill="#60a5fa"/><text x="299" y="42.2" text-anchor="middle" font-size="9" fill="#cbd5e1">44.0%</text>
+<circle cx="299" cy="114.6" r="3.2" fill="#34d399"/><text x="299" y="106.6" text-anchor="middle" font-size="9" fill="#cbd5e1">20.6%</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<circle cx="382" cy="55.0" r="3.2" fill="#60a5fa"/><text x="382" y="47.0" text-anchor="middle" font-size="9" fill="#cbd5e1">42.3%</text>
+<circle cx="382" cy="114.8" r="3.2" fill="#34d399"/><text x="382" y="106.8" text-anchor="middle" font-size="9" fill="#cbd5e1">20.5%</text><text x="382" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<circle cx="465" cy="55.7" r="3.2" fill="#60a5fa"/><text x="465" y="47.7" text-anchor="middle" font-size="9" fill="#cbd5e1">42.0%</text>
+<circle cx="465" cy="116.8" r="3.2" fill="#34d399"/><text x="465" y="108.8" text-anchor="middle" font-size="9" fill="#cbd5e1">19.8%</text><text x="465" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<circle cx="548" cy="55.1" r="3.2" fill="#60a5fa"/><text x="548" y="47.1" text-anchor="middle" font-size="9" fill="#cbd5e1">42.2%</text>
+<circle cx="548" cy="115.2" r="3.2" fill="#34d399"/><text x="548" y="107.2" text-anchor="middle" font-size="9" fill="#cbd5e1">20.4%</text><text x="548" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<circle cx="631" cy="55.1" r="3.2" fill="#60a5fa"/><text x="631" y="47.1" text-anchor="middle" font-size="9" fill="#cbd5e1">42.2%</text>
+<circle cx="631" cy="114.7" r="3.2" fill="#34d399"/><text x="631" y="106.7" text-anchor="middle" font-size="9" fill="#cbd5e1">20.6%</text><text x="631" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue (SEK m)</th><th>YoY (reported)</th><th>Orders (SEK m)</th><th>Gross margin</th><th>Operating profit, SEK m (margin)</th><th>Basic EPS (SEK)</th></tr>
+    <tr><td>Q3'24</td><td>43,105</td><td>-3.1%</td><td>42,080</td><td>43.5%</td><td>9,337 (21.7%)</td><td>1.47</td></tr>
+    <tr><td>Q4'24</td><td>45,988</td><td>+2.3%</td><td>39,725</td><td>41.5%</td><td>10,018 (21.8%)</td><td>1.60</td></tr>
+    <tr><td>Q1'25</td><td>42,730</td><td>-0.3%</td><td>46,604</td><td>43.3%</td><td>8,605 (20.1%)</td><td>1.35</td></tr>
+    <tr><td>Q2'25</td><td>41,210</td><td>-8.0%</td><td>40,087</td><td>44.0%</td><td>8,493 (20.6%)</td><td>1.34</td></tr>
+    <tr><td>Q3'25</td><td>41,621</td><td>-3.4%</td><td>40,517</td><td>42.3%</td><td>8,546 (20.5%)</td><td>1.37</td></tr>
+    <tr><td>Q4'25</td><td>42,782</td><td>-7.0%</td><td>38,606</td><td>42.0%</td><td>8,470 (19.8%)</td><td>1.36</td></tr>
+    <tr><td>Q1'26</td><td>40,540</td><td>-5.1%</td><td>45,395</td><td>42.2%</td><td>8,261 (20.4%)</td><td>1.28</td></tr>
+    <tr><td>Q2'26</td><td>44,974</td><td>+9.1%</td><td>50,951</td><td>42.2%</td><td>9,249 (20.6%)</td><td>1.45</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Q3 2024 to Q4 2025 operating profit, revenue and cost-of-sales lines come from the Q3 2025 and Q4 2025 reports; Q1 and Q2 2026 from the Q2 2026 report (Q1 2026 derived as six-month less Q2: revenue 40,540, operating profit 8,261, EPS 1.28, orders 45,395). Gross margin is my calculation (gross profit &divide; revenue). Quarterly YoY uses the prior-year quarter&rsquo;s reported revenue. The reported operating margin includes items affecting comparability (SEK -206m in Q2 2026; restructuring in 2025).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Outlook (Jul 16, 2026):</b> &ldquo;Atlas Copco Group expects the customer activity to remain at the current level&rdquo; &mdash; the same near-term wording as in January and April 2026. Atlas Copco gives no numeric revenue or margin guidance. Q2 2026 orders by region: Asia/Oceania 39% (+47% in local currency), North America 28% (+49%), Europe 23% (+7%), South America 5% (+16%), Africa/Middle East 5% (-6%).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Q3 2026 preview (FactSet, 14 analysts):</b> orders SEK 50.5bn (Q3 2025: 40.5bn), revenue SEK 47.6bn (41.6bn), adjusted operating profit SEK 10.3bn (8.9bn); Handelsbanken expected slightly lower orders than consensus. Those are estimates, not results &mdash; check the Oct 22 report before relying on this page&rsquo;s latest-quarter figures.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E. Year-end P/Es are the company-published year-end A-share closes (split-adjusted) divided by basic EPS; the current figure uses the four reported quarters to Q2 2026 (EPS SEK 5.46). The Q3 2026 report would change the trailing EPS.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~35.3x = SEK 192.85 / TTM EPS SEK 5.46) is ~113% of Atlas Copco&rsquo;s FY2021-25 year-end average (31.2x). FY2021&rsquo;s 42.1x was the highest year-end reading; the next four year-ends ranged from 25.5x to 30.6x, so this year&rsquo;s move is a re-rating. EPS is up 46% since 2021 (FY2025: 5.43), the A share +23%.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="30.1" width="70" height="79.9" fill="#60a5fa"/><text x="55" y="25.1" text-anchor="middle" font-size="9" fill="#cbd5e1">42.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="61.5" width="70" height="48.5" fill="#60a5fa"/><text x="150" y="56.5" text-anchor="middle" font-size="9" fill="#cbd5e1">25.5x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="52.7" width="70" height="57.3" fill="#60a5fa"/><text x="245" y="47.7" text-anchor="middle" font-size="9" fill="#cbd5e1">30.1x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="57.5" width="70" height="52.5" fill="#60a5fa"/><text x="340" y="52.5" text-anchor="middle" font-size="9" fill="#cbd5e1">27.6x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="51.9" width="70" height="58.1" fill="#60a5fa"/><text x="435" y="46.9" text-anchor="middle" font-size="9" fill="#cbd5e1">30.6x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="42.9" width="70" height="67.1" fill="#2dd4bf"/><text x="530" y="37.9" text-anchor="middle" font-size="9" fill="#cbd5e1">35.3x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="50.7" x2="690" y2="50.7" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="46.7" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 31.2x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> a third-party aggregator (MarketScreener, undated snapshot) shows ~34.8x 2026e and ~28.7x 2027e earnings, i.e. about 29x forward if 2027 estimates hold; I could not retrieve a dated consensus EPS, so treat this as indicative. With EPS growing at a high single-digit rate over the past four years, a rough PEG is above 3 (my estimate). The scorecard uses the trailing figure (ratio 1.13, 2/5 points). Handelsbanken&rsquo;s SEK 240 target (Oct 7) implies ~24% upside from SEK 192.85; the bank itself noted the absolute valuation is high but the relative valuation has fallen markedly in recent years.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (SEK m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex here is PP&amp;E + intangibles (mostly capitalised R&amp;D) + the rental fleet in Power Technique. It has crept up from 3.5% to 4.9% of revenue as the rental fleet and software/IP investment grew; manufacturing is spread across Belgium, the US, China, India, Germany and Italy.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (SEK m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="129.9" width="60" height="30.1" fill="#60a5fa"/><text x="60" y="124.9" text-anchor="middle" font-size="8" fill="#cbd5e1">3,869</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="114.0" width="60" height="46.0" fill="#60a5fa"/><text x="200" y="109.0" text-anchor="middle" font-size="8" fill="#cbd5e1">5,915</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="103.5" width="60" height="56.5" fill="#60a5fa"/><text x="340" y="98.5" text-anchor="middle" font-size="8" fill="#cbd5e1">7,265</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="93.5" width="60" height="66.5" fill="#60a5fa"/><text x="480" y="88.5" text-anchor="middle" font-size="8" fill="#cbd5e1">8,550</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="96.1" width="60" height="63.9" fill="#60a5fa"/><text x="620" y="91.1" text-anchor="middle" font-size="8" fill="#cbd5e1">8,219</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,97.2 200,84.7 340,84.3 480,72.9 620,72.1" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="97.2" r="3" fill="#fbbf24"/><text x="60" y="89.2" text-anchor="middle" font-size="7.5" fill="#fde68a">3.5%</text>
+<circle cx="200" cy="84.7" r="3" fill="#fbbf24"/><text x="200" y="76.7" text-anchor="middle" font-size="7.5" fill="#fde68a">4.2%</text>
+<circle cx="340" cy="84.3" r="3" fill="#fbbf24"/><text x="340" y="76.3" text-anchor="middle" font-size="7.5" fill="#fde68a">4.2%</text>
+<circle cx="480" cy="72.9" r="3" fill="#fbbf24"/><text x="480" y="64.9" text-anchor="middle" font-size="7.5" fill="#fde68a">4.8%</text>
+<circle cx="620" cy="72.1" r="3" fill="#fbbf24"/><text x="620" y="64.1" text-anchor="middle" font-size="7.5" fill="#fde68a">4.9%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership (share of capital)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="53.7 260.4" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="44.0 270.2" stroke-dashoffset="-53.7" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="216.5 97.7" stroke-dashoffset="-97.7" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">17.1%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Investor AB (Wallenberg sphere) 17.1% of capital, <b>22.4% of votes</b> (YE2025)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Other top-10 holders &asymp;14% (Dec 2023 table; Swedbank Robur 4.0%, Alecta 2.7%, Handelsbanken Fonder 2.0%)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders &asymp;69% (foreign investors held 52.8% of capital at Dec 2023)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count</div>
+      <p>Basic average shares were 4,870.9m (2021, split-adjusted) and 4,868.8m (2025): flat. Total shares are 4,918m (3,358m A + 1,561m B), of which 47.9m A shares are held by the company to cover its personnel option plans, leaving 4,870.6m outstanding. The 2022 4-for-1 split (with a redemption share worth SEK 8 per old share) is reflected in every price and EPS figure here.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Votes vs capital (criterion 12):</b> Atlas Copco has two share classes: an A share carries one vote and a B share one-tenth of a vote. Investor AB, the Wallenberg family&rsquo;s investment company (itself controlled by Wallenberg foundations), held 840,053,755 shares at year-end 2025, which is <b>22.4% of the votes but 17.1% of the capital</b> (it bought a further ~215,000 B shares on Mar 23, 2026 per Swedish press, 17.08% / 22.35% beforehand). Both measures sit in the 15&ndash;30% band; it is the largest owner by far (the next largest, Swedbank Robur, had 3.1% of votes at Dec 2023), so it is an anchor holder with blocking influence, but not a majority controller, and it is not a founder or executive insider. Ownership table for the other holders is from the company&rsquo;s Dec 2023 disclosure and is dated.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; capital allocation:</b> net indebtedness was SEK 20.7bn at Dec 2025 (SEK 22.3bn at Jun 2026), equal to 0.5x EBITDA and 19% of equity; average debt maturity was 4.6 years; equity/assets 55%. Cash and equivalents were SEK 14.7bn at Jun 2026 against borrowings of SEK 35.9bn (including leases). In 2025 the Group spent SEK 11.6bn on acquisitions (more than 30 small and mid-sized deals) and returned SEK 14.6bn in dividends; the SEK 5.00 per share for FY2025 (SEK 24.4bn in total, paid April and October 2026) includes a SEK 2.00 extra distribution. The Group&rsquo;s own return target is to beat an 8.0% WACC; ROCE was 24% at Dec 2025 and Q2 2026 (26% a year earlier).
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — CURRENCY EXPOSURE ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Currency Exposure &mdash; a Stockholm Listing, a Global Earnings Stream</div></div>
+  <div class="sec-sub">Atlas Copco reports in SEK and its shares trade in SEK, but almost all of its revenue is earned outside Sweden. That creates two currency layers for an investor outside Sweden: the company&rsquo;s own translation effect on reported results, and the exchange rate on the share price itself. Theme page linked to the site topic on how currencies affect investment returns.</div>
+
+  <div class="callout">
+    <b>Currency exposure (company disclosures, FY2025):</b> revenue by region was Asia/Oceania 36%, Europe 28%, North America 26%, Africa/Middle East 6% and South America 4%. Sweden is not broken out in the material I reviewed; as a proxy only 1,721 of 55,549 average employees (3%) are in Sweden, so almost all revenue is earned in foreign currencies. <b>Estimated currency mix (not disclosed in the sources I reviewed):</b> roughly a quarter US-dollar-linked, a bit over a quarter euro and other European currencies, and a third spread across the Chinese yuan, yen, won, rupee and other Asian currencies &mdash; inferred from the regional split, not reported by the company. Manufacturing is also global (Belgium, US, China, India, Germany, Italy), which gives a partial natural hedge on costs.
+  </div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Period</th><th>Currency effect on orders</th><th>Currency effect on revenue</th><th>Effect on operating profit</th><th>Organic revenue growth</th></tr>
+    <tr><td>FY2025</td><td>-6%</td><td>-6%</td><td>about SEK -3.4bn, ~-0.6pp of margin</td><td>-1%</td></tr>
+    <tr><td>Q3 2025</td><td>-6%</td><td>-7%</td><td>n/r</td><td>+1%</td></tr>
+    <tr><td>Q4 2025</td><td>-11%</td><td>-11%</td><td>SEK -1,705m (bridge)</td><td>0%</td></tr>
+    <tr><td>Q1 2026</td><td>n/r</td><td>n/r (reported -5% vs organic +3%)</td><td>n/r</td><td>+3%</td></tr>
+    <tr><td>Q2 2026</td><td>-4%</td><td>-3%</td><td>n/r</td><td>+8%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">From the company&rsquo;s own sales bridges in the Q3 2025, Q4 2025 and Q2 2026 reports and the FY2025 summary (&ldquo;Changes in exchange rates ... had a negative effect of MSEK -3,400 on operating profit and approximately a 0.6 percentage point negative effect on the operating margin&rdquo;). n/r = not retrieved.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">What the Same Share Return Looks Like in Different Currencies (Dec 31, 2021 &rarr; Oct 2026, price only)</div>
+    <div class="chart-sub">The A share rose 23.2% in SEK (SEK 156.50 &rarr; SEK 192.85). Converted at ECB reference rates, a euro investor&rsquo;s price-only gain was 13.6%, a US-dollar investor&rsquo;s 12.4% and a Danish-krone investor&rsquo;s 14.1%, because the krona is weaker today than at the end of 2021 (against the dollar +9.6%, the euro +8.5%, the Danish krone +8.0% in SEK-per-unit terms). Dividends excluded.</div>
+    <svg viewBox="0 0 700 146">
+<line x1="10" y1="120" x2="690" y2="120" stroke="#263049" stroke-width="1"/>
+<rect x="70" y="36.4" width="90" height="83.6" fill="#2dd4bf"/><text x="115" y="30.4" text-anchor="middle" font-size="11" font-weight="700" fill="#e2e8f0">+23.2%</text><text x="115" y="136" text-anchor="middle" font-size="10" fill="#94a3b8">SEK</text>
+<rect x="230" y="71.2" width="90" height="48.8" fill="#60a5fa"/><text x="275" y="65.2" text-anchor="middle" font-size="11" font-weight="700" fill="#e2e8f0">+13.6%</text><text x="275" y="136" text-anchor="middle" font-size="10" fill="#94a3b8">EUR</text>
+<rect x="390" y="75.2" width="90" height="44.8" fill="#fbbf24"/><text x="435" y="69.2" text-anchor="middle" font-size="11" font-weight="700" fill="#e2e8f0">+12.4%</text><text x="435" y="136" text-anchor="middle" font-size="10" fill="#94a3b8">USD</text>
+<rect x="550" y="69.1" width="90" height="50.9" fill="#a78bfa"/><text x="595" y="63.1" text-anchor="middle" font-size="11" font-weight="700" fill="#e2e8f0">+14.1%</text><text x="595" y="136" text-anchor="middle" font-size="10" fill="#94a3b8">DKK</text>
+</svg>
+  </div>
+
+  <table class="datatable" style="margin-top:6px;">
+    <tr><th>Date</th><th>EUR/SEK</th><th>USD/SEK</th><th>DKK/SEK</th><th>ATCO A (SEK)</th><th>in EUR</th><th>in USD</th><th>in DKK</th></tr>
+    <tr><td>Dec 31, 2021</td><td>10.25</td><td>9.05</td><td>1.378</td><td>156.50</td><td>15.27</td><td>17.29</td><td>113.5</td></tr>
+    <tr><td>Dec 30, 2022</td><td>11.12</td><td>10.43</td><td>1.496</td><td>123.10</td><td>11.07</td><td>11.81</td><td>82.3</td></tr>
+    <tr><td>Dec 29, 2023</td><td>11.10</td><td>10.04</td><td>1.489</td><td>173.60</td><td>15.65</td><td>17.29</td><td>116.6</td></tr>
+    <tr><td>Dec 31, 2024</td><td>11.46</td><td>11.03</td><td>1.537</td><td>168.90</td><td>14.74</td><td>15.31</td><td>109.9</td></tr>
+    <tr><td>Dec 31, 2025</td><td>10.82</td><td>9.21</td><td>1.449</td><td>166.10</td><td>15.35</td><td>18.04</td><td>114.6</td></tr>
+    <tr><td>Now (price Oct 21; FX Oct 20, 2026)</td><td>11.12</td><td>9.92</td><td>1.488</td><td>192.85</td><td>17.34</td><td>19.44</td><td>129.6</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Exchange rates are ECB euro reference rates (EUR/SEK direct; USD/SEK = EUR/SEK &divide; EUR/USD; DKK/SEK = EUR/SEK &divide; EUR/DKK), computed by me; the &ldquo;Now&rdquo; row pairs the Oct 21 close with the Oct 20, 2026 ECB rate (the latest I could retrieve). Year-end A-share closes are Atlas Copco&rsquo;s published figures. The krona is weaker than at end-2021 against all three but much stronger than at end-2024 (USD/SEK was 11.03 then); valutafx reports USD/SEK touching 8.79 on Jan 27, 2026. Annualised, the price-only return since Dec 2021 is 4.4% in SEK against about 2.5&ndash;2.8% in EUR, USD and DKK.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="info-box working">
+      <div class="title">How the translation effect works</div>
+      <p>When the krona strengthens, Atlas Copco&rsquo;s foreign sales and profits translate into fewer kronor: 2025 revenue fell 5% in SEK with organic volumes -1%, and the group margin lost ~0.6 points. When the krona weakens, as it has done against the dollar and the euro in 2026, the effect reverses (Q2 2026 currency drag shrank to -3%). The company reports in SEK, so local-currency strength is invisible unless you read the organic line.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What it means for non-SEK investors</div>
+      <p>A euro, dollar or Danish-krone investor holds a SEK asset whose earnings are mostly in other currencies. If SEK strengthens, reported SEK profits fall but the share is worth more in the investor&rsquo;s own currency; if SEK weakens, the reverse. Over this window the krona&rsquo;s weakness cut the gain by roughly 9&ndash;11 points in each currency versus the SEK return. The exposure is real in both directions and can be hedged by the investor or by the choice of listing or fund share class &mdash; this page is not advice.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022&rsquo;s.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Atlas Copco</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+11.0% &mdash; SEK 110.9bn &rarr; 168.3bn, helped by ~2% a year of acquisitions; FY2025 -4.8% on currency (organic -1%) (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+9.7% &mdash; operating profit SEK 23.6bn &rarr; 34.1bn; FY2025 was -11% (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>20.3% reported (FY2025; 20.7% adjusted), 21.2&ndash;21.6% in FY2021-24; Q2 2026 20.6%. Only just above the line (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+7.4% &mdash; SEK 19.8bn &rarr; 26.4bn (operating cash flow less PP&amp;E and intangibles); FY2022 dip to 16.3bn, FY2024 peak 30.9bn (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Leading global position in compressors, its largest business (46% of segment revenue), ahead of Ingersoll Rand (incl. Gardner Denver), Kaeser and Hitachi (Sullair); also a global leader in vacuum for semiconductors and industry. No independent share percentage found, so this is a judgment based on the company&rsquo;s own statements and named peer set (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; a handful of global compressor groups plus numerous regional and local competitors (the annual report singles out China), a different set of peers in each of vacuum, tools and portable power. Judgment, not a measured index (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC ~20.4% (my calculation) vs the company&rsquo;s 8.0% WACC benchmark, a ~+12.4pp spread; company ROCE is 24% pre-tax. Sits just above the 12pp band edge &mdash; at a 9% WACC it would score 4/5 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.5x (company-reported, Dec 2025; same at Jun 2026): net indebtedness SEK 20.7bn including leases and pensions (score 4/5, the 0&ndash;1x band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>77.3% (FY2025: FCF SEK 26,379m / EBIT 34,114m). Five-year path 84% / 54% / 61% / 81% / 77% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E ~35.3x (SEK 192.85 / TTM EPS 5.46) vs FY21-25 year-end average 31.2x (ratio 1.13); forward ~29x on 2027e (third-party, undated). Up to a 15% premium (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Average shares 4,870.9m (2021) vs 4,868.8m (2025), unchanged; the company only buys shares to cover option plans (score 3/5, flat band)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Investor AB (Wallenberg sphere) holds 22.4% of the votes and 17.1% of the capital (YE2025; A shares carry 1 vote, B shares 1/10); the largest owner by far, with a blocking-size vote but not a majority, and not a founder/insider stake. Both measures fall in the 15&ndash;30% band (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.9% of revenue in FY2025 (SEK 8.2bn: PP&amp;E 4.3bn, rental fleet 2.0bn, intangibles 1.9bn); 3.5&ndash;4.9% over FY2021-25 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis is gross margin (revenue less cost of sales, which Atlas Copco reports): 42.0% (FY2022) &rarr; 42.9% (FY2025), +0.9pp. Peak 43.5% in FY2023; H1 2026 was 42.2% against 43.6% in H1 2025 as currency bit (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13/5=7.8 &middot; #2 2&times;11/5=4.4 &middot; #3 5&times;10/5=10.0 &middot; #4 2&times;8/5=3.2 &middot; #5 5&times;7/5=7.0 &middot; #6 2&times;6/5=2.4 &middot; #7 5&times;10/5=10.0 &middot; #8 4&times;6/5=4.8 &middot; #9 3&times;8/5=4.8 &middot; #10 2&times;8/5=3.2 &middot; #11 3&times;4/5=2.4 &middot; #12 4&times;5/5=4.0 &middot; #13 4&times;4/5=3.2 &middot; #14 5&times;5/5=5.0. Total 72.2 / 105 = <b>69/100</b>. Criteria met: 8/14 on the binary thresholds. <b>Judgment calls and estimates:</b> #3 clears 20% by only 0.3 points; #5 and #6 are qualitative; #7 uses my own after-tax ROIC and the company&rsquo;s WACC and is close to a band edge; #9 and #4 use my FCF definition (excludes leases and acquisitions); #10 uses company-published year-end prices with a Q2 2026 trailing EPS; the Oct 21 price is derived. The Q3 2026 report (Oct 22) could move #1, #2, #10 and #3.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A global leader in compressors and vacuum with a 20%+ EBIT margin through a currency headwind, ROIC about 12 points above its cost of capital, net debt of only 0.5x EBITDA and a decentralised model that keeps compounding through small acquisitions. Service is 38% of revenue and growing faster than equipment, orders hit a record SEK 51.0bn in Q2 2026, gross margin is 0.9 points above FY2022, and Investor AB gives the register a stable anchor. Cash conversion is high enough to fund a SEK 5.00 dividend and ~SEK 11.6bn of bolt-ons in 2025.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth: a 11% revenue CAGR is mostly price, acquisitions and the 2021-23 inflation spike, and 2025 organic revenue fell 1%. Currency has moved reported revenue by 3&ndash;11% in each of the last four quarters and EBIT by SEK 1.7bn in a quarter. Valuation is ~13% above its own average at ~35x, with the A share near its record. The order surge leans on semiconductor vacuum equipment (+60% in Q2 2026), which is cyclical, and automotive tooling is weak. Ingersoll Rand, Kaeser and Hitachi in compressors, and Ebara, Busch and Shimadzu in vacuum, compete directly. Several inputs are derived or third-party: the Oct 21 close, the 52-week low, forward P/E, the Dec 2023 holder table, Power Technique&rsquo;s service share and FCF/ROIC definitions.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Atlas Copco Group interim reports (Q3 2025, Q4 2025, Q1/Q2 2026) and year-end reports for FY2022-FY2023 (atlascopcogroup.com, cision); Atlas Copco Annual Report 2025 (regional revenue split, competitors, Investor AB holding, service share); Atlas Copco Share information and Shareholders pages (year-end share prices, per-share data, ownership); Finwire/Placera (Q3 2026 consensus, Handelsbanken target, Investor AB purchase); EFN/DI (Oct 6, 2026 record); ECB euro foreign exchange reference rates; valutafx (USD/SEK range); MarketScreener (forward P/E). Prices and ratios: the Oct 21 close, 52-week low, forward P/E, ROIC and the concentration and market-position judgments are derived, third-party or approximate and flagged as such. All figures SEK unless stated. Prepared Oct 22, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Atlas Copco A share &mdash; Nasdaq Stockholm (ATCO A) price in SEK, split-adjusted. A 2022 drawdown, a sharp 2023 recovery, two flat years, then a record SEK 212.60 in October 2026: about +23% over the window in kronor, but less in euros, dollars or Danish kroner.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Atlas Copco A &mdash; Year-End Close (Nasdaq Stockholm, SEK, split-adjusted)</div>
+    <div class="chart-sub">Year-end closes FY2021-FY2025 (SEK 156.50, 123.10, 173.60, 168.90, 166.10) are Atlas Copco&rsquo;s own published A-share closes, already adjusted for the 2022 split; the Now point is the Oct 21, 2026 close of SEK 192.85 (derived from the previous close implied by Oct 22 quotes). The dashed line is the straight-line annualised price CAGR between Dec 31, 2021 and Oct 21, 2026 (4.80 years). 52-week range: about SEK 145 &ndash; 212.60 (low approximate).</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><text x="42" y="31.5" text-anchor="end" font-size="8.5" fill="#64748b">SEK 220</text>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/><text x="42" y="82.2" text-anchor="end" font-size="8.5" fill="#64748b">SEK 180</text>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/><text x="42" y="132.8" text-anchor="end" font-size="8.5" fill="#64748b">SEK 140</text>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><text x="42" y="183.5" text-anchor="end" font-size="8.5" fill="#64748b">SEK 100</text>
+<path d="M 46.0,108.4 L 172.8,150.7 L 299.6,86.8 L 426.4,92.7 L 553.2,96.3 L 680.0,62.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="108.4" x2="680.0" y2="62.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="330" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +4.4%*</text>
+<path d="M 46.0,108.4 L 172.8,150.7 L 299.6,86.8 L 426.4,92.7 L 553.2,96.3 L 680.0,62.4" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="108.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="46.0" y="96.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 156.50</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="150.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="172.8" y="138.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 123.10</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="86.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="299.6" y="74.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 173.60</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="92.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="426.4" y="80.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 168.90</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="96.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="553.2" y="84.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">SEK 166.10</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="62.4" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/><text x="678" y="50.4" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">SEK 192.85</text><text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="end">Now</text>
+</svg>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Split history in the price (Atlas Copco and Epiroc):</b> in June 2018 Atlas Copco distributed all shares of Epiroc (mining and infrastructure equipment) to its shareholders 1:1 (A for A, B for B; Epiroc traded from Jun 18, 2018), alongside a 2:1 share split and a SEK 8 per share redemption. That is before this window, but it is why Atlas Copco price series earlier than mid-2018 are not comparable with later ones and different data providers adjust them differently. Inside the window, the 2022 split gave holders 4 new shares plus 1 redemption share per old share; the redemption share was bought back at SEK 8 (about SEK 9.7bn in total), or about SEK 2 per new share, in cash. The SEK 156.50 Dec 2021 close is the old ~SEK 626 price divided by four (my derivation); the SEK 8 redemption is not added back, so the price-only CAGR below slightly understates the total return.
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR, SEK, no dividends reinvested (ordinary dividends of SEK 1.90, 2.30, 2.80, 3.00 and 3.00 for FY2021-25 per post-split share, plus the SEK 2 redemption in 2022 and a SEK 2.00 extra distribution for FY2025). Because the 5-year window runs from Dec 31, 2021 to Oct 21, 2026 (4.80 years), the annualised rate is on that exact span. Over the same window basic EPS rose 46% (SEK 3.72 &rarr; 5.43), so the share price gain of 23% means the multiple has not expanded much from the 2021 year-end. In euros the same price-only return is +13.6%, in dollars +12.4% and in Danish kroner +14.1% (see the Currency Exposure page).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
