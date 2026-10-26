@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nordea Bank Abp — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/nordea.html">
+<meta property="og:title" content="Nordea Bank Abp — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nordea Bank Abp — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Nasdaq Helsinki: NDA FI</div>
+  <h1>Nordea Bank Abp</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq Helsinki: NDA FI · reports in EUR</div>
+    <div class="badge">Sector: Banks — Nordic universal bank</div>
+    <div class="badge">HQ: Helsinki, Finland · Nordea Group formed 2000 (Nordic merger)</div>
+    <div class="badge">Largest Nordic financial group · G-SIB · ~28,400 employees</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">€15.27</div>
+  <div class="price-sub">Close Oct 23, 2026 (Nasdaq Helsinki, EUR; latest close available at build time) · Market cap ≈ €52bn (≈3.40B shares) · 52-week range ≈ €14.16–18.11 (from available daily data) · FY25 dividend €0.96/share (≈6.3% yield) plus a mid-year 2026 dividend · Analyst consensus target not retrieved. Latest reported quarter is Q3 2026 (reported Oct 15, 2026); the shares fell about 8% on results day.</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> DNB (Norway) &middot; Danske Bank (Denmark) &middot; Handelsbanken, SEB and Swedbank (Sweden) &middot; OP Financial Group and S-Bank (Finland) &middot; large pan-European banks in Nordic corporate and wealth management &mdash; a concentrated but contested set of Nordic markets.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Operating Income (FY25)</div>
+      <div class="val">€11.7B</div>
+      <div class="sub">-2.8% vs FY24 (€12.1B) on lower net interest income (-6%); fees +3%. Q3 2026 income was €3.0B (+2.0% YoY).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Profit / ROTE (FY25)</div>
+      <div class="val green">€4.8B / 17.8%</div>
+      <div class="note">Net profit (Nordea-reported); ROE 15.5%. ROTE of 17.8% clears a ~10% cost of equity by ~7.8pp. Down from €5.1B and 19.2% in FY24.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income Ratio (FY25)</div>
+      <div class="val green">46.0%</div>
+      <div class="note">Including amortised regulatory fees; 45.0% excluding them &mdash; lower is better. 44.1% in FY24 (43.1% excl. fees). The bank-specific analog to operating margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (Q3 2026)</div>
+      <div class="val green">15.8%</div>
+      <div class="note">1.9pp above the regulatory requirement (Nordea-stated); assumes a 70% dividend deduction, subject to ECB approval. 15.7% at FY25. Substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">57/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/14 criteria met — exceptional profitability and capital strength, offset by single-digit growth, income that has slipped two years running, and a stock re-rated above its own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 68.78,195.59 L 84.83,162.26 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 68.78,195.59 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 84.83,162.26 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 Met</b> — net-margin proxy, a leading Nordic bank, ROTE vs. cost of equity, CET1 cushion, capital-distribution ratio (~84%), share count trend (-13% since FY21), capex intensity, margin stability (underlying cost/income -1.0pp over three years).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 Not Met</b> — operating income CAGR (~5.1%) and net-profit proxy CAGR for the EBIT and FCF criteria (~6.0%, identical by construction), market concentration (raw score 3), an entry multiple above its own FY21&ndash;FY25 average, and insider ownership below 5%.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Nordea is the largest financial services group in the Nordic region, with leading positions in personal banking, business banking, large corporates and asset and wealth management across Finland, Sweden, Denmark and Norway, about 28,400 employees and a G-SIB designation. FY2025 operating income was €11.7bn (-2.8%) and net profit €4.8bn (-4%), a 17.8% return on tangible equity (15.5% ROE), with a 46.0% cost/income ratio and a 15.7% CET1 ratio. Over FY2021&ndash;FY2025 operating income compounded at ~5.1% a year and net profit at ~6.0% &mdash; well below this framework's 15% bar, and measured across an IFRS 17 break and a FY2022 year that includes Russia-related items. The strength is returns and capital: ROTE has stayed 15&ndash;19% since FY2023, FY2025 dividends of €0.96 per share plus about €0.75bn of executed buybacks were roughly 84% of profit, and the share count is down ~13% since FY2021. The caveats are that falling policy rates have cut net interest income (-6% in FY25), Q3 2026 profit was 4% below a year earlier, and at ~11.2x trailing earnings and ~1.66x book value the shares trade above their own FY21&ndash;FY25 averages of ~9.8x and ~1.31x after a sharp 2025 re-rating (+53%).
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> Nordea is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly onto it. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total Operating Income</b> stands in for revenue (criterion 1); <b>Net Income</b> substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) &mdash; a bank's cash flow statement is dominated by deposit and trading-book swings that do not map to a &ldquo;free cash flow&rdquo; concept, so criteria 2 and 4 are necessarily identical here, a genuine limitation of the adaptation and not a workaround; <b>ROTE vs. an assumed ~10% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; Nordea reports return on tangible equity (ROTE) alongside ROE, so ROTE is used for the spread. A ~10% cost of equity is used, the low end of the 10&ndash;11% range, rather than the 9&ndash;10% allowed for low-beta Nordic banks, to stay conservative); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8), scored on the cushion over the requirement; and <b>(dividends + buybacks) &divide; net income</b> substitutes for FCF conversion (criterion 9). Entry multiple (criterion 10) is scored on the average of the P/E and P/B ratios, each current value divided by its own FY2021&ndash;FY2025 year-end average (P/TBV history is not available, so P/B is used). Criterion 14 uses the efficiency (cost/income) ratio because banks report no gross profit; a falling ratio counts as a margin rise. Everything is reported in EUR and nothing is converted.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (fiscal year = calendar year). All figures in EUR billions unless noted, from Nordea's own results releases. FY2021 is as originally reported (before IFRS 17); FY2022 is the restated figure shown as comparative in the FY2023 release and includes items affecting comparability (Russia-related), so FY21&rarr;FY22 is not like-for-like. FY2023&ndash;FY2025 are as reported. Net profit is the bank proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income vs. Net Profit (EUR B)</div>
+    <div class="chart-sub">Net profit peaked in FY2024 at €5.1B and slipped 4% in FY2025 as net interest income fell 6% with lower policy rates; income has been roughly flat at €11.7&ndash;12.1B for three years.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Operating Income</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="140" x2="680" y2="140" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="64.4" width="24" height="75.6" fill="#2dd4bf"/><text x="74" y="59.4" text-anchor="middle" font-size="8" fill="#cbd5e1">9.6</text>
+      <rect x="92" y="109.9" width="24" height="30.1" fill="#fbbf24"/><text x="104" y="104.9" text-anchor="middle" font-size="8" fill="#cbd5e1">3.8</text>
+      <text x="89" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="63.6" width="24" height="76.4" fill="#2dd4bf"/><text x="202" y="58.6" text-anchor="middle" font-size="8" fill="#cbd5e1">9.7</text>
+      <rect x="220" y="111.8" width="24" height="28.2" fill="#fbbf24"/><text x="232" y="106.8" text-anchor="middle" font-size="8" fill="#cbd5e1">3.6</text>
+      <text x="217" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="47.7" width="24" height="92.3" fill="#2dd4bf"/><text x="330" y="42.7" text-anchor="middle" font-size="8" fill="#cbd5e1">11.7</text>
+      <rect x="348" y="101.2" width="24" height="38.8" fill="#fbbf24"/><text x="360" y="96.2" text-anchor="middle" font-size="8" fill="#cbd5e1">4.9</text>
+      <text x="345" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="45.0" width="24" height="95.0" fill="#2dd4bf"/><text x="458" y="40.0" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1</text>
+      <rect x="476" y="100.2" width="24" height="39.8" fill="#fbbf24"/><text x="488" y="95.2" text-anchor="middle" font-size="8" fill="#cbd5e1">5.1</text>
+      <text x="473" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="47.7" width="24" height="92.3" fill="#5eead4"/><text x="586" y="42.7" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">11.7</text>
+      <rect x="604" y="101.9" width="24" height="38.1" fill="#fde68a"/><text x="616" y="96.9" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">4.8</text>
+      <text x="601" y="182" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Operating Income CAGR (5yr, crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~5.1%</div>
+      <div class="sub">FY21&rarr;FY25, €9.6B&rarr;€11.7B; well below the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val" style="color:#fbbf24;">~6.0%</div>
+      <div class="sub">€3.83B&rarr;€4.84B; below the bar (FY22 depressed by Russia-related items)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit CAGR (FY22&rarr;FY25, reference)</div>
+      <div class="val" style="color:#fbbf24;">~10.5%</div>
+      <div class="sub">€3.59B&rarr;€4.84B over 3 years off a trough year (reference only, not scored)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">€1.39</div>
+      <div class="sub">Up from €0.95 (FY21) despite a flat-to-lower profit trend; buybacks cut the share count ~13%</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cost/Income Ratio Trend — bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Operating expenses &divide; total operating income including amortised regulatory fees, per Nordea. The ratio improved from 48.3% (FY21) to 44.1% (FY24) as income grew, then rose to 46.0% in FY25 on lower income; FY22 (49.7%) includes Russia-related items. 2026 guidance is 44&ndash;45% excluding regulatory fees.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,58.8 210,45.0 360,95.1 510,100.0 660,81.3" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="58.8" r="4" fill="#2dd4bf"/><text x="60" y="46.8" text-anchor="middle" font-size="9" fill="#f1f5f9">48.3%</text>
+      <circle cx="210" cy="45.0" r="4" fill="#2dd4bf"/><text x="210" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">49.7%</text>
+      <circle cx="360" cy="95.1" r="4" fill="#2dd4bf"/><text x="360" y="83.1" text-anchor="middle" font-size="9" fill="#f1f5f9">44.6%</text>
+      <circle cx="510" cy="100.0" r="4" fill="#2dd4bf"/><text x="510" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">44.1%</text>
+      <circle cx="660" cy="81.3" r="4" fill="#5eead4"/><text x="660" y="69.3" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">46.0%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (EUR B)</th><th>Op. Income</th><th>Net Profit</th><th>Net Margin</th><th>ROE</th><th>Cost/Income</th><th>EPS (€)</th><th>DPS (€)</th></tr>
+    <tr><td>FY21</td><td>9.6</td><td>3.8</td><td>39.8%</td><td>11.2%</td><td>48.3%</td><td>0.95</td><td>0.69</td></tr>
+    <tr><td>FY22</td><td>9.7</td><td>3.6</td><td>36.9%</td><td>11.8%</td><td>49.7%</td><td>0.94</td><td>0.80</td></tr>
+    <tr><td>FY23</td><td>11.7</td><td>4.9</td><td>42.0%</td><td>16.9%</td><td>44.6%</td><td>1.37</td><td>0.92</td></tr>
+    <tr><td>FY24</td><td>12.1</td><td>5.1</td><td>41.9%</td><td>16.7%</td><td>44.1%</td><td>1.44</td><td>0.94</td></tr>
+    <tr><td>FY25</td><td>11.7</td><td>4.8</td><td>41.2%</td><td>15.5%</td><td>46.0%</td><td>1.39</td><td>0.96</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">As a bank, Nordea does not report EBIT or free cash flow in the industrial sense; Net Profit is the proxy for criteria 2 and 4, and &ldquo;Net Margin&rdquo; (net profit &divide; operating income) plays the role of an operating-margin column. ROE and cost/income are Nordea's measures including amortised regulatory fees (FY22 includes items affecting comparability). Nordea reports ROTE: 15.6% (FY22, excluding items, original basis), 19.4% (FY23), 19.2% (FY24), 17.8% (FY25).</div>
+  <div class="footer-note" style="margin-top:4px;">FY2021 is as originally reported (pre-IFRS 17) and FY2022 is the IFRS 17-restated comparative including items (originally €9.8B income and €3.6B profit); this break slightly flatters or depresses growth rates and is why the five-year CAGRs are indicative. Diluted EPS and dividends per share are Nordea-reported; dividends are for the financial year.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER, SEGMENTS & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend, Segments &amp; Profitability (Q3 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter: Q3 2026 (reported Oct 15, 2026). Eight quarters shown, Nordea-reported; Q1 2026 includes a EUR 190m restructuring charge.</div>
+
+  <div class="headline-box">
+    <div class="title">What the latest quarter showed (Q3 2026)</div>
+    <p>Q3 2026 operating income was €2,968m (+2% YoY, -2% on Q2), with net interest income €1,799m (+1% YoY), fees €880m (+9%) and net fair value result €198m (-19%). Operating profit was €1,541m (-4% YoY) and net profit €1,181m (-4%), with a cost/income ratio of 45.0% (excluding regulatory fees), ROE of 15.1% and ROTE of 17.6%, and diluted EPS of €0.35. Net loan losses were €74m (7bp), within the group's long-term expectation of about 10bp, driven by a few corporate customers. The CET1 ratio was 15.8%, 1.9pp above the requirement, after assuming a 70% dividend deduction subject to ECB approval. Lending rose 6% YoY to €399.6bn, deposits 15% to €259.0bn and assets under management 13% to €509.4bn. Nordea kept its 2026 outlook of ROE above 15% and a cost/income ratio of 44&ndash;45%, and its 2030 target of ROE above 15% with a cost/income ratio of 40&ndash;42%. The shares closed at €15.65 on results day against €16.98 the day before (-7.8%), and were at €15.27 on Oct 23.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income &mdash; Last 8 Quarters (EUR m)</div>
+    <div class="chart-sub">YoY: Q4'25 -0.2%, Q1'26 -2.2%, Q2'26 +4.2%, Q3'26 +2.0% (Nordea-reported) &mdash; income has held in a narrow €2.9&ndash;3.0bn band for two years as falling net interest income has been offset by fees.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly total operating income, EUR m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="47.2" width="56" height="82.8" fill="#2dd4bf"/><text x="53" y="42.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,955</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="46.6" width="56" height="83.4" fill="#2dd4bf"/><text x="135" y="41.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2,974</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="48.4" width="56" height="81.6" fill="#2dd4bf"/><text x="217" y="43.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,911</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="48.4" width="56" height="81.6" fill="#2dd4bf"/><text x="299" y="43.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,910</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="47.4" width="56" height="82.6" fill="#2dd4bf"/><text x="381" y="42.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,948</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="48.4" width="56" height="81.6" fill="#2dd4bf"/><text x="463" y="43.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2,910</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="45.0" width="56" height="85.0" fill="#2dd4bf"/><text x="545" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3,032</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="46.8" width="56" height="83.2" fill="#2dd4bf"/><text x="627" y="41.8" text-anchor="middle" font-size="9" fill="#cbd5e1">2,968</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Profit &mdash; Last 8 Quarters (EUR m)</div>
+    <div class="chart-sub">Net profit has run at €1.1&ndash;1.2bn a quarter; Q1'26 (€1.10bn) includes the €190m restructuring charge (€1.24bn excluding it), and Q3'26 (€1.18bn) is 4% below Q3'25.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, EUR m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="52.2" width="56" height="77.8" fill="#60a5fa"/><text x="53" y="47.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,129</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="45.0" width="56" height="85.0" fill="#60a5fa"/><text x="135" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,234</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="45.9" width="56" height="84.1" fill="#60a5fa"/><text x="217" y="40.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,221</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="45.4" width="56" height="84.6" fill="#60a5fa"/><text x="299" y="40.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,228</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="50.3" width="56" height="79.7" fill="#60a5fa"/><text x="381" y="45.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,157</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="54.2" width="56" height="75.8" fill="#60a5fa"/><text x="463" y="49.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,100</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="45.1" width="56" height="84.9" fill="#60a5fa"/><text x="545" y="40.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,232</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="48.7" width="56" height="81.3" fill="#60a5fa"/><text x="627" y="43.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,181</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>EUR m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Operating income</td><td>2,955</td><td>2,974</td><td>2,911</td><td>2,910</td><td>2,948</td><td>2,910</td><td>3,032</td><td>2,968</td></tr>
+    <tr><td>Net profit</td><td>1,129</td><td>1,234</td><td>1,221</td><td>1,228</td><td>1,157</td><td>1,100</td><td>1,232</td><td>1,181</td></tr>
+    <tr><td>Diluted EPS (€)*</td><td>0.32</td><td>0.35</td><td>0.35</td><td>0.36</td><td>0.34</td><td>0.36</td><td>0.36</td><td>0.35</td></tr>
+    <tr><td>Net margin</td><td>38.2%</td><td>41.5%</td><td>41.9%</td><td>42.2%</td><td>39.2%</td><td>37.8%</td><td>40.6%</td><td>39.8%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures as published in Nordea's quarterly releases (Q1'25 derived from the six-month figures). *EPS excludes items affecting comparability; Q1'26 reported EPS including the restructuring charge was about €0.32. Next report: Q4/FY2026 in early 2027.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FY2025 Operating Income by Line (EUR B, % of total)</div>
+    <div class="chart-sub">Income mix by line substitutes for a product/geography revenue split (Nordea's business-area split was not retrieved from a primary source). Net interest income is still 61% of income, so rate sensitivity is high.</div>
+    <svg viewBox="0 0 700 187" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Net interest income</text>
+      <rect x="215" y="10" width="260.0" height="20" fill="#2dd4bf"/>
+      <text x="483.0" y="24" font-size="9" fill="#f1f5f9">€7.17B &middot; 61.0%</text>
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Net fee and commission income</text>
+      <rect x="215" y="45" width="117.9" height="20" fill="#3b82f6"/>
+      <text x="340.9" y="59" font-size="9" fill="#f1f5f9">€3.25B &middot; 27.7%</text>
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Net fair value result</text>
+      <rect x="215" y="80" width="37.9" height="20" fill="#5eead4"/>
+      <text x="260.9" y="94" font-size="9" fill="#f1f5f9">€1.04B &middot; 8.9%</text>
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Net insurance result</text>
+      <rect x="215" y="115" width="8.8" height="20" fill="#818cf8"/>
+      <text x="231.8" y="129" font-size="9" fill="#f1f5f9">€0.24B &middot; 2.1%</text>
+      <text x="10" y="164" font-size="9.5" fill="#dbe4f0">Other income</text>
+      <rect x="215" y="150" width="1.5" height="20" fill="#475569"/>
+      <text x="224.5" y="164" font-size="9" fill="#f1f5f9">€0.04B &middot; 0.3%</text>
+      <line x1="215" y1="5" x2="215" y2="182" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">ROE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Return on equity (with amortised regulatory fees), full year, per Nordea, vs. an assumed ~10% cost of equity (not drawn). FY21&ndash;FY22 sat 1&ndash;2pp above the hurdle (FY22 includes Russia-related items); FY23&ndash;FY25 are 5&ndash;7pp above it. The scored measure is FY25 ROTE of 17.8% (Nordea-reported), a ~7.8pp spread.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,100.0 210,94.2 360,45.0 510,46.9 660,58.5" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="100.0" r="4" fill="#a78bfa"/><text x="60" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">11.2%</text>
+      <circle cx="210" cy="94.2" r="4" fill="#a78bfa"/><text x="210" y="82.2" text-anchor="middle" font-size="9" fill="#f1f5f9">11.8%</text>
+      <circle cx="360" cy="45.0" r="4" fill="#a78bfa"/><text x="360" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">16.9%</text>
+      <circle cx="510" cy="46.9" r="4" fill="#a78bfa"/><text x="510" y="34.9" text-anchor="middle" font-size="9" fill="#f1f5f9">16.7%</text>
+      <circle cx="660" cy="58.5" r="4" fill="#c4b5fd"/><text x="660" y="46.5" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">15.5%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> Nordea is the largest financial services group in the Nordic region by assets, with leading shares in Finland and large positions in Sweden, Denmark and Norway, where it competes with Danske Bank, DNB, Handelsbanken, SEB and Swedbank &mdash; a strong regional #1/#2 that supports criterion #5 (scored as a strong #2 because it is not the top bank in every market, a judgment call). Nordic banking is concentrated among a handful of large banks but is contested within each country, and net interest margins have narrowed, so concentration (#6) is scored 3/5 (2 points on the graduated scale, Not Met on the site convention). Its G-SIB status brings higher capital buffers.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B (price to book value per share) are the two standard bank valuation lenses, shown together; Nordea reports equity per share but not tangible book per share, so P/B is used. CET1 vs. the regulatory requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/B (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end close &divide; that year's diluted EPS; P/B = year-end close &divide; equity per share (Nordea releases). &ldquo;Now&rdquo; = €15.27 (Oct 23, 2026) on trailing 12-month EPS of €1.37 (including the Q1'26 restructuring charge; €1.42 excluding it) and Q3'26 equity per share of €9.21. FY21 and FY22 equity per share are as originally reported (pre-IFRS 17).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B (line, scale 0&ndash;2.5x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="32.28" width="44" height="117.72" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="26.28" text-anchor="middle" font-size="8" fill="#cbd5e1">11.36x</text>
+      <rect x="172.95" y="39.43" width="44" height="110.57" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="33.43" text-anchor="middle" font-size="8" fill="#cbd5e1">10.67x</text>
+      <rect x="276.25" y="65.03" width="44" height="84.97" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="59.03" text-anchor="middle" font-size="8" fill="#cbd5e1">8.20x</text>
+      <rect x="379.55" y="74.46" width="44" height="75.54" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="68.46" text-anchor="middle" font-size="8" fill="#cbd5e1">7.29x</text>
+      <rect x="482.85" y="30.00" width="44" height="120.00" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="24.00" text-anchor="middle" font-size="8" fill="#cbd5e1">11.58x</text>
+      <rect x="586.15" y="34.46" width="44" height="115.54" fill="#5eead4"/><text x="608.15" y="28.46" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">11.15x</text>
+      <polyline points="91.65,89.04 194.95,94.32 298.25,89.04 401.55,95.76 504.85,68.40 608.15,70.32" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="89.04" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="94.32" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="89.04" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="95.76" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="68.40" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="70.32" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (1.27x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (1.16x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (1.27x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (1.13x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (1.70x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">Now (1.66x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~11.2x trailing earnings and ~1.66x book value, Nordea trades above its own FY2021&ndash;FY2025 averages (P/E average ~9.8x, range 7.3x&ndash;11.6x; P/B average ~1.31x, range 1.13x&ndash;1.70x). Current-to-average is ~1.14 for P/E and ~1.27 for P/B, a blended ~1.20, which lands in the 1.15&ndash;1.30 band (1/5). The re-rating is recent: the shares rose 53% in 2025 (€10.50 to €16.09) and eased about 5% in 2026 after weaker Q3 numbers, while earnings per share have been flat. Forward P/E is roughly 11x on consensus (third-party, scaled to the current price), about in line with trailing. On a strict &ldquo;vs. own history&rdquo; test this is Not Met.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement (Estimate)</div>
+    <div class="chart-sub">Substitutes for a net-debt/EBITDA chart. Year-end ratios per Nordea's results releases. The dashed line is derived: Nordea states the FY25 ratio of 15.7% is 1.9pp above the current requirement, implying ~13.8% (the requirement has changed over the period, so earlier years' cushions differ; the Q3 2026 cushion is also 1.9pp). Nordea's CET1 policy is to distribute excess capital via buybacks.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="86.9" x2="680" y2="86.9" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="81.9" text-anchor="end" font-size="8" fill="#fbbf24">~13.8% requirement (derived)</text>
+      <polyline points="60,45.0 210,52.9 360,45.0 510,60.7 660,62.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="45.0" r="4" fill="#2dd4bf"/><text x="60" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">17.0%</text>
+      <circle cx="210" cy="52.9" r="4" fill="#2dd4bf"/><text x="210" y="40.9" text-anchor="middle" font-size="9" fill="#f1f5f9">16.4%</text>
+      <circle cx="360" cy="45.0" r="4" fill="#2dd4bf"/><text x="360" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">17.0%</text>
+      <circle cx="510" cy="60.7" r="4" fill="#2dd4bf"/><text x="510" y="48.7" text-anchor="middle" font-size="9" fill="#f1f5f9">15.8%</text>
+      <circle cx="660" cy="62.0" r="4" fill="#5eead4"/><text x="660" y="50.0" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">15.7%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="15.3 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#60a5fa" stroke-width="14" stroke-dasharray="11.9 263.9" stroke-dashoffset="-15.3" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#818cf8" stroke-width="14" stroke-dasharray="10.3 263.9" stroke-dashoffset="-27.2" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="8.2 263.9" stroke-dashoffset="-37.5" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#5eead4" stroke-width="14" stroke-dasharray="7.1 263.9" stroke-dashoffset="-45.7" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#a78bfa" stroke-width="14" stroke-dasharray="2.6 263.9" stroke-dashoffset="-52.8" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#475569" stroke-width="14" stroke-dasharray="208.5 263.9" stroke-dashoffset="-55.4" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>BlackRock ~5.8%</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Vanguard ~4.5%</div>
+          <div><span class="dot" style="background:#818cf8;"></span>Nordea-fonden (foundation) ~3.9%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Cevian Capital ~3.1%</div>
+          <div><span class="dot" style="background:#5eead4;"></span>Norges Bank Investment Management ~2.7%</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>Alecta ~1.0%</div>
+          <div><span class="dot" style="background:#475569;"></span>Other holders ~79% (management well under 1%)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>Nordea has no controlling shareholder or founder; the largest holders at Sep 30, 2026 (per Nordea's factbook, approximate) are global asset managers, the Danish foundation Nordea-fonden (3.9%) and the activist investor Cevian (3.1%), several of which sit on the shareholders' nomination board. Management ownership is well under 1%. Under the criterion's bands the 3.9% foundation stake is scored as a 1&ndash;5% anchor holder (2 points) and flagged as not meaningful insider alignment. Nordea's policy is a 60&ndash;70% dividend payout with excess capital returned through buybacks; it executed three &euro;250m buyback programmes in 2025 and started a &euro;500m programme in December 2025.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained further on pages 1, 2 and 4. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total operating income</td><td>~5.1% CAGR FY21&ndash;FY25 (€9.6B&rarr;€11.7B); FY25 growth -2.8%</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>~6.0% CAGR FY21&ndash;FY25 (€3.83B&rarr;€4.84B); FY22&rarr;FY25 is ~10.5% (reference only; FY22 had Russia-related items)</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 41.2% (FY25); operating profit €6.3B is 53.8% of income; cost/income 46.0% &mdash; far above the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>Same ~6.0% net-profit CAGR as criterion #2 &mdash; identical by construction, an honest limitation of the bank adaptation, not an independent FCF measure</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Largest Nordic financial group by assets; #1 in Finland and a top-two bank in several other Nordic markets; scored as a strong #2 (judgment, not a published rank)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; concentrated Nordic banking among a few large banks, but contested within each country and under margin pressure</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROTE vs. cost of equity (bank proxy)</td><td>FY25 ROTE 17.8% (Nordea-reported; ROE 15.5%) vs. an assumed ~10% cost of equity: a ~7.8pp spread</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. requirement</td><td>CET1 15.7% (FY25) and 15.8% (Q3 2026), 1.9pp above the requirement (Nordea-stated; band 1.0&ndash;2.0pp). Q3 assumes a 70% dividend deduction</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &mdash; substituted with capital-distribution ratio</td><td>FY25: dividend €0.96/share (~€3.3bn on ~3.43B shares, estimate) + ~€0.75bn executed buybacks = ~€4.05bn, ~84% of the €4.84bn net profit</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>Current P/E ~11.2x vs. ~9.8x average (ratio ~1.14); P/B ~1.66x vs. ~1.31x (ratio ~1.27); blended ~1.20 &mdash; above the bank's own FY21&ndash;FY25 average</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Potential shares 3,966M (FY21) &rarr; 3,434M (FY25), about -13%, and 3,403M at Q3 2026 (buybacks)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Management well under 1%; largest anchor holder Nordea-fonden ~3.9% (a foundation, not an insider) &mdash; scored on the 1&ndash;5% band</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capex not separately retrieved; depreciation, amortisation and impairment of ~€0.6B (~5% of income, estimate) used as a proxy &mdash; light for a bank of this size (technology spend is partly expensed)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Banks report no gross profit, so the cost/income ratio is used (lower = better). On the underlying basis (excluding regulatory fees and items affecting comparability), FY2022 &rarr; FY2025: 44.0% &rarr; 45.0%, a margin-equivalent decline of ~1.0pp (band -0.5 to -1.0pp, still Met). On the reported basis including Russia-related FY22 items, 46.4% &rarr; 45.0% would be a gain, so the underlying basis is the conservative choice</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Martinero Index arithmetic (57/100):</b> Points by criterion 1&ndash;14 = 2, 2, 5, 2, 4, 2, 3, 3, 4, 1, 4, 2, 4, 3. Weights 13/11/10/8/7/6/10/6/8/8/4/5/4/5 (total 105); index = &Sigma;(points &divide; 5 &times; weight) &divide; 105 &times; 100 = 59.8 &rarr; 57. No criterion is N/A. Criterion 8 uses a bank-specific mapping of the CET1 cushion over the requirement (&ge;3.0pp = 5, 2.0&ndash;3.0 = 4, 1.0&ndash;2.0 = 3, 0.5&ndash;1.0 = 2, 0&ndash;0.5 = 1, below requirement = 0) because the bands file has no bank bands for it.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The most profitable large bank in its region on this framework: ROTE of 17.8% (ROE 15.5%), a 41% net margin, a 46% cost/income ratio and a 15.7% CET1 ratio about 1.9pp above the requirement. Capital return is substantial &mdash; roughly 84% of FY25 profit via dividends and buybacks, with the share count down ~13% since FY2021 &mdash; credit quality is strong (7bp of loan losses in Q3 2026), fees and assets under management are growing, and management guides to ROE above 15% through 2030 with a cost/income ratio falling to 40&ndash;42%.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth has stalled: operating income has been flat at €11.7&ndash;12.1B for three years, net profit fell 4% in FY2025 and again in Q3 2026 as lower policy rates cut net interest income (61% of income), and the five-year CAGRs are 5&ndash;6% against the framework's 15% bar. The shares trade at ~11.2x earnings and ~1.66x book, above FY21&ndash;FY25 averages, after a 53% re-rating in 2025 and a sharp fall on the Q3 print. Restructuring costs hit Q1 2026, the CET1 figure relies on a 70% dividend-deduction assumption pending ECB approval, and the Russia-related items in FY2022 and the IFRS 17 break reduce comparability. Insider ownership is below 5%.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> Nordea results releases: Q3 2026 (Oct 15, 2026), half-year 2026 (Jul 16, 2026), Q4/FY2025 (Jan 29, 2026), Q4/FY2023 (Feb 5, 2024) and Q4/FY2022 (Feb 2, 2023) on nordea.com &mdash; income, net profit, ROE/ROTE, cost/income, CET1, EPS, equity per share, year-end share prices and share counts; Nordea buy-back completion releases (2025); Yahoo Finance &mdash; daily prices and 52-week range; Nordea's Q3 2026 factbook (as summarised by a search aggregator) &mdash; shareholders.<br><b>Data-quality flags:</b> (1) The Oct 26, 2026 close was not available at build time; the Oct 23 close (€15.27) is used. (2) FY2021 is pre-IFRS 17 and FY2022 is the restated figure including Russia-related items, so FY21&rarr;FY22 is not like-for-like. (3) The CET1 requirement (~13.8%) is derived from Nordea's stated 1.9pp margin. (4) The FY25 dividend payout uses DPS &times; potential shares (an estimate) and the three executed &euro;250m buybacks; the December 2025 &euro;500m programme is excluded. (5) Capex is a depreciation-based proxy; the 52-week range is from available daily data and may miss intra-day extremes; the analyst consensus target and forward P/E are third-party/unavailable. (6) Ownership percentages are approximate and aggregated by a third party.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in EUR, as originally reported, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Nordea Bank Abp &mdash; Nasdaq Helsinki, EUR share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Nordea &mdash; Year-End Close (Nasdaq Helsinki, EUR)</div>
+    <div class="chart-sub">Range-bound at €10&ndash;11 from end-2021 to end-2024, then a sharp 2025 re-rating to €16.09 (+53%) and a high near €18 in September 2026 before an ~8% drop on the Q3 2026 results; the shares are ~41% above their end-2021 level on a price-only basis.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46.0" y1="122.74" x2="680.0" y2="54.68" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +7.2%</text>
+<path d="M 46.0,122.74 L 172.8,134.29 L 299.6,116.06 L 426.4,127.15 L 553.2,42.22 L 680.0,54.68 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,122.74 L 172.8,134.29 L 299.6,116.06 L 426.4,127.15 L 553.2,42.22 L 680.0,54.68" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="122.74" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="112.74" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€10.79</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="134.29" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="124.29" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€10.03</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="116.06" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="106.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€11.23</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="127.15" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="117.15" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€10.50</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="42.22" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="32.22" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€16.09</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="54.68" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="44.68" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€15.27</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021&ndash;2025 from Nordea's quarterly results releases (&lsquo;share price, end of period&rsquo;); the current price (€15.27) is the Oct 23, 2026 close from Yahoo Finance (Nasdaq Helsinki), the latest available at build time. Prices are as originally reported (split- and dividend-unadjusted; no splits occurred in this window), so the 5-year change excludes dividends received (total return was much higher).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

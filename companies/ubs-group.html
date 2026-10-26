@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UBS Group AG — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/ubs-group.html">
+<meta property="og:title" content="UBS Group AG — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UBS Group AG — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · SIX: UBSG</div>
+  <h1>UBS Group AG</h1>
+  <div class="badges">
+    <div class="badge">SIX Swiss Exchange: UBSG &middot; trades in CHF, <b>reports in USD</b></div>
+    <div class="badge">Sector: Global Wealth Management &amp; Investment Banking</div>
+    <div class="badge">HQ: Zurich &amp; Basel, Switzerland &middot; Founded 1862 (current UBS Group since 2014)</div>
+    <div class="badge">World&rsquo;s largest private bank: USD 7.3tn invested assets (2Q26)</div>
+    <div class="badge">Global systemically important bank (G-SIB) &middot; absorbed Credit Suisse in 2023</div>
+    <div class="badge warn">Bank scorecard adaptation &mdash; see framing note below</div>
+  </div>
+
+  <div class="price">CHF 38.32</div>
+  <div class="price-sub">Close Oct 23, 2026 (SIX Swiss Exchange, CHF) &middot; Market cap &asymp; CHF 117bn &middot; 52-week range CHF 28.25&ndash;45.04 &middot; Analyst consensus target CHF 44.87 (17 analysts, stockanalysis.com) &middot; FY25 dividend USD 1.10/share (&asymp;2.3% yield). Financials below are in USD, the reporting currency; the share price is in CHF.</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> JPMorgan &amp; Morgan Stanley (US wealth and investment banking) &middot; Goldman Sachs &middot; Julius Baer &amp; Pictet (private banking) &middot; Deutsche Bank &amp; BNP Paribas &middot; Swiss peers Raiffeisen and Zürcher Kantonalbank &mdash; global wealth management is large and fragmented, with UBS the biggest single player.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Revenue (FY25)</div>
+      <div class="val">$50.1B</div>
+      <div class="sub">+3.2% vs FY24 ($48.6B) on S&amp;P-standardized revenue; 2Q26 revenue +13% YoY (UBS-reported $13.7B) as Credit Suisse integration matures</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Profit / ROE (FY25)</div>
+      <div class="val">$7.8B / 8.9%</div>
+      <div class="note">ROE is S&amp;P-computed on total equity. UBS-reported return on tangible equity was 13.4% in 2Q26 and 13.9% in 1H26 (10.2% in 1H25). FY25 ROE sits below a ~10% cost-of-equity assumption; FY23&rsquo;s $27.4B profit was a one-off Credit Suisse badwill gain.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income (FY25)</div>
+      <div class="val">71.2%</div>
+      <div class="note">Opex &divide; revenue (S&amp;P-standardized); UBS-reported 2Q26 ratio 72.9%, 2028 ambition ~67%. Improved from 72.8% (FY22); FY23 was 95% on integration costs.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (2Q26)</div>
+      <div class="val green">14.4%</div>
+      <div class="note">Management manages to ~14%. Requirement of ~12% is an estimate; pending Swiss rules on foreign-subsidiary capital are the main swing factor (substitutes for net debt/EBITDA).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">48/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/14 criteria met &mdash; scale, capital and capital-return strength weighed against flat integration-era earnings, a sub-hurdle FY25 ROE and a valuation above its own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 0 1 151.22,195.59 L 135.17,162.26 A 58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 151.22,195.59 A 95,95 0 1 1 110.000,15.000 L 110.000,52.000 A 58,58 0 1 0 135.17,162.26 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 Met</b> &mdash; market share (clear #1 in global wealth), CET1 cushion, capital-distribution ratio, share count trend, capex intensity, margin stability (cost/income down 1.6pp over three years).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 Not Met</b> &mdash; revenue and net-profit CAGR (both far under 15%), pre-tax margin of 17.7% (&lt;20%), market concentration (moderate), FY25 ROE below the cost-of-equity assumption, entry multiple above own history, negligible insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    UBS is the world&rsquo;s largest private bank, with USD 7.3tn of invested assets, and since absorbing Credit Suisse in 2023 it is also Switzerland&rsquo;s only global universal bank. The honest case rests on <b>franchise scale, capital strength and a rising capital return</b>, not growth: total revenue compounded at 9.1% a year over FY2021&ndash;FY2025 and net profit at just 1.0% ($7.5B &rarr; $7.8B), because integration costs absorbed most of the benefit of the larger business &mdash; the cost/income ratio only fell from 72.8% (FY22) to 71.2% (FY25), still well above the ~67% management targets for 2028. Momentum has since improved: 1H26 net profit was $5.8B (vs. $4.1B in 1H25) and return on tangible equity reached 13.9%. The CET1 ratio of 14.4% is comfortable, and the dividend has risen every year of the window (USD 0.50 &rarr; 1.10) alongside a $3bn annual buyback. The catch is twofold: Swiss lawmakers are debating much tougher capital rules for foreign subsidiaries (UBS has said it is weighing options including relocating its headquarters), and the stock at ~16x trailing earnings and ~1.6x book trades above its own FY21&ndash;FY25 average. <b>Latest reported quarter is 2Q26 (published July 2026); 3Q26 results are due Oct 28, 2026 and are not reflected here.</b>
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note &mdash; why this scorecard looks different for a bank:</b> the standard revenue/EBIT/FCF/net-debt framework does not map cleanly onto a bank, so the same substitutions are used here as on the JPMorgan Chase page, all flagged inline: <b>Total revenue</b> (net interest + fee + trading and other income) stands in for revenue (criterion 1); <b>Net profit</b> attributable to shareholders substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) &mdash; a bank's cash-flow statement is dominated by deposit and trading-book swings, so criteria 2 and 4 are necessarily identical here, a genuine limitation of adapting the framework; <b>return on equity vs. an assumed ~10% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8); <b>(dividends + buybacks) &divide; net profit</b> substitutes for FCF conversion (criterion 9); entry multiple (criterion 10) blends P/E and P/B against the bank's own FY21&ndash;FY25 history; and margin stability (criterion 14) uses the <b>cost/income (efficiency) ratio</b> because a bank has no gross-profit line. The criterion-3 &ldquo;operating margin&rdquo; is the <b>pre-tax margin</b> (pre-tax profit &divide; total revenue). Banks are valuation-sensitive and capital-regulated, so the bands are applied mechanically and no score has been rounded up. <b>UBS-specific:</b> UBS reports in USD but its primary listing trades in CHF, so financials are shown in USD (nothing converted) and price/valuation in CHF; P/E multiples use S&amp;P&rsquo;s currency-consistent figures. FY2023 contains a ~$27.4B accounting gain from the Credit Suisse acquisition (negative goodwill), which is excluded from revenue and flagged wherever it distorts a ratio.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (fiscal year = calendar year). All figures in USD billions (UBS&rsquo;s reporting currency, nothing converted) unless noted; S&amp;P Global-standardized, so they can differ slightly from UBS&rsquo;s own &ldquo;total revenues&rdquo;. Net profit is the proxy for both EBIT and FCF.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Revenue vs. Net Profit (USDB)</div>
+    <div class="chart-sub">Total revenue = revenue before loan-loss provisions (S&amp;P-standardized). FY2023 net profit of $27.4B includes a ~$27.4B Credit Suisse badwill gain (shown as is, flagged *) &mdash; underlying FY23 earnings were close to zero after integration charges, so that bar says nothing about run-rate profitability.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Total revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net profit</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="680" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="65.4" width="24" height="84.6" fill="#2dd4bf"/><text x="74" y="59.9" text-anchor="middle" font-size="8" fill="#cbd5e1">35.4</text>
+      <rect x="92" y="132.1" width="24" height="17.9" fill="#fbbf24"/><text x="104" y="126.6" text-anchor="middle" font-size="8" fill="#cbd5e1">7.5</text>
+      <text x="89" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="68.1" width="24" height="81.9" fill="#2dd4bf"/><text x="202" y="62.6" text-anchor="middle" font-size="8" fill="#cbd5e1">34.2</text>
+      <rect x="220" y="131.7" width="24" height="18.3" fill="#fbbf24"/><text x="232" y="126.2" text-anchor="middle" font-size="8" fill="#cbd5e1">7.6</text>
+      <text x="217" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="52.7" width="24" height="97.3" fill="#2dd4bf"/><text x="330" y="47.2" text-anchor="middle" font-size="8" fill="#cbd5e1">40.7</text>
+      <rect x="348" y="84.5" width="24" height="65.5" fill="#fbbf24"/><text x="360" y="79.0" text-anchor="middle" font-size="8" fill="#cbd5e1">27.4</text>
+      <text x="345" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="33.7" width="24" height="116.3" fill="#2dd4bf"/><text x="458" y="28.2" text-anchor="middle" font-size="8" fill="#cbd5e1">48.6</text>
+      <rect x="476" y="137.8" width="24" height="12.2" fill="#fbbf24"/><text x="488" y="132.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.1</text>
+      <text x="473" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="30.0" width="24" height="120.0" fill="#5eead4"/><text x="586" y="24.5" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">50.1</text>
+      <rect x="604" y="131.4" width="24" height="18.6" fill="#fde68a"/><text x="616" y="125.9" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">7.8</text>
+      <text x="601" y="165" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~9.1%</div>
+      <div class="sub">FY21&rarr;FY25, $35.4B&rarr;$50.1B; boosted by the 2023 Credit Suisse acquisition, below the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val red">~1.0%</div>
+      <div class="sub">$7.46B&rarr;$7.77B; FY23 badwill gain is not an endpoint, so not distorting this figure</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit, 1H26 vs 1H25</div>
+      <div class="val green">+41%</div>
+      <div class="sub">$5.8B vs. $4.1B (UBS-reported; reference only, not scored) &mdash; the integration payoff starting to show</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">$2.36</div>
+      <div class="sub">vs. $2.06 (FY21) &mdash; flat-ish EPS despite a 9% lower share count; $8.30 in FY23 was the badwill gain</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cost/Income (Efficiency) Ratio Trend &mdash; bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Opex &divide; total revenue (S&amp;P-standardized). FY23 spikes to 95% on Credit Suisse integration and restructuring costs against a half-year of CS revenue. UBS-reported cost/income was 72.9% in 2Q26; management targets ~67% by 2028. Lower is better.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,99.4 210,101.4 360,50.0 510,96.4 660,105.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="99.4" r="4" fill="#2dd4bf"/><text x="60" y="87.4" text-anchor="middle" font-size="9" fill="#f1f5f9">73.7%</text>
+      <circle cx="210" cy="101.4" r="4" fill="#2dd4bf"/><text x="210" y="89.4" text-anchor="middle" font-size="9" fill="#f1f5f9">72.8%</text>
+      <circle cx="360" cy="50.0" r="4" fill="#2dd4bf"/><text x="360" y="38.0" text-anchor="middle" font-size="9" fill="#f1f5f9">95.4%*</text>
+      <circle cx="510" cy="96.4" r="4" fill="#2dd4bf"/><text x="510" y="84.4" text-anchor="middle" font-size="9" fill="#f1f5f9">75.0%</text>
+      <circle cx="660" cy="105.0" r="4" fill="#5eead4"/><text x="660" y="93.0" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">71.2%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USDB)</th><th>Total revenue</th><th>Pre-tax profit</th><th>Net profit</th><th>Pre-tax margin</th><th>Cost/income</th><th>ROE</th><th>EPS ($)</th><th>DPS ($)</th></tr>
+    <tr><td>FY21</td><td>35.4</td><td>9.5</td><td>7.5</td><td>26.8%</td><td>73.7%</td><td>12.4%</td><td>2.06</td><td>0.50</td></tr>
+    <tr><td>FY22</td><td>34.2</td><td>9.6</td><td>7.6</td><td>28.1%</td><td>72.8%</td><td>13.0%</td><td>2.25</td><td>0.55</td></tr>
+    <tr><td>FY23*</td><td>40.7</td><td>28.3</td><td>27.4</td><td>69.5%</td><td>95.4%</td><td>38.2%</td><td>8.30*</td><td>0.70</td></tr>
+    <tr><td>FY24</td><td>48.6</td><td>6.8</td><td>5.1</td><td>14.0%</td><td>75.0%</td><td>6.0%</td><td>1.52</td><td>0.90</td></tr>
+    <tr><td>FY25</td><td>50.1</td><td>8.9</td><td>7.8</td><td>17.7%</td><td>71.2%</td><td>8.9%</td><td>2.36</td><td>1.10</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">As a bank, UBS does not report EBIT or free cash flow in the industrial sense &mdash; net profit is used as the closest available proxy for both criteria 2 and 4 (see framing note, page 1). &ldquo;Pre-tax margin&rdquo; (pre-tax profit &divide; total revenue) plays the role of the operating margin; ROE is S&amp;P-computed on average total equity.</div>
+  <div class="footer-note" style="margin-top:4px;">* FY2023 pre-tax and net profit include ~$27.4B of negative goodwill from the Credit Suisse acquisition (and the cost/income spike reflects integration costs); EPS of $8.30 and ROE of 38% are one-off distortions, not run-rate. DPS is the dividend for the financial year as listed by S&amp;P; all USD.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND & BUSINESS MIX ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; Business Mix</div></div>
+  <div class="sec-sub">Eight quarters of S&amp;P-standardized results, followed by the divisional mix. Latest reported quarter: <b>2Q26</b> (3Q26 results are due Oct 28, 2026).</div>
+
+  <div class="headline-box">
+    <div class="title">2Q26 results (reported July 2026) &mdash; what moved the stock</div>
+    <p>Net profit $2.8B (diluted EPS $0.87), profit before tax $3.6B, revenue $13.7B (+13% YoY); return on tangible equity 13.4% and cost/income 72.9% (UBS-reported). CET1 ratio 14.4% with a 4.4% CET1 leverage ratio, and the $3bn buyback was completed in July; management accrues for a mid-teens percentage dividend increase. The share price, however, has been driven since August by the Swiss capital debate: the Council of States backed a 90% CET1 backing requirement for foreign subsidiaries (UBS estimates ~$16B more CET1 on top of ~$15B already required after the Credit Suisse deal), and reports that UBS is exploring relocation or a merger as fall-backs pushed the stock ~15% below its 2026 high of CHF 45.04.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Total Revenue vs. Net Profit (USDB)</div>
+    <div class="chart-sub">S&amp;P-standardized quarterly revenue and net profit attributable to shareholders. Net profit climbed from ~$0.8&ndash;1.7B in the integration-heavy quarters of 2024&ndash;1H25 to $2.4&ndash;3.0B in recent quarters; 4Q25 dipped on year-end charges and litigation/restructuring items.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Total revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net profit</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="680" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="55.0" y="53.4" width="26" height="96.6" fill="#2dd4bf"/><text x="68.0" y="47.9" text-anchor="middle" font-size="8" fill="#cbd5e1">12.23</text>
+      <rect x="85.0" y="138.7" width="26" height="11.3" fill="#fbbf24"/><text x="98.0" y="133.2" text-anchor="middle" font-size="8" fill="#cbd5e1">1.43</text>
+      <text x="83.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'24</text>
+      <rect x="135.0" y="60.2" width="26" height="89.8" fill="#2dd4bf"/><text x="148.0" y="54.7" text-anchor="middle" font-size="8" fill="#cbd5e1">11.36</text>
+      <rect x="165.0" y="143.9" width="26" height="6.1" fill="#fbbf24"/><text x="178.0" y="138.4" text-anchor="middle" font-size="8" fill="#cbd5e1">0.77</text>
+      <text x="163.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'24</text>
+      <rect x="215.0" y="51.6" width="26" height="98.4" fill="#2dd4bf"/><text x="228.0" y="46.1" text-anchor="middle" font-size="8" fill="#cbd5e1">12.46</text>
+      <rect x="245.0" y="136.6" width="26" height="13.4" fill="#fbbf24"/><text x="258.0" y="131.1" text-anchor="middle" font-size="8" fill="#cbd5e1">1.69</text>
+      <text x="243.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'25</text>
+      <rect x="295.0" y="56.3" width="26" height="93.7" fill="#2dd4bf"/><text x="308.0" y="50.8" text-anchor="middle" font-size="8" fill="#cbd5e1">11.85</text>
+      <rect x="325.0" y="131.1" width="26" height="18.9" fill="#fbbf24"/><text x="338.0" y="125.6" text-anchor="middle" font-size="8" fill="#cbd5e1">2.40</text>
+      <text x="323.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q2'25</text>
+      <rect x="375.0" y="51.0" width="26" height="99.0" fill="#2dd4bf"/><text x="388.0" y="45.5" text-anchor="middle" font-size="8" fill="#cbd5e1">12.53</text>
+      <rect x="405.0" y="130.4" width="26" height="19.6" fill="#fbbf24"/><text x="418.0" y="124.9" text-anchor="middle" font-size="8" fill="#cbd5e1">2.48</text>
+      <text x="403.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'25</text>
+      <rect x="455.0" y="49.1" width="26" height="100.9" fill="#2dd4bf"/><text x="468.0" y="43.6" text-anchor="middle" font-size="8" fill="#cbd5e1">12.76</text>
+      <rect x="485.0" y="140.5" width="26" height="9.5" fill="#fbbf24"/><text x="498.0" y="135.0" text-anchor="middle" font-size="8" fill="#cbd5e1">1.20</text>
+      <text x="483.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'25</text>
+      <rect x="535.0" y="38.0" width="26" height="112.0" fill="#2dd4bf"/><text x="548.0" y="32.5" text-anchor="middle" font-size="8" fill="#cbd5e1">14.17</text>
+      <rect x="565.0" y="126.0" width="26" height="24.0" fill="#fbbf24"/><text x="578.0" y="120.5" text-anchor="middle" font-size="8" fill="#cbd5e1">3.04</text>
+      <text x="563.0" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'26</text>
+      <rect x="615.0" y="42.7" width="26" height="107.3" fill="#5eead4"/><text x="628.0" y="37.2" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">13.58</text>
+      <rect x="645.0" y="127.9" width="26" height="22.1" fill="#fde68a"/><text x="658.0" y="122.4" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">2.80</text>
+      <text x="643.0" y="165" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Q2'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>USDm</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Total revenue</td><td>12,227</td><td>11,359</td><td>12,457</td><td>11,852</td><td>12,525</td><td>12,762</td><td>14,172</td><td>13,581</td></tr>
+    <tr><td>Net profit</td><td>1,425</td><td>770</td><td>1,692</td><td>2,395</td><td>2,481</td><td>1,199</td><td>3,040</td><td>2,800</td></tr>
+    <tr><td>Net margin</td><td>11.7%</td><td>6.8%</td><td>13.6%</td><td>20.2%</td><td>19.8%</td><td>9.4%</td><td>21.5%</td><td>20.6%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Quarterly revenue is S&amp;P-standardized and runs ~1&ndash;5% above/below UBS&rsquo;s own &ldquo;total revenues&rdquo; in some quarters (UBS-reported: 2Q26 $13.70B, 1Q26 $14.24B, 4Q25 $12.15B, 2Q25 $12.11B). Net profit matches UBS&rsquo;s reported figures. USD millions.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FY2025 Revenue by Division (USD B, S&P / Fiscal.ai segment data)</div>
+    <div class="chart-sub">Global Wealth Management is more than half of group revenue. Group Items (-$1.19B) and Non-core &amp; Legacy ($0.15B) are not shown as bars; bar lengths are relative to the largest division.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Global Wealth Management</text>
+      <rect x="200" y="10" width="330.0" height="20" fill="#2dd4bf"/>
+      <text x="538.0" y="24" font-size="9" fill="#f1f5f9">$25.96B &middot; 52%</text>
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Investment Bank</text>
+      <rect x="200" y="45" width="156.9" height="20" fill="#3b82f6"/>
+      <text x="364.9" y="59" font-size="9" fill="#f1f5f9">$12.34B &middot; 25%</text>
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Personal &amp; Corporate Banking</text>
+      <rect x="200" y="80" width="116.3" height="20" fill="#5eead4"/>
+      <text x="324.3" y="94" font-size="9" fill="#f1f5f9">$9.15B &middot; 18%</text>
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Asset Management</text>
+      <rect x="200" y="115" width="40.2" height="20" fill="#818cf8"/>
+      <text x="248.2" y="129" font-size="9" fill="#f1f5f9">$3.16B &middot; 6%</text>
+      <line x1="200" y1="5" x2="200" y2="145" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Return on Equity Trend &mdash; bank analog to ROIC vs. an assumed ~10% cost of equity</div>
+    <div class="chart-sub">Return on average total equity (S&amp;P-computed), vs. an assumed ~10% cost of equity (dashed). FY23 (38%*) is the Credit Suisse badwill gain. UBS-reported return on tangible equity is higher (13.4% in 2Q26, 13.9% in 1H26) because tangible equity is smaller than total equity. A ~10% cost of equity is justified for a low-beta (0.85) Swiss G-SIB.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="98.2" x2="680" y2="98.2" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="672" y="94.2" text-anchor="end" font-size="8" fill="#fbbf24">~10% assumed cost of equity</text>
+      <polyline points="60,94.1 210,93.1 360,50.0 510,105.0 660,100.1" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="94.1" r="4" fill="#a78bfa"/><text x="60" y="82.1" text-anchor="middle" font-size="9" fill="#f1f5f9">12.4%</text>
+      <circle cx="210" cy="93.1" r="4" fill="#a78bfa"/><text x="210" y="81.1" text-anchor="middle" font-size="9" fill="#f1f5f9">13.0%</text>
+      <circle cx="360" cy="50.0" r="4" fill="#a78bfa"/><text x="360" y="38.0" text-anchor="middle" font-size="9" fill="#f1f5f9">38.2%*</text>
+      <circle cx="510" cy="105.0" r="4" fill="#a78bfa"/><text x="510" y="93.0" text-anchor="middle" font-size="9" fill="#f1f5f9">6.0%</text>
+      <circle cx="660" cy="100.1" r="4" fill="#c4b5fd"/><text x="660" y="88.1" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">8.9%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> UBS is the largest wealth manager in the world by invested assets ($7.3tn, ~52% of revenue from Global Wealth Management), the #1 bank in Switzerland, and a top-tier investment bank with particular strength in equities and M&amp;A advisory &mdash; a genuine #1 for criterion #5. But the markets it competes in are not concentrated: global wealth management has hundreds of competitors from JPMorgan and Morgan Stanley to boutique private banks, and the Swiss home market still has strong cantonal and cooperative banks. That is why #5 scores 5/5 while market concentration (#6) scores only 2/5 and is Not Met. Its G-SIB status cuts both ways: it supports client trust but invites the heavy, still-unsettled Swiss capital regime discussed on page 4.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B are the standard bank valuation lenses (P/B used for the history because tangible-book history was not available from the sources); CET1 vs. the regulatory requirement substitutes for net debt/EBITDA.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/B (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end price &divide; EPS and P/B = year-end price &divide; book value per share, both from S&amp;P Global (year-end prices as published by StockAnalysis, which may be dividend-adjusted). &ldquo;Now&rdquo; = CHF 38.32 (Oct 23, 2026) on trailing earnings and latest book value. Forward P/E ~11.6x on consensus. *FY23 P/E (3.7x) is distorted by the badwill gain and excluded from the average.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B ratio (right scale 0&ndash;2.0x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="94.45" width="44" height="55.55" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="88.45" text-anchor="middle" font-size="8" fill="#cbd5e1">8.32x</text>
+      <rect x="172.95" y="98.19" width="44" height="51.81" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="92.19" text-anchor="middle" font-size="8" fill="#cbd5e1">7.76x</text>
+      <rect x="276.25" y="125.56" width="44" height="24.44" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="119.56" text-anchor="middle" font-size="8" fill="#cbd5e1">3.66x</text>
+      <rect x="379.55" y="22.00" width="44" height="128.00" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="16.00" text-anchor="middle" font-size="8" fill="#cbd5e1">19.17x</text>
+      <rect x="482.85" y="23.00" width="44" height="127.00" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="17.00" text-anchor="middle" font-size="8" fill="#cbd5e1">19.02x</text>
+      <rect x="586.15" y="42.10" width="44" height="107.90" fill="#5eead4"/><text x="608.15" y="36.10" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">16.16x</text>
+      <polyline points="91.65,81.15 194.95,80.47 298.25,71.70 401.55,73.05 504.85,39.98 608.15,40.65" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="81.15" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="80.47" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="71.70" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="73.05" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="39.98" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="40.65" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (1.02x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (1.03x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23* (1.16x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (1.14x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (1.63x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now (1.62x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~16.2x trailing earnings and ~1.62x book, UBS trades above its own history on both lenses (P/E average 13.6x excluding FY23, P/B average 1.20x), a blended ratio of 1.27, which lands in the 1.15&ndash;1.30 band (1/5). The context matters: trailing earnings still include integration costs, forward P/E of ~11.6x is well below trailing, and the FY24&ndash;FY25 P/E of ~19x was inflated by depressed earnings. Even so, the stock has re-rated from ~1.0x book in FY21&ndash;FY22 to ~1.6x. On PEG (forward P/E &divide; expected EPS growth), analyst forecasts of strong 2026&ndash;27 EPS growth would put PEG near 1, but that depends on the integration payoff and on the capital outcome in Switzerland.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement</div>
+    <div class="chart-sub">Dashed line = an <b>estimated</b> ~12% Group CET1 requirement including buffers (not taken from a primary source). Year-end CET1 for FY21&ndash;FY24 is recollected (marked *) and not re-verified; FY25 (14.4%) is from UBS&rsquo;s 4Q25 release and 2Q26 is also 14.4%. Management guides to ~14% and a CET1 leverage ratio above 4%. The Swiss capital proposal is not reflected.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="86.4" x2="680" y2="86.4" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="672" y="82.4" text-anchor="end" font-size="8" fill="#fbbf24">~12% requirement (estimate)</text>
+      <polyline points="60,48.6 210,48.6 360,45.2 510,45.2 660,45.2" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="48.6" r="4" fill="#2dd4bf"/><text x="60" y="36.6" text-anchor="middle" font-size="9" fill="#f1f5f9">14.2%*</text>
+      <circle cx="210" cy="48.6" r="4" fill="#2dd4bf"/><text x="210" y="36.6" text-anchor="middle" font-size="9" fill="#f1f5f9">14.2%*</text>
+      <circle cx="360" cy="45.2" r="4" fill="#2dd4bf"/><text x="360" y="33.2" text-anchor="middle" font-size="9" fill="#f1f5f9">14.4%*</text>
+      <circle cx="510" cy="45.2" r="4" fill="#2dd4bf"/><text x="510" y="33.2" text-anchor="middle" font-size="9" fill="#f1f5f9">14.4%*</text>
+      <circle cx="660" cy="45.2" r="4" fill="#5eead4"/><text x="660" y="33.2" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">14.4%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="13.2 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="249.4 263.9" stroke-dashoffset="-13.2" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="1.3 263.9" stroke-dashoffset="-262.6" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>BlackRock ~5.0% (last disclosed Nov 2023 &mdash; stale)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other institutional and retail holders &asymp;94.5% (no controlling holder; Norges Bank fell below 3% in Feb 2026)</div>
+          <div><span class="dot" style="background:#f87171;"></span>Directors &amp; executives: well under 1% (not quantified)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>UBS has no controlling shareholder or founding family; the largest disclosed holders are index/active managers (BlackRock 5.01% as last disclosed in 2023, Norges Bank below 3% as of Feb 2026). Directors and executives hold well under 1%. Employee share plans are significant in absolute terms but the aggregate stake was not available from the sources used and is not credited. Governance risk is regulatory and political rather than ownership-based: the Swiss Federal Council and Parliament are deciding how much extra CET1 UBS must hold against foreign subsidiaries (UBS estimates ~$16B under the 90% version approved by the Council of States, ~$22B under the original proposal), with final terms expected in 2027 and implementation not before 2028.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing does not apply; every substitution is noted inline and explained on pages 1, 2 and 4. &ldquo;Met&rdquo;: crit. 7 ROE &gt; ~10%; crit. 8 CET1 cushion &ge;1pp; crit. 9 payout &ge;80%; crit. 10 blended ratio &le;1.0; crit. 13 capex &le;6% of revenue; crit. 14 cost/income not worse by &gt;1pp. Market concentration (#6): raw 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total revenue</td><td>9.1% CAGR FY21&ndash;FY25 ($35.4B&rarr;$50.1B, revenue before loan-loss provisions, S&amp;P-standardized; excludes the $27.4B Credit Suisse badwill gain booked in FY23). Growth was real but lumpy: the CS acquisition (closed June 2023) lifted FY23&ndash;FY24, then FY25 grew just 3.2%</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>1.0% CAGR FY21&ndash;FY25 ($7.46B&rarr;$7.77B) &mdash; essentially flat over four years of integration costs and a larger share count base; FY23&rsquo;s $27.4B profit was a one-off accounting gain and is not in either endpoint</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; pre-tax margin proxy</td><td>Pre-tax margin 17.7% in FY25 ($8.85B &divide; $50.1B); below the 20% bar and well under the 26&ndash;28% of FY21&ndash;FY22 because the integration cost base is still being worked down (cost/income 71.2%)</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>Same 1.0% net-profit CAGR as criterion #2 &mdash; unavoidably identical once both EBIT and FCF are proxied by net profit (UBS reported &ldquo;free cash flow&rdquo; swings from -$0.2B to +$32B across years on deposit and trading-book movements and is not meaningful)</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Clear #1 global wealth manager: $7.3tn invested assets (2Q26), the largest in the world, plus #1 Swiss universal bank and a top-10 global investment bank. Scored 5/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; Swiss domestic banking is concentrated (UBS, Raiffeisen, cantonal banks) but global wealth management and investment banking are contested by JPMorgan, Morgan Stanley, BofA, Goldman, Julius Baer and Pictet; no monopoly or tight oligopoly</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROE vs. ~10% cost of equity (bank proxy)</td><td>FY25 ROE 8.9% (S&amp;P) is below the ~10% assumption (spread -1.1 pts), as is FY24 (6.0%). UBS-reported RoTE has since recovered to 13.4% (2Q26) and 13.9% (1H26), which would clear the hurdle &mdash; but the latest full-year figure is what is scored, so 0/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. requirement</td><td>CET1 14.4% (2Q26; 14.4% at FY25) vs. an estimated ~12% requirement incl. buffers (approximate &mdash; not taken from a primary source) = ~2.4pp cushion. UBS manages to ~14%. The Swiss &ldquo;foreign subsidiary&rdquo; capital proposal could demand USD 16&ndash;22bn more CET1 and is unresolved</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion &mdash; substituted with capital-distribution ratio</td><td>FY25 dividend (USD 1.10 &times; ~3.1B shares &asymp; $3.4B) + $3.0B buyback &divide; net profit $7.77B &asymp; 83% (shares and dividend timing approximate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>P/E 16.2x vs. 4-yr average 13.6x (FY23 excluded as badwill-distorted) = 1.19; P/B 1.62x vs. 1.20x = 1.35; blended ratio 1.27 (15&ndash;30% premium band). Forward P/E ~11.6x</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Diluted shares 3,627M (FY21) &rarr; 3,290M (FY25), -9.3% via buybacks (partly offset by the CS share issue in 2023)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Directors and executives hold well under 1%; BlackRock&rsquo;s 5.01% (last disclosed Nov 2023) is a financial investor, not an insider. No controlling shareholder; the size of any employee share-plan holding was not available from the sources used, so it is not credited</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capital expenditure $2.36B = 4.7% of FY25 revenue (S&amp;P) &mdash; low for a 100,000-employee group (JPMorgan treatment: direct capex only; UBS&rsquo;s technology spend is mostly operating expense)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>No gross-profit line, so the basis is the cost/income ratio (opex &divide; revenue): 72.8% in FY22 &rarr; 71.2% in FY25, a 1.6pp improvement (= margin-equivalent +1.6pp, top band). FY23 (95%) was inflated by integration costs, so the 3-year endpoints flatter the trend slightly; UBS targets ~67% by 2028</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The largest private bank in the world with a clear #1 position, a 14.4% CET1 ratio comfortably above management&rsquo;s ~14% target, and a rising shareholder return (dividend $0.50 &rarr; $1.10, $3bn buyback, share count down ~9%). Cost/income has improved from 72.8% to 71.2% over three years and 1H26 profit was ~40% higher than 1H25 as integration synergies land; management targets a ~67% ratio and ~18% return on CET1 capital by 2028. Capex is low for a group of its size.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Five-year revenue (9.1%/yr) and net-profit (1.0%/yr) growth are both far below this framework&rsquo;s 15% bar, FY25 ROE (8.9%) was under the cost-of-equity assumption, and the pre-tax margin (17.7%) is below 20%. The stock trades above its own P/E and P/B history, and the biggest swing factor is political: Swiss rules that could require ~$16&ndash;22B of extra CET1 &mdash; or a relocation/merger in response &mdash; are unresolved. Insider ownership is negligible and the home-market regulator is also the main risk to returns.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked across &ge;2 where possible):</b> UBS 4Q25/FY25 results release (Feb 4, 2026) and 2Q26 results page (ubs.com, July 2026); UBS Form 6-K and 20-F filings (SEC EDGAR); stockanalysis.com (S&amp;P Global Market Intelligence) &mdash; USD income statement, cash flow, segment revenue, ratios, price, share data and consensus (Oct 23&ndash;26, 2026); Reuters coverage of the Swiss capital debate (Oct 2026); S&amp;P Global Market Intelligence commentary (Oct 2026).
+    <br><b>Data-quality flags:</b> Financials are S&amp;P-standardized and differ slightly from UBS&rsquo;s own reported totals (quarterly revenue up to ~5%); the FY23 badwill gain distorts net profit, EPS, ROE and P/E and is excluded from averages; ROE is on total equity (UBS reports RoTE separately); the ~12% CET1 requirement is an estimate; FY21&ndash;FY24 CET1 ratios are recollected; the FY25 payout ratio uses an approximate share count; historical year-end share prices and P/B are vendor values that may be dividend-adjusted, so historical multiples may be slightly understated. Latest reported quarter is 2Q26 &mdash; 3Q26 is due Oct 28, 2026.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. Financials in USD (UBS&rsquo;s reporting currency, nothing converted); share price in CHF. Unaudited / as originally reported, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">UBS Group AG &mdash; SIX Swiss Exchange, CHF share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">UBS Group &mdash; Year-End Close (SIX Swiss Exchange, CHF)</div>
+    <div class="chart-sub">Year-end values for 2021&ndash;2025 are as published by StockAnalysis (S&amp;P Global) and may be adjusted for dividends and corporate actions; they are not archived raw exchange closes. The stock more than doubled from end-2021 on the Credit Suisse deal and recovering earnings, and has fallen back about 15% from its August 2026 high on the Swiss capital debate. The dashed line is the straight-line annualised price CAGR (FY21&rarr;Now, 5-year convention) and excludes dividends.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +21.8%</text>
+<path d="M 46.0,150.00 L 172.8,144.87 L 299.6,104.73 L 426.4,94.61 L 553.2,48.69 L 680.0,38.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="150.00" x2="680.0" y2="38.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,150.00 L 172.8,144.87 L 299.6,104.73 L 426.4,94.61 L 553.2,48.69 L 680.0,38.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="150.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="140.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 14.32</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="144.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="134.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 15.42</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="104.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="94.73" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 24.02</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="94.61" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="84.61" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 26.19</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="48.69" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="38.69" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">CHF 36.03</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="38.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="678.0" y="54.00" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">CHF 38.32</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes 2021&ndash;2025 and the current price (CHF 38.32, Oct 23, 2026 SIX close) from stockanalysis.com / S&amp;P Global; third-party figures, treat as approximate. CHF throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

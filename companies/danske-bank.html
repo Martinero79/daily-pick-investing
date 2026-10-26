@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Danske Bank A/S — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/danske-bank.html">
+<meta property="og:title" content="Danske Bank A/S — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Danske Bank A/S — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Nasdaq Copenhagen: DANSKE</div>
+  <h1>Danske Bank A/S</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq Copenhagen: DANSKE · reports in DKK</div>
+    <div class="badge">Sector: Banks — Nordic universal bank</div>
+    <div class="badge">HQ: Copenhagen, Denmark · founded 1871</div>
+    <div class="badge">Largest Danish bank · ~19,500 employees · Denmark, Sweden, Norway, Finland, Northern Ireland</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">DKK 344.50</div>
+  <div class="price-sub">Last price Oct 26, 2026 (Nasdaq Copenhagen, delayed intraday quote ~3:15 PM CET; not a closing print) · Market cap ≈ DKK 277bn (≈803M shares) · 52-week range DKK 270.60–383.70 · Consensus target ≈ DKK 409 (16 analysts, third-party aggregate) · Trailing dividend yield ≈ 6.6% (includes extraordinary payouts)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Nordea (Nordic #1 by market value; also large in Denmark) &middot; Nykredit (mortgage-led, unlisted) &middot; Jyske Bank &middot; Sydbank &middot; Handelsbanken / SEB / Swedbank (in Sweden) &middot; DNB (Norway) &mdash; a concentrated Danish market with regional players and Nordic peers.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Income (FY25)</div>
+      <div class="val">DKK 56.5B</div>
+      <div class="sub">-0.7% vs FY24 (DKK 56.9B); growth stalled after +9.2% (FY24) and +18.6% (FY23) as the rate tailwind plateaued</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Income / ROE (FY25)</div>
+      <div class="val green">DKK 23.0B / 13.3%</div>
+      <div class="note">Danske reports ROE (return on average shareholders' equity), not ROTCE, so ROE is used in place of ROIC. Against a ~10% cost-of-equity assumption it clears the hurdle by ~3pp.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income Ratio (FY25)</div>
+      <div class="val green">45.5%</div>
+      <div class="note">Operating expenses &divide; income &mdash; lower is better. Down from an adjusted ~63% in FY22 (third-party figure; FY22 includes the Estonia case); the bank-specific analog to operating margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (FY25)</div>
+      <div class="val green">17.3%</div>
+      <div class="note">Vs. an estimated ~15% requirement incl. buffers (not independently verified) and a management target of about 16%. Substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">65/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">11/14 criteria met — strong profitability, capital and capital-return record; growth is modest and the shares have re-rated sharply versus their own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 17.38,88.86 L 53.45,97.09 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 17.38,88.86 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 53.45,97.09 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">11/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 Met</b> — net-income proxy CAGR (EBIT and FCF criteria, identical by construction), net margin proxy, #1 Danish bank, ROE vs. cost of equity, CET1 cushion, capital-distribution ratio, share count trend, anchor-shareholder stake (A.P. Møller Holding ~20%, scored on the same basis as state anchor holders), capex intensity, margin stability (cost/income ratio).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 Not Met</b> — total income CAGR (~4.5%, far below the 15% bar), market concentration (raw score 3: concentrated Danish market but with Nordic and mortgage competitors), and an entry multiple well above the bank's own FY21&ndash;FY25 history (P/E and P/B).</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Danske Bank is Denmark's largest bank and one of the larger lenders in the Nordics, with personal, business and large-corporate franchises in Denmark, Sweden, Norway, Finland and Northern Ireland plus the Danica life insurer. FY2025 total income was DKK 56.5bn (-0.7% YoY) and net profit DKK 23.0bn, a 13.3% return on equity, with a CET1 ratio of 17.3% and a cost/income ratio of 45.5%. The honest read on growth: total income compounded at only ~4.5% a year over FY2021&ndash;FY2025, and the ~16.6% net-income CAGR that clears the growth bar is flattered by a depressed FY2021 base (ROE 7.6%) and a FY2022 net loss from the roughly DKK 15bn Estonia money-laundering provision &mdash; it is a recovery and rate-cycle story more than steady compounding. Capital return is the strength: FY2025 distributions of DKK 22.72 per share (including a DKK 5.78 extraordinary component) plus a DKK 4.5bn buyback are about 100% of net profit. The catch is price: the shares have roughly tripled since end-2021 (DKK 113 &rarr; DKK 344.50) while earnings roughly doubled, so trailing P/E has re-rated from ~7&ndash;8x to ~11.9x and P/B from ~0.6x to ~1.7x &mdash; both well above the bank's own five-year range.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> Danske Bank is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly onto it. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total Income</b> stands in for revenue (criterion 1); <b>Net Income</b> substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) &mdash; a bank's cash flow statement is dominated by deposit and trading-book swings that do not map to a &ldquo;free cash flow&rdquo; concept, so criteria 2 and 4 are necessarily identical here, a genuine limitation of the adaptation and not a workaround; <b>ROE vs. an assumed ~10% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; Danske reports ROE, not ROTCE; a ~10% cost of equity is used, the low end of the 10&ndash;11% range, given the stock's low beta of ~0.6); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8), scored on the cushion over the requirement; and <b>(dividends + buybacks) &divide; net income</b> substitutes for FCF conversion (criterion 9). Entry multiple (criterion 10) uses P/E as the scored measure with P/B shown alongside, each against its own FY2021&ndash;FY2025 history. Criterion 14 uses the efficiency (cost/income) ratio because banks report no gross profit; a falling ratio counts as a margin rise. Everything is reported in DKK and nothing is converted.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (fiscal year = calendar year). All figures in DKK billions unless noted; revenue and net income per S&amp;P Global data via stockanalysis.com (net income attributable to shareholders). Net Income is used as the bank proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income vs. Net Income (DKK B)</div>
+    <div class="chart-sub">FY2022 shows a net loss (DKK -4.7B) because of the Estonia money-laundering case provision and goodwill impairment; FY2021 earnings were also depressed (ROE 7.6%). Both distort the FY21&rarr;FY25 net-income growth figure upward.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Income</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="140" x2="680" y2="140" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="60.9" width="24" height="79.1" fill="#2dd4bf"/><text x="74" y="55.9" text-anchor="middle" font-size="8" fill="#cbd5e1">47.4</text>
+      <rect x="92" y="119.2" width="24" height="20.8" fill="#fbbf24"/><text x="104" y="114.2" text-anchor="middle" font-size="8" fill="#cbd5e1">12.5</text>
+      <text x="89" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="66.6" width="24" height="73.4" fill="#2dd4bf"/><text x="202" y="61.6" text-anchor="middle" font-size="8" fill="#cbd5e1">44.0</text>
+      <rect x="220" y="140.0" width="24" height="7.8" fill="#fbbf24"/><text x="232" y="158.8" text-anchor="middle" font-size="8" fill="#cbd5e1">-4.7</text>
+      <text x="217" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22*</text>
+      <rect x="318" y="53.0" width="24" height="87.0" fill="#2dd4bf"/><text x="330" y="48.0" text-anchor="middle" font-size="8" fill="#cbd5e1">52.2</text>
+      <rect x="348" y="104.5" width="24" height="35.5" fill="#fbbf24"/><text x="360" y="99.5" text-anchor="middle" font-size="8" fill="#cbd5e1">21.3</text>
+      <text x="345" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="45.0" width="24" height="95.0" fill="#2dd4bf"/><text x="458" y="40.0" text-anchor="middle" font-size="8" fill="#cbd5e1">56.9</text>
+      <rect x="476" y="100.6" width="24" height="39.4" fill="#fbbf24"/><text x="488" y="95.6" text-anchor="middle" font-size="8" fill="#cbd5e1">23.6</text>
+      <text x="473" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="45.7" width="24" height="94.3" fill="#5eead4"/><text x="586" y="40.7" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">56.5</text>
+      <rect x="604" y="101.6" width="24" height="38.4" fill="#fde68a"/><text x="616" y="96.6" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">23.0</text>
+      <text x="601" y="182" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Total Income CAGR (5yr, crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~4.5%</div>
+      <div class="sub">FY21&rarr;FY25, DKK 47.4B&rarr;56.5B; well below the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val green">~16.6%</div>
+      <div class="sub">DKK 12.5B&rarr;23.0B; clears the bar, but off a depressed FY21 base and a FY22 loss in between</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (FY23&rarr;FY25, reference)</div>
+      <div class="val" style="color:#fbbf24;">~4.1%</div>
+      <div class="sub">DKK 21.3B&rarr;23.0B over two years &mdash; the post-rebound growth rate (reference only, not scored)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">DKK 27.90</div>
+      <div class="sub">Up from DKK 14.60 (FY21); share count down ~4% over the window</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cost/Income Ratio Trend — bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Operating expenses &divide; total income. FY22 is an adjusted third-party figure excluding the Estonia provision; FY23 (49%) and FY24 (46%) are rounded company/analyst figures; FY25 (45.5%) is the bank's reported ratio. FY21 is shown as n/a: a verified comparable figure was not located.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="210,45.0 360,89.2 510,98.5 660,100.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="210" cy="45.0" r="4" fill="#2dd4bf"/><text x="210" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">63.4%</text>
+      <circle cx="360" cy="89.2" r="4" fill="#2dd4bf"/><text x="360" y="77.2" text-anchor="middle" font-size="9" fill="#f1f5f9">49%</text>
+      <circle cx="510" cy="98.5" r="4" fill="#2dd4bf"/><text x="510" y="86.5" text-anchor="middle" font-size="9" fill="#f1f5f9">46%</text>
+      <circle cx="660" cy="100.0" r="4" fill="#5eead4"/><text x="660" y="88.0" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">45.5%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (DKK B)</th><th>Total Income</th><th>Net Income</th><th>Net Margin</th><th>ROE</th><th>Cost/Income</th><th>EPS (DKK)</th><th>DPS (DKK)</th></tr>
+    <tr><td>FY21</td><td>47.4</td><td>12.5</td><td>26.3%</td><td>7.6%</td><td>n/a</td><td>14.60</td><td>2.00</td></tr>
+    <tr><td>FY22*</td><td>44.0</td><td>-4.7</td><td>-10.6%</td><td>-3.1%</td><td>~63%&dagger;</td><td>-5.44</td><td>0.00</td></tr>
+    <tr><td>FY23</td><td>52.2</td><td>21.3</td><td>40.8%</td><td>12.7%</td><td>~49%</td><td>24.70</td><td>14.50</td></tr>
+    <tr><td>FY24</td><td>56.9</td><td>23.6</td><td>41.5%</td><td>13.4%</td><td>~46%</td><td>27.80</td><td>22.20&Dagger;</td></tr>
+    <tr><td>FY25</td><td>56.5</td><td>23.0</td><td>40.7%</td><td>13.3%</td><td>45.5%</td><td>27.90</td><td>22.72&Dagger;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">As a bank, Danske does not report EBIT or free cash flow in the industrial sense (S&amp;P's FCF line swings between roughly +DKK 176B and -DKK 80B with deposit and trading flows and is not meaningful); Net Income is the proxy for criteria 2 and 4, and &ldquo;Net Margin&rdquo; (net income &divide; total income) plays the role of an operating-margin column.</div>
+  <div class="footer-note" style="margin-top:4px;">* FY2022: net loss from the Estonia case provision/impairment. &dagger; Adjusted cost/income excluding the provision (third-party summary; company-defined basis not verified). &Dagger; DPS includes extraordinary distributions (FY24 total DKK 22.20 per Danske IR; FY25 DKK 16.94 ordinary + DKK 5.78 extraordinary). ROE per Danske IR share data / results releases; EPS per S&amp;P Global.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER, SEGMENTS & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend, Segments &amp; Profitability (Q2 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter: Q2 2026 (reported July 17, 2026). Q3 2026 results are due Oct 29, 2026 and are not included here.</div>
+
+  <div class="headline-box">
+    <div class="title">What the latest quarter showed (Q2 2026)</div>
+    <p>Q2 2026 total income was DKK 14.87bn (+8.0% YoY on the S&amp;P Global series) and net profit DKK 6.20bn (+13.7% YoY, vs. DKK 5.45bn in Q2 2025), a return on equity of about 14.8% per the results-call summary. Broad-based income growth, fee income and cost discipline drove the beat, and management raised its 2026 net-profit outlook to DKK 23&ndash;25bn. Danske described stable asset quality and continued technology investment; in its early-October pre-close call it left net interest income guidance unchanged and said its agricultural exposure is well provisioned. Q1 2026 had been DKK 14.0bn of income and DKK 5.69bn of net profit. A third-party summary notes capital requirements are being lowered by roughly 40bp after a supervisory review of resolved legacy cases (to be reflected in Q3 disclosure; not independently verified).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income &mdash; Last 8 Quarters (DKK m)</div>
+    <div class="chart-sub">YoY (S&amp;P Global series): Q3'24 +11.6%, Q4'24 +5.9%, Q1'25 +0.2%, Q2'25 -3.4%, Q3'25 -3.2%, Q4'25 +3.5%, Q1'26 +0.9%, Q2'26 +8.0% &mdash; income growth stalled through 2025 and has re-accelerated.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly total income, DKK m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="50.8" width="56" height="79.2" fill="#2dd4bf"/><text x="53" y="45.8" text-anchor="middle" font-size="9" fill="#cbd5e1">14,162</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="47.9" width="56" height="82.1" fill="#2dd4bf"/><text x="135" y="42.9" text-anchor="middle" font-size="9" fill="#cbd5e1">14,676</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="52.3" width="56" height="77.7" fill="#2dd4bf"/><text x="217" y="47.3" text-anchor="middle" font-size="9" fill="#cbd5e1">13,881</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="53.0" width="56" height="77.0" fill="#2dd4bf"/><text x="299" y="48.0" text-anchor="middle" font-size="9" fill="#cbd5e1">13,768</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="53.3" width="56" height="76.7" fill="#2dd4bf"/><text x="381" y="48.3" text-anchor="middle" font-size="9" fill="#cbd5e1">13,703</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="45.0" width="56" height="85.0" fill="#2dd4bf"/><text x="463" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">15,192</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="51.7" width="56" height="78.3" fill="#2dd4bf"/><text x="545" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">14,001</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="46.8" width="56" height="83.2" fill="#2dd4bf"/><text x="627" y="41.8" text-anchor="middle" font-size="9" fill="#cbd5e1">14,865</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Income &mdash; Last 8 Quarters (DKK m)</div>
+    <div class="chart-sub">Quarterly net profit has held in a DKK 5.5&ndash;6.3bn band; Q4'25 (6,307) and Q2'26 (6,201) are the high points.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, DKK m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="46.9" width="56" height="83.1" fill="#60a5fa"/><text x="53" y="41.9" text-anchor="middle" font-size="9" fill="#cbd5e1">6,165</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="49.2" width="56" height="80.8" fill="#60a5fa"/><text x="135" y="44.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5,995</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="52.4" width="56" height="77.6" fill="#60a5fa"/><text x="217" y="47.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5,757</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="56.5" width="56" height="73.5" fill="#60a5fa"/><text x="299" y="51.5" text-anchor="middle" font-size="9" fill="#cbd5e1">5,454</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="55.6" width="56" height="74.4" fill="#60a5fa"/><text x="381" y="50.6" text-anchor="middle" font-size="9" fill="#cbd5e1">5,520</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="45.0" width="56" height="85.0" fill="#60a5fa"/><text x="463" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">6,307</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="53.4" width="56" height="76.6" fill="#60a5fa"/><text x="545" y="48.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5,686</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="46.4" width="56" height="83.6" fill="#60a5fa"/><text x="627" y="41.4" text-anchor="middle" font-size="9" fill="#cbd5e1">6,201</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>DKK m</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Total income</td><td>14,162</td><td>14,676</td><td>13,881</td><td>13,768</td><td>13,703</td><td>15,192</td><td>14,001</td><td>14,865</td></tr>
+    <tr><td>Net income</td><td>6,165</td><td>5,995</td><td>5,757</td><td>5,454</td><td>5,520</td><td>6,307</td><td>5,686</td><td>6,201</td></tr>
+    <tr><td>EPS (DKK)</td><td>7.20</td><td>7.14</td><td>6.90</td><td>6.60</td><td>6.67</td><td>7.70</td><td>7.00</td><td>7.60</td></tr>
+    <tr><td>Net margin</td><td>43.5%</td><td>40.8%</td><td>41.5%</td><td>39.6%</td><td>40.3%</td><td>41.5%</td><td>40.6%</td><td>41.7%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly series per S&amp;P Global Market Intelligence via stockanalysis.com; may differ marginally from Danske's own reported figures. Q3 2026 (due Oct 29, 2026) is the next print.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FY2025 Income by Segment (DKK B, % of gross segment income before eliminations)</div>
+    <div class="chart-sub">Segment mix substitutes for a product/geography revenue split. Segment income sums to DKK 59.7B before DKK -3.1B of eliminations; percentages are of the gross segment total. Group Functions includes treasury and other central items.</div>
+    <svg viewBox="0 0 700 222" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Personal Customers</text>
+      <rect x="215" y="10" width="260.0" height="20" fill="#2dd4bf"/>
+      <text x="483.0" y="24" font-size="9" fill="#f1f5f9">DKK 17.8B &middot; 29.8%</text>
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Large Corporates &amp; Institutions</text>
+      <rect x="215" y="45" width="253.2" height="20" fill="#3b82f6"/>
+      <text x="476.2" y="59" font-size="9" fill="#f1f5f9">DKK 17.3B &middot; 29.0%</text>
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Business Customers</text>
+      <rect x="215" y="80" width="230.5" height="20" fill="#5eead4"/>
+      <text x="453.5" y="94" font-size="9" fill="#f1f5f9">DKK 15.8B &middot; 26.4%</text>
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Northern Ireland</text>
+      <rect x="215" y="115" width="56.4" height="20" fill="#818cf8"/>
+      <text x="279.4" y="129" font-size="9" fill="#f1f5f9">DKK 3.9B &middot; 6.5%</text>
+      <text x="10" y="164" font-size="9.5" fill="#dbe4f0">Group Functions</text>
+      <rect x="215" y="150" width="52.4" height="20" fill="#a78bfa"/>
+      <text x="275.4" y="164" font-size="9" fill="#f1f5f9">DKK 3.6B &middot; 6.0%</text>
+      <text x="10" y="199" font-size="9.5" fill="#dbe4f0">Danica (life insurance)</text>
+      <rect x="215" y="185" width="19.8" height="20" fill="#fbbf24"/>
+      <text x="242.8" y="199" font-size="9" fill="#f1f5f9">DKK 1.4B &middot; 2.3%</text>
+      <line x1="215" y1="5" x2="215" y2="217" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">ROE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Return on average shareholders' equity, full year, vs. an assumed ~10% cost of equity (not drawn). FY21 (7.6%) and FY22 (-3.1%) were below the hurdle; FY23&ndash;FY25 sit 2.7&ndash;3.4pp above it. Danske does not report ROTCE.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,64.3 210,100.0 360,47.3 510,45.0 660,45.3" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="64.3" r="4" fill="#a78bfa"/><text x="60" y="52.3" text-anchor="middle" font-size="9" fill="#f1f5f9">7.6%</text>
+      <circle cx="210" cy="100.0" r="4" fill="#a78bfa"/><text x="210" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">-3.1%</text>
+      <circle cx="360" cy="47.3" r="4" fill="#a78bfa"/><text x="360" y="35.3" text-anchor="middle" font-size="9" fill="#f1f5f9">12.7%</text>
+      <circle cx="510" cy="45.0" r="4" fill="#a78bfa"/><text x="510" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">13.4%</text>
+      <circle cx="660" cy="45.3" r="4" fill="#c4b5fd"/><text x="660" y="33.3" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">13.3%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> Danske is the largest bank in Denmark by assets and a top-tier Nordic lender, which supports criterion #5. But Denmark is a concentrated market with credible competitors &mdash; Nordea, Nykredit (the dominant mortgage lender), Jyske and Sydbank &mdash; and Danske competes in Sweden, Norway and Finland against larger local incumbents. That makes the market a moderately concentrated oligopoly rather than a monopoly or duopoly, so concentration is scored 3/5 (Not Met on the Met/Not Met convention, 2 points on the graduated scale). Danske's recent history also matters: the Estonia money-laundering case led to a US settlement in December 2022, and supervisors had imposed capital add-ons; it is described here as a historical risk event, not a current allegation.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B (price to book value per share) are the two standard bank valuation lenses, shown together; Danske does not report tangible book value prominently, so P/B is used. CET1 vs. the regulatory requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/B (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end close &divide; that year's EPS (S&amp;P Global); FY22 is n/m because of the net loss. P/B = year-end close &divide; company-reported book value per share (FY25: S&amp;P Global). Current = trailing 12-month EPS of DKK 28.97 at DKK 344.50; P/B uses the Jun 30, 2026 book value (≈DKK 208, derived).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B (line, scale 0&ndash;2x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="71.98" width="44" height="78.02" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="65.98" text-anchor="middle" font-size="8" fill="#cbd5e1">7.73x</text>
+      <text x="194.95" y="142" text-anchor="middle" font-size="8" fill="#94a3b8">n/m (loss)</text>
+      <rect x="276.25" y="76.43" width="44" height="73.57" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="70.43" text-anchor="middle" font-size="8" fill="#cbd5e1">7.29x</text>
+      <rect x="379.55" y="77.43" width="44" height="72.57" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="71.43" text-anchor="middle" font-size="8" fill="#cbd5e1">7.19x</text>
+      <rect x="482.85" y="36.36" width="44" height="113.64" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="30.36" text-anchor="middle" font-size="8" fill="#cbd5e1">11.26x</text>
+      <rect x="586.15" y="30.00" width="44" height="120.00" fill="#5eead4"/><text x="608.15" y="24.00" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">11.89x</text>
+      <polyline points="91.65,116.40 194.95,106.20 298.25,97.20 401.55,91.80 504.85,64.20 608.15,50.40" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="116.40" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="106.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="97.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="91.80" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="64.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="50.40" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (0.56x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (0.73x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (0.88x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (0.97x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (1.43x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">Now (1.66x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~11.9x trailing earnings and ~1.66x book value, Danske trades well above its own FY2021&ndash;FY2025 range on both measures (P/E 7.2x&ndash;11.3x, average ~8.4x over the four non-loss years; P/B 0.56x&ndash;1.43x, average ~0.91x). The ratio of current to average P/E is ~1.42 and for P/B ~1.82, both in the &gt;1.30 band (0 points). The re-rating reflects higher earnings, big capital returns and a fading overhang from the legacy cases &mdash; but on a strict &ldquo;vs. own history&rdquo; test this is Not Met. Forward P/E is ~10.7x on consensus estimates (third-party), below trailing, implying modest expected growth. Note the average is based on only four P/E observations and a FY2021&ndash;FY2022 period of depressed earnings, which makes the historical multiples look lower than a normal-earnings cycle would.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement (Estimate)</div>
+    <div class="chart-sub">Substitutes for a net-debt/EBITDA chart. FY23&ndash;FY25 per Danske results releases (FY24 and FY25 are after deducting announced distributions); FY21 (16.9%) from a company release comparison; FY22 (17.8%) from the FY22 results summary. The dashed requirement line is a rounded estimate (Danske's management target is about 16%); a supervisory review is reported to have lowered the requirement by roughly 40bp.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="88.5" x2="680" y2="88.5" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="83.5" text-anchor="end" font-size="8" fill="#fbbf24">~15% estimated requirement incl. buffers (unverified)</text>
+      <polyline points="60,66.8 210,56.5 360,45.0 510,56.5 660,62.2" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="66.8" r="4" fill="#2dd4bf"/><text x="60" y="54.8" text-anchor="middle" font-size="9" fill="#f1f5f9">16.9%</text>
+      <circle cx="210" cy="56.5" r="4" fill="#2dd4bf"/><text x="210" y="44.5" text-anchor="middle" font-size="9" fill="#f1f5f9">17.8%</text>
+      <circle cx="360" cy="45.0" r="4" fill="#2dd4bf"/><text x="360" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">18.8%</text>
+      <circle cx="510" cy="56.5" r="4" fill="#2dd4bf"/><text x="510" y="44.5" text-anchor="middle" font-size="9" fill="#f1f5f9">17.8%</text>
+      <circle cx="660" cy="62.2" r="4" fill="#5eead4"/><text x="660" y="50.2" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">17.3%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="52.8 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="210.6 263.9" stroke-dashoffset="-52.8" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="0.5 263.9" stroke-dashoffset="-263.4" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>A.P. Møller Holding ~20% (largest shareholder; approximate)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other institutions and retail ~80% (includes Danish and international index/active funds)</div>
+          <div><span class="dot" style="background:#f87171;"></span>Executive management: well under 1% (not itemised)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>No founder or controlling shareholder, but A.P. Møller Holding (the investment vehicle linked to the Møller family and A.P. Møller Foundation) is a long-term anchor holder at roughly 20%. Under the stake bands (15&ndash;30% = 4 points) this counts as a large aligned holder; it is not an insider or founder in the strict sense, so this is the most judgment-heavy score on the page &mdash; scoring it 0 instead would lower the index by ~4 points. Management ownership is negligible. Dividend policy targets a 60&ndash;70% ordinary payout with extraordinary distributions on top when capital allows.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained further on pages 1, 2 and 4. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total income</td><td>~4.5% CAGR FY21&ndash;FY25 (DKK 47.4B&rarr;56.5B); FY25 income fell 0.7%</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>~16.6% CAGR FY21&ndash;FY25 (DKK 12.5B&rarr;23.0B). Clears the bar but flattered by a depressed FY21 base and a FY22 loss; the FY23&rarr;FY25 rate is ~4.1% (reference only)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 40.7% (FY25); cost/income 45.5% (54.5% margin-equivalent) &mdash; both far above the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>Same ~16.6% net-income CAGR as criterion #2 &mdash; identical by construction, an honest limitation of the bank adaptation, not an independent FCF measure</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Largest bank in Denmark by assets; top-tier Nordic universal bank</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; concentrated Danish banking with Nordea, Nykredit, Jyske and Sydbank as credible rivals, and larger local incumbents in Sweden, Norway and Finland</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROE vs. cost of equity (bank proxy)</td><td>ROE 13.3% (FY25) vs. an assumed ~10% cost of equity: a ~3.3pp spread. FY21&ndash;FY22 were below the hurdle (7.6%, -3.1%); ROTCE is not reported</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. requirement</td><td>CET1 17.3% (FY25) vs. an estimated ~15% requirement incl. buffers: ~2.3pp cushion (requirement not independently verified; management target ~16%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &mdash; substituted with capital-distribution ratio</td><td>FY25 distributions: DKK 22.72/share (ordinary DKK 16.94 + extraordinary DKK 5.78) &asymp; DKK 18.6bn plus a DKK 4.5bn buyback &asymp; DKK 23bn vs. net income DKK 23.0bn &mdash; roughly 100% (scored in the 80&ndash;100% band, not claimed above 100%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>Current P/E ~11.9x vs. ~8.4x average (ratio ~1.42); P/B ~1.66x vs. ~0.91x (ratio ~1.82) &mdash; well above the bank's own FY21&ndash;FY25 range</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Shares outstanding ~853M (FY21) &rarr; ~819M (FY25), about -4% (roughly flat band), with buybacks accelerating (DKK 4.5bn in 2026)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>A.P. Møller Holding holds ~20% as a long-term anchor shareholder (approximate); management stakes are negligible. Scored on the 15&ndash;30% band, flagged as a judgment call (see page 4)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capital expenditure DKK 0.34B in FY25, ~0.6% of income &mdash; very light (technology spend is largely expensed)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Banks report no gross profit, so the cost/income ratio is used (lower = better), FY2022 &rarr; FY2025: ~63% (adjusted, third-party) &rarr; 45.5%, a margin-equivalent improvement of ~18pp, far above the +0.5pp top band. Caveat: FY22 is inflated by the Estonia case and the base is adjusted, so the improvement overstates a steady trend; FY23&rarr;FY25 the gain is ~3.5pp</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Martinero Index arithmetic (65/100):</b> Points by criterion 1&ndash;14 = 1, 4, 5, 4, 5, 2, 2, 4, 4, 0, 3, 4, 5, 5. Weights 13/11/10/8/7/6/10/6/8/8/4/5/4/5 (total 105); index = &Sigma;(points &divide; 5 &times; weight) &divide; 105 &times; 100 = 67.8 &rarr; 65. No criterion is N/A. Criterion 8 uses a bank-specific mapping of the CET1 cushion over the requirement (&ge;3.0pp = 5, 2.0&ndash;3.0 = 4, 1.0&ndash;2.0 = 3, 0.5&ndash;1.0 = 2, 0&ndash;0.5 = 1, below requirement = 0) because the bands file has no bank bands for it.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A top-tier Nordic franchise with a 13.3% ROE, 45.5% cost/income ratio and 17.3% CET1 ratio, comfortably above a ~10% cost-of-equity hurdle and a ~15% estimated capital requirement. Net profit has been steady at DKK 23&ndash;24bn for three years and management has just raised 2026 guidance to DKK 23&ndash;25bn. Capital return is generous: ordinary payout 60&ndash;70% plus extraordinary distributions and a DKK 4.5bn buyback, roughly 100% of FY25 profit. Capex is negligible and the share count is down ~4% since FY21.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Revenue growth is weak (~4.5% CAGR; FY25 income down 0.7%) and the headline net-income CAGR is flattered by a depressed FY21 base and a FY22 loss. The valuation has re-rated sharply: ~11.9x P/E and ~1.7x book versus ~8.4x and ~0.9x on average, so much of the improvement is in the price (the stock is ~3x its end-2021 level). Net interest income depends on the rate path (analysts cite margin pressure risk), the market is concentrated but contested, and the legacy Estonia case, though settled, shaped capital requirements. The CET1 requirement figure and the 2025 year-end share price used here are estimates.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> Danske Bank IR share data (danskebank.com/investor-relations/shares/share-data) &mdash; year-end prices FY21&ndash;FY24, ROE, EPS, DPS, book value per share; Danske Bank FY2025 and FY2024 results releases (CET1, ROE, distributions, cost/income); stockanalysis.com (S&amp;P Global Market Intelligence) &mdash; income, net income, EPS, quarterly series, P/E, price, market cap, 52-week range, consensus target, as of Oct 20&ndash;26, 2026; Q2 2026 results-call and Oct 2026 pre-close-call summaries.<br><b>Data-quality flags:</b> (1) The FY2025 year-end close (≈DKK 314) is derived from S&amp;P's year-end P/E (11.26x) &times; EPS (27.90), not an official close. (2) Danske's IR table lists 210.7 as the first price cell for 2024 but its own P/E, P/B and market cap all reconcile to ~DKK 204; DKK 203.7 is used. (3) The CET1 requirement (~15%) is an estimate. (4) Cost/income for FY21 is n/a, FY22 is a third-party adjusted figure, FY23&ndash;FY24 are rounded. (5) Mixed bases: income/net income/EPS per S&amp;P, ROE/DPS/CET1 per company. (6) The price shown is a delayed intraday quote, not a close. (7) Ownership percentage for A.P. Møller Holding is approximate.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in DKK, as originally reported, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Danske Bank A/S &mdash; Nasdaq Copenhagen, DKK share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Danske Bank &mdash; Year-End Close (Nasdaq Copenhagen, DKK)</div>
+    <div class="chart-sub">A steady climb from DKK 113 (end-2021) to DKK 203.70 (end-2024), then a sharp 2025 rally on record profits and big capital returns; the shares are ~3x their end-2021 level, with the 52-week range DKK 270.60&ndash;383.70.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46.0" y1="162.01" x2="680.0" y2="39.14" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +25.0%</text>
+<path d="M 46.0,162.01 L 172.8,149.11 L 299.6,126.24 L 426.4,113.87 L 553.2,55.33 L 680.0,39.14 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,162.01 L 172.8,149.11 L 299.6,126.24 L 426.4,113.87 L 553.2,55.33 L 680.0,39.14" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="162.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="152.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 113.00</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="149.11" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="139.11" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 137.30</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="126.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="116.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 180.40</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="113.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="103.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 203.70</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="55.33" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="45.33" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 314.00</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="39.14" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="29.14" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">DKK 344.50</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes 2021&ndash;2024 from Danske Bank IR share data (2024 reconciled to ~DKK 203.7, see data-quality flag); the 2025 point (≈DKK 314) is derived from year-end P/E &times; EPS and is approximate; the current price (DKK 344.50) is the Oct 26, 2026 delayed intraday quote from stockanalysis.com. Prices are as originally reported (split- and dividend-unadjusted; no splits occurred in this window), so the 5-year change excludes dividends received.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

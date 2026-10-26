@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ING Groep N.V. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/ing-groep.html">
+<meta property="og:title" content="ING Groep N.V. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ING Groep N.V. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Euronext Amsterdam: INGA</div>
+  <h1>ING Groep N.V.</h1>
+  <div class="badges">
+    <div class="badge">Euronext Amsterdam: INGA · reports in EUR</div>
+    <div class="badge">Sector: Banks — retail and wholesale, Europe</div>
+    <div class="badge">HQ: Amsterdam, Netherlands · ING Group formed 1991 (roots to 1762)</div>
+    <div class="badge">Global systemically important bank (G-SIB) · ~60,000 employees</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">€29.04</div>
+  <div class="price-sub">Close Oct 26, 2026 (Euronext Amsterdam, EUR) · Market cap ≈ €82bn (≈2.84B shares, third-party) · 52-week range €20.40–32.40 · Consensus target ≈ €34 (20 analysts, 'Buy', third-party) · FY25 dividend €1.09/share (≈3.7% yield). Latest reported quarter is Q2 2026; Q3 2026 results are due Oct 29, 2026.</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Rabobank and ABN AMRO (Netherlands) &middot; KBC, BNP Paribas Fortis and Belfius (Belgium) &middot; Deutsche Bank, Commerzbank and the Sparkassen (Germany) &middot; Santander, BBVA, UniCredit and other pan-European banks &mdash; a concentrated home market inside a fragmented European one.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Income (FY25)</div>
+      <div class="val">€23.0B</div>
+      <div class="sub">+1.9% vs FY24 (€22.6B); the rate tailwind has faded but fee income grew 15% in FY25. Q2 2026 income was €6.3B (+10.2% YoY).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Result / ROTE (FY25)</div>
+      <div class="val green">€6.3B / 13.6%</div>
+      <div class="note">Net result attributable to shareholders (ING-reported). ROTE 13.6% (ROE 13.2%) vs. a ~10% cost of equity; four-quarter rolling ROTE was 14.5% at Q2 2026.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income Ratio (FY25)</div>
+      <div class="val green">54.6%</div>
+      <div class="note">Operating expenses &divide; total income &mdash; lower is better. 60.5% in FY21 and 51.2% in FY23; 49.1% in Q2 2026 (ING-reported). The bank-specific analog to operating margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (Q2 2026)</div>
+      <div class="val green">13.1%</div>
+      <div class="note">Vs. an 11.04% requirement incl. buffers (ING, Q4 2025) &mdash; a ~2.1pp cushion. ING targets ~13%. Substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">58/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/14 criteria met — strong profitability, capital return and efficiency gains, offset by mid-single-digit growth, an entry multiple well above its own history, and a modest spread over the cost of equity.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 68.78,195.59 L 84.83,162.26 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 68.78,195.59 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 84.83,162.26 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 Met</b> — net-margin proxy, a top-two Dutch bank, ROTE vs. cost of equity, CET1 cushion, capital-distribution ratio (&gt;100%), share count trend (-23% since FY21), capex intensity, margin stability (cost/income down 5.7pp over three years).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 Not Met</b> — total income CAGR (~5.6%) and net-result proxy CAGR for the EBIT and FCF criteria (~7.3%, identical by construction), market concentration (raw score 3), an entry multiple ~35% above its own FY21&ndash;FY25 average on P/E, and negligible insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    ING is one of Europe's largest retail and wholesale banks, with leading positions in the Netherlands, Belgium and Germany, a fast-growing direct-banking franchise across Europe and roughly 60,000 employees. FY2025 total income was €23.0bn (+1.9%) and the net result €6.3bn, a 13.6% return on tangible equity, with a 54.6% cost/income ratio and a 13.1% CET1 ratio. Over FY2021&ndash;FY2025 income compounded at ~5.6% a year and net result at ~7.3% &mdash; well below this framework's 15% bar, flattered at the start by a FY2021 base with a 9.2% ROE and a weak FY2022 (7.2%) before the rate cycle lifted profit in FY2023. Capital return is the standout: FY2025 cash dividends of €3.2bn, an extra €0.5bn cash distribution and €3.1bn of buybacks were about 107% of the net result, and the share count is down ~23% since FY2021. Momentum has improved in 2026: Q2 total income rose 10.2% year on year, net result 16%, and management lifted its 2026 and 2027 ROTE outlook to above 15% and 16%. The caveats are the rich re-rating &mdash; ~12.6x trailing earnings and ~1.65x book value against FY21&ndash;FY25 averages of ~9.3x and ~0.98x &mdash; and dependence on interest rates and European credit conditions.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> ING is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly onto it. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total Income</b> stands in for revenue (criterion 1); <b>Net Income</b> substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) &mdash; a bank's cash flow statement is dominated by deposit and trading-book swings that do not map to a &ldquo;free cash flow&rdquo; concept, so criteria 2 and 4 are necessarily identical here, a genuine limitation of the adaptation and not a workaround; <b>ROTE vs. an assumed ~10% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; ING reports return on tangible equity (ROTE) from 2026 (restating prior periods) and ROE on IFRS-EU equity before that; ROTE is used for the spread. A ~10% cost of equity is used, the low end of the 10&ndash;11% range, given a beta near 0.9 and a European-bank credit profile); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8), scored on the cushion over the requirement; and <b>(dividends + buybacks) &divide; net income</b> substitutes for FCF conversion (criterion 9). Entry multiple (criterion 10) is scored on the average of the P/E and P/B ratios, each current value divided by its own FY2021&ndash;FY2025 year-end average (P/TBV history is not available, so P/B is used). Criterion 14 uses the efficiency (cost/income) ratio because banks report no gross profit; a falling ratio counts as a margin rise. Everything is reported in EUR and nothing is converted.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (fiscal year = calendar year). All figures in EUR billions unless noted, from ING's own quarterly and annual results releases: total income and net result attributable to shareholders as reported. FY2023 total income (€23.0bn) is derived from ING's reported FY2023 pre-tax result, loan-loss provisions and cost/income ratio (marked *); EPS for FY2021&ndash;FY2023 is net result divided by S&amp;P Global average share count (marked *). Net result is the bank proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income vs. Net Result (EUR B)</div>
+    <div class="chart-sub">Net result peaked in FY2023 at €7.3B and has eased since; total income has stalled near €23B for three years while fee income rose 15% in FY2025 and net interest income fell.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Income</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="140" x2="680" y2="140" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="63.7" width="24" height="76.3" fill="#2dd4bf"/><text x="74" y="58.7" text-anchor="middle" font-size="8" fill="#cbd5e1">18.5</text>
+      <rect x="92" y="120.3" width="24" height="19.7" fill="#fbbf24"/><text x="104" y="115.3" text-anchor="middle" font-size="8" fill="#cbd5e1">4.8</text>
+      <text x="89" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="63.5" width="24" height="76.5" fill="#2dd4bf"/><text x="202" y="58.5" text-anchor="middle" font-size="8" fill="#cbd5e1">18.6</text>
+      <rect x="220" y="124.8" width="24" height="15.2" fill="#fbbf24"/><text x="232" y="119.8" text-anchor="middle" font-size="8" fill="#cbd5e1">3.7</text>
+      <text x="217" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="45.1" width="24" height="94.9" fill="#2dd4bf"/><text x="330" y="40.1" text-anchor="middle" font-size="8" fill="#cbd5e1">23.0</text>
+      <rect x="348" y="109.9" width="24" height="30.1" fill="#fbbf24"/><text x="360" y="104.9" text-anchor="middle" font-size="8" fill="#cbd5e1">7.3</text>
+      <text x="345" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23*</text>
+      <rect x="446" y="46.7" width="24" height="93.3" fill="#2dd4bf"/><text x="458" y="41.7" text-anchor="middle" font-size="8" fill="#cbd5e1">22.6</text>
+      <rect x="476" y="113.6" width="24" height="26.4" fill="#fbbf24"/><text x="488" y="108.6" text-anchor="middle" font-size="8" fill="#cbd5e1">6.4</text>
+      <text x="473" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="45.0" width="24" height="95.0" fill="#5eead4"/><text x="586" y="40.0" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">23.0</text>
+      <rect x="604" y="113.9" width="24" height="26.1" fill="#fde68a"/><text x="616" y="108.9" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">6.3</text>
+      <text x="601" y="182" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Total Income CAGR (5yr, crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~5.6%</div>
+      <div class="sub">FY21&rarr;FY25, €18.5B&rarr;€23.0B; well below the 15% bar</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Result CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val" style="color:#fbbf24;">~7.3%</div>
+      <div class="sub">€4.78B&rarr;€6.33B; below the bar and flattered by a weak FY2022 base (€3.67B)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Result CAGR (FY22&rarr;FY25, reference)</div>
+      <div class="val" style="color:#34d399;">~19.9%</div>
+      <div class="sub">€3.67B&rarr;€6.33B over 3 years &mdash; strong off a trough (reference only, not scored)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EPS, FY25</div>
+      <div class="val">€2.12</div>
+      <div class="sub">Up from €1.23* (FY21) on a 23% lower share count</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cost/Income Ratio Trend — bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Operating expenses &divide; total income, as reported by ING. The ratio fell from ~60% (FY21&ndash;FY22) to 51.2% in FY2023 as rates lifted income, then drifted up to 54.6% in FY2025 as expenses grew faster than income; 1H26 was 52.1%.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,45.0 210,46.2 360,100.0 510,85.8 660,79.9" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="45.0" r="4" fill="#2dd4bf"/><text x="60" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">60.5%</text>
+      <circle cx="210" cy="46.2" r="4" fill="#2dd4bf"/><text x="210" y="34.2" text-anchor="middle" font-size="9" fill="#f1f5f9">60.3%</text>
+      <circle cx="360" cy="100.0" r="4" fill="#2dd4bf"/><text x="360" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">51.2%</text>
+      <circle cx="510" cy="85.8" r="4" fill="#2dd4bf"/><text x="510" y="73.8" text-anchor="middle" font-size="9" fill="#f1f5f9">53.6%</text>
+      <circle cx="660" cy="79.9" r="4" fill="#5eead4"/><text x="660" y="67.9" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">54.6%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (EUR B)</th><th>Total Income</th><th>Net Result</th><th>Net Margin</th><th>ROE</th><th>Cost/Income</th><th>EPS (€)</th><th>DPS (€)</th></tr>
+    <tr><td>FY21</td><td>18.5</td><td>4.8</td><td>25.8%</td><td>9.2%</td><td>60.5%</td><td>1.23*</td><td>n/a</td></tr>
+    <tr><td>FY22</td><td>18.6</td><td>3.7</td><td>19.8%</td><td>7.2%</td><td>60.3%</td><td>1.02*</td><td>0.56</td></tr>
+    <tr><td>FY23*</td><td>23.0</td><td>7.3</td><td>31.7%</td><td>14.8%</td><td>51.2%</td><td>2.05*</td><td>1.11</td></tr>
+    <tr><td>FY24</td><td>22.6</td><td>6.4</td><td>28.3%</td><td>13.0%</td><td>53.6%</td><td>1.98</td><td>1.06</td></tr>
+    <tr><td>FY25</td><td>23.0</td><td>6.3</td><td>27.5%</td><td>13.2%</td><td>54.6%</td><td>2.12</td><td>1.09</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">As a bank, ING does not report EBIT or free cash flow in the industrial sense; Net Result is the proxy for criteria 2 and 4, and &ldquo;Net Margin&rdquo; (net result &divide; total income) plays the role of an operating-margin column. ROE is ING's return on IFRS-EU equity (excluding reserved profits); ING switched its headline measure to ROTE from 2026 (FY25 ROTE 13.6%, FY24 13.4%).</div>
+  <div class="footer-note" style="margin-top:4px;">* FY2023 total income of €23.0bn is derived (pre-tax result €10,492m + loan-loss provisions €738m, divided by 1 &minus; 51.2% cost/income), not read from a table; the other total-income figures are ING-reported (FY22 €18,561m, FY21 €18,490m, FY24 €22,615m, FY25 €23,035m). EPS for FY21&ndash;FY23 = net result &divide; S&amp;P average shares (3,889m / 3,619m / 3,563m). FY21 DPS is omitted because the available series mixes regular and catch-up payments. Do not use S&amp;P Global's &ldquo;revenue&rdquo; for ING: it grosses up trading and interest flows and is not total income.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER, SEGMENTS & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend, Segments &amp; Profitability (Q2 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter: Q2 2026 (reported July 30, 2026); Q3 2026 results are due Oct 29, 2026, so Q2 is the latest available. Seven quarters shown, ING-reported.</div>
+
+  <div class="headline-box">
+    <div class="title">What the latest quarter showed (Q2 2026)</div>
+    <p>Q2 2026 total income was €6,284m (+10.2% YoY, +7.9% on Q1) and the net result €1,947m (+16% YoY), with profit before tax up 23% to €2,919m. Commercial net interest income rose 10.7% YoY on net core lending growth of €15.2bn (about 8% annualised) and deposit inflows of €15.9bn; fee income was €1,278m (+14% YoY) and the cost/income ratio fell to 49.1% from 55.3% in Q1. Risk costs were 15bp of average lending against a through-the-cycle 20bp. ROTE was 17.0% for the quarter (14.5% over four quarters) and the CET1 ratio 13.1%, helped by €1.0bn of risk-weighted-asset relief from a significant risk-transfer transaction. ING lifted its 2026 total income outlook to above €24.5bn and its ROTE outlook to above 15% (2026) and above 16% (2027), declared a €0.40 interim dividend, and has a €1.0bn buyback running to October. Costs excluding regulatory items rose 4.2% YoY, and Australian regulators set extra liquidity and capital conditions on ING's local unit in September (third-party report).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income &mdash; Last 7 Quarters (EUR m)</div>
+    <div class="chart-sub">YoY: Q4'25 +7.2%, Q1'26 +3.3%, Q2'26 +10.2% (ING-reported); the Q4'25 and Q1'26 dips in sequential income reflected lower Treasury income and market volatility, with a rebound in Q2'26.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly total income, EUR m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="56.9" width="56" height="73.1" fill="#2dd4bf"/><text x="53" y="51.9" text-anchor="middle" font-size="9" fill="#cbd5e1">5,407</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="53.8" width="56" height="76.2" fill="#2dd4bf"/><text x="135" y="48.8" text-anchor="middle" font-size="9" fill="#cbd5e1">5,637</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="52.9" width="56" height="77.1" fill="#2dd4bf"/><text x="217" y="47.9" text-anchor="middle" font-size="9" fill="#cbd5e1">5,702</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="50.2" width="56" height="79.8" fill="#2dd4bf"/><text x="299" y="45.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5,898</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="51.6" width="56" height="78.4" fill="#2dd4bf"/><text x="381" y="46.6" text-anchor="middle" font-size="9" fill="#cbd5e1">5,797</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="51.2" width="56" height="78.8" fill="#2dd4bf"/><text x="463" y="46.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5,823</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="45.0" width="56" height="85.0" fill="#2dd4bf"/><text x="545" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">6,284</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Result &mdash; Last 7 Quarters (EUR m)</div>
+    <div class="chart-sub">Net result attributable to shareholders. A low Q4'24 (€1.15bn, higher non-deductible items and tax) and Q4'25 (€1.41bn) bracket a rising run-rate; Q2'26 at €1.95bn is the highest of the seven quarters.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, EUR m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="79.6" width="56" height="50.4" fill="#60a5fa"/><text x="53" y="74.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,154</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="66.5" width="56" height="63.5" fill="#60a5fa"/><text x="135" y="61.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,455</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="56.9" width="56" height="73.1" fill="#60a5fa"/><text x="217" y="51.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,675</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="52.0" width="56" height="78.0" fill="#60a5fa"/><text x="299" y="47.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,787</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="68.4" width="56" height="61.6" fill="#60a5fa"/><text x="381" y="63.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,411</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="62.1" width="56" height="67.9" fill="#60a5fa"/><text x="463" y="57.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,556</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="45.0" width="56" height="85.0" fill="#60a5fa"/><text x="545" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,947</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>EUR m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Total income</td><td>5,407</td><td>5,637</td><td>5,702</td><td>5,898</td><td>5,797</td><td>5,823</td><td>6,284</td></tr>
+    <tr><td>Net result</td><td>1,154</td><td>1,455</td><td>1,675</td><td>1,787</td><td>1,411</td><td>1,556</td><td>1,947</td></tr>
+    <tr><td>EPS (€)</td><td>0.37</td><td>0.47</td><td>0.56</td><td>0.60</td><td>0.48</td><td>0.54</td><td>0.68</td></tr>
+    <tr><td>Net margin</td><td>21.3%</td><td>25.8%</td><td>29.4%</td><td>30.3%</td><td>24.3%</td><td>26.7%</td><td>31.0%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures as published in ING's quarterly press releases (Q1'25 and Q1'26 derived from the six-month and quarterly comparatives). Q3'24 is omitted because it was not retrieved from a primary source.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FY2025 Income by Segment (EUR B, % of total)</div>
+    <div class="chart-sub">Segment mix substitutes for a product/geography revenue split. Segment income per ING's segment reporting (via Fiscal.ai/S&amp;P); it sums to the consolidated €23.0B.</div>
+    <svg viewBox="0 0 700 222" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Wholesale Banking</text>
+      <rect x="215" y="10" width="260.0" height="20" fill="#2dd4bf"/>
+      <text x="483.0" y="24" font-size="9" fill="#f1f5f9">€7.0B &middot; 30.4%</text>
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Retail Netherlands</text>
+      <rect x="215" y="45" width="184.3" height="20" fill="#3b82f6"/>
+      <text x="407.3" y="59" font-size="9" fill="#f1f5f9">€5.0B &middot; 21.6%</text>
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Retail Other (Poland, Spain, Italy, Australia &hellip;)</text>
+      <rect x="215" y="80" width="182.1" height="20" fill="#5eead4"/>
+      <text x="405.1" y="94" font-size="9" fill="#f1f5f9">€4.9B &middot; 21.3%</text>
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Retail Germany</text>
+      <rect x="215" y="115" width="111.0" height="20" fill="#818cf8"/>
+      <text x="334.0" y="129" font-size="9" fill="#f1f5f9">€3.0B &middot; 13.0%</text>
+      <text x="10" y="164" font-size="9.5" fill="#dbe4f0">Retail Belgium</text>
+      <rect x="215" y="150" width="99.2" height="20" fill="#60a5fa"/>
+      <text x="322.2" y="164" font-size="9" fill="#f1f5f9">€2.7B &middot; 11.6%</text>
+      <text x="10" y="199" font-size="9.5" fill="#dbe4f0">Corporate Line</text>
+      <rect x="215" y="185" width="18.0" height="20" fill="#475569"/>
+      <text x="241.0" y="199" font-size="9" fill="#f1f5f9">€0.5B &middot; 2.1%</text>
+      <line x1="215" y1="5" x2="215" y2="217" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">ROE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Return on equity (IFRS-EU, excluding reserved profits), full year, per ING, vs. an assumed ~10% cost of equity (not drawn). FY21&ndash;FY22 sat at or below the hurdle; FY23&ndash;FY25 are 3&ndash;5pp above it. The scored measure is FY25 ROTE of 13.6% (ING-reported), a ~3.6pp spread.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,85.5 210,100.0 360,45.0 510,58.0 660,56.6" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="85.5" r="4" fill="#a78bfa"/><text x="60" y="73.5" text-anchor="middle" font-size="9" fill="#f1f5f9">9.2%</text>
+      <circle cx="210" cy="100.0" r="4" fill="#a78bfa"/><text x="210" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">7.2%</text>
+      <circle cx="360" cy="45.0" r="4" fill="#a78bfa"/><text x="360" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">14.8%</text>
+      <circle cx="510" cy="58.0" r="4" fill="#a78bfa"/><text x="510" y="46.0" text-anchor="middle" font-size="9" fill="#f1f5f9">13.0%</text>
+      <circle cx="660" cy="56.6" r="4" fill="#c4b5fd"/><text x="660" y="44.6" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">13.2%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> ING is one of the two or three largest banks in the Netherlands (alongside Rabobank and ABN AMRO), a top-tier Dutch mortgage and savings provider, and runs one of Europe's largest direct banks in Germany, plus Belgium, Poland, Spain, Italy and Australia &mdash; a strong #2/top-three position that supports criterion #5 (scored as a strong #2, a judgment call rather than a published rank). The Dutch retail market is concentrated, but ING's footprint spans many countries and a large wholesale business where competition is broad and European banking remains fragmented, so concentration (#6) is scored 3/5 (2 points on the graduated scale, Not Met on the site convention). Its G-SIB status brings higher capital buffers.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B are the two standard bank valuation lenses, shown together; ING reports book value per share but this page uses P/B rather than P/TBV because tangible-book history was not available. CET1 vs. the regulatory requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/B (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end close &divide; that year's EPS; P/B = year-end close &divide; shareholders' equity per share (ING releases). &ldquo;Now&rdquo; = €29.04 (Oct 26, 2026) on trailing 12-month EPS of €2.30 (Q3'25&ndash;Q2'26) and a book value of €17.57 per share (S&amp;P Global, latest). FY21&ndash;FY23 EPS is computed (net result &divide; average shares); FY24&ndash;FY25 EPS is ING-reported.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B (line, scale 0&ndash;2x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="55.46" width="44" height="94.54" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="49.46" text-anchor="middle" font-size="8" fill="#cbd5e1">9.95x</text>
+      <rect x="172.95" y="43.87" width="44" height="106.13" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="37.87" text-anchor="middle" font-size="8" fill="#cbd5e1">11.17x</text>
+      <rect x="276.25" y="87.29" width="44" height="62.71" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="81.29" text-anchor="middle" font-size="8" fill="#cbd5e1">6.60x</text>
+      <rect x="379.55" y="77.41" width="44" height="72.59" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="71.41" text-anchor="middle" font-size="8" fill="#cbd5e1">7.64x</text>
+      <rect x="482.85" y="42.35" width="44" height="107.65" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="36.35" text-anchor="middle" font-size="8" fill="#cbd5e1">11.33x</text>
+      <rect x="586.15" y="30.00" width="44" height="120.00" fill="#5eead4"/><text x="608.15" y="24.00" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">12.63x</text>
+      <polyline points="91.65,98.40 194.95,100.20 298.25,97.20 401.55,94.20 504.85,66.00 608.15,51.00" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="98.40" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="100.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="97.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="94.20" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="66.00" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="51.00" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (0.86x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (0.83x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (0.88x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (0.93x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (1.40x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">Now (1.65x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~12.6x trailing earnings and ~1.65x book value, ING trades well above its own FY2021&ndash;FY2025 averages (P/E average ~9.3x, range 6.6x&ndash;11.3x; P/B average ~0.98x, range 0.83x&ndash;1.40x). Current-to-average is ~1.35 for P/E and ~1.68 for P/B, both in the worst band, so criterion 10 scores 0. The context matters: FY23&ndash;FY24 P/E multiples were low because the stock was cheap relative to a peak-rate earnings base, and the shares have re-rated about 2.1x since end-2023 (€13.53 to €29.04) while earnings are roughly flat to modestly higher. Forward P/E is ~10.5&ndash;10.7x on consensus (third-party), below trailing because analysts expect earnings to rise with the upgraded outlook. Consensus is 'Buy' with a target near €34 (third-party). On a strict &ldquo;vs. own history&rdquo; test this is Not Met.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement</div>
+    <div class="chart-sub">Substitutes for a net-debt/EBITDA chart. Year-end CET1 ratios per ING's results releases (FY21 recalled from ING's 2021 results and not re-verified in this build). The dashed line is ING's own stated requirement including buffers at Q4 2025 (11.04%; fully loaded 11.09%); earlier years' requirements were different. ING targets ~13%, so the ratio has been deliberately run down by distributions; the Q2 2026 cushion is ~2.1pp.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="89.5" x2="680" y2="89.5" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="84.5" text-anchor="end" font-size="8" fill="#fbbf24">11.04% requirement incl. buffers (Q4 2025)</text>
+      <polyline points="60,45.0 210,53.4 360,51.3 510,62.8 660,68.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="45.0" r="4" fill="#2dd4bf"/><text x="60" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">15.3%</text>
+      <circle cx="210" cy="53.4" r="4" fill="#2dd4bf"/><text x="210" y="41.4" text-anchor="middle" font-size="9" fill="#f1f5f9">14.5%</text>
+      <circle cx="360" cy="51.3" r="4" fill="#2dd4bf"/><text x="360" y="39.3" text-anchor="middle" font-size="9" fill="#f1f5f9">14.7%</text>
+      <circle cx="510" cy="62.8" r="4" fill="#2dd4bf"/><text x="510" y="50.8" text-anchor="middle" font-size="9" fill="#f1f5f9">13.6%</text>
+      <circle cx="660" cy="68.0" r="4" fill="#5eead4"/><text x="660" y="56.0" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">13.1%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="19.8 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#60a5fa" stroke-width="14" stroke-dasharray="15.8 263.9" stroke-dashoffset="-19.8" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#818cf8" stroke-width="14" stroke-dasharray="8.4 263.9" stroke-dashoffset="-35.6" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="8.4 263.9" stroke-dashoffset="-44.1" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#475569" stroke-width="14" stroke-dasharray="211.4 263.9" stroke-dashoffset="-52.5" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>Capital Research and Management ~7.5% (third-party)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>BlackRock ~6.0% (third-party)</div>
+          <div><span class="dot" style="background:#818cf8;"></span>Vanguard ~3.2% (third-party)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Amundi ~3.2% (third-party)</div>
+          <div><span class="dot" style="background:#475569;"></span>Other holders ~80% (insiders ~0.01%)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>ING has no controlling shareholder, founder or family; the register is dominated by global asset managers, and the percentages above are approximate third-party figures from sources that disagree by a point or two (and mix ordinary shares with ADRs). Insider ownership is about 0.01% per S&amp;P Global, with no notable employee-ownership plan, so it scores 0. ING's policy is a 50% payout of resilient net profit as dividends, with excess capital above the ~13% CET1 target returned through buybacks and additional cash distributions: &euro;3.2bn of dividends, &euro;0.5bn of extra cash and &euro;3.1bn of buybacks were announced for FY2025.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained further on pages 1, 2 and 4. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total income</td><td>~5.6% CAGR FY21&ndash;FY25 (€18.5B&rarr;€23.0B); FY25 growth +1.9%</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net result used as bank proxy</td><td>~7.3% CAGR FY21&ndash;FY25 (€4.78B&rarr;€6.33B) off a weak FY22 base; FY22&rarr;FY25 is ~19.9% (reference only)</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 27.5% (FY25); pre-tax margin 39.7%; cost/income 54.6% &mdash; above the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net result used as bank proxy</td><td>Same ~7.3% net-result CAGR as criterion #2 &mdash; identical by construction, an honest limitation of the bank adaptation, not an independent FCF measure</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Top-two Dutch bank (with Rabobank/ABN AMRO), large direct bank in Germany; scored as a strong #2 (judgment, not a published rank)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; concentrated Dutch home market, but ING competes across fragmented European retail and wholesale markets</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROTE vs. cost of equity (bank proxy)</td><td>FY25 ROTE 13.6% (ING-reported; ROE 13.2%) vs. an assumed ~10% cost of equity: a ~3.6pp spread (FY21&ndash;FY22 ROE was below the hurdle)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. requirement</td><td>CET1 13.1% (Q2 2026 and FY25) vs. an 11.04% requirement incl. buffers: ~2.1pp cushion (band 2.0&ndash;3.0pp)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &mdash; substituted with capital-distribution ratio</td><td>FY25: €3.2bn cash dividends + €0.5bn extra cash + €3.1bn buybacks (ING-announced) = ~€6.8bn, ~107% of the €6.3bn net result</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>Current P/E ~12.6x vs. ~9.3x average (ratio ~1.35); P/B ~1.65x vs. ~0.98x (ratio ~1.68); blended ~1.52 &mdash; above the bank's own FY21&ndash;FY25 average</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Shares outstanding 3,776M (FY21) &rarr; 2,902M (FY25), about -23%, and ~2.84B now (buybacks)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Insiders ~0.01%; no controlling holder and no notable employee-ownership plan</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capital expenditure €351m in FY25 (S&amp;P Global), ~1.5% of income &mdash; light (technology spend is largely expensed)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Banks report no gross profit, so the cost/income ratio is used (lower = better), FY2022 &rarr; FY2025: 60.3% &rarr; 54.6%, a margin-equivalent gain of ~5.7pp (top band, &ge;+0.5pp). Caveat: the ratio rose ~3.4pp from its FY23 trough (51.2%) before improving again to 49.1% in Q2 2026</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Martinero Index arithmetic (58/100):</b> Points by criterion 1&ndash;14 = 2, 2, 5, 2, 4, 2, 2, 4, 5, 0, 5, 0, 5, 5. Weights 13/11/10/8/7/6/10/6/8/8/4/5/4/5 (total 105); index = &Sigma;(points &divide; 5 &times; weight) &divide; 105 &times; 100 = 60.6 &rarr; 58. No criterion is N/A. Criterion 8 uses a bank-specific mapping of the CET1 cushion over the requirement (&ge;3.0pp = 5, 2.0&ndash;3.0 = 4, 1.0&ndash;2.0 = 3, 0.5&ndash;1.0 = 2, 0&ndash;0.5 = 1, below requirement = 0) because the bands file has no bank bands for it.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Strong commercial momentum (primary customers +1m in 12 months, Q2 2026 income +10%), a 13.6% ROTE with guidance lifted to above 15% for 2026, and a very generous capital return &mdash; about 107% of FY25 profit via dividends and buybacks, with the share count down ~23% since FY2021. Credit quality is solid (risk costs 15&ndash;20bp), fee income is growing double digits, and the cost/income ratio has improved by ~5.7pp over three years. Capex is light and the 13.1% CET1 ratio sits ~2pp above the requirement.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth has been modest: income has been roughly flat since FY2023 and the five-year CAGRs are 5&ndash;7%, well below the framework's 15% bar. The shares have re-rated to ~12.6x trailing earnings and ~1.65x book, far above FY21&ndash;FY25 averages of ~9.3x and ~0.98x, so much of the improvement may already be priced in. Net interest income is sensitive to rates and deposit competition, the Q4'25&ndash;Q1'26 results showed volatility in market-related income, the CET1 buffer is deliberately thin (~2pp), and the planned sale of the Russian business carries an expected ~€0.8bn post-tax loss. Insider ownership is negligible and the Dutch market is concentrated.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> ING press releases 4Q/FY2025, 2Q2026 (ing.com, SEC 6-K and distributor copies) &mdash; income, net result, cost/income, ROE/ROTE, CET1, dividends, share information and year-end share prices; ING 4Q2022, 4Q2023 and 4Q2024 releases (share price, equity per share, prior-year comparatives); stockanalysis.com / S&amp;P Global &mdash; share count, book value per share, capex, segment income, market cap, consensus and 52-week range as of Oct 22&ndash;26, 2026; third-party ownership aggregators.<br><b>Data-quality flags:</b> (1) FY2023 total income is derived, and FY21&ndash;FY23 EPS is computed (marked *). (2) Entry-multiple EPS uses ING's net result; S&amp;P Global's &ldquo;net income&rdquo; and &ldquo;revenue&rdquo; series for ING are distorted by trading and hedge flows and were not used. (3) FY2021 CET1 (15.3%) is recalled and not re-verified; FY2021 DPS is omitted. (4) Ownership percentages are approximate third-party figures. (5) Current P/B uses S&amp;P's latest book value (€17.57), not ING's reported Q2 figure. (6) Consensus target and market cap are third-party. (7) Q3 2026 results were not yet published at build time.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in EUR, as originally reported, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">ING Groep N.V. &mdash; Euronext Amsterdam, EUR share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">ING &mdash; Year-End Close (Euronext Amsterdam, EUR)</div>
+    <div class="chart-sub">Flat to lower in 2021&ndash;2022 (€12.24 &rarr; €11.39), then a steady re-rating through 2023&ndash;2025 (€13.53 &rarr; €15.13 &rarr; €24.01, +59% in 2025 alone) and a further rise to €29.04 in 2026 as earnings guidance rose; the price is ~2.5x its end-2022 level on a price-only basis.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46.0" y1="151.58" x2="680.0" y2="39.67" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +18.9%</text>
+<path d="M 46.0,151.58 L 172.8,157.24 L 299.6,142.98 L 426.4,132.33 L 553.2,73.18 L 680.0,39.67 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,151.58 L 172.8,157.24 L 299.6,142.98 L 426.4,132.33 L 553.2,73.18 L 680.0,39.67" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="151.58" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="141.58" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€12.24</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="157.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="147.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€11.39</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="142.98" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="132.98" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€13.53</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="132.33" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="122.33" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€15.13</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="73.18" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="63.18" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€24.01</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="39.67" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="29.67" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€29.04</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021&ndash;2025 from ING's quarterly results releases (&lsquo;share price, end of period&rsquo;); the current price (€29.04) is the Oct 26, 2026 close from stockanalysis.com (Euronext Amsterdam). Prices are as originally reported (split- and dividend-unadjusted; no splits occurred in this window), so the 5-year change excludes dividends received (total return was higher).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

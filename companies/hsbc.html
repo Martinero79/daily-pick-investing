@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HSBC Holdings plc — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/hsbc.html">
+<meta property="og:title" content="HSBC Holdings plc — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HSBC Holdings plc — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · LSE: HSBA</div>
+  <h1>HSBC Holdings plc</h1>
+  <div class="badges">
+    <div class="badge">LSE: HSBA · reports in USD · quoted in GBX (pence)</div>
+    <div class="badge">Sector: Diversified Banking &amp; Wealth</div>
+    <div class="badge">HQ: London, UK · Hong Kong roots to 1865</div>
+    <div class="badge">One of Europe's largest banks by assets (~$3tn+)</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">1,352.00p</div>
+  <div class="price-sub">Close Oct 23, 2026 (London Stock Exchange, GBX pence = £13.52) · Market cap ≈ £231bn (17.1bn shares) · 52-week range ≈ 959.30p–1,610.00p (snapshot of Oct 16) · Consensus target ≈ 1,520p (17 analysts, Hold) · FY25 dividends $0.75/share (declared in USD) · Q3 results due Oct 27</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Barclays, Lloyds and NatWest (UK retail/commercial) &middot; Standard Chartered and Bank of China (Hong Kong/Asia) &middot; BNP Paribas, Santander and Deutsche Bank (European wholesale) &middot; Citigroup and JPMorgan (global wholesale and trade finance) — HSBC is a G-SIB with a broad but not monopolistic position in each.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Net Revenue (FY25)</div>
+      <div class="val">$68.3B</div>
+      <div class="note">+3.7% vs FY24 ($65.9B); FY24 was −0.3% vs FY23 ($66.1B). Notable items (e.g. a $2.1bn BoCom dilution/impairment, $1.5bn French-portfolio reserve recycling) distort the path; constant-currency revenue excluding notable items was ~$71.0bn.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Income / RoTE (FY25)</div>
+      <div class="val green">$21.1B / 13.3%</div>
+      <div class="note">Net income to ordinary shareholders. RoTE (return on tangible equity) was 13.3% reported, 17.2% excluding notable items; H1 2026 annualised 18.2%. Above a ~10–11% cost-of-equity assumption.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost Efficiency Ratio (FY25)</div>
+      <div class="val">53.4%</div>
+      <div class="note">Operating expenses ÷ revenue — lower is better. 53.4% vs 50.2% (FY24) and 48.5% (FY23); the long-run improvement from 64.4% (FY22) has partly reversed since FY23.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (Jun 2026)</div>
+      <div class="val green">14.1%</div>
+      <div class="note">Down from 14.9% at Dec 2025 after the Hang Seng Bank privatisation; target range 14–14.5%. Versus an estimated ~11.5% requirement incl. buffers (approximate) — substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">8/14 criteria met — strong capital, returns and capital return, weighed against modest growth, a re-rated valuation and negligible insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 68.78,195.59 L 84.83,162.26 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 68.78,195.59 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 84.83,162.26 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">8/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 Met</b> — net-margin proxy, market share (among Europe's largest banks by assets), RoTE vs. cost of equity, CET1 cushion, capital-distribution ratio (~90%), share count trend, capex intensity, margin stability (cost/income, FY22→FY25 — but see the watch-list).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 Not Met</b> — revenue CAGR (~8%), net-income CAGR (~14%, used for both the EBIT and FCF criteria), moderate market concentration, a rich entry multiple vs. own history (P/E and P/B ~1.6–1.8x their FY21–25 averages) and negligible insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    HSBC is one of the world's largest banks (total assets ~$3tn+; ~206,000 employees), earning most of its profit in Hong Kong, the UK and its wholesale franchise. FY2025 net operating income (HSBC's “revenue”) was $68.3bn and net income to ordinary shareholders $21.1bn, with a reported RoTE of 13.3% (17.2% excluding notable items) and a CET1 ratio of 14.9%; H1 2026 annualised RoTE stepped up to 18.2%. The honest case for the scorecard is <b>capital strength, returns and capital return</b>, not growth: revenue compounded at ~8% over FY2021–FY2025 and the net-income proxy at ~14%, both under this framework's 15% bar — and both measured from a low-rate, low-earnings FY2021–22 base. The share count fell ~13.5% over the window. The catch is valuation: after the share price roughly tripled from 448.65p (end-2021) to 1,352p, HSBC trades at ~14.6x trailing earnings and ~1.5x book versus FY21–FY25 year-end averages of ~9.1x and ~0.86x. Cost efficiency has also drifted from 48.5% (FY23) to 53.4% (FY25), and CET1 fell to 14.1% after the Hang Seng privatisation.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> HSBC Holdings plc is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total net revenue</b> stands in for revenue (criterion 1); <b>net income attributable to ordinary shareholders</b> substitutes for both EBIT (criterion 2) and free cash flow (criterion 4) — a bank's cash flow statement is dominated by deposit and trading-book swings, so criteria 2 and 4 are necessarily correlated, a genuine limitation of the adaptation and not a workaround; <b>RoTE vs. an assumed ~10–11% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; 10.5% midpoint used for the points); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8; points banded by the CET1 cushion: 4pp+ = 5, 3–4pp = 4, 2–3pp = 3, 1–2pp = 2, 0–1pp = 1, below requirement = 0); <b>(dividends + buybacks) ÷ net income</b> substitutes for FCF conversion (criterion 9); criterion 10 averages the P/E and P/B ratios versus the bank's own FY21–FY25 year-end history; and <b>criterion 14 uses the efficiency (cost/income) ratio</b> because banks report no gross margin. HSBC reports in US dollars while its London shares trade in pence; nothing is converted on this page except the P/E and P/B history, which uses S&amp;P's own conversion.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021–FY2025 (fiscal year = calendar year). All figures in USD billions unless noted; the bank reports in USD and nothing is converted. Net income attributable to ordinary shareholders is used as the bank-appropriate proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Net Revenue vs. Net Income ($B)</div>
+    <div class="chart-sub">Revenue = net operating income before expected credit losses (HSBC's own “revenue”), company-reported; net income = profit attributable to ordinary shareholders. FY25 net income fell ~8% on ~$4.9bn of net adverse notable items, while the FY21→FY25 “growth” is flattered by FY21–22 being low-rate years. * FY21–FY22 as originally reported under IFRS 4.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Total net revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net income to ordinary shareholders</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="680" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="62.9" width="24" height="87.1" fill="#2dd4bf"/><text x="74" y="57.9" text-anchor="middle" font-size="8" fill="#cbd5e1">49.6</text>
+      <rect x="92" y="127.8" width="24" height="22.2" fill="#fbbf24"/><text x="104" y="122.8" text-anchor="middle" font-size="8" fill="#cbd5e1">12.6</text>
+      <text x="89" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21*</text>
+      <rect x="190" y="59.1" width="24" height="90.9" fill="#2dd4bf"/><text x="202" y="54.1" text-anchor="middle" font-size="8" fill="#cbd5e1">51.7</text>
+      <rect x="220" y="124.8" width="24" height="25.2" fill="#fbbf24"/><text x="232" y="119.8" text-anchor="middle" font-size="8" fill="#cbd5e1">14.3</text>
+      <text x="217" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22*</text>
+      <rect x="318" y="33.9" width="24" height="116.1" fill="#2dd4bf"/><text x="330" y="28.9" text-anchor="middle" font-size="8" fill="#cbd5e1">66.1</text>
+      <rect x="348" y="110.6" width="24" height="39.4" fill="#fbbf24"/><text x="360" y="105.6" text-anchor="middle" font-size="8" fill="#cbd5e1">22.4</text>
+      <text x="345" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="34.3" width="24" height="115.7" fill="#2dd4bf"/><text x="458" y="29.3" text-anchor="middle" font-size="8" fill="#cbd5e1">65.9</text>
+      <rect x="476" y="109.7" width="24" height="40.3" fill="#fbbf24"/><text x="488" y="104.7" text-anchor="middle" font-size="8" fill="#cbd5e1">22.9</text>
+      <text x="473" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="30.0" width="24" height="120.0" fill="#5eead4"/><text x="586" y="25.0" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">68.3</text>
+      <rect x="604" y="112.9" width="24" height="37.1" fill="#fde68a"/><text x="616" y="107.9" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">21.1</text>
+      <text x="601" y="165" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, crit. #1)</div>
+      <div class="val " style="color:#fbbf24;">~8.3%</div>
+      <div class="sub">FY21→FY25, $49.6B→$68.3B (company-reported, before ECL)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val " style="color:#fbbf24;">~13.7%</div>
+      <div class="sub">$12.6B→$21.1B; measured from a low-earnings FY21–22 base, FY25 dented by notable items</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EPS CAGR (FY21→FY25)</div>
+      <div class="val green">~17.9%</div>
+      <div class="sub">$0.62→$1.20; faster than net income because the share count fell (buybacks)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">RoTE (FY25, reported)</div>
+      <div class="val">13.3%</div>
+      <div class="sub">17.2% excluding notable items; target ≥17% (ex-notables) for 2026–28; H1 2026 annualised 18.2%</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Efficiency (Cost/Income) Ratio Trend — bank analog to margin stability (lower is better)</div>
+    <div class="chart-sub">Cost efficiency ratio = operating expenses ÷ revenue, as reported (lower is better). * FY21–FY22 are original IFRS 4 figures. The ratio improved sharply to 48.5% in FY23 but has since drifted up to 50.2% (FY24) and 53.4% (FY25) as notable items hit revenue and restructuring costs rose; HSBC targets target-basis cost growth of ~1% in 2026.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,48.0 210,63.4 360,108.0 510,103.2 660,94.3" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="48.0" r="4" fill="#2dd4bf"/><text x="60" y="36.0" text-anchor="middle" font-size="9" fill="#f1f5f9">69.9%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21*</text>
+      <circle cx="210" cy="63.4" r="4" fill="#2dd4bf"/><text x="210" y="51.4" text-anchor="middle" font-size="9" fill="#f1f5f9">64.4%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22*</text>
+      <circle cx="360" cy="108.0" r="4" fill="#2dd4bf"/><text x="360" y="96.0" text-anchor="middle" font-size="9" fill="#f1f5f9">48.5%</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="103.2" r="4" fill="#2dd4bf"/><text x="510" y="91.2" text-anchor="middle" font-size="9" fill="#f1f5f9">50.2%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="94.3" r="4" fill="#5eead4"/><text x="660" y="82.3" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">53.4%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($B)</th><th>Net Revenue</th><th>Net Income</th><th>Net Margin</th><th>RoTE</th><th>Cost/Income</th><th>EPS</th><th>DPS</th></tr>
+    <tr><td>FY21*</td><td>49.6</td><td>12.6</td><td>25.4%</td><td>8.3%*</td><td>69.9%*</td><td>$0.62</td><td>$0.25</td></tr>
+    <tr><td>FY22*</td><td>51.7</td><td>14.3</td><td>27.7%</td><td>9.9%*</td><td>64.4%*</td><td>$0.75</td><td>$0.32</td></tr>
+    <tr><td>FY23</td><td>66.1</td><td>22.4</td><td>34.0%</td><td>14.6%</td><td>48.5%</td><td>$1.14</td><td>$0.61</td></tr>
+    <tr><td>FY24</td><td>65.9</td><td>22.9</td><td>34.8%</td><td>14.6%</td><td>50.2%</td><td>$1.24</td><td>$0.66</td></tr>
+    <tr><td>FY25</td><td>68.3</td><td>21.1</td><td>30.9%</td><td>13.3%</td><td>53.4%</td><td>$1.20</td><td>$0.75</td></tr>
+    </table>
+  <div class="footer-note" style="margin-top:6px;">HSBC reports “net operating income before change in expected credit losses” as revenue. Net income is used as the bank proxy for criteria #2 and #4 (see framing note, page 1); “Net Margin” = net income to ordinary shareholders ÷ revenue.</div>
+  <div class="footer-note" style="margin-top:4px;">* FY21–FY22 revenue, cost efficiency and RoTE are as originally reported under IFRS 4 (not restated for IFRS 17); FY23 onward are IFRS 17. EPS is basic. DPS is in respect of the year, in USD; FY25's $0.75 includes a $0.45 fourth interim.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; Profitability</div></div>
+  <div class="sec-sub">Eight quarters, Q3'24–Q2'26. Latest reported quarter: <b>Q2 2026</b> — Q3 2026 results are not out yet (HSBC reports on Oct 27, 2026), so this page does not use them.</div>
+
+  <div class="headline-box">
+    <div class="title">Interim results 2026 (reported Aug 4, 2026) — H1 and Q2 2026</div>
+    <p>H1 revenue $37.7bn (+11% YoY) and profit before tax $19.5bn (+23%); annualised RoTE 18.2% (19.1% excluding notable items) vs. 14.7% in 1H25. CET1 was 14.1% (14.9% at year-end 2025) after the Hang Seng Bank privatisation, dividends and higher risk-weighted assets; HSBC says it will manage CET1 within its 14–14.5% range. A second interim dividend of $0.10/share and a buyback of up to $1bn were announced (to complete by the Q3 results). Targets: RoTE ≥17% (excluding notable items) for 2026–2028 and a 50% dividend payout. Q3 2026 results are due on Oct 27, 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Net Revenue vs. Net Income ($B)</div>
+    <div class="chart-sub">Net operating income after expected credit losses (segment totals from S&amp;P/company data, USD). Q4'24 includes a very large Corporate Centre loss (about −$5.1bn in the segment data) and is not a run-rate quarter.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net income to ordinary shareholders</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="44" y="43.6" width="26" height="106.4" fill="#2dd4bf"/><text x="57" y="38.6" text-anchor="middle" font-size="8" fill="#cbd5e1">16.0</text>
+      <rect x="74" y="109.3" width="26" height="40.7" fill="#fbbf24"/><text x="87" y="104.3" text-anchor="middle" font-size="8" fill="#cbd5e1">6.1</text>
+      <text x="72" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'24</text>
+      <rect x="126" y="82.2" width="26" height="67.8" fill="#2dd4bf"/><text x="139" y="77.2" text-anchor="middle" font-size="8" fill="#cbd5e1">10.2</text>
+      <rect x="156" y="148.7" width="26" height="1.3" fill="#fbbf24"/><text x="169" y="143.7" text-anchor="middle" font-size="8" fill="#cbd5e1">0.2</text>
+      <text x="154" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'24</text>
+      <rect x="208" y="38.6" width="26" height="111.4" fill="#2dd4bf"/><text x="221" y="33.6" text-anchor="middle" font-size="8" fill="#cbd5e1">16.8</text>
+      <rect x="238" y="104.0" width="26" height="46.0" fill="#fbbf24"/><text x="251" y="99.0" text-anchor="middle" font-size="8" fill="#cbd5e1">6.9</text>
+      <text x="236" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'25</text>
+      <rect x="290" y="47.7" width="26" height="102.3" fill="#2dd4bf"/><text x="303" y="42.7" text-anchor="middle" font-size="8" fill="#cbd5e1">15.4</text>
+      <rect x="320" y="119.6" width="26" height="30.4" fill="#fbbf24"/><text x="333" y="114.6" text-anchor="middle" font-size="8" fill="#cbd5e1">4.6</text>
+      <text x="318" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q2'25</text>
+      <rect x="372" y="38.5" width="26" height="111.5" fill="#2dd4bf"/><text x="385" y="33.5" text-anchor="middle" font-size="8" fill="#cbd5e1">16.8</text>
+      <rect x="402" y="117.6" width="26" height="32.4" fill="#fbbf24"/><text x="415" y="112.6" text-anchor="middle" font-size="8" fill="#cbd5e1">4.9</text>
+      <text x="400" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'25</text>
+      <rect x="454" y="47.3" width="26" height="102.7" fill="#2dd4bf"/><text x="467" y="42.3" text-anchor="middle" font-size="8" fill="#cbd5e1">15.5</text>
+      <rect x="484" y="118.7" width="26" height="31.3" fill="#fbbf24"/><text x="497" y="113.7" text-anchor="middle" font-size="8" fill="#cbd5e1">4.7</text>
+      <text x="482" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'25</text>
+      <rect x="536" y="34.9" width="26" height="115.1" fill="#2dd4bf"/><text x="549" y="29.9" text-anchor="middle" font-size="8" fill="#cbd5e1">17.3</text>
+      <rect x="566" y="103.9" width="26" height="46.1" fill="#fbbf24"/><text x="579" y="98.9" text-anchor="middle" font-size="8" fill="#cbd5e1">6.9</text>
+      <text x="564" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'26</text>
+      <rect x="618" y="30.0" width="26" height="120.0" fill="#5eead4"/><text x="631" y="25.0" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">18.1</text>
+      <rect x="648" y="98.9" width="26" height="51.1" fill="#fde68a"/><text x="661" y="93.9" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">7.7</text>
+      <text x="646" y="166" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Q2'26</text>
+    </svg>
+  </div>
+  <table class="datatable">
+    <tr><th>$B</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Net revenue ($B)</td><td>16.0</td><td>10.2</td><td>16.8</td><td>15.4</td><td>16.8</td><td>15.5</td><td>17.3</td><td>18.1</td></tr>
+    <tr><td>YoY growth</td><td>+6.1%</td><td>-14.9%</td><td>-16.3%</td><td>-3.9%</td><td>+4.8%</td><td>+51.6%</td><td>+3.3%</td><td>+17.3%</td></tr>
+    <tr><td>Net income to ordinary ($B)</td><td>6.13</td><td>0.20</td><td>6.93</td><td>4.58</td><td>4.87</td><td>4.72</td><td>6.94</td><td>7.69</td></tr>
+    <tr><td>EPS ($)</td><td>0.34</td><td>0.01</td><td>0.39</td><td>0.26</td><td>0.28</td><td>0.27</td><td>0.40</td><td>0.45</td></tr>
+    </table>
+  <div class="footer-note" style="margin-top:6px;">Revenue here is net operating income <i>after</i> expected credit losses, so it is lower than the headline “revenue” (before ECL) on page 2 (FY25: $64.4B after ECL vs. $68.3B before). Q2'26 YoY compares with Q2'25 on the same basis (+17.3%); company-reported H1'26 revenue (before ECL) grew +11%.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">RoTE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Reported return on average tangible equity, full year, vs. an assumed ~10–11% cost of equity. FY21–FY22 are as reported under IFRS 4. FY25 was 13.3% reported (17.2% excluding notable items); H1 2026 annualised 18.2%. FY21 and FY22 sat below the hurdle.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,108.0 210,92.8 360,48.0 510,48.0 660,60.4" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="108.0" r="4" fill="#a78bfa"/><text x="60" y="96.0" text-anchor="middle" font-size="9" fill="#f1f5f9">8.3%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21*</text>
+      <circle cx="210" cy="92.8" r="4" fill="#a78bfa"/><text x="210" y="80.8" text-anchor="middle" font-size="9" fill="#f1f5f9">9.9%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22*</text>
+      <circle cx="360" cy="48.0" r="4" fill="#a78bfa"/><text x="360" y="36.0" text-anchor="middle" font-size="9" fill="#f1f5f9">14.6%</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="48.0" r="4" fill="#a78bfa"/><text x="510" y="36.0" text-anchor="middle" font-size="9" fill="#f1f5f9">14.6%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="60.4" r="4" fill="#c4b5fd"/><text x="660" y="48.4" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">13.3%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> HSBC is among the very largest banks in Europe by total assets (~$3tn+), the leading international bank in Hong Kong (one of the note-issuing banks) and a top-tier UK retail and commercial bank — enough for a “strong #2-tier” reading (4/5) on market share, so criterion #5 is Met. It is not a clear global #1: US and Chinese banks are larger by assets and market value, and in UK retail it competes with Lloyds, Barclays and NatWest, so market concentration (criterion #6) scores a moderate 3/5 and is Not Met. G-SIB status brings higher capital buffers and tighter regulation, and the Hong Kong/mainland China exposure ties results to geopolitics, property credit and rate paths in two regions.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B (price-to-book) versus the bank's own year-end history; CET1 capital ratio vs. the regulatory requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars) and P/B (line, right scale 0&ndash;2.0x) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end market cap ÷ that year's net income; P/B = year-end market cap ÷ book equity (both S&amp;P Global). “Now” = Oct 23, 2026 close (1,352p): trailing P/E scaled from S&amp;P's 15.43x at 1,428p (Oct 13) to ~14.6x; P/B scaled from 1.74x at 1,530p (Sep 17) to ~1.54x. Forward P/E is ~9.8x on consensus (S&amp;P 10.37x at 1,428p, scaled). P/TBV is somewhat higher than P/B and is not tracked consistently across years here.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B ratio</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="67.09" width="44" height="82.91" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="61.09" text-anchor="middle" font-size="8" fill="#cbd5e1">9.69x</text>
+      <rect x="172.95" y="76.85" width="44" height="73.15" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="70.85" text-anchor="middle" font-size="8" fill="#cbd5e1">8.55x</text>
+      <rect x="276.25" y="91.39" width="44" height="58.61" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="85.39" text-anchor="middle" font-size="8" fill="#cbd5e1">6.85x</text>
+      <rect x="379.55" y="85.15" width="44" height="64.85" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="79.15" text-anchor="middle" font-size="8" fill="#cbd5e1">7.58x</text>
+      <rect x="482.85" y="40.14" width="44" height="109.86" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="34.14" text-anchor="middle" font-size="8" fill="#cbd5e1">12.84x</text>
+      <rect x="586.15" y="25.00" width="44" height="125.00" fill="#5eead4"/><text x="608.15" y="19.00" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">14.61x</text>
+      <polyline points="91.65,111.25 194.95,108.75 298.25,100.00 401.55,93.75 504.85,67.50 608.15,53.75" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="111.25" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="108.75" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="100.00" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="93.75" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="67.50" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="53.75" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (0.62x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (0.66x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (0.80x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (0.90x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (1.32x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now (1.54x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> HSBC's share price has risen about 3x since end-2021 while net income rose about 1.7x, so the multiple has re-rated from a deeply discounted base: P/E from 6.9x–9.7x (FY21–FY24) to ~14.6x now, P/B from 0.6x–0.9x to ~1.5x. Part of that re-rating is earned — RoTE is 13–18% versus 8–10% in FY21–22 — but on a strict “vs. own history” test it is a Not Met (0/5). The forward P/E (~9.8x) is well below trailing because trailing earnings still carry notable items; consensus assumes a clean step-up in earnings that has to be delivered. Own FY21–FY25 year-end averages: P/E 9.1x, P/B 0.86x; current P/E 14.6x (1.61x of average) and P/B 1.54x (1.79x of average). Criterion 10 averages those two ratios (1.70).
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement</div>
+    <div class="chart-sub">Dashed line = estimated CET1 requirement including buffers (~11.5%, an approximate figure: HSBC's exact MDA threshold was not re-verified for this page). FY21–FY23 ratios (15.8%, 14.2%, 15.2%) are recollected from prior reporting, not re-checked; FY24 and FY25 (14.9%, 14.9%) are as reported. Latest: 14.1% at 30 Jun 2026, after the Hang Seng privatisation (about −110bp CET1 impact in January 2026).</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="108.0" x2="680" y2="108.0" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="119.0" text-anchor="end" font-size="8" fill="#fbbf24">~11.5% est. requirement incl. buffers (approx.)</text>
+      <polyline points="60,42.0 210,66.6 360,51.2 510,55.8 660,55.8" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="42.0" r="4" fill="#2dd4bf"/><text x="60" y="30.0" text-anchor="middle" font-size="9" fill="#f1f5f9">15.8%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <circle cx="210" cy="66.6" r="4" fill="#2dd4bf"/><text x="210" y="54.6" text-anchor="middle" font-size="9" fill="#f1f5f9">14.2%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <circle cx="360" cy="51.2" r="4" fill="#2dd4bf"/><text x="360" y="39.2" text-anchor="middle" font-size="9" fill="#f1f5f9">15.2%</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="55.8" r="4" fill="#2dd4bf"/><text x="510" y="43.8" text-anchor="middle" font-size="9" fill="#f1f5f9">14.9%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="55.8" r="4" fill="#5eead4"/><text x="660" y="43.8" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">14.9%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="24.0 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#a78bfa" stroke-width="14" stroke-dasharray="21.1 263.9" stroke-dashoffset="-24.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="217.5 263.9" stroke-dashoffset="-45.1" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="1.3 263.9" stroke-dashoffset="-262.6" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>BlackRock ~9.1% (long position notified 11 Jul 2025)</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>Ping An Asset Management ~8.0% (notified 7 May 2024)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other institutional &amp; retail ~82.4% (incl. ADS holders via BNY Mellon as depositary)</div>
+          <div><span class="dot" style="background:#f87171;"></span>Directors / executives &lt;1% (illustrative sliver)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>No controlling shareholder or founder: HSBC's largest disclosed holders are BlackRock (~9.1%) and Ping An Asset Management (~8.0%, a strategic holder), plus the depositary for its US ADSs. Directors and executives hold well under 1% in aggregate, so alignment comes from pay and the capital-return policy, not ownership (criterion 12 scores 0/5). Capital policy: CET1 target range 14–14.5%, a 50% dividend payout target for 2026–2028, and buybacks that were paused after the Hang Seng privatisation until CET1 returned toward range (up to $1bn announced with the interims). As a G-SIB, HSBC also carries additional loss-absorbing-capacity and buffer requirements.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained on pages 1, 2 and 4. Points per criterion (0–5) are shown in the finding text; Martinero Index = Σ(points ÷ 5 × weight) ÷ 105 × 100 = 56. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>~8.3% CAGR FY21&ndash;FY25 ($49.6B&rarr;$68.3B, company-reported net operating income before ECL; FY21&ndash;22 pre-IFRS 17). Points: 2/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net income to ordinary shareholders used as bank proxy</td><td>~13.8% CAGR ($12.6B&rarr;$21.1B); measured from a low-earnings FY21 base and dented by FY25 notable items. Points: 3/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 30.9% (net income $21.1B &divide; revenue $68.3B); reported profit before tax $29.9B is 43.8% of revenue. Points: 5/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>Same ~13.8% net-income CAGR as criterion #2 &mdash; unavoidably correlated once both EBIT and FCF are proxied by net income (a bank's reported cash flow swings with deposits and trading books). Points: 3/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Among Europe's largest banks by assets (~$3tn+) and the leading international bank in Hong Kong; not a clear global #1 (US and Chinese banks are larger). Strong #2-tier: 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; concentrated in Hong Kong (a few note-issuing banks) and the UK (HSBC, Lloyds, Barclays, NatWest), but global wholesale banking and wealth are contested. Raw 3 &rarr; 2/5 points</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; RoTE vs. cost of equity (bank proxy)</td><td>RoTE 13.3% (FY25 reported; 17.2% ex-notable items) vs. an assumed 10.5% cost of equity: spread 2.8pp &rarr; 1/5 (on the ex-notables 17.2% it would be 3/5). FY21&ndash;22 RoTE of 8&ndash;10% was below the hurdle</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. regulatory requirement</td><td>CET1 14.1% (30 Jun 2026; 14.9% at Dec 2025) vs. an estimated ~11.5% requirement incl. buffers (approximate): cushion ~2.6pp &rarr; 3/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion &mdash; substituted with capital-distribution ratio</td><td>FY25 dividends declared ~$12.9B + buybacks $6.0B = ~$18.9B &divide; net income $21.1B &asymp; 90% &rarr; 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>P/E ~14.6x vs. FY21&ndash;25 average 9.1x (1.61x); P/B ~1.54x vs. average 0.86x (1.79x); mean ratio 1.70 &rarr; 0/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>~20.3bn (FY21) &rarr; ~17.5bn (FY25), &minus;13.5% (derived from S&amp;P net-cash-per-share), 17.1bn now &rarr; declining 5&ndash;15% = 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>No controlling or founding holder; BlackRock (~9.1%) and Ping An AM (~8.0%) are institutional/strategic, not insiders; directors and executives well under 1% &rarr; 0/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capex $1.45B &divide; revenue $68.3B = 2.1% (S&amp;P cash-flow data) &rarr; 5/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Basis: cost efficiency ratio (lower = better; a bank has no gross margin). FY22 64.4% (original IFRS 4 basis) &rarr; FY25 53.4% = ~11pp improvement (&ge;0.5pp) &rarr; 5/5. Caveat: the ratio has <i>worsened</i> from 48.5% (FY23) to 53.4% (FY25) as notable items and restructuring weighed, and the FY22 base is not IFRS 17-restated</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A large, globally diversified franchise with strong capital (CET1 14.1–14.9%) and a returns step-up (H1 2026 annualised RoTE 18.2%). Capital return is heavy — about 90% of FY25 earnings returned through dividends and $6bn of buybacks — the share count is down ~13.5% since FY21, capex is light (~2% of revenue), and net income compounded ~14% a year from a low FY21 base.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is below the framework's 15% bar (~8% revenue, ~14% net income) and the cost/income ratio has worsened since FY23 (48.5% &rarr; 53.4%). The stock has re-rated ~3x since 2021 and sits at ~1.6–1.8x its own P/E and P/B averages, leaving little cushion; the ~9.8x forward P/E depends on a clean earnings step-up. CET1 dropped to 14.1% after the Hang Seng privatisation (further buybacks depend on returning to the 14–14.5% range), results carry Hong Kong/mainland China property and geopolitical exposure, UK wealth restructuring is under way, notable items repeatedly distort reported numbers, and insider ownership is negligible.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked across &ge;2 where possible):</b> HSBC Holdings 2025 annual results release (Feb 25, 2026), 2022 results release and Interim Results 2026 (Aug 4, 2026), hsbc.com / RNS; Form 20-F FY2025 (SEC EDGAR); stockanalysis.com (S&amp;P Global Market Intelligence) &mdash; annual/quarterly financials, ratios, prices and consensus target, Oct 16&ndash;26, 2026; Yahoo Finance monthly price history for HSBA.L (year-end closes); HSBC Annual Report 2025 (substantial shareholders).
+    <br><b>Data-quality flags:</b> (1) FY21&ndash;FY22 revenue, cost efficiency and RoTE are as originally reported under IFRS 4 and not restated for IFRS 17, so FY22&rarr;FY23 has a comparability break; (2) quarterly revenue is net operating income after ECL (S&amp;P/company segment totals); (3) the ~11.5% CET1 requirement and the FY21&ndash;FY23 CET1 ratios are approximate/recollected, not re-verified; (4) P/E and P/B history is S&amp;P-standardised (year-end market cap, S&amp;P's USD/GBP conversion) and the “Now” multiples are scaled from the last full S&amp;P snapshot to the Oct 23 close; (5) the 52-week range, market cap and consensus target are stockanalysis.com snapshots (Oct 16&ndash;23); (6) share counts are derived from S&amp;P net-cash-per-share; (7) the quoted price is the Oct 23 close (the market was open on Oct 26 at compile time); (8) Q3 2026 results (Oct 27) are not reflected; (9) the criterion-8 scale (CET1 cushion bands) is this page's own convention.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in USD, unaudited/as originally reported or S&amp;P-standardised where stated, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">HSBC Holdings plc &mdash; London Stock Exchange, GBX pence share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">HSBC &mdash; Year-End Close (London Stock Exchange, GBX pence)</div>
+    <div class="chart-sub">Calendar year-end closes for 2021–2025 (not adjusted for dividends) and the Oct 23, 2026 close. HSBC roughly tripled over the window as RoTE rose from ~8% to 13–18% and the bank returned heavy capital; it reached 1,610p within the last 52 weeks and has pulled back ~16% from that level. London prices are quoted in pence (GBX): 1,352.00p = £13.52.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +24.7%</text>
+<path d="M 46.0,160.00 L 172.8,151.84 L 299.6,137.25 L 426.4,119.01 L 553.2,71.70 L 680.0,50.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="160.00" x2="680.0" y2="50.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,160.00 L 172.8,151.84 L 299.6,137.25 L 426.4,119.01 L 553.2,71.70 L 680.0,50.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="160.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="178.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">448.65p</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="151.84" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="141.84" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">515.70p</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="137.25" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="127.25" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">635.50p</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="119.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="109.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">785.30p</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="71.70" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="61.70" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">1,173.80p</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="50.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="40.00" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">1,352.00p</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes (2021: 448.65p; 2022: 515.70p; 2023: 635.50p; 2024: 785.30p; 2025: 1,173.80p) are the December-month closes from Yahoo Finance (HSBA.L); the current price is the Oct 23, 2026 close (1,352.00p) from stockanalysis.com / Yahoo Finance. Prices are as originally quoted: split-unadjusted and dividend-unadjusted (HSBC's USD dividends are not added back). The 5-yr CAGR is price-only.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

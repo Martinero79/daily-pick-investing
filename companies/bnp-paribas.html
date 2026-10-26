@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BNP Paribas SA — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/bnp-paribas.html">
+<meta property="og:title" content="BNP Paribas SA — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BNP Paribas SA — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Euronext Paris: BNP</div>
+  <h1>BNP Paribas SA</h1>
+  <div class="badges">
+    <div class="badge">Euronext Paris: BNP · reports in EUR</div>
+    <div class="badge">Sector: Diversified Banking, Insurance &amp; Asset Management</div>
+    <div class="badge">HQ: Paris, France · predecessor banks date to 1822</div>
+    <div class="badge">One of the two largest euro-area banks by assets</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">€83.52</div>
+  <div class="price-sub">Close Oct 23, 2026 (Euronext Paris, EUR) · Market cap ≈ €91.5bn (1.10bn shares) · 52-week range ≈ €65.12–€113.82 · Consensus target ≈ €119 (19 analysts, Buy) · FY25 dividend €5.16/share (60% payout), TTM yield ≈ 6% · Q3 results due Oct 28</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Crédit Agricole, BPCE and Société Générale (French retail and CIB) &middot; Santander, UniCredit, Intesa Sanpaolo, Deutsche Bank and ING (European peers) &middot; HSBC, JPMorgan, Citi and Goldman Sachs in global wholesale and markets — a G-SIB with strong but contested positions.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Net Revenue (FY25)</div>
+      <div class="val">€51.2B</div>
+      <div class="note">Company-reported net banking income, +4.9% vs FY24 (€48.8B), incl. ~€0.8bn from AXA IM (consolidated from Jul 2025). The 5-year CAGR on this page uses S&amp;P-standardised revenue (FY25 €47.9B, +4.8%) so all five years are on one basis.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Income / RoTE (FY25)</div>
+      <div class="val green">€12.2B / 11.6%</div>
+      <div class="note">Net income group share €12.2bn (+4.6%); €11.5bn after AT1 coupons (the basis used for EPS and the scorecard). RoTE 11.6% vs. a ~10–11% cost-of-equity assumption; Q2 2026 RoTE 13.3% (that quarter included an €858m Ageas/AGI gain).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income Ratio (FY25)</div>
+      <div class="val green">61.2%</div>
+      <div class="note">Operating expenses ÷ revenue — lower is better: 67.3% (FY21) → 61.2% (FY25); 56.7% in Q2 2026; target &lt;56% by 2028. The bank-specific analog to margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (Jun 2026)</div>
+      <div class="val green">13.0%</div>
+      <div class="note">Vs. a 10.52% SREP requirement (31 Dec 2025): cushion ~2.5pp. Target 13% by end-2027 (post-FRTB). Substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">52/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">7/14 criteria met — solid capital, efficiency gains and a steady payout, a valuation close to its own history, weighed against low growth and thin insider/controlling ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 0 1 110.00,205.00 L 110.00,168.00 A 58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 110.00,205.00 A 95,95 0 1 1 110.000,15.000 L 110.000,52.000 A 58,58 0 1 0 110.00,168.00 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">7/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>7 Met</b> — net-margin proxy, market share (one of the two largest euro-area banks by assets), RoTE vs. cost of equity, CET1 cushion over the SREP requirement, share count trend, capex intensity, margin stability (cost/income).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>7 Not Met</b> — revenue CAGR (~3.6%), net-income CAGR (~6.2%, used for both the EBIT and FCF criteria), moderate market concentration, capital-distribution ratio (~60% vs. the 80% bar), entry multiple (P/E at its average but P/B ~1.2x its average) and limited insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    BNP Paribas is France's largest bank and, with Crédit Agricole, one of the two largest in the euro area by assets, with three divisions — Corporate &amp; Institutional Banking, Commercial, Personal Banking &amp; Services, and Investment &amp; Protection Services (insurance, asset management, wealth) — and roughly 180,000 employees. FY2025 net banking income was €51.2bn and net income group share €12.2bn (RoTE 11.6%, CET1 12.6%); in Q2 2026 net income group share reached €4.3bn, helped by an €858m one-off gain, and CET1 rose to 13.0%. The scorecard case rests on <b>capital, efficiency gains and a high payout</b> (FY25 dividend €5.16/share plus a €1.15bn buyback, share count down ~10% since FY2021), not on growth: S&amp;P-standardised revenue compounded at only ~3.6% a year over FY2021–FY2025 and the net-income proxy at ~6.2%. Valuation is more neutral than at HSBC or Santander: the stock is down ~27% from its August high (€113.82) at €83.52, so trailing P/E (~7.2x) sits right at its own FY21–25 average (7.2x), while P/B (~0.68x) is about 19% above its average (0.57x).
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> BNP Paribas SA is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total net revenue</b> stands in for revenue (criterion 1); <b>net income attributable to ordinary shareholders</b> substitutes for both EBIT (criterion 2) and free cash flow (criterion 4) — a bank's cash flow statement is dominated by deposit and trading-book swings, so criteria 2 and 4 are necessarily correlated, a genuine limitation of the adaptation and not a workaround; <b>RoTE vs. an assumed ~10–11% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; 10.5% midpoint used for the points); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8; points banded by the CET1 cushion: 4pp+ = 5, 3–4pp = 4, 2–3pp = 3, 1–2pp = 2, 0–1pp = 1, below requirement = 0); <b>(dividends + buybacks) ÷ net income</b> substitutes for FCF conversion (criterion 9); criterion 10 averages the P/E and P/B ratios versus the bank's own FY21–FY25 year-end history; and <b>criterion 14 uses the efficiency (cost/income) ratio</b> because banks report no gross margin. Annual revenue and net income on this page are S&amp;P-standardised (continuing operations, EUR) so five years sit on one basis; BNP's own reported figures (net banking income €51.2bn, net income group share €12.2bn in FY25) are quoted where they differ.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021–FY2025 (fiscal year = calendar year). All figures in EUR billions unless noted; the bank reports in EUR and nothing is converted. Net income attributable to ordinary shareholders is used as the bank-appropriate proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Net Revenue vs. Net Income (€B)</div>
+    <div class="chart-sub">Revenue is S&amp;P-standardised (continuing operations, EUR) so all five years sit on one basis; BNP's own reported net banking income is higher (FY24 €48.8B, FY25 €51.2B), and early-year history is complicated by the 2023 sale of Bank of the West. Net income is attributable to ordinary shareholders after AT1 coupons (FY25 €11.5B vs. €12.2B group share).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Total net revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net income to ordinary shareholders</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="680" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="45.8" width="24" height="104.2" fill="#2dd4bf"/><text x="74" y="40.8" text-anchor="middle" font-size="8" fill="#cbd5e1">41.6</text>
+      <rect x="92" y="127.3" width="24" height="22.7" fill="#fbbf24"/><text x="104" y="122.3" text-anchor="middle" font-size="8" fill="#cbd5e1">9.1</text>
+      <text x="89" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="43.7" width="24" height="106.3" fill="#2dd4bf"/><text x="202" y="38.7" text-anchor="middle" font-size="8" fill="#cbd5e1">42.5</text>
+      <rect x="220" y="126.8" width="24" height="23.2" fill="#fbbf24"/><text x="232" y="121.8" text-anchor="middle" font-size="8" fill="#cbd5e1">9.3</text>
+      <text x="217" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="42.8" width="24" height="107.2" fill="#2dd4bf"/><text x="330" y="37.8" text-anchor="middle" font-size="8" fill="#cbd5e1">42.8</text>
+      <rect x="348" y="124.2" width="24" height="25.8" fill="#fbbf24"/><text x="360" y="119.2" text-anchor="middle" font-size="8" fill="#cbd5e1">10.3</text>
+      <text x="345" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="35.5" width="24" height="114.5" fill="#2dd4bf"/><text x="458" y="30.5" text-anchor="middle" font-size="8" fill="#cbd5e1">45.7</text>
+      <rect x="476" y="122.9" width="24" height="27.1" fill="#fbbf24"/><text x="488" y="117.9" text-anchor="middle" font-size="8" fill="#cbd5e1">10.8</text>
+      <text x="473" y="165" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="30.0" width="24" height="120.0" fill="#5eead4"/><text x="586" y="25.0" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">47.9</text>
+      <rect x="604" y="121.2" width="24" height="28.8" fill="#fde68a"/><text x="616" y="116.2" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">11.5</text>
+      <text x="601" y="165" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, crit. #1)</div>
+      <div class="val red">~3.6%</div>
+      <div class="sub">FY21→FY25, €41.6B→€47.9B (S&amp;P-standardised)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val " style="color:#fbbf24;">~6.2%</div>
+      <div class="sub">€9.1B→€11.5B; after AT1 coupons; steady but slow</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EPS CAGR (FY21→FY25)</div>
+      <div class="val " style="color:#fbbf24;">~9.1%</div>
+      <div class="sub">€7.26→€10.29; faster than net income because the share count fell (buybacks)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">RoTE (FY25, reported)</div>
+      <div class="val">11.6%</div>
+      <div class="sub">10.9% in FY24; target 12% in 2026 and &gt;13% in 2028 (post-FRTB); Q2 2026 13.3% incl. a one-off gain</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Efficiency (Cost/Income) Ratio Trend — bank analog to margin stability (lower is better)</div>
+    <div class="chart-sub">Cost/income = operating expenses ÷ revenues, company-reported (lower is better). FY21 (67.3%) and FY25 (61.2%) are from BNP's 4Q25 results deck; FY24 (61.8%) is computed from the deck's operating expenses (€30.2bn) and revenues (€48.8bn); FY22 (~66.8%) is derived from press-reported figures (opex ≈ €33.7bn, revenue ≈ €50.4bn) and is approximate; FY23 was not re-verified (n/a). Q2 2026 was 56.7%; target &lt;56% by 2028.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,48.0 210,52.9" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <polyline points="510,102.1 660,108.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="48.0" r="4" fill="#2dd4bf"/><text x="60" y="36.0" text-anchor="middle" font-size="9" fill="#f1f5f9">67.3%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <circle cx="210" cy="52.9" r="4" fill="#2dd4bf"/><text x="210" y="40.9" text-anchor="middle" font-size="9" fill="#f1f5f9">66.8%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="100" text-anchor="middle" font-size="9" fill="#64748b">n/a</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="102.1" r="4" fill="#2dd4bf"/><text x="510" y="90.1" text-anchor="middle" font-size="9" fill="#f1f5f9">61.8%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="108.0" r="4" fill="#5eead4"/><text x="660" y="96.0" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">61.2%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (€B)</th><th>Net Revenue</th><th>Net Income</th><th>Net Margin</th><th>ROE (S&amp;P)</th><th>Cost/Income</th><th>EPS</th><th>DPS</th></tr>
+    <tr><td>FY21</td><td>41.6</td><td>9.1</td><td>21.7%</td><td>7.6%</td><td>67.3%</td><td>€7.26</td><td>€3.67</td></tr>
+    <tr><td>FY22</td><td>42.5</td><td>9.3</td><td>21.8%</td><td>7.7%</td><td>~66.8%</td><td>€7.52</td><td>€3.90</td></tr>
+    <tr><td>FY23</td><td>42.8</td><td>10.3</td><td>24.0%</td><td>6.6%</td><td>n/a</td><td>€8.58</td><td>€4.60</td></tr>
+    <tr><td>FY24</td><td>45.7</td><td>10.8</td><td>23.7%</td><td>9.3%</td><td>61.8%</td><td>€9.57</td><td>€4.79</td></tr>
+    <tr><td>FY25</td><td>47.9</td><td>11.5</td><td>24.0%</td><td>9.7%</td><td>61.2%</td><td>€10.29</td><td>€5.16</td></tr>
+    </table>
+  <div class="footer-note" style="margin-top:6px;">Net Income is used as the bank proxy for criteria #2 and #4 (see framing note, page 1); “Net Margin” = net income to ordinary shareholders (after AT1 coupons) ÷ S&amp;P-standardised revenue. On BNP's reported net banking income (€51.2B) the FY25 net margin is 22.5%.</div>
+  <div class="footer-note" style="margin-top:4px;">Revenue, net income, EPS and ROE are S&amp;P-standardised; EPS equals BNP's reported EPS. DPS is the dividend in respect of each year (FY25: €2.59 interim + €2.57 balance). ROE is S&amp;P's return on average equity, not RoTE (reported RoTE: FY24 10.9%, FY25 11.6%).</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; Profitability</div></div>
+  <div class="sec-sub">Eight quarters, Q3'24–Q2'26. Latest reported quarter: <b>Q2 2026</b> — Q3 2026 results are not out yet (BNP Paribas reports on Oct 28, 2026), so this page does not use them.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 results (reported Jul 23, 2026)</div>
+    <p>Revenues €14.09bn (+12% YoY on BNP's own basis); net income group share €4.35bn (+33%), including an €858m capital gain on the Ageas/AGI transaction; cost/income 56.7%; cost of risk 39bp (incl. €95m of geopolitical provisions); RoTE 13.3%; CET1 13.0% (+20bp on the quarter). Management says it is confident of exceeding its 2026 targets (RoTE 12%) and targets net income growth of &gt;10% a year over 2025–28, RoTE &gt;13% and cost/income &lt;56% by 2028, and a 13% CET1 ratio by end-2027 (post-FRTB). Q3 2026 results are due Oct 28, 2026. The share price is down ~27% from its August high into that print; HSBC and Santander also retreated ~12–16% from their highs over the same weeks, which points to a sector-wide move, but this research did not establish a cause.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Net Revenue vs. Net Income (€B)</div>
+    <div class="chart-sub">S&amp;P-standardised revenue (continuing operations, EUR) and net income to ordinary shareholders after AT1 coupons. BNP's own reported revenues were €13.1bn in Q4'25 and €14.1bn in Q2'26 — higher than the S&amp;P basis shown. Q2'26 net income includes the one-off Ageas/AGI gain.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenue</span><span><span class="dot" style="background:#fbbf24;"></span>Net income to ordinary shareholders</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="44" y="52.0" width="26" height="98.0" fill="#2dd4bf"/><text x="57" y="47.0" text-anchor="middle" font-size="8" fill="#cbd5e1">11.2</text>
+      <rect x="74" y="124.9" width="26" height="25.1" fill="#fbbf24"/><text x="87" y="119.9" text-anchor="middle" font-size="8" fill="#cbd5e1">2.9</text>
+      <text x="72" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'24</text>
+      <rect x="126" y="53.4" width="26" height="96.6" fill="#2dd4bf"/><text x="139" y="48.4" text-anchor="middle" font-size="8" fill="#cbd5e1">11.0</text>
+      <rect x="156" y="131.6" width="26" height="18.4" fill="#fbbf24"/><text x="169" y="126.6" text-anchor="middle" font-size="8" fill="#cbd5e1">2.1</text>
+      <text x="154" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'24</text>
+      <rect x="208" y="41.9" width="26" height="108.1" fill="#2dd4bf"/><text x="221" y="36.9" text-anchor="middle" font-size="8" fill="#cbd5e1">12.4</text>
+      <rect x="238" y="124.2" width="26" height="25.8" fill="#fbbf24"/><text x="251" y="119.2" text-anchor="middle" font-size="8" fill="#cbd5e1">3.0</text>
+      <text x="236" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'25</text>
+      <rect x="290" y="48.8" width="26" height="101.2" fill="#2dd4bf"/><text x="303" y="43.8" text-anchor="middle" font-size="8" fill="#cbd5e1">11.6</text>
+      <rect x="320" y="124.8" width="26" height="25.2" fill="#fbbf24"/><text x="333" y="119.8" text-anchor="middle" font-size="8" fill="#cbd5e1">2.9</text>
+      <text x="318" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q2'25</text>
+      <rect x="372" y="47.1" width="26" height="102.9" fill="#2dd4bf"/><text x="385" y="42.1" text-anchor="middle" font-size="8" fill="#cbd5e1">11.8</text>
+      <rect x="402" y="123.4" width="26" height="26.6" fill="#fbbf24"/><text x="415" y="118.4" text-anchor="middle" font-size="8" fill="#cbd5e1">3.0</text>
+      <text x="400" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q3'25</text>
+      <rect x="454" y="44.1" width="26" height="105.9" fill="#2dd4bf"/><text x="467" y="39.1" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1</text>
+      <rect x="484" y="125.7" width="26" height="24.3" fill="#fbbf24"/><text x="497" y="120.7" text-anchor="middle" font-size="8" fill="#cbd5e1">2.8</text>
+      <text x="482" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q4'25</text>
+      <rect x="536" y="30.0" width="26" height="120.0" fill="#2dd4bf"/><text x="549" y="25.0" text-anchor="middle" font-size="8" fill="#cbd5e1">13.7</text>
+      <rect x="566" y="121.9" width="26" height="28.1" fill="#fbbf24"/><text x="579" y="116.9" text-anchor="middle" font-size="8" fill="#cbd5e1">3.2</text>
+      <text x="564" y="166" text-anchor="middle" font-size="9" fill="#7c8aa5">Q1'26</text>
+      <rect x="618" y="31.7" width="26" height="118.3" fill="#5eead4"/><text x="631" y="26.7" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">13.5</text>
+      <rect x="648" y="116.2" width="26" height="33.8" fill="#fde68a"/><text x="661" y="111.2" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">3.9</text>
+      <text x="646" y="166" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Q2'26</text>
+    </svg>
+  </div>
+  <table class="datatable">
+    <tr><th>€B</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Net revenue (€B)</td><td>11.2</td><td>11.0</td><td>12.4</td><td>11.6</td><td>11.8</td><td>12.1</td><td>13.7</td><td>13.5</td></tr>
+    <tr><td>YoY growth</td><td>+3.4%</td><td>+12.9%</td><td>+3.4%</td><td>+0.5%</td><td>+4.9%</td><td>+9.7%</td><td>+11.0%</td><td>+16.9%</td></tr>
+    <tr><td>Net income to ordinary (€B)</td><td>2.87</td><td>2.11</td><td>2.95</td><td>2.88</td><td>3.04</td><td>2.78</td><td>3.22</td><td>3.86</td></tr>
+    <tr><td>EPS (€)</td><td>2.53</td><td>1.87</td><td>2.61</td><td>2.57</td><td>2.71</td><td>2.50</td><td>2.93</td><td>3.53</td></tr>
+    </table>
+  <div class="footer-note" style="margin-top:6px;">Revenue and net income are S&amp;P-standardised (revenue is ~€2–3bn a year below BNP's reported net banking income; net income is after AT1 coupons). On BNP's own basis Q2'26 revenue grew +12% YoY and net income group share +33%; on the S&amp;P basis shown here revenue grew +16.9%.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Return on Equity Trend (S&P-standardised) — bank analog to ROIC</div>
+    <div class="chart-sub">S&amp;P return on average equity: 7.6%, 7.7%, 6.6%, 9.3%, 9.7%. This is plain ROE, not RoTE: BNP's reported RoTE was 10.9% in FY24 and 11.6% in FY25 (13.3% in Q2 2026, incl. a one-off gain), which is the figure used for criterion #7 against an assumed ~10–11% cost of equity. Earlier reported RoTE was not re-verified, so no RoTE line is drawn.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,88.1 210,87.1 360,108.0 510,55.7 660,48.0" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="88.1" r="4" fill="#a78bfa"/><text x="60" y="76.1" text-anchor="middle" font-size="9" fill="#f1f5f9">7.6%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <circle cx="210" cy="87.1" r="4" fill="#a78bfa"/><text x="210" y="75.1" text-anchor="middle" font-size="9" fill="#f1f5f9">7.7%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <circle cx="360" cy="108.0" r="4" fill="#a78bfa"/><text x="360" y="96.0" text-anchor="middle" font-size="9" fill="#f1f5f9">6.6%</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="55.7" r="4" fill="#a78bfa"/><text x="510" y="43.7" text-anchor="middle" font-size="9" fill="#f1f5f9">9.3%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="48.0" r="4" fill="#c4b5fd"/><text x="660" y="36.0" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">9.7%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> BNP Paribas is France's largest bank and, with Crédit Agricole, one of the two largest in the euro area by total assets. It also holds leading positions in Belgium, Luxembourg and Italy (BNL), a top-tier European corporate &amp; institutional banking franchise, a large vehicle-leasing platform (Arval) and an insurance/asset-management arm that grew with AXA IM in 2025 — a “strong #2-tier” reading (4/5) on market share, so criterion #5 is Met. But no single bank dominates: French banking is shared by four or five large groups, Belgium and Italy have strong local rivals, and global wholesale banking is contested by US banks, so concentration is a moderate 3/5 and Not Met. As a G-SIB it carries additional capital buffers.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/B (price-to-book) versus the bank's own year-end history; CET1 capital ratio vs. the regulatory requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars) and P/B (line, right scale 0&ndash;1.0x) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end market cap ÷ that year's net income; P/B = year-end market cap ÷ book equity (both S&amp;P Global). “Now” = Oct 23, 2026 close (€83.52): trailing P/E 7.23x on S&amp;P TTM EPS of €11.55; P/B ~0.68x scaled from S&amp;P's 0.79x at €96.97 (Sep 23 snapshot). Forward P/E is ~6.7x (S&amp;P consensus). Tangible-book P/TBV is not tracked consistently across years, so P/B is used.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/B ratio</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="25.00" width="44" height="125.00" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="19.00" text-anchor="middle" font-size="8" fill="#cbd5e1">8.26x</text>
+      <rect x="172.95" y="42.86" width="44" height="107.14" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="36.86" text-anchor="middle" font-size="8" fill="#cbd5e1">7.08x</text>
+      <rect x="276.25" y="44.37" width="44" height="105.63" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="38.37" text-anchor="middle" font-size="8" fill="#cbd5e1">6.98x</text>
+      <rect x="379.55" y="56.78" width="44" height="93.22" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="50.78" text-anchor="middle" font-size="8" fill="#cbd5e1">6.16x</text>
+      <rect x="482.85" y="33.02" width="44" height="116.98" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="27.02" text-anchor="middle" font-size="8" fill="#cbd5e1">7.73x</text>
+      <rect x="586.15" y="40.59" width="44" height="109.41" fill="#5eead4"/><text x="608.15" y="34.59" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">7.23x</text>
+      <polyline points="91.65,73.75 194.95,85.00 298.25,80.00 401.55,87.50 504.85,66.25 608.15,65.00" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="73.75" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="85.00" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="80.00" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="87.50" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="66.25" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="65.00" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (0.61x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (0.52x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (0.56x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (0.50x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (0.67x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now (0.68x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> BNP is the one of the three banks whose entry multiple is not stretched against its own history on earnings: the stock has pulled back ~27% from its August high, putting trailing P/E (7.2x) at the FY21–FY25 average and forward P/E at ~6.7x. On book value it is less cheap — P/B of ~0.68x is about 19% above its ~0.57x average, because returns have risen (ROE 7.6% → 9.7%). Averaging the two lenses gives a ratio just above 1.0, so criterion 10 is Not Met, narrowly (2/5). Note that trailing earnings include the Q2 2026 one-off gain, so the “at average” P/E reading is flattered. Own FY21–FY25 year-end averages: P/E 7.2x, P/B 0.57x; current P/E 7.2x (1.00x of average) and P/B 0.68x (1.19x of average). Criterion 10 averages those two ratios (1.09).
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement</div>
+    <div class="chart-sub">Dashed line = SREP CET1 requirement of 10.52% as of 31 Dec 2025 (including a 74bp countercyclical buffer and 14bp systemic risk buffer, per the 4Q25 results deck). FY23 (13.2%) and FY25 (12.6%) are as reported; FY21, FY22 and FY24 values (12.9%, 12.3%, 12.5%) are recollected, not re-verified, and FY24/FY25 sit on different Basel 3/CRR3 bases. Latest: 13.0% at 30 Jun 2026; target 13% by end-2027 (post-FRTB).</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="108.0" x2="680" y2="108.0" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="119.0" text-anchor="end" font-size="8" fill="#fbbf24">10.52% SREP requirement (31 Dec 2025)</text>
+      <polyline points="60,49.4 210,64.2 360,42.0 510,59.2 660,56.8" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="49.4" r="4" fill="#2dd4bf"/><text x="60" y="37.4" text-anchor="middle" font-size="9" fill="#f1f5f9">12.9%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <circle cx="210" cy="64.2" r="4" fill="#2dd4bf"/><text x="210" y="52.2" text-anchor="middle" font-size="9" fill="#f1f5f9">12.3%</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <circle cx="360" cy="42.0" r="4" fill="#2dd4bf"/><text x="360" y="30.0" text-anchor="middle" font-size="9" fill="#f1f5f9">13.2%</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <circle cx="510" cy="59.2" r="4" fill="#2dd4bf"/><text x="510" y="47.2" text-anchor="middle" font-size="9" fill="#f1f5f9">12.5%</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <circle cx="660" cy="56.8" r="4" fill="#5eead4"/><text x="660" y="44.8" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">12.6%</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="193.2 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="18.5 263.9" stroke-dashoffset="-193.2" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#a78bfa" stroke-width="14" stroke-dasharray="15.0 263.9" stroke-dashoffset="-211.6" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#fbbf24" stroke-width="14" stroke-dasharray="11.3 263.9" stroke-dashoffset="-226.7" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#94a3b8" stroke-width="14" stroke-dasharray="19.0 263.9" stroke-dashoffset="-238.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="6.9 263.9" stroke-dashoffset="-257.0" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other institutional investors ~73.2% (Europe 41.5%, rest of world 31.7%)</div>
+          <div><span class="dot" style="background:#3b82f6;"></span>BlackRock ~7.0%</div>
+          <div><span class="dot" style="background:#a78bfa;"></span>SFPI (Belgian federal holding company) ~5.7%</div>
+          <div><span class="dot" style="background:#fbbf24;"></span>Employees ~4.3% (group savings plan + direct)</div>
+          <div><span class="dot" style="background:#94a3b8;"></span>Individual shareholders ~7.2%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Luxembourg State ~1.1% + treasury shares ~1.5%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>No controlling shareholder or founder. The largest holders are BlackRock (~7%) and the Belgian federal holding company SFPI (~5.7%); an official investor-relations page shows different shares on a voting-rights basis, so all percentages here are approximate. Employees own roughly 4% through the group savings plan — meaningful, but just short of the ~5% mark for a “notable employee plan”, so criterion 12 scores 1/5. Capital policy: a 60% payout (cash dividends of at least 50%, buybacks up to 10%) for 2025–26 earnings and a minimum of 60% from 2027; a €1.15bn buyback was finalised in Dec 2025, and distribution of surplus CET1 above 13% will be decided annually from 2027.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained on pages 1, 2 and 4. Points per criterion (0–5) are shown in the finding text; Martinero Index = Σ(points ÷ 5 × weight) ÷ 105 × 100 = 52. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15%</td><td>~3.6% CAGR FY21&ndash;FY25 (&euro;41.6B&rarr;&euro;47.9B S&amp;P-standardised; company-reported net banking income &euro;51.2B in FY25, +4.9%). Points: 1/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net income to ordinary shareholders used as bank proxy</td><td>~6.2% CAGR (&euro;9.05B&rarr;&euro;11.52B after AT1 coupons). Points: 2/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 22.5% (&euro;11.52B &divide; reported revenue &euro;51.2B; 24.0% on S&amp;P revenue); cost/income 61.2%. Points: 5/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net income used as bank proxy</td><td>Same ~6.2% net-income CAGR as criterion #2 &mdash; unavoidably correlated once both EBIT and FCF are proxied by net income. Points: 2/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>France's largest bank; with Cr&eacute;dit Agricole one of the two largest euro-area banks by assets; not a clear global #1. Strong #2-tier: 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; French retail banking is shared by four&ndash;five large groups, but BNP's Belgium, Italy, CIB and asset-management businesses face deep, fragmented competition. Raw 3 &rarr; 2/5 points</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; RoTE vs. cost of equity (bank proxy)</td><td>RoTE 11.6% (FY25) vs. an assumed 10.5% cost of equity: spread 1.1pp &rarr; 1/5. FY24 RoTE (10.9%) was barely at the hurdle; Q2 2026's 13.3% includes a one-off gain</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. regulatory requirement</td><td>CET1 13.0% (30 Jun 2026) vs. a 10.52% SREP requirement: cushion ~2.5pp &rarr; 3/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion &mdash; substituted with capital-distribution ratio</td><td>FY25 dividend &euro;5.16/share (~&euro;5.8B) + &euro;1.15B buyback &asymp; &euro;6.9B &divide; net income to ordinary shareholders &euro;11.5B &asymp; 60% (57% of &euro;12.2B group share) &rarr; 3/5; below the 80% bar</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/B) vs. own trading history</td><td>P/E ~7.2x vs. FY21&ndash;25 average 7.2x (1.00x); P/B ~0.68x vs. average 0.57x (1.19x); mean ratio 1.09 &rarr; 2/5; above its own average on book value</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>~1.25bn (FY21) &rarr; ~1.12bn (FY25), &minus;10.2% (derived from S&amp;P net-cash-per-share), 1.10bn now &rarr; declining 5&ndash;15% = 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>No controlling or founding holder; employees ~4.3% via the group savings plan (just under the ~5% notable-plan mark); BlackRock ~7% and SFPI ~5.7% are not insiders &rarr; 1/5</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capex &euro;2.9B (S&amp;P cash flow; includes operating-lease asset purchases at Arval/Leasing Solutions) &divide; reported revenue &euro;51.2B = 5.6% &rarr; 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Basis: cost/income ratio (lower = better; a bank has no gross margin). FY21 67.3% &rarr; FY25 61.2% (BNP 4Q25 deck); FY22 &asymp;66.8% (derived from press-reported opex and revenue, not a reported ratio) &rarr; FY25 improvement &asymp;5.6pp (&ge;0.5pp) &rarr; 5/5. FY23 not re-verified; Q2 2026 56.7%</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Capital and operating discipline: CET1 13.0% against a 10.52% requirement, cost/income down ~6pp since FY21 to 61.2% (56.7% in Q2 2026, target &lt;56% by 2028), and EPS growing ~9% a year, faster than revenue. Capital return is steady (60% payout, €1.15bn buyback), the share count is down ~10%, and the stock trades near its own earnings average after a ~27% pullback with a ~6% dividend yield.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is the weak point (S&amp;P revenue ~3.6%/yr, net income ~6.2%/yr), well under the 15% bar; Q2 2026 included an €858m one-off gain, so the 13.3% RoTE and +33% profit growth overstate the run-rate. P/B (~0.68x) is ~19% above its own average. The share price moved sharply (−27% from the August high) into Q3 results on Oct 28. French sovereign/political risk, the AXA IM and Arval/Athlon integrations, geopolitical provisions in the cost of risk, and the absence of insider or controlling ownership are further watch-items.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked across &ge;2 where possible):</b> BNP Paribas 4Q25/FY2025 results presentation (Feb 5, 2026) and Q2 2026 results coverage (Jul 23, 2026), invest.bnpparibas; stockanalysis.com (S&amp;P Global Market Intelligence) &mdash; financials, ratios, prices and consensus, Oct 20&ndash;26, 2026; Yahoo Finance monthly price history for BNP.PA (year-end closes); abcbourse.com and BNP's investor-relations share page &mdash; shareholder structure; press coverage of BNP's 2022 and 2023 results.
+    <br><b>Data-quality flags:</b> (1) Annual revenue and net income are S&amp;P-standardised, not BNP's reported net banking income (&euro;51.2B) or net income group share (&euro;12.2B); (2) the FY22 cost/income is derived and FY23 is unavailable (n/a); (3) FY21, FY22 and FY24 CET1 values are recollected, not re-verified; (4) P/B is used instead of P/TBV (tangible book not consistently available) and “Now” P/B is scaled from a Sep 23 S&amp;P snapshot; (5) ownership percentages come from a third-party aggregator whose categories differ from BNP's own voting-rights table (which does not sum to 100%) &mdash; treat as approximate; (6) quarterly revenue is S&amp;P-standardised (~&euro;2&ndash;3bn a year below reported); (7) S&amp;P capex includes operating-lease asset purchases; (8) the quoted price is the Oct 23 close (the market was open on Oct 26 at compile time) and Q3 2026 results (Oct 28) are not reflected; (9) the criterion-8 scale (CET1 cushion bands) is this page's own convention; criterion 9 is borderline between 2/5 and 3/5 depending on whether net income is measured before or after AT1 coupons.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in EUR, unaudited/as originally reported or S&amp;P-standardised where stated, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">BNP Paribas SA &mdash; Euronext Paris, EUR share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">BNP Paribas &mdash; Year-End Close (Euronext Paris, EUR)</div>
+    <div class="chart-sub">Calendar year-end closes for 2021–2025 (not adjusted for dividends) and the Oct 23, 2026 close. BNP was flat to down through 2022–2024, re-rated sharply in 2025, hit €113.82 in August 2026 and has since fallen ~27% to €83.52. The 5-year CAGR is price-only; BNP's dividend (~6% yield) is not included.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +6.6%</text>
+<path d="M 46.0,132.67 L 172.8,160.00 L 299.6,126.06 L 426.4,138.31 L 553.2,59.92 L 680.0,50.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="132.67" x2="680.0" y2="50.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,132.67 L 172.8,160.00 L 299.6,126.06 L 426.4,138.31 L 553.2,59.92 L 680.0,50.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="132.67" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="122.67" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€60.77</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="160.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="178.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€53.25</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="126.06" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="116.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€62.59</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="138.31" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="128.31" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€59.22</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="59.92" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="49.92" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">€80.79</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="50.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="40.00" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">€83.52</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes (2021: €60.77; 2022: €53.25; 2023: €62.59; 2024: €59.22; 2025: €80.79) are the December-month closes from Yahoo Finance (BNP.PA); the current price is the Oct 23, 2026 close (€83.52). Prices are as originally quoted: split-unadjusted and dividend-unadjusted.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

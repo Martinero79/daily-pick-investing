@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DBS Group Holdings Ltd — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/dbs-group.html">
+<meta property="og:title" content="DBS Group Holdings Ltd — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DBS Group Holdings Ltd — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · SGX: D05</div>
+  <h1>DBS Group Holdings Ltd</h1>
+  <div class="badges">
+    <div class="badge">SGX: D05 · reports in SGD</div>
+    <div class="badge">Sector: Banks — Asian universal bank</div>
+    <div class="badge">HQ: Singapore · founded 1968</div>
+    <div class="badge">Southeast Asia's largest bank by assets (S$897bn) · Temasek owns ~29.5%</div>
+    <div class="badge warn">Bank scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">S$74.21</div>
+  <div class="price-sub">Close Oct 26, 2026 (SGX, 5:15 PM SGT) · Market cap ≈ S$211bn (≈2.84B shares) · 52-week range S$52.85–79.05 · Consensus target ≈ S$79.28 (17 analysts, third-party aggregate) · Trailing dividends S$2.94/share, yield ≈ 4.0%</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> OCBC and UOB (Singapore's other two local banks) &middot; Standard Chartered and HSBC (regional wealth and trade competition) &middot; Maybank, CIMB and Bank Central Asia (regional) &middot; Citi and other foreign banks &mdash; a concentrated Singapore market with a contested regional market.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Income (FY25)</div>
+      <div class="val">S$22.9B</div>
+      <div class="sub">+2.7% vs FY24 (S$22.3B); growth slowed sharply from +10.5% (FY24) and +22.3% (FY23) as net interest margin eased from 2.15% to 2.01%</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Profit / ROTE (FY25)</div>
+      <div class="val green">S$10.9B / 17.8%</div>
+      <div class="note">Reported net profit; ROTE (return on tangible equity, excluding one-offs and CSR provision) is the ROTCE analog used in place of ROIC. ROE was 16.2%. Both clear a ~10% cost of equity comfortably, though they are down from 20.0% ROTE in FY23&ndash;FY24.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Cost/Income Ratio (FY25)</div>
+      <div class="val green">40.4%</div>
+      <div class="note">Operating expenses &divide; income &mdash; lower is better. Improved from 45.6% (FY21) and 43.0% (FY22), with a small uptick from 39.9% in FY24; the bank-specific analog to operating margin.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">CET1 Ratio (FY25)</div>
+      <div class="val green">17.0%</div>
+      <div class="note">Reported (Basel III reform transitional basis); 15.0% fully phased-in. Vs. an estimated ~10% minimum incl. buffers (approximate). Substitutes for net debt/EBITDA.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">70/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/14 criteria met — strong, stable profitability and capital with a state-linked anchor shareholder, weighed against growth below the 15% bar and a valuation far above the bank's own history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 110.000,15.000 A 95,95 0 1 1 35.73,169.23 L 64.65,146.16 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/>
+      <path d="M 35.73,169.23 A 95,95 0 0 1 110.000,15.000 L 110.000,52.000 A 58,58 0 0 0 64.65,146.16 Z" fill="#f87171"/>
+      <text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/14</text>
+      <text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 Met</b> — net-margin proxy, #1 in Singapore and Southeast Asia, light local competition (raw concentration score 2), ROTE vs. cost of equity, CET1 cushion, share count trend (flat), state-linked anchor shareholder (Temasek ~29.5%), capex intensity, margin stability (cost/income ratio).</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>5 Not Met</b> — total income CAGR (~12.7%) and the net-income proxy for the EBIT and FCF criteria (~12.6%, identical by construction) both short of 15%, a capital-distribution ratio just under the 80% bar (~79%), and an entry multiple far above the bank's own FY21&ndash;FY25 average (P/E and P/NAV).</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    DBS is the largest bank in Singapore and Southeast Asia (S$897bn of assets), with leading consumer, wealth, institutional and treasury franchises across Singapore, Hong Kong, Greater China, South Asia and Indonesia. FY2025 total income was S$22.9bn (+2.7%) and reported net profit S$10.9bn, a 16.2% return on equity (17.8% on tangible equity) with a 40.4% cost/income ratio and 17.0% CET1 ratio. Over FY2021&ndash;FY2025 total income compounded at ~12.7% and net profit at ~12.6% a year &mdash; strong for a bank but below the framework's 15% bar, and heavily helped by the 2022&ndash;2023 rate cycle; growth has slowed sharply as margins eased and net profit slipped in FY2025. Management guides 2026 net profit near 2025 levels (third-party call summary) while growing wealth fees, with wealth assets under management of S$680bn and a target above S$1 trillion by 2030. Ordinary dividends have been raised every year and special capital-return dividends added, but the payout (~79% of FY25 profit) is just under the 80% bar. The catch is price: the stock has risen ~2.5x since end-2021 and trades at ~19x trailing earnings and ~3.0x book value, versus ~11.5x and ~1.75x on average over FY2021&ndash;FY2025.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard looks different for a bank:</b> DBS Group is a bank, so the standard revenue/EBIT/FCF/net-debt framework does not map cleanly onto it. The same substitutions used on the JPMorgan Chase page are applied here, all flagged inline: <b>Total Income</b> stands in for revenue (criterion 1); <b>Net Income</b> substitutes for both EBIT (criterion 2) and Free Cash Flow (criterion 4) &mdash; a bank's cash flow statement is dominated by deposit and trading-book swings that do not map to a &ldquo;free cash flow&rdquo; concept, so criteria 2 and 4 are necessarily identical here, a genuine limitation of the adaptation and not a workaround; <b>ROTE (return on tangible equity) vs. an assumed ~10% cost of equity</b> substitutes for ROIC vs. WACC (criterion 7; DBS reports ROTE, which is used as the ROTCE analog; a ~10% cost of equity is used, the low end of the 10&ndash;11% range, as DBS is a very low-beta stock (~0.3) in a AAA-rated sovereign jurisdiction); <b>CET1 ratio vs. the regulatory requirement</b> substitutes for net debt/EBITDA (criterion 8), scored on the cushion over the requirement; and <b>(dividends + buybacks) &divide; net income</b> substitutes for FCF conversion (criterion 9). Entry multiple (criterion 10) uses P/E as the scored measure with P/NAV shown alongside, each against its own FY2021&ndash;FY2025 history. Criterion 14 uses the efficiency (cost/income) ratio because banks report no gross profit; a falling ratio counts as a margin rise. Everything is reported in SGD and nothing is converted.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (fiscal year = calendar year). All figures in SGD billions unless noted, per DBS's own 2025 annual-report five-year summary (total income; reported net profit). Net Profit is used as the bank proxy for both the EBIT and FCF criteria (see framing note, page 1).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income vs. Net Profit (S$ B)</div>
+    <div class="chart-sub">Net profit grew from S$6.8B (FY21) to a S$11.3B peak in FY24 and eased to S$10.9B in FY25 as net interest margin fell from 2.15% to 2.01%; FY2025 profit includes a S$100M CSR provision, and FY2021 includes a gain on the Shenzhen Rural Commercial Bank acquisition.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Income</span><span><span class="dot" style="background:#fbbf24;"></span>Net Income</span></div>
+    <svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="140" x2="680" y2="140" stroke="#263049" stroke-width="1"/>
+      <rect x="62" y="81.1" width="24" height="58.9" fill="#2dd4bf"/><text x="74" y="76.1" text-anchor="middle" font-size="8" fill="#cbd5e1">14.2</text>
+      <rect x="92" y="111.8" width="24" height="28.2" fill="#fbbf24"/><text x="104" y="106.8" text-anchor="middle" font-size="8" fill="#cbd5e1">6.8</text>
+      <text x="89" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <rect x="190" y="71.5" width="24" height="68.5" fill="#2dd4bf"/><text x="202" y="66.5" text-anchor="middle" font-size="8" fill="#cbd5e1">16.5</text>
+      <rect x="220" y="106.0" width="24" height="34.0" fill="#fbbf24"/><text x="232" y="101.0" text-anchor="middle" font-size="8" fill="#cbd5e1">8.2</text>
+      <text x="217" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <rect x="318" y="56.3" width="24" height="83.7" fill="#2dd4bf"/><text x="330" y="51.3" text-anchor="middle" font-size="8" fill="#cbd5e1">20.2</text>
+      <rect x="348" y="98.3" width="24" height="41.7" fill="#fbbf24"/><text x="360" y="93.3" text-anchor="middle" font-size="8" fill="#cbd5e1">10.1</text>
+      <text x="345" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <rect x="446" y="47.5" width="24" height="92.5" fill="#2dd4bf"/><text x="458" y="42.5" text-anchor="middle" font-size="8" fill="#cbd5e1">22.3</text>
+      <rect x="476" y="93.2" width="24" height="46.8" fill="#fbbf24"/><text x="488" y="88.2" text-anchor="middle" font-size="8" fill="#cbd5e1">11.3</text>
+      <text x="473" y="182" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <rect x="574" y="45.0" width="24" height="95.0" fill="#5eead4"/><text x="586" y="40.0" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">22.9</text>
+      <rect x="604" y="94.6" width="24" height="45.4" fill="#fde68a"/><text x="616" y="89.6" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">10.9</text>
+      <text x="601" y="182" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Total Income CAGR (5yr, crit. #1)</div>
+      <div class="val" style="color:#fbbf24;">~12.7%</div>
+      <div class="sub">FY21&rarr;FY25, S$14.2B&rarr;22.9B; below the 15% bar but strong for a bank</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit CAGR (5yr, crit. #2 &amp; #4 proxy)</div>
+      <div class="val" style="color:#fbbf24;">~12.6%</div>
+      <div class="sub">S$6.8B&rarr;10.9B (reported); below the 15% bar, with the last two years flat to down</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Profit CAGR (FY22&rarr;FY25, reference)</div>
+      <div class="val" style="color:#fbbf24;">~10.1%</div>
+      <div class="sub">S$8.2B&rarr;10.9B over 3 years (reference only, not scored)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EPS (reported, basic), FY25</div>
+      <div class="val">S$3.84</div>
+      <div class="sub">Up from S$2.38 (FY21, restated for the 2024 bonus issue); S$3.94 in FY24</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cost/Income Ratio Trend — bank analog to operating margin (lower is better)</div>
+    <div class="chart-sub">Operating expenses &divide; total income, per DBS's annual-report five-year summary (excluding one-time items and the CSR provision). Efficiency improved by 5.2pp between FY21 and FY24 as rising rates lifted income; FY25 ticked up 0.5pp as income growth slowed.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,45.0 210,70.1 360,100.0 510,100.0 660,95.2" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="45.0" r="4" fill="#2dd4bf"/><text x="60" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">45.6%</text>
+      <circle cx="210" cy="70.1" r="4" fill="#2dd4bf"/><text x="210" y="58.1" text-anchor="middle" font-size="9" fill="#f1f5f9">43.0%</text>
+      <circle cx="360" cy="100.0" r="4" fill="#2dd4bf"/><text x="360" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">39.9%</text>
+      <circle cx="510" cy="100.0" r="4" fill="#2dd4bf"/><text x="510" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">39.9%</text>
+      <circle cx="660" cy="95.2" r="4" fill="#5eead4"/><text x="660" y="83.2" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">40.4%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (S$ B)</th><th>Total Income</th><th>Net Profit</th><th>Net Margin</th><th>ROE</th><th>ROTE</th><th>Cost/Income</th><th>EPS (S$)</th><th>DPS (S$)</th></tr>
+    <tr><td>FY21</td><td>14.2</td><td>6.8</td><td>48.0%</td><td>12.5%</td><td>13.8%</td><td>45.6%</td><td>2.38</td><td>1.09</td></tr>
+    <tr><td>FY22</td><td>16.5</td><td>8.2</td><td>49.7%</td><td>15.0%</td><td>16.7%</td><td>43.0%</td><td>2.86</td><td>1.82&dagger;</td></tr>
+    <tr><td>FY23</td><td>20.2</td><td>10.1</td><td>49.9%</td><td>18.0%</td><td>20.0%</td><td>39.9%</td><td>3.52</td><td>1.75</td></tr>
+    <tr><td>FY24</td><td>22.3</td><td>11.3</td><td>50.6%</td><td>18.0%</td><td>20.0%</td><td>39.9%</td><td>3.94</td><td>2.22</td></tr>
+    <tr><td>FY25</td><td>22.9</td><td>10.9</td><td>47.7%</td><td>16.2%</td><td>17.8%</td><td>40.4%</td><td>3.84</td><td>3.06&Dagger;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">As a bank, DBS does not report EBIT or free cash flow in the industrial sense (S&amp;P's operating cash flow is large and negative from deposit and loan flows and is not meaningful); reported Net Profit is the proxy for criteria 2 and 4, and &ldquo;Net Margin&rdquo; (net profit &divide; total income) plays the role of an operating-margin column. ROE and ROTE exclude one-time items and the CSR provision.</div>
+  <div class="footer-note" style="margin-top:4px;">&dagger; FY22 DPS includes a S$0.45 special dividend. &Dagger; FY25 DPS includes S$0.60 of capital-return dividends. EPS and DPS are restated for the 10% bonus issue of April 2024. Source: DBS Annual Report 2025, five-year summary.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER, SEGMENTS & PROFITABILITY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend, Segments &amp; Profitability (Q2 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter: Q2 2026 (reported with H1 2026 results on Aug 5, 2026). DBS's Q3 2026 results are due Nov 5, 2026 and are not included here. Quarterly series per S&amp;P Global; FY25 quarters sum to S$22.1bn vs. S$22.9bn of company-reported total income (definitions differ).</div>
+
+  <div class="headline-box">
+    <div class="title">What the latest quarter showed (Q2 2026)</div>
+    <p>Q2 2026 total income was S$5.98bn on the S&amp;P Global series (+6.8% YoY) and net income S$3.08bn (+9.0% YoY, vs. S$2.82bn), with H1 2026 net profit and total income both at record highs per the results-call summary, led by fee income, treasury-customer sales and wealth management. Q1 2026 net profit was S$2.93bn (+1% YoY) and management guided 2026 net profit near FY2025 levels (third-party call summary; not an official figure verified here). Strategic markers: wealth AUM of S$680bn with a target above S$1 trillion by 2030 (Reuters, Jul 15, 2026), 18 new wealth centres across Asia by end-2027, and a China bond-underwriting licence granted in March 2026. Capital returns are being managed through buybacks and special dividends. Third-party commentary (JPMorgan, via GuruFocus, October 2026) warns that rising bond yields could weigh on Southeast Asian banks.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Income &mdash; Last 8 Quarters (S$ m)</div>
+    <div class="chart-sub">YoY (S&amp;P Global series): Q3'24 +13.0%, Q4'24 +9.7%, Q1'25 +2.9%, Q2'25 +5.0%, Q3'25 +3.3%, Q4'25 -3.3%, Q1'26 +3.2%, Q2'26 +6.8% &mdash; a dip in Q4'25, then a rebound to the highest quarter in the window.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly total income, S$ m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="50.0" width="56" height="80.0" fill="#2dd4bf"/><text x="53" y="45.0" text-anchor="middle" font-size="9" fill="#cbd5e1">5,623</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="54.7" width="56" height="75.3" fill="#2dd4bf"/><text x="135" y="49.7" text-anchor="middle" font-size="9" fill="#cbd5e1">5,296</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="50.7" width="56" height="79.3" fill="#2dd4bf"/><text x="217" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">5,580</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="50.4" width="56" height="79.6" fill="#2dd4bf"/><text x="299" y="45.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5,599</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="47.4" width="56" height="82.6" fill="#2dd4bf"/><text x="381" y="42.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5,808</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="57.2" width="56" height="72.8" fill="#2dd4bf"/><text x="463" y="52.2" text-anchor="middle" font-size="9" fill="#cbd5e1">5,122</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="48.1" width="56" height="81.9" fill="#2dd4bf"/><text x="545" y="43.1" text-anchor="middle" font-size="9" fill="#cbd5e1">5,758</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="45.0" width="56" height="85.0" fill="#2dd4bf"/><text x="627" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">5,978</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Income &mdash; Last 8 Quarters (S$ m)</div>
+    <div class="chart-sub">Quarterly net income runs at roughly S$2.8&ndash;3.1bn, with a trough of S$2.22bn in Q4'25 and S$3.08bn in Q2'26, the highest in the window.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, S$ m</span></div>
+    <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="46.4" width="56" height="83.6" fill="#60a5fa"/><text x="53" y="41.4" text-anchor="middle" font-size="9" fill="#cbd5e1">3,027</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="63.2" width="56" height="66.8" fill="#60a5fa"/><text x="135" y="58.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,419</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="50.0" width="56" height="80.0" fill="#60a5fa"/><text x="217" y="45.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2,897</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="52.0" width="56" height="78.0" fill="#60a5fa"/><text x="299" y="47.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2,824</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="48.5" width="56" height="81.5" fill="#60a5fa"/><text x="381" y="43.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,954</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="68.6" width="56" height="61.4" fill="#60a5fa"/><text x="463" y="63.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2,223</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="49.1" width="56" height="80.9" fill="#60a5fa"/><text x="545" y="44.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2,930</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="45.0" width="56" height="85.0" fill="#60a5fa"/><text x="627" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3,079</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>S$ m</th><th>Q3'24</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+    <tr><td>Total income</td><td>5,623</td><td>5,296</td><td>5,580</td><td>5,599</td><td>5,808</td><td>5,122</td><td>5,758</td><td>5,978</td></tr>
+    <tr><td>Net income</td><td>3,027</td><td>2,419</td><td>2,897</td><td>2,824</td><td>2,954</td><td>2,223</td><td>2,930</td><td>3,079</td></tr>
+    <tr><td>Net margin</td><td>53.8%</td><td>45.7%</td><td>51.9%</td><td>50.4%</td><td>50.9%</td><td>43.4%</td><td>50.9%</td><td>51.5%</td></tr>
+    <tr><td>Income YoY</td><td>+13.0%</td><td>+9.7%</td><td>+2.9%</td><td>+5.0%</td><td>+3.3%</td><td>-3.3%</td><td>+3.2%</td><td>+6.8%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly series per S&amp;P Global Market Intelligence via stockanalysis.com; definitions differ modestly from DBS's own reported figures (e.g. FY25 total income S$22.1bn on this series vs. S$22.9bn reported). Next report: Q3 2026 on Nov 5, 2026.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">FY2025 Total Income by Segment (S$ B, % of total)</div>
+    <div class="chart-sub">Segment mix substitutes for a product/geography revenue split. Consumer Banking/Wealth Management is now the largest segment (it was 37.5% of income in FY2021); Institutional Banking has slipped since FY2023.</div>
+    <svg viewBox="0 0 700 152" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="24" font-size="9.5" fill="#dbe4f0">Consumer Banking / Wealth Mgmt</text>
+      <rect x="215" y="10" width="260.0" height="20" fill="#2dd4bf"/>
+      <text x="483.0" y="24" font-size="9" fill="#f1f5f9">S$10.5B &middot; 46.0%</text>
+      <text x="10" y="59" font-size="9.5" fill="#dbe4f0">Institutional Banking</text>
+      <rect x="215" y="45" width="219.7" height="20" fill="#3b82f6"/>
+      <text x="442.7" y="59" font-size="9" fill="#f1f5f9">S$8.9B &middot; 38.9%</text>
+      <text x="10" y="94" font-size="9.5" fill="#dbe4f0">Others</text>
+      <rect x="215" y="80" width="51.3" height="20" fill="#818cf8"/>
+      <text x="274.3" y="94" font-size="9" fill="#f1f5f9">S$2.1B &middot; 9.1%</text>
+      <text x="10" y="129" font-size="9.5" fill="#dbe4f0">Treasury Markets</text>
+      <rect x="215" y="115" width="33.9" height="20" fill="#5eead4"/>
+      <text x="256.9" y="129" font-size="9" fill="#f1f5f9">S$1.4B &middot; 6.0%</text>
+      <line x1="215" y1="5" x2="215" y2="147" stroke="#263049" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">ROTE Trend — bank analog to ROIC</div>
+    <div class="chart-sub">Return on tangible equity, full year (excluding one-time items and the CSR provision), per DBS's annual report, vs. an assumed ~10% cost of equity (not drawn). All five years clear the hurdle, by 3.8&ndash;10.0pp; the FY25 decline to 17.8% reflects lower margins and a larger capital base.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <polyline points="60,100.0 210,74.3 360,45.0 510,45.0 660,64.5" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+      <circle cx="60" cy="100.0" r="4" fill="#a78bfa"/><text x="60" y="88.0" text-anchor="middle" font-size="9" fill="#f1f5f9">13.8%</text>
+      <circle cx="210" cy="74.3" r="4" fill="#a78bfa"/><text x="210" y="62.3" text-anchor="middle" font-size="9" fill="#f1f5f9">16.7%</text>
+      <circle cx="360" cy="45.0" r="4" fill="#a78bfa"/><text x="360" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">20.0%</text>
+      <circle cx="510" cy="45.0" r="4" fill="#a78bfa"/><text x="510" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">20.0%</text>
+      <circle cx="660" cy="64.5" r="4" fill="#c4b5fd"/><text x="660" y="52.5" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">17.8%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="callout gray">
+    <b>Market position, honestly stated:</b> DBS is the largest bank in Singapore and in Southeast Asia by assets (S$897bn at FY2025), well ahead of OCBC and UOB, which supports criterion #5. Singapore's domestic banking market is highly concentrated &mdash; three local banks dominate, regulated by MAS &mdash; so concentration is scored 2/5 (light competition: Met, 4 points). Beyond Singapore, competition in wealth, trade finance and regional lending (Standard Chartered, HSBC, Maybank, CIMB, foreign banks) is much more open. DBS is also a designated domestic systemically important bank, with closer supervision and higher capital expectations.
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION, CAPITAL & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital Strength &amp; Ownership</div></div>
+  <div class="sec-sub">P/E and P/NAV (price to net asset value per share, the book-value analog; DBS also reports ROTE on tangible equity) are the two standard bank valuation lenses, shown together. CET1 vs. an estimated requirement substitutes for a net-debt/EBITDA chart.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">P/E (bars, left) and P/NAV (line, right) vs. Own Trading History</div>
+    <div class="chart-sub">P/E = year-end close &divide; that year's reported EPS (S&amp;P Global); P/NAV = year-end close &divide; DBS net asset value per share (annual report). All prices are adjusted for the 2024 one-for-ten bonus issue. Current = S$74.21 on trailing 12-month EPS of S$3.91; current P/NAV uses the Jun 30, 2026 book value per share (~S$24.7, derived).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>P/E ratio</span><span><span class="dot" style="background:#fbbf24;"></span>P/NAV (line, scale 0&ndash;4x)</span></div>
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+      <rect x="69.65" y="70.78" width="44" height="79.22" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="64.78" text-anchor="middle" font-size="8" fill="#cbd5e1">12.53x</text>
+      <rect x="172.95" y="81.91" width="44" height="68.09" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="75.91" text-anchor="middle" font-size="8" fill="#cbd5e1">10.77x</text>
+      <rect x="276.25" y="95.37" width="44" height="54.63" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="89.37" text-anchor="middle" font-size="8" fill="#cbd5e1">8.64x</text>
+      <rect x="379.55" y="79.95" width="44" height="70.05" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="73.95" text-anchor="middle" font-size="8" fill="#cbd5e1">11.08x</text>
+      <rect x="482.85" y="57.19" width="44" height="92.81" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="51.19" text-anchor="middle" font-size="8" fill="#cbd5e1">14.68x</text>
+      <rect x="586.15" y="30.00" width="44" height="120.00" fill="#5eead4"/><text x="608.15" y="24.00" text-anchor="middle" font-size="8" font-weight="700" fill="#f8fafc">18.98x</text>
+      <polyline points="91.65,104.40 194.95,102.00 298.25,106.80 401.55,93.90 504.85,80.40 608.15,60.00" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="91.65" cy="104.40" r="3.5" fill="#fbbf24"/>
+      <circle cx="194.95" cy="102.00" r="3.5" fill="#fbbf24"/>
+      <circle cx="298.25" cy="106.80" r="3.5" fill="#fbbf24"/>
+      <circle cx="401.55" cy="93.90" r="3.5" fill="#fbbf24"/>
+      <circle cx="504.85" cy="80.40" r="3.5" fill="#fbbf24"/>
+      <circle cx="608.15" cy="60.00" r="3.5" fill="#fbbf24"/>
+      <text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21 (1.52x)</text>
+      <text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22 (1.60x)</text>
+      <text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23 (1.44x)</text>
+      <text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24 (1.87x)</text>
+      <text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25 (2.32x)</text>
+      <text x="608.15" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">Now (3.00x)</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~19.0x trailing earnings and ~3.0x net asset value, DBS trades far above its own FY2021&ndash;FY2025 range on both measures (P/E 8.6x&ndash;14.7x, average ~11.5x; P/NAV 1.44x&ndash;2.32x, average ~1.75x). The ratio of current to average P/E is ~1.64 and for P/NAV ~1.71, both in the &gt;1.30 band (0 points). The shares have risen about 2.5x since end-2021 on a business whose profit rose ~1.6x and whose margins and ROTE have eased from their FY23&ndash;FY24 peak, so the multiple has stretched. Forward P/E is ~17.5x on consensus (third-party), below trailing, implying modest growth expectations. Consensus is 'Buy' with a target ~7% above the current price. On a strict &ldquo;vs. own history&rdquo; test this is Not Met &mdash; the main reason the Martinero Index is not higher.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CET1 Capital Ratio vs. Regulatory Requirement (Estimate)</div>
+    <div class="chart-sub">Substitutes for a net-debt/EBITDA chart. Reported ratios per DBS's annual report; the FY24&ndash;FY25 step-up reflects the move to Basel III reform rules (transitional arrangements) from July 2024 &mdash; on a fully phased-in basis the ratios were 15.1% (FY24) and 15.0% (FY25). The dashed line is a rounded estimate of MAS's minimum plus capital conservation and D-SIB buffers, not a DBS-stated figure.</div>
+    <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+      <line x1="40" y1="93.1" x2="680" y2="93.1" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,4"/>
+      <text x="660" y="88.1" text-anchor="end" font-size="8" fill="#fbbf24">~10% est. minimum incl. buffers (approximate)</text>
+      <polyline points="60,62.9 210,61.5 360,61.5 510,45.0 660,45.0" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+      <circle cx="60" cy="62.9" r="4" fill="#2dd4bf"/><text x="60" y="50.9" text-anchor="middle" font-size="9" fill="#f1f5f9">14.4%</text>
+      <circle cx="210" cy="61.5" r="4" fill="#2dd4bf"/><text x="210" y="49.5" text-anchor="middle" font-size="9" fill="#f1f5f9">14.6%</text>
+      <circle cx="360" cy="61.5" r="4" fill="#2dd4bf"/><text x="360" y="49.5" text-anchor="middle" font-size="9" fill="#f1f5f9">14.6%</text>
+      <circle cx="510" cy="45.0" r="4" fill="#2dd4bf"/><text x="510" y="33.0" text-anchor="middle" font-size="9" fill="#f1f5f9">17.0%</text>
+      <circle cx="660" cy="45.0" r="4" fill="#5eead4"/><text x="660" y="33.0" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">17.0%</text>
+      <text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+      <text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+      <text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+      <text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+      <text x="660" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="77.9 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="185.5 263.9" stroke-dashoffset="-77.9" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="0.5 263.9" stroke-dashoffset="-263.4" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>Temasek Holdings ~29.5% (approximate; owned by the Government of Singapore)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other institutions and retail ~70%</div>
+          <div><span class="dot" style="background:#f87171;"></span>Executive management: well under 1% (not itemised)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>Temasek, the Singapore government's investment company, is the anchor shareholder at roughly 30% (approximate). DBS has no founder; the stake makes the bank effectively government-linked: it supports stability and a long-term horizon, but means the bank is not a pure private-owner story and policy considerations can matter. It is scored on the 15&ndash;30% band (4 points) and flagged as an anchor-shareholder judgment call, not insider ownership. DBS is a D-SIB regulated by MAS. Its policy is a progressive ordinary dividend plus capital-return dividends; the FY25 total of S$3.06 per share includes S$0.60 of capital return.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a bank where the generic revenue/EBIT/FCF/net-debt framing doesn't apply; every substitution is noted inline and explained further on pages 1, 2 and 4. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:32%;">Criterion</th><th style="width:44%;">Finding</th><th style="width:20%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total income</td><td>~12.7% CAGR FY21&ndash;FY25 (S$14.2B&rarr;22.9B); FY25 growth only +2.7%</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>~12.6% CAGR FY21&ndash;FY25 (S$6.8B&rarr;10.9B reported); FY22&rarr;FY25 ~10.1% (reference only); FY25 profit fell 3% YoY</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; net-margin proxy</td><td>Net margin 47.7% (FY25); cost/income 40.4% (59.6% margin-equivalent) &mdash; both far above the bar</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net profit used as bank proxy</td><td>Same ~12.6% net-profit CAGR as criterion #2 &mdash; identical by construction, an honest limitation of the bank adaptation, not an independent FCF measure</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Largest bank in Singapore and Southeast Asia by assets (S$897bn), ahead of OCBC and UOB</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~2/5 &mdash; Singapore retail and corporate banking is dominated by three local banks under MAS oversight; regional wealth and trade competition is more open</td><td><span class="status-pill status-met">Met (raw score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROTE vs. cost of equity (ROTCE analog)</td><td>ROTE 17.8% (FY25), 13.8&ndash;20.0% across FY21&ndash;FY25, vs. an assumed ~10% cost of equity: a ~7.8pp spread; every year clears the hurdle</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with CET1 ratio vs. requirement</td><td>CET1 17.0% (FY25, transitional; 15.0% fully phased-in) vs. an estimated ~10% minimum incl. buffers: a cushion of 5&ndash;7pp (requirement is an approximation)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT) &mdash; substituted with capital-distribution ratio</td><td>FY25 dividends of S$3.06/share &times; ~2.85B shares &asymp; S$8.7B &divide; reported net profit S$10.9B &asymp; 79% (buybacks are small and for employee plans, not counted) &mdash; just under the 80% bar</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E &amp; P/NAV) vs. own trading history</td><td>Current P/E ~19.0x vs. ~11.5x average (ratio ~1.64); P/NAV ~3.0x vs. ~1.75x (ratio ~1.71) &mdash; far above the bank's own FY21&ndash;FY25 range</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>~2.82B (FY21, restated for the 2024 bonus issue) &rarr; ~2.85B (FY25), about +1% &mdash; flat; a bonus issue is not economic dilution</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Temasek (Government of Singapore) ~29.5% (approximate) as a state-linked anchor shareholder; not founder or insider ownership. Scored on the 15&ndash;30% band and flagged</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>Capital expenditure S$0.5B in FY25, ~2.3% of income &mdash; light for a bank of this size (technology spend is largely expensed)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>Banks report no gross profit, so the cost/income ratio is used (lower = better), FY2022 &rarr; FY2025: 43.0% &rarr; 40.4%, a margin-equivalent gain of ~2.6pp (top band, &ge;+0.5pp); FY25 ticked up 0.5pp from the FY23&ndash;FY24 level of 39.9%</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Martinero Index arithmetic (70/100):</b> Points by criterion 1&ndash;14 = 3, 3, 5, 3, 5, 4, 3, 5, 3, 0, 3, 4, 5, 5. Weights 13/11/10/8/7/6/10/6/8/8/4/5/4/5 (total 105); index = &Sigma;(points &divide; 5 &times; weight) &divide; 105 &times; 100 = 73.2 &rarr; 70. No criterion is N/A. Criterion 8 uses a bank-specific mapping of the CET1 cushion over the requirement (&ge;3.0pp = 5, 2.0&ndash;3.0 = 4, 1.0&ndash;2.0 = 3, 0.5&ndash;1.0 = 2, 0&ndash;0.5 = 1, below requirement = 0) because the bands file has no bank bands for it.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The region's dominant bank: S$897bn of assets, ROTE of 17.8%, a 40.4% cost/income ratio and a 17.0% CET1 ratio (15.0% fully phased-in). Profit is up ~1.6x since FY2021 with ordinary dividends raised every year plus special capital-return dividends; wealth AUM of S$680bn is a growing fee engine. A concentrated home market, government-linked anchor shareholder (Temasek), very low volatility (beta ~0.3) and light capex support the quality case.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is slowing: income +2.7% and profit -3% in FY25, net interest margin down from 2.15% to 2.01%, and 2026 profit guided near 2025 levels. Valuation is the main concern: ~19x earnings and ~3.0x book versus ~11.5x and ~1.75x on average, so expectations are high. The payout (~79%) is just under this framework's bar, ROTE has slipped from 20% to 17.8%, and third-party commentary flags rising bond yields as a risk for Southeast Asian banks. State-linked ownership means policy and geopolitical considerations (US&ndash;China tensions, Greater China exposure) matter more than for a purely private bank.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> DBS Annual Report 2025 &mdash; five-year summary (dbs.com/annualreports/2025) and share-price table (year-end closes, adjusted for the 2024 bonus issue); stockanalysis.com (S&amp;P Global Market Intelligence) &mdash; quarterly series, P/E, price, market cap, consensus, 52-week range, as of Oct 3&ndash;26, 2026; H1 2026 and Q1 2026 results-call summaries; Reuters (Jul 15, Jun 1, Mar 4, 2026); CNBC and GuruFocus (Oct 2026) for third-party commentary.<br><b>Data-quality flags:</b> (1) The CET1 requirement (~10%) is a rounded estimate of MAS minimums plus buffers, not a DBS-stated figure. (2) Temasek's ~29.5% stake is approximate. (3) Quarterly income/net income are S&amp;P-defined and differ from DBS's reported totals. (4) The 2026 guidance of 'net profit near 2025 levels' comes from a third-party call summary. (5) Current P/NAV uses a derived Jun 2026 book value. (6) Shares outstanding (~2.85B) is derived from S&amp;P net-cash-per-share data.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in SGD, as originally reported, subject to restatement. Compiled Oct 26, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">DBS Group Holdings Ltd &mdash; SGX, SGD share price trend. Points shown are calendar year-end closes plus the current price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">DBS Group &mdash; Year-End Close (SGX, SGD)</div>
+    <div class="chart-sub">Flat at roughly S$30 for three years (2021&ndash;2023), then a re-rating to S$43.72 (2024) and S$56.36 (2025) as profit and dividends rose, and a further climb to S$74.21 in 2026 &mdash; about 2.5x the end-2021 level on a price-only basis.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46.0" y1="156.62" x2="680.0" y2="39.74" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.6"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +20.1%</text>
+<path d="M 46.0,156.62 L 172.8,153.60 L 299.6,154.83 L 426.4,119.78 L 553.2,86.60 L 680.0,39.74 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<path d="M 46.0,156.62 L 172.8,153.60 L 299.6,154.83 L 426.4,119.78 L 553.2,86.60 L 680.0,39.74" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="156.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="146.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$29.69</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="153.60" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="143.60" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$30.84</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="154.83" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="144.83" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$30.37</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="119.78" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="109.78" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$43.72</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="86.60" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="76.60" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$56.36</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="39.74" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="680.0" y="29.74" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">S$74.21</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Calendar year-end closes for 2021&ndash;2025 from DBS Annual Report 2025 (adjusted for the one-for-ten bonus issue announced Feb 7, 2024); the current price (S$74.21) is the Oct 26, 2026 SGX close from stockanalysis.com. Prices are dividend-unadjusted, so the 5-year change excludes dividends received (about 4&ndash;7% a year).<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
