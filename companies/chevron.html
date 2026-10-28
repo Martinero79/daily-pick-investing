@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chevron Corporation — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/chevron.html">
+<meta property="og:title" content="Chevron Corporation — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chevron Corporation — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Chevron Corporation</h1>
+  <div class="badges">
+    <div class="badge">NYSE: CVX</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Houston, Texas (moving from San Ramon)</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Near 52-Wk High &mdash; Oil ~$114 Brent Cycle Peak; Q3 Reports Fri Oct 30</div>
+  </div>
+
+  <div class="price">$228.23</div>
+  <div class="price-sub">Oct 27, 2026 close (NYSE) &middot; Market cap &asymp; $447B (1.96B shares) &middot; 52-wk range $146.49 &ndash; $234.08 &middot; 1-yr price change &asymp; +49% &middot; Beta 0.52 &middot; Analyst consensus: Buy (25 analysts), avg PT $232.50 (+2%) &middot; Next report (Q3 2026): Fri Oct 30, 2026, before market open</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> the second-largest US integrated oil major after ExxonMobil, with upstream (Permian, Kazakhstan, Gulf of Mexico, LNG in Australia) and downstream (refining, chemicals) segments. Since July 2025 it also owns Hess, including its stake in the Stabroek block offshore Guyana.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in US dollars. Financials are <b>reported GAAP numbers as standardised by S&amp;P Global (via stockanalysis.com)</b>, not Chevron's adjusted earnings; &ldquo;EBIT&rdquo; = S&amp;P operating income. &ldquo;Free cash flow&rdquo; = consolidated operating cash flow minus capital expenditure. Net debt = total debt incl. leases minus cash. Chevron has no captive finance arm, so no industrial adjustment is needed. <b>Latest quarter shown is Q2 2026; Q3 2026 is pending (reports Oct 30).</b></div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$184.7B</div>
+      <div class="sub" style="color:#f87171;">-5.6% YoY</div>
+      <div class="note">FY2024 was +0.4%. Hess volumes added from Jul 2025 but lower realised prices dominated. Q2 2026 revenue was $67.9B, +53.5% YoY, on the oil spike.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (S&amp;P basis)</div>
+      <div class="val" style="color:#f87171;">9.55%</div>
+      <div class="sub">FY2025; TTM Jun-26 13.0%</div>
+      <div class="note">Peak was 17.8% in FY2022. Q2 2026 alone printed 21.9%. Gross margin 41.9% (FY2025), 44.3% TTM.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#fbbf24;">8.2% vs 6.8%</div>
+      <div class="sub">Third-party (S&amp;P Global)</div>
+      <div class="note">Positive but thin spread, and measured on a TTM that includes the oil spike quarter.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.56x</div>
+      <div class="sub">Jun 2026; net debt $28.5B</div>
+      <div class="note">Down from $40.4B at Dec 2025 as Q2 cash flow ($18.1B FCF) paid debt down.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">37/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A balance-sheet-strong, cash-generative major whose growth, margin and valuation scores are weak at a cycle high.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; market position (#2), ROIC above WACC, net debt/EBITDA, FCF conversion, share count (flat) and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market concentration, entry multiple (P/E 1.43x own average), insider ownership and capex intensity</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Chevron Corporation is the second-largest US integrated oil and gas company, with Upstream (crude, natural gas and LNG; $53.5B of FY2025 sales) and Downstream (refining, marketing and chemicals; $130.9B of FY2025 sales) segments. Its profits follow oil and refining margins: operating income was $16.1B in FY2021, $42.0B at the FY2022 peak, and $17.6B in FY2025. The largest recent event is the all-stock acquisition of Hess (announced October 2023, closed July 2025 after an arbitration ruling), which brought a share of the Stabroek block in Guyana and Bakken assets and added roughly 300M shares; the share count is up about 2% over five years net of buybacks. Capex has doubled since FY2021 to $17.3B, so FCF is lower than in FY2021 even though operating cash flow is higher. In late October 2026 Brent trades near $114 on the Iran and Red Sea/Saudi tensions, the stock is near its 52-week high ($234.08), and Q2 2026 delivered $14.8B of operating income and $18.1B of FCF; the five-year growth rates below do not yet capture that. Read every ratio as cycle-dependent: Q3 2026 results are due Friday October 30 and are not in these numbers.
+  </div>
+
+  <div class="callout">
+    <b>Cycle caveat:</b> (1) <b>Oil price</b> &mdash; Brent near $114 (late Oct 2026) is far above the price environment behind FY2025's 9.6% margin, so TTM and Q2 2026 figures are flattered relative to a mid-cycle year. (2) <b>Hess</b> &mdash; FY2025 includes only about 5.5 months of Hess, and S&amp;P shows shares +12% YoY; per-share figures mix old and new share counts. (3) <b>Reported vs adjusted</b> &mdash; Chevron's own adjusted earnings exclude special items and will differ from the GAAP-based figures here. Chevron also reported Oct 6, 2026 that it will divest its Hess Midstream interest and DJ Basin crude midstream assets (Reuters/Business Wire), and press reports point to a CEO succession in progress; neither is reflected in the numbers.
+  </div>
+
+  <div class="bignum-corner">CVX</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, US$ millions, reported (GAAP) basis as standardised by S&amp;P Global. EBIT = operating income; FCF = operating cash flow minus capex. FY2021-22 sit in the post-COVID price spike; FY2025 includes ~5.5 months of Hess.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">Axis in US$ billions at true relative size. Revenue spiked in FY2022 (+52%) and has drifted lower; EBIT fell from $42.0B to $17.6B while capex rose, so FCF is below its FY2021 level.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">50bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">100bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">150bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">200bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">250bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="103.5" width="30" height="136.5" rx="2" fill="#2dd4bf"/><text x="100.0" y="98.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">155,067</text>
+<rect x="123.0" y="225.8" width="30" height="14.2" rx="2" fill="#60a5fa"/><text x="138.0" y="220.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">16,087</text>
+<rect x="161.0" y="221.4" width="30" height="18.6" rx="2" fill="#fbbf24"/><text x="176.0" y="216.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">21,131</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="32.4" width="30" height="207.6" rx="2" fill="#2dd4bf"/><text x="256.0" y="27.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">235,916</text>
+<rect x="279.0" y="203.0" width="30" height="37.0" rx="2" fill="#60a5fa"/><text x="294.0" y="198.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">42,005</text>
+<rect x="317.0" y="206.9" width="30" height="33.1" rx="2" fill="#fbbf24"/><text x="332.0" y="201.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">37,628</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="68.6" width="30" height="171.4" rx="2" fill="#2dd4bf"/><text x="412.0" y="63.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">194,799</text>
+<rect x="435.0" y="216.3" width="30" height="23.7" rx="2" fill="#60a5fa"/><text x="450.0" y="211.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">26,964</text>
+<rect x="473.0" y="222.6" width="30" height="17.4" rx="2" fill="#fbbf24"/><text x="488.0" y="217.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">19,780</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="67.9" width="30" height="172.1" rx="2" fill="#2dd4bf"/><text x="568.0" y="62.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">195,568</text>
+<rect x="591.0" y="220.4" width="30" height="19.6" rx="2" fill="#60a5fa"/><text x="606.0" y="215.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">22,319</text>
+<rect x="629.0" y="226.8" width="30" height="13.2" rx="2" fill="#fbbf24"/><text x="644.0" y="221.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">15,044</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="77.5" width="30" height="162.5" rx="2" fill="#2dd4bf"/><text x="724.0" y="72.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">184,654</text>
+<rect x="747.0" y="224.5" width="30" height="15.5" rx="2" fill="#60a5fa"/><text x="762.0" y="219.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">17,631</text>
+<rect x="785.0" y="225.4" width="30" height="14.6" rx="2" fill="#fbbf24"/><text x="800.0" y="220.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">16,592</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">+4.5%</div><div class="sub">$155.1B &rarr; $184.7B &mdash; FY2022 +52%, then three weaker years</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">+2.3%</div><div class="sub">$16.1B &rarr; $17.6B &mdash; peak $42.0B in FY2022</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">-5.9%</div><div class="sub">$21.1B &rarr; $16.6B &mdash; capex up from $8.1B to $17.3B</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating (EBIT) Margin Trend &mdash; operating income / revenue</div>
+    <div class="chart-sub">Margin peaked at 17.8% in FY2022 and fell to 9.6% in FY2025 as prices eased and costs rose. Gross margin (S&amp;P-derived) moved 41.0% / 38.9% / 39.3% / 39.5% / 41.9% over the same years, i.e. it did not fall; the EBIT decline came from operating costs, depreciation and the lower price base.</div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+<text x="2" y="55.5" font-size="7.5" fill="#64748b">10%</text>
+<text x="2" y="18" font-size="7.5" fill="#64748b">20%</text>
+<polyline points="60,51.1 205,23.2 350,38.1 495,47.2 640,54.2" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="51.1" r="3.2" fill="#34d399"/><text x="60" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text><text x="60" y="44.1" text-anchor="middle" font-size="8" fill="#cbd5e1">10.4%</text>
+<circle cx="205" cy="23.2" r="3.2" fill="#34d399"/><text x="205" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text><text x="205" y="16.2" text-anchor="middle" font-size="8" fill="#cbd5e1">17.8%</text>
+<circle cx="350" cy="38.1" r="3.2" fill="#34d399"/><text x="350" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text><text x="350" y="31.1" text-anchor="middle" font-size="8" fill="#cbd5e1">13.8%</text>
+<circle cx="495" cy="47.2" r="3.2" fill="#34d399"/><text x="495" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text><text x="495" y="40.2" text-anchor="middle" font-size="8" fill="#cbd5e1">11.4%</text>
+<circle cx="640" cy="54.2" r="3.2" fill="#34d399"/><text x="640" y="97" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text><text x="640" y="47.2" text-anchor="middle" font-size="8" fill="#cbd5e1">9.5%</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (US$ m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS ($)</th><th>FCF</th><th>FCF/EBIT</th><th>Capex</th><th>Net debt</th><th>DPS ($)</th></tr>
+    <tr><td>FY2021</td><td>155,067</td><td>16,087</td><td>10.4%</td><td>15,625</td><td>8.14</td><td>21,131</td><td>131%</td><td>8,056</td><td>29,197</td><td>5.31</td></tr>
+<tr><td>FY2022</td><td>235,916</td><td>42,005</td><td>17.8%</td><td>35,465</td><td>18.28</td><td>37,628</td><td>90%</td><td>11,974</td><td>9,469</td><td>5.68</td></tr>
+<tr><td>FY2023</td><td>194,799</td><td>26,964</td><td>13.8%</td><td>21,369</td><td>11.36</td><td>19,780</td><td>73%</td><td>15,829</td><td>17,847</td><td>6.04</td></tr>
+<tr><td>FY2024</td><td>195,568</td><td>22,319</td><td>11.4%</td><td>17,661</td><td>9.72</td><td>15,044</td><td>67%</td><td>16,448</td><td>22,826</td><td>6.52</td></tr>
+<tr><td>FY2025</td><td>184,654</td><td>17,631</td><td>9.5%</td><td>12,299</td><td>6.63</td><td>16,592</td><td>94%</td><td>17,347</td><td>40,446</td><td>6.84</td></tr>
+<tr><td>TTM (Jun'26)</td><td>209,384</td><td>27,239</td><td>13.0%</td><td>20,591</td><td>10.41</td><td>27,012</td><td>99%</td><td>18,309</td><td>28,545</td><td>7.12*</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Reported GAAP basis, not adjusted/CCS. Net income is attributable to Chevron. Net debt = total debt incl. leases minus cash and investments (S&amp;P). TTM EPS and net income are as shown by S&amp;P and include a very strong Q2 2026. *DPS shown for TTM is the current annualised $7.12 (Q2 2026 quarterly $1.78); FY dividends rose each year (39 consecutive years of growth per S&amp;P). EPS fell 64% from the FY2022 peak to FY2025.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence), data updated Aug 6, 2026 for Q2 2026 results; cross-check against Chevron Form 10-K/10-Q on SEC EDGAR is recommended for audit-grade use. All figures US$.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q2 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter is Q2 2026 (reported early August 2026). Q3 2026 is pending and is due Friday October 30, 2026, before the US market opens.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q2 2026 revenue was $67.9B (+53.5% YoY, +42% QoQ) and operating income $14.8B (21.9% margin) against $3.8B a year earlier, as oil and product prices jumped with the Middle East conflict. Net income was $12.1B (EPS $6.11). Operating cash flow was $22.6B and free cash flow $18.1B, helped by a $3.1B working-capital release after a $4.5B build in Q1 2026 (when FCF was -$1.5B). Net debt fell from $40.1B to $28.5B in the quarter; dividends ($3.5B) and buybacks ($3.1B) continued. Treat this as a spike quarter: the prior seven quarters were in a $3.5B-$5.4B operating-income range. I could not verify the composition of Q2 net income (one-off gains vs operations), so no adjusted figure is shown.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (US$ bn)</div>
+    <div class="chart-sub">YoY: Q3'25 -1.4%, Q4'25 -8.2%, Q1'26 +2.3%, Q2'26 +53.5%. Hess is consolidated from mid-July 2025, so Q3'25 onward includes it.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$ bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="70.7" width="56" height="59.3" fill="#2dd4bf"/><text x="53" y="65.7" text-anchor="middle" font-size="9" fill="#cbd5e1">49.4</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="71.0" width="56" height="59.0" fill="#2dd4bf"/><text x="135" y="66.0" text-anchor="middle" font-size="9" fill="#cbd5e1">49.2</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="73.9" width="56" height="56.1" fill="#2dd4bf"/><text x="217" y="68.9" text-anchor="middle" font-size="9" fill="#cbd5e1">46.7</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="76.9" width="56" height="53.1" fill="#2dd4bf"/><text x="299" y="71.9" text-anchor="middle" font-size="9" fill="#cbd5e1">44.2</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="71.5" width="56" height="58.5" fill="#2dd4bf"/><text x="381" y="66.5" text-anchor="middle" font-size="9" fill="#cbd5e1">48.7</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="75.8" width="56" height="54.2" fill="#2dd4bf"/><text x="463" y="70.8" text-anchor="middle" font-size="9" fill="#cbd5e1">45.1</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="72.6" width="56" height="57.4" fill="#2dd4bf"/><text x="545" y="67.6" text-anchor="middle" font-size="9" fill="#cbd5e1">47.8</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="48.6" width="56" height="81.4" fill="#2dd4bf"/><text x="627" y="43.6" text-anchor="middle" font-size="9" fill="#cbd5e1">67.9</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income &mdash; Last 8 Quarters (US$ m)</div>
+    <div class="chart-sub">Seven quarters between $3.5B and $5.4B, then $14.8B in Q2 2026. Q1 2026 ($3.5B) was the weakest of the period.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, US$ m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="92.3" width="56" height="37.7" fill="#60a5fa"/><text x="53" y="87.3" text-anchor="middle" font-size="9" fill="#cbd5e1">5,392</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'24</text>
+<rect x="107" y="97.7" width="56" height="32.3" fill="#60a5fa"/><text x="135" y="92.7" text-anchor="middle" font-size="9" fill="#cbd5e1">4,621</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="189" y="95.7" width="56" height="34.3" fill="#60a5fa"/><text x="217" y="90.7" text-anchor="middle" font-size="9" fill="#cbd5e1">4,906</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="271" y="103.2" width="56" height="26.8" fill="#60a5fa"/><text x="299" y="98.2" text-anchor="middle" font-size="9" fill="#cbd5e1">3,822</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="353" y="96.4" width="56" height="33.6" fill="#60a5fa"/><text x="381" y="91.4" text-anchor="middle" font-size="9" fill="#cbd5e1">4,803</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="435" y="100.1" width="56" height="29.9" fill="#60a5fa"/><text x="463" y="95.1" text-anchor="middle" font-size="9" fill="#cbd5e1">4,270</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="517" y="105.5" width="56" height="24.5" fill="#60a5fa"/><text x="545" y="100.5" text-anchor="middle" font-size="9" fill="#cbd5e1">3,496</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="599" y="26.1" width="56" height="103.9" fill="#60a5fa"/><text x="627" y="21.1" text-anchor="middle" font-size="9" fill="#cbd5e1">14,840</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter (US$ m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS ($)</th></tr>
+    <tr><td>Q3'24</td><td>49,416</td><td>5,392</td><td>10.9%</td><td>4,487</td><td>2.48</td></tr>
+<tr><td>Q4'24</td><td>49,159</td><td>4,621</td><td>9.4%</td><td>3,239</td><td>1.82</td></tr>
+<tr><td>Q1'25</td><td>46,727</td><td>4,906</td><td>10.5%</td><td>3,500</td><td>2.00</td></tr>
+<tr><td>Q2'25</td><td>44,224</td><td>3,822</td><td>8.6%</td><td>2,490</td><td>1.45</td></tr>
+<tr><td>Q3'25</td><td>48,747</td><td>4,803</td><td>9.9%</td><td>3,539</td><td>1.82</td></tr>
+<tr><td>Q4'25</td><td>45,126</td><td>4,270</td><td>9.5%</td><td>2,770</td><td>1.39</td></tr>
+<tr><td>Q1'26</td><td>47,813</td><td>3,496</td><td>7.3%</td><td>2,210</td><td>1.11</td></tr>
+<tr><td>Q2'26</td><td>67,868</td><td>14,840</td><td>21.9%</td><td>12,072</td><td>6.11</td></tr>
+
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Reported GAAP basis via S&amp;P Global; Q2 2026 vs Q2 2025: revenue 67,868 vs 44,224 (+53.5%), operating income 14,840 vs 3,822, FCF 18,095 vs 4,864.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance &amp; what is pending:</b> Q3 2026 results are due Oct 30; consensus numbers were not verified for this page. BofA (target $252) noted that oil fell ~7% quarter-on-quarter in Q3 while refining margins were strong (TheFly, Oct 2026), so Q3 is unlikely to repeat Q2. Management also meets Piper Sandler the same day.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Portfolio moves:</b> On Oct 6, 2026 Chevron agreed to restructure Bakken midstream contracts with Hess Midstream and divest its Hess Midstream stake and DJ Basin crude midstream assets (Reuters/Business Wire). Details of proceeds are not included here.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on reported GAAP EPS. For a cyclical, the FY2022 peak makes the own-history average look low, so the comparison is shown honestly rather than forced to pass.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on GAAP EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (21.9x = $228.23 / TTM EPS $10.41) is 143% of Chevron's FY2021-25 year-end average (15.3x). FY-end P/E values are from S&amp;P/stockanalysis (price at year-end / reported diluted EPS). FY2025's 24.8x reflects depressed trough earnings, FY2022's 9.7x reflects peak earnings.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span></div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="74.1" width="70" height="35.9" fill="#60a5fa"/><text x="55" y="69.1" text-anchor="middle" font-size="9" fill="#cbd5e1">14.4x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="85.7" width="70" height="24.3" fill="#60a5fa"/><text x="150" y="80.7" text-anchor="middle" font-size="9" fill="#cbd5e1">9.7x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="77.2" width="70" height="32.9" fill="#60a5fa"/><text x="245" y="72.2" text-anchor="middle" font-size="9" fill="#cbd5e1">13.1x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="73.2" width="70" height="36.9" fill="#60a5fa"/><text x="340" y="68.2" text-anchor="middle" font-size="9" fill="#cbd5e1">14.7x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="48.0" width="70" height="62.0" fill="#60a5fa"/><text x="435" y="43.0" text-anchor="middle" font-size="9" fill="#cbd5e1">24.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="55.2" width="70" height="54.8" fill="#2dd4bf"/><text x="530" y="50.2" text-anchor="middle" font-size="9" fill="#cbd5e1">21.9x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="71.6" x2="690" y2="71.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="67.6" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 15.3x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is ~12.2x, versus a FY-end forward average of ~13.5x for FY2021-25 (about 90% of its own average); PEG ~0.61 per S&amp;P. The low forward multiple assumes earnings stay near the Q2 2026 run-rate, which depends on oil staying elevated. Average analyst price target $232.50 (25 analysts) is within 2% of the current price. The scorecard uses the trailing figure (ratio 1.43, 0/5).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (US$ m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex rose from $8.1B (5.2% of revenue) in FY2021 to $17.3B (9.4%) in FY2025 as Chevron funded Permian, Tengiz and Hess/Guyana growth. Capital-intensive by nature, this is the main reason FCF has not tracked operating cash flow.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (US$ m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="99.6" width="60" height="60.4" fill="#60a5fa"/><text x="60" y="94.6" text-anchor="middle" font-size="8" fill="#cbd5e1">8,056</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="70.2" width="60" height="89.8" fill="#60a5fa"/><text x="200" y="65.2" text-anchor="middle" font-size="8" fill="#cbd5e1">11,974</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="41.3" width="60" height="118.7" fill="#60a5fa"/><text x="340" y="36.3" text-anchor="middle" font-size="8" fill="#cbd5e1">15,829</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="36.6" width="60" height="123.4" fill="#60a5fa"/><text x="480" y="31.6" text-anchor="middle" font-size="8" fill="#cbd5e1">16,448</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="29.9" width="60" height="130.1" fill="#60a5fa"/><text x="620" y="24.9" text-anchor="middle" font-size="8" fill="#cbd5e1">17,347</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,118.4 200,119.4 340,95.0 480,92.7 620,84.8" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="118.4" r="3" fill="#fbbf24"/><text x="60" y="132.4" text-anchor="middle" font-size="7.5" fill="#fde68a">5.2%</text>
+<circle cx="200" cy="119.4" r="3" fill="#fbbf24"/><text x="200" y="133.4" text-anchor="middle" font-size="7.5" fill="#fde68a">5.1%</text>
+<circle cx="340" cy="95.0" r="3" fill="#fbbf24"/><text x="340" y="109.0" text-anchor="middle" font-size="7.5" fill="#fde68a">8.1%</text>
+<circle cx="480" cy="92.7" r="3" fill="#fbbf24"/><text x="480" y="106.7" text-anchor="middle" font-size="7.5" fill="#fde68a">8.4%</text>
+<circle cx="620" cy="84.8" r="3" fill="#fbbf24"/><text x="620" y="98.8" text-anchor="middle" font-size="7.5" fill="#fde68a">9.4%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.1 313.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="223.4 90.8" stroke-dashoffset="-1.1" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="89.7 224.5" stroke-dashoffset="-224.5" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">71% inst.</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~0.34% (S&amp;P)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~71.1% (S&amp;P)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail/other ~28.5%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Roughly +2% over the window (~1.92B at end-2021, 1.96B now). Buybacks ran about $10-15B per year ($3.1B in Q2 2026) but the Hess acquisition issued roughly 300M shares in July 2025 (S&amp;P shows shares +12% YoY). Dividend per share has grown every year (FY2021 $5.31 to FY2025 $6.84); the TTM payout ratio is ~68% of earnings and ~52% of FCF.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> total debt $37.1B, cash $8.5B, net debt $28.5B (Jun 2026), equity $195.6B, debt/equity 0.19, interest coverage ~19x. Net debt rose from $9.5B (FY2022) to $40.4B (FY2025) as the Hess deal closed and capex climbed, then fell sharply in Q2 2026. No founder or controlling insider block; this is a widely held institutional stock.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist with the graduated bands applied mechanically; no criteria are N/A. Growth CAGRs are 4-year (FY2021-25) and start on a post-COVID recovery year, end on a trough-price year. Criterion #14 compares FY2025 gross margin with FY2022's (3 fiscal years).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Chevron</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+4.5% &mdash; $155.1B &rarr; $184.7B (reported, S&amp;P standardised). FY2022 was the price spike (+52%), FY2023 -17%, FY2025 -5.6% despite Hess volumes (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+2.3% &mdash; operating income $16.1B &rarr; $17.6B; FY2022 peak was $42.0B, so FY2025 is 58% below it (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>9.55% (FY2025), vs 17.8% at the FY2022 peak; TTM Jun-26 13.0% as oil rose (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-5.9% &mdash; OCF minus capex $21.1B &rarr; $16.6B; capex has doubled ($8.1B &rarr; $17.3B) while OCF grew 16% (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Strong #2 US integrated oil major by market value behind ExxonMobil, and one of the 'Big Five' western supermajors. No verified global %-share (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; crude is a global price-taker market; no company, and not even the top majors, sets price; OPEC+ influence is the main swing factor (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 8.22% vs WACC 6.79% (S&amp;P Global, Oct 2026), +1.4pp spread. At the FY2025 trough ROIC would have been far lower; this is cycle-flattered (score 1/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.56x &mdash; net debt $28.5B (incl. leases, Jun 2026) / TTM EBITDA $50.7B (S&amp;P). FY2025 basis was ~1.1x ($40.4B / ~$37.6B). No captive finance arm to strip out (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>94% (FY2025: $16.6B / $17.6B). Five-year path 131% / 90% / 73% / 67% / 94% &mdash; EBIT here is S&amp;P operating income, which is depressed vs cash flow by DD&amp;A (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 21.9x (price $228.23 / TTM EPS $10.41) vs FY21-25 year-end average 15.3x (ratio 1.43). The average is low because FY2022 earnings were a peak (P/E 9.7x); forward P/E ~12.2x vs ~13.5x own forward average (0.90). Scored on the trailing basis, not forced to pass (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~1.92B (end-2021) &rarr; ~1.96B now (+2%): ~$10-15B/yr buybacks were offset by roughly 300M shares issued for Hess in Jul 2025 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~0.34% (S&amp;P); institutions ~71%. No founder or controlling holder; no notable employee-ownership plan verified (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>9.4% of revenue in FY2025 (5.2% in FY2021); capital-intensive by nature and guided higher post-Hess (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (S&amp;P-derived: revenue less cost of sales; Chevron does not print a gross-profit line). FY2022 38.87% &rarr; FY2025 41.90%, +3.03pp. Note this reflects refining and mix, while EBIT margin fell 17.8% &rarr; 9.6% over the same window (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 1&times;13=2.6 &middot; #2 1&times;11=2.2 &middot; #3 2&times;10=4.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 1&times;10=2.0 &middot; #8 4&times;6=4.8 &middot; #9 4&times;8=6.4 &middot; #10 0&times;8=0.0 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 3&times;4=2.4 &middot; #14 5&times;5=5.0. Total 38.6 / 105 = <b>37/100</b>. Criteria met: 6/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #7 uses S&amp;P's ROIC/WACC; #12 reflects S&amp;P's insider percentage; #14 uses an S&amp;P-derived gross margin, not a Chevron-reported line.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Balance sheet and cash conversion: net debt/EBITDA is 0.56x, FCF was 94% of EBIT in FY2025 and Q2 2026 produced $18.1B of FCF. Dividend per share has grown every year (39 straight years per S&amp;P) and the TTM payout is about half of FCF. Hess adds long-life Guyana barrels, ROIC is above WACC, gross margin is higher than in FY2022, and the stock trades at ~12x forward earnings.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a commodity price-taker at a cycle high: Brent near $114 vs a FY2025 9.6% margin, so the TTM numbers and ~12x forward P/E depend on prices staying high. Five-year revenue, EBIT and FCF CAGRs are weak or negative, capex has doubled, trailing P/E (21.9x) is 1.43x its FY21-25 average (flattered low by the FY2022 peak), and the stock is within 2% of the analyst target. Hess integration, the Q3 report on Oct 30 and the reported CEO succession are open items. No insider block.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence: annual and quarterly financials, ratios, statistics, price, analyst target, ownership percentages, ROIC/WACC; Oct 27, 2026); Reuters and Business Wire via stockanalysis.com news (Oct 6, 2026 Hess Midstream/DJ Basin announcement); TheFly (analyst targets). Hess deal timing and ~300M new shares are from public company announcements and are approximate. Year-end share prices, ROIC, WACC and shares outstanding are third-party or approximate and flagged as such. All figures US$, reported GAAP basis. Price as of Oct 27, 2026 close; prepared Oct 28, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Chevron &mdash; US$ share price on the NYSE. A post-COVID recovery to a 2022 peak, a three-year range-bound period, and a sharp rally in 2026 as oil prices spiked.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Chevron &mdash; Year-End Close (Unadjusted, NYSE: CVX), USD</div>
+    <div class="chart-sub">Year-end closing prices FY2021-FY2024 (unadjusted for dividends) plus an approximate FY2025 close (~$164.30, derived from S&amp;P's FY2025 P/E of 24.78 x EPS $6.63) and the Oct 27, 2026 close of $228.23. The dashed line is the straight-line annualised price CAGR from the Dec 2021 point to now (4.8 years), excluding dividends (current yield ~3.1%). 52-week range: $146.49 &ndash; $234.08.</div>
+    <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,109.6 L 172.8,72.3 L 299.6,90.5 L 426.4,93.1 L 553.2,81.4 L 680.0,43.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="109.6" x2="680.0" y2="43.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +14.8%*</text>
+<path d="M 46.0,109.6 L 172.8,72.3 L 299.6,90.5 L 426.4,93.1 L 553.2,81.4 L 680.0,43.1" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="109.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="97.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$117.34</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="72.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="60.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$179.49</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="90.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="105.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$149.16</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="93.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="108.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$144.84</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="81.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="69.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$164.30</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="43.1" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="31.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$228.23</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price-only CAGR, excluding about $6-7 per share of annual dividends; year-end closes for FY2021-24 are taken from public NYSE data as I recall it (not re-verified here) and the FY2025 point is derived, so treat all as approximate. The rally from ~$145-165 to $228 happened alongside the 2026 oil spike and the Hess acquisition (all-stock, adding ~300M shares). Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ConocoPhillips Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/conocophillips.html">
+<meta property="og:title" content="ConocoPhillips Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ConocoPhillips Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Oil &amp; Gas Exploration &amp; Production &mdash; Largest Independent (Pure-Play, No Refining)</div>
+  <h1>ConocoPhillips</h1>
+  <div class="badges">
+    <span class="badge">NYSE: COP</span>
+    <span class="badge">FY ends Dec 31</span>
+    <span class="badge">Pure-play E&amp;P since the 2012 Phillips 66 refining spin-off &middot; Marathon Oil acquired Nov 2024</span>
+    <span class="badge warn">Q3 2026 results are pending (due Nov 5, 2026): the latest reported quarter is Q2 2026. Brent has been around $114/bbl in late Oct 2026 (Iran/Houthi-Saudi tensions) &mdash; treat current earnings power as cycle-high, not a baseline</span>
+  </div>
+  <div class="price">$147.96</div>
+  <div class="price-sub">Close Oct 27, 2026 (NYSE: COP, USD) &middot; 52-wk range $85.57&ndash;$152.77 (intraday) &middot; Mkt cap &asymp;$177.7B (&asymp;1.20B shares) &middot; Analyst avg. target $151.48 (29 analysts, consensus Buy)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> EOG Resources, Canadian Natural Resources, Occidental, Devon, Diamondback (independent E&amp;Ps) &middot; ExxonMobil, Chevron (integrated majors with large Permian positions) &mdash; ConocoPhillips is the largest listed independent producer, but the oil and gas market itself is fragmented and price-set by global supply and OPEC+</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$60.3B</div>
+      <div class="sub" style="color:#34d399;">+6.8% YoY &mdash; Marathon Oil volumes from Nov 2024; Q2 2026 +35.5% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (FY2025)</div>
+      <div class="val">20.85%</div>
+      <div class="sub">Down from 33.9% in FY2022; TTM to Q2 2026 is 23.1%</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs WACC</div>
+      <div class="val" style="color:#34d399;">11.6% / &asymp;5.2%</div>
+      <div class="note">Both figures are third-party (S&amp;P Global) estimates; the WACC looks low for a commodity producer, so the &asymp;6.4pt spread is likely overstated.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt/EBITDA</div>
+      <div class="val" style="color:#34d399;">0.58x</div>
+      <div class="sub">&asymp;$15.6B net debt (incl. leases) vs &asymp;$26.8B TTM EBITDA</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">37/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Solid balance sheet and returns, but flat FY21-25 growth, falling margins, heavy capex and a rich multiple on cyclical earnings.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 184.27,169.23 L155.35,146.16 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M184.27,169.23 A95,95 0 1 1 109.99,15.00 L109.99,52.00 A58,58 0 1 0 155.35,146.16 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">5/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 5 (operating margin, market share, ROIC/WACC, net debt/EBITDA, share count trend)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 9 (revenue CAGR, EBIT CAGR, FCF CAGR, market concentration, FCF conversion, entry multiple vs. history, insider ownership, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; fragmented global supply; COP is a price taker with no pricing power</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    ConocoPhillips is the largest independent oil and gas producer: a pure exploration-and-production business with no refining or retail (those went to Phillips 66 in 2012), so its earnings move almost one-for-one with oil and gas prices. In November 2024 it closed the all-stock acquisition of Marathon Oil, adding Lower 48 acreage and volumes; that lifted FY2025 revenue 6.8% even as operating income fell to $12.6B, because realised prices were lower than in FY2022-23. Five years on from FY2021, revenue is up about 6.6% a year, operating income is slightly lower and free cash flow is down by more than a third, while capex has more than doubled to about 21% of revenue. The balance sheet is sound (net debt roughly 0.6x EBITDA) and the share count has fallen despite the Marathon issuance, but the Martinero Index of 37 reflects a business whose five-year record is mostly a price cycle, not compounding. Q2 2026 was a sharp rebound (revenue +35.5% YoY, operating income more than doubled) and the shares are up about 72% in 52 weeks with Brent near $114, so the current trailing P/E of 19.6x sits well above its own FY21-25 average of 12.2x, an average itself depressed by the FY2022 earnings peak.
+  </div>
+
+  <div class="callout">
+    <b>Data vintage note:</b> financials through Q2 2026 (quarter ended Jun 30, 2026, reported early August 2026). Q3 2026 is pending and is expected Nov 5, 2026, before the market open. Price is the Oct 27, 2026 NYSE close. Figures are S&amp;P Global Market Intelligence standardised data via stockanalysis.com, not ConocoPhillips' own reported line items: revenue, operating income and margins can differ slightly from the company's adjusted or reported-earnings presentation. All figures here are <b>reported (GAAP-based), not adjusted</b>.
+  </div>
+
+  <div class="bignum-corner">5/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD, S&amp;P-standardised, reported (not adjusted). CAGR computed FY21&rarr;FY25 (4-year span). FCF = operating cash flow minus capital expenditure. Net debt = total debt incl. leases minus cash &amp; investments. DPS includes variable return of cash and special dividends where declared. Fiscal year = calendar year. Low-oil-price years are visible: FY2021 pre-dates the price spike and FY2024-25 show earnings fading as prices eased.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income, Net Income &amp; Free Cash Flow &mdash; Annual ($B)</div>
+    <div class="chart-sub">FY2022 was the commodity-price peak (revenue $80.6B, operating income $27.3B). FY2023-FY2025 show prices and profits normalising lower, with Marathon Oil adding volumes from Nov 2024.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating Income</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Net Income</span>
+      <span><span class="dot" style="background:#a78bfa;"></span>Free Cash Flow</span>
+    </div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">$30B</text><line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">$60B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$90B</text><rect x="92" y="125.94" width="20" height="114.06" rx="1.5" fill="#2dd4bf"/><text x="102" y="120.94" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">46.7</text><rect x="116" y="208.09" width="20" height="31.91" rx="1.5" fill="#60a5fa"/><text x="126" y="203.09" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">13.1</text><rect x="140" y="220.30" width="20" height="19.70" rx="1.5" fill="#fbbf24"/><text x="150" y="215.30" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">8.1</text><rect x="164" y="211.47" width="20" height="28.53" rx="1.5" fill="#a78bfa"/><text x="174" y="206.47" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">11.7</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY21</text><rect x="248" y="43.04" width="20" height="196.96" rx="1.5" fill="#2dd4bf"/><text x="258" y="38.04" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">80.6</text><rect x="272" y="173.21" width="20" height="66.79" rx="1.5" fill="#60a5fa"/><text x="282" y="168.21" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">27.3</text><rect x="296" y="194.48" width="20" height="45.52" rx="1.5" fill="#fbbf24"/><text x="306" y="189.48" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">18.6</text><rect x="320" y="195.62" width="20" height="44.38" rx="1.5" fill="#a78bfa"/><text x="330" y="190.62" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">18.2</text><text x="294" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY22</text><rect x="404" y="98.56" width="20" height="141.44" rx="1.5" fill="#2dd4bf"/><text x="414" y="93.56" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">57.9</text><rect x="428" y="199.84" width="20" height="40.16" rx="1.5" fill="#60a5fa"/><text x="438" y="194.84" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">16.4</text><rect x="452" y="213.30" width="20" height="26.70" rx="1.5" fill="#fbbf24"/><text x="462" y="208.30" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">10.9</text><rect x="476" y="218.69" width="20" height="21.31" rx="1.5" fill="#a78bfa"/><text x="486" y="213.69" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">8.7</text><text x="450" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY23</text><rect x="560" y="102.01" width="20" height="137.99" rx="1.5" fill="#2dd4bf"/><text x="570" y="97.01" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">56.5</text><rect x="584" y="204.06" width="20" height="35.94" rx="1.5" fill="#60a5fa"/><text x="594" y="199.06" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">14.7</text><rect x="608" y="217.47" width="20" height="22.53" rx="1.5" fill="#fbbf24"/><text x="618" y="212.47" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">9.2</text><rect x="632" y="220.43" width="20" height="19.57" rx="1.5" fill="#a78bfa"/><text x="642" y="215.43" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">8.0</text><text x="606" y="258" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="700">FY24</text><rect x="716" y="92.65" width="20" height="147.35" rx="1.5" fill="#2dd4bf"/><text x="726" y="87.65" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">60.3</text><rect x="740" y="209.27" width="20" height="30.73" rx="1.5" fill="#60a5fa"/><text x="750" y="204.27" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">12.6</text><rect x="764" y="220.54" width="20" height="19.46" rx="1.5" fill="#fbbf24"/><text x="774" y="215.54" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">8.0</text><rect x="788" y="222.29" width="20" height="17.71" rx="1.5" fill="#a78bfa"/><text x="798" y="217.29" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">7.2</text><text x="762" y="258" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR</div><div class="val" style="color:#f87171;">+6.61%</div><div class="sub">$46.7B &rarr; $60.3B; below the growth bar, largely price-driven plus Marathon</div></div>
+    <div class="cagr-card"><div class="label">Op. Income CAGR</div><div class="val" style="color:#f87171;">-0.94%</div><div class="sub">$13.1B &rarr; $12.6B; no net growth over the period</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR</div><div class="val" style="color:#f87171;">-11.24%</div><div class="sub">$11.7B &rarr; $7.2B; capex more than doubled</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend</div>
+    <div class="chart-sub">Gross margin (S&amp;P-derived; COP reports no gross-profit line) held near 49% until FY2024, then dipped to 46.2%. Operating margin fell from a 33.9% FY2022 peak to 20.85% in FY2025 as prices eased and depreciation, depletion and exploration costs rose with the larger asset base.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#fbbf24;"></span>Gross margin</span><span><span class="dot" style="background:#2dd4bf;"></span>Operating margin</span></div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">15%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">45%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60%</text><path d="M 50.00,56.13 L 247.50,56.20 L 445.00,57.57 L 642.50,56.50 L 840.00,66.07" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.00" cy="56.13" r="3" fill="#fbbf24"/><text x="50.00" y="46.13" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">49.2%</text><circle cx="247.50" cy="56.20" r="3" fill="#fbbf24"/><text x="247.50" y="46.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">49.1%</text><circle cx="445.00" cy="57.57" r="3" fill="#fbbf24"/><text x="445.00" y="47.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">48.7%</text><circle cx="642.50" cy="56.50" r="3" fill="#fbbf24"/><text x="642.50" y="46.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">49.0%</text><circle cx="840.00" cy="66.07" r="3" fill="#fbbf24"/><text x="840.00" y="56.07" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">46.2%</text><path d="M 50.00,126.73 L 247.50,106.97 L 445.00,125.33 L 642.50,133.20 L 840.00,150.50" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="126.73" r="3" fill="#2dd4bf"/><text x="50.00" y="144.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">28.0%</text><circle cx="247.50" cy="106.97" r="3" fill="#2dd4bf"/><text x="247.50" y="124.97" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">33.9%</text><circle cx="445.00" cy="125.33" r="3" fill="#2dd4bf"/><text x="445.00" y="143.33" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">28.4%</text><circle cx="642.50" cy="133.20" r="3" fill="#2dd4bf"/><text x="642.50" y="151.20" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">26.0%</text><circle cx="840.00" cy="150.50" r="3" fill="#2dd4bf"/><text x="840.00" y="168.50" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">20.9%</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>FCF</th><th>Capex</th><th>Net debt</th><th>DPS</th></tr>
+<tr><td>FY2021</td><td>$46.7B</td><td>$13.1B</td><td>27.98%</td><td>$8.1B</td><td>$6.07</td><td>$11.7B</td><td>$5.3B</td><td>$14.0B</td><td>$1.75</td></tr>
+<tr><td>FY2022</td><td>$80.6B</td><td>$27.3B</td><td>33.91%</td><td>$18.6B</td><td>$14.57</td><td>$18.2B</td><td>$10.2B</td><td>$7.9B</td><td>$4.49</td></tr>
+<tr><td>FY2023</td><td>$57.9B</td><td>$16.4B</td><td>28.40%</td><td>$10.9B</td><td>$9.06</td><td>$8.7B</td><td>$11.2B</td><td>$13.0B</td><td>$4.61</td></tr>
+<tr><td>FY2024</td><td>$56.5B</td><td>$14.7B</td><td>26.04%</td><td>$9.2B</td><td>$7.81</td><td>$8.0B</td><td>$12.1B</td><td>$19.2B</td><td>$3.12</td></tr>
+<tr><td>FY2025</td><td>$60.3B</td><td>$12.6B</td><td>20.85%</td><td>$8.0B</td><td>$6.35</td><td>$7.2B</td><td>$12.6B</td><td>$17.4B</td><td>$3.18</td></tr>
+
+  </table>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">FY2025 capex was $12.6B (&asymp;20.8% of revenue). Dividends: FY2022-23 per-share totals include variable return of cash (VROC) payments; the ordinary quarterly dividend is now $0.84 (up 7.7%), a trailing yield of about 2.2% and a payout of roughly 45% of TTM earnings. Source: stockanalysis.com / S&amp;P Global; revenue differs slightly from ConocoPhillips' "total revenues and other income".</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Latest Results</div></div>
+  <div class="sec-sub">ConocoPhillips reports calendar quarters. Latest reported period: Q2 2026 (three months to June 30, 2026). Q3 2026 is pending, due Nov 5, 2026. Eight quarters shown (Q3 2024 &ndash; Q2 2026); all figures reported, not adjusted.</div>
+
+  <div class="headline-box">
+    <div class="title">Q2 2026 Headlines</div>
+    <p>Revenue <b style="color:#f8fafc;">$19.4B</b>, +35.5% YoY. Operating income <b style="color:#f8fafc;">$6.11B</b> (31.5% margin, vs 19.7% a year earlier), net income <b style="color:#f8fafc;">$3.92B</b> (+99.5% YoY), EPS <b style="color:#f8fafc;">$3.23</b> (+107%). Free cash flow was $4.4B on $7.4B of operating cash flow. The step-up follows two soft quarters (Q4'25 operating margin 16.3%, Q1'26 22.3%) and coincides with the higher oil-price environment (Brent about $114 by late October); this pass did not source company-reported realised prices or production for Q2, so the price-versus-volume split is not broken out here. The stock has risen from about $116 at the August 6 close to $148 since the print, helped by price-target raises (Susquehanna to $175, Jefferies to $174, Morgan Stanley to $159, per TheFly headlines, Oct 2026). Separately, Reuters reported on Oct 26 that the company will reduce its Canadian workforce.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue ($B)</div>
+    <div class="chart-sub">Revenue was range-bound at $13.5&ndash;16.9B for seven quarters before Q2 2026's jump to $19.4B, the highest in this window.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="184.0" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="60" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="144.0" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="60" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="104.0" text-anchor="end" font-size="11" fill="#64748b">$15B</text><line x1="60" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="64.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$25B</text><rect x="80.0" y="112.14" width="57.5" height="107.86" rx="2" fill="#2dd4bf"/><text x="108.8" y="105.14" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.5B</text><text x="108.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q3'24</text><rect x="177.5" y="102.59" width="57.5" height="117.41" rx="2" fill="#2dd4bf"/><text x="206.2" y="95.59" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$14.7B</text><text x="206.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q4'24</text><rect x="275.0" y="84.73" width="57.5" height="135.27" rx="2" fill="#2dd4bf"/><text x="303.8" y="77.73" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$16.9B</text><text x="303.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q1'25</text><rect x="372.5" y="105.45" width="57.5" height="114.55" rx="2" fill="#2dd4bf"/><text x="401.2" y="98.45" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$14.3B</text><text x="401.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q2'25</text><rect x="470.0" y="96.99" width="57.5" height="123.01" rx="2" fill="#2dd4bf"/><text x="498.8" y="89.99" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$15.4B</text><text x="498.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q3'25</text><rect x="567.5" y="110.60" width="57.5" height="109.40" rx="2" fill="#2dd4bf"/><text x="596.2" y="103.60" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$13.7B</text><text x="596.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q4'25</text><rect x="665.0" y="91.57" width="57.5" height="128.43" rx="2" fill="#2dd4bf"/><text x="693.8" y="84.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$16.1B</text><text x="693.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q1'26</text><rect x="762.5" y="64.80" width="57.5" height="155.20" rx="2" fill="#2dd4bf"/><text x="791.2" y="57.80" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$19.4B</text><text x="791.2" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Operating Income ($B) &amp; Margin</div>
+    <div class="chart-sub">Operating income troughed at $2.2B (16.3% margin) in Q4'25 and then nearly tripled to $6.1B in Q2'26. Margin is shown inside each bar.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="174.0" text-anchor="end" font-size="11" fill="#64748b">$2B</text><line x1="60" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="124.0" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="74.0" text-anchor="end" font-size="11" fill="#64748b">$6B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$8B</text><rect x="80.0" y="138.18" width="57.5" height="81.83" rx="2" fill="#60a5fa"/><text x="108.8" y="131.18" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.27B</text><text x="108.8" y="150.18" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">24.3%</text><text x="108.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q3'24</text><rect x="177.5" y="123.57" width="57.5" height="96.43" rx="2" fill="#60a5fa"/><text x="206.2" y="116.57" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.86B</text><text x="206.2" y="135.57" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">26.3%</text><text x="206.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q4'24</text><rect x="275.0" y="107.22" width="57.5" height="112.78" rx="2" fill="#60a5fa"/><text x="303.8" y="100.22" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$4.51B</text><text x="303.8" y="119.22" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">26.7%</text><text x="303.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q1'25</text><rect x="372.5" y="149.38" width="57.5" height="70.62" rx="2" fill="#60a5fa"/><text x="401.2" y="142.38" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.83B</text><text x="401.2" y="161.38" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">19.7%</text><text x="401.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q2'25</text><rect x="470.0" y="144.88" width="57.5" height="75.12" rx="2" fill="#60a5fa"/><text x="498.8" y="137.88" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.00B</text><text x="498.8" y="156.88" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">19.5%</text><text x="498.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q3'25</text><rect x="567.5" y="164.28" width="57.5" height="55.73" rx="2" fill="#60a5fa"/><text x="596.2" y="157.28" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$2.23B</text><text x="596.2" y="176.28" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">16.3%</text><text x="596.2" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q4'25</text><rect x="665.0" y="130.43" width="57.5" height="89.58" rx="2" fill="#60a5fa"/><text x="693.8" y="123.43" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$3.58B</text><text x="693.8" y="142.43" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">22.3%</text><text x="693.8" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" >Q1'26</text><rect x="762.5" y="67.17" width="57.5" height="152.83" rx="2" fill="#60a5fa"/><text x="791.2" y="60.17" text-anchor="middle" font-size="10.5" fill="#e2e8f0" font-weight="700">$6.11B</text><text x="791.2" y="79.17" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">31.5%</text><text x="791.2" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q2'26</text></svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>FCF</th></tr>
+<tr><td>Q3'24</td><td>$13.48B</td><td>$3.27B</td><td>24.3%</td><td>$2.05B</td><td>$1.76</td><td>$2.85B</td></tr>
+<tr><td>Q4'24</td><td>$14.68B</td><td>$3.86B</td><td>26.3%</td><td>$2.30B</td><td>$1.90</td><td>$1.14B</td></tr>
+<tr><td>Q1'25</td><td>$16.91B</td><td>$4.51B</td><td>26.7%</td><td>$2.84B</td><td>$2.23</td><td>$2.74B</td></tr>
+<tr><td>Q2'25</td><td>$14.32B</td><td>$2.83B</td><td>19.7%</td><td>$1.96B</td><td>$1.56</td><td>$0.20B</td></tr>
+<tr><td>Q3'25</td><td>$15.38B</td><td>$3.00B</td><td>19.5%</td><td>$1.72B</td><td>$1.38</td><td>$3.01B</td></tr>
+<tr><td>Q4'25</td><td>$13.68B</td><td>$2.23B</td><td>16.3%</td><td>$1.44B</td><td>$1.16</td><td>$1.29B</td></tr>
+<tr><td>Q1'26</td><td>$16.05B</td><td>$3.58B</td><td>22.3%</td><td>$2.18B</td><td>$1.78</td><td>$1.35B</td></tr>
+<tr><td>Q2'26</td><td>$19.40B</td><td>$6.11B</td><td>31.5%</td><td>$3.92B</td><td>$3.23</td><td>$4.41B</td></tr>
+
+  </table>
+
+  <div class="callout" style="margin-top:8px;">
+    <b>Cycle caveat:</b> Q3 2026 (to be reported Nov 5) will be the first quarter fully inside the Brent ~$114 environment, so a further rise in reported earnings is plausible, but a commodity producer's earnings can reverse quickly if prices ease. The chairman has said ConocoPhillips sees the oil-price floor rising to about $70/bbl (Reuters headline, Oct 5, 2026) &mdash; a management view, not a forecast this page endorses. No company guidance figures were sourced for this page.
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E at each fiscal year-end, FY2021&ndash;FY2025, plus the current TTM reading and current forward P/E.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing &amp; Forward P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub">Year-end trailing P/E (stockanalysis.com / S&amp;P) rose steadily from 7.9x at the FY2022 earnings peak to 14.5x at FY2025 as earnings fell faster than the share price. At the current 19.6x (price $147.96 / TTM EPS $7.53) it is about 1.62x its FY21-25 average of 12.2x, a premium of roughly 62%. The five-year average is flattered low by FY2022's peak earnings (7.9x), so the trailing comparison looks worse than the forward one: forward P/E is 12.3x (derived from the Oct 23 consensus-based 12.55x, repriced to the Oct 27 close) vs a five-year year-end forward average of about 11.9x (8.9, 9.6, 11.5, 13.3, 16.3).</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="180.0" x2="840" y2="180.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="184.0" text-anchor="end" font-size="11" fill="#64748b">5x</text><line x1="50" y1="140.0" x2="840" y2="140.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="144.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="100.0" x2="840" y2="100.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="104.0" text-anchor="end" font-size="11" fill="#64748b">15x</text><line x1="50" y1="60.0" x2="840" y2="60.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="64.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25x</text><line x1="50.0" y1="122.75" x2="840.0" y2="122.75" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="290" y="135.75" text-anchor="middle" font-size="10" fill="#94a3b8">FY21-25 avg: 12.2x</text><path d="M50.0,125.52 L208.0,156.80 L366.0,119.04 L524.0,108.64 L682.0,103.76 L840.0,62.80" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50.0" cy="125.52" r="3" fill="#a78bfa"/><text x="50.0" y="115.52" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">11.81x</text><circle cx="208.0" cy="156.80" r="3" fill="#a78bfa"/><text x="208.0" y="146.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">7.90x</text><circle cx="366.0" cy="119.04" r="3" fill="#a78bfa"/><text x="366.0" y="109.04" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.62x</text><circle cx="524.0" cy="108.64" r="3" fill="#a78bfa"/><text x="524.0" y="98.64" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.92x</text><circle cx="682.0" cy="103.76" r="3" fill="#a78bfa"/><text x="682.0" y="93.76" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">14.53x</text><circle cx="840.0" cy="62.80" r="3.5" fill="#a78bfa"/><text x="840.0" y="52.80" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.65x</text><text x="50.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21</text><text x="208.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="366.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="524.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="682.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY25</text><text x="840.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text><circle cx="840.0" cy="121.49" r="3.5" fill="#fca5a5" stroke="#0a0e1a" stroke-width="1"/><text x="800.0" y="131.49" text-anchor="end" font-size="10" fill="#fca5a5" font-weight="700">Fwd 12.31x</text></svg>
+  </div>
+
+  <div class="legend-row" style="margin-top:-2px;margin-bottom:6px;">
+    <span><span class="dot" style="background:#a78bfa;"></span>Trailing P/E</span>
+    <span><span class="dot" style="background:#fca5a5;"></span>Forward P/E (current only)</span>
+  </div>
+
+  <div class="callout blue">
+    <b>Reading the three P/E numbers:</b> current P/E is today's share price divided by the last 12 months of reported earnings (TTM EPS $7.53, which includes the strong Q2 2026). Trailing P/E (the FY21-25 series above) is that same ratio at each fiscal year-end. Forward P/E is today's price divided by analysts' consensus estimate of the <i>next</i> 12 months of earnings; here 12.3x versus 19.6x trailing, implying consensus expects EPS to rise by roughly 60% on higher oil prices. That is a commodity-price call, not a growth trend. stockanalysis.com reports a PEG ratio of 0.79 (3-year consensus EPS growth forecast 18.7%), but that growth is a rebound from a trough and should not be read as steady compounding. Because earnings are cyclical, a low P/E can signal peak earnings and a high P/E trough earnings; today's elevated trailing multiple partly reflects TTM earnings still catching up with the price move.
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> at Q2 2026 (Jun 30, 2026) ConocoPhillips held $7.7B of cash and investments against $23.3B of total debt including leases, a net debt of about $15.6B, or &asymp;0.58x TTM EBITDA of $26.8B (debt/EBITDA 0.85x, interest cover ~18.6x per S&amp;P). Net debt rose from $7.9B (FY2022) to $19.2B (FY2024) around the Marathon Oil acquisition, which assumed Marathon's debt, and has since eased to $15.6B. Consolidated net debt, no captive finance arm.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 110 110)"><circle cx="110" cy="110" r="70" fill="none" stroke="#60a5fa" stroke-width="40" stroke-dasharray="378.16 439.82" stroke-dashoffset="-0.00"/><circle cx="110" cy="110" r="70" fill="none" stroke="#34d399" stroke-width="40" stroke-dasharray="0.35 439.82" stroke-dashoffset="-378.16"/><circle cx="110" cy="110" r="70" fill="none" stroke="#64748b" stroke-width="40" stroke-dasharray="61.31 439.82" stroke-dashoffset="-378.51"/></g></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutional holders &asymp; 86.0%</div>
+        <div><span class="dot" style="background:#34d399;"></span>Insiders (directors &amp; officers) &asymp; 0.08%</div>
+        <div><span class="dot" style="background:#64748b;"></span>Other / retail float &asymp; 13.9% (derived)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance note:</b> ConocoPhillips is a widely held, professionally managed company with no founder or controlling shareholder and negligible insider ownership (~0.08%), so the framework's insider-ownership criterion scores zero. Institutional ownership is high (~86%) and short interest is low (~1.3% of shares), per stockanalysis.com / S&amp;P Global (third-party). The Marathon Oil all-stock deal gave Marathon holders new COP shares; buybacks since have more than offset the issuance on a net basis.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met &mdash; less competition means more pricing power and more room for the share price to compound.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>ConocoPhillips</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+6.6% &mdash; $46.7B &rarr; $60.3B (S&amp;P-standardised revenue); FY2022 was the price-spike peak ($80.6B), FY2025 only 6.8% above FY2021 (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>2</td><td>Operating Income CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-0.9% &mdash; $13.1B &rarr; $12.6B; FY2022 peak $27.3B, then three straight declines (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>20.85% (FY2025), down from 33.9% in FY2022 and 28.0% in FY2021; TTM to Q2 2026 is 23.1%. Just clears the bar after a three-year slide (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-11.2% &mdash; $11.7B &rarr; $7.2B (operating cash flow minus capex); capex more than doubled from $5.3B to $12.6B, partly the Marathon Oil asset base (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Category = listed independent (non-integrated) E&amp;P: the largest by production and market cap, ahead of Canadian Natural Resources (~$107B) and EOG (~$81B) market caps. Against integrated majors and national oil companies it is far smaller, and no verified global %-share was sourced (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; global oil and gas supply is fragmented across OPEC+, national oil companies, majors and independents; COP is a price taker (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 11.63% vs WACC 5.21% (both S&amp;P Global estimates via stockanalysis.com), a +6.4pt spread. The 5.2% WACC looks low for a commodity producer (beta 0.24); at a more typical ~8% the spread would be ~3.6pt (2/5). Scored on the sourced figures (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.58x &mdash; net debt $15.6B (total debt incl. leases $23.3B minus cash &amp; investments $7.7B, Q2 2026) vs TTM EBITDA $26.8B. Industrial/ex-captive-finance basis not needed (no finance arm) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>57.6% (FY2025: $7.2B FCF / $12.6B operating income); 5-year path 89% / 66% / 53% / 54% / 58%. Heavy capex keeps conversion low even at reasonable margins (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing P/E 19.6x (price $147.96 / TTM EPS $7.53) vs FY21-25 year-end average 12.2x, ratio 1.62. The average is pulled down by FY2022's peak-earnings 7.9x, and on forward P/E (12.3x vs ~11.9x five-year average) the ratio is ~1.03. Scored on the trailing basis, not forced to pass (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>EPS-implied weighted shares ~1.33B (FY21) &rarr; ~1.23B (TTM), about &minus;7.5%; current 1.20B (about &minus;9.6%). Buybacks outweighed the Marathon Oil share issuance in Nov 2024 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~0.08% and no controlling holder; institutions ~86% (stockanalysis.com). No employee-ownership plan data sourced (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>20.8% of revenue (FY2025: $12.6B on $60.3B); TTM 18.4%. A depleting-asset upstream business must reinvest continuously (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &mdash; EBIT margin (proxy: no gross margin)</td><td>drop &le;1.0pp (3-yr)</td><td>ConocoPhillips does not report a gross-profit line, so operating (EBIT) margin is the basis: 33.91% (FY2022) &rarr; 20.85% (FY2025), &minus;13.06pp. The S&amp;P-derived gross margin series (49.14% &rarr; 46.18%, &minus;2.96pp) would also score 0/5. Mostly the fade from the FY2022 price peak (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+
+  </table>
+
+  <div class="callout blue" style="margin-top:10px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 0&times;11=0.0 &middot; #3 5&times;10=10.0 &middot; #4 0&times;8=0.0 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 3&times;10=6.0 &middot; #8 4&times;6=4.8 &middot; #9 2&times;8=3.2 &middot; #10 0&times;8=0.0 &middot; #11 4&times;4=3.2 &middot; #12 0&times;5=0.0 &middot; #13 0&times;4=0.0 &middot; #14 0&times;5=0.0 (each = points/5 &times; weight). Total 39.2 / 105 = <b>37/100</b>. Criteria met: 5/14 on the binary thresholds. <b>Judgment calls:</b> #5 category definition, #6 concentration score, #7 uses third-party ROIC and a low third-party WACC. No criterion is N/A.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A strong balance sheet (net debt about 0.6x EBITDA) and a ROIC of ~11.6% that clears its estimated cost of capital. The company is the largest independent E&amp;P, the Marathon Oil deal added scale, and the share count is down roughly 8-10% since FY2021 even after issuing stock for it. Q2 2026 showed how much operating leverage the business has to higher prices: operating income more than doubled year on year, FCF reached $4.4B, and the dividend was raised 7.7%.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Five-year growth is flat: operating income is slightly below FY2021 and FCF is down about a third, while capex has risen to ~21% of revenue and operating margin has slid from 33.9% to 20.85%. Earnings are a function of oil and gas prices, so the Brent ~$114 backdrop (Iran/Houthi-Saudi tensions) flatters the latest quarter and the forward P/E; if prices fall back, earnings and the multiple could move in opposite directions. The trailing P/E of 19.6x is well above the FY21-25 average, there is no insider anchor, and Q3 2026 results (Nov 5) are still to come.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Oct 27, 2026 (NYSE close). Sources: stockanalysis.com (financials, ratios, quarterly data, statistics, price history, forecast; sourced from S&amp;P Global Market Intelligence), TheFly/TipRanks and Reuters headlines (analyst target changes, workforce and oil-price-floor news, Oct 2026). Year-end prices for 2021-2024 are not from a sourced table: they are the unadjusted NYSE year-end closes as recalled and cross-checked against stockanalysis.com's year-end market-cap history (within ~2%), so treat them as approximate.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. WACC (&asymp;5.2%) and ROIC (&asymp;11.6%) are third-party estimates; Brent ~$114 is market context from the project brief, not company data.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor. Figures combine directly-sourced and lightly-estimated data points; verify before acting.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">ConocoPhillips &mdash; USD share price trend, NYSE (COP). Year-end closes FY2021-FY2025 (unadjusted, no dividends) plus the Oct 27, 2026 close.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">ConocoPhillips &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">The share price peaked at the end of 2022 ($118.00), drifted down to $93.61 by end-2025 as earnings normalised, then rallied about 58% in 2026 to $147.96 with Brent near $114. The +15.4% 5-year CAGR is price only and excludes dividends; it starts from a pre-spike FY2021 base.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="130.0" x2="680" y2="130.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="80.0" x2="680" y2="80.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="30.0" x2="680" y2="30.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,161.73 L 172.8,93.00 L 299.6,95.90 L 426.4,121.25 L 553.2,129.59 L 680.0,48.06 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/><line x1="46.0" y1="161.73" x2="680.0" y2="48.06" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +15.4%</text><path d="M 46.0,161.73 L 172.8,93.00 L 299.6,95.90 L 426.4,121.25 L 553.2,129.59 L 680.0,48.06" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="46.0" cy="161.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="151.73" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$72.18</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text><circle cx="172.8" cy="93.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="83.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$118.00</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text><circle cx="299.6" cy="95.90" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="85.90" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$116.07</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text><circle cx="426.4" cy="121.25" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="111.25" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$99.17</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text><circle cx="553.2" cy="129.59" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="119.59" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$93.61</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text><circle cx="680.0" cy="48.06" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="680.0" y="38.06" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$147.96</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    The Dec 31, 2025 close ($93.61) and the Oct 27, 2026 close ($147.96) are direct quotes (stockanalysis.com / S&amp;P Global). The 2021-2024 year-end closes ($72.18, $118.00, $116.07, $99.17) are unadjusted closes recalled from memory and cross-checked against year-end market-cap history, not read from a price table, so treat them as approximate. 5-Yr CAGR is computed FY21-close to current (naive 5-year span, price only). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
