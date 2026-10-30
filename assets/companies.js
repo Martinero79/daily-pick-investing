@@ -3289,6 +3289,24 @@ const COMPANIES = [
     file: "companies/shell.html"
   },
 
+  {
+    slug: "fortinet",
+    name: "Fortinet",
+    ticker: "Nasdaq: FTNT",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Cybersecurity",
+    tags: ["Cybersecurity","Network Security","Firewalls","Net Cash","Founder-led"],
+    dateFeatured: "2026-10-30",
+    price: "$139.10",
+    score: "13 / 14",
+    martinero: 85,
+    momentum: { status: "steady", recent: 14.2, prior: 12.3 },
+    quarterYoY: { period: "Q3 2026", growth: 20.5 },
+    blurb: "Fortinet sells FortiGate firewalls built on its own ASICs plus security subscriptions and support. FY2025 revenue was $6.80B (+14.2%) with a 30.5% GAAP operating margin, and the company holds $4.3B of net cash. Q3 2026 revenue grew 20.5% and billings 29%, but GAAP gross margin slipped to 79.0% and the shares fell 20.1% on Oct 29.",
+    file: "companies/fortinet.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
