@@ -1811,7 +1811,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 55,
     momentum: { status: "accelerating", recent: 98.6, prior: -30.3 },
-    quarterYoY: { period: "FY2026 (ended Mar 2026)", growth: 98.6 },
+    quarterYoY: { period: "Q1 FY2027 (Apr-Jun 2026)", growth: -9.5 },
     blurb: "A genuine mid-pack score, and honestly a fun pick more than a screaming value case. Switch 2 launched in June 2025 and nearly doubled revenue (+98.6% FY2026), but hardware-launch economics crushed gross margin (61.0%→39.3%) and operating margin (35.0%→15.6%) — the classic pattern before high-margin software attach rates catch up. Zero debt, a ¥2.2T net cash pile, steady buybacks (~11% share count decline over 5 years), and a trailing P/E modestly below its own average are real positives. The clear miss: insider/founder ownership is under 1% — Yamauchi family control ended in 2013, fully institutional today.",
     file: "companies/nintendo.html",
     personalNote: "I picked Nintendo the way I picked Booking Holdings — not because a screen flagged it, but because I've been playing Mario and Zelda since I was a kid and wanted to see what the checklist actually says about it. The honest answer: it's a genuine mixed bag, and this happens to be about the worst fiscal year to look at it in. Nintendo just launched Switch 2 (June 2025), and hardware launch years are structurally brutal on this framework — revenue nearly doubled to ¥2,313.1B (+98.6%) as tens of millions of new consoles shipped, but gross margin collapsed from 61.0% to 39.3% and operating margin fell to 15.6% (from 35.0% just four years ago) because early-cycle hardware sells at thin or negative margins before the high-margin software attach rate catches up. That single dynamic is why revenue CAGR, EBIT CAGR, FCF CAGR and the margin-stability criterion all land as misses despite Switch 2 objectively outselling the PS5 at launch. What isn't a launch-year artifact: Nintendo carries zero debt and a ¥2.2T net cash pile, buybacks have quietly shrunk the share count by roughly 11% over five years, capex is essentially nothing since Nintendo doesn't manufacture its own hardware, and at a trailing P/E of roughly 19.75x the stock actually sits modestly below its own five-year average multiple. The clear miss, and the one that matters most for a 'beloved brand' thesis: insider and founder ownership is under 1% — the Yamauchi family's direct control ended after Hiroshi Yamauchi's 2013 death, and Nintendo today is fully institutionally owned, not founder-run. Net: 7 of 14 criteria met, Martinero Index 55/100 — middle of the pack, not a standout. This is sentiment more than a screaming value case right now; the checklist mildly likes the balance sheet and the valuation, is neutral on the market position, and actively dislikes this specific fiscal year's growth and margin trend. An honest, unglamorous result for a stock I picked mostly because I love the games."
@@ -1952,7 +1952,7 @@ const COMPANIES = [
     score: "3 / 14",
     martinero: 38,
     momentum: { status: "accelerating", recent: 11.5, prior: 4.1 },
-    quarterYoY: { period: "TTM (Sep 2026)", growth: 11.5 },
+    quarterYoY: { period: "FY2026 (ended May 2026)", growth: 11.5 },
     blurb: "A real, ~$915.5M-revenue cannabis-and-craft-beverage-alcohol company with growing sales (+11.5% TTM) and a narrowing operating loss — unlike this site's pre-revenue psychedelics names, Tilray is scored as a normal operating business, not N/A-heavy. But relentless share dilution (a 1-for-10 reverse split in Dec 2025 didn't stop it), a deeply negative ROIC, and a history of billion-dollar goodwill writedowns keep it firmly out of quality-compounder territory. Down roughly 65% over the trailing year.",
     file: "companies/tilray.html"
   },
@@ -1987,7 +1987,7 @@ const COMPANIES = [
     score: "11 / 14",
     martinero: 89,
     momentum: { status: "accelerating", recent: 17.7, prior: 15.5 },
-    quarterYoY: { period: "TTM (Sep 2026)", growth: 17.7 },
+    quarterYoY: { period: "TTM (Jun 2026)", growth: 17.7 },
     blurb: "A decentralized, three-decade compounder of ~1,000+ niche B2B vertical-market software businesses — utilities billing, library systems, funeral homes, hospitality, and hundreds of other narrow, sticky verticals, acquired and held permanently, never sold. Reported TTM revenue growth of 17.7% and a 4-year revenue CAGR of 22.8%, one of the widest ROIC-vs-cost-of-capital spreads on this site (19.58% vs ~7.55%), an essentially flat share count for years, and net debt/EBITDA around 1.27x. Down roughly 45% from its 2025 high on AI-moat fears and founder Mark Leonard's health-related exit from the President role (successor Mark Miller, a 30-year company veteran, has run it since late 2025) — the reported growth never actually confirmed the panic. Misses: latest-FY operating margin (16.6% vs this site's 20% bar), a market-concentration criterion that's hard to score cleanly for a business with no single market, and modest direct founder/insider ownership relative to other founder-led names here.",
     file: "companies/constellation-software.html",
     personalNote: "Constellation Software is the answer to a question I get asked a lot in different forms: is there a real business that can compound at 15%+ a year for five years without taking on speculative, story-stock risk? CSU is about as close as I've found. It's not exciting — a Toronto-based holding company buying and permanently keeping mission-critical but deeply boring software businesses across hundreds of tiny niches, run by operators who never have to worry about a competitor showing up because most of these markets are too small for anyone else to bother building for. That's the whole moat: nobody wants to compete for a library-software contract worth a few hundred thousand dollars a year, but a few hundred thousand of those add up. The scorecard backs it up better than almost anything else on this site — 11 of 14 criteria met, a Martinero Index of 89, essentially no dilution in years, and a return on capital that dwarfs its cost of capital by a wide margin. The stock is down about 45% from its 2025 high, partly on generic 'AI will eat legacy enterprise software' fears that I don't think really apply to a portfolio this fragmented and mission-critical, and partly because founder Mark Leonard stepped back from President for health reasons in late 2025. I don't own this yet, but it's now on my shortlist — the real risks are a very high per-share price that makes position-sizing awkward, and a growth engine that depends on continuing to find and integrate good acquisitions at sensible prices, which gets harder as the company gets bigger. Still, of everything I've looked at recently, this is the one that made me want to actually go do more homework rather than just publish the dashboard and move on."
@@ -2005,6 +2005,7 @@ const COMPANIES = [
     price: "€223.35",
     score: "3 / 14",
     martinero: 30,
+    quarterYoY: { period: "Q3 2026", growth: 0.0 },
     blurb: "Gucci-owner Kering is a genuine, severe multi-year earnings collapse, not a distortion — group operating margin has more than halved since 2021 (28.4%→11.1%) as Gucci alone lost roughly 38% of its revenue amid a brand repositioning and softer Chinese demand, while ROIC has fallen below a reasonable cost of capital. Non-Gucci houses (Saint Laurent, Bottega Veneta, Eyewear) have actually grown, and gross margins have stayed surprisingly stable, but even after a roughly 68% price decline the stock isn't obviously cheap against its own history once a one-off FCF distortion is corrected for. Pinault family (Artémis) ownership ~42.3%.",
     file: "companies/kering.html"
   },
@@ -2053,6 +2054,7 @@ const COMPANIES = [
     price: "€43.56",
     score: "9 / 14",
     martinero: 73,
+    quarterYoY: { period: "9M 2026", growth: 3.0 },
     blurb: "One of the stronger, more disciplined operators in the luxury sector — clear #1 in luxury outerwear/technical jackets (Moncler brand plus Stone Island), with operating margin held in a tight 28-30% band every year since FY2021, a net-cash balance sheet, and a flat share count. Held back mainly by growth that's decelerated to low-double-digits and a genuinely fragmented competitive backdrop, not by any operating weakness. Chairman/CEO Remo Ruffini remains a controlling shareholder.",
     file: "companies/moncler.html"
   },
@@ -2069,6 +2071,7 @@ const COMPANIES = [
     price: "€80.80",
     score: "7 / 14",
     martinero: 62,
+    quarterYoY: { period: "Q3 2026", growth: 13.5 },
     blurb: "Founder-controlled 'King of Cashmere' — ten straight years of revenue growth (+18.6% 5-yr CAGR), expanding gross margins (84.1%→91.4%), and a real discount to its own 5-year valuation history (trailing P/E 39.85x vs a 59.5x own-average, a genuine de-rating despite the brand's growing reputation). Capex intensity is elevated (6.4%→9.1% of revenue) because the company owns 94 of its 124 stores plus its Solomeo campus — a deliberate real-estate strategy, not inefficiency. Brunello Cucinelli personally controls ~50-51% via an irrevocable trust.",
     file: "companies/brunello-cucinelli.html"
   },
@@ -2189,6 +2192,7 @@ const COMPANIES = [
     price: "$689.59",
     score: "6 / 14",
     martinero: 45,
+    momentum: { status: "accelerating", recent: -11.7, prior: -15.6 },
     quarterYoY: { period: "Q3 FY2026", growth: 4.9 },
     blurb: "The world's #1 agricultural equipment maker, with an almost debt-free equipment business and ROIC well above its cost of capital, but growth and margins are still near the cycle trough. At 38x trailing earnings against a 17x five-year average, the stock has already priced in the 2027 recovery.",
     file: "companies/deere.html"
@@ -2224,6 +2228,7 @@ const COMPANIES = [
     price: "SEK 321.20",
     score: "5 / 14",
     martinero: 49,
+    momentum: { status: "decelerating", recent: -9.0, prior: -4.7 },
     quarterYoY: { period: "Q3 2026", growth: 7.9 },
     blurb: "Trucks-heavy Nordic cyclical (Volvo CE is a Caterpillar rival): net-cash industrial core, Industrivärden-anchored register, ~4% variable dividend. Sales are off the 2023 peak, but Q2 2026 truck orders rose 33%.",
     file: "companies/volvo-group.html"
