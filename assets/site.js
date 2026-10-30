@@ -1,3 +1,4 @@
+function r0(x){var r=Math.sign(x)*Math.round(Math.abs(x));return r===0?0:r;}
 // ============================================================
 // Rendering logic — you shouldn't need to touch this file.
 // It reads assets/companies.js and fills in whichever page
@@ -146,7 +147,7 @@ function momentumChipHTML(c) {
   const m = c.momentum;
   const arrow = m.status === "accelerating" ? "&#9650;" : m.status === "decelerating" ? "&#9660;" : "&#8213;";
   const label = m.status === "accelerating" ? "Accelerating" : m.status === "decelerating" ? "Decelerating" : "Steady";
-  const detail = (m.recent != null && m.prior != null) ? ` (FY ${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)` : "";
+  const detail = (m.recent != null && m.prior != null) ? ` (FY ${r0(m.prior)}%&rarr;${r0(m.recent)}%)` : "";
   return `<span class="momentum-chip momentum-${m.status}" title="Annual revenue growth trend — most recent full fiscal year's growth rate vs the year before. Not real-time, not part of the Martinero Index.">${arrow} ${label}${detail}</span>`;
 }
 
@@ -329,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show the two actual growth rates, not just the raw pp delta — a bare
       // "+27.3pp" means nothing without the numbers behind it. "FY" prefix
       // makes clear this is annual, not a current-quarter reading.
-      return `<span class="momentum-chip momentum-${m.status}">${arrow} ${label} (FY ${m.prior.toFixed(0)}%&rarr;${m.recent.toFixed(0)}%)</span>`;
+      return `<span class="momentum-chip momentum-${m.status}">${arrow} ${label} (FY ${r0(m.prior)}%&rarr;${r0(m.recent)}%)</span>`;
     }
 
     // Separate from momentumDelta above — this is a single-period snapshot
