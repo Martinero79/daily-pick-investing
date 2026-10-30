@@ -3199,8 +3199,8 @@ const COMPANIES = [
     score: "3 / 14",
     martinero: 28,
     momentum: { status: "accelerating", recent: -6.8, prior: -10.7 },
-    quarterYoY: { period: "Q2 2026", growth: 27.8 },
-    blurb: "French integrated energy major with a large LNG business, refining and marketing, and a growing integrated-power segment. FY2021-25 revenue, EBIT and FCF are flat to falling after the 2022 price spike, but leverage is modest (about 1x net debt/EBITDA) and the share count is down about 15%. Q2 2026 revenue rose 27.8% year on year with Brent near $114, so current earnings sit at a cycle high.",
+    quarterYoY: { period: "Q3 2026", growth: 40.5 },
+    blurb: "French integrated energy major with a large LNG business, refining and marketing, and a growing integrated-power segment. FY2021-25 revenue, EBIT and FCF are flat to falling after the 2022 price spike, but leverage is modest and the share count is down about 15%. Q3 2026 revenue rose 40.5% year on year and reported net income reached $8.26B ($9.10B adjusted) with Brent above $100, so current earnings sit at a cycle high.",
     file: "companies/totalenergies.html"
   },
   {
@@ -3216,8 +3216,8 @@ const COMPANIES = [
     score: "3 / 14",
     martinero: 34,
     momentum: { status: "accelerating", recent: 0.1, prior: -10.1 },
-    quarterYoY: { period: "Q2 2026", growth: 48.2 },
-    blurb: "BP is a UK integrated oil and gas major in the middle of a strategy reset. It pivoted back to oil and gas, is selling assets (including 65% of Castrol and its UK North Sea business), suspended its buyback in Feb 2026 and kept a dividend that grows about 4% a year. Margins are thin (FY25 operating margin 7.7%, reported basis) and growth is low, but leverage is moderate and the share count is down about 24% in five years. Q3 results are due Oct 30.",
+    quarterYoY: { period: "Q3 2026", growth: 45.6 },
+    blurb: "BP is a UK integrated oil and gas major in the middle of a strategy reset: it pivoted back to oil and gas, is selling assets (including 65% of Castrol), and has kept the buyback suspended since Feb 2026 while holding the dividend at 8.66 cents a share. Q3 2026 revenue was about $69.9B (+45.6% YoY); BP's underlying profit was $8.5B on a refining-margin windfall, but about $4B of impairments cut reported profit to $4.7B, and net debt fell to $13.9B. Margins on the reported basis are thin and growth is low, but leverage is now moderate and the share count is down about 24% in five years.",
     file: "companies/bp.html"
   },
   {
@@ -3281,11 +3281,11 @@ const COMPANIES = [
     tags: ["Oil & Gas", "LNG", "Dividend", "Buybacks", "Cyclical", "Netherlands", "AEX"],
     dateFeatured: "2026-10-28",
     price: "€47.13",
-    score: "4 / 14",
-    martinero: 40,
+    score: "5 / 14",
+    martinero: 43,
     momentum: { status: "accelerating", recent: -6.1, prior: -10.2 },
-    quarterYoY: { period: "Q2 2026", growth: 44.7 },
-    blurb: "Shell is a European integrated oil and gas major and the largest LNG portfolio among the Western majors. Its HQ moved from The Hague/London to London in January 2022, when it became a single-class Shell plc, and the shares still trade on Euronext Amsterdam. Net debt is under 1x EBITDA and buybacks have cut the share count by about 27% since FY2021. Growth is flat, and Q2 2026 earnings reflect a high oil price (Brent about $114).",
+    quarterYoY: { period: "Q3 2026", growth: 36.2 },
+    blurb: "Shell is a European integrated oil and gas major and the largest LNG portfolio among the Western majors; its HQ moved to London in 2022 and the shares still trade on Euronext Amsterdam. Q3 2026 revenue was $92.8B (+36.2% YoY) and net income $12.1B, on the high oil-price cycle (Brent about $114). Net debt fell to $39.7B and Shell announced a new $5.0B buyback. Long-run growth is flat, and the scorecard shows 5 of 14 criteria met, helped by earnings at a cycle high.",
     file: "companies/shell.html"
   },
 
