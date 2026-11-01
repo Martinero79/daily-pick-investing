@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analog Devices, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/analog-devices.html">
+<meta property="og:title" content="Analog Devices, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Analog Devices, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Analog Devices, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: ADI</div>
+    <div class="badge">FY ends Saturday nearest Oct 31 (FY2025 = Nov 1, 2025)</div>
+    <div class="badge">HQ: Wilmington, Massachusetts</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~6% Below 52-Wk High &mdash; Cyclical Recovery Year; Q3 FY26 Revenue +40% YoY</div>
+  </div>
+
+  <div class="price">$417.11</div>
+  <div class="price-sub">Oct 30, 2026 close (Nasdaq) &middot; Market cap &asymp; $202B (484.6M shares) &middot; 52-wk range $223.47 &ndash; $445.91 (to Oct 27) &middot; 1-yr price change &asymp; +75% (S&amp;P, Oct 27) &middot; Beta 1.23 &middot; Analyst consensus: Strong Buy (34 analysts), avg PT $472.44 (+13%) &middot; Next report (Q4 FY26): Nov 24, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> ADI is a leading designer and manufacturer of analog, mixed-signal and power ICs (data converters, amplifiers, power management, RF), with end-markets of Industrial (~48% of trailing revenue), Automotive (~25%), Communications (~15%) and Consumer (~12%). It is generally ranked #2 in analog behind Texas Instruments; I could not verify a current market-share percentage.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> Every figure is in US dollars. Operating income / EBIT is <b>GAAP</b> (includes amortisation of acquired intangibles, which is large after the 2021 Maxim deal); ADI's non-GAAP adjusted EPS runs well above GAAP (Q3 FY26: $3.45 adjusted vs $2.74 GAAP). FCF = operating cash flow minus capex. Fiscal years end on the Saturday nearest Oct 31; &ldquo;FY2025&rdquo; ended Nov 1, 2025 and the latest reported quarter (Q3 FY26) ended Aug 1, 2026.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val" style="color:#34d399;">$11.02B</div>
+      <div class="sub">+16.9% YoY, rebounding from -23.4% in FY2024</div>
+      <div class="note">Latest quarter (Q3 FY26, Aug 1, 2026) was $4.02B, +39.6% YoY. Trailing 12 months $13.88B (+33.6%). FY2022 ($12.0B) was the previous peak.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">27.2%</div>
+      <div class="sub">FY2025; trailing 12 months 35.7%</div>
+      <div class="note">Q3 FY26 GAAP operating margin was 39.5%, the highest in the 20 quarters shown. Gross margin recovered from 54.7% (Q2 FY24 trough) to 67.3%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#fbbf24;">11.0% vs ~10.7%</div>
+      <div class="sub">Spread only +0.3pp (S&amp;P Global)</div>
+      <div class="note">Third-party estimates. ROIC is held down by the goodwill and intangibles carried from the 2021 Maxim acquisition; it should rise as earnings recover.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">~1.0x</div>
+      <div class="sub">Net debt $6.84B, Aug 1, 2026</div>
+      <div class="note">Total debt $9.16B less cash $2.33B; EBITDA $6.92B (S&amp;P). Debt rose in FY26 and ADI announced the $1.35B all-cash Alif Semiconductor acquisition in Sep 2026.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">58/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Upper-middle of the pack: very high margins and cash conversion with a low-leverage balance sheet, offset by a cyclical revenue/EBIT record, a thin ROIC-WACC spread and no insider block.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; EBIT margin, FCF CAGR, market position (#2), ROIC above WACC (barely), net debt/EBITDA, FCF conversion, share count (declining) and capex intensity</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 not met</b> &mdash; revenue CAGR, EBIT CAGR, market concentration (score 3), entry multiple (P/E above own average), insider ownership, and gross-margin stability (-3.49pp over FY22-FY25)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Analog Devices designs and makes the chips that sit between the real world and digital systems: converting sensor signals to data, managing power and processing signals in industrial automation, cars, data-centre and communications equipment. It was founded in 1965, has paid a dividend for decades and is vertically integrated, running its own wafer fabs as well as using foundries. The model is high gross margin, long product lives and sticky design wins, but it is cyclical: after the post-COVID inventory build, FY2024 revenue fell 23% and GAAP operating income fell 48%. The recovery is now steep. Q3 FY26 revenue of $4.02B was +39.6% YoY with a 39.5% GAAP operating margin, and the company guides Q4 to about $4.3B (&plusmn;$0.1B) with adjusted EPS of $3.86 (&plusmn;$0.15). The stock has risen about 75% in a year and the trailing GAAP P/E is ~49.5x, roughly in line with its (distorted) five-year average, so the debate is how far the upcycle, data-centre demand and the new Alif acquisition can carry earnings. Read the five-year growth rates with care: FY2021 is the base and was a mid-cycle year that only included the Maxim acquisition from late August 2021.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Cycle</b> &mdash; FY2022-23 were peak years (revenue $12.0-12.3B), FY2024 the trough ($9.4B); the 4-year CAGR from FY2021 understates the rebound and overstates stability. (2) <b>Maxim</b> &mdash; the all-stock deal closed in Aug 2021, so FY2021 contains only about two months of Maxim and FY2022 is the first full year; GAAP earnings carry heavy intangible amortisation, which is why FY2021's P/E (67x) and FY2024's (68x) look inflated. (3) <b>GAAP vs adjusted</b> &mdash; this page uses GAAP throughout; adjusted EPS is roughly 25% higher than GAAP (Q3 FY26: $3.45 vs $2.74).
+  </div>
+
+  <div class="bignum-corner">ADI</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, US$ millions as reported (S&amp;P Global data via stockanalysis.com). Fiscal years end on the Saturday nearest Oct 31: Oct 30 2021, Oct 29 2022, Oct 28 2023, Nov 2 2024, Nov 1 2025. Operating income is GAAP. Two flags: the Maxim acquisition closed in Aug 2021, and FY2024 was a deep cyclical trough.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (US$ billions)</div>
+    <div class="chart-sub">Revenue peaked at $12.3B in FY2023, fell to $9.4B in FY2024 and recovered to $11.0B in FY2025; the trailing 12 months to Aug 2026 are already $13.9B. EBIT fell harder than revenue in FY2024 (operating leverage plus underutilised fabs), while FCF held up better ($3.1B) because capex was cut from $1.26B to $0.73B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (EBIT, GAAP)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">2.5bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">7.5bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">12.5bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="111.2" width="30" height="128.8" rx="2" fill="#2dd4bf"/><text x="100.0" y="106.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">7,318</text>
+<rect x="123.0" y="203.0" width="30" height="37.0" rx="2" fill="#60a5fa"/><text x="138.0" y="198.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,104</text>
+<rect x="161.0" y="197.9" width="30" height="42.1" rx="2" fill="#fbbf24"/><text x="176.0" y="192.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,391</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2021</text>
+<rect x="241.0" y="28.6" width="30" height="211.4" rx="2" fill="#2dd4bf"/><text x="256.0" y="23.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">12,014</text>
+<rect x="279.0" y="172.8" width="30" height="67.2" rx="2" fill="#60a5fa"/><text x="294.0" y="167.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,821</text>
+<rect x="317.0" y="173.5" width="30" height="66.5" rx="2" fill="#fbbf24"/><text x="332.0" y="168.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,776</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="397.0" y="23.4" width="30" height="216.6" rx="2" fill="#2dd4bf"/><text x="412.0" y="18.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">12,306</text>
+<rect x="435.0" y="170.0" width="30" height="70.0" rx="2" fill="#60a5fa"/><text x="450.0" y="165.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,979</text>
+<rect x="473.0" y="177.4" width="30" height="62.6" rx="2" fill="#fbbf24"/><text x="488.0" y="172.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,556</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="553.0" y="74.1" width="30" height="165.9" rx="2" fill="#2dd4bf"/><text x="568.0" y="69.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">9,427</text>
+<rect x="591.0" y="203.7" width="30" height="36.3" rx="2" fill="#60a5fa"/><text x="606.0" y="198.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,063</text>
+<rect x="629.0" y="185.1" width="30" height="54.9" rx="2" fill="#fbbf24"/><text x="644.0" y="180.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,122</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="709.0" y="46.0" width="30" height="194.0" rx="2" fill="#2dd4bf"/><text x="724.0" y="41.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">11,020</text>
+<rect x="747.0" y="187.3" width="30" height="52.7" rx="2" fill="#60a5fa"/><text x="762.0" y="182.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,996</text>
+<rect x="785.0" y="164.7" width="30" height="75.3" rx="2" fill="#fbbf24"/><text x="800.0" y="159.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4,279</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+10.8%</div>
+      <div class="sub">$7.32B &rarr; $11.02B &mdash; between the 10% and 15% scoring bands; clears 15% only if measured to the trailing 12 months</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+9.2%</div>
+      <div class="sub">$2.10B &rarr; $3.00B (GAAP) &mdash; held back by acquisition amortisation and the FY2024 trough</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+15.7%</div>
+      <div class="sub">$2.39B &rarr; $4.28B &mdash; clears the 15% bar; FY2025 FCF was a record, with 38.8% FCF margin</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Gross margin slid from 66.4% (FY2021) to 57.1% (FY2024) as volumes fell and fab utilisation dropped, then recovered to 61.5% in FY2025 and 65.8% on a trailing basis. GAAP operating margin follows the same path, from 28.8% to 21.9% and back up to 27.2%. The criterion-14 test (FY2022 to FY2025 gross margin) catches the recovery only part-way.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 120">
+<line x1="30" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="75.7" x2="690" y2="75.7" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="78.7" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="51.4" x2="690" y2="51.4" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="54.4" font-size="7.5" fill="#64748b">40%</text>
+<line x1="30" y1="27.1" x2="690" y2="27.1" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="30.1" font-size="7.5" fill="#64748b">60%</text>
+<text x="8" y="103" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,19.4 205,21.1 350,22.3 495,30.7 640,25.4" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="19.4" r="3.2" fill="#60a5fa"/><text x="60" y="12.4" text-anchor="middle" font-size="8" fill="#cbd5e1">66.4%</text>
+<circle cx="205" cy="21.1" r="3.2" fill="#60a5fa"/><text x="205" y="14.1" text-anchor="middle" font-size="8" fill="#cbd5e1">65.0%</text>
+<circle cx="350" cy="22.3" r="3.2" fill="#60a5fa"/><text x="350" y="15.3" text-anchor="middle" font-size="8" fill="#cbd5e1">64.0%</text>
+<circle cx="495" cy="30.7" r="3.2" fill="#60a5fa"/><text x="495" y="23.7" text-anchor="middle" font-size="8" fill="#cbd5e1">57.1%</text>
+<circle cx="640" cy="25.4" r="3.2" fill="#60a5fa"/><text x="640" y="18.4" text-anchor="middle" font-size="8" fill="#cbd5e1">61.5%</text>
+<polyline points="60,65.1 205,61.4 350,60.7 495,73.4 640,67.0" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="65.1" r="3.2" fill="#34d399"/><text x="60" y="78.1" text-anchor="middle" font-size="8" fill="#cbd5e1">28.8%</text>
+<circle cx="205" cy="61.4" r="3.2" fill="#34d399"/><text x="205" y="74.4" text-anchor="middle" font-size="8" fill="#cbd5e1">31.8%</text>
+<circle cx="350" cy="60.7" r="3.2" fill="#34d399"/><text x="350" y="73.7" text-anchor="middle" font-size="8" fill="#cbd5e1">32.3%</text>
+<circle cx="495" cy="73.4" r="3.2" fill="#34d399"/><text x="495" y="86.4" text-anchor="middle" font-size="8" fill="#cbd5e1">21.9%</text>
+<circle cx="640" cy="67.0" r="3.2" fill="#34d399"/><text x="640" y="80.0" text-anchor="middle" font-size="8" fill="#cbd5e1">27.2%</text>
+<text x="60" y="115" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text>
+<text x="205" y="115" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="350" y="115" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="495" y="115" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="640" y="115" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($m)</th><th>Revenue</th><th>Op. Inc.</th><th>Op. Mgn</th><th>Gross Mgn</th><th>Net Inc.</th><th>EPS</th><th>FCF</th><th>Capex</th><th>Net debt</th><th>DPS</th></tr>
+    <tr><td>FY2021</td><td>7,318</td><td>2,104</td><td>28.8%</td><td>66.4%</td><td>1,390</td><td>3.46</td><td>2,391</td><td>344</td><td>5,140</td><td>2.760</td></tr>
+    <tr><td>FY2022</td><td>12,014</td><td>3,821</td><td>31.8%</td><td>65.0%</td><td>2,749</td><td>5.25</td><td>3,776</td><td>699</td><td>5,469</td><td>3.040</td></tr>
+    <tr><td>FY2023</td><td>12,306</td><td>3,979</td><td>32.3%</td><td>64.0%</td><td>3,315</td><td>6.55</td><td>3,556</td><td>1,261</td><td>6,497</td><td>3.440</td></tr>
+    <tr><td>FY2024</td><td>9,427</td><td>2,063</td><td>21.9%</td><td>57.1%</td><td>1,635</td><td>3.28</td><td>3,122</td><td>730</td><td>5,642</td><td>3.680</td></tr>
+    <tr><td>FY2025</td><td>11,020</td><td>2,996</td><td>27.2%</td><td>61.5%</td><td>2,267</td><td>4.56</td><td>4,279</td><td>534</td><td>5,309</td><td>3.960</td></tr>
+    <tr><td>TTM (Aug 1, '26)</td><td>13,882</td><td>4,952</td><td>35.7%</td><td>65.8%</td><td>4,135</td><td>8.42</td><td>4,937</td><td>608</td><td>6,839</td><td>4.400</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net income and EPS are GAAP (diluted EPS). Net debt = total debt less cash and short-term investments (S&amp;P). DPS is dividends declared per fiscal year; the TTM row shows the current annualised $4.40 rate. FCF/EBIT over 100% reflects large non-cash charges (amortisation and depreciation of ~$2B/yr) in GAAP operating income.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence), updated Aug 19, 2026, cross-checked to ADI's Q3 FY26 earnings release (SEC 8-K, Aug 19, 2026). FY2021 figures include Maxim only from Aug 26, 2021.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q3 FY26, ended Aug 1, 2026)</div></div>
+  <div class="sec-sub">Reported Aug 19, 2026. The next report (Q4 FY26, quarter ended ~Oct 31, 2026) is due Nov 24, 2026, so Q3 FY26 is the latest actual.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 FY26 revenue was $4.02B, up 39.6% YoY (and +11% sequentially), YoY growth has accelerated every quarter since Q4 FY24. Industrial was $1.97B (+52% YoY), Automotive $998M (+16%), Communications $655M (+84%) and Consumer $397M (+6%). GAAP gross margin was 67.3% and GAAP operating margin 39.5% (vs 28.6% a year earlier), so operating income grew 93% to $1.59B. GAAP EPS was $2.74 (vs $1.04) and adjusted EPS $3.45 (vs $2.05). Free cash flow was $1.46B (36% of revenue); the TTM FCF is $4.94B. Management described demand as strengthening across products and regions, led by data-centre and industrial, per the earnings release and call summary.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (US$ bn)</div>
+    <div class="chart-sub">Revenue has climbed every quarter since the Q1 FY25 low of $2.42B. YoY: Q4'24 -10.1%, Q1'25 -3.6%, Q2'25 +22.3%, Q3'25 +24.6%, Q4'25 +25.9%, Q1'26 +30.4%, Q2'26 +37.3%, Q3'26 +39.6%. Fiscal quarters end near Feb 1, May 1, Aug 1 and Oct 31.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="74.1" width="56" height="55.9" fill="#2dd4bf"/><text x="53" y="69.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2.44</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="74.6" width="56" height="55.4" fill="#2dd4bf"/><text x="135" y="69.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2.42</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="69.6" width="56" height="60.4" fill="#2dd4bf"/><text x="217" y="64.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2.64</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="64.1" width="56" height="65.9" fill="#2dd4bf"/><text x="299" y="59.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2.88</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="59.6" width="56" height="70.4" fill="#2dd4bf"/><text x="381" y="54.6" text-anchor="middle" font-size="9" fill="#cbd5e1">3.08</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="57.7" width="56" height="72.3" fill="#2dd4bf"/><text x="463" y="52.7" text-anchor="middle" font-size="9" fill="#cbd5e1">3.16</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="47.1" width="56" height="82.9" fill="#2dd4bf"/><text x="545" y="42.1" text-anchor="middle" font-size="9" fill="#cbd5e1">3.62</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="38.0" width="56" height="92.0" fill="#2dd4bf"/><text x="627" y="33.0" text-anchor="middle" font-size="9" fill="#cbd5e1">4.02</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (GAAP EBIT) &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">GAAP operating income has risen from $556M (Q1'25) to $1,589M (Q3'26), nearly 3x on 66% more revenue, showing strong operating leverage on a largely fixed fab and R&amp;D base.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="97.3" width="56" height="32.7" fill="#60a5fa"/><text x="53" y="92.3" text-anchor="middle" font-size="9" fill="#cbd5e1">566</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="97.9" width="56" height="32.1" fill="#60a5fa"/><text x="135" y="92.9" text-anchor="middle" font-size="9" fill="#cbd5e1">555</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="90.6" width="56" height="39.4" fill="#60a5fa"/><text x="217" y="85.6" text-anchor="middle" font-size="9" fill="#cbd5e1">680</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="82.4" width="56" height="47.6" fill="#60a5fa"/><text x="299" y="77.4" text-anchor="middle" font-size="9" fill="#cbd5e1">822</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="75.7" width="56" height="54.3" fill="#60a5fa"/><text x="381" y="70.7" text-anchor="middle" font-size="9" fill="#cbd5e1">938</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="69.5" width="56" height="60.5" fill="#60a5fa"/><text x="463" y="64.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,045</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="50.1" width="56" height="79.9" fill="#60a5fa"/><text x="545" y="45.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,380</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="38.0" width="56" height="92.0" fill="#60a5fa"/><text x="627" y="33.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,589</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Revenue ($m)</td><td>2,443</td><td>2,423</td><td>2,640</td><td>2,880</td><td>3,076</td><td>3,160</td><td>3,623</td><td>4,022</td></tr>
+    <tr><td>YoY growth</td><td>-10.1%</td><td>-3.6%</td><td>+22.3%</td><td>+24.6%</td><td>+25.9%</td><td>+30.4%</td><td>+37.3%</td><td>+39.6%</td></tr>
+    <tr><td>Gross margin</td><td>58.0%</td><td>59.0%</td><td>61.0%</td><td>62.1%</td><td>63.1%</td><td>64.7%</td><td>67.3%</td><td>67.3%</td></tr>
+    <tr><td>Op. income ($m)</td><td>566</td><td>555</td><td>680</td><td>822</td><td>938</td><td>1,045</td><td>1,380</td><td>1,589</td></tr>
+    <tr><td>Op. margin</td><td>23.2%</td><td>22.9%</td><td>25.7%</td><td>28.6%</td><td>30.5%</td><td>33.1%</td><td>38.1%</td><td>39.5%</td></tr>
+    <tr><td>Net income ($m)</td><td>478</td><td>391</td><td>570</td><td>519</td><td>788</td><td>831</td><td>1,176</td><td>1,340</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarter labels use ADI fiscal quarters (Q1 = quarter ending ~Feb 1). All figures GAAP from S&amp;P Global data via stockanalysis.com. Prior-year comparison for Q3'26: revenue $2,880M, operating income $822M, net income $519M (Q3'25).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;"><b>Guidance (Q4 FY26):</b> revenue $4.3B &plusmn; $0.1B (+40% YoY at the midpoint vs $3.08B in Q4 FY25), adjusted EPS $3.86 &plusmn; $0.15 and GAAP EPS $3.14 &plusmn; $0.15, per the Q3 FY26 release. Guidance is the company's own and is not a forecast by this site.</div>
+    <div class="callout blue" style="flex:1;"><b>Capital deployment:</b> dividend raised ~11% to $1.10/quarter ($4.40 annualised, ex-dividend Sep 1, 2026; 22 years of increases per S&amp;P). In Sep 2026 ADI agreed to acquire Alif Semiconductor for $1.35B in cash (AI-native edge processors); closing timing and financial effect were not verified here. Net debt rose to $6.84B at Aug 1, 2026 from $5.27B in the prior quarter.</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (price / trailing 12-month GAAP diluted EPS), which is distorted by acquisition amortisation and the FY2024 trough. Leverage is modest; the balance-sheet story is the Alif cash deal and rising debt.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~49.5x = $417.11 / trailing GAAP EPS of $8.42) is 104% of ADI's FY2021-25 average year-end P/E (47.5x). Year-end ratios are S&amp;P/stockanalysis figures at each fiscal year-end. FY2021 (67x) and FY2024 (68x) reflect depressed trailing GAAP EPS, FY2022-23 (27x, 24x) the peak-earnings years &mdash; an average of 47.5x is therefore a wide-ranging number.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="36.5" width="70" height="73.5" fill="#60a5fa"/><text x="55" y="31.5" text-anchor="middle" font-size="9" fill="#cbd5e1">67.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="80.3" width="70" height="29.7" fill="#60a5fa"/><text x="150" y="75.3" text-anchor="middle" font-size="9" fill="#cbd5e1">27.1x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="83.6" width="70" height="26.4" fill="#60a5fa"/><text x="245" y="78.6" text-anchor="middle" font-size="9" fill="#cbd5e1">24.1x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="35.0" width="70" height="75.0" fill="#60a5fa"/><text x="340" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">68.5x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="54.3" width="70" height="55.7" fill="#60a5fa"/><text x="435" y="49.3" text-anchor="middle" font-size="9" fill="#cbd5e1">50.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="55.7" width="70" height="54.3" fill="#2dd4bf"/><text x="530" y="50.7" text-anchor="middle" font-size="9" fill="#cbd5e1">49.5x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="57.9" x2="690" y2="57.9" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="53.9" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 47.5x</text>
+</svg>
+  </div>
+
+  <div class="callout blue"><b>Forward P/E &amp; PEG:</b> forward P/E (consensus next 12 months) is ~26.0x at the Oct 30 close versus a FY21-25 year-end average of ~23.6x (24.7, 15.1, 20.1, 32.4, 25.6), about 110% of its own average. PEG is ~0.92 (S&amp;P, Oct 27). The scorecard uses the trailing GAAP figure (ratio 1.04 = 2/5); on the forward basis the ratio is ~1.10, also 2/5. Average analyst price target $472.44 (34 analysts) implies ~13% upside; targets rely on the earnings upswing continuing.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex ranged from $344M (4.7% of revenue, FY2021) to a $1.26B peak (10.2%, FY2023) as ADI built capacity, then was cut to $534M (4.8%) in FY2025; trailing 12 months are $608M (4.4%). ADI manufactures much of its own output, so it is moderately capital-intensive rather than asset-light.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="130.0" width="60" height="30.0" fill="#60a5fa"/><text x="60" y="125.0" text-anchor="middle" font-size="8" fill="#cbd5e1">344</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="170" y="99.0" width="60" height="61.0" fill="#60a5fa"/><text x="200" y="94.0" text-anchor="middle" font-size="8" fill="#cbd5e1">699</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="310" y="50.0" width="60" height="110.0" fill="#60a5fa"/><text x="340" y="45.0" text-anchor="middle" font-size="8" fill="#cbd5e1">1,261</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="450" y="96.3" width="60" height="63.7" fill="#60a5fa"/><text x="480" y="91.3" text-anchor="middle" font-size="8" fill="#cbd5e1">730</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="590" y="113.4" width="60" height="46.6" fill="#60a5fa"/><text x="620" y="108.4" text-anchor="middle" font-size="8" fill="#cbd5e1">534</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<polyline points="60,74.8 200,68.8 340,45.0 480,58.4 620,74.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="74.8" r="3" fill="#fbbf24"/><text x="60" y="65.8" text-anchor="middle" font-size="7.5" fill="#fde68a">4.70%</text>
+<circle cx="200" cy="68.8" r="3" fill="#fbbf24"/><text x="200" y="59.8" text-anchor="middle" font-size="7.5" fill="#fde68a">5.82%</text>
+<circle cx="340" cy="45.0" r="3" fill="#fbbf24"/><text x="340" y="36.0" text-anchor="middle" font-size="7.5" fill="#fde68a">10.25%</text>
+<circle cx="480" cy="58.4" r="3" fill="#fbbf24"/><text x="480" y="49.4" text-anchor="middle" font-size="7.5" fill="#fde68a">7.74%</text>
+<circle cx="620" cy="74.0" r="3" fill="#fbbf24"/><text x="620" y="65.0" text-anchor="middle" font-size="7.5" fill="#fde68a">4.85%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/><circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="0.7 313.5" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="290.3 23.8" stroke-dashoffset="-0.7" transform="rotate(-90 60 60)"/><text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">92.4%</text></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders 0.21% (S&amp;P Global)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions 92.4% (S&amp;P Global)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~7.4%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Returns</div>
+      <p>Roughly 515M shares at the end of FY2021 (approximate, after the Maxim share issuance) versus 484.6M now, about -6%: buybacks have more than offset stock compensation (shares -1.4% in the last year, buyback yield 1.41%). Dividend per share has grown every year: $2.76 (FY21) to $3.96 (FY25) and $4.40 annualised now; payout ratio ~52% of trailing GAAP EPS and ~43% of FCF.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;"><b>Insiders &amp; honest caveats:</b> ADI has no founder or controlling holder; insiders own ~0.2% of the shares and the register is dominated by index and active institutions (92%). I could not verify the individual institutional percentages and do not list them. The FY2021 share count (~515M) is approximate: S&amp;P's per-share series for that year is a weighted average and is not directly comparable. A mini-tender offer by a third party for up to 100,000 shares (Oct 2026) was publicly rejected by ADI's board and is not a company event.</div>
+  <div class="callout gray" style="margin-top:8px;"><b>Balance sheet:</b> total debt $9.16B, cash and short-term investments $2.33B, net debt $6.84B (Aug 1, 2026) &mdash; ~1.0x trailing EBITDA of $6.92B and well covered (interest coverage ~14x, S&amp;P). Net debt has risen from $4.65B at Q1 FY26 as ADI funded buybacks, dividends and bolt-ons; the $1.35B Alif purchase (cash) would add to it once closed. ADI has no captive finance arm, so this is industrial net debt.</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25); criterion #14 compares FY2025 gross margin with FY2022's (three fiscal years), as per the site rule.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Analog Devices</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+10.8% &mdash; $7.32B &rarr; $11.02B. FY2021 includes only ~2 months of Maxim (closed Aug 2021); FY2024 was a -23% cyclical down year (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+9.2% &mdash; GAAP operating income $2.10B &rarr; $3.00B; FY2025 is still below the FY2023 peak of $3.98B (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>27.2% (FY2025, GAAP); trailing 12 months to Aug 2026 is 35.7% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+15.7% &mdash; FCF (operating cash flow minus capex) $2.39B &rarr; $4.28B, clears the bar by a small margin (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Widely described as the #2 analog IC supplier behind Texas Instruments, and a leader in high-performance data converters; no verified current share percentage (industry-ranking based, approximate) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; a few large players (Texas Instruments, ADI, Infineon, STMicro, NXP, Microchip) hold a majority of analog, but no single firm dominates; boundary case (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 10.96% vs est. WACC 10.68% (S&amp;P Global, trailing), a +0.3pp spread. ROIC is held down by goodwill and intangibles from the Maxim deal; third-party estimates (score 1/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~1.0x (net debt $6.84B / EBITDA $6.92B, Aug 2026); no captive finance arm, so this is industrial net debt (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>142.8% (FY2025: FCF $4.28B vs GAAP operating income $3.00B); five-year path 114% / 99% / 89% / 151% / 143% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 49.5x vs FY21-25 year-end average 47.5x (ratio 1.04); forward P/E ~26.0x vs ~23.6x average (ratio ~1.10). FY2021 and FY2024 averages are inflated by depressed GAAP EPS (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~515M (end FY2021, approximate) &rarr; 484.6M now, about -6%; shares -1.4% in the last year (S&amp;P) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>0.21% insiders (S&amp;P); 92.4% institutional. Professional management, no founder block, no unusually large employee plan (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>4.8% of revenue in FY2025 (range 4.7%&ndash;10.2% over FY21-25); ADI runs its own fabs, so not asset-light, but moderate and falling (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (3-yr change, FY22&rarr;FY25)</td><td>&Delta; &ge; -1.0pp</td><td>Gross margin 64.96% (FY2022) &rarr; 61.47% (FY2025), -3.49pp (bottomed at 57.08% in FY2024; trailing 12 months is 65.8%). Basis: gross margin (ADI reports a gross-profit line) (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13/5=7.8 &middot; #2 2&times;11/5=4.4 &middot; #3 5&times;10/5=10.0 &middot; #4 4&times;8/5=6.4 &middot; #5 4&times;7/5=5.6 &middot; #6 2&times;6/5=2.4 &middot; #7 1&times;10/5=2.0 &middot; #8 4&times;6/5=4.8 &middot; #9 5&times;8/5=8.0 &middot; #10 2&times;8/5=3.2 &middot; #11 4&times;4/5=3.2 &middot; #12 0&times;5/5=0.0 &middot; #13 4&times;4/5=3.2 &middot; #14 0&times;5/5=0.0. Total 61.0 / 105 = <b>58/100</b>. Criteria met: 8/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified share percentage); #7 uses third-party ROIC/WACC; #10 is on trailing GAAP P/E against five FY-end observations that include depressed-EPS years; #11 uses an approximate FY2021 share count; #12 scores 0 because insiders hold <1% and ADI has no unusually large employee ownership plan. #14 applies the bands mechanically (-3.49pp = 0/5) even though gross margin has since fully recovered (65.8% TTM).
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Margins and cash generation are exceptional for a hardware company: 39.5% GAAP operating margin and 67% gross margin in Q3 FY26, FCF conversion above 100% of GAAP operating income, and net debt of only ~1x EBITDA. Revenue growth has accelerated every quarter since Q4 FY24 (+39.6% in Q3), the Q4 guide implies roughly +40% again, and demand is broadening from industrial and automotive into data-centre and communications. The share count is down ~6% since FY2021, the dividend has grown 22 consecutive years and ADI is investing in capacity and adjacent technology (Alif).</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>This is a cyclical business: FY2024 showed revenue -23% and GAAP operating income -48% in one year, and the 4-year revenue and EBIT CAGRs (10.8% and 9.2%) are well below the 15% bars. The stock is up ~75% in twelve months at ~49.5x trailing and ~26x forward earnings, i.e. above its own trailing average, so a pause in the upcycle would hit both earnings and the multiple. ROIC (11.0%) barely exceeds the estimated WACC (10.7%). GAAP earnings carry large acquisition amortisation. There is no founder or insider block. Unverified: market-share percentage, the exact FY2021 share count and the Alif deal's closing timing.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence): price, shares, ratios, ROIC/WACC, 52-week range, analyst target, historical closes; ADI Q3 FY26 earnings release (SEC 8-K exhibit 99.1, Aug 19, 2026) and company press release for results and Q4 outlook; Reuters/WSJ (Sep 9, 2026) for the Alif Semiconductor agreement. Year-end closes are Nasdaq closes on the last trading day of each fiscal year; WACC, ROIC and market-share statements are third-party or approximate and flagged as such. Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Analog Devices &mdash; USD share price trend. A mid-2021 post-Maxim level, a 2022 chip-sector drawdown, a gradual recovery through FY2023-24, then a sharp re-rating in 2025-26 as the cyclical upturn and data-centre demand took hold.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Analog Devices &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">Closing prices on the last trading day of each fiscal year (Oct 29 2021, Oct 28 2022, Oct 27 2023, Nov 1 2024, Oct 31 2025) plus the Oct 30, 2026 close, from stockanalysis.com (S&amp;P Global); unadjusted for dividends (no stock splits in the period). The dashed line is the straight-line annualised price CAGR between the FY2021 point and Oct 30, 2026 (5.0 years), excluding dividends ($4.40/share annualised, ~1.1% yield). 52-week range: $223.47 &ndash; $445.91.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,121.4 L 172.8,131.1 L 299.6,125.8 L 426.4,103.8 L 553.2,100.9 L 680.0,39.1 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="121.4" x2="680.0" y2="39.1" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="18" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +19.2%</text>
+<path d="M 46.0,121.4 L 172.8,131.1 L 299.6,125.8 L 426.4,103.8 L 553.2,100.9 L 680.0,39.1" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="121.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="111.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$173.49</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY2021</text>
+<circle cx="172.8" cy="131.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="147.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$144.88</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY2022</text>
+<circle cx="299.6" cy="125.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="115.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.57</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY2023</text>
+<circle cx="426.4" cy="103.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="93.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$225.48</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY2024</text>
+<circle cx="553.2" cy="100.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="90.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$234.13</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY2025</text>
+<circle cx="680.0" cy="39.1" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="690" y="29.1" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$417.11</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Fiscal-year-end dates are about two months before calendar year-end, so this chart is not comparable point-for-point with calendar-year charts of other companies. The window starts shortly after the Aug 2021 Maxim closing; ADI issued shares to Maxim holders, so the per-share path embeds that dilution. The Now point is refreshed daily by the site.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

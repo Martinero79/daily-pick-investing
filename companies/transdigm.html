@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TransDigm Group Incorporated — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/transdigm.html">
+<meta property="og:title" content="TransDigm Group Incorporated — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TransDigm Group Incorporated — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>TransDigm Group Incorporated</h1>
+  <div class="badges">
+    <div class="badge">NYSE: TDG</div>
+    <div class="badge">FY ends Sep 30 (latest: FY2025)</div>
+    <div class="badge">HQ: Cleveland, Ohio, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Net Debt ~5.8x EBITDA &amp; Negative Equity &mdash; Quality Operations, Aggressive Balance Sheet</div>
+  </div>
+
+  <div class="price">$1,146.81</div>
+  <div class="price-sub">Oct 30, 2026 close (NYSE; S&amp;P Global data via stockanalysis.com) &middot; Market cap &asymp; $63.4B (55.3M common shares; excludes vested options) &middot; 52-wk range $1,071.25 &ndash; $1,463.03 &middot; 1-yr price change about &minus;17% &middot; Beta 0.94 &middot; Analyst consensus: Buy (23 analysts), avg PT $1,414.30 (about +23%) &middot; FY2026 results expected mid-November 2026 (date not confirmed; S&amp;P lists Nov 16)</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Fiscal-year &amp; definition note:</b> TransDigm's fiscal year ends Sep 30 (FY2025 = Oct 2024 to Sep 2025); FY2026 has not yet been reported, so FY2025 is the latest full year and Q3 FY2026 (quarter ended Jun 27, 2026) the latest quarter. &ldquo;Op. income / EBIT&rdquo; is GAAP operating income as standardised by S&amp;P Global (the company-reported Q3 FY2026 figure is $1,227m versus S&amp;P's $1,261m). &ldquo;EBITDA As Defined&rdquo; and &ldquo;adjusted EPS&rdquo; are the company's non-GAAP measures and are labelled as such. FCF = operating cash flow minus capex, after interest. Net income is shown to common shareholders (S&amp;P), which is lower than company net income when dividend-equivalent payments are made on options.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$8.83B</div>
+      <div class="sub" style="color:#34d399;">+11.2% YoY (FY2024: +20.6%)</div>
+      <div class="note">4-yr CAGR FY2021-25 +16.5%. Q3 FY2026 revenue $2,741m, +22.5% YoY (organic +13%), helped by acquisitions. FY2026 guidance $10.47-10.55B.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">47.6%</div>
+      <div class="sub">FY2025; gross margin 60.3%</div>
+      <div class="note">EBITDA As Defined margin (non-GAAP) was 53.9% in FY2025 and 52.8% in Q3 FY2026; acquisitions are diluting it slightly.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">16.6% vs ~7.7%</div>
+      <div class="sub">S&amp;P Global estimates</div>
+      <div class="note">Third-party figures. ROIC (FY2025) is on a capital base that includes large goodwill; WACC of 7.65% reflects a beta of 0.94 and may understate the cost of this much debt.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#f87171;">~5.8x</div>
+      <div class="sub">$30.7B net debt (Jun 27, 2026)</div>
+      <div class="note">Net debt $30.7B / LTM EBITDA As Defined ~$5.3B (my calculation). Stockholders' deficit is &minus;$9.8B, so book-equity ratios are not meaningful. Excludes the $1.07B Prince &amp; Izant deal that closed in September.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">69/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong: elite margins and growth. The score is held back by leverage above 4x, low cash conversion after interest, a weak rank in the broad aerospace-components category and no insider block.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="224.4 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 314.16" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria fully met</b> &mdash; revenue, EBIT and FCF CAGR, EBIT margin, market concentration, ROIC above WACC, entry multiple vs own history, share count (flat), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; market share rank (broad category), net debt/EBITDA (~5.8x), FCF conversion (43% of EBIT after about $1.6B of interest) and insider ownership (0.4%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    TransDigm Group designs and makes highly engineered aircraft components &mdash; actuators, ignition systems, pumps and valves, power-conditioning devices, latches, connectors, seat belts, cockpit displays and many others &mdash; reported in three segments (Power &amp; Control, Airframe and Non-aviation). The company describes most of its sales as proprietary and sole-source, and sells into three channels: commercial OEM (new aircraft), commercial aftermarket (spares and repairs for aircraft in service) and defense. The model is to buy niche proprietary-product businesses, run them with a decentralised, value-driven playbook (pricing discipline, cost control, lean operations), and finance the whole with high leverage and cash returns to shareholders. FY2025 revenue was $8.83B with a 47.6% GAAP operating margin; Q3 FY2026 revenue grew 22.5% (13% organic) and FY2026 guidance was raised in August to $10.47-10.55B of sales and $5.49-5.55B of EBITDA As Defined. The cost of the approach is on the balance sheet: $33.5B of debt, a $9.8B stockholders' deficit created largely by special dividends ($90 per share in September 2025 on top of $75 in October 2024) and buybacks, and about $2.0B of net interest expense guided for FY2026. The stock is about 22% below its 52-week high and several brokers cut price targets in October.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Negative equity</b> &mdash; book equity is a deficit because the company returns cash through special dividends and buybacks funded by debt, so ROE, P/B and debt/equity are not meaningful; this page relies on ROIC and EBITDA-based leverage instead. (2) <b>M&amp;A</b> &mdash; Jet Parts Engineering and Victor Sierra ($2.2B, closed Apr 2026) and Prince &amp; Izant ($1.07B, closed Sep 2026) inflate reported growth (Q3 FY2026: +22.5% reported, 13% organic) and add leverage. (3) <b>Non-GAAP vs GAAP</b> &mdash; adjusted EPS ($37.33 in FY2025; $40.62-41.46 guided for FY2026) excludes stock compensation and acquisition costs; GAAP EPS ($32.06 in FY2025) is lower and is further reduced in years with dividend-equivalent payments. Special dividends make the historical dividend line lumpy: unadjusted year-end prices below do not adjust for them.
+  </div>
+
+  <div class="bignum-corner">TDG</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (fiscal years ending Sep 30), USD millions, S&amp;P Global-standardised GAAP figures (operating income = EBIT; FCF = operating cash flow minus capex). The FY2026 result is due mid-November 2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income (EBIT) &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Revenue grew every year except FY2021's pandemic dip base; EBIT grew faster (margin up from 35.5% to 47.6%) but free cash flow has lagged because interest on rising debt takes about a third of EBIT. FY2025 FCF ($1,816m) was down 3.4% on FY2024.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">2bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">8bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="134.4" width="30" height="105.6" rx="2" fill="#2dd4bf"/>
+<text x="100" y="129.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,798</text>
+<rect x="123" y="202.5" width="30" height="37.5" rx="2" fill="#60a5fa"/>
+<text x="138" y="197.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,705</text>
+<rect x="161" y="222.2" width="30" height="17.8" rx="2" fill="#fbbf24"/>
+<text x="176" y="217.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">808</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text>
+<rect x="241" y="120.6" width="30" height="119.4" rx="2" fill="#2dd4bf"/>
+<text x="256" y="115.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,429</text>
+<rect x="279" y="191.2" width="30" height="48.8" rx="2" fill="#60a5fa"/>
+<text x="294" y="186.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,219</text>
+<rect x="317" y="221.8" width="30" height="18.2" rx="2" fill="#fbbf24"/>
+<text x="332" y="216.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">829</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+<rect x="397" y="95.1" width="30" height="144.9" rx="2" fill="#2dd4bf"/>
+<text x="412" y="90.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">6,585</text>
+<rect x="435" y="175.7" width="30" height="64.3" rx="2" fill="#60a5fa"/>
+<text x="450" y="170.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,923</text>
+<rect x="473" y="212.8" width="30" height="27.2" rx="2" fill="#fbbf24"/>
+<text x="488" y="207.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,236</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+<rect x="553" y="65.3" width="30" height="174.7" rx="2" fill="#2dd4bf"/>
+<text x="568" y="60.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">7,940</text>
+<rect x="591" y="160.8" width="30" height="79.2" rx="2" fill="#60a5fa"/>
+<text x="606" y="155.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,598</text>
+<rect x="629" y="198.6" width="30" height="41.4" rx="2" fill="#fbbf24"/>
+<text x="644" y="193.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,880</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+<rect x="709" y="45.7" width="30" height="194.3" rx="2" fill="#2dd4bf"/>
+<text x="724" y="40.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">8,831</text>
+<rect x="747" y="147.6" width="30" height="92.4" rx="2" fill="#60a5fa"/>
+<text x="762" y="142.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,199</text>
+<rect x="785" y="200.0" width="30" height="40.0" rx="2" fill="#fbbf24"/>
+<text x="800" y="195.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,816</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+16.5%</div><div class="sub">$4.80B &rarr; $8.83B; includes acquisitions (FY2021 itself was -6.0%, a pandemic trough)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+25.3%</div><div class="sub">$1.71B &rarr; $4.20B (S&amp;P-standardised operating income)</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+22.4%</div><div class="sub">$808m &rarr; $1,816m, but flat versus FY2024 ($1,880m) as interest costs rose</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Margin Trend &mdash; Operating Margin vs Gross Margin (GAAP)</div>
+    <div class="chart-sub">Gross margin rose from 52.4% to 60.3% and operating margin from 35.5% to 47.6% over four years, driven by pricing, mix toward aftermarket and operating leverage. Gross margin rose +3.2pp over the three years FY2022-25.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Operating margin</span><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span></div>
+    <svg viewBox="0 0 700 130">
+<line x1="30" y1="108" x2="690" y2="108" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="83.4" x2="690" y2="83.4" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="86.4" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="58.9" x2="690" y2="58.9" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="61.9" font-size="7.5" fill="#64748b">40%</text>
+<line x1="30" y1="34.3" x2="690" y2="34.3" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="37.3" font-size="7.5" fill="#64748b">60%</text>
+<text x="8" y="111" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,43.6 205,37.9 350,36.3 495,35.4 640,34.0" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="43.6" r="3.2" fill="#60a5fa"/><text x="60" y="36.6" text-anchor="middle" font-size="8" fill="#93c5fd">52.4%</text>
+<circle cx="205" cy="37.9" r="3.2" fill="#60a5fa"/><text x="205" y="30.9" text-anchor="middle" font-size="8" fill="#93c5fd">57.1%</text>
+<circle cx="350" cy="36.3" r="3.2" fill="#60a5fa"/><text x="350" y="29.3" text-anchor="middle" font-size="8" fill="#93c5fd">58.3%</text>
+<circle cx="495" cy="35.4" r="3.2" fill="#60a5fa"/><text x="495" y="28.4" text-anchor="middle" font-size="8" fill="#93c5fd">59.1%</text>
+<circle cx="640" cy="34.0" r="3.2" fill="#60a5fa"/><text x="640" y="27.0" text-anchor="middle" font-size="8" fill="#93c5fd">60.2%</text>
+<polyline points="60,64.3 205,57.8 350,53.5 495,52.3 640,49.6" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="64.3" r="3.2" fill="#34d399"/><text x="60" y="57.3" text-anchor="middle" font-size="8" fill="#cbd5e1">35.5%</text>
+<circle cx="205" cy="57.8" r="3.2" fill="#34d399"/><text x="205" y="50.8" text-anchor="middle" font-size="8" fill="#cbd5e1">40.9%</text>
+<circle cx="350" cy="53.5" r="3.2" fill="#34d399"/><text x="350" y="46.5" text-anchor="middle" font-size="8" fill="#cbd5e1">44.4%</text>
+<circle cx="495" cy="52.3" r="3.2" fill="#34d399"/><text x="495" y="45.3" text-anchor="middle" font-size="8" fill="#cbd5e1">45.3%</text>
+<circle cx="640" cy="49.6" r="3.2" fill="#34d399"/><text x="640" y="42.6" text-anchor="middle" font-size="8" fill="#cbd5e1">47.5%</text>
+<text x="60" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">FY21</text>
+<text x="205" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">FY22</text>
+<text x="350" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">FY23</text>
+<text x="495" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">FY24</text>
+<text x="640" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">FY25</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (Sep 30, $m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income*</th><th>EPS (GAAP)</th><th>FCF</th><th>FCF/EBIT</th><th>Capex</th><th>Net debt</th><th>Special div./sh</th></tr>
+    <tr><td>FY2021</td><td>4,798</td><td>1,705</td><td>35.5%</td><td>607</td><td>$10.39</td><td>808</td><td>47.4%</td><td>105</td><td>15,582</td><td>&ndash;</td></tr>
+    <tr><td>FY2022</td><td>5,429</td><td>2,219</td><td>40.9%</td><td>780</td><td>$13.40</td><td>829</td><td>37.4%</td><td>119</td><td>16,874</td><td>$18.50</td></tr>
+    <tr><td>FY2023</td><td>6,585</td><td>2,923</td><td>44.4%</td><td>1,260</td><td>$22.03</td><td>1,236</td><td>42.3%</td><td>139</td><td>16,246</td><td>&ndash;</td></tr>
+    <tr><td>FY2024</td><td>7,940</td><td>3,598</td><td>45.3%</td><td>1,481</td><td>$25.62</td><td>1,880</td><td>52.3%</td><td>165</td><td>18,635</td><td>$35.00</td></tr>
+    <tr><td>FY2025</td><td>8,831</td><td>4,199</td><td>47.6%</td><td>1,866</td><td>$32.06</td><td>1,816</td><td>43.2%</td><td>222</td><td>27,273</td><td>$165.00</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>10,006</td><td>4,675</td><td>46.7%</td><td>1,911</td><td>$32.96</td><td>1,927</td><td>41.2%</td><td>271</td><td>30,705</td><td>&ndash;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*Net income to common shareholders (S&amp;P Global); company-reported FY2025 net income was $2,074m, before about $208m of dividends and dividend equivalents on participating securities. Net debt is S&amp;P's total debt minus cash (includes leases and the receivables securitisation facility). Special dividends are allocated to the fiscal year of the ex-date: $18.50 (Aug 2022), $35 (Nov 2023), $75 (Oct 2024) and $90 (Sep 2025) &mdash; FY2025 therefore includes two special dividends. No regular dividend. Company non-GAAP: EBITDA As Defined was $4,760m in FY2025 (53.9% margin) and adjusted EPS $37.33. The TTM row combines company and S&amp;P data and is an estimate.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) for annual, TTM, balance-sheet and dividend data; TransDigm Q3 FY2026 earnings release (Aug 4, 2026) for FY2025 non-GAAP figures and FY2026 guidance. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q3 FY2026)</div></div>
+  <div class="sec-sub">Eight fiscal quarters from Q4 FY2024 (Jul-Sep 2024) to Q3 FY2026 (Apr-Jun 2026). Quarter labels are fiscal quarters. Reported Aug 4, 2026; Q4 FY2026 and the full-year result are due in mid-November.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 FY2026 net sales were $2,741m, up 23% from $2,237m (organic growth 13%). Net income was $540m (+10%), GAAP EPS $9.39 (+11%) and adjusted EPS $10.87 (+13%; company non-GAAP). EBITDA As Defined rose 19% to $1,447m, but the margin slipped to 52.8% from 54.4% as acquisitions diluted it; the base businesses expanded margin, according to the CEO. Commercial aftermarket grew 17%, commercial OEM and defense both grew at double-digit rates. Net interest expense rose to $514m from $397m on higher debt, which is why net income grew far slower than sales. The company bought back $1.0B of stock in the quarter (809,101 shares at an average of $1,208), taking nine-month repurchases to $1.8B, and raised debt by $1.5B in April.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($bn)</div>
+    <div class="chart-sub">YoY growth: Q4'24 +18.0%, Q1'25 +12.1%, Q2'25 +12.0%, Q3'25 +9.3%, Q4'25 +11.5%, Q1'26 +13.9%, Q2'26 +18.3%, Q3'26 +22.5%. Growth re-accelerated in FY2026, partly through acquisitions.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="62.2" width="56" height="67.8" fill="#2dd4bf"/><text x="58.0" y="57.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2.19</text><text x="58.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="112" y="67.8" width="56" height="62.2" fill="#2dd4bf"/><text x="140.0" y="62.8" text-anchor="middle" font-size="9" fill="#cbd5e1">2.01</text><text x="140.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="194" y="63.3" width="56" height="66.7" fill="#2dd4bf"/><text x="222.0" y="58.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2.15</text><text x="222.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="276" y="60.6" width="56" height="69.4" fill="#2dd4bf"/><text x="304.0" y="55.6" text-anchor="middle" font-size="9" fill="#cbd5e1">2.24</text><text x="304.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="358" y="54.4" width="56" height="75.6" fill="#2dd4bf"/><text x="386.0" y="49.4" text-anchor="middle" font-size="9" fill="#cbd5e1">2.44</text><text x="386.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="440" y="59.1" width="56" height="70.9" fill="#2dd4bf"/><text x="468.0" y="54.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2.29</text><text x="468.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="522" y="51.1" width="56" height="78.9" fill="#2dd4bf"/><text x="550.0" y="46.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2.54</text><text x="550.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="604" y="45.0" width="56" height="85.0" fill="#2dd4bf"/><text x="632.0" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2.74</text><text x="632.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (EBIT) &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">S&amp;P-standardised GAAP operating income; operating margin held in a 44-49% band (Q3'26: 46.0%, versus 46.9% a year earlier).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="64.8" width="56" height="65.2" fill="#60a5fa"/><text x="58.0" y="59.8" text-anchor="middle" font-size="9" fill="#cbd5e1">967</text><text x="58.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="112" y="64.3" width="56" height="65.7" fill="#60a5fa"/><text x="140.0" y="59.3" text-anchor="middle" font-size="9" fill="#cbd5e1">974</text><text x="140.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="194" y="62.9" width="56" height="67.1" fill="#60a5fa"/><text x="222.0" y="57.9" text-anchor="middle" font-size="9" fill="#cbd5e1">996</text><text x="222.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="276" y="59.4" width="56" height="70.6" fill="#60a5fa"/><text x="304.0" y="54.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,048</text><text x="304.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="358" y="51.5" width="56" height="78.5" fill="#60a5fa"/><text x="386.0" y="46.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,164</text><text x="386.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="440" y="59.8" width="56" height="70.2" fill="#60a5fa"/><text x="468.0" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,042</text><text x="468.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="522" y="50.0" width="56" height="80.0" fill="#60a5fa"/><text x="550.0" y="45.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,187</text><text x="550.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="604" y="45.0" width="56" height="85.0" fill="#60a5fa"/><text x="632.0" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,261</text><text x="632.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>$m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Revenue</td><td>2,186</td><td>2,006</td><td>2,150</td><td>2,237</td><td>2,437</td><td>2,285</td><td>2,544</td><td>2,741</td></tr>
+    <tr><td>Revenue growth YoY</td><td>+18.0%</td><td>+12.1%</td><td>+12.0%</td><td>+9.3%</td><td>+11.5%</td><td>+13.9%</td><td>+18.3%</td><td>+22.5%</td></tr>
+    <tr><td>Operating income</td><td>967</td><td>974</td><td>996</td><td>1,048</td><td>1,164</td><td>1,042</td><td>1,187</td><td>1,261</td></tr>
+    <tr><td>Operating margin</td><td>44.2%</td><td>48.6%</td><td>46.3%</td><td>46.9%</td><td>47.8%</td><td>45.6%</td><td>46.7%</td><td>46.0%</td></tr>
+    <tr><td>Net income*</td><td>336</td><td>444</td><td>479</td><td>492</td><td>451</td><td>386</td><td>535</td><td>539</td></tr>
+    <tr><td>EPS (GAAP)</td><td>$5.79</td><td>$7.62</td><td>$8.24</td><td>$8.47</td><td>$7.76</td><td>$6.63</td><td>$9.19</td><td>$9.39</td></tr>
+    <tr><td>Free cash flow</td><td>531</td><td>710</td><td>92</td><td>573</td><td>441</td><td>772</td><td>64</td><td>650</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">*To common shareholders (S&amp;P Global). Q1 includes dividend-equivalent payments, which reduce GAAP EPS in that quarter. FCF is seasonal: fiscal Q2 is the weak quarter because of interest and tax timing. Company-reported Q3 FY2026 operating income was $1,227m versus S&amp;P's $1,261m.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, raised Aug 4, 2026):</b> net sales $10,470-10,550m (+19% at the midpoint); GAAP EPS $35.38-36.21; EBITDA As Defined $5,490-5,550m (about 52.5% margin); adjusted EPS $40.62-41.46. Assumes commercial OEM growth in the mid-teens, commercial aftermarket low double digits and defense high single to low double digits. Excludes Prince &amp; Izant.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Capital allocation:</b> $2.2B Jet Parts Engineering / Victor Sierra (Apr 2026), $1.07B Prince &amp; Izant (closed Sep 28, 2026) and about $240M of California assets (Extant Aerospace, announced Sep 21) alongside $1.8B of buybacks in nine months. Debt is rising with each, so leverage is a live variable.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (S&amp;P Global) against the company's own FY-end history. Leverage and negative equity are the central balance-sheet facts.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (34.8x = $1,146.81 / TTM EPS of $32.96) is about 78% of the FY2021-25 average of 44.8x (56.7x, 36.5x, 36.9x, 54.1x, 39.8x). Year-end prices are unadjusted for special dividends, and GAAP EPS is depressed in years with dividend-equivalent payments.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span></div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="35.0" width="70" height="75.0" fill="#60a5fa"/><text x="55" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">56.7x</text>
+<text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="61.7" width="70" height="48.3" fill="#60a5fa"/><text x="150" y="56.7" text-anchor="middle" font-size="9" fill="#cbd5e1">36.5x</text>
+<text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="61.2" width="70" height="48.8" fill="#60a5fa"/><text x="245" y="56.2" text-anchor="middle" font-size="9" fill="#cbd5e1">36.9x</text>
+<text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="38.5" width="70" height="71.5" fill="#60a5fa"/><text x="340" y="33.5" text-anchor="middle" font-size="9" fill="#cbd5e1">54.1x</text>
+<text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="57.4" width="70" height="52.6" fill="#60a5fa"/><text x="435" y="52.4" text-anchor="middle" font-size="9" fill="#cbd5e1">39.8x</text>
+<text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="64.0" width="70" height="46.0" fill="#2dd4bf"/><text x="530" y="59.0" text-anchor="middle" font-size="9" fill="#cbd5e1">34.8x</text>
+<text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="50.8" x2="690" y2="50.8" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="46.8" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 44.8x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E is 24.6x versus a FY2021-25 year-end average of ~32.6x (39.4x, 25.2x, 28.4x, 37.4x, 32.6x), about 75% of its own average. PEG is about 1.5 per S&amp;P. The scorecard uses the trailing figure (ratio 0.78 = 4/5). Average analyst target is $1,414.30 (23 analysts), about 23% above the close, but several brokers lowered targets in October (for example Goldman Sachs to $1,745, Morgan Stanley to $1,300, RBC to $1,200, TD Cowen to $1,300), and Guggenheim initiated at Neutral citing threats to dominance, per news headlines I did not read in full.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex is 2.1-2.5% of revenue every year (FY2025: $222m, 2.5%); the business is asset-light in capital terms. Acquisitions, not capex, are the main use of investment cash.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="112.7" width="60" height="47.3" fill="#60a5fa"/><text x="60" y="107.7" text-anchor="middle" font-size="8" fill="#cbd5e1">105</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY21</text>
+<rect x="170" y="106.4" width="60" height="53.6" fill="#60a5fa"/><text x="200" y="101.4" text-anchor="middle" font-size="8" fill="#cbd5e1">119</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY22</text>
+<rect x="310" y="97.4" width="60" height="62.6" fill="#60a5fa"/><text x="340" y="92.4" text-anchor="middle" font-size="8" fill="#cbd5e1">139</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY23</text>
+<rect x="450" y="85.7" width="60" height="74.3" fill="#60a5fa"/><text x="480" y="80.7" text-anchor="middle" font-size="8" fill="#cbd5e1">165</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY24</text>
+<rect x="590" y="60.0" width="60" height="100.0" fill="#60a5fa"/><text x="620" y="55.0" text-anchor="middle" font-size="8" fill="#cbd5e1">222</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY25</text>
+<polyline points="60,116.0 200,116.0 340,118.0 480,118.0 620,110.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="116.0" r="3" fill="#fbbf24"/><text x="60" y="106.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.2%</text>
+<circle cx="200" cy="116.0" r="3" fill="#fbbf24"/><text x="200" y="106.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.2%</text>
+<circle cx="340" cy="118.0" r="3" fill="#fbbf24"/><text x="340" y="108.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.1%</text>
+<circle cx="480" cy="118.0" r="3" fill="#fbbf24"/><text x="480" y="108.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.1%</text>
+<circle cx="620" cy="110.0" r="3" fill="#fbbf24"/><text x="620" y="100.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.5%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.3 312.9" stroke-dashoffset="-0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="304.3 9.9" stroke-dashoffset="-1.3" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="8.6 305.5" stroke-dashoffset="-305.5" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">96.9%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~96.9% (S&amp;P)</div>
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~0.4% (S&amp;P)</div>
+          <div><span class="dot" style="background:#475569;"></span>Other ~2.7%; short interest 2.2% of shares</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Roughly flat: about 58.4M shares (S&amp;P-implied, FY2021, two-class basis) versus 57.4M in Q3 FY2026, a decline of about 1.7%. Buybacks resumed in size in FY2026 ($1.8B in nine months at about $1,207 average), after the company prioritised special dividends in FY2024-25. S&amp;P's 55.3M basic common-share figure excludes about 1.7M vested options treated as participating securities.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Insiders &amp; honest caveats:</b> S&amp;P shows insiders at about 0.4% of shares. Management and directors also hold stock options, which are not counted here and which the company treats as participating securities in EPS; I could not verify the full beneficial-ownership table, so the insider criterion is scored on the 0.4% figure and may understate alignment.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Leverage, handled honestly:</b> at Jun 27, 2026 debt was $33.5B (long-term $32.6B, current $0.14B, receivables facility $0.73B) against cash of $2.8B, i.e. net debt $30.7B, versus $27.2B at FY2025 year-end and $15.6B in FY2021. Against LTM EBITDA As Defined of about $5.3B (FY2025 $4,760m + 9M FY2026 $3,981m &minus; 9M FY2025 $3,441m) that is about 5.8x before the Prince &amp; Izant purchase; FY2026 net interest is guided at about $2.0B, so EBIT of about $4.8B (my estimate from guidance) covers interest about 2.4x. Stockholders' deficit is &minus;$9.8B. Part of the debt is floating-rate term loans, so interest costs are rate-sensitive. This site's bands treat &gt;4x as zero points; the cash-generative, high-margin operations are what service it.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion could be scored, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 (1&ndash;2 = Met). CAGRs are 4-year (FY2021-25, fiscal years ending Sep 30). Criterion #14 uses gross margin (a gross-profit line exists), comparing FY2025 with FY2022. Negative book equity is handled by using ROIC and EBITDA-based leverage.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>TransDigm</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+16.5% &mdash; $4.80B &rarr; $8.83B; includes acquired revenue (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+25.3% &mdash; operating income $1.71B &rarr; $4.20B (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>47.6% GAAP operating margin (FY2025); EBITDA As Defined margin 53.9% (non-GAAP) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+22.4% &mdash; $808m &rarr; $1,816m; flat vs FY2024 as interest costs rose (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Judgment: in the broad aerospace components/systems category TransDigm ($8.8B) ranks roughly #4-5 by revenue behind much larger groups; within its niches most sales are proprietary and sole-source, but no verified category share exists. A niche-level reading would score higher (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; the broad parts market is fragmented, but TransDigm's proprietary, certified, often sole-source products face limited direct competition (judgment) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 16.57% (FY2025; 15.4% current) vs est. WACC 7.65% (S&amp;P): spread +8.9pp. Third-party figures; WACC likely understates the cost of this leverage (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~5.8x &mdash; net debt $30.7B (Jun 2026, incl. securitisation) / LTM EBITDA As Defined ~$5.3B (S&amp;P: 6.0x). Industrial company, no captive finance arm (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>43.2% (FY2025: $1,816m / $4,199m); 5-year path 47% / 37% / 42% / 52% / 43%. FCF is after about $1.6B of interest (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 34.8x vs FY21-25 average 44.8x (ratio 0.78); forward 24.6x vs 32.6x (0.75) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~58.4M &rarr; ~57.4M, about &minus;1.7% over the window; buybacks resumed in FY2026 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>0.4% insiders (S&amp;P); options not counted; no broad employee ownership plan verified (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.5% of revenue (FY2025: $222m); 2.1-2.5% every year (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (gross profit / revenue, S&amp;P Global). 57.08% (FY2022) &rarr; 60.25% (FY2025), +3.17pp &mdash; improving (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 4&times;13=10.4 &middot; #2 5&times;11=11.0 &middot; #3 5&times;10=10.0 &middot; #4 5&times;8=8.0 &middot; #5 1&times;7=1.4 &middot; #6 4&times;6=4.8 &middot; #7 3&times;10=6.0 &middot; #8 0&times;6=0.0 &middot; #9 2&times;8=3.2 &middot; #10 4&times;8=6.4 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0. Total 72.6 / 105 = <b>69/100</b>. Criteria met: 10/14 on the binary thresholds. <b>Judgment calls:</b> #5 (a niche-level reading would raise it; at 3/5 the index would be about 72) and #6 are qualitative; #7 uses third-party ROIC/WACC; #8 is my own calculation from company data; #12 relies on S&amp;P's 0.4% and excludes options.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Exceptional unit economics: a 47.6% GAAP operating margin, gross margin up 3.2pp in three years, 25% EBIT CAGR and 22% FCF CAGR over four years, capex of about 2.5% of revenue, and ROIC about twice the estimated WACC. Q3 FY2026 growth accelerated to 22.5% (13% organic), commercial aftermarket grew 17%, guidance was raised, and defense backlog is building. The stock trades at 34.8x trailing and 24.6x forward earnings versus 44.8x and 32.6x own-history averages, after a decline of about 22% from the 52-week high. Buybacks have resumed in size.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Leverage of about 5.8x net debt/EBITDA (before the latest acquisition), a &minus;$9.8B stockholders' deficit and roughly $2.0B of annual interest leave less room for error, and FCF conversion is only about 43% of EBIT. Reported growth is helped by acquisitions, and acquisitions are diluting EBITDA margin (52.8% vs 54.4%). Full-year revenue growth decelerated in FY2025 (+11.2% vs +20.6%), several brokers cut targets in October, and commercial aerospace demand, pricing scrutiny on proprietary parts and defense budgets are standing risks. No founder or insider block. Inputs that are third-party or my own estimates: ROIC/WACC, LTM leverage, insider ownership, market-position ranking and the TTM column.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> TransDigm Group Q3 FY2026 earnings release (Form 8-K Exhibit 99.1, Aug 4, 2026); stockanalysis.com (S&amp;P Global Market Intelligence: annual and quarterly financials, ratios, statistics, dividends, ownership, analyst consensus, segment data via Fiscal.ai). Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">TransDigm Group &mdash; USD share price at fiscal year-ends (Sep 30). A 2.9x rise from the FY2022 low to the FY2025 high of the series, then a decline of about 13% since.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">TransDigm &mdash; Fiscal Year-End Close (Sep 30; NYSE, USD)</div>
+    <div class="chart-sub">Closing prices on Sep 30 of 2021-2025 (S&amp;P Global via stockanalysis.com, unadjusted for special dividends) plus the Oct 30, 2026 close. The dashed line is the straight-line annualised price CAGR between the Sep 2021 point and Oct 2026 (about 5.1 years), excluding dividends; special dividends of $18.50, $35, $75 and $90 per share were paid in the window. The 52-week range is $1,071.25 &ndash; $1,463.03.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +16.9%</text>
+<path d="M 46.0,127.4 L 172.8,134.5 L 299.6,107.0 L 426.4,51.8 L 553.2,46.4 L 680.0,63.8 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="127.4" x2="680.0" y2="63.8" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,127.4 L 172.8,134.5 L 299.6,107.0 L 426.4,51.8 L 553.2,46.4 L 680.0,63.8" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="127.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="115.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$519.11</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Sep-21</text>
+<circle cx="172.8" cy="134.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="122.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$448.61</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Sep-22</text>
+<circle cx="299.6" cy="107.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="95.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$720.69</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Sep-23</text>
+<circle cx="426.4" cy="51.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="39.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,264.74</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Sep-24</text>
+<circle cx="553.2" cy="46.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="34.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,318.02</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Sep-25</text>
+<circle cx="680.0" cy="63.8" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="51.8" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$1,146.81</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    The price series excludes $218.50 per share of special dividends paid between August 2022 and September 2025 (sum of the four payments), so total return was higher than the price CAGR shown. Fiscal years end Sep 30, so &ldquo;FY21&rdquo; is Sep 30, 2021.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

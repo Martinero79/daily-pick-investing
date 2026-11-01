@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KLA Corporation — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/kla.html">
+<meta property="og:title" content="KLA Corporation — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KLA Corporation — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>KLA Corporation</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: KLAC</div>
+    <div class="badge">FY ends June 30 (FY2026 = Jul 2025&ndash;Jun 2026)</div>
+    <div class="badge">HQ: Milpitas, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">Split-adjusted: 10-for-1 on Jun 11, 2026</div>
+    <div class="badge warn">~49% Below 52-Wk High &mdash; Chip-Equipment Sell-Off in Oct 2026; Q1 FY27 Beat and Q2 Guide $4.7B</div>
+  </div>
+
+  <div class="price">$157.91</div>
+  <div class="price-sub">Oct 30, 2026 close (Nasdaq, USD) &middot; Market cap &asymp; $206B (1.305B shares) &middot; 52-wk range $107.20 &ndash; 307.37 (intraday; high Jun 30, 2026) &middot; Beta 1.45 &middot; Analyst consensus: Moderate Buy / Buy (~29-30 analysts), avg PT &asymp; $220 (MarketBeat $220.35; range $133&ndash;$425) &middot; Next report (Q2 FY2027): late Jan 2027 (date not yet confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> KLA is the largest supplier of semiconductor process-control tools (wafer and reticle inspection, metrology), the equipment that finds defects and measures structures during chip manufacturing. Its customers are the leading foundries, logic and memory makers; it competes with Applied Materials, Hitachi High-Tech, ASML (e-beam), Onto Innovation and Lasertec in parts of the market. Process control was 90% of FY2026 revenue ($12.2B of $13.6B).</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in US dollars. KLA&rsquo;s fiscal year ends June 30, so &ldquo;FY2026&rdquo; is July 2025 to June 2026 and Q1 FY2027 is the September 2026 quarter. KLA completed a <b>10-for-1 stock split on June 11, 2026</b>; every per-share figure and every historical price on this page is split-adjusted (older sources quote prices and EPS 10x higher). &ldquo;EBIT / Op. Income&rdquo; is <b>GAAP operating income</b> (revenue less cost of revenues, R&amp;D and SG&amp;A); free cash flow is operating cash flow minus capital expenditures. Non-GAAP figures are labelled as such.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026, Jun)</div>
+      <div class="val">$13.58B</div>
+      <div class="sub">+11.7% YoY; Q1 FY27 +28.9%</div>
+      <div class="note">4-yr CAGR FY22-26 is +10.2%. Growth is re-accelerating: Q1 FY2027 (Sep 2026) revenue was $4.14B, and KLA guides $4.7B &plusmn; $0.2B for the December quarter (+43% YoY at the midpoint).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">41.7%</div>
+      <div class="sub">FY2026; Q1 FY27 45.0%; gross margin 61.3%</div>
+      <div class="note">Operating margin is up from 37.1% in FY2024. Q1 FY2027 GAAP operating income was $1.86B on $4.14B of revenue (a third-party summary cites a record 46.1% non-GAAP operating margin).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">66.8% vs 12.0%</div>
+      <div class="sub">S&amp;P Global estimates</div>
+      <div class="note">Third-party figures. ROIC is flattered by a small book-equity base after years of buybacks, so treat the level with care; the spread is large under any definition.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.2x</div>
+      <div class="sub">Jun 2026: net debt $1.25B</div>
+      <div class="note">Total debt $6.15B against cash and securities of $4.90B; EBITDA ~$6.05B. Interest cover ~20x (S&amp;P). Debt has been roughly flat while net debt fell from $4.1B in FY2022.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">71/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High-quality franchise: best-in-class margins, high returns and a clear #1 share, held back by merely double-digit growth (not 15%+), a flat FY26 FCF, a trailing P/E above its own history and almost no insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="179.5 134.6" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="134.6 179.5" stroke-dashoffset="-179.5" transform="rotate(-90 60 60)"/>
+<text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">8/14</text><text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+</svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>8 criteria fully met</b> &mdash; EBIT margin (41.7%), market position (clear #1), market concentration (oligopoly), ROIC vs WACC, net debt/EBITDA (0.2x), share count (-13.7%), capex intensity and gross-margin stability (+1.49pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>6 not met</b> &mdash; revenue CAGR (+10.2%), EBIT CAGR (+11.6%), FCF CAGR (+5.8%), FCF conversion (66.5%), entry multiple vs own history (ratio 1.07) and insider ownership (~0.1%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    KLA Corporation, based in Milpitas, California, makes the inspection and measurement tools that chipmakers use to find defects and control variation while wafers are processed. It was formed by the 1997 merger of KLA Instruments and Tencor and has been the leader in this niche ever since; the idea is simple and economically sticky: as chips get smaller, stacked and more complex (leading-edge logic, high-bandwidth memory, advanced packaging), the share of capital spending that goes on finding yield-killing defects rises, and KLA sells the tools plus a growing, recurring services stream (service was $851m, about 21%, of Q1 FY2027 revenue). Segments for FY2026: Semiconductor Process Control $12.2B, Specialty Semiconductor Process $0.58B, and PCB, Display and Component Inspection $0.75B. The financial profile is unusual for hardware: gross margin has held at 60-62% for five years, GAAP operating margin reached 41.7% in FY2026 and 45.0% in Q1 FY2027, capex is below 3.5% of revenue and the business returned $3.79B to shareholders over the last twelve months. Growth is the debatable part: the 4-year revenue CAGR is a solid but not spectacular 10.2% because FY2024 fell 6.5% in the equipment downturn, but the last four quarters ramped from +7% to +29% YoY. The share price has moved far more than the business: after a 10-for-1 split in June 2026 the stock peaked at $307 on June 30 and then fell about 49% to $157.91 as chip-equipment stocks sold off in October on worries about AI-related capex, component supply constraints and valuation, even as KLA beat its September-quarter guidance.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Stock split</b> &mdash; KLA split 10-for-1 on June 11, 2026; all prices, EPS and dividends here are split-adjusted, but some third-party pages still quote older unadjusted values. (2) <b>Cycle</b> &mdash; semiconductor equipment is cyclical (FY2024 revenue -6.5%, and Q2 FY2026 growth was only +7%), so a 4-year CAGR from FY2022 reflects one down year and a rebound, not a steady trend. (3) <b>Price vs. financials</b> &mdash; the FY2026 year-end P/E of 81.6x was computed at the June 30, 2026 peak price ($301.37) on trailing EPS of $3.66; that single point lifts KLA&rsquo;s 5-year average P/E and makes today&rsquo;s ~39.5x look closer to its history than the forward multiple (~29x) suggests. Estimates, ROIC/WACC and market share are third-party or judgment and are flagged as such.
+  </div>
+
+  <div class="bignum-corner">KLAC</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending June 30), $ millions as reported by KLA (via S&amp;P Global standardisation). Op. Income is GAAP operating income; FCF = operating cash flow minus capex. FY2024 was the equipment-downturn year; FY2025-26 show the AI-driven re-acceleration.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. Revenue rose from $9.2B to $13.6B over four years with a dip in FY2024; EBIT grew faster than revenue (margin expansion) while FCF grew slower, because FY2026 FCF was held back by inventory and receivables growth and higher capex. FCF/EBIT fell from 83% to 67%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">3bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">9bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">12bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="104.9" width="30" height="135.1" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="99.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">9,212</text>
+<rect x="123.0" y="186.4" width="30" height="53.6" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="181.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,652</text>
+<rect x="161.0" y="195.9" width="30" height="44.1" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="190.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,005</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241.0" y="86.1" width="30" height="153.9" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="81.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">10,496</text>
+<rect x="279.0" y="181.4" width="30" height="58.6" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="176.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,995</text>
+<rect x="317.0" y="191.2" width="30" height="48.8" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="186.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,328</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397.0" y="96.1" width="30" height="143.9" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="91.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">9,812</text>
+<rect x="435.0" y="186.7" width="30" height="53.3" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="181.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,636</text>
+<rect x="473.0" y="195.5" width="30" height="44.5" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="190.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,031</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553.0" y="61.7" width="30" height="178.3" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="56.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">12,156</text>
+<rect x="591.0" y="166.5" width="30" height="73.5" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="161.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,014</text>
+<rect x="629.0" y="185.0" width="30" height="55.0" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="180.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,747</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709.0" y="40.8" width="30" height="199.2" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="35.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">13,579</text>
+<rect x="747.0" y="157.0" width="30" height="83.0" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="152.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,661</text>
+<rect x="785.0" y="184.8" width="30" height="55.2" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="179.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,767</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#fbbf24;">+10.2%</div>
+      <div class="sub">$9.2B &rarr; $13.6B &mdash; clears 10% but not the 15% bar; FY2024 was -6.5%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#fbbf24;">+11.6%</div>
+      <div class="sub">$3.65B &rarr; $5.66B &mdash; operating margin 39.6% &rarr; 41.7%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#f87171;">+5.8%</div>
+      <div class="sub">$3.0B &rarr; $3.8B &mdash; FY2026 flat on FY2025 on working-capital build</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin Trend &mdash; GAAP, % of revenue</div>
+    <div class="chart-sub">Gross margin has stayed in a 59.8-61.3% band; operating margin dipped to 37.1% in FY2024 on lower volume and then recovered to 41.7% as revenue grew faster than operating expenses (R&amp;D and SG&amp;A rose, but slower than sales). Quarterly operating margin reached 45.0% in Q1 FY2027.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90.0" x2="690" y2="90.0" stroke="#263049" stroke-width="1"/>
+<text x="2" y="93.0" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="55.5" font-size="7.5" fill="#64748b">40%</text>
+<line x1="30" y1="15.0" x2="690" y2="15.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="18.0" font-size="7.5" fill="#64748b">80%</text>
+<polyline points="60,32.8 205,33.9 350,33.8 495,32.9 640,32.5" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+<circle cx="60" cy="32.8" r="3.2" fill="#2dd4bf"/><text x="60" y="25.8" text-anchor="middle" font-size="8" fill="#cbd5e1">61.0%</text>
+<circle cx="205" cy="33.9" r="3.2" fill="#2dd4bf"/><text x="205" y="26.9" text-anchor="middle" font-size="8" fill="#cbd5e1">59.8%</text>
+<circle cx="350" cy="33.8" r="3.2" fill="#2dd4bf"/><text x="350" y="26.8" text-anchor="middle" font-size="8" fill="#cbd5e1">60.0%</text>
+<circle cx="495" cy="32.9" r="3.2" fill="#2dd4bf"/><text x="495" y="25.9" text-anchor="middle" font-size="8" fill="#cbd5e1">60.9%</text>
+<circle cx="640" cy="32.5" r="3.2" fill="#2dd4bf"/><text x="640" y="25.5" text-anchor="middle" font-size="8" fill="#cbd5e1">61.3%</text>
+<polyline points="60,52.8 205,54.3 350,55.3 495,51.3 640,50.9" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="52.8" r="3.2" fill="#34d399"/><text x="60" y="64.8" text-anchor="middle" font-size="8" fill="#cbd5e1">39.6%</text>
+<circle cx="205" cy="54.3" r="3.2" fill="#34d399"/><text x="205" y="66.3" text-anchor="middle" font-size="8" fill="#cbd5e1">38.1%</text>
+<circle cx="350" cy="55.3" r="3.2" fill="#34d399"/><text x="350" y="67.3" text-anchor="middle" font-size="8" fill="#cbd5e1">37.0%</text>
+<circle cx="495" cy="51.3" r="3.2" fill="#34d399"/><text x="495" y="63.3" text-anchor="middle" font-size="8" fill="#cbd5e1">41.2%</text>
+<circle cx="640" cy="50.9" r="3.2" fill="#34d399"/><text x="640" y="62.9" text-anchor="middle" font-size="8" fill="#cbd5e1">41.7%</text>
+<text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (Jun, $m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>Dil. EPS ($)</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net Debt</th><th>DPS ($)</th></tr>
+    <tr><td>FY2022</td><td>9,212</td><td>3,652</td><td>39.6%</td><td>61.0%</td><td>3,322</td><td>2.19</td><td>3,005</td><td>82.3%</td><td>307</td><td>4,066</td><td>0.42</td></tr>
+    <tr><td>FY2023</td><td>10,496</td><td>3,995</td><td>38.1%</td><td>59.8%</td><td>3,387</td><td>2.42</td><td>3,328</td><td>83.3%</td><td>342</td><td>2,820</td><td>0.52</td></tr>
+    <tr><td>FY2024</td><td>9,812</td><td>3,636</td><td>37.0%</td><td>60.0%</td><td>2,762</td><td>2.03</td><td>3,031</td><td>83.4%</td><td>277</td><td>2,316</td><td>0.565</td></tr>
+    <tr><td>FY2025</td><td>12,156</td><td>5,014</td><td>41.2%</td><td>60.9%</td><td>4,062</td><td>3.04</td><td>3,747</td><td>74.7%</td><td>335</td><td>1,594</td><td>0.675</td></tr>
+    <tr><td>FY2026</td><td>13,579</td><td>5,661</td><td>41.7%</td><td>61.3%</td><td>4,831</td><td>3.66</td><td>3,767</td><td>66.5%</td><td>376</td><td>1,249</td><td>0.80</td></tr>
+    <tr><td>TTM (Sep&rsquo;26)</td><td>14,505</td><td>6,186</td><td>42.6%</td><td>61.5%</td><td>5,259</td><td>4.00</td><td>4,040</td><td>65.3%</td><td>&mdash;</td><td>&mdash;</td><td>0.92 (annualised)</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">TTM (Sep 2026) = FY2026 minus Q1 FY2026 plus Q1 FY2027, computed from the quarterly figures; TTM FCF ($4.04B) is KLA&rsquo;s own figure from the Q1 FY2027 release, and TTM FCF/EBIT uses the computed GAAP operating income. Net debt = total debt minus cash and investments (S&amp;P Global, June year-end). DPS is split-adjusted; the quarterly dividend is now $0.23. FY2022 and FY2023 dividends per share are as quoted by S&amp;P Global.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) annual and quarterly financials, last updated Oct 29, 2026; KLA Q1 FY2027 earnings release (Oct 28, 2026, via PR Newswire/TradingView) for the September-quarter income statement, balance sheet, cash flows and guidance. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter &amp; Momentum (Q1 FY2027, Sep 2026)</div></div>
+  <div class="sec-sub">KLA reported Q1 FY2027 (quarter ended Sep 30, 2026) on Oct 28, 2026 after the close. Fiscal quarters: Q2 FY25 = Dec 2024 &hellip; Q1 FY27 = Sep 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue was $4,136m (+28.9% YoY, +13.1% on the June quarter), above the $4.0B &plusmn; $0.2B guidance midpoint, with GAAP diluted EPS of $1.18 (non-GAAP $1.22) versus $0.85 a year earlier. GAAP operating income of $1,862m gives a 45.0% operating margin (gross margin 61.85%); a third-party summary cites a record 46.1% non-GAAP operating margin. Product revenue rose to $3,285m (+33% YoY) and service to $851m (+14%). Cash generation was strong in the quarter: operating cash flow $1.53B, free cash flow $1.34B (KLA&rsquo;s figure) and $1.24B returned to shareholders ($936m of buybacks and $305m of dividends). The quarter also showed the build behind the growth: inventory rose to $4.09B from $3.65B in June and capex was $195m (4.7% of revenue, more than double the year-ago $96m). Management said it expects accelerated growth through the second half of calendar 2026 and into 2027.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Revenue grew sequentially in each of the last five quarters, from $3.2B (Sep 2025) to $4.1B. YoY growth: Q2 FY25 +23.7%, Q3 FY25 +29.8%, Q4 FY25 +23.6%, Q1 FY26 +13.0%, Q2 FY26 +7.2%, Q3 FY26 +11.5%, Q4 FY26 +15.2%, Q1 FY27 +28.9%. The FY2026 trough in growth reflects tough comparisons, not a revenue decline.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="64.5" width="60" height="65.5" fill="#2dd4bf"/><text x="52.5" y="59.5" text-anchor="middle" font-size="9" fill="#cbd5e1">3,077</text><text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="107.5" y="64.8" width="60" height="65.2" fill="#2dd4bf"/><text x="137.5" y="59.8" text-anchor="middle" font-size="9" fill="#cbd5e1">3,063</text><text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="192.5" y="62.4" width="60" height="67.6" fill="#2dd4bf"/><text x="222.5" y="57.4" text-anchor="middle" font-size="9" fill="#cbd5e1">3,175</text><text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="277.5" y="61.7" width="60" height="68.3" fill="#2dd4bf"/><text x="307.5" y="56.7" text-anchor="middle" font-size="9" fill="#cbd5e1">3,210</text><text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="362.5" y="59.9" width="60" height="70.1" fill="#2dd4bf"/><text x="392.5" y="54.9" text-anchor="middle" font-size="9" fill="#cbd5e1">3,297</text><text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="447.5" y="57.3" width="60" height="72.7" fill="#2dd4bf"/><text x="477.5" y="52.3" text-anchor="middle" font-size="9" fill="#cbd5e1">3,415</text><text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="532.5" y="52.2" width="60" height="77.8" fill="#2dd4bf"/><text x="562.5" y="47.2" text-anchor="middle" font-size="9" fill="#cbd5e1">3,658</text><text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="617.5" y="42.0" width="60" height="88.0" fill="#2dd4bf"/><text x="647.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">4,136</text><text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Operating income rose in seven of the last eight quarters (the exception was a small dip in Q1 FY26), and the Q1 FY27 figure of $1,862m is 39% above the year-ago quarter. Q2 FY25 diluted EPS ($0.62) included a $230m goodwill impairment; operating income excludes it.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP Operating Income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="71.3" width="60" height="58.7" fill="#60a5fa"/><text x="52.5" y="66.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,242</text><text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="107.5" y="68.6" width="60" height="61.4" fill="#60a5fa"/><text x="137.5" y="63.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,300</text><text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="192.5" y="66.1" width="60" height="63.9" fill="#60a5fa"/><text x="222.5" y="61.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,352</text><text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="277.5" y="66.8" width="60" height="63.2" fill="#60a5fa"/><text x="307.5" y="61.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,337</text><text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="362.5" y="65.6" width="60" height="64.4" fill="#60a5fa"/><text x="392.5" y="60.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,362</text><text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="447.5" y="63.5" width="60" height="66.5" fill="#60a5fa"/><text x="477.5" y="58.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,408</text><text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="532.5" y="56.6" width="60" height="73.4" fill="#60a5fa"/><text x="562.5" y="51.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,554</text><text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="617.5" y="42.0" width="60" height="88.0" fill="#60a5fa"/><text x="647.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,862</text><text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>$m</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th></tr>
+    <tr><td>Revenue</td><td>3,077</td><td>3,063</td><td>3,175</td><td>3,210</td><td>3,297</td><td>3,415</td><td>3,658</td><td>4,136</td></tr>
+    <tr><td>Revenue YoY</td><td>+23.7%</td><td>+29.8%</td><td>+23.6%</td><td>+13.0%</td><td>+7.2%</td><td>+11.5%</td><td>+15.2%</td><td>+28.9%</td></tr>
+    <tr><td>Gross margin (GAAP)</td><td>60.3%</td><td>61.6%</td><td>62.0%</td><td>61.3%</td><td>61.5%</td><td>61.1%</td><td>61.4%</td><td>61.9%</td></tr>
+    <tr><td>Operating income</td><td>1,242</td><td>1,300</td><td>1,352</td><td>1,337</td><td>1,362</td><td>1,408</td><td>1,554</td><td>1,862</td></tr>
+    <tr><td>Operating margin</td><td>40.4%</td><td>42.5%</td><td>42.6%</td><td>41.7%</td><td>41.3%</td><td>41.2%</td><td>42.5%</td><td>45.0%</td></tr>
+    <tr><td>Diluted EPS ($, split-adj.)</td><td>0.62*</td><td>0.82</td><td>0.91</td><td>0.85</td><td>0.87</td><td>0.91</td><td>1.04</td><td>1.18</td></tr>
+    <tr><td>Free cash flow</td><td>757</td><td>990</td><td>1,065</td><td>1,066</td><td>1,262</td><td>622</td><td>817</td><td>1,336</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">*Q2 FY25 EPS includes a $230m goodwill impairment. Free cash flow is operating cash flow minus capex (S&amp;P Global; Q1 FY27 as reported by KLA at $1.34B). Quarterly figures are GAAP; Q2 FY25 revenue is $3,077m (Dec 2024).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (Q2 FY2027, Dec 2026 quarter):</b> revenue $4.7B &plusmn; $0.2B (about +43% YoY and +14% QoQ at the midpoint), GAAP gross margin 61.8% &plusmn; 1.0%, non-GAAP gross margin 62.5% &plusmn; 1.0%, GAAP diluted EPS $1.41 &plusmn; $0.11 and non-GAAP $1.44 &plusmn; $0.11. Guidance is management&rsquo;s own and can be missed.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Stock reaction:</b> shares closed at $158.77 on Oct 28, rose 5.5% to $167.43 on Oct 29, then fell 5.7% to $157.91 on Oct 30. Several brokers cut price targets after the report (for example Wells Fargo to $210 from $245, Cantor Fitzgerald to $225 from $325, Needham to $200 from $270), while JPMorgan nudged its target up to $240 from $238, as reported by TheFly.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>What moved the stock:</b> the move is mostly sector-wide rather than company-specific. Chip-equipment shares fell sharply through October 2026 (KLA -9.6% on Oct 22 alone), with reports pointing to profit-taking after a very strong run, doubts about the durability of AI data-centre capex, and component shortages (memory, capacitors, circuit boards, optics) that could slow tool ramps. KLA&rsquo;s own results and guidance were above expectations, so the de-rating is a valuation and sentiment story, not a fundamental miss. Treat the causes as reported commentary, not verified fact.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on GAAP diluted EPS, measured at each June fiscal year-end versus today. Leverage is low; the number to watch is how the multiple behaves after a ~49% drawdown in the share price.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; June FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~39.5x = $157.91 / TTM GAAP EPS of $4.00 through Sep 2026) is 1.07x KLA&rsquo;s FY2022-26 June-year-end average (37.0x). FY-end P/Es (S&amp;P Global via stockanalysis.com): 14.3x, 19.7x, 40.2x, 29.2x, 81.6x. The FY2026 point (81.6x) uses the June 30, 2026 price of $301.37, the share-price peak, on trailing EPS of $3.66, and so overstates the typical level; it pulls the average up.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>5-year average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="96.3" width="70" height="13.7" fill="#60a5fa"/><text x="55" y="91.3" text-anchor="middle" font-size="9" fill="#cbd5e1">14.3x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="91.2" width="70" height="18.8" fill="#60a5fa"/><text x="150" y="86.2" text-anchor="middle" font-size="9" fill="#cbd5e1">19.6x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="71.6" width="70" height="38.4" fill="#60a5fa"/><text x="245" y="66.6" text-anchor="middle" font-size="9" fill="#cbd5e1">40.2x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="82.1" width="70" height="27.9" fill="#60a5fa"/><text x="340" y="77.1" text-anchor="middle" font-size="9" fill="#cbd5e1">29.2x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="32.0" width="70" height="78.0" fill="#60a5fa"/><text x="435" y="27.0" text-anchor="middle" font-size="9" fill="#cbd5e1">81.6x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="72.3" width="70" height="37.7" fill="#2dd4bf"/><text x="530" y="67.3" text-anchor="middle" font-size="9" fill="#cbd5e1">39.5x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="74.6" x2="690" y2="74.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="70.6" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 37.0x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is about 28.9x at $157.91 (27.3x at $149.21 per S&amp;P Global; implied forward EPS ~$5.46) versus a FY22-26 June-year-end average of ~31.9x, about 0.91 of its own average (3/5 on the bands). S&amp;P lists a PEG of ~1.3 at $149. The scorecard uses the trailing GAAP basis (ratio 1.07 = 2/5) as the spec requires; on a forward basis KLA would score one band higher. Average analyst price target ~$220 implies roughly 40% upside, but target cuts followed the report and the range is wide ($133-$425).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light for a hardware maker: capex has been 2.8-3.3% of revenue every year (S&amp;P Global). Q1 FY2027 capex was $195m, 4.7% of quarterly revenue and more than double the year-ago quarter, as KLA adds capacity; if that pace persists, FY2027 intensity will be higher than the FY2026 level of 2.8%, though still low.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="98.8" width="60" height="61.2" fill="#60a5fa"/><text x="60" y="93.8" text-anchor="middle" font-size="8" fill="#cbd5e1">307</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="170" y="91.8" width="60" height="68.2" fill="#60a5fa"/><text x="200" y="86.8" text-anchor="middle" font-size="8" fill="#cbd5e1">342</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="310" y="104.7" width="60" height="55.3" fill="#60a5fa"/><text x="340" y="99.7" text-anchor="middle" font-size="8" fill="#cbd5e1">277</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="450" y="93.2" width="60" height="66.8" fill="#60a5fa"/><text x="480" y="88.2" text-anchor="middle" font-size="8" fill="#cbd5e1">335</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="590" y="85.0" width="60" height="75.0" fill="#60a5fa"/><text x="620" y="80.0" text-anchor="middle" font-size="8" fill="#cbd5e1">376</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<polyline points="60,30.0 200,33.9 340,58.6 480,62.0 620,61.4" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="30.0" r="3" fill="#fbbf24"/><text x="60" y="21.0" text-anchor="middle" font-size="7.5" fill="#fde68a">3.33%</text>
+<circle cx="200" cy="33.9" r="3" fill="#fbbf24"/><text x="200" y="24.9" text-anchor="middle" font-size="7.5" fill="#fde68a">3.26%</text>
+<circle cx="340" cy="58.6" r="3" fill="#fbbf24"/><text x="340" y="49.6" text-anchor="middle" font-size="7.5" fill="#fde68a">2.82%</text>
+<circle cx="480" cy="62.0" r="3" fill="#fbbf24"/><text x="480" y="53.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.76%</text>
+<circle cx="620" cy="61.4" r="3" fill="#fbbf24"/><text x="620" y="52.4" text-anchor="middle" font-size="7.5" fill="#fde68a">2.77%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="292.1 22.1" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="0.3 313.8" stroke-dashoffset="-292.1" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="21.7 292.4" stroke-dashoffset="-292.4" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">93%</text>
+</svg>
+        <div class="ownership-legend">
+<div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp; 93.0% (mostly large index and active managers)</div>
+<div><span class="dot" style="background:#fbbf24;"></span>Insiders &asymp; 0.10%</div>
+<div><span class="dot" style="background:#2dd4bf;"></span>Retail and other &asymp; 6.9%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Basic shares fell from 1,513M (Dec 2021) to 1,305M (Sep 2026), -13.7%, and the YoY reduction was still -1.0% in Q1 FY2027 (S&amp;P Global; all split-adjusted). Buybacks were $936m in Q1 FY2027 and total capital returns were $3.79B over the last twelve months. The quarterly dividend is $0.23 ($0.92 annualised, ~0.6% yield) after 16 consecutive years of increases (S&amp;P Global); the FY2026 dividend per share was $0.80. Note that net share count reduction is smaller than gross buybacks because of stock compensation (tax-withholding payments were $239m in Q1 FY2027).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> KLA has no founder or controlling shareholder; it is run by professional management (CEO Rick Wallace) and owned ~93% by institutions. S&amp;P Global shows insider ownership of ~0.10%, which scores 0 on the Martinero band (below 1% and no verified employee ownership plan of ~5% or more). Equity awards and an employee stock purchase plan exist but I did not verify employee ownership as a share of the company, so no credit is given. The largest holders are, as far as I know, the big index managers; I did not verify a current top-holder list for this page.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; leverage:</b> at Sep 30, 2026 KLA held $1.53B cash and $3.21B marketable securities against $5.72B long-term debt (plus a small current portion), total assets of $18.4B and stockholders&rsquo; equity of $6.5B; at Jun 30, 2026 net debt was $1.25B or 0.2x EBITDA. Interest cover is ~20x. Book equity is small because KLA has repurchased far more stock than it has issued, which is also why ROE (87.5%) and ROIC (66.8%) look extreme; both are accurate arithmetic but reflect leverage and buybacks, not just operating strength.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2022-26, June fiscal years). Criterion #14 compares FY2026 gross margin (gross profit / revenue) with FY2023&rsquo;s.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>KLA</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+10.2% &mdash; $9.2B (FY2022) &rarr; $13.6B (FY2026); FY2024 was a -6.5% down year in the wafer-equipment downturn, FY2025 +23.9%, FY2026 +11.7% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+11.6% &mdash; GAAP operating income $3.65B &rarr; $5.66B; margin expansion helped but did not lift it past 15% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>41.7% GAAP operating margin in FY2026 (45.0% in Q1 FY2027); gross margin 61.3% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+5.8% &mdash; FCF $3.0B &rarr; $3.8B; FY2026 FCF was flat on FY2025 ($3,767m vs $3,747m) because inventory and receivables built ahead of the growth ramp (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear #1 in semiconductor process control (inspection and metrology); industry trackers commonly put its share at roughly half of the segment, an estimate not verified on this page (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; a concentrated oligopoly: KLA leads, with Applied Materials, Hitachi High-Tech, ASML (e-beam), Onto Innovation, Lasertec and others holding niches. Judgment call: no verified top-N share table (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 66.8% vs WACC 12.0% (S&amp;P Global via stockanalysis.com), a 54.8pp spread. ROIC is inflated by a small book-equity base after years of buybacks (equity $6.5B vs $206B market cap), but it clears any reasonable hurdle (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>0.2x (Jun 2026: total debt $6.15B less cash and securities $4.90B = $1.25B net debt on FY2026 EBITDA of ~$6.05B). Sep 2026 cash and securities were $4.74B; long-term debt $5.72B (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>66.5% (FY2026); path 82% / 83% / 83% / 75% / 67%. TTM through Sep 2026 is higher (FCF $4.04B per KLA vs GAAP EBIT ~$6.2B, ~65%) because of a working-capital build (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 39.5x vs FY22-26 June-year-end average 37.0x (ratio 1.07). The average is lifted by FY2026 (81.6x at the Jun-30 peak price); on forward P/E (~28.9x vs ~31.9x) the ratio would be ~0.91 (3/5). Scored on trailing GAAP (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Basic shares 1,513M (Dec 2021) &rarr; 1,305M (Sep 2026), -13.7% (split-adjusted); buybacks of $936m in Q1 FY2027 alone (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders hold ~0.10% (S&amp;P Global); no founder or controlling holder, and no verified broad employee ownership plan at the ~5% level. 93% institutional (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.8% of revenue in FY2026 ($376m); 2.8-3.3% every year FY22-26. Q1 FY2027 capex stepped up to $195m (4.7% of revenue) on capacity additions (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (revenue minus cost of revenues, reported by KLA). 59.81% (FY2023) &rarr; 61.30% (FY2026), +1.49pp &mdash; margin rising, so Met. EBIT margin rose even more (38.06% &rarr; 41.69%) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13=7.8 &middot; #2 3&times;11=6.6 &middot; #3 5&times;10=10.0 &middot; #4 2&times;8=3.2 &middot; #5 5&times;7=7.0 &middot; #6 4&times;6=4.8 &middot; #7 5&times;10=10.0 &middot; #8 4&times;6=4.8 &middot; #9 3&times;8=4.8 &middot; #10 2&times;8=3.2 &middot; #11 4&times;4=3.2 &middot; #12 0&times;5=0.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0. Total 74.4 / 105 = <b>71/100</b>. Criteria met: 8/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage; the segment lead is clear but the figure is an industry estimate); #7 uses third-party ROIC/WACC estimates; #10 uses trailing GAAP P/E at June year-end prices versus today&rsquo;s price, which is distorted by the FY2026 peak; #12 gets 0 because no employee ownership at the ~5% level was verified.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Best-in-class economics: gross margin 60-62% for five years, GAAP operating margin 41.7% (45.0% in the latest quarter), ROIC far above WACC, net debt only 0.2x EBITDA and capex under 3.5% of revenue. KLA is a clear #1 in a concentrated niche with a recurring services stream, the share count is down ~14% since 2021 and the dividend has grown for 16 years. Momentum is improving (YoY growth +28.9% in Q1 FY2027; December-quarter guide +43% at the midpoint), the September quarter beat the guidance midpoint on every key metric, and the shares are about 49% below their June peak, with forward P/E of ~29x versus ~32x for its own FY-end average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The business is cyclical and the stock is volatile (beta 1.45, -9.6% in a day on Oct 22): FY2024 revenue fell 6.5%, 4-year revenue and EBIT CAGRs are only 10-12%, and FCF CAGR is just 5.8% with FY2026 FCF flat despite higher earnings, because inventory ($4.09B) and capex are rising. Valuation still depends on the growth ramp: trailing GAAP P/E of ~39.5x is above the 5-year average of 37.0x and forward ~29x assumes consensus EPS growth. Demand is tied to AI-related capex, supply-chain bottlenecks and export controls on China, and customer concentration among a handful of chipmakers. Several inputs are third-party or judgment: market share, ROIC/WACC and the consensus targets.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> KLA Corporation Q1 FY2027 earnings release (Oct 28, 2026; PR Newswire via TradingView) and investor-relations press-release list (ir.kla.com); stockanalysis.com (S&amp;P Global Market Intelligence) for annual and quarterly financials, ratios, statistics, price history (daily closes to Oct 30, 2026), shares, ownership and dividends; MarketBeat, Yahoo Finance and Morningstar quotes (via search summaries) for the 52-week range, market cap and analyst consensus; WallStreetNumbers (year-end unadjusted-for-dividends, split-adjusted closes); TheFly price-target headlines (via stockanalysis.com); Investing.com and Simply Wall St coverage of the October 2026 sell-off; Reuters via search summary. Year-end prices are split-adjusted but not dividend-adjusted. WACC, ROIC, market share and consensus targets are third-party or approximate and flagged as such. Prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">KLA Corporation &mdash; Nasdaq, USD, split-adjusted (10-for-1 on Jun 11, 2026) but not dividend-adjusted. Dec 31 year-end closes 2021-2025 plus the Oct 30, 2026 close. KLA&rsquo;s fiscal year ends June; the chart uses calendar year-ends for comparability with other pages.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">KLA Corporation &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">Strong compounding followed by a sharp reversal: from $43.01 (Dec 2021) to $121.51 (Dec 2025), then a spike to a $301.37 close on Jun 30, 2026 (intraday high $307.37) and a ~48% fall by Oct 30 as chip-equipment stocks sold off. The 52-week range is $107.20 &ndash; 307.37. The dashed line is the straight-line annualised CAGR between the Dec 2021 point and today, computed over five years as on other pages; the actual span is ~4.8 years.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="146.3" x2="680" y2="146.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="112.5" x2="680" y2="112.5" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.8" x2="680" y2="78.8" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="45" x2="680" y2="45" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,143.04 L 172.8,147.60 L 299.6,130.04 L 426.4,125.85 L 553.2,75.57 L 680.0,44.29 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="143.04" x2="680.0" y2="44.29" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +29.7%</text>
+<path d="M 46.0,143.04 L 172.8,147.60 L 299.6,130.04 L 426.4,125.85 L 553.2,75.57 L 680.0,44.29" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="143.04" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="133.04" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$43.01</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="147.60" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="164.60" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$37.70</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="130.04" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="120.04" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$58.13</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="125.85" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="115.85" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$63.01</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="75.57" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="65.57" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$121.51</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="44.29" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="34.29" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$157.91</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The CAGR (+29.7%/yr, price only, excluding dividends of ~$0.80/share in FY2026) is measured from the Dec 2021 close and is flattered by the 2025-26 rally; from the June 30, 2026 close ($301.37) the shares are down about 48%. Year-end closes are from WallStreetNumbers/stockanalysis.com and are split-adjusted but not dividend-adjusted; the Oct 30, 2026 close ($157.91) is from stockanalysis.com. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

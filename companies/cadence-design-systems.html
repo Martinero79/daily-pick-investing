@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cadence Design Systems — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/cadence-design-systems.html">
+<meta property="og:title" content="Cadence Design Systems — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cadence Design Systems — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Cadence Design Systems</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: CDNS</div>
+    <div class="badge">FY = calendar year (ends on the Saturday nearest Dec 31; FY2021 ended Jan 1, 2022)</div>
+    <div class="badge">HQ: San Jose, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">No dividend</div>
+    <div class="badge warn">~21% Below 52-Wk High &mdash; Q3 2026 Beat and Guidance Raised; Record $8.2B Backlog</div>
+  </div>
+
+  <div class="price">$327.89</div>
+  <div class="price-sub">Oct 30, 2026 close (Nasdaq, USD) &middot; Market cap &asymp; $90B (274.4M shares) &middot; 52-wk range $262.75 &ndash; 416.69 (high Jun 2, 2026) &middot; Beta 1.13 &middot; Analyst consensus: Strong Buy (24 analysts), avg PT $411.76 (+26%) &middot; Next report (Q4 2026): around mid/late Feb 2027 (date not yet confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Cadence and Synopsys are the two largest suppliers of electronic design automation (EDA) software, the tools engineers use to design and verify chips and, increasingly, whole electronic systems; Siemens EDA is the third full-line vendor. Core EDA was 69% of Q3 2026 revenue, semiconductor IP 15% and System Design and Analysis 16%. No verified market-share percentage is used on this page.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in US dollars. Cadence&rsquo;s fiscal year is a 52/53-week year ending near Dec 31 (FY2021 had 53 weeks and ended Jan 1, 2022). &ldquo;EBIT / Op. Income&rdquo; is <b>GAAP income from operations</b> as reported by Cadence (FY2022 and FY2023 are computed from the reported GAAP margins of 30.1% and 30.6%, so they are approximate to ~$1m); it is after stock-based compensation, acquired-intangible amortisation, restructuring and a $128.5m FY2025 legal settlement. Non-GAAP figures are Cadence&rsquo;s own and are labelled. Free cash flow is operating cash flow minus capex. Quarterly operating income in Section 2 is S&amp;P Global&rsquo;s standardised figure, which excludes restructuring and one-off items.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$5.30B</div>
+      <div class="sub">+14.1% YoY; Q3 2026 +22.0%</div>
+      <div class="note">4-yr CAGR FY21-25 is +15.4%. Growth is accelerating: FY2026 guidance is $6.39-6.42B (about +21%), helped by acquisitions and 18% recurring-revenue growth in Q3.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">GAAP Operating Margin</div>
+      <div class="val" style="color:#34d399;">28.2%</div>
+      <div class="sub">FY2025; non-GAAP 44.6%</div>
+      <div class="note">GAAP margin is down from 30.6% in FY2023 on amortisation, acquisition and restructuring costs; Q3 2026 GAAP margin was 26.2% (non-GAAP 44.1%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">17.1% vs 10.2%</div>
+      <div class="sub">S&amp;P Global estimates</div>
+      <div class="note">Third-party figures. ROIC was 35.9% in FY2022 and fell as 2026 acquisitions (~$2.1B cash paid in 9M 2026) enlarged the capital base.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">0.55x</div>
+      <div class="sub">Sep 2026: net debt $1.18B</div>
+      <div class="note">Debt $2.63B less cash $1.45B; was net cash of $489m at end-2025 before the acquisitions. Interest cover ~14.5x (S&amp;P).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">71/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A high-quality, high-growth franchise (duopoly-like industry, 106% FCF conversion, 15%+ growth, low capex) held back by a premium valuation, falling gross margin, negligible insider ownership and a slower FCF CAGR.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="246.8 67.3" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.3 246.8" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+<text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/14</text><text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+</svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 criteria fully met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, market position (#2 co-leader), concentration, ROIC vs WACC, net debt/EBITDA, FCF conversion, entry multiple vs own history (ratio 0.93), flat share count and capex intensity</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; FCF CAGR (+11.2%), insider ownership (~0.3%) and gross-margin stability (-3.21pp over three years)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Cadence Design Systems, based in San Jose, California, sells the software (and some emulation hardware) that engineers use to design, simulate and verify integrated circuits, circuit boards and, via its System Design and Analysis business, whole electronic systems. Chipmakers, hyperscalers, automakers and aerospace firms license it on multi-year terms, which is why revenue is highly recurring: 18% recurring-revenue growth in Q3 2026, a record backlog of $8.2B and $4.2B expected to be recognised over the next 12 months. Revenue has grown every year at 11-19% (FY2025 $5.30B, +14.1%) and growth has accelerated in 2026 to +18.7%, +24.2% and +22.0% in the first three quarters, with Cadence guiding to about +21% for the year; the company points to AI-driven chip designs, record hardware sales and growing demand for its IP. Profitability is high but looks lower on a GAAP basis: GAAP operating margin was 28.2% in FY2025 (non-GAAP 44.6%) because of stock compensation (about 9% of revenue), amortisation and acquisition costs, and it dipped to 26.2% in Q3 2026. Gross margin has slipped from 89.6% (FY2022) to 86.4% (FY2025), the main blemish on the scorecard. The balance sheet moved from net cash to net debt of $1.18B in 2026 after roughly $2.1B of acquisitions. The shares are far from cheap: a trailing GAAP P/E of 65x (about 35x forward on non-GAAP-style consensus), though that is below the company&rsquo;s own FY-end average of 70x. After the Q3 report the stock rose to about $343 and then gave back 4.3% on Oct 30 to $327.89, 21% below its June high.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>GAAP vs. non-GAAP</b> &mdash; Cadence&rsquo;s own headline margins and EPS are non-GAAP (44.1% margin, $2.11 EPS in Q3 2026) and exclude ~$0.53 per quarter of stock compensation plus amortisation and restructuring; this page scores on GAAP, which is why the margin looks about 15 points lower. (2) <b>Acquisitions and the 53-week year</b> &mdash; FY2021 had 53 weeks, and 2026 growth is partly acquired (goodwill rose from $2.7B to $4.9B in nine months), so 2026 organic growth is lower than the headline +22%. (3) <b>Legal matters</b> &mdash; FY2025 includes a $128.5m charge tied to the July 2025 settlements with the U.S. Department of Justice and Bureau of Industry and Security (export controls); China was 16% of Q3 2026 revenue. Estimates, ROIC/WACC and the market-share call are third-party or judgment and are flagged as such.
+  </div>
+
+  <div class="bignum-corner">CDNS</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (52/53-week fiscal years ending near Dec 31), $ millions. Op. Income is GAAP income from operations; FCF = operating cash flow minus capex. FY2025 operating income includes a $128.5m legal charge.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. Revenue has compounded at 15.4% a year; GAAP EBIT grew faster (17.6%) as the margin rose from 26.1% to the 29-31% range; FCF grew more slowly (11.2%), with a dip in FY2024 (working capital and tax timing) and a strong FY2025 ($1,587m, 106% of EBIT).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP income from operations)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="203.3" x2="840" y2="203.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.3" text-anchor="end" font-size="11" fill="#64748b">1bn</text>
+<line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">2bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">3bn</text>
+<line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="56.7" x2="840" y2="56.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.7" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">6bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="130.4" width="30" height="109.6" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="125.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,988</text>
+<rect x="123.0" y="211.4" width="30" height="28.6" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="206.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">781</text>
+<rect x="161.0" y="202.0" width="30" height="38.0" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="197.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,036</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2021</text>
+<rect x="241.0" y="109.4" width="30" height="130.6" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="104.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,562</text>
+<rect x="279.0" y="200.7" width="30" height="39.3" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="195.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,072</text>
+<rect x="317.0" y="199.0" width="30" height="41.0" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="194.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,119</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="397.0" y="90.0" width="30" height="150.0" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="85.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,090</text>
+<rect x="435.0" y="194.1" width="30" height="45.9" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="189.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,251</text>
+<rect x="473.0" y="194.3" width="30" height="45.7" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="189.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,247</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="553.0" y="69.8" width="30" height="170.2" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="64.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,641</text>
+<rect x="591.0" y="190.5" width="30" height="49.5" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="185.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,351</text>
+<rect x="629.0" y="199.0" width="30" height="41.0" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="194.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,118</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="709.0" y="45.8" width="30" height="194.2" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="40.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">5,297</text>
+<rect x="747.0" y="185.3" width="30" height="54.7" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="180.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,492</text>
+<rect x="785.0" y="181.8" width="30" height="58.2" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="176.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,587</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+15.4%</div>
+      <div class="sub">$2.99B &rarr; $5.30B &mdash; clears the 15% bar; FY2021 had 53 weeks</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+17.6%</div>
+      <div class="sub">GAAP $781m &rarr; $1,492m &mdash; clears 15% on a GAAP basis</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#fbbf24;">+11.3%</div>
+      <div class="sub">$1.04B &rarr; $1.59B &mdash; below the bar; FY2024 dipped to $1.12B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin Trend &mdash; GAAP, % of revenue</div>
+    <div class="chart-sub">Gross margin fell from ~89.6% to ~86% between FY2023 and FY2024 (more hardware and IP revenue, plus acquired-business mix) and has stayed there; GAAP operating margin has held 29-31% since FY2022, dipping to 28.2% in FY2025 (legal charge, amortisation) and 26.2% in Q3 2026.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90.0" x2="690" y2="90.0" stroke="#263049" stroke-width="1"/>
+<text x="2" y="93.0" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="55.5" font-size="7.5" fill="#64748b">50%</text>
+<line x1="30" y1="15.0" x2="690" y2="15.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="18.0" font-size="7.5" fill="#64748b">100%</text>
+<polyline points="60,22.7 205,22.8 350,23.0 495,25.5 640,25.2" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+<circle cx="60" cy="22.7" r="3.2" fill="#2dd4bf"/><text x="60" y="15.7" text-anchor="middle" font-size="8" fill="#cbd5e1">89.7%</text>
+<circle cx="205" cy="22.8" r="3.2" fill="#2dd4bf"/><text x="205" y="15.8" text-anchor="middle" font-size="8" fill="#cbd5e1">89.6%</text>
+<circle cx="350" cy="23.0" r="3.2" fill="#2dd4bf"/><text x="350" y="16.0" text-anchor="middle" font-size="8" fill="#cbd5e1">89.4%</text>
+<circle cx="495" cy="25.5" r="3.2" fill="#2dd4bf"/><text x="495" y="18.5" text-anchor="middle" font-size="8" fill="#cbd5e1">86.0%</text>
+<circle cx="640" cy="25.2" r="3.2" fill="#2dd4bf"/><text x="640" y="18.2" text-anchor="middle" font-size="8" fill="#cbd5e1">86.4%</text>
+<polyline points="60,70.4 205,67.4 350,67.0 495,68.2 640,68.8" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="70.4" r="3.2" fill="#34d399"/><text x="60" y="82.4" text-anchor="middle" font-size="8" fill="#cbd5e1">26.1%</text>
+<circle cx="205" cy="67.4" r="3.2" fill="#34d399"/><text x="205" y="79.4" text-anchor="middle" font-size="8" fill="#cbd5e1">30.1%</text>
+<circle cx="350" cy="67.0" r="3.2" fill="#34d399"/><text x="350" y="79.0" text-anchor="middle" font-size="8" fill="#cbd5e1">30.6%</text>
+<circle cx="495" cy="68.2" r="3.2" fill="#34d399"/><text x="495" y="80.2" text-anchor="middle" font-size="8" fill="#cbd5e1">29.1%</text>
+<circle cx="640" cy="68.8" r="3.2" fill="#34d399"/><text x="640" y="80.8" text-anchor="middle" font-size="8" fill="#cbd5e1">28.2%</text>
+<text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text>
+<text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($m)</th><th>Revenue</th><th>Op. Income (GAAP)</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>Dil. EPS ($)</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net cash / debt</th><th>DPS</th></tr>
+    <tr><td>FY2021</td><td>2,988</td><td>781</td><td>26.1%</td><td>89.7%</td><td>696</td><td>2.50</td><td>1,036</td><td>133%</td><td>65</td><td>Net cash 615</td><td>&mdash;</td></tr>
+    <tr><td>FY2022</td><td>3,562</td><td>1,072</td><td>30.1%</td><td>89.6%</td><td>849</td><td>3.09</td><td>1,119</td><td>104%</td><td>123</td><td>Net debt 37</td><td>&mdash;</td></tr>
+    <tr><td>FY2023</td><td>4,090</td><td>1,251</td><td>30.6%</td><td>89.4%</td><td>1,041</td><td>3.82</td><td>1,247</td><td>100%</td><td>102</td><td>Net cash 332</td><td>&mdash;</td></tr>
+    <tr><td>FY2024</td><td>4,641</td><td>1,351</td><td>29.1%</td><td>86.0%</td><td>1,055</td><td>3.85</td><td>1,118</td><td>83%</td><td>143</td><td>Net cash 158</td><td>&mdash;</td></tr>
+    <tr><td>FY2025</td><td>5,297</td><td>1,492</td><td>28.2%</td><td>86.4%</td><td>1,109</td><td>4.06</td><td>1,587</td><td>106%</td><td>142</td><td>Net cash 489</td><td>&mdash;</td></tr>
+    <tr><td>TTM (Sep&rsquo;26)</td><td>6,132</td><td>1,774</td><td>28.9%</td><td>85.7%</td><td>1,381</td><td>5.03</td><td>1,760</td><td>99%</td><td>204</td><td>Net debt 1,181</td><td>&mdash;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">TTM (Sep 2026) = FY2025 plus nine months 2026 minus nine months 2025; TTM gross margin, FCF ($1.76B) and capex ($204m) are S&amp;P Global figures; TTM GAAP operating income ($1,774m) is computed from Cadence&rsquo;s reported figures. FY2021 operating income and FY2024-25 are as reported by Cadence; FY2022-23 are derived from reported GAAP margins. Net income, EPS, FCF, capex and net cash from S&amp;P Global Market Intelligence. Cadence pays no dividend.</div>
+  <div class="footer-note">Source: Cadence Q3 2026 earnings release (Oct 26, 2026, SEC Form 8-K) and Q4/FY2025 release (Feb 2026, Business Wire); Cadence CFO commentary (GAAP margin history); stockanalysis.com (S&amp;P Global Market Intelligence). All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter &amp; Momentum (Q3 2026)</div></div>
+  <div class="sec-sub">Reported Oct 26, 2026 after the close (quarter ended Sep 30, 2026). Calendar quarters; FY = calendar year.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue was $1,633m (+22.0% YoY, +3.1% QoQ), with double-digit growth in every product category: Core EDA +20%, semiconductor IP +24% and System Design and Analysis +30%; recurring revenue grew 18%. Non-GAAP EPS was $2.11 (vs $1.93) and above the ~$2.05 consensus, but GAAP EPS was flat at $1.05 and GAAP operating margin fell to 26.2% from 31.8% (non-GAAP 44.1% vs 47.6%) on higher amortisation (4.9% of revenue vs 1.9%), restructuring and acquisition costs. Backlog reached a record $8.2B. Cadence used $400m on buybacks in the quarter and the board added $2.5B to the authorisation. Free cash flow was $362m (22% of revenue), below Q2&rsquo;s $582m. Cash paid for acquisitions was $2.14B in the first nine months, funded from cash and a revolver, and net debt is now $1.18B.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Revenue has risen sequentially in each of the last six quarters, from $1,242m (Q1&rsquo;25) to $1,633m. YoY growth: Q4&rsquo;24 +26.9%, Q1&rsquo;25 +23.1%, Q2&rsquo;25 +20.3%, Q3&rsquo;25 +10.2%, Q4&rsquo;25 +6.2%, Q1&rsquo;26 +18.7%, Q2&rsquo;26 +24.2%, Q3&rsquo;26 +22.0%. The Q3&rsquo;25 and Q4&rsquo;25 slowdown reflected tough comparisons and hardware timing.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="56.9" width="60" height="73.1" fill="#2dd4bf"/><text x="52.5" y="51.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,356</text><text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107.5" y="63.1" width="60" height="66.9" fill="#2dd4bf"/><text x="137.5" y="58.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,242</text><text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="192.5" y="61.3" width="60" height="68.7" fill="#2dd4bf"/><text x="222.5" y="56.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,275</text><text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="277.5" y="57.8" width="60" height="72.2" fill="#2dd4bf"/><text x="307.5" y="52.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,339</text><text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="362.5" y="52.4" width="60" height="77.6" fill="#2dd4bf"/><text x="392.5" y="47.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,440</text><text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="447.5" y="50.6" width="60" height="79.4" fill="#2dd4bf"/><text x="477.5" y="45.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,474</text><text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="532.5" y="44.6" width="60" height="85.4" fill="#2dd4bf"/><text x="562.5" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,584</text><text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="617.5" y="42.0" width="60" height="88.0" fill="#2dd4bf"/><text x="647.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,633</text><text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (S&amp;P standardised) &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">S&amp;P Global&rsquo;s operating income excludes restructuring and one-off items, so it differs from Cadence&rsquo;s GAAP figure (Q3&rsquo;26 GAAP income from operations was $428.7m, 26.2%; S&amp;P shows $472.5m). It is used here only for the eight-quarter trend: roughly flat at $440-470m for a year while revenue grew, as amortisation and costs from acquisitions and AI investment rose.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating Income (S&amp;P standardised), $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="43.5" width="60" height="86.5" fill="#60a5fa"/><text x="52.5" y="38.5" text-anchor="middle" font-size="9" fill="#cbd5e1">465</text><text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107.5" y="62.5" width="60" height="67.5" fill="#60a5fa"/><text x="137.5" y="57.5" text-anchor="middle" font-size="9" fill="#cbd5e1">363</text><text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="192.5" y="60.4" width="60" height="69.6" fill="#60a5fa"/><text x="222.5" y="55.4" text-anchor="middle" font-size="9" fill="#cbd5e1">374</text><text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="277.5" y="42.6" width="60" height="87.4" fill="#60a5fa"/><text x="307.5" y="37.6" text-anchor="middle" font-size="9" fill="#cbd5e1">470</text><text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="362.5" y="42.0" width="60" height="88.0" fill="#60a5fa"/><text x="392.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">473</text><text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="447.5" y="48.5" width="60" height="81.5" fill="#60a5fa"/><text x="477.5" y="43.5" text-anchor="middle" font-size="9" fill="#cbd5e1">438</text><text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="532.5" y="45.7" width="60" height="84.3" fill="#60a5fa"/><text x="562.5" y="40.7" text-anchor="middle" font-size="9" fill="#cbd5e1">453</text><text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="617.5" y="42.2" width="60" height="87.8" fill="#60a5fa"/><text x="647.5" y="37.2" text-anchor="middle" font-size="9" fill="#cbd5e1">472</text><text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>$m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Revenue</td><td>1,356</td><td>1,242</td><td>1,275</td><td>1,339</td><td>1,440</td><td>1,474</td><td>1,584</td><td>1,633</td></tr>
+    <tr><td>Revenue YoY</td><td>+26.9%</td><td>+23.1%</td><td>+20.3%</td><td>+10.2%</td><td>+6.2%</td><td>+18.7%</td><td>+24.2%</td><td>+22.0%</td></tr>
+    <tr><td>Gross margin</td><td>83.8%</td><td>86.6%</td><td>85.6%</td><td>86.4%</td><td>86.9%</td><td>85.5%</td><td>84.9%</td><td>85.6%</td></tr>
+    <tr><td>Operating income (S&amp;P)</td><td>465</td><td>363</td><td>374</td><td>470</td><td>473</td><td>438</td><td>453</td><td>472</td></tr>
+    <tr><td>Operating margin (S&amp;P)</td><td>34.3%</td><td>29.3%</td><td>29.4%</td><td>35.1%</td><td>32.8%</td><td>29.7%</td><td>28.6%</td><td>28.9%</td></tr>
+    <tr><td>Diluted EPS (GAAP, $)</td><td>1.24</td><td>1.00</td><td>0.59*</td><td>1.05</td><td>1.42</td><td>1.23</td><td>1.33</td><td>1.05</td></tr>
+    <tr><td>Free cash flow</td><td>404</td><td>464</td><td>334</td><td>277</td><td>512</td><td>307</td><td>582</td><td>362</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">*Q2&rsquo;25 EPS includes a $128.5m legal charge. Gross margin = revenue less cost of product, maintenance and services (S&amp;P Global). Free cash flow is operating cash flow minus capex (S&amp;P Global).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, raised):</b> revenue $6.387-6.417B (about +21%, from $6.26-6.34B), GAAP operating margin 28.2-29.2%, non-GAAP 44.2-45.2%, GAAP EPS $4.84-4.90 and non-GAAP EPS $8.37-8.43. Q4 implies GAAP operating margin of 30-31% and non-GAAP EPS of $2.19-2.25. Guidance is management&rsquo;s own.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Stock reaction:</b> the shares rose roughly 6-7% on Oct 27 to about $343 (sources differ on the exact close) and closed at $342.75 on Oct 29, then fell 4.3% to $327.89 on Oct 30. Analysts raised price targets after the print; the average target is ~$412 (24 analysts).
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Strategic notes:</b> Cadence launched Maestro, a set of domain-specific AI models for chip and system design, and reports more than 100 active customer engagements for its AI &ldquo;Super Agents&rdquo;; hardware had another record quarter. These are management claims. Risks: customer concentration in a few chipmakers and hyperscalers, export-control exposure (China was 16% of Q3 revenue), and the integration of the 2026 acquisitions.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on GAAP diluted EPS at each fiscal year-end versus today. Cadence is expensive on every measure; the question is whether it is expensive relative to its own history.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~65.2x = $327.89 / TTM GAAP EPS of $5.03) is 0.93x of the FY2021-25 year-end average (70.4x). FY-end P/Es (S&amp;P Global via stockanalysis.com): 74.2x, 51.9x, 71.2x, 78.1x, 76.7x. FY2021 uses the price at the fiscal year-end of Jan 1, 2022 ($186.35 per S&amp;P).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>5-year average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="35.9" width="70" height="74.1" fill="#60a5fa"/><text x="55" y="30.9" text-anchor="middle" font-size="9" fill="#cbd5e1">74.2x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="58.1" width="70" height="51.9" fill="#60a5fa"/><text x="150" y="53.1" text-anchor="middle" font-size="9" fill="#cbd5e1">51.9x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="38.9" width="70" height="71.1" fill="#60a5fa"/><text x="245" y="33.9" text-anchor="middle" font-size="9" fill="#cbd5e1">71.2x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="32.0" width="70" height="78.0" fill="#60a5fa"/><text x="340" y="27.0" text-anchor="middle" font-size="9" fill="#cbd5e1">78.1x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="33.3" width="70" height="76.7" fill="#60a5fa"/><text x="435" y="28.3" text-anchor="middle" font-size="9" fill="#cbd5e1">76.7x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="44.9" width="70" height="65.1" fill="#2dd4bf"/><text x="530" y="39.9" text-anchor="middle" font-size="9" fill="#cbd5e1">65.2x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="39.6" x2="690" y2="39.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="35.6" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 70.4x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (S&amp;P Global, next-12-month consensus, largely non-GAAP) is ~34.8x versus a FY21-25 average of ~45.1x (about 0.77 of its own average); PEG is ~2.0. The scorecard uses trailing GAAP (ratio 0.93 = 3/5). The forward multiple depends on consensus EPS growth of ~17-18% a year (S&amp;P) and on non-GAAP earnings that exclude stock compensation. Average analyst target $411.76 implies ~26% upside.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light: capex was 2.2-3.5% of revenue every year (S&amp;P Global). TTM capex is $204m (about 3.3% of TTM revenue) as Cadence builds out hardware cloud and facilities. Operating leases and capitalised software are not included.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="125.9" width="60" height="34.1" fill="#60a5fa"/><text x="60" y="120.9" text-anchor="middle" font-size="8" fill="#cbd5e1">65</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="170" y="95.5" width="60" height="64.5" fill="#60a5fa"/><text x="200" y="90.5" text-anchor="middle" font-size="8" fill="#cbd5e1">123</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="310" y="106.5" width="60" height="53.5" fill="#60a5fa"/><text x="340" y="101.5" text-anchor="middle" font-size="8" fill="#cbd5e1">102</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="450" y="85.0" width="60" height="75.0" fill="#60a5fa"/><text x="480" y="80.0" text-anchor="middle" font-size="8" fill="#cbd5e1">143</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="590" y="85.5" width="60" height="74.5" fill="#60a5fa"/><text x="620" y="80.5" text-anchor="middle" font-size="8" fill="#cbd5e1">142</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<polyline points="60,62.0 200,30.0 340,54.2 480,39.8 620,49.7" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="62.0" r="3" fill="#fbbf24"/><text x="60" y="53.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.19%</text>
+<circle cx="200" cy="30.0" r="3" fill="#fbbf24"/><text x="200" y="21.0" text-anchor="middle" font-size="7.5" fill="#fde68a">3.46%</text>
+<circle cx="340" cy="54.2" r="3" fill="#fbbf24"/><text x="340" y="45.2" text-anchor="middle" font-size="7.5" fill="#fde68a">2.50%</text>
+<circle cx="480" cy="39.8" r="3" fill="#fbbf24"/><text x="480" y="30.8" text-anchor="middle" font-size="7.5" fill="#fde68a">3.07%</text>
+<circle cx="620" cy="49.7" r="3" fill="#fbbf24"/><text x="620" y="40.7" text-anchor="middle" font-size="7.5" fill="#fde68a">2.68%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="284.3 29.8" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.1 313.1" stroke-dashoffset="-284.3" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="28.7 285.4" stroke-dashoffset="-285.4" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">91%</text>
+</svg>
+        <div class="ownership-legend">
+<div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp; 90.5%</div>
+<div><span class="dot" style="background:#fbbf24;"></span>Insiders &asymp; 0.34%</div>
+<div><span class="dot" style="background:#2dd4bf;"></span>Retail and other &asymp; 9.2%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Basic shares were 273M in Q4 2021 and 274M in Q3 2026 (+0.4%); the YoY change is +0.3% (S&amp;P). Cadence repurchased $800m of stock in the first nine months of 2026 ($400m in Q3) and the board just added $2.5B to the authorisation, but stock-based compensation (~$430m in 9M 2026) and tax-withholding offsets keep the count flat. Cadence pays no dividend.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> Cadence has no founder or controlling holder. CEO Anirudh Devgan leads a professional management team; S&amp;P Global shows insiders at ~0.34% and institutions at ~90.5%. That is below the 1% line, and I could not verify a broad employee ownership plan at the ~5% level, so criterion 12 scores 0. I did not verify a current top-holder list.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; leverage:</b> at Sep 30, 2026 Cadence held $1.45B cash against $2.63B of debt ($150m revolver, $0.50B current notes, $1.98B long-term), equity of $6.88B, goodwill of $4.93B and acquired intangibles of $1.79B. Net debt/EBITDA is ~0.55x on TTM GAAP EBITDA (~$2.16B); S&amp;P shows 0.52x. Inventories rose to $449m from $304m at end-2025 (emulation hardware). Leverage is modest, but the shift from $489m net cash at end-2025 to $1.18B net debt came in nine months.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25, GAAP). Criterion #14 compares FY2025 gross margin with FY2022&rsquo;s.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Cadence</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+15.4% &mdash; $2.99B (FY2021, 53 weeks) &rarr; $5.30B (FY2025); steady 13-19% growth every year (FY2025 +14.1%). TTM growth is faster, +22% in Q3 2026 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+17.6% &mdash; GAAP income from operations $781m &rarr; $1,492m. GAAP margin is after stock-based compensation, amortisation and acquisition costs (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>28.2% GAAP operating margin in FY2025 (non-GAAP 44.6%); 26.1-30.6% across FY21-25. Q3 2026 GAAP margin 26.2% after acquisitions (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+11.3% &mdash; FCF $1.04B &rarr; $1.59B; FY2024 dipped to $1.12B (-10%) before FY2025 rebounded +42%. FCF is before large stock-based compensation (~$0.45B+ a year) (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Co-leader of electronic design automation (EDA) with Synopsys; Siemens EDA is the third full-line vendor. Cadence is a strong #2 by revenue as far as I know; no verified market-share percentage (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; three vendors (Synopsys, Cadence, Siemens EDA) supply the large majority of leading-edge chip design software; high switching costs. Judgment call: no verified top-N share table (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 17.1% vs WACC 10.2% (S&amp;P Global), a +6.8pp spread. ROIC has fallen from 35.9% (FY2022) as the 2026 acquisitions added ~$2.2B of goodwill and intangibles before their earnings arrive (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~0.55x at Sep 30, 2026: debt $2.63B (revolver $150m, notes $2.48B) less cash $1.45B = $1.18B net debt on TTM GAAP EBITDA of ~$2.16B. Net cash of $489m at end-2025 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>106% (FY2025: FCF $1,587m / GAAP EBIT $1,492m); 5-year path 133% / 104% / 100% / 83% / 106%. High partly because stock-based compensation is non-cash (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 65.2x vs FY21-25 year-end average 70.4x (ratio 0.93); forward P/E ~34.8x vs ~45.1x average (0.77). Scored on trailing GAAP. All of these are very high multiples in absolute terms (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Basic shares 273M (Q4 2021) &rarr; 274M (Q3 2026), +0.4%: buybacks ($800m in 9M 2026, $400m in Q3) roughly offset stock compensation. Flat, not shrinking (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~0.34% (S&amp;P Global); no founder or controlling holder; ~90.5% institutional. No verified employee ownership plan at the ~5% level (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.7% of revenue in FY2025 ($142m); 2.2-3.5% every year FY21-25. Software-led, with hardware emulation systems adding some inventory (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (revenue minus cost of product, maintenance and services, S&amp;P Global). 89.57% (FY2022) &rarr; 86.36% (FY2025), -3.21pp &mdash; worse than the -2.5pp floor, so 0/5. Drivers: more hardware and IP/system mix; GAAP operating margin held 29-31% (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 4&times;13=10.4 &middot; #2 4&times;11=8.8 &middot; #3 5&times;10=10.0 &middot; #4 3&times;8=4.8 &middot; #5 4&times;7=5.6 &middot; #6 4&times;6=4.8 &middot; #7 3&times;10=6.0 &middot; #8 4&times;6=4.8 &middot; #9 5&times;8=8.0 &middot; #10 3&times;8=4.8 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 5&times;4=4.0 &middot; #14 0&times;5=0.0. Total 74.4 / 105 = <b>71/100</b>. Criteria met: 11/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses third-party ROIC/WACC estimates; #2 and #3 use GAAP, which is much lower than Cadence&rsquo;s non-GAAP margin (44.6%) but still passes; #9 benefits from non-cash stock compensation; #12 gets 0 because no 5%+ employee ownership plan was verified.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Durable, recurring revenue (record $8.2B backlog, 18% recurring growth) in a three-vendor industry where Cadence is a co-leader, growth that has accelerated to +22% with guidance raised to about +21% for 2026, GAAP operating margin around 28-31%, FCF at 106% of EBIT in FY2025, capex under 3% of revenue and modest leverage (0.55x). The shares are about 21% below their June high, trailing GAAP P/E (65x) is below the company&rsquo;s 70x FY-end average, and forward P/E (~35x) is well below its ~45x average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation is still very high in absolute terms (65x trailing GAAP, ~15x sales) and the stock needs sustained mid-teens growth. Gross margin has fallen 3.2pp in three years (score 0 on criterion 14), GAAP margin dropped to 26.2% in Q3 2026 on acquisitions, ROIC has halved from its 2022 peak, and FCF CAGR (11.2%) is below the 15% bar. Net debt appeared in 2026 after $2.1B of acquisitions, so integration risk is live. Other risks: customer concentration, export controls and the July 2025 DOJ/BIS settlement obligations (China was 16% of Q3 revenue), and competition from Synopsys and Siemens. ROIC/WACC, market share and consensus targets are third-party or judgment.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Cadence Q3 2026 earnings release (Oct 26, 2026; SEC Form 8-K Exhibit 99.01) and Q4/FY2025 release (Business Wire, Feb 2026); Cadence CFO commentary (GAAP margin history); stockanalysis.com (S&amp;P Global Market Intelligence) for annual and quarterly financials, ratios, statistics, ownership, price history and analyst consensus; Benzinga, GuruFocus, Yahoo Finance, FinanceCharts and IndMoney coverage (via search summaries) for the earnings reaction and 52-week range. Year-end prices are unadjusted closes as listed by S&amp;P Global (FY2021 reflects the fiscal year-end of Jan 1, 2022). WACC, ROIC, market share and consensus targets are third-party or approximate. Prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Cadence Design Systems &mdash; Nasdaq, USD, unadjusted year-end closes (no dividends or splits in the period). 2021-2025 plus the Oct 30, 2026 close.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Cadence Design Systems &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">A 2022 drawdown (to $160.64) was followed by a rally to $300+ by end-2024, then a flat 2025 and a 2026 range of $262.75-416.69. The dashed line is the straight-line annualised CAGR between the FY2021 point and today, computed over five years as on other pages. The 2021 point is the S&amp;P Global price at the Jan 1, 2022 fiscal year-end and may differ slightly from the Dec 31, 2021 exchange close.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="146.3" x2="680" y2="146.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="112.5" x2="680" y2="112.5" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.8" x2="680" y2="78.8" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="45" x2="680" y2="45" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,102.87 L 172.8,113.51 L 299.6,67.27 L 426.4,55.64 L 553.2,50.62 L 680.0,44.29 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="102.87" x2="680.0" y2="44.29" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +12.0%</text>
+<path d="M 46.0,102.87 L 172.8,113.51 L 299.6,67.27 L 426.4,55.64 L 553.2,50.62 L 680.0,44.29" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="102.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="92.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$186.35</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="113.51" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="130.51" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.64</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="67.27" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="57.27" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$272.37</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="55.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="45.64" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$300.46</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="50.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="40.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$312.58</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="44.29" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="34.29" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$327.89</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The CAGR (price only, no dividends) is measured from the FY2021 year-end and is roughly in line with revenue growth; much of the gain came in 2023, when the shares rose ~70%. The Oct 30, 2026 close ($327.89) is from stockanalysis.com. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

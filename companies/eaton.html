@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Eaton Corporation plc — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/eaton.html">
+<meta property="og:title" content="Eaton Corporation plc — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eaton Corporation plc — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Eaton Corporation plc</h1>
+  <div class="badges"><div class="badge">NYSE: ETN</div><div class="badge">FY = Calendar Year</div><div class="badge">HQ: Dublin, Ireland</div><div class="badge">Reports &amp; trades in USD</div><div class="badge warn">~23% Below 52-Wk High &mdash; Q3 Results Due Nov 3; Boyd Thermal Deal Took Net Debt to ~3.1x EBITDA</div></div>
+  <div class="price">$369.97</div>
+  <div class="price-sub">Oct 30, 2026 close (NYSE, USD) &middot; Market cap &asymp; $143.7B (388.4M shares) &middot; 52-wk range $311.92 &ndash; 478.00 &middot; Beta 1.13 &middot; Analyst consensus: Buy (28 analysts), avg PT $485.47 (+31%) &middot; Dividend $1.10/quarter ($4.40 annualised, ~1.2% yield) &middot; Next report (Q3 2026): Nov 3, 2026, before the open</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Eaton is a power-management group: Electrical Americas ($13.3B FY2025 revenue), Electrical Global ($6.8B), Aerospace ($4.2B), Vehicle and eMobility. By revenue its electrical business ranks roughly #3 globally behind Schneider Electric and alongside Siemens Smart Infrastructure and ABB Electrification, and is a top-2 name in North American power distribution and UPS &mdash; an estimate, not a verified market-share figure (see scorecard #5).</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> All figures are in US dollars. &ldquo;Operating income / EBIT&rdquo; is <b>GAAP operating income</b> as standardised by S&amp;P Global; it is after intangible amortisation and acquisition costs, so it is lower than Eaton's own non-GAAP &ldquo;segment margin&rdquo; (23.1% in Q2 2026) and adjusted EPS (Q2 2026: $3.15 vs GAAP $2.11), both of which are shown only where labelled. &ldquo;Free cash flow&rdquo; = operating cash flow minus capex. Q3 2026 has not yet been reported (due Nov 3); the latest reported quarter is Q2 2026.</div>
+  <div class="metrics-row">
+<div class="mcard"><div class="label">Revenue (FY2025)</div><div class="val" style="color:#34d399;">$27.4B</div><div class="sub">+10.3% YoY; Q2 2026 +21.4% YoY</div><div class="note">Q2 2026 growth was 14% organic plus 7% acquisitions (company). 4-yr revenue CAGR FY2021-25 is +8.7%; annual growth has ranged from 5.7% to 11.8% (FY2022-25: 5.7%, 11.8%, 7.3%, 10.3%).</div></div>
+<div class="mcard"><div class="label">Operating Margin (GAAP)</div><div class="val">19.32%</div><div class="sub">FY2025, up from 12.77% in FY2021</div><div class="note">TTM to Jun 2026 slipped to 18.2% as Boyd Thermal amortisation and deal costs arrived (Q2 2026: 16.6%). Gross margin 37.8% in FY2025 vs 32.3% in FY2021.</div></div>
+<div class="mcard"><div class="label">ROIC vs Est. WACC</div><div class="val" style="color:#fbbf24;">10.6% vs 9.3%</div><div class="sub">+1.3pp spread (S&amp;P Global)</div><div class="note">ROIC was 15.8% at FY2025 before the ~$11B of acquisitions swelled invested capital; the current figure is third-party and temporarily depressed.</div></div>
+<div class="mcard"><div class="label">Net Debt / EBITDA</div><div class="val" style="color:#f87171;">3.1x</div><div class="sub">Jun 2026: net debt $20.6B, TTM EBITDA $6.6B</div><div class="note">Was 1.6x at Dec 2025. Debt rose from $10.7B to $21.3B in H1 2026 to fund acquisitions; TTM EBITDA includes only part of Boyd Thermal, so the ratio overstates run-rate leverage. No buybacks planned for 2026.</div></div>
+<div class="mcard" style="border-color:#4c1d95;"><div class="label" style="color:#a78bfa;">Martinero Index</div><div class="val" style="color:#c4b5fd;">55/100</div><div class="sub">Weighted score (see About)</div><div class="note">Strong EBIT and FCF growth, a rising gross margin and clean capex are held back by new leverage, a #3 electrical position, a P/E above its own history and no insider block.</div></div>
+  </div>
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">criteria met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria met</b> &mdash; EBIT CAGR, FCF CAGR, ROIC above WACC (narrowly), share count (flat/down), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR (+8.7%), operating margin (19.3% vs 20% bar), market position (#3), concentration (moderate), leverage (3.1x), FCF conversion (67%), entry multiple (P/E 24% above own average) and insider ownership (0.06%)</div>
+    </div>
+  </div>
+  <div class="narrative">Eaton Corporation plc is an Irish-domiciled power-management company headquartered in Dublin. Its largest and fastest-growing franchise is electrical equipment &mdash; switchgear, busway, UPS, circuit protection and power distribution for data centres, utilities, commercial buildings and industry &mdash; which together made up about 73% of FY2025 revenue. Aerospace (fuel, hydraulic and motion-control systems) added 15%, and Vehicle and eMobility the rest; in 2026 Eaton agreed to separate its Mobility business through a Reverse Morris Trust. Over FY2021-25 revenue grew from $19.6B to $27.4B, GAAP operating income more than doubled from $2.5B to $5.3B as operating margin widened by 6.5 points, and free cash flow rose from $1.6B to $3.6B. The story turned more acquisitive in 2026: roughly $11B of cash acquisitions in the twelve months to June (mainly Boyd Thermal, a liquid-cooling business) lifted net debt to $20.6B and pushed Q2 2026 sales up 21% to a record $8.5B, with 14% organic growth, while GAAP margins dipped on amortisation and deal costs. Backlogs are the bullish datapoint: at June 2026 they were up 33% year on year in Electrical Americas, up 103% in Electrical Global and up 28% in Aerospace. The stock sits about 23% below its 52-week high of $478 after falling about 6% on each of Oct 22 and Oct 30 (no company-specific cause identified in the sources reviewed), ahead of Q3 results on Nov 3.</div>
+  <div class="callout"><b>Three things to keep in mind:</b> (1) <b>GAAP vs adjusted</b> &mdash; this page scores GAAP figures; Eaton's adjusted EPS excludes amortisation, deal and restructuring costs ($1.04 per share in Q2 2026: $3.15 adjusted vs $2.11 GAAP). (2) <b>M&amp;A</b> &mdash; 2026 growth and leverage both include Boyd Thermal, so FY2021-25 CAGRs are mostly organic but TTM figures are not. (3) <b>Pending catalyst</b> &mdash; Q3 2026 results (Nov 3) will update every TTM number here; this page is based on Q2 2026 reported data and the Oct 30 price.</div>
+  <div class="bignum-corner">ETN</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, USD millions (GAAP, standardised by S&amp;P Global Market Intelligence; December year-end). Free Cash Flow = operating cash flow minus capex. TTM = twelve months to June 30, 2026 (Q3 2026 not yet reported).</div>
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Revenue grew every year; operating income grew faster than revenue until FY2025, when FCF stalled at $3.6B because working capital absorbed $0.7B (FY2024 FCF $3.5B). Axis in $ billions; bar labels in $ millions.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (EBIT, GAAP)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="203.3" x2="840" y2="203.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.3" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+<line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="56.7" x2="840" y2="56.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.7" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="96.1" width="30" height="143.9" rx="2" fill="#2dd4bf"/><text x="100.0" y="91.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">19,628</text>
+<rect x="123.0" y="221.6" width="30" height="18.4" rx="2" fill="#60a5fa"/><text x="138.0" y="216.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,507</text>
+<rect x="161.0" y="228.4" width="30" height="11.6" rx="2" fill="#fbbf24"/><text x="176.0" y="223.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,588</text>
+<text x="138.0" y="264" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241.0" y="87.8" width="30" height="152.2" rx="2" fill="#2dd4bf"/><text x="256.0" y="82.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">20,752</text>
+<rect x="279.0" y="217.8" width="30" height="22.2" rx="2" fill="#60a5fa"/><text x="294.0" y="212.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,028</text>
+<rect x="317.0" y="225.8" width="30" height="14.2" rx="2" fill="#fbbf24"/><text x="332.0" y="220.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,935</text>
+<text x="294.0" y="264" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397.0" y="69.9" width="30" height="170.1" rx="2" fill="#2dd4bf"/><text x="412.0" y="64.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">23,196</text>
+<rect x="435.0" y="211.2" width="30" height="28.8" rx="2" fill="#60a5fa"/><text x="450.0" y="206.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,933</text>
+<rect x="473.0" y="219.0" width="30" height="21.0" rx="2" fill="#fbbf24"/><text x="488.0" y="214.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,867</text>
+<text x="450.0" y="264" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553.0" y="57.6" width="30" height="182.4" rx="2" fill="#2dd4bf"/><text x="568.0" y="52.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">24,878</text>
+<rect x="591.0" y="205.7" width="30" height="34.3" rx="2" fill="#60a5fa"/><text x="606.0" y="200.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,673</text>
+<rect x="629.0" y="214.2" width="30" height="25.8" rx="2" fill="#fbbf24"/><text x="644.0" y="209.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,519</text>
+<text x="606.0" y="264" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709.0" y="38.7" width="30" height="201.3" rx="2" fill="#2dd4bf"/><text x="724.0" y="33.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">27,448</text>
+<rect x="747.0" y="201.1" width="30" height="38.9" rx="2" fill="#60a5fa"/><text x="762.0" y="196.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,304</text>
+<rect x="785.0" y="213.9" width="30" height="26.1" rx="2" fill="#fbbf24"/><text x="800.0" y="208.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,553</text>
+<text x="762.0" y="264" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY21-25)</div><div class="val" style="color:#f87171;">+8.7%</div><div class="sub">$19.6B &rarr; $27.4B &mdash; steady high-single-digit growth, below the 15% bar (score 2/5)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+20.6%</div><div class="sub">$2.5B &rarr; $5.3B &mdash; margin expansion from 12.8% to 19.3% did most of the work (score 5/5)</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+22.3%</div><div class="sub">$1.6B &rarr; $3.6B &mdash; off a depressed FY2021 base; FY2025 was flat on FY2024 (score 5/5)</div></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Gross margin rose 5.5 points (32.3% to 37.8%) over FY2021-25 while operating margin widened by 6.5 points. Q1-Q2 2026 gross margin fell to 35.7% and 33.6% as lower-margin acquired revenue and amortisation entered the base.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">20%</text><text x="2" y="18" font-size="7.5" fill="#64748b">40%</text>
+<polyline points="60,29.5 205,27.8 350,21.8 495,18.4 640,19.2" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="29.5" r="3.2" fill="#60a5fa"/><text x="60" y="23.5" text-anchor="middle" font-size="8" fill="#cbd5e1">32.3%</text>
+<circle cx="205" cy="27.8" r="3.2" fill="#60a5fa"/><text x="205" y="21.8" text-anchor="middle" font-size="8" fill="#cbd5e1">33.2%</text>
+<circle cx="350" cy="21.8" r="3.2" fill="#60a5fa"/><text x="350" y="15.8" text-anchor="middle" font-size="8" fill="#cbd5e1">36.4%</text>
+<circle cx="495" cy="18.4" r="3.2" fill="#60a5fa"/><text x="495" y="12.4" text-anchor="middle" font-size="8" fill="#cbd5e1">38.2%</text>
+<circle cx="640" cy="19.2" r="3.2" fill="#60a5fa"/><text x="640" y="13.2" text-anchor="middle" font-size="8" fill="#cbd5e1">37.8%</text>
+<polyline points="60,66.1 205,62.6 350,58.2 495,54.8 640,53.8" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="66.1" r="3.2" fill="#34d399"/><text x="60" y="60.1" text-anchor="middle" font-size="8" fill="#cbd5e1">12.8%</text>
+<circle cx="205" cy="62.6" r="3.2" fill="#34d399"/><text x="205" y="56.6" text-anchor="middle" font-size="8" fill="#cbd5e1">14.6%</text>
+<circle cx="350" cy="58.2" r="3.2" fill="#34d399"/><text x="350" y="52.2" text-anchor="middle" font-size="8" fill="#cbd5e1">17.0%</text>
+<circle cx="495" cy="54.8" r="3.2" fill="#34d399"/><text x="495" y="48.8" text-anchor="middle" font-size="8" fill="#cbd5e1">18.8%</text>
+<circle cx="640" cy="53.8" r="3.2" fill="#34d399"/><text x="640" y="47.8" text-anchor="middle" font-size="8" fill="#cbd5e1">19.3%</text>
+<text x="60" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<text x="205" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<text x="350" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<text x="495" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<text x="640" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+  <table class="datatable">
+<tr><th>FY ($ m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net debt (cash)</th><th>DPS</th></tr>
+<tr><td>FY2021</td><td>19,628</td><td>2,507</td><td>12.8%</td><td>2,144</td><td>$5.34</td><td>1,588</td><td>63.3%</td><td>575</td><td>8,525</td><td>$3.04</td></tr>
+<tr><td>FY2022</td><td>20,752</td><td>3,028</td><td>14.6%</td><td>2,462</td><td>$6.14</td><td>1,935</td><td>63.9%</td><td>598</td><td>8,686</td><td>$3.24</td></tr>
+<tr><td>FY2023</td><td>23,196</td><td>3,933</td><td>17.0%</td><td>3,218</td><td>$8.02</td><td>2,867</td><td>72.9%</td><td>757</td><td>7,331</td><td>$3.44</td></tr>
+<tr><td>FY2024</td><td>24,878</td><td>4,673</td><td>18.8%</td><td>3,794</td><td>$9.50</td><td>3,519</td><td>75.3%</td><td>808</td><td>7,904</td><td>$3.76</td></tr>
+<tr><td>FY2025</td><td>27,448</td><td>5,304</td><td>19.3%</td><td>4,087</td><td>$10.45</td><td>3,553</td><td>67.0%</td><td>919</td><td>9,881</td><td>$4.16</td></tr>
+<tr><td>TTM (Jun'26)</td><td>30,026</td><td>5,455</td><td>18.2%</td><td>3,829</td><td>$9.82</td><td>3,934</td><td>72.1%</td><td>1,016</td><td>20,631</td><td>$4.40*</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">*Current annualised dividend ($1.10 per quarter); not a TTM sum. Net debt = total debt minus cash and investments (S&amp;P Global). Eaton has no captive finance arm, so this is effectively industrial net debt. Operating income is as standardised by S&amp;P Global; Eaton's own reported segment operating profit is higher. TTM FCF/EBIT of 72% is not comparable with annual figures because H1 is seasonally weak for cash flow.</div>
+  <div class="footer-note">Source: Eaton Corporation plc 10-K/10-Q data via stockanalysis.com (S&amp;P Global Market Intelligence), last updated Jul 31, 2026; Eaton Q2 2026 results release (Jul 31, 2026, SEC Form 8-K exhibit 99). All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter &amp; Order Backlog (Q2 2026)</div></div>
+  <div class="sec-sub">Latest reported quarter: Q2 2026 (reported Jul 31, 2026). Q3 2026 is scheduled for Nov 3, 2026, before the open. Quarters are calendar quarters.</div>
+  <div class="headline-box"><div class="title">What actually moved the numbers</div><p>Q2 2026 sales were a record $8,531m, up 21.4% year on year (14% organic, 7% from acquisitions, per the company). Electrical Global was the standout: sales rose to $2,517m from $1,753m, with Boyd Thermal contributing about 25 points in its first full quarter and 18% organic growth. Electrical Americas grew 18% to $3,951m. Operating margin was 16.6% on a GAAP basis (Eaton's segment margin: 23.1%, 80bp below Q2 2025) and GAAP EPS fell 16% to $2.11 as amortisation and acquisition charges ($0.99 per share together) hit; adjusted EPS was a Q2 record of $3.15. Free cash flow was $874m (Q2 2025: $716m). The share price moves in October (-6.3% on Oct 22, -6.0% on Oct 30) were not tied to company news in the sources reviewed.</p></div>
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters ($ bn)</div>
+    <div class="chart-sub">Revenue growth has accelerated from +4.6% YoY in Q4 2024 to +21.4% in Q2 2026 (with one pause in Q3 2025); the Q1-Q2 2026 step-up includes Boyd Thermal and other acquisitions.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $ bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="28.6" y="60.5" width="60" height="69.5" fill="#2dd4bf"/><text x="58.6" y="55.5" text-anchor="middle" font-size="9" fill="#cbd5e1">6.24</text><text x="58.6" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="125.7" y="59.0" width="60" height="71.0" fill="#2dd4bf"/><text x="155.7" y="54.0" text-anchor="middle" font-size="9" fill="#cbd5e1">6.38</text><text x="155.7" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="222.9" y="51.7" width="60" height="78.3" fill="#2dd4bf"/><text x="252.9" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">7.03</text><text x="252.9" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="320.0" y="52.2" width="60" height="77.8" fill="#2dd4bf"/><text x="350.0" y="47.2" text-anchor="middle" font-size="9" fill="#cbd5e1">6.99</text><text x="350.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="417.1" y="51.4" width="60" height="78.6" fill="#2dd4bf"/><text x="447.1" y="46.4" text-anchor="middle" font-size="9" fill="#cbd5e1">7.05</text><text x="447.1" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="514.3" y="47.0" width="60" height="83.0" fill="#2dd4bf"/><text x="544.3" y="42.0" text-anchor="middle" font-size="9" fill="#cbd5e1">7.45</text><text x="544.3" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="611.4" y="35.0" width="60" height="95.0" fill="#2dd4bf"/><text x="641.4" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">8.53</text><text x="641.4" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 7 Quarters ($m)</div>
+    <div class="chart-sub">GAAP operating income dipped in Q1 2026 ($1,200m, 16.1% margin) when deal costs and amortisation started, then recovered to $1,413m in Q2 2026. Eaton's non-GAAP segment margin in Q2 2026 was 23.1%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating income, $ m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="28.6" y="46.9" width="60" height="83.1" fill="#60a5fa"/><text x="58.6" y="41.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,236</text><text x="58.6" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="125.7" y="48.8" width="60" height="81.2" fill="#60a5fa"/><text x="155.7" y="43.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,207</text><text x="155.7" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="222.9" y="42.3" width="60" height="87.7" fill="#60a5fa"/><text x="252.9" y="37.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,305</text><text x="252.9" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="320.0" y="37.0" width="60" height="93.0" fill="#60a5fa"/><text x="350.0" y="32.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,383</text><text x="350.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="417.1" y="35.3" width="60" height="94.7" fill="#60a5fa"/><text x="447.1" y="30.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,409</text><text x="447.1" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="514.3" y="49.3" width="60" height="80.7" fill="#60a5fa"/><text x="544.3" y="44.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,200</text><text x="544.3" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="611.4" y="35.0" width="60" height="95.0" fill="#60a5fa"/><text x="641.4" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,413</text><text x="641.4" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+</svg>
+  </div>
+  <table class="datatable">
+<tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th></tr>
+<tr><td>Revenue ($m)</td><td>6,240</td><td>6,377</td><td>7,028</td><td>6,988</td><td>7,055</td><td>7,451</td><td>8,531</td></tr>
+<tr><td>Revenue YoY</td><td>+4.6%</td><td>+7.3%</td><td>+10.7%</td><td>+10.1%</td><td>+13.1%</td><td>+16.8%</td><td>+21.4%</td></tr>
+<tr><td>Gross margin</td><td>38.9%</td><td>38.4%</td><td>37.4%</td><td>38.4%</td><td>36.9%</td><td>35.7%</td><td>33.6%</td></tr>
+<tr><td>Operating income ($m)</td><td>1,236</td><td>1,207</td><td>1,305</td><td>1,383</td><td>1,409</td><td>1,200</td><td>1,413</td></tr>
+<tr><td>Operating margin</td><td>19.8%</td><td>18.9%</td><td>18.6%</td><td>19.8%</td><td>20.0%</td><td>16.1%</td><td>16.6%</td></tr>
+<tr><td>GAAP EPS</td><td>$2.45</td><td>$2.45</td><td>$2.51</td><td>$2.59</td><td>$2.91</td><td>$2.22</td><td>$2.11</td></tr>
+<tr><td>Free cash flow ($m)</td><td>1,342</td><td>91</td><td>716</td><td>1,173</td><td>1,573</td><td>314</td><td>874</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:4px;">Source: S&amp;P Global Market Intelligence via stockanalysis.com. GAAP EPS shown; adjusted EPS (non-GAAP, company-reported) for Q2 2026 was $3.15. Free cash flow = operating cash flow minus capex; Q1 is seasonally weak.</div>
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;"><b>Backlog &amp; orders (June 30, 2026):</b> Electrical Americas backlog +33% vs June 2025; Electrical Global backlog +103% (largely Boyd Thermal and data-centre orders); Aerospace +28%. Backlog is company-reported and includes acquired order books.</div>
+    <div class="callout blue" style="flex:1;"><b>Guidance (reported Jul 31):</b> FY2026 organic growth raised to 11-13%, segment margin 24.1-24.5%, adjusted EPS $13.40-13.60 (GAAP EPS $10.36-10.56). Q3 2026: organic growth 13.5-15.5%, segment margin 24.6-25.0%, adjusted EPS $3.46-3.56. No share repurchases planned in 2026.</div>
+  </div>
+  <div class="callout" style="margin-top:8px;"><b>Portfolio moves:</b> Eaton agreed to separate its Mobility business through a Reverse Morris Trust, and on Sep 24, 2026 signed a deal to buy COL Group (medium-voltage distribution, EMEA) for about EUR 810m. Neither is reflected in the reported balance sheet. These are company announcements, not completed transactions unless stated.</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (price / diluted GAAP EPS), scored against the company's own FY2021-25 year-end average. Leverage jumped in H1 2026 on acquisitions, which is the main balance-sheet point to track.</div>
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current trailing P/E (37.7x = $369.97 / TTM GAAP EPS of $9.82) is ~24% above Eaton's FY2021-25 year-end average (30.4x). TTM GAAP EPS is depressed by Boyd Thermal deal costs and amortisation, which inflates the current multiple relative to adjusted earnings. Year-end P/Es are S&amp;P Global values (32.1, 25.4, 29.9, 34.6, 30.3).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span></div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="48.6" width="70" height="61.4" fill="#60a5fa"/><text x="55" y="43.6" text-anchor="middle" font-size="9" fill="#cbd5e1">32.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="115" y="61.5" width="70" height="48.5" fill="#60a5fa"/><text x="150" y="56.5" text-anchor="middle" font-size="9" fill="#cbd5e1">25.4x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="52.9" width="70" height="57.1" fill="#60a5fa"/><text x="245" y="47.9" text-anchor="middle" font-size="9" fill="#cbd5e1">29.9x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="43.9" width="70" height="66.1" fill="#60a5fa"/><text x="340" y="38.9" text-anchor="middle" font-size="9" fill="#cbd5e1">34.6x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="52.1" width="70" height="57.9" fill="#60a5fa"/><text x="435" y="47.1" text-anchor="middle" font-size="9" fill="#cbd5e1">30.3x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="38.0" width="70" height="72.0" fill="#2dd4bf"/><text x="530" y="33.0" text-anchor="middle" font-size="9" fill="#cbd5e1">37.7x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="51.8" x2="690" y2="51.8" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="47.8" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 30.4x</text>
+</svg>
+  </div>
+  <div class="callout blue"><b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is ~24.4x at $369.97, versus a FY2021-25 year-end average of ~24.0x (ratio ~1.02), and the PEG ratio is ~1.9 (S&amp;P Global). On the forward basis the stock is therefore at its own average rather than 24% above it, but forward EPS embeds the acquired earnings. The scorecard uses the trailing GAAP figure (ratio 1.24 = 1/5). Average analyst price target $485.47 (28 analysts) implies ~31% upside; targets are third-party opinions, not forecasts.</div>
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has stayed at 2.9%-3.4% of revenue (FY2025: 3.35%, $919m) while the company adds plants for data-centre electrical equipment (e.g. a $242m Arkansas facility announced in September 2026, per press reports). TTM capex to June 2026 was $1,016m (3.4% of TTM revenue).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="91.2" width="60" height="68.8" fill="#60a5fa"/><text x="60" y="86.2" text-anchor="middle" font-size="8" fill="#cbd5e1">575</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="88.4" width="60" height="71.6" fill="#60a5fa"/><text x="200" y="83.4" text-anchor="middle" font-size="8" fill="#cbd5e1">598</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="69.4" width="60" height="90.6" fill="#60a5fa"/><text x="340" y="64.4" text-anchor="middle" font-size="8" fill="#cbd5e1">757</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="63.3" width="60" height="96.7" fill="#60a5fa"/><text x="480" y="58.3" text-anchor="middle" font-size="8" fill="#cbd5e1">808</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="50.0" width="60" height="110.0" fill="#60a5fa"/><text x="620" y="45.0" text-anchor="middle" font-size="8" fill="#cbd5e1">919</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,110.6 200,111.3 340,106.2 480,106.3 620,105.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="110.6" r="3" fill="#fbbf24"/><text x="60" y="100.6" text-anchor="middle" font-size="7.5" fill="#fde68a">2.93%</text>
+<circle cx="200" cy="111.3" r="3" fill="#fbbf24"/><text x="200" y="101.3" text-anchor="middle" font-size="7.5" fill="#fde68a">2.88%</text>
+<circle cx="340" cy="106.2" r="3" fill="#fbbf24"/><text x="340" y="96.2" text-anchor="middle" font-size="7.5" fill="#fde68a">3.26%</text>
+<circle cx="480" cy="106.3" r="3" fill="#fbbf24"/><text x="480" y="96.3" text-anchor="middle" font-size="7.5" fill="#fde68a">3.25%</text>
+<circle cx="620" cy="105.0" r="3" fill="#fbbf24"/><text x="620" y="95.0" text-anchor="middle" font-size="7.5" fill="#fde68a">3.35%</text>
+</svg>
+  </div>
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="274.2 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="40.0 314.16" stroke-dashoffset="-274.2" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">87.28% inst.</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions 87.28% (S&amp;P Global)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Other holders (retail, other) ~12.7%</div>
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders 0.06% (S&amp;P Global)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box"><div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div><p>About 398.6M shares at end-2021 to 388.4M now (-2.6%), with buybacks of $0.2B (2021), $0.3B (2022), $0.05B (2023), $2.6B (2024) and $1.9B (2025) roughly offsetting option dilution; TTM buybacks were $0.6B. Eaton has said it plans no repurchases in 2026 while it digests Boyd Thermal. The dividend has grown 16 straight years, $3.04 (FY2021) to $4.16 (FY2025), $4.40 annualised now; payout ~45% of earnings.</p></div>
+  </div>
+  <div class="callout blue" style="margin-top:8px;"><b>Ownership &amp; insiders:</b> S&amp;P Global reports insiders at 0.06% and institutions at 87.3%. Eaton has no founder or controlling holder, and I could not verify a named top-holder list or any broad employee-ownership plan, so none is asserted. Management is professionally appointed (CEO Paulo Ruiz).</div>
+  <div class="callout gray" style="margin-top:8px;"><b>Leverage path:</b> total debt $21.3B and cash $0.7B at Jun 30, 2026 (net debt $20.6B), versus $10.7B and $0.8B at Dec 31, 2025. Net debt/EBITDA of 3.1x uses TTM EBITDA of $6.6B, which includes only part of Boyd Thermal; on a full-year pro-forma basis the ratio would be lower, but no pro-forma figure was found. Annual free cash flow of ~$3.9B (TTM) is the natural deleveraging source, with buybacks paused. This is arithmetic, not guidance.</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed 14-criterion checklist. Growth CAGRs are 4-year (FY2021-25) on GAAP figures. Criterion #14 compares FY2025 gross margin (gross profit / revenue) with FY2022's (3-year change). Net debt/EBITDA and ROIC/WACC use the latest data (Jun 2026 balance sheet), which already include the 2026 acquisitions.</div>
+  <table class="datatable criteria-table">
+<tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Eaton</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+8.7% &mdash; $19.6B &rarr; $27.4B; 5.7% / 11.8% / 7.3% / 10.3% by year (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+20.6% &mdash; GAAP operating income $2.5B &rarr; $5.3B; margin expansion plus volume (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>19.32% (FY2025) &mdash; just under the bar; TTM 18.2% after acquisition amortisation (score 4/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+22.3% &mdash; $1.6B &rarr; $3.6B; FY2021 base was low and FY2025 was flat on FY2024 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Roughly #3 globally in electrical equipment (Schneider ahead; Siemens Smart Infrastructure and ABB Electrification comparable in size); top-2 in North American power distribution/UPS. Revenue-based estimate, no verified share figure (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; several scaled global competitors (Schneider, Siemens, ABB, Legrand, Hubbell, Vertiv in data centres) plus regional specialists; moderate concentration (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 10.61% vs WACC 9.33% (S&amp;P Global), +1.3pp; ROIC was 15.8% at FY2025 before the 2026 acquisitions enlarged invested capital (score 1/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>3.1x (net debt $20.6B / TTM EBITDA $6.6B, Jun 2026); 1.6x at Dec 2025. No captive finance; TTM EBITDA includes only part of Boyd Thermal (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>67.0% (FY2025: $3,553m / $5,304m); 5-year path 63% / 64% / 73% / 75% / 67%. FCF is after capex of ~3% of sales (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 37.7x vs FY21-25 average 30.4x (ratio 1.24); forward ~24.4x vs ~24.0x (ratio ~1.02). Scored on the trailing GAAP basis; TTM EPS is depressed by deal costs (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~398.6M (end-2021) to 388.4M now, -2.6%; buybacks of $2.6B (2024) and $1.9B (2025) outweighed dilution; none planned in 2026 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders 0.06% (S&amp;P Global); no founder or controlling holder; no employee ownership plan verified (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.35% of revenue in FY2025 ($919m); 2.9%-3.4% in each of FY2021-25. Not asset-light but modest for a manufacturer (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (gross profit / revenue). 33.19% (FY2022) &rarr; 37.77% (FY2025), +4.58pp. Q2 2026 gross margin was 33.6%, so the trend has since reversed on acquisition mix (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+</table>
+  <div class="callout gray" style="margin-top:6px;"><b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 5&times;11=11.0 &middot; #3 4&times;10=8.0 &middot; #4 5&times;8=8.0 &middot; #5 2&times;7=2.8 &middot; #6 2&times;6=2.4 &middot; #7 1&times;10=2.0 &middot; #8 1&times;6=1.2 &middot; #9 3&times;8=4.8 &middot; #10 1&times;8=1.6 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 4&times;4=3.2 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 57.6 / 105 = <b>55/100</b>. Criteria met: 6/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share data); #7 uses a third-party ROIC/WACC; #10 uses trailing GAAP P/E, which the 2026 deal costs inflate; #12 assumes no employee ownership plan because none was verified. No criterion is N/A.</div>
+  <div class="two-col">
+    <div class="info-box working"><div class="title">What's Working</div><p>Operating income has compounded at ~21% a year since FY2021 and FCF at ~22%, helped by a 5.5-point gross-margin gain, and the business is exposed to data-centre, utility and aerospace demand with record backlogs (Electrical Americas +33%, Global +103%, Aerospace +28% year on year at June 2026). Capex is a steady ~3% of sales, the dividend has risen 16 years in a row, and management raised FY2026 organic growth guidance to 11-13% with a Q3 guide of 13.5-15.5%. The forward P/E (~24x) is in line with its own FY2021-25 average even though the trailing GAAP multiple looks high.</p></div>
+    <div class="info-box watch"><div class="title">What to Watch</div><p>The $11B+ of 2026 acquisitions took net debt to $20.6B (3.1x TTM EBITDA) and cut GAAP margins and ROIC; buybacks are paused and more deals are pending (COL Group). GAAP EPS fell 16% in Q2 2026 even as revenue rose 21%. The stock is already down ~23% from its high on an AI/data-centre sentiment swing, and the trailing P/E (37.7x) is 24% above its own average. Eaton is #3 in a competitive global market, has no insider block, and FCF conversion (67%) is below the 80% bar. Q3 results on Nov 3 will reset every TTM figure here. Market-share, ROIC/WACC and employee-ownership inputs are estimates or unverified.</p></div>
+  </div>
+  <div class="footer-note"><b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence): annual and quarterly financials, ratios, statistics, price, analyst targets (last financial update Jul 31, 2026; statistics Oct 27, 2026); digrin.com monthly unadjusted closes (year-end prices); Eaton Q2 2026 earnings release (Form 8-K exhibit 99, Jul 31, 2026), Quartr and Pulse2 Q2 summaries; Business Wire (Q3 2026 date, dividend, COL Group); TheFly/TipRanks (price targets). Segment revenue, backlog, organic growth and guidance are company-reported. WACC, ROIC and market share are third-party or estimated. Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b></div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Eaton Corporation plc &mdash; NYSE, USD, unadjusted closes. A steady multi-year climb driven by electrical and data-centre demand, a pull-back through 2025, a rebound to a $478 high in 2026 and a ~23% drawdown since.</div>
+  <div class="chart-card">
+    <div class="chart-title">Eaton &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Year-end closes 2021-2025 (calendar year, unadjusted for dividends; digrin.com monthly real prices) plus the Oct 30, 2026 close. The dashed line is the straight-line annualised price CAGR between the Dec 2021 close and the current price, treated as 5 years, excluding dividends ($4.16 per share in FY2025, ~1.2% yield). Intra-period highs and lows are not shown: the 52-week range is $311.92 &ndash; 478.00.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="146.3" x2="680" y2="146.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="112.5" x2="680" y2="112.5" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.8" x2="680" y2="78.8" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,142.18 L 172.8,150.00 L 299.6,108.66 L 426.4,63.78 L 553.2,70.37 L 680.0,45.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="142.18" x2="680.0" y2="45.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +16.4%</text>
+<path d="M 46.0,142.18 L 172.8,150.00 L 299.6,108.66 L 426.4,63.78 L 553.2,70.37 L 680.0,45.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="142.18" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="132.18" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$172.82</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="150.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="140.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$156.95</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="108.66" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="98.66" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$240.82</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="63.78" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="53.78" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$331.87</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="70.37" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="60.37" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$318.51</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="45.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="35.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$369.97</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+  <div class="footer-note">Year-end closes (Dec 31): 2021 $172.82, 2022 $156.95, 2023 $240.82, 2024 $331.87, 2025 $318.51; current price $369.97 (Oct 30, 2026 close, stockanalysis.com / S&amp;P Global). 5-Yr CAGR (FY21&rarr;Now) is computed from the 2021 close to the current price over 5 years and excludes dividends; the stock's total return was higher. Currency: USD throughout. No stock split since 2011.<br>Not investment advice &mdash; for personal research only.</div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

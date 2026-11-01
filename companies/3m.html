@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3M Investment Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/3m.html">
+<meta property="og:title" content="3M Investment Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3M Investment Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+  .page {
+    width: 210mm; padding: 11mm 13mm;
+    background: #0a0e1a; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+  .eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+  h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+  .badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+  .badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+  .price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+  .price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+  .metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+  .mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+  .mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+  .mcard .val.green { color:#34d399; }
+  .mcard .val.red { color:#f87171; }
+  .mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+  .mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+  .summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+  .summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+  .narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+  .callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+  .callout b { color:#fbbf24; }
+  .callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; }
+  .callout.blue b { color:#60a5fa; }
+  .callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+  .bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+  @media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+
+  .sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+  .sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+
+  .chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+  .chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+  .chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+  .legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; }
+  .legend-row .dot { width:8px; height:8px; }
+  .chart-card svg { width:100%; display:block; }
+
+  .cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+  .cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+  .cagr-card .val { font-size:19px; font-weight:700; }
+  .cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+
+  table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+  table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+  table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+  table.datatable tr:last-child td { border-bottom:none; }
+
+  .criteria-table th, .criteria-table td { font-size:12px; }
+  .status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+  .status-met { background:#0d2b20; color:#34d399; }
+  .status-not { background:#301414; color:#f87171; }
+  .status-score { background:#2a2110; color:#fbbf24; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+  .two-col { display:flex; gap:10px; margin-top:10px; }
+  .info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+  .info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+  .info-box.working .title { color:#34d399; }
+  .info-box.watch .title { color:#f87171; }
+  .info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+
+  .footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; }
+  .footer-note b { color:#8a97ad; }
+
+  .headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; }
+  .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+
+  .ownership-row { display:flex; align-items:center; gap:22px; }
+  .ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="eyebrow">Investment Case &middot; Diversified Industrials &amp; Materials Science</div>
+  <h1>3M Company</h1>
+  <div class="badges">
+    <span class="badge">NYSE: MMM, USD (also listed on SIX Swiss Exchange)</span>
+    <span class="badge">Fiscal year = calendar year (ends Dec 31) &middot; reports quarterly</span>
+    <span class="badge">Founded 1902 &middot; St. Paul, MN</span>
+    <span class="badge warn">History is distorted: Solventum spin-off (Apr 2024), PFAS and earplug settlement charges (2023-25), divestitures. FY22-FY25 are continuing-ops (restated) GAAP figures; FY21 is pre-spin and not comparable</span>
+  </div>
+  <div class="price">$174.34</div>
+  <div class="price-sub">Close Fri Oct 30, 2026 (NYSE), -1.70% on the day &middot; Mkt cap &asymp;$90.1B (516.7M shares) &middot; 52-wk range $139.34 &ndash; $184.90 (as of Oct 26) &middot; Analyst consensus target $190.09 (19 analysts, "Buy"); recent targets range from $135 (RBC, Underperform) to $197 (Deutsche Bank, Bernstein)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Main competitors:</b> Honeywell, Avery Dennison, Henkel, Saint-Gobain, Nitto Denko, Sika, Kimberly-Clark and Clorox (consumer), plus niche specialists in each product line &mdash; three segments: Safety &amp; Industrial, Transportation &amp; Electronics, Consumer</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$24.95B</div>
+      <div class="sub">+1.5% YoY (continuing ops); Q3 2026 GAAP sales $6.58B, +1.0% YoY (adjusted organic +3.3%)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Gross Margin (GAAP)</div>
+      <div class="val" style="color:#fbbf24;">42.3%</div>
+      <div class="note">Q3 2026, vs 41.8% a year earlier. FY2025 39.9% vs FY2022 39.4% (+0.5pp over three years). Q4 2025 was 33.6% on special items.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#fbbf24;">18.9% FY25</div>
+      <div class="sub">Q3 2026: 23.7% GAAP, 26.2% adjusted (new basis)</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt</div>
+      <div class="val red">$8.2B</div>
+      <div class="sub">$15.6B debt (incl. leases) vs $7.4B cash &amp; investments (Sep 30, 2026); &asymp;1.3x TTM EBITDA</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">42/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">6/14 criteria met &mdash; strong balance-sheet and margin-stability points; growth and cash conversion criteria fail on distorted GAAP history.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div style="flex:0 0 220px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M110.00,15.00 A95,95 0 0 1 151.22,195.59 L135.17,162.26 A58,58 0 0 0 110.00,52.00 Z" fill="#34d399"/><path d="M151.22,195.59 A95,95 0 1 1 110.00,15.00 L110.00,52.00 A58,58 0 1 0 135.17,162.26 Z" fill="#f87171"/><text x="110.0" y="106.0" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">6/14</text><text x="110.0" y="128.0" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg></div>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span>Met &mdash; 6 (market share, ROIC/WACC, net debt/EBITDA, share count, capex intensity, margin stability)</div>
+      <div><span class="dot" style="background:#f87171;"></span>Not met &mdash; 8 (revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, FCF conversion, entry multiple, insider ownership)</div>
+      <div><span class="dot" style="background:#64748b;"></span>N/A &mdash; 0</div>
+      <div><span class="dot" style="background:#fbbf24;"></span>Market concentration score: <b style="color:#fbbf24;">4 / 5</b> &mdash; fragmented across many end markets</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    3M is a 124-year-old materials-science conglomerate. Since it spun off its Health Care business as Solventum on April 1, 2024 it has been a smaller company: about $25B of revenue, growing low single digits, with GAAP operating margin of 18.9% in FY2025 and 23.7% in Q3 2026. The reported history is hard to read. The Solventum spin removed roughly a quarter of the old revenue, 2023 contains the very large PFAS public-water-supplier and Combat Arms earplug settlement charges (GAAP operating loss of $10.2B), and PFAS-related payments, divestitures and the ups and downs of the retained Solventum stake keep moving GAAP earnings and cash flow. Q3 2026 was the best-received report in a while: adjusted EPS $2.50 against $2.38 expected, guidance raised, and an expanded optical-connectivity relationship with Amazon for data centers, which lifted the stock 5.8% on the day. The stock closed at $174.34 on Oct 30, about 26x trailing GAAP EPS and about 19x the adjusted 2026 EPS guide.
+  </div>
+
+  <div class="callout">
+    <b>How to read the numbers on this page:</b> (1) FY22-FY25 are continuing operations (Solventum shown as discontinued), as restated by S&amp;P Global from 3M's filings; FY21 is the originally reported pre-spin figure including Health Care and is excluded from all CAGRs. (2) All financials are GAAP; 3M's &ldquo;adjusted&rdquo; numbers (which exclude PFAS/litigation costs, amortization from Q3 2026, transformation costs and the Solventum stake revaluation) are quoted only when labelled. (3) Cash-flow figures include discontinued operations until the spin and are net of settlement payments. Q3 2026 GAAP EPS of $2.63 includes a $0.60 per-share gain from the Solventum stake.
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Data vintage:</b> Q3 2026 (quarter to Sep 30, 2026, reported Tue Oct 20 before the open) is the latest quarter; price is the Fri Oct 30, 2026 close. Fiscal year = calendar year, so FY2025 = year ended Dec 31, 2025.
+  </div>
+
+  <div class="bignum-corner">6/14 CRITERIA MET</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Annual Financials (FY2021&ndash;FY2025)</div></div>
+  <div class="sec-sub">All figures in USD, GAAP. Fiscal year ends Dec 31. FY22-FY25 are continuing operations (Solventum excluded); *FY21 is as originally reported before the spin (includes Health Care) and is NOT comparable. CAGRs are therefore FY22&rarr;FY25 (three intervals). Free cash flow = operating cash flow minus capex, from the consolidated cash-flow statement (includes discontinued operations until April 2024).</div>
+
+  <div class="callout" style="margin-bottom:8px;">
+    <b>Distortions to keep in mind:</b> FY23 operating loss of $10.2B reflects the PFAS public-water-supplier settlement and Combat Arms earplug charges (quarterly net losses of $6.8B in Q2 2023 and $2.1B in Q3 2023). FY22 includes a $2.7B gain on asset sales (the Food Safety divestiture; shown below operating income) and a $1.2B legal-settlement charge. Net income also includes gains and losses on the retained Solventum stake and on divestitures (FY24 gain on investments $1.56B, FY25 $0.40B, 2025 divestiture loss $162M), and FY22-FY24 include income from discontinued operations ($1.8B, $1.4B, $0.2B). Dividend per share was reset after the spin (FY24 includes one pre-spin $1.51 quarter).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual (FY21* pre-spin)</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Operating income (GAAP)</span>
+      <span><span class="dot" style="background:#34d399;"></span>Free cash flow</span>
+    </div>
+    <svg viewBox="0 0 860 262" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="212.0" x2="840" y2="212.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="216.0" text-anchor="end" font-size="11" fill="#64748b">-$10B</text><line x1="60" y1="172.0" x2="840" y2="172.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="176.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="132.0" x2="840" y2="132.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="136.0" text-anchor="end" font-size="11" fill="#64748b">$10B</text><line x1="60" y1="92.0" x2="840" y2="92.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="96.0" text-anchor="end" font-size="11" fill="#64748b">$20B</text><line x1="60" y1="52.0" x2="840" y2="52.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="56.0" text-anchor="end" font-size="11" fill="#64748b">$30B</text><line x1="60" y1="172.0" x2="840" y2="172.0" stroke="#475569" stroke-width="1.2"/><rect x="110" y="30.6" width="16" height="141.4" rx="1.5" fill="#2dd4bf"/><text x="118" y="25.6" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$35.35B</text><rect x="130" y="141.0" width="16" height="31.0" rx="1.5" fill="#60a5fa"/><text x="138" y="136.0" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$7.75B</text><rect x="150" y="148.6" width="16" height="23.4" rx="1.5" fill="#34d399"/><text x="158" y="143.6" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$5.85B</text><text x="138" y="250" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY21*</text><rect x="266" y="67.4" width="16" height="104.6" rx="1.5" fill="#2dd4bf"/><text x="274" y="62.4" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$26.16B</text><rect x="286" y="158.2" width="16" height="13.8" rx="1.5" fill="#60a5fa"/><text x="294" y="153.2" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$3.45B</text><rect x="306" y="156.6" width="16" height="15.4" rx="1.5" fill="#34d399"/><text x="314" y="151.6" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$3.84B</text><text x="294" y="250" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY22</text><rect x="422" y="73.6" width="16" height="98.4" rx="1.5" fill="#2dd4bf"/><text x="430" y="68.6" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$24.61B</text><rect x="442" y="172.0" width="16" height="40.8" rx="1.5" fill="#60a5fa"/><text x="450" y="224.8" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">-$10.20B</text><rect x="462" y="151.7" width="16" height="20.3" rx="1.5" fill="#34d399"/><text x="470" y="146.7" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$5.07B</text><text x="450" y="250" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY23</text><rect x="578" y="73.7" width="16" height="98.3" rx="1.5" fill="#2dd4bf"/><text x="586" y="68.7" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$24.57B</text><rect x="598" y="155.3" width="16" height="16.7" rx="1.5" fill="#60a5fa"/><text x="606" y="150.3" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$4.18B</text><rect x="618" y="169.4" width="16" height="2.6" rx="1.5" fill="#34d399"/><text x="626" y="164.4" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$0.64B</text><text x="606" y="250" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">FY24</text><rect x="734" y="72.2" width="16" height="99.8" rx="1.5" fill="#2dd4bf"/><text x="742" y="67.2" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$24.95B</text><rect x="754" y="153.2" width="16" height="18.8" rx="1.5" fill="#60a5fa"/><text x="762" y="148.2" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$4.71B</text><rect x="774" y="166.4" width="16" height="5.6" rx="1.5" fill="#34d399"/><text x="782" y="161.4" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$1.40B</text><text x="762" y="250" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">FY25</text></svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (FY22-25)</div><div class="val" style="color:#f87171;">-1.6%</div><div class="sub">$26.16B &rarr; $24.95B (divestitures and exiting PFAS manufacturing reduce the base)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (FY22-25)</div><div class="val" style="color:#fbbf24;">+10.9%</div><div class="sub">$3.45B &rarr; $4.71B GAAP</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (FY22-25)</div><div class="val" style="color:#f87171;">-28.6%</div><div class="sub">$3.84B &rarr; $1.40B (not like-for-like; settlement payments)</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend (criterion 14)</div>
+    <div class="chart-sub">Gross margin (teal) is 39.4% in FY22, 39.5% FY23, 41.3% FY24 and 39.9% FY25 on the continuing-ops basis (the FY21 46.8% includes Health Care). GAAP operating margin (amber) swings with litigation charges: 13.2%, -41.5% (FY23), 17.0%, 18.9%.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Operating margin</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">-50%</text><line x1="50" y1="174.5" x2="840" y2="174.5" stroke="#1e293b" stroke-width="1"/><text x="42" y="178.5" text-anchor="end" font-size="11" fill="#64748b">-25%</text><line x1="50" y1="129.1" x2="840" y2="129.1" stroke="#1e293b" stroke-width="1"/><text x="42" y="133.1" text-anchor="end" font-size="11" fill="#64748b">0%</text><line x1="50" y1="83.6" x2="840" y2="83.6" stroke="#1e293b" stroke-width="1"/><text x="42" y="87.6" text-anchor="end" font-size="11" fill="#64748b">25%</text><line x1="50" y1="38.2" x2="840" y2="38.2" stroke="#1e293b" stroke-width="1"/><text x="42" y="42.2" text-anchor="end" font-size="11" fill="#64748b">50%</text><path d="M 50.00,43.93 L 247.50,57.45 L 445.00,57.31 L 642.50,53.94 L 840.00,56.52" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="43.93" r="3" fill="#2dd4bf"/><text x="60.00" y="34.93" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">46.8%</text><circle cx="247.50" cy="57.45" r="3" fill="#2dd4bf"/><text x="247.50" y="48.45" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.4%</text><circle cx="445.00" cy="57.31" r="3" fill="#2dd4bf"/><text x="445.00" y="48.31" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.5%</text><circle cx="642.50" cy="53.94" r="3" fill="#2dd4bf"/><text x="642.50" y="44.94" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.3%</text><circle cx="840.00" cy="56.52" r="3" fill="#2dd4bf"/><text x="826.00" y="47.52" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">39.9%</text><path d="M 50.00,89.21 L 247.50,105.12 L 445.00,204.46 L 642.50,98.16 L 840.00,94.78" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.00" cy="89.21" r="3" fill="#fbbf24"/><text x="60.00" y="80.21" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">21.9%</text><circle cx="247.50" cy="105.12" r="3" fill="#fbbf24"/><text x="247.50" y="96.12" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">13.2%</text><circle cx="445.00" cy="204.46" r="3" fill="#fbbf24"/><text x="445.00" y="195.46" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">-41.5%</text><circle cx="642.50" cy="98.16" r="3" fill="#fbbf24"/><text x="642.50" y="89.16" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.0%</text><circle cx="840.00" cy="94.78" r="3" fill="#fbbf24"/><text x="826.00" y="85.78" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.9%</text><text x="58.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY21*</text><text x="247.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY22</text><text x="445.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY23</text><text x="642.5" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY24</text><text x="832.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">FY25</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Five-year table</div>
+    <table class="datatable"><tr><th></th><th>FY21*</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr><tr><td>Revenue ($M)</td><td>35,355*</td><td>26,161</td><td>24,610</td><td>24,575</td><td>24,948</td></tr><tr><td>Gross profit margin (GAAP)</td><td>46.8%*</td><td>39.4%</td><td>39.5%</td><td>41.3%</td><td>39.9%</td></tr><tr><td>Operating income (GAAP, $M)</td><td>7,754*</td><td>3,449</td><td>(10,201)</td><td>4,181</td><td>4,708</td></tr><tr><td>Operating margin (GAAP)</td><td>21.9%*</td><td>13.2%</td><td>-41.5%</td><td>17.0%</td><td>18.9%</td></tr><tr><td>Net income, total attributable ($M)</td><td>5,921</td><td>5,777</td><td>(6,995)</td><td>4,173</td><td>3,250</td></tr><tr><td>Net income, continuing ops (derived, $M)</td><td>n/a</td><td>4,013</td><td>(8,402)</td><td>4,009</td><td>3,250</td></tr><tr><td>Diluted EPS (GAAP, total, $)</td><td>10.12</td><td>10.18</td><td>(12.63)</td><td>7.56</td><td>6.00</td></tr><tr><td>Free cash flow ($M, incl. disc. ops)</td><td>5,851</td><td>3,842</td><td>5,065</td><td>638</td><td>1,396</td></tr><tr><td>Capex ($M, incl. disc. ops)</td><td>1,603</td><td>1,749</td><td>1,615</td><td>1,181</td><td>910</td></tr><tr><td>Net debt ($M, incl. leases)</td><td>13,552</td><td>13,064</td><td>10,966</td><td>5,965</td><td>5,199</td></tr><tr><td>Dividend / share ($)</td><td>5.92</td><td>5.96</td><td>6.00</td><td>3.61</td><td>2.92</td></tr></table>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">Source: stockanalysis.com (S&amp;P Global Market Intelligence) income statement, balance sheet and cash-flow data, cross-checked to 3M's reported Q3 2026 release. Continuing-ops net income is derived as earnings from continuing operations less minority interest; EPS is total diluted GAAP EPS as reported (includes discontinued operations in FY22-FY24). Net debt includes lease liabilities; FY21-FY23 balance sheets still contained Health Care. Capex also includes discontinued operations until April 2024.</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Development &mdash; Q3 2026: Beat, Raise and an Amazon Deal</div></div>
+  <div class="sec-sub">Latest reported quarter: Q3 2026 (three months to Sep 30, 2026), reported Tue Oct 20, 2026 before the open. GAAP sales $6.58B, +1.0% YoY; GAAP operating margin 23.7% (+150bp); GAAP EPS $2.63 (+70%); adjusted EPS $2.50 (+12%) on 3M's new basis.</div>
+
+  <div class="headline-box">
+    <div class="title">What moved the stock: raised guidance and the data-center angle</div>
+    <p><b style="color:#f8fafc;">The numbers.</b> GAAP organic growth was only 0.2%; adjusted organic growth (which excludes manufactured PFAS products 3M is exiting) was 3.3%. Segments: Safety &amp; Industrial sales $3.18B (+9.1%), Transportation &amp; Electronics $2.00B (+0.4%), Consumer $1.31B (-0.4%), Other $0.10B (versus $0.30B a year ago as PFAS products wind down). Adjusted operating margin was 26.2% (+110bp); adjusted EPS $2.50 compared with $2.38 expected. GAAP EPS of $2.63 is higher than adjusted because it includes a $0.60 per-share gain from the Solventum stake, offset by $0.19 of litigation/PFAS costs, $0.08 transformation costs and $0.20 of amortization and acquisition costs.</p>
+    <p style="margin-top:6px;"><b style="color:#f8fafc;">The news flow.</b> Before the print (Oct 19) 3M announced an expanded commercial relationship with Amazon for optical-connectivity and other data-center products, including a warrant for Amazon to buy up to 3.2M 3M shares tied to $6B of cumulative sales over seven years and other milestones, and a Taiwan collaboration with GSEO in which 3M takes about 4.7%. 2026 adjusted EPS guidance was raised to $9.10-9.15 (from $8.80-8.95; the new range also reflects the change to exclude amortization). The stock rose 5.8% on Oct 20 to $171.37 and was $174.34 on Oct 30.</p>
+    <p style="margin-top:6px;"><b style="color:#fbbf24;">Caveats.</b> The data-center revenue has yet to show up in reported numbers; the warrant is an equity cost attached to it. GAAP free cash flow was only $230M in Q3 (operating cash flow $486M less $256M capex) versus the $1.2B &ldquo;adjusted free cash flow&rdquo; 3M reported, which as we read the release excludes settlement payments. Q4 2025's 33.6% gross margin and 12.4% operating margin show how special items can swing a single quarter.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Revenue (Q4'24&ndash;Q3'26, $B, GAAP)</div>
+    <div class="chart-sub">Roughly flat around $6.0-6.6B, with YoY growth of -1% to +3.5%. Other-segment sales (largely wind-down PFAS products) were $0.27-0.30B in Q1-Q3 2025 and about $0.1B per quarter since.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="224.0" text-anchor="end" font-size="11" fill="#64748b">$0B</text><line x1="60" y1="191.4" x2="840" y2="191.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="195.4" text-anchor="end" font-size="11" fill="#64748b">$1B</text><line x1="60" y1="162.9" x2="840" y2="162.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="166.9" text-anchor="end" font-size="11" fill="#64748b">$2B</text><line x1="60" y1="134.3" x2="840" y2="134.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="138.3" text-anchor="end" font-size="11" fill="#64748b">$3B</text><line x1="60" y1="105.7" x2="840" y2="105.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="109.7" text-anchor="end" font-size="11" fill="#64748b">$4B</text><line x1="60" y1="77.1" x2="840" y2="77.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="81.1" text-anchor="end" font-size="11" fill="#64748b">$5B</text><line x1="60" y1="48.6" x2="840" y2="48.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="52.6" text-anchor="end" font-size="11" fill="#64748b">$6B</text><line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$7B</text><rect x="98" y="48.3" width="22" height="171.7" rx="1.5" fill="#2dd4bf"/><text x="109" y="43.3" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.01B</text><text x="109" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'24</text><rect x="195" y="49.9" width="22" height="170.1" rx="1.5" fill="#2dd4bf"/><text x="206" y="44.9" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$5.95B</text><text x="206" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'25</text><rect x="293" y="38.7" width="22" height="181.3" rx="1.5" fill="#2dd4bf"/><text x="304" y="33.7" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.34B</text><text x="304" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'25</text><rect x="390" y="33.8" width="22" height="186.2" rx="1.5" fill="#2dd4bf"/><text x="401" y="28.8" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.52B</text><text x="401" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q3'25</text><rect x="488" y="44.8" width="22" height="175.2" rx="1.5" fill="#2dd4bf"/><text x="499" y="39.8" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.13B</text><text x="499" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q4'25</text><rect x="585" y="47.7" width="22" height="172.3" rx="1.5" fill="#2dd4bf"/><text x="596" y="42.7" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.03B</text><text x="596" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q1'26</text><rect x="682" y="34.3" width="22" height="185.7" rx="1.5" fill="#2dd4bf"/><text x="693" y="29.3" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.50B</text><text x="693" y="238" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="400">Q2'26</text><rect x="780" y="31.9" width="22" height="188.1" rx="1.5" fill="#2dd4bf"/><text x="791" y="26.9" text-anchor="middle" font-size="8.5" fill="#e2e8f0" font-weight="700">$6.58B</text><text x="791" y="238" text-anchor="middle" font-size="11" fill="#f8fafc" font-weight="700">Q3'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly Gross Margin &amp; Operating Margin (GAAP, Q4'24&ndash;Q3'26)</div>
+    <div class="chart-sub">Gross margin has recovered to 42.3% in Q3 2026 after the 33.6% Q4 2025 dip; operating margin reached 23.7%, the highest in the series bar Q3 2025 (24.4%).</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Operating margin</span>
+    </div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">10%</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">20%</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">30%</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">40%</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">50%</text><path d="M 50.00,80.90 L 162.86,62.05 L 275.71,57.35 L 388.57,60.95 L 501.43,102.20 L 614.29,66.35 L 727.14,63.60 L 840.00,58.65" fill="none" stroke="#2dd4bf" stroke-width="2.5"/><circle cx="50.00" cy="80.90" r="3" fill="#2dd4bf"/><text x="60.00" y="71.90" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">37.8%</text><circle cx="162.86" cy="62.05" r="3" fill="#2dd4bf"/><text x="162.86" y="53.05" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.6%</text><circle cx="275.71" cy="57.35" r="3" fill="#2dd4bf"/><text x="275.71" y="48.35" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">42.5%</text><circle cx="388.57" cy="60.95" r="3" fill="#2dd4bf"/><text x="388.57" y="51.95" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.8%</text><circle cx="501.43" cy="102.20" r="3" fill="#2dd4bf"/><text x="501.43" y="93.20" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">33.6%</text><circle cx="614.29" cy="66.35" r="3" fill="#2dd4bf"/><text x="614.29" y="57.35" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">40.7%</text><circle cx="727.14" cy="63.60" r="3" fill="#2dd4bf"/><text x="727.14" y="54.60" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">41.3%</text><circle cx="840.00" cy="58.65" r="3" fill="#2dd4bf"/><text x="826.00" y="49.65" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">42.3%</text><path d="M 50.00,182.00 L 162.86,167.70 L 275.71,181.75 L 388.57,148.15 L 501.43,207.95 L 614.29,153.40 L 727.14,168.25 L 840.00,151.55" fill="none" stroke="#fbbf24" stroke-width="2.5"/><circle cx="50.00" cy="182.00" r="3" fill="#fbbf24"/><text x="60.00" y="173.00" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.6%</text><circle cx="162.86" cy="167.70" r="3" fill="#fbbf24"/><text x="162.86" y="158.70" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.5%</text><circle cx="275.71" cy="181.75" r="3" fill="#fbbf24"/><text x="275.71" y="172.75" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.6%</text><circle cx="388.57" cy="148.15" r="3" fill="#fbbf24"/><text x="388.57" y="139.15" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">24.4%</text><circle cx="501.43" cy="207.95" r="3" fill="#fbbf24"/><text x="501.43" y="198.95" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.4%</text><circle cx="614.29" cy="153.40" r="3" fill="#fbbf24"/><text x="614.29" y="144.40" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.3%</text><circle cx="727.14" cy="168.25" r="3" fill="#fbbf24"/><text x="727.14" y="159.25" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">20.4%</text><circle cx="840.00" cy="151.55" r="3" fill="#fbbf24"/><text x="826.00" y="142.55" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.7%</text><text x="58.0" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'24</text><text x="162.9" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'25</text><text x="275.7" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'25</text><text x="388.6" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q3'25</text><text x="501.4" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q4'25</text><text x="614.3" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q1'26</text><text x="727.1" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Q2'26</text><text x="832.0" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc">Q3'26</text></svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Quarterly data table</div>
+    <table class="datatable"><tr><th></th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr><tr><td>Revenue ($M)</td><td>6,010</td><td>5,954</td><td>6,344</td><td>6,517</td><td>6,133</td><td>6,030</td><td>6,500</td><td>6,584</td></tr><tr><td>Revenue growth YoY (GAAP)</td><td>+0.1%*</td><td>-1.0%</td><td>+1.4%</td><td>+3.5%</td><td>+2.1%</td><td>+1.3%</td><td>+2.5%</td><td>+1.0%</td></tr><tr><td>Gross margin (GAAP)</td><td>37.8%</td><td>41.6%</td><td>42.5%</td><td>41.8%</td><td>33.6%</td><td>40.7%</td><td>41.3%</td><td>42.3%</td></tr><tr><td>Operating income ($M)</td><td>1,058</td><td>1,218</td><td>1,120</td><td>1,588</td><td>761</td><td>1,406</td><td>1,323</td><td>1,560</td></tr><tr><td>Operating margin (GAAP)</td><td>17.6%</td><td>20.5%</td><td>17.6%</td><td>24.4%</td><td>12.4%</td><td>23.3%</td><td>20.4%</td><td>23.7%</td></tr><tr><td>Diluted EPS (GAAP, $)</td><td>1.33</td><td>2.04</td><td>1.34</td><td>1.55</td><td>1.07</td><td>1.23</td><td>1.78</td><td>2.63</td></tr><tr><td>Free cash flow ($M, GAAP)</td><td>1,527</td><td>(315)</td><td>(1,162)</td><td>1,538</td><td>1,335</td><td>349</td><td>763</td><td>230</td></tr></table>
+  </div>
+  <div class="footer-note" style="margin-top:6px;text-align:left;">*Q4'24 YoY is derived from FY2023 continuing-ops revenue less Q1-Q3 2023 ($6.00B). Q1'25 EPS of $2.04 and Q4'24-Q3'25 FCF are affected by settlement payments, divestitures and Solventum-stake gains/losses; see 3M's special-items reconciliations. Source: stockanalysis.com (S&amp;P Global), 3M Q3 2026 release.</div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Guidance (updated Oct 20, 2026, adjusted/non-GAAP):</b> FY2026 adjusted sales growth &gt;4.5% (adjusted organic &gt;3.5%), adjusted EPS $9.10-$9.15, adjusted operating cash flow &asymp;$5.9B and adjusted free cash flow &asymp;$4.8B. 3M states it cannot forecast the GAAP equivalents without unreasonable effort, so there is no GAAP guidance to compare. The guide includes the Madison Fire &amp; Rescue acquisition and the change to treat intangible amortization as a special item (which adds roughly $0.04 per quarter to adjusted EPS).
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">GAAP trailing P/E at each fiscal year-end (year-end close / reported diluted EPS), plus today on trailing four-quarter GAAP EPS. FY23 is a loss year and is excluded from the average (dashed line).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; Year-End, Plus Current</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">Now 26.0x vs FY21-25 average 18.3x (ratio 1.42).</b> FY22's 11.8x was flattered by a one-off gain and the pre-spin share price; FY25's 26.7x by depressed earnings. Forward P/E is about 19.1x on the FY2026 adjusted EPS guidance midpoint of $9.125 (which excludes litigation, amortization and the Solventum stake revaluation, so it is not comparable with the GAAP series); S&amp;P Global's consensus forward P/E was 17.7x at the Q3 quarter-end.</div>
+    <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text><line x1="50" y1="170.0" x2="840" y2="170.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="174.0" text-anchor="end" font-size="11" fill="#64748b">10x</text><line x1="50" y1="120.0" x2="840" y2="120.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="124.0" text-anchor="end" font-size="11" fill="#64748b">20x</text><line x1="50" y1="70.0" x2="840" y2="70.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="74.0" text-anchor="end" font-size="11" fill="#64748b">30x</text><line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40x</text><line x1="50" y1="128.6" x2="840" y2="128.6" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="124.6" text-anchor="end" font-size="10" fill="#94a3b8">FY21-25 avg: 18.3x (ex-FY23)</text><path d="M50.0,132.24 L208.0,161.10" fill="none" stroke="#a78bfa" stroke-width="2.5"/><path d="M524.0,134.62 L682.0,86.58 L840.0,90.09" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="50" cy="132.24" r="3" fill="#a78bfa"/><text x="50" y="122.24" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.6x</text><text x="50" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY21</text><circle cx="208" cy="161.10" r="3" fill="#a78bfa"/><text x="208" y="151.10" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">11.8x</text><text x="208" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY22</text><text x="366" y="208.0" text-anchor="middle" font-size="10" fill="#94a3b8" font-weight="700">n/m (GAAP loss)</text><text x="366" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY23</text><circle cx="524" cy="134.62" r="3" fill="#a78bfa"/><text x="524" y="124.62" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">17.1x</text><text x="524" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY24</text><circle cx="682" cy="86.58" r="3" fill="#a78bfa"/><text x="682" y="76.58" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">26.7x</text><text x="682" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-weight="400">FY25</text><circle cx="840" cy="90.09" r="3.5" fill="#a78bfa"/><text x="840" y="80.09" text-anchor="end" font-size="10" fill="#e2e8f0" font-weight="700">26.0x</text><text x="840" y="238" text-anchor="middle" font-size="10.5" fill="#f8fafc" font-weight="700">Now</text></svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Balance sheet:</b> Total debt $15.6B (including about $0.6B of leases) against $7.4B of cash and short-term investments at Sep 30, 2026: net debt $8.2B, about 1.3x TTM EBITDA of &asymp;$6.5B. Net debt has fallen from $13.6B at end-2021 (pre-spin) but edged up about $0.3B in Q3 2026: debt rose $2.4B and cash $2.1B in the quarter. The guidance update cites the Madison Fire &amp; Rescue acquisition, and goodwill is $7.3B versus $6.4B at year-end 2025; $0.6B went to shareholder returns in the quarter. Common equity is only $4.1B after years of buybacks ($3.25B in FY25, $4.0B TTM) and litigation charges, which makes ROE (73%) and book-based ROIC look unusually high. Other long-term liabilities were $10.0B at year-end 2025 and include, as we understand it, the long-term portion of PFAS and earplug settlement obligations; they are not in the net debt figure. 3M kept a stake in Solventum at the spin (initially about 19.9%) and has been working it down; the remaining size was not verified here and it is not netted against debt.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ownership Structure</div>
+    <div class="ownership-row">
+      <div style="flex:0 0 180px;"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="110" r="76" fill="none" stroke="#64748b" stroke-width="37"/><circle cx="110" cy="110" r="76" fill="none" stroke="#60a5fa" stroke-width="37" stroke-dasharray="362.9 477.5" transform="rotate(-90 110 110)"/></svg></div>
+      <div class="ownership-legend">
+        <div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp;76% (S&amp;P Global)</div>
+        <div><span class="dot" style="background:#64748b;"></span>Retail / other public float &asymp;24%</div>
+        <div style="font-size:11.5px;color:#94a3b8;">Insiders (directors and officers) hold only &asymp;0.06%. No founder or family control; 3M is a widely held S&amp;P 500 and Dow component.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Governance and dilution note:</b> William Brown has been Chairman and CEO. Amazon's warrant (up to 3.2M shares, about 0.6% of shares outstanding) vests only on sales and other milestones. Share count has fallen about 10% since 2021 through buybacks despite stock-based compensation of roughly $225M a year.
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard &amp; Key Risks</div></div>
+  <div class="sec-sub">Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally: 1&ndash;2 = Met, 3&ndash;5 = Not met. Martinero Index 42/100. Growth criteria use FY22&rarr;FY25 continuing operations because FY21 is not comparable (Solventum spin-off); this is a shorter window than the usual FY21&rarr;FY25.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>3M</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (FY22-25, continuing ops)</td><td>&ge;15%</td><td>-1.6% ($26.16B &rarr; $24.95B, 3 intervals). FY21 is pre-spin and excluded (see page 2). (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>Operating Income CAGR (GAAP, FY22-25)</td><td>&ge;15%</td><td>+10.9% ($3.45B &rarr; $4.71B, 3 intervals); FY25 itself still carries litigation/PFAS and divestiture charges, FY22 carried similar items (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY</td><td>&ge;20%</td><td>18.9% (FY2025 GAAP); Q3 2026 GAAP 23.7%, adjusted 26.2%; TTM about 20% (score 4/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-25)</td><td>&ge;15%</td><td>-28.6% ($3.84B &rarr; $1.40B; OCF minus capex, as reported incl. Health Care to Apr 2024 and net of litigation payments). Not like-for-like; GAAP FCF has been depressed by settlement payments (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share</td><td>#1 or #2</td><td>Judgment: #1 or #2 in several core niches (industrial abrasives, respirators/PPE, adhesive tapes, Post-it), but 3M is a diversified industrial with no single measured market share; scored as a strong position (4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>4 &mdash; fragmented across many end markets and niche competitors (Honeywell, Avery Dennison, Henkel, Saint-Gobain, Sika, Nitto and others) (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC &ge;15%, clears WACC</td><td>Estimate: FY25 NOPAT &asymp;$3.6B (GAAP operating income at a 23.5% tax rate). On debt + equity &minus; cash ($9.9B) ROIC would be &asymp;36% (S&amp;P Global shows 33.9%), but that base is shrunk by buybacks and litigation write-offs, so I add the $10.0B of other long-term liabilities (largely litigation-related) to capital: ROIC &asymp;18% vs WACC &asymp;9.2% (S&amp;P estimate) = spread &asymp;8.8pts (score 3/5). Not company-reported.</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>&asymp;1.3x at Sep 30, 2026 ($8.2B net debt incl. leases: $15.6B debt less $7.4B cash and short-term investments; TTM EBITDA &asymp;$6.5B). FY2025 was 0.9x. Excludes the value of the retained Solventum stake and any litigation obligations (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>30% (FY2025: $1.40B FCF / $4.71B GAAP EBIT); TTM about 53%. 3M's own adjusted FCF guide for 2026 is &asymp;$4.8B, but it excludes settlement payments, so GAAP is used here (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>GAAP P/E 26.0x (price $174.34 / TTM EPS $6.71) vs FY21-25 year-end average 18.3x (FY23 loss year excluded) = ratio 1.42 (score 0/5). Both sides are distorted by one-offs; on the adjusted 2026 EPS guide midpoint ($9.125) the multiple is 19.1x</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend</td><td>flat/declining</td><td>&asymp;571.9M &rarr; 516.7M shares outstanding (&asymp;-9.6%, Dec 2021 to Sep 2026); diluted 585M &rarr; 541M (FY21-FY25). An Amazon warrant for up to 3.2M shares (&asymp;0.6%) is a small future offset (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership</td><td>meaningful</td><td>Insiders hold &asymp;0.06% (S&amp;P Global); no verified broad employee-plan figure of 5%+ (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.6% of revenue (FY2025 $910M; Q3 2026 $256M on $6.58B sales) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin</td><td>flat/expanding (&le;1.0pp compression)</td><td>Basis: GAAP gross margin (3M reports a cost-of-sales line). FY22 39.40% &rarr; FY25 39.92% = <b>+0.51pp</b> over the 3 fiscal years, on continuing-ops figures (score 5/5, but only 0.01pp above the 5-point threshold of +0.5pp; the Q4 2025 quarter was 33.6% on special items, Q3 2026 is 42.3%)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Operating momentum: Q3 2026 GAAP operating margin of 23.7% and adjusted 26.2% (+110bp), adjusted organic growth of 3.3% with Safety &amp; Industrial up 9%, and guidance raised. Net debt is down from $13.6B in 2021 to $8.2B (1.3x EBITDA), capex is light (3.7% of sales), and the share count is down about 10% since 2021. The Amazon/data-center optical-connectivity relationship and new GSEO collaboration give a new growth story.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Reported growth is near zero (GAAP organic +0.2% in Q3; FY22-25 revenue CAGR -1.6%) and GAAP FCF is a fraction of the adjusted FCF 3M guides to, because settlement payments for PFAS and earplug cases continue. Ongoing PFAS litigation (including a roughly $1.4B Australian government claim) is an open-ended risk, and GAAP earnings still swing on stake revaluations and special items. Transportation &amp; Electronics and Consumer are flat. The trailing GAAP multiple (about 26x) is above its own history on distorted earnings. ROIC, market share and the criterion-7 adjustment are estimates or judgment.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data as of Oct 30, 2026. Sources: stockanalysis.com (financials, ratios, price history, statistics; S&amp;P Global Market Intelligence), 3M Q3 2026 earnings release dated Oct 20, 2026 (Form 8-K Exhibit 99.1; text read via the PR Newswire/Finviz copy, as the SEC exhibit could not be opened directly), digrin.com (monthly closes), and news reports of analyst target changes.<br>
+    <b>Disclaimer:</b> All figures are derived from third-party data sources and function as indicators only, not as verified facts or a basis for investment decisions. Continuing-ops history, ROIC, WACC and market-share assessments are estimates or judgment. Year-end share prices are unadjusted closes.<br>
+    This is a data summary generated for personal research, not financial advice &mdash; Claude is not a licensed financial advisor.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">3M &mdash; NYSE, USD, unadjusted closes (not adjusted for dividends or for the April 2024 Solventum spin-off, in which holders received one Solventum share for every four 3M shares). Year-end closes 2021-2025 (calendar year) plus the Oct 30, 2026 close.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">3M &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub"><b style="color:#fbbf24;">Not a like-for-like record:</b> the 2021-2023 prices include the value of the Health Care business later spun off, so the roughly flat five-year price change understates total return to holders who also received Solventum shares and about $3 per share a year in dividends. Recent path: $160.10 at end-2025, $164.15 at end-September 2026, $162.01 before the Oct 20 report, and $174.34 now. The 52-week range is $139.34 to $184.90. The dashed line is the straight-line annualised CAGR of the first and last points.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="146.3" x2="680" y2="146.3" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="112.5" x2="680" y2="112.5" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="78.8" x2="680" y2="78.8" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,54.48 L 172.8,128.67 L 299.6,142.30 L 426.4,116.88 L 553.2,77.01 L 680.0,58.71 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="54.48" x2="680.0" y2="58.71" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): -0.4%</text>
+<path d="M 46.0,54.48 L 172.8,128.67 L 299.6,142.30 L 426.4,116.88 L 553.2,77.01 L 680.0,58.71" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="54.48" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="44.48" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$177.63</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="128.67" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="145.67" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$119.92</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="142.30" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="159.30" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$109.32</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="116.88" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="106.88" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$129.09</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="77.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="67.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$160.10</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="58.71" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="48.71" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$174.34</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes (Dec 31): 2021 $177.63, 2022 $119.92, 2023 $109.32, 2024 $129.09, 2025 $160.10 (digrin.com monthly real/unadjusted closes); the current price and the Oct 2026 closes are from stockanalysis.com (S&amp;P Global). 5-Yr CAGR is computed from the 2021 close to the current price over a 5-year span. Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

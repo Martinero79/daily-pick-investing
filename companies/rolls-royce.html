@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rolls-Royce Holdings plc — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/rolls-royce.html">
+<meta property="og:title" content="Rolls-Royce Holdings plc — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rolls-Royce Holdings plc — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Rolls-Royce Holdings plc</h1>
+  <div class="badges">
+    <div class="badge">LSE: RR.</div>
+    <div class="badge">FY = Calendar Year (Dec 31)</div>
+    <div class="badge">HQ: London, United Kingdom</div>
+    <div class="badge">Reports in GBP &middot; quoted in pence</div>
+    <div class="badge warn">~22% Below 52-Wk High &mdash; Underlying Profit Surging, but Trailing P/E Is Above Its Own 5-Yr Average</div>
+  </div>
+
+  <div class="price">1,239.4p</div>
+  <div class="price-sub">Oct 30, 2026 close (London Stock Exchange; S&amp;P Global data via stockanalysis.com) &middot; Market cap &asymp; &pound;102B (8.24B shares) &middot; 52-wk range 990.0p &ndash; 1,586.0p (as of Oct 23) &middot; Beta 1.27 &middot; Analyst consensus: Buy (20 analysts), avg PT 1,732p (about +40%) &middot; Rolls-Royce reports half-yearly; next report is FY2026 results (expected Feb 2027, date not confirmed)</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> financials are in GBP millions; the share price is in pence (100p = &pound;1), as on the other UK pages. &ldquo;Underlying&rdquo; is Rolls-Royce's own non-GAAP headline basis (underlying revenue, underlying operating profit &mdash; &ldquo;EBIT&rdquo; on this page &mdash; and free cash flow); it uses hedged-rate revenue and strips out FX and derivative fair-value effects. Statutory (IFRS) figures are shown where noted. Free cash flow is the company's own measure, after capex and net investments but before dividends, buybacks and M&amp;A. Gross margin and capex are S&amp;P Global-standardised statutory data (third party).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025, underlying)</div>
+      <div class="val">&pound;20.1B</div>
+      <div class="sub green" style="color:#34d399;">+12.4% YoY (FY2024: +15.8%)</div>
+      <div class="note">Statutory revenue &pound;21.2B (+12.2%). 4-yr underlying CAGR FY2021-25 is +16.3%. H1 2026 underlying revenue was &pound;11.3B, +24.5% YoY.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Underlying Operating Margin</div>
+      <div class="val" style="color:#fbbf24;">17.3%</div>
+      <div class="sub">FY2025; 22.5% in H1 2026</div>
+      <div class="note">Up from 3.8% in FY2021. Below this site's 20% bar on the full-year figure. Management's 2028 target is 18-20%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">18.9% vs ~11.0%</div>
+      <div class="sub">Company return on capital vs S&amp;P WACC</div>
+      <div class="note">Return on capital is Rolls-Royce's own adjusted measure (22.0% in H1 2026); WACC (10.96%) is a third-party S&amp;P estimate that uses a 1.27 beta, so it is on the high side.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">&pound;2.1B net cash (Jun 30, 2026)</div>
+      <div class="note">After &pound;2.7B of gross debt and &pound;1.7B of leases. Was net debt of about &pound;5.3B on S&amp;P's measure in FY2021.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">76/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High: fast growth, expanding margin, net cash and a concentrated industry. Held back by a margin under 20%, a trailing P/E above its own average and no insider block.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="246.8 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.3 314.16" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 criteria fully met</b> &mdash; revenue CAGR, EBIT CAGR, FCF CAGR (FY2022-25 proxy), market position (#2), market concentration, ROIC above WACC, net cash, FCF conversion, share count (flat), capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; EBIT margin (17.3% vs the 20% bar), entry multiple (trailing P/E 34.3x vs a ~32.8x own average) and insider ownership (0.03%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Rolls-Royce Holdings is a UK-listed maker of power systems built around three businesses: Civil Aerospace (large civil engines such as the Trent family, business-jet engines, and long-term service agreements that bill by flying hour), Defence (combat, transport and naval propulsion, including submarine nuclear work) and Power Systems (mtu engines and generators, increasingly for data-centre backup and prime power), plus a small-modular-reactor (SMR) development programme. After the 2020 pandemic collapse in flying hours, the group has been run since early 2023 under CEO Tufan Erginbilgic through a &ldquo;transformation programme&rdquo; of contract renegotiation, cost cutting and aftermarket focus. The numbers are striking: underlying operating profit rose from &pound;414m in FY2021 to &pound;3,462m in FY2025 and &pound;2.5B in H1 2026 alone; the company reinstated a dividend in 2025 and announced a &pound;7-9B buyback for 2026-28, and FY2026 guidance was raised in July to &pound;4.7-4.9B underlying operating profit and &pound;3.8-4.0B free cash flow. The share price has run just as far (about 120p at the end of 2021) but fell about 15% in October 2026; I could not verify a single cause. At roughly 34x trailing statutory earnings, the market is already paying for continued delivery.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Depressed starting base</b> &mdash; FY2021 was still a COVID-recovery year (underlying operating profit &pound;414m, free cash flow &minus;&pound;1.5B), so the 4-year CAGRs of +70% (EBIT) are measured from a trough; FCF CAGR is not meaningful from a negative base, so a FY2022-25 proxy is used. (2) <b>Statutory vs underlying</b> &mdash; FY2025 statutory net income of &pound;5.8B includes non-cash items such as a &pound;277m UK deferred-tax credit and derivative fair-value gains; statutory EPS and the GAAP P/E history (85x in FY2021, a loss in FY2022) are therefore noisy. (3) <b>Half-yearly reporting</b> &mdash; there is no quarterly series; this dashboard uses half-years, and contract catch-ups and long-term service agreement (LTSA) accounting can move profit and cash between periods.
+  </div>
+
+  <div class="bignum-corner">RR.</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025, GBP millions, underlying basis as reported by Rolls-Royce (EBIT = underlying operating profit; FCF = company free cash flow). Statutory net income, EPS, capex and net cash come from S&amp;P Global-standardised data. FY2021 is a COVID-recovery base.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Underlying Revenue, Underlying EBIT &amp; Free Cash Flow &mdash; Annual (&pound;m)</div>
+    <div class="chart-sub">Revenue has nearly doubled since FY2021, but EBIT grew more than eight-fold and FCF swung from a &pound;1.5B outflow to a &pound;3.3B inflow, which is the operating-leverage story: aftermarket margins and contract renegotiations, not just volume.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Underlying revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Underlying operating profit (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">-4bn</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.6" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="177.1" x2="840" y2="177.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="181.1" text-anchor="end" font-size="11" fill="#64748b">4bn</text>
+<line x1="60" y1="145.7" x2="840" y2="145.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.7" text-anchor="end" font-size="11" fill="#64748b">8bn</text>
+<line x1="60" y1="114.3" x2="840" y2="114.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="118.3" text-anchor="end" font-size="11" fill="#64748b">12bn</text>
+<line x1="60" y1="82.9" x2="840" y2="82.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.9" text-anchor="end" font-size="11" fill="#64748b">16bn</text>
+<line x1="60" y1="51.4" x2="840" y2="51.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.4" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">24bn</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="122.6" width="30" height="86.0" rx="2" fill="#2dd4bf"/>
+<text x="100" y="117.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">10,947</text>
+<rect x="123" y="205.3" width="30" height="3.3" rx="2" fill="#60a5fa"/>
+<text x="138" y="200.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">414</text>
+<rect x="161" y="208.6" width="30" height="11.7" rx="2" fill="#fbbf24"/>
+<text x="176" y="233.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-1,485</text>
+<text x="138" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="241" y="108.9" width="30" height="99.7" rx="2" fill="#2dd4bf"/>
+<text x="256" y="103.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">12,691</text>
+<rect x="279" y="203.4" width="30" height="5.1" rx="2" fill="#60a5fa"/>
+<text x="294" y="198.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">652</text>
+<rect x="317" y="204.6" width="30" height="4.0" rx="2" fill="#fbbf24"/>
+<text x="332" y="199.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">505</text>
+<text x="294" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="397" y="87.5" width="30" height="121.1" rx="2" fill="#2dd4bf"/>
+<text x="412" y="82.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">15,409</text>
+<rect x="435" y="196.1" width="30" height="12.5" rx="2" fill="#60a5fa"/>
+<text x="450" y="191.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,590</text>
+<rect x="473" y="198.5" width="30" height="10.1" rx="2" fill="#fbbf24"/>
+<text x="488" y="193.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,285</text>
+<text x="450" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="553" y="68.3" width="30" height="140.2" rx="2" fill="#2dd4bf"/>
+<text x="568" y="63.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">17,848</text>
+<rect x="591" y="189.2" width="30" height="19.4" rx="2" fill="#60a5fa"/>
+<text x="606" y="184.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,464</text>
+<rect x="629" y="189.5" width="30" height="19.1" rx="2" fill="#fbbf24"/>
+<text x="644" y="184.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,425</text>
+<text x="606" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="709" y="51.0" width="30" height="157.6" rx="2" fill="#2dd4bf"/>
+<text x="724" y="46.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">20,059</text>
+<rect x="747" y="181.4" width="30" height="27.2" rx="2" fill="#60a5fa"/>
+<text x="762" y="176.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,462</text>
+<rect x="785" y="182.9" width="30" height="25.7" rx="2" fill="#fbbf24"/>
+<text x="800" y="177.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,270</text>
+<text x="762" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+16.3%</div>
+      <div class="sub">&pound;10.9B &rarr; &pound;20.1B underlying; statutory CAGR is +17.3%. Recovery-driven early, aftermarket-driven later.</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+70.1%</div>
+      <div class="sub">&pound;414m &rarr; &pound;3,462m underlying &mdash; from a COVID-trough base, so not a sustainable run-rate</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (proxy, FY22-25)</div>
+      <div class="val" style="color:#34d399;">+86.5%</div>
+      <div class="sub">&pound;505m &rarr; &pound;3,270m over 3 years. FY2021 FCF was negative (&minus;&pound;1,485m), so a 4-year CAGR is not meaningful.</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Margin Trend &mdash; Underlying Operating Margin vs Statutory Gross Margin</div>
+    <div class="chart-sub">Both have risen every year. Underlying operating margin (green) is the company's measure; gross margin (blue) is statutory (S&amp;P Global). Gross margin rose +8.0pp from FY2022 to FY2025 (19.9% to 27.9%).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Underlying operating margin</span><span><span class="dot" style="background:#60a5fa;"></span>Gross margin (statutory)</span></div>
+    <svg viewBox="0 0 700 130">
+<line x1="30" y1="108" x2="690" y2="108" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="81.1" x2="690" y2="81.1" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="84.1" font-size="7.5" fill="#64748b">10%</text>
+<line x1="30" y1="54.2" x2="690" y2="54.2" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="57.2" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="27.4" x2="690" y2="27.4" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="30.4" font-size="7.5" fill="#64748b">30%</text>
+<text x="8" y="111" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,56.8 205,54.6 350,48.6 495,47.8 640,33.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="56.8" r="3.2" fill="#60a5fa"/><text x="60" y="49.8" text-anchor="middle" font-size="8" fill="#93c5fd">19.0%</text>
+<circle cx="205" cy="54.6" r="3.2" fill="#60a5fa"/><text x="205" y="47.6" text-anchor="middle" font-size="8" fill="#93c5fd">19.9%</text>
+<circle cx="350" cy="48.6" r="3.2" fill="#60a5fa"/><text x="350" y="41.6" text-anchor="middle" font-size="8" fill="#93c5fd">22.1%</text>
+<circle cx="495" cy="47.8" r="3.2" fill="#60a5fa"/><text x="495" y="40.8" text-anchor="middle" font-size="8" fill="#93c5fd">22.4%</text>
+<circle cx="640" cy="33.1" r="3.2" fill="#60a5fa"/><text x="640" y="26.1" text-anchor="middle" font-size="8" fill="#93c5fd">27.9%</text>
+<polyline points="60,97.8 205,94.3 350,80.3 495,70.9 640,61.5" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="97.8" r="3.2" fill="#34d399"/><text x="60" y="90.8" text-anchor="middle" font-size="8" fill="#cbd5e1">3.8%</text>
+<circle cx="205" cy="94.3" r="3.2" fill="#34d399"/><text x="205" y="87.3" text-anchor="middle" font-size="8" fill="#cbd5e1">5.1%</text>
+<circle cx="350" cy="80.3" r="3.2" fill="#34d399"/><text x="350" y="73.3" text-anchor="middle" font-size="8" fill="#cbd5e1">10.3%</text>
+<circle cx="495" cy="70.9" r="3.2" fill="#34d399"/><text x="495" y="63.9" text-anchor="middle" font-size="8" fill="#cbd5e1">13.8%</text>
+<circle cx="640" cy="61.5" r="3.2" fill="#34d399"/><text x="640" y="54.5" text-anchor="middle" font-size="8" fill="#cbd5e1">17.3%</text>
+<text x="60" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+<text x="205" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+<text x="350" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+<text x="495" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+<text x="640" y="124" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (&pound;m)</th><th>Und. Revenue</th><th>Und. EBIT</th><th>Und. Margin</th><th>Stat. Net Income</th><th>Stat. EPS</th><th>FCF</th><th>FCF/EBIT</th><th>Capex</th><th>Net cash/(debt)</th><th>DPS</th></tr>
+    <tr><td>FY2021</td><td>10,947</td><td>414</td><td>3.8%</td><td>120</td><td>1p</td><td>(1,485)</td><td>n/m</td><td>328</td><td>(5,254)</td><td>&ndash;</td></tr>
+    <tr><td>FY2022</td><td>12,691</td><td>652</td><td>5.1%</td><td>(1,269)</td><td>(15)p</td><td>505</td><td>77.5%</td><td>359</td><td>(3,459)</td><td>&ndash;</td></tr>
+    <tr><td>FY2023</td><td>15,409</td><td>1,590</td><td>10.3%</td><td>2,412</td><td>29p</td><td>1,285</td><td>80.8%</td><td>429</td><td>(2,076)</td><td>&ndash;</td></tr>
+    <tr><td>FY2024</td><td>17,848</td><td>2,464</td><td>13.8%</td><td>2,521</td><td>30p</td><td>2,425</td><td>98.4%</td><td>519</td><td>457</td><td>6.0p</td></tr>
+    <tr><td>FY2025</td><td>20,059</td><td>3,462</td><td>17.3%</td><td>5,841</td><td>69p</td><td>3,270</td><td>94.5%</td><td>621</td><td>1,887</td><td>9.5p</td></tr>
+    <tr><td>TTM (Jun'26)</td><td>22,281</td><td>4,263</td><td>19.1%</td><td>3,038</td><td>36p</td><td>3,652</td><td>85.7%</td><td>656</td><td>2,111</td><td>&ndash;</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Underlying revenue, EBIT and FCF are Rolls-Royce's reported figures (FY2021-25); the TTM row is derived (FY2025 + H1 2026 &minus; H1 2025) and is an estimate. Statutory revenue was &pound;11,218m / 13,520 / 16,486 / 18,909 / 21,207m. Statutory operating profit: &pound;4,468m (FY2025) and &pound;2,906m (FY2024) as reported; S&amp;P-standardised &pound;465m / 755 / 1,832m for FY2021-23. Net income, EPS (rounded to the nearest penny by S&amp;P), capex and net cash are S&amp;P Global data; company-reported net cash was &pound;1,895m (FY2025) and &pound;475m (FY2024). Dividends were suspended 2020-23 and reinstated in 2025 (FY2025 total 9.5p; interim H1 2026 6.0p).</div>
+  <div class="footer-note">Source: Rolls-Royce Holdings plc full-year results press releases (FY2022, FY2023, FY2025) and half-year results (H1 2024, H1 2025, H1 2026); stockanalysis.com (S&amp;P Global Market Intelligence) for statutory, capex, net-cash and gross-margin data. All figures GBP.</div>
+</div>
+
+<!-- ============ PAGE 3 — HALF-YEAR TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Half-Year Trend &amp; Latest Results (H1 2026)</div></div>
+  <div class="sec-sub">Rolls-Royce reports half-yearly, so seven half-years (H1 2023 to H1 2026) are shown instead of quarters. Reported July 30, 2026; the next scheduled report is the FY2026 result.</div>
+
+  <div class="headline-box">
+    <div class="title">What the half actually showed</div>
+    <p>H1 2026 underlying revenue was &pound;11,279m (+24.5% YoY) and underlying operating profit &pound;2,534m (+46%), a 22.5% margin versus 19.1%. All three divisions improved: Civil Aerospace 25.3% margin (H1 2025: 24.9%), Defence 21.0% (15.4%) and Power Systems 20.3% (15.3%). Free cash flow was &pound;1,964m (H1 2025: &pound;1,582m) but grew less than profit because LTSA balance growth fell to &pound;86m (from &pound;472m) and net investment and cash tax rose. Net cash was &pound;2,136m. Guidance was raised to &pound;4.7-4.9B underlying operating profit and &pound;3.8-4.0B FCF, which implies a second half of &pound;2.2-2.4B, below the H1 figure of &pound;2.5B (my arithmetic).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Underlying Revenue &mdash; Last 7 Half-Years (&pound;bn)</div>
+    <div class="chart-sub">H1 2026 is the strongest half on record in this series. Growth rates: H1'24 +17.7%, H2'24 +14.3%, H1'25 +10.7%, H2'25 +13.8%, H1'26 +24.5%. H2'23 and H1'23 are derived from FY2023 and H1 2023 figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Underlying revenue, &pound;bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="77.6" width="62" height="52.4" fill="#2dd4bf"/><text x="71.0" y="72.6" text-anchor="middle" font-size="9" fill="#cbd5e1">7.0</text><text x="71.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'23</text>
+<rect x="135" y="66.3" width="62" height="63.7" fill="#2dd4bf"/><text x="166.0" y="61.3" text-anchor="middle" font-size="9" fill="#cbd5e1">8.5</text><text x="166.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'23</text>
+<rect x="230" y="68.3" width="62" height="61.7" fill="#2dd4bf"/><text x="261.0" y="63.3" text-anchor="middle" font-size="9" fill="#cbd5e1">8.2</text><text x="261.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'24</text>
+<rect x="325" y="57.2" width="62" height="72.8" fill="#2dd4bf"/><text x="356.0" y="52.2" text-anchor="middle" font-size="9" fill="#cbd5e1">9.7</text><text x="356.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'24</text>
+<rect x="420" y="61.7" width="62" height="68.3" fill="#2dd4bf"/><text x="451.0" y="56.7" text-anchor="middle" font-size="9" fill="#cbd5e1">9.1</text><text x="451.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'25</text>
+<rect x="515" y="47.1" width="62" height="82.9" fill="#2dd4bf"/><text x="546.0" y="42.1" text-anchor="middle" font-size="9" fill="#cbd5e1">11.0</text><text x="546.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'25</text>
+<rect x="610" y="45.0" width="62" height="85.0" fill="#2dd4bf"/><text x="641.0" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">11.3</text><text x="641.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Underlying Operating Profit &mdash; Last 7 Half-Years (&pound;m)</div>
+    <div class="chart-sub">Margins: 9.7%, 10.8%, 14.0%, 13.6%, 19.1%, 15.7%, 22.5%. H1 has been the stronger half for margin in 2025, so H1 2026 should not simply be doubled.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Underlying operating profit, &pound;m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="107.4" width="62" height="22.6" fill="#60a5fa"/><text x="71.0" y="102.4" text-anchor="middle" font-size="9" fill="#cbd5e1">673</text><text x="71.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'23</text>
+<rect x="135" y="99.2" width="62" height="30.8" fill="#60a5fa"/><text x="166.0" y="94.2" text-anchor="middle" font-size="9" fill="#cbd5e1">917</text><text x="166.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'23</text>
+<rect x="230" y="91.5" width="62" height="38.5" fill="#60a5fa"/><text x="261.0" y="86.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,149</text><text x="261.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'24</text>
+<rect x="325" y="85.9" width="62" height="44.1" fill="#60a5fa"/><text x="356.0" y="80.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,315</text><text x="356.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'24</text>
+<rect x="420" y="71.9" width="62" height="58.1" fill="#60a5fa"/><text x="451.0" y="66.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,733</text><text x="451.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'25</text>
+<rect x="515" y="72.0" width="62" height="58.0" fill="#60a5fa"/><text x="546.0" y="67.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,729</text><text x="546.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H2'25</text>
+<rect x="610" y="45.0" width="62" height="85.0" fill="#60a5fa"/><text x="641.0" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2,534</text><text x="641.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">H1'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>&pound;m (underlying)</th><th>H1'23</th><th>H2'23</th><th>H1'24</th><th>H2'24</th><th>H1'25</th><th>H2'25</th><th>H1'26</th></tr>
+    <tr><td>Revenue</td><td>6,950</td><td>8,459</td><td>8,182</td><td>9,666</td><td>9,057</td><td>11,002</td><td>11,279</td></tr>
+    <tr><td>Revenue growth YoY</td><td>n/a</td><td>n/a</td><td>+17.7%</td><td>+14.3%</td><td>+10.7%</td><td>+13.8%</td><td>+24.5%</td></tr>
+    <tr><td>Operating profit</td><td>673</td><td>917</td><td>1,149</td><td>1,315</td><td>1,733</td><td>1,729</td><td>2,534</td></tr>
+    <tr><td>Operating margin</td><td>9.7%</td><td>10.8%</td><td>14.0%</td><td>13.6%</td><td>19.1%</td><td>15.7%</td><td>22.5%</td></tr>
+    <tr><td>Free cash flow</td><td>356</td><td>929</td><td>1,158</td><td>1,267</td><td>1,582</td><td>1,688</td><td>1,964</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">H2 figures are derived as full year minus first half (H2'23 = FY2023 &minus; H1 2023, etc.). Year-on-year growth for H1/H2 2023 is not shown because the 2022 half-year comparatives were not retrieved.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, raised Jul 30, 2026):</b> underlying operating profit &pound;4.7-4.9B (previous &pound;4.0-4.2B) and FCF &pound;3.8-4.0B (previous &pound;3.6-3.8B). Management said it was raised despite the conflict in the Middle East, which it continues to monitor.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Mid-term targets (2028 timeframe, set Feb 2026):</b> underlying operating profit &pound;4.9-5.2B at an 18-20% margin, FCF &pound;5.0-5.3B, return on capital 23-26%. FY2026 guidance already sits near the bottom of the profit range, so either the targets are conservative or growth slows after 2026 &mdash; I do not know which.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Capital returns &amp; balance sheet:</b> interim dividend 6.0p; &pound;1.4B of the &pound;2.5B 2026 buyback done by end-July, part of a &pound;7-9B programme for 2026-28; net cash &pound;2.1B; credit ratings Moody's A3 and Fitch A- (both upgraded in H1) and S&amp;P BBB+ with a positive outlook.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing statutory (GAAP) P/E from S&amp;P Global. It is noisy: FY2021 earnings were near zero, FY2022 was a loss, and FY2025 includes non-cash gains. Treat the comparison with caution.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (34.3x at 1,239.4p; S&amp;P) is about 105% of the average of the four meaningful year-end readings (85.3x, 10.4x, 18.9x, 16.5x = 32.8x). FY2022 is not meaningful (loss). The average is dominated by FY2021's 85x, so excluding it would put the ratio far above 1.0; the scorecard applies the stated method mechanically (ratio 1.05).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span></div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="35.0" width="70" height="75.0" fill="#60a5fa"/><text x="55" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">85.3x</text>
+<text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<text x="150" y="104" text-anchor="middle" font-size="9" fill="#94a3b8">n/m (loss)</text>
+<text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="210" y="100.9" width="70" height="9.1" fill="#60a5fa"/><text x="245" y="95.9" text-anchor="middle" font-size="9" fill="#cbd5e1">10.4x</text>
+<text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="305" y="93.4" width="70" height="16.6" fill="#60a5fa"/><text x="340" y="88.4" text-anchor="middle" font-size="9" fill="#cbd5e1">18.9x</text>
+<text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="400" y="95.5" width="70" height="14.5" fill="#60a5fa"/><text x="435" y="90.5" text-anchor="middle" font-size="9" fill="#cbd5e1">16.5x</text>
+<text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="495" y="79.9" width="70" height="30.1" fill="#2dd4bf"/><text x="530" y="74.9" text-anchor="middle" font-size="9" fill="#cbd5e1">34.3x</text>
+<text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="81.2" x2="690" y2="81.2" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="77.2" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 32.8x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E is 26.2x versus a FY2021-25 year-end average of ~29.2x (about 90% of its own average; 22.3x, 32.1x, 26.5x, 28.2x, 36.8x). PEG is about 1.4 per S&amp;P. The scorecard uses the trailing figure (ratio 1.05 = 2/5); on the forward basis the ratio of 0.90 would score 3/5. Analyst average target is 1,732p (20 analysts), about 40% above the Oct 30 close.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (&pound;m) &amp; CapEx Intensity (% of Underlying Revenue)</div>
+    <div class="chart-sub">Capex has stayed at 2.8-3.1% of underlying revenue (S&amp;P capex over underlying revenue; FY2025 3.1%). Management notes capex has doubled over three years as MRO and Power Systems capacity is added, so absolute spend is rising faster than the ratio shows.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (&pound;m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="107.2" width="60" height="52.8" fill="#60a5fa"/><text x="60" y="102.2" text-anchor="middle" font-size="8" fill="#cbd5e1">328</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+<rect x="170" y="102.2" width="60" height="57.8" fill="#60a5fa"/><text x="200" y="97.2" text-anchor="middle" font-size="8" fill="#cbd5e1">359</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+<rect x="310" y="90.9" width="60" height="69.1" fill="#60a5fa"/><text x="340" y="85.9" text-anchor="middle" font-size="8" fill="#cbd5e1">429</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+<rect x="450" y="76.4" width="60" height="83.6" fill="#60a5fa"/><text x="480" y="71.4" text-anchor="middle" font-size="8" fill="#cbd5e1">519</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+<rect x="590" y="60.0" width="60" height="100.0" fill="#60a5fa"/><text x="620" y="55.0" text-anchor="middle" font-size="8" fill="#cbd5e1">621</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+<polyline points="60,100.0 200,104.0 340,104.0 480,102.0 620,98.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="100.0" r="3" fill="#fbbf24"/><text x="60" y="90.0" text-anchor="middle" font-size="7.5" fill="#fde68a">3.0%</text>
+<circle cx="200" cy="104.0" r="3" fill="#fbbf24"/><text x="200" y="94.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.8%</text>
+<circle cx="340" cy="104.0" r="3" fill="#fbbf24"/><text x="340" y="94.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.8%</text>
+<circle cx="480" cy="102.0" r="3" fill="#fbbf24"/><text x="480" y="92.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.9%</text>
+<circle cx="620" cy="98.0" r="3" fill="#fbbf24"/><text x="620" y="88.0" text-anchor="middle" font-size="7.5" fill="#fde68a">3.1%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="0.1 314.1" stroke-dashoffset="-0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="252.9 61.3" stroke-dashoffset="-0.1" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="61.2 253.0" stroke-dashoffset="-253.0" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">80.5%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~80.5% (S&amp;P)</div>
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~0.03% (S&amp;P)</div>
+          <div><span class="dot" style="background:#475569;"></span>Other / retail ~19.5%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Roughly flat to slightly down: about 8.3B shares around FY2021 (S&amp;P-implied) versus 8.24B now, with a 0.7% decline in the last year. A &pound;1.0B buyback was completed in 2025 (the first in about ten years) and &pound;2.5B is planned for 2026, so the count should fall faster if the programme continues; employee share issuance partly offsets it.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> Rolls-Royce has no founder or controlling holder; the register is almost entirely institutional. S&amp;P shows insiders at 0.03%; I could not verify the size of any employee share plan, so none is credited. Named top holders are not asserted here because their percentages were not verified.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> net cash of &pound;2,136m at Jun 30, 2026 (cash &pound;6.5B, gross debt &pound;2.7B, leases &pound;1.7B; includes leases). Liquidity &pound;9.0B. Book equity is small (about &pound;2.9B), so P/B (35x) is not a useful measure. A bond of about &pound;1.1B was repaid from cash in H1 2026 and &euro;1B of new bonds maturing 2031 and 2036 were issued.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion could be scored, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met). Growth CAGRs are 4-year (FY2021-25) on the underlying basis. Criterion #14 compares FY2025 gross margin with FY2022's (gross margin basis, not an EBIT proxy).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Rolls-Royce</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+16.3% &mdash; underlying &pound;10.9B &rarr; &pound;20.1B; partly a recovery from the COVID trough (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+70.1% &mdash; underlying operating profit &pound;414m &rarr; &pound;3,462m, from a very low base (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>17.3% underlying (FY2025); 22.5% in H1 2026 but the full year is what is scored (score 4/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (FY22-25 proxy)</td><td>&ge;15%</td><td>+86.5% &mdash; &pound;505m &rarr; &pound;3,270m over 3 years. FY2021 FCF was negative (&minus;&pound;1,485m), so the 4-year CAGR is not meaningful; this proxy is flagged (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Strong #2 in large civil aero engines behind GE Aerospace/CFM (judgment; Trent XWB is the sole engine on the A350); also top-tier in business-jet, naval and mtu power systems. No verified global %-share (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; large civil engines are a small oligopoly with very high barriers to entry; defence and power are more contested (judgment) (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>Return on capital 18.9% (company adjusted measure, FY2025) vs S&amp;P WACC 10.96%: spread +7.9pp. Definitions differ and S&amp;P's own ROIC is distorted by a tiny equity base (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash &pound;2.1B (Jun 2026, incl. leases); S&amp;P net debt/EBITDA &minus;0.41x (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>94.5% (FY2025: &pound;3,270m / &pound;3,462m); 5-year path n/m, 77%, 81%, 98%, 95% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 34.3x vs ~32.8x average of four meaningful FY-end readings (ratio 1.05); the average is distorted by FY2021's 85x. Forward 26.2x vs 29.2x (0.90) (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~8.3B &rarr; 8.24B, roughly &minus;1%; buyback restarted in 2025 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>0.03% insiders (S&amp;P); no founder or controlling holder; employee plan size not verified (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.1% of underlying revenue (&pound;621m, FY2025; 2.8-3.1% every year). Engines are capital-intensive at the programme level, but the ratio is low (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (statutory gross profit / revenue, S&amp;P Global). 19.87% (FY2022) &rarr; 27.87% (FY2025), +8.00pp &mdash; improving (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 4&times;13=10.4 &middot; #2 5&times;11=11.0 &middot; #3 4&times;10=8.0 &middot; #4 5&times;8=8.0 &middot; #5 4&times;7=5.6 &middot; #6 4&times;6=4.8 &middot; #7 3&times;10=6.0 &middot; #8 5&times;6=6.0 &middot; #9 4&times;8=6.4 &middot; #10 2&times;8=3.2 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 4&times;4=3.2 &middot; #14 5&times;5=5.0. Total 80.0 / 105 = <b>76/100</b>. Criteria met: 11/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #4 uses a FY2022-25 proxy; #7 mixes a company ROIC with a third-party WACC; #10 is fragile (see valuation page) and would be 0/5 if FY2021's 85x were excluded from the average; #13 uses S&amp;P capex over underlying revenue.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>The transformation shows in every line: underlying operating profit up from &pound;414m to &pound;3.5B in four years with margin up 13.5pp, gross margin up 8pp in three years, FCF conversion of about 95%, and a move from net debt to &pound;2.1B net cash with upgraded credit ratings. All three divisions raised margin in H1 2026, FY2026 guidance was lifted in July, and shareholder returns (dividend plus a &pound;7-9B buyback programme) have restarted. Aftermarket (57% of FY2025 revenue per S&amp;P) provides recurring, flying-hour-linked income, and the engine industry has very high barriers to entry.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The shares are priced for delivery: trailing P/E of 34x is above the company's own (noisy) average, and the stock fell about 15% in October with no verified single cause. Growth is decelerating on a full-year basis (+12.4% in FY2025 vs +15.8%), the FY2026 guidance implies a weaker second half than H1, and LTSA balance growth slowed sharply in H1 2026. Margin of 17.3% is below this site's 20% bar. Results depend on flying hours, supply-chain constraints, contract catch-ups and the Middle East conflict the company flagged. Insiders hold almost nothing, and half-yearly reporting means fewer data points between results. Several inputs are estimates or third-party: WACC, gross margin, capex, ownership and the TTM figures.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Rolls-Royce Holdings plc results announcements (FY2022, FY2023, FY2025, H1 2024, H1 2025, H1 2026) via rolls-royce.com; stockanalysis.com (S&amp;P Global Market Intelligence: price, shares, ratios, WACC, ownership, statutory financials, year-end closes, analyst consensus). Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Rolls-Royce Holdings &mdash; share price in pence. A pandemic-era trough around 90p at the end of 2022, then a rise of more than ten-fold on the turnaround to record highs in 2026, followed by a sharp pull-back in October.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Rolls-Royce &mdash; Year-End Close (London Stock Exchange, pence)</div>
+    <div class="chart-sub">Year-end closes for 2021-2025 (S&amp;P Global via stockanalysis.com, rounded to the nearest penny, unadjusted) plus the Oct 30, 2026 close. The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Oct 2026 (about 4.8 years), excluding dividends. Intra-period highs and lows are not shown: the 52-week range is 990.0p &ndash; 1,586.0p.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +62.2%</text>
+<path d="M 46.0,167.0 L 172.8,170.1 L 299.6,148.1 L 426.4,119.5 L 553.2,56.1 L 680.0,45.4 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="167.0" x2="680.0" y2="45.4" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,167.0 L 172.8,170.1 L 299.6,148.1 L 426.4,119.5 L 553.2,56.1 L 680.0,45.4" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="167.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="155.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">120p</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="170.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="158.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">91p</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="148.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="136.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">294p</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="119.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="107.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">557p</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="56.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="44.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">1,141p</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="45.4" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="33.4" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">1,239.4p</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts near the post-COVID trough, so the very high CAGR reflects recovery from a depressed base and not a repeatable rate. A 2020 rights issue and the later reinstatement of the dividend (2025) and buyback sit inside this period. No stock split in the window.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

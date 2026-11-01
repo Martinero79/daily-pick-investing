@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parker-Hannifin Corporation — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/parker-hannifin.html">
+<meta property="og:title" content="Parker-Hannifin Corporation — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Parker-Hannifin Corporation — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Parker-Hannifin Corporation</h1>
+  <div class="badges">
+    <div class="badge">NYSE: PH</div>
+    <div class="badge">FY ends June 30</div>
+    <div class="badge">HQ: Cleveland, Ohio</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~18% Below 52-Wk High &mdash; FY2027 Guidance Excludes the ~$9B Filtration Group Deal (Closed Aug 13, 2026)</div>
+  </div>
+
+  <div class="price">$899.82</div>
+  <div class="price-sub">Oct 30, 2026 close (NYSE, USD) &middot; Market cap &asymp; $113.5B (126.1M shares) &middot; 52-wk range $755.10 &ndash; $1,099.94 &middot; 1-yr price change &asymp; +16% (vs $772.83 on Oct 31, 2025) &middot; Beta ~1.1 &middot; Analyst consensus: Buy (26 analysts), avg PT $1,152.58 (as of Oct 26; ~+28% vs the Oct 30 close) &middot; Next report (Q1 FY2027): Nov 5, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Parker describes itself as the global leader in motion and control technologies, with two segments: Diversified Industrial (67% of FY2026 sales, split into North America and International businesses) and Aerospace Systems (33%, record $8.5B backlog). Competitors include Eaton, Bosch Rexroth, Danfoss and Honeywell/Safran/Woodward in aerospace components; I could not verify a global %-share, so market share is scored as a judgment call.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in US dollars. &ldquo;EBIT / Op. Income&rdquo; is the S&amp;P Global standardised operating income (gross profit less SG&amp;A), which differs from Parker's own <b>segment operating margin</b> (24.5% reported, 27.3% adjusted in FY2026; adjusted excludes acquired-intangible amortisation, realignment and integration costs and a tariff refund). EPS is GAAP diluted unless marked adjusted (FY2026: GAAP $28.48, adjusted $32.31). &ldquo;Free cash flow&rdquo; = operating cash flow minus capex. <b>Fiscal year ends June 30</b> (FY2026 = Jul 2025 &ndash; Jun 2026).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val" style="color:#f8fafc;">$21.5B</div>
+      <div class="sub" style="color:#34d399;">+8.3% YoY &mdash; organic +6.6%</div>
+      <div class="note">Record year. FY2025 was -0.4%; Q4 FY2026 grew +9.8% (organic +8.0%). 4-yr CAGR FY22-26 is +7.9%, flattered by the Meggitt deal in FY2023. Backlog is a record $12.8B.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (S&P basis)</div>
+      <div class="val" style="color:#34d399;">22.0%</div>
+      <div class="sub">FY2026, up from 17.8% in FY2022</div>
+      <div class="note">Company adjusted segment margin 27.3% vs a prior 27% target; new target is 30% by FY2031. Q4 FY2026 included an $84M tariff-refund credit.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">16.3% vs ~8.5%</div>
+      <div class="sub">FY2026; spread ~7.8pp</div>
+      <div class="note">ROIC is S&amp;P Global; the WACC is my own estimate and not a published figure. Goodwill from Filtration Group will weigh on ROIC from FY2027.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#fbbf24;">1.45x</div>
+      <div class="sub">Jun 30, 2026, before Filtration Group</div>
+      <div class="note">Net debt $8.2B. The ~$9B cash deal closed Aug 13, 2026, so leverage rises sharply in FY2027 (my pro-forma estimate ~3x; not company-stated).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">61/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High-quality, cash-generative compounder: 22% EBIT margin, 83% FCF conversion and a rising gross margin. Points lost on growth (7.9% revenue CAGR), a fragmented market, no insider block and a P/E ~22% above its own 5-year average.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="202.0 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="112.2 314.16" stroke-dashoffset="-202.0" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">9/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 criteria fully met</b> &mdash; EBIT margin, FCF CAGR, market position (#1/#2, judgment), ROIC above WACC, net debt/EBITDA under 2x, FCF conversion, flat share count, capex intensity and gross-margin stability (+3.75pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>5 not met</b> &mdash; revenue CAGR (7.9%), EBIT CAGR (13.8%), market concentration (fragmented), entry multiple (P/E ~22% above own average) and insider ownership (&lt;1%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Parker-Hannifin is an Ohio-based maker of motion and control technologies &mdash; hydraulics, pneumatics, filtration, sealing, electromechanical systems and aerospace actuation, fuel and engine components. It sells through two segments: Diversified Industrial ($14.4B of FY2026 sales, split between North America and International businesses and sold largely through a distribution network) and Aerospace Systems ($7.1B, about one third of sales and the fastest-growing part). Management runs the company through &ldquo;The Win Strategy&rdquo; and has built scale by acquisition: Meggitt (aerospace, closed Sep 2022), Curtis Instruments (FY2026), and in August 2026 the ~$9B purchase of Filtration Group (about $1.8B of FY2027 sales in its first 10.5 months), with the CIRCOR commercial and defense aerospace business still pending. FY2026 was a record: sales $21.5B (+8.3%, organic +6.6%), GAAP EPS $28.48 (adjusted $32.31, +18%), operating cash flow $4.4B (20.3% of sales) and about $2B returned to shareholders, with the dividend raised 11% for a 70th consecutive annual increase. Orders accelerated through the year (+19% in Q4) and backlog hit a record $12.8B. FY2027 guidance (excluding Filtration Group and CIRCOR) calls for sales +5.5% to +8.5%, adjusted segment margin 27.5-27.9% and adjusted EPS of $34.25-35.25. The shares are ~18% below the 52-week high but trade at ~31.6x trailing GAAP earnings, well above their own five-year fiscal-year-end average of ~26x.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>M&amp;A</b> &mdash; Meggitt lifted FY2023 revenue (+20.2%) and the four-year growth CAGRs; the Filtration Group deal will do the same for FY2027, so reported growth will mix acquired and organic. (2) <b>Non-GAAP vs GAAP</b> &mdash; Parker's headline adjusted EPS ($32.31) excludes ~$4.6 per share of acquired-intangible amortisation and other items; this page scores on GAAP figures (S&amp;P-standardised) and shows adjusted numbers separately. (3) <b>One-offs</b> &mdash; FY2026 includes an $84M IEEPA tariff refund credited to cost of sales (excluded from adjusted results) and FY2025 net income included a $252M divestiture gain and $215M of discrete tax benefits, which is why FY2026 GAAP net income grew only 3% while adjusted grew 16%.
+  </div>
+
+  <div class="bignum-corner">PH</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending June 30), USD millions. EBIT = S&amp;P Global standardised operating income; FCF = operating cash flow minus capex. FY2023 includes the Meggitt acquisition (closed Sep 2022); FY2026 includes an $84M tariff-refund credit. A four-year CAGR (FY22 &rarr; FY26) is used for the growth criteria.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (USD millions)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. Revenue grew in every year except FY2025 (-0.4%) while EBIT and FCF compounded faster than sales: EBIT is up 68% and FCF up 77% since FY2022 against revenue up 36%, because margins widened from 17.8% to 22.0%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (S&amp;P operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="100.4" width="30" height="139.6" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="95.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">15,862</text>
+<rect x="123.0" y="215.2" width="30" height="24.8" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="210.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,822</text>
+<rect x="161.0" y="220.5" width="30" height="19.5" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="215.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,212</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241.0" y="72.2" width="30" height="167.8" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="67.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">19,065</text>
+<rect x="279.0" y="210.3" width="30" height="29.7" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="205.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,379</text>
+<rect x="317.0" y="217.1" width="30" height="22.9" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="212.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,599</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397.0" y="64.6" width="30" height="175.4" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="59.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">19,930</text>
+<rect x="435.0" y="205.4" width="30" height="34.6" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="200.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,937</text>
+<rect x="473.0" y="213.7" width="30" height="26.3" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="208.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,984</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553.0" y="65.3" width="30" height="174.7" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="60.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">19,850</text>
+<rect x="591.0" y="203.3" width="30" height="36.7" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="198.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,165</text>
+<rect x="629.0" y="210.6" width="30" height="29.4" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="205.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,341</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709.0" y="50.8" width="30" height="189.2" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="45.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">21,499</text>
+<rect x="747.0" y="198.4" width="30" height="41.6" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="193.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,727</text>
+<rect x="785.0" y="205.6" width="30" height="34.4" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="200.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">3,905</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#fbbf24;">+7.9%</div>
+      <div class="sub">$15.9B &rarr; $21.5B &mdash; includes Meggitt (FY2023); organic growth FY2026 +6.6%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#fbbf24;">+13.8%</div>
+      <div class="sub">$2.82B &rarr; $4.73B &mdash; margin expansion adds ~6pp of growth on top of sales</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+15.3%</div>
+      <div class="sub">$2.21B &rarr; $3.91B &mdash; clears the 15% bar; FCF margin 18.2% vs 13.9% in FY2022</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Gross margin rose from 33.5% (FY2022) to 37.6% (FY2026) and EBIT margin from 17.8% to 22.0% on pricing, mix toward aerospace and Parker's cost programme. FY2023 gross margin (33.8%) is the base for criterion 14. FY2026 includes the one-off $84M tariff refund (~0.4pp).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>EBIT margin</span></div>
+    <svg viewBox="0 0 700 118">
+<line x1="30" y1="100.0" x2="690" y2="100.0" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="59.0" x2="690" y2="59.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="62.0" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="18.0" x2="690" y2="18.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="21.0" font-size="7.5" fill="#64748b">40%</text>
+<text x="8" y="103.0" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,31.3 205,30.7 350,26.4 495,24.1 640,23.0" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="31.3" r="3.2" fill="#60a5fa"/><text x="60" y="24.3" text-anchor="middle" font-size="8" fill="#cbd5e1">33.5%</text>
+<circle cx="205" cy="30.7" r="3.2" fill="#60a5fa"/><text x="205" y="23.7" text-anchor="middle" font-size="8" fill="#cbd5e1">33.8%</text>
+<circle cx="350" cy="26.4" r="3.2" fill="#60a5fa"/><text x="350" y="19.4" text-anchor="middle" font-size="8" fill="#cbd5e1">35.9%</text>
+<circle cx="495" cy="24.1" r="3.2" fill="#60a5fa"/><text x="495" y="17.1" text-anchor="middle" font-size="8" fill="#cbd5e1">37.0%</text>
+<circle cx="640" cy="23.0" r="3.2" fill="#60a5fa"/><text x="640" y="16.0" text-anchor="middle" font-size="8" fill="#cbd5e1">37.5%</text>
+<polyline points="60,63.5 205,63.7 350,59.5 495,57.0 640,54.9" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="63.5" r="3.2" fill="#34d399"/><text x="60" y="76.5" text-anchor="middle" font-size="8" fill="#cbd5e1">17.8%</text>
+<circle cx="205" cy="63.7" r="3.2" fill="#34d399"/><text x="205" y="76.7" text-anchor="middle" font-size="8" fill="#cbd5e1">17.7%</text>
+<circle cx="350" cy="59.5" r="3.2" fill="#34d399"/><text x="350" y="72.5" text-anchor="middle" font-size="8" fill="#cbd5e1">19.8%</text>
+<circle cx="495" cy="57.0" r="3.2" fill="#34d399"/><text x="495" y="70.0" text-anchor="middle" font-size="8" fill="#cbd5e1">21.0%</text>
+<circle cx="640" cy="54.9" r="3.2" fill="#34d399"/><text x="640" y="67.9" text-anchor="middle" font-size="8" fill="#cbd5e1">22.0%</text>
+<text x="60" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue</th><th>Op. Income (EBIT)</th><th>EBIT Margin</th><th>Net Income</th><th>Diluted EPS</th><th>Free Cash Flow</th><th>Capex</th><th>Net Cash (Debt)</th><th>DPS</th></tr>
+    <tr><td>FY2022</td><td>15,862</td><td>2,822</td><td>17.8%</td><td>1,316</td><td>$10.09</td><td>2,212</td><td>230</td><td>-11,063</td><td>$4.42</td></tr>
+    <tr><td>FY2023</td><td>19,065</td><td>3,379</td><td>17.7%</td><td>2,083</td><td>$16.04</td><td>2,599</td><td>381</td><td>-12,322</td><td>$5.47</td></tr>
+    <tr><td>FY2024</td><td>19,930</td><td>3,937</td><td>19.8%</td><td>2,844</td><td>$21.84</td><td>2,984</td><td>400</td><td>-10,372</td><td>$6.07</td></tr>
+    <tr><td>FY2025</td><td>19,850</td><td>4,165</td><td>21.0%</td><td>3,531</td><td>$27.12</td><td>3,341</td><td>435</td><td>-9,019</td><td>$6.69</td></tr>
+    <tr><td>FY2026</td><td>21,499</td><td>4,727</td><td>22.0%</td><td>3,648</td><td>$28.48</td><td>3,905</td><td>459</td><td>-8,232</td><td>$7.40</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">EBIT is S&amp;P Global's standardised operating income and does not equal Parker's reported segment operating income less corporate expenses ($5,068M in FY2026, which includes other items). GAAP net income to common shareholders; EPS is GAAP diluted. Net cash (debt) = cash less total debt per S&amp;P ($501M less $8,733M for FY2026). DPS is cash dividends declared per fiscal year.</div>
+  <div class="footer-note">Source: Parker Hannifin Q4 FY2026 earnings release (Aug 6, 2026); stockanalysis.com (S&amp;P Global Market Intelligence) for FY2022-25 financials, margins and ratios. All figures in USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q4 FY2026, Jun 2026) &amp; Recent Trend</div></div>
+  <div class="sec-sub">Eight quarters, Q1 FY2025 to Q4 FY2026 (fiscal quarters end Sep/Dec/Mar/Jun). Reported Aug 6, 2026; Q1 FY2027 results are due Nov 5, 2026, after which the Filtration Group deal enters the numbers.</div>
+
+  <div class="headline-box">
+    <div class="title">What actually moved the numbers</div>
+    <p>Growth turned from flat to roughly 10% in a year: YoY revenue was between -2.3% and +1.2% in the four quarters of FY2025 and +3.7%, +9.1%, +10.6% and +9.8% in FY2026. Q4 FY2026 sales were a record $5,755M (organic +8.0%, acquisitions +1.5%, currency +0.3%), with Aerospace Systems up 13.4% (organic 13.3%) and Diversified Industrial up 8.1%. Adjusted segment margin was a record 28.0% (+110bps), and adjusted EPS $9.27 (+21%). Orders rose 19% in the quarter (Diversified North America +16%, International +24%, Aerospace +18%) and backlog reached $12.8B. Free cash flow of $1.56B in Q4 lifted FY2026 FCF to a record $3.9B. Note that Q4 includes an $84M tariff refund (excluded from adjusted figures). The stock fell 6.8% on Oct 22, 2026 and closed between about $880 and $930 in the following six sessions; I did not verify the reason.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (USD bn)</div>
+    <div class="chart-sub">Revenue has stepped up from ~$4.9B to $5.8B per quarter in a year. YoY: Q4 FY25 +1.1%, Q1 FY26 +3.7%, Q2 +9.1%, Q3 +10.6%, Q4 +9.8%. Part of the FY2026 growth is acquired (Curtis; ~1.2% for the year) and currency (+1.2%).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, USD bn</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="24" y="49.0" width="56" height="81.0" fill="#2dd4bf"/><text x="52" y="44.0" text-anchor="middle" font-size="9" fill="#cbd5e1">4.90</text><text x="52" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="107" y="51.7" width="56" height="78.3" fill="#2dd4bf"/><text x="135" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">4.74</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="190" y="48.1" width="56" height="81.9" fill="#2dd4bf"/><text x="218" y="43.1" text-anchor="middle" font-size="9" fill="#cbd5e1">4.96</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="273" y="43.5" width="56" height="86.5" fill="#2dd4bf"/><text x="301" y="38.5" text-anchor="middle" font-size="9" fill="#cbd5e1">5.24</text><text x="301" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="356" y="46.1" width="56" height="83.9" fill="#2dd4bf"/><text x="384" y="41.1" text-anchor="middle" font-size="9" fill="#cbd5e1">5.08</text><text x="384" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="439" y="44.6" width="56" height="85.4" fill="#2dd4bf"/><text x="467" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">5.17</text><text x="467" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="39.4" width="56" height="90.6" fill="#2dd4bf"/><text x="550" y="34.4" text-anchor="middle" font-size="9" fill="#cbd5e1">5.49</text><text x="550" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="605" y="35.0" width="56" height="95.0" fill="#2dd4bf"/><text x="633" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">5.75</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">EBIT (Operating Income) &mdash; Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">S&amp;P-standardised operating income (gross profit less SG&amp;A), so it can differ from Parker's segment income. Q4 FY2026 ($1,350M, 23.5% margin) includes the $84M tariff refund; excluding it the margin would be ~22.0%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, USD m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="24" y="60.8" width="56" height="69.2" fill="#60a5fa"/><text x="52" y="55.8" text-anchor="middle" font-size="9" fill="#cbd5e1">984</text><text x="52" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="107" y="61.0" width="56" height="69.0" fill="#60a5fa"/><text x="135" y="56.0" text-anchor="middle" font-size="9" fill="#cbd5e1">980</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="190" y="54.5" width="56" height="75.5" fill="#60a5fa"/><text x="218" y="49.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,073</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="273" y="50.6" width="56" height="79.4" fill="#60a5fa"/><text x="301" y="45.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,128</text><text x="301" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="356" y="54.6" width="56" height="75.4" fill="#60a5fa"/><text x="384" y="49.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,072</text><text x="384" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="439" y="50.9" width="56" height="79.1" fill="#60a5fa"/><text x="467" y="45.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,124</text><text x="467" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="46.9" width="56" height="83.1" fill="#60a5fa"/><text x="550" y="41.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,181</text><text x="550" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="605" y="35.0" width="56" height="95.0" fill="#60a5fa"/><text x="633" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,350</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>USD m</th><th>Q1 FY25</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th></tr>
+    <tr><td>Revenue</td><td>4,904</td><td>4,743</td><td>4,960</td><td>5,243</td><td>5,084</td><td>5,174</td><td>5,486</td><td>5,755</td></tr>
+    <tr><td>YoY growth</td><td>+1.2%</td><td>-1.6%</td><td>-2.2%</td><td>+1.1%</td><td>+3.7%</td><td>+9.1%</td><td>+10.6%</td><td>+9.8%</td></tr>
+    <tr><td>EBIT</td><td>984</td><td>980</td><td>1,073</td><td>1,128</td><td>1,072</td><td>1,124</td><td>1,181</td><td>1,350</td></tr>
+    <tr><td>EBIT margin</td><td>20.1%</td><td>20.7%</td><td>21.6%</td><td>21.5%</td><td>21.1%</td><td>21.7%</td><td>21.5%</td><td>23.5%</td></tr>
+    <tr><td>Diluted EPS</td><td>$5.34</td><td>$7.25</td><td>$7.37</td><td>$7.15</td><td>$6.29</td><td>$6.60</td><td>$7.06</td><td>$8.53</td></tr>
+    <tr><td>Free cash flow</td><td>649</td><td>814</td><td>542</td><td>1,336</td><td>693</td><td>768</td><td>881</td><td>1,563</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly EBIT, EPS (GAAP diluted) and free cash flow are from S&amp;P Global via stockanalysis.com; Q4 FY2026 GAAP diluted EPS is $8.54 in Parker's release ($8.53 in S&amp;P data). Adjusted Q4 EPS was $9.27.</div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Metric (USD m)</th><th>Prior-year quarter</th><th>Latest quarter</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>5,243</td><td>5,755</td><td>+9.8%</td></tr>
+    <tr><td>Gross profit (S&amp;P)</td><td>1,968</td><td>2,182</td><td>+10.9%</td></tr>
+    <tr><td>EBIT (S&amp;P operating income)</td><td>1,128</td><td>1,350</td><td>+19.7%</td></tr>
+    <tr><td>Segment operating income (reported)</td><td>1,254</td><td>1,524</td><td>+21.5%</td></tr>
+    <tr><td>Adjusted segment operating income</td><td>1,410</td><td>1,614</td><td>+14.5% (margin 26.9% &rarr; 28.0%)</td></tr>
+    <tr><td>&nbsp;&nbsp;Aerospace Systems (adjusted)</td><td>486</td><td>567</td><td>+16.7% (margin 29.0% &rarr; 29.8%)</td></tr>
+    <tr><td>Net income to common (GAAP)</td><td>923</td><td>1,091</td><td>+18.2%</td></tr>
+    <tr><td>Diluted EPS GAAP / adjusted ($)</td><td>7.15 / 7.69</td><td>8.54 / 9.27</td><td>+19% / +21%</td></tr>
+    <tr><td>Free cash flow</td><td>1,336</td><td>1,563</td><td>+17.0%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2027, excludes Filtration Group and CIRCOR):</b> reported and organic sales growth of 5.5% to 8.5%; segment operating margin 24.5-24.9% reported (27.5-27.9% adjusted); EPS $30.00-31.00 GAAP ($34.25-35.25 adjusted). Previously completed acquisitions add ~0.5% to growth and currency is a ~0.5% headwind.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Filtration Group (closed Aug 13, 2026):</b> reported value above $9B; expected to add about $1.8B of sales in the first 10.5 months of FY2027, to be neutral to adjusted EPS in Q1 and accretive for the full year, with ~$220M of pre-tax cost synergies by the end of year three. Roughly 60% of its sales sit in Diversified North America and 40% in International. Funded largely with new debt (my inference: net debt was $8.2B before the deal; the exact financing mix is not verified here).
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>FY2031 targets (Aug 2026):</b> adjusted segment operating margin of 30% (raised by 300bps after surpassing the 27% target), 4-6% organic growth, 17% free cash flow margin and more than 10% adjusted EPS growth. These are management ambitions, not forecasts.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (price over fiscal-year EPS). On this basis Parker trades well above its own recent history; forward P/E is shown for context. Leverage is about to rise because of the Filtration Group purchase.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E (GAAP) &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E (~31.6x = $899.82 / FY2026 GAAP EPS $28.48) is ~122% of the FY2022-26 fiscal-year-end average (~26.0x). Fiscal-year-end P/Es are S&amp;P/stockanalysis figures at each Jun 30 close (dividend-adjusted prices), so they are approximate. The FY2022 earnings base was depressed by Meggitt costs; FY2026 (33.8x) was the peak.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY22-26 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="56.7" width="70" height="53.3" fill="#60a5fa"/><text x="55" y="51.7" text-anchor="middle" font-size="9" fill="#cbd5e1">24.0x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="56.7" width="70" height="53.3" fill="#60a5fa"/><text x="150" y="51.7" text-anchor="middle" font-size="9" fill="#cbd5e1">24.0x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="59.3" width="70" height="50.7" fill="#60a5fa"/><text x="245" y="54.3" text-anchor="middle" font-size="9" fill="#cbd5e1">22.9x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="53.9" width="70" height="56.1" fill="#60a5fa"/><text x="340" y="48.9" text-anchor="middle" font-size="9" fill="#cbd5e1">25.3x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="35.0" width="70" height="75.0" fill="#60a5fa"/><text x="435" y="30.0" text-anchor="middle" font-size="9" fill="#cbd5e1">33.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="39.9" width="70" height="70.1" fill="#2dd4bf"/><text x="530" y="34.9" text-anchor="middle" font-size="9" fill="#cbd5e1">31.6x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="52.3" x2="690" y2="52.3" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="48.3" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 26.0x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E is ~25.3x (next-12-month consensus; S&amp;P/stockanalysis, scaled to the Oct 30 close) versus a FY2022-26 year-end forward average of ~21.0x (about 121% of it), and ~25.9x on the adjusted FY2027 guidance midpoint of $34.75 (excludes Filtration Group). PEG is ~2.5 per S&amp;P data. The scorecard uses the trailing GAAP basis (ratio 1.22 = 1/5); on the forward basis the ratio is 1.21, also 1/5. Average analyst price target $1,152.58 (26 analysts, Oct 26) implies ~28% upside, but targets have been drifting down in October (Stifel $1,002, Mizuho $1,200, JPMorgan $1,131).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (USD m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has been 1.5% to 2.1% of revenue every year FY2022-26 (FY2026: $459M, 2.1%), so the model is asset-light for an industrial manufacturer. Acquisitions are separate and larger ($1.0B in FY2026 for Curtis; ~$9B for Filtration Group in FY2027).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (USD m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="127.4" width="60" height="32.6" fill="#60a5fa"/><text x="60" y="122.4" text-anchor="middle" font-size="8" fill="#cbd5e1">230</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="170" y="106.0" width="60" height="54.0" fill="#60a5fa"/><text x="200" y="101.0" text-anchor="middle" font-size="8" fill="#cbd5e1">381</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="310" y="103.4" width="60" height="56.6" fill="#60a5fa"/><text x="340" y="98.4" text-anchor="middle" font-size="8" fill="#cbd5e1">400</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="450" y="98.4" width="60" height="61.6" fill="#60a5fa"/><text x="480" y="93.4" text-anchor="middle" font-size="8" fill="#cbd5e1">435</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="590" y="95.0" width="60" height="65.0" fill="#60a5fa"/><text x="620" y="90.0" text-anchor="middle" font-size="8" fill="#cbd5e1">459</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<polyline points="60,70.0 200,40.4 340,39.9 480,30.0 620,33.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="70.0" r="3" fill="#fbbf24"/><text x="60" y="61.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.45%</text>
+<circle cx="200" cy="40.4" r="3" fill="#fbbf24"/><text x="200" y="31.4" text-anchor="middle" font-size="7.5" fill="#fde68a">2.00%</text>
+<circle cx="340" cy="39.9" r="3" fill="#fbbf24"/><text x="340" y="30.9" text-anchor="middle" font-size="7.5" fill="#fde68a">2.01%</text>
+<circle cx="480" cy="30.0" r="3" fill="#fbbf24"/><text x="480" y="21.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.19%</text>
+<circle cx="620" cy="33.0" r="3" fill="#fbbf24"/><text x="620" y="24.0" text-anchor="middle" font-size="7.5" fill="#fde68a">2.13%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="1.5 312.6" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="277.1 37.1" stroke-dashoffset="-1.5" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="35.6 278.6" stroke-dashoffset="-278.6" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~88% inst.</text></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders (directors &amp; officers) ~0.5%</div><div><span class="dot" style="background:#60a5fa;"></span>Institutions ~88% (S&amp;P/stockanalysis; the largest are index and asset-management firms)</div><div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~11%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Returns</div>
+      <p>Diluted shares were ~130M in FY2022 and 128.1M in FY2026 (basic 126.1M in Q4), a fall of about 1.5% over four years: buybacks ($1.3B in FY2026; $1.8B in FY2025) have only just outpaced stock compensation, and the Q4 FY2026 count was 0.9% below a year earlier. The dividend is $2.00 per quarter ($8.00 annualised, ~0.9% yield) after a 70th consecutive annual increase; payout is ~26% of GAAP earnings. About $2B was returned to shareholders in FY2026.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Insiders &amp; honest caveats:</b> Parker has no founder or controlling holder; Jenny Parmentier is Chairman and CEO. The ~0.5% insider figure is S&amp;P's older snapshot and the ~88% institutional figure comes from the same source; I did not verify the current top-holder percentages or whether employees hold a large stake through retirement plans, so insider ownership is scored 0/5. The WACC used for criterion 7 (~8.5%) is my own estimate.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> at Jun 30, 2026, cash was $501M and total debt $8.73B (net debt $8.23B, 1.45x EBITDA, down from $12.3B and 2.9x in FY2023 as Parker paid down Meggitt debt). The Filtration Group purchase (>$9B, closed Aug 13, 2026) reverses much of that deleveraging; Parker historically pays debt down quickly after deals, but no leverage target or timeline was verified here. Illustrative arithmetic only, not guidance: $8.2B plus ~$9B of new debt over roughly $5.7B of EBITDA plus ~$0.5B from the acquired business (my assumption) would be about 2.8-3x.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are four-year (FY2022-26) on S&amp;P-standardised figures. Criterion #14 uses gross margin (revenue minus cost of sales) over FY2023 &rarr; FY2026. Several inputs are judgment calls or third-party estimates, flagged below.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Detail</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+7.9% &mdash; $15.9B &rarr; $21.5B. FY2023 (+20.2%) includes the Meggitt acquisition (closed Sep 2022) and FY2025 was -0.4%; organic growth was 6.6% in FY2026 (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+13.8% &mdash; S&amp;P-standardised operating income $2.82B &rarr; $4.73B; just under the 15% bar, helped by Meggitt and a margin climb from 17.8% to 22.0% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>22.0% (FY2026), up from 17.8% in FY2022. On the company's own basis, adjusted segment margin was 27.3% (24.5% reported) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+15.3% &mdash; $2.21B &rarr; $3.91B (OCF less capex); FY2026 FCF was a record, +16.9% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Self-described global leader in motion and control technologies and among the very largest suppliers of hydraulics, filtration, sealing and aerospace actuation components; no verified global %-share, and rivals such as Eaton and Bosch Rexroth are strong in sub-segments. Scored as a strong, contested #1/#2 (score 4/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; motion and control components is a fragmented market with many specialist suppliers, distributors and regional players; Parker is the largest but holds a modest share of the whole. No verified top-N share (score 1/5, judgment)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 16.3% (S&amp;P Global, FY2026) vs an estimated WACC of ~8.5% (my estimate from beta ~1.1, not a published figure), a ~7.8pp spread; ROIC has risen from 12.3% in FY2023 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.45x at Jun 30, 2026 (net debt $8.23B; FY2026 EBITDA $5.66B, S&amp;P). Reported before the ~$9B Filtration Group purchase closed on Aug 13, 2026; pro-forma leverage will be higher (my estimate ~3x, not company-stated) (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>82.6% (FY2026: FCF $3.91B / EBIT $4.73B); 5-year path 78% / 77% / 76% / 80% / 83% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 31.6x ($899.82 / FY2026 EPS $28.48) vs FY22-26 fiscal-year-end average 26.0x (ratio 1.22); forward P/E ~25.3x vs ~21.0x (ratio 1.21). Scored on the trailing basis (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Diluted shares 130.2M (FY2025) and ~130M (FY2022) &rarr; 128.1M (FY2026), about -1.6% over four years; basic 126.1M in Q4 FY2026. Repurchases roughly offset stock compensation until FY2026 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders hold under 1% (S&amp;P/stockanalysis ~0.5%, an older snapshot); ~88% is institutional. No founder or controlling holder, and I could not verify a broad employee ownership plan of 5%+ (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>2.1% of FY2026 revenue ($459M on $21.5B); 1.5-2.1% every year FY22-26 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 33.80% (FY2023) &rarr; 37.55% (FY2026), +3.75pp, improving. Basis is gross margin (revenue less cost of sales). FY2026 includes an $84M one-off tariff refund credited to cost of sales (about 0.4pp) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 3&times;11=6.6 &middot; #3 5&times;10=10.0 &middot; #4 4&times;8=6.4 &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 3&times;10=6.0 &middot; #8 3&times;6=3.6 &middot; #9 4&times;8=6.4 &middot; #10 1&times;8=1.6 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0. Total 64.0 / 105 = <b>61/100</b>. Criteria met: 9/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses S&amp;P ROIC and my own WACC estimate; #12 relies on an older S&amp;P insider snapshot; #10 compares GAAP P/E (which includes amortisation of acquired intangibles) with its own history.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue growth has re-accelerated (organic +8.0% in Q4 FY2026), orders rose 19% and backlog is a record $12.8B, so FY2027 starts with visibility. Quality metrics are strong and improving: EBIT margin 22.0% (adjusted segment margin 27.3%), gross margin +3.75pp in three years, FCF conversion 83%, capex ~2% of sales and ROIC of ~16%. FY2026 free cash flow was a record $3.9B (18.2% margin), the dividend has risen for 70 straight years, and management has a record of buying and integrating businesses (Meggitt, Curtis) while lifting margins above its own target. Net debt/EBITDA of 1.45x at June gave room for the Filtration Group deal.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation is the main tension: trailing GAAP P/E of ~31.6x is ~22% above the five-year average and the stock is only ~18% off its high, so expectations are already high; the Oct 22 drop of 6.8% shows how sensitive it is. Filtration Group (>$9B) pushes leverage back up (my estimate ~3x pro forma) and adds integration risk, and ROIC will dip with the added goodwill. Growth is cyclical: FY2025 was -0.4% and international organic growth was flat in EMEA and negative in Latin America in FY2026. Part of FY2026's margin is a tariff refund. Aerospace (a third of sales) carries the growth and concentrates exposure to commercial and defense build rates. There is no founder or large insider stake.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Parker Hannifin Corporation, Q4 and full-year fiscal 2026 earnings release (Form 8-K Exhibit 99.1, Aug 6, 2026); Parker press releases on the Filtration Group completion (Aug 13, 2026) and Q1 FY2027 earnings date (Oct 20, 2026); stockanalysis.com (S&amp;P Global Market Intelligence) for FY2022-25 financials, ratios, margins, price, 52-week range, analyst targets and share data (price data to Oct 30, 2026); digrin.com for month-end closes. WACC, market share and concentration scores are my own judgment. Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Parker-Hannifin &mdash; NYSE, USD share price trend. Calendar year-end closes for 2021-2025 plus the Oct 30, 2026 close. The shares fell in 2022, then compounded strongly from 2023 as margins and aerospace demand rose.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Parker-Hannifin &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Dec 31 closes for 2021-2025 (unadjusted for dividends; month-end closes from digrin.com) plus the Oct 30, 2026 close ($899.82). The dashed line is the straight-line annualised price CAGR from the Dec 2021 point to now (about 4.8 years, shown on a 5-year basis), excluding dividends (~0.9% yield). The 52-week range is $755.10 &ndash; $1,099.94.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<text x="363" y="16" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&rarr;Now): +23.1%</text>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,145.5 L 172.8,150.0 L 299.6,122.1 L 426.4,93.3 L 553.2,53.4 L 680.0,50.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="145.5" x2="680.0" y2="50.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,145.5 L 172.8,150.0 L 299.6,122.1 L 426.4,93.3 L 553.2,53.4 L 680.0,50.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="145.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="133.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$318.12</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="150.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="168.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$291.00</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="122.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="110.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$460.70</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="93.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="81.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$636.03</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="53.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="41.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$878.96</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="50.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="68.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$899.82</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price CAGR excludes dividends and is a simple start-to-now measure; the window starts after the Dec 2021 close ($318.12), before the 2022 drawdown (Dec 2022: $291.00). Fiscal-year-end (June) closes were $307.11 (2021), $246.05 (2022), $390.04 (2023), $505.81 (2024), $698.47 (2025) and $978.12 (2026). Last split: 3-for-2 in 2007. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

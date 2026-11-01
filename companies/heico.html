@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HEICO Corporation — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/heico.html">
+<meta property="og:title" content="HEICO Corporation — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEICO Corporation — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>HEICO Corporation</h1>
+  <div class="badges">
+    <div class="badge">NYSE: HEI</div>
+    <div class="badge">FY ends Oct 31 (FY2026 not yet reported)</div>
+    <div class="badge">HQ: Hollywood, Florida</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">Two share classes: HEI and HEI.A</div>
+    <div class="badge warn">Premium Valuation (~54x Trailing GAAP P/E) &mdash; FY2026 Ended Oct 31, Results Due ~December</div>
+  </div>
+
+  <div class="price">$321.36</div>
+  <div class="price-sub">Oct 30, 2026 close (NYSE, USD, HEI common shares) &middot; Market cap &asymp; $44.9B if all 139.8M shares are valued at the HEI price (S&amp;P method), nearer $38B if the 84.5M lower-priced Class A shares are valued at their own price (estimate) &middot; 52-wk range &asymp; $256 &ndash; $377 (third-party, as of Oct 21) &middot; 1-yr price change &asymp; -2.5% (Oct 26) &middot; Beta 1.09 &middot; Analyst consensus: Buy (24 analysts), avg PT $390.70 (+22%) &middot; Dividend $0.13 semi-annual ($0.26/yr, ~0.1% yield) &middot; Next report (Q4/FY2026): December 2026 (date not confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> HEICO describes itself as the world's largest non-OEM supplier of FAA-approved PMA replacement aircraft parts, and its other Flight Support and Electronic Technologies niches (specialty products, repair, defense and space electronics) are often #1 or #2 within narrow product categories. In the wider aircraft-parts aftermarket, however, the OEMs (GE, RTX, Honeywell and others) remain much larger &mdash; see Section 4 for how this was scored.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Basis &amp; definition note:</b> Every figure is in US dollars. <b>HEICO's fiscal year ends October 31</b>: &ldquo;FY2025&rdquo; is Nov 2024&ndash;Oct 2025. <b>FY2026 ended on Oct 31, 2026 but has not been reported</b> (the Q4/FY2026 release is expected in December), so the basis is five full fiscal years FY2021&ndash;FY2025, trailing twelve months to Jul 31, 2026 (TTM) and the latest reported quarter, Q3 FY2026 (Feb&ndash;Jul 2026, reported Aug 25, 2026). Financials are S&amp;P Global Market Intelligence standardised figures (&ldquo;Op. Income&rdquo; = GAAP operating income; FCF = operating cash flow minus capex), cross-checked to HEICO's Q3 FY2026 release. Net income and EPS are GAAP and attributable to HEICO shareholders; FY2025-26 include discrete tax benefits from stock-option exercises ($0.19 in Q1 FY25, $0.15 in Q1 FY26 per diluted share). The company-defined net debt/EBITDA is used for leverage.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val" style="color:#34d399;">$4.49B</div>
+      <div class="sub">+16.3% YoY (FY2024: +30.0%)</div>
+      <div class="note">TTM to Jul 2026: $5.18B (+20.7%). Q3 FY2026 net sales $1.41B, +23% (organic +14%). About 70% of sales come from the Flight Support Group.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP operating)</div>
+      <div class="val" style="color:#34d399;">23.0%</div>
+      <div class="sub">FY2025, up from 21.1% in FY2021</div>
+      <div class="note">Gross margin 39.8% (FY2021: 39.0%). TTM operating margin 24.3%; Q3 FY2026 25.1% (a record).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">13.1% vs ~9.9%</div>
+      <div class="sub">Spread &asymp; +3.2pp (S&amp;P Global)</div>
+      <div class="note">Third-party estimates. ROIC is held down by $4.4B of goodwill from a long acquisition record; returns on the acquired capital have so far cleared the cost of capital.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#fbbf24;">1.57x</div>
+      <div class="sub">Jul 31, 2026 (company-defined)</div>
+      <div class="note">Net debt $2.30B (total debt $2.54B less cash $0.24B) over TTM EBITDA $1.47B. Up from 1.60x at Oct 2025 only after a $1.0B cash acquisition spend in nine months; $1.2B of new senior notes replaced revolver borrowings.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">79/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong score: double-digit growth in revenue, EBIT and FCF, 23% margins, steady gross margin, a founder-family holding and almost no capex. Held back by a moderate ROIC spread, acquisition-funded leverage and a niche (not dominant) market position.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="291.7 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-291.7" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">13/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>13 criteria fully met</b> &mdash; revenue, EBIT and FCF CAGRs, EBIT margin, market position (#1 in its PMA niche), ROIC vs WACC, leverage under 2x, FCF conversion, entry multiple vs own history (at/just below average), share count (flat), insider/founder family ownership, capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>1 not met</b> &mdash; market concentration only (many separate niches rather than one concentrated market; scored 3). Note that the entry-multiple criterion is met only relative to HEICO's own always-high multiple</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    HEICO is a Florida-based aerospace, defense and electronics group, founded in 1957 and still led by the founding family (Co-Chairmen and Co-CEOs Eric and Victor Mendelson). It has two segments. The <b>Flight Support Group (FSG)</b> (about 70% of sales) makes FAA-approved PMA replacement parts that compete with OEM spare parts at lower prices, plus specialty products (such as repair, avionics and thermal products), repair and overhaul services and distribution. The <b>Electronic Technologies Group (ETG)</b> makes niche electronic, microwave, power and infrared products for defense, space, medical and industrial customers. The model is a long compounding story built on <b>organic niche growth plus a steady stream of small-to-mid-sized acquisitions</b> funded by cash flow and moderate debt: capex is only ~1.6% of sales, FCF was $861m in FY2025 and 84% of operating income. Fiscal 2025 revenue grew 16.3% to $4.49B with a 23.0% operating margin; the first nine months of fiscal 2026 accelerated to +21% sales and +30% operating income, with Q3 FY2026 setting records for sales ($1.41B), operating income ($355m, 25.1% margin) and net income ($235m, $1.67 per share). The shares trade at about 54x trailing GAAP earnings &mdash; roughly in line with HEICO's own history (average ~55x at year-ends FY2021-25) but a very high absolute multiple, so the stock is far more sensitive to any slowing of growth than the fundamentals suggest.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Fiscal year</b> &mdash; FY2026 (Nov 2025&ndash;Oct 2026) has ended but is unreported, so the latest annual figures are FY2025 and 'current' growth comes from the TTM and nine-month figures. (2) <b>M&amp;A</b> &mdash; reported growth includes acquisitions (FY2023's +34% included the Wencor deal; Q3 FY2026's +23% is 14% organic plus acquisitions), so reported CAGRs flatter organic growth. (3) <b>Two share classes</b> &mdash; HEI (1 vote) and HEI.A (1/10 vote) trade at different prices (HEI.A roughly 24% lower); the price, P/E and market cap on this page use the HEI common share, and the same GAAP EPS applies to both, so HEI.A trades at a lower P/E.
+  </div>
+
+  <div class="bignum-corner">HEI</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (fiscal years ending Oct 31) plus trailing twelve months to Jul 31, 2026, USD millions (S&amp;P Global Market Intelligence). Op. Income = GAAP operating income; Free Cash Flow = operating cash flow minus capex. FY2023 includes the first months of the Wencor acquisition; FY2026 is not yet reported.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m, FY ends Oct 31)</div>
+    <div class="chart-sub">Axis in $ millions. Revenue grew in every year (+4.4%, +18.4%, +34.4%, +30.0%, +16.3%), EBIT roughly 2.6x over four years, and FCF 2.1x. FY2023's FCF dipped (-8%) as the Wencor acquisition added working capital and cost; FY2024-25 FCF rebounded to $614m and $861m.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">1,000</text>
+<line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">2,000</text>
+<line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">3,000</text>
+<line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">4,000</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">5,000</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="157.9" width="30" height="82.1" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="152.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,866</text>
+<rect x="123.0" y="222.7" width="30" height="17.3" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="217.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">394</text>
+<rect x="161.0" y="222.0" width="30" height="18.0" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="217.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">408</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2021</text>
+<rect x="241.0" y="142.8" width="30" height="97.2" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="137.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,208</text>
+<rect x="279.0" y="218.5" width="30" height="21.5" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="213.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">489</text>
+<rect x="317.0" y="220.8" width="30" height="19.2" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="215.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">436</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="397.0" y="109.4" width="30" height="130.6" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="104.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,968</text>
+<rect x="435.0" y="212.0" width="30" height="28.0" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="207.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">637</text>
+<rect x="473.0" y="222.4" width="30" height="17.6" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="217.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">399</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="553.0" y="70.2" width="30" height="169.8" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="65.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,858</text>
+<rect x="591.0" y="203.8" width="30" height="36.2" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="198.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">822</text>
+<rect x="629.0" y="213.0" width="30" height="27.0" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="208.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">614</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="709.0" y="42.7" width="30" height="197.3" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="37.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">4,485</text>
+<rect x="747.0" y="194.6" width="30" height="45.4" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="189.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,032</text>
+<rect x="785.0" y="202.1" width="30" height="37.9" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="197.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">861</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2025</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+24.5%</div>
+      <div class="sub">$1.87B &rarr; $4.49B &mdash; organic growth plus acquisitions; FY2023's +34% was Wencor-boosted</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+27.2%</div>
+      <div class="sub">$394m &rarr; $1.03B &mdash; EBIT grew faster than revenue as margin rose from 21.1% to 23.0%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#34d399;">+20.5%</div>
+      <div class="sub">$408m &rarr; $861m &mdash; includes a flat FY2021-23 stretch while M&amp;A absorbed cash; TTM FCF is $1.03B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin Trend</div>
+    <div class="chart-sub">Gross margin (net sales minus cost of sales) has been remarkably stable at 38.9-39.8% across FY2021-25 (TTM 40.4%), while operating margin moved from 21.1% to 23.0% (TTM 24.3%) on lower SG&amp;A as a share of sales. Criterion 14 uses gross margin.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 135">
+<line x1="30" y1="110.0" x2="690" y2="110.0" stroke="#263049" stroke-width="1"/><text x="2" y="113.0" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="76.0" x2="690" y2="76.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="79.0" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="42.0" x2="690" y2="42.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="45.0" font-size="7.5" fill="#64748b">40%</text>
+<polyline points="60,43.7 205,43.6 350,43.9 495,43.8 640,42.3" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="43.7" r="3.2" fill="#60a5fa"/><text x="60" y="36.7" text-anchor="middle" font-size="8" fill="#cbd5e1">39.0%</text>
+<circle cx="205" cy="43.6" r="3.2" fill="#60a5fa"/><text x="205" y="36.6" text-anchor="middle" font-size="8" fill="#cbd5e1">39.1%</text>
+<circle cx="350" cy="43.9" r="3.2" fill="#60a5fa"/><text x="350" y="36.9" text-anchor="middle" font-size="8" fill="#cbd5e1">38.9%</text>
+<circle cx="495" cy="43.8" r="3.2" fill="#60a5fa"/><text x="495" y="36.8" text-anchor="middle" font-size="8" fill="#cbd5e1">38.9%</text>
+<circle cx="640" cy="42.3" r="3.2" fill="#60a5fa"/><text x="640" y="35.3" text-anchor="middle" font-size="8" fill="#cbd5e1">39.8%</text>
+<polyline points="60,74.1 205,72.3 350,73.5 495,73.8 640,70.9" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="74.1" r="3.2" fill="#34d399"/><text x="60" y="88.1" text-anchor="middle" font-size="8" fill="#cbd5e1">21.1%</text>
+<circle cx="205" cy="72.3" r="3.2" fill="#34d399"/><text x="205" y="86.3" text-anchor="middle" font-size="8" fill="#cbd5e1">22.1%</text>
+<circle cx="350" cy="73.5" r="3.2" fill="#34d399"/><text x="350" y="87.5" text-anchor="middle" font-size="8" fill="#cbd5e1">21.5%</text>
+<circle cx="495" cy="73.8" r="3.2" fill="#34d399"/><text x="495" y="87.8" text-anchor="middle" font-size="8" fill="#cbd5e1">21.3%</text>
+<circle cx="640" cy="70.9" r="3.2" fill="#34d399"/><text x="640" y="84.9" text-anchor="middle" font-size="8" fill="#cbd5e1">23.0%</text>
+<text x="60" y="128" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text>
+<text x="205" y="128" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="350" y="128" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="495" y="128" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="640" y="128" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (Oct 31, $m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net Debt*</th><th>DPS</th></tr>
+    <tr><td>FY2021</td><td>1,866</td><td>394</td><td>21.1%</td><td>304</td><td>$2.21</td><td>408</td><td>103.5%</td><td>36</td><td>204</td><td>$0.17</td></tr>
+    <tr><td>FY2022</td><td>2,208</td><td>489</td><td>22.2%</td><td>352</td><td>$2.55</td><td>436</td><td>89.1%</td><td>32</td><td>242</td><td>$0.18</td></tr>
+    <tr><td>FY2023</td><td>2,968</td><td>637</td><td>21.5%</td><td>404</td><td>$2.91</td><td>399</td><td>62.7%</td><td>49</td><td>2,432</td><td>$0.20</td></tr>
+    <tr><td>FY2024</td><td>3,858</td><td>822</td><td>21.3%</td><td>514</td><td>$3.67</td><td>614</td><td>74.7%</td><td>58</td><td>2,204</td><td>$0.21</td></tr>
+    <tr><td>FY2025</td><td>4,485</td><td>1,032</td><td>23.0%</td><td>690</td><td>$4.90</td><td>861</td><td>83.5%</td><td>73</td><td>2,091</td><td>$0.23</td></tr>
+    <tr><td>TTM (Jul'26)</td><td>5,177</td><td>1,256</td><td>24.3%</td><td>848</td><td>$6.00</td><td>1,030</td><td>82.0%</td><td>81</td><td>2,300</td><td>$0.26</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">* Net debt FY2021-FY2025 is S&amp;P's standardised total debt (including leases) minus cash; the company's own figure was $1,950m at Oct 31, 2025 (1.60x EBITDA) and $2,300m at Jul 31, 2026 (1.57x), the latter shown in the TTM row. Net income and EPS are GAAP, attributable to HEICO shareholders (EPS diluted); they include discrete tax benefits from stock-option exercises in some quarters. HEICO reports a single EPS for both share classes. Dividends are paid semi-annually. FY2026 (ended Oct 31, 2026) is not yet reported.</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence) annual, quarterly and TTM statements, ratios and statistics (last updated Aug 27 / Oct 26, 2026); HEICO Q3 FY2026 earnings release (Aug 25, 2026, Exhibit 99.1 to Form 8-K) for TTM EBITDA, net debt, share counts and segment data. USD millions unless stated.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q3 FY2026) &amp; Eight-Quarter Trend</div></div>
+  <div class="sec-sub">Quarter ended Jul 31, 2026, reported Aug 25, 2026. Fiscal Q4 (Aug&ndash;Oct 2026) ended on Oct 31 and is unreported. HEICO does not publish numeric annual guidance; the commentary below is management's qualitative outlook.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Net sales rose 23% to a record $1,413.1m (consolidated organic growth 14%); operating income rose 34% to a record $355.2m (margin 25.1% vs 23.1%); net income rose 33% to $235.4m ($1.67 per diluted share vs $1.26); EBITDA rose 31% to $415.2m and operating cash flow rose 49% to $345.3m. The Flight Support Group grew sales 18% (organic 12%) to $947.8m, with operating income +24% to $245.3m (25.9% margin). The Electronic Technologies Group grew sales 36% (organic 18%) to $483.5m and operating income 55% to $125.6m (26.0% margin), helped by aerospace, defense and other electronics. Over the nine months, sales rose 21% to $3.97B, operating income 30% to $965.5m and EPS 31% to $4.67. Management funded the quarter's acquisitions by issuing $1.2B of senior notes ($550m 4.95% due 2031 and $650m 5.40% due 2036), repaying revolver borrowings; net debt/EBITDA improved to 1.57x.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m, fiscal quarters)</div>
+    <div class="chart-sub">YoY: Q4 FY24 +8.3%, Q1 FY25 +14.9%, Q2 FY25 +14.9%, Q3 FY25 +15.7%, Q4 FY25 +19.3%, Q1 FY26 +14.4%, Q2 FY26 +25.3%, Q3 FY26 +23.1%. Growth has stepped up in the last two quarters as acquisitions closed in fiscal 2026 added to 12-18% organic growth.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22" y="66.8" width="56" height="63.2" fill="#2dd4bf"/><text x="50" y="61.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,014</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY24</text>
+<rect x="106" y="65.9" width="56" height="64.1" fill="#2dd4bf"/><text x="134" y="60.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,030</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="190" y="61.6" width="56" height="68.4" fill="#2dd4bf"/><text x="218" y="56.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,098</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="274" y="58.5" width="56" height="71.5" fill="#2dd4bf"/><text x="302" y="53.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,148</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="358" y="54.7" width="56" height="75.3" fill="#2dd4bf"/><text x="386" y="49.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,209</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="442" y="56.6" width="56" height="73.4" fill="#2dd4bf"/><text x="470" y="51.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,179</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="526" y="44.3" width="56" height="85.7" fill="#2dd4bf"/><text x="554" y="39.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,376</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="610" y="42.0" width="56" height="88.0" fill="#2dd4bf"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,413</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Operating income has risen in six of the last seven sequential quarters (only Q1 FY26 dipped); the margin hit 25.5% in Q2 FY26 and 25.1% in Q3 FY26, a record.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22" y="75.2" width="56" height="54.8" fill="#60a5fa"/><text x="50" y="70.2" text-anchor="middle" font-size="9" fill="#cbd5e1">221</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY24</text>
+<rect x="106" y="73.0" width="56" height="57.0" fill="#60a5fa"/><text x="134" y="68.0" text-anchor="middle" font-size="9" fill="#cbd5e1">230</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="190" y="68.5" width="56" height="61.5" fill="#60a5fa"/><text x="218" y="63.5" text-anchor="middle" font-size="9" fill="#cbd5e1">248</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="274" y="64.3" width="56" height="65.7" fill="#60a5fa"/><text x="302" y="59.3" text-anchor="middle" font-size="9" fill="#cbd5e1">265</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="358" y="59.8" width="56" height="70.2" fill="#60a5fa"/><text x="386" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">283</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="442" y="65.1" width="56" height="64.9" fill="#60a5fa"/><text x="470" y="60.1" text-anchor="middle" font-size="9" fill="#cbd5e1">262</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="526" y="43.2" width="56" height="86.8" fill="#60a5fa"/><text x="554" y="38.2" text-anchor="middle" font-size="9" fill="#cbd5e1">350</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="610" y="42.0" width="56" height="88.0" fill="#60a5fa"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">355</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter</th><th>Revenue ($m)</th><th>YoY</th><th>Op. income ($m)</th><th>Op. margin</th><th>EPS (GAAP)</th><th>FCF ($m)</th></tr>
+    <tr><td>Q4 FY24</td><td>1,014</td><td>+8.3%</td><td>221</td><td>21.8%</td><td>$1.00</td><td>190</td></tr>
+    <tr><td>Q1 FY25</td><td>1,030</td><td>+14.9%</td><td>230</td><td>22.3%</td><td>$1.20</td><td>186</td></tr>
+    <tr><td>Q2 FY25</td><td>1,098</td><td>+14.9%</td><td>248</td><td>22.6%</td><td>$1.12</td><td>189</td></tr>
+    <tr><td>Q3 FY25</td><td>1,148</td><td>+15.7%</td><td>265</td><td>23.1%</td><td>$1.26</td><td>218</td></tr>
+    <tr><td>Q4 FY25</td><td>1,209</td><td>+19.3%</td><td>283</td><td>23.4%</td><td>$1.33</td><td>268</td></tr>
+    <tr><td>Q1 FY26</td><td>1,179</td><td>+14.4%</td><td>262</td><td>22.2%</td><td>$1.35</td><td>165</td></tr>
+    <tr><td>Q2 FY26</td><td>1,376</td><td>+25.3%</td><td>350</td><td>25.5%</td><td>$1.66</td><td>274</td></tr>
+    <tr><td>Q3 FY26</td><td>1,413</td><td>+23.1%</td><td>355</td><td>25.1%</td><td>$1.67</td><td>323</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Q1 FY25 and Q1 FY26 EPS include discrete tax benefits from option exercises ($0.19 and $0.15 per share). Q3 FY26 vs Q3 FY25 (company): net sales $1,413.1m vs $1,147.6m; operating income $355.2m vs $265.0m; net income $235.4m vs $177.3m; Flight Support sales $947.8m vs $802.7m; Electronic Technologies sales $483.5m vs $355.9m. FCF = operating cash flow minus capex (S&amp;P).</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;"><b>Outlook (qualitative):</b> management expects net sales at both segments to keep growing in the rest of fiscal 2026, supported by underlying demand and contributions from fiscal 2026 and 2025 acquisitions, and says it forecasts strong cash flow from operations for fiscal 2026. No numeric FY2026 guidance was found; the sell-side expects roughly 13-14% annual revenue growth and ~19% EPS growth over three years (S&amp;P consensus averages).</div>
+    <div class="callout blue" style="flex:1;"><b>Acquisitions &amp; balance sheet:</b> $1.02B of cash went to acquisitions in the first nine months of FY2026 (versus $0.63B a year earlier), taking goodwill to $4.36B and intangibles to $1.78B. Net debt/EBITDA is 1.57x (target flexibility remains: a $1.2B note issue extended maturities to 2031 and 2036). Capital allocation: &lsquo;organic growth and acquisitions first&rsquo; while keeping a small dividend ($0.13 semi-annual).</div>
+  </div>
+  <div class="callout" style="margin-top:8px;"><b>What to expect next:</b> the Q4/FY2026 report in December will give the first complete FY2026 numbers. Nine-month sales were $3.97B and operating income $965.5m; a fourth quarter near the Q3 run-rate would imply FY2026 sales of roughly $5.3-5.4B and operating income near $1.3B &mdash; arithmetic extrapolation only, not a forecast or guidance.</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E on HEI common shares (price / S&amp;P diluted GAAP EPS; the same EPS applies to HEI.A). HEICO has traded at a persistently high multiple, so being 'at the average' still means a very high absolute multiple. Balance sheet leverage is moderate and acquisition-driven.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E 53.6x ($321.36 / TTM EPS $6.00) is 0.98x HEICO's FY2021-25 fiscal-year-end average of 54.8x (58.4x, 54.9x, 47.8x, 57.4x, 55.5x). Fiscal-year-end prices are the last close of October each year (S&amp;P/stockanalysis.com, not adjusted for dividends); the P/E range over the five years is only 47.8x-58.4x.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing GAAP P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing GAAP P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Average of FY-end points shown</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="38.6" width="78" height="71.4" fill="#60a5fa"/><text x="59" y="33.6" text-anchor="middle" font-size="9" fill="#cbd5e1">58.4x</text><text x="59" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="128" y="42.8" width="78" height="67.2" fill="#60a5fa"/><text x="167" y="37.8" text-anchor="middle" font-size="9" fill="#cbd5e1">54.9x</text><text x="167" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="236" y="51.5" width="78" height="58.5" fill="#60a5fa"/><text x="275" y="46.5" text-anchor="middle" font-size="9" fill="#cbd5e1">47.8x</text><text x="275" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="344" y="39.7" width="78" height="70.3" fill="#60a5fa"/><text x="383" y="34.7" text-anchor="middle" font-size="9" fill="#cbd5e1">57.4x</text><text x="383" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="452" y="42.0" width="78" height="68.0" fill="#60a5fa"/><text x="491" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">55.5x</text><text x="491" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="560" y="44.5" width="78" height="65.5" fill="#2dd4bf"/><text x="599" y="39.5" text-anchor="middle" font-size="9" fill="#cbd5e1">53.6x</text><text x="599" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="42.9" x2="690" y2="42.9" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="38.9" text-anchor="end" font-size="9" fill="#fbbf24">avg 54.8x</text>
+</svg>
+  </div>
+
+  <div class="callout blue"><b>Forward P/E &amp; PEG:</b> S&amp;P's forward P/E was about 44.5x at the Oct 26 price ($308.66), which implies consensus next-twelve-month EPS of roughly $6.94; on the Oct 30 close that is about 46x, versus fiscal-year-end forward P/Es of 53.2x, 56.2x, 51.3x, 59.7x and 61.3x (average ~56.3x) &mdash; a ratio of about 0.82. PEG is about 2.25. Average analyst target $390.70 (24 analysts) implies ~22% upside. The scorecard uses the trailing GAAP basis (ratio 0.98 = 3/5).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light: capex was only 1.5-1.9% of revenue each year ($36m to $73m; TTM $81m, 1.6%), because HEICO's products are engineered parts rather than heavy manufacturing. Acquisitions, not capex, are the main use of cash: $1.02B in the first nine months of FY2026 alone.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="117.1" width="60" height="42.9" fill="#60a5fa"/><text x="60" y="112.1" text-anchor="middle" font-size="8" fill="#cbd5e1">36</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="170" y="121.9" width="60" height="38.1" fill="#60a5fa"/><text x="200" y="116.9" text-anchor="middle" font-size="8" fill="#cbd5e1">32</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="310" y="101.6" width="60" height="58.4" fill="#60a5fa"/><text x="340" y="96.6" text-anchor="middle" font-size="8" fill="#cbd5e1">49</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="450" y="90.9" width="60" height="69.1" fill="#60a5fa"/><text x="480" y="85.9" text-anchor="middle" font-size="8" fill="#cbd5e1">58</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="590" y="73.0" width="60" height="87.0" fill="#60a5fa"/><text x="620" y="68.0" text-anchor="middle" font-size="8" fill="#cbd5e1">73</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<polyline points="60,94.0 200,108.1 340,101.8 480,106.4 620,102.9" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="94.0" r="3" fill="#fbbf24"/><text x="60" y="85.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.94%</text>
+<circle cx="200" cy="108.1" r="3" fill="#fbbf24"/><text x="200" y="99.1" text-anchor="middle" font-size="7.5" fill="#fde68a">1.45%</text>
+<circle cx="340" cy="101.8" r="3" fill="#fbbf24"/><text x="340" y="92.8" text-anchor="middle" font-size="7.5" fill="#fde68a">1.67%</text>
+<circle cx="480" cy="106.4" r="3" fill="#fbbf24"/><text x="480" y="97.4" text-anchor="middle" font-size="7.5" fill="#fde68a">1.51%</text>
+<circle cx="620" cy="102.9" r="3" fill="#fbbf24"/><text x="620" y="93.9" text-anchor="middle" font-size="7.5" fill="#fde68a">1.63%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="35.0 279.2" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="259.5 54.7" stroke-dashoffset="-35.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="19.7 294.4" stroke-dashoffset="-294.4" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~11% insiders</text></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~11.1% (S&amp;P; the Mendelson family and management)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~82.6%</div>
+          <div><span class="dot" style="background:#475569;"></span>Retail / other ~6.3%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Return</div>
+      <p>About 139.8M shares outstanding across both classes (55.2M HEI common and 84.5M HEI.A Class A per the Q3 FY26 release), +0.3% over the last year and roughly +1.4% versus ~137.8M at end-FY2021 (derived from S&amp;P net-cash-per-share), i.e. broadly flat; there is no buyback programme to speak of (buyback yield -0.3%, i.e. small net dilution from option exercises). Dividends are small and rising: $0.17 (FY2021) to $0.23 (FY2025) per share; $0.26 annualised, a ~4% payout of earnings.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;"><b>Founders, insiders &amp; honest caveats:</b> HEICO was founded in 1957 and is run by two Mendelson family members as Co-Chairmen and Co-CEOs (Eric and Victor Mendelson). S&amp;P reports insiders at 11.1% of shares; because HEI common carries one vote per share against 1/10 vote for HEI.A, the family's voting influence is likely higher than its economic stake, but I did not retrieve an exact voting percentage or a named holder list, so none is asserted. Do not read HEI.A prices as equivalent to HEI: the lower-priced Class A shares (about 60% of the share count) make a pure HEI-price market cap overstate the company's value.</div>
+  <div class="callout gray" style="margin-top:8px;"><b>Balance sheet:</b> total debt $2.54B, cash $241m, net debt $2.30B at Jul 31, 2026 (company: 1.57x TTM EBITDA of $1.47B; total debt/net income 3.0x); interest cover ~9.5x; current ratio 2.7. Goodwill ($4.36B) plus intangibles ($1.78B) are 62% of $9.94B total assets, so a bad acquisition would show up as an impairment risk. Redeemable noncontrolling interests ($618m) are a further claim on cash flow (distributions to minority partners were $26m in nine months).</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. Growth CAGRs are 4-year (FY2021&rarr;FY2025, fiscal years ending Oct 31). Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Criterion #14 compares FY2025 gross margin with FY2022's (3 fiscal years). FY2026 (ended Oct 31, 2026) is unreported and not used.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>HEICO</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+24.5% &mdash; $1.87B &rarr; $4.49B; includes acquisitions (e.g. Wencor in FY2023) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+27.2% &mdash; operating income $394m &rarr; $1.03B (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>23.01% (FY2025); TTM 24.3%; 21.1% in FY2021 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+20.5% &mdash; $408m &rarr; $861m (operating cash flow minus capex); FY2022-23 were flat to down (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Largest independent (non-OEM) supplier of FAA-approved PMA parts and #1/#2 in many niches (company description), but small in the whole aftermarket where OEMs dominate; judgment, no verified %-share (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 3 &mdash; many separate niches, each fairly concentrated, but the broader aerospace-parts aftermarket and defense electronics are contested by OEMs and large primes. Judgment, no verified top-N share (score 2/5)</td><td><span class="status-pill status-not">Not met (score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 13.1% vs est. WACC 9.9% (S&amp;P Global), spread +3.2pp; goodwill-heavy balance sheet (score 2/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>1.57x at Jul 31, 2026 (company-defined: net debt $2.30B / TTM EBITDA $1.47B); 1.60x at Oct 31, 2025 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>83.5% (FY2025: FCF $861m / operating income $1,032m); TTM 82.0%; five-year path 104% / 89% / 63% / 75% / 84% (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>GAAP P/E 53.6x vs 54.8x average of FY2021-25 fiscal-year-ends, ratio 0.98 (near the average); forward basis ~46x vs ~56x (0.82). A high multiple that has always been high (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~137.8M (FY2021, derived) &rarr; ~139.8M now, about +1.4%: roughly flat, no buyback programme (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~11.1% (S&amp;P); founding-family Co-Chairmen/Co-CEOs; voting power probably higher through the 1-vote HEI class (unquantified) (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.6% of revenue in FY2025 (TTM 1.6%); 1.5-1.9% across FY2021-25 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 39.07% (FY2022) &rarr; 39.83% (FY2025), +0.76pp: improving (basis: gross margin = net sales minus cost of sales; 3 fiscal years to latest FY) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;"><b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 5&times;13=13.0 &middot; #2 5&times;11=11.0 &middot; #3 5&times;10=10.0 &middot; #4 5&times;8=8.0 &middot; #5 4&times;7=5.6 &middot; #6 2&times;6=2.4 &middot; #7 2&times;10=4.0 &middot; #8 3&times;6=3.6 &middot; #9 4&times;8=6.4 &middot; #10 3&times;8=4.8 &middot; #11 3&times;4=2.4 &middot; #12 3&times;5=3.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 83.2 / 105 = <b>79/100</b>. Criteria met: 13/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #7 uses third-party ROIC/WACC estimates; #10 is applied on trailing GAAP P/E (a 'met' that means near an unusually high long-run average, not cheap); #12 gives 3/5 on S&amp;P's 11.1% insider figure.</div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Compounding with discipline: 4-year CAGRs of 25% (revenue), 27% (EBIT) and 21% (FCF), a 23% operating margin that is still rising (TTM 24.3%), a steady ~39-40% gross margin, and capex of only ~1.6% of sales. Growth has accelerated to +23% in Q3 FY2026 with 14% organic growth and record margins in both segments. A founding-family management team, an acquisition record that has so far earned more than its cost of capital (ROIC 13% vs ~10% WACC), leverage of 1.57x after a $1.0B acquisition year, and FCF conversion above 80% combine growth with quality.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation is the main risk: ~54x trailing and ~46x forward earnings means the stock needs growth to stay near 20% a year, and the 'met' on the entry-multiple criterion only means the multiple is near HEICO's own long-run (always high) average. Reported growth includes acquisitions (organic is 12-18%), goodwill and intangibles are 62% of assets, and leverage has been rising with acquisition spend ($1.0B in nine months). ROIC is only ~3pp above WACC. Aftermarket PMA parts depend on FAA approvals and OEM reactions, ETG is exposed to defense and space budgets, and commercial aviation is cyclical. HEI and HEI.A trade at different prices, so market-cap and P/E figures depend on which class is quoted. FY2026 numbers are not yet public.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence): annual, quarterly and TTM financials, ratios, statistics, price (data updated Aug 27 / Oct 26-30, 2026); HEICO Corporation Q3 FY2026 earnings release, Exhibit 99.1 to Form 8-K (Aug 25, 2026) for quarterly and nine-month results, EBITDA, net debt, share counts and segment data; third-party market-data pages for the 52-week range and HEI.A price (Oct 21-23, 2026). WACC, ROIC, forward EPS and analyst targets are third-party estimates; market cap is stated two ways because of the two share classes. All figures USD. Price as of Oct 30, 2026 close; prepared Nov 1, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">HEICO (NYSE: HEI common shares), USD. A steady climb through fiscal 2021-22, a pause in fiscal 2023, then a strong re-rating in fiscal 2024-25 as growth and margins accelerated; the shares have since moved sideways and are about 15% below their 52-week high.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">HEICO (HEI) &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Last close of October (fiscal year-end) 2021-2025 plus the Oct 30, 2026 close, HEI common shares, unadjusted for dividends (HEICO's dividend is ~0.1% a year), from S&amp;P Global Market Intelligence via stockanalysis.com. The last stock split was a 1.25-for-1 in June 2018, so no split affects this window. The dashed line is the straight-line annualised CAGR between the first and last points. 52-week range roughly $256 &ndash; $377.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="130" x2="680" y2="130" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="80" x2="680" y2="80" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,148.00 L 172.8,135.73 L 299.6,137.85 L 426.4,92.35 L 553.2,54.01 L 680.0,52.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="148.00" x2="680.0" y2="52.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +18.3%</text>
+<path d="M 46.0,148.00 L 172.8,135.73 L 299.6,137.85 L 426.4,92.35 L 553.2,54.01 L 680.0,52.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="148.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="138.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$138.68</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="135.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="125.73" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$162.02</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="137.85" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="154.85" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$158.00</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="92.35" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="82.35" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$244.57</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="54.01" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="44.01" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$317.54</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="52.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="42.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$321.36</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Fiscal-year-end closes (Oct 29-31): FY2021 $138.68, FY2022 $162.02, FY2023 $158.00, FY2024 $244.57, FY2025 $317.54; Oct 30, 2026 close $321.36. The 5-Yr CAGR is computed from the FY2021 close to the current price over 5 years (price only; a ~0.1% dividend yield adds little). The Class A shares (HEI.A) trade at a lower price and are not shown.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
