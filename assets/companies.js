@@ -230,7 +230,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 80,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 175.3, prior: 10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 372.0, note: "Extreme YoY reflects the 2026 NAND pricing supercycle against an unusually weak, depressed prior-year quarter shortly after the Feb 2025 spinoff — not an ongoing run-rate." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q1 FY2027", growth: 378.0, note: "Extreme YoY reflects the 2026 NAND pricing supercycle against an unusually weak, depressed prior-year quarter shortly after the Feb 2025 spinoff — not an ongoing run-rate." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The NAND flash memory maker behind SD cards and enterprise SSDs, spun off from Western Digital in Feb 2025 — up roughly 570% year-to-date on a structural memory shortage colliding with AI-datacenter demand, though the stock has been on a wild round trip: an all-time-high close of $2,335 on June 25, a 56% plunge to $1,015.89 by July 29, and a partial recovery since. Genuinely strong numbers on most criteria, but two can't be tested at all given the short standalone trading history.",
     file: "companies/sandisk.html",
     personalNote: "I didn't see this one coming. To me, SanDisk was always just the name on the memory card in my old camera — not a stock I'd ever think to check. Then a friend mentioned it to me, already deep into a run I'd completely missed: from around $235 at the start of the year to a peak near $2,354 by late June, on a genuine shortage of the NAND flash memory that AI data centers need for storage. It's cooled off since — down to around $1,569 now, roughly a third off that peak, as the memory-chip trade caught some profit-taking. Still up something like 570% since January, though. I don't own it — I'm overwhelmingly overexposed to AI as it is. But I expect he serves me a good Malbec at our next asado."
@@ -895,7 +895,7 @@ const COMPANIES = [
     score: "9 / 14",
     martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 11.0, prior: 16.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 129.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 126.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "TSMC's only real foundry rival, but really two businesses in one: a genuinely dominant #1 memory franchise (39% DRAM share, 29% NAND share) riding an AI-driven supercycle — quarterly operating margin rocketed from 6.27% to 52.18% in a year — and a distant, widening-gap #2 in foundry at just 6.5-7% vs TSMC's 72-73%. The 5-year revenue and EBIT CAGRs both miss badly, but only because the window captures FY2023's brutal memory-industry trough; FCF CAGR, ROIC/WACC, entry multiple, net cash position and market share all clear comfortably. Stock is up 264% over the past 52 weeks. Control runs through a Korean chaebol cross-shareholding pyramid (Lee family → Samsung C&T → Samsung Life → 8.51% of Samsung Electronics) rather than direct ownership.",
     file: "companies/samsung.html",
     personalNote: "Samsung is the most timing-sensitive dashboard I've built so far, and I want to be upfront about that. Everything about this scorecard depends on which five years you look at: the trailing CAGRs are ugly because FY2023 was a genuine trough, but the last five quarters have been about as good as memory chip results get, with margin going from 6% to 52% in a year. That's not a typo, and it's also not something I'd assume just continues in a straight line — memory has burned people who did that before, including Samsung itself in 2022-23. What I find most interesting isn't the memory story though, it's the foundry story: this whole dashboard exists because someone might read 'Samsung' as 'the other TSMC,' and the numbers say that's not really true right now — the gap to TSMC in foundry share actually widened this year, not narrowed. So I'd hold two separate views on this one: memory Samsung looks like a genuine, currently-undervalued compounder given how little the multiple has moved despite the stock's own rally; foundry Samsung still looks like a distant second place with no clear sign of catching up. Worth watching both threads separately rather than treating this as a single story."
@@ -1227,6 +1227,7 @@ const COMPANIES = [
     price: "$149.74",
     score: "4 / 14",
     martinero: 59,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
+    quarterYoY: { period: "Q3 2026", growth: 161.4 },
     blurb: "SpaceX completed the largest IPO in history on June 12, 2026 (NASDAQ: SPCX, priced at $135/share, ~$1.77T debut valuation). Falcon 9 dominates global launch (~82% share, 165 orbital missions in 2025) and Starlink is the clear #1 in LEO satellite broadband (~58-62% revenue share), but the S-1 also revealed a consolidated FY2025 operating loss (-13.86% margin) driven by a newly-disclosed, loss-making AI/compute segment, extreme capex intensity, and a balance sheet that appears to have swung to roughly $71B net cash after the IPO raise. Marked as an explicit exception: 7 of 14 criteria are N/A because they require 5 years of public trading/reporting history that simply doesn't exist yet, 3 months post-IPO.",
     file: "companies/spacex.html"
   },
@@ -1334,7 +1335,7 @@ const COMPANIES = [
     score: "9 / 14",
     martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 1.40, prior: 3.31 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 4.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 4.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in global toothpaste (41.3% value share, still gaining) with a stable ~20% operating margin, low leverage and 63 straight years of dividend growth — plus a genuine second growth leg in Hill's Pet Nutrition (~23% of sales, up nearly 60% in five years). Growth is mature and low-single-digit against this framework's 15% bars, insider ownership is essentially zero (0.13%), and the stock trades roughly 14% above its own 5-year average P/E.",
     file: "companies/colgate-palmolive.html"
   },
@@ -1515,7 +1516,7 @@ const COMPANIES = [
     score: "6 / 14",
     martinero: 49,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -0.56, prior: 6.60 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 2.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 2.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "World's largest hearing-aid retail/distribution network (not a manufacturer) is about to become one too — a pending, not-yet-closed ~€2.3-2.5bn acquisition of GN Store Nord's hearing-aid manufacturing business would end that distinction, but standalone growth has stalled and ROIC doesn't clear even a conservative WACC.",
     file: "companies/amplifon.html"
   },
@@ -1605,7 +1606,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 3.46, prior: 29.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: -3.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
+    quarterYoY: { period: "Q3 2026", growth: 13.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
     blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL: revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% (well under the 20% bar), free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge, and H1 2026 revenue actually fell 7.1% YoY as a brutal domestic price war bit into China sales. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
     file: "companies/byd.html"
   },
@@ -1623,7 +1624,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 8.21, prior: 0.56 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q2 FY2027", growth: 15.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic) — up 35.8% over the past year to an all-time high in February 2026, with FY2026 revenue +8.21% and net income +30.31% YoY. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses are the flip side of years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR to near zero and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot anywhere and no founder or insider stake.",
     file: "companies/hitachi.html"
   },
@@ -2211,7 +2212,7 @@ const COMPANIES = [
     score: "5 / 14",
     martinero: 57,
     momentum: { status: "decelerating", recent: 0.7, prior: 6.2 },
-    quarterYoY: { period: "Q1 FY2027", growth: 14.7 },
+    quarterYoY: { period: "Q2 FY2027", growth: 13.5 },
     blurb: "World #2 in construction and mining equipment with a clean balance sheet, a shrinking share count and no cross-shareholdings. Margins are off their peak and the stock now trades about 49% above its own 5-year average P/E. Reported growth is flattered by a weak yen.",
     file: "companies/komatsu.html"
   },
@@ -2843,7 +2844,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 50,
     momentum: { status: "decelerating", recent: 1.6, prior: 4.1 },
-    quarterYoY: { period: "Q2 2026", growth: 1.6 },
+    quarterYoY: { period: "Q3 2026", growth: 1.0 },
     blurb: "Church & Dwight is a US consumer-staples company behind ARM & HAMMER, OxiClean, Batiste, TheraBreath and Hero. Revenue grew about 4.6% a year over FY2021-25 and free cash flow reached $1.09B, but GAAP operating income was flat because of two non-cash impairments. Its only sleep exposure, the sleep and melatonin gummies inside Vitafusion, was sold on 31 December 2025.",
     file: "companies/church-dwight.html"
   },
@@ -2860,7 +2861,7 @@ const COMPANIES = [
     score: "12 / 14",
     martinero: 82,
     momentum: { status: "steady", recent: 9.9, prior: 9.8 },
-    quarterYoY: { period: "Q4 FY2026", growth: 8.6 },
+    quarterYoY: { period: "Q1 FY2027", growth: 5.9 },
     blurb: "ResMed is the world's largest maker of CPAP machines and masks for obstructive sleep apnea. Sleep and Breathing Health was 88% of FY2026 revenue of $5.65B (+9.9%), with a 33.4% GAAP operating margin, net cash and $1.65B of free cash flow. The debate centres on GLP-1 drugs such as Zepbound and on Philips' US restrictions.",
     file: "companies/resmed.html"
   },
@@ -2930,7 +2931,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 55,
     momentum: { status: "decelerating", recent: -2.0, prior: 10.5 },
-    quarterYoY: { period: "Q2 2026", growth: 10.2 },
+    quarterYoY: { period: "Q3 2026", growth: 12.0 },
     blurb: "Banco Santander is Spain's largest bank by assets, with retail and commercial banking in Spain, the UK, Brazil, Mexico and the US. FY2025 reported total income was €62.4bn and attributable profit €14.1bn, with RoTE of 16.3% and an efficiency ratio of 41.2%. H1 2026 profit of €9.0bn included a €1.9bn net gain on the Santander Bank Polska sale, and the Webster acquisition closed on Aug 20, 2026.",
     file: "companies/banco-santander.html"
   },
@@ -2964,7 +2965,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 58,
     momentum: { status: "accelerating", recent: 1.9, prior: -1.7 },
-    quarterYoY: { period: "Q2 2026", growth: 10.2 },
+    quarterYoY: { period: "Q3 2026", growth: 5.6 },
     blurb: "One of Europe's largest retail and wholesale banks, with a 13.6% ROTE, a 13.1% CET1 ratio and capital returns of about 107% of FY25 profit that have cut the share count ~23% since FY21. Income and net result CAGRs of ~5.6% and ~7.3% miss the 15% growth bar, and the stock now trades well above its own FY21-FY25 P/E and P/B averages.",
     file: "companies/ing-groep.html"
   },
@@ -2998,7 +2999,7 @@ const COMPANIES = [
     score: "11 / 14",
     martinero: 65,
     momentum: { status: "decelerating", recent: -0.7, prior: 9.2 },
-    quarterYoY: { period: "Q2 2026", growth: 8.0 },
+    quarterYoY: { period: "Q3 2026", growth: 9.0 },
     blurb: "Denmark's largest bank, with operations across the Nordics and Northern Ireland. FY2025 income was DKK 56.5bn and net profit DKK 23.0bn, with ROE of 13.3%, a cost/income ratio of 45.5% and CET1 of 17.3%. Revenue growth is weak (about 4.5% CAGR) and the shares trade well above their own five-year P/E and P/B history.",
     file: "companies/danske-bank.html"
   },
@@ -3166,11 +3167,11 @@ const COMPANIES = [
     subIndustry: "Integrated Oil & Gas",
     tags: ["Oil & Gas", "Dividend Growth", "Cyclical", "Energy Majors"],
     dateFeatured: "2026-10-27",
-    price: "$179.91",
+    price: "$187.25",
     score: "4 / 14",
     martinero: 36,
     momentum: { status: "decelerating", recent: -4.5, prior: 1.4 },
-    quarterYoY: { period: "Q2 2026", growth: 44.1 },
+    quarterYoY: { period: "Q3 2026", growth: 32.6 },
     blurb: "Exxon Mobil is the largest Western oil major, with low leverage (net debt about 0.5x EBITDA), a 45-year record of dividend increases and roughly $20B a year of buybacks. FY2025 operating income of $35.4B is less than half the FY2022 peak, and free cash flow has fallen about 10% a year since FY2021 as capex more than doubled. Q2 2026 revenue rose 44% year on year on the oil-price spike, and Q3 results are due Oct 30.",
     file: "companies/exxon-mobil.html"
   },
@@ -3183,11 +3184,11 @@ const COMPANIES = [
     subIndustry: "Integrated Oil & Gas",
     tags: ["Oil & Gas", "Energy", "Dividend", "Hess", "Cyclical"],
     dateFeatured: "2026-10-27",
-    price: "$228.23",
+    price: "$235.52",
     score: "6 / 14",
-    martinero: 37,
+    martinero: 40,
     momentum: { status: "decelerating", recent: -5.6, prior: 0.4 },
-    quarterYoY: { period: "Q2 2026", growth: 53.5 },
+    quarterYoY: { period: "Q3 2026", growth: 34.8 },
     blurb: "Chevron is the second-largest US integrated oil major, with upstream and downstream operations and the Hess assets (including Guyana) added in July 2025. Net debt is low at 0.56x EBITDA and FCF conversion is strong, but five-year revenue, EBIT and FCF growth are weak and capex has doubled. The stock sits near its 52-week high with Brent near $114, so TTM figures are cycle-flattered; Q3 2026 reports Oct 30.",
     file: "companies/chevron.html"
   },
@@ -3238,7 +3239,7 @@ const COMPANIES = [
     score: "4 / 14",
     martinero: 33,
     momentum: { status: "accelerating", recent: 3.2, prior: -4.1 },
-    quarterYoY: { period: "Q2 2026", growth: 37.4 },
+    quarterYoY: { period: "Q3 2026", growth: 27.4 },
     blurb: "Norway's state-controlled energy major (state owns about 67%) and Europe's largest pipeline gas supplier. FY2025 EBIT margin was 25.0% with low net debt, but EBIT and free cash flow have fallen since the FY2022 gas-crisis peak while capex has risen. The share count is down about 26% in five years through buybacks.",
     file: "companies/equinor.html"
   },
@@ -3310,6 +3311,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q3 2026", growth: 20.5 },
     blurb: "Fortinet sells FortiGate firewalls built on its own ASICs plus security subscriptions and support. FY2025 revenue was $6.80B (+14.2%) with a 30.5% GAAP operating margin, and the company holds $4.3B of net cash. Q3 2026 revenue grew 20.5% and billings 29%, but GAAP gross margin slipped to 79.0% and the shares fell 20.1% on Oct 29.",
     file: "companies/fortinet.html"
+  },
+
+  {
+    slug: "3m",
+    name: "3M Company",
+    ticker: "NYSE: MMM",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Diversified Industrials & Materials Science",
+    tags: ["Industrials","Conglomerate","Materials Science","PFAS Litigation","Spin-off","Dividend"],
+    dateFeatured: "2026-11-02",
+    price: "$174.34",
+    score: "6 / 14",
+    martinero: 42,
+    momentum: { status: "steady", recent: 1.5, prior: -0.1 },
+    quarterYoY: { period: "Q3 2026", growth: 1.0 },
+    blurb: "3M is a materials-science conglomerate (Safety & Industrial, Transportation & Electronics, Consumer) with about $25B of revenue after spinning off Solventum in April 2024. Q3 2026 brought a beat-and-raise (adjusted EPS $2.50, 2026 guide $9.10-9.15) and an expanded optical-connectivity deal with Amazon; GAAP history is distorted by PFAS and earplug charges, divestitures and the Solventum stake.",
+    file: "companies/3m.html"
   },
 
   // Add the next company below this line, as a new {...} block ⬇
