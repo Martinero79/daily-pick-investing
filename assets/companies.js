@@ -3605,6 +3605,24 @@ const COMPANIES = [
     file: "companies/texas-instruments.html"
   },
 
+  {
+    slug: "waste-management",
+    name: "Waste Management, Inc.",
+    ticker: "NYSE: WM",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Waste Collection & Disposal",
+    tags: ["Waste & Environmental Services", "Landfill Pricing Power", "Stericycle / Healthcare Waste", "Renewable Natural Gas (RNG)", "Defensive Compounder"],
+    dateFeatured: "2026-11-09",
+    price: "$236.26",
+    score: "6 / 14",
+    martinero: 56,
+    momentum: { status: "accelerating", recent: 14.2, prior: 8.0 },
+    quarterYoY: { period: "Q3 2026", growth: 6.3 },
+    blurb: "North America's largest waste company, with the biggest U.S. landfill and collection network and a Healthcare Solutions unit added through the Stericycle acquisition (closed Nov 2024). Q3 2026 revenue was $6.85B (+6.3%) with core price +5.8%, and 2026 revenue and free cash flow are guided to the high end of their ranges. Leverage is 2.9x net debt/EBITDA after the debt-funded deal, and the RNG and recycling build-out is mostly complete, so sustainability capex is falling.",
+    file: "companies/waste-management.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
