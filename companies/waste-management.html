@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Waste Management, Inc. (WM) — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/waste-management.html">
+<meta property="og:title" content="Waste Management, Inc. (WM) — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Waste Management, Inc. (WM) — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Waste Management, Inc. (WM)</h1>
+  <div class="badges">
+    <div class="badge">NYSE: WM</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Houston, Texas</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~5% Below 52-Wk High &mdash; Stericycle Integration Year 2; Leverage 2.9x, Buybacks Back</div>
+  </div>
+
+  <div class="price">$236.26</div>
+  <div class="price-sub">Nov 6, 2026 close (NYSE, USD) &middot; Market cap &asymp; $93.95B (397.6M shares) &middot; 52-wk range $197.47 &ndash; $248.13 &middot; 1-yr price change &asymp; +17.8% &middot; Beta 0.39 &middot; Analyst consensus: Buy (28 analysts), avg PT $255.60 (+8.2%) &middot; Latest report: Q3 2026 (Oct 27, 2026); Q4 2026 report expected late Jan 2027 (date not confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> North America's largest comprehensive waste company: the largest U.S. landfill and collection network, the largest recycler, and since Nov 2024 (Stericycle) a leading U.S. regulated medical waste and secure document destruction operator. Republic Services is the clear #2 in U.S. solid waste.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> all figures are in U.S. dollars. Annual &ldquo;Op. Income / EBIT&rdquo; is S&amp;P Global's standardised operating income, which excludes restructuring, impairments and divestiture gains; WM's own headline metric is <b>adjusted operating EBITDA</b> (Q3 2026: $2,121M, 31.0% margin). WM does not report a gross-profit line, so &ldquo;gross margin&rdquo; here is revenue minus cost of operations. &ldquo;Free cash flow&rdquo; in the tables and scorecard is operating cash flow minus capex; WM's own FCF definition also adds divestiture proceeds and is quoted separately where used (2026 guide: $3.75-3.85B).</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$25.2B</div>
+      <div class="sub green" style="color:#fbbf24;">+14.2% YoY &mdash; Stericycle-boosted</div>
+      <div class="note">Q3 2026 revenue $6.85B, +6.3% YoY (core price +5.8%). Excluding Stericycle's revenue in both years, FY2025 growth was roughly +4.8% (derived). FY2021-25 CAGR +8.9%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (S&amp;P-standardised)</div>
+      <div class="val" style="color:#fbbf24;">18.6%</div>
+      <div class="sub">FY2025; gross margin 40.4%</div>
+      <div class="note">Adjusted operating EBITDA margin was 31.0% in Q3 2026 vs 31.1% a year earlier: price-to-cost spread (+40bp) and Healthcare (+30bp) were offset by fuel and risk-management costs (-80bp).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">11.8% vs ~5.7%</div>
+      <div class="sub">+6.1pp spread (S&amp;P Global)</div>
+      <div class="note">Third-party estimates. ROIC fell from 12.7% (FY2023) to 11.2% (FY2025) as Stericycle's goodwill entered the base, and has recovered to 11.8%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#fbbf24;">2.9x</div>
+      <div class="sub">Sep 30, 2026; target 2.5-3.0x</div>
+      <div class="note">Net debt about $23.2B (S&amp;P, incl. finance leases), up from about $16.3B at end-2023. Above this site's 2x bar; WM reports 2.92x on its own basis.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">56/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Upper-middle: a clear #1 with strong pricing power, rising gross margin and a positive ROIC spread, held back by moderate growth, heavy capex, 2.9x leverage and ~60% FCF conversion.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="134.6 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-134.6" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">6/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>6 criteria fully met</b> &mdash; market position (#1), market concentration (score 2), ROIC above WACC, entry multiple vs own history, share count (about flat, -4.9%) and gross-margin stability (+2.85pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR (+8.9%), EBIT CAGR (+12.3%), EBIT margin (18.6%, just under 20%), FCF CAGR (+3.7%), leverage above 2x (2.9x), FCF conversion (60%), insider ownership (0.17%) and capex intensity (12.8% of revenue)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Waste Management (WM) is the largest waste and environmental services company in North America. Its core is Collection and Disposal: residential, commercial and industrial collection, transfer stations and a network of landfills, with about 72% of collected waste internalised into its own disposal sites, which is the source of its pricing leverage. Around that core sit Recycling Processing and Sales, Renewable Energy (landfill gas turned into renewable natural gas, RNG, and electricity) and, since the Stericycle acquisition closed in November 2024, Healthcare Solutions (regulated medical waste and secure document destruction). Stericycle was the biggest deal in WM's history: roughly $7.5B of cash acquisitions in FY2024 (S&amp;P cash flow), funded with debt, which lifted total debt from about $16.7B to $24.9B, pushed net debt/EBITDA from 2.8x to 3.7x (S&amp;P basis) and added roughly $2.5B of annual revenue at a much lower margin than solid waste. Two years in, WM is bringing it into line: Healthcare Solutions' adjusted operating EBITDA margin was 22.4% in Q3 2026 (17.5% a year earlier), SG&amp;A is down to 15.2% of its revenue and its core price is 5.5%. Leverage has eased to 2.9x and share repurchases (about $2B planned for 2026) have restarted. In the core, WM keeps pushing price (core price 5.8% in Q3, collection and disposal yield +3.4%) while volumes are slightly negative (-0.4%) as it sheds low-margin residential contracts. The stock trades near the top of its 52-week range at 31x trailing GAAP earnings and 27.5x forward, roughly in line with its own five-year average. A CEO handover is also coming: Jim Fish retires in early January 2027 and John Morris, currently President, takes over.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>M&amp;A</b> &mdash; Stericycle contributed two months in FY2024 and a full year in FY2025, so FY2025 revenue growth of +14.2% is not organic; the acquisition effect annualised in Q4 2025 and growth has since normalised to +3.5% to +7.1% a quarter. (2) <b>Adjusted vs GAAP</b> &mdash; WM adds back Stericycle integration costs and impairments: Q3 2026 EPS was $2.15 adjusted vs $2.05 GAAP, and FY2025 was $7.50 adjusted vs $6.70 GAAP. GAAP is used for P/E here. Q3 2025 GAAP EPS ($1.49) was depressed by about $197M of impairments, which flatters the +37.6% GAAP EPS growth in Q3 2026. (3) <b>Energy surcharges and commodity prices</b> &mdash; Q3 2026 revenue growth of 6.3% included $112M (about 1.7pp) from energy surcharges recovering record diesel costs, and higher recycling and RNG volumes; fuel is a pass-through for revenue but a margin drag (-40bp in Q3).
+  </div>
+
+  <div class="bignum-corner">WM</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (fiscal year = calendar year), USD millions. Source: S&amp;P Global Market Intelligence via stockanalysis.com, cross-checked with WM's reported quarterly releases. Op. Income = S&amp;P-standardised operating income; FCF = operating cash flow minus capex. FY2024 includes two months of Stericycle, FY2025 a full year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size (axis in $ billions). Revenue and EBIT have risen every year; FCF dipped in FY2022-23 as capex stepped up from $1.9B to $2.9B (fleet, automation and RNG/recycling investment plus working capital), then recovered to $2.8B in FY2025 and $3.7B on a trailing basis.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (EBIT)</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow (OCF - capex)</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="203.3" x2="840" y2="203.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.3" text-anchor="end" font-size="11" fill="#64748b">5bn</text>
+    <line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+    <line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">15bn</text>
+    <line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+    <line x1="60" y1="56.7" x2="840" y2="56.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.7" text-anchor="end" font-size="11" fill="#64748b">25bn</text>
+    <line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+    <line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+    <rect x="85.0" y="108.5" width="30" height="131.5" rx="2" fill="#2dd4bf"/>
+    <text x="100.0" y="103.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">17,931</text>
+    <rect x="123.0" y="218.3" width="30" height="21.7" rx="2" fill="#60a5fa"/>
+    <text x="138.0" y="213.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,957</text>
+    <rect x="161.0" y="222.2" width="30" height="17.8" rx="2" fill="#fbbf24"/>
+    <text x="176.0" y="217.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,434</text>
+    <text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+    <rect x="241.0" y="95.5" width="30" height="144.5" rx="2" fill="#2dd4bf"/>
+    <text x="256.0" y="90.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">19,698</text>
+    <rect x="279.0" y="214.9" width="30" height="25.1" rx="2" fill="#60a5fa"/>
+    <text x="294.0" y="209.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,428</text>
+    <rect x="317.0" y="225.7" width="30" height="14.3" rx="2" fill="#fbbf24"/>
+    <text x="332.0" y="220.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,949</text>
+    <text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+    <rect x="397.0" y="90.2" width="30" height="149.8" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="85.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">20,426</text>
+    <rect x="435.0" y="212.0" width="30" height="28.0" rx="2" fill="#60a5fa"/>
+    <text x="450.0" y="207.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3,823</text>
+    <rect x="473.0" y="226.6" width="30" height="13.4" rx="2" fill="#fbbf24"/>
+    <text x="488.0" y="221.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,824</text>
+    <text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+    <rect x="553.0" y="78.2" width="30" height="161.8" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="73.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">22,063</text>
+    <rect x="591.0" y="208.4" width="30" height="31.6" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="203.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,309</text>
+    <rect x="629.0" y="224.2" width="30" height="15.8" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="219.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,159</text>
+    <text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+    <rect x="709.0" y="55.2" width="30" height="184.8" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="50.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">25,204</text>
+    <rect x="747.0" y="205.6" width="30" height="34.4" rx="2" fill="#60a5fa"/>
+    <text x="762.0" y="200.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,696</text>
+    <rect x="785.0" y="219.3" width="30" height="20.7" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="214.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">2,816</text>
+    <text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+8.9%</div>
+      <div class="sub">$17.9B &rarr; $25.2B &mdash; includes Stericycle ($0.4B FY2024, $2.5B FY2025); FY2021-23 growth came mostly from price</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+12.3%</div>
+      <div class="sub">$2.96B &rarr; $4.70B &mdash; operating income has grown faster than revenue; FY2025 +9.0% as Stericycle diluted margin</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+3.7%</div>
+      <div class="sub">$2.43B &rarr; $2.82B &mdash; low FY2021 capex base and a heavy FY2022-24 investment cycle; TTM FCF is $3.74B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating (EBIT) Margin Trend</div>
+    <div class="chart-sub">Gross margin (revenue minus cost of operations; derived, WM has no gross-profit line) rose from 37.6% in FY2022 to 40.4% in FY2025 as price outran cost inflation. EBIT margin rose to 19.5% in FY2024, then slipped to 18.6% in FY2025 as lower-margin Stericycle revenue was consolidated, higher SG&amp;A and integration costs. Note: from 2026 WM reports landfill accretion within D&amp;A rather than operating expense, so FY2026 gross margins are about 0.5pp higher on the new basis; the FY chart is not restated.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Gross margin (derived)</span><span><span class="dot" style="background:#34d399;"></span>EBIT margin</span></div>
+    <svg viewBox="0 0 700 107">
+      <line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+      <line x1="30" y1="65" x2="690" y2="65" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="40" x2="690" y2="40" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+      <text x="4" y="68" font-size="7.5" fill="#64748b">15%</text>
+      <text x="4" y="43" font-size="7.5" fill="#64748b">30%</text>
+      <text x="4" y="18" font-size="7.5" fill="#64748b">45%</text>
+      <polyline points="60,26.6 205,27.3 350,26.2 495,24.4 640,22.6" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+      <polyline points="60,62.5 205,61.0 350,58.8 495,57.4 640,59.0" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="26.6" r="3.2" fill="#2dd4bf"/><text x="60" y="19.6" text-anchor="middle" font-size="8" fill="#cbd5e1">38.0%</text>
+      <circle cx="205" cy="27.3" r="3.2" fill="#2dd4bf"/><text x="205" y="20.3" text-anchor="middle" font-size="8" fill="#cbd5e1">37.6%</text>
+      <circle cx="350" cy="26.2" r="3.2" fill="#2dd4bf"/><text x="350" y="19.2" text-anchor="middle" font-size="8" fill="#cbd5e1">38.3%</text>
+      <circle cx="495" cy="24.4" r="3.2" fill="#2dd4bf"/><text x="495" y="17.4" text-anchor="middle" font-size="8" fill="#cbd5e1">39.3%</text>
+      <circle cx="640" cy="22.6" r="3.2" fill="#2dd4bf"/><text x="640" y="15.6" text-anchor="middle" font-size="8" fill="#cbd5e1">40.4%</text>
+      <circle cx="60" cy="62.5" r="3.2" fill="#34d399"/><text x="60" y="55.5" text-anchor="middle" font-size="8" fill="#cbd5e1">16.5%</text><text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+      <circle cx="205" cy="61.0" r="3.2" fill="#34d399"/><text x="205" y="54.0" text-anchor="middle" font-size="8" fill="#cbd5e1">17.4%</text><text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+      <circle cx="350" cy="58.8" r="3.2" fill="#34d399"/><text x="350" y="51.8" text-anchor="middle" font-size="8" fill="#cbd5e1">18.7%</text><text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+      <circle cx="495" cy="57.4" r="3.2" fill="#34d399"/><text x="495" y="50.4" text-anchor="middle" font-size="8" fill="#cbd5e1">19.5%</text><text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+      <circle cx="640" cy="59.0" r="3.2" fill="#34d399"/><text x="640" y="52.0" text-anchor="middle" font-size="8" fill="#cbd5e1">18.6%</text><text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>Diluted EPS (GAAP)</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net cash (debt)</th><th>DPS ($)</th></tr>
+    <tr><td>FY2021</td><td>17,931</td><td>2,957</td><td>16.5%</td><td>1,816</td><td>4.29</td><td>2,434</td><td>82.3%</td><td>1,904</td><td>(13,810)</td><td>2.30</td></tr>
+    <tr><td>FY2022</td><td>19,698</td><td>3,428</td><td>17.4%</td><td>2,238</td><td>5.39</td><td>1,949</td><td>56.9%</td><td>2,587</td><td>(15,157)</td><td>2.60</td></tr>
+    <tr><td>FY2023</td><td>20,426</td><td>3,823</td><td>18.7%</td><td>2,304</td><td>5.66</td><td>1,824</td><td>47.7%</td><td>2,895</td><td>(16,289)</td><td>2.80</td></tr>
+    <tr><td>FY2024</td><td>22,063</td><td>4,309</td><td>19.5%</td><td>2,746</td><td>6.81</td><td>2,159</td><td>50.1%</td><td>3,231</td><td>(24,526)</td><td>3.00</td></tr>
+    <tr><td>FY2025</td><td>25,204</td><td>4,696</td><td>18.6%</td><td>2,708</td><td>6.70</td><td>2,816</td><td>60.0%</td><td>3,227</td><td>(23,716)</td><td>3.30</td></tr>
+    <tr><td>TTM (Sep'26)</td><td>26,070</td><td>4,930</td><td>18.9%</td><td>3,070</td><td>7.62</td><td>3,740</td><td>75.9%</td><td>2,825</td><td>(23,170)</td><td>3.78*</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net income is attributable to WM. Net debt is S&amp;P's figure including finance leases (company-reported long-term debt at Sep 30, 2026 was $23.4B including current portion, cash $0.25B). TTM = four quarters to Sep 30, 2026 (9M 2026 plus Q4 2025); TTM operating income and EBITDA are S&amp;P-standardised. *DPS: annualised current quarterly dividend of $0.945 (+14.5% from $0.825); FY DPS are declared per share for the year. WM's own adjusted EPS (FY2025 $7.50 vs $6.70 GAAP) adds back Stericycle integration costs and impairments and is not used in the tables.</div>
+  <div class="footer-note">Source: WM Q3 2026 earnings release (Form 8-K, Oct 27, 2026); WM Q4/FY2025 release (Jan 28, 2026); stockanalysis.com (S&amp;P Global Market Intelligence) for annual and quarterly standardised financials. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — STERICYCLE, PRICING, SUSTAINABILITY & LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Stericycle, Pricing &amp; Latest Quarter (Q3 2026)</div></div>
+  <div class="sec-sub">The case for the next 12 months is whether price-to-cost spread in solid waste, Healthcare margin recovery and a maturing RNG build-out can lift cash flow faster than fuel, insurance and landfill-compliance costs and flat-to-negative volumes erode it. Reported Oct 27, 2026 (call Oct 28).</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 2026 revenue was $6,846M (+6.3% YoY) and adjusted operating EBITDA $2,121M (+5.8%), a 31.0% margin vs 31.1%. Adjusted EPS was $2.15 (GAAP $2.05) against a consensus of about $2.18, a small miss; revenue beat (about $6.81B expected). Core price was +5.8% and collection and disposal yield +3.4%, with volume -0.4% (-0.5% workday-adjusted) from deliberate residential shedding and prior national-account broker losses. Operating expenses rose to 59.8% of revenue (58.9%): collection and disposal efficiency improved the ratio by 40bp, but fuel and increased risk-management (insurance and claims) costs added 130bp; SG&amp;A improved 70bp to 9.3% adjusted. Healthcare Solutions revenue grew 3.7% and adjusted EBITDA rose 33% to $146M (22.4% margin). Free cash flow (WM definition) was $985M (+20%), $3.01B for nine months (+42%), and WM returned $957M to shareholders in the quarter ($580M buybacks, $377M dividends).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($bn)</div>
+    <div class="chart-sub">Stericycle was consolidated from Nov 4, 2024, so YoY growth ran +13% to +19% from Q4'24 through Q3'25 and normalised to +3.5% to +7.1% once it lapped (Q4'25 +7.1%, Q1'26 +3.5%, Q2'26 +4.0%, Q3'26 +6.3%). The Q3'26 pick-up includes energy surcharges.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $bn</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="54.7" width="56" height="75.3" fill="#2dd4bf"/><text x="58" y="49.7" text-anchor="middle" font-size="9" fill="#cbd5e1">5.89</text><text x="58" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="53.1" width="56" height="76.9" fill="#2dd4bf"/><text x="140" y="48.1" text-anchor="middle" font-size="9" fill="#cbd5e1">6.02</text><text x="140" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="47.8" width="56" height="82.2" fill="#2dd4bf"/><text x="222" y="42.8" text-anchor="middle" font-size="9" fill="#cbd5e1">6.43</text><text x="222" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="47.7" width="56" height="82.3" fill="#2dd4bf"/><text x="304" y="42.7" text-anchor="middle" font-size="9" fill="#cbd5e1">6.44</text><text x="304" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="49.3" width="56" height="80.7" fill="#2dd4bf"/><text x="386" y="44.3" text-anchor="middle" font-size="9" fill="#cbd5e1">6.31</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="50.4" width="56" height="79.6" fill="#2dd4bf"/><text x="468" y="45.4" text-anchor="middle" font-size="9" fill="#cbd5e1">6.23</text><text x="468" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="44.6" width="56" height="85.4" fill="#2dd4bf"/><text x="550" y="39.6" text-anchor="middle" font-size="9" fill="#cbd5e1">6.68</text><text x="550" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="42.5" width="56" height="87.5" fill="#2dd4bf"/><text x="632" y="37.5" text-anchor="middle" font-size="9" fill="#cbd5e1">6.85</text><text x="632" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (S&amp;P-standardised) &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Seasonal (Q1 lowest, Q4/Q3 highest) with a rising trend. Q3'26 $1,306M is before restructuring and impairment items; WM's GAAP income from operations was $1,279M ($1,329M adjusted). Read the trend rather than single quarters.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="57.6" width="56" height="72.4" fill="#60a5fa"/><text x="58" y="52.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,101</text><text x="58" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="62.4" width="56" height="67.6" fill="#60a5fa"/><text x="140" y="57.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,028</text><text x="140" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="52.0" width="56" height="78.0" fill="#60a5fa"/><text x="222" y="47.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,187</text><text x="222" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="50.1" width="56" height="79.9" fill="#60a5fa"/><text x="304" y="45.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,216</text><text x="304" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="46.9" width="56" height="83.1" fill="#60a5fa"/><text x="386" y="41.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,265</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="58.3" width="56" height="71.7" fill="#60a5fa"/><text x="468" y="53.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,091</text><text x="468" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="46.6" width="56" height="83.4" fill="#60a5fa"/><text x="550" y="41.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,269</text><text x="550" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="44.2" width="56" height="85.8" fill="#60a5fa"/><text x="632" y="39.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,306</text><text x="632" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Revenue ($m)</td><td>5,893</td><td>6,018</td><td>6,430</td><td>6,443</td><td>6,313</td><td>6,227</td><td>6,684</td><td>6,846</td></tr>
+    <tr><td>Revenue YoY</td><td>+13.0%</td><td>+16.6%</td><td>+19.0%</td><td>+14.9%</td><td>+7.1%</td><td>+3.5%</td><td>+4.0%</td><td>+6.2%</td></tr>
+    <tr><td>Op. Income ($m, S&amp;P)</td><td>1,101</td><td>1,028</td><td>1,187</td><td>1,216</td><td>1,265</td><td>1,091</td><td>1,269</td><td>1,306</td></tr>
+    <tr><td>Op. Margin</td><td>18.7%</td><td>17.1%</td><td>18.5%</td><td>18.9%</td><td>20.0%</td><td>17.5%</td><td>19.0%</td><td>19.1%</td></tr>
+    <tr><td>Diluted EPS (GAAP, $)</td><td>1.48</td><td>1.58</td><td>1.80</td><td>1.49</td><td>1.83</td><td>1.79</td><td>1.95</td><td>2.05</td></tr>
+    <tr><td>FCF ($m, OCF - capex)</td><td>396</td><td>377</td><td>813</td><td>816</td><td>810</td><td>851</td><td>1,096</td><td>983</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures are S&amp;P Global standardised (stockanalysis.com); Q3'26 and Q3'25 revenue, GAAP EPS and FCF agree with WM's release (FCF $983M S&amp;P basis vs $985M WM basis). Diluted EPS is GAAP, including impairments (Q3'25) and Stericycle integration costs.</div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="info-box" style="flex:1;">
+      <div class="title" style="color:#60a5fa;">Pricing power &mdash; Q3 2026 yield vs volume, by line</div>
+      <table class="datatable">
+        <tr><th>Line</th><th>Yield</th><th>Volume</th><th>9M yield</th><th>9M volume</th></tr>
+        <tr><td>Commercial</td><td>+4.2%</td><td>-1.3%</td><td>+4.3%</td><td>-1.4%</td></tr>
+        <tr><td>Industrial</td><td>+3.1%</td><td>0.0%</td><td>+3.2%</td><td>+0.1%</td></tr>
+        <tr><td>Residential</td><td>+5.4%</td><td>-2.6%</td><td>+5.9%</td><td>-3.5%</td></tr>
+        <tr><td>Total collection</td><td>+4.0%</td><td>-1.2%</td><td>+4.2%</td><td>-1.4%</td></tr>
+        <tr><td>Landfill (MSW)</td><td>+4.2%</td><td>-1.1%</td><td>+5.3%</td><td>+0.5%</td></tr>
+        <tr><td>Transfer</td><td>+2.7%</td><td>+1.8%</td><td>+3.2%</td><td>-0.6%</td></tr>
+        <tr><td><b>Collection &amp; disposal</b></td><td><b>+3.4%</b></td><td><b>-0.5%</b></td><td><b>+3.6%</b></td><td><b>-1.3%</b></td></tr>
+      </table>
+    </div>
+    <div class="info-box" style="flex:1;">
+      <div class="title" style="color:#34d399;">Sustainability &amp; RNG &mdash; spend vs payoff</div>
+      <table class="datatable">
+        <tr><th>Item ($m unless stated)</th><th>Q3 2026</th><th>Q3 2025</th></tr>
+        <tr><td>Sustainability growth capex</td><td>55</td><td>141</td></tr>
+        <tr><td>&nbsp;&nbsp;9M cumulative</td><td>191</td><td>429</td></tr>
+        <tr><td>Renewable Energy revenue</td><td>167</td><td>115</td></tr>
+        <tr><td>Renewable Energy adj. EBITDA</td><td>65 (38.9%)</td><td>48 (41.7%)</td></tr>
+        <tr><td>Recycling adj. EBITDA</td><td>91 (20.6%)</td><td>65 (17.5%)</td></tr>
+        <tr><td>RIN price ($/credit)</td><td>2.32</td><td>2.56</td></tr>
+        <tr><td>Single-stream recycled ($/ton)</td><td>~82</td><td>~68</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, reaffirmed Oct 27):</b> revenue $26.275-26.475B (now expected at the <b>high end</b>); adjusted operating EBITDA $8.15-8.25B (within range; FY2025 about $7.6B at a 30.1% margin, derived); free cash flow $3.75-3.85B (<b>high end</b>; built from ~$6.5B operating cash flow, ~$2.5B sustaining capex and ~$0.25B sustainability growth capex). About $2B of buybacks and, with dividends of roughly $1.5B, around $3.5B of capital returns planned. Volume still about -1% for the year (-0.5% excluding prior-year wildfire cleanup); SG&amp;A about 10% of revenue.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Stericycle (Healthcare Solutions):</b> closed Nov 2024 for a reported ~$7.2B including debt (announced $62/share; not re-verified here). Healthcare revenue: $0.4B in FY2024 (two months), $2.5B in FY2025, flat since (9M 2026 $1,903M vs $1,893M; internal growth -$42M). Both year-end 2026 targets &mdash; core price 5.5% and SG&amp;A of 15-16% of revenue &mdash; were hit in Q3, and the full cost-synergy target is now expected around mid-2027, slightly ahead of plan. Integration costs are still being added back ($30M in Q3).
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Pricing power in collection and landfills:</b> WM has pushed yield above volume loss for years: collection yield is +4.2% (9M) and landfill/transfer pricing is where management says the opportunity lies, because its post-collection assets are scarce and critical (internalisation 72.1%). New California landfill-monitoring rules and rising leachate costs are being passed through in price. The trade-off is volume: collection and disposal volume was -1.3% over nine months. Gross margin rose 2.85pp in three years, which is the clearest evidence that price has beaten cost; the risk is that fuel, insurance and compliance costs (and the abandonment of low-margin residential volume) absorb part of it.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>RNG and sustainability:</b> WM brought its 18th renewable natural gas plant online in Q3 2026 (since 2022); one more is expected in Q4 and the last in early Q1 2027. Sustainability growth capex has fallen sharply (9M 2026 $191M vs $429M in 9M 2025; $250M guided for FY2026), which is a main reason free cash flow is rising faster than EBITDA. Management says more than 90% of 2026 RNG production and about 40% of 2027 production is contracted and cites a long-term realised-price outlook of about $26 (about $27 expected for 2026; the unit was not stated in the transcript excerpt I used). RINs averaged $2.32 per credit in Q3 vs $2.56 a year earlier. Q3 plant start-up shortfalls hurt RNG output, with a rebound expected in Q4. RNG earnings remain exposed to RIN, natural gas and policy changes.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on GAAP diluted EPS (WM's adjusted EPS is higher: $7.50 in FY2025 vs $6.70 GAAP). Leverage after the Stericycle deal is the balance-sheet number to watch.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on GAAP Diluted EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current P/E (31.0x = $236.26 / TTM GAAP EPS of $7.62) is ~96% of WM's FY2021-25 year-end average (32.4x). Year-end prices are unadjusted NYSE closes ($166.89, $156.88, $179.10, $201.79, $219.71); EPS is GAAP diluted ($4.29, $5.39, $5.66, $6.81, $6.70). The FY2021 peak reflects the post-COVID rerating; FY2025 EPS was reduced by impairments and Stericycle costs.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="32.2" width="70" height="77.8" fill="#60a5fa"/><text x="55" y="27.2" text-anchor="middle" font-size="9" fill="#cbd5e1">38.9x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="115" y="51.8" width="70" height="58.2" fill="#60a5fa"/><text x="150" y="46.8" text-anchor="middle" font-size="9" fill="#cbd5e1">29.1x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="210" y="46.7" width="70" height="63.3" fill="#60a5fa"/><text x="245" y="41.7" text-anchor="middle" font-size="9" fill="#cbd5e1">31.6x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="305" y="50.7" width="70" height="59.3" fill="#60a5fa"/><text x="340" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">29.6x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="400" y="44.4" width="70" height="65.6" fill="#60a5fa"/><text x="435" y="39.4" text-anchor="middle" font-size="9" fill="#cbd5e1">32.8x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="495" y="48.0" width="70" height="62.0" fill="#2dd4bf"/><text x="530" y="43.0" text-anchor="middle" font-size="9" fill="#cbd5e1">31.0x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="45.2" x2="690" y2="45.2" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="41.2" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 32.4x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus, S&amp;P/stockanalysis.com) is ~27.5x versus a FY21-25 year-end average of ~27.5x (30.8, 26.2, 27.4, 25.7, 27.2), i.e. at its own average. PEG is ~2.8 (consensus 3-year EPS growth ~9.5%), so the multiple does not leave much room for a growth disappointment. EV/EBITDA is ~14.9x (S&amp;P) vs 14.3-16.7x at prior year-ends. The scorecard uses the trailing GAAP ratio (0.96 = 3/5). Average analyst price target $255.60 (28 analysts) implies ~8% upside; individual targets were moved both ways after Q3 (for example JPMorgan to $260 from $235, Baird to $265 from $275).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex (S&amp;P, cash flow statement, includes sustainability growth spend) has risen from 10.6% to 14.6% of revenue in FY2024 and 12.8% in FY2025 (S&amp;P TTM $2.8B, ~10.8%). The company guides FY2026 at about $2.5B of capex to support the business plus ~$0.25B of sustainability growth capex, meaning the RNG and recycling build-out is largely behind it. This is an asset-heavy business; the scorecard banding for capex is 2/5.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="112.4" width="60" height="47.6" fill="#60a5fa"/><text x="60" y="107.4" text-anchor="middle" font-size="8" fill="#cbd5e1">1,904</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <rect x="170" y="95.3" width="60" height="64.7" fill="#60a5fa"/><text x="200" y="90.3" text-anchor="middle" font-size="8" fill="#cbd5e1">2,587</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <rect x="310" y="87.6" width="60" height="72.4" fill="#60a5fa"/><text x="340" y="82.6" text-anchor="middle" font-size="8" fill="#cbd5e1">2,895</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <rect x="450" y="79.2" width="60" height="80.8" fill="#60a5fa"/><text x="480" y="74.2" text-anchor="middle" font-size="8" fill="#cbd5e1">3,231</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <rect x="590" y="79.3" width="60" height="80.7" fill="#60a5fa"/><text x="620" y="74.3" text-anchor="middle" font-size="8" fill="#cbd5e1">3,227</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <polyline points="60,56.9 200,44.3 340,39.1 480,36.8 620,46.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="56.9" r="3" fill="#fbbf24"/><text x="60" y="47.9" text-anchor="middle" font-size="7.5" fill="#fde68a">10.6%</text>
+      <circle cx="200" cy="44.3" r="3" fill="#fbbf24"/><text x="200" y="35.3" text-anchor="middle" font-size="7.5" fill="#fde68a">13.1%</text>
+      <circle cx="340" cy="39.1" r="3" fill="#fbbf24"/><text x="340" y="30.1" text-anchor="middle" font-size="7.5" fill="#fde68a">14.2%</text>
+      <circle cx="480" cy="36.8" r="3" fill="#fbbf24"/><text x="480" y="27.8" text-anchor="middle" font-size="7.5" fill="#fde68a">14.6%</text>
+      <circle cx="620" cy="46.0" r="3" fill="#fbbf24"/><text x="620" y="37.0" text-anchor="middle" font-size="7.5" fill="#fde68a">12.8%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="267.3 46.9" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="46.6 267.6" stroke-dashoffset="-267.3" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~85%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions ~85.1% (stockanalysis.com; individual holders such as Vanguard and BlackRock not verified here)</div>
+          <div><span class="dot" style="background:#475569;"></span>Retail and other ~14.7%, of which insiders (directors and officers) ~0.17%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Diluted shares fell from ~421M (Q4 2021) to ~400M (Q3 2026) and shares outstanding are 397.6M (-0.29% YoY). Repurchases were $1.4B (2021), $1.5B (2022), $1.3B (2023), then only $0.3B (2024) and $0.05B (2025) while cash went to Stericycle. They resumed in 2026: $1.58B in nine months, with $2B planned for the year. Dividend per share rose 10% in 2025 and 14.5% from Q1 2026 to $0.945 a quarter (22 consecutive years of growth, per stockanalysis.com); the payout ratio is ~50% of GAAP earnings.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Founders, insiders &amp; caveats:</b> WM has no founder or controlling holder; leadership are professional managers (CEO Jim Fish retires in early January 2027; John Morris, President, succeeds him; CFO David Reed). Insider ownership of ~0.17% is a third-party figure. Cascade Investment (Bill Gates) reported 4.0% in a Feb 2022 Schedule 13G/A; I could not verify its current holding and it is not an insider stake.
+  </div>
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Leverage after Stericycle:</b> net debt / EBITDA (S&amp;P basis) was 2.79x, 2.77x and 2.76x in FY2021-23, jumped to 3.73x at end-2024 after the debt-funded purchase, eased to 3.14x at end-2025 and 2.93x at Sep 30, 2026 (WM: 2.92x, inside its 2.5x-3.0x target range). Total debt (S&amp;P) was $16.7B at end-2023, $24.9B at end-2024 and $23.4B now. EBITDA growth (guided ~+8% for FY2026 at the midpoint vs FY2025, derived) and ~$3.8B of FCF are doing the work, while ~$3.5B a year of dividends and buybacks keep net debt roughly flat. The $250M acquisition signed for early 2027 and tuck-in M&A would add to debt.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; every criterion is computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25) and FY2025 includes Stericycle. Criterion #14 compares FY2025 gross margin (revenue minus cost of operations, derived) with FY2022's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Waste Management</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+8.9% &mdash; $17.9B &rarr; $25.2B; includes the Stericycle step-up (Healthcare Solutions $2.5B in FY2025, consolidated from Nov 2024). Excluding Stericycle's FY2025 revenue the FY2024-25 growth would be about +4.8% (derived) (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+12.3% &mdash; operating income (S&amp;P-standardised, before restructuring and impairment items) $2.96B &rarr; $4.70B (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>18.63% (FY2025), from 16.49% in FY2021; peaked at 19.53% in FY2024 before Stericycle's lower-margin mix was fully consolidated (score 4/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+3.7% &mdash; operating cash flow minus capex $2.43B &rarr; $2.82B. FY2021 capex was unusually low ($1.9B vs $3.2B in FY2024-25), so the base is flattering; the path was 2.43 &rarr; 1.95 &rarr; 1.82 &rarr; 2.16 &rarr; 2.82 (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Largest U.S. solid-waste company by revenue and landfill network (disposal network, collection fleet and recycling). Republic Services is the clear #2; no verified exact national %-share is quoted here (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; landfills and transfer stations are permit-constrained and the three national players (WM, Republic, Waste Connections) hold a large share of private disposal capacity, but local collection markets still have many municipal and regional operators. Judgment call, no verified top-N share (score 4/5)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 11.83% vs est. WACC 5.72% (S&amp;P Global via stockanalysis.com), a +6.1pp spread. Both are third-party estimates; ROIC was 12.7% in FY2023 before the Stericycle goodwill was added (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>2.9x (Sep 30, 2026: net debt about $23.2B incl. finance leases / TTM EBITDA $7.89B, S&amp;P basis; WM reports 2.92x on its own definition vs a 2.5x-3.0x target). Was 2.76x in FY2023, 3.73x in FY2024 right after Stericycle (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>59.97% (FY2025: FCF $2,816M / operating income $4,696M); 5-year path 82% / 57% / 48% / 50% / 60%. TTM to Sep 2026 is about 76% as capex fell (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 31.0x vs FY21-25 year-end average 32.4x (ratio 0.96); forward P/E 27.5x vs a ~27.5x average (ratio ~1.00) &mdash; scored on trailing GAAP basis (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~418M (Q4 2021 basic) to 397.6M now, about -4.9%: buybacks shrank it through 2023, were paused in 2024-25 for Stericycle, and resumed in 2026 ($1.58B in 9M). Sits at the edge of the &plusmn;5% flat band (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders own about 0.17% (stockanalysis.com); institutions about 85%. No founder or controlling holder, and no verified broad employee ownership plan. Cascade Investment (Bill Gates) reported 4.0% in a Feb 2022 Schedule 13G/A; the current stake is not verified and it is a financial holder, not an insider (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>12.8% of revenue in FY2025 (10.6% in FY2021, 14.6% in FY2024): trucks, landfills, RNG and recycling plants make this a heavy-asset model (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin (revenue minus cost of operations; WM does not report a gross-profit line, so this is derived from S&amp;P-standardised figures) 37.59% (FY2022) &rarr; 40.44% (FY2025), +2.85pp. EBIT margin also rose, 17.40% &rarr; 18.63% (+1.23pp), so the proxy would give the same 5/5 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13=5.2 &middot; #2 3&times;11=6.6 &middot; #3 4&times;10=8.0 &middot; #4 1&times;8=1.6 &middot; #5 5&times;7=7.0 &middot; #6 4&times;6=4.8 &middot; #7 3&times;10=6.0 &middot; #8 2&times;6=2.4 &middot; #9 2&times;8=3.2 &middot; #10 3&times;8=4.8 &middot; #11 3&times;4=2.4 &middot; #12 0&times;5=0.0 &middot; #13 2&times;4=1.6 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 58.6 / 105 = <b>56/100</b>. Criteria met: 6/14 on the binary thresholds. <b>Judgment calls:</b> #6 is qualitative (no verified top-N share); #7 uses third-party ROIC/WACC estimates; #9 is 59.97%, a hair under the 60% band edge; #11 (-4.9%) is at the edge of the &plusmn;5% flat band; #14 uses a derived gross margin, and EBIT margin as a proxy would score the same.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A clear #1 with scarce, permit-protected landfill assets and 72% internalisation, which is why price keeps beating volume loss (core price +5.8%, gross margin +2.85pp in three years). ROIC (11.8%) sits about 6pp above an estimated WACC, EBIT has compounded at 12% a year, and FCF is inflecting (TTM $3.7B, +56% YoY) as sustainability growth capex falls away. Stericycle is being worked into shape: Healthcare Solutions' adjusted EBITDA margin rose to 22.4%, SG&amp;A and pricing targets were hit early, and leverage has come down from 3.7x to 2.9x. Buybacks ($2B in 2026) and a 14.5% dividend raise are back, FY2026 revenue and FCF are guided to the high end of ranges, and about 90% of 2026 RNG output is contracted.
+      </p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is moderate once Stericycle is stripped out (about +4.8% in FY2025; +3.5% to +6.3% a quarter in 2026) and volumes are negative (-1.3% for nine months). Q3 adjusted EBITDA margin dipped to 31.0% as fuel (-40bp) and insurance/risk costs (-40bp) rose, and adjusted EPS missed by about $0.03. Leverage is 2.9x, above this site's 2x bar, and capex remains 11-13% of revenue; only 60% of EBIT converts to FCF. RNG earnings depend on RIN prices (lower year on year) and policy, and Q3 plant start-up delays showed execution risk. Landfill compliance costs (California) are rising. The stock is at 31x trailing and 27.5x forward earnings (PEG ~2.8), leaving little margin for error, and a CEO transition arrives in January 2027. Unverified: exact national market share, current holder percentages, the original Stericycle synergy target figure, and the FY2025 EBITDA on WM's restated basis.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> WM Q3 2026 earnings release (Form 8-K Exhibit 99.1, Oct 27, 2026, sec.gov), Q3 2026 earnings call transcript (Oct 28, 2026, via stockanalysis.com), WM Q4/FY2025 release (Jan 28, 2026); stockanalysis.com (S&amp;P Global Market Intelligence: prices, share count, standardised financials, ratios, ROIC/WACC, ownership, analyst targets); TheFly/TipRanks (analyst target changes, EPS consensus); Zacks and Finviz (Dec 31, 2025 close, $219.71); SEC Schedule 13G/A (Cascade, Feb 2022). Year-end prices 2021-2024 are unadjusted NYSE closes recalled from public quotes and cross-checked against S&amp;P adjusted series; treat as approximate. WACC, ROIC, gross margin, ex-Stericycle growth and EBITDA for FY2025 are third-party or derived and flagged as such. All figures USD. Price as of Nov 6, 2026 close; prepared Nov 9, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Waste Management, Inc. &mdash; NYSE, USD, unadjusted closes (not adjusted for dividends). Year-end closes 2021-2025 (calendar year) plus the Nov 6, 2026 close. A defensive compounder: a dip in 2022, steady re-rating through 2024-25, and a fresh high of $248.13 in the past 52 weeks.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Waste Management &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Year-end closing prices Dec 2021 - Dec 2025 plus the Nov 6, 2026 close ($236.26). Dividends are excluded ($3.78 annualised now, ~1.6% yield), so total return was higher than the price CAGR. The dashed line is the straight-line annualised CAGR of the first and last points over a 5-year span. 52-week range: $197.47 &ndash; $248.13. No stock splits in the period.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/><line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/><path d="M 46.0,142.84 L 172.8,156.67 L 299.6,125.97 L 426.4,94.62 L 553.2,69.86 L 680.0,46.99 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="142.84" x2="680.0" y2="46.99" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +7.2%</text>
+<path d="M 46.0,142.84 L 172.8,156.67 L 299.6,125.97 L 426.4,94.62 L 553.2,69.86 L 680.0,46.99" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="142.84" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="132.84" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$166.89</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="156.67" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="173.67" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$156.88</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="125.97" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="115.97" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$179.10</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="94.62" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="84.62" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$201.79</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="69.86" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="59.86" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$219.71</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="46.99" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="36.99" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$236.26</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes (Dec 31): 2021 $166.89, 2022 $156.88, 2023 $179.10, 2024 $201.79 (public quote history, unadjusted; cross-checked against stockanalysis.com's dividend-adjusted series), 2025 $219.71 (Zacks/Dow Jones, Dec 31, 2025); current price from stockanalysis.com (S&amp;P Global / CBOE). The 5-Yr CAGR is computed from the 2021 close to the current price over a 5-year span (not the exact 4.85 years elapsed, which would give about +7.4%). Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
