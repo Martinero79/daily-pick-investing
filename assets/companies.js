@@ -3623,6 +3623,24 @@ const COMPANIES = [
     file: "companies/waste-management.html"
   },
 
+  {
+    slug: "fair-isaac",
+    name: "Fair Isaac Corporation",
+    ticker: "NYSE: FICO",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Credit scoring & decision analytics software",
+    tags: ["Credit scores", "Mortgage exposure", "Negative equity", "Debt-funded buybacks", "Regulatory risk"],
+    dateFeatured: "2026-11-10",
+    price: "$723.76",
+    score: "11 / 14",
+    martinero: 81,
+    momentum: { status: "accelerating", recent: 27.3, prior: 15.9 },
+    quarterYoY: { period: "Q4 FY2026 (Sep 2026)", growth: 27.4 },
+    blurb: "Fair Isaac owns the FICO Score, the dominant US consumer credit score, and a decisioning and fraud software business. FY2026 (Sep year-end) revenue rose 27% to $2.53B at a 49.9% GAAP operating margin and 86% gross margin. The shares are about 61% below their 52-week high after regulators and bureau-owned VantageScore challenged its mortgage-score pricing, and net debt is $5.0B after debt-funded buybacks.",
+    file: "companies/fair-isaac.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
