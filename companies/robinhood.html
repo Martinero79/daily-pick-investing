@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Robinhood Markets — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/robinhood.html">
+<meta property="og:title" content="Robinhood Markets — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Robinhood Markets — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Nasdaq: HOOD</div>
+  <h1>Robinhood Markets, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: HOOD · reports in USD</div>
+    <div class="badge">Sector: Retail Brokerage, Crypto &amp; Fintech (Financials)</div>
+    <div class="badge">HQ: Menlo Park, CA · Founded 2013 (Tenev &amp; Bhatt) · IPO Jul 2021</div>
+    <div class="badge">28.7M funded customers · $396B platform assets (Q3 2026)</div>
+    <div class="badge warn">Short profit record: GAAP-profitable only since FY24 (~2.5 years)</div>
+    <div class="badge warn">Financial-company scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">$83.32</div>
+  <div class="price-sub">Close Nov 9, 2026 (Nasdaq, Mon) · Market cap ≈ $74.9bn (≈899M Class A + B shares) · 52-week range ≈ $63.52–$139.75 (intraday) · Analyst average target ≈ $134.90 (32 analysts, S&amp;P Global; collected before the Q3 print) · No dividend</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Charles Schwab &middot; Fidelity &middot; Vanguard &middot; Interactive Brokers &middot; Morgan Stanley (E*Trade) &middot; Coinbase and other crypto venues &middot; Webull, SoFi and prediction-market operators — a crowded field with low switching costs.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Total Net Revenues (FY25)</div>
+      <div class="val">$4.47B</div>
+      <div class="sub">+51.6% vs FY24 ($2.95B; FY24 was +58.2%): still fast but decelerating. Q3 2026: $1.42B, +11.8% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Income / Margin (FY25)</div>
+      <div class="val green">$2.09B / 46.8%</div>
+      <div class="note">Operating margin was negative in FY21&ndash;FY23 (&minus;90%, &minus;72%, &minus;29%): <b>a very short profit record</b>. Net income FY25 $1.88B (some help from a low ~14% tax rate).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Revenue Mix (Q3 2026)</div>
+      <div class="val">61% trading · 29% NII</div>
+      <div class="note">Transaction-based revenue (options 28%, event contracts 12%, equities ~8%, crypto ~8%, other 4%) vs. net interest 29% and other product 10%. Crypto was 21% of Q3 2025.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Latest Quarter (Q3 2026)</div>
+      <div class="val">$468M NI</div>
+      <div class="note">Net income −16% YoY on +16% operating expenses (EPS $0.51); net deposits $15.7B; reported Oct 27, 2026.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">73/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/14 criteria met, 2 N/A (negative bases). Strong growth and margins; short profit history, thin capital-return and market-position evidence.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M 110.00,15.00 A 95,95 0 1 1 35.73,169.23 L 64.65,146.16 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M 35.73,169.23 A 95,95 0 0 1 35.73,50.77 L 64.65,73.84 A 58,58 0 0 0 64.65,146.16 Z" fill="#f87171"/><path d="M 35.73,50.77 A 95,95 0 0 1 110.00,15.00 L 110.00,52.00 A 58,58 0 0 0 64.65,73.84 Z" fill="#64748b"/><text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/14</text><text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 Met</b> — revenue CAGR, operating margin, ROE vs. cost of equity, net-cash position (thin), entry multiple vs. its short own history, share count, founder ownership, capex intensity, margin stability.</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 Not Met</b> — market share (not top-2), market concentration, capital-return ratio (~50% via buybacks, no dividend).</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>2 N/A</b> — EBIT CAGR and FCF CAGR (both negative at the FY21 base, so no CAGR exists).</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Robinhood runs a mobile-first brokerage for U.S. retail investors, with equities, options, crypto, event (prediction-market) contracts, a Gold subscription, retirement accounts and a credit card. Revenue grew from $1.82bn in FY2021 to $4.47bn in FY2025 (~25% a year), and the business swung from a $1.6bn operating loss to a $2.1bn operating profit, a 46.8% margin. <b>That profit record is short:</b> FY2023 was still loss-making (net loss $541M), quarterly profits only became consistent from Q4 2023, and FY2024 net income of $1.41bn was helped by a tax benefit (net income exceeded operating income by ~$360M, which is consistent with a one-off valuation-allowance release). Everything scored on a multi-year basis (EBIT and FCF CAGR, valuation history, ROE) therefore rests on two full profitable years plus 2026 to date. Revenue is also cyclical and concentrated: transaction-based lines (options, crypto, equities, event contracts) were 61% of Q3 2026 revenue and net interest 29%. Crypto revenue fell 55% YoY to $120M in Q3 2026 (from $268M), net interest revenue fell 9% as rates eased, and operating expenses grew 16%, so Q3 net income fell 16% even as revenue rose 12%. The stock fell ~25% in October 2026 and is down from a $139.75 intraday high in Dec 2025.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard is adapted for a broker with a short profit history:</b> Robinhood is a financial company whose cash flow is dominated by customer cash, margin and fractional-share flows, so the standard industrial framework is adapted, with each substitution flagged inline: <b>total net revenues</b> stand in for revenue; <b>operating income</b> is used as EBIT, but its FY21 base is negative, so criteria 2 (EBIT CAGR) and 4 (FCF CAGR) are <b>N/A</b> and their weights (11 + 8 = 19) are dropped from the Martinero denominator (105 − 19 = 86); <b>ROE vs. an assumed ~13.5% cost of equity</b> replaces ROIC vs. WACC (criterion 7); <b>net cash / capital position</b> replaces net debt/EBITDA (criterion 8; no CET1 is reported); <b>(dividends + buybacks) ÷ net income</b> replaces FCF conversion (criterion 9); criterion 10 uses an 8-quarter own-history average because no 5-year P/E record exists; and criterion 14 uses the operating (efficiency) margin because there is no gross-profit line.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021–FY2025 (fiscal year = calendar year). USD millions unless noted. Data from S&amp;P Global (via stockanalysis.com); FY21 net loss of $3.7bn included large non-cash IPO-related and convertible-note charges that are not itemised here. Net revenues are total net revenues.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Revenues vs. Operating Income ($B)</div>
+    <div class="chart-sub">Operating income was negative in FY21&ndash;FY23 and turned positive in FY24; FY21 revenue ($1.8B) was a meme-stock boom year, then FY22 fell 25%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenues</span><span><span class="dot" style="background:#fbbf24;"></span>Operating income</span></div>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="127.6" x2="680" y2="127.6" stroke="#263049" stroke-width="1"/>
+<rect x="62" y="89.6" width="24" height="38.0" fill="#2dd4bf"/>
+<text x="74" y="84.6" text-anchor="middle" font-size="8" fill="#cbd5e1">1.8</text>
+<rect x="92" y="127.6" width="24" height="34.4" fill="#fbbf24"/>
+<text x="104" y="173.0" text-anchor="middle" font-size="8" fill="#cbd5e1">-1.6</text>
+<text x="89" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<rect x="190" y="99.2" width="24" height="28.4" fill="#2dd4bf"/>
+<text x="202" y="94.2" text-anchor="middle" font-size="8" fill="#cbd5e1">1.4</text>
+<rect x="220" y="127.6" width="24" height="20.5" fill="#fbbf24"/>
+<text x="232" y="159.2" text-anchor="middle" font-size="8" fill="#cbd5e1">-1.0</text>
+<text x="217" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<rect x="318" y="88.6" width="24" height="39.0" fill="#2dd4bf"/>
+<text x="330" y="83.6" text-anchor="middle" font-size="8" fill="#cbd5e1">1.9</text>
+<rect x="348" y="127.6" width="24" height="11.2" fill="#fbbf24"/>
+<text x="360" y="149.9" text-anchor="middle" font-size="8" fill="#cbd5e1">-0.5</text>
+<text x="345" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<rect x="446" y="65.9" width="24" height="61.8" fill="#2dd4bf"/>
+<text x="458" y="60.9" text-anchor="middle" font-size="8" fill="#cbd5e1">3.0</text>
+<rect x="476" y="105.6" width="24" height="22.1" fill="#fbbf24"/>
+<text x="488" y="100.6" text-anchor="middle" font-size="8" fill="#cbd5e1">1.1</text>
+<text x="473" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<rect x="574" y="34.0" width="24" height="93.6" fill="#5eead4"/>
+<text x="586" y="29.0" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">4.5</text>
+<rect x="604" y="83.8" width="24" height="43.8" fill="#fde68a"/>
+<text x="616" y="78.8" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">2.1</text>
+<text x="601" y="193" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, crit. #1)</div>
+      <div class="val green">~25.3%</div>
+      <div class="sub">FY21→FY25, $1.82B→$4.47B</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (crit. #2)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">FY21 operating income negative (−$1.64B); FY25 +$2.09B</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (crit. #4)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">FY21 FCF negative (−$0.95B); FY25 +$1.62B but flow-driven</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">$2.05</div>
+      <div class="sub">First positive full-year EPS was FY24 ($1.56); FY23 −$0.61</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Margin Trend (efficiency-margin proxy for criterion 14)</div>
+    <div class="chart-sub">Operating income ÷ net revenues. From −90% to +47% in four years; the dashed line marks 0%. Only FY24 and FY25 are positive years.</div>
+<svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+<line x1="40" y1="56.5" x2="680" y2="56.5" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+<polyline points="60,108.5 210,98.0 360,73.0 510,36.0 660,29.6" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="60" cy="108.5" r="4" fill="#2dd4bf"/>
+<text x="60" y="99.5" text-anchor="middle" font-size="9" fill="#f1f5f9">-90%</text>
+<circle cx="210" cy="98.0" r="4" fill="#2dd4bf"/>
+<text x="210" y="89.0" text-anchor="middle" font-size="9" fill="#f1f5f9">-72%</text>
+<circle cx="360" cy="73.0" r="4" fill="#2dd4bf"/>
+<text x="360" y="64.0" text-anchor="middle" font-size="9" fill="#f1f5f9">-29%</text>
+<circle cx="510" cy="36.0" r="4" fill="#2dd4bf"/>
+<text x="510" y="27.0" text-anchor="middle" font-size="9" fill="#f1f5f9">36%</text>
+<circle cx="660" cy="29.6" r="4" fill="#2dd4bf"/>
+<text x="660" y="20.6" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">47%</text>
+<text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Net Revenue</th><th>Operating Income</th><th>Op. Margin</th><th>Net Income</th><th>Diluted EPS</th><th>Reported FCF</th><th>Capex</th><th>Net cash (S&amp;P)</th></tr>
+    <tr><td>FY21</td><td>1,815</td><td>&minus;1,641</td><td>-90.4%</td><td>&minus;3,687</td><td>&minus;$7.49</td><td>&minus;948</td><td>63</td><td>6,457</td></tr>
+    <tr><td>FY22</td><td>1,358</td><td>&minus;981</td><td>-72.2%</td><td>&minus;1,028</td><td>&minus;$1.17</td><td>&minus;880</td><td>28</td><td>7,877</td></tr>
+    <tr><td>FY23</td><td>1,865</td><td>&minus;536</td><td>-28.7%</td><td>&minus;541</td><td>&minus;$0.61</td><td>1,179</td><td>2</td><td>7,229</td></tr>
+    <tr><td>FY24</td><td>2,951</td><td>1,054</td><td>35.7%</td><td>1,411</td><td>$1.56</td><td>&minus;170</td><td>13</td><td>4,582</td></tr>
+    <tr><td>FY25</td><td>4,473</td><td>2,094</td><td>46.8%</td><td>1,883</td><td>$2.05</td><td>1,623</td><td>15</td><td>197</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Reported FCF = operating cash flow − capex and is dominated by customer-cash and fractional-share-obligation swings, so it is not treated as owner earnings. "Net cash" is S&amp;P Global's cash &amp; investments minus total debt and includes broker-funding and credit-card-related borrowing. FY24 net income ($1,411M) exceeded operating income ($1,054M), consistent with a tax benefit. No dividends; no stock split since IPO.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; Revenue Mix (Q3 2026)</div></div>
+  <div class="sec-sub">Q3 2026 (quarter to Sep 30) was reported on Oct 27, 2026 and is the latest available. Source: company Q3 2026 release plus S&amp;P Global data for earlier quarters.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 2026 net revenues were a record $1.42B (+12% YoY, +9% vs Q2), but total operating expenses rose 16% to $739M (provisions for credit losses on the growing credit-card book, spending on Trump Accounts and Rothera, marketing), so operating income was $685M (48.1% margin) and net income $468M ($0.51 per share), down 16% from $556M. Adjusted EBITDA was $808M (+9%, 57% margin). The revenue mix moved sharply: options $399M (+31%), event contracts $173M (from $27M), equities $121M (+41%), while cryptocurrency revenue fell 55% to $120M and net interest revenue fell 9% to $415M. Platform assets reached $396B (+19%), net deposits were $15.7B (17% annualised) and TTM net deposits $71.0B; Gold subscribers rose 34% to 5.2M and funded customers 7% to 28.7M. Buybacks were only $25M in the quarter (~0.2M shares at ~$105; $689M year-to-date). The stock closed at $83.32 on Nov 9, 2026, down from ~$112.5 at end-September.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Revenues — Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">YoY growth by quarter: Q4'24 +115.3%, Q1'25 +50.0%, Q2'25 +45.0%, Q3'25 +100.0%, Q4'25 +26.5%, Q1'26 +15.1%, Q2'26 +32.3%, Q3'26 +11.8%. The earlier growth rates were boosted by crypto trading and a small prior-year base.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly net revenues, USD m</span></div>
+<svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="67.3" width="56" height="62.7" fill="#2dd4bf"/><text x="53" y="62.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,014</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="72.7" width="56" height="57.3" fill="#2dd4bf"/><text x="135" y="67.7" text-anchor="middle" font-size="9" fill="#cbd5e1">927</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="68.9" width="56" height="61.1" fill="#2dd4bf"/><text x="217" y="63.9" text-anchor="middle" font-size="9" fill="#cbd5e1">989</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="51.3" width="56" height="78.7" fill="#2dd4bf"/><text x="299" y="46.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,274</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="50.7" width="56" height="79.3" fill="#2dd4bf"/><text x="381" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">1,283</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="64.1" width="56" height="65.9" fill="#2dd4bf"/><text x="463" y="59.1" text-anchor="middle" font-size="9" fill="#cbd5e1">1,067</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="49.2" width="56" height="80.8" fill="#2dd4bf"/><text x="545" y="44.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,308</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="42.0" width="56" height="88.0" fill="#2dd4bf"/><text x="627" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,424</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Income — Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">Q4'24 ($916M) was inflated by a tax benefit (it exceeded that quarter's $556M operating income); Q2'26 ($561M) also benefited from a low tax line (pre-tax margin 54% vs. operating margin 44%). Q3'26 sits between Q1'26 and Q2'26.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income, USD m</span></div>
+<svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="42.0" width="56" height="88.0" fill="#60a5fa"/><text x="53" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">916</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="97.7" width="56" height="32.3" fill="#60a5fa"/><text x="135" y="92.7" text-anchor="middle" font-size="9" fill="#cbd5e1">336</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="92.9" width="56" height="37.1" fill="#60a5fa"/><text x="217" y="87.9" text-anchor="middle" font-size="9" fill="#cbd5e1">386</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="76.6" width="56" height="53.4" fill="#60a5fa"/><text x="299" y="71.6" text-anchor="middle" font-size="9" fill="#cbd5e1">556</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="71.9" width="56" height="58.1" fill="#60a5fa"/><text x="381" y="66.9" text-anchor="middle" font-size="9" fill="#cbd5e1">605</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="96.4" width="56" height="33.6" fill="#60a5fa"/><text x="463" y="91.4" text-anchor="middle" font-size="9" fill="#cbd5e1">350</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="76.1" width="56" height="53.9" fill="#60a5fa"/><text x="545" y="71.1" text-anchor="middle" font-size="9" fill="#cbd5e1">561</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="85.0" width="56" height="45.0" fill="#60a5fa"/><text x="627" y="80.0" text-anchor="middle" font-size="9" fill="#cbd5e1">468</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>USD m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Net revenues</td><td>1,014</td><td>927</td><td>989</td><td>1,274</td><td>1,283</td><td>1,067</td><td>1,308</td><td>1,424</td></tr>
+    <tr><td>YoY growth</td><td>+115.3%</td><td>+50.0%</td><td>+45.0%</td><td>+100.0%</td><td>+26.5%</td><td>+15.1%</td><td>+32.3%</td><td>+11.8%</td></tr>
+    <tr><td>Transaction-based</td><td>672</td><td>583</td><td>539</td><td>730</td><td>776</td><td>623</td><td>776</td><td>867</td></tr>
+    <tr><td>  of which crypto</td><td>358</td><td>252</td><td>160</td><td>268</td><td>221</td><td>134</td><td>100</td><td>120</td></tr>
+    <tr><td>Net interest</td><td>296</td><td>290</td><td>357</td><td>456</td><td>411</td><td>359</td><td>389</td><td>415</td></tr>
+    <tr><td>Net income</td><td>916</td><td>336</td><td>386</td><td>556</td><td>605</td><td>350</td><td>561</td><td>468</td></tr>
+    <tr><td>Diluted EPS (GAAP)</td><td>$1.01</td><td>$0.37</td><td>$0.42</td><td>$0.61</td><td>$0.66</td><td>$0.38</td><td>$0.62</td><td>$0.51</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Transaction-based = options + crypto + equities + event contracts + other transaction-based revenue. Net income is net income attributable to Robinhood. Event contracts began contributing in Q4 2024; guidance beyond the release was not reviewed in full.</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Q3 2026 Net Revenue by Line ($M, % of total)</div>
+    <div class="chart-sub">Options is the largest transaction line; net interest is the single largest line at 29% but is shrinking as a share. Crypto, which was 21% of revenue a year ago, is now 8%.</div>
+<svg viewBox="0 0 700 255" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="24" font-size="9.5" fill="#dbe4f0">Options</text><rect x="180" y="10" width="317.3" height="20" fill="#2dd4bf"/><text x="505.3" y="24" font-size="9" fill="#f8fafc">$399M &middot; 28.0%</text>
+<text x="10" y="59" font-size="9.5" fill="#dbe4f0">Net interest</text><rect x="180" y="45" width="330.0" height="20" fill="#fbbf24"/><text x="518.0" y="59" font-size="9" fill="#f8fafc">$415M &middot; 29.1%</text>
+<text x="10" y="94" font-size="9.5" fill="#dbe4f0">Event contracts</text><rect x="180" y="80" width="137.6" height="20" fill="#a78bfa"/><text x="325.6" y="94" font-size="9" fill="#f8fafc">$173M &middot; 12.1%</text>
+<text x="10" y="129" font-size="9.5" fill="#dbe4f0">Other product (Gold, etc.)</text><rect x="180" y="115" width="112.9" height="20" fill="#818cf8"/><text x="300.9" y="129" font-size="9" fill="#f8fafc">$142M &middot; 10.0%</text>
+<text x="10" y="164" font-size="9.5" fill="#dbe4f0">Equities</text><rect x="180" y="150" width="96.2" height="20" fill="#3b82f6"/><text x="284.2" y="164" font-size="9" fill="#f8fafc">$121M &middot; 8.5%</text>
+<text x="10" y="199" font-size="9.5" fill="#dbe4f0">Cryptocurrencies</text><rect x="180" y="185" width="95.4" height="20" fill="#f472b6"/><text x="283.4" y="199" font-size="9" fill="#f8fafc">$120M &middot; 8.4%</text>
+<text x="10" y="234" font-size="9.5" fill="#dbe4f0">Other transaction-based</text><rect x="180" y="220" width="42.9" height="20" fill="#64748b"/><text x="230.9" y="234" font-size="9" fill="#f8fafc">$54M &middot; 3.8%</text>
+<line x1="180" y1="5" x2="180" y2="250" stroke="#263049" stroke-width="1"/>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Mix Over Time — Transaction-Based share vs. Net Interest share</div>
+    <div class="chart-sub">Transaction-based (teal, labels above) fell from 77% in FY21 to 42% in FY23 as rates rose and trading cooled, then recovered to ~60%; net interest (amber, labels below) rose from 14% to 50% in FY23 and has since eased to 29&ndash;34%. Both lines are sensitive to market activity and rate levels.</div>
+<svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+<polyline points="60,35.0 180,52.7 300,71.0 420,56.9 540,53.9 660,51.8" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="60" cy="35.0" r="4" fill="#2dd4bf"/>
+<text x="60" y="26.0" text-anchor="middle" font-size="9" fill="#f1f5f9">77%</text>
+<circle cx="180" cy="52.7" r="4" fill="#2dd4bf"/>
+<text x="180" y="43.7" text-anchor="middle" font-size="9" fill="#f1f5f9">60%</text>
+<circle cx="300" cy="71.0" r="4" fill="#2dd4bf"/>
+<text x="300" y="62.0" text-anchor="middle" font-size="9" fill="#f1f5f9">42%</text>
+<circle cx="420" cy="56.9" r="4" fill="#2dd4bf"/>
+<text x="420" y="47.9" text-anchor="middle" font-size="9" fill="#f1f5f9">56%</text>
+<circle cx="540" cy="53.9" r="4" fill="#2dd4bf"/>
+<text x="540" y="44.9" text-anchor="middle" font-size="9" fill="#f1f5f9">59%</text>
+<circle cx="660" cy="51.8" r="4" fill="#2dd4bf"/>
+<text x="660" y="42.8" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">61%</text>
+<polyline points="60,99.6 180,82.1 300,63.1 420,75.6 540,79.4 660,84.2" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+<circle cx="60" cy="99.6" r="4" fill="#fbbf24"/>
+<text x="60" y="114.6" text-anchor="middle" font-size="9" fill="#f1f5f9">14%</text>
+<circle cx="180" cy="82.1" r="4" fill="#fbbf24"/>
+<text x="180" y="97.1" text-anchor="middle" font-size="9" fill="#f1f5f9">31%</text>
+<circle cx="300" cy="63.1" r="4" fill="#fbbf24"/>
+<text x="300" y="78.1" text-anchor="middle" font-size="9" fill="#f1f5f9">50%</text>
+<circle cx="420" cy="75.6" r="4" fill="#fbbf24"/>
+<text x="420" y="90.6" text-anchor="middle" font-size="9" fill="#f1f5f9">38%</text>
+<circle cx="540" cy="79.4" r="4" fill="#fbbf24"/>
+<text x="540" y="94.4" text-anchor="middle" font-size="9" fill="#f1f5f9">34%</text>
+<circle cx="660" cy="84.2" r="4" fill="#fbbf24"/>
+<text x="660" y="99.2" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">29%</text>
+<text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="180" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="300" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="420" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="540" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25</text>
+<text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital &amp; Ownership</div></div>
+  <div class="sec-sub">P/E exists only for the two profitable year-ends (FY24, FY25) and now; FY21&ndash;FY23 were loss-making so P/E is not meaningful.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E (bars) and Forward P/E (line) vs. Own Trading History</div>
+    <div class="chart-sub">Year-end P/E = year-end close ÷ GAAP diluted EPS (S&amp;P Global via stockanalysis.com). Now = $83.32 (Nov 9, 2026) ÷ $2.17 TTM GAAP EPS. Forward P/E on consensus adjusted EPS (third-party estimate; FY23's 259x is off-scale and omitted); ~32.4x now.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E</span><span><span class="dot" style="background:#fbbf24;"></span>Forward P/E (consensus)</span></div>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+<text x="91.65" y="140" text-anchor="middle" font-size="8" fill="#7c8aa5">n/m (loss)</text>
+<text x="194.95" y="140" text-anchor="middle" font-size="8" fill="#7c8aa5">n/m (loss)</text>
+<text x="298.25" y="140" text-anchor="middle" font-size="8" fill="#7c8aa5">n/m (loss)</text>
+<rect x="379.55" y="103.32" width="44" height="46.68" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="97.32" text-anchor="middle" font-size="8" fill="#cbd5e1">23.3x</text>
+<rect x="482.85" y="41.98" width="44" height="108.02" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="35.98" text-anchor="middle" font-size="8" fill="#cbd5e1">54.0x</text>
+<rect x="586.15" y="73.21" width="44" height="76.79" fill="#5eead4"/><text x="608.15" y="67.21" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">38.4x</text>
+<polyline points="401.55,75.06 504.85,56.78 608.15,85.21" fill="none" stroke="#fbbf24" stroke-width="2"/>
+<circle cx="401.55" cy="75.06" r="3.5" fill="#fbbf24"/>
+<circle cx="504.85" cy="56.78" r="3.5" fill="#fbbf24"/>
+<circle cx="608.15" cy="85.21" r="3.5" fill="#fbbf24"/>
+<text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25</text>
+<text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~38.4x trailing GAAP earnings the stock is below the 8-quarter average (~41.5x, range 23.2x–58.0x) of the quarter-end P/Es since Q4 2024, mainly because the price fell ~26% in about six weeks while earnings kept growing. With only ~2.5 profitable years that "own history" is thin, and the range (23x to 58x) is very wide, so treat the criterion-10 signal as low confidence. P/S is ~14.7x on TTM revenue of $5.08B vs. year-end values of 8.4x, 5.3x, 5.9x, 11.2x and 22.7x for FY21&ndash;FY25. The data source's PEG is ~1.8 (Oct 27) on consensus EPS growth of ~23% a year.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capital Position (Q3 2026, S&amp;P Global basis)</div>
+    <div class="chart-sub">Cash &amp; investments $24.8B vs. total debt $22.6B (net cash +$2.3B; Dec 2025 +$0.2B; Mar 2026 +$5.7B; Jun 2026 +$1.0B); book equity about $9.5B at Jun 2026 (P/B 8.8x, P/TBV 9.8x on Oct 27 data). Debt rose from $3.7B (FY23) to $22.6B as the credit-card, margin and funding books grew; the split between corporate and customer-funding debt, and any regulatory capital ratio, were not verified here. $1.3B of buybacks since Q3 2024.</div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership Structure</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/><circle cx="55" cy="55" r="42" fill="none" stroke="#f87171" stroke-width="14" stroke-dasharray="33.3 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/><circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="180.8 263.9" stroke-dashoffset="-33.3" transform="rotate(-90 55 55)"/><circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="49.9 263.9" stroke-dashoffset="-214.0" transform="rotate(-90 55 55)"/></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#f87171;"></span>Insiders ~12.6% (co-founders Tenev and Bhatt, Class B)</div>
+          <div><span class="dot" style="background:#3b82f6;"></span>Institutions ~68.5%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Retail / other ~18.9%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>Robinhood has a dual-class structure: Class A (about 791M shares) trades; Class B (high-vote, held by the co-founders) makes up the rest of the ~899M total. Insiders hold ~12.6% of shares per S&amp;P Global, which clears the 5% bar, but their voting share was not verified here. The stock is volatile (beta ~2.35; down ~31% over 52 weeks as of Oct 27, short interest ~4.5% of shares). Regulatory and business-model risks include payment-for-order-flow and crypto/prediction-market rule changes and the credit-card book&rsquo;s loss provisions.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a broker with a short profit record (see framing note, page 1). Criteria 2 and 4 are N/A (negative FY21 base) and excluded from the denominator. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met. Martinero Index = 63.2 weighted points &divide; 86 (105 &minus; 19 N/A weight) &times; 100 = 73.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:30%;">Criterion</th><th style="width:48%;">Finding</th><th style="width:18%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total net revenues</td><td>~25.3% CAGR FY21&ndash;FY25 ($1.82B&rarr;$4.47B). FY21 was a retail-trading boom year, so the base is elevated, yet growth still cleared 20%: FY22 &minus;25%, FY23 +37%, FY24 +58%, FY25 +52%. Q3 2026 growth slowed to +11.8% YoY</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15%</td><td>Not meaningful: operating income was <b>negative at the FY21 base</b> (&minus;$1,641M; also &minus;$981M FY22, &minus;$536M FY23), so a CAGR is undefined. For reference only: operating income swung to +$1,054M in FY24 and +$2,094M in FY25 (+99%). Weight dropped from the Martinero denominator</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20%</td><td>FY25 operating margin ~46.8% ($2.09B &divide; $4.47B; Q3 2026: 48.1%). <b>Short profit record:</b> the margin was negative until FY24 (&minus;90%, &minus;72%, &minus;29% in FY21&ndash;FY23) and quarterly profits only became consistent from Q4 2023, so the level is proven for only ~2.5 years</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15%</td><td>Not meaningful: reported FCF was <b>negative at the FY21 base</b> (&minus;$948M) and swings with customer-cash and fractional-share flows (&minus;$880M, +$1,179M, &minus;$170M, +$1,623M in FY22&ndash;FY25), so no CAGR exists; the criterion is also unreliable for a broker. Weight dropped from the denominator (net income is not substituted because FY21 net income is also negative, &minus;$3.7B)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>28.7M funded customers and $396B of platform assets (Q3 2026): a top-5 U.S. retail brokerage by customers, but behind Fidelity, Schwab and Vanguard on customers/assets and far smaller by assets than any of them. Leading in no category on a verified basis, so scored in the #4&ndash;5 band</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; a few giant incumbents plus many zero-commission rivals and crypto exchanges; retail switching costs are low</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROE (ROTCE slightly higher) vs. cost of equity</td><td>ROE ~23.6% TTM to Jun 2026 (S&amp;P Global; ROTCE est. ~26%) vs. an assumed ~13.5% cost of equity (beta 2.35; S&amp;P Global WACC 13.55%): spread ~10 pts, band 9&ndash;12. The ROE benefits from a low effective tax rate (13.9%) and from the profit base being only ~2 years old. Q3 2026 equity was not verified</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with net cash / capital position</td><td>S&amp;P Global shows net cash of +$2.3B at Q3 2026 (cash &amp; investments $24.8B vs. total debt $22.6B), but this is thin and volatile: +$0.2B at Dec 2025 and +$5.7B at Mar 2026, and the debt line includes broker-funding and credit-card-related borrowing whose split from corporate debt was not verified. Scored as net cash (5/5) mechanically; debt/equity is a high 2.4x. No CET1 is reported</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion &mdash; substituted with (dividends + buybacks) &divide; net income</td><td>No dividend. Buybacks $689M in the first nine months of 2026 vs. net income of $1,379M &asymp; 50% ($1.3B cumulative since Q3 2024: 27M shares at ~$48 avg). Buybacks are largely offsetting stock-based compensation</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E) vs. own trading history</td><td><b>Only ~2.5 profitable years of history:</b> using the 8 quarter-end trailing P/Es since Q4 2024 (avg ~41.5x, range 23.2x&ndash;58.0x) vs. current ~38.4x ($83.32 &divide; $2.17 TTM GAAP EPS): ratio 0.92. The only two profitable year-end P/Es are FY24 23.3x and FY25 54.0x. Low-confidence signal; no 5-year average exists. P/S is ~14.7x now vs. 5.3x&ndash;22.7x at year-ends FY21&ndash;FY25</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>~899M Class A+B shares outstanding, +0.9% YoY and &minus;0.3% QoQ; implied diluted shares ~904M (FY24) &rarr; ~918M (FY25). Measured from FY24 because the FY21 weighted-average base (IPO year, convertible preferred) is not comparable; buybacks have roughly offset SBC dilution</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>Insiders hold ~12.6% (S&amp;P Global); co-founders Vlad Tenev (CEO) and Baiju Bhatt hold high-vote Class B stock. Voting control percentage was not verified here</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>FY25 capex $15M &divide; $4.47B revenue &asymp; 0.3% &mdash; very asset-light (TTM to Jun 2026: $26M)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>No gross-profit line, so evaluated on the operating (efficiency) margin, FY2025 vs FY2022 (3 years prior): &minus;72.2% &rarr; +46.8%, about +119pp. Maximum band, but measured off a loss-making base year; the improvement shows operating leverage, not a long record of stability</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue has compounded ~25% a year since FY21, the business is now solidly profitable (46.8% operating margin, ~24% ROE) and capex is ~0.3% of revenue. Platform assets ($396B, +19%), funded customers (28.7M) and Gold subscribers (5.2M, +34%) keep growing; $71B of net deposits over twelve months funds future activity. Product breadth (options, event contracts, credit card, retirement, crypto) is diversifying the mix, buybacks have roughly offset dilution, and founders hold ~12.6% of shares.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The profit record is short (profitable only since FY24; FY24 helped by a tax benefit), so ROE, margin and valuation comparisons rest on very little history. Q3 2026 net income fell 16% as operating expenses (+16%) outgrew revenue (+12%); crypto revenue fell 55% and net interest revenue 9%. Revenue is activity- and rate-sensitive. Debt has risen sharply ($3.7B to $22.6B) with the credit-card and funding books, the market position is mid-pack by assets, and the stock is volatile (beta ~2.35; fell ~25% in October 2026). Analyst targets (average ~$135) pre-date the Q3 print.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> Robinhood Markets Q3 2026 results release (Oct 27, 2026; via Finviz/Business Wire) — Q3 2026 revenue lines, expenses, net income, Adjusted EBITDA, platform assets, deposits, buybacks; stockanalysis.com (S&amp;P Global Market Intelligence and Fiscal.ai data) — FY21–FY25 and quarterly financials, revenue by line, ratios, statistics (as of Oct 27, 2026), analyst targets (Oct 26, 2026), price history through Nov 9, 2026.
+    <br><b>Data-quality flags:</b> Statistics (ROE 23.6%, beta, P/B, shares, insider %) are third-party and several pre-date the Q3 print (ROE is TTM to Jun 2026); the ~13.5% cost of equity and the 8-quarter P/E average are assumptions/derived; FY21 and FY24 net income contain one-off items not separately itemised here; the 52-week range and analyst target are approximate; the composition of "total debt" was not verified.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in USD, as originally reported, subject to restatement. Compiled Nov 10, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Robinhood Markets &mdash; Nasdaq, USD share price trend (IPO Jul 29, 2021 at $38; first trading year-end is 2021). Points shown are calendar year-end closes plus the current price (Nov 9, 2026 close).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Robinhood — Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">The stock fell from its IPO price of $38 to $8.14 at end-2022, then rose roughly 14x to $113.10 at end-2025 (intraday high $139.75 in Dec 2025), and has since fallen ~26%. The dashed line is the straight-line annualised price CAGR from the Dec 2021 close ($17.76) to Nov 9, 2026 (4.86 years), which flatters the result because it starts well below the IPO price. No stock splits since IPO; no dividends.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="14" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +37.4%</text>
+<path d="M 46.0,156.76 L 172.8,169.35 L 299.6,163.33 L 426.4,131.24 L 553.2,32.00 L 680.0,70.97 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="156.76" x2="680.0" y2="70.97" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,156.76 L 172.8,169.35 L 299.6,163.33 L 426.4,131.24 L 553.2,32.00 L 680.0,70.97" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="156.76" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="146.76" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$17.76</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="169.35" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="159.35" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$8.14</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="163.33" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="153.33" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$12.74</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="131.24" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="121.24" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$37.26</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="32.00" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="22.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$113.10</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="70.97" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="674.0" y="60.97" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$83.32</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes and the current price ($83.32, Nov 9, 2026 close) from stockanalysis.com (S&amp;P Global Market Intelligence); unadjusted for dividends (none paid) and no splits have occurred. The 5-year CAGR label uses the actual 4.86-year span.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Veeva Systems, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/veeva-systems.html">
+<meta property="og:title" content="Veeva Systems, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Veeva Systems, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 - COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Veeva Systems, Inc.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: VEEV</div>
+    <div class="badge">FY ends Jan 31 (FY2026 = year to Jan 2026)</div>
+    <div class="badge">HQ: Pleasanton, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Net cash $7.1B &middot; no dividend &middot; GAAP P/E ~50x</div>
+  </div>
+
+  <div class="price">$306.40</div>
+  <div class="price-sub">Mon Nov 9, 2026 close (NYSE, USD) &middot; Market cap &asymp; $49.6B (161.9M shares) &middot; 52-wk range $148.05 &ndash; $325.99 &middot; Beta 0.88 &middot; Analyst consensus: Buy (29 analysts), avg price target $319.93 (+4.4%; S&amp;P Global data as of Nov 7) &middot; Latest quarter: Q2 FY2027 (Jul 2026), reported Aug 26, 2026 &middot; Next report (Q3 FY2027): expected early Dec 2026 (date not confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Veeva is the dominant industry-cloud vendor to life sciences (pharma/biotech CRM, content, clinical, regulatory, quality and safety software, plus Crossix data/analytics). The company reports 1,500+ customers and, in Q2 FY2027, 180+ customers live on Vault CRM with 12 top-20 biopharma commitments. No third-party market-share percentage was verified; the #1 score is a judgment call (see Section 4).</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> every figure is in US dollars. Fiscal years end Jan 31 (Veeva's &ldquo;FY2026&rdquo; ended Jan 31, 2026; the latest quarter, Q2 FY2027, ended Jul 31, 2026). &ldquo;Op. Income / EBIT&rdquo; is <b>GAAP operating income</b> as standardised by S&amp;P Global (it excludes a $30.6M litigation-settlement charge booked in Q2 FY2026; Veeva's reported GAAP figure for that quarter was $195.9M). GAAP numbers include stock-based compensation (~14-15% of revenue); Veeva's own non-GAAP operating margin is ~45%. FCF = operating cash flow minus capex. Share prices are unadjusted closes.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$3.20B</div>
+      <div class="sub green" style="color:#34d399;">+16.3% YoY</div>
+      <div class="note">FY2025 was +16.2%. 4-yr CAGR FY2022-26 is +14.6%. Latest quarter (Q2 FY2027): $928.0M, +17.6% YoY; FY2027 guidance $3.682-3.687B (+15.3%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">29.6%</div>
+      <div class="sub">FY2026; gross margin 75.5%</div>
+      <div class="note">Up from 18.2% in FY2024. Q2 FY2027 GAAP operating margin 29.6% (non-GAAP 44.8%). Margin is after stock-based compensation.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">95.6% vs ~9.1%</div>
+      <div class="sub">Spread &gt;12 pts</div>
+      <div class="note">Third-party (S&amp;P Global) figures. ROIC is flattered because $7.2B of cash and investments is excluded from invested capital; ROCE, which includes cash, is a more modest 13.6%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">$7.1B net cash (Jul 31, 2026)</div>
+      <div class="note">$7.2B cash &amp; investments vs $152M debt (mostly lease liabilities). H1 FY2027 buybacks of $473M (none in H1 FY2026).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">84/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High-quality, cash-rich, asset-light software franchise; points lost mainly on growth rates below 15-20% and a valuation above its own 5-year average discount.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="291.7 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-291.7" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">13/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>13 criteria fully met</b> &mdash; EBIT CAGR, EBIT margin, FCF CAGR, market position, market concentration (light competition), ROIC vs WACC, net cash, FCF conversion, entry multiple vs own history, share count (flat), insider ownership (S&amp;P ~8%), capex intensity and gross-margin stability (+3.8pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>1 not met</b> &mdash; revenue CAGR (+14.6%, just under the 15% bar)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Veeva Systems is a Pleasanton, California software company that sells cloud applications, data and (increasingly) AI agents to the global life sciences industry. Its two subscription families are Commercial Solutions (Vault CRM, data, Crossix analytics; $1.33B trailing subscription revenue) and R&amp;D and Quality Solutions (clinical, regulatory, quality, safety; $1.56B), now the larger and faster-growing half. Revenue is almost entirely recurring subscription plus professional services, billed largely annually in advance, so cash flow runs seasonally ahead of earnings (Q1 free cash flow is the heavy collection quarter). The business is asset-light (capex under 1% of revenue), holds $7.2B of cash and investments against negligible debt, and converted 146% of FY2026 GAAP operating income into free cash flow. Q2 FY2027 revenue was $928.0M (+17.6% YoY), subscription revenue $766.8M (+16%), GAAP operating income $275.0M (+40%, helped by a $30.6M litigation charge in the prior-year quarter) and non-GAAP operating income $415.9M (+18%); the company raised FY2027 guidance to $3.682-3.687B revenue and about $1.64B non-GAAP operating income. The share price has more than doubled from its April 2026 low of $148.05 as software-sector worries about AI disruption eased, so the valuation debate is now about how long growth of mid-to-high teens can be sustained at ~50x trailing GAAP earnings.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>GAAP vs non-GAAP</b> &mdash; Veeva's non-GAAP operating margin (~45%) excludes ~$0.5B a year of stock-based compensation; this page scores the GAAP figures. (2) <b>Fiscal-year labels</b> &mdash; Veeva's FY2026 ended Jan 31, 2026, so &ldquo;FY2022-26&rdquo; spans Feb 2021 to Jan 2026 and the 4-year CAGRs below start from FY2022 (Jan 2022). (3) <b>Investor Day</b> &mdash; Veeva held a virtual Investor Day on Nov 5, 2026; any new long-term targets from it are not incorporated here.
+  </div>
+
+  <div class="bignum-corner">VEEV</div>
+</div>
+
+<!-- ============ PAGE 2 - FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending Jan 31), US$ millions. Op. Income = GAAP operating income (S&amp;P Global standardised); Free Cash Flow = operating cash flow minus capex.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual (US$m)</div>
+    <div class="chart-sub">Revenue has compounded at ~14.6% a year; free cash flow has grown faster (+16.6% CAGR) and now exceeds GAAP operating income because stock-based compensation is non-cash and customers prepay annually.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (GAAP)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+<svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.6" text-anchor="end" font-size="11" fill="#64748b">500</text>
+<line x1="60" y1="177.1" x2="840" y2="177.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="181.1" text-anchor="end" font-size="11" fill="#64748b">1,000</text>
+<line x1="60" y1="145.7" x2="840" y2="145.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.7" text-anchor="end" font-size="11" fill="#64748b">1,500</text>
+<line x1="60" y1="114.3" x2="840" y2="114.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="118.3" text-anchor="end" font-size="11" fill="#64748b">2,000</text>
+<line x1="60" y1="82.9" x2="840" y2="82.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.9" text-anchor="end" font-size="11" fill="#64748b">2,500</text>
+<line x1="60" y1="51.4" x2="840" y2="51.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.4" text-anchor="end" font-size="11" fill="#64748b">3,000</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">3,500</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="123.7" width="30" height="116.3" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="118.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,851</text>
+<rect x="123.0" y="208.2" width="30" height="31.8" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="203.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">506</text>
+<rect x="161.0" y="192.8" width="30" height="47.2" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="187.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">750</text>
+<text x="138.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241.0" y="104.5" width="30" height="135.5" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="99.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,155</text>
+<rect x="279.0" y="211.1" width="30" height="28.9" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="206.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">459</text>
+<rect x="317.0" y="191.8" width="30" height="48.2" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="186.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">767</text>
+<text x="294.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397.0" y="91.4" width="30" height="148.6" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="86.4" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,364</text>
+<rect x="435.0" y="213.0" width="30" height="27.0" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="208.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">429</text>
+<rect x="473.0" y="184.4" width="30" height="55.6" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="179.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">885</text>
+<text x="450.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553.0" y="67.3" width="30" height="172.7" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="62.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,747</text>
+<rect x="591.0" y="196.2" width="30" height="43.8" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="191.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">696</text>
+<rect x="629.0" y="172.7" width="30" height="67.3" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="167.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,070</text>
+<text x="606.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709.0" y="39.2" width="30" height="200.8" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="34.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,195</text>
+<rect x="747.0" y="180.5" width="30" height="59.5" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="175.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">947</text>
+<rect x="785.0" y="152.9" width="30" height="87.1" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="147.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,386</text>
+<text x="762.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY22-26)</div><div class="val" style="color:#fbbf24;">+14.6%</div><div class="sub">$1.85B &rarr; $3.20B; just below the 15% bar (score 3/5)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY22-26)</div><div class="val" style="color:#34d399;">+17.0%</div><div class="sub">$506M &rarr; $947M; FY2023-24 dipped on SBC and R&amp;D investment before recovering</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY22-26)</div><div class="val" style="color:#34d399;">+16.6%</div><div class="sub">$750M &rarr; $1,386M; steady every year</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend (GAAP)</div>
+    <div class="chart-sub">Gross margin (blue) rose from 71.7% in FY2023 to 75.5% in FY2026 (+3.8pp, the basis of criterion 14); GAAP operating margin (green) recovered from a trough of 18.2% in FY2024 to 29.6%.</div>
+<svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">50%</text><text x="-2" y="18" font-size="7.5" fill="#64748b">100%</text>
+<polyline points="60,35.4 205,36.2 350,36.5 495,34.1 640,33.4" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="35.4" r="3.2" fill="#60a5fa"/><text x="60" y="28.4" text-anchor="middle" font-size="8" fill="#cbd5e1">72.8%</text>
+<circle cx="205" cy="36.2" r="3.2" fill="#60a5fa"/><text x="205" y="29.2" text-anchor="middle" font-size="8" fill="#cbd5e1">71.7%</text>
+<circle cx="350" cy="36.5" r="3.2" fill="#60a5fa"/><text x="350" y="29.5" text-anchor="middle" font-size="8" fill="#cbd5e1">71.3%</text>
+<circle cx="495" cy="34.1" r="3.2" fill="#60a5fa"/><text x="495" y="27.1" text-anchor="middle" font-size="8" fill="#cbd5e1">74.5%</text>
+<circle cx="640" cy="33.4" r="3.2" fill="#60a5fa"/><text x="640" y="26.4" text-anchor="middle" font-size="8" fill="#cbd5e1">75.5%</text>
+<polyline points="60,69.5 205,74.0 350,76.4 495,71.0 640,67.8" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="69.5" r="3.2" fill="#34d399"/><text x="60" y="62.5" text-anchor="middle" font-size="8" fill="#cbd5e1">27.3%</text>
+<circle cx="205" cy="74.0" r="3.2" fill="#34d399"/><text x="205" y="67.0" text-anchor="middle" font-size="8" fill="#cbd5e1">21.3%</text>
+<circle cx="350" cy="76.4" r="3.2" fill="#34d399"/><text x="350" y="69.4" text-anchor="middle" font-size="8" fill="#cbd5e1">18.2%</text>
+<circle cx="495" cy="71.0" r="3.2" fill="#34d399"/><text x="495" y="64.0" text-anchor="middle" font-size="8" fill="#cbd5e1">25.4%</text>
+<circle cx="640" cy="67.8" r="3.2" fill="#34d399"/><text x="640" y="60.8" text-anchor="middle" font-size="8" fill="#cbd5e1">29.6%</text>
+<text x="60" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+<table class="datatable">
+<tr><th>FY (US$m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>EPS (diluted)</th><th>Free Cash Flow</th><th>Capex</th><th>Net cash</th><th>DPS</th></tr>
+<tr><td>FY2022</td><td>1,851</td><td>505.5</td><td>27.3%</td><td>72.8%</td><td>427.4</td><td>2.63</td><td>750.2</td><td>14.2</td><td>2,322</td><td>none</td></tr><tr><td>FY2023</td><td>2,155</td><td>459.1</td><td>21.3%</td><td>71.7%</td><td>487.7</td><td>3.00</td><td>767.0</td><td>13.5</td><td>3,042</td><td>none</td></tr><tr><td>FY2024</td><td>2,364</td><td>429.3</td><td>18.2%</td><td>71.3%</td><td>525.7</td><td>3.22</td><td>885.1</td><td>26.2</td><td>3,972</td><td>none</td></tr><tr><td>FY2025</td><td>2,747</td><td>696.4</td><td>25.4%</td><td>74.5%</td><td>714.1</td><td>4.32</td><td>1,070.0</td><td>20.5</td><td>5,074</td><td>none</td></tr><tr><td>FY2026</td><td>3,195</td><td>947.0</td><td>29.6%</td><td>75.5%</td><td>908.9</td><td>5.44</td><td>1,386.0</td><td>29.1</td><td>6,465</td><td>none</td></tr><tr><td>TTM (Jul 2026)</td><td>3,458</td><td>1,035</td><td>29.9%</td><td>75.0%</td><td>1,015</td><td>6.10</td><td>1,639</td><td>26.7</td><td>7,091</td><td>none</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">FY2022-26 figures are from S&amp;P Global Market Intelligence via stockanalysis.com and cross-checked to Veeva's Q2 FY2027 release for H1 totals; EPS is GAAP diluted. Net income includes ~$0.3B a year of interest income on the cash pile (pretax margin 38% vs 30% operating margin), and FY2023 net income was lifted by a tax benefit. Veeva has never paid a dividend. TTM = four quarters to Jul 31, 2026.</div>
+  <div class="footer-note">Source: Veeva Systems Q2 FY2027 earnings release (Aug 26, 2026); S&amp;P Global Market Intelligence (stockanalysis.com) for annual and quarterly standardised data. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 - QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q2 FY2027)</div></div>
+  <div class="sec-sub">Fiscal quarters (Q2 FY2027 = three months to Jul 31, 2026). Reported Aug 26, 2026; Q3 FY2027 (Oct 2026 quarter) is expected in early December.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue of $928.0M grew 17.6% (the fastest in eight quarters) and beat the company's own guidance; subscription revenue grew 16.3% and professional services 24.1%. GAAP operating income rose 40% to $275.0M, but roughly 10 points of that is a base effect from a $30.6M litigation charge in Q2 FY2026; non-GAAP operating income grew 18% to $415.9M (44.8% margin, flat YoY). Veeva said Vault CRM had its best quarter ever (180+ customers live, 12 top-20 biopharma commitments) and that its Falcon agent platform is moving toward first go-lives this year. Operating cash flow was flat YoY at $238.7M (seasonally small Q2). The company bought back $472.7M of stock in H1 and spent $81.8M on acquisitions (including Copli).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (US$m)</div>
+    <div class="chart-sub">Growth has held in a 13-18% band and has re-accelerated modestly: +13.4% (Q3 FY25) to +17.6% (Q2 FY27).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="63.7" width="60" height="66.3" fill="#2dd4bf"/><text x="50" y="58.7" text-anchor="middle" font-size="9" fill="#cbd5e1">699.2</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="104" y="61.6" width="60" height="68.4" fill="#2dd4bf"/><text x="134" y="56.6" text-anchor="middle" font-size="9" fill="#cbd5e1">720.9</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="188" y="58.0" width="60" height="72.0" fill="#2dd4bf"/><text x="218" y="53.0" text-anchor="middle" font-size="9" fill="#cbd5e1">759.0</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="272" y="55.2" width="60" height="74.8" fill="#2dd4bf"/><text x="302" y="50.2" text-anchor="middle" font-size="9" fill="#cbd5e1">789.1</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="356" y="53.1" width="60" height="76.9" fill="#2dd4bf"/><text x="386" y="48.1" text-anchor="middle" font-size="9" fill="#cbd5e1">811.2</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="440" y="50.7" width="60" height="79.3" fill="#2dd4bf"/><text x="470" y="45.7" text-anchor="middle" font-size="9" fill="#cbd5e1">836.0</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="524" y="46.3" width="60" height="83.7" fill="#2dd4bf"/><text x="554" y="41.3" text-anchor="middle" font-size="9" fill="#cbd5e1">883.0</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="608" y="42.0" width="60" height="88.0" fill="#2dd4bf"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">928.0</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (GAAP, S&amp;P standardised) &mdash; Last 8 Quarters (US$m)</div>
+    <div class="chart-sub">Q2 FY26 is shown excluding the $30.6M litigation charge (reported GAAP: $195.9M); the Q1 bars are seasonally the highest-margin quarter.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, US$m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="72.0" width="60" height="58.0" fill="#60a5fa"/><text x="50" y="67.0" text-anchor="middle" font-size="9" fill="#cbd5e1">181.3</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="104" y="69.7" width="60" height="60.3" fill="#60a5fa"/><text x="134" y="64.7" text-anchor="middle" font-size="9" fill="#cbd5e1">188.4</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="188" y="55.2" width="60" height="74.8" fill="#60a5fa"/><text x="218" y="50.2" text-anchor="middle" font-size="9" fill="#cbd5e1">233.7</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="272" y="57.5" width="60" height="72.5" fill="#60a5fa"/><text x="302" y="52.5" text-anchor="middle" font-size="9" fill="#cbd5e1">226.5</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="356" y="52.9" width="60" height="77.1" fill="#60a5fa"/><text x="386" y="47.9" text-anchor="middle" font-size="9" fill="#cbd5e1">240.8</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="440" y="51.3" width="60" height="78.7" fill="#60a5fa"/><text x="470" y="46.3" text-anchor="middle" font-size="9" fill="#cbd5e1">245.9</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="524" y="42.6" width="60" height="87.4" fill="#60a5fa"/><text x="554" y="37.6" text-anchor="middle" font-size="9" fill="#cbd5e1">273.1</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="608" y="42.0" width="60" height="88.0" fill="#60a5fa"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">275.0</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+<table class="datatable">
+<tr><th>Quarter</th><th>Revenue</th><th>YoY</th><th>Gross margin</th><th>Op. income</th><th>Op. margin</th><th>Net income</th><th>EPS</th></tr>
+<tr><td>Q3 FY25</td><td>699.2</td><td>+13.4%</td><td>75.1%</td><td>181.3</td><td>25.9%</td><td>185.8</td><td>1.13</td></tr><tr><td>Q4 FY25</td><td>720.9</td><td>+14.3%</td><td>74.9%</td><td>188.4</td><td>26.1%</td><td>195.6</td><td>1.17</td></tr><tr><td>Q1 FY26</td><td>759.0</td><td>+16.7%</td><td>77.1%</td><td>233.7</td><td>30.8%</td><td>228.2</td><td>1.37</td></tr><tr><td>Q2 FY26</td><td>789.1</td><td>+16.7%</td><td>75.3%</td><td>226.5</td><td>28.7%</td><td>200.3</td><td>1.19</td></tr><tr><td>Q3 FY26</td><td>811.2</td><td>+16.0%</td><td>75.4%</td><td>240.8</td><td>29.7%</td><td>236.2</td><td>1.40</td></tr><tr><td>Q4 FY26</td><td>836.0</td><td>+16.0%</td><td>74.5%</td><td>245.9</td><td>29.4%</td><td>244.2</td><td>1.45</td></tr><tr><td>Q1 FY27</td><td>883.0</td><td>+16.3%</td><td>75.0%</td><td>273.1</td><td>30.9%</td><td>260.9</td><td>1.57</td></tr><tr><td>Q2 FY27</td><td>928.0</td><td>+17.6%</td><td>75.0%</td><td>275.0</td><td>29.6%</td><td>273.4</td><td>1.66</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly data from S&amp;P Global (stockanalysis.com); Q2 FY27 matches Veeva's release (revenue $927.96M, operating income $275.0M, net income $273.4M, diluted EPS $1.66).</div>
+<table class="datatable">
+<tr><th>Metric (US$m)</th><th>Q2 FY2026</th><th>Q2 FY2027</th><th>Change</th></tr>
+<tr><td>Total revenue</td><td>789.1</td><td>928.0</td><td>+17.6%</td></tr><tr><td>Subscription revenue</td><td>659.2</td><td>766.8</td><td>+16.3%</td></tr><tr><td>Professional services &amp; other</td><td>129.9</td><td>161.2</td><td>+24.1%</td></tr><tr><td>Gross profit</td><td>593.8</td><td>696.0</td><td>+17.2%</td></tr><tr><td>Operating income (reported GAAP)</td><td>195.9</td><td>275.0</td><td>+40.4%</td></tr><tr><td>Operating income (non-GAAP)</td><td>352.6</td><td>415.9</td><td>+18.0%</td></tr><tr><td>Net income (GAAP)</td><td>200.3</td><td>273.4</td><td>+36.5%</td></tr><tr><td>Diluted EPS GAAP / non-GAAP ($)</td><td>1.19 / 1.99</td><td>1.66 / 2.35</td><td>+39.5% / +18.1%</td></tr><tr><td>Operating cash flow</td><td>238.4</td><td>238.7</td><td>+0.1%</td></tr>
+</table>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="callout blue" style="flex:1;"><b>Guidance (FY2027, raised Aug 26):</b> revenue $3,682-3,687M (+15.3% vs $3,195M), non-GAAP operating income ~$1,640M, non-GAAP EPS ~$9.21. Q3 FY2027: revenue $932-935M, non-GAAP operating income $417-420M, non-GAAP EPS $2.33-2.34. Management guidance, not a forecast.</div>
+    <div class="callout blue" style="flex:1;"><b>Customers &amp; AI:</b> Vault CRM 180+ live, 12 top-20 biopharma commitments; Veeva Safety 100+ customers; 30+ new Quality customers in the quarter. AI agents (Veeva AI, Falcon) are the company's stated next growth chapter, and also the area investors watch for disruption risk from general-purpose AI vendors.</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 - VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (price over diluted GAAP EPS). Veeva carries almost no debt, so the balance-sheet question is how the $7B+ cash pile is deployed.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E of ~50.2x ($306.40 / TTM diluted EPS $6.10) compares with a FY2022-26 year-end average of ~58.6x, a ratio of 0.86. Year-end multiples are S&amp;P Global's; they fell from 85x as earnings grew into the valuation.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY22-26 average</span></div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="41.9" width="70" height="68.1" fill="#60a5fa"/><text x="55" y="36.9" text-anchor="middle" font-size="9" fill="#cbd5e1">85.1x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="66.4" width="70" height="43.6" fill="#60a5fa"/><text x="150" y="61.4" text-anchor="middle" font-size="9" fill="#cbd5e1">54.4x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="59.2" width="70" height="50.8" fill="#60a5fa"/><text x="245" y="54.2" text-anchor="middle" font-size="9" fill="#cbd5e1">63.5x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="67.6" width="70" height="42.4" fill="#60a5fa"/><text x="340" y="62.6" text-anchor="middle" font-size="9" fill="#cbd5e1">53.0x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="80.5" width="70" height="29.5" fill="#60a5fa"/><text x="435" y="75.5" text-anchor="middle" font-size="9" fill="#cbd5e1">36.9x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="69.8" width="70" height="40.2" fill="#2dd4bf"/><text x="530" y="64.8" text-anchor="middle" font-size="9" fill="#cbd5e1">50.2x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="63.1" x2="690" y2="63.1" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="59.1" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 58.6x</text>
+</svg>
+  </div>
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E is ~31.8x (S&amp;P consensus, scaled to the Nov 9 close; 33.3x on Veeva's own non-GAAP FY2027 EPS guidance of $9.21) against a FY-end forward average of ~39.6x (61.3, 39.1, 38.5, 34.6, 24.5), about 0.80 of its own average. S&amp;P shows a PEG near 0.9. The scorecard uses the trailing GAAP basis (ratio 0.86 = 3/5). Average analyst target $319.93 (29 analysts) implies only ~4% upside, so the stock trades close to consensus fair value after its rally.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capex (US$m) &amp; Capex Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light: capex was 0.6-1.1% of revenue in every year FY2022-26 (S&amp;P Global).</div>
+<svg viewBox="0 0 700 192">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="113.3" width="60" height="46.7" fill="#60a5fa"/><text x="60" y="108.3" text-anchor="middle" font-size="8" fill="#cbd5e1">14.2</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text><text x="60" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.77% of revenue</text>
+<rect x="170" y="115.6" width="60" height="44.4" fill="#60a5fa"/><text x="200" y="110.6" text-anchor="middle" font-size="8" fill="#cbd5e1">13.5</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text><text x="200" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.63% of revenue</text>
+<rect x="310" y="74.0" width="60" height="86.0" fill="#60a5fa"/><text x="340" y="69.0" text-anchor="middle" font-size="8" fill="#cbd5e1">26.2</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text><text x="340" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">1.11% of revenue</text>
+<rect x="450" y="92.6" width="60" height="67.4" fill="#60a5fa"/><text x="480" y="87.6" text-anchor="middle" font-size="8" fill="#cbd5e1">20.5</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text><text x="480" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.75% of revenue</text>
+<rect x="590" y="64.3" width="60" height="95.7" fill="#60a5fa"/><text x="620" y="59.3" text-anchor="middle" font-size="8" fill="#cbd5e1">29.1</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text><text x="620" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.91% of revenue</text>
+</svg>
+  </div>
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+<svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="26.1 288.0" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="284.3 29.9" stroke-dashoffset="-26.1" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="3.7 310.4" stroke-dashoffset="-310.4" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~8.3%</text></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~8.3% (includes founder/CEO Peter Gassner and directors)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~90.5%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~1.2% (residual); float 148.3M shares</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Shares outstanding are about flat over the window: ~162.3M (Jan 2022, derived from S&amp;P net cash per share) to 161.9M now (-0.2%). Stock-based compensation (~$0.5B a year) had been creeping the count up; buybacks of $473M in H1 FY2027 (vs none in H1 FY2026) reversed that, with the diluted count at 165.1M in Q2 versus 167.7M a year earlier. No dividend.</p>
+    </div>
+  </div>
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founder &amp; insider caveat:</b> Veeva was founded in 2007 by CEO Peter Gassner and is a Public Benefit Corporation. The ~8.3% insider figure is S&amp;P Global's aggregate; I did not parse the proxy statement, so Mr. Gassner's individual stake is not stated here. There is no controlling shareholder.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> at Jul 31, 2026, cash $1.81B plus short-term investments $5.43B = $7.24B; total liabilities $1.63B, of which $1.31B is deferred revenue (prepaid subscriptions) and ~$152M lease liabilities; equity $7.43B. Seasonal receivables of $0.50B at Jul 31 (vs $1.26B at Jan 31) show the annual-billing cycle.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 - SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; all 14 criteria are testable (no N/A). CAGRs are 4-year (FY2022-26, Jan year-ends). Criterion #14 compares FY2026 gross margin with FY2023's (3 fiscal years).</div>
+<table class="datatable criteria-table">
+<tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Veeva Systems</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+14.6% &mdash; $1.85B &rarr; $3.20B; just under the bar (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr><tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+17.0% &mdash; GAAP operating income $506M &rarr; $947M (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>29.6% (FY2026, GAAP, after stock-based comp) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+16.6% &mdash; $750M &rarr; $1,386M (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear leader in life-sciences industry cloud / pharma CRM by customer adoption (180+ Vault CRM live, 12 top-20 commitments); no verified third-party %-share, so a judgment call (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; few scaled rivals in pharma CRM (IQVIA, Salesforce-based builds) and clinical (Dassault/Medidata, others); judgment, not a measured concentration ratio (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 95.6% vs WACC ~9.1% (S&amp;P Global); ex-cash basis, ROCE 13.6% on a cash-inclusive basis still clears WACC (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash $7.1B; debt $152M (mostly leases) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>146% (FY2026: FCF $1,386M / operating income $947M); 5-yr path 148% / 167% / 206% / 154% / 146% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E ~50.2x vs FY22-26 year-end average ~58.6x (ratio 0.86); forward ~31.8x vs ~39.6x (0.80) (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~162.3M &rarr; 161.9M (-0.2%); SBC dilution offset by buybacks, restarted in FY2027 (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders ~8.3% per S&amp;P Global (founder-CEO plus directors); Gassner's own stake not verified here (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.9% of revenue in FY2026; 0.6-1.1% every year (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>14</td><td>Margin Stability &mdash; gross margin</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 71.72% (FY2023) &rarr; 75.53% (FY2026), +3.81pp: improving (score 5/5; basis: gross margin, gross-profit line reported)</td><td><span class="status-pill status-met">Met</span></td></tr>
+</table>
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13=7.8 &middot; #2 4&times;11=8.8 &middot; #3 5&times;10=10.0 &middot; #4 4&times;8=6.4 &middot; #5 5&times;7=7.0 &middot; #6 4&times;6=4.8 &middot; #7 5&times;10=10.0 &middot; #8 5&times;6=6.0 &middot; #9 5&times;8=8.0 &middot; #10 3&times;8=4.8 &middot; #11 3&times;4=2.4 &middot; #12 3&times;5=3.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 88.0 / 105 = <b>84/100</b>. Criteria met: 13/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative; #7 uses third-party ROIC/WACC (ex-cash); #12 uses S&amp;P's aggregate insider %; #10 uses year-end P/Es from S&amp;P.
+  </div>
+  <div class="two-col">
+    <div class="info-box working"><div class="title">What's Working</div><p>A rare combination of 15%+ growth, ~30% GAAP operating margin, 146% FCF conversion, 0.9% capex intensity and $7.1B of net cash. Growth re-accelerated to +17.6% in Q2 FY2027 and guidance was raised to $3.68B revenue; gross margin has risen 3.8pp in three years; Vault CRM wins at top-20 biopharmas continue; and share repurchases have restarted. The R&amp;D and Quality half of the business is growing faster than Commercial and deepens the customer relationship beyond CRM.</p></div>
+    <div class="info-box watch"><div class="title">What to Watch</div><p>At ~50x trailing GAAP earnings (~32x forward) the stock already discounts sustained mid-to-high-teens growth; the average target implies only ~4% upside. The revenue CAGR sits just under 15%, the stock has doubled from its April low, and AI-disruption sentiment moves the shares sharply in both directions. GAAP margins depend on stock-based compensation of ~14-15% of revenue, roughly a fifth of pretax income is interest income on the cash pile, and customer concentration in a pharma industry sensitive to policy and funding is structural. Market-share figures and Mr. Gassner's exact stake were not independently verified.</p></div>
+  </div>
+  <div class="footer-note">
+    <b>Sources:</b> Veeva Systems Q2 FY2027 earnings release (Form 8-K, Aug 26, 2026); S&amp;P Global Market Intelligence via stockanalysis.com (financials, ratios, ROIC/WACC, ownership, analyst targets, prices); TIKR / Quartr coverage of Q2 FY2027. Estimates and third-party figures (ROIC, WACC, insider %, forward P/E, analyst target) are flagged above. Price as of Mon Nov 9, 2026 close; prepared Nov 10, 2026 &mdash; for personal research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Veeva Systems &mdash; NYSE: VEEV, USD. A post-2021 de-rating, a recovery into 2025, a slide into early 2026 on AI-disruption worries, then a sharp rebound.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Veeva Systems &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Closing prices on the last trading day of each fiscal year (Jan 31, 2022; Jan 31, 2023; Jan 31, 2024; Jan 31, 2025; Jan 30, 2026) plus the Nov 9, 2026 close, unadjusted (no splits in the period; no dividends paid). The dashed line is the annualised price CAGR from the Jan 2022 close to Nov 9, 2026 (4.77 years). The 52-week range is $148.05 &ndash; $325.99.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,67.6 L 172.8,99.0 L 299.6,81.5 L 426.4,69.2 L 553.2,83.1 L 680.0,34.5 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="67.6" x2="680.0" y2="34.5" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="18" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +5.6%</text>
+<path d="M 46.0,67.6 L 172.8,99.0 L 299.6,81.5 L 426.4,69.2 L 553.2,83.1 L 680.0,34.5" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="67.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="55.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$236.54</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="99.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="114.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$170.55</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="81.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="69.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$207.41</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="69.2" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="57.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$233.26</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="83.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="98.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$203.92</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="34.5" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="22.5" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$306.40</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+  <div class="footer-note">
+    The first point is the Jan 2022 close ($236.54), so the window is just under 4.8 years rather than a full five; the label follows the site's fiscal-year convention for non-December year-ends. Source: S&amp;P Global Market Intelligence via stockanalysis.com. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

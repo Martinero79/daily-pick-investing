@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fair Isaac Corporation (FICO) — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/fair-isaac.html">
+<meta property="og:title" content="Fair Isaac Corporation (FICO) — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fair Isaac Corporation (FICO) — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.bullet-list{font-size:12px;color:#cbd5e1;line-height:1.55;margin:0;padding-left:18px;}
+.bullet-list li{margin-bottom:5px;}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Fair Isaac Corporation (FICO)</h1>
+  <div class="badges">
+    <div class="badge">NYSE: FICO</div>
+    <div class="badge">FY ends Sep 30 (FY2026 = Oct 2025 &ndash; Sep 2026)</div>
+    <div class="badge">HQ: Bozeman, Montana, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">~61% Below 52-Wk High &mdash; Record FY2026 Results, but the Mortgage-Score Pricing Model Is Under Regulatory and Competitive Attack</div>
+  </div>
+
+  <div class="price">$723.76</div>
+  <div class="price-sub">Nov 9, 2026 close (NYSE, USD) &middot; Market cap &asymp; $15.2B (&asymp;21.0M shares; Motley Fool/Polygon data) &middot; 52-wk range $586.05 &ndash; $1,858.91 &middot; Trailing GAAP P/E 19.9x (non-GAAP 16.8x) &middot; Analyst targets: no verified post-Q4 consensus; recent cuts ranged $897 (BMO) to $1,322 (Goldman, Sep 29) &middot; Next report (Q1 FY2027): expected late Jan 2027 (date not confirmed)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> FICO Scores are the dominant US consumer credit score used in lending decisions, sold through the three credit bureaus (Equifax, Experian, TransUnion) and, since 2025, increasingly via direct licences. The Software segment (fraud, decisioning, the FICO Platform) is the smaller, slower-growing half of the business.</div>
+
+  <div class="callout" style="margin-bottom:10px;border-left-color:#ef4444;background:#1f1214;">
+    <b style="color:#f87171;">Why the stock de-rated (the key issue):</b> FY2026 was a record year (revenue +27%, EPS +37%), yet the shares fell from a 52-week high of $1,858.91 to $723.76 and the trailing P/E from ~52x (FY21-25 average) to ~20x, because the profit engine &mdash; mortgage credit scores sold at rapidly rising prices &mdash; is now being challenged by the US housing regulator. In September 2026 FHFA director Bill Pulte let Fannie Mae and Freddie Mac lenders use VantageScore 4.0 (stock -16.7% on Sep 4) and then put VantageScore on the <b>same pricing grid</b> as FICO Classic (stock -26.5% on Sep 29), removing lenders' main cost reason to stay with FICO; the bureau-owned VantageScore is priced at $0.99 versus FICO's ~$10. On Oct 26 the shares fell another 13% after FICO held its mortgage price at $10 for 2027 rather than raising it and Pulte promised &ldquo;more action&rdquo;, and on Nov 4 FICO gave <b>no FY2027 guidance</b>. See What to Watch (Section 4) for the full timeline and sources.
+  </div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definitions &amp; basis:</b> all figures in US dollars; fiscal years end Sep 30. &ldquo;Op. Income / EBIT&rdquo; is <b>GAAP operating income</b> (FY2026 is after a $65M litigation accrual and a $27M restructuring charge). &ldquo;FCF&rdquo; is operating cash flow minus capex (company definition; capex includes capitalised internal-use software from FY2024). Net debt = reported debt (current + long-term, carrying value) minus cash; leases excluded. Stockholders' equity is <b>negative</b> (-$3.87B) after debt-funded buybacks, so book-based ratios are not meaningful.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$2.53B</div>
+      <div class="sub" style="color:#34d399;">+27.3% YoY (Q4: +27.4%)</div>
+      <div class="note">FY2025 was +15.9%. Scores +41% ($1.65B) did most of the work, mainly through higher mortgage-score unit prices; Software +7% ($883M).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin / Gross Margin</div>
+      <div class="val" style="color:#34d399;">49.9% / 86.1%</div>
+      <div class="sub">FY2026 GAAP; op. margin 38.4% in FY2021</div>
+      <div class="note">Scores is near-pure royalty revenue, so incremental price lifts fall almost straight to profit. Q4 FY26 op. margin was 40.6% on one-offs (~54.7% excluding them).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#fbbf24;">~82%* vs ~9-10%</div>
+      <div class="sub">*distorted: equity is negative</div>
+      <div class="note">Own calculation, WACC is my estimate. Counting all FY21-26 buybacks as capital the ROIC would be ~11% (Section 3).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#f87171;">3.9x</div>
+      <div class="sub">GAAP EBITDA; ~3.2-3.4x adjusted</div>
+      <div class="note">Net debt $5.04B (was $2.92B a year earlier). Buybacks of $3.05B in FY26 vs FCF of $1.03B; buybacks now paused to repay the ASR-related term loan.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">81/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Scores high on the numbers (margins, growth, cash, de-rated multiple) but the score is backward-looking: it cannot capture the pricing-power risk behind the de-rating.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="246.8 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.3 314.16" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">11/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>11 criteria fully met</b> &mdash; EBIT CAGR, EBIT margin, FCF CAGR, market position, concentration (score 2), ROIC vs WACC (judgment), FCF conversion, entry multiple, share count, capex intensity and gross-margin stability</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; revenue CAGR (14.0%, just under 15%), leverage (3.9x vs &lt;2x) and insider ownership (no founder/controlling block)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Fair Isaac Corporation (FICO) is a US analytics company founded in 1956 that owns the FICO Score, the credit score most US lenders use to price consumer credit, plus a decisioning and fraud-detection Software business. It has two segments. <b>Scores</b> (65% of FY2026 revenue, $1.65B) earns royalties each time a lender pulls a FICO Score, mostly via the credit bureaus; the largest and fastest-growing piece is US mortgage origination, where unit prices rose sharply (mortgage-origination score revenue grew 72-127% a quarter in FY2026 even as mortgage volumes fell). <b>Software</b> (35%, $883M) sells analytics and the cloud FICO Platform; total ARR was up 14% at September 30, 2026 with platform ARR +72% to $453M while legacy non-platform ARR fell 18%. Revenue has grown from $1.32B (FY2021) to $2.53B (FY2026), operating margin from 38% to 50%, and the share count has fallen about 21% on buybacks that were increasingly financed by debt: FY2026 repurchases of $3.05B were nearly three times FCF, pushing net debt to $5.0B (3.9x EBITDA) and stockholders' equity to -$3.87B. The shares, meanwhile, have lost about 61% from their 52-week high after the regulatory and competitive developments described above.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Growth is price-led.</b> FICO itself attributes the Scores B2B growth &ldquo;primarily&rdquo; to higher mortgage origination score unit prices, partly offset by lower mortgage volumes; FICO does not report mortgage revenue as its own line, so the exact dependence on mortgage origination cannot be quantified from its releases. (2) <b>Backward-looking financials.</b> Every number on this page up to FY2026 was earned under the old pricing; what 2027 pricing will look like is explicitly unknown (no guidance, and FICO will no longer disclose mortgage pricing terms). (3) <b>Leverage amplifies both ways.</b> A smaller share count helps EPS per share, but interest expense ($166M of net other expense in FY2026, up from $122M) and a negative equity base leave less room if Scores revenue stalls.
+  </div>
+
+  <div class="bignum-corner">FICO</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2026 (fiscal years end Sep 30), US$ millions as reported by FICO in its earnings releases (8-K exhibits). Op. Income is GAAP operating income; gross margin = (revenue &minus; cost of revenues) / revenue; FCF = operating cash flow minus capex. FICO has never paid a dividend in this period.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">Revenue +27.3% in FY2026 after +15.9% in FY2025. EBIT has grown faster than revenue every year because price increases drop through at very high margin; FY2026 EBIT is after $92M of one-off charges (litigation accrual $65M, restructuring $27M).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="203.3" x2="840" y2="203.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="207.3" text-anchor="end" font-size="11" fill="#64748b">$0.5bn</text>
+<line x1="60" y1="166.7" x2="840" y2="166.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="170.7" text-anchor="end" font-size="11" fill="#64748b">$1.0bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">$1.5bn</text>
+<line x1="60" y1="93.3" x2="840" y2="93.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="97.3" text-anchor="end" font-size="11" fill="#64748b">$2.0bn</text>
+<line x1="60" y1="56.7" x2="840" y2="56.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="60.7" text-anchor="end" font-size="11" fill="#64748b">$2.5bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$3.0bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="72" y="143.5" width="32" height="96.5" rx="2" fill="#2dd4bf"/><text x="88" y="138.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,317</text>
+<rect x="108" y="202.9" width="32" height="37.1" rx="2" fill="#60a5fa"/><text x="124" y="197.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">505</text>
+<rect x="144" y="209.5" width="32" height="30.5" rx="2" fill="#fbbf24"/><text x="160" y="204.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">416</text>
+<text x="124" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+<rect x="200" y="139.0" width="32" height="101.0" rx="2" fill="#2dd4bf"/><text x="216" y="134.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,377</text>
+<rect x="236" y="200.2" width="32" height="39.8" rx="2" fill="#60a5fa"/><text x="252" y="195.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">542</text>
+<rect x="272" y="203.1" width="32" height="36.9" rx="2" fill="#fbbf24"/><text x="288" y="198.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">503</text>
+<text x="252" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+<rect x="328" y="129.0" width="32" height="111.0" rx="2" fill="#2dd4bf"/><text x="344" y="124.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,514</text>
+<rect x="364" y="192.9" width="32" height="47.1" rx="2" fill="#60a5fa"/><text x="380" y="187.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">643</text>
+<rect x="400" y="205.9" width="32" height="34.1" rx="2" fill="#fbbf24"/><text x="416" y="200.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">465</text>
+<text x="380" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+<rect x="456" y="114.0" width="32" height="126.0" rx="2" fill="#2dd4bf"/><text x="472" y="109.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,718</text>
+<rect x="492" y="186.2" width="32" height="53.8" rx="2" fill="#60a5fa"/><text x="508" y="181.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">734</text>
+<rect x="528" y="195.5" width="32" height="44.5" rx="2" fill="#fbbf24"/><text x="544" y="190.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">607</text>
+<text x="508" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+<rect x="584" y="94.0" width="32" height="146.0" rx="2" fill="#2dd4bf"/><text x="600" y="89.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,991</text>
+<rect x="620" y="172.2" width="32" height="67.8" rx="2" fill="#60a5fa"/><text x="636" y="167.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">925</text>
+<rect x="656" y="185.8" width="32" height="54.2" rx="2" fill="#fbbf24"/><text x="672" y="180.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">739</text>
+<text x="636" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2025</text>
+<rect x="712" y="54.1" width="32" height="185.9" rx="2" fill="#2dd4bf"/><text x="728" y="49.1" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,535</text>
+<rect x="748" y="147.2" width="32" height="92.8" rx="2" fill="#60a5fa"/><text x="764" y="142.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,266</text>
+<rect x="784" y="164.1" width="32" height="75.9" rx="2" fill="#fbbf24"/><text x="800" y="159.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,034</text>
+<text x="764" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#fbbf24;">+14.0%</div>
+      <div class="sub">$1,316.5M &rarr; $2,534.9M; FY22-26 4-yr CAGR is +16.5%, but FY2022 was only +4.6% and FY2023 +9.9%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#34d399;">+20.1%</div>
+      <div class="sub">$505.5M &rarr; $1,265.7M; FY22-26 4-yr CAGR +23.6%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (5yr, FY21-26)</div>
+      <div class="val" style="color:#34d399;">+20.0%</div>
+      <div class="sub">$416M &rarr; $1,034M; FY2026 FCF +40% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend (%)</div>
+    <div class="chart-sub">Gross margin rose from 74.8% to 86.1% as price increases outran cost of revenues (flat at ~$350M since FY2024, and professional-services revenue is shrinking); operating margin followed from 38.4% to 49.9% despite higher R&amp;D and SG&amp;A (including the FY2026 one-offs).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating margin</span></div>
+    <svg viewBox="0 0 700 120">
+<line x1="30" y1="100" x2="690" y2="100" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="78.8" x2="690" y2="78.8" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="81.8" font-size="7.5" fill="#64748b">25%</text>
+<line x1="30" y1="57.5" x2="690" y2="57.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="60.5" font-size="7.5" fill="#64748b">50%</text>
+<line x1="30" y1="36.2" x2="690" y2="36.2" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="39.2" font-size="7.5" fill="#64748b">75%</text>
+<text x="8" y="103" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="70,36.5 182,33.6 294,32.5 406,32.2 518,30.1 630,26.8" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="70" cy="36.5" r="3.2" fill="#60a5fa"/><text x="70" y="29.5" text-anchor="middle" font-size="8" fill="#cbd5e1">74.7%</text>
+<circle cx="182" cy="33.6" r="3.2" fill="#60a5fa"/><text x="182" y="26.6" text-anchor="middle" font-size="8" fill="#cbd5e1">78.1%</text>
+<circle cx="294" cy="32.5" r="3.2" fill="#60a5fa"/><text x="294" y="25.5" text-anchor="middle" font-size="8" fill="#cbd5e1">79.4%</text>
+<circle cx="406" cy="32.2" r="3.2" fill="#60a5fa"/><text x="406" y="25.2" text-anchor="middle" font-size="8" fill="#cbd5e1">79.7%</text>
+<circle cx="518" cy="30.1" r="3.2" fill="#60a5fa"/><text x="518" y="23.1" text-anchor="middle" font-size="8" fill="#cbd5e1">82.2%</text>
+<circle cx="630" cy="26.8" r="3.2" fill="#60a5fa"/><text x="630" y="19.8" text-anchor="middle" font-size="8" fill="#cbd5e1">86.1%</text>
+<polyline points="70,67.4 182,66.5 294,63.9 406,63.7 518,60.5 630,57.6" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="70" cy="67.4" r="3.2" fill="#34d399"/><text x="70" y="60.4" text-anchor="middle" font-size="8" fill="#cbd5e1">38.4%</text>
+<circle cx="182" cy="66.5" r="3.2" fill="#34d399"/><text x="182" y="59.5" text-anchor="middle" font-size="8" fill="#cbd5e1">39.4%</text>
+<circle cx="294" cy="63.9" r="3.2" fill="#34d399"/><text x="294" y="56.9" text-anchor="middle" font-size="8" fill="#cbd5e1">42.5%</text>
+<circle cx="406" cy="63.7" r="3.2" fill="#34d399"/><text x="406" y="56.7" text-anchor="middle" font-size="8" fill="#cbd5e1">42.7%</text>
+<circle cx="518" cy="60.5" r="3.2" fill="#34d399"/><text x="518" y="53.5" text-anchor="middle" font-size="8" fill="#cbd5e1">46.5%</text>
+<circle cx="630" cy="57.6" r="3.2" fill="#34d399"/><text x="630" y="50.6" text-anchor="middle" font-size="8" fill="#cbd5e1">49.9%</text>
+<text x="70" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text>
+<text x="182" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="294" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="406" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="518" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="630" y="113" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (US$ m; Sep 30 YE)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>Diluted EPS</th><th>FCF</th><th>Capex</th><th>Net Debt</th><th>DPS</th></tr>
+<tr><td>FY2021</td><td>1,317</td><td>505</td><td>38.4%</td><td>74.7%</td><td>392</td><td>$13.40</td><td>416</td><td>7.6</td><td>1,064</td><td>none</td></tr>
+<tr><td>FY2022</td><td>1,377</td><td>542</td><td>39.4%</td><td>78.1%</td><td>374</td><td>$14.18</td><td>503</td><td>6.0</td><td>1,720</td><td>none</td></tr>
+<tr><td>FY2023</td><td>1,514</td><td>643</td><td>42.5%</td><td>79.4%</td><td>429</td><td>$16.93</td><td>465</td><td>4.2</td><td>1,725</td><td>none</td></tr>
+<tr><td>FY2024</td><td>1,718</td><td>734</td><td>42.7%</td><td>79.7%</td><td>513</td><td>$20.45</td><td>607</td><td>25.6</td><td>2,058</td><td>none</td></tr>
+<tr><td>FY2025</td><td>1,991</td><td>925</td><td>46.5%</td><td>82.2%</td><td>652</td><td>$26.54</td><td>739</td><td>39.4</td><td>2,922</td><td>none</td></tr>
+<tr><td>FY2026</td><td>2,535</td><td>1,266</td><td>49.9%</td><td>86.1%</td><td>835</td><td>$36.32</td><td>1,034</td><td>37.7</td><td>5,042</td><td>none</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net debt = current maturities + long-term debt (carrying values) minus cash and equivalents at Sep 30; excludes marketable securities ($52M in FY26) and operating leases. FY2026 net income $835.0M includes a $48M non-operating gain on sale of an equity investment. Capex: FY21-23 is purchases of property and equipment only; FY24-26 also include capitalised internal-use software (FY2026: $35.6M of the $37.7M). FY2021 and FY2022 net income, cash flow and net-debt items come from FICO's Q4 FY2022 release; FY2023-24 from the Q4 FY2024 release; FY2025-26 from the Q4 FY2026 release.</div>
+  <div class="footer-note">Sources: FICO Form 8-K Exhibit 99.1 earnings releases for Q4 FY2022 (Nov 9, 2022, via Business Wire), Q4 FY2024 (Nov 6, 2024, SEC) and Q4 FY2026 (Nov 4, 2026, SEC). All figures in US$.</div>
+</div>
+
+<!-- ============ PAGE 3 — SEGMENTS & QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Scores vs Software &amp; Latest Quarter (Q4 FY2026)</div></div>
+  <div class="sec-sub">Q4 FY2026 (quarter ended Sep 30, 2026) was reported on Nov 4, 2026. Eight quarters shown (Q1 FY2025 to Q4 FY2026) so the chart covers the pre- and post-price-increase periods. Q1 FY2025 and Q1 FY2026 are derived (year-to-date minus Q2).</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed: a clean beat, but a decelerating Scores engine and no outlook</div>
+    <p>Q4 revenue was $657.0M (+27.4% YoY, vs $515.8M); Scores $413.8M (+33%, down from +41% in Q3 and +60% in Q2) and Software $243.2M (+19%, vs +2% in Q3). Within Scores, B2B revenue rose 39% &ldquo;primarily attributable to a higher mortgage origination scores unit price, partially offset by a decline in mortgage originations volume&rdquo; (FICO release); B2C was +3%. Software ARR was +14%: platform ARR +72% (part of which is customers migrating from non-platform, which fell 18%), net retention 112% overall and 156% for platform. GAAP operating income was $266.6M (40.6% margin) after the $65M antitrust-settlement accrual and $27M restructuring charge; non-GAAP EPS was $11.10 (GAAP $8.12). Free cash flow was $284.3M (+35%). The consequential part was the outlook: FICO is <b>not providing FY2027 guidance</b>, citing the transition to &ldquo;bespoke mortgage originations pricing&rdquo;, still-elevated rates and uncertain mortgage markets.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue by Segment &mdash; Last 8 Quarters (US$ m; Scores teal, Software blue)</div>
+    <div class="chart-sub">Scores stepped up in Q2 FY2026 (+60% YoY) on the mortgage price increase and has decelerated since (+41%, +33%); Software has been roughly flat at $200-217M until Q4 FY2026 ($243M, helped by platform deals).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Scores</span><span><span class="dot" style="background:#60a5fa;"></span>Software</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="97.0" width="58" height="33.0" fill="#2dd4bf"/><rect x="30" y="68.4" width="58" height="28.6" fill="#60a5fa"/><text x="59" y="63.4" text-anchor="middle" font-size="9" fill="#cbd5e1">440.0</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="112" y="88.4" width="58" height="41.6" fill="#2dd4bf"/><rect x="112" y="60.2" width="58" height="28.2" fill="#60a5fa"/><text x="141" y="55.2" text-anchor="middle" font-size="9" fill="#cbd5e1">498.7</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="194" y="84.6" width="58" height="45.4" fill="#2dd4bf"/><rect x="194" y="54.9" width="58" height="29.7" fill="#60a5fa"/><text x="223" y="49.9" text-anchor="middle" font-size="9" fill="#cbd5e1">536.4</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="276" y="86.4" width="58" height="43.6" fill="#2dd4bf"/><rect x="276" y="57.8" width="58" height="28.6" fill="#60a5fa"/><text x="305" y="52.8" text-anchor="middle" font-size="9" fill="#cbd5e1">515.8</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="358" y="87.4" width="58" height="42.6" fill="#2dd4bf"/><rect x="358" y="58.3" width="58" height="29.0" fill="#60a5fa"/><text x="387" y="53.3" text-anchor="middle" font-size="9" fill="#cbd5e1">511.9</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="440" y="63.5" width="58" height="66.5" fill="#2dd4bf"/><rect x="440" y="33.2" width="58" height="30.3" fill="#60a5fa"/><text x="469" y="28.2" text-anchor="middle" font-size="9" fill="#cbd5e1">691.7</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="65.8" width="58" height="64.2" fill="#2dd4bf"/><rect x="522" y="35.6" width="58" height="30.1" fill="#60a5fa"/><text x="551" y="30.6" text-anchor="middle" font-size="9" fill="#cbd5e1">674.2</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="604" y="72.1" width="58" height="57.9" fill="#2dd4bf"/><rect x="604" y="38.0" width="58" height="34.0" fill="#60a5fa"/><text x="633" y="33.0" text-anchor="middle" font-size="9" fill="#cbd5e1">657.0</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters (US$ m)</div>
+    <div class="chart-sub">Q4 FY2026 (amber) absorbed ~$92M of one-off charges; excluding them operating income would have been about $359M (54.7% margin), assuming the $65M accrual sits in SG&amp;A (SG&amp;A rose ~$100M YoY). Quarterly Q1 values are derived from year-to-date figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Operating income</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="85.1" width="58" height="44.9" fill="#34d399"/><text x="59" y="80.1" text-anchor="middle" font-size="9" fill="#cbd5e1">179.5</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="112" y="68.6" width="58" height="61.4" fill="#34d399"/><text x="141" y="63.6" text-anchor="middle" font-size="9" fill="#cbd5e1">245.6</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="194" y="64.4" width="58" height="65.6" fill="#34d399"/><text x="223" y="59.4" text-anchor="middle" font-size="9" fill="#cbd5e1">262.5</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="276" y="70.7" width="58" height="59.3" fill="#34d399"/><text x="305" y="65.7" text-anchor="middle" font-size="9" fill="#cbd5e1">237.2</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="358" y="71.5" width="58" height="58.5" fill="#34d399"/><text x="387" y="66.5" text-anchor="middle" font-size="9" fill="#cbd5e1">234.0</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="440" y="29.4" width="58" height="100.6" fill="#34d399"/><text x="469" y="24.4" text-anchor="middle" font-size="9" fill="#cbd5e1">402.5</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="522" y="39.3" width="58" height="90.7" fill="#34d399"/><text x="551" y="34.3" text-anchor="middle" font-size="9" fill="#cbd5e1">362.6</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="604" y="63.3" width="58" height="66.7" fill="#f59e0b"/><text x="633" y="58.3" text-anchor="middle" font-size="9" fill="#cbd5e1">266.6</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Quarter (US$ m)</th><th>Revenue</th><th>Scores</th><th>Software</th><th>Op. Income</th><th>Op. Margin</th></tr>
+<tr><td>Q1 FY25</td><td>440.0</td><td>235.7</td><td>204.3</td><td>179.5</td><td>40.8%</td></tr>
+<tr><td>Q2 FY25</td><td>498.7</td><td>297.0</td><td>201.7</td><td>245.6</td><td>49.2%</td></tr>
+<tr><td>Q3 FY25</td><td>536.4</td><td>324.3</td><td>212.1</td><td>262.5</td><td>48.9%</td></tr>
+<tr><td>Q4 FY25</td><td>515.8</td><td>311.6</td><td>204.2</td><td>237.2</td><td>46.0%</td></tr>
+<tr><td>Q1 FY26</td><td>511.9</td><td>304.5</td><td>207.4</td><td>234.0</td><td>45.7%</td></tr>
+<tr><td>Q2 FY26</td><td>691.7</td><td>475.0</td><td>216.7</td><td>402.5</td><td>58.2%</td></tr>
+<tr><td>Q3 FY26</td><td>674.2</td><td>458.9</td><td>215.3</td><td>362.6</td><td>53.8%</td></tr>
+<tr><td>Q4 FY26</td><td>657.0</td><td>413.8</td><td>243.2</td><td>266.6</td><td>40.6%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Segments (FY2026):</b> Scores $1,652M (+41%, 65% of revenue) vs Software $883M (+7%, 35%). Scores includes B2B (lenders, via bureaus and direct licences) and B2C (myFICO, royalties from bureaus selling scores to consumers). Segment-level operating income is not given in the earnings releases and is not shown here.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Outlook:</b> none. FICO gave FY2026 guidance throughout the year (raised in Q2 and Q3, final $2.53B revenue/&asymp;$42.4 non-GAAP EPS; actual $2.535B/$42.99) but declined to give FY2027 guidance on Nov 4. Direct-licence agreements cover ~73% of reseller volume (up from ~60%) and the FHA will accept FICO 10T from Jan 1, 2027, but VantageScore 4.0 also goes live at FHA that day (Earnings Whispers summary of the call).
+    </div>
+  </div>
+  <div class="footer-note" style="margin-top:6px;">Segment history: Software = total revenue minus Scores (Software includes professional services). FY2021-FY2024 Scores from the Q4 FY2022/FY2024 releases; FY2025-26 from the Q4 FY2026 release. Quarterly Scores/Software and operating income for Q1-Q3 FY2026 and FY2025 are from the Q2 and Q3 FY2026 releases (Business Wire).</div>
+  <table class="datatable" style="margin-top:6px;">
+    <tr><th>FY (US$ m)</th><th>Scores</th><th>Software</th><th>Scores % of revenue</th><th>Scores YoY</th><th>Software YoY</th></tr>
+<tr><td>FY2021</td><td>654</td><td>662</td><td>49.7%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>FY2022</td><td>707</td><td>671</td><td>51.3%</td><td>+8.0%</td><td>+1.2%</td></tr>
+<tr><td>FY2023</td><td>774</td><td>740</td><td>51.1%</td><td>+9.5%</td><td>+10.3%</td></tr>
+<tr><td>FY2024</td><td>920</td><td>798</td><td>53.5%</td><td>+18.8%</td><td>+7.9%</td></tr>
+<tr><td>FY2025</td><td>1,169</td><td>822</td><td>58.7%</td><td>+27.1%</td><td>+3.1%</td></tr>
+<tr><td>FY2026</td><td>1,652</td><td>883</td><td>65.2%</td><td>+41.4%</td><td>+7.3%</td></tr>
+  </table>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet, Buybacks &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on diluted GAAP EPS: fiscal-year-end (Sep 30) closing price divided by that year's diluted EPS, versus today's price on FY2026 EPS ($36.32). The de-rating is steep, but it reflects uncertainty about future pricing, not weak FY2026 earnings.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E on Diluted GAAP EPS &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">Current 19.9x (= $723.76 / $36.32) is about 38% of FICO's FY21-25 average of 52.3x. Year-end closes (unadjusted): $397.93, $412.01, $868.53, $1,943.52, $1,496.53 (stockanalysis.com / S&amp;P Global); EPS $13.40, $14.18, $16.93, $20.45, $26.54. FY2024's ~95x reflects a rerating to the share price peak. On non-GAAP EPS ($42.99) the current multiple is 16.8x. At the Sep 30, 2026 close ($592.47) the trailing GAAP P/E was 16.3x.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="86.2" width="70" height="23.8" fill="#60a5fa"/><text x="65" y="81.2" text-anchor="middle" font-size="9" fill="#cbd5e1">29.7x</text><text x="65" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+<rect x="130" y="86.8" width="70" height="23.2" fill="#60a5fa"/><text x="165" y="81.8" text-anchor="middle" font-size="9" fill="#cbd5e1">29.1x</text><text x="165" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="230" y="69.0" width="70" height="41.0" fill="#60a5fa"/><text x="265" y="64.0" text-anchor="middle" font-size="9" fill="#cbd5e1">51.3x</text><text x="265" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="330" y="34.0" width="70" height="76.0" fill="#60a5fa"/><text x="365" y="29.0" text-anchor="middle" font-size="9" fill="#cbd5e1">95.0x</text><text x="365" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="430" y="64.9" width="70" height="45.1" fill="#60a5fa"/><text x="465" y="59.9" text-anchor="middle" font-size="9" fill="#cbd5e1">56.4x</text><text x="465" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="530" y="94.1" width="70" height="15.9" fill="#2dd4bf"/><text x="565" y="89.1" text-anchor="middle" font-size="9" fill="#cbd5e1">19.9x</text><text x="565" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="68.2" x2="690" y2="68.2" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="64.2" text-anchor="end" font-size="9" fill="#fbbf24">FY21-25 avg 52.3x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> not available. FICO withheld FY2027 guidance and I could not verify a post-Q4 consensus EPS, so no forward P/E or PEG is shown (one outlet cited ~14x 2026 non-GAAP estimates on Sep 29 at a $610 price, before the Q4 report). The scorecard uses the trailing GAAP ratio (0.38 = 5/5). Treat that as a statement about how much the multiple has compressed, not about cheapness: the market is pricing a risk that FY2027 earnings per score fall, which trailing earnings cannot show.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Free Cash Flow vs Share Repurchases &mdash; Annual (US$ m)</div>
+    <div class="chart-sub">FICO has repurchased $7.7B of stock over FY2021-26 against cumulative net income of $3.2B; in FY2026 buybacks ($3.05B, including an accelerated repurchase) were 2.9x FCF, funded by new borrowing ($3.1B of revolver/term-loan proceeds and $1.0B of senior notes, less $1.9B of repayments). Net debt rose from $1.1B (FY2021) to $5.0B (FY2026) and stockholders' deficit from -$111M to -$3.87B.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span><span><span class="dot" style="background:#f87171;"></span>Share repurchases</span></div>
+    <svg viewBox="0 0 700 180">
+<line x1="10" y1="150" x2="690" y2="150" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="135.0" width="34" height="15.0" fill="#fbbf24"/><text x="57" y="131.0" text-anchor="middle" font-size="8.5" fill="#cbd5e1">416</text>
+<rect x="78" y="118.5" width="34" height="31.5" fill="#f87171"/><text x="95" y="114.5" text-anchor="middle" font-size="8.5" fill="#cbd5e1">874</text>
+<text x="76" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2021</text>
+<rect x="150" y="131.9" width="34" height="18.1" fill="#fbbf24"/><text x="167" y="127.9" text-anchor="middle" font-size="8.5" fill="#cbd5e1">503</text>
+<rect x="188" y="110.2" width="34" height="39.8" fill="#f87171"/><text x="205" y="106.2" text-anchor="middle" font-size="8.5" fill="#cbd5e1">1,104</text>
+<text x="186" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2022</text>
+<rect x="260" y="133.3" width="34" height="16.7" fill="#fbbf24"/><text x="277" y="129.3" text-anchor="middle" font-size="8.5" fill="#cbd5e1">465</text>
+<rect x="298" y="135.4" width="34" height="14.6" fill="#f87171"/><text x="315" y="131.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">406</text>
+<text x="296" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2023</text>
+<rect x="370" y="128.1" width="34" height="21.9" fill="#fbbf24"/><text x="387" y="124.1" text-anchor="middle" font-size="8.5" fill="#cbd5e1">607</text>
+<rect x="408" y="120.4" width="34" height="29.6" fill="#f87171"/><text x="425" y="116.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">822</text>
+<text x="406" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2024</text>
+<rect x="480" y="123.4" width="34" height="26.6" fill="#fbbf24"/><text x="497" y="119.4" text-anchor="middle" font-size="8.5" fill="#cbd5e1">739</text>
+<rect x="518" y="99.1" width="34" height="50.9" fill="#f87171"/><text x="535" y="95.1" text-anchor="middle" font-size="8.5" fill="#cbd5e1">1,414</text>
+<text x="516" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2025</text>
+<rect x="590" y="112.8" width="34" height="37.2" fill="#fbbf24"/><text x="607" y="108.8" text-anchor="middle" font-size="8.5" fill="#cbd5e1">1,034</text>
+<rect x="628" y="40.3" width="34" height="109.7" fill="#f87171"/><text x="645" y="36.3" text-anchor="middle" font-size="8.5" fill="#cbd5e1">3,046</text>
+<text x="626" y="168" text-anchor="middle" font-size="9.5" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (approximate)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="3.1 311.0" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="311.0 3.1" stroke-dashoffset="-3.1" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">&lt;1%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders (CEO, directors, officers): est. well under 1% (not verified)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions and public: the vast majority, led by index and large asset managers (exact current percentages not verified)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buybacks</div>
+      <p>Diluted weighted shares fell from 29.3M (FY2021) to 23.0M (FY2026), -21.4%, and the Q4 FY2026 diluted count was 21.6M (vs 24.2M a year earlier). The reduction was increasingly debt-funded. Buybacks are paused while the term loan tied to the accelerated share repurchase is repaid, and FICO said professional-services revenue (already down to $19.5M in Q4) will fall further in FY2027, so the share-count tailwind to EPS per share fades from here. No dividend is paid.</p>
+    </div>
+  </div>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Leverage, calculated:</b> Sep 30, 2026 debt = current maturities $337.5M + long-term debt $4,921.6M = $5,259.1M (carrying value); cash $217.6M; <b>net debt $5,041.5M</b>. EBITDA (GAAP operating income $1,265.7M + depreciation &amp; amortisation $16.7M) = $1,282.4M, so <b>net debt/EBITDA = 3.9x</b>. Adding back stock-based compensation ($185.5M) gives 3.4x, and also adding the $92M of one-offs 3.2x (a third-party summary quoted 3.29x on its own basis). All variants sit in the 3-4x band. Gross debt is $5.26B vs a market capitalisation of ~$15.2B.
+  </div>
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Negative equity and ROIC, handled honestly:</b> stockholders' equity is -$3.87B because buybacks ($7.7B in six years) have exceeded cumulative profits; it is a financing choice, not a sign of losses. ROIC can still be computed on <b>operating</b> capital rather than equity: invested capital (debt + equity &minus; cash) &asymp; $1.17B (goodwill $0.79B plus working capital) and NOPAT &asymp; $961M (operating income $1,266M &times; (1 &minus; 24.1% tax rate)), giving ~82%. That figure is genuine for an asset-light royalty business but is artificially high because buybacks shrank the capital base. As a stress test, adding all FY21-26 buybacks ($7.7B) back as capital gives ~11%, against an estimated WACC of ~9-10% (my estimate, not a sourced figure), a thin spread. The scorecard therefore scores ROIC 4/5 rather than the mechanical 5/5, flagged as a judgment.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; no criterion is N/A. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met). CAGRs are 5-year (FY2021-26). Criterion #14 uses gross margin (revenue minus cost of revenues) and compares FY2026 with FY2023.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Fair Isaac</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>+14.0% &mdash; $1,316.5M &rarr; $2,534.9M (FY2026 alone +27.3%; FY2022 was only +4.6%). Just under the 15% bar; FY22-26 4-yr CAGR is +16.5% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>2</td><td>EBIT CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>+20.1% &mdash; GAAP operating income $505.5M &rarr; $1,265.7M; FY2026 includes a $65M litigation accrual and $27M restructuring charge (score 5/5, only just above the 20% band edge)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>49.9% GAAP operating margin (FY2026), up from 38.4% in FY2021; about 54% before the one-off $92M of charges (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (5yr, FY21-26)</td><td>&ge;15%</td><td>+20.0% (19.97%) &mdash; FCF (operating cash flow minus capex, company definition) $416M &rarr; $1,034M; sits right on the 20% band edge, scored 4/5</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>FICO Score is the long-standing standard US consumer credit score; VantageScore (bureau-owned) was cited at ~13% of the credit-scoring market in September 2026 and is gaining in mortgage. Still clear #1 today, but eroding (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; near-duopoly in US scoring (FICO and bureau-owned VantageScore) with a regulator now actively pushing competition; judgment call, was closer to 1 before 2026 (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>Reported-basis ROIC ~82% (NOPAT ~$961M on operating invested capital ~$1.17B) is distorted by the negative equity from buybacks; stress test adding all FY21-26 buybacks ($7.7B) as capital gives ~11% vs an estimated WACC of ~9-10%. Scored 4/5 as a judgment, one band below the mechanical 5/5 (see Section 3)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>3.9x &mdash; net debt $5,041M (debt $5,259M less cash $218M) / GAAP EBITDA $1,282M (operating income + D&amp;A). Adding back stock comp and one-offs gives ~3.2-3.4x; same band either way (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>81.7% (FY2026); path 82% / 93% / 72% / 83% / 80% / 82%. Note stock-based compensation ($185M in FY26) is a non-cash cost that flatters FCF (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>GAAP trailing P/E 19.9x vs FY21-25 fiscal-year-end average 52.3x (ratio 0.38); non-GAAP P/E 16.8x. The FY2024 point (95x) inflates the average; vs the median (~51x) the ratio is still ~0.39 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Diluted weighted shares 29.3M (FY21) &rarr; 23.0M (FY26), -21.4% (-12.7% since FY22); Q4 FY26 diluted 21.6M. Funded partly by debt (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>No founder or controlling holder; CEO Will Lansing and directors hold small stakes (est. well under 1% in total, not verified against the proxy). Stock-based pay is sizeable ($185M) (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.5% of revenue (FY2026: $37.7M incl. capitalised internal-use software); 0.3-2.0% every year FY21-26 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &amp; Structural Profitability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin basis (revenue minus cost of revenues): 79.45% (FY2023) &rarr; 86.13% (FY2026), +6.7pp, improving (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 3&times;13=7.8 &middot; #2 5&times;11=11.0 &middot; #3 5&times;10=10.0 &middot; #4 4&times;8=6.4 &middot; #5 5&times;7=7.0 &middot; #6 4&times;6=4.8 &middot; #7 4&times;10=8.0 &middot; #8 1&times;6=1.2 &middot; #9 4&times;8=6.4 &middot; #10 5&times;8=8.0 &middot; #11 5&times;4=4.0 &middot; #12 1&times;5=1.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 84.6 / 105 = <b>81/100</b>. Criteria met: <b>11/14</b> on the binary thresholds. <b>Judgment calls:</b> #5/#6 are qualitative; #7 is capped at 4/5 for the negative-equity distortion and uses my own WACC estimate; #12 insider holdings are unverified; #2 and #4 land within 0.2pp of the 20% band edge.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Exceptional unit economics: 86% gross margin, ~50% GAAP operating margin and ~$1.0B of FCF on $2.5B of revenue with capex at 1.5% of sales. FY2026 revenue grew 27% and EPS 37%, the Software platform is accelerating (ARR +14%, platform ARR +72%, platform net retention 156%), direct-licence agreements now cover ~73% of reseller volume, the FICO Preferred Program has signed a growing list of large lenders (FICO has listed Guild, New American Funding, PennyMac, DHI Mortgage, loanDepot, CMG Financial, Movement and Rate in Oct-Nov 2026), and the FHA will accept FICO 10T from Jan 1, 2027. The share count is down ~21% since FY2021, and at ~20x trailing GAAP earnings the multiple is well below FICO's own ~52x five-year average. Operating cash generation was unambiguous: $1.07B of operating cash flow in FY2026.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch &mdash; Why the Stock De-Rated</div>
+      <ul class="bullet-list">
+        <li><b>The core issue: mortgage-score pricing is now contested by the regulator.</b> FICO's growth was price-led (B2B growth &ldquo;primarily&rdquo; higher mortgage unit price). In 2026 FHFA director Bill Pulte, who oversees Fannie Mae and Freddie Mac, moved to open the mortgage market to bureau-owned VantageScore.</li>
+        <li><b>Timeline (price moves are closes):</b> Apr 22: Bloomberg reports Pulte moving to cut credit-score costs, shares slump; Apr 30: analyst downgrade, -6.9%. <b>Sep 4: -16.7% ($1,118.93 to $932.26)</b> as Pulte said Fannie/Freddie securitisations could use VantageScore 4.0 (or both). <b>Sep 29: -26.5% ($840.89 to $617.87)</b> after Pulte announced a single pricing grid with VantageScore alongside FICO Classic (previously VantageScore loans carried higher pricing), TransUnion fixed VantageScore 4.0 at $0.99 through Dec 2028, and Rocket Mortgage (largest originator) said it would default to VantageScore 4.0 in Q4 on Fannie/Freddie/VA loans. Sep 30 close $592.47 (intraday low $586.05). <b>Oct 23-26: -13.2% ($815.31 to $708.07)</b> after FICO held its mortgage score at $10 for lenders in its Preferred Program (no 2027 increase; bundled with 10T), Pulte promised &ldquo;more action&rdquo;, Wells Fargo downgraded and BMO ($897), JPMorgan ($900), UBS ($942) and Mizuho ($986) cut targets.</li>
+        <li><b>Direct-licence and price history:</b> FICO roughly doubled score prices since the end of Trump's first term in Jan 2021 (Motley Fool) and, per press reports, lifted the mortgage score to ~$10 from $4.95; VantageScore is $0.99. Lenders, bureaus and the regulator now treat that gap as the lever. FICO is moving to &ldquo;bespoke&rdquo; pricing and will no longer disclose mortgage pricing terms.</li>
+        <li><b>Regulatory/legal:</b> $65M accrual (Q4) for a proposed settlement of antitrust class actions over Scores pricing; reports of a Senate inquiry into 2026 pricing (single secondary source, not verified).</li>
+        <li><b>No FY2027 guidance</b> (Nov 4); Scores growth already decelerating (+60% Q2, +41% Q3, +33% Q4); mortgage volumes fell high-single digits in Q4; any loss of share or price in mortgage hits the highest-margin revenue in the company. Scores is 65% of revenue and most of the profit, mortgage dependence cannot be quantified from FICO's releases.</li>
+        <li><b>Leverage on a debt-funded buyback:</b> net debt $5.0B (3.9x EBITDA), negative equity -$3.87B, interest cost rising, buybacks paused; FY2026 repurchases ($3.05B) were made at prices far above today's ($1,100-$1,850 range during the year) and EPS-per-share support from buybacks is ending.</li>
+        <li><b>Unverified/caveats:</b> insider holdings, post-Q4 analyst consensus and forward EPS could not be verified; reported single-day drops differ by source (e.g. -27% intraday vs -26.5% close on Sep 29).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> FICO Form 8-K Exhibit 99.1 (Q4 FY2026, Nov 4, 2026, sec.gov; Q4 FY2024, sec.gov; Q4 FY2022, Q3 FY2026 and Q2 FY2026 via Business Wire); stockanalysis.com / S&amp;P Global Market Intelligence (daily and fiscal-year-end closes, analyst-action headlines incl. TheFly: BMO, JPMorgan, UBS, Mizuho, Wells Fargo); Motley Fool &ldquo;Why Fair Isaac Corporation Plunged Today&rdquo; (Sep 29, 2026; market cap, 52-wk range, VantageScore share, Rocket, TransUnion $0.99); TIKR (Sep 29, 2026; one-grid detail, Goldman target $1,322); Earnings Whispers via Finviz (Nov 4, 2026; call details, Preferred Program, leverage on its basis); headlines from Bloomberg (Apr 22, 2026), WSJ and Business Wire (Oct 23, 2026), Yahoo Finance and Barron's (Oct 26, 2026) as listed on stockanalysis.com. Market cap, WACC, ROIC and ownership are approximate or my own estimates and flagged. Price as of Nov 9, 2026 close; prepared Nov 10, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Fair Isaac &mdash; NYSE, USD, unadjusted closes. A steep run from about $400 (FY2021-22) to a peak near $2,370 in November 2024, a gradual fade through 2025, then the 2026 collapse on the regulatory and VantageScore developments.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Fair Isaac &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Fiscal-year-end (Sep 30) closes FY2021-FY2025 plus the Nov 9, 2026 close (stockanalysis.com / S&amp;P Global; Nov 9 from Motley Fool). The dashed line is the straight-line annualised price CAGR over a 5-year span, excluding dividends (none paid). The 52-week range is $586.05 &ndash; $1,858.91; the all-time high was about $2,370 (Nov 2024, TIKR) and the Sep 30, 2026 (FY2026 year-end) close was $592.47.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="144.0" x2="680" y2="144.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="108.0" x2="680" y2="108.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="71.9" x2="680" y2="71.9" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="35.9" x2="680" y2="35.9" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,151.3 L 172.8,150.3 L 299.6,117.4 L 426.4,40.0 L 553.2,72.2 L 680.0,127.9 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="151.34" x2="680.0" y2="127.86" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +12.7%</text>
+<path d="M 46.0,151.3 L 172.8,150.3 L 299.6,117.4 L 426.4,40.0 L 553.2,72.2 L 680.0,127.9" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="151.34" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="46.0" y="141.34" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$397.93</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY21</text>
+<circle cx="172.8" cy="150.32" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="172.8" y="140.32" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$412.01</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="299.6" cy="117.44" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="299.6" y="107.44" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$868.53</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="426.4" cy="40.00" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="426.4" y="30.00" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,943.52</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="553.2" cy="72.20" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/><text x="553.2" y="62.20" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1,496.53</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="680.0" cy="127.86" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/><text x="672.0" y="117.86" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$723.76</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    The FY2024 point ($1,943.52) is near the stock's peak and the FY2026 year-end close ($592.47) is below the current price, so the 5-year CAGR hides a ~70% fall from the high. A 5-year price CAGR of +12.7% compares with a revenue CAGR of +14.0% and an EBIT CAGR of +20.1% over the same window. No stock split in this period. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

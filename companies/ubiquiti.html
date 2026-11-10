@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ubiquiti Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/ubiquiti.html">
+<meta property="og:title" content="Ubiquiti Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ubiquiti Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 - COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Ubiquiti Inc.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: UI</div>
+    <div class="badge">FY ends Jun 30 (FY2026 = year to Jun 2026)</div>
+    <div class="badge">HQ: New York, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Controlled company: founder Robert Pera owns ~93% &mdash; free float only ~7%</div>
+  </div>
+
+  <div class="price">$685.68</div>
+  <div class="price-sub">Mon Nov 9, 2026 close (NYSE, USD; +15.7% on the day, after +15.3% on Nov 6 following the Q1 report) &middot; Market cap &asymp; $41.5B (60.5M shares) &middot; 52-wk range $500.23 &ndash; $1,099.99 &middot; Beta 1.31 &middot; Analyst consensus: Hold (only 2 analysts), avg price target $734.50 (S&amp;P Global, as of Oct 26, before the Q1 report; may be stale) &middot; Latest quarter: Q1 FY2027 (Sep 2026), reported Nov 5, 2026 &middot; Next report (Q2 FY2027): expected early Feb 2027</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Ubiquiti sells UniFi (enterprise and prosumer Wi-Fi, switching, cameras, access control), airMAX/UISP (wireless broadband for service providers) and related networking gear, mostly via distributors and its own online stores. It is a strong challenger in small and mid-size business and prosumer networking but not a top-2 vendor in the overall networking market (Cisco, HPE Aruba and Huawei are larger); no third-party share figure was verified (see Section 4).</div>
+  <div class="callout" style="margin-bottom:12px;"><b>Free-float and control warning:</b> insiders hold ~93.0% of the shares (S&amp;P Global), overwhelmingly founder, chairman and CEO Robert Pera. Only ~4.2M shares (~7% of the company, roughly $2.9B at today's price) are free float, and average volume is only ~90,000 shares a day. Practical consequences: thin liquidity, large single-day moves (the stock fell 10% on Sep 9 and then rose ~15% on each of Nov 6 and Nov 9, 2026), little index and institutional ownership (~5%), and minority shareholders have no real say in governance. About 93% of every dividend ($4.00/share annualised) flows to Mr. Pera.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> all figures are US dollars. Fiscal years end Jun 30 (&ldquo;FY2026&rdquo; = Jul 2025-Jun 2026; the latest quarter, Q1 FY2027, ended Sep 30, 2026). &ldquo;Op. Income / EBIT&rdquo; is GAAP operating income (S&amp;P Global standardised). FCF = operating cash flow minus capex. Share prices are unadjusted closes. Third-party-only numbers are flagged where used.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">$3.27B</div>
+      <div class="sub green" style="color:#34d399;">+27.2% YoY</div>
+      <div class="note">FY2025 was +33.5%, so full-year growth decelerated, but Q1 FY2027 revenue hit a record $1,026M (+39.9% YoY). 4-yr CAGR FY2022-26: +17.9%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">36.2%</div>
+      <div class="sub">FY2026; gross margin 46.2%</div>
+      <div class="note">Q1 FY2027: operating margin 38.2%, gross margin 47.3%. Management warned that component costs have risen since Q4 FY2026 and may keep rising.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">106% vs ~11.4%</div>
+      <div class="sub">Spread &gt;12 pts</div>
+      <div class="note">Third-party (S&amp;P Global) estimates; a small equity base after years of debt-funded buybacks inflates ROIC and ROE (91%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">$770M net cash (Sep 30, 2026)</div>
+      <div class="note">Cash $845M vs debt $76M. Net debt was $1.0B in Jun 2023; the revolver was repaid from record cash flow.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">77/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Excellent growth, margins and capital efficiency; points lost on a modest market position (not top-2), a fragmented market, FCF conversion under 80% and a valuation above its own average.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="224.4 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 314.16" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria fully met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, ROIC vs WACC, net cash, share count (flat), founder/insider ownership, capex intensity and gross-margin stability (+7.0pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; market share (not #1/#2), market concentration (fragmented), FCF conversion (76.7% vs 80% bar) and entry multiple vs own history (ratio 1.21)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Ubiquiti Inc. designs and sells networking technology built around a software-driven, low-cost-to-serve model: it develops hardware and its UniFi software in-house, outsources manufacturing, sells mainly through distributors and online stores, and runs a very lean organisation (~1,800 employees, ~$1.8M revenue per employee). The Enterprise Technology segment (UniFi Wi-Fi, switching, cameras, access control, ~91% of FY2026 revenue of $3.27B) is the growth engine; Service Provider Technology (airMAX and related, ~9%) has been flat at $300-375M for four years. Revenue was $1.69B in FY2022, fell slightly in FY2024 after the pandemic hangover, then grew +33% in FY2025 and +27% in FY2026 as margins expanded from 26% to 36%. Q1 FY2027 (Sep 2026) was the first $1B quarter: revenue $1,026.2M (+39.9%), gross margin 47.3%, operating income $391.5M, GAAP EPS $5.29 (non-GAAP $5.32), operating cash flow $318.6M. Ubiquiti gave no numerical guidance and cautioned that component costs have risen since June and availability may stay constrained. The shares have been volatile: from a $1,099.99 high in April 2026 to $500.23 in September, then back to $685.68 after the quarter. Founder Robert Pera controls ~93% of the company, which aligns his interests with the business but leaves a free float of only ~7%.
+  </div>
+
+  <div class="callout">
+    <b>Risks that sit outside the scorecard:</b> (1) <b>Allegation and legal headlines</b> &mdash; in early 2026 a Hunterbrook report alleged Ubiquiti gear is used in Russian military communications, and law-firm &ldquo;investigation&rdquo; notices followed; an Ax Wireless patent complaint was filed at the US ITC on Feb 2, 2026. These are allegations or pending proceedings; I did not verify outcomes or the company's responses. (2) <b>Component costs and supply</b> flagged by management. (3) <b>Concentrated control</b> &mdash; one person holds ~93% of the equity.
+  </div>
+
+  <div class="bignum-corner">UI</div>
+</div>
+
+<!-- ============ PAGE 2 - FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending Jun 30), US$ millions. Op. Income = GAAP operating income (S&amp;P Global standardised); Free Cash Flow = operating cash flow minus capex.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, Operating Income &amp; Free Cash Flow &mdash; Annual (US$m)</div>
+    <div class="chart-sub">Revenue nearly doubled over four years; operating income grew faster (+26.5% CAGR) as gross margin widened. FY2023 free cash flow was negative (&minus;$166M) because of a large inventory build; it has since recovered to $909M.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>Operating income (GAAP)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+<svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="208.6" x2="840" y2="208.6" stroke="#1e293b" stroke-width="1"/><text x="50" y="212.6" text-anchor="end" font-size="11" fill="#64748b">500</text>
+<line x1="60" y1="177.1" x2="840" y2="177.1" stroke="#1e293b" stroke-width="1"/><text x="50" y="181.1" text-anchor="end" font-size="11" fill="#64748b">1,000</text>
+<line x1="60" y1="145.7" x2="840" y2="145.7" stroke="#1e293b" stroke-width="1"/><text x="50" y="149.7" text-anchor="end" font-size="11" fill="#64748b">1,500</text>
+<line x1="60" y1="114.3" x2="840" y2="114.3" stroke="#1e293b" stroke-width="1"/><text x="50" y="118.3" text-anchor="end" font-size="11" fill="#64748b">2,000</text>
+<line x1="60" y1="82.9" x2="840" y2="82.9" stroke="#1e293b" stroke-width="1"/><text x="50" y="86.9" text-anchor="end" font-size="11" fill="#64748b">2,500</text>
+<line x1="60" y1="51.4" x2="840" y2="51.4" stroke="#1e293b" stroke-width="1"/><text x="50" y="55.4" text-anchor="end" font-size="11" fill="#64748b">3,000</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">3,500</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="133.6" width="30" height="106.4" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="128.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,692</text>
+<rect x="123.0" y="210.9" width="30" height="29.1" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="205.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">462</text>
+<rect x="161.0" y="217.6" width="30" height="22.4" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="212.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">357</text>
+<text x="138.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241.0" y="118.0" width="30" height="122.0" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="113.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,941</text>
+<rect x="279.0" y="205.8" width="30" height="34.2" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="200.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">545</text>
+<rect x="317.0" y="240" width="30" height="10.5" rx="2" fill="#f87171"/>
+<text x="332.0" y="262.5" text-anchor="middle" font-size="10" fill="#fca5a5">-166</text>
+<text x="294.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397.0" y="118.8" width="30" height="121.2" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="113.8" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,928</text>
+<rect x="435.0" y="208.6" width="30" height="31.4" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="203.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">499</text>
+<rect x="473.0" y="206.7" width="30" height="33.3" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="201.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">530</text>
+<text x="450.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553.0" y="78.2" width="30" height="161.8" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="73.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">2,574</text>
+<rect x="591.0" y="187.4" width="30" height="52.6" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="182.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">836</text>
+<rect x="629.0" y="200.6" width="30" height="39.4" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="195.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">627</text>
+<text x="606.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709.0" y="34.2" width="30" height="205.8" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="29.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">3,274</text>
+<rect x="747.0" y="165.5" width="30" height="74.5" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="160.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">1,185</text>
+<rect x="785.0" y="182.9" width="30" height="57.1" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="177.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">909</text>
+<text x="762.0" y="270" text-anchor="middle" font-size="11" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY22-26)</div><div class="val" style="color:#34d399;">+17.9%</div><div class="sub">$1.69B &rarr; $3.27B; FY2024 was flat (&minus;0.6%)</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY22-26)</div><div class="val" style="color:#34d399;">+26.5%</div><div class="sub">$462M &rarr; $1,185M; margin 27.3% &rarr; 36.2%</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY22-26)</div><div class="val" style="color:#34d399;">+26.3%</div><div class="sub">$357M &rarr; $909M; FY2023 was negative, so the path is lumpy</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin &amp; Operating Margin Trend (GAAP)</div>
+    <div class="chart-sub">Gross margin (blue) rose from 39.2% in FY2023 to 46.2% in FY2026 (+7.0pp, the basis of criterion 14); operating margin (green) from 28.1% to 36.2%. Q1 FY2027: 47.3% and 38.2%.</div>
+<svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="30" y1="15" x2="690" y2="15" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text><text x="2" y="55.5" font-size="7.5" fill="#64748b">50%</text><text x="-2" y="18" font-size="7.5" fill="#64748b">100%</text>
+<polyline points="60,60.3 205,60.6 350,61.2 495,57.4 640,55.4" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="60.3" r="3.2" fill="#60a5fa"/><text x="60" y="53.3" text-anchor="middle" font-size="8" fill="#cbd5e1">39.6%</text>
+<circle cx="205" cy="60.6" r="3.2" fill="#60a5fa"/><text x="205" y="53.6" text-anchor="middle" font-size="8" fill="#cbd5e1">39.2%</text>
+<circle cx="350" cy="61.2" r="3.2" fill="#60a5fa"/><text x="350" y="54.2" text-anchor="middle" font-size="8" fill="#cbd5e1">38.4%</text>
+<circle cx="495" cy="57.4" r="3.2" fill="#60a5fa"/><text x="495" y="50.4" text-anchor="middle" font-size="8" fill="#cbd5e1">43.4%</text>
+<circle cx="640" cy="55.4" r="3.2" fill="#60a5fa"/><text x="640" y="48.4" text-anchor="middle" font-size="8" fill="#cbd5e1">46.2%</text>
+<polyline points="60,69.5 205,69.0 350,70.6 495,65.6 640,62.8" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="69.5" r="3.2" fill="#34d399"/><text x="60" y="62.5" text-anchor="middle" font-size="8" fill="#cbd5e1">27.3%</text>
+<circle cx="205" cy="69.0" r="3.2" fill="#34d399"/><text x="205" y="62.0" text-anchor="middle" font-size="8" fill="#cbd5e1">28.1%</text>
+<circle cx="350" cy="70.6" r="3.2" fill="#34d399"/><text x="350" y="63.6" text-anchor="middle" font-size="8" fill="#cbd5e1">25.9%</text>
+<circle cx="495" cy="65.6" r="3.2" fill="#34d399"/><text x="495" y="58.6" text-anchor="middle" font-size="8" fill="#cbd5e1">32.5%</text>
+<circle cx="640" cy="62.8" r="3.2" fill="#34d399"/><text x="640" y="55.8" text-anchor="middle" font-size="8" fill="#cbd5e1">36.2%</text>
+<text x="60" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="103" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+<table class="datatable">
+<tr><th>FY (US$m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>EPS (diluted)</th><th>Free Cash Flow</th><th>Capex</th><th>Net cash / (debt)</th><th>DPS</th></tr>
+<tr><td>FY2022</td><td>1,692</td><td>462.3</td><td>27.3%</td><td>39.6%</td><td>378.7</td><td>6.13</td><td>356.8</td><td>13.5</td><td>(717)</td><td>2.40</td></tr><tr><td>FY2023</td><td>1,941</td><td>544.6</td><td>28.1%</td><td>39.2%</td><td>407.6</td><td>6.74</td><td>-166.4</td><td>20.9</td><td>(1,023)</td><td>2.40</td></tr><tr><td>FY2024</td><td>1,928</td><td>499.0</td><td>25.9%</td><td>38.4%</td><td>350.0</td><td>5.79</td><td>529.5</td><td>12.0</td><td>(631)</td><td>2.40</td></tr><tr><td>FY2025</td><td>2,574</td><td>836.3</td><td>32.5%</td><td>43.4%</td><td>711.9</td><td>11.76</td><td>627.4</td><td>12.6</td><td>(148)</td><td>2.60</td></tr><tr><td>FY2026</td><td>3,274</td><td>1,185.0</td><td>36.2%</td><td>46.2%</td><td>960.3</td><td>15.85</td><td>908.9</td><td>19.7</td><td>531</td><td>3.40</td></tr><tr><td>TTM (Sep 2026)</td><td>3,566</td><td>1,315</td><td>36.9%</td><td>46.5%</td><td>1,073</td><td>17.71</td><td>1,028</td><td>20.9</td><td>770</td><td>3.60</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">Figures are from S&amp;P Global Market Intelligence via stockanalysis.com; Q1 FY2027 cross-checked to Ubiquiti's Nov 5, 2026 release (revenue $1,026.2M, GAAP net income $320.5M, EPS $5.29). TTM = FY2026 + Q1 FY2027 &minus; Q1 FY2026 (revenue 3,274+1,026.2&minus;733.8; operating income 1,185+391.5&minus;261.7; net income 960.3+320.5&minus;207.9; derived by me; TTM FCF 909+312.4&minus;193.3 = 1,028). FY2025 net income ($712M) benefited from a low tax charge (a Q4 FY2025 tax benefit); FY2024 and FY2025 DPS are annual sums of quarterly dividends ($0.60/qtr rising to $0.80 and then $1.00 per quarter). Net debt is shown in parentheses.</div>
+  <div class="footer-note">Source: Ubiquiti Inc. Q1 FY2027 results (Business Wire, Nov 5, 2026); S&amp;P Global Market Intelligence (stockanalysis.com). All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 - QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q1 FY2027)</div></div>
+  <div class="sec-sub">Fiscal quarters (Q1 FY2027 = three months to Sep 30, 2026). Reported Nov 5, 2026; Q2 FY2027 (Dec 2026 quarter) is expected in early February 2027.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue reached a record $1,026.2M, up 39.9% YoY and 9.5% on the prior quarter, the first quarter above $1 billion. Enterprise Technology revenue was $941.3M (+43.2%); Service Provider Technology $84.9M (+10.8%). Gross margin rose to 47.3% (46.0% a year ago, 45.8% in Q4 FY2026) on lower indirect costs, partly offset by higher component costs. Operating income was $391.5M (38.2% margin, +49.6%), GAAP net income $320.5M and GAAP EPS $5.29 (non-GAAP $5.32). Operating cash flow was $318.6M and free cash flow $312.4M, lifting net cash to $770M as the company now holds more cash ($845M) than debt ($76M). Management gave no numerical guidance and said component costs have risen since Q4 FY2026 and may continue to rise, with availability possibly constrained, a margin risk. The stock rose ~15.3% on Nov 6 and a further ~15.7% on Nov 9, 2026.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (US$m)</div>
+    <div class="chart-sub">Revenue has risen in most quarters; Q3 FY26 (Mar 2026) dipped 3.3% sequentially before the Jun and Sep quarters set records. YoY growth ranged from +18.7% to +49.6%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="78.6" width="60" height="51.4" fill="#2dd4bf"/><text x="50" y="73.6" text-anchor="middle" font-size="9" fill="#cbd5e1">599.9</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="104" y="73.0" width="60" height="57.0" fill="#2dd4bf"/><text x="134" y="68.0" text-anchor="middle" font-size="9" fill="#cbd5e1">664.2</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="188" y="64.9" width="60" height="65.1" fill="#2dd4bf"/><text x="218" y="59.9" text-anchor="middle" font-size="9" fill="#cbd5e1">759.1</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="272" y="67.1" width="60" height="62.9" fill="#2dd4bf"/><text x="302" y="62.1" text-anchor="middle" font-size="9" fill="#cbd5e1">733.8</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="356" y="60.1" width="60" height="69.9" fill="#2dd4bf"/><text x="386" y="55.1" text-anchor="middle" font-size="9" fill="#cbd5e1">814.9</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="440" y="62.4" width="60" height="67.6" fill="#2dd4bf"/><text x="470" y="57.4" text-anchor="middle" font-size="9" fill="#cbd5e1">788.2</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="524" y="49.6" width="60" height="80.4" fill="#2dd4bf"/><text x="554" y="44.6" text-anchor="middle" font-size="9" fill="#cbd5e1">937.3</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="608" y="42.0" width="60" height="88.0" fill="#2dd4bf"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,026.2</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+</svg>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (GAAP) &mdash; Last 8 Quarters (US$m)</div>
+    <div class="chart-sub">Operating income more than doubled in seven quarters, from $178.8M to $391.5M; operating margin climbed from 29.8% to 38.2%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, US$m</span></div>
+<svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="89.8" width="60" height="40.2" fill="#60a5fa"/><text x="50" y="84.8" text-anchor="middle" font-size="9" fill="#cbd5e1">178.8</text><text x="50" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="104" y="79.0" width="60" height="51.0" fill="#60a5fa"/><text x="134" y="74.0" text-anchor="middle" font-size="9" fill="#cbd5e1">226.9</text><text x="134" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="188" y="71.2" width="60" height="58.8" fill="#60a5fa"/><text x="218" y="66.2" text-anchor="middle" font-size="9" fill="#cbd5e1">261.4</text><text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="272" y="71.2" width="60" height="58.8" fill="#60a5fa"/><text x="302" y="66.2" text-anchor="middle" font-size="9" fill="#cbd5e1">261.7</text><text x="302" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="356" y="64.2" width="60" height="65.8" fill="#60a5fa"/><text x="386" y="59.2" text-anchor="middle" font-size="9" fill="#cbd5e1">292.9</text><text x="386" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="440" y="64.6" width="60" height="65.4" fill="#60a5fa"/><text x="470" y="59.6" text-anchor="middle" font-size="9" fill="#cbd5e1">290.8</text><text x="470" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="524" y="53.6" width="60" height="76.4" fill="#60a5fa"/><text x="554" y="48.6" text-anchor="middle" font-size="9" fill="#cbd5e1">340.0</text><text x="554" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="608" y="42.0" width="60" height="88.0" fill="#60a5fa"/><text x="638" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">391.5</text><text x="638" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+</svg>
+  </div>
+<table class="datatable">
+<tr><th>Quarter</th><th>Revenue</th><th>YoY</th><th>Gross margin</th><th>Op. income</th><th>Op. margin</th><th>Net income</th><th>EPS</th></tr>
+<tr><td>Q2 FY25</td><td>599.9</td><td>+29.0%</td><td>41.2%</td><td>178.8</td><td>29.8%</td><td>136.8</td><td>2.26</td></tr><tr><td>Q3 FY25</td><td>664.2</td><td>+34.7%</td><td>44.5%</td><td>226.9</td><td>34.2%</td><td>180.4</td><td>2.98</td></tr><tr><td>Q4 FY25</td><td>759.1</td><td>+49.6%</td><td>45.1%</td><td>261.4</td><td>34.4%</td><td>266.7</td><td>4.40</td></tr><tr><td>Q1 FY26</td><td>733.8</td><td>+33.3%</td><td>46.0%</td><td>261.7</td><td>35.7%</td><td>207.9</td><td>3.43</td></tr><tr><td>Q2 FY26</td><td>814.9</td><td>+35.8%</td><td>45.9%</td><td>292.9</td><td>36.0%</td><td>233.6</td><td>3.86</td></tr><tr><td>Q3 FY26</td><td>788.2</td><td>+18.7%</td><td>47.0%</td><td>290.8</td><td>36.9%</td><td>233.9</td><td>3.86</td></tr><tr><td>Q4 FY26</td><td>937.3</td><td>+23.5%</td><td>45.8%</td><td>340.0</td><td>36.3%</td><td>284.9</td><td>4.70</td></tr><tr><td>Q1 FY27</td><td>1,026.2</td><td>+39.9%</td><td>47.3%</td><td>391.5</td><td>38.1%</td><td>320.5</td><td>5.29</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly data from S&amp;P Global (stockanalysis.com); Q4 FY25 net income ($266.7M) is above pretax income because of a tax benefit. EPS is GAAP diluted.</div>
+<table class="datatable">
+<tr><th>Metric (US$m)</th><th>Q1 FY2026</th><th>Q1 FY2027</th><th>Change</th></tr>
+<tr><td>Total revenue</td><td>733.8</td><td>1,026.2</td><td>+39.9%</td></tr><tr><td>Enterprise Technology</td><td>657.2</td><td>941.3</td><td>+43.2%</td></tr><tr><td>Service Provider Technology</td><td>76.6</td><td>84.9</td><td>+10.8%</td></tr><tr><td>Gross profit (margin)</td><td>337.4 (46.0%)</td><td>485.4 (47.3%)</td><td>+43.8%</td></tr><tr><td>Operating income</td><td>261.7</td><td>391.5</td><td>+49.6%</td></tr><tr><td>Net income (GAAP)</td><td>207.9</td><td>320.5</td><td>+54.2%</td></tr><tr><td>Diluted EPS GAAP ($)</td><td>3.43</td><td>5.29</td><td>+54.2%</td></tr><tr><td>Free cash flow</td><td>193.3</td><td>312.4</td><td>+61.6%</td></tr><tr><td>Net cash / (net debt)</td><td>(1.0)</td><td>769.5</td><td>n/a</td></tr>
+</table>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="callout blue" style="flex:1;"><b>Guidance:</b> none &mdash; Ubiquiti does not give numerical guidance. It cautioned that component costs have increased since Q4 FY2026 and may continue to rise, and that availability may remain constrained.</div>
+    <div class="callout blue" style="flex:1;"><b>Capital return:</b> quarterly dividend raised to $1.00 per share (from $0.80 and $0.60 earlier); annualised $4.00, a ~0.6% yield with a ~23% payout of earnings. Debt was paid down from $1.14B (Jun 2023) to $76M.</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 - VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing GAAP P/E (price over diluted GAAP EPS). The key ownership fact is the ~7% free float.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E of ~38.7x ($685.68 / TTM diluted EPS $17.71, derived from FY2026 $15.85 + Q1 FY27 $5.29 &minus; Q1 FY26 $3.43) compares with a FY2022-26 year-end average of ~31.9x, a ratio of 1.21. Year-end multiples are S&amp;P Global's.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span><span><span class="dot" style="background:#fbbf24;"></span>FY22-26 average</span></div>
+<svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="38.7" width="70" height="71.3" fill="#60a5fa"/><text x="55" y="33.7" text-anchor="middle" font-size="9" fill="#cbd5e1">39.6x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="63.1" width="70" height="46.9" fill="#60a5fa"/><text x="150" y="58.1" text-anchor="middle" font-size="9" fill="#cbd5e1">26.1x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="64.7" width="70" height="45.3" fill="#60a5fa"/><text x="245" y="59.7" text-anchor="middle" font-size="9" fill="#cbd5e1">25.2x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="47.0" width="70" height="63.0" fill="#60a5fa"/><text x="340" y="42.0" text-anchor="middle" font-size="9" fill="#cbd5e1">35.0x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="49.4" width="70" height="60.6" fill="#60a5fa"/><text x="435" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">33.7x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="40.3" width="70" height="69.7" fill="#2dd4bf"/><text x="530" y="35.3" text-anchor="middle" font-size="9" fill="#cbd5e1">38.7x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="52.6" x2="690" y2="52.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="48.6" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 31.9x</text>
+</svg>
+  </div>
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> no reliable post-quarter consensus was available (only 2 analysts cover the stock and S&amp;P's forward EPS pre-dates the Q1 report). As an illustrative run-rate only, annualising Q1 FY2027 non-GAAP EPS of $5.32 gives ~$21.3 and a forward-style P/E of ~32.2x; this is not a forecast and ignores the component-cost risk. FY-end forward P/Es were 36.5, 21.4, 19.7, 45.9 and 32.3 (average ~31.1). A PEG is not available (no growth forecast). The scorecard uses the trailing GAAP basis (ratio 1.21 = 1/5). The average analyst target of $734.50 (2 analysts) dates from before the Q1 report.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capex (US$m) &amp; Capex Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light: capex was 0.5-1.1% of revenue every year FY2022-26 (manufacturing is outsourced), though working capital (inventory) swings cash flow, as FY2023 showed.</div>
+<svg viewBox="0 0 700 192">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="98.4" width="60" height="61.6" fill="#60a5fa"/><text x="60" y="93.4" text-anchor="middle" font-size="8" fill="#cbd5e1">13.5</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text><text x="60" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.80% of revenue</text>
+<rect x="170" y="64.3" width="60" height="95.7" fill="#60a5fa"/><text x="200" y="59.3" text-anchor="middle" font-size="8" fill="#cbd5e1">20.9</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text><text x="200" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">1.08% of revenue</text>
+<rect x="310" y="105.3" width="60" height="54.7" fill="#60a5fa"/><text x="340" y="100.3" text-anchor="middle" font-size="8" fill="#cbd5e1">12.0</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text><text x="340" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.62% of revenue</text>
+<rect x="450" y="102.5" width="60" height="57.5" fill="#60a5fa"/><text x="480" y="97.5" text-anchor="middle" font-size="8" fill="#cbd5e1">12.6</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text><text x="480" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.49% of revenue</text>
+<rect x="590" y="69.8" width="60" height="90.2" fill="#60a5fa"/><text x="620" y="64.8" text-anchor="middle" font-size="8" fill="#cbd5e1">19.7</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text><text x="620" y="186" text-anchor="middle" font-size="8.5" fill="#fde68a">0.60% of revenue</text>
+</svg>
+  </div>
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global) &mdash; Controlled Company</div>
+      <div class="ownership-row">
+<svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="292.1 22.0" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="15.9 298.3" stroke-dashoffset="-292.1" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="6.2 308.0" stroke-dashoffset="-308.0" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~93%</text></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~93.0% (principally founder/CEO Robert Pera)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Institutions ~5.1%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other / retail ~2.0% (residual)</div>
+          <div style="color:#fbbf24;"><b>Free float &asymp; 4.2M shares (~7%)</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Capital Return</div>
+      <p>Shares outstanding are ~60.5M (Aug 2026 10-K), up 0.06% in a year; roughly 61-62M in 2022 (derived from S&amp;P net cash per share), i.e. about -2% net, effectively flat. Buybacks are negligible (buyback yield -0.06%). The dividend has grown from $2.40 (FY2022-24) to $3.40 (FY2026) and $4.00 annualised.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Why the free float matters:</b> with ~93% held by one holder, only about $2.9B of the $41.5B market cap actually trades. Average daily volume is ~90,000 shares (~$55M); short interest is 0.6% of shares but 8.8% of the float. Index funds can hold little, news moves the price by 10-15% in a day, and Mr. Pera can effectively decide any shareholder vote. His interests are strongly aligned with minority holders on value creation, but there is no independent check on strategy, related-party dealings or the allegations noted on the cover.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet (Sep 30, 2026):</b> cash and investments $845.5M, total debt $76.0M, net cash $769.5M. Debt peaked at ~$1.14B in Jun 2023 (net debt $1.02B) and was repaid in three years from free cash flow of ~$2.1B over FY2024-26.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 - SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist; all 14 criteria are testable (no N/A). CAGRs are 4-year (FY2022-26, Jun year-ends). Criterion #14 compares FY2026 gross margin with FY2023's.</div>
+<table class="datatable criteria-table">
+<tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Ubiquiti</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+17.9% &mdash; $1.69B &rarr; $3.27B (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+26.5% &mdash; GAAP operating income $462M &rarr; $1,185M (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>36.2% (FY2026); 38.2% in Q1 FY2027 (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+26.3% &mdash; $357M &rarr; $909M; FY2023 was negative (&minus;$166M) so the path is lumpy (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Not a top-2 vendor in overall networking or enterprise Wi-Fi (Cisco, HPE Aruba, Huawei lead); strong in SMB/prosumer Wi-Fi. No verified ranking, so scored conservatively as #4-5 (score 1/5, judgment)</td><td><span class="status-pill status-not">Not met</span></td></tr><tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; networking is contested by large incumbents and many specialist vendors; no verified concentration ratio (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr><tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 106% vs WACC ~11.4% (S&amp;P Global); inflated by a small equity base (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash $770M (Sep 30, 2026); debt $76M (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>76.7% (FY2026: FCF $909M / operating income $1,185M); path 77% / n.m. / 106% / 75% / 77% (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr><tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E ~38.7x vs FY22-26 year-end average ~31.9x (ratio 1.21, a 21% premium) (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr><tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~61-62M (2022, derived) &rarr; 60.5M, about -2%; buybacks negligible (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>~93.0% held by insiders, founder-CEO Robert Pera (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.6% of revenue in FY2026; 0.5-1.1% every year (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr><tr><td>14</td><td>Margin Stability &mdash; gross margin</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 39.20% (FY2023) &rarr; 46.16% (FY2026), +6.96pp: improving (score 5/5; basis: gross margin, gross-profit line reported)</td><td><span class="status-pill status-met">Met</span></td></tr>
+</table>
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 4&times;13=10.4 &middot; #2 5&times;11=11.0 &middot; #3 5&times;10=10.0 &middot; #4 5&times;8=8.0 &middot; #5 1&times;7=1.4 &middot; #6 1&times;6=1.2 &middot; #7 5&times;10=10.0 &middot; #8 5&times;6=6.0 &middot; #9 3&times;8=4.8 &middot; #10 1&times;8=1.6 &middot; #11 3&times;4=2.4 &middot; #12 5&times;5=5.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 80.8 / 105 = <b>77/100</b>. Criteria met: 10/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative and deliberately conservative (no verified share data); #7 uses third-party ROIC/WACC; #10 uses year-end P/Es from S&amp;P; #11 uses a derived 2022 share count.
+  </div>
+  <div class="two-col">
+    <div class="info-box working"><div class="title">What's Working</div><p>Growth and profitability are exceptional for a hardware company: revenue +27% in FY2026 and +39.9% in the latest quarter, a record $1B quarter, operating margin up from 26% to 38% in about two years, gross margin up 7pp, ROIC above 100%, 0.6% capex intensity and a swing from $1.0B net debt to $770M net cash. The quarterly dividend has been raised three times since mid-2025. The founder owns ~93% of the shares, so interests are strongly aligned with the long-term health of the business.</p></div>
+    <div class="info-box watch"><div class="title">What to Watch</div><p>Control and liquidity: ~93% insider ownership leaves a ~7% free float, thin trading and 10-15% single-day swings, and minority holders have no governance leverage. Management warned that component costs are rising, which could pressure the 47% gross margin that drove the earnings jump. The stock trades ~21% above its own 5-year average P/E after a 33% two-day rally, FCF conversion is below 80% and swings with inventory (FY2023 was negative), and market position is mid-tier outside SMB/prosumer. Allegations about Russian military use of its products, a patent complaint at the ITC and law-firm investigation notices add headline risk; outcomes were not verified here.</p></div>
+  </div>
+  <div class="footer-note">
+    <b>Sources:</b> Ubiquiti Inc. Q1 FY2027 results release (Business Wire, Nov 5, 2026, via Morningstar/Finviz); S&amp;P Global Market Intelligence via stockanalysis.com (financials, ratios, ROIC/WACC, ownership, share count, analyst targets, prices); 247WallSt and TIKR Q1 FY2027 coverage; TheFly and Business Wire headlines for legal items. Estimates and third-party figures are flagged above. Price as of Mon Nov 9, 2026 close; prepared Nov 10, 2026 &mdash; for personal research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Ubiquiti &mdash; NYSE: UI, USD. A 2022-24 trough as earnings normalised, a sharp 2025-26 rally on record growth and margins, a fall from $1,100 to $500 in 2026, and a ~33% two-day rebound after the Q1 FY2027 report.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Ubiquiti &mdash; Fiscal Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">Closing prices on the last trading day of each fiscal year (Jun 30, 2022; Jun 30, 2023; Jun 28, 2024; Jun 30, 2025; Jun 30, 2026) plus the Nov 9, 2026 close, unadjusted. The dashed line is the annualised price CAGR from the Jun 2022 close to Nov 9, 2026 (4.36 years), excluding dividends ($4.00/share annualised, ~0.6% yield). The 52-week range is $500.23 &ndash; $1,099.99.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,127.6 L 172.8,142.9 L 299.6,149.2 L 426.4,93.1 L 553.2,67.3 L 680.0,35.2 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="127.6" x2="680.0" y2="35.2" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="18" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +26.2%</text>
+<path d="M 46.0,127.6 L 172.8,142.9 L 299.6,149.2 L 426.4,93.1 L 553.2,67.3 L 680.0,35.2" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="127.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="115.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$248.21</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="142.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="130.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$175.75</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="149.2" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="164.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$145.66</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="93.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="81.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$411.65</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="67.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="55.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$534.03</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="35.2" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="23.2" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$685.68</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+  <div class="footer-note">
+    The first point is the Jun 2022 close ($248.21), so the window is about 4.4 years rather than a full five; the label follows the site's fiscal-year convention for non-December year-ends. With a ~7% free float, the share price can move far more than the business fundamentals in a single day. No stock splits. Source: S&amp;P Global Market Intelligence via stockanalysis.com. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

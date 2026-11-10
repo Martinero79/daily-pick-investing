@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Brokers Group — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/interactive-brokers.html">
+<meta property="og:title" content="Interactive Brokers Group — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interactive Brokers Group — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 70+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); height:auto; } }
+@media print{ .page{ width:210mm !important; height:297mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { text-align:right; margin-top:18px; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+@media print{ .bignum-corner{ position:absolute; right:13mm; bottom:9mm; margin-top:0; } }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+  .status-na { background:#1a2030; color:#94a3b8; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard · Nasdaq: IBKR</div>
+  <h1>Interactive Brokers Group, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: IBKR · reports in USD</div>
+    <div class="badge">Sector: Electronic Brokerage &amp; Market Making (Financials)</div>
+    <div class="badge">HQ: Greenwich, CT · Founded 1977 by Thomas Peterffy · IPO 2007</div>
+    <div class="badge">5.58M customer accounts · $964.7B customer equity (Q3 2026)</div>
+    <div class="badge warn">Financial-company scorecard adaptation — see framing note below</div>
+  </div>
+
+  <div class="price">$77.57</div>
+  <div class="price-sub">Close Nov 9, 2026 (Nasdaq, Mon) · Market cap ≈ $35.1bn on 453.2M Class A shares (≈ $132bn if all 1.70bn IBG LLC interests, including those held by IBG Holdings, are counted) · 52-week range ≈ $58.95–$98.75 (intraday) · Analyst average target ≈ $104.66 (17 analysts, S&amp;P Global, as of Oct 30) · Quarterly dividend raised to $0.15 (≈ 0.8% annualised yield)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:14px;"><b style="color:#94a3b8;">Top competitors:</b> Charles Schwab (incl. TD Ameritrade) &middot; Fidelity &middot; Vanguard &middot; Morgan Stanley (E*Trade) &middot; Robinhood &middot; plus global brokers and, for professional clients, prime brokers and market makers — a competitive field with low switching costs at the retail end.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Net Revenues (FY25)</div>
+      <div class="val">$6.21B</div>
+      <div class="sub">+19.7% vs FY24 ($5.19B); FY24 was +19.5%, so growth is steady near 20%. Q3 2026: $1.91B, +15.7% YoY</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Pre-Tax Income / Margin (FY25)</div>
+      <div class="val green">$4.77B / 76.9%</div>
+      <div class="note">Pre-tax income is the EBIT proxy used here (IBKR reports no EBIT line). Net income to common stockholders ($984M) is only the ~26% public slice of the business.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Interest Income Share</div>
+      <div class="val">57% FY25 · 60% Q3'26</div>
+      <div class="note">Net interest income ÷ net revenues (FY21: 42%). Rate-sensitive: lower short rates would pressure the largest revenue line.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Latest Quarter (Q3 2026)</div>
+      <div class="val">5.58M accts</div>
+      <div class="note">Accounts +35% YoY; customer equity +27%; DARTs 4.27M (+18% YoY but −11% vs Q2). Reported Oct 15, 2026.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">74/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">9/14 criteria met — elite growth and margins, held back by a rich multiple, minimal payout, rising share count and a mid-pack market position.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M 110.00,15.00 A 95,95 0 1 1 35.73,169.23 L 64.65,146.16 A 58,58 0 1 0 110.00,52.00 Z" fill="#34d399"/><path d="M 35.73,169.23 A 95,95 0 0 1 110.00,15.00 L 110.00,52.00 A 58,58 0 0 0 64.65,146.16 Z" fill="#f87171"/><text x="110" y="106" text-anchor="middle" font-size="30" font-weight="700" fill="#f1f5f9">9/14</text><text x="110" y="128" text-anchor="middle" font-size="10.5" fill="#94a3b8" letter-spacing="1">CRITERIA MET</text></svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 Met</b> — revenue CAGR, pre-tax income CAGR (EBIT proxy), pre-tax margin, net-income CAGR (FCF proxy), ROE vs. cost of equity, debt-free capital position, founder ownership, capex intensity, margin stability.</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>5 Not Met</b> — market share (not top-2 among U.S. brokers), market concentration, low capital-return payout, entry multiple ~30% above own average, rising Class A share count.</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Interactive Brokers is a highly automated, global electronic broker serving individual investors, hedge funds, advisors and proprietary trading firms on 175+ markets. Revenue grew ~23% a year over FY2021–FY2025 ($2.71bn to $6.21bn of net revenues) and the pre-tax margin rose from 66% to 77%, because net revenues scaled far faster than costs. Two structural points matter for reading the numbers. First, <b>ownership:</b> the public company (IBG, Inc.) owns only ~26.6% of the operating company IBG LLC; IBG Holdings, controlled by founder Thomas Peterffy and affiliates, owns the other 73.4%. Headline net income and EPS ($984M, $2.22 in FY25) reflect only the public slice, so this page uses pre-tax income of the whole business as the EBIT proxy. Second, <b>split history:</b> IBKR did a 4-for-1 forward split on June 18, 2025; all prices, EPS and dividends here are split-adjusted. About 57–60% of revenue is net interest income on customer margin loans and cash balances, so the model is rate-sensitive, and trading activity (DARTs) is cyclical: Q3 2026 DARTs fell 11% from Q2 and October was reported 4% below a year earlier. The stock trades at ~29.6x trailing earnings (about 30% above its own FY21–FY25 average) and has fallen about 20% from its late-Aug 2026 high.
+  </div>
+
+  <div class="callout blue">
+    <b>Framing note — why this scorecard is adapted for a broker:</b> Like JPMorgan and NN Group on this site, IBKR is a financial company whose customer cash and securities flows dominate its cash-flow statement, so the standard industrial framework is adapted, with every substitution flagged inline: <b>Net revenues</b> stand in for revenue (criterion 1); <b>pre-tax income</b> stands in for EBIT (criteria 2 and 3) and <b>net income to common</b> for FCF (criterion 4); <b>ROE vs. an assumed ~11.5% cost of equity</b> replaces ROIC vs. WACC (criterion 7); <b>corporate debt and capital position</b> replace net debt/EBITDA (criterion 8; IBKR does not report CET1); <b>(dividends + buybacks) ÷ net income</b> replaces FCF conversion (criterion 9); criterion 10 uses P/E vs. own history; and criterion 14 uses the pre-tax (efficiency) margin because there is no gross-profit line.
+  </div>
+
+  <div class="bignum-corner">01 / 06</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Five-Year Financial Trends</div></div>
+  <div class="sec-sub">FY2021–FY2025 (fiscal year = calendar year). USD. Net revenues are GAAP total net revenues (interest net of interest expense). FY pre-tax income is derived from S&amp;P Global data (via stockanalysis.com) and should be checked against the 10-K; all per-share data is adjusted for the June 2025 4:1 split.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Revenues vs. Pre-Tax Income ($B)</div>
+    <div class="chart-sub">Pre-tax income of the whole operating company (IBG LLC), used as the EBIT proxy. Pre-tax income has grown faster than revenue every year since FY22.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Net revenues</span><span><span class="dot" style="background:#fbbf24;"></span>Pre-tax income</span></div>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="162.0" x2="680" y2="162.0" stroke="#263049" stroke-width="1"/>
+<rect x="62" y="106.0" width="24" height="56.0" fill="#2dd4bf"/>
+<text x="74" y="101.0" text-anchor="middle" font-size="8" fill="#cbd5e1">2.7</text>
+<rect x="92" y="125.1" width="24" height="36.9" fill="#fbbf24"/>
+<text x="104" y="120.1" text-anchor="middle" font-size="8" fill="#cbd5e1">1.8</text>
+<text x="89" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<rect x="190" y="98.7" width="24" height="63.3" fill="#2dd4bf"/>
+<text x="202" y="93.7" text-anchor="middle" font-size="8" fill="#cbd5e1">3.1</text>
+<rect x="220" y="120.8" width="24" height="41.2" fill="#fbbf24"/>
+<text x="232" y="115.8" text-anchor="middle" font-size="8" fill="#cbd5e1">2.0</text>
+<text x="217" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<rect x="318" y="72.5" width="24" height="89.5" fill="#2dd4bf"/>
+<text x="330" y="67.5" text-anchor="middle" font-size="8" fill="#cbd5e1">4.3</text>
+<rect x="348" y="98.7" width="24" height="63.3" fill="#fbbf24"/>
+<text x="360" y="93.7" text-anchor="middle" font-size="8" fill="#cbd5e1">3.1</text>
+<text x="345" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<rect x="446" y="55.0" width="24" height="107.0" fill="#2dd4bf"/>
+<text x="458" y="50.0" text-anchor="middle" font-size="8" fill="#cbd5e1">5.2</text>
+<rect x="476" y="85.8" width="24" height="76.2" fill="#fbbf24"/>
+<text x="488" y="80.8" text-anchor="middle" font-size="8" fill="#cbd5e1">3.7</text>
+<text x="473" y="193" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<rect x="574" y="34.0" width="24" height="128.0" fill="#5eead4"/>
+<text x="586" y="29.0" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">6.2</text>
+<rect x="604" y="63.6" width="24" height="98.4" fill="#fde68a"/>
+<text x="616" y="58.6" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">4.8</text>
+<text x="601" y="193" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Net Revenue CAGR (5yr, crit. #1)</div>
+      <div class="val green">~23.0%</div>
+      <div class="sub">FY21→FY25, $2.71B→$6.21B</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Pre-Tax Income CAGR (crit. #2 proxy)</div>
+      <div class="val green">~27.8%</div>
+      <div class="sub">$1.79B→$4.77B</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Net Income to Common CAGR (crit. #4 proxy)</div>
+      <div class="val green">~33.7%</div>
+      <div class="sub">$308M→$984M (public ~26% slice)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">Diluted EPS, FY25</div>
+      <div class="val">$2.22</div>
+      <div class="sub">Up from $0.81 (FY21), split-adjusted; share count also rose</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Pre-Tax Margin Trend — the broker's operating-margin analog</div>
+    <div class="chart-sub">Pre-tax income ÷ net revenues. Margin expansion since FY22 reflects higher net interest income and automation; it would likely compress if short-term rates fall or activity weakens.</div>
+<svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+<polyline points="60,87.1 210,90.3 360,64.7 510,62.2 660,36.3" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="60" cy="87.1" r="4" fill="#2dd4bf"/>
+<text x="60" y="78.1" text-anchor="middle" font-size="9" fill="#f1f5f9">65.8%</text>
+<circle cx="210" cy="90.3" r="4" fill="#2dd4bf"/>
+<text x="210" y="81.3" text-anchor="middle" font-size="9" fill="#f1f5f9">65.1%</text>
+<circle cx="360" cy="64.7" r="4" fill="#2dd4bf"/>
+<text x="360" y="55.7" text-anchor="middle" font-size="9" fill="#f1f5f9">70.7%</text>
+<circle cx="510" cy="62.2" r="4" fill="#2dd4bf"/>
+<text x="510" y="53.2" text-anchor="middle" font-size="9" fill="#f1f5f9">71.3%</text>
+<circle cx="660" cy="36.3" r="4" fill="#2dd4bf"/>
+<text x="660" y="27.3" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">76.9%</text>
+<text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="210" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="360" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="510" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">FY25</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Net Revenue</th><th>Pre-Tax Income</th><th>Pre-Tax Margin</th><th>Net Income (common)</th><th>Diluted EPS</th><th>Dividend/sh</th><th>Capex</th></tr>
+    <tr><td>FY21</td><td>2,714</td><td>1,787</td><td>65.8%</td><td>308</td><td>$0.81</td><td>$0.100</td><td>77</td></tr>
+    <tr><td>FY22</td><td>3,067</td><td>1,998</td><td>65.1%</td><td>380</td><td>$0.94</td><td>$0.100</td><td>69</td></tr>
+    <tr><td>FY23</td><td>4,340</td><td>3,069</td><td>70.7%</td><td>600</td><td>$1.42</td><td>$0.100</td><td>49</td></tr>
+    <tr><td>FY24</td><td>5,185</td><td>3,695</td><td>71.3%</td><td>755</td><td>$1.73</td><td>$0.212</td><td>49</td></tr>
+    <tr><td>FY25</td><td>6,205</td><td>4,771</td><td>76.9%</td><td>984</td><td>$2.22</td><td>$0.302</td><td>67</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Reported "free cash flow" (operating cash flow minus capex) was $5.8B, $3.9B, $4.5B, $8.7B and $15.7B for FY21–FY25 but is dominated by changes in customer segregated cash and securities lending, so it is not treated as owner earnings. Net debt is not shown: the S&amp;P Global "net cash" figure ($80B at FY25) counts customer cash. Equity (incl. Holdings minority interest): $23.3B at Sep 30, 2026.</div>
+
+  <div class="bignum-corner">02 / 06</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Quarterly Trend &amp; Revenue Mix (Q3 2026)</div></div>
+  <div class="sec-sub">Q3 2026 (quarter to Sep 30) was reported on Oct 15, 2026 and is the latest available. Source: company 8-K press release (Q3 2026 and Q3 2025 figures) and S&amp;P Global data for earlier quarters.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Q3 2026 net revenues were $1.91B (+15.7% YoY, +1% vs Q2), pre-tax income $1.50B (78% margin vs 79% a year ago) and GAAP diluted EPS $0.69 ($0.67 adjusted) vs $0.59. Net interest income rose 19% to $1.15B on customer margin loans ($105.2B, +36%) and customer credits ($186.2B, +20%); commissions rose 12% to $602M on 18% higher DARTs, though DARTs fell 11% from Q2 and stock volumes fell 24% YoY. Net interest margin slipped to 1.99% from 2.16%. Customer accounts reached 5.58M (+35%) and customer equity $964.7B (+27%). The board raised the quarterly dividend from $0.0875 to $0.15. The shares nonetheless slid from ~$86 on results day to ~$73–78 in early November; this page does not attribute the move to a single cause.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Revenues — Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">YoY growth by quarter: Q4'24 +21.8%, Q1'25 +18.6%, Q2'25 +20.3%, Q3'25 +21.2%, Q4'25 +18.5%, Q1'26 +17.0%, Q2'26 +28.1%, Q3'26 +15.7%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly net revenues, USD m</span></div>
+<svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="66.2" width="56" height="63.8" fill="#2dd4bf"/><text x="53" y="61.2" text-anchor="middle" font-size="9" fill="#cbd5e1">1,387</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="64.4" width="56" height="65.6" fill="#2dd4bf"/><text x="135" y="59.4" text-anchor="middle" font-size="9" fill="#cbd5e1">1,427</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="62.0" width="56" height="68.0" fill="#2dd4bf"/><text x="217" y="57.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,480</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="53.9" width="56" height="76.1" fill="#2dd4bf"/><text x="299" y="48.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,655</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="54.5" width="56" height="75.5" fill="#2dd4bf"/><text x="381" y="49.5" text-anchor="middle" font-size="9" fill="#cbd5e1">1,643</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="53.3" width="56" height="76.7" fill="#2dd4bf"/><text x="463" y="48.3" text-anchor="middle" font-size="9" fill="#cbd5e1">1,669</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="42.8" width="56" height="87.2" fill="#2dd4bf"/><text x="545" y="37.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,896</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="42.0" width="56" height="88.0" fill="#2dd4bf"/><text x="627" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,914</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Income to Common — Last 8 Quarters (USD m)</div>
+    <div class="chart-sub">Public-company (~26.6%) share of earnings only; the whole-company pre-tax figure for Q3 2026 is $1,496M.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Net income to common, USD m</span></div>
+<svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="25" y="69.2" width="56" height="60.8" fill="#60a5fa"/><text x="53" y="64.2" text-anchor="middle" font-size="9" fill="#cbd5e1">217</text><text x="53" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+<rect x="107" y="70.3" width="56" height="59.7" fill="#60a5fa"/><text x="135" y="65.3" text-anchor="middle" font-size="9" fill="#cbd5e1">213</text><text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+<rect x="189" y="67.2" width="56" height="62.8" fill="#60a5fa"/><text x="217" y="62.2" text-anchor="middle" font-size="9" fill="#cbd5e1">224</text><text x="217" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+<rect x="271" y="56.3" width="56" height="73.7" fill="#60a5fa"/><text x="299" y="51.3" text-anchor="middle" font-size="9" fill="#cbd5e1">263</text><text x="299" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+<rect x="353" y="50.4" width="56" height="79.6" fill="#60a5fa"/><text x="381" y="45.4" text-anchor="middle" font-size="9" fill="#cbd5e1">284</text><text x="381" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+<rect x="435" y="55.2" width="56" height="74.8" fill="#60a5fa"/><text x="463" y="50.2" text-anchor="middle" font-size="9" fill="#cbd5e1">267</text><text x="463" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+<rect x="517" y="42.6" width="56" height="87.4" fill="#60a5fa"/><text x="545" y="37.6" text-anchor="middle" font-size="9" fill="#cbd5e1">312</text><text x="545" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+<rect x="599" y="42.0" width="56" height="88.0" fill="#60a5fa"/><text x="627" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">314</text><text x="627" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>USD m</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Net revenues</td><td>1,387</td><td>1,427</td><td>1,480</td><td>1,655</td><td>1,643</td><td>1,669</td><td>1,896</td><td>1,914</td></tr>
+    <tr><td>YoY growth</td><td>+21.8%</td><td>+18.6%</td><td>+20.3%</td><td>+21.2%</td><td>+18.5%</td><td>+17.0%</td><td>+28.1%</td><td>+15.6%</td></tr>
+    <tr><td>Net interest income</td><td>807</td><td>770</td><td>860</td><td>967</td><td>966</td><td>904</td><td>1,057</td><td>1,154</td></tr>
+    <tr><td>NII share of revenue</td><td>58%</td><td>54%</td><td>58%</td><td>58%</td><td>59%</td><td>54%</td><td>56%</td><td>60%</td></tr>
+    <tr><td>Net income to common</td><td>217</td><td>213</td><td>224</td><td>263</td><td>284</td><td>267</td><td>312</td><td>314</td></tr>
+    <tr><td>Diluted EPS (GAAP)</td><td>$0.49</td><td>$0.48</td><td>$0.51</td><td>$0.59</td><td>$0.64</td><td>$0.59</td><td>$0.69</td><td>$0.69</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly net revenues are GAAP (the company also reports adjusted figures that strip currency-diversification and mark-to-market items: Q3 2026 adjusted net revenues $1.87B, adjusted EPS $0.67).</div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Q3 2026 Net Revenue by Line ($M, % of total)</div>
+    <div class="chart-sub">Net interest income is 60% of net revenues; commissions 31%.</div>
+<svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="24" font-size="9.5" fill="#dbe4f0">Net interest income</text><rect x="180" y="10" width="330.0" height="20" fill="#fbbf24"/><text x="518.0" y="24" font-size="9" fill="#f8fafc">$1,154M &middot; 60.3%</text>
+<text x="10" y="59" font-size="9.5" fill="#dbe4f0">Commissions</text><rect x="180" y="45" width="172.1" height="20" fill="#2dd4bf"/><text x="360.1" y="59" font-size="9" fill="#f8fafc">$602M &middot; 31.5%</text>
+<text x="10" y="94" font-size="9.5" fill="#dbe4f0">Other fees &amp; services</text><rect x="180" y="80" width="25.2" height="20" fill="#3b82f6"/><text x="213.2" y="94" font-size="9" fill="#f8fafc">$88M &middot; 4.6%</text>
+<text x="10" y="129" font-size="9.5" fill="#dbe4f0">Other income</text><rect x="180" y="115" width="20.0" height="20" fill="#818cf8"/><text x="208.0" y="129" font-size="9" fill="#f8fafc">$70M &middot; 3.7%</text>
+<line x1="180" y1="5" x2="180" y2="145" stroke="#263049" stroke-width="1"/>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue Mix Over Time — Net Interest Income share vs. Commissions share</div>
+    <div class="chart-sub">Net interest income (amber, labels above) rose from 42% of net revenues in FY21 to 57–64% since FY23; commissions (teal, labels below) fell from 50% to ~35% in FY25 (31% in Q3 2026).</div>
+<svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="130" x2="680" y2="130" stroke="#263049" stroke-width="1"/>
+<polyline points="60,73.0 180,50.7 300,32.3 420,39.1 540,45.1 660,39.9" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+<circle cx="60" cy="73.0" r="4" fill="#fbbf24"/>
+<text x="60" y="64.0" text-anchor="middle" font-size="9" fill="#f1f5f9">42%</text>
+<circle cx="180" cy="50.7" r="4" fill="#fbbf24"/>
+<text x="180" y="41.7" text-anchor="middle" font-size="9" fill="#f1f5f9">54%</text>
+<circle cx="300" cy="32.3" r="4" fill="#fbbf24"/>
+<text x="300" y="23.3" text-anchor="middle" font-size="9" fill="#f1f5f9">64%</text>
+<circle cx="420" cy="39.1" r="4" fill="#fbbf24"/>
+<text x="420" y="30.1" text-anchor="middle" font-size="9" fill="#f1f5f9">61%</text>
+<circle cx="540" cy="45.1" r="4" fill="#fbbf24"/>
+<text x="540" y="36.1" text-anchor="middle" font-size="9" fill="#f1f5f9">57%</text>
+<circle cx="660" cy="39.9" r="4" fill="#fbbf24"/>
+<text x="660" y="30.9" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">60%</text>
+<polyline points="60,59.3 180,71.5 300,93.1 420,90.6 540,87.1 660,92.9" fill="none" stroke="#2dd4bf" stroke-width="2.5"/>
+<circle cx="60" cy="59.3" r="4" fill="#2dd4bf"/>
+<text x="60" y="74.3" text-anchor="middle" font-size="9" fill="#f1f5f9">50%</text>
+<circle cx="180" cy="71.5" r="4" fill="#2dd4bf"/>
+<text x="180" y="86.5" text-anchor="middle" font-size="9" fill="#f1f5f9">43%</text>
+<circle cx="300" cy="93.1" r="4" fill="#2dd4bf"/>
+<text x="300" y="108.1" text-anchor="middle" font-size="9" fill="#f1f5f9">31%</text>
+<circle cx="420" cy="90.6" r="4" fill="#2dd4bf"/>
+<text x="420" y="105.6" text-anchor="middle" font-size="9" fill="#f1f5f9">33%</text>
+<circle cx="540" cy="87.1" r="4" fill="#2dd4bf"/>
+<text x="540" y="102.1" text-anchor="middle" font-size="9" fill="#f1f5f9">35%</text>
+<circle cx="660" cy="92.9" r="4" fill="#2dd4bf"/>
+<text x="660" y="107.9" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">31%</text>
+<text x="60" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="180" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="300" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="420" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="540" y="144" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25</text>
+<text x="660" y="144" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Q3'26</text>
+</svg>
+  </div>
+
+  <div class="bignum-corner">03 / 06</div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION & OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Valuation, Capital &amp; Ownership</div></div>
+  <div class="sec-sub">Trailing P/E (bars) and forward P/E (line) at each year-end vs. now; P/TBV is shown in text only (no history available).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E (bars) and Forward P/E (line) vs. Own Trading History</div>
+    <div class="chart-sub">Year-end P/E = year-end close ÷ that year's GAAP diluted EPS (S&amp;P Global via stockanalysis.com). Now = $77.57 (Nov 9, 2026) ÷ $2.62 TTM EPS. Forward P/E on consensus adjusted EPS (third-party estimate), ~24.4x now.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E</span><span><span class="dot" style="background:#fbbf24;"></span>Forward P/E (consensus)</span></div>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="150" x2="660" y2="150" stroke="#263049" stroke-width="1"/>
+<rect x="69.65" y="63.19" width="44" height="86.81" fill="#2dd4bf" opacity="0.85"/><text x="91.65" y="57.19" text-anchor="middle" font-size="8" fill="#cbd5e1">25.3x</text>
+<rect x="172.95" y="82.83" width="44" height="67.17" fill="#2dd4bf" opacity="0.85"/><text x="194.95" y="76.83" text-anchor="middle" font-size="8" fill="#cbd5e1">19.6x</text>
+<rect x="276.25" y="99.29" width="44" height="50.71" fill="#2dd4bf" opacity="0.85"/><text x="298.25" y="93.29" text-anchor="middle" font-size="8" fill="#cbd5e1">14.8x</text>
+<rect x="379.55" y="62.64" width="44" height="87.36" fill="#2dd4bf" opacity="0.85"/><text x="401.55" y="56.64" text-anchor="middle" font-size="8" fill="#cbd5e1">25.5x</text>
+<rect x="482.85" y="50.19" width="44" height="99.81" fill="#2dd4bf" opacity="0.85"/><text x="504.85" y="44.19" text-anchor="middle" font-size="8" fill="#cbd5e1">29.1x</text>
+<rect x="586.15" y="48.49" width="44" height="101.51" fill="#5eead4"/><text x="608.15" y="42.49" text-anchor="middle" font-size="8" fill="#f8fafc" font-weight="700">29.6x</text>
+<polyline points="91.65,66.24 194.95,100.08 298.25,104.23 401.55,61.89 504.85,53.79 608.15,66.48" fill="none" stroke="#fbbf24" stroke-width="2"/>
+<circle cx="91.65" cy="66.24" r="3.5" fill="#fbbf24"/>
+<circle cx="194.95" cy="100.08" r="3.5" fill="#fbbf24"/>
+<circle cx="298.25" cy="104.23" r="3.5" fill="#fbbf24"/>
+<circle cx="401.55" cy="61.89" r="3.5" fill="#fbbf24"/>
+<circle cx="504.85" cy="53.79" r="3.5" fill="#fbbf24"/>
+<circle cx="608.15" cy="66.48" r="3.5" fill="#fbbf24"/>
+<text x="91.65" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY21</text>
+<text x="194.95" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY22</text>
+<text x="298.25" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY23</text>
+<text x="401.55" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY24</text>
+<text x="504.85" y="163" text-anchor="middle" font-size="9" fill="#7c8aa5">FY25</text>
+<text x="608.15" y="163" text-anchor="middle" font-size="9" fill="#f8fafc" font-weight="700">Now</text>
+</svg>
+  </div>
+
+  <div class="callout">
+    <b>Reading the valuation:</b> at ~29.6x trailing earnings the stock trades about 30% above its FY21–FY25 year-end average of ~22.9x (range 14.8x–29.1x), and above the FY23 low of 14.8x when growth was similar. Forward P/E (~24.4x) implies consensus EPS growth of roughly 20%+ a year; analyst consensus growth of ~19.7% a year gives a PEG of ~1.06 on the data source's own calculation. Note that the P/E uses EPS of the public ~26.6% slice, which also bears the group's tax; the price-to-pre-tax-earnings of the whole operating company is a different (lower) multiple. Price-to-book is ~5.6x on $13.74 of book value per Class A share.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Capital Position (Sep 30, 2026)</div>
+    <div class="chart-sub">Total equity $23.3B (stockholders' $6.2B + Holdings minority interest $17.0B) against total assets of $243.2B (9.6%); customer payables $180.5B. Corporate borrowings are negligible ($18M short-term). Regulatory excess capital and CET1 are not disclosed in the Q3 release and were not verified here.</div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="title" style="color:#5eead4;">Ownership of IBG LLC (Sep 30, 2026)</div>
+      <div class="ownership-row">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="42" fill="none" stroke="#1a2236" stroke-width="14"/><circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="193.7 263.9" stroke-dashoffset="-0.0" transform="rotate(-90 55 55)"/><circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="70.2 263.9" stroke-dashoffset="-193.7" transform="rotate(-90 55 55)"/></svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#3b82f6;"></span>IBG Holdings (Peterffy &amp; affiliates) 73.4% (1.25bn interests)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>IBG, Inc. — public Class A 26.6% (453M shares; ~87% held by institutions)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Governance &amp; Capital Notes</div>
+      <p>Thomas Peterffy (founder, Chairman) controls IBG Holdings and the voting Class B stock. The headline "~75% economic ownership" is a third-party rounding: the filing-based figure is that IBG Holdings holds 73.4% of IBG LLC, and Holdings itself has other member-owners besides Peterffy. Public shareholders therefore own a 26.6% economic claim on the operating business, and as Holdings members exchange into Class A shares the public share count rises without new capital being raised. Insiders own ~2.8% of the Class A float (S&amp;P Global). Customer-protection rules require segregation of customer cash and securities; IBKR also runs a currency-diversification strategy (equity held in a basket of 10 currencies) that moves reported other income and OCI.</p>
+    </div>
+  </div>
+
+  <div class="bignum-corner">04 / 06</div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Scorecard</div></div>
+  <div class="sec-sub">Criteria adapted for a broker (see framing note, page 1); every substitution is noted in the row. Market concentration (#6) uses the site convention: raw score 1&ndash;2 = Met, 3&ndash;5 = Not met. Martinero Index = 77.4 weighted points &divide; 105 &times; 100 = 74; no criterion is N/A.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th style="width:4%;">#</th><th style="width:30%;">Criterion</th><th style="width:48%;">Finding</th><th style="width:18%;">Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr) &ge;15% &mdash; total net revenues</td><td>~23.0% CAGR FY21&ndash;FY25 ($2.71B&rarr;$6.21B net revenues, GAAP). Growth was +19.5% in FY24 and +19.7% in FY25; Q3 2026 +15.7% YoY</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr) &ge;15% &mdash; <b>pre-tax income used as EBIT proxy</b></td><td>~27.8% CAGR FY21&ndash;FY25 ($1.79B&rarr;$4.77B pre-tax income of the operating company IBG LLC, i.e. 100% of the business before the 26% minority-slice tax/NCI split). Pre-tax income is used because IBKR reports no EBIT line, and "net income to common" captures only the ~26% public stake. Derived from S&amp;P Global data (stockanalysis.com); verify vs. 10-K</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>3</td><td>Operating margin, latest FY &ge;20% &mdash; pre-tax margin (EBIT proxy)</td><td>FY25 pre-tax margin ~76.9% of net revenues (Q3 2026: 78% reported); helped by automation and a rate-driven interest spread</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr) &ge;15% &mdash; net income to common used as proxy</td><td>~33.7% CAGR FY21&ndash;FY25 ($308M&rarr;$984M). Reported "FCF" (operating cash flow &minus; capex) is not used: it swings with customer segregated-cash and securities-lending flows ($5.8B&rarr;$3.9B&rarr;$4.5B&rarr;$8.7B&rarr;$15.7B) and is not owner earnings</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>Top-tier by trading activity (4.27M DARTs, 5.58M accounts, $965B customer equity in Q3 2026) but not #1 or #2 among U.S. brokers by accounts or assets (Fidelity, Schwab and Vanguard are far larger by assets; Robinhood has more funded customers). Honest placement: #4&ndash;5 band</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration (1=monopoly&hellip;5=open)</td><td>~3/5 &mdash; a few giant incumbents plus many zero-commission challengers; low switching costs for retail, stickier for professional/prop clients</td><td><span class="status-pill status-not">Not Met (raw score 3)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC &mdash; ROE (ROTCE &asymp; ROE, minimal intangibles) vs. cost of equity</td><td>ROE ~23.7% TTM (S&amp;P Global via stockanalysis.com) vs. an assumed ~11.5% cost of equity (beta ~1.37): spread ~12.2 pts, just above the 12-pt top band (borderline; at a 12% CoE it would score 4/5). Equity includes the Holdings minority interest ($23.3B total)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA &mdash; substituted with corporate debt &amp; capital position</td><td>No meaningful corporate borrowings (short-term borrowings $18M at Sep 30, 2026); total equity $23.3B is ~9.6% of $243B total assets. S&amp;P Global's "net cash" of $94.8B is not used because it counts customer cash and securities-lending balances. IBKR does not report CET1; regulatory excess capital was not verified here</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion &mdash; substituted with (dividends + buybacks) &divide; net income to common</td><td>FY25 dividends ~$0.30/share &times; ~445M shares &asymp; $134M vs. $984M net income &asymp; 14%; no buybacks (share count rising). The dividend was just raised 71% to $0.15/quarter, but payout remains low: the rest of IBG LLC earnings are retained or distributed to Holdings</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple (P/E) vs. own trading history</td><td>Current trailing P/E ~29.6x (GAAP, $77.57 &divide; $2.62 TTM EPS) vs. FY21&ndash;FY25 year-end average of ~22.9x (range 14.8x&ndash;29.1x): ratio 1.30, a ~30% premium (borderline of the 1.15&ndash;1.30 band). P/TBV ~5.6x current; no P/TBV history was available for comparison</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>Diluted Class A shares up ~17% FY21&rarr;FY25 (~380M&rarr;~443M, post 4:1 split basis) and +1.9% YoY. Mostly an ownership-structure effect (Holdings members exchange interests into public shares; total IBG LLC interests are ~1.70B, up only 0.3% since Dec 2025) rather than new capital raised &mdash; but scored on the reported figure, so no credit</td><td><span class="status-pill status-not">Not Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful (~5%+)</td><td>IBG Holdings, controlled by founder/Chairman Thomas Peterffy and affiliates, owns 73.4% of the operating company IBG LLC (Sep 30, 2026 10-Q data) and Peterffy controls the voting Class B. His personal look-through share of Holdings was not separately verified, but is a large majority (the common ~75% figure is a third-party estimate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity &mdash; low/asset-light</td><td>FY25 capex $67M &divide; $6.2B net revenues &asymp; 1.1% &mdash; very asset-light (technology spend is largely expensed)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; efficiency ratio (proxy: no gross margin)</td><td>No gross-profit line, so evaluated on the pre-tax margin (the mirror of the efficiency ratio), FY2025 vs FY2022 (3 years prior): 65.1% &rarr; 76.9%, about +11.8pp &mdash; structural improvement as revenue (mainly net interest income) grew much faster than costs; partly cyclical (higher rates)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Revenue compounding near 20% a year with a pre-tax margin of ~77% and a capex bill of ~1% of revenue. Account growth is strong (+35% YoY to 5.58M) and customer equity ($965B) and margin loans ($105B, +36%) are growing, which feed net interest income. ROE of ~24% clears any reasonable cost of equity, the corporate balance sheet carries no meaningful debt, and the founder-controlled structure (73.4% via Holdings) gives strong alignment. The quarterly dividend was raised 71% to $0.15.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Valuation: ~29.6x trailing earnings is ~30% above IBKR's own FY21–FY25 average. About 60% of revenue is net interest income, so falling short-term rates or smaller customer margin balances would hit the largest line (NIM already slipped to 1.99% from 2.16%). Trading activity is cyclical (Q3 DARTs −11% QoQ; October −4% YoY). Payout is low (~14% of net income to common) and the Class A share count rises as Holdings members exchange. Market position is strong but mid-pack among U.S. brokers by assets, and the public holds only a 26.6% economic interest, so EPS understates whole-company earnings (and the tax rate on them is low at ~9%).</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources (cross-checked where possible):</b> Interactive Brokers Group 3Q2026 earnings release (Form 8-K, Oct 15, 2026; SEC EDGAR) — Q3 2026 and Q3 2025 income statement, balance sheet, ownership table, operating data; Q1 2026 Form 10-Q (73.7% Holdings ownership at Mar 31, 2026); stockanalysis.com (S&amp;P Global Market Intelligence data) — FY21–FY25 and quarterly financials, statistics, analyst targets (as of Oct 30, 2026), price history through Nov 9, 2026; secondary news coverage of the Q3 release.
+    <br><b>Data-quality flags:</b> FY pre-tax income is derived (pre-tax margin × revenue from S&amp;P Global) and FY21–FY25 year-end P/E ratios, ROE (23.7%) and beta-based cost-of-equity (~11.5%) are third-party or assumption-based; FY21–FY25 diluted share counts are net income ÷ EPS; Peterffy's personal look-through stake is not separately verified; the 52-week range and analyst target are approximate; Q2 2026 detail was not independently re-verified.
+    <br>This document is informational research for a personal portfolio and is <b>not investment advice</b>. All figures in USD, as originally reported, subject to restatement. Compiled Nov 10, 2026.
+  </div>
+
+  <div class="bignum-corner">05 / 06</div>
+</div>
+
+<!-- ============ PAGE 6 — SHARE PRICE HISTORY ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Share Price — Last 5 Years</div></div>
+  <div class="sec-sub">Interactive Brokers Group &mdash; Nasdaq, USD share price trend. Points shown are calendar year-end closes plus the current price (Nov 9, 2026 close).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Interactive Brokers — Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">Year-end closes are adjusted for the June 18, 2025 4-for-1 split (IBKR split-adjusted close for Dec 2021 was ~$19.86; the pre-split price was ~4x that) but not for dividends. The dashed line is the straight-line annualised price CAGR from the Dec 2021 close to Nov 9, 2026 (4.86 years). The stock rose almost fivefold to an Aug 2026 high near $98 (intraday) and has since pulled back about 20%.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="363" y="14" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +32.4%</text>
+<path d="M 46.0,142.11 L 172.8,145.49 L 299.6,140.45 L 426.4,95.73 L 553.2,57.30 L 680.0,32.00 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="142.11" x2="680.0" y2="32.00" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,142.11 L 172.8,145.49 L 299.6,140.45 L 426.4,95.73 L 553.2,57.30 L 680.0,32.00" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="142.11" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="46.0" y="132.11" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$19.86</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="145.49" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="172.8" y="135.49" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$18.09</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="140.45" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="299.6" y="130.45" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$20.73</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="95.73" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="426.4" y="85.73" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$44.17</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="57.30" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="553.2" y="47.30" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$64.31</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="32.00" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/>
+<text x="674.0" y="22.00" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$77.57</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    Year-end closes and the current price ($77.57, Nov 9, 2026 close) from stockanalysis.com (S&amp;P Global Market Intelligence); split-adjusted, not dividend-adjusted. The 5-year CAGR label uses the actual 4.86-year span.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
