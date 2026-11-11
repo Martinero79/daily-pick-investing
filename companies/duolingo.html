@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Duolingo, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/duolingo.html">
+<meta property="og:title" content="Duolingo, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Duolingo, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1e293b; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Duolingo, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: DUOL (Class A)</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Pittsburgh, Pennsylvania</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">Two share classes (A listed; B founder-held)</div>
+    <div class="badge warn">Growth Slowing Sharply (Q3 2026 revenue +13.7%) &mdash; GAAP P/E Distorted by a Tax Benefit</div>
+  </div>
+
+  <div class="price">$154.25</div>
+  <div class="price-sub">Nov 9, 2026 close (latest verified close; -3.9% on the day, after $161.27 on Nov 4 following the Q3 report and $128.00 on Nov 3) &middot; Market cap &asymp; $7.3B (~47M Class A + B shares) &middot; 52-wk range not verified (S&amp;P shows -53.5% over 52 weeks as of Oct 26) &middot; Beta 1.05 &middot; Analyst consensus: Hold (24 analysts), avg PT $136.57 as of Oct 26 &mdash; before the Q3 report; several targets were raised afterwards (e.g. Jefferies $175, Truist $170, Wedbush $155) &middot; Next report: Q4 2026 (not yet dated)</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> the largest language-learning app by users (64.9M daily active users in Q3 2026, +29% YoY); a freemium consumer subscription business, 84% of FY2025 revenue from subscriptions. See Section 4 for how market share was scored.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency, share-class &amp; earnings-basis note:</b> all figures are in US dollars. Duolingo has <b>two share classes</b>: Class A (listed as DUOL, one vote per share) and Class B (not listed, ten votes per share, held by the co-founders and early holders; exact voting split not verified here). Per-share data and market cap combine both classes. &ldquo;EBIT&rdquo; means GAAP operating income, which is <b>after stock-based compensation</b>; &ldquo;FCF&rdquo; is operating cash flow minus capex and also adds back that non-cash expense. <b>GAAP net income and P/E are distorted by a large tax benefit</b> (see below), so valuation on this page uses price-to-free-cash-flow.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$1,038M</div>
+      <div class="sub green" style="color:#34d399;">+38.7% YoY</div>
+      <div class="note">4-yr CAGR FY21-25 is +42.6%, but quarterly growth has fallen from 41% (Q3 2025) to 13.7% (Q3 2026: $309.0M). FY2026 revenue guide $1.221B (about +18%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP)</div>
+      <div class="val" style="color:#fbbf24;">13.6%</div>
+      <div class="sub">FY2025, from -23.9% in FY2021</div>
+      <div class="note">Q3 2026 GAAP operating margin was 8.5% vs 14.6% a year earlier. FY2026 adjusted EBITDA guide: $323M (company basis, ~26% of guided revenue).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">~61% vs ~9.9%</div>
+      <div class="sub">Return on capital employed only ~9.6%</div>
+      <div class="note">Third-party (S&amp;P Global) estimates. ROIC is very high because cash is netted out of capital; including cash, returns are near WACC.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">$1.29B net cash, Sep 30, 2026</div>
+      <div class="note">$1,374M cash and investments vs $84M debt &mdash; about 18% of the market cap.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">82/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Scored on 13 of 14 criteria (EBIT CAGR is not computable from a negative FY2021 base). High because of 43% revenue CAGR, cash conversion and net cash; held back by a 26% rise in share count and a fragmented market.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="224.4 314.16" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="67.3 314.16" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-291.7" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">10/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>10 criteria fully met</b> &mdash; revenue CAGR, FCF CAGR, market position (#1 by users), ROIC vs WACC, net cash, FCF conversion, entry multiple (on P/FCF), insider ownership, capex intensity and gross-margin stability (-0.86pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>3 not met</b> &mdash; EBIT margin (13.6%), market concentration (fragmented) and share count (+26% since 2021)</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>1 not scored (N/A)</b> &mdash; EBIT CAGR (FY2021 EBIT is negative, so no CAGR can be calculated)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Duolingo, founded in 2011 by Luis von Ahn and Severin Hacker and listed on Nasdaq in July 2021, runs a mobile-first, game-like language-learning app. Anyone can use it free with ads; paying users on Super Duolingo and Max tiers generated $873M of FY2025's $1,038M revenue (84%), with advertising ($80M), the Duolingo English Test ($42M) and in-app purchases ($40M) making up the rest. The financial turnaround is real: revenue grew from $251M (FY2021) to $1,038M (FY2025), GAAP operating income went from -$60M to +$141M and free cash flow from $6M to $370M (35.6% margin), all with a net-cash balance sheet and ~1.7% capex. The stock, however, has been de-rated: S&amp;P shows it down about 53% over the 52 weeks to Oct 26, as growth decelerated through 2026 (revenue growth +26.5%, +18.3% and +13.7% in Q1, Q2 and Q3, versus +41% in mid-2025). Q3 2026, reported on Nov 3, showed revenue of $309.0M (+14%), bookings of $316.1M (+12%), daily active users of 64.9M (+29%) and GAAP EPS of $0.54, with FY2026 guidance of $1.221B revenue and $323M adjusted EBITDA. The shares jumped 26% the next day ($128.00 to $161.27) and closed at $154.25 on Nov 9. Note the gap between user growth (+29%) and revenue/bookings growth (+12&ndash;14%): users are growing faster than monetisation, which is the central thing to follow.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Tax benefit in GAAP earnings</b> &mdash; FY2025 GAAP net income of $414M and EPS of $8.57 are far above pre-tax income of ~$182M (derived: pre-tax margin 17.6% on $1,038M); the gap (~$232M) is a net income-tax benefit, and Q3 2025 EPS of $5.95 was one quarter of it. A trailing P/E of 19.6x at end-FY2025 therefore overstated earnings power; on the current trailing basis it is ~52x ($154.25 / $2.98 over the last four quarters). (2) <b>Negative early EBIT</b> &mdash; FY2021-23 operating income was negative, so EBIT CAGR is undefined and FCF CAGR (+185%) is a base effect. (3) <b>Stock compensation and two classes</b> &mdash; GAAP EBIT is after, and FCF is before, stock compensation, and share count has risen ~26% since 2021; founders' Class B shares give them voting power beyond their economic stake.
+  </div>
+
+  <div class="bignum-corner">DUOL</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021&ndash;FY2025 (calendar years), $ millions as reported (via S&amp;P Global Market Intelligence). Op. Income = GAAP operating income (after stock compensation); Free Cash Flow = operating cash flow minus capex. FY2021-23 EBIT was negative, so CAGR handling is explained below.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">True relative size (axis in $ millions). Revenue quadrupled in four years; EBIT crossed zero in FY2024; FCF ($370M in FY2025) is larger than GAAP EBIT ($141M) because stock compensation is non-cash and subscriptions are paid in advance.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">250</text>
+    <line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">500</text>
+    <line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">750</text>
+    <line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">1,000</text>
+    <line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">1,250</text>
+    <line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+    <rect x="85.0" y="195.9" width="30" height="44.1" rx="2" fill="#2dd4bf"/>
+    <text x="100.0" y="190.9" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">251</text>
+    <rect x="123.0" y="240.0" width="30" height="10.6" rx="2" fill="#60a5fa"/>
+    <text x="138.0" y="261.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-60</text>
+    <rect x="161.0" y="239.0" width="30" height="1.0" rx="2" fill="#fbbf24"/>
+    <text x="176.0" y="234.0" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6</text>
+    <text x="138.0" y="276" text-anchor="middle" font-size="11" fill="#94a3b8">FY21</text>
+    <rect x="241.0" y="175.0" width="30" height="65.0" rx="2" fill="#2dd4bf"/>
+    <text x="256.0" y="170.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">370</text>
+    <rect x="279.0" y="240.0" width="30" height="11.5" rx="2" fill="#60a5fa"/>
+    <text x="294.0" y="262.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-65</text>
+    <rect x="317.0" y="231.5" width="30" height="8.5" rx="2" fill="#fbbf24"/>
+    <text x="332.0" y="226.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">48</text>
+    <text x="294.0" y="276" text-anchor="middle" font-size="11" fill="#94a3b8">FY22</text>
+    <rect x="397.0" y="146.5" width="30" height="93.5" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="141.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">531</text>
+    <rect x="435.0" y="240.0" width="30" height="2.3" rx="2" fill="#60a5fa"/>
+    <text x="450.0" y="253.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-13</text>
+    <rect x="473.0" y="213.5" width="30" height="26.5" rx="2" fill="#fbbf24"/>
+    <text x="488.0" y="208.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">150</text>
+    <text x="450.0" y="276" text-anchor="middle" font-size="11" fill="#94a3b8">FY23</text>
+    <rect x="553.0" y="108.3" width="30" height="131.7" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="103.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">748</text>
+    <rect x="591.0" y="228.8" width="30" height="11.2" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="223.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">64</text>
+    <rect x="629.0" y="191.9" width="30" height="48.1" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="186.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">273</text>
+    <text x="606.0" y="276" text-anchor="middle" font-size="11" fill="#94a3b8">FY24</text>
+    <rect x="709.0" y="57.3" width="30" height="182.7" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="52.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">1,038</text>
+    <rect x="747.0" y="215.1" width="30" height="24.9" rx="2" fill="#60a5fa"/>
+    <text x="762.0" y="210.1" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">141</text>
+    <rect x="785.0" y="174.9" width="30" height="65.1" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="169.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">370</text>
+    <text x="762.0" y="276" text-anchor="middle" font-size="11" fill="#f8fafc">FY25</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card"><div class="label">Revenue CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+42.6%</div><div class="sub">$250.8M &rarr; $1,038M &mdash; but Q3 2026 growth is down to +13.7%</div></div>
+    <div class="cagr-card"><div class="label">EBIT CAGR (4yr, FY21-25)</div><div class="val" style="color:#94a3b8;">N/A</div><div class="sub">FY2021 EBIT was -$60.0M: a CAGR from a negative base is undefined. Not scored; improvement was +$201M (FY2024-25 growth +121%)</div></div>
+    <div class="cagr-card"><div class="label">FCF CAGR (4yr, FY21-25)</div><div class="val" style="color:#34d399;">+185%</div><div class="sub">$5.6M &rarr; $369.7M &mdash; a base effect; FY2025 FCF margin 35.6%</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating (EBIT) Margin Trend &mdash; GAAP</div>
+    <div class="chart-sub">Gross margin has been stable at 72&ndash;73% (the criterion-14 basis); operating margin moved from -23.9% to +13.6% as revenue scaled over a largely fixed cost base. FY2025 operating margin includes stock compensation as an expense.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating margin</span></div>
+    <svg viewBox="0 0 700 130">
+      <line x1="30" y1="92.5" x2="690" y2="92.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="2" y="95.5" font-size="7.5" fill="#64748b">-20%</text>
+      <line x1="30" y1="77.6" x2="690" y2="77.6" stroke="#263049" stroke-width="1"/>
+      <text x="2" y="80.6" font-size="7.5" fill="#64748b">0%</text>
+      <line x1="30" y1="62.7" x2="690" y2="62.7" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="2" y="65.7" font-size="7.5" fill="#64748b">20%</text>
+      <line x1="30" y1="47.8" x2="690" y2="47.8" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="2" y="50.8" font-size="7.5" fill="#64748b">40%</text>
+      <line x1="30" y1="32.9" x2="690" y2="32.9" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="2" y="35.9" font-size="7.5" fill="#64748b">60%</text>
+      <line x1="30" y1="18.0" x2="690" y2="18.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="2" y="21.0" font-size="7.5" fill="#64748b">80%</text>
+      <polyline points="60,23.7 205,23.2 350,23.0 495,23.4 640,23.8" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+      <circle cx="60" cy="23.7" r="3.2" fill="#60a5fa"/><text x="60" y="16.7" text-anchor="middle" font-size="8" fill="#cbd5e1">72.4%</text>
+      <circle cx="205" cy="23.2" r="3.2" fill="#60a5fa"/><text x="205" y="16.2" text-anchor="middle" font-size="8" fill="#cbd5e1">73.1%</text>
+      <circle cx="350" cy="23.0" r="3.2" fill="#60a5fa"/><text x="350" y="16.0" text-anchor="middle" font-size="8" fill="#cbd5e1">73.2%</text>
+      <circle cx="495" cy="23.4" r="3.2" fill="#60a5fa"/><text x="495" y="16.4" text-anchor="middle" font-size="8" fill="#cbd5e1">72.8%</text>
+      <circle cx="640" cy="23.8" r="3.2" fill="#60a5fa"/><text x="640" y="16.8" text-anchor="middle" font-size="8" fill="#cbd5e1">72.2%</text>
+      <polyline points="60,95.5 205,90.8 350,79.5 495,71.3 640,67.5" fill="none" stroke="#34d399" stroke-width="2.2"/>
+      <circle cx="60" cy="95.5" r="3.2" fill="#34d399"/><text x="60" y="108.5" text-anchor="middle" font-size="8" fill="#cbd5e1">-23.9%</text>
+      <circle cx="205" cy="90.8" r="3.2" fill="#34d399"/><text x="205" y="103.8" text-anchor="middle" font-size="8" fill="#cbd5e1">-17.6%</text>
+      <circle cx="350" cy="79.5" r="3.2" fill="#34d399"/><text x="350" y="92.5" text-anchor="middle" font-size="8" fill="#cbd5e1">-2.5%</text>
+      <circle cx="495" cy="71.3" r="3.2" fill="#34d399"/><text x="495" y="84.3" text-anchor="middle" font-size="8" fill="#cbd5e1">8.5%</text>
+      <circle cx="640" cy="67.5" r="3.2" fill="#34d399"/><text x="640" y="80.5" text-anchor="middle" font-size="8" fill="#cbd5e1">13.6%</text>
+      <text x="60" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">FY2021</text>
+      <text x="205" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+      <text x="350" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+      <text x="495" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+      <text x="640" y="122" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY ($ m)</th><th>Revenue</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS (dil.)</th><th>Free Cash Flow</th><th>Capex</th><th>Net cash</th></tr>
+    <tr><td>FY2021</td><td>250.8</td><td>-60.0</td><td>-23.9%</td><td>-60.1</td><td>$-2.57</td><td>5.6</td><td>3.6</td><td>521</td></tr>
+    <tr><td>FY2022</td><td>369.5</td><td>-65.2</td><td>-17.6%</td><td>-59.6</td><td>$-1.51</td><td>48.1</td><td>5.6</td><td>580</td></tr>
+    <tr><td>FY2023</td><td>531.1</td><td>-13.3</td><td>-2.5%</td><td>16.1</td><td>$0.35</td><td>150.4</td><td>3.2</td><td>723</td></tr>
+    <tr><td>FY2024</td><td>748.0</td><td>63.8</td><td>8.5%</td><td>88.6</td><td>$1.88</td><td>273.4</td><td>12.1</td><td>820</td></tr>
+    <tr><td>FY2025</td><td>1,038.0</td><td>141.2</td><td>13.6%</td><td>414.1</td><td>$8.57</td><td>369.7</td><td>18.1</td><td>1,039</td></tr>
+    <tr><td>TTM (Sep'26)</td><td>1,182.3</td><td>150.0</td><td>12.7%</td><td>145.7</td><td>$2.98</td><td>407.0</td><td>28.7</td><td>1,290</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">No dividend (Duolingo pays none). FY2025 net income ($414.1m) includes a net income-tax benefit of roughly $232m (derived as net income minus pre-tax income of ~$182m at S&amp;P's 17.6% pre-tax margin); EPS and net income are therefore not a clean measure of earnings power. FY2023-24 net income was close to pre-tax income (no comparable benefit). TTM (Sep'26) is summed from the last four reported quarters (Q4'25-Q3'26); S&amp;P's own TTM series was last updated at Jun'26. Net cash = cash and investments minus total debt (includes some lease liabilities in debt). Revenue FY2025 shown as $1,038m (S&amp;P rounds to the nearest $m).</div>
+  <div class="footer-note">Source: stockanalysis.com (S&amp;P Global Market Intelligence), financials updated Nov 4, 2026; Duolingo Q3 2026 results (Nov 3, 2026) as provided in the research brief. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q3 2026) &amp; the Growth Slowdown</div></div>
+  <div class="sec-sub">Reported Nov 3, 2026 (after the close). Figures are GAAP via S&amp;P Global unless labelled as company-reported KPIs (bookings, daily active users, guidance).</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter showed &mdash; and what the stock did</div>
+    <p>Revenue was $309.0M (+13.7% YoY; the company cites +14%), the slowest growth rate in the table. Total bookings were $316.1M (+12%) and daily active users 64.9M (+29%): users are growing about twice as fast as revenue. GAAP operating income fell to $26.4M (8.5% margin) from $39.6M (14.6%) a year earlier, GAAP EPS was $0.54 (versus $5.95 a year ago, which included the large tax benefit), and free cash flow was $78.5M, flat year on year. FY2026 guidance is revenue of $1.221B (implying about $322M in Q4, +14% YoY, derived) and adjusted EBITDA of $323M. The shares closed at $128.00 on Nov 3 (they were trading around $142.75 after hours), then rose 26.0% on Nov 4 to $161.27 on volume roughly ten times its recent daily average, and drifted to $157.02, $160.42 and $154.25 over the next three sessions. This page cannot say which part of the report the market was reacting to.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">YoY: Q4'24 +38.8%, Q1'25 +37.7%, Q2'25 +41.5%, Q3'25 +41.1%, Q4'25 +35.0%, Q1'26 +26.5%, Q2'26 +18.3%, Q3'26 +13.7%. Dollar revenue still rises every quarter; the percentage growth is what is falling.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="70.3" width="58" height="59.7" fill="#2dd4bf"/><text x="59" y="65.3" text-anchor="middle" font-size="9" fill="#cbd5e1">210</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="64.3" width="58" height="65.7" fill="#2dd4bf"/><text x="141" y="59.3" text-anchor="middle" font-size="9" fill="#cbd5e1">231</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="58.2" width="58" height="71.8" fill="#2dd4bf"/><text x="223" y="53.2" text-anchor="middle" font-size="9" fill="#cbd5e1">252</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="52.6" width="58" height="77.4" fill="#2dd4bf"/><text x="305" y="47.6" text-anchor="middle" font-size="9" fill="#cbd5e1">272</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="49.4" width="58" height="80.6" fill="#2dd4bf"/><text x="387" y="44.4" text-anchor="middle" font-size="9" fill="#cbd5e1">283</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="46.9" width="58" height="83.1" fill="#2dd4bf"/><text x="469" y="41.9" text-anchor="middle" font-size="9" fill="#cbd5e1">292</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="45.0" width="58" height="85.0" fill="#2dd4bf"/><text x="551" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">298</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="42.0" width="58" height="88.0" fill="#2dd4bf"/><text x="633" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">309</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Income (GAAP) &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">GAAP operating income peaked at $44.9M in Q1'26 and has fallen two quarters in a row to $26.4M; operating margin has gone from 15.4% to 8.5% in that time.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="102.0" width="58" height="28.0" fill="#60a5fa"/><text x="59" y="97.0" text-anchor="middle" font-size="9" fill="#cbd5e1">14.3</text><text x="59" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="83.5" width="58" height="46.5" fill="#60a5fa"/><text x="141" y="78.5" text-anchor="middle" font-size="9" fill="#cbd5e1">23.7</text><text x="141" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="63.2" width="58" height="66.8" fill="#60a5fa"/><text x="223" y="58.2" text-anchor="middle" font-size="9" fill="#cbd5e1">34.0</text><text x="223" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="52.3" width="58" height="77.7" fill="#60a5fa"/><text x="305" y="47.3" text-anchor="middle" font-size="9" fill="#cbd5e1">39.6</text><text x="305" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="44.0" width="58" height="86.0" fill="#60a5fa"/><text x="387" y="39.0" text-anchor="middle" font-size="9" fill="#cbd5e1">43.9</text><text x="387" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="42.0" width="58" height="88.0" fill="#60a5fa"/><text x="469" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">44.9</text><text x="469" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="61.6" width="58" height="68.4" fill="#60a5fa"/><text x="551" y="56.6" text-anchor="middle" font-size="9" fill="#cbd5e1">34.9</text><text x="551" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="78.3" width="58" height="51.7" fill="#60a5fa"/><text x="633" y="73.3" text-anchor="middle" font-size="9" fill="#cbd5e1">26.4</text><text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Revenue ($m)</td><td>209.6</td><td>230.7</td><td>252.3</td><td>271.7</td><td>282.9</td><td>292.0</td><td>298.4</td><td>309.0</td></tr>
+    <tr><td>YoY growth</td><td>+38.8%</td><td>+37.7%</td><td>+41.5%</td><td>+41.1%</td><td>+35.0%</td><td>+26.5%</td><td>+18.3%</td><td>+13.7%</td></tr>
+    <tr><td>Gross margin</td><td>71.9%</td><td>71.1%</td><td>72.4%</td><td>72.5%</td><td>72.8%</td><td>73.0%</td><td>72.6%</td><td>72.9%</td></tr>
+    <tr><td>Op. income ($m)</td><td>14.3</td><td>23.7</td><td>34.0</td><td>39.6</td><td>43.9</td><td>44.9</td><td>34.9</td><td>26.4</td></tr>
+    <tr><td>Op. margin (GAAP)</td><td>6.8%</td><td>10.3%</td><td>13.5%</td><td>14.6%</td><td>15.5%</td><td>15.4%</td><td>11.7%</td><td>8.5%</td></tr>
+    <tr><td>EPS, GAAP diluted ($)</td><td>0.30</td><td>0.72</td><td>0.91</td><td>5.95</td><td>0.89</td><td>0.89</td><td>0.66</td><td>0.54</td></tr>
+    <tr><td>FCF ($m)</td><td>81.4</td><td>104.3</td><td>89.5</td><td>79.4</td><td>96.5</td><td>150.6</td><td>81.4</td><td>78.5</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Q3'25 GAAP EPS of $5.95 includes the large income-tax benefit (S&amp;P net income $292.2m vs pre-tax income of ~$46m); it is shown unadjusted. Quarterly figures are rounded from S&amp;P Global data.</div>
+
+  <table class="datatable" style="margin-top:6px;">
+    <tr><th>Metric ($m)</th><th>Q3 2025</th><th>Q3 2026</th><th>Change</th></tr>
+    <tr><td>Revenue</td><td>271.7</td><td>309.0</td><td>+13.7%</td></tr>
+    <tr><td>&nbsp;&nbsp;Subscription</td><td>229.5</td><td>270.0</td><td>+17.7%</td></tr>
+    <tr><td>&nbsp;&nbsp;Advertising</td><td>21.0</td><td>20.8</td><td>-1.0%</td></tr>
+    <tr><td>&nbsp;&nbsp;Duolingo English Test</td><td>9.7</td><td>9.9</td><td>+2.1%</td></tr>
+    <tr><td>&nbsp;&nbsp;In-app purchases</td><td>11.1</td><td>6.9</td><td>-38.0%</td></tr>
+    <tr><td>Gross profit</td><td>196.9</td><td>225.1</td><td>+14.3%</td></tr>
+    <tr><td>Operating income (GAAP)</td><td>39.6</td><td>26.4</td><td>-33.5%</td></tr>
+    <tr><td>Free cash flow</td><td>79.4</td><td>78.5</td><td>-1.1%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, company):</b> revenue $1.221B (+17.6% on FY2025's $1,038M) and adjusted EBITDA $323M, the latter a non-GAAP measure that excludes stock compensation (not reconciled on this page). Q3 company KPIs: bookings $316.1M (+12%), DAUs 64.9M (+29%).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Legal notices:</b> law-firm press releases about a securities class action against Duolingo, with a lead-plaintiff deadline of Dec 7, 2026, appeared in news feeds this week. Such notices are advertisements for plaintiffs; the allegations are unproven and are not assessed here.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>Analyst reaction:</b> after the report, targets were raised (Jefferies to $175 from $145, Truist to $170 from $120, Wedbush to $155 from $150, Scotiabank to $140 from $120 per TheFly headlines); the S&amp;P average of $136.57 (Hold, 24 analysts) pre-dates these and is stale.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">GAAP P/E is not a usable basis here: earnings were negative until FY2022, near zero in FY2023, and FY2025 includes a ~$232M tax benefit. This page values the stock on price-to-free-cash-flow (P/FCF) at fiscal-year-end vs now, and shows P/E for reference.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price / Free Cash Flow &mdash; Fiscal-Year-End vs. Current</div>
+    <div class="chart-sub">Current P/FCF (17.9x = market cap $7.28B / TTM FCF ~$407M) is ~36% of Duolingo's FY2022-25 year-end average (49.2x). FY2021 is excluded (712x on $5.6M FCF, not meaningful). Multiples fell mainly because the share price dropped ~53% while FCF kept growing &mdash; and FCF adds back stock compensation, so it flatters the cash earnings.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>P/FCF (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>P/FCF (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY22-25 average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+      <line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+      <rect x="20" y="50.6" width="70" height="59.4" fill="#60a5fa"/><text x="55" y="45.6" text-anchor="middle" font-size="9" fill="#cbd5e1">59.4x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="115" y="46.6" width="70" height="63.4" fill="#60a5fa"/><text x="150" y="41.6" text-anchor="middle" font-size="9" fill="#cbd5e1">63.4x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="210" y="57.8" width="70" height="52.2" fill="#60a5fa"/><text x="245" y="52.8" text-anchor="middle" font-size="9" fill="#cbd5e1">52.2x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="305" y="88.1" width="70" height="21.9" fill="#60a5fa"/><text x="340" y="83.1" text-anchor="middle" font-size="9" fill="#cbd5e1">21.9x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="400" y="92.1" width="70" height="17.9" fill="#2dd4bf"/><text x="435" y="87.1" text-anchor="middle" font-size="9" fill="#cbd5e1">17.9x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="60.8" x2="690" y2="60.8" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="56.8" text-anchor="end" font-size="9" fill="#fbbf24">FY22-25 avg 49.2x</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>GAAP P/E &amp; forward P/E (reference only):</b> trailing GAAP P/E was n/m in FY2021-22 (losses), 593x at end-FY2023, 161x at end-FY2024 and 19.6x at end-FY2025 (flattered by the tax benefit); on the last four quarters ($2.98 EPS) it is ~52x today. Forward P/E (consensus) is ~50x now vs ~123x (FY2024) and ~45x (FY2025). The scorecard uses P/FCF (ratio 0.36 = 5/5); on forward P/E the ratio against FY2024-25 would be ~0.60 (also 5/5 in the &le;0.70 band), but both lean on a falling price and on consensus that predates Q3. The scorecard flags this as a judgment, not a clean read.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex is $18.1M (1.7% of revenue) in FY2025, up from $3.2M in FY2023 as the company invests in offices and equipment; still very light. S&amp;P Global data.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="138.2" width="60" height="21.8" fill="#60a5fa"/><text x="60" y="133.2" text-anchor="middle" font-size="8" fill="#cbd5e1">3.6</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2021</text>
+      <rect x="170" y="126.2" width="60" height="33.8" fill="#60a5fa"/><text x="200" y="121.2" text-anchor="middle" font-size="8" fill="#cbd5e1">5.6</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+      <rect x="310" y="140.6" width="60" height="19.4" fill="#60a5fa"/><text x="340" y="135.6" text-anchor="middle" font-size="8" fill="#cbd5e1">3.2</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+      <rect x="450" y="86.3" width="60" height="73.7" fill="#60a5fa"/><text x="480" y="81.3" text-anchor="middle" font-size="8" fill="#cbd5e1">12.1</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="590" y="50.0" width="60" height="110.0" fill="#60a5fa"/><text x="620" y="45.0" text-anchor="middle" font-size="8" fill="#cbd5e1">18.1</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <polyline points="60,73.0 200,69.5 340,113.1 480,63.9 620,58.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="73.0" r="3" fill="#fbbf24"/><text x="60" y="63.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.43%</text>
+      <circle cx="200" cy="69.5" r="3" fill="#fbbf24"/><text x="200" y="59.5" text-anchor="middle" font-size="7.5" fill="#fde68a">1.50%</text>
+      <circle cx="340" cy="113.1" r="3" fill="#fbbf24"/><text x="340" y="103.1" text-anchor="middle" font-size="7.5" fill="#fde68a">0.60%</text>
+      <circle cx="480" cy="63.9" r="3" fill="#fbbf24"/><text x="480" y="53.9" text-anchor="middle" font-size="7.5" fill="#fde68a">1.62%</text>
+      <circle cx="620" cy="58.0" r="3" fill="#fbbf24"/><text x="620" y="48.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.74%</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="45.6 268.6" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="268.6 45.6" stroke-dashoffset="-45.6" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~14.5%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders ~14.5% (incl. co-founders, mostly Class B)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders ~85.5% (institutions ~86% by S&amp;P's count, overlapping)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Dual-Class Structure</div>
+      <p>Total shares (Class A + B) have grown from ~37.5M at end-2021 to ~47.2M now (derived from S&amp;P market cap / price), +26%, driven by stock compensation; S&amp;P shows +2.6% over the last year and no net buyback. As of Oct 26 S&amp;P listed ~40.4M Class A shares of 46.8M total, implying ~6.4M Class B shares (derived). Class B carries ten votes per share per the company's IPO documents (exact voting share not re-verified).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> co-founders Luis von Ahn (CEO) and Severin Hacker (CTO) remain the company's leaders; S&amp;P puts insider ownership at ~14.5%, but because Class B shares have extra votes their control is likely higher than that. I could not verify named holdings, the Class B voting percentage or any Class B sale/conversion plans. Short interest is high (S&amp;P: 15.3% of shares outstanding as of Oct 26).
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet:</b> cash and investments $1,374M vs debt $84M at Sep 30, 2026 (net cash $1.29B, about 18% of market cap; $25.8 per share by S&amp;P's count); current ratio 2.7. No buyback or dividend. Return on equity (TTM, as of Nov 9) is 10.5%, much lower than earlier readings (34&ndash;38%) that included the tax benefit.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. One criterion (#2, EBIT CAGR) is N/A because FY2021 EBIT is negative; its weight is dropped from the denominator (total 94 instead of 105). Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021&rarr;FY2025). Criterion #14 compares FY2025 gross margin with FY2022's (3 fiscal years).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Duolingo</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+42.6% &mdash; $250.8M &rarr; $1,038M; every year grew 38&ndash;55%, but growth has slowed sharply in 2026 (Q3 2026 +13.7%) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td><b>N/A &mdash; not computable.</b> FY2021 GAAP operating income was negative (-$60.0M), so a CAGR from that base is undefined (and FY2022-23 were also negative). Context: EBIT swung from -$60.0M to +$141.2M (a $201M improvement); FY2024-25 growth was +121%. Excluded from the Martinero denominator (weight 11 dropped, total 94)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>13.6% (FY2025), up from -23.9% in FY2021; the Sep-2026 quarter was 8.5% GAAP vs 14.6% a year earlier, so the latest trend is down (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+185% a year &mdash; FCF $5.6M &rarr; $369.7M. Effectively a base effect: FY2021 FCF was near zero, so read the 35.6% FY2025 FCF margin instead (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Widely regarded as the world's most-downloaded language-learning app (64.9M daily active users reported for Q3 2026); no verified market-share percentage in this build, and the &ldquo;category&rdquo; is loosely defined. Judgment: clear #1 in language-learning apps (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; fragmented: other apps, tutors, schools, free content and AI chatbots all compete for the same learner time and low switching costs. Judgment, not a measured index (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC ~61.2% vs S&amp;P-estimated WACC 9.9% (spread ~51pp). Inflated because most of the balance sheet is cash, which S&amp;P nets out; return on capital employed (cash included) is only 9.6%, roughly at WACC. Either way the business needs little capital (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: $1,374M cash and investments vs $84M debt at Sep 30, 2026 (net cash $1.29B). Debt/EBITDA 0.6x (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>262% (FY2025: FCF $369.7M / GAAP EBIT $141.2M). FCF exceeds GAAP EBIT because stock-based compensation is non-cash and subscriptions are paid up front (deferred revenue) &mdash; FCF is not &ldquo;extra&rdquo; profit (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td><b>Basis: P/FCF, not GAAP P/E</b> (GAAP P/E is distorted by a tax benefit, see Section 3). Current 17.9x vs FY2022-25 fiscal-year-end average 49.2x (ratio 0.36); FY2021 (712x on $5.6M FCF) excluded as not meaningful. GAAP P/E would give 52x current vs a 19.6x FY2025 and 161x FY2024 &mdash; not usable. Forward P/E ~50x vs 123x/45x (FY24/25). Flagged judgment (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~37.5M (end-2021) &rarr; ~47.2M now (Class A + Class B combined, derived from S&amp;P market cap / price), +26%; S&amp;P shows +2.6% in the last year from stock compensation, with no buyback shrinkage (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>S&amp;P shows ~14.5% insider ownership (5&ndash;15% band, score 3/5). The two co-founders hold Class B shares with extra votes, so voting control is likely higher than the economic stake; the exact voting percentage was not verified</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.7% of revenue in FY2025 ($18.1M); 0.6&ndash;1.7% every year FY21-25. Software and content; no factories (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin (revenue minus cost of revenue) 73.09% (FY2022) &rarr; 72.23% (FY2025), -0.86pp; basis is gross margin. Inside the -1.0pp bar but down (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; (105 &minus; N/A weights) &times; 100):</b> #1 5&times;13/5=13.0 &middot; #3 3&times;10/5=6.0 &middot; #4 5&times;8/5=8.0 &middot; #5 5&times;7/5=7.0 &middot; #6 1&times;6/5=1.2 &middot; #7 5&times;10/5=10.0 &middot; #8 5&times;6/5=6.0 &middot; #9 5&times;8/5=8.0 &middot; #10 5&times;8/5=8.0 &middot; #11 0&times;4/5=0.0 &middot; #12 3&times;5/5=3.0 &middot; #13 5&times;4/5=4.0 &middot; #14 3&times;5/5=3.0; #2 N/A (weight 11 dropped). Total 77.2 / 94 = <b>82/100</b>. Criteria met: 10/14 on the binary thresholds (10 of the 13 scoreable). <b>Judgment calls:</b> #2 is N/A rather than scored (it could be argued as the best or worst case); #4 is a base effect; #5 and #6 are qualitative; #7 uses third-party estimates that depend on how cash is treated; #10 is scored on P/FCF because GAAP P/E is distorted; #12 is scored on the economic stake only.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A very large and fast-growing consumer subscription business: revenue up 4x in four years, 64.9M daily users (+29%), 72% gross margin, free cash flow of $370M in FY2025 (35.6% margin) and $1.29B of net cash with almost no capex. Operating margin turned positive in 2024 and was 13.6% in FY2025. Subscription revenue is growing about 18% YoY and daily users keep growing faster than revenue. Founders remain in charge, and on price-to-free-cash-flow the stock is at 17.9x versus an own-history average of ~49x after a roughly 53% decline over the year to Oct 26.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is decelerating quickly (Q3 revenue +13.7% vs +41% a year earlier; bookings +12%), users are growing twice as fast as revenue, and GAAP operating margin fell to 8.5% in Q3 from 14.6%. GAAP earnings and P/E are distorted by a ~$232M tax benefit, FCF flatters because stock compensation is added back, and the share count is up ~26% since 2021. The market is fragmented with AI chatbots and free alternatives as competition, the stock is volatile (+26% in a day, -53% over a year), short interest is high, and securities-class-action notices are in the news. The FY2026 targets (revenue $1.221B, adjusted EBITDA $323M) imply a Q4 growth rate near 14%. Unverified here: the 52-week high, market share, Class B voting power and the Q4 report date.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> stockanalysis.com (S&amp;P Global Market Intelligence): annual and quarterly financials (updated Nov 4, 2026), ratios, ROIC/WACC, ownership, short interest, analyst consensus (Oct 26, 2026) and price history to the Nov 9, 2026 close; Duolingo Q3 2026 results (Nov 3, 2026) for revenue, bookings, DAUs, EPS and FY2026 guidance as provided in the research brief; TheFly/TipRanks headlines for analyst target changes; law-firm press releases (GlobeNewswire/Newsfile, Nov 2026) for the class-action notices. Tax benefit, share counts and FY2026 implied Q4 are derived by this page from those inputs. Market share and concentration are qualitative judgments. Price as of Nov 9, 2026 close; prepared Nov 10, 2026 &mdash; for personal research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Duolingo (Class A) &mdash; USD share price trend. A 2021 post-IPO level, a 2022 low, a rise through 2023-24 on rapid revenue and profit growth to a peak above $400 in mid-2025 (Jun 30, 2025 close $410.02), then a steep de-rating through 2026 as growth slowed.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Duolingo &mdash; Year-End Close, USD</div>
+    <div class="chart-sub">Year-end closing prices FY2021-FY2025 plus the Nov 9, 2026 close, from S&amp;P Global via stockanalysis.com (no stock splits to adjust for). The dashed line is the straight-line annualised price CAGR between the Dec 2021 point and Nov 2026 (4.9 years), excluding dividends (none paid). The Jun 30, 2025 quarter-end close ($410.02) is not shown; intra-period moves were large.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,137.6 L 172.8,151.6 L 299.6,89.3 L 426.4,50.4 L 553.2,109.8 L 680.0,118.3 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="137.6" x2="680.0" y2="118.3" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="172" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +8.0%*</text>
+<path d="M 46.0,137.6 L 172.8,151.6 L 299.6,89.3 L 426.4,50.4 L 553.2,109.8 L 680.0,118.3" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="137.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="125.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$106.11</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="151.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="139.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$71.13</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="89.3" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="77.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$226.85</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="50.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="38.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$324.23</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="109.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="97.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$175.50</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="118.3" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="136.3" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$154.25</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The positive CAGR (about +8% a year) hides a round trip: the price rose from $71 (2022) to a mid-2025 peak above $400 and has since fallen by more than half, so the starting point matters a great deal. Not a verdict on the business or on valuation. The Class B shares are not listed; this chart is the Class A price. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
