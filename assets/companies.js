@@ -3624,6 +3624,132 @@ const COMPANIES = [
   },
 
   {
+    slug: "veeva-systems",
+    name: "Veeva Systems",
+    ticker: "NYSE: VEEV",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Life Sciences Software",
+    tags: ["Software", "Healthcare", "Cloud", "Net Cash"],
+    dateFeatured: "2026-11-10",
+    price: "$306.40",
+    score: "13 / 14",
+    martinero: 84,
+    momentum: { status: "steady", recent: 16.3, prior: 16.2 },
+    quarterYoY: { period: "Q2 FY2027 (Jul 2026)", growth: 17.6 },
+    blurb: "Veeva Systems sells cloud applications, data and AI agents to the global life sciences industry, led by Vault CRM and its R&D and Quality suites. Revenue was $3.20B in FY2026 (+16.3%) with a 29.6% GAAP operating margin, 146% FCF conversion, $7.1B of net cash and capex under 1% of revenue. Q2 FY2027 revenue grew 17.6% and guidance was raised, but the stock trades at about 50x trailing GAAP earnings after doubling from its April 2026 low.",
+    file: "companies/veeva-systems.html"
+  },
+
+  {
+    slug: "ubiquiti",
+    name: "Ubiquiti Inc.",
+    ticker: "NYSE: UI",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Networking Equipment",
+    tags: ["Networking", "Hardware", "Controlled Company", "Low Float"],
+    dateFeatured: "2026-11-10",
+    price: "$685.68",
+    score: "10 / 14",
+    martinero: 77,
+    momentum: { status: "decelerating", recent: 27.2, prior: 33.5 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 39.9 },
+    blurb: "Ubiquiti designs UniFi Wi-Fi, switching and camera products and airMAX wireless gear, sold mainly through distributors and online stores. FY2026 revenue was $3.27B (+27.2%) at a 36.2% operating margin, and Q1 FY2027 was its first $1B quarter (+39.9% YoY). Founder Robert Pera owns about 93% of the shares, leaving a free float of only about 7% (about 4.2M shares), which makes trading thin and the price volatile.",
+    file: "companies/ubiquiti.html"
+  },
+
+  {
+    slug: "interactive-brokers",
+    name: "Interactive Brokers Group",
+    ticker: "Nasdaq: IBKR",
+    sector: "Financials",
+    industry: "Financials",
+    subIndustry: "Electronic Brokerage",
+    tags: ["Brokerage", "Financials", "Founder-controlled", "Net interest income", "Split 4:1 (2025)"],
+    dateFeatured: "2026-11-10",
+    price: "$77.57",
+    score: "9 / 14",
+    martinero: 74,
+    momentum: { status: "steady", recent: 19.7, prior: 19.5 },
+    quarterYoY: { period: "Q3 2026", growth: 15.7 },
+    blurb: "Interactive Brokers is a highly automated global electronic broker with 5.58M customer accounts and $965B of customer equity. Net revenues compounded about 23% a year over FY21-FY25 at a pre-tax margin near 77%, and net interest income is about 57-60% of revenue. Founder Thomas Peterffy controls IBG Holdings, which owns 73.4% of the operating company, so the public shares carry only a 26.6% economic stake.",
+    file: "companies/interactive-brokers.html"
+  },
+
+  {
+    slug: "robinhood",
+    name: "Robinhood Markets",
+    ticker: "Nasdaq: HOOD",
+    sector: "Financials",
+    industry: "Financials",
+    subIndustry: "Retail Brokerage & Crypto",
+    tags: ["Brokerage", "Crypto", "Prediction markets", "Short profit record", "Dual-class"],
+    dateFeatured: "2026-11-10",
+    price: "$83.32",
+    score: "9 / 14",
+    martinero: 73,
+    momentum: { status: "decelerating", recent: 51.6, prior: 58.2 },
+    quarterYoY: { period: "Q3 2026", growth: 11.8 },
+    blurb: "Robinhood runs a mobile retail brokerage with 28.7M funded customers and $396B of platform assets. Revenue grew about 25% a year over FY21-FY25 and operating margin reached 46.8%, but the business has been profitable only since FY24. In Q3 2026 revenue was $1.42B (+12%), transaction-based lines were 61% of it and net interest 29%, and net income fell 16% as costs outgrew revenue.",
+    file: "companies/robinhood.html"
+  },
+
+  {
+    slug: "axon-enterprise",
+    name: "Axon Enterprise",
+    ticker: "Nasdaq: AXON",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Public safety technology (TASER, body cameras, cloud software)",
+    tags: ["TASER", "Body cameras", "Axon Cloud", "Skydio", "GAAP vs adjusted"],
+    dateFeatured: "2026-11-10",
+    price: "$303.18",
+    score: "6 / 14",
+    martinero: 50,
+    momentum: { status: "steady", recent: 33.5, prior: 33.4 },
+    quarterYoY: { period: "Q3 2026", growth: 27.9 },
+    blurb: "Axon sells TASER devices, body cameras, drones and counter-drone systems, and an Axon Cloud software layer with $1.75B of annual recurring revenue (+40%). Q3 2026 revenue of $909M (+28%) missed estimates and full-year growth guidance was cut to about 30% on roughly $130M of delayed federal Dedrone deployments. GAAP operating margin is near zero (adjusted EBITDA is about 26%), net debt is about $1.2B, and Axon is investing $1.2B more in Skydio.",
+    file: "companies/axon-enterprise.html"
+  },
+
+  {
+    slug: "lam-research",
+    name: "Lam Research",
+    ticker: "Nasdaq: LRCX",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Semiconductor Equipment",
+    tags: ["Semiconductors", "Equipment", "AI Capex", "Cyclical", "Net Cash"],
+    dateFeatured: "2026-11-10",
+    price: "$221.31",
+    score: "9 / 14",
+    martinero: 69,
+    momentum: { status: "steady", recent: 26.0, prior: 23.7 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 54.4 },
+    blurb: "Lam Research makes etch, deposition and clean tools for chipmakers and earns about 36% of revenue from services on its installed base. FY2026 (June) revenue was $23.2B (+26%) with a 35.3% operating margin, and the Sep-2026 quarter was a record at $8.22B (+54% YoY). The shares closed at $221.31 on Nov 9, about 50% below the 52-week high, after a sharp chip-equipment sell-off and a new $25B buyback.",
+    file: "companies/lam-research.html"
+  },
+
+  {
+    slug: "duolingo",
+    name: "Duolingo",
+    ticker: "Nasdaq: DUOL",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Consumer Internet / EdTech",
+    tags: ["EdTech", "Consumer Apps", "Subscription", "Net Cash", "Dual-Class"],
+    dateFeatured: "2026-11-10",
+    price: "$154.25",
+    score: "10 / 14",
+    martinero: 82,
+    momentum: { status: "steady", recent: 38.7, prior: 40.8 },
+    quarterYoY: { period: "Q3 2026", growth: 13.7 },
+    blurb: "Duolingo runs the largest freemium language-learning app, with 84% of revenue from subscriptions. Revenue grew from $251M (FY2021) to $1.04B (FY2025) with positive operating income and a 35.6% FCF margin, but Q3 2026 growth slowed to +14% while daily users grew +29%. The shares closed at $154.25 on Nov 9 after a 26% jump on Nov 4.",
+    file: "companies/duolingo.html"
+  },
+
+  {
     slug: "fair-isaac",
     name: "Fair Isaac Corporation",
     ticker: "NYSE: FICO",
@@ -3639,6 +3765,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q4 FY2026 (Sep 2026)", growth: 27.4 },
     blurb: "Fair Isaac owns the FICO Score, the dominant US consumer credit score, and a decisioning and fraud software business. FY2026 (Sep year-end) revenue rose 27% to $2.53B at a 49.9% GAAP operating margin and 86% gross margin. The shares are about 61% below their 52-week high after regulators and bureau-owned VantageScore challenged its mortgage-score pricing, and net debt is $5.0B after debt-funded buybacks.",
     file: "companies/fair-isaac.html"
+  },
+
+  {
+    slug: "ibm",
+    name: "International Business Machines",
+    ticker: "NYSE: IBM",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "IT Services & Enterprise Software (Hybrid Cloud/AI)",
+    tags: ["Software", "IT Services", "Mainframe", "Hybrid Cloud", "AI", "Dividend Aristocrat-style", "Quantum", "Acquisitive"],
+    dateFeatured: "2026-11-11",
+    price: "$244.53",
+    score: "8 / 14",
+    martinero: 60,
+    momentum: { status: "accelerating", recent: 7.6, prior: 1.4 },
+    quarterYoY: { period: "Q3 2026", growth: 4.7 },
+    blurb: "IBM is a hybrid-cloud and AI company whose Software segment (Red Hat, HashiCorp, Confluent) now earns most of its segment profit, alongside Consulting, Infrastructure (mainframe) and a captive Financing arm. Revenue grew 7.6% in FY2025 and 4.7% in Q3 2026, and operating margin rose from 9.7% in FY2021 to 18.7% on software mix. Acquisition goodwill is large ($88.5B with intangibles), there are no buybacks, and the dividend has been paid every year since 1916.",
+    file: "companies/ibm.html"
   },
 
   // Add the next company below this line, as a new {...} block ⬇
