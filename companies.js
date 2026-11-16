@@ -27,10 +27,10 @@ const COMPANIES = [
     tags: ["Near-Monopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-11",          // YYYY-MM-DD, the day you're posting this
     price: "$274.58",
-    score: "8 / 13",
-    martinero: 66,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 22.8, prior: 23.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 22.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 27.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Near-monopoly architecture licensor behind 99% of smartphone CPUs, now pushing into AI datacenter compute.",
     file: "companies/arm-holdings.html"   // path to the dashboard file you saved
   },
@@ -45,10 +45,10 @@ const COMPANIES = [
     tags: ["Near-Monopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-12",
     price: "$1,733.48",
-    score: "11 / 13",
+    score: "11 / 14",
     martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 15.6, prior: 2.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 20.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 55.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Sole supplier of EUV lithography systems — the irreplaceable chokepoint behind every leading-edge chip. Clears margin, ROIC and balance-sheet bars comfortably; misses on valuation (up sharply over the last year, well above its own trading history) and on 5-yr FCF CAGR, a base-effect artifact of an unusually strong FY2021 starting year.",
     file: "companies/asml-holding.html",
     personalNote: "ASML is where my portfolio started, 13 years ago, and it taught me a lesson. It nearly doubled fast, so I sold a chunk around €100 to bank some profit — a mistake in hindsight, given it's now trading above €1,600. ASML holds a near-monopoly on the EUV lithography machines behind every leading-edge chip, which is exactly why the US leans on the EU over what it can export, and to whom. It's one leg of the ASML-TSMC-NVIDIA chain driving the AI buildout — boom or bust, I honestly don't know."
@@ -64,8 +64,8 @@ const COMPANIES = [
     tags: ["Magnificent Seven", "Geopolitically Critical"],
     dateFeatured: "2026-08-13",
     price: "$217.55",
-    score: "11 / 13",
-    martinero: 91,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "12 / 14",
+    martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 65.5, prior: 114.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027", growth: 106.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Dominant AI accelerator GPU supplier — data-center AI/GPU now ~90% of revenue, up from ~41% five years ago. Growth, margin, ROIC and valuation-vs-history all clear the bar; misses are FCF conversion and thin insider ownership.",
@@ -82,10 +82,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-14",
     price: "$416.08",
-    score: "9 / 13",
-    martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 23.9, prior: 44.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2026", growth: 48.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 FY2026", growth: 86.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Diversified semiconductor and enterprise software conglomerate — custom AI accelerators (ASICs) alongside VMware virtualization. Clears growth, margin, ROIC and balance-sheet bars comfortably; misses are mostly structural, including a concentrated customer base and thin insider ownership.",
     file: "companies/broadcom.html"
   },
@@ -100,10 +100,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-15",
     price: "DKK 282.20",
-    score: "6 / 13",
-    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 59,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 2.5, prior: 3.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: 15.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (prelim)", growth: 11.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Danish hearing-aid and hearing-healthcare manufacturer. A more mixed scorecard — margins have swung year to year, and only about half the criteria clear the bar.",
     file: "companies/demant.html",
     personalNote: "As an ex-employee, I hold an oversized position in my portfolio. Somewhere between growth and blue chip: it grows mid-single digits, but the share price swings far more than the business does — maybe a case for buying low and selling high, if you can time it. The sector behaves like an oligopoly and is consolidating — GN just sold its hearing business to Amplifon, and Demant bought a retail chain of its own. Major launch years tend to be strong; the year after, more moderate. Right now it's riding real momentum — a multi-month rally, strong H1 2026 results and upgraded guidance, a well-received launch with another coming, cost cuts behind it, and that acquisition settling in. Let's see how far it goes."
@@ -119,10 +119,10 @@ const COMPANIES = [
     tags: ["Magnificent Seven"],
     dateFeatured: "2026-08-16",
     price: "$599.12",
-    score: "8 / 13",
-    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 75,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 22.2, prior: 21.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 28.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 26.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Dominant in social media and digital advertising, now pouring capital into AI infrastructure. Margins, returns on capital and valuation-vs-history clear the bar; growth has cooled and capex is running hot as the AI buildout ramps.",
     file: "companies/meta.html"
   },
@@ -137,10 +137,10 @@ const COMPANIES = [
     tags: ["Magnificent Seven"],
     dateFeatured: "2026-08-17",
     price: "$503.81",
-    score: "8 / 13",
-    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 66,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 17.8, prior: 14.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 18.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q1 FY2027", growth: 19.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Cloud and enterprise software giant, still compounding on Azure and Copilot-driven AI demand. Operating margin has expanded every year on the model's own numbers, though free cash flow has been squeezed by heavy AI capex.",
     file: "companies/microsoft.html"
   },
@@ -155,8 +155,8 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-18",
     price: "DKK 966.50",
-    score: "5 / 13",
-    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "6 / 14",
+    martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 9.6, prior: 26.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: 0.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Danish manufacturer of power cables for the subsea and land grid buildout tied to the energy transition. Margins have improved sharply from a low base, but the scorecard is still more miss than hit at this stage.",
@@ -173,8 +173,9 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-18",
     price: "€77.94",
-    score: "6 / 13",
-    martinero: 50,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
+    quarterYoY: { period: "H1 2026", growth: -0.2 },
     blurb: "Dutch insurance and asset manager, mostly Netherlands-focused life and pension products. Solid capital generation and a high dividend yield, but growth and market-position criteria keep it under half the checklist met.",
     file: "companies/nn-group.html"
   },
@@ -189,10 +190,10 @@ const COMPANIES = [
     tags: ["Duopoly"],
     dateFeatured: "2026-08-18",
     price: "$362.82",
-    score: "9 / 13",
-    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 72,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 11.3, prior: 10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 14.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q4 FY2026", growth: 13.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The toll-booth on global card payments, alongside Mastercard in a genuine duopoly. Margins, returns on capital and valuation all clear the bar; growth has simply slowed as card payment volumes mature.",
     file: "companies/visa.html",
     personalNote: "Visa caught my attention for the sub-sector — Visa and Mastercard run a genuine duopoly on card-payment rails, with Amex as a small, closed-loop niche player. Merchants have complained about the fees for years, and they just pass them on — we're all quietly overpaying on every card swipe. It used to feel like a pure blue-chip compounder. Now real-time rails like Pix, UPI and FedNow are built to cut Visa out entirely. Are Visa's golden days ending, or do I just hold and let it grow conservatively?"
@@ -207,12 +208,12 @@ const COMPANIES = [
     subIndustry: "GLP-1 & Metabolic Health",
     tags: [],
     dateFeatured: "2026-08-19",
-    price: "DKK 294.70",
-    score: "10 / 13",
-    martinero: 80,                    // Martinero Index (weighted 1-100 score, see About)
+    price: "DKK 285.20",
+    score: "10 / 14",
+    martinero: 76,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 6.4, prior: 25.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 3.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The maker of Ozempic and Wegovy — still growing revenue and earnings every year, but down roughly 75% from its June 2024 peak after two clinical setbacks for its next-gen drug CagriSema and a resurgent Eli Lilly. Clears growth, margin, ROIC and balance-sheet bars; misses are capex intensity and weak free-cash-flow conversion as it builds out manufacturing capacity.",
+    quarterYoY: { period: "Q3 2026", growth: 5.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The maker of Ozempic and Wegovy — still growing revenue every year, but down roughly 75% from its June 2024 peak after two clinical setbacks for its next-gen drug CagriSema and a resurgent Eli Lilly. Q3 2026 sales rose 5.6% in reported DKK (+4% at constant exchange rates) and FY2026 guidance now sits at -2% to +2%. Clears growth, margin, ROIC and balance-sheet bars; misses are capex intensity and weak free-cash-flow conversion as it builds out manufacturing capacity.",
     file: "companies/novo-nordisk.html",
     personalNote: "Today's pick is partly thanks to the media attention Novo Nordisk has gotten since its Q2 results — but there's a personal angle too. I used to own this stock. Over Christmas break in 2023, I reshuffled my portfolio and bought three names at once: Arm, NVIDIA, and Novo Nordisk. All three took off early on. Arm and NVIDIA kept climbing, but Novo went the other way — from a peak around DKK 1,033 on June 25, 2024, down to a low near DKK 225 in March 2026. It wasn't a winner for me, and I don't hold any Novo shares today. But that's a story about my timing, not necessarily the company's potential — which is exactly why it's worth a clear-eyed look."
   },
@@ -227,10 +228,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-21",
     price: "$1,568.87",
-    score: "7 / 13",
-    martinero: 75,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 80,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 175.3, prior: 10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 372.0, note: "Extreme YoY reflects the 2026 NAND pricing supercycle against an unusually weak, depressed prior-year quarter shortly after the Feb 2025 spinoff — not an ongoing run-rate." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q1 FY2027", growth: 378.0, note: "Extreme YoY reflects the 2026 NAND pricing supercycle against an unusually weak, depressed prior-year quarter shortly after the Feb 2025 spinoff — not an ongoing run-rate." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The NAND flash memory maker behind SD cards and enterprise SSDs, spun off from Western Digital in Feb 2025 — up roughly 570% year-to-date on a structural memory shortage colliding with AI-datacenter demand, though the stock has been on a wild round trip: an all-time-high close of $2,335 on June 25, a 56% plunge to $1,015.89 by July 29, and a partial recovery since. Genuinely strong numbers on most criteria, but two can't be tested at all given the short standalone trading history.",
     file: "companies/sandisk.html",
     personalNote: "I didn't see this one coming. To me, SanDisk was always just the name on the memory card in my old camera — not a stock I'd ever think to check. Then a friend mentioned it to me, already deep into a run I'd completely missed: from around $235 at the start of the year to a peak near $2,354 by late June, on a genuine shortage of the NAND flash memory that AI data centers need for storage. It's cooled off since — down to around $1,569 now, roughly a third off that peak, as the memory-chip trade caught some profit-taking. Still up something like 570% since January, though. I don't own it — I'm overwhelmingly overexposed to AI as it is. But I expect he serves me a good Malbec at our next asado."
@@ -245,12 +246,12 @@ const COMPANIES = [
     subIndustry: "AI & Data Analytics Software",
     tags: [],
     dateFeatured: "2026-08-21",
-    price: "$173.96",
-    score: "11 / 13",
-    martinero: 92,                    // Martinero Index (weighted 1-100 score, see About)
+    price: "$171.70",
+    score: "12 / 14",
+    martinero: 93,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 56.1, prior: 28.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 93.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "AI data-fusion platform that started in classified government work and has pushed hard into commercial AI deployment — revenue growth has accelerated to +93% YoY, with GAAP operating margin scaling from -26.7% (FY2021) to 47.1% (Q2 2026). Clears growth, margin, cash and even entry-multiple-vs-history bars; misses are commercial-side competition and continued share dilution. Still expensive at 149x trailing earnings. IMPORTANT: the business will very likely keep executing — the share price is a separate bet, and at this multiple a lot of future growth is already paid for.",
+    quarterYoY: { period: "Q3 2026", growth: 96.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "AI data-fusion platform that started in classified government work and has pushed hard into commercial AI deployment. Q3 2026 revenue grew 96% YoY to $2.31B with a 46.9% GAAP operating margin, and full-year guidance was raised again. Clears growth, margin, cash and even entry-multiple-vs-history bars; misses are commercial-side competition and continued share dilution. Still expensive at about 121x trailing earnings. IMPORTANT: the business will very likely keep executing — the share price is a separate bet, and at this multiple a lot of future growth is already paid for.",
     file: "companies/palantir.html",
     personalNote: "I briefly owned this one. Palantir got hyped hard — at the technological forefront, deeply embedded with the US government and defense establishment, with an outspoken CEO in Alex Karp you either love or can't stand. I bought at the end of that run and sold for a tiny profit — I was late to the show, and if I'm honest, the company never quite felt right for me. The stock showed the hype: from around $16 in late January 2024 to an all-time high of $207 on November 3, 2025 — roughly 13x in under two years, before cooling to around $174 today. On the financial KPIs and business success alone, it might be a good company to own — but at 150x earnings and 74x sales, you're paying almost entirely for growth that hasn't happened yet."
   },
@@ -265,10 +266,10 @@ const COMPANIES = [
     tags: ["Near-Monopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-22",
     price: "$418.95",
-    score: "9 / 13",
-    martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 35.9, prior: 30.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 36.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 41.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "World's dominant contract chipmaker — a near-monopoly (74-77% of wafer revenue) at the leading edge, manufacturing for NVIDIA, Apple, AMD and nearly every fabless chip designer. Clears growth, margin, ROIC and balance-sheet bars comfortably; misses are the extreme capex intensity of the foundry model, FCF conversion, a valuation re-rated above its own recent average, and no controlling founder-CEO since Morris Chang's retirement.",
     file: "companies/tsmc.html",
     personalNote: "I don't own TSMC myself, but it's closer to home than you'd think. I've held ASML for over 13 years, and ASML builds the extreme-UV lithography machines that make TSMC's most advanced chips possible in the first place. Pair that with NVIDIA, which I also own, and the chain is hard to miss: ASML supplies TSMC, TSMC manufactures for NVIDIA, and NVIDIA's chips are what every AI datacenter is racing to secure. Companies like these have become so central to the technology arms race that they're starting to feel less like ordinary stock picks and more like geopolitical pawns — Taiwan alone produces the overwhelming majority of the world's most advanced chips, which is exactly the point. I hold NVIDIA and ASML; my girlfriend holds TSMC. Between the two of us, we're thoroughly overexposed to semiconductors and AI — though that's partly because the growth has been genuinely stellar, not just hype. These are the previous generation's 'must-haves,' now priced accordingly. Still a buy from here? You decide."
@@ -284,10 +285,10 @@ const COMPANIES = [
     tags: ["Duopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-23",
     price: "€203.70",
-    score: "6 / 13",
-    martinero: 58,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 59,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 6.1, prior: 5.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "9M 2026", growth: 7.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "One half of the commercial-aircraft duopoly with Boeing, sitting on a record backlog of over 9,200 aircraft — more than a decade of production already locked in. Clears market-share, balance-sheet and ownership-alignment bars; misses are thin margins for the order book it commands, capex intensity, and a valuation that's run well ahead of its own history.",
     file: "companies/airbus.html",
     personalNote: "I filled out the papers for a pilot academy early in my studies — never sent them. Airbus and Boeing run something close to a duopoly, just over 70% of the commercial aircraft market between them, and Airbus's own backlog runs past 9,200 aircraft — over a decade of production already locked in. Does that make it a good investment? Not automatically — a duopoly helps, but Boeing's own execution problems show it can still burn one of the two members. On new entrants: China's COMAC is the real one to watch, already flying commercially and just made its first international flight, though it's still years from EU/US certification. Brazil's Embraer plays a real but smaller game in regional jets. Canada's actually out of it entirely now — Bombardier sold its whole commercial jet program to Airbus back in 2018."
@@ -303,10 +304,10 @@ const COMPANIES = [
     tags: ["Near-Monopoly", "Robotics"],
     dateFeatured: "2026-08-24",
     price: "$378.81",
-    score: "10 / 13",
-    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 77,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 20.6, prior: 17.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 19.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 22.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Two-decade near-monopoly in robotic surgery — 60%+ market share, a recurring-revenue model, and one of the highest scorecards on this site. Clears growth, margin, ROIC, balance-sheet and even valuation bars; the misses are EBIT/FCF growth during a 2023-24 capacity build and a lack of any founder-anchored ownership. 2025-26 also marks the first year of real, FDA-cleared competition after twenty years unchallenged.",
     file: "companies/intuitive-surgical.html",
     personalNote: "I used to own a robotics ETF that did reasonably well, but I prefer picking my own stocks — and robotics is a sector I believe will only become more relevant, even without deep technical knowledge of it. Intuitive Surgical is how I'd want to express that belief: instead of the cyclical, lower-margin world of industrial robot makers like FANUC or Yaskawa, it's a near-monopoly in one defensible niche — robotic surgery — with a recurring-revenue model built around every da Vinci system placed. For two decades it had the operating room to itself; 2025-26 is the first year real rivals — Medtronic, J&J — show up. It's also just been through a real de-rating, from a P/E in the 70s-80s down to the low 40s — could this be a good buying moment?"
@@ -322,10 +323,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-24",
     price: "DKK 145.60",
-    score: "5 / 13",
-    martinero: 42,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "5 / 14",
+    martinero: 46,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 4.0, prior: 9.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 10.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 6.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Northern Europe's largest integrated ferry and logistics operator, but a genuinely rough scorecard: EBIT margin collapsed from 9.2% to under 1% between FY2022 and FY2025 on competitive pressure and a Mediterranean misstep, before Q1-Q2 2026 marked a real sequential turnaround with EBIT more than doubling and guidance raised twice. Clears market share, valuation-vs-history, share count and foundation ownership; misses growth, margin, ROIC and leverage badly — a textbook case of the framework's bias against capital-intensive, thin-margin transport.",
     file: "companies/dfds.html",
     personalNote: "DFDS isn't a classic growth stock — a regular year sees single-digit organic revenue growth; the bigger 2021-22 jumps were mostly a COVID rebound and acquisitions. I grew up sailing most summer weekends — my family loves everything maritime, and there was something nice as a kid about dreaming where those ships were headed. DFDS is Northern Europe's largest ferry and logistics operator, still 40%-controlled by the Lauritzen Fonden foundation. I assumed shipping returns would be gradual, not dramatic — sailing, not space travel — but the stock fell roughly 70% over four years as margins collapsed, and even last quarter's sharp EBIT rebound came off a thin base, still under the FY2022 peak margin. Dividends stayed suspended, but buybacks never stopped — a possible positive signal. The shares have already rallied off the bottom, so this may no longer be clearly cheap — is there still a case for modest, patient returns here?"
@@ -341,10 +342,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-08-25",
     price: "€291.80",
-    score: "4 / 13",
-    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "5 / 14",
+    martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 5.2, prior: 6.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 14.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 17.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A genuinely excellent, well-run French industrial — #1 on Gartner's supply chain ranking for ten straight years, twice named World's Most Sustainable Company, and sitting at the center of AI-driven data-center demand and grid electrification. But the scorecard comes out low regardless: too large to clear a 15% growth bar, competing in a genuinely fragmented market rather than a monopoly, and richly valued after the 2025-26 AI-driven re-rating. Clears market share, net debt/EBITDA, share count and capex intensity; misses growth, margin, ROIC, FCF conversion, valuation-vs-history and insider ownership — a case study in the score measuring something narrower than overall quality.",
     file: "companies/schneider-electric.html",
     personalNote: "Schneider Electric has been on my watch list for almost two years, and I think it's one of the stars of European companies — Gartner's #1 supply chain ten years running, twice named World's Most Sustainable Company. The electrification and renewables thesis checks out: it's genuinely at the center of grid modernization and the AI-driven data-center buildout, with H1 2026 organic revenue growth accelerating to 14%. But I want to be honest about timing — today's P/E of ~35x sits well above Schneider's own five-year average of ~28x, so this isn't a classic 'wait for a dip' entry, and it competes in a genuinely crowded field against Siemens, ABB, Eaton and Legrand rather than holding any kind of monopoly. Net debt has also crept up funding recent acquisitions. None of that changes the long-term story — it's more a question of whether I buy the quality now at a premium, or wait for a better entry point."
@@ -359,12 +360,12 @@ const COMPANIES = [
     subIndustry: "Consumer Hardware & Digital Services",
     tags: ["Magnificent Seven"],
     dateFeatured: "2026-08-20",
-    price: "$310.34",
-    score: "7 / 13",
-    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 6.4, prior: 2.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 16.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Extraordinary quality, mature growth. A 32% operating margin, a ROIC-WACC spread few companies can match, and a genuinely net-cash balance sheet despite hundreds of billions in buybacks. What holds the score back: revenue has compounded at just 3.3% a year since FY2021 and free cash flow hasn't grown at all over that span — this framework's heavy growth weighting catching a mature mega-cap exactly as designed. Clears margin, market position (an effective Apple-Samsung duopoly at the premium tier), ROIC, balance sheet, share count and capex intensity; misses growth, FCF growth, FCF conversion, valuation-vs-history and insider ownership.",
+    price: "$349.51",
+    score: "9 / 14",
+    martinero: 62,                    // Martinero Index (weighted 1-100 score, see About)
+    momentum: { status: "accelerating", recent: 15.1, prior: 6.4 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    quarterYoY: { period: "Q4 FY2026 (Sep 2026)", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Extraordinary quality, mature growth. A 33% operating margin, a ROIC-WACC spread few companies can match, and a net-cash balance sheet despite hundreds of billions in buybacks. FY2026 (Sep) revenue was $478.8B, with Q4 up 12%, and FCF conversion is now above the bar. What holds the score back: revenue has compounded at just 3.3% a year over FY2021-25, FCF hasn't grown much over that span, and the stock trades at about 39x earnings against a 31x own average. This framework's heavy growth weighting catches a mature mega-cap exactly as designed.",
     file: "companies/apple.html",
     personalNote: "Apple's probably the most obvious 'everyone already owns this' stock on this list, but running it through the same checklist as everything else here was still worth doing. The operating numbers are genuinely exceptional — a 32% margin, a ROIC-WACC spread most companies can't touch, and a net-cash balance sheet even after Apple's spent hundreds of billions buying back stock. What the checklist makes hard to ignore is that revenue has barely grown in five years and free cash flow hasn't grown at all, even as the stock itself has kept compounding at a healthy clip. That's not really an 'undervalued' story — the market already prices in the quality — it's more a question of whether I'm comfortable paying up for a wonderful, slow-growing business, or whether that capital is better spent finding the next thing still early in its growth curve."
   },
@@ -379,10 +380,10 @@ const COMPANIES = [
     tags: ["Magnificent Seven", "Near-Monopoly"],
     dateFeatured: "2026-08-21",
     price: "$346.96",
-    score: "8 / 13",
-    martinero: 71,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 15.1, prior: 13.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 24.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 25.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A genuine near-monopoly (global search, ~89-90% share) paired with founder-controlled governance and, after years of AI-disruption fears, a trailing P/E that's actually cheap relative to its own five-year average. The scorecard's real drag is the current AI infrastructure buildout: capex jumped 74% YoY to $91.4B in FY2025, pulling capex intensity and FCF conversion below this framework's bars. Clears margin, market position, ROIC, balance sheet, valuation-vs-history, share count and founder ownership; misses growth, FCF growth, FCF conversion and capex intensity.",
     file: "companies/alphabet.html",
     personalNote: "Alphabet is the one on this list where the checklist and my gut actually agree for once. A near-monopoly in search, founders who still control the votes even after selling down most of their economic stake, and — this is the part that surprised me — a P/E that's actually below its own five-year average, because the market spent years worried ChatGPT would eat Google's lunch. Meanwhile Google Cloud is growing 82% a year and the core ad business hasn't missed a step. The honest complication is the AI capex ramp: it's eating free cash flow and pushing capex intensity well past what I'd normally call asset-light, and I don't think anyone — including Alphabet — really knows yet when that spending levels off. I like the setup, but I'm watching the capex trajectory closely before adding."
@@ -398,10 +399,10 @@ const COMPANIES = [
     tags: ["Magnificent Seven"],
     dateFeatured: "2026-08-24",
     price: "$261.06",
-    score: "7 / 13",
-    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 12.4, prior: 11.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A commanding #1 in US e-commerce (~35.7% share, ~6x #2 Walmart) with a genuinely dominant, high-margin cloud business in AWS (39%+ segment margin, growing 37% YoY). Operating income has recovered dramatically off a depressed FY2021 base. The scorecard's real drag is the current AI infrastructure buildout: FY2025 capex hit $131B, pushing capex intensity well past this framework's bar, collapsing free cash flow 71% YoY, and pulling ROIC below WACC on a trailing basis. Clears market share, market concentration, net debt/EBITDA, valuation-vs-history, share count and founder ownership; misses growth, margin, FCF growth, ROIC/WACC, FCF conversion and capex intensity.",
     file: "companies/amazon.html",
     personalNote: "Amazon is the trickiest one on this list to score honestly, because the two halves of the business pull in different directions. AWS on its own would ace this checklist — dominant, high-margin, growing 37% a year — but it's bolted onto a much thinner-margin retail business, so the consolidated numbers land in the middle. The part I take most seriously is that ROIC has actually dipped below WACC right now, and free cash flow is down 71% year-over-year, both driven by a genuinely enormous AI capex ramp ($131B in FY2025 alone). That's not a red flag in the sense of something being broken — it's a deliberate, disclosed bet on AWS/AI infrastructure — but it does mean I'm being asked to trust that the payoff shows up later, and I don't think anyone outside Amazon really knows yet when that is. Jeff Bezos is still selling down his stake gradually too, which I note without reading too much into it."
@@ -417,10 +418,10 @@ const COMPANIES = [
     tags: ["Near-Monopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-27",
     price: "CNY 376.73",
-    score: "10 / 13",
+    score: "11 / 14",
     martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 17.0, prior: -9.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 56.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 58.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's dominant EV battery and energy-storage maker — #1 for nine straight years, holding roughly 40% of the global market, more than double the #2 player (BYD). Revenue and profit have both compounded above 30% annually since 2021 despite a rare 2024 revenue dip, the balance sheet is comfortably net cash, and the current P/E sits modestly below its own FY21-25 average. One of the strongest scorecards on this site — the main structural miss is heavy capex intensity from gigafactory buildout, plus two data-availability N/As (FCF CAGR, FCF conversion) and real geopolitical exposure as a China-domiciled, strategically sensitive supply-chain company.",
     file: "companies/catl.html",
     personalNote: "I recently advised CATL to my girlfriend — we were probably a bit late to the show, buying well after the 2023 low, but I still believe in this company for the long run. Roughly 40% of the world's EV and grid-storage battery market, more than double its nearest rival, with revenue and profit both compounding above 30% a year since 2021 and a comfortably net-cash balance sheet. The honest complications: real export-control and sanctions-list risk as a China-domiciled company, and genuinely heavy capex from gigafactory buildout — this isn't an asset-light compounder. One worry I had going in was CATL getting squeezed by the brutal price war among Chinese EV makers, but its own margins have kept expanding right through that, which says a lot about its pricing power. Free cash flow wasn't reliably verifiable from public sources either, so two criteria are marked N/A rather than guessed at. Fundamentals look solid; the geopolitical and capex risks are the parts I still can't fully price."
@@ -436,10 +437,10 @@ const COMPANIES = [
     tags: ["GRANOLAS"],
     dateFeatured: "2026-08-28",
     price: "£18.49",
-    score: "6 / 13",
-    martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 4.1, prior: 3.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 5.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 5.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A well-run diversified pharma with genuine category leadership in HIV (via majority-owned ViiV Healthcare) and shingles vaccines (Shingrix), a 28.5% ROIC well clear of its cost of capital, and moderate leverage. Growth is the main weak spot — revenue, EBIT and free cash flow have all grown below this framework's bar since FY2021 — and FY2022's net income is skewed by a one-off gain on the Haleon Consumer Healthcare demerger, clearly flagged throughout this dashboard. No founder or anchor shareholder; ownership is broadly institutional, typical of a FTSE 100 major. Current valuation sits almost exactly at its own FY21-25 average.",
     file: "companies/gsk.html",
     personalNote: "GSK is the first of the GRANOLAS I'm adding — Europe's answer to the Magnificent Seven, a set of large, steady, quality-compounder stocks. It's a good example of why I like this framework: the headline FY2022 net income of £15B looks amazing until you realize it's almost entirely a one-off accounting gain from spinning off Haleon, not real operating profit. Strip that out and what's left is a solid, unglamorous pharma business — genuine leadership in HIV treatment and the Shingrix shingles vaccine, strong returns on capital, manageable debt — but growth in the high single digits, not the double digits I usually look for. There's no founder or big insider holder here either, which is normal for a company this size but still something I note. Not a name I'd expect to double quickly, but a reasonable, fairly-priced compounder to own for the dividend and the steady cash generation."
@@ -455,10 +456,10 @@ const COMPANIES = [
     tags: ["GRANOLAS", "Founder-Controlled"],
     dateFeatured: "2026-08-28",
     price: "$56.39",
-    score: "7 / 13",
-    martinero: 53,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 1.6, prior: 3.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: -2.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (sales)", growth: 7.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Exceptional profitability (33% operating margin, 30.8% ROIC) and low leverage from the global #1 in in-vitro diagnostics and a top-3 oncology pharma franchise. Genuinely rare governance: 130 years after founding, the Hoffmann-Oeri family pool still controls ~45% of voting shares. The main weakness is growth — revenue, EBIT and FCF have all been roughly flat since FY2021 as the pandemic-era Diagnostics boom faded and older oncology blockbusters faced biosimilar competition — and the current P/E sits about 14% above its own FY21-25 average.",
     file: "companies/roche.html",
     personalNote: "Roche is the GRANOLAS name I find most interesting from a governance angle — a 130-year-old Swiss pharma giant where the founding Hoffmann-Oeri family still controls roughly 45% of the voting shares through a formal shareholder pool. That's genuinely rare at this scale, and it shows up in the numbers: a 33% operating margin and 30.8% ROIC are about as good as it gets anywhere on this site. The catch is growth — revenue has barely moved in four years as the COVID-testing boom in Diagnostics faded and older oncology blockbusters lost ground to biosimilars. The current price is also running a bit ahead of Roche's own recent valuation history, so I wouldn't call this a screaming bargain today. Still, a business this profitable and this durably family-aligned earns a place on my watchlist even without exciting growth."
@@ -474,10 +475,10 @@ const COMPANIES = [
     tags: ["GRANOLAS"],
     dateFeatured: "2026-08-28",
     price: "$97.19",
-    score: "4 / 13",
-    martinero: 41,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "5 / 14",
+    martinero: 51,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: -2.0, prior: -1.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: -2.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (sales)", growth: 4.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's largest food & beverage company by revenue, but the weakest scorecard in the GRANOLAS batch so far — genuine, structural struggles rather than a one-off distortion. Revenue has declined for four straight years, operating margin has never once reached this framework's 20% bar across the last five years, and net debt/EBITDA at 3.10x is the highest leverage seen in this batch. Free cash flow is a real bright spot (+6.08% CAGR), the share count has declined meaningfully, and H1 2026 organic growth accelerated to 3.6% — an early but genuine sign of a turnaround. Ownership is fully dispersed with no founder or controlling family.",
     file: "companies/nestle.html",
     personalNote: "Nestlé is the honest miss in this batch — I went in expecting another steady, boring GRANOLAS compounder and came out with the weakest scorecard I've built so far. Revenue has actually shrunk for four straight years, and operating margin has sat stubbornly in the 15-17% range without ever clearing my 20% bar, which is a real structural gap, not a one-year blip like GSK's or Roche's distortions. What keeps me from writing it off entirely is the cash generation — free cash flow is up meaningfully since 2022, the share count keeps shrinking, and the first half of 2026 showed the clearest sign yet that the volume-led turnaround under the new CEO might actually be working. Leverage is the highest I've seen in this batch too, which is worth watching. This isn't a stock I'd rush into at nearly 18% above its own five-year average valuation while it's still proving the turnaround is real — but it's one I'll keep watching for the moment the numbers start confirming the story."
@@ -493,10 +494,10 @@ const COMPANIES = [
     tags: ["GRANOLAS"],
     dateFeatured: "2026-08-28",
     price: "$157.54",
-    score: "7 / 13",
-    martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 9.7, prior: 10.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 3.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 4.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "By far the strongest scorecard in the GRANOLAS batch: since completing the Sandoz generics spin-off in 2023, operating margin has expanded to 33.5%, ROIC sits near 25% against a modest cost of capital, leverage is low, and the share count has declined ~27% since FY2021. Two large one-off gains (the 2021 Roche-stake sale and the 2023 Sandoz spin-off) inflate net income in those years and are flagged throughout; the current P/E also sits meaningfully above its own recent average. The real near-term risk is Entresto's patent cliff (sales down ~50% YoY in Q2 2026), which newer growth drivers (Kisqali, Cosentyx, Pluvicto) are so far offsetting.",
     file: "companies/novartis.html",
     personalNote: "Novartis is the pleasant surprise of this GRANOLAS batch — I expected another steady-but-unspectacular European pharma like GSK, and instead found the strongest scorecard I've built in weeks. The Sandoz spin-off in 2023 really did clean the business up: margins have jumped from the low 20s to the mid-30s, ROIC is nearly 25%, and they've bought back more than a quarter of the share count since 2021. The two big one-off gains — selling the old Roche stake back in 2021, then the Sandoz separation gain in 2023 — took some real digging to untangle and flag properly, since they distort both net income and the P/E chart if you're not careful. What keeps this from being an obvious buy for me is timing: Entresto, still one of their biggest products, just lost patent protection and sales are down about half year-over-year, and the stock has already re-rated a lot on the story I like, trading noticeably above its own recent average multiple. I want to see a couple more quarters of the growth drivers actually absorbing that Entresto hole before I'd feel good paying today's price for it."
@@ -512,10 +513,10 @@ const COMPANIES = [
     tags: ["GRANOLAS", "Founder-Controlled"],
     dateFeatured: "2026-08-28",
     price: "€386.60",
-    score: "8 / 13",
-    martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 1.4, prior: 5.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: 5.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (sales)", growth: 7.7 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's largest beauty company by revenue, and the highest binary criteria count (8/13) in the GRANOLAS batch — anchored by genuine founder-descendant control (the Bettencourt Meyers family holds ~34.8%, the strongest founder alignment on this site among the GRANOLAS names). Financials are unusually clean for this batch, with no one-off gains or charges to flag: very low leverage (0.19x net debt/EBITDA), FCF conversion clearing 80%, and — unusually — a current P/E (32.8x) sitting below its own 5-year average. Growth is steady but never approaches this framework's 15% bar, and ROIC (13.3%) falls just short of the 15% threshold despite clearing an estimated cost of capital comfortably.",
     file: "companies/loreal.html",
     personalNote: "L'Oréal turned out to be the cleanest read of this whole GRANOLAS batch — no accounting gains to untangle, no writedowns to explain away, just five years of steady, if unspectacular, growth. What stands out to me is the ownership: the Bettencourt Meyers family still controls about 35% of the company, which is real, durable founder alignment at a scale most consumer companies this size simply don't have anymore. There's also a neat thread connecting back to Nestlé's dashboard in this same batch — Nestlé still owns roughly 20% of L'Oréal, a relationship going back to 1974, and the one-off gain I flagged on Nestlé's 2021 numbers was literally Nestlé selling part of this exact stake back to L'Oréal. The one thing holding this back from a higher score is that growth has just never cleared my usual bar, and ROIC sits just under 15% despite otherwise excellent capital discipline. Still, for a founder-anchored compounder trading slightly below its own five-year average multiple, this is one of the more straightforward, high-quality names I've looked at in a while."
@@ -531,10 +532,10 @@ const COMPANIES = [
     tags: ["GRANOLAS", "Founder-Controlled"],
     dateFeatured: "2026-08-28",
     price: "$105.10",
-    score: "8 / 13",
-    martinero: 58,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 59,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -4.6, prior: -1.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 0.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 1.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The unambiguous global #1 in luxury goods, matching L'Oréal's 8/13 binary criteria count but scoring lower on the weighted index because the misses run deeper: revenue has declined for two straight years from a FY2023 peak and free cash flow is down outright since FY2021 — a real, well-documented luxury demand slowdown, not a distortion. Leverage is moderate (1.13x net debt/EBITDA), FCF conversion clears 80%, and the current P/E (20.87x) sits about 22% below its own five-year average, the deepest discount in this batch. The Arnault family crossed 50% ownership of LVMH's capital in February 2026 (65.9% of voting rights) — the strongest, most direct founder control of any GRANOLAS name.",
     file: "companies/lvmh.html",
     personalNote: "LVMH is the batch's clearest lesson in separating a real cyclical slowdown from an accounting distortion — there's no one-off gain to flag here, just two straight years of declining revenue and margin compression as the global luxury boom of 2021-2023 normalized lower. What keeps me interested is what didn't change: this is still the undisputed #1 in luxury by a wide margin, leverage is comfortable, and the stock is trading about 22% below its own five-year average multiple, the biggest discount I've found in this whole batch. The ownership story is also unlike anything else here — Bernard Arnault and family crossed 50% of the company's capital and hold nearly 66% of the voting rights, which is about as direct as founder control gets at this scale. H1 2026 gave the first real hint of stabilization, with organic growth turning positive and accelerating through the second quarter even as currency effects kept the reported numbers negative. I'd want to see that organic recovery hold for another quarter or two, especially in the Fashion & Leather Goods division, before treating this as a confirmed turn rather than a cheaper entry into an ongoing downcycle."
@@ -550,10 +551,10 @@ const COMPANIES = [
     tags: ["GRANOLAS"],
     dateFeatured: "2026-08-28",
     price: "$164.52",
-    score: "9 / 13",
-    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 8.5, prior: 18.1 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 6.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 7.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The strongest scorecard in the GRANOLAS batch, but only after untangling a real distortion: the 2021 Alexion acquisition loaded that year's income statement with one-off charges that crushed operating margin to 7.74% and net income to near-zero, making both the FY2021 P/E (1625x) and naive CAGRs statistically meaningless. Adjusting for this, operating income has compounded at roughly 17.5% annually since 2022, operating margin has expanded to 24.3%, ROIC (17.0%) comfortably clears an estimated cost of capital, leverage is moderate (1.24x net debt/EBITDA), and the stock trades at a 37% discount to its own recent average multiple — the largest valuation gap found anywhere in this batch. Oncology, now 44% of revenue, ranks a strong #2 globally. No founder or controlling shareholder; insiders hold well under 1%.",
     file: "companies/astrazeneca.html",
     personalNote: "AstraZeneca turned into the most rewarding puzzle of this whole GRANOLAS batch. My first pass at the numbers looked almost broken — a P/E of 1625x in 2021 and net income of basically zero that same year — until I traced it back to the Alexion acquisition and realized the entire income statement that year was loaded with one-off deal charges, not a real operating problem. Once I rebuilt the growth rates from a cleaner 2022 base, this turned into the strongest scorecard I've built in this entire batch: margins expanding every year since, ROIC comfortably above cost of capital, leverage cut by more than two-thirds, and Oncology growing into a genuine #2 global franchise behind Merck. What really caught my attention is the valuation — at 24x earnings against a recent average north of 30x, this is trading at the widest discount to its own history I've found in any GRANOLAS name so far, which is unusual for a company executing this well. The honest caveats: there's no founder or controlling family here, growth still falls a bit short of my usual bars even after adjusting for the distortion, and the July 2026 Phase III miss on Wainua is a reminder that pipeline risk never fully goes away in this industry. Still, this is the batch's biggest positive surprise for me."
@@ -569,10 +570,10 @@ const COMPANIES = [
     tags: ["GRANOLAS", "Founder-Influenced"],
     dateFeatured: "2026-08-28",
     price: "$221.17",
-    score: "9 / 13",
-    martinero: 73,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 72,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 7.6, prior: 9.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 9.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 13.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Ties AstraZeneca for the strongest scorecard in the GRANOLAS batch. Operating margin has expanded every year to a record 28.31% in FY2025, the balance sheet sits in a genuine net cash position — the strongest in this batch — and ROIC (16.82%) comfortably clears an estimated cost of capital. The one real distortion: a disclosed €3.14bn FY2024 restructuring charge (SAP's Business AI transformation program) crushed that year's net income and pushed its P/E to an absurd 88x, excluded here from the entry-multiple average. On the resulting adjusted average, the current 28.67x multiple sits about 17% below its own recent history. Growth is genuinely strong (cloud revenue +23-24%) but still falls short of this framework's 15% bar. Co-founder Hasso Plattner remains SAP's largest individual shareholder at ~6.1%, and active as Supervisory Board Chairman Emeritus.",
     file: "companies/sap.html",
     personalNote: "SAP quietly turned into one of the best all-around scorecards I've built in this entire GRANOLAS batch, and I didn't expect that going in — I had it filed mentally as 'steady enterprise software, nothing dramatic.' Instead I found a company with a genuine net cash balance sheet, margins expanding every single year to a record 28%, and ROIC comfortably above what I'd estimate its cost of capital to be. The one thing that needed real digging was 2024: net income collapsed and the P/E briefly hit 88x, which looked alarming until I traced it to a disclosed €3.1 billion restructuring charge tied to their AI transformation push — a real cost, but a one-time one, sitting below the line where operating income actually grew. Once I excluded that year from the valuation average, the stock is trading at a real discount to its own recent history, which is not something I expected to find in a name that's up double digits annually over five years. I also liked finding that Hasso Plattner, one of the original 1972 founders, still holds a real stake and an active board role — it's a much smaller percentage than LVMH's or L'Oréal's founder families, but it's genuine, ongoing skin in the game from someone who built the company. My main hesitation is that growth, while clearly strong and cloud-led, still hasn't crossed my usual 15% bar on any of the three growth measures — this is a high-quality compounder, not a hypergrowth story."
@@ -588,10 +589,10 @@ const COMPANIES = [
     tags: ["GRANOLAS"],
     dateFeatured: "2026-08-28",
     price: "$44.84",
-    score: "6 / 13",
-    martinero: 47,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 5.4, prior: 7.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 16.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 16.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The honest weak point of this GRANOLAS batch's pharma names — a real, structural gap rather than a one-off distortion. ROIC has sat in the 8-10% range every year since FY2021, never approaching this framework's 15% bar, and revenue/EBIT/FCF growth have all been modest-to-flat over five years. Two genuine one-off items are worth flagging: FY2022's elevated margins reflect Regeneron-related equity stake gains, and FY2025's net income includes a €2.61bn gain from divesting Opella (consumer healthcare) to CD&R. What's working: Dupixent just crossed €5B in quarterly sales for the first time (+37.6%), leverage is moderate, and the share count is down a real 18% over five years. Current valuation (23.85x) sits about 30% above its own recent average — the richest gap in this batch.",
     file: "companies/sanofi.html",
     personalNote: "Sanofi is the batch's reality check — after AstraZeneca and SAP both turned into pleasant surprises, this one reminded me that not every GRANOLAS name is a hidden gem. The honest story here is a return-on-capital problem: ROIC has been stuck in the high single digits for five straight years, never getting close to my usual bar, and it's not explained away by any one-off charge — it's just a genuinely lower-return business than the other pharma names in this batch. I did find two real distortions worth flagging: 2022's margins were flattered by Regeneron stake-sale gains, and 2025's net income got a real boost from selling the Opella consumer health business, which is worth remembering if the headline numbers look better than they are. What keeps me from writing this off completely is Dupixent — crossing €5 billion in quarterly sales for the first time is a genuinely big deal, and the buyback funded by the Opella proceeds has meaningfully shrunk the share count. But at nearly 30% above its own recent average multiple for a business growing this slowly, I don't see the value case here right now — this is one I'd want to see re-rate lower, or the returns genuinely improve, before getting interested."
@@ -607,8 +608,8 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-28",
     price: "$227.96",
-    score: "4 / 13",
-    martinero: 49,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "5 / 14",
+    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 21.8, prior: 29.1 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027", growth: 26.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The fastest, most consistent revenue growth found anywhere on this site — +34.9% CAGR over FY2022-26, never below +21% in any single year — funded almost entirely by strong free cash flow (+29.7% CAGR, 27-32% FCF margin every year) rather than GAAP profit. GAAP operating income has never been positive in five fiscal years due to heavy stock-based compensation, which drags this framework's score down hard: no valid EBIT CAGR to compute, no ROIC reading, and a P/FCF of 145x that's roughly double its own 5-year average after the Aug 27, 2026 earnings-beat pop (+20.5% in one day on record net-new ARR). The 49/100 undersells the underlying business quality — read it alongside the FCF story, not instead of it. Balance sheet carries no net debt and $4.41B in net cash.",
@@ -626,10 +627,10 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$371.59",
-    score: "8 / 13",
-    martinero: 74,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 14.8, prior: 16.5 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 31.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q4 FY2026", growth: 34.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The strongest scorecard in this site's AI/SaaS batch so far — 8/13, real and growing GAAP operating margins since FY2023, a comfortable net-cash balance sheet even after its largest deal ever, and a clear #1-or-#2 platform position that just added identity security via the $25B CyberArk acquisition (closed Feb 11, 2026). Revenue just accelerated to +31% YoY with Next-Gen Security ARR up 60% YoY. The catch is entirely about timing and price: the stock has roughly tripled since April 2026, pushing P/FCF to 79.8x against a 30.4x five-year average — the richest premium-to-history found anywhere in this project — while CyberArk integration costs pushed the most recent quarter to a rare GAAP operating loss. Share count is up 35% over five years, mostly from the CyberArk stock issuance.",
     file: "companies/panw.html",
     personalNote: "Palo Alto Networks is the flip side of CrowdStrike in this batch — a real, mature GAAP earner rather than a pure cash-flow story, and it shows in the score: 8/13 versus CRWD's 4/13. What holds it back isn't business quality, it's price and dilution. The stock has essentially tripled since April on a mix of genuine AI-security demand and a broad cybersecurity re-rating, and CyberArk added 112 million new shares on top of ordinary stock comp. I like the direction of this business a lot — CEO Nikesh Arora has actually been buying shares in the open market rather than selling, which is the opposite signal from what I usually see — but I'd rather wait for the CyberArk integration dust to settle and the multiple to cool off than chase it at 2.6x its own historical valuation."
@@ -645,10 +646,10 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$184.23",
-    score: "7 / 13",
-    martinero: 66,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 23.0, prior: 34.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 25.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q4 FY2026", growth: 24.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Sits between CrowdStrike and Palo Alto Networks in this AI/SaaS batch — never GAAP operating-profitable, but the loss has narrowed every single year for five straight years (-30.7% to -4.6% operating margin), while free cash flow has compounded at +51.4% CAGR and margins held 22-30%. Two things set this dashboard apart: founder & CEO Jay Chaudhry's family trusts control roughly 35% of shares outstanding, the strongest insider alignment anywhere in this batch, and the stock is down -32.5% over the past year even as revenue kept growing above 20% — pushing the current 31.0x P/FCF to well under half its own five-year average of 91.8x. Market share is real (Gartner SASE/SSE Leader) but the competitive field is genuinely tightening, and share count is up 17% over five years from stock-based comp.",
     file: "companies/zs.html",
     personalNote: "Zscaler is the one in this batch where the price and the business seem to be telling different stories. The fundamentals are steadily converging on GAAP profitability — five years running of narrowing losses is not a fluke — and free cash flow has been compounding faster than revenue. Meanwhile the stock is down almost a third over the past year. Some of that is a genuine growth deceleration (management itself guided FY2027 ARR growth down to 16-17%), so I don't think it's simply 'the market is wrong.' But a 35% founder stake and a P/FCF multiple sitting at a third of its own five-year average is a combination I don't see very often, and it's enough to put this one on my watchlist for a closer look rather than filing it away next to CrowdStrike."
@@ -664,10 +665,10 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$236.98",
-    score: "7 / 13",
-    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "8 / 14",
+    martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 28.0, prior: 25.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 36.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 35.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The strongest market-position claim in this AI/SaaS batch — a Gartner Magic Quadrant Leader for Observability Platforms for six consecutive years, positioned highest in Ability to Execute in 2026 — paired with the messiest GAAP profitability path: operating income has flipped sign three times in five years, never building the clean trend seen at Palo Alto Networks or Zscaler. Free cash flow is the cleaner story, compounding at +37.9% CAGR with 22-35% margins every year. The stock is up +79.9% over the past year but fell -17% in a single day in August 2026 after management flagged a usage reduction from its largest customer, despite an otherwise beat-and-raise quarter. Insider ownership is thin at 5.48%, and share count is up 21% over five years. IMPORTANT: 'Met' on entry multiple means 72.6x P/FCF is a modest ~16% discount to Datadog's own 86x average — not a bargain — while growth has cooled from a faster earlier pace into the high-20s%.",
     file: "companies/ddog.html",
     personalNote: "Datadog is an interesting case because the market-position story is genuinely the best in this batch — six years running as the Gartner-recognized Observability leader is not a small thing — but the profit-and-loss statement refuses to settle into a trend. It's not deteriorating, it's just bouncing around zero year after year, which makes we wonder whether that's really a temporary phase or closer to where this business structurally sits given how competitive and price-sensitive observability tooling has become. The August drop on a single large customer trimming usage is the kind of thing I'd want to watch resolve over a couple more quarters before getting more constructive — not because the business is broken, but because it's a reminder that even a 33,000-customer SaaS company can still have concentration risk hiding in the guidance language."
@@ -683,10 +684,10 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$328.00",
-    score: "6 / 13",
-    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 28.9, prior: 29.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 33.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q2 FY2027", growth: 35.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The lowest binary score in this site's AI/SaaS batch — 6/13 — driven by the widest GAAP gap of the group: revenue and free cash flow have both compounded at 40%+ annually, but operating margin remains deeply negative (-28.32% in FY2026, the worst in this batch, though improving from -58.64% in FY2022). The competitive picture has genuinely shifted too — private rival Databricks has overtaken Snowflake in ARR and is growing faster (65% vs. 29%), a real reversal from 2023. Insider ownership is the thinnest here at 2.64%, reflecting a diffuse ownership structure after multiple CEO transitions. Current valuation (97.2x P/FCF) sits within its recent multi-year trading range rather than at either extreme. IMPORTANT: the 'Met' on entry multiple is mostly mechanical — it only looks cheap against a history skewed by one extreme FY2022 outlier; excluding that, 97.2x sits at the expensive end of Snowflake's normal range.",
     file: "companies/snow.html",
     personalNote: "Snowflake is the toughest read in this batch for me. The growth numbers are genuinely excellent — 40% revenue CAGR, 86% FCF CAGR — but the GAAP losses aren't shrinking in dollar terms even as the margin percentage improves, and Databricks overtaking it in ARR is the kind of competitive shift I don't want to wave away as noise. I don't think this is a broken business by any means, but between the deepest losses in this batch, the thinnest insider ownership, and a well-funded private competitor now growing faster, this is one I'd want to see the FY2027 numbers on before getting more constructive. The valuation isn't demanding me to rush in either way — it's sitting in the middle of its own recent range, not screaming cheap or expensive."
@@ -702,10 +703,10 @@ const COMPANIES = [
     tags: ["State-Owned", "Geopolitically Critical"],
     dateFeatured: "2026-08-28",
     price: "SAR 26.10",
-    score: "7 / 13",
-    martinero: 53,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 50,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -7.2, prior: -2.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 19.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 20.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's largest crude oil producer and one of its most profitable companies by any measure — a 44% operating margin, a 20.8% ROIC against an estimated 8.3% cost of capital, and net debt/EBITDA of just 0.09x. Ownership is concentrated in the Saudi state (government + PIF, ~90% combined) rather than a founder. The scorecard's main miss is growth: revenue, operating income and free cash flow have all been roughly flat-to-declining since FY2021, and FY2026's strong headline results are meaningfully inflated by a real but unusual Strait of Hormuz supply disruption tied to the ongoing regional conflict — a geopolitical tailwind that could reverse just as quickly as it appeared.",
     file: "companies/aramco.html",
     personalNote: "Aramco is a strange one to hold up against the rest of this list — it's not a growth story, it's not founder-led, and its profits are currently juiced by a geopolitical event I'd rather not see continue. But strip all that away and what's left is genuinely the most profitable, least levered business on this entire site: a 44% operating margin, ROIC miles above its cost of capital, and almost no net debt. The dividend yield (over 5%) is real income, backed by a state that has every incentive to keep paying it. What keeps me cautious is growth — revenue and free cash flow have barely moved since 2021, and long-term I'd want to see how Aramco navigates the energy transition, since this isn't a business I'd want to hold for 20 years on autopilot. Right now feels like buying deep, reliable cash flow at a fair price, not buying compounding growth — worth remembering which of those two things I'm actually getting."
@@ -721,13 +722,13 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$317.76",
-    score: "12 / 13",
-    martinero: 89,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "13 / 14",
+    martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 70.2, prior: 75.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 53.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The highest scorecard on this entire site — 12/13 criteria met, Martinero Index 89 — but it comes with real context. AppLovin divested its legacy mobile-games/apps business (closed June 30, 2025) to become a pure AI ad-tech platform built around AXON, its ad-recommendation engine; what's left runs at 75.75% operating margin and 132.73% ROIC against 17.73% WACC, the widest capital-efficiency spread of any company covered here. Because the divestiture changed the business, only FY2023-25 are used as the comparable base for growth and valuation math. The stock has been rough despite the fundamentals: short-seller Muddy Waters alleged Terms-of-Service violations in March 2025 (-20% that day), and Q2 2026 earnings on Aug 5 — despite 53% revenue growth — sent shares down another 16-21% on concerns about the pace of AppLovin's newer e-commerce ad push. The stock is down 53% from its FY2025 close of $673.82. The lone scorecard miss is market concentration, in a genuinely crowded ad-tech field (Meta, Google, Unity, Digital Turbine, and others).",
+    quarterYoY: { period: "Q3 2026", growth: 55.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The highest criteria-met tally on this entire site — 13/14 criteria met, Martinero Index 90 — but it comes with real context. AppLovin divested its legacy mobile-games/apps business (closed June 30, 2025) to become a pure AI ad-tech platform built around AXON, its ad-recommendation engine; what's left runs at 75.75% operating margin and 132.73% ROIC against 17.73% WACC, the widest capital-efficiency spread of any company covered here. Because the divestiture changed the business, only FY2023-25 are used as the comparable base for growth and valuation math. The stock has been rough despite the fundamentals: short-seller Muddy Waters alleged Terms-of-Service violations in March 2025 (-20% that day), and Q2 2026 earnings on Aug 5 — despite 53% revenue growth — sent shares down another 16-21% on concerns about the pace of AppLovin's newer e-commerce ad push. The stock is down 53% from its FY2025 close of $673.82. The lone scorecard miss is market concentration, in a genuinely crowded ad-tech field (Meta, Google, Unity, Digital Turbine, and others).",
     file: "companies/app.html",
-    personalNote: "AppLovin is the highest score I've ever put on this site, and that number alone makes me want to slow down rather than get excited. This one genuinely could go both ways, and I think it's worth being honest about both sides rather than picking one. The bull case is real: a 53% drop from the FY2025 peak looks a lot more like sentiment and noise than a fundamentals problem — Q2 2026 EBITDA and net income both beat and grew 58% and 55% respectively, the stock fell mainly on the CEO's 'lumpy timing' comments rather than an actual miss, and today's valuation sits below AppLovin's own two-year average. If AXON's edge is real and durable, that's the kind of gap between price and business quality I'd normally want to lean into. But the bear case is just as real. The economics are extraordinary — software-platform margins on what used to be a lower-margin mobile ad business — but that's only true because AppLovin sold off half the company in mid-2025, so I'm judging a two-year-old version of this business against a 13-criteria framework built for companies with a much longer track record. The stock has round-tripped hard: up roughly 7x from its 2022 low to its 2025 peak, then down more than half from that peak into today. And the Muddy Waters allegations aren't resolved — if Foroughi's independent review finds real ToS violations with Meta, Google or TikTok, that's a risk to AXON's actual data pipeline, not just a PR headache. So: could be a fun, genuinely mispriced opportunity, could also be a value trap dressed up as one. I want to watch how the next couple of quarters land and how that independent review resolves before treating a 12/13 score as anything close to a sure thing."
+    personalNote: "AppLovin has one of the highest scores I've ever put on this site, and that number alone makes me want to slow down rather than get excited. This one genuinely could go both ways, and I think it's worth being honest about both sides rather than picking one. The bull case is real: a 53% drop from the FY2025 peak looks a lot more like sentiment and noise than a fundamentals problem — Q2 2026 EBITDA and net income both beat and grew 58% and 55% respectively, the stock fell mainly on the CEO's 'lumpy timing' comments rather than an actual miss, and today's valuation sits below AppLovin's own two-year average. If AXON's edge is real and durable, that's the kind of gap between price and business quality I'd normally want to lean into. But the bear case is just as real. The economics are extraordinary — software-platform margins on what used to be a lower-margin mobile ad business — but that's only true because AppLovin sold off half the company in mid-2025, so I'm judging a two-year-old version of this business against a 14-criteria framework built for companies with a much longer track record. The stock has round-tripped hard: up roughly 7x from its 2022 low to its 2025 peak, then down more than half from that peak into today. And the Muddy Waters allegations aren't resolved — if Foroughi's independent review finds real ToS violations with Meta, Google or TikTok, that's a risk to AXON's actual data pipeline, not just a PR headache. So: could be a fun, genuinely mispriced opportunity, could also be a value trap dressed up as one. I want to watch how the next couple of quarters land and how that independent review resolves before treating a 12/13 score as anything close to a sure thing."
   },
 
   {
@@ -740,8 +741,8 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$256.00",
-    score: "9 / 13",
-    martinero: 77,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "10 / 14",
+    martinero: 81,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 9.6, prior: 8.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027", growth: 11.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The clearest 'core enterprise OS' name on this site — #1 in global CRM for 13 straight years, roughly 4x the market share of nearest rival Microsoft, and an AI story (Agentforce) that's now showing up as real revenue rather than roadmap talk: $1.5B annualized, up 240% YoY, with agentic workflow actions up 97% quarter-over-quarter. Margins have expanded cleanly and continuously from a 2022 trough of 2.07% to 21.47% today, and free cash flow has grown every single year. What holds the score back: overall revenue growth has structurally decelerated below this framework's 15% bar as the company has scaled past $40B, ROIC still hasn't cleared 15% despite real improvement, and a $25B debt-funded buyback in March 2026 flipped the balance sheet from net cash to a 2.40x leveraged position overnight — a deliberate capital-allocation call under investor pressure, not distress, but worth watching. Trades at 23.7x trailing P/E versus a 76.0x FY22/24-26 average (FY2023 excluded as a near-zero-earnings noise year), a steep discount to its own trading history.",
@@ -759,11 +760,11 @@ const COMPANIES = [
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
     price: "$144.71",
-    score: "10 / 13",
-    martinero: 81,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "11 / 14",
+    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 20.9, prior: 22.4 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 24.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The strongest scorecard of any core-enterprise-SaaS name on this site — 10/13 criteria met, Martinero Index 81 — built on genuinely rare growth durability: five straight years of 20%+ revenue growth that's now accelerating (Q2 2026 was +24.0% YoY, the fastest in two years) despite already being past $13B in revenue. ServiceNow holds roughly 44% of the global ITSM market, more than 2.5x its nearest rival, and its AI product line crossed $1B in annual contract value this quarter with agentic AI deployments up 9x in nine months. The balance sheet stayed conservatively levered (net debt/EBITDA 0.60x) even after the $7.75B Armis Security acquisition. What holds it back: GAAP operating margin (15.06%) is still below this framework's 20% bar and just had a sharp one-quarter compression tied to acquisition costs and stock comp; ROIC hasn't cleared 15%; and insider ownership is the thinnest on the site (0.14%) since CEO Bill McDermott is a professional hire, not a founder. The stock is down 18.5% over the past year despite the growth acceleration — a real disconnect between fundamentals and price. IMPORTANT: the 'Met' on entry multiple is only relative — 90.4x P/E is cheaper than ServiceNow's own extreme history, not cheap in absolute terms (PEG well above 4x). I own this stock and bought in without weighing that gap closely enough; I'm riding it out, not selling, but it's the clearest personal example on this site of financials likely staying strong while the share price is a separate, less certain bet.",
+    quarterYoY: { period: "Q3 2026", growth: 20.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The strongest scorecard of any core-enterprise-SaaS name on this site — 11/14 criteria met, Martinero Index 80 — built on genuinely rare growth durability: five straight years of 20%+ revenue growth that's now accelerating (Q2 2026 was +24.0% YoY, the fastest in two years) despite already being past $13B in revenue. ServiceNow holds roughly 44% of the global ITSM market, more than 2.5x its nearest rival, and its AI product line crossed $1B in annual contract value this quarter with agentic AI deployments up 9x in nine months. The balance sheet stayed conservatively levered (net debt/EBITDA 0.60x) even after the $7.75B Armis Security acquisition. What holds it back: GAAP operating margin (15.06%) is still below this framework's 20% bar and just had a sharp one-quarter compression tied to acquisition costs and stock comp; ROIC hasn't cleared 15%; and insider ownership is the thinnest on the site (0.14%) since CEO Bill McDermott is a professional hire, not a founder. The stock is down 18.5% over the past year despite the growth acceleration — a real disconnect between fundamentals and price. IMPORTANT: the 'Met' on entry multiple is only relative — 90.4x P/E is cheaper than ServiceNow's own extreme history, not cheap in absolute terms (PEG well above 4x). I own this stock and bought in without weighing that gap closely enough; I'm riding it out, not selling, but it's the clearest personal example on this site of financials likely staying strong while the share price is a separate, less certain bet.",
     file: "companies/now.html",
     personalNote: "ServiceNow is the one I actually own — and the one where I walked straight into the exact trap this dashboard now flags for everyone else. I bought in on the growth story: five years of 20%+ revenue growth, accelerating rather than decelerating, real booked AI contract value rather than a projection. All of that is still true and still good. What I didn't weigh carefully enough going in was valuation — the 'Met' checkmark on entry multiple here means 90.4x is cheaper than ServiceNow's own unusually rich history, not that it's cheap outright, and a PEG north of 4x on trailing growth says the same thing more bluntly. I'm not selling. I still believe in the business, and I'd rather ride out a multiple correction — if one comes — than sell a company I think is genuinely well run. But if you're scanning this dashboard and reading 'Met' as 'cheap,' don't — I made close to that exact mistake myself, and I'd rather you learn it from my dashboard than from your own portfolio."
   },
@@ -778,11 +779,11 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$118.90",
-    score: "3 / 13",
-    martinero: 31,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 43,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 2.8, prior: 5.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q1 FY2027", growth: 9.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "By far the weakest scorecard on this site — 3/13 criteria met, Martinero Index 31 — but driven almost entirely by two live, real events rather than a broken business. First, Alibaba committed roughly ¥50B ($7B) to a quick-commerce subsidy war against Meituan and JD.com, taking GAAP operating margin from 15.22% (FY2025) to 6.15% (FY2026) and 4.56% TTM. Second, capex more than tripled to fund AI/cloud infrastructure, pushing free cash flow negative (-$11.38B TTM) for the first time in years. Set against that: Alibaba remains net cash ($17.5B), has cut its share count over 13% since FY2022, and trades at a PEG ratio of just 0.44. Taobao+Tmall remain China's largest combined e-commerce group (~40-46% GMV share) but the market has become genuinely four-way contested, unlike a decade ago.",
+    blurb: "One of the weaker scorecards on this site — 4/14 criteria met, Martinero Index 43 — but driven almost entirely by two live, real events rather than a broken business. First, Alibaba committed roughly ¥50B ($7B) to a quick-commerce subsidy war against Meituan and JD.com, taking GAAP operating margin from 15.22% (FY2025) to 6.15% (FY2026) and 4.56% TTM. Second, capex more than tripled to fund AI/cloud infrastructure, pushing free cash flow negative (-$11.38B TTM) for the first time in years. Set against that: Alibaba remains net cash ($17.5B), has cut its share count over 13% since FY2022, and trades at a PEG ratio of just 0.44. Taobao+Tmall remain China's largest combined e-commerce group (~40-46% GMV share) but the market has become genuinely four-way contested, unlike a decade ago.",
     file: "companies/baba.html",
     personalNote: "Alibaba is the hardest scorecard I've had to sit with on this site, because the number (31) looks like a broken business and the reality is a lot messier than that. Two things are doing basically all the damage: a subsidy war Alibaba chose to fight, and an AI capex ramp every hyperscaler is running through right now. Neither is a sign the core business is failing — quarterly operating margin already bounced off its March 2026 low (1.01% to 7.29%) — but neither has fully resolved either, and I don't know yet whether management can dial the subsidy spend back without just handing share back to Meituan and JD. What keeps me interested despite the ugly number: net cash balance sheet, a shrinking share count even through this mess, and a PEG of 0.44 that says the market is pricing in less growth than analysts still expect. What keeps me cautious: real, multi-way competition in a market that used to be Alibaba's alone, plus the structural China-ADR considerations that don't apply to anything else in this batch. I'd want to see two more quarters of margin recovery before treating this as a value opportunity rather than a business genuinely losing ground."
   },
@@ -797,13 +798,13 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$85.69",
-    score: "11 / 13",
-    martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "11 / 14",
+    martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 9.6, prior: 58.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: 8.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "One of the strongest scorecards on this entire site — 11/13 criteria met, Martinero Index 90 — yet the stock is down nearly 30% over the past year. Pinduoduo has overtaken JD.com by domestic GMV, operating margin sits at 21.56%, ROIC-WACC spread is a huge 10.7 points, and net cash of $66.5B is worth more than half the market cap. The drag is Temu: the US ended its de minimis tariff exemption (May 2025) and the EU added its own per-item duty (Jul 2026), pushing Temu's global MAU down from ~525M to ~467M and cooling overall revenue growth from 89.68% (FY2023) to 9.65% (FY2025). ROIC missed this framework's 15% bar by just 0.08pt. Trades at 9.35x P/E against a 25.10x five-year average.",
+    blurb: "One of the strongest scorecards on this entire site — 11/14 criteria met, Martinero Index 85 — yet the stock is down nearly 30% over the past year. Pinduoduo has overtaken JD.com by domestic GMV, operating margin sits at 21.56%, ROIC-WACC spread is a huge 10.7 points, and net cash of $66.5B is worth more than half the market cap. The drag is Temu: the US ended its de minimis tariff exemption (May 2025) and the EU added its own per-item duty (Jul 2026), pushing Temu's global MAU down from ~525M to ~467M and cooling overall revenue growth from 89.68% (FY2023) to 9.65% (FY2025). ROIC missed this framework's 15% bar by just 0.08pt. Trades at 9.35x P/E against a 25.10x five-year average.",
     file: "companies/pdd.html",
-    personalNote: "PDD is the sharpest gap I've found yet between what the scorecard says and what the stock price says — 11 of 13 criteria met, a Martinero Index of 90, and the stock is still down almost 30% over the last year. The business itself is genuinely excellent: Pinduoduo has grown past JD.com domestically, the balance sheet carries more cash than half the market cap, and founder Colin Huang still holds nearly 32% of the company, the strongest founder alignment of any e-commerce name I've built. What's actually weighing on the stock is real, not sentiment-only — Temu lost its US tariff exemption, the EU just added its own duty on top, and Temu's user base has genuinely shrunk as the company retools its shipping model from direct-from-China to local warehousing. That's a real headwind to the growth story, not a made-up one. The ROIC miss is almost comically close — 14.92% against a 15% bar — which tells me this framework's binary cutoffs can occasionally punish a company for being a hair on the wrong side of an arbitrary line. Cheap for a real reason, or genuinely mispriced? I lean toward the latter, but I'd want to see Temu's MAU trend stabilize before calling this an obvious buy."
+    personalNote: "PDD is the sharpest gap I've found yet between what the scorecard says and what the stock price says — 11 of 14 criteria met, a Martinero Index of 85, and the stock is still down almost 30% over the last year. The business itself is genuinely excellent: Pinduoduo has grown past JD.com domestically, the balance sheet carries more cash than half the market cap, and founder Colin Huang still holds nearly 32% of the company, the strongest founder alignment of any e-commerce name I've built. What's actually weighing on the stock is real, not sentiment-only — Temu lost its US tariff exemption, the EU just added its own duty on top, and Temu's user base has genuinely shrunk as the company retools its shipping model from direct-from-China to local warehousing. That's a real headwind to the growth story, not a made-up one. The ROIC miss is almost comically close — 14.92% against a 15% bar — which tells me this framework's binary cutoffs can occasionally punish a company for being a hair on the wrong side of an arbitrary line. Cheap for a real reason, or genuinely mispriced? I lean toward the latter, but I'd want to see Temu's MAU trend stabilize before calling this an obvious buy."
   },
 
   {
@@ -816,10 +817,10 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$119.36",
-    score: "7 / 13",
+    score: "8 / 14",
     martinero: 72,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 36.3, prior: 28.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 48.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 43.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A genuine multi-year turnaround — Shopee (#1 in Southeast Asia e-commerce, ~52-53% share), Garena and Monee are now all GAAP operating-profitable at once for the first time in Sea's history. Operating margin has climbed cleanly from -15.90% (FY2021) to 8.65% (FY2025), free cash flow has compounded to $4.51B, and revenue growth has actually re-accelerated to +43% TTM. What holds the score to 7/13: operating margin is still thin, TikTok Shop is closing the gap in a genuinely three-way contested market, share count keeps drifting up from stock-based comp, and the current valuation sits slightly above Sea's own recent trading history. EBIT and FCF CAGR are marked N/A since FY2021 was a loss year for both, making a standard growth-rate calculation undefined.",
     file: "companies/se.html",
     personalNote: "Sea Limited is the most literal turnaround story in this whole e-commerce batch. This isn't a company still promising future profitability — Shopee, Garena and Monee are all making money at the same time right now, after years of Sea deliberately burning cash to win share. The margin chart alone tells the story: a clean, uninterrupted five-year climb from -15.9% to +8.65%, no zigzagging. What keeps this at a 72 rather than higher is that the margin, while genuinely improving, is still thin by this framework's standards, and TikTok Shop is a real, fast-growing threat in Sea's home market rather than a hypothetical one. There's also a fun connection to the rest of this batch: Sea just launched a 'Turbo Delivery' service in Brazil aimed squarely at Amazon and MercadoLibre, both of which I've covered elsewhere on this site. I like this business more than the score alone suggests — a genuine, working turnaround with a founder who still controls the company through multi-class voting shares — but I'd want to see operating margin actually clear double digits before calling this cheap rather than fairly priced."
@@ -835,10 +836,10 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$16.52",
-    score: "6 / 13",
-    martinero: 45,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 13.9, prior: 24.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 4.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 7.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Korea's clear #1 e-commerce platform (37.7% usage share vs Naver's 27.2%) built on a genuine Rocket Delivery logistics moat — but the financial picture right now is the weakest in this batch outside Alibaba. A $410M Korean privacy-regulator fine over a November 2025 data breach (37M+ customers) drove Coupang's largest-ever quarterly operating loss in Q2 2026, and revenue growth has decelerated to just 3.90% YoY, the slowest in its public history. ROIC is deeply negative, net cash has shrunk to a thin $477M buffer, and free cash flow has collapsed toward breakeven. Clears market share, net cash, share count trend, insider ownership and capex intensity; misses margin, market concentration, ROIC/WACC, FCF conversion and entry multiple. EBIT and FCF CAGR are marked N/A since FY2021 was a loss year for both.",
     file: "companies/cpng.html",
     personalNote: "Coupang is the batch's clearest lesson in separating market position from financial health right now — those are two very different questions here. The market position is genuinely excellent: Coupang built a real logistics moat with Rocket Delivery and it shows in the usage numbers, clearly ahead of Naver. But the financials are rough. A $410 million fine over a data breach that exposed 37 million customers' data drove the company's worst quarter since its 2021 listing — and that's disclosed and one-off, easy enough to look past. What actually gives me pause is that Q1 2026 was already posting a loss before the fine hit, and revenue growth has slowed to the weakest pace in Coupang's history as a public company. Founder Bom Kim controls about 76% of the vote through 29-to-1 super-voting shares despite owning only about 9% of the economics, which is worth knowing given the breach happened on his watch. I'd want to see at least two clean quarters, with the fine fully behind them, before treating the current cheap-looking price as an opportunity rather than a warning."
@@ -854,8 +855,8 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$28.74",
-    score: "6 / 13",
-    martinero: 44,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 12.9, prior: 6.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: -2.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "China's largest retailer by revenue, running a first-party logistics model that leaves it with thin margins but a genuinely enormous net cash position ($22.78B, more than half the market cap). The weak score here is largely self-inflicted: JD launched an aggressive push into food delivery in February 2025, directly challenging Meituan, and the resulting subsidy war cost JD three straight quarterly operating losses (Q2-Q4 2025) before a modest recovery in Q1-Q2 2026. Revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC and entry multiple all miss; market share, net debt/EBITDA, FCF conversion, share count trend, insider ownership and capex intensity all clear. Unlike the rest of this batch's China/SE Asia names, no criteria needed N/A treatment — FY2021 was already a thin profit and positive-FCF year for JD, so every growth rate is directly computable, including the very poor ones.",
@@ -873,10 +874,10 @@ const COMPANIES = [
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
     price: "$1,966.25",
-    score: "11 / 13",
-    martinero: 86,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "11 / 14",
+    martinero: 78,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 38.9, prior: 37.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 50.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 45.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The strongest scorecard in this entire e-commerce batch: MercadoLibre is the clear, widening #1 in Latin American e-commerce and fintech across 18 countries, with revenue compounding at a 42.18% CAGR (FY21-25) and free cash flow growing even faster at 128.96% CAGR. Q2 2026 revenue grew 49.76% YoY, the fastest pace in nearly four years, yet the stock is down 18.53% over the past 52 weeks — a real gap between price and fundamentals. Current P/E of 53.5x sits below its own FY22-25 average of 66.3x. Only two misses, both close calls: operating margin (11.08%, reinvesting into logistics and lending) and ROIC (14.20%, just under the 15% bar despite clearing WACC). No criteria needed N/A treatment — MELI was already profitable and FCF-positive in FY2021.",
     file: "companies/meli.html",
     personalNote: "MercadoLibre is the easiest story to like in this whole batch, and I mean that as a genuine compliment, not a knock on the framework's rigor. There's no tariff fight, no self-inflicted price war, no supervoting founder drama — just a dominant platform in a region growing faster than the global e-commerce average, compounding both revenue and free cash flow at rates nothing else here comes close to. And unlike most 'great business' stories, this one currently trades at a P/E below its own recent average, while the stock is actually down over the past year despite the business just posting its fastest growth in nearly four years. That combination — accelerating fundamentals, compressing valuation — is rare enough that I wanted it to be the batch's closing pick. The two things keeping this from a perfect score are worth taking seriously, though: margin has been drifting down for several quarters straight as they lean into logistics and Mercado Crédito, and I'd want to see that stabilize before assuming it's purely growth investment and not competitive pressure. I'd also flag the debt structure for what it is — most of it funds their own lending book, not the core commerce business — but it's exactly the kind of thing worth re-checking each quarter as that credit portfolio keeps scaling."
@@ -892,10 +893,10 @@ const COMPANIES = [
     tags: ["Memory Cycle", "TSMC Competitor"],
     dateFeatured: "2026-08-31",
     price: "₩256,250",
-    score: "9 / 13",
-    martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "9 / 14",
+    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 11.0, prior: 16.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 129.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 126.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "TSMC's only real foundry rival, but really two businesses in one: a genuinely dominant #1 memory franchise (39% DRAM share, 29% NAND share) riding an AI-driven supercycle — quarterly operating margin rocketed from 6.27% to 52.18% in a year — and a distant, widening-gap #2 in foundry at just 6.5-7% vs TSMC's 72-73%. The 5-year revenue and EBIT CAGRs both miss badly, but only because the window captures FY2023's brutal memory-industry trough; FCF CAGR, ROIC/WACC, entry multiple, net cash position and market share all clear comfortably. Stock is up 264% over the past 52 weeks. Control runs through a Korean chaebol cross-shareholding pyramid (Lee family → Samsung C&T → Samsung Life → 8.51% of Samsung Electronics) rather than direct ownership.",
     file: "companies/samsung.html",
     personalNote: "Samsung is the most timing-sensitive dashboard I've built so far, and I want to be upfront about that. Everything about this scorecard depends on which five years you look at: the trailing CAGRs are ugly because FY2023 was a genuine trough, but the last five quarters have been about as good as memory chip results get, with margin going from 6% to 52% in a year. That's not a typo, and it's also not something I'd assume just continues in a straight line — memory has burned people who did that before, including Samsung itself in 2022-23. What I find most interesting isn't the memory story though, it's the foundry story: this whole dashboard exists because someone might read 'Samsung' as 'the other TSMC,' and the numbers say that's not really true right now — the gap to TSMC in foundry share actually widened this year, not narrowed. So I'd hold two separate views on this one: memory Samsung looks like a genuine, currently-undervalued compounder given how little the multiple has moved despite the stock's own rally; foundry Samsung still looks like a distant second place with no clear sign of catching up. Worth watching both threads separately rather than treating this as a single story."
@@ -911,10 +912,10 @@ const COMPANIES = [
     tags: ["Turnaround Bet", "TSMC Competitor"],
     dateFeatured: "2026-08-31",
     price: "$89.47",
-    score: "3 / 13",
-    martinero: 24,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "3 / 14",
+    martinero: 29,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: -0.4, prior: -2.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 25.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 21.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The most dramatic risk/reward story in this batch: stock up 260% over the past year on the U.S. government's 10% equity stake, a $5B Nvidia investment, Apple foundry talks, and 18A finally reaching high-volume production under new CEO Lip-Bu Tan — while the actual scorecard is one of the weakest on the whole site. Revenue is still 28% below its FY2021 peak, ROIC (3.42%) badly misses its own cost of capital (15.14%), FCF was negative for four straight years, and funding the turnaround has diluted shareholders by roughly a quarter over five years. Q2 2026 showed real operating improvement (12.19% margin, the best quarter in years) — genuinely encouraging, but one quarter against years of decline. Intel Foundry itself remains a distant, unproven challenger to TSMC (roughly single-digit share vs. TSMC's ~70%+); Intel's real day-to-day fight is still against AMD in core x86 CPUs.",
     file: "companies/intel.html",
     personalNote: "Intel is the one where I most want to flag the gap between the stock chart and the scorecard, because it's genuinely the widest gap on the whole site. Up 260% in a year, and simultaneously one of the worst-scoring dashboards I've built — both things are true at once, and I don't think either one cancels the other out. The bull case here isn't really a financial-statement case yet; it's a bet on a specific turnaround story with unusually credible backers: the U.S. government taking an equity stake to keep leading-edge chipmaking domestic, Nvidia putting in real money and a real partnership, Apple reportedly in talks about foundry capacity. That's a different kind of signal than a normal 'insider buying' data point, and I didn't want to just score it as a zero and move on — there's a governance note on the ownership page walking through why. But I also don't want to talk myself into ignoring what the numbers say: negative economic returns, heavy dilution, capex eating over a fifth of revenue, and a valuation multiple that's almost impossible to read meaningfully off a still-thin FCF base. Q2 2026's operating margin was the best in years, and if that holds up over a few more quarters I'd want to revisit this scorecard rather than treat it as fixed. For now, this is a stock I'd watch closely and a business I wouldn't yet call cheap or proven — those are different questions, and Intel is a good reminder to keep asking them separately."
@@ -930,10 +931,10 @@ const COMPANIES = [
     tags: ["Memory Cycle", "AI Infrastructure"],
     dateFeatured: "2026-08-31",
     price: "$932.86",
-    score: "7 / 13",
-    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "7 / 14",
+    martinero: 51,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 49.0, prior: 61.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 346.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q4 FY2026", growth: 379.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The US-based leg of the memory trio alongside Samsung and SK hynix, and the one whose stock has actually run the hardest: +692% over the last 52 weeks, even more than SK hynix's +536%. A genuine #2 in HBM (~21% share) and closely contesting DRAM's #2 spot, with the widest ROIC/WACC spread and strongest balance sheet (Altman Z 9.42) of the three names — but also the weakest FCF conversion, the highest capex intensity (28% of revenue), and no anchor shareholder to fall back on. The 5-year revenue/EBIT/FCF CAGRs all miss this framework's bar, mostly because the window ends just before FY2026's real explosion: a single recent quarter (Q3 FY2026, +345.72% YoY, 80.37% margin) already exceeds most of FY2025's full-year total.",
     file: "companies/micron.html",
     personalNote: "Micron is a useful check on how much a stock chart alone can mislead you. It's up more than SK hynix over the past year, and yet this is clearly the weaker of the two scorecards — 7/13 versus 10/13, Martinero 56 versus 89. None of that is because Micron's business is bad; if anything, the most recent quarter here is the single most explosive number in this whole memory batch, an 80% operating margin on revenue that's up 3.5x year-over-year. The gap comes down to a few specific, real things: Micron is burning more of its cash flow on capex than SK hynix is right now, its market position is a genuine #2 rather than a clear #1, and it doesn't have the kind of anchor shareholder structure that gave Samsung and SK hynix a pass on the insider-ownership criterion — Micron really is just a widely-held public company with no founder backstop. I don't think that makes Micron a worse investment necessarily, but I do think it makes it a more purely momentum-driven one right now, where more of the case rests on the trend continuing rather than on a moat that's already fully priced in. Between the two, if I had to hold only one through a memory-cycle downturn, SK hynix's scorecard gives me more comfort — but Micron is the one I'd watch most closely for a re-rating if that gap closes."
@@ -949,11 +950,11 @@ const COMPANIES = [
     tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
     dateFeatured: "2026-09-01",
     price: "$15.59",
-    score: "2 / 13",
-    martinero: 11,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "2 / 14",
+    martinero: 43,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -34.3, prior: -10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 183.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The weakest of four quantum-computing names covered in this batch, scored on this site's standard 13-criterion scorecard: revenue actually shrank over FY2021-FY2025 (-5.6% CAGR, the only decline among the four), operating losses have widened rather than narrowed, latest-FY capex ran at roughly 2.6x revenue, and market position is a distant follower to Google and IBM in superconducting-qubit hardware. Q2 2026 did show real sequential and YoY acceleration (+185% YoY on Novera system shipments) plus a $100M CHIPS Act letter of intent, and the balance sheet carries $436M in net cash from a large 2025 raise. Result: 2 of 13 criteria met, Martinero Index 11/100.",
+    quarterYoY: { period: "Q3 2026", growth: -27.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The weakest of four quantum-computing names covered in this batch, scored on this site's standard 14-criterion scorecard: revenue actually shrank over FY2021-FY2025 (-5.6% CAGR, the only decline among the four), operating losses have widened rather than narrowed, latest-FY capex ran at roughly 2.6x revenue, and market position is a distant follower to Google and IBM in superconducting-qubit hardware. Q2 2026 did show real sequential and YoY acceleration (+185% YoY on Novera system shipments) plus a $100M CHIPS Act letter of intent, and the balance sheet carries $436M in net cash from a large 2025 raise. Result: 2 of 13 criteria met, Martinero Index 11/100.",
     file: "companies/rigetti.html",
     personalNote: "Rigetti is the one company in this batch where the standard scorecard caught something I don't think I'd have seen otherwise: revenue actually went down over the FY2021-2025 window, even though the stock has had a wild multi-year run and just landed a $100M CHIPS Act letter of intent. That's a real, mechanical finding from plugging the same numbers into the same framework every other company here gets — exactly what a bespoke, gentler scorecard for early-stage names might have talked around. Q2 2026 looks like a genuine inflection (+185% YoY on actual system shipments), but one good quarter against a five-year decline is a start, not a trend. Of the four quantum names here, this is the one I'd want two or three more quarters of real growth from before taking the recent momentum at face value."
   },
@@ -968,10 +969,10 @@ const COMPANIES = [
     tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
     dateFeatured: "2026-09-01",
     price: "$17.20",
-    score: "3 / 13",
-    martinero: 28,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 60,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 179.5, prior: 0.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 0.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 20.7 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The second-strongest of four quantum-computing names in this batch on the site's standard scorecard, helped by a genuinely distinct competitive position: D-Wave is essentially the only commercial-scale public vendor of quantum annealing hardware, a narrower niche than the crowded gate-model race. FY2025 revenue grew 178.5% YoY to $24.59M and the balance sheet holds $841M in net cash, but EBIT and FCF losses have both widened, insider ownership is thin (~0.88%), and shares outstanding have roughly tripled since the 2022 SPAC merger. Result: 3 of 13 criteria met, Martinero Index 28/100.",
     file: "companies/d-wave.html",
     personalNote: "D-Wave is the one name in this batch where I think the market-share criterion genuinely deserves a Met: quantum annealing is a real, distinct architecture from the gate-model approach IonQ, Rigetti, Google and IBM are all racing on, and D-Wave is close to the only commercial-scale public company selling it. That's a meaningfully different, more defensible position than 'one of many gate-model startups.' Q2 2026 revenue of $3.1M looks like a slowdown next to Q2 2025's $15.0M, but that prior quarter included a lumpy system sale, not a sustainable run-rate — the real story is still deepening losses and thin insider alignment (under 1%). A Martinero Index of 28 puts this second of the four, behind IonQ on scale but ahead of Rigetti and Quantum Computing Inc on a cleaner niche story."
@@ -987,10 +988,10 @@ const COMPANIES = [
     tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
     dateFeatured: "2026-09-01",
     price: "$8.15",
-    score: "3 / 13",
-    martinero: 23,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "3 / 14",
+    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 75.0, prior: 0.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 9084.0, note: "Revenue jumped from a tiny $61K base to $5.6M, driven mostly by 2026 acquisitions (incl. a semiconductor foundry) rather than organic photonics demand — the percentage is real but not meaningful as a run-rate comparison." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 2374.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The smallest and most acquisition-driven of four quantum-computing names in this batch. Three 2026 acquisitions (most recently NHanced Semiconductors, an advanced-packaging foundry) took quarterly revenue from $61K to $5.6M, and the balance sheet carries $1.12B in net cash after large capital raises — but revenue is still tiny relative to that cash pile, capex now runs at roughly 10x annual revenue, and share count is up nearly 7x since FY2021, the heaviest dilution of the four. Founder/Chief Scientist Yuping Huang's ~10% personal stake is a genuine positive. Result: 3 of 13 criteria met, Martinero Index 23/100.",
     file: "companies/quantum-computing-inc.html",
     personalNote: "Quantum Computing Inc is the hardest of the four to get an honest read on, because the most important fact about its recent numbers isn't really about quantum computing at all: the jump from a $61K quarter to a $5.6M quarter is mostly M&A, not photonics demand, after three 2026 acquisitions including a semiconductor foundry that has nothing to do with the core photonics product line. I don't think that makes the revenue fake, but the growth rate is measuring roll-up activity more than organic traction. The one real positive: founder and Chief Scientist Yuping Huang's roughly 10% personal stake, a genuine alignment signal rare among these four names. But capex running at something like 10x annual revenue, on a business still generating single-digit millions in sales, is the number I keep coming back to. A Martinero Index of 23 feels right: real cash, a real founder stake, and a genuinely uncertain path from here."
@@ -1006,10 +1007,10 @@ const COMPANIES = [
     tags: ["Memory Cycle", "AI Infrastructure"],
     dateFeatured: "2026-08-31",
     price: "₩1,648,000",
-    score: "10 / 13",
-    martinero: 89,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "11 / 14",
+    martinero: 84,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 46.7, prior: 101.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 257.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (prelim)", growth: 327.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The real supplier behind the AI buildout: the #1 maker of HBM (high-bandwidth memory) at 58-62% share, the component Nvidia's GPUs physically depend on. Revenue nearly quadrupled year-over-year last quarter, operating margin climbed from 41% to 76% across five straight quarters, and the balance sheet flipped from net debt to a ₩66.87T net cash cushion in under two years. ROIC of 61.59% clears its 17.27% cost of capital by more than 44 points — genuine current profitability, not a hoped-for turnaround. Valuation is the exception: the headline 7.26x trailing P/E is inflated by a one-off gain, and normalized on real operating earnings the multiple runs closer to 27.3x, roughly 2.2x its own recent average — a real premium for a stock up 536% in a year, not a discount. Scorecard isn't flawless — FCF conversion, entry multiple and capex intensity all miss — but 10/13 met is one of the strongest results on this site, backed by real numbers rather than narrative alone.",
     file: "companies/sk-hynix.html",
     personalNote: "Of the two names to come out of the TSMC-competitor detour, SK hynix is the one I'd actually want to own, and I think it's worth being explicit about why: Intel's case was 'the turnaround might work,' Samsung's was 'two different businesses pulling in different directions,' and SK hynix's is just... the numbers are good. Really good. Revenue nearly quadrupling in a year and margin going from 41% to 76% would normally make me suspicious of a one-off, but this maps directly onto something concrete and ongoing — every major AI accelerator needs HBM stacked next to the compute die, and SK hynix has held the lead in that specific product for a while now. What surprised me most building this one was the valuation math: at first glance the trailing P/E of 7.26x after a 536% year looks almost too good to be true — and it is. That figure is inflated by a one-off non-operating gain; strip it out and the normalized multiple is running around 27x, more than double the stock's own recent average. So the entry-multiple criterion does fail here, just not for the reason I expected going in — it's not that the market ignored the rally, it's that the cheap-looking headline number was hiding the real one. I'm not pretending this is risk-free — memory is savagely cyclical (FY2023 was a loss year for the whole industry, not just SK hynix), and Micron and Samsung are both racing to close the HBM gap. But of everything I've built recently, this is the dashboard where the fundamentals do the most work and the narrative does the least, and that's usually the combination I trust more."
@@ -1025,13 +1026,13 @@ const COMPANIES = [
     tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
     dateFeatured: "2026-09-01",
     price: "$39.31",
-    score: "4 / 13",
-    martinero: 30,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 201.6, prior: 95.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 287.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The largest of four public quantum-computing pure-plays covered on this site by a wide margin (2025 revenue $130.02M vs. $24.59M, $7.09M and $0.68M for D-Wave, Rigetti and Quantum Computing Inc respectively), scored on the same standard 13-criterion scorecard as every other company here. Revenue is up 287% YoY in the latest quarter (fifth straight record) with backlog up 297% YoY, and the balance sheet carries $2.36B in net cash. Against the standard scorecard, though: operating margin is -487%, EBIT and FCF losses have both widened sharply, shares outstanding have roughly doubled since 2021, and capex intensity and market concentration both miss. Result: 4 of 13 criteria met, Martinero Index 30/100 — a highly speculative, high-risk/high-reward bet on a still-unproven, loss-making, R&D-heavy industry with large long-run potential in cryptography, drug discovery, materials science and optimization.",
+    quarterYoY: { period: "Q3 2026", growth: 336.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "The largest of four public quantum-computing pure-plays covered on this site by a wide margin (2025 revenue $130.02M vs. $24.59M, $7.09M and $0.68M for D-Wave, Rigetti and Quantum Computing Inc respectively), scored on the same standard 14-criterion scorecard as every other company here. Revenue is up 287% YoY in the latest quarter (fifth straight record) with backlog up 297% YoY, and the balance sheet carries $2.36B in net cash. Against the standard scorecard, though: operating margin is -487%, EBIT and FCF losses have both widened sharply, shares outstanding have roughly doubled since 2021, and capex intensity and market concentration both miss. Result: 4 of 14 criteria met, Martinero Index 57/100 — a highly speculative, high-risk/high-reward bet on a still-unproven, loss-making, R&D-heavy industry with large long-run potential in cryptography, drug discovery, materials science and optimization.",
     file: "companies/ionq.html",
-    personalNote: "IonQ is the one dashboard on this site I'd flag as genuinely high-risk, high-reward — a speculative bet, not a value pick. On the standard scorecard it only clears 4 of 13 criteria for a Martinero Index of 30: operating margin is -487%, both EBIT and FCF losses are widening, and shares outstanding have roughly doubled since 2021. But within that, IonQ is the strongest of the four public quantum-computing pure-plays I cover — by far the most revenue, the clearest realistic market position, and a $2.36B net-cash cushion that buys real runway. Quantum computing itself is still an early, unproven, deeply R&D-heavy industry — every public player here is loss-making, and nobody has yet demonstrated a commercial quantum advantage at meaningful scale — but the long-run promise (cryptography, drug discovery, materials science, optimization problems classical computers can't touch) is why serious capital keeps funding it despite the losses. I'd call this the most investable of the four on fundamentals, but 'most investable among speculative bets' and 'objectively strong' are different claims — this is a venture-stage wager on a technology that may take a decade or more to prove out, not a value pick."
+    personalNote: "IonQ is the one dashboard on this site I'd flag as genuinely high-risk, high-reward — a speculative bet, not a value pick. On the standard scorecard it only clears 4 of 14 criteria for a Martinero Index of 57: operating margin is -487%, both EBIT and FCF losses are widening, and shares outstanding have roughly doubled since 2021. But within that, IonQ is the strongest of the four public quantum-computing pure-plays I cover — by far the most revenue, the clearest realistic market position, and a $2.36B net-cash cushion that buys real runway. Quantum computing itself is still an early, unproven, deeply R&D-heavy industry — every public player here is loss-making, and nobody has yet demonstrated a commercial quantum advantage at meaningful scale — but the long-run promise (cryptography, drug discovery, materials science, optimization problems classical computers can't touch) is why serious capital keeps funding it despite the losses. I'd call this the most investable of the four on fundamentals, but 'most investable among speculative bets' and 'objectively strong' are different claims — this is a venture-stage wager on a technology that may take a decade or more to prove out, not a value pick."
   },
 
   {
@@ -1044,10 +1045,10 @@ const COMPANIES = [
     tags: ["Cyclical", "Family-Controlled", "Pending M&A"],
     dateFeatured: "2026-09-02",
     price: "€129.60",
-    score: "4 / 13",
-    martinero: 29,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 41,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -2.51, prior: 6.59 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 8.37, note: "Revenue growth was genuine (freight-rate and volume recovery), but roughly $600M in Strait-of-Hormuz-related disruption costs kept profit from following — EBIT margin was only 2.88% that quarter." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 26.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Hapag-Lloyd is the world's #5 container shipping carrier by capacity (~7.1% share) and a Gemini Cooperation alliance partner with Maersk, even as the two remain direct commercial rivals. Its FY2021-2025 financials trace the full container-shipping supercycle round trip — revenue and EBIT roughly 1.5x'd in the 2022 rate spike before crashing over 90% at the EBIT line by FY2025, and 2026 has added fresh disruption from adverse weather and a Strait of Hormuz closure. Control rests with a three-way anchor pact — CSAV, the Kühne family, and the City of Hamburg's HGV, holding roughly 74% combined and locked in through at least 2031 — while a pending $4.2B acquisition of ZIM (see that dashboard) would materially expand scale if it clears regulatory review.",
     file: "companies/hapag-lloyd.html"
   },
@@ -1062,7 +1063,7 @@ const COMPANIES = [
     tags: ["Pending Acquisition", "Highly Cyclical"],
     dateFeatured: "2026-09-02",
     price: "$27.01",
-    score: "3 / 13",
+    score: "3 / 14",
     martinero: 37,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -18.07, prior: 63.25 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: 8.87, note: "First quarter of renewed YoY growth after three straight quarters of double-digit declines." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
@@ -1080,10 +1081,10 @@ const COMPANIES = [
     tags: ["State-Owned", "Deep Cyclical", "Dual-Listed A/H"],
     dateFeatured: "2026-09-02",
     price: "HK$16.81",
-    score: "4 / 13",
-    martinero: 41,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 40,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -6.1, prior: 33.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 17.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 29.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "COSCO SHIPPING Holdings is the world's fourth-largest container shipping line (~10.7% global capacity share) and a Chinese state-owned enterprise, dual-listed on the Hong Kong (1919.HK) and Shanghai (601919.SS) exchanges. Revenue and earnings have swung dramatically with the freight-rate cycle — from a 2021-2022 supercycle peak to a 2023 crash and a partial, uneven recovery since — leaving 5-year growth, margin and valuation metrics well below this framework's bars. The balance sheet remains a genuine strength: a persistent net cash position, an ~6.5% share-count reduction from buybacks, and one of the higher dividend yields in this shipping batch.",
     file: "companies/cosco-shipping.html"
   },
@@ -1098,8 +1099,8 @@ const COMPANIES = [
     tags: ["Cyclical", "Dividend Payer"],
     dateFeatured: "2026-09-02",
     price: "NT$234.50",
-    score: "4 / 13",
-    martinero: 32,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "4 / 14",
+    martinero: 31,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -18.23, prior: 67.53 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 2026", growth: 21.60, note: "Snapped four straight quarters of double-digit YoY revenue declines (Q2'25-Q1'26)." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Evergreen Marine is Taiwan's flagship container carrier and the anchor of the Ocean Alliance, ranking #7 globally by fleet capacity (~5.5% share) behind MSC, Maersk, CMA CGM, COSCO and Hapag-Lloyd. The company posted some of the highest EPS in the world during the 2021-2022 COVID-era freight-rate supercycle (net income peaked at NT$334.2B in FY2022) before earnings normalized sharply in FY2023 and partially rebounded in FY2024 on Red Sea rerouting disruption. The Chang family and Evergreen Group affiliated entities hold a combined stake of roughly 21%, and the balance sheet carries very little net leverage despite a recent swing from net cash to a small net-debt position. TWSE-listed only, with no actively-traded U.S. ADR.",
@@ -1116,10 +1117,10 @@ const COMPANIES = [
     tags: ["State-Owned", "Turnaround Bet"],
     dateFeatured: "2026-09-02",
     price: "₩20,800",
-    score: "2 / 13",
-    martinero: 18,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "2 / 14",
+    martinero: 31,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -6.9, prior: 39.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 29.7, note: "Growth is flattered by an easy comparison against Q2 2025's tariff-driven freight-rate slump, not a clean sustained acceleration." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 52.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "HMM is South Korea's largest ocean carrier and a direct global competitor to Maersk, but ranks only #9 worldwide by container capacity (~2.9% share) at roughly a fifth of Maersk's fleet size. Every growth metric in this scorecard is negative largely because the fixed FY2021-25 window starts at the pandemic freight-rate supercycle's peak and ends in a normalized 2025 — a genuine base-year effect, not an operating collapse — but heavy historical dilution (+92.9% share count), a valuation still at a premium to its own boom-adjusted history, and thin margins keep the scorecard weak regardless. HMM remains majority-owned by two state creditors from its 2016 bankruptcy rescue, KDB and KOBC (~65% combined), who have been trying and failing to exit since 2023; POSCO Holdings is now conducting preliminary due diligence on KDB's stake with no decision expected before December 2026.",
     file: "companies/hmm.html"
   },
@@ -1134,10 +1135,10 @@ const COMPANIES = [
     tags: ["Cyclical", "State-Linked"],
     dateFeatured: "2026-09-02",
     price: "NT$59.50",
-    score: "3 / 13",
-    martinero: 19,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "3 / 14",
+    martinero: 36,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -26.56, prior: 58.37 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 18.78, note: "Growth is measured against Q2 2025's already-depressed base after the FY2023-25 freight-rate collapse, not a return to 2021-22 boom levels — Q2 2026 revenue (NT$45.9B) remains far below 2022's peak quarters (>NT$100B each)." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 52.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Taiwan's #2 container carrier and the world's #7 by TEU capacity (~2.1-2.3% share), a Premier Alliance partner alongside ONE and HMM. Revenue and profit round-tripped from a 2021-22 pandemic freight-rate windfall (60%+ operating margins) to a 2023 near-breakeven trough and a still-thin 8.99% FY2025 margin. A strong net-cash balance sheet (NT$110.8B) and ~14% Taiwan-government-linked ownership are the clear positives; ROIC below WACC, negative FCF, and rising fleet-renewal capex keep the scorecard weak at 3/13.",
     file: "companies/yang-ming.html"
   },
@@ -1152,10 +1153,10 @@ const COMPANIES = [
     tags: ["Founder-Controlled", "Cyclical"],
     dateFeatured: "2026-09-02",
     price: "DKK 20,980",
-    score: "5 / 13",
-    martinero: 37,                    // Martinero Index (weighted 1-100 score, see About)
+    score: "5 / 14",
+    martinero: 44,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -2.7, prior: 8.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 27.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "World's #2 container shipping line by capacity (~13% of global fleet, behind MSC's ~21.6%), controlled since 1904 by the A.P. Møller Foundation, which holds roughly 41.5% of share capital and 51.45% of voting rights. Revenue, EBIT and free cash flow all show negative 5-year CAGRs — the window brackets the 2021-22 freight-rate supercycle and the 2023 crash — despite a genuine rate-driven recovery underway in 2026. The balance sheet stayed net-cash every year of the period and the share count has shrunk by over a fifth on continued buybacks, but the current 20.75x trailing P/E sits at roughly 3.6x the stock's own 5-year average.",
     file: "companies/maersk.html",
     personalNote: "Fun personal footnote: I started my career at Maersk back in 2007. Left in 2009, though, so that's a nostalgia point, not an insider edge — I have no real read on how the place runs today, and the dashboard below is built the same way as every other one on this site. The tricky part of this sector, and the reason the scorecard looks rough, is the lag: freight rates move fast, but new ship capacity takes years to order and deliver, so supply always arrives late — either piling onto a boom until it becomes a glut, or missing a trough entirely. That's why revenue, EBIT and FCF all show negative 5-year CAGRs here: the window happens to start at the 2021-22 supercycle peak and end after the 2023 crash, which is a cycle-timing artifact, not a deteriorating business. The valuation is what actually gives me pause — at 20.75x trailing P/E against a 5.80x five-year average, the stock is pricing in a better cycle than the fundamentals have delivered yet. What holds up regardless of timing: the Møller family has controlled this company since 1904 and still holds roughly 41.5% of the capital and over half the voting rights, the balance sheet stayed net-cash through the crash, and the share count has shrunk by more than a fifth on buybacks. Five of 13 criteria met is a mediocre score, and I think that's the honest read of a cyclical, lagging-supply business priced for a recovery it hasn't fully delivered yet."
@@ -1172,9 +1173,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-03",
     price: 145.75,
     score: "5 / 14",
-    martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 53,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 17.35, prior: 8.38 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY26", growth: 21.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q1 FY27", growth: 29.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in relational databases now making a massive, largely debt-funded bet on AI cloud infrastructure (OCI) — revenue and margin are both accelerating, but capex ate all of free cash flow and leverage has jumped to 4.45x net debt/EBITDA.",
     file: "companies/oracle.html"
   },
@@ -1210,7 +1211,7 @@ const COMPANIES = [
     score: "9 / 14",
     martinero: 75,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 10.53, prior: 10.80 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2026", growth: 12.68 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 FY2026", growth: 13.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Adobe is the long-standing #1 in professional creative software (Photoshop/Illustrator/Premiere via Creative Cloud, an estimated 58-70% category share) and effectively invented and still leads document software (Acrobat/PDF) — margins are excellent and stable (36.63% operating margin FY2025, gross margin actually up 1.57pp over three years), FCF conversion runs above 100% of EBIT, the balance sheet is essentially net cash, and buybacks have cut share count every year since FY2021. But 5-year revenue, EBIT and FCF CAGRs all miss this framework's 15% growth bar, insider ownership is genuinely low at just 0.19%, and the stock is down roughly 54% from its FY2023 high on real fears that generative-AI tools erode the Creative Cloud moat — fears underscored by Adobe's own blocked $20B bid for Figma, terminated in December 2023 after regulators balked.",
     file: "companies/adobe.html"
   },
@@ -1227,6 +1228,7 @@ const COMPANIES = [
     price: "$149.74",
     score: "4 / 14",
     martinero: 59,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
+    quarterYoY: { period: "Q3 2026", growth: 161.4 },
     blurb: "SpaceX completed the largest IPO in history on June 12, 2026 (NASDAQ: SPCX, priced at $135/share, ~$1.77T debut valuation). Falcon 9 dominates global launch (~82% share, 165 orbital missions in 2025) and Starlink is the clear #1 in LEO satellite broadband (~58-62% revenue share), but the S-1 also revealed a consolidated FY2025 operating loss (-13.86% margin) driven by a newly-disclosed, loss-making AI/compute segment, extreme capex intensity, and a balance sheet that appears to have swung to roughly $71B net cash after the IPO raise. Marked as an explicit exception: 7 of 14 criteria are N/A because they require 5 years of public trading/reporting history that simply doesn't exist yet, 3 months post-IPO.",
     file: "companies/spacex.html"
   },
@@ -1240,12 +1242,12 @@ const COMPANIES = [
     subIndustry: "CPUs, GPUs & AI Accelerators",
     tags: ["Intel Competitor", "AI Compute"],
     dateFeatured: "2026-09-05",
-    price: "$477.57",
+    price: "$488.78",
     score: "9 / 14",
     martinero: 70,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 34.34, prior: 13.69 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 50.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "A strong, fast-improving #2 in x86 CPUs (34.1% share vs. Intel) and a distant but credible #2 in AI accelerators (vs. Nvidia's 73-80%+ share) — revenue and free cash flow are both compounding at over 20% annually and the balance sheet carries net cash every year, but operating margin and ROIC still haven't recovered from the goodwill-heavy Xilinx/Pensando deals, and insider ownership is thin.",
+    quarterYoY: { period: "Q3 2026", growth: 44.7 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "A strong, fast-improving #2 in x86 CPUs (34.1% share vs. Intel) and a distant but credible #2 in AI accelerators (vs. Nvidia's 73-80%+ share). Q3 2026 revenue rose 44.7% to $13.4B with Data Center +97% and a Q4 guide of about $17B. Revenue and free cash flow are both compounding at over 20% annually and the balance sheet carries net cash every year, but operating margin and ROIC still haven't recovered from the goodwill-heavy Xilinx/Pensando deals, and insider ownership is thin.",
     file: "companies/amd.html"
   },
 
@@ -1262,7 +1264,7 @@ const COMPANIES = [
     score: "5 / 14",
     martinero: 59,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "flat", recent: 0.0, prior: 1.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY26", growth: 10.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 11.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A diversified conglomerate of insurance, rail (BNSF), energy (BHE) and manufacturing businesses plus a $300B+ public-equities portfolio, sitting on a record $344B net-cash pile — a fortress balance sheet story, not a growth one, six months into the Buffett-to-Abel CEO transition. GAAP net income is distorted by mandatory mark-to-market swings in the equity portfolio, so this dashboard scores against Berkshire's own preferred non-GAAP operating earnings instead — clears net debt/EBITDA, FCF conversion and (partially) market position; misses growth, margin, ROIC-vs-WACC, valuation-vs-history and capex intensity (BNSF and BHE alone run ~$14B/yr in capex).",
     file: "companies/berkshire-hathaway.html"
   },
@@ -1280,7 +1282,7 @@ const COMPANIES = [
     score: "11 / 14",
     martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 44.70, prior: 32.00 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 47.67 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 38.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The maker of Mounjaro and Zepbound — the tirzepatide franchise that took the #1 spot in the GLP-1 duopoly from Novo Nordisk, with revenue and EBIT compounding at 23%+ and 37%+ over five years and margins expanding every year. Clears growth, margin, ROIC, balance-sheet, market-position and valuation-vs-history bars; misses cluster in the capex/cash-conversion story as manufacturing capacity is built out — FCF growth, FCF conversion and capex intensity all fall short.",
     file: "companies/eli-lilly.html"
   },
@@ -1298,7 +1300,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 74,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 4.5, prior: 12.3 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 2025", growth: 7.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 8.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The largest U.S. bank by assets (~$4.4tn) and the most profitable, with a 20% ROTCE and CET1 capital comfortably above regulatory minimums — but revenue and the bank-appropriate net-income proxy used for EBIT/FCF both miss this framework's 15% growth bar, and the stock now trades well above its own 5-year P/E and P/TBV history.",
     file: "companies/jpmorgan-chase.html"
   },
@@ -1316,7 +1318,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 70,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 3.26, prior: 1.51 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 1.51 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q1 FY2027", growth: 4.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A genuinely high-quality, well-margined dividend compounder — expanding operating and gross margins, rock-steady ROIC and a conservative balance sheet — but five-year growth (2-4% CAGRs) is mature-market slow, and a PEG near 4.2x argues the stock isn't statistically cheap despite trading modestly below its own trailing P/E history.",
     file: "companies/procter-gamble.html"
   },
@@ -1334,7 +1336,7 @@ const COMPANIES = [
     score: "9 / 14",
     martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 1.40, prior: 3.31 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 4.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 4.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in global toothpaste (41.3% value share, still gaining) with a stable ~20% operating margin, low leverage and 63 straight years of dividend growth — plus a genuine second growth leg in Hill's Pet Nutrition (~23% of sales, up nearly 60% in five years). Growth is mature and low-single-digit against this framework's 15% bars, insider ownership is essentially zero (0.13%), and the stock trades roughly 14% above its own 5-year average P/E.",
     file: "companies/colgate-palmolive.html"
   },
@@ -1352,7 +1354,7 @@ const COMPANIES = [
     score: "8 / 14",
     martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "flat", recent: 1.79, prior: 1.5 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 4.7 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 3.3 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "A profitable, cash-generative FMCG operator (24.11% operating margin, 19.7% ROIC, low 1.75x net debt/EBITDA, cheap-looking 11.5x trailing P/E) held back by low-single-digit growth, weak FCF conversion (51.4%), essentially zero insider ownership, and an unresolved Mead Johnson/Enfamil NEC baby-formula litigation overhang with mixed 2026 bellwether verdicts and no settlement in sight.",
     file: "companies/reckitt-benckiser.html"
   },
@@ -1370,7 +1372,7 @@ const COMPANIES = [
     score: "6 / 14",
     martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -2.1, prior: -2.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 0.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026 (prelim)", growth: -0.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Huggies is a durable global #2 in diapers, ROIC comfortably clears both the 15% bar and assumed WACC, net debt/EBITDA sits under 2x, and the current P/E is modestly below Kimberly-Clark's own five-year average. But reported revenue, EBIT and free cash flow all show negative 5-year CAGRs (heavily distorted by shifting the international tissue business into a new Suzano joint venture, but still real on a reported basis), operating margin has never cleared the framework's 20% bar in this window, FCF conversion slipped back below 80%, insider ownership is negligible, and capex runs hotter than typical CPG peers. Layered on top: a pending $48.7B acquisition of Kenvue (Tylenol, Band-Aid, Listerine, Neutrogena), shareholder-approved but still awaiting final regulatory clearance and expected to close in H2 2026 — not reflected anywhere in these figures.",
     file: "companies/kimberly-clark.html"
   },
@@ -1388,7 +1390,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 2.25, prior: 0.42 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY26", growth: 6.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 5.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Frito-Lay's dominant snacks franchise and a genuine Coke/Pepsi beverage duopoly (plus Gatorade's #1 in sports drinks) are real, but mature single-digit growth, weak ~50% FCF conversion, and no founder/insider ownership are why Elliott Management built a $4B activist stake in Sep 2025 amid GLP-1-driven demand softness.",
     file: "companies/pepsico.html"
   },
@@ -1406,7 +1408,7 @@ const COMPANIES = [
     score: "12 / 14",
     martinero: 83,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 14.79, prior: 13.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 14.07 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 14.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Visa's direct duopoly rival and a genuine toll-booth business in its own right — a strong #2 globally by card volume, not the #1, but with cleaner growth (EBIT and FCF both still clear 15%/year) and a real discount to its own valuation history where Visa trades flat against its average.",
     file: "companies/mastercard.html"
   },
@@ -1422,9 +1424,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-05",
     price: "$347.70",
     score: "6 / 14",
-    martinero: 48,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 47,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -3.0, prior: 0.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 25.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: -0.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, gross margin has compressed 7.6pp over three years on price cuts and mix shift, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history, share count trend and margin stability.",
     file: "companies/tesla.html",
     personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
@@ -1443,7 +1445,7 @@ const COMPANIES = [
     score: "6 / 14",
     martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -3.77, prior: 1.55 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "H1 2026", growth: 0.5 },  // latest reported period revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 6.7 },  // latest reported period revenue YoY (non-scored, separate from annual trend)
     blurb: "The Dove/Persil/OMO consumer-goods giant delivers exactly what you'd expect from a 95-year-old FMCG portfolio: genuinely strong, stable ROIC (15.9%-17.8%) and steadily improving margins (20.05% operating margin in FY2025, a first for this window), paired with reported revenue, EBIT and free cash flow that are all essentially flat to negative over five years. Clears operating margin, market share, ROIC/WACC, share count trend, capex intensity and margin stability; misses revenue/EBIT/FCF growth, market concentration, net debt/EBITDA, FCF conversion, entry multiple and insider/founder ownership.",
     file: "companies/unilever.html",
     personalNote: "Unilever was one of my first 'safe' blue-chip buys — the kind of stock you own because it's boring, not despite it. And for a long stretch it really was: revenue and earnings barely moved for years, the share price spent most of a decade going sideways, and the whole thesis came down to a dependable, ever-so-slightly-growing dividend rather than any real growth story. That's exactly what the numbers here confirm — five-year revenue and EBIT CAGRs that are basically flat to negative, even as the dividend kept showing up like clockwork. The ROIC is genuinely good and the balance sheet is fine, so this was never a bad business, just a slow one. Eventually the lack of any growth narrative wore me down and I sold to put the money somewhere with more of a story — the 2024-2025 margin turnaround and ice cream demerger came after I'd already moved on, which feels about right for how these things usually go."
@@ -1461,6 +1463,7 @@ const COMPANIES = [
     price: "$210.43",
     score: "3 / 14",
     martinero: 54,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
+    quarterYoY: { period: "Q3 2026", growth: 55.0 },
     blurb: "Wafer-scale AI-chip challenger to Nvidia that IPO'd in May 2026 at $185/share (opened at $350, closed day one up 68%, then fell ~10% the next day). Real multi-year revenue ($78.7M FY23 to $510.3M FY25) and a fortress post-IPO balance sheet (~$8.6B cash, minimal debt), but still GAAP loss-making at the operating line, extremely customer-concentrated (G42/UAE, now layering on a vendor-financed OpenAI deal), and under 4 months of public trading history — 7 of 14 scorecard criteria are marked N/A as a result, the same honest treatment as SpaceX.",
     file: "companies/cerebras.html"
   },
@@ -1478,7 +1481,7 @@ const COMPANIES = [
     score: "10 / 14",
     martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 15.85, prior: 15.65 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 13.36 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 11.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The largest streaming service globally by both revenue and subscribers — operating margin has expanded from 17.82% to 29.49% since FY2022, free cash flow went from essentially breakeven to $9.46B, and net debt/EBITDA has fallen to roughly 0.58x. But the share price hasn't tracked that improvement: Netflix's own 5-year CAGR is just +4.97%, blue-chip territory rather than a growth stock's return, even with EBIT more than doubling over the same stretch. Most of that gap is a ~43% pullback from Netflix's June 2025 high (split-adjusted following a 10-for-1 forward split in Nov 2025), which is also why the entry multiple now sits well below its own five-year average. Clears EBIT growth, operating margin, FCF growth, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity and margin stability; misses revenue growth, market concentration, FCF conversion and insider/founder ownership (down to 0.58% company-wide as co-founder Reed Hastings has steadily sold down his stake).",
     file: "companies/netflix.html",
     personalNote: "Netflix is an interesting one for me because a few years back I took a CPA course specifically on how to analyze a public company's balance sheet to find inconsistencies — the kind of forensic-accounting lens that can build toward a short-selling case. The instructor used Netflix as an example at one point. He stopped well short of actually recommending a short, but he flagged that there could be some inflated items, or at least real inconsistencies, in both the financial and non-financial KPIs — not fraud, just areas where the numbers deserved more scrutiny than most investors gave them. Looking at it now, years later, the honest update is: Netflix just kept rising. Whatever those flagged inconsistencies were, they clearly weren't disqualifying, and margins, free cash flow and leverage have all genuinely improved since then — a useful reminder that accounting skepticism and share-price performance don't always move together. I can still see what he might have meant, though: the content amortization has always been judgment-heavy, and Netflix quietly stopped reporting subscriber counts in 2025 — right when that used to be the single most-watched non-financial KPI for the company — which is exactly the kind of disclosure change that would catch a forensic accountant's eye, even years after the fact."
@@ -1497,7 +1500,7 @@ const COMPANIES = [
     score: "10 / 14",
     martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: -0.2, prior: -0.4 },  // revenue growth, most recent FY vs prior FY (non-scored, reported CHF; local-currency growth was +5.9% recent vs. high-single-digit prior)
-    quarterYoY: { period: "FY 2025/26 (LC)", growth: 5.9 },  // latest reported period revenue YoY, local currency (non-scored) — reported CHF growth was -0.2% on FX headwinds
+    quarterYoY: { period: "H1 FY2026/27 (Sep 2026) (LC)", growth: 7.5 },  // latest reported period revenue YoY, local currency (non-scored) — reported CHF growth was -0.2% on FX headwinds
     blurb: "Global #1 hearing-aid maker (Phonak, Advanced Bionics) in a five-player oligopoly with Demant, WS Audiology, GN and Starkey. Reported-CHF growth looks flat on strong-franc FX headwinds, but balance-sheet quality (1.1x net debt/EBITDA, 19% ROCE) is well ahead of sector comparable Demant.",
     file: "companies/sonova.html"
   },
@@ -1513,9 +1516,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-10",
     price: "€11.96",
     score: "6 / 14",
-    martinero: 51,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 49,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -0.56, prior: 6.60 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 2.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q3 2026", growth: 2.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "World's largest hearing-aid retail/distribution network (not a manufacturer) is about to become one too — a pending, not-yet-closed ~€2.3-2.5bn acquisition of GN Store Nord's hearing-aid manufacturing business would end that distinction, but standalone growth has stalled and ROIC doesn't clear even a conservative WACC.",
     file: "companies/amplifon.html"
   },
@@ -1531,7 +1534,7 @@ const COMPANIES = [
     dateFeatured: "2026-09-10",
     price: "A$139.65",
     score: "6 / 14",
-    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 53,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 0.19, prior: 4.81 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "H2 FY26", growth: 6.0 },  // latest reported half-year revenue YoY (non-scored, separate from annual trend)
     blurb: "The Australian dominant global leader in cochlear implants (~50-60% share) — surgically implanted devices for severe-to-profound hearing loss, a genuinely different category from conventional hearing aids (Demant/Oticon, Sonova/Phonak). Competes mainly with Austria's MED-EL (~25%) and Sonova-owned Advanced Bionics (~20%) in a tight, concentrated implant market. FY2026 was a rough operating year — revenue growth stalled, operating margin fell below 20% for the first time in five years, and statutory profit fell 62% on one-off write-downs — while the balance sheet stayed net-cash and capex stayed low.",
@@ -1549,7 +1552,7 @@ const COMPANIES = [
     dateFeatured: "2026-09-10",
     price: "$107.14",
     score: "6 / 14",
-    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 5.6, prior: 6.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
@@ -1567,9 +1570,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-10",
     price: "$902.60",
     score: "7 / 14",
-    martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 8.17, prior: 5.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 FY2026", growth: 11.58 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q4 FY2026", growth: 11.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "The standing counterexample to Walmart's thin-merchandise-margin model: Costco prices goods near cost to drive membership renewals, and its real profit engine is a separate, near-100%-margin membership-fee line that supplied roughly 51% of FY2025 operating income from just 1.9% of revenue. ROIC of 38.44% comfortably clears WACC, the balance sheet has carried net cash every year for five years, and capex runs a lean 2.0% of revenue. But the stock has never been cheap (45.40x trailing P/E, PEG 3.64), five-year revenue/EBIT/FCF CAGRs all miss this framework's 15% bars, and insider ownership has faded to just 0.17% since co-founder Jim Sinegal's 2012 retirement.",
     file: "companies/costco.html"
   },
@@ -1587,7 +1590,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 18.3, prior: 18.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 12.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
+    quarterYoY: { period: "Q3 2026", growth: 10.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
     blurb: "Ride-hailing and delivery platform that has genuinely turned profitable, now betting on aggregating autonomous vehicles from Waymo, WeRide, Nuro and ~30 other partners rather than building its own — the opposite path from Tesla's vertically-integrated robotaxi bet, with an already-fraying Waymo relationship as the central risk.",
     file: "companies/uber.html"
   },
@@ -1603,9 +1606,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-12",
     price: "$10.13",
     score: "8 / 14",
-    martinero: 60,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 3.46, prior: 29.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: -3.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
+    quarterYoY: { period: "Q3 2026", growth: 13.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
     blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL: revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% (well under the 20% bar), free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge, and H1 2026 revenue actually fell 7.1% YoY as a brutal domestic price war bit into China sales. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
     file: "companies/byd.html"
   },
@@ -1623,7 +1626,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 8.21, prior: 0.56 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 20.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q2 FY2027", growth: 15.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic) — up 35.8% over the past year to an all-time high in February 2026, with FY2026 revenue +8.21% and net income +30.31% YoY. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses are the flip side of years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR to near zero and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot anywhere and no founder or insider stake.",
     file: "companies/hitachi.html"
   },
@@ -1637,12 +1640,12 @@ const COMPANIES = [
     subIndustry: "E-Commerce Platform Software",
     tags: [],
     dateFeatured: "2026-09-14",
-    price: "$128.79",
-    score: "12 / 14",
-    martinero: 83,                    // Martinero Index (weighted 1-100 score, see About)
+    price: "$142.57",
+    score: "11 / 14",
+    martinero: 82,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 30.14, prior: 25.78 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 34.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Canadian e-commerce infrastructure platform (storefronts, payments, fulfillment, POS) that just posted +34% YoY quarterly revenue growth and real operating leverage, with shares up ~17% on the print. One of the stronger scorecards on this site — net cash, near-zero capex, ROIC well above cost of capital — but operating margin (16.42%) still misses the 20% bar and GAAP earnings are distorted by the 2023 Deliverr/Flexport writedown, so valuation is scored on P/FCF instead of trailing P/E. IMPORTANT: the 'entry multiple' criterion is Met only relative to Shopify's own trading history (70x P/FCF vs a ~100x average) — at 70x FCF and a PEG near 2.0, the stock is still priced for a lot of future growth. Financials will probably keep delivering; the share price already assumes they will.",
+    quarterYoY: { period: "Q3 2026", growth: 31.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Canadian e-commerce infrastructure platform (storefronts, payments, fulfillment, POS) that posted +31.6% YoY revenue growth in Q3 2026 with real operating leverage, though the shares fell about 9% on the print after a consensus miss. One of the stronger scorecards on this site — net cash, near-zero capex, ROIC well above cost of capital — but operating margin (16.42%) still misses the 20% bar and GAAP earnings are distorted by the 2023 Deliverr/Flexport writedown, so valuation is scored on P/FCF instead of trailing P/E. IMPORTANT: the 'entry multiple' criterion is Met only relative to Shopify's own trading history — at about 69x FCF the stock is still priced for a lot of future growth.",
     file: "companies/shopify.html"
   },
 
@@ -1659,7 +1662,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 9.59, prior: 7.06 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 25.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 27.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "India's largest private-sector conglomerate — the Jamnagar O2C refining/petrochemicals engine, Reliance Retail (India's largest retailer) and Jio (India's #1 telecom carrier, ~49% wireless-broadband share) under one roof, with the Ambani family/promoter group holding roughly 50.5%. Clears net debt/EBITDA, valuation-vs-history, share count and insider ownership; misses are the growth and profitability criteria this framework weighs most heavily — revenue/EBIT CAGR near 11% and an 11.5% consolidated operating margin, both well under the bars, reflecting the low-margin refining business blended into the mix.",
     file: "companies/reliance-industries.html",
     personalNote: "Reliance is the first Indian company I've run through this checklist, and it's a good test of whether the framework travels outside the US and Europe. It's genuinely three or four businesses under one roof — the original Jamnagar refining and petrochemicals engine, India's largest retailer, and Jio, now India's dominant telecom carrier, on the verge of what would be India's biggest-ever IPO after Jio Platforms just got SEBI approval for a roughly ₹37,700 crore listing. The Ambani family and promoter entities control just over half the company (~50.5%, recently increased, not reduced), which is about as concentrated as insider ownership gets on this site — reassuring for alignment, though it's also one family effectively controlling a company that touches national telecom and energy infrastructure. The checklist is fairly unforgiving here: revenue and EBIT have both compounded around 11% a year, comfortably below my 15% growth bar, and the consolidated operating margin (11.5%) looks thin next to the software and pharma names on this site — though that's really an artifact of blending a low-margin refining business with much higher-margin retail and telecom units, something one number can't show. What I do like: the balance sheet is genuinely conservative for a company spending this much on capex (net debt/EBITDA under 1x), the share count is flat (the 2024 bonus issue was a split, not dilution), and the stock itself has gone essentially nowhere in five years even as earnings grew roughly 31% — either a value opportunity or a sign the market already suspects growth is slowing before the trailing numbers show it. I don't currently hold any India exposure myself."
@@ -1678,7 +1681,7 @@ const COMPANIES = [
     score: "4 / 14",
     martinero: 43,
     momentum: { status: "accelerating", recent: 15.3, prior: 11.2 },
-    quarterYoY: { period: "TTM (Jun 2026)", growth: 15.2 },
+    quarterYoY: { period: "Q3 2026", growth: 11.9 },
     blurb: "A genuine top-5 global commercial real estate services firm, differentiated by Investment Management (Harrison Street) and Engineering (Englobe, Ayesa) now making up ~41% of revenue. Real double-digit growth, but EBIT has been essentially flat since FY2021 despite it, ROIC misses its own cost of capital, and net debt/EBITDA has widened to 3-4x funding the acquisition strategy. Co-founder Jay Hennick's ownership and dual-class voting control give real founder alignment.",
     file: "companies/colliers.html",
     personalNote: "Colliers is a useful stress test of the checklist on a services business. The growth headline is real — revenue's still compounding at a double-digit clip — but this framework is built to look past that, and what it finds underneath is less comfortable: EBIT hasn't actually grown since FY2021 even as revenue grew nearly 8% a year, meaning the M&A that's driving growth has been diluting margin, not adding to it. ROIC doesn't clear even the stock's own auto-computed cost of capital. What I do like: capex is minimal, gross margin has actually held up, and Jay Hennick's ownership plus dual-class voting structure gives him genuine, durable skin in the game — rare among the CRE peers I ran alongside this one. The stock's down over 40% in a year, which has pulled the multiple well below its own average, but a chunk of that 'cheapness' is a shrinking earnings base, not a pure bargain."
@@ -1695,9 +1698,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-18",
     price: "DKK 29.50",
     score: "3 / 14",
-    martinero: 24,
+    martinero: 22,
     momentum: { status: "accelerating", recent: 28.7, prior: -3.5 },
-    quarterYoY: { period: "Q2 2026", growth: 28.7 },
+    quarterYoY: { period: "Q3 2026", growth: 2.7 },
     blurb: "Denmark's clear #1 single-family homebuilder (~22% share, more than double #2), but one of the lowest scorers on this site. Revenue, EBIT and FCF are all negative on a 5-year CAGR basis after the 2022 rate-hike downturn, ROIC doesn't cover its cost of capital, and net debt/EBITDA has climbed near 7x — though that's an earnings problem more than a debt one, since net debt itself sits at a 5-year low. Capex is minimal (asset-light, builds on customer-owned land), and volumes are genuinely recovering (+28.7% YoY in Q2 2026), but three legacy B2B contracts keep margins depressed through at least 2027 per management's own guidance.",
     file: "companies/huscompagniet.html",
     personalNote: "HusCompagniet is the smallest, most speculative name I've put on this site so far — a Danish homebuilder trading at DKK 29.50, down about 30% over the past year, with a Martinero Index of just 24/100. I'm not dressing this up as a quality compounder: revenue, EBIT and FCF are all negative on a 5-year CAGR basis, ROIC doesn't come close to covering its cost of capital, and net debt/EBITDA has climbed to nearly 7x — though that's really an earnings problem, not a debt problem, since net debt itself is at a 5-year low. What keeps me curious: they're genuinely #1 in Danish detached houses by a wide margin, capex is almost nothing because they build on customer-owned land, and the 2025-26 volume recovery looks real — revenue's up 25-30% the last several quarters. The catch is three legacy B2B contracts eating the P&L, and management itself says margins don't normalize until after 2027. That's a long time to wait on a thin, illiquid stock with no dividend. This isn't a pick — it's a name I'm tracking to see if the market position and asset-light model eventually show up in the numbers once the bad contracts roll off."
@@ -1714,9 +1717,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-16",
     price: "$140.90",
     score: "5 / 14",
-    martinero: 36,
+    martinero: 34,
     momentum: { status: "accelerating", recent: 13.4, prior: 12.0 },
-    quarterYoY: { period: "Q2 2026", growth: 16.0 },
+    quarterYoY: { period: "Q3 2026", growth: 12.7 },
     blurb: "The clear #1 global commercial real estate services firm by revenue and investment-sales volume (25% share, 15th consecutive year at #1) — but the clearest example on this site of growth without profitability: revenue is up ~46% since FY2021 while EBIT is actually lower today than it was then. Operating margin has thinned every year (5.6%→3.2%), ROIC misses its cost of capital, and leverage has climbed from near-zero to ~4x EBITDA. Insider ownership is negligible (<1%), unlike Colliers' founder-controlled structure.",
     file: "companies/cbre.html",
     personalNote: "CBRE is the scale leader of the group by a wide margin — genuinely #1, not a close call — which makes the margin story more interesting, not less. Revenue's grown nearly 46% in four years and EBIT is actually lower than where it started; that's not a company struggling to grow, it's a company where growth and profitability have become disconnected, which is exactly the kind of thing a growth-only view would miss entirely. Capex is minimal and the entry multiple sits right at its own five-year average, so there's no real discount being offered for the profitability problem. No founder or concentrated insider stake here either, unlike Colliers — CBRE is a fully institutionally-run business at this point. I don't hold this one."
@@ -1732,10 +1735,10 @@ const COMPANIES = [
     tags: [],
     dateFeatured: "2026-09-16",
     price: "$12.52",
-    score: "2 / 14",
-    martinero: 25,
+    score: "1 / 14",
+    martinero: 24,
     momentum: { status: "accelerating", recent: 8.9, prior: -0.5 },
-    quarterYoY: { period: "TTM (Jun 2026)", growth: 11.0 },
+    quarterYoY: { period: "Q3 2026", growth: 7.7 },
     blurb: "The weakest scorer of the group. Revenue is only marginally above FY2021 levels after a genuine two-year decline through the 2022-23 rate-hike downturn, EBIT is still below its FY2021 level, and net debt/EBITDA runs the highest of the peer set at ~4-4.3x — a legacy of its LBO/2018-IPO capital structure. Insider ownership is negligible (0.82%). The one real positive: capex is minimal and the current entry multiple, while messy given a loss-making FY2023, looks cheap on a forward basis if the recovery holds.",
     file: "companies/cushman-wakefield.html",
     personalNote: "The clearest 'show me' story of the CRE batch. Revenue's only just recovered to above FY2021 levels, EBIT still hasn't, and the leverage — already the highest-risk balance sheet among the peers I looked at — hasn't come down with the recovery. It's genuinely accelerating right now (FY2025 revenue growth flipped from negative to nearly 9%), so this could be the early innings of a real turnaround, or it could be a cyclical bounce off a very low base. Insider ownership is essentially nil, so there's no founder conviction here to lean on either way. Lowest score of the group, and the balance sheet is the reason why — worth watching the deleveraging path, not worth owning yet on what's in front of me."
@@ -1752,7 +1755,7 @@ const COMPANIES = [
     dateFeatured: "2026-09-16",
     price: "£9.76",
     score: "5 / 14",
-    martinero: 35,
+    martinero: 33,
     momentum: { status: "decelerating", recent: 6.1, prior: 7.4 },
     quarterYoY: { period: "H1 2026", growth: 9.0 },
     blurb: "UK-headquartered and the smallest of this batch by revenue — genuinely more a strong #5-6 globally than a confident top-5, despite sitting in the same competitive set as CBRE, JLL, Colliers and Cushman & Wakefield. The standout strength is the balance sheet: run far more conservatively than the US roll-up peers, with net cash on an ex-lease basis. EBIT declined over the FY21-25 window (a genuine -12% CAGR) before recovering post-2023, and ROIC sits right at the edge of its assumed cost of capital.",
@@ -1771,9 +1774,9 @@ const COMPANIES = [
     dateFeatured: "2026-09-16",
     price: "$343.65",
     score: "6 / 14",
-    martinero: 46,
+    martinero: 44,
     momentum: { status: "decelerating", recent: 11.5, prior: 12.9 },
-    quarterYoY: { period: "TTM (Jun 2026)", growth: 11.2 },
+    quarterYoY: { period: "Q3 2026", growth: 12.0 },
     blurb: "The strongest scorer of the Big 5 CRE batch. The clear standout is the balance sheet — net debt/EBITDA of ~1.3-1.6x, well under the 2x bar and far better than every other peer in the group (all running 3x or higher) — paired with genuine FCF conversion (83%) and a trailing P/E meaningfully below its own five-year average (PEG ≈0.67). Growth and margin are still real misses (EBIT roughly flat over the period, margin the thinnest of the group at 4.5%), and gross margin has eroded just past this framework's stability threshold.",
     file: "companies/jll.html",
     personalNote: "Of the five commercial real estate names I ran through the checklist this week — Colliers, CBRE, Cushman & Wakefield, Savills and this one — JLL comes out on top, and it's not close. It's the only one of the group that actually clears the leverage bar outright, converts free cash flow at a real rate, and trades at a genuine discount to its own trading history rather than a discount that's mostly a shrinking earnings base in disguise. That doesn't mean it's a strong business in absolute terms — margin is still the thinnest of the group, EBIT has barely grown since FY2021, and gross margin has eroded a touch more than I'd like. But relative to CBRE's growth-without-profit problem, Colliers' and Cushman & Wakefield's leverage, this is the one balance sheet in the group I'd actually trust through a downturn. Picking it as today's highlight less because it's a great business and more because, of this specific peer set, it's the one that would worry me least."
@@ -1792,7 +1795,7 @@ const COMPANIES = [
     score: "12 / 14",
     martinero: 89,
     momentum: { status: "accelerating", recent: 13.4, prior: 11.1 },
-    quarterYoY: { period: "Q2 2026", growth: 8.0 },
+    quarterYoY: { period: "Q3 2026", growth: -1.0 },
     blurb: "The dominant global online travel platform (Booking.com, Priceline, Kayak, Agoda, OpenTable) by gross bookings, though Trip.com Group narrowly leads on one global-share measure thanks to China's domestic market. Excellent margins (35% operating, 87% gross), aggressive buybacks (~27% share count decline), minimal leverage and capex, and a trailing P/E sitting near half its own five-year average — PEG comes in around 0.9, genuinely below the 1.0-2.0 band this was checked against. One of the highest scores on the site; the only real misses are negligible insider ownership and a genuinely competitive market.",
     file: "companies/booking-holdings.html",
     personalNote: "Booking.com is one of my favorite platforms to just dream away on — scrolling through hotels in places I have no concrete travel plans for, half-building a trip I'm not booking. For years the one thing that kept me from ever buying it just for fun was the share price — it used to trade north of $4,000/share, a number that's psychologically hard to click 'buy' on even when you know that's not a rational reason to skip a stock. A 25-for-1 split in April 2026 brought it down to a normal-looking $171 and change, so that barrier is technically gone now. But it turns out I didn't need the vibes-only excuse anyway: the fundamentals are surprisingly strong, making this a rational buy on its own merits too. 12 of 14 criteria met, Martinero Index of 89 — one of the highest scores on the whole site. Worth knowing before reading too much into the growth numbers: COVID first crushed travel demand, then triggered a sharp reopening snap-back (+56% revenue growth in FY2022 alone), so the FY21-25 CAGR is inflated by that low base — the cleaner FY22-25 read is still good (mid-teens revenue, low-20s EBIT growth) just less dramatic than the headline number, and that specific source of volatility should be behind the stock now that the reopening cycle is years past. What actually convinced me is the valuation: trailing P/E is sitting at roughly half its own five-year average, and the PEG ratio comes in around 0.9 — genuinely below 1.0, not just inside the 1.0-2.0 'reasonably priced growth' band I went in expecting to find. Margins are excellent, it's been buying back stock aggressively for years, capex is basically nothing, and leverage is low. The two real knocks: almost no insider ownership (0.2% — fully institutional since the Priceline-to-Booking-Holdings rename in 2018, no founder at the wheel) and a genuinely competitive market, with Expedia, Airbnb and China's Trip.com Group all pushing back hard. Neither is a dealbreaker, but they're why this isn't a perfect score. Bottom line: a platform I already loved turns out to also be one of the better-priced growth compounders on this whole list."
@@ -1811,7 +1814,7 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 55,
     momentum: { status: "accelerating", recent: 98.6, prior: -30.3 },
-    quarterYoY: { period: "FY2026 (ended Mar 2026)", growth: 98.6 },
+    quarterYoY: { period: "H1 FY2027 (Apr-Sep 2026)", growth: -12.1 },
     blurb: "A genuine mid-pack score, and honestly a fun pick more than a screaming value case. Switch 2 launched in June 2025 and nearly doubled revenue (+98.6% FY2026), but hardware-launch economics crushed gross margin (61.0%→39.3%) and operating margin (35.0%→15.6%) — the classic pattern before high-margin software attach rates catch up. Zero debt, a ¥2.2T net cash pile, steady buybacks (~11% share count decline over 5 years), and a trailing P/E modestly below its own average are real positives. The clear miss: insider/founder ownership is under 1% — Yamauchi family control ended in 2013, fully institutional today.",
     file: "companies/nintendo.html",
     personalNote: "I picked Nintendo the way I picked Booking Holdings — not because a screen flagged it, but because I've been playing Mario and Zelda since I was a kid and wanted to see what the checklist actually says about it. The honest answer: it's a genuine mixed bag, and this happens to be about the worst fiscal year to look at it in. Nintendo just launched Switch 2 (June 2025), and hardware launch years are structurally brutal on this framework — revenue nearly doubled to ¥2,313.1B (+98.6%) as tens of millions of new consoles shipped, but gross margin collapsed from 61.0% to 39.3% and operating margin fell to 15.6% (from 35.0% just four years ago) because early-cycle hardware sells at thin or negative margins before the high-margin software attach rate catches up. That single dynamic is why revenue CAGR, EBIT CAGR, FCF CAGR and the margin-stability criterion all land as misses despite Switch 2 objectively outselling the PS5 at launch. What isn't a launch-year artifact: Nintendo carries zero debt and a ¥2.2T net cash pile, buybacks have quietly shrunk the share count by roughly 11% over five years, capex is essentially nothing since Nintendo doesn't manufacture its own hardware, and at a trailing P/E of roughly 19.75x the stock actually sits modestly below its own five-year average multiple. The clear miss, and the one that matters most for a 'beloved brand' thesis: insider and founder ownership is under 1% — the Yamauchi family's direct control ended after Hiroshi Yamauchi's 2013 death, and Nintendo today is fully institutionally owned, not founder-run. Net: 7 of 14 criteria met, Martinero Index 55/100 — middle of the pack, not a standout. This is sentiment more than a screaming value case right now; the checklist mildly likes the balance sheet and the valuation, is neutral on the market position, and actively dislikes this specific fiscal year's growth and margin trend. An honest, unglamorous result for a stock I picked mostly because I love the games."
@@ -1830,7 +1833,7 @@ const COMPANIES = [
     score: "11 / 14",
     martinero: 86,
     momentum: { status: "decelerating", recent: 9.65, prior: 18.31 },
-    quarterYoY: { period: "Q2 2026", growth: 14.0 },
+    quarterYoY: { period: "Q3 2026", growth: 16.0 },
     blurb: "The clear #1 global audio streaming platform (300M Premium subscribers, 777M MAU, ~31-32% global share), and one of the highest scores on the site at 86/100. Genuine, undistorted 15.5% revenue CAGR, net cash balance sheet, minimal capex, FCF conversion over 100%, and an entry multiple well below its own average. The eye-catching EBIT/FCF growth rates (+120%, +80%) are largely base-effect noise from a company that was barely profitable for most of its history — real profitability is only ~2 years old. Founders Daniel Ek and Martin Lorentzon still control ~70% of the vote despite owning only ~25% economically.",
     file: "companies/spotify.html",
     personalNote: "I use Spotify every day — it's the soundtrack to basically everything I do, from commuting to working to falling asleep to a playlist. So when I say this is a 'fun' pick, I mean it: I picked this company because I love the product, not because I screened for a strong score first. What actually surprised me running the numbers is that the checklist likes it more than I expected — 86/100, 11 of 14 criteria met. But I don't want to oversell that. The two scariest-looking numbers on this dashboard (+120% EBIT CAGR, +80% FCF CAGR) are basically noise: Spotify was losing money or barely breaking even for most of the last five years, and those huge percentages are just what happens when you divide a real number by a number that used to be near zero. The actual story is simpler and, I think, more honest: Spotify spent years proving the subscription model could work at scale, and only in the last two years has it actually shown it can make real money doing it — healthy margins, strong free cash flow, a clean net-cash balance sheet. That's a good story. It's just a much shorter track record of actual profitability than the headline growth rates make it look like, and I'd rather be straight about that than let a two-year hot streak convince me this is a proven compounder yet. Daniel Ek and Martin Lorentzon still controlling roughly 70% of the vote gives me some comfort that the founders have skin in the game for the long haul, even though their economic ownership has been diluted down to about a quarter of the company. I'm not making a buy call here — I just like using the product, and it turns out the numbers aren't embarrassing either, which isn't always true when I pick a 'fun' one."
@@ -1849,7 +1852,7 @@ const COMPANIES = [
     score: "3 / 14",
     martinero: 26,
     momentum: { status: "decelerating", recent: 167.9, prior: 736.0 },
-    quarterYoY: { period: "TTM (Jun 2026)", growth: 115.3 },
+    quarterYoY: { period: "Q3 2026", growth: 168.0 },
     blurb: "The largest pure-play 'neocloud' GPU-as-a-service provider, IPO'd March 2025 and up ~114% from its $40 IPO price despite a ~53% drop from its June 2025 high. Revenue growth is undeniable (+167.9% FY24-25) but every other criterion breaks down: FCF is deeply negative and worsening (-$13.7B TTM) on capex running 200%+ of revenue, net debt/EBITDA sits near 12x, ROIC is negative, and shares outstanding are up ~76% YoY. Roughly two-thirds of revenue comes from Microsoft and Meta combined — its two biggest customers are also its two biggest long-term competitive threats as they build out their own AI silicon.",
     file: "companies/coreweave.html"
   },
@@ -1867,7 +1870,7 @@ const COMPANIES = [
     score: "2 / 14",
     martinero: 13,
     momentum: { status: "accelerating", recent: 2.97, prior: -6.61 },
-    quarterYoY: { period: "FY2025", growth: 2.97 },
+    quarterYoY: { period: "Q3 2026", growth: -2.6 },
     blurb: "Not really a software dashboard anymore — Strategy's ~$65B market value is now driven almost entirely by its ~845,000 BTC treasury, funded by convertible debt and heavy share issuance (+240% share count since FY2021). The legacy BI software business is flat-to-declining (-1.68% CAGR, $510.8M→$477.2M). mNAV (market cap ÷ Bitcoin holdings value) — the one number that actually matters here — has compressed from a historical 1.5-2x+ premium (briefly 6x in 2021) to around 0.9-1.1x today, dipping below 1.0x entirely in June 2026. Almost every traditional criterion on this site simply isn't built for a company like this, and the scorecard shows it.",
     file: "companies/microstrategy.html"
   },
@@ -1885,7 +1888,7 @@ const COMPANIES = [
     score: "10 / 14",
     martinero: 71,
     momentum: { status: "decelerating", recent: 61.0, prior: 69.0 },
-    quarterYoY: { period: "Q2 2026", growth: 61.0 },
+    quarterYoY: { period: "Q3 2026", growth: 53.0 },
     blurb: "The clear #1 online forum/community discussion platform (~84% share of Google forum search results), two and a half years into life as a public company (IPO'd March 2024 at $34, now ~4.7x that despite a ~40% pullback from highs). Revenue has compounded at roughly 46%/year since FY2021, with FY2025 delivering Reddit's first full year of real GAAP profitability (20.1% operating margin) and a near-debt-free balance sheet ($2.45B net cash). AI licensing deals with Google and OpenAI add a differentiated revenue stream beyond advertising. Misses: still-rising share count (+5.9% in FY2025) and modest direct insider ownership (2.95% — CEO Steve Huffman's often-cited 24.8% SEC stake is mostly shared voting power, not personal economic ownership).",
     file: "companies/reddit.html",
     personalNote: "I picked Reddit as a long-time user — I've been reading and posting on the site for years — and wanted to see what the checklist says now that it's two and a half years into life as a public company. The picture is genuinely strong. Revenue has compounded at roughly 46% a year since FY2021 ($484.9M → $2,203M), and FY2025 was Reddit's first full year of solid GAAP profitability: a 20.07% operating margin, up from deep losses every year before it. The one asterisk on the growth numbers is FY2024, when a one-time $534.7M stock-based comp charge tied to IPO vesting pushed operating income to -$560.6M even as revenue kept climbing — that single item is why EBIT and FCF CAGR both come out mathematically undefined ('n/m', a loss-to-profit sign flip) rather than a clean percentage. Strip that out and the underlying trend is a real, durable swing to profitability: free cash flow went from -$132.5M (FY2021) to $684.2M (FY2025), a 154.8% FCF-to-EBIT conversion rate. The balance sheet is close to debt-free ($2.45B net cash), capex is next to nothing (0.3% of revenue), and today's trailing P/E (37.0x) sits at roughly a 55% discount to the only comparable data point available, FY2025's 82.2x reading, with a PEG ratio around 0.59. Where the checklist pushes back: share count is still rising (+5.9% in FY2025 alone, from ongoing RSU issuance) and direct insider/officer ownership is a modest 2.95% — Steve Huffman's often-cited 24.8% SEC-reported stake is mostly shared voting power tied to a pre-IPO voting agreement with Advance Publications, not shares he personally owns. Net: 10 of 14 criteria met, Martinero Index 71/100 — a genuinely strong scorecard for a two-year-old public company, with dilution and ownership structure as the honest counterweights to an otherwise clean growth-and-margin story."
@@ -1952,7 +1955,7 @@ const COMPANIES = [
     score: "3 / 14",
     martinero: 38,
     momentum: { status: "accelerating", recent: 11.5, prior: 4.1 },
-    quarterYoY: { period: "TTM (Sep 2026)", growth: 11.5 },
+    quarterYoY: { period: "Q1 FY2027 (Aug 2026)", growth: 22.7 },
     blurb: "A real, ~$915.5M-revenue cannabis-and-craft-beverage-alcohol company with growing sales (+11.5% TTM) and a narrowing operating loss — unlike this site's pre-revenue psychedelics names, Tilray is scored as a normal operating business, not N/A-heavy. But relentless share dilution (a 1-for-10 reverse split in Dec 2025 didn't stop it), a deeply negative ROIC, and a history of billion-dollar goodwill writedowns keep it firmly out of quality-compounder territory. Down roughly 65% over the trailing year.",
     file: "companies/tilray.html"
   },
@@ -1987,7 +1990,7 @@ const COMPANIES = [
     score: "11 / 14",
     martinero: 89,
     momentum: { status: "accelerating", recent: 17.7, prior: 15.5 },
-    quarterYoY: { period: "TTM (Sep 2026)", growth: 17.7 },
+    quarterYoY: { period: "Q3 2026", growth: 19.0 },
     blurb: "A decentralized, three-decade compounder of ~1,000+ niche B2B vertical-market software businesses — utilities billing, library systems, funeral homes, hospitality, and hundreds of other narrow, sticky verticals, acquired and held permanently, never sold. Reported TTM revenue growth of 17.7% and a 4-year revenue CAGR of 22.8%, one of the widest ROIC-vs-cost-of-capital spreads on this site (19.58% vs ~7.55%), an essentially flat share count for years, and net debt/EBITDA around 1.27x. Down roughly 45% from its 2025 high on AI-moat fears and founder Mark Leonard's health-related exit from the President role (successor Mark Miller, a 30-year company veteran, has run it since late 2025) — the reported growth never actually confirmed the panic. Misses: latest-FY operating margin (16.6% vs this site's 20% bar), a market-concentration criterion that's hard to score cleanly for a business with no single market, and modest direct founder/insider ownership relative to other founder-led names here.",
     file: "companies/constellation-software.html",
     personalNote: "Constellation Software is the answer to a question I get asked a lot in different forms: is there a real business that can compound at 15%+ a year for five years without taking on speculative, story-stock risk? CSU is about as close as I've found. It's not exciting — a Toronto-based holding company buying and permanently keeping mission-critical but deeply boring software businesses across hundreds of tiny niches, run by operators who never have to worry about a competitor showing up because most of these markets are too small for anyone else to bother building for. That's the whole moat: nobody wants to compete for a library-software contract worth a few hundred thousand dollars a year, but a few hundred thousand of those add up. The scorecard backs it up better than almost anything else on this site — 11 of 14 criteria met, a Martinero Index of 89, essentially no dilution in years, and a return on capital that dwarfs its cost of capital by a wide margin. The stock is down about 45% from its 2025 high, partly on generic 'AI will eat legacy enterprise software' fears that I don't think really apply to a portfolio this fragmented and mission-critical, and partly because founder Mark Leonard stepped back from President for health reasons in late 2025. I don't own this yet, but it's now on my shortlist — the real risks are a very high per-share price that makes position-sizing awkward, and a growth engine that depends on continuing to find and integrate good acquisitions at sensible prices, which gets harder as the company gets bigger. Still, of everything I've looked at recently, this is the one that made me want to actually go do more homework rather than just publish the dashboard and move on."
@@ -2003,8 +2006,9 @@ const COMPANIES = [
     tags: ["Turnaround"],
     dateFeatured: "2026-09-26",
     price: "€223.35",
-    score: "4 / 14",
-    martinero: 32,
+    score: "3 / 14",
+    martinero: 30,
+    quarterYoY: { period: "Q3 2026", growth: 0.0 },
     blurb: "Gucci-owner Kering is a genuine, severe multi-year earnings collapse, not a distortion — group operating margin has more than halved since 2021 (28.4%→11.1%) as Gucci alone lost roughly 38% of its revenue amid a brand repositioning and softer Chinese demand, while ROIC has fallen below a reasonable cost of capital. Non-Gucci houses (Saint Laurent, Bottega Veneta, Eyewear) have actually grown, and gross margins have stayed surprisingly stable, but even after a roughly 68% price decline the stock isn't obviously cheap against its own history once a one-off FCF distortion is corrected for. Pinault family (Artémis) ownership ~42.3%.",
     file: "companies/kering.html"
   },
@@ -2020,7 +2024,8 @@ const COMPANIES = [
     dateFeatured: "2026-09-26",
     price: "CHF 171.40",
     score: "8 / 14",
-    martinero: 64,
+    martinero: 62,
+    quarterYoY: { period: "Q1 FY2027 (Jun 2026)", growth: 17.0 },
     blurb: "The Swiss luxury conglomerate behind Cartier and Van Cleef & Arpels — the standout jewelry performer in global luxury, with a net-cash balance sheet (~€8.5-9.1B) and a dual-class structure that gives the Rupert family only ~10% of economic ownership but ~50.6% of voting control. Jewellery Maisons have carried the group; the Watchmakers division has been weaker and more cyclical, and a one-off FY2023 divestment charge (YNAP/Net-a-Porter) distorts that year's P/E.",
     file: "companies/richemont.html"
   },
@@ -2036,7 +2041,8 @@ const COMPANIES = [
     dateFeatured: "2026-09-26",
     price: "1,022.50p",
     score: "4 / 14",
-    martinero: 34,
+    martinero: 32,
+    quarterYoY: { period: "H1 FY2027 (Sep 2026)", growth: 6.0 },
     blurb: "British heritage luxury house mid-turnaround: a self-inflicted 'ultra-luxury' repositioning cratered sales and margins (operating margin fell to a 1.06% FY2025 trough) and forced a dividend suspension in 2024, still not reinstated. New CEO Joshua Schulman's 'Burberry Forward' strategy is showing genuine recovery (FY2026 margin back to 6.61%, a swing to modest profit) — real progress, not yet a full repair. Deliberately scored without flattery: one of the weaker performers in this luxury batch.",
     file: "companies/burberry.html"
   },
@@ -2053,6 +2059,7 @@ const COMPANIES = [
     price: "€43.56",
     score: "9 / 14",
     martinero: 73,
+    quarterYoY: { period: "9M 2026", growth: 3.0 },
     blurb: "One of the stronger, more disciplined operators in the luxury sector — clear #1 in luxury outerwear/technical jackets (Moncler brand plus Stone Island), with operating margin held in a tight 28-30% band every year since FY2021, a net-cash balance sheet, and a flat share count. Held back mainly by growth that's decelerated to low-double-digits and a genuinely fragmented competitive backdrop, not by any operating weakness. Chairman/CEO Remo Ruffini remains a controlling shareholder.",
     file: "companies/moncler.html"
   },
@@ -2069,6 +2076,7 @@ const COMPANIES = [
     price: "€80.80",
     score: "7 / 14",
     martinero: 62,
+    quarterYoY: { period: "Q3 2026", growth: 13.5 },
     blurb: "Founder-controlled 'King of Cashmere' — ten straight years of revenue growth (+18.6% 5-yr CAGR), expanding gross margins (84.1%→91.4%), and a real discount to its own 5-year valuation history (trailing P/E 39.85x vs a 59.5x own-average, a genuine de-rating despite the brand's growing reputation). Capex intensity is elevated (6.4%→9.1% of revenue) because the company owns 94 of its 124 stores plus its Solomeo campus — a deliberate real-estate strategy, not inefficiency. Brunello Cucinelli personally controls ~50-51% via an irrevocable trust.",
     file: "companies/brunello-cucinelli.html"
   },
@@ -2083,10 +2091,10 @@ const COMPANIES = [
     tags: ["Founder-Controlled"],
     dateFeatured: "2026-09-26",
     price: "€1,356.50",
-    score: "11 / 14",
-    martinero: 80,
+    score: "10 / 14",
+    martinero: 79,
     momentum: { status: "steady", recent: 15.5, prior: 15.5 },
-    quarterYoY: { period: "Q2 2026", growth: 7.0 },
+    quarterYoY: { period: "Q3 2026", growth: 6.0 },
     blurb: "The Birkin-and-Kelly house that deliberately makes less than the world wants — a 41.0% operating margin, zero net debt (~€9.9B net cash), and a founder family (the Dumas/Guerrand/Puech branches, consolidated via the H51 holding company) that's controlled it since 1837, holding ~66.7% of capital and ~78.6% of voting rights. Down roughly 41% from its 2025 high on a sector-wide luxury multiple de-rating, not deteriorating fundamentals — revenue CAGR is a clean +15.5% (FY21-25). The two misses (FCF CAGR, FCF conversion) both trace to elevated leather-workshop capex from vertical integration (owned tanneries, ~55% in-house manufacturing) — a structural trait, not a red flag.",
     file: "companies/hermes.html",
     personalNote: "Hermès is the purest example I've found on this site of a business that simply refuses to grow as fast as demand would let it, on purpose, and gets rewarded for it anyway. Most luxury names eventually chase volume — more stores, more product drops, more accessible price points — and it erodes the brand over time; you can see exactly that story play out in Kering's Gucci and in Burberry's last few years, both built this week alongside Hermès as direct comparisons. Hermès has never done that. Birkin and Kelly bags stay capped well below what the company could sell, waitlists run for years, and the result is a 41% operating margin that would be a rounding error for almost any other consumer-goods company. The family control appeals to me too — descendants of the founder still hold roughly two-thirds of the company through a holding vehicle called H51, and that kind of multi-generational patience is a real reason a brand doesn't get milked for a decade of quick earnings. The stock is down about 41% from its 2025 high, which on the surface sounds alarming, but the dashboard shows revenue still compounding at a clean 15%+ and margins holding — this reads much more like a sector-wide luxury re-rating (institutional money rotating out of expensive luxury names generally) than anything specific going wrong at Hermès itself. I don't currently own it, and it's never been what I'd call cheap, but of the six luxury names I looked at together this week, this is the one I'd actually want to own for the next decade, not just admire from the sidelines."
@@ -2103,7 +2111,8 @@ const COMPANIES = [
     dateFeatured: "2026-09-28",
     price: "$6.40",
     score: "8 / 14",
-    martinero: 65,
+    martinero: 63,
+    quarterYoY: { period: "Q3 2026", growth: 3.9 },
     blurb: "The dominant incumbent in US home/business alarm monitoring (~30% share, ~5x the next competitor) — strong 26% EBIT margins and 98% FCF conversion, but low growth (~5% revenue CAGR) and leverage left over from its 2016 Apollo LBO (net debt/EBITDA 2.8x).",
     file: "companies/adt.html"
   },
@@ -2120,6 +2129,7 @@ const COMPANIES = [
     price: "SEK 152.10",
     score: "6 / 14",
     martinero: 63,
+    quarterYoY: { period: "Q3 2026", growth: 0.1 },
     blurb: "Global #2 in manned guarding, and the historical parent of today's Verisure pick — Verisure was Securitas's own alarm-monitoring arm until its 2006 spin-off. A structurally different, labor-intensive, thin-margin business (6.9% EBIT margin), not a recurring-subscriber compounder.",
     file: "companies/securitas.html"
   },
@@ -2136,6 +2146,7 @@ const COMPANIES = [
     price: "€2.90",
     score: "4 / 14",
     martinero: 54,
+    quarterYoY: { period: "9M 2026", growth: 7.5 },
     blurb: "Verisure's most direct alarm-monitoring rival in Spain and Latin America (Prosegur Alarmas) — but that's only ~5% of a much larger, family-controlled security conglomerate spanning guarding, cash logistics and outsourcing, with structurally thinner margins and real Argentina/Brazil currency risk.",
     file: "companies/prosegur.html"
   },
@@ -2152,6 +2163,7 @@ const COMPANIES = [
     price: "$53.38",
     score: "10 / 14",
     martinero: 80,
+    quarterYoY: { period: "Q3 2026", growth: 9.0 },
     blurb: "Licenses the cloud SaaS platform independent security dealers run on — 66% gross margins, sub-2% capex, expanding EBIT margins, but high-single-digit growth rather than 15%+. Not a Verisure/ADT competitor: it's the software layer one level up from the subscriber relationship.",
     file: "companies/alarm-com.html"
   },
@@ -2169,11 +2181,1631 @@ const COMPANIES = [
     score: "7 / 14",
     martinero: 66,
     momentum: { status: "accelerating", recent: 13.0, prior: 9.0 },
-    quarterYoY: { period: "H1 2026", growth: 12.0 },
+    quarterYoY: { period: "Q3 2026", growth: 10.5 },
     blurb: "Europe's #1 monitored home-security alarm company, growing double-digit every quarter since its October 2025 IPO — but trading ~39% below its own offer price on lingering PE-era leverage and a fresh post-IPO sponsor overhang.",
     file: "companies/verisure.html",
     personalNote: "I built four competitor dashboards alongside this one on purpose, because the alarm-monitoring industry has genuinely different business models hiding under one label, and Verisure sits in an interesting spot among them. ADT is the leveraged US incumbent with similar economics but slower growth. Securitas is actually Verisure's own former parent — it spun the alarm-monitoring business out in 2006 as 'Securitas Direct,' and what's left at Securitas today is a much lower-margin guarding business, which tells you how much better the subscriber-monitoring model is than the labor-intensive one. Prosegur Alarmas is Verisure's most direct rival in Spain and Latin America, but it's a small piece of a diversified, family-run conglomerate. And Alarm.com is the odd one out — a capital-light software platform sitting a level above the subscriber relationship entirely, with better margins than any of the hardware-and-monitoring players including this one. Verisure itself is the purest expression of the direct-to-consumer subscriber model: #1 position in 13 of 17 markets, expanding margins, real double-digit growth. The reason it's not screening better is straightforward and worth being honest about — it's still carrying private-equity-era leverage (net debt/EBITDA around 2.7x, down from roughly 5x before the IPO) and it's trading nearly 40% below where Hellman & Friedman priced it just under a year ago, which reads to me as a fresh-IPO sponsor overhang more than a verdict on the business. I don't own this one yet. A single year of public trading history isn't much to judge a stock on, and I'd want to see the leverage keep coming down before I'd treat this as anything other than 'interesting and worth watching closely.'"
   }
+
+  ,
+
+  {
+    slug: "deere",
+    name: "Deere & Company",
+    ticker: "NYSE: DE",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Agricultural & Farm Machinery",
+    tags: ["Cyclical", "Precision Ag", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "$689.59",
+    score: "6 / 14",
+    martinero: 45,
+    momentum: { status: "accelerating", recent: -11.7, prior: -15.6 },
+    quarterYoY: { period: "Q3 FY2026", growth: 4.9 },
+    blurb: "The world's #1 agricultural equipment maker, with an almost debt-free equipment business and ROIC well above its cost of capital, but growth and margins are still near the cycle trough. At 38x trailing earnings against a 17x five-year average, the stock has already priced in the 2027 recovery.",
+    file: "companies/deere.html"
+  },
+
+  {
+    slug: "komatsu",
+    name: "Komatsu Ltd.",
+    ticker: "TYO: 6301",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Construction & Mining Equipment",
+    tags: ["Japan", "Mining", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "¥7,012",
+    score: "5 / 14",
+    martinero: 57,
+    momentum: { status: "decelerating", recent: 0.7, prior: 6.2 },
+    quarterYoY: { period: "Q2 FY2027", growth: 13.5 },
+    blurb: "World #2 in construction and mining equipment with a clean balance sheet, a shrinking share count and no cross-shareholdings. Margins are off their peak and the stock now trades about 49% above its own 5-year average P/E. Reported growth is flattered by a weak yen.",
+    file: "companies/komatsu.html"
+  },
+
+  {
+    slug: "volvo-group",
+    name: "AB Volvo (Volvo Group)",
+    ticker: "STO: VOLV B",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Heavy Trucks & Construction Equipment",
+    tags: ["Nordic", "Dividend Payer", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "SEK 321.20",
+    score: "5 / 14",
+    martinero: 49,
+    momentum: { status: "decelerating", recent: -9.0, prior: -4.7 },
+    quarterYoY: { period: "Q3 2026", growth: 7.9 },
+    blurb: "Trucks-heavy Nordic cyclical (Volvo CE is a Caterpillar rival): net-cash industrial core, Industrivärden-anchored register, ~4% variable dividend. Sales are off the 2023 peak, but Q2 2026 truck orders rose 33%.",
+    file: "companies/volvo-group.html"
+  },
+
+  {
+    slug: "cnh",
+    name: "CNH Industrial N.V.",
+    ticker: "NYSE: CNH",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Agricultural & Construction Machinery",
+    tags: ["Cyclical", "Exor-Controlled", "Caterpillar Peer"],
+    dateFeatured: "2026-09-29",
+    price: "$13.17",
+    score: "4 / 14",
+    martinero: 23,
+    quarterYoY: { period: "Q3 2026", growth: -1.1 },
+    blurb: "The #2–#3 global ag-equipment maker (Case IH, New Holland) sits in a trough year, with Industrial EBIT margin down to 4.3% from 12.4% in 2023 and a rebound not guided until 2027. A rich P/E on depressed earnings and negative ROIC-versus-WACC keep the score low.",
+    file: "companies/cnh.html"
+  },
+
+  {
+    slug: "caterpillar",
+    name: "Caterpillar Inc.",
+    ticker: "NYSE: CAT",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Heavy Machinery & Power Systems",
+    tags: ["Cyclical Compounder", "AI Data-Center Power", "Buybacks"],
+    dateFeatured: "2026-09-29",
+    price: "$819.95",
+    score: "7 / 14",
+    martinero: 59,
+    momentum: { status: "accelerating", recent: 4.3, prior: -3.4 },
+    quarterYoY: { period: "Q3 2026", growth: 17.0 },
+    blurb: "Cyclical compounder with a record $72B backlog and an AI data-center power tailwind: services-rich, buyback-shrunk share count (-16% since FY21) and a 20.9% Q2'26 operating margin, but priced at ~1.8x its own 5-year average P/E.",
+    file: "companies/caterpillar.html",
+    personalNote: "Caterpillar is the classic 'good business, demanding price' problem. The scorecard likes the things that make it durable: a services and aftermarket business that smooths the cycle, a share count that has shrunk about 16% in five years through buybacks, ME&T free cash flow around $9.5B a year, and a genuinely new demand source in data-center power generation. What it does not like is the entry price. The stock trades at roughly 1.8x its own five-year average P/E, and revenue growth over five years is single-digit, well below the 15% bar this site uses. That is why it lands at 7 of 14 rather than higher. I built Deere, Komatsu, Volvo and CNH alongside it on purpose: Deere and CNH are the same cycle seen from agriculture, Komatsu is the closest like-for-like rival, and Volvo shows the trucks-heavy version. Caterpillar scores best of the five, but 'best of a cyclical peer group' is a low bar, and the honest read is that a lot of the good news is already in the price. I don't own it."
+  }
+
+  ,
+
+  {
+    slug: "kuehne-nagel",
+    name: "Kuehne+Nagel International AG",
+    ticker: "SIX: KNIN",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Controlling Shareholder"],
+    dateFeatured: "2026-10-01",
+    price: "CHF 220.30",
+    score: "7 / 14",
+    martinero: 41,
+    momentum: { status: "decelerating", recent: -1.3, prior: 4.0 },
+    quarterYoY: { period: "Q3 2026", growth: 22.0 },
+    blurb: "Swiss asset-light freight forwarder and global #1 in sea and air volumes. Earnings are still about two-thirds below the FY2022 peak, but Q2 2026 EBIT rose 11% and guidance was raised. Strong ROIC and a 53% controlling holder offset negative growth CAGRs and a rich trailing multiple.",
+    file: "companies/kuehne-nagel.html"
+  },
+
+  {
+    slug: "dhl-group",
+    name: "DHL Group",
+    ticker: "XETRA: DHL",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Recovery", "Buybacks"],
+    dateFeatured: "2026-10-01",
+    price: "€57.00",
+    score: "4 / 14",
+    martinero: 39,
+    momentum: { status: "decelerating", recent: -1.6, prior: 3.0 },
+    quarterYoY: { period: "Q3 2026 (prelim)", growth: 12.4 },
+    blurb: "Global logistics leader spanning express, forwarding, contract logistics and German mail. Earnings are recovering strongly (Q2 EBIT +30%, FY26 guidance raised, buyback up to €6.5B), but flat FY21–25 growth, 2.8x leverage and a re-rated 17x P/E keep the score modest.",
+    file: "companies/dhl-group.html"
+  },
+
+  {
+    slug: "ch-robinson",
+    name: "C.H. Robinson Worldwide",
+    ticker: "NASDAQ: CHRW",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Dividend Grower"],
+    dateFeatured: "2026-10-01",
+    price: "$147.96",
+    score: "8 / 14",
+    martinero: 48,
+    momentum: { status: "decelerating", recent: -8.4, prior: 0.7 },
+    quarterYoY: { period: "Q3 2026", growth: 29.5 },
+    blurb: "Asset-light US freight broker and #1 US brokerage by gross revenue. Its Lean AI automation has cut headcount about 11% and lifted operating income even as revenue and gross profit shrank. Returns are excellent (ROIC 21.9%), but the stock trades at about 28x trailing earnings against a ~23.5x five-year average.",
+    file: "companies/ch-robinson.html"
+  },
+
+  {
+    slug: "expeditors",
+    name: "Expeditors International of Washington",
+    ticker: "NYSE: EXPD",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Asset-Light", "Net Cash", "Buybacks"],
+    dateFeatured: "2026-10-01",
+    price: "$184.64",
+    score: "6 / 14",
+    martinero: 45,
+    momentum: { status: "decelerating", recent: 4.4, prior: 14.0 },
+    quarterYoY: { period: "Q3 2026", growth: 42.0 },
+    blurb: "Asset-light, net-cash freight forwarder with a 57% ROIC, capex under 0.5% of revenue and a share count down 24% since 2021. Q2 2026 revenue jumped 32%, but revenue is still 33% below its FY2021 peak and the stock trades at 27x earnings versus a 19x five-year average.",
+    file: "companies/expeditors.html"
+  },
+
+  {
+    slug: "dsv",
+    name: "DSV A/S",
+    ticker: "CPH: DSV",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Freight Forwarding & Logistics",
+    tags: ["Cyclical", "Acquisition-Driven", "Asset-Light"],
+    dateFeatured: "2026-10-01",
+    price: "DKK 1,215.50",
+    score: "6 / 14",
+    martinero: 46,
+    momentum: { status: "accelerating", recent: 48.0, prior: 10.8 },
+    quarterYoY: { period: "Q3 2026", growth: 12.1 },
+    blurb: "The world's largest freight forwarder after the DB Schenker deal, asset-light with about 1% capex and 83% FCF conversion, but FY2025's 48% revenue jump is mostly acquired. Post-deal ROIC is below WACC (7.2% vs 7.9%), leverage is 2.7x with buybacks paused, and the stock sits 36% below its 52-week high.",
+    file: "companies/dsv.html"
+  },
+
+  {
+    slug: "toyota",
+    name: "Toyota Motor Corp.",
+    ticker: "NYSE: TM",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "Japan", "Hybrids"],
+    dateFeatured: "2026-10-06",
+    price: "$184.12",
+    score: "7 / 14",
+    martinero: 64,
+    momentum: { status: "steady", recent: 5.5, prior: 6.5 },
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 8.6 },
+    blurb: "Toyota is the world's largest automaker by volume (including Daihatsu and Hino), with a net-cash industrial balance sheet and a large captive finance arm. FY2026 (year to March 2026) revenue rose 5.5% to 50.7T yen, but tariffs and costs cut operating income about 21% to 3.77T yen, and management guided FY2027 lower again. The scorecard rests on industrial (non-financial services) figures, which show solid free cash flow but thin and falling margins.",
+    file: "companies/toyota.html"
+  },
+  {
+    slug: "xiaomi",
+    name: "Xiaomi Corporation",
+    ticker: "HKEX: 1810",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Consumer Electronics & Smart EVs",
+    tags: ["Autos", "China", "Founder-Controlled"],
+    dateFeatured: "2026-10-06",
+    price: "HK$23.88",
+    score: "7 / 14",
+    martinero: 62,
+    momentum: { status: "decelerating", recent: 24.97, prior: 35.04 },
+    quarterYoY: { period: "Q2 2026", growth: -6.1 },
+    blurb: "Xiaomi is a Beijing-based smartphone, consumer-IoT and internet-services group that launched an EV business in 2024 (SU7, YU7). FY2025 revenue was RMB 457.3B (+25.0% YoY) at a 22.3% gross margin and 7.1% standardised EBIT margin, with a net cash position. Q2 2026 revenue fell 6.1% YoY as memory-cost pressure hit smartphone margins and the EV segment returned to a loss.",
+    file: "companies/xiaomi.html"
+  },
+  {
+    slug: "general-motors",
+    name: "General Motors Company",
+    ticker: "NYSE: GM",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "Buybacks", "Cyclical"],
+    dateFeatured: "2026-10-06",
+    price: "$80.23",
+    score: "6 / 14",
+    martinero: 43,
+    momentum: { status: "decelerating", recent: -1.3, prior: 9.1 },
+    quarterYoY: { period: "Q3 2026", growth: 2.9 },
+    blurb: "General Motors is the largest US automaker by sales, with a captive lender (GM Financial) and heavy buybacks that cut the share count about 40% since 2021. FY2025 revenue was $185.0B (-1.3%) and EBIT-adjusted $12.7B (6.9% margin), while adjusted automotive free cash flow reached $10.6B. Gross margin has slid from 13.5% to 10.7% in three years, and trailing GAAP P/E (~40x) is inflated by $7.2B of Q4 2025 EV charges versus a forward P/E near 5.8x.",
+    file: "companies/general-motors.html"
+  },
+  {
+    slug: "hyundai-motor",
+    name: "Hyundai Motor Company",
+    ticker: "KRX: 005380",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "South Korea", "Captive Finance"],
+    dateFeatured: "2026-10-06",
+    price: "₩348,000",
+    score: "3 / 14",
+    martinero: 31,
+    momentum: { status: "steady", recent: 6.3, prior: 7.7 },
+    quarterYoY: { period: "Q3 2026", growth: -3.4 },
+    blurb: "South Korea's largest carmaker (Hyundai and Genesis brands, 4.14M vehicles in 2025), with a captive finance arm and a roughly one-third stake in Kia. Revenue is at a record (FY2025 ₩186.3T, Q2 2026 +1.9% YoY), but operating profit is 24% below its FY2023 peak (6.2% margin) as tariffs, incentives and raw-material costs bite. The shares are about 56% below their 2026 high and trade at roughly twice their own five-year average trailing P/E.",
+    file: "companies/hyundai-motor.html"
+  },
+  {
+    slug: "ford",
+    name: "Ford Motor Company",
+    ticker: "NYSE: F",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "Family-Controlled", "Cyclical"],
+    dateFeatured: "2026-10-06",
+    price: "$12.15",
+    score: "6 / 14",
+    martinero: 36,
+    momentum: { status: "decelerating", recent: 1.2, prior: 5.0 },
+    quarterYoY: { period: "Q3 2026", growth: -2.0 },
+    blurb: "Ford Motor Company is a Dearborn-based automaker selling Ford and Lincoln trucks, SUVs and vans through Ford Blue, Ford Pro and Model e, plus the Ford Credit captive lender. FY2025 revenue was a record $187.3B (+1.2%), but Company-adjusted EBIT was $6.8B (3.6% margin) and Company-adjusted FCF was $3.5B. Q2 2026 revenue fell 3.8% YoY.",
+    file: "companies/ford.html"
+  },
+  {
+    slug: "porsche-ag",
+    name: "Porsche AG",
+    ticker: "Xetra: P911",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Luxury Sports Cars",
+    tags: ["Autos", "Luxury", "Controlled Company"],
+    dateFeatured: "2026-10-06",
+    price: "€43.13",
+    score: "5 / 14",
+    martinero: 34,
+    momentum: { status: "decelerating", recent: -9.5, prior: -1.1 },
+    quarterYoY: { period: "9M 2026", growth: -5.9 },
+    blurb: "Dr. Ing. h.c. F. Porsche AG is the Stuttgart sports-car maker (911, Cayenne, Macan, Taycan) and a Volkswagen Group company, listed in September 2022 with VW and Porsche SE holding all the voting shares. FY2025 revenue fell 9.5% to €36.3B and operating profit fell to €0.4B (1.1% margin) after about €3.9B of realignment, battery and US-tariff charges. H1 2026 margin recovered to 7.8% while deliveries fell 16.5%. Automotive net cash is €7.3B.",
+    file: "companies/porsche-ag.html"
+  },
+  {
+    slug: "mercedes-benz",
+    name: "Mercedes-Benz Group AG",
+    ticker: "Xetra: MBG",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Premium Automakers",
+    tags: ["Autos", "Premium", "Net Cash (Industrial)"],
+    dateFeatured: "2026-10-06",
+    price: "€40.20",
+    score: "5 / 14",
+    martinero: 28,
+    momentum: { status: "decelerating", recent: -9.2, prior: -4.5 },
+    quarterYoY: { period: "Q3 2026", growth: -4.4 },
+    blurb: "Stuttgart-based premium carmaker (Mercedes-Benz, AMG, Maybach, Sprinter vans) with a captive finance arm, and a pure-play cars and vans company since the Dec 2021 Daimler Truck spin-off. Group EBIT fell from €20.5B (FY2022) to €5.8B (FY2025) as China volumes, tariffs, FX and pricing weighed, but the industrial business holds about €30B of net cash and has cut its share count about 14% since FY2021. The stock trades near its 52-week low at about 7.6x trailing earnings.",
+    file: "companies/mercedes-benz.html"
+  },
+  {
+    slug: "honda",
+    name: "Honda Motor Co., Ltd.",
+    ticker: "Tokyo: 7267",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Automobiles & Motorcycles",
+    tags: ["Autos", "Japan", "Turnaround"],
+    dateFeatured: "2026-10-06",
+    price: "¥1,687.5",
+    score: "4 / 14",
+    martinero: 33,
+    momentum: { status: "decelerating", recent: 0.5, prior: 6.2 },
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 12.9 },
+    blurb: "World's largest motorcycle maker, plus automobiles and captive financial services. FY2026 (year to Mar 2026) was its first annual operating loss since listing (-¥414.3B) on ¥1.58T of EV-related charges, yet Q1 FY2027 delivered a record ¥530.7B operating profit and full-year guidance was raised to ¥650B. The industrial arm holds ¥3.3T of net cash and the share count is down about 25% since FY2022.",
+    file: "companies/honda.html"
+  },
+  {
+    slug: "volkswagen",
+    name: "Volkswagen AG",
+    ticker: "Xetra: VOW3",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "Germany", "Restructuring"],
+    dateFeatured: "2026-10-06",
+    price: "€68.54",
+    score: "6 / 14",
+    martinero: 38,
+    momentum: { status: "steady", recent: -0.8, prior: 0.7 },
+    quarterYoY: { period: "Q3 2026", growth: -6.3 },
+    blurb: "Volkswagen Group is the world's second-largest carmaker by volume, with Volkswagen, Audi, Porsche, Skoda, SEAT/Cupra, Traton and a large captive finance arm. FY2025 revenue was €321.9B with a 2.8% operating margin, and Automotive net liquidity was €34.5B. On Sep 18, 2026 the group cut 2026 guidance to an operating margin of up to 1%, citing ~€10B of one-offs including a ~€6B Porsche write-down.",
+    file: "companies/volkswagen.html"
+  },
+  {
+    slug: "bmw",
+    name: "BMW Group (Bayerische Motoren Werke AG)",
+    ticker: "Xetra: BMW",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Premium Automakers",
+    tags: ["Autos", "Premium", "Family-Controlled"],
+    dateFeatured: "2026-10-06",
+    price: "€54.22",
+    score: "6 / 14",
+    martinero: 38,
+    momentum: { status: "steady", recent: -6.3, prior: -8.4 },
+    quarterYoY: { period: "Q3 2026", growth: -5.8 },
+    blurb: "BMW Group is a German premium carmaker (BMW, MINI, Rolls-Royce, BMW Motorrad) with a captive finance arm. FY2025 revenue was €133.5B (-6.3%) at a 7.4% group EBIT margin, and 2026 Automotive EBIT margin guidance was cut to 1-3% on China weakness and tariffs. The industrial business holds more than €44B of net financial assets, and the Quandt family controls about 47% of the shares.",
+    file: "companies/bmw.html"
+  },
+  {
+    slug: "kia",
+    name: "Kia Corporation",
+    ticker: "KRX: 000270",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "South Korea", "Net Cash"],
+    dateFeatured: "2026-10-06",
+    price: "₩112,600",
+    score: "6 / 14",
+    martinero: 50,
+    momentum: { status: "steady", recent: 6.2, prior: 7.7 },
+    quarterYoY: { period: "Q3 2026", growth: 10.1 },
+    blurb: "Kia is the Seoul-listed carmaker about 35% owned by Hyundai Motor, selling roughly 3 million vehicles a year with a growing hybrid and EV mix. Revenue is at a record (Q2 2026 +12.6% YoY), but FY2025 operating margin fell to 8.0% from 11.8% on US tariffs and higher incentives. It holds net cash of about ₩21T, roughly half its market cap.",
+    file: "companies/kia.html"
+  },
+  {
+    slug: "stellantis",
+    name: "Stellantis N.V.",
+    ticker: "Euronext Milan: STLAM · NYSE: STLA",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Mass-Market Automakers",
+    tags: ["Autos", "Turnaround", "Cyclical"],
+    dateFeatured: "2026-10-06",
+    price: "€3.99",
+    score: "4 / 14",
+    martinero: 22,
+    momentum: { status: "accelerating", recent: -2.2, prior: -17.2 },
+    quarterYoY: { period: "Q3 2026", growth: 1.0 },
+    blurb: "Stellantis was formed in January 2021 from the FCA and PSA merger and owns Jeep, Ram, Peugeot, Fiat and Opel. Adjusted operating margin ran 12-13% in FY21-23, then fell to -0.5% in FY25 after €25.4B of unusual charges and a €22.3B net loss. H1 2026 shows a modest recovery (revenue +10%, margin 2.1%), with industrial net cash of €6.7B as the main cushion.",
+    file: "companies/stellantis.html"
+  },
+  {
+    slug: "geely",
+    name: "Geely Automobile Holdings Ltd",
+    ticker: "HKEX: 0175",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Chinese Automakers & EVs",
+    tags: ["Autos", "China", "EV"],
+    dateFeatured: "2026-10-06",
+    price: "HK$14.95",
+    score: "11 / 14",
+    martinero: 80,
+    momentum: { status: "decelerating", recent: 25.1, prior: 54.0 },
+    quarterYoY: { period: "Q3 2026", growth: 10.0 },
+    blurb: "Listed Geely Automobile Holdings (HKEX: 0175) owns the Geely, Lynk & Co, Zeekr and Galaxy brands. It is not the unlisted parent Geely Holding Group, which owns the Volvo Cars stake, Polestar and Lotus. Revenue grew about 36% a year over FY21-25 to RMB 345B, helped by the Zeekr merger, and the company holds net cash, but operating margin is only 3.3%. H1 2026 growth came from exports (+158%) while China's domestic car market contracts.",
+    file: "companies/geely.html"
+  },
+  {
+    slug: "rivian",
+    name: "Rivian Automotive, Inc.",
+    ticker: "NASDAQ: RIVN",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Electric Vehicles",
+    tags: ["Autos", "Loss-Making", "Recent IPO"],
+    dateFeatured: "2026-10-06",
+    price: "$14.60",
+    score: "2 / 14",
+    martinero: 20,
+    momentum: { status: "decelerating", recent: 8.4, prior: 12.1 },
+    quarterYoY: { period: "Q3 2026", growth: 38.3 },
+    blurb: "Loss-making US EV maker (R1 pickup/SUV, Amazon van, new R2 SUV) with a Volkswagen joint venture. Gross margin has risen from -188% to +2.7% in three years and Q3 2026 deliveries hit a record 19,248, but the operating margin is still -67%, free cash flow is -$3.5B a year, and the share count is up about 61% since the 2021 IPO. Only revenue CAGR (a tiny-base effect) and gross-margin improvement pass; EBIT, FCF, ROIC, leverage, capex and dilution all score zero.",
+    file: "companies/rivian.html"
+  },
+
+  {
+    slug: "nu-holdings",
+    name: "Nu Holdings Ltd.",
+    ticker: "NYSE: NU",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Digital Banking",
+    tags: ["FinTech", "Digital Bank", "Emerging Markets"],
+    dateFeatured: "2026-10-05",
+    price: "$12.66",
+    score: "10 / 14",
+    martinero: 91,
+    momentum: { status: "decelerating", recent: 26.8, prior: 48.7 },
+    quarterYoY: { period: "Q3 2026", growth: 45.0 },
+    blurb: "Latin America's largest digital bank, with 139M customers across Brazil, Mexico and Colombia. Net income topped $1B in a single quarter, ROE is 33%, and the stock trades near 17x trailing earnings. Credit risk on an unsecured loan book and the cash-flow checklist items that don't fit a bank are the main caveats.",
+    file: "companies/nu-holdings.html"
+  },
+
+  {
+    slug: "toast",
+    name: "Toast, Inc.",
+    ticker: "NYSE: TOST",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Restaurant POS & Payments Platform",
+    tags: ["FinTech", "Restaurant Tech"],
+    dateFeatured: "2026-10-05",
+    price: "$28.99",
+    score: "9 / 14",
+    martinero: 74,
+    momentum: { status: "decelerating", recent: 24.05, prior: 28.33 },
+    quarterYoY: { period: "Q3 2026", growth: 21.3 },
+    blurb: "Restaurant POS and payments platform that has swung from a $384M operating loss in 2022 to $305M profit and $608M free cash flow, with $1.7B net cash and ~23% growth. The share price has de-rated about 27% off its high despite raised guidance; GAAP margin is only 5%.",
+    file: "companies/toast.html"
+  },
+
+  {
+    slug: "block",
+    name: "Block, Inc.",
+    ticker: "NYSE: XYZ",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payments & Fintech",
+    tags: ["FinTech", "Bitcoin Exposure", "Dual-Class"],
+    dateFeatured: "2026-10-05",
+    price: "$73.53",
+    score: "9 / 14",
+    martinero: 66,
+    momentum: { status: "decelerating", recent: 0.3, prior: 10.1 },
+    quarterYoY: { period: "Q3 2026", growth: 9.9 },
+    blurb: "Square plus Cash App: gross profit has more than doubled since 2021 and is still growing 20%+, with strong free cash flow, near-zero net debt and a 16x forward P/E. Reported revenue is distorted by bitcoin pass-through, GAAP margins are thin, and ROIC sits below cost of capital.",
+    file: "companies/block.html"
+  },
+
+  {
+    slug: "paypal",
+    name: "PayPal Holdings, Inc.",
+    ticker: "NASDAQ: PYPL",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payment Processing",
+    tags: ["FinTech", "Turnaround"],
+    dateFeatured: "2026-10-05",
+    price: "$52.53",
+    score: "8 / 14",
+    martinero: 65,
+    momentum: { status: "decelerating", recent: 4.32, prior: 6.8 },
+    quarterYoY: { period: "Q3 2026", growth: 2.0 },
+    blurb: "Global digital-payments platform (PayPal, Venmo, Braintree) with 439M accounts, ROIC far above cost of capital, and a share count down 27% since 2021. Growth has stalled at about 4-5%, insiders own almost nothing, and at roughly 10x earnings the stock is also moving on reported, unconfirmed takeover bids.",
+    file: "companies/paypal.html"
+  },
+
+  {
+    slug: "affirm",
+    name: "Affirm Holdings, Inc.",
+    ticker: "NASDAQ: AFRM",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Buy Now Pay Later / Consumer Installment Lending",
+    tags: ["FinTech", "Founder-Controlled", "Turnaround"],
+    dateFeatured: "2026-10-05",
+    price: "$69.23",
+    score: "8 / 14",
+    martinero: 62,
+    momentum: { status: "decelerating", recent: 32.2, prior: 38.8 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 35.2 },
+    blurb: "Largest US buy-now-pay-later network, with revenue compounding about 37% a year and GAAP operating profit only arriving in FY2026. Growth, liquidity and margin trend score well. Thin 9.8% margins, returns far below cost of capital, steady dilution and a funding-debt-financed loan book hold it back.",
+    file: "companies/affirm.html"
+  },
+
+  {
+    slug: "adyen",
+    name: "Adyen N.V.",
+    ticker: "Euronext: ADYEN",
+    sector: "Financials",
+    industry: "Financial Services",
+    subIndustry: "Payment Processing",
+    tags: ["FinTech", "Founder-Led", "Net Cash"],
+    dateFeatured: "2026-10-05",
+    price: "€881.50",
+    score: "10 / 14",
+    martinero: 74,
+    momentum: { status: "decelerating", recent: 18.4, prior: 22.8 },
+    quarterYoY: { period: "Q3 2026", growth: 23.0 },
+    blurb: "Amsterdam-based global payments platform running online, in-store and embedded finance on one stack. Growth near 20%, 47% EBIT margins, almost no debt and high cash conversion; but the stock is down about 35% in a year on cooler guidance, a CFO exit and rising capex.",
+    file: "companies/adyen.html"
+  },
+
+  {
+    slug: "ferrari",
+    name: "Ferrari N.V.",
+    ticker: "Euronext Milan: RACE",
+    sector: "Consumer Discretionary",
+    industry: "Automobiles",
+    subIndustry: "Luxury Sports Cars",
+    tags: ["Autos", "Luxury", "Founder-Family Controlled"],
+    dateFeatured: "2026-10-06",
+    price: "€341.20",
+    score: "10 / 14",
+    martinero: 78,
+    momentum: { status: "decelerating", recent: 7.0, prior: 11.8 },
+    quarterYoY: { period: "Q3 2026", growth: 7.4 },
+    blurb: "Ferrari builds around 13,600 cars a year on purpose, with an order book that covers 2027, and earns a 29.5% EBIT margin and a 31% ROIC. Industrial net debt is close to zero, and Exor and the Piero Ferrari family hold about 32% of the shares. Growth is slowing (FY2025 revenue +7.0%), and capex runs at about 13% of revenue.",
+    file: "companies/ferrari.html"
+  },
+
+  {
+    slug: "cisco",
+    name: "Cisco Systems",
+    ticker: "NASDAQ: CSCO",
+    sector: "Information Technology",
+    industry: "Communications Equipment",
+    subIndustry: "Networking & Communications Equipment",
+    tags: ["Networking", "AI Infrastructure", "Dividend", "Cybersecurity"],
+    dateFeatured: "2026-10-08",
+    price: "$117.39",
+    score: "7 / 14",
+    martinero: 53,
+    momentum: { status: "accelerating", recent: 11.8, prior: 5.3 },
+    quarterYoY: { period: "Q1 FY2027 (Oct 2026)", growth: 24.0 },
+    blurb: "Cisco is the largest Ethernet switch and enterprise networking vendor, with security, observability (Splunk, acquired 2024) and a $15B services business. Revenue grew 11.8% in FY2026 after a slow FY2022-26 (+5.3% a year), and AI infrastructure orders reached $9.3B. The shares trade at about 35x trailing earnings against a roughly 23x own five-year average.",
+    file: "companies/cisco.html"
+  },
+  {
+    slug: "hewlett-packard-enterprise",
+    name: "Hewlett Packard Enterprise",
+    ticker: "NYSE: HPE",
+    sector: "Information Technology",
+    industry: "Technology Hardware",
+    subIndustry: "Enterprise Networking, Servers & AI Infrastructure",
+    tags: ["Networking", "Servers", "AI Infrastructure", "Juniper Acquisition"],
+    dateFeatured: "2026-10-08",
+    price: "$72.09",
+    score: "1 / 14",
+    martinero: 18,
+    momentum: { status: "accelerating", recent: 13.8, prior: 3.4 },
+    quarterYoY: { period: "Q3 FY2026", growth: 33.7 },
+    blurb: "Hewlett Packard Enterprise sells AI and enterprise servers, storage and a financing arm. Since buying Juniper Networks (closed July 2025) it also runs a large networking business. FY2021-25 revenue grew only about 5% a year and FY2025 was a Juniper-distorted trough. The July 2026 quarter showed revenue up 34%, and the stock trades near a record at about 37x trailing earnings.",
+    file: "companies/hewlett-packard-enterprise.html"
+  },
+  {
+    slug: "celestica",
+    name: "Celestica",
+    ticker: "NYSE: CLS",
+    sector: "Information Technology",
+    industry: "Electronic Equipment",
+    subIndustry: "Electronic Manufacturing Services (ODM Networking Hardware)",
+    tags: ["AI Infrastructure", "Networking", "Contract Manufacturing", "Customer Concentration"],
+    dateFeatured: "2026-10-08",
+    price: "$371.57",
+    score: "8 / 14",
+    martinero: 66,
+    momentum: { status: "accelerating", recent: 28.5, prior: 21.2 },
+    quarterYoY: { period: "Q3 2026", growth: 83.0 },
+    blurb: "Toronto-based design and manufacturing partner that builds 800G/1.6T Ethernet switches, servers and storage for hyperscalers, with revenue up from $5.6B in FY2021 to $12.4B in FY2025 and +62% YoY in Q2 2026. Margins are thin (12.1% gross, 8.6% EBIT) but ROIC is about 37% with almost no net debt. The shares trade at about 39x trailing earnings versus a ~21x own average, and three customers were 58% of FY2025 revenue.",
+    file: "companies/celestica.html"
+  },
+
+  {
+    slug: "arista-networks",
+    name: "Arista Networks",
+    ticker: "NYSE: ANET",
+    sector: "Information Technology",
+    industry: "Communications Equipment",
+    subIndustry: "Data-Center Networking",
+    tags: ["AI Infrastructure", "Networking", "Founder-Led", "Net Cash"],
+    dateFeatured: "2026-10-08",
+    price: "$178.48",
+    score: "12 / 14",
+    martinero: 87,
+    momentum: { status: "accelerating", recent: 28.6, prior: 19.5 },
+    quarterYoY: { period: "Q3 2026", growth: 58.5 },
+    blurb: "Ethernet switches and software for the biggest cloud and AI data centers; second to NVIDIA in data-center Ethernet at about 21% share. Revenue has compounded at 32% a year to $9.0B (FY2025), and Q3 2026 revenue rose 58.5% to $3.66B at a 44.9% GAAP operating margin, with net cash. The shares trade at about 48x trailing earnings against a 43x own average, about 18% below the October high, and Microsoft and Meta were roughly 42% of FY2025 revenue.",
+    file: "companies/arista-networks.html"
+  },
+  {
+    slug: "kweichow-moutai",
+    name: "Kweichow Moutai",
+    ticker: "Shanghai: 600519",
+    sector: "Consumer Staples",
+    industry: "Beverages",
+    subIndustry: "Premium Baijiu (Chinese Liquor)",
+    tags: ["Baijiu", "Luxury & Scarcity", "State-Controlled", "China Consumer", "Dividend Payer"],
+    dateFeatured: "2026-10-09",
+    price: "¥1,255.79",
+    score: "10 / 14",
+    martinero: 74,
+    momentum: { status: "decelerating", recent: -1.2, prior: 15.7 },
+    quarterYoY: { period: "Q3 2026", growth: 3.1 },
+    blurb: "Kweichow Moutai makes Feitian Moutai, China's most prestigious premium baijiu (liquor), and earns a roughly 66% operating margin with almost no debt. FY2025 brought its first annual decline in revenue (¥168.8B, -1.2%) and net profit (-4.5%), and H1 2026 profit fell another 2.0%. The state (Guizhou SASAC) holds a controlling stake of about 54%, and foreign investors reach the shares through Stock Connect or A-share ETFs.",
+    file: "companies/kweichow-moutai.html"
+  },
+  {
+    slug: "sleep-number",
+    name: "Sleep Number",
+    ticker: "OTC: SNBRQ (delisted from Nasdaq: SNBR)",
+    sector: "Consumer Discretionary",
+    industry: "Household Durables",
+    subIndustry: "Smart Beds (Sleep)",
+    tags: ["Sleep", "Smart Beds", "Chapter 11", "Delisted"],
+    dateFeatured: "2026-10-21",
+    price: "$0.02",
+    score: "3 / 14",
+    martinero: 21,
+    momentum: { status: "decelerating", recent: -16.1, prior: -10.9 },
+    quarterYoY: { period: "Q1 2026", growth: -18.9 },
+    blurb: "Sleep Number made adjustable-firmness smart beds with SleepIQ sleep tracking, sold mostly through about 600 company-owned stores. Sales fell from $2.19B in FY2021 to $1.41B in FY2025, with negative equity and going-concern doubt. The company filed Chapter 11 on 12 June 2026, was delisted from Nasdaq and agreed to sell its assets; it says common shares are expected to receive no recovery.",
+    file: "companies/sleep-number.html"
+  },
+  {
+    slug: "church-dwight",
+    name: "Church & Dwight Co., Inc.",
+    ticker: "NYSE: CHD",
+    sector: "Consumer Staples",
+    industry: "Household Products",
+    subIndustry: "Household & Personal Care Staples",
+    tags: ["Consumer Staples", "Household Products", "Dividend Growth", "Sleep (Divested)"],
+    dateFeatured: "2026-10-21",
+    price: "$105.96",
+    score: "7 / 14",
+    martinero: 50,
+    momentum: { status: "decelerating", recent: 1.6, prior: 4.1 },
+    quarterYoY: { period: "Q3 2026", growth: 1.0 },
+    blurb: "Church & Dwight is a US consumer-staples company behind ARM & HAMMER, OxiClean, Batiste, TheraBreath and Hero. Revenue grew about 4.6% a year over FY2021-25 and free cash flow reached $1.09B, but GAAP operating income was flat because of two non-cash impairments. Its only sleep exposure, the sleep and melatonin gummies inside Vitafusion, was sold on 31 December 2025.",
+    file: "companies/church-dwight.html"
+  },
+  {
+    slug: "resmed",
+    name: "ResMed",
+    ticker: "NYSE: RMD",
+    sector: "Health Care",
+    industry: "Health Care Equipment",
+    subIndustry: "Sleep Apnea & Respiratory Devices",
+    tags: ["Sleep Apnea", "CPAP", "Medical Devices", "Dividend & Buyback"],
+    dateFeatured: "2026-10-21",
+    price: "$245.50",
+    score: "12 / 14",
+    martinero: 82,
+    momentum: { status: "steady", recent: 9.9, prior: 9.8 },
+    quarterYoY: { period: "Q1 FY2027", growth: 5.9 },
+    blurb: "ResMed is the world's largest maker of CPAP machines and masks for obstructive sleep apnea. Sleep and Breathing Health was 88% of FY2026 revenue of $5.65B (+9.9%), with a 33.4% GAAP operating margin, net cash and $1.65B of free cash flow. The debate centres on GLP-1 drugs such as Zepbound and on Philips' US restrictions.",
+    file: "companies/resmed.html"
+  },
+  {
+    slug: "philips",
+    name: "Koninklijke Philips N.V.",
+    ticker: "Euronext Amsterdam: PHIA",
+    sector: "Health Care",
+    industry: "Health Care Equipment",
+    subIndustry: "Health Technology (Imaging, Monitoring & Sleep)",
+    tags: ["Turnaround", "Product Recall", "Sleep Apnea", "Medical Devices"],
+    dateFeatured: "2026-10-21",
+    price: "€23.08",
+    score: "4 / 14",
+    martinero: 34,
+    momentum: { status: "steady", recent: -1.0, prior: -0.8 },
+    quarterYoY: { period: "Q3 2026", growth: 2.1 },
+    blurb: "Hospital-technology group that has shed lighting and appliances to become a pure health-technology company, but is still working through the 2021 Respironics sleep and respiratory recall and a 2024 FDA consent decree that bars new US sleep-device sales. The underlying recovery is real (gross margin 40.4% to 45.2%, adjusted EBITA margin 7.4% to 12.3%), yet sales are flat and returns sit below the cost of capital.",
+    file: "companies/philips.html"
+  },
+
+
+  {
+    slug: "hsbc",
+    name: "HSBC Holdings plc",
+    ticker: "LSE: HSBA",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Global Universal Banking",
+    tags: ["Bank", "Global Banking", "Asia", "Wealth Management", "Dividend"],
+    dateFeatured: "2026-10-25",
+    price: "1,352.00p",
+    score: "8 / 14",
+    martinero: 56,
+    momentum: { status: "accelerating", recent: 3.7, prior: -0.3 },
+    quarterYoY: { period: "Q3 2026", growth: 4.5 },
+    blurb: "HSBC is a London-headquartered global bank focused on Asia, the UK and international wholesale banking and trade finance. FY2025 revenue was about $68.3bn, with a net margin of about 30.9% and a cost/income ratio of about 53.4%. The share price ended 2021 at 448.65p and closed at 1,352.00p (£13.52) on Oct 23, 2026.",
+    file: "companies/hsbc.html"
+  },
+  {
+    slug: "bnp-paribas",
+    name: "BNP Paribas SA",
+    ticker: "Euronext Paris: BNP",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banking, Insurance & Asset Management",
+    tags: ["Bank", "Eurozone Banking", "Corporate & Investment Banking", "Insurance", "Dividend"],
+    dateFeatured: "2026-10-25",
+    price: "€83.52",
+    score: "7 / 14",
+    martinero: 52,
+    momentum: { status: "steady", recent: 4.8, prior: 6.8 },
+    quarterYoY: { period: "Q3 2026", growth: 9.5 },
+    blurb: "BNP Paribas is France's largest bank and one of the two largest in the euro area by assets, with corporate and institutional banking, commercial and personal banking, and insurance and asset management. FY2025 reported net banking income was €51.2bn and net income group share €12.2bn, with RoTE of 11.6%, CET1 of 12.6% and cost/income of 61.2%. Q2 2026 net income of €4.3bn included an €858m one-off gain.",
+    file: "companies/bnp-paribas.html"
+  },
+  {
+    slug: "banco-santander",
+    name: "Banco Santander, S.A.",
+    ticker: "Madrid: SAN",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Retail & Commercial Banking",
+    tags: ["Bank", "Retail Banking", "Spain", "Latin America", "Dividend"],
+    dateFeatured: "2026-10-25",
+    price: "€11.51",
+    score: "7 / 14",
+    martinero: 55,
+    momentum: { status: "decelerating", recent: -2.0, prior: 10.5 },
+    quarterYoY: { period: "Q3 2026", growth: 12.0 },
+    blurb: "Banco Santander is Spain's largest bank by assets, with retail and commercial banking in Spain, the UK, Brazil, Mexico and the US. FY2025 reported total income was €62.4bn and attributable profit €14.1bn, with RoTE of 16.3% and an efficiency ratio of 41.2%. H1 2026 profit of €9.0bn included a €1.9bn net gain on the Santander Bank Polska sale, and the Webster acquisition closed on Aug 20, 2026.",
+    file: "companies/banco-santander.html"
+  },
+  {
+    slug: "ubs-group",
+    name: "UBS Group AG",
+    ticker: "SIX Swiss Exchange: UBSG",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["G-SIB", "Wealth Management", "Switzerland"],
+    dateFeatured: "2026-10-25",
+    price: "CHF 38.32",
+    score: "6 / 14",
+    martinero: 48,
+    momentum: { status: "decelerating", recent: 3.2, prior: 19.4 },
+    quarterYoY: { period: "Q3 2026", growth: 5.0 },
+    blurb: "The world's largest private bank (USD 7.3tn of invested assets) and Switzerland's only global universal bank since absorbing Credit Suisse, with CET1 at 14.4% and a rising capital return. Revenue and net profit CAGRs (~9.1% and ~1.0%) miss the 15% bar, FY25 ROE sits below the cost of equity, and the stock trades above its own history while the Swiss capital debate stays unresolved.",
+    file: "companies/ubs-group.html"
+  },
+  {
+    slug: "ing-groep",
+    name: "ING Groep N.V.",
+    ticker: "Euronext Amsterdam: INGA",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["G-SIB", "Netherlands", "Retail Banking"],
+    dateFeatured: "2026-10-25",
+    price: "€29.04",
+    score: "8 / 14",
+    martinero: 58,
+    momentum: { status: "accelerating", recent: 1.9, prior: -1.7 },
+    quarterYoY: { period: "Q3 2026", growth: 5.6 },
+    blurb: "One of Europe's largest retail and wholesale banks, with a 13.6% ROTE, a 13.1% CET1 ratio and capital returns of about 107% of FY25 profit that have cut the share count ~23% since FY21. Income and net result CAGRs of ~5.6% and ~7.3% miss the 15% growth bar, and the stock now trades well above its own FY21-FY25 P/E and P/B averages.",
+    file: "companies/ing-groep.html"
+  },
+  {
+    slug: "nordea",
+    name: "Nordea Bank Abp",
+    ticker: "Nasdaq Helsinki: NDA FI",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["G-SIB", "Nordics", "Dividend", "Capital return"],
+    dateFeatured: "2026-10-25",
+    price: "€15.27",
+    score: "8 / 14",
+    martinero: 57,
+    momentum: { status: "decelerating", recent: -2.8, prior: 2.9 },
+    quarterYoY: { period: "Q3 2026", growth: 2.0 },
+    blurb: "The largest Nordic financial group, with a 17.8% ROTE, a 15.7% CET1 ratio about 1.9pp above its requirement and roughly 84% of FY25 profit returned via dividends and buybacks. Operating income and net profit CAGRs of ~5-6% miss the 15% bar, income is flat to lower as policy rates fall, and the stock trades above its own FY21-FY25 P/E and P/B averages.",
+    file: "companies/nordea.html"
+  },
+  {
+    slug: "danske-bank",
+    name: "Danske Bank",
+    ticker: "Nasdaq Copenhagen: DANSKE",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Banks - Nordic universal bank",
+    tags: ["Banks", "Nordics", "Denmark", "Dividend", "Capital return"],
+    dateFeatured: "2026-10-25",
+    price: "DKK 344.50",
+    score: "11 / 14",
+    martinero: 65,
+    momentum: { status: "decelerating", recent: -0.7, prior: 9.2 },
+    quarterYoY: { period: "Q3 2026", growth: 9.0 },
+    blurb: "Denmark's largest bank, with operations across the Nordics and Northern Ireland. FY2025 income was DKK 56.5bn and net profit DKK 23.0bn, with ROE of 13.3%, a cost/income ratio of 45.5% and CET1 of 17.3%. Revenue growth is weak (about 4.5% CAGR) and the shares trade well above their own five-year P/E and P/B history.",
+    file: "companies/danske-bank.html"
+  },
+  {
+    slug: "dnb-bank",
+    name: "DNB Bank",
+    ticker: "Oslo: DNB",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Banks - Nordic universal bank",
+    tags: ["Banks", "Nordics", "Norway", "Dividend", "State-anchored"],
+    dateFeatured: "2026-10-25",
+    price: "NOK 317.60",
+    score: "9 / 14",
+    martinero: 67,
+    momentum: { status: "decelerating", recent: 3.0, prior: 7.9 },
+    quarterYoY: { period: "Q3 2026", growth: -3.1 },
+    blurb: "Norway's largest financial group, with the Norwegian state owning about 34%. FY2025 income was NOK 87.9bn and net income NOK 41.9bn, with ROE of 15.9%, cost/income of 38.0% and CET1 of 17.9%. Total payout is about 86% of earnings, but profit has fallen two years running and the stock trades above its own history.",
+    file: "companies/dnb-bank.html"
+  },
+  {
+    slug: "goldman-sachs",
+    name: "The Goldman Sachs Group, Inc.",
+    ticker: "NYSE: GS",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Investment Banking & Brokerage",
+    tags: ["Investment Banking", "Capital Markets", "Trading", "Wealth Management", "U.S. Large Cap"],
+    dateFeatured: "2026-10-25",
+    price: "$875.68",
+    score: "8 / 14",
+    martinero: 44,
+    momentum: { status: "decelerating", recent: 8.9, prior: 15.7 },
+    quarterYoY: { period: "Q3 2026", growth: 23.0 },
+    blurb: "Goldman Sachs is a leading global investment bank, earning most of its $58.3bn FY25 net revenue from advisory, underwriting and trading, with the rest from asset and wealth management. Net revenue was roughly flat from FY21 to FY25 (-0.4% CAGR), but Q3 2026 revenue rose 23% YoY and the 9M'26 ROE is 20.7%. The shares trade at about 2.35x tangible book against a five-year average near 1.68x.",
+    file: "companies/goldman-sachs.html"
+  },
+  {
+    slug: "bank-of-america",
+    name: "Bank of America Corporation",
+    ticker: "NYSE: BAC",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["Banking", "Consumer Banking", "Wealth Management", "U.S. Large Cap"],
+    dateFeatured: "2026-10-25",
+    price: "$50.56",
+    score: "7 / 14",
+    martinero: 50,
+    momentum: { status: "accelerating", recent: 6.8, prior: 3.0 },
+    quarterYoY: { period: "Q3 2026", growth: 3.2 },
+    blurb: "Bank of America is the second-largest U.S. bank by assets (about $3.4tn) and a leader in consumer deposits and wealth management. FY25 net revenue was $113.1bn (+6.8%) and net income to common $29.1bn, and the efficiency ratio improved from 67.0% to 61.7% over FY21-FY25. Q3 2026 revenue rose 3.2% YoY, with earnings reduced by a roughly $1.2bn regulatory settlement charge.",
+    file: "companies/bank-of-america.html"
+  },
+  {
+    slug: "wells-fargo",
+    name: "Wells Fargo & Company",
+    ticker: "NYSE: WFC",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["Banking", "Consumer Banking", "U.S. Large Cap", "Asset Cap"],
+    dateFeatured: "2026-10-25",
+    price: "$82.39",
+    score: "6 / 14",
+    martinero: 49,
+    momentum: { status: "accelerating", recent: 1.7, prior: -0.4 },
+    quarterYoY: { period: "Q3 2026", growth: 2.0 },
+    blurb: "Wells Fargo is a top-four U.S. bank (about $2.15tn of assets at FY25) whose growth was limited for years by the Federal Reserve's asset cap, imposed in February 2018 and lifted in June 2025. Revenue grew 1.6% a year over FY21-FY25 while shares fell about 20% through buybacks, and Q3 2026 revenue rose 2.0% YoY with EPS up 13%. The shares trade at about 1.85x tangible book against a five-year average near 1.50x.",
+    file: "companies/wells-fargo.html"
+  },
+  {
+    slug: "citigroup",
+    name: "Citigroup Inc.",
+    ticker: "NYSE: C",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["Restructuring", "G-SIB", "U.S. Large Cap"],
+    dateFeatured: "2026-10-25",
+    price: "$120.62",
+    score: "3 / 14",
+    martinero: 35,
+    momentum: { status: "accelerating", recent: 5.6, prior: 2.9 },
+    quarterYoY: { period: "Q3 2026", growth: 7.9 },
+    blurb: "The third-largest U.S. bank by assets (~$2.9tn) and the most global of the big American lenders, mid-restructuring (Asia consumer exit, Banamex stake sale). The efficiency ratio has improved from 71.8% (FY23) to 64.7% (FY25) and RoTCE reached 11.5% in Q3 2026, but FY25 RoTCE was only 7.7%, revenue growth is ~4.4%/yr, and the stock now trades well above its own 5-year P/E and P/TBV history.",
+    file: "companies/citigroup.html"
+  },
+  {
+    slug: "icbc",
+    name: "Industrial and Commercial Bank of China (ICBC)",
+    ticker: "HKEX: 1398",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["State-owned", "G-SIB", "China"],
+    dateFeatured: "2026-10-25",
+    price: "HK$7.52",
+    score: "5 / 14",
+    martinero: 40,
+    momentum: { status: "accelerating", recent: 1.9, prior: -2.5 },
+    quarterYoY: { period: "Q3 2026", growth: 8.1 },
+    blurb: "The world's largest bank by total assets (RMB 53.5tn) and China's most profitable, ~66% owned by the state (Central Huijin plus Ministry of Finance). Capital is very strong (CET1 13.2%) and H1 2026 showed an income rebound, but operating income is below FY21, ROE has slid from 12.2% to 9.5%, and the H-share has re-rated from ~2.7x to ~6.4x earnings.",
+    file: "companies/icbc.html"
+  },
+  {
+    slug: "china-construction-bank",
+    name: "China Construction Bank (CCB)",
+    ticker: "HKEX: 0939",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Diversified Banks",
+    tags: ["State-owned", "G-SIB", "China"],
+    dateFeatured: "2026-10-25",
+    price: "HK$9.92",
+    score: "6 / 14",
+    martinero: 39,
+    momentum: { status: "accelerating", recent: 1.7, prior: -2.3 },
+    quarterYoY: { period: "Q3 2026", growth: 13.1 },
+    blurb: "China's #3 bank by assets (RMB 45.6tn) and #2 by profit, majority state-owned (Central Huijin ~54.6%). Capital is very strong (CET1 14.2%), ROE is still above a ~9.5% cost-of-equity assumption and H1 2026 income rebounded 10.5%, but operating income is below FY21, ROE has slid from 12.6% to 10.0%, and the H-share has re-rated from ~2.6x to ~6.6x earnings.",
+    file: "companies/china-construction-bank.html"
+  },
+  {
+    slug: "atlas-copco",
+    name: "Atlas Copco",
+    ticker: "Nasdaq Stockholm: ATCO A",
+    sector: "Industrials",
+    industry: "Machinery",
+    subIndustry: "Industrial Machinery (Compressors, Vacuum & Tools)",
+    tags: ["Compressors","Vacuum technology","Industrial tools","Sweden","Wallenberg","Currency theme","Semiconductor equipment","Aftermarket service"],
+    dateFeatured: "2026-10-22",
+    price: "SEK 192.85",
+    score: "8 / 14",
+    martinero: 69,
+    momentum: { status: "decelerating", recent: -4.8, prior: 2.4 },
+    quarterYoY: { period: "Q3 2026", growth: 15.1 },
+    blurb: "Swedish industrial group and the world's largest compressor maker, with Vacuum, Industrial Technique (tools and assembly) and Power Technique business areas; service is 38% of revenue and nearly all sales are outside Sweden. FY2025 revenue was SEK 168.3bn (-4.8%, mostly a strong-krona effect) with a 20.3% EBIT margin, and Q2 2026 brought record orders of SEK 51.0bn (+27%). Investor AB (Wallenberg sphere) holds 22.4% of the votes and 17.1% of the capital.",
+    file: "companies/atlas-copco.html"
+  },
+
+  {
+    slug: "dbs-group",
+    name: "DBS Group Holdings",
+    ticker: "SGX: D05",
+    sector: "Diversified Banking & Financial Services",
+    industry: "Financials",
+    subIndustry: "Banks - Asian universal bank",
+    tags: ["Banks", "Singapore", "Asia", "Wealth"],
+    dateFeatured: "2026-10-26",
+    price: "S$74.21",
+    score: "9 / 14",
+    martinero: 70,
+    momentum: { status: "decelerating", recent: 2.7, prior: 10.5 },
+    quarterYoY: { period: "Q3 2026", growth: -1.0 },
+    blurb: "Southeast Asia's largest bank, with S$897bn of assets and Temasek as anchor shareholder. FY2025 total income was S$22.9bn and net profit S$10.9bn, with ROTE of 17.8%, cost/income of 40.4% and CET1 of 17.0%. Profit and income growth have slowed sharply, and the shares trade at about 19x earnings and 3.0x book, well above their five-year averages.",
+    file: "companies/dbs-group.html"
+  },
+
+  {
+    slug: "exxon-mobil",
+    name: "Exxon Mobil",
+    ticker: "NYSE: XOM",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Dividend Growth", "Cyclical", "Energy Majors"],
+    dateFeatured: "2026-10-27",
+    price: "$187.25",
+    score: "4 / 14",
+    martinero: 36,
+    momentum: { status: "decelerating", recent: -4.5, prior: 1.4 },
+    quarterYoY: { period: "Q3 2026", growth: 32.6 },
+    blurb: "Exxon Mobil is the largest Western oil major, with low leverage (net debt about 0.5x EBITDA), a 45-year record of dividend increases and roughly $20B a year of buybacks. FY2025 operating income of $35.4B is less than half the FY2022 peak, and free cash flow has fallen about 10% a year since FY2021 as capex more than doubled. Q2 2026 revenue rose 44% year on year on the oil-price spike, and Q3 results are due Oct 30.",
+    file: "companies/exxon-mobil.html"
+  },
+  {
+    slug: "chevron",
+    name: "Chevron",
+    ticker: "NYSE: CVX",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Energy", "Dividend", "Hess", "Cyclical"],
+    dateFeatured: "2026-10-27",
+    price: "$235.52",
+    score: "6 / 14",
+    martinero: 40,
+    momentum: { status: "decelerating", recent: -5.6, prior: 0.4 },
+    quarterYoY: { period: "Q3 2026", growth: 34.8 },
+    blurb: "Chevron is the second-largest US integrated oil major, with upstream and downstream operations and the Hess assets (including Guyana) added in July 2025. Net debt is low at 0.56x EBITDA and FCF conversion is strong, but five-year revenue, EBIT and FCF growth are weak and capex has doubled. The stock sits near its 52-week high with Brent near $114, so TTM figures are cycle-flattered; Q3 2026 reports Oct 30.",
+    file: "companies/chevron.html"
+  },
+  {
+    slug: "totalenergies",
+    name: "TotalEnergies",
+    ticker: "Euronext Paris: TTE",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Energy", "LNG", "Dividend", "Cyclical", "Europe"],
+    dateFeatured: "2026-10-27",
+    price: "€83.00",
+    score: "3 / 14",
+    martinero: 28,
+    momentum: { status: "accelerating", recent: -6.8, prior: -10.7 },
+    quarterYoY: { period: "Q3 2026", growth: 40.5 },
+    blurb: "French integrated energy major with a large LNG business, refining and marketing, and a growing integrated-power segment. FY2021-25 revenue, EBIT and FCF are flat to falling after the 2022 price spike, but leverage is modest and the share count is down about 15%. Q3 2026 revenue rose 40.5% year on year and reported net income reached $8.26B ($9.10B adjusted) with Brent above $100, so current earnings sit at a cycle high.",
+    file: "companies/totalenergies.html"
+  },
+  {
+    slug: "bp",
+    name: "BP plc",
+    ticker: "LSE: BP.",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Energy", "UK", "Dividend", "Turnaround", "Cyclical"],
+    dateFeatured: "2026-10-27",
+    price: "612.7p",
+    score: "3 / 14",
+    martinero: 34,
+    momentum: { status: "accelerating", recent: 0.1, prior: -10.1 },
+    quarterYoY: { period: "Q3 2026", growth: 45.6 },
+    blurb: "BP is a UK integrated oil and gas major in the middle of a strategy reset: it pivoted back to oil and gas, is selling assets (including 65% of Castrol), and has kept the buyback suspended since Feb 2026 while holding the dividend at 8.66 cents a share. Q3 2026 revenue was about $69.9B (+45.6% YoY); BP's underlying profit was $8.5B on a refining-margin windfall, but about $4B of impairments cut reported profit to $4.7B, and net debt fell to $13.9B. Margins on the reported basis are thin and growth is low, but leverage is now moderate and the share count is down about 24% in five years.",
+    file: "companies/bp.html"
+  },
+  {
+    slug: "equinor",
+    name: "Equinor ASA",
+    ticker: "Oslo: EQNR",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Europe", "State-Owned", "Natural Gas", "Dividend"],
+    dateFeatured: "2026-10-27",
+    price: "NOK 440.50",
+    score: "4 / 14",
+    martinero: 33,
+    momentum: { status: "accelerating", recent: 3.2, prior: -4.1 },
+    quarterYoY: { period: "Q3 2026", growth: 27.4 },
+    blurb: "Norway's state-controlled energy major (state owns about 67%) and Europe's largest pipeline gas supplier. FY2025 EBIT margin was 25.0% with low net debt, but EBIT and free cash flow have fallen since the FY2022 gas-crisis peak while capex has risen. The share count is down about 26% in five years through buybacks.",
+    file: "companies/equinor.html"
+  },
+  {
+    slug: "eni",
+    name: "Eni S.p.A.",
+    ticker: "Borsa Italiana: ENI",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "Energy", "Dividend payer", "State-owned stake", "Cyclical"],
+    dateFeatured: "2026-10-27",
+    price: "€26.46",
+    score: "5 / 14",
+    martinero: 33,
+    momentum: { status: "decelerating", recent: -8.3, prior: -3.8 },
+    quarterYoY: { period: "Q3 2026", growth: 26.7 },
+    blurb: "Eni is Italy's integrated energy group, with upstream oil and gas of about 1.8M boe/d, a global gas and LNG portfolio, refining and chemicals, and the Enilive and Plenitude retail businesses. The Italian state holds about 32% (CDP and MEF). Reported FY2021-25 earnings fell sharply from the FY2022 peak, while Q3 2026 revenue rose 26.7% on high oil prices and refining margins, alongside an extraordinary dividend and a larger buyback.",
+    file: "companies/eni.html"
+  },
+  {
+    slug: "conocophillips",
+    name: "ConocoPhillips",
+    ticker: "NYSE: COP",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Oil & Gas Exploration & Production",
+    tags: ["Oil & Gas", "E&P", "Pure-play", "Cyclical", "Dividend"],
+    dateFeatured: "2026-10-27",
+    price: "$147.96",
+    score: "5 / 14",
+    martinero: 37,
+    momentum: { status: "accelerating", recent: 6.8, prior: -2.4 },
+    quarterYoY: { period: "Q3 2026", growth: 29.2 },
+    blurb: "ConocoPhillips is the largest independent, pure-play oil and gas producer, with no refining since the 2012 Phillips 66 spin-off. It closed the all-stock Marathon Oil acquisition in Nov 2024. FY2025 revenue was $60.3B with a 20.9% operating margin, and Q2 2026 revenue rose 35.5% YoY as oil prices surged.",
+    file: "companies/conocophillips.html"
+  },
+  {
+    slug: "shell",
+    name: "Shell plc",
+    ticker: "Euronext Amsterdam: SHELL",
+    sector: "Energy",
+    industry: "Energy",
+    subIndustry: "Integrated Oil & Gas",
+    tags: ["Oil & Gas", "LNG", "Dividend", "Buybacks", "Cyclical", "Netherlands", "AEX"],
+    dateFeatured: "2026-10-28",
+    price: "€47.13",
+    score: "5 / 14",
+    martinero: 43,
+    momentum: { status: "accelerating", recent: -6.1, prior: -10.2 },
+    quarterYoY: { period: "Q3 2026", growth: 36.2 },
+    blurb: "Shell is a European integrated oil and gas major and the largest LNG portfolio among the Western majors; its HQ moved to London in 2022 and the shares still trade on Euronext Amsterdam. Q3 2026 revenue was $92.8B (+36.2% YoY) and net income $12.1B, on the high oil-price cycle (Brent about $114). Net debt fell to $39.7B and Shell announced a new $5.0B buyback. Long-run growth is flat, and the scorecard shows 5 of 14 criteria met, helped by earnings at a cycle high.",
+    file: "companies/shell.html"
+  },
+
+  {
+    slug: "fortinet",
+    name: "Fortinet",
+    ticker: "Nasdaq: FTNT",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Cybersecurity",
+    tags: ["Cybersecurity","Network Security","Firewalls","Net Cash","Founder-led"],
+    dateFeatured: "2026-10-30",
+    price: "$139.10",
+    score: "13 / 14",
+    martinero: 85,
+    momentum: { status: "steady", recent: 14.2, prior: 12.3 },
+    quarterYoY: { period: "Q3 2026", growth: 20.5 },
+    blurb: "Fortinet sells FortiGate firewalls built on its own ASICs plus security subscriptions and support. FY2025 revenue was $6.80B (+14.2%) with a 30.5% GAAP operating margin, and the company holds $4.3B of net cash. Q3 2026 revenue grew 20.5% and billings 29%, but GAAP gross margin slipped to 79.0% and the shares fell 20.1% on Oct 29.",
+    file: "companies/fortinet.html"
+  },
+
+  {
+    slug: "kla",
+    name: "KLA Corporation",
+    ticker: "Nasdaq: KLAC",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Semiconductor process control equipment",
+    tags: ["Semiconductor equipment", "AI infrastructure", "Process control", "High margin"],
+    dateFeatured: "2026-11-01",
+    price: "$157.91",
+    score: "8 / 14",
+    martinero: 71,
+    momentum: { status: "decelerating", recent: 11.7, prior: 23.9 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 28.9 },
+    blurb: "KLA is the leading maker of semiconductor inspection and metrology tools, with 61% gross margins, 42% GAAP operating margin and net debt of only 0.2x EBITDA. September-quarter revenue rose 28.9% to $4.14B and the company guides $4.7B for December. The shares fell about 49% from their June peak in an October chip-equipment sell-off.",
+    file: "companies/kla.html"
+  },
+
+  {
+    slug: "cadence-design-systems",
+    name: "Cadence Design Systems",
+    ticker: "Nasdaq: CDNS",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Electronic design automation (EDA) software",
+    tags: ["EDA software", "AI chip design", "Recurring revenue", "Duopoly-like industry"],
+    dateFeatured: "2026-11-01",
+    price: "$327.89",
+    score: "11 / 14",
+    martinero: 71,
+    momentum: { status: "steady", recent: 14.1, prior: 13.5 },
+    quarterYoY: { period: "Q3 2026", growth: 22.0 },
+    blurb: "Cadence is one of the two leading suppliers of chip and system design software, with a record $8.2B backlog and revenue growth that has accelerated to 22% in Q3 2026. GAAP operating margin is about 28% (non-GAAP 44%), free cash flow is above EBIT and net debt is modest at about 0.55x. The shares trade at 65x trailing GAAP earnings, below their own five-year year-end average.",
+    file: "companies/cadence-design-systems.html"
+  },
+
+  {
+    slug: "analog-devices",
+    name: "Analog Devices",
+    ticker: "Nasdaq: ADI",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Analog & Mixed-Signal Semiconductors",
+    tags: ["Semiconductors", "Analog", "Industrial", "Automotive", "Dividend growth"],
+    dateFeatured: "2026-11-01",
+    price: "$417.11",
+    score: "8 / 14",
+    martinero: 58,
+    momentum: { status: "accelerating", recent: 16.9, prior: -23.4 },
+    quarterYoY: { period: "Q3 FY2026 (Aug 2026)", growth: 39.6 },
+    blurb: "Analog Devices designs and manufactures analog, mixed-signal and power chips used in industrial, automotive, communications and data-centre equipment. Q3 FY26 revenue was $4.02B (+39.6% YoY) with a 39.5% GAAP operating margin, as the cyclical recovery from the FY2024 trough accelerated. The balance sheet is low-leverage (~1.0x net debt/EBITDA), but the trailing GAAP P/E of ~49.5x is above its own five-year average.",
+    file: "companies/analog-devices.html"
+  },
+
+  {
+    slug: "amphenol",
+    name: "Amphenol",
+    ticker: "NYSE: APH",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Electronic Connectors & Interconnect",
+    tags: ["Interconnect", "AI Datacenter", "Industrial", "Acquisitive", "Electronic Components"],
+    dateFeatured: "2026-11-01",
+    price: "$79.30",
+    score: "10 / 14",
+    martinero: 75,
+    momentum: { status: "accelerating", recent: 51.7, prior: 21.3 },
+    quarterYoY: { period: "Q3 2026", growth: 65.1 },
+    blurb: "Amphenol makes connectors, cables, sensors and interconnect systems for data centres, industrial, defence and automotive markets. Q3 2026 revenue was a record $10.23B (+65.1% YoY, partly acquired) with a 29.7% GAAP operating margin and ROIC of about 20% against an estimated WACC near 10%. Net debt rose to $12.6B (~1.2x EBITDA) after 2026 acquisitions, and the trailing GAAP P/E is ~34x.",
+    file: "companies/amphenol.html"
+  },
+
+  {
+    slug: "monolithic-power-systems",
+    name: "Monolithic Power Systems",
+    ticker: "Nasdaq: MPWR",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Power Management Semiconductors",
+    tags: ["Semiconductors", "Power Management", "AI Infrastructure", "Fabless", "Net Cash"],
+    dateFeatured: "2026-11-01",
+    price: "$1,211.63",
+    score: "8 / 14",
+    martinero: 73,
+    momentum: { status: "accelerating", recent: 26.4, prior: 21.2 },
+    quarterYoY: { period: "Q3 2026", growth: 63.1 },
+    blurb: "Monolithic Power Systems is a fabless maker of power-management chips for AI/data-center servers, automotive, communications and industrial markets. Revenue compounded 23% a year over FY2021-25 and rose 63% YoY in Q3 2026 to a record $1.2B. It holds net cash, with ROIC far above WACC. The shares trade at about 66x trailing GAAP earnings, roughly 29% below their 52-week high.",
+    file: "companies/monolithic-power-systems.html"
+  },
+
+  {
+    slug: "idexx-laboratories",
+    name: "IDEXX Laboratories",
+    ticker: "Nasdaq: IDXX",
+    sector: "Healthcare",
+    industry: "Healthcare",
+    subIndustry: "Veterinary Diagnostics",
+    tags: ["Healthcare", "Diagnostics", "Veterinary", "Recurring Revenue", "Buybacks"],
+    dateFeatured: "2026-11-01",
+    price: "$551.21",
+    score: "9 / 14",
+    martinero: 72,
+    momentum: { status: "accelerating", recent: 10.4, prior: 6.5 },
+    quarterYoY: { period: "Q3 2026", growth: 9.9 },
+    blurb: "IDEXX is the global leader in companion-animal diagnostics, selling in-clinic analyzers and recurring consumables plus reference-lab services. Q3 2026 revenue rose 9.9% to $1.21B with a 33.1% operating margin and GAAP EPS up 18%, and FY2026 guidance was raised again on Nov 2. The share count has fallen about 9% over five years. At the last verified close ($551.21, Oct 30) the stock traded at about 37x trailing earnings, roughly 0.68x its own five-year average and about 28% below its 52-week high.",
+    file: "companies/idexx-laboratories.html"
+  },
+
+  {
+    slug: "ge-aerospace",
+    name: "GE Aerospace",
+    ticker: "NYSE: GE",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Aerospace Engines & Aftermarket",
+    tags: ["Aerospace", "Jet Engines", "Aftermarket Services", "Defense", "Post-Spin-Off"],
+    dateFeatured: "2026-11-01",
+    price: "$301.80",
+    score: "10 / 14",
+    martinero: 76,
+    momentum: { status: "accelerating", recent: 18.5, prior: 9.5 },
+    quarterYoY: { period: "Q3 2026", growth: 15.9 },
+    blurb: "GE Aerospace designs, builds and services commercial and military jet engines, with its 50/50 CFM joint venture with Safran and a services-heavy installed base of about 50,000 commercial engines. Restated continuing-operations revenue reached $45.9B in FY2025 (+18.5%) at a 20.7% operating margin, and Q3 2026 orders rose 49% with guidance raised again. The stock trades about 22% below its 52-week high at roughly 35x trailing earnings.",
+    file: "companies/ge-aerospace.html"
+  },
+
+  {
+    slug: "heico",
+    name: "HEICO Corporation",
+    ticker: "NYSE: HEI",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Aerospace & Defense Components",
+    tags: ["Aerospace", "Defense", "Aftermarket Parts", "Acquisitive Compounder", "Founder-Family Led"],
+    dateFeatured: "2026-11-01",
+    price: "$321.36",
+    score: "13 / 14",
+    martinero: 79,
+    momentum: { status: "decelerating", recent: 16.3, prior: 30.0 },
+    quarterYoY: { period: "Q3 FY2026", growth: 23.1 },
+    blurb: "HEICO makes FAA-approved PMA replacement aircraft parts and niche defense, space and electronics products, and is led by the founding Mendelson family. FY2025 revenue grew 16.3% to $4.49B at a 23.0% operating margin, with Q3 FY2026 sales up 23% to a record $1.41B. The stock trades at about 54x trailing GAAP earnings, close to its own five-year average.",
+    file: "companies/heico.html"
+  },
+
+  {
+    slug: "rolls-royce",
+    name: "Rolls-Royce Holdings plc",
+    ticker: "LSE: RR.",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Aero Engines & Power Systems",
+    tags: ["Aerospace & Defense", "Aero Engines", "Data Centre Power", "Nuclear SMR", "Turnaround"],
+    dateFeatured: "2026-11-01",
+    price: "1,239.4p",
+    score: "11 / 14",
+    martinero: 76,
+    momentum: { status: "decelerating", recent: 12.4, prior: 15.8 },
+    quarterYoY: { period: "H1 2026 (half-year)", growth: 24.5 },
+    blurb: "Rolls-Royce is a UK maker of large civil aero engines, defence propulsion and mtu power systems, with an SMR nuclear programme in development. Underlying operating profit rose from \u00a3414m in FY2021 to \u00a33.46bn in FY2025, margin reached 17.3% (22.5% in H1 2026), and the group has \u00a32.1bn of net cash. FY2026 guidance was raised in July; the trailing P/E (about 34x) is above its own noisy five-year average.",
+    file: "companies/rolls-royce.html"
+  },
+
+  {
+    slug: "transdigm",
+    name: "TransDigm Group",
+    ticker: "NYSE: TDG",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Aerospace Components & Aftermarket",
+    tags: ["Aerospace & Defense", "Aftermarket", "Proprietary Parts", "High Leverage", "Negative Equity"],
+    dateFeatured: "2026-11-01",
+    price: "$1,146.81",
+    score: "10 / 14",
+    martinero: 69,
+    momentum: { status: "decelerating", recent: 11.2, prior: 20.6 },
+    quarterYoY: { period: "Q4 FY2026 (Sep 2026)", growth: 22.6 },
+    blurb: "TransDigm makes proprietary, mostly sole-source aircraft components and sells them to commercial OEMs, the commercial aftermarket and defense. FY2025 revenue was $8.83bn at a 47.6% GAAP operating margin. Q3 FY2026 revenue grew 22.5% (13% organic) and guidance was raised. It runs about 5.8x net debt/EBITDA and a $9.8bn stockholders' deficit, funded by debt-financed special dividends and buybacks.",
+    file: "companies/transdigm.html"
+  },
+
+  {
+    slug: "eaton",
+    name: "Eaton Corporation plc",
+    ticker: "NYSE: ETN",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Electrical Equipment & Power Management",
+    tags: ["Electrical equipment", "Data-center power", "Aerospace", "Dividend growth", "AI infrastructure"],
+    dateFeatured: "2026-11-01",
+    price: "$369.97",
+    score: "6 / 14",
+    martinero: 56,
+    momentum: { status: "accelerating", recent: 10.3, prior: 7.3 },
+    quarterYoY: { period: "Q3 2026", growth: 28.0 },
+    blurb: "Eaton is an Irish-domiciled power-management group whose electrical business (switchgear, UPS, power distribution for data centres and utilities) is about 73% of revenue, with Aerospace and Mobility making up the rest. GAAP operating income grew about 21% a year over FY2021-25. Q3 2026 sales rose 28% to a record $8.9B (19% organic), backlogs are at records and FY2026 organic guidance was raised to 13-15%. Roughly $11B of 2026 acquisitions, mainly Boyd Thermal, leave net debt at about 2.8x estimated EBITDA, and the last verified close ($369.97, Oct 30) was about 23% below the 52-week high.",
+    file: "companies/eaton.html"
+  },
+
+  {
+    slug: "vertiv",
+    name: "Vertiv Holdings",
+    ticker: "NYSE: VRT",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Data Center Power & Cooling Infrastructure",
+    tags: ["Data-center infrastructure", "AI infrastructure", "Power & cooling", "High growth", "Net cash"],
+    dateFeatured: "2026-11-01",
+    price: "$232.50",
+    score: "11 / 14",
+    martinero: 83,
+    momentum: { status: "accelerating", recent: 27.7, prior: 16.7 },
+    quarterYoY: { period: "Q3 2026", growth: 61.2 },
+    blurb: "Vertiv supplies power and thermal-management equipment and services for data centres and communications sites. Revenue doubled from $5.0B (FY2021) to $10.2B (FY2025), and Q3 2026 sales rose 61% with organic orders more than doubling and FY2026 guidance raised. Gross margin has risen 7.9 points since FY2022 and the balance sheet moved from net debt to net cash. The stock is high-beta (2.05) and tied to AI data-centre spending.",
+    file: "companies/vertiv.html"
+  },
+
+  {
+    slug: "parker-hannifin",
+    name: "Parker-Hannifin",
+    ticker: "NYSE: PH",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Motion & control technologies (hydraulics, filtration, aerospace systems)",
+    tags: ["Industrials", "Aerospace & Defense", "Dividend growth", "Acquisitive", "Quality compounder"],
+    dateFeatured: "2026-11-01",
+    price: "$899.82",
+    score: "9 / 14",
+    martinero: 61,
+    momentum: { status: "accelerating", recent: 8.3, prior: -0.4 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 17.9 },
+    blurb: "Parker-Hannifin is a global maker of motion and control technologies, with Diversified Industrial and Aerospace Systems segments. FY2026 (June year-end) brought record sales of $21.5B (+8.3%, organic +6.6%), a 22% EBIT margin, 83% FCF conversion and a record $12.8B backlog. The ~$9B Filtration Group deal closed on Aug 13, 2026; the shares trade at ~31.6x trailing GAAP earnings against a five-year average of ~26x.",
+    file: "companies/parker-hannifin.html"
+  },
+
+  {
+    slug: "copart",
+    name: "Copart",
+    ticker: "Nasdaq: CPRT",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Online vehicle auctions (salvage and used vehicles)",
+    tags: ["Industrials", "Marketplaces", "Net cash", "Duopoly", "De-rated"],
+    dateFeatured: "2026-11-01",
+    price: "$30.13",
+    score: "9 / 14",
+    martinero: 71,
+    momentum: { status: "decelerating", recent: 0.4, prior: 9.7 },
+    quarterYoY: { period: "Q4 FY2026 (Jul 2026)", growth: 2.4 },
+    blurb: "Copart runs online auctions for salvage and used vehicles and is one of the two dominant U.S. platforms alongside IAA. FY2026 (July year-end) revenue grew only 0.4% to $4.67B, EBIT fell 2.6% (margin 35.4%) and the company holds $4.4B of net cash. The ACV Auctions deal (~$1.9B, closed Oct 15, 2026) is not yet in the numbers, and the shares trade at ~19x trailing earnings against a five-year average of ~29x.",
+    file: "companies/copart.html"
+  },
+
+  {
+    slug: "3m",
+    name: "3M Company",
+    ticker: "NYSE: MMM",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Diversified Industrials & Materials Science",
+    tags: ["Industrials","Conglomerate","Materials Science","PFAS Litigation","Spin-off","Dividend"],
+    dateFeatured: "2026-11-02",
+    price: "$174.34",
+    score: "6 / 14",
+    martinero: 42,
+    momentum: { status: "steady", recent: 1.5, prior: -0.1 },
+    quarterYoY: { period: "Q3 2026", growth: 1.0 },
+    blurb: "3M is a materials-science conglomerate (Safety & Industrial, Transportation & Electronics, Consumer) with about $25B of revenue after spinning off Solventum in April 2024. Q3 2026 brought a beat-and-raise (adjusted EPS $2.50, 2026 guide $9.10-9.15) and an expanded optical-connectivity deal with Amazon; GAAP history is distorted by PFAS and earplug charges, divestitures and the Solventum stake.",
+    file: "companies/3m.html"
+  },
+
+  {
+    slug: "texas-instruments",
+    name: "Texas Instruments",
+    ticker: "Nasdaq: TXN",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Analog Semiconductors",
+    tags: ["Semiconductors","Analog","Industrial","300mm fabs","CHIPS Act","Dividend growth"],
+    dateFeatured: "2026-11-05",
+    price: "$311.49",
+    score: "5 / 14",
+    martinero: 38,
+    momentum: { status: "accelerating", recent: 13.1, prior: -10.7 },
+    quarterYoY: { period: "Q3 2026", growth: 27.7 },
+    blurb: "Texas Instruments is the world's largest analog chip maker, with about 81% of sales from analog and the rest mostly embedded processors. It spent FY2023-25 building 300mm fabs, supported by CHIPS Act grants. During that build FCF fell to $1.3-2.6B a year, below its roughly $5B of annual dividends. Capex has now dropped and Q3 2026 revenue rose 27.7% YoY with quarterly FCF of $2.96B, but the stock trades around 40x trailing GAAP earnings.",
+    file: "companies/texas-instruments.html"
+  },
+
+  {
+    slug: "waste-management",
+    name: "Waste Management, Inc.",
+    ticker: "NYSE: WM",
+    sector: "Industrials",
+    industry: "Industrials",
+    subIndustry: "Waste Collection & Disposal",
+    tags: ["Waste & Environmental Services", "Landfill Pricing Power", "Stericycle / Healthcare Waste", "Renewable Natural Gas (RNG)", "Defensive Compounder"],
+    dateFeatured: "2026-11-09",
+    price: "$236.26",
+    score: "6 / 14",
+    martinero: 56,
+    momentum: { status: "accelerating", recent: 14.2, prior: 8.0 },
+    quarterYoY: { period: "Q3 2026", growth: 6.3 },
+    blurb: "North America's largest waste company, with the biggest U.S. landfill and collection network and a Healthcare Solutions unit added through the Stericycle acquisition (closed Nov 2024). Q3 2026 revenue was $6.85B (+6.3%) with core price +5.8%, and 2026 revenue and free cash flow are guided to the high end of their ranges. Leverage is 2.9x net debt/EBITDA after the debt-funded deal, and the RNG and recycling build-out is mostly complete, so sustainability capex is falling.",
+    file: "companies/waste-management.html"
+  },
+
+  {
+    slug: "veeva-systems",
+    name: "Veeva Systems",
+    ticker: "NYSE: VEEV",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Life Sciences Software",
+    tags: ["Software", "Healthcare", "Cloud", "Net Cash"],
+    dateFeatured: "2026-11-10",
+    price: "$306.40",
+    score: "13 / 14",
+    martinero: 84,
+    momentum: { status: "steady", recent: 16.3, prior: 16.2 },
+    quarterYoY: { period: "Q2 FY2027 (Jul 2026)", growth: 17.6 },
+    blurb: "Veeva Systems sells cloud applications, data and AI agents to the global life sciences industry, led by Vault CRM and its R&D and Quality suites. Revenue was $3.20B in FY2026 (+16.3%) with a 29.6% GAAP operating margin, 146% FCF conversion, $7.1B of net cash and capex under 1% of revenue. Q2 FY2027 revenue grew 17.6% and guidance was raised, but the stock trades at about 50x trailing GAAP earnings after doubling from its April 2026 low.",
+    file: "companies/veeva-systems.html"
+  },
+
+  {
+    slug: "ubiquiti",
+    name: "Ubiquiti Inc.",
+    ticker: "NYSE: UI",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Networking Equipment",
+    tags: ["Networking", "Hardware", "Controlled Company", "Low Float"],
+    dateFeatured: "2026-11-10",
+    price: "$685.68",
+    score: "10 / 14",
+    martinero: 77,
+    momentum: { status: "decelerating", recent: 27.2, prior: 33.5 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 39.9 },
+    blurb: "Ubiquiti designs UniFi Wi-Fi, switching and camera products and airMAX wireless gear, sold mainly through distributors and online stores. FY2026 revenue was $3.27B (+27.2%) at a 36.2% operating margin, and Q1 FY2027 was its first $1B quarter (+39.9% YoY). Founder Robert Pera owns about 93% of the shares, leaving a free float of only about 7% (about 4.2M shares), which makes trading thin and the price volatile.",
+    file: "companies/ubiquiti.html"
+  },
+
+  {
+    slug: "interactive-brokers",
+    name: "Interactive Brokers Group",
+    ticker: "Nasdaq: IBKR",
+    sector: "Financials",
+    industry: "Financials",
+    subIndustry: "Electronic Brokerage",
+    tags: ["Brokerage", "Financials", "Founder-controlled", "Net interest income", "Split 4:1 (2025)"],
+    dateFeatured: "2026-11-10",
+    price: "$77.57",
+    score: "9 / 14",
+    martinero: 74,
+    momentum: { status: "steady", recent: 19.7, prior: 19.5 },
+    quarterYoY: { period: "Q3 2026", growth: 15.7 },
+    blurb: "Interactive Brokers is a highly automated global electronic broker with 5.58M customer accounts and $965B of customer equity. Net revenues compounded about 23% a year over FY21-FY25 at a pre-tax margin near 77%, and net interest income is about 57-60% of revenue. Founder Thomas Peterffy controls IBG Holdings, which owns 73.4% of the operating company, so the public shares carry only a 26.6% economic stake.",
+    file: "companies/interactive-brokers.html"
+  },
+
+  {
+    slug: "robinhood",
+    name: "Robinhood Markets",
+    ticker: "Nasdaq: HOOD",
+    sector: "Financials",
+    industry: "Financials",
+    subIndustry: "Retail Brokerage & Crypto",
+    tags: ["Brokerage", "Crypto", "Prediction markets", "Short profit record", "Dual-class"],
+    dateFeatured: "2026-11-10",
+    price: "$83.32",
+    score: "9 / 14",
+    martinero: 73,
+    momentum: { status: "decelerating", recent: 51.6, prior: 58.2 },
+    quarterYoY: { period: "Q3 2026", growth: 11.8 },
+    blurb: "Robinhood runs a mobile retail brokerage with 28.7M funded customers and $396B of platform assets. Revenue grew about 25% a year over FY21-FY25 and operating margin reached 46.8%, but the business has been profitable only since FY24. In Q3 2026 revenue was $1.42B (+12%), transaction-based lines were 61% of it and net interest 29%, and net income fell 16% as costs outgrew revenue.",
+    file: "companies/robinhood.html"
+  },
+
+  {
+    slug: "axon-enterprise",
+    name: "Axon Enterprise",
+    ticker: "Nasdaq: AXON",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Public safety technology (TASER, body cameras, cloud software)",
+    tags: ["TASER", "Body cameras", "Axon Cloud", "Skydio", "GAAP vs adjusted"],
+    dateFeatured: "2026-11-10",
+    price: "$303.18",
+    score: "6 / 14",
+    martinero: 50,
+    momentum: { status: "steady", recent: 33.5, prior: 33.4 },
+    quarterYoY: { period: "Q3 2026", growth: 27.9 },
+    blurb: "Axon sells TASER devices, body cameras, drones and counter-drone systems, and an Axon Cloud software layer with $1.75B of annual recurring revenue (+40%). Q3 2026 revenue of $909M (+28%) missed estimates and full-year growth guidance was cut to about 30% on roughly $130M of delayed federal Dedrone deployments. GAAP operating margin is near zero (adjusted EBITDA is about 26%), net debt is about $1.2B, and Axon is investing $1.2B more in Skydio.",
+    file: "companies/axon-enterprise.html"
+  },
+
+  {
+    slug: "lam-research",
+    name: "Lam Research",
+    ticker: "Nasdaq: LRCX",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Semiconductor Equipment",
+    tags: ["Semiconductors", "Equipment", "AI Capex", "Cyclical", "Net Cash"],
+    dateFeatured: "2026-11-10",
+    price: "$221.31",
+    score: "9 / 14",
+    martinero: 69,
+    momentum: { status: "steady", recent: 26.0, prior: 23.7 },
+    quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 54.4 },
+    blurb: "Lam Research makes etch, deposition and clean tools for chipmakers and earns about 36% of revenue from services on its installed base. FY2026 (June) revenue was $23.2B (+26%) with a 35.3% operating margin, and the Sep-2026 quarter was a record at $8.22B (+54% YoY). The shares closed at $221.31 on Nov 9, about 50% below the 52-week high, after a sharp chip-equipment sell-off and a new $25B buyback.",
+    file: "companies/lam-research.html"
+  },
+
+  {
+    slug: "duolingo",
+    name: "Duolingo",
+    ticker: "Nasdaq: DUOL",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Consumer Internet / EdTech",
+    tags: ["EdTech", "Consumer Apps", "Subscription", "Net Cash", "Dual-Class"],
+    dateFeatured: "2026-11-10",
+    price: "$154.25",
+    score: "10 / 14",
+    martinero: 82,
+    momentum: { status: "steady", recent: 38.7, prior: 40.8 },
+    quarterYoY: { period: "Q3 2026", growth: 13.7 },
+    blurb: "Duolingo runs the largest freemium language-learning app, with 84% of revenue from subscriptions. Revenue grew from $251M (FY2021) to $1.04B (FY2025) with positive operating income and a 35.6% FCF margin, but Q3 2026 growth slowed to +14% while daily users grew +29%. The shares closed at $154.25 on Nov 9 after a 26% jump on Nov 4.",
+    file: "companies/duolingo.html"
+  },
+
+  {
+    slug: "fair-isaac",
+    name: "Fair Isaac Corporation",
+    ticker: "NYSE: FICO",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Credit scoring & decision analytics software",
+    tags: ["Credit scores", "Mortgage exposure", "Negative equity", "Debt-funded buybacks", "Regulatory risk"],
+    dateFeatured: "2026-11-10",
+    price: "$723.76",
+    score: "11 / 14",
+    martinero: 81,
+    momentum: { status: "accelerating", recent: 27.3, prior: 15.9 },
+    quarterYoY: { period: "Q4 FY2026 (Sep 2026)", growth: 27.4 },
+    blurb: "Fair Isaac owns the FICO Score, the dominant US consumer credit score, and a decisioning and fraud software business. FY2026 (Sep year-end) revenue rose 27% to $2.53B at a 49.9% GAAP operating margin and 86% gross margin. The shares are about 61% below their 52-week high after regulators and bureau-owned VantageScore challenged its mortgage-score pricing, and net debt is $5.0B after debt-funded buybacks.",
+    file: "companies/fair-isaac.html"
+  },
+
+  {
+    slug: "ibm",
+    name: "International Business Machines",
+    ticker: "NYSE: IBM",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "IT Services & Enterprise Software (Hybrid Cloud/AI)",
+    tags: ["Software", "IT Services", "Mainframe", "Hybrid Cloud", "AI", "Dividend Aristocrat-style", "Quantum", "Acquisitive"],
+    dateFeatured: "2026-11-11",
+    price: "$244.53",
+    score: "8 / 14",
+    martinero: 60,
+    momentum: { status: "accelerating", recent: 7.6, prior: 1.4 },
+    quarterYoY: { period: "Q3 2026", growth: 4.7 },
+    blurb: "IBM is a hybrid-cloud and AI company whose Software segment (Red Hat, HashiCorp, Confluent) now earns most of its segment profit, alongside Consulting, Infrastructure (mainframe) and a captive Financing arm. Revenue grew 7.6% in FY2025 and 4.7% in Q3 2026, and operating margin rose from 9.7% in FY2021 to 18.7% on software mix. Acquisition goodwill is large ($88.5B with intangibles), there are no buybacks, and the dividend has been paid every year since 1916.",
+    file: "companies/ibm.html"
+  },
+
+  {
+    slug: "applied-materials",
+    name: "Applied Materials",
+    ticker: "Nasdaq: AMAT",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Semiconductor Equipment",
+    tags: ["Semiconductors", "Wafer Fab Equipment", "AI Infrastructure", "China Exposure"],
+    dateFeatured: "2026-11-16",
+    price: "$370.50",
+    score: "7 / 14",
+    martinero: 60,
+    momentum: { status: "accelerating", recent: 21.4, prior: 4.4 },
+    quarterYoY: { period: "Q4 FY2026 (Oct 2026)", growth: 53.1 },
+    blurb: "Applied Materials is one of the five large wafer-fab-equipment makers, with leading positions in deposition, CMP, implant and e-beam, plus a services arm (AGS) that was 20% of FY2026 revenue. FY2026 (ended Oct 25, 2026) revenue was a record $34.45B (+21.4%) with a 32.2% GAAP operating margin; China was 27% of revenue and net cash was $2.8B. The shares are about 49% below their Jun 30, 2026 close.",
+    file: "companies/applied-materials.html"
+  },
 
   // Add the next company below this line, as a new {...} block ⬇
 
