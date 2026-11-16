@@ -3785,6 +3785,24 @@ const COMPANIES = [
     file: "companies/ibm.html"
   },
 
+  {
+    slug: "applied-materials",
+    name: "Applied Materials",
+    ticker: "Nasdaq: AMAT",
+    sector: "Technology",
+    industry: "Technology",
+    subIndustry: "Semiconductor Equipment",
+    tags: ["Semiconductors", "Wafer Fab Equipment", "AI Infrastructure", "China Exposure"],
+    dateFeatured: "2026-11-16",
+    price: "$370.50",
+    score: "7 / 14",
+    martinero: 60,
+    momentum: { status: "accelerating", recent: 21.4, prior: 4.4 },
+    quarterYoY: { period: "Q4 FY2026 (Oct 2026)", growth: 53.1 },
+    blurb: "Applied Materials is one of the five large wafer-fab-equipment makers, with leading positions in deposition, CMP, implant and e-beam, plus a services arm (AGS) that was 20% of FY2026 revenue. FY2026 (ended Oct 25, 2026) revenue was a record $34.45B (+21.4%) with a 32.2% GAAP operating margin; China was 27% of revenue and net cash was $2.8B. The shares are about 49% below their Jun 30, 2026 close.",
+    file: "companies/applied-materials.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
