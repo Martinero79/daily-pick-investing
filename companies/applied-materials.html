@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Applied Materials — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/applied-materials.html">
+<meta property="og:title" content="Applied Materials — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Applied Materials — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Applied Materials</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: AMAT</div>
+    <div class="badge">FY ends late October (FY2026 = Oct 27, 2025&ndash;Oct 25, 2026)</div>
+    <div class="badge">HQ: Santa Clara, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">Q4 FY26 reported Nov 12, 2026</div>
+    <div class="badge warn">~49% Below Jun-30 Peak Close &mdash; Chip-Equipment Sell-Off; Record FY26, Q1 FY27 Guide $11.1B</div>
+  </div>
+
+  <div class="price">$370.50</div>
+  <div class="price-sub">Fri Nov 13, 2026 close (Nasdaq, USD; -2.74% on the day, the first session after the Q4 report) &middot; Market cap &asymp; $294B (793.6M shares) &middot; 52-wk range $203.40 &ndash; 739.67 (intraday; highest close $723.00 on Jun 30, 2026) &middot; Beta 1.67 &middot; Analyst consensus: Strong Buy (39 analysts per S&amp;P Global), avg PT &asymp; $569 (several brokers cut targets on Nov 13, so the average may lag) &middot; Next report (Q1 FY2027): mid-Feb 2027 (date not yet confirmed) &middot; Ex-dividend Nov 19, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Applied Materials is one of the five large wafer-fab-equipment (WFE) suppliers, the machines that deposit, etch, polish and implant the thin films that make up a chip. It has leading positions in deposition (CVD, PVD, epitaxy), CMP, ion implant, thermal processing and e-beam inspection, and runs a services business (Applied Global Services, AGS) on its installed base. Competitors include ASML, Lam Research, Tokyo Electron and KLA. Semiconductor Systems was 76% of FY2026 revenue ($26.1B), AGS 20% ($6.9B) and Display and other 4%.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; definition note:</b> every figure is in US dollars. Applied&rsquo;s fiscal year ends on the last Sunday of October, so &ldquo;FY2026&rdquo; is the 52 weeks to Oct 25, 2026 and Q4 FY2026 is the August&ndash;October 2026 quarter. &ldquo;EBIT / Op. Income&rdquo; is <b>GAAP income from operations</b> as reported by Applied (FY2022-24 as standardised by S&amp;P Global); free cash flow is operating cash flow minus capital expenditures. GAAP and non-GAAP are both shown where they differ materially: FY2026 GAAP EPS $12.62 vs non-GAAP $12.89; Q4 GAAP EPS $3.40 vs non-GAAP $4.16 (a $653m unrealised loss on strategic investments). Prices are not split-adjusted (no split since 2002) and not dividend-adjusted.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026, Oct)</div>
+      <div class="val">$34.45B</div>
+      <div class="sub">+21.4% YoY; Q4 FY26 +53.1%</div>
+      <div class="note">FY2025 grew only +4.4% and the 4-yr CAGR FY22-26 is +7.5%. Q4 FY2026 revenue was a record $10.41B, and the Q1 FY2027 guide is $11.1B &plusmn; $0.5B (about +58% YoY at the midpoint, in a 14-week quarter).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Operating Margin (GAAP)</div>
+      <div class="val" style="color:#34d399;">32.2%</div>
+      <div class="sub">FY2026; Q4 FY26 35.1%; gross margin 50.0%</div>
+      <div class="note">Up from 29.2% in FY2025. FY2026 GAAP operating income of $11.09B is after a $253m export-control settlement (non-GAAP operating margin 33.1%). Gross margin has risen for 14 straight quarters YoY, per management.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#34d399;">42.2% vs 13.2%</div>
+      <div class="sub">S&amp;P Global estimates</div>
+      <div class="note">Third-party figures. ROIC is helped by buybacks shrinking the equity base (book equity $26.1B vs $294B market cap), but the spread is wide under any definition.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Cash / (Debt)</div>
+      <div class="val" style="color:#34d399;">Net cash $2.8B</div>
+      <div class="sub">Oct 25, 2026; about -0.2x EBITDA</div>
+      <div class="note">Cash and short-term investments $9.34B plus $4.76B of long-term investments against $6.53B of debt. Including long-term investments, net cash is $7.6B. Interest cover ~41x (S&amp;P).</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">60/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong margin, returns and net cash with a rising gross margin, held back by a slow 4-year growth record (7.5% revenue CAGR), a 56% FCF conversion, a trailing P/E 40% above its own FY-end average and almost no insider ownership.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="157.1 157.1" stroke-dashoffset="-157.1" transform="rotate(-90 60 60)"/>
+<text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">7/14</text><text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+</svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>7 criteria fully met</b> &mdash; EBIT margin (32.2%), market position (strong #2), market concentration (oligopoly), ROIC vs WACC, net debt/EBITDA (net cash), share count (-9.0%) and gross-margin stability (+3.29pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>7 not met</b> &mdash; revenue CAGR (+7.5%), EBIT CAGR (+9.2%), FCF CAGR (+7.7%), FCF conversion (55.9%), entry multiple vs own history (ratio 1.40), insider ownership (~0.3%) and capex intensity (7.8%)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Applied Materials, based in Santa Clara, California and founded in 1967, makes the equipment that deposits, etches, planarises and modifies the materials inside a chip. Its pitch is &ldquo;materials engineering&rdquo;: as transistors move to gate-all-around (GAA) structures, memory moves to stacked DRAM and high-bandwidth memory (HBM), and chips are joined in advanced packages, more of the value sits in new materials and thin-film steps, which is where Applied is strongest. FY2026 was a record: revenue $34.45B (+21.4%), GAAP operating margin 32.2%, free cash flow $6.2B and $4.75B returned to shareholders ($3.18B of buybacks and $1.57B of dividends). The growth is lopsided toward AI-related demand: Semiconductor Systems revenue was $26.1B (63% foundry and logic, 30% DRAM, 7% flash), advanced-packaging revenue is expected to rise about 90% in calendar 2026, and management expects wafer-fab-equipment (WFE) demand to grow more than 30% again in 2027. China, which Reuters reports was nearly 40% of revenue in recent years, fell to 27% of FY2026 revenue ($9.3B) as US export rules narrowed what Applied can sell there, while a recovery in &ldquo;ICAPS&rdquo; (mature-node chips for internet-of-things, communications, automotive, power and sensors) is expected in 2027 and, per management, mainly outside China. The share price has moved far more than the business: from a $723.00 close on June 30, 2026 it fell to $370.50 as chip-equipment stocks de-rated on worries about the durability of AI capex, even though FY2026 and the Q4 results were records.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>China and export controls</b> &mdash; China was 27% of FY2026 revenue and 25% of Q4; Applied paid a $253m settlement to the US Commerce Department&rsquo;s Bureau of Industry and Security (BIS) over an export-controls compliance matter in Q1 FY2026, and the company said in Nov 2025 that it can no longer serve parts of China&rsquo;s memory and mature-node market. Future rule changes can move revenue. (2) <b>GAAP vs non-GAAP</b> &mdash; GAAP net income includes large swings in the value of strategic investments (a $653m loss in Q4, gains of $949m in the first three quarters), so GAAP EPS ($12.62) and non-GAAP EPS ($12.89) are close for the year but far apart in Q4 ($3.40 vs $4.16). (3) <b>Price vs. financials</b> &mdash; results are at record highs while the price is about 49% below its June close; the share-price chart and the P/E history reflect sentiment, not just earnings. Market share, ROIC/WACC and analyst targets are third-party or judgment and are flagged as such.
+  </div>
+
+  <div class="bignum-corner">AMAT</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022-FY2026 (fiscal years ending late October), $ millions. FY2025-26 from Applied&rsquo;s own earnings releases; FY2022-24 from S&amp;P Global standardised statements. Op. Income is GAAP income from operations; FCF = operating cash flow minus capex. FY2023-25 were flat years after the 2022 peak; FY2026 broke out on AI-driven demand.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual ($m)</div>
+    <div class="chart-sub">Shown at true, unscaled relative size. Revenue was nearly flat from $25.8B to $28.4B over FY2022-25, then jumped 21% to $34.4B; EBIT rose 33.8% in FY2026 because operating expenses grew slower than sales. FCF did not follow: $7.6B in FY2023 fell to $5.7B in FY2025 and recovered only to $6.2B as capex rose from $1.1B to $2.7B and receivables grew. FCF/EBIT fell from 99% to 56%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">10bn</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">20bn</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">30bn</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">40bn</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85.0" y="98.2" width="30" height="141.8" rx="2" fill="#2dd4bf"/>
+<text x="100.0" y="93.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">25,785</text>
+<rect x="123.0" y="197.2" width="30" height="42.8" rx="2" fill="#60a5fa"/>
+<text x="138.0" y="192.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">7,784</text>
+<rect x="161.0" y="214.6" width="30" height="25.4" rx="2" fill="#fbbf24"/>
+<text x="176.0" y="209.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4,612</text>
+<text x="138.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241.0" y="94.2" width="30" height="145.8" rx="2" fill="#2dd4bf"/>
+<text x="256.0" y="89.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">26,517</text>
+<rect x="279.0" y="197.9" width="30" height="42.1" rx="2" fill="#60a5fa"/>
+<text x="294.0" y="192.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">7,654</text>
+<rect x="317.0" y="198.2" width="30" height="41.8" rx="2" fill="#fbbf24"/>
+<text x="332.0" y="193.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">7,594</text>
+<text x="294.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397.0" y="90.5" width="30" height="149.5" rx="2" fill="#2dd4bf"/>
+<text x="412.0" y="85.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">27,176</text>
+<rect x="435.0" y="196.7" width="30" height="43.3" rx="2" fill="#60a5fa"/>
+<text x="450.0" y="191.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">7,867</text>
+<rect x="473.0" y="198.8" width="30" height="41.2" rx="2" fill="#fbbf24"/>
+<text x="488.0" y="193.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">7,487</text>
+<text x="450.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553.0" y="84.0" width="30" height="156.0" rx="2" fill="#2dd4bf"/>
+<text x="568.0" y="79.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">28,368</text>
+<rect x="591.0" y="194.4" width="30" height="45.6" rx="2" fill="#60a5fa"/>
+<text x="606.0" y="189.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">8,289</text>
+<rect x="629.0" y="208.7" width="30" height="31.3" rx="2" fill="#fbbf24"/>
+<text x="644.0" y="203.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5,698</text>
+<text x="606.0" y="262" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709.0" y="50.5" width="30" height="189.5" rx="2" fill="#2dd4bf"/>
+<text x="724.0" y="45.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">34,446</text>
+<rect x="747.0" y="179.0" width="30" height="61.0" rx="2" fill="#60a5fa"/>
+<text x="762.0" y="174.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">11,087</text>
+<rect x="785.0" y="205.9" width="30" height="34.1" rx="2" fill="#fbbf24"/>
+<text x="800.0" y="200.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">6,196</text>
+<text x="762.0" y="262" text-anchor="middle" font-size="11" fill="#f8fafc">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#f87171;">+7.5%</div>
+      <div class="sub">$25.8B &rarr; $34.4B &mdash; below the 15% bar; FY2023-25 growth was +2.8%, +2.5%, +4.4%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#f87171;">+9.2%</div>
+      <div class="sub">$7.78B &rarr; $11.09B &mdash; operating margin 30.2% &rarr; 32.2%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#f87171;">+7.7%</div>
+      <div class="sub">$4.6B &rarr; $6.2B &mdash; FY2022 was a low base (inventory build); FY2023 peak $7.6B</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; Operating Margin Trend &mdash; GAAP, % of revenue</div>
+    <div class="chart-sub">Gross margin rose every year from 46.5% (FY2022) to 50.0% (FY2026) on mix (more leading-edge and DRAM systems), pricing and a growing services business; operating margin was stuck near 29% for FY2023-25 and then rose to 32.2% as revenue outgrew operating expenses. Q4 FY2026 reached 50.4% gross and 35.1% operating margin. The FY2025 figure includes a $181m restructuring charge and FY2026 a $253m legal settlement.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Gross margin</span><span><span class="dot" style="background:#34d399;"></span>Operating (EBIT) margin</span></div>
+    <svg viewBox="0 0 700 107">
+<line x1="30" y1="90.0" x2="690" y2="90.0" stroke="#263049" stroke-width="1"/>
+<text x="2" y="93.0" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="52.5" x2="690" y2="52.5" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="55.5" font-size="7.5" fill="#64748b">40%</text>
+<line x1="30" y1="15.0" x2="690" y2="15.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="2" y="18.0" font-size="7.5" fill="#64748b">80%</text>
+<polyline points="60,46.4 205,46.2 350,45.5 495,44.4 640,43.1" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+<circle cx="60" cy="46.4" r="3.2" fill="#2dd4bf"/><text x="60" y="39.4" text-anchor="middle" font-size="8" fill="#cbd5e1">46.5%</text>
+<circle cx="205" cy="46.2" r="3.2" fill="#2dd4bf"/><text x="205" y="39.2" text-anchor="middle" font-size="8" fill="#cbd5e1">46.7%</text>
+<circle cx="350" cy="45.5" r="3.2" fill="#2dd4bf"/><text x="350" y="38.5" text-anchor="middle" font-size="8" fill="#cbd5e1">47.5%</text>
+<circle cx="495" cy="44.4" r="3.2" fill="#2dd4bf"/><text x="495" y="37.4" text-anchor="middle" font-size="8" fill="#cbd5e1">48.7%</text>
+<circle cx="640" cy="43.1" r="3.2" fill="#2dd4bf"/><text x="640" y="36.1" text-anchor="middle" font-size="8" fill="#cbd5e1">50.0%</text>
+<polyline points="60,61.7 205,62.9 350,62.9 495,62.6 640,59.8" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="61.7" r="3.2" fill="#34d399"/><text x="60" y="73.7" text-anchor="middle" font-size="8" fill="#cbd5e1">30.2%</text>
+<circle cx="205" cy="62.9" r="3.2" fill="#34d399"/><text x="205" y="74.9" text-anchor="middle" font-size="8" fill="#cbd5e1">28.9%</text>
+<circle cx="350" cy="62.9" r="3.2" fill="#34d399"/><text x="350" y="74.9" text-anchor="middle" font-size="8" fill="#cbd5e1">28.9%</text>
+<circle cx="495" cy="62.6" r="3.2" fill="#34d399"/><text x="495" y="74.6" text-anchor="middle" font-size="8" fill="#cbd5e1">29.2%</text>
+<circle cx="640" cy="59.8" r="3.2" fill="#34d399"/><text x="640" y="71.8" text-anchor="middle" font-size="8" fill="#cbd5e1">32.2%</text>
+<text x="60" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="101" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (Oct, $m)</th><th>Revenue</th><th>Op. Income (GAAP)</th><th>Op. Margin</th><th>Gross Margin</th><th>Net Income</th><th>Dil. EPS ($)</th><th>Free Cash Flow</th><th>FCF/EBIT</th><th>Capex</th><th>Net Cash (Debt)</th><th>DPS ($)</th></tr>
+    <tr><td>FY2022</td><td>25,785</td><td>7,784</td><td>30.2%</td><td>46.5%</td><td>6,525</td><td>7.44</td><td>4,612</td><td>59.2%</td><td>787</td><td>-3,291*</td><td>1.02</td></tr>
+    <tr><td>FY2023</td><td>26,517</td><td>7,654</td><td>28.9%</td><td>46.7%</td><td>6,856</td><td>8.11</td><td>7,594</td><td>99.2%</td><td>1,106</td><td>899*</td><td>1.22</td></tr>
+    <tr><td>FY2024</td><td>27,176</td><td>7,867</td><td>28.9%</td><td>47.5%</td><td>7,177</td><td>8.61</td><td>7,487</td><td>95.2%</td><td>1,190</td><td>2,891*</td><td>1.52</td></tr>
+    <tr><td>FY2025</td><td>28,368</td><td>8,289</td><td>29.2%</td><td>48.7%</td><td>6,998</td><td>8.66</td><td>5,698</td><td>68.7%</td><td>2,260</td><td>2,018</td><td>1.78</td></tr>
+    <tr><td>FY2026</td><td>34,446</td><td>11,087</td><td>32.2%</td><td>50.0%</td><td>10,088</td><td>12.62</td><td>6,196</td><td>55.9%</td><td>2,672</td><td>2,807</td><td>1.98</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">*Net cash for FY2022-24 is derived from S&amp;P Global&rsquo;s net-debt/EBITDA ratios and is approximate (FY2022 is net debt of ~$3.3B, shown negative); FY2025-26 are from Applied&rsquo;s balance sheets (cash plus short-term investments less short- and long-term debt; long-term investments of $4.3B and $4.8B are excluded). DPS is dividends declared and paid per share in the fiscal year (FY2026 = $1.98 derived from $1.57B paid on ~793M shares, reflecting 2 quarters at $0.46 and 2 at $0.53); the current quarterly dividend is $0.53. FY2025-26 operating income is as reported by Applied (FY2025 8,289 after $181m of restructuring; FY2026 11,087 after a $253m legal settlement); S&amp;P&rsquo;s standardised figures, which exclude those items, are $8,511m and about $11.35B.</div>
+  <div class="footer-note">Source: Applied Materials Q4 and fiscal-year 2026 earnings release (8-K, Nov 12, 2026); stockanalysis.com (S&amp;P Global Market Intelligence) annual income statement, cash-flow statement and ratios. All figures USD.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter &amp; Momentum (Q4 FY2026, Oct 2026)</div></div>
+  <div class="sec-sub">Applied reported Q4 FY2026 (quarter ended Oct 25, 2026) and the full fiscal year on Nov 12, 2026 after the close. Fiscal quarters: Q1 FY25 = Jan 2025 &hellip; Q4 FY26 = Oct 2026.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue was a record $10,409m (+53.1% YoY, +14% on the July quarter), above the $10.25B &plusmn; $0.5B guidance midpoint. GAAP operating income was $3,658m (35.1% margin; gross margin 50.4%), GAAP EPS $3.40 and non-GAAP EPS $4.16 (+92% YoY) against guidance of $4.02 &plusmn; $0.20; the gap between the two is a $653m unrealised loss on strategic investments. Semiconductor Systems revenue rose 64% to $7,996m (58% foundry/logic, 33% DRAM, 9% flash) and AGS rose 26% to $1,896m. Operating cash flow was a record $3.30B and free cash flow $2.62B; Applied returned $2.42B, including $2.00B of buybacks, its largest quarterly repurchase in more than eight years. The balance sheet shows the build: receivables $9.0B (from $5.2B a year ago), inventory $6.9B, and Q4 capex of $684m. Management expects Semiconductor Systems revenue to grow more than 40% in calendar 2026 and WFE demand to grow more than 30% in 2027, but also says supply chain and clean-room capacity gate how fast the industry can grow.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Revenue was flat at $7.0-7.3B for four quarters, dipped to $6.8B in Q4 FY25 (-3% YoY), and then rose sequentially in each of the next four quarters. YoY growth: Q1 FY26 -2.1%, Q2 FY26 +11.4%, Q3 FY26 +24.8%, Q4 FY26 +53.1%. The Q4 FY25 comparison is the easiest in the series, which flatters the +53%.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="61.2" width="60" height="68.8" fill="#2dd4bf"/><text x="52.5" y="56.2" text-anchor="middle" font-size="9" fill="#cbd5e1">7,166</text>
+<text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="107.5" y="61.8" width="60" height="68.2" fill="#2dd4bf"/><text x="137.5" y="56.8" text-anchor="middle" font-size="9" fill="#cbd5e1">7,100</text>
+<text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="192.5" y="59.8" width="60" height="70.2" fill="#2dd4bf"/><text x="222.5" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">7,302</text>
+<text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="277.5" y="64.7" width="60" height="65.3" fill="#2dd4bf"/><text x="307.5" y="59.7" text-anchor="middle" font-size="9" fill="#cbd5e1">6,800</text>
+<text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="362.5" y="62.6" width="60" height="67.4" fill="#2dd4bf"/><text x="392.5" y="57.6" text-anchor="middle" font-size="9" fill="#cbd5e1">7,012</text>
+<text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="447.5" y="54.0" width="60" height="76.0" fill="#2dd4bf"/><text x="477.5" y="49.0" text-anchor="middle" font-size="9" fill="#cbd5e1">7,910</text>
+<text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="532.5" y="42.4" width="60" height="87.6" fill="#2dd4bf"/><text x="562.5" y="37.4" text-anchor="middle" font-size="9" fill="#cbd5e1">9,115</text>
+<text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="617.5" y="30.0" width="60" height="100.0" fill="#2dd4bf"/><text x="647.5" y="25.0" text-anchor="middle" font-size="9" fill="#cbd5e1">10,409</text>
+<text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters ($m)</div>
+    <div class="chart-sub">Operating income more than doubled from $1,712m in Q4 FY25 to $3,658m in Q4 FY26. Q4 FY25 includes a $181m restructuring charge and Q1 FY26 a $253m export-control legal settlement, so those two quarters are lower than the underlying run-rate (non-GAAP operating margin was 28.6% and 30.0%).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP Operating Income, $m</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="77.7" width="60" height="52.3" fill="#60a5fa"/><text x="52.5" y="72.7" text-anchor="middle" font-size="9" fill="#cbd5e1">2,175</text>
+<text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="107.5" y="77.8" width="60" height="52.2" fill="#60a5fa"/><text x="137.5" y="72.8" text-anchor="middle" font-size="9" fill="#cbd5e1">2,169</text>
+<text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="192.5" y="76.3" width="60" height="53.7" fill="#60a5fa"/><text x="222.5" y="71.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2,233</text>
+<text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="277.5" y="88.8" width="60" height="41.2" fill="#60a5fa"/><text x="307.5" y="83.8" text-anchor="middle" font-size="9" fill="#cbd5e1">1,712</text>
+<text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="362.5" y="86.0" width="60" height="44.0" fill="#60a5fa"/><text x="392.5" y="81.0" text-anchor="middle" font-size="9" fill="#cbd5e1">1,831</text>
+<text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="447.5" y="69.3" width="60" height="60.7" fill="#60a5fa"/><text x="477.5" y="64.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2,523</text>
+<text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="532.5" y="56.0" width="60" height="74.0" fill="#60a5fa"/><text x="562.5" y="51.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3,075</text>
+<text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="617.5" y="42.0" width="60" height="88.0" fill="#60a5fa"/><text x="647.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">3,658</text>
+<text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">China Revenue &mdash; Last 8 Quarters ($m, with % of total revenue)</div>
+    <div class="chart-sub">China revenue was steady at $1.8-2.6B a quarter and reached a record $2,642m in Q4 FY26, but it fell as a share of the total from 35% (Q3 FY25) to 25% because non-China demand grew faster. FY2026 China revenue was $9,330m (27%), up 9% on FY2025&rsquo;s $8,529m (30%). Per the company, 28nm-type investment drove its China growth; management expects China to stay below 25% of shipments in 2027.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#f59e0b;"></span>China revenue, $m (label inside bar = % of company revenue)</span></div>
+    <svg viewBox="0 0 700 160">
+<line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22.5" y="55.3" width="60" height="74.7" fill="#f59e0b"/><text x="52.5" y="50.3" text-anchor="middle" font-size="9" fill="#cbd5e1">2,243</text>
+<text x="52.5" y="68.3" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">31%</text>
+<text x="52.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY25</text>
+<rect x="107.5" y="70.9" width="60" height="59.1" fill="#f59e0b"/><text x="137.5" y="65.9" text-anchor="middle" font-size="9" fill="#cbd5e1">1,774</text>
+<text x="137.5" y="83.9" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">25%</text>
+<text x="137.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY25</text>
+<rect x="192.5" y="45.1" width="60" height="84.9" fill="#f59e0b"/><text x="222.5" y="40.1" text-anchor="middle" font-size="9" fill="#cbd5e1">2,548</text>
+<text x="222.5" y="58.1" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">35%</text>
+<text x="222.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="277.5" y="64.6" width="60" height="65.4" fill="#f59e0b"/><text x="307.5" y="59.6" text-anchor="middle" font-size="9" fill="#cbd5e1">1,964</text>
+<text x="307.5" y="77.6" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">29%</text>
+<text x="307.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="362.5" y="60.2" width="60" height="69.8" fill="#f59e0b"/><text x="392.5" y="55.2" text-anchor="middle" font-size="9" fill="#cbd5e1">2,095</text>
+<text x="392.5" y="73.2" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">30%</text>
+<text x="392.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="447.5" y="60.5" width="60" height="69.5" fill="#f59e0b"/><text x="477.5" y="55.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,087</text>
+<text x="477.5" y="73.5" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">26%</text>
+<text x="477.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="532.5" y="46.5" width="60" height="83.5" fill="#f59e0b"/><text x="562.5" y="41.5" text-anchor="middle" font-size="9" fill="#cbd5e1">2,506</text>
+<text x="562.5" y="59.5" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">27%</text>
+<text x="562.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="617.5" y="42.0" width="60" height="88.0" fill="#f59e0b"/><text x="647.5" y="37.0" text-anchor="middle" font-size="9" fill="#cbd5e1">2,642</text>
+<text x="647.5" y="55.0" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1710">25%</text>
+<text x="647.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>$m</th><th>Q1 FY25</th><th>Q2 FY25</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th></tr>
+    <tr><td>Revenue</td><td>7,166</td><td>7,100</td><td>7,302</td><td>6,800</td><td>7,012</td><td>7,910</td><td>9,115</td><td>10,409</td></tr>
+    <tr><td>Revenue YoY</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-2.1%</td><td>+11.4%</td><td>+24.8%</td><td>+53.1%</td></tr>
+    <tr><td>Gross margin (GAAP)</td><td>48.8%</td><td>49.1%</td><td>48.8%</td><td>48.0%</td><td>49.0%</td><td>49.9%</td><td>50.3%</td><td>50.4%</td></tr>
+    <tr><td>Operating income (GAAP)</td><td>2,175</td><td>2,169</td><td>2,233</td><td>1,712</td><td>1,831</td><td>2,523</td><td>3,075</td><td>3,658</td></tr>
+    <tr><td>Operating margin</td><td>30.4%</td><td>30.5%</td><td>30.6%</td><td>25.2%</td><td>26.1%</td><td>31.9%</td><td>33.7%</td><td>35.1%</td></tr>
+    <tr><td>Diluted EPS ($, GAAP)</td><td>1.45</td><td>2.63</td><td>2.22</td><td>2.38</td><td>2.54</td><td>3.51</td><td>3.17</td><td>3.40</td></tr>
+    <tr><td>Free cash flow</td><td>544</td><td>1,061</td><td>2,050</td><td>2,043</td><td>1,040</td><td>210</td><td>2,330</td><td>2,616</td></tr>
+    <tr><td>China revenue</td><td>2,243</td><td>1,774</td><td>2,548</td><td>1,964</td><td>2,095</td><td>2,087</td><td>2,506</td><td>2,642</td></tr>
+    <tr><td>China % of revenue</td><td>31%</td><td>25%</td><td>35%</td><td>29%</td><td>30%</td><td>26%</td><td>27%</td><td>25%</td></tr>
+    <tr><td>AGS (services) revenue</td><td>1,353</td><td>1,420</td><td>1,463</td><td>1,506</td><td>1,559</td><td>1,665</td><td>1,781</td><td>1,896</td></tr>
+    <tr><td>AGS % of revenue</td><td>19%</td><td>20%</td><td>20%</td><td>22%</td><td>22%</td><td>21%</td><td>20%</td><td>18%</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures are GAAP from Applied&rsquo;s earnings releases (Q1-Q3 FY2025 from the comparative columns in the FY2026 releases). Free cash flow = operating cash flow minus capex. AGS and segment figures are recast for the FY2026 move of the 200mm equipment business into Semiconductor Systems. YoY growth for FY25 quarters is not shown because FY2024 quarters are outside the table.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (Q1 FY2027, Jan 2027 quarter, 14 weeks):</b> revenue $11.1B &plusmn; $0.5B (about +58% YoY at the midpoint), non-GAAP EPS $4.35 &plusmn; $0.20 (+83%), non-GAAP gross margin ~50.8%. Semiconductor Systems ~$8.7B (+69%), AGS ~$2.0B (+28%, helped by the extra week), other ~$0.4B. Consensus before the report was revenue $11.41B and EPS $4.25 per TheFly, so the revenue guide was below consensus while EPS was above. Guidance is management&rsquo;s own and can be missed.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Stock reaction:</b> shares closed at $380.95 on Nov 12 (before the release), then fell 2.7% to $370.50 on Nov 13. Brokers lowered targets after the report (for example Evercore ISI to $430 from $590, JPMorgan to $500 from $660, Goldman Sachs to $580 from $670) while B. Riley raised to $500 from $475 and Summit Insights downgraded to Hold, as reported by TheFly. Earlier in the month the shares fell 13.6% on Nov 5 and rose 11.4% on Nov 9.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:8px;">
+    <b>What moved the stock:</b> the October-November decline (from a $540 close on Oct 2 to $319 on Nov 5) was sector-wide: chip-equipment peers fell in parallel, with commentary pointing to profit-taking after a very strong run, doubts about AI capex durability, supply-chain constraints on how fast tool output can grow, and a quick reversal on Nov 9. Applied&rsquo;s own results beat guidance; the &ldquo;sell the news&rdquo; reaction and target cuts reflect valuation and sentiment rather than a miss. Treat the causes as reported commentary, not verified fact.
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet, Segments &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses trailing P/E on GAAP diluted EPS, measured at each fiscal year-end versus today. The multiple is the part that has re-rated: earnings have jumped but the price has fallen about half from its June high.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing GAAP P/E &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/E (29.4x = $370.50 / FY2026 GAAP EPS of $12.62) is 1.40x Applied&rsquo;s FY2022-26 fiscal-year-end average (21.0x). FY-end P/Es: 11.8x, 16.0x, 21.4x, 26.0x (S&amp;P Global via stockanalysis.com) and 29.9x for FY2026 (computed: $377.24 close on Oct 23, 2026 / $12.62). The multiple has risen every year as the price rose faster than trailing earnings, which were flat in FY2023-25.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>5-year average</span>
+    </div>
+    <svg viewBox="0 0 700 140">
+<line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="20" y="79.2" width="70" height="30.8" fill="#60a5fa"/><text x="55" y="74.2" text-anchor="middle" font-size="9" fill="#cbd5e1">11.8x</text><text x="55" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="115" y="68.3" width="70" height="41.7" fill="#60a5fa"/><text x="150" y="63.3" text-anchor="middle" font-size="9" fill="#cbd5e1">16.0x</text><text x="150" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="210" y="54.3" width="70" height="55.7" fill="#60a5fa"/><text x="245" y="49.3" text-anchor="middle" font-size="9" fill="#cbd5e1">21.4x</text><text x="245" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="305" y="42.3" width="70" height="67.7" fill="#60a5fa"/><text x="340" y="37.3" text-anchor="middle" font-size="9" fill="#cbd5e1">26.0x</text><text x="340" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="400" y="32.3" width="70" height="77.7" fill="#60a5fa"/><text x="435" y="27.3" text-anchor="middle" font-size="9" fill="#cbd5e1">29.9x</text><text x="435" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="495" y="33.7" width="70" height="76.3" fill="#2dd4bf"/><text x="530" y="28.7" text-anchor="middle" font-size="9" fill="#cbd5e1">29.4x</text><text x="530" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="55.3" x2="690" y2="55.3" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="51.3" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 21.0x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> forward P/E (next-12-month consensus) is 19.3x at $370.50 versus FY-end forward multiples of 13.2x, 17.3x, 20.1x, 25.5x and 21.4x (FY2022-26 average ~19.5x), so on a forward basis today&rsquo;s multiple is about 0.99 of its own average (3/5 on the bands). S&amp;P lists a PEG of 0.64. The scorecard uses the trailing GAAP basis (ratio 1.40 = 0/5) as the spec requires; forward EPS depends on a continued ramp and on consensus that predates the Nov 13 target cuts. Average analyst target ~$569 (S&amp;P/stockanalysis, 39 analysts) implies about 54% upside, but individual targets span $430-$640 and several were cut after the report.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx ($m) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex has more than tripled since FY2022 (from $787m to $2,672m) and from 3.1% to 7.8% of revenue, as Applied builds capacity: the EPIC Center in Silicon Valley, and plans to double system output from Q4 FY2026 levels by 2028 and more than double manufacturing and lab capacity by 2030. Capex fell sequentially to $684m in Q4 FY26 from $707m in Q3. That is moderate for an equipment maker but no longer asset-light.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex ($m, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    <svg viewBox="0 0 700 183">
+<line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="127.6" width="60" height="32.4" fill="#60a5fa"/><text x="60" y="122.6" text-anchor="middle" font-size="8" fill="#cbd5e1">787</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="170" y="114.5" width="60" height="45.5" fill="#60a5fa"/><text x="200" y="109.5" text-anchor="middle" font-size="8" fill="#cbd5e1">1,106</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="310" y="111.0" width="60" height="49.0" fill="#60a5fa"/><text x="340" y="106.0" text-anchor="middle" font-size="8" fill="#cbd5e1">1,190</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="450" y="67.0" width="60" height="93.0" fill="#60a5fa"/><text x="480" y="62.0" text-anchor="middle" font-size="8" fill="#cbd5e1">2,260</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="590" y="50.0" width="60" height="110.0" fill="#60a5fa"/><text x="620" y="45.0" text-anchor="middle" font-size="8" fill="#cbd5e1">2,672</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<polyline points="60,99.2 200,82.4 340,79.3 480,25.5 620,28.6" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="99.2" r="3" fill="#fbbf24"/><text x="60" y="90.2" text-anchor="middle" font-size="7.5" fill="#fde68a">3.05%</text>
+<circle cx="200" cy="82.4" r="3" fill="#fbbf24"/><text x="200" y="73.4" text-anchor="middle" font-size="7.5" fill="#fde68a">4.17%</text>
+<circle cx="340" cy="79.3" r="3" fill="#fbbf24"/><text x="340" y="70.3" text-anchor="middle" font-size="7.5" fill="#fde68a">4.38%</text>
+<circle cx="480" cy="25.5" r="3" fill="#fbbf24"/><text x="480" y="16.5" text-anchor="middle" font-size="7.5" fill="#fde68a">7.97%</text>
+<circle cx="620" cy="28.6" r="3" fill="#fbbf24"/><text x="620" y="19.6" text-anchor="middle" font-size="7.5" fill="#fde68a">7.76%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (S&amp;P Global)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="261.4 52.8" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="0.8 313.3" stroke-dashoffset="-261.4" transform="rotate(-90 60 60)"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="51.9 262.3" stroke-dashoffset="-262.2" transform="rotate(-90 60 60)"/>
+<text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">83%</text>
+</svg>
+        <div class="ownership-legend">
+<div><span class="dot" style="background:#60a5fa;"></span>Institutions &asymp; 83.2% (mostly large index and active managers)</div>
+<div><span class="dot" style="background:#fbbf24;"></span>Insiders &asymp; 0.26%</div>
+<div><span class="dot" style="background:#2dd4bf;"></span>Retail and other &asymp; 16.5%</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Buybacks &amp; Dividend</div>
+      <p>FY2026 shareholder returns were $4.75B: $3.18B of buybacks and $1.57B of dividends, about 77% of FCF ($6.20B); management targets 80-100% of FCF over time. Q4 alone had $2.00B of buybacks, the largest in more than eight years, with $10.8B left on the authorization. Basic shares fell from 871M (FY2022) to 793M (FY2026), -9.0%, and the YoY reduction was -1.1% in the latest quarter; stock compensation and tax-withholding payments ($570m in FY2026) offset part of the gross buyback. The quarterly dividend is $0.53 (raised 15% from $0.46 in May 2026, the ninth straight annual increase), $2.12 annualised, a yield of ~0.57% and a payout of ~16% of earnings.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> Applied has no founder or controlling shareholder; it is run by professional management (CEO Gary Dickerson) and owned ~83% by institutions. S&amp;P Global shows insider ownership of ~0.26%, which scores 0 on the Martinero band (below 1% and no verified employee ownership plan of ~5% or more). Applied also holds minority strategic investments, notably in BE Semiconductor Industries (Besi), where an accelerated share purchase agreement is meant to lift its stake to about 20%; these are marked to market through GAAP earnings. I did not verify a current top-holder list for this page.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; net cash / debt:</b> at Oct 25, 2026 Applied held $7.24B cash, $2.10B short-term and $4.76B long-term investments (total $14.1B) against $6.53B of debt ($1.30B short-term debt, $5.23B long-term), total assets of $45.4B and equity of $26.1B. Net cash is $2.8B on cash and short-term investments (S&amp;P basis) or $7.6B including long-term investments, up from $2.0B at Oct 2025 on the first basis. Working capital rose sharply: receivables $9.0B (from $5.2B), inventories $6.9B (from $5.9B), contract liabilities $3.6B; the build is why FY2026 FCF ($6.2B) lagged EBIT ($11.1B). Debt has been roughly flat at $6.5B for five years.
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">Demand Mix &mdash; Leading Edge vs ICAPS, Memory, Packaging &amp; Services</div>
+    <div class="chart-sub">Applied does not report ICAPS, GAA or HBM revenue separately, so the mix below is from its segment disclosures and call commentary (management statements, not audited splits).</div>
+    <table class="datatable">
+      <tr><th>Area</th><th>What the data show</th><th>Direction (per management, Nov 12, 2026)</th></tr>
+      <tr><td>Foundry &amp; logic (incl. leading-edge GAA)</td><td>63% of FY26 Semiconductor Systems revenue (58% in Q4, down from 66% a year earlier); GAA tools (Viva, Sym3 Z Magnum, Spectral, Precision Selective Nitride, Trillium ALD) launched in FY2026</td><td>Leading-edge logic running at full utilisation; nodal share gains claimed; Intel and TSMC are EPIC partners</td></tr>
+      <tr><td>DRAM and HBM</td><td>30% of FY26 Semi Systems revenue (33% in Q4, up from 28%); record DRAM revenue in Q4; collaboration agreements with SK hynix and Micron on DRAM/HBM</td><td>Among the fastest-growing WFE areas in 2026-27 along with logic and packaging</td></tr>
+      <tr><td>NAND / flash</td><td>7% of FY26 Semi Systems revenue (9% in Q4)</td><td>&ldquo;Not far behind&rdquo; DRAM in utilisation; mostly upgrades</td></tr>
+      <tr><td>Advanced packaging</td><td>Not broken out in dollars; revenue expected up ~90% in calendar 2026; NEXX (ASMPT) acquisition agreed; stake in Besi to ~20%</td><td>Raised each quarter; record revenue in Q4</td></tr>
+      <tr><td>ICAPS (mature-node logic)</td><td>Not broken out; China 28nm-type demand supported FY2026 China revenue</td><td>&ldquo;Healthy zone&rdquo;; expected to grow again in 2027, faster outside China than in China</td></tr>
+      <tr><td>Services (AGS)</td><td>$6.9B, 20.0% of FY26 revenue (+20% YoY), gross margin 35.0%, operating margin 29.5%; Q4 $1.9B (+26%), record services and spares</td><td>Q1 FY27 ~$2.0B (+28%, 14-week quarter), then about flat in Q2; target to lift service revenue per installed tool 20%+ by 2030</td></tr>
+    </table>
+  </div>
+
+  <div class="chart-card" style="margin-top:8px;">
+    <div class="chart-title">How Applied Materials Compares With Lam Research and KLA</div>
+    <div class="chart-sub">Figures for Lam and KLA are taken from their dashboards on this site (companies/lam-research.html priced Nov 9, 2026; companies/kla.html priced Oct 30, 2026), so dates and fiscal years differ. Applied&rsquo;s latest FY2026 ended Oct 25, 2026; Lam&rsquo;s and KLA&rsquo;s ended in June 2026.</div>
+    <table class="datatable">
+    <tr><th>Metric</th><th>Applied Materials (this page)</th><th>Lam Research (our page)</th><th>KLA (our page)</th></tr>
+    <tr><td>Fiscal year ends</td><td>Late Oct (FY2026 = Oct 25, 2026)</td><td>Late Jun (FY2026 = Jun 28, 2026)</td><td>Jun 30 (FY2026)</td></tr>
+    <tr><td>Latest FY revenue (YoY)</td><td>$34.45B (+21.4%)</td><td>$23.2B (+26.0%)</td><td>$13.58B (+11.7%)</td></tr>
+    <tr><td>Latest quarter revenue YoY</td><td>Q4 FY26 (Oct 2026): +53.1%</td><td>Sep-2026 quarter: +54%</td><td>Q1 FY27 (Sep 2026): +28.9%</td></tr>
+    <tr><td>GAAP operating margin (latest FY)</td><td>32.2%</td><td>35.3%</td><td>41.7%</td></tr>
+    <tr><td>Gross margin (latest FY)</td><td>50.0%</td><td>50.5%</td><td>61.3%</td></tr>
+    <tr><td>Revenue CAGR FY22-26 (4-yr)</td><td>+7.5%</td><td>+7.8%</td><td>+10.2%</td></tr>
+    <tr><td>Services share of revenue</td><td>20.0% (AGS, FY26; 18.2% in Q4)</td><td>~36% (customer support &amp; other; broader definition)</td><td>~21% (service, Q1 FY27)</td></tr>
+    <tr><td>Net cash / (debt)</td><td>Net cash $2.8B (cash + ST inv. less debt); $7.6B incl. LT investments</td><td>Net cash $3.7B (Sep 2026)</td><td>Net debt $1.25B (0.2x EBITDA, Jun 2026)</td></tr>
+    <tr><td>Trailing GAAP P/E (vs own FY22-26 avg)</td><td>29.4x (21.0x avg; ratio 1.40)</td><td>33.0x (31.3x avg; ratio 1.05)</td><td>39.5x (37.0x avg; ratio 1.07)</td></tr>
+    <tr><td>Forward P/E</td><td>19.3x</td><td>21.5x</td><td>28.9x</td></tr>
+    <tr><td>China exposure</td><td>27% of FY26 revenue (25% in Q4)</td><td>Not quantified on our page</td><td>Not quantified on our page</td></tr>
+    <tr><td>Share count change</td><td>-9.0% (FY22-26, basic)</td><td>-10.3% (FY22-26, diluted)</td><td>-13.7% (Dec 2021 - Sep 2026)</td></tr>
+    <tr><td>Martinero Index / criteria met</td><td>60 / 7 of 14</td><td>69 / 9 of 14</td><td>71 / 8 of 14</td></tr>
+    </table>
+    <div class="footer-note" style="margin-top:6px;">Read-across: Applied is the largest and most diversified of the three (more than 2x KLA&rsquo;s revenue), with the lowest margins and lowest valuation of the group, and the lowest Martinero score of the three on this site&rsquo;s method. Differences in services definitions (Lam&rsquo;s ~36% includes spares and upgrades) and in fiscal-year timing mean the table is indicative, not like-for-like.</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site&rsquo;s fixed checklist; every criterion is directly computable, so there are no N/A cases. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2022-26, late-October fiscal years). Criterion #14 compares FY2026 gross margin (gross profit / revenue) with FY2023&rsquo;s.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Applied Materials</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+7.5% &mdash; $25.8B (FY2022) &rarr; $34.4B (FY2026); growth was only +2.8%, +2.5% and +4.4% in FY2023-25 before +21.4% in FY2026 (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+9.2% &mdash; GAAP operating income $7.78B &rarr; $11.09B; flat for three years, then +33.8% in FY2026. FY2026 is after a $253m export-control settlement and $8m restructuring (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>32.2% GAAP operating margin in FY2026 (35.1% in Q4 FY26); non-GAAP 33.1%. Gross margin 50.0% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+7.7% &mdash; FCF (operating cash flow minus capex) $4.61B &rarr; $6.20B; peaked at $7.6B in FY2023, fell to $5.7B in FY2025 as capex doubled and receivables built (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Judgment: a strong #2 in wafer-fab equipment (WFE) overall, behind or alongside ASML depending on how services are counted, and #1 in several process areas (CVD, PVD, epitaxy, CMP, implant, thermal, e-beam, per the company). Management says it serves ~55% of total WFE. No share percentage verified (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 &mdash; light competition: ASML, Applied, Lam, Tokyo Electron and KLA supply most WFE spend, with high switching costs. Judgment, no measured concentration index (score 4/5)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 42.2% vs S&amp;P-estimated WACC 13.2%, a ~29pp spread (S&amp;P Global via stockanalysis.com). Third-party estimates; ROIC is flattered by buybacks shrinking the equity base, but the spread is wide on any reasonable inputs (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: $9.34B cash and short-term investments (plus $4.76B long-term investments) vs $6.53B debt at Oct 25, 2026 = net cash $2.8B (about -0.24x EBITDA of $11.9B, S&amp;P basis) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>55.9% (FY2026: $6.20B / $11.09B). Five-year path 59% / 99% / 95% / 69% / 56%; capex ($2.67B) and a $1.9B working-capital build (receivables $9.0B vs $5.2B) held FCF back as sales jumped (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>Trailing GAAP P/E 29.4x ($370.50 / FY2026 EPS $12.62) vs FY22-26 fiscal-year-end average 21.0x (11.8x, 16.0x, 21.4x, 26.0x, 29.9x), ratio 1.40: more than 30% premium. On forward P/E (19.3x now vs ~19.5x average at FY-ends) the ratio would be ~0.99 (3/5). Scored on trailing GAAP (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Basic weighted shares 871M (FY2022) &rarr; 793M (FY2026), -9.0%; 793.6M outstanding now. FY2026 buybacks $3.18B (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Insiders hold ~0.26% (S&amp;P Global); institutions ~83%. No founder or controlling holder; no broad employee-ownership plan verified at the ~5% level (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>7.8% of revenue in FY2026 ($2.67B), up from 3.1% in FY2022 and 8.0% in FY2025 as Applied builds the EPIC Center and expands manufacturing and lab capacity. Moderate, not asset-light; marked Not met on the site's usual convention (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (revenue minus cost of products sold, reported by Applied). 46.70% (FY2023) &rarr; 49.99% (FY2026), +3.29pp &mdash; margin rising, so Met. Operating margin 28.9% &rarr; 32.2% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; 105 &times; 100):</b> #1 2&times;13/5=5.2 &middot; #2 2&times;11/5=4.4 &middot; #3 5&times;10/5=10.0 &middot; #4 2&times;8/5=3.2 &middot; #5 4&times;7/5=5.6 &middot; #6 4&times;6/5=4.8 &middot; #7 5&times;10/5=10.0 &middot; #8 5&times;6/5=6.0 &middot; #9 2&times;8/5=3.2 &middot; #10 0&times;8/5=0.0 &middot; #11 4&times;4/5=3.2 &middot; #12 0&times;5/5=0.0 &middot; #13 3&times;4/5=2.4 &middot; #14 5&times;5/5=5.0. Total 63.0 / 105 = <b>60/100</b>. Criteria met: 7/14 on the binary thresholds. <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage; ASML is at least as large in total WFE); #7 uses third-party ROIC/WACC estimates; #10 is scored on trailing GAAP P/E against fiscal-year-end multiples (a forward basis would score 3/5 instead of 0/5, which would lift the index to ~63); #12 scores 0 because no employee-ownership plan or insider block was verified; #13 is marked Not met at 7.8% of revenue though it earns 3/5 on the bands.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Record FY2026 with revenue +21.4%, GAAP operating margin 32.2% (35.1% in Q4) and gross margin up 3.3pp in three years to 50.0%. Applied is positioned in the AI-driven parts of WFE (leading-edge logic, DRAM/HBM, advanced packaging, e-beam inspection) and guides Q1 FY2027 revenue +58% YoY at the midpoint, with management seeing WFE up more than 30% again in 2027 and customers giving rolling eight-quarter forecasts. Services are 20% of revenue at a 35% gross margin and growing double digits. Net cash is $2.8B ($7.6B including long-term investments), ROIC is far above WACC, $4.75B went back to shareholders in FY2026 and the dividend has grown nine years in a row. China fell to 27% of revenue while the total grew, and forward P/E (19.3x) is about in line with its own FY-end average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The 4-year record is modest: revenue CAGR +7.5%, EBIT CAGR +9.2% and FCF CAGR +7.7%, with three flat years before FY2026, and equipment demand is cyclical and concentrated in a handful of foundry and memory customers. FCF conversion fell to 56% as receivables, inventory and capex (7.8% of revenue) rose; trailing GAAP P/E of 29.4x is 40% above its own FY-end average. China is 27% of revenue and exposed to export-control changes (a $253m BIS settlement in FY2026; management said in Nov 2025 that it cannot serve parts of China&rsquo;s memory and mature-node market). The stock is volatile (beta 1.67; -13.6% in a day on Nov 5, +11.4% on Nov 9) and about 49% below its June close; the +53% Q4 growth compares with a depressed year-ago quarter; supply and clean-room capacity may limit shipments; and GAAP EPS swings with the value of strategic investments. Market share, ROIC/WACC and analyst targets are third-party or judgment.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Applied Materials Q4 and fiscal-year 2026 earnings release (8-K exhibit 99.1, Nov 12, 2026), Q3, Q2 and Q1 FY2026 releases (Aug 13, May 14 and Feb 12, 2026) and the Q4 FY2026 earnings call transcript (via stockanalysis.com); stockanalysis.com (S&amp;P Global Market Intelligence) for annual and quarterly financials, ratios, ROIC/WACC, statistics, price history (daily closes to Nov 13, 2026), shares, ownership and dividends; TheFly price-target headlines (via stockanalysis.com and TipRanks); Trefis for the Jun 30, 2026 high close and early-November moves; TrendForce/Reuters (Nov 2025) for export-control context; year-end 2021-24 closes from public price histories and the Dec 31, 2025 close ($256.99) from TS2.tech/NewsQuantified reports, not an exchange record. Lam Research and KLA figures are from their dashboards on this site. WACC, ROIC, market share and consensus targets are third-party or approximate and flagged as such. Prepared Nov 16, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Applied Materials &mdash; Nasdaq, USD, not split-adjusted (no split since 2002) and not dividend-adjusted. Dec 31 year-end closes 2021-2025 plus the Fri Nov 13, 2026 close. Applied&rsquo;s fiscal year ends in late October; the chart uses calendar year-ends for comparability with other pages.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Applied Materials &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">The shares were roughly flat from Dec 2021 ($157.37) to Dec 2024 ($162.63) through the 2022 chip downturn and a flat revenue period, then rose 58% in 2025 to $256.99 and reached a $723.00 close on Jun 30, 2026 (intraday high $739.67). They have since fallen about 49% to $370.50 as chip-equipment stocks sold off. The 52-week range is $203.40 &ndash; 739.67. The dashed line is the straight-line annualised CAGR between the Dec 2021 point and today, computed over five years as on other pages; the actual span is ~4.9 years.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="146.3" x2="680" y2="146.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="112.5" x2="680" y2="112.5" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.8" x2="680" y2="78.8" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="45" x2="680" y2="45" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,122.36 L 172.8,144.33 L 299.6,120.64 L 426.4,120.43 L 553.2,85.87 L 680.0,44.29 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="122.36" x2="680.0" y2="44.29" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="20" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +18.7%</text>
+<path d="M 46.0,122.36 L 172.8,144.33 L 299.6,120.64 L 426.4,120.43 L 553.2,85.87 L 680.0,44.29" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="122.36" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="112.36" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$157.37</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="144.33" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="161.33" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$97.38</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="120.64" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="110.64" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$162.07</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="120.43" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="110.43" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$162.63</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="85.87" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="75.87" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$256.99</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="44.29" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="672.0" y="34.29" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$370.50</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The CAGR (+18.7%/yr, price only, excluding dividends of about $2/share a year) is measured from the Dec 2021 close and is flattered by the 2025-26 rally; from the June 30, 2026 close ($723.00) the shares are down about 49%. Year-end closes 2021-2024 are from public price histories (unadjusted for dividends) and the Dec 31, 2025 close is from news reports, so treat them as accurate to about a cent but not exchange-verified; the Nov 13, 2026 close ($370.50) is from stockanalysis.com. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
