@@ -3807,6 +3807,96 @@ const COMPANIES = [
     file: "companies/applied-materials.html"
   },
 
+  {
+    slug: "signet-jewelers",
+    name: "Signet Jewelers",
+    ticker: "NYSE: SIG",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Jewellery Retail",
+    tags: ["Jewellery", "Share Buybacks", "Net Cash"],
+    dateFeatured: "2026-11-16",
+    price: "$113.98",
+    score: "7 / 14",
+    martinero: 45,
+    momentum: { status: "accelerating", recent: 1.6, prior: -6.5 },
+    quarterYoY: { period: "Q2 FY2027 (Jul 2026)", growth: -0.5 },
+    blurb: "Signet is the world's largest specialty diamond-jewellery retailer (Kay, Zales, Jared, Blue Nile, H.Samuel), with about 2,500 stores in the US, Canada and the UK. Revenue is 13% below the FY2022 peak, but cost cuts and buybacks (share count down about a third) have rebuilt earnings. Q2 FY2027 same-store sales rose 2.2% and adjusted operating income rose 25%, and the company has no financial debt.",
+    file: "companies/signet-jewelers.html"
+  },
+
+  {
+    slug: "chow-tai-fook",
+    name: "Chow Tai Fook Jewellery Group",
+    ticker: "HKEX: 1929",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Jewellery Retail",
+    tags: ["Jewellery", "Gold", "China Consumer", "Controlling Family"],
+    dateFeatured: "2026-11-16",
+    price: "HK$11.81",
+    score: "9 / 14",
+    martinero: 61,
+    momentum: { status: "accelerating", recent: 5.3, prior: -17.5 },
+    quarterYoY: { period: "Q2 FY2027 (retail sales value)", growth: -0.5 },
+    blurb: "Hong Kong-listed jewellery retailer and brand controlled by the Cheng family, with about 80% of revenue from Chinese Mainland. FY2026 (year to 31 Mar 2026) was a record: revenue HK$94.4B (+5.3%), operating margin about 20% and net profit HK$9.0B (+52%), helped by a rising gold price. Group retail sales value was -0.5% in the quarter to Sep 2026 as Mainland stores closed, and the company flagged H1 FY2027 net profit up 90-100%.",
+    file: "companies/chow-tai-fook.html"
+  },
+
+  {
+    slug: "titan-company",
+    name: "Titan Company Ltd",
+    ticker: "NSE: TITAN",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Jewellery & Watches Retail",
+    tags: ["Jewellery", "Watches", "India", "Tata Group", "Gold"],
+    dateFeatured: "2026-11-16",
+    price: "₹4,844.90",
+    score: "9 / 14",
+    martinero: 68,
+    momentum: { status: "accelerating", recent: 44.9, prior: 18.3 },
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 10.1 },
+    blurb: "Tata Group-controlled Titan is India's largest branded jewellery retailer (Tanishq, Mia, Zoya, CaratLane, Damas in the GCC) and its largest watch maker. Statutory revenue grew about 32% a year over FY22-26 (March year-ends), with capex near 1% of revenue and a flat share count. Q2 FY2027 profit was flattered by a customs-duty inventory gain and a non-cash Damas put-option credit, and the shares trade at about 61x GAAP trailing earnings, below their own five-year average.",
+    file: "companies/titan-company.html"
+  },
+
+  {
+    slug: "brilliant-earth",
+    name: "Brilliant Earth Group, Inc.",
+    ticker: "Nasdaq: BRLT",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Jewellery Retail",
+    tags: ["Jewellery", "Short Listing History", "Founder-Controlled", "Net Cash"],
+    dateFeatured: "2026-11-16",
+    price: "$1.16",
+    score: "5 / 14",
+    martinero: 27,
+    momentum: { status: "accelerating", recent: 3.6, prior: -5.4 },
+    quarterYoY: { period: "Q3 2026", growth: 2.3 },
+    blurb: "Founder-controlled, asset-light online and showroom retailer of ethically sourced diamond and fine jewelry, listed on Nasdaq in September 2021. Gross margin has risen from 49% to 57% since FY2021 and the balance sheet holds $76M of cash with no borrowings. Revenue growth has slowed to low single digits and GAAP operating income has turned into a loss (-1.2% margin in FY2025). The shares are about 94% below the $20 IPO price.",
+    file: "companies/brilliant-earth.html"
+  },
+
+  {
+    slug: "pandora",
+    name: "Pandora A/S",
+    ticker: "Nasdaq Copenhagen: PNDORA",
+    sector: "Consumer Discretionary",
+    industry: "Consumer Discretionary",
+    subIndustry: "Jewellery",
+    tags: ["Jewellery", "Denmark", "Buybacks"],
+    dateFeatured: "2026-11-17",
+    price: "DKK 933.00",
+    score: "7 / 14",
+    martinero: 55,
+    momentum: { status: "decelerating", recent: 2.7, prior: 12.6 },
+    quarterYoY: { period: "Q3 2026", growth: 6.8 },
+    blurb: "Pandora is the Copenhagen-based maker of charm bracelets and the world's largest jewellery brand by volume (company claim). It earns a gross margin of about 79%, an EBIT margin of about 24% and a ROIC near 27%, and it has cut its share count by about a quarter since 2021. Q3 2026 organic growth was 6% (LFL +4%), but 370bp of the Q3 EBIT margin came from a one-off US tariff refund.",
+    file: "companies/pandora.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
