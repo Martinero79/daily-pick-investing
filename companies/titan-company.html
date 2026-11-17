@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Titan Company Ltd — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/titan-company.html">
+<meta property="og:title" content="Titan Company Ltd — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Titan Company Ltd — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1e2433; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Titan Company Ltd</h1>
+  <div class="badges">
+    <div class="badge">NSE: TITAN (Yahoo: TITAN.NS)</div>
+    <div class="badge">FY ends 31 March (FY2026 = year to Mar 31, 2026)</div>
+    <div class="badge">HQ: Bengaluru, India</div>
+    <div class="badge">Reports &amp; trades in INR (₹); 1 crore = 10 million</div>
+    <div class="badge warn">Q2 FY2027 (Sep 2026 quarter) profit flattered by one-offs &mdash; see callout</div>
+  </div>
+
+  <div class="price">₹4,844.90</div>
+  <div class="price-sub">Nov 13, 2026 NSE close (latest verified quote; two sources agree) &middot; Market cap &asymp; ₹4.30 lakh crore (~88.8 crore shares) &middot; 52-wk range ₹3,751 &ndash; 5,187 (as of Nov 12) &middot; ~6.6% below the 52-wk high &middot; Brokerage 12-month consensus target ₹5,423 (~+12%; Business Today, Oct 7, 2026 &mdash; pre-Q2 results, third-party) &middot; Dividend ₹15/share recommended for FY2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> Tata Group company (with TIDCO, the promoter group holds 52.9%) and India's largest jewellery retailer (Tanishq, Mia, Zoya, CaratLane; Damas in the GCC since Q4 FY2026) and its largest watch maker (Titan, Fastrack, Sonata), plus EyeCare and emerging brands. Jewellery is the bulk of revenue.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency, fiscal-year &amp; definition note:</b> every figure is in Indian rupees (₹) and ₹ crore unless stated. <b>Fiscal year ends March 31</b>: FY2026 = Apr 2025&ndash;Mar 2026; the latest quarter, <b>Q2 FY2027, is the quarter to Sep 30, 2026</b>. &ldquo;Revenue&rdquo; is <b>statutory consolidated revenue from operations</b>, which includes bullion and digi-gold sales; Titan's own headline &ldquo;total income&rdquo; <b>excludes</b> those, so its growth rates (e.g. +25% in Q2 FY2027) are higher than the statutory ones shown here (+10.1%). &ldquo;EBIT&rdquo; is <b>derived</b> (operating profit excluding other income, less depreciation) from Screener.in consolidated data; Titan's segment EBIT definitions differ. Net income is attributable profit as reported by Screener.in.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2026)</div>
+      <div class="val">₹87,584 cr</div>
+      <div class="sub" style="color:#fbbf24;">+44.9% YoY &mdash; gold price + Damas</div>
+      <div class="note">Statutory incl. bullion; FY2025 was +18.4%. Company-basis total income ex-bullion was ₹76,078 cr (+33%). Q2 FY2027 statutory revenue ₹20,614 cr was +10.1% YoY (company ex-bullion +25%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (derived)</div>
+      <div class="val" style="color:#f87171;">8.6%</div>
+      <div class="sub">FY2026, vs 10.9% in FY2023</div>
+      <div class="note">Gross margin 27.65% (FY2026) vs 28.42% (FY2023). Q2 FY2027 operating margin of 14.5% includes a ₹536 cr customs-duty gain; India jewellery EBIT margin was 13.1% reported, 10.7% adjusted.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#fbbf24;">~13% vs ~11.5%</div>
+      <div class="sub">Own estimates, FY2026</div>
+      <div class="note">Not third-party figures: NOPAT / (equity + borrowings &minus; investments); WACC is an assumption. Screener's pre-tax ROCE is 20.5%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#fbbf24;">~2.4x</div>
+      <div class="sub">Sep 2026, TTM; incl. leases &amp; gold funding</div>
+      <div class="note">Borrowings rose sharply for festive inventory and the Damas deal; H1 operating cash flow was negative. Cash balances not separately sourced, so likely overstated.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">68/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Strong growth and a controlling, aligned owner; held back by a thin EBIT margin, a fragmented market and a premium multiple. FCF CAGR is N/A (negative base) and excluded.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="202.0 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 314.16" stroke-dashoffset="-202.0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-291.7" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">9/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 criteria met</b> &mdash; revenue CAGR, EBIT CAGR, market position (#1), ROIC above WACC (thin, own estimate), entry multiple vs own history, share count (flat), controlling owner, capex intensity and gross-margin stability (&minus;0.77pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; EBIT margin (8.6%), market concentration (fragmented), net debt/EBITDA (~2.4x) and FCF conversion (63%)</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>1 N/A</b> &mdash; FCF CAGR (FY2022 base was negative)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Titan Company Ltd was founded in 1984 as a joint venture between the Tata Group and the Tamil Nadu Industrial Development Corporation (TIDCO). It began as a watch maker and is now mostly a jewellery company: Tanishq, Mia, Zoya and CaratLane sell gold and studded jewellery through a network of owned and franchised stores, and in Q4 FY2026 Titan completed the purchase of a 67% stake in Damas, a GCC jewellery retailer. Total stores reached 3,758 at September 2026. The model is high-turnover but capital-heavy in working capital terms: Titan must hold large gold and diamond inventories (inventory days ~220), funded partly by borrowings and customer gold-exchange schemes, while capex is only ~1% of revenue. Revenue has grown from ₹28,799 cr in FY2022 to ₹87,584 cr in FY2026 (+32% CAGR), helped by market-share gains from unorganised jewellers, a higher gold price, and the Damas consolidation. Q2 FY2027 (Sep 2026 quarter) was reported on Nov 5, 2026: statutory revenue ₹20,614 cr (+10.1% YoY; Titan's ex-bullion total income ₹20,533 cr, +25%), operating profit ₹2,983 cr, and net profit ₹2,393 cr (+114%). Most of that profit jump is not operating: it includes a ₹536 cr customs-duty inventory gain and a ₹671 cr non-cash gain from remeasuring the Damas minority put option; the company's adjusted PAT was ₹1,722 cr (+54%) and a third-party estimate of fully normalised growth is ~16%. The share trades at ~61x GAAP trailing earnings (~68x excluding the put-option gain), below its own FY2022-26 year-end average of ~84x but far above most large-cap peers on this site.
+  </div>
+
+  <div class="callout">
+    <b>Three distortions to keep in mind:</b> (1) <b>Gold price &amp; bullion</b> &mdash; gold is the main input; statutory revenue includes bullion/digi-gold sales (about ₹2,300 cr in Q2 FY2026 vs very little in Q2 FY2027), so statutory growth is lumpy and not like-for-like; Titan's ex-bullion figures are shown separately where used. (2) <b>Customs duty</b> &mdash; the government's gold duty increase gave Titan inventory gains of ₹407 cr (Q1) and ₹536 cr (Q2 FY2027), which lifted margins; management did not guarantee they persist, and a duty cut would reverse the benefit. (3) <b>Damas &amp; put-option accounting</b> &mdash; Damas is consolidated from Q4 FY2026 (international jewellery revenue +105% YoY in Q2 FY2027); the ₹671 cr put-option credit is non-cash and non-operating.
+  </div>
+
+  <div class="bignum-corner">TITAN</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2022&ndash;FY2026 (years ended March 31), ₹ crore, consolidated statutory figures via Screener.in (Titan's annual reports are the primary source). EBIT is derived (operating profit less depreciation); FCF = operating cash flow less capex as computed by Screener.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (₹ crore)</div>
+    <div class="chart-sub">Axis in ₹ crore, true relative size. Revenue includes bullion sales and the Damas consolidation in Q4 FY2026. FCF is volatile and gold-inventory-driven: negative in FY2022 and FY2025, ₹4,713 cr in FY2026.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (derived)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+<svg viewBox="0 0 860 290" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="185.0" x2="840" y2="185.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="189.0" text-anchor="end" font-size="11" fill="#64748b">25,000</text>
+<line x1="60" y1="130.0" x2="840" y2="130.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="134.0" text-anchor="end" font-size="11" fill="#64748b">50,000</text>
+<line x1="60" y1="75.0" x2="840" y2="75.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="79.0" text-anchor="end" font-size="11" fill="#64748b">75,000</text>
+<line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">100,000</text>
+<line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+<rect x="85" y="176.6" width="30" height="63.4" rx="2" fill="#2dd4bf"/>
+<text x="100" y="171.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">28,799</text>
+<rect x="123" y="233.5" width="30" height="6.5" rx="2" fill="#60a5fa"/>
+<text x="138" y="228.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">2,945</text>
+<rect x="161" y="240" width="30" height="2.1" rx="2" fill="#fbbf24"/>
+<text x="176" y="254.1" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-940</text>
+<text x="138" y="282" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="241" y="150.7" width="30" height="89.3" rx="2" fill="#2dd4bf"/>
+<text x="256" y="145.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">40,575</text>
+<rect x="279" y="230.2" width="30" height="9.8" rx="2" fill="#60a5fa"/>
+<text x="294" y="225.2" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,441</text>
+<rect x="317" y="237.9" width="30" height="2.1" rx="2" fill="#fbbf24"/>
+<text x="332" y="232.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">950</text>
+<text x="294" y="282" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="397" y="127.6" width="30" height="112.4" rx="2" fill="#2dd4bf"/>
+<text x="412" y="122.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">51,084</text>
+<rect x="435" y="229.6" width="30" height="10.4" rx="2" fill="#60a5fa"/>
+<text x="450" y="224.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4,708</text>
+<rect x="473" y="237.7" width="30" height="2.3" rx="2" fill="#fbbf24"/>
+<text x="488" y="232.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">1,024</text>
+<text x="450" y="282" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="553" y="107.0" width="30" height="133.0" rx="2" fill="#2dd4bf"/>
+<text x="568" y="102.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">60,456</text>
+<rect x="591" y="229.0" width="30" height="11.0" rx="2" fill="#60a5fa"/>
+<text x="606" y="224.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">5,001</text>
+<rect x="629" y="240" width="30" height="2.2" rx="2" fill="#fbbf24"/>
+<text x="644" y="254.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-1,011</text>
+<text x="606" y="282" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="709" y="47.3" width="30" height="192.7" rx="2" fill="#2dd4bf"/>
+<text x="724" y="42.3" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">87,584</text>
+<rect x="747" y="223.4" width="30" height="16.6" rx="2" fill="#60a5fa"/>
+<text x="762" y="218.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">7,531</text>
+<rect x="785" y="229.6" width="30" height="10.4" rx="2" fill="#fbbf24"/>
+<text x="800" y="224.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">4,713</text>
+<text x="762" y="282" text-anchor="middle" font-size="11" fill="#f8fafc">FY2026</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+32.1%</div>
+      <div class="sub">₹28,799 cr &rarr; ₹87,584 cr &mdash; FY2026 alone +44.9% (gold price, Damas, bullion)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+26.5%</div>
+      <div class="sub">₹2,945 cr &rarr; ₹7,531 cr &mdash; derived; FY2026 includes inventory/duty effects</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">FY2022 FCF was &minus;₹940 cr (negative base); FY2026 FCF ₹4,713 cr</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross &amp; EBIT Margin Trend &mdash; % of statutory revenue</div>
+    <div class="chart-sub">Gross margin (blue) = revenue less material cost (purchases, materials and inventory change) over revenue; EBIT margin (green) is derived. Gross margin slipped from 28.4% to 27.7% as low-margin gold/bullion mix grew; EBIT margin fell from 10.9% (FY2023) to 8.3% (FY2025) and recovered to 8.6%.</div>
+<svg viewBox="0 0 700 107">
+<line x1="30" y1="90" x2="690" y2="90" stroke="#263049" stroke-width="1"/>
+<line x1="30" y1="51.0" x2="690" y2="51.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="54.0" font-size="7.5" fill="#64748b">20%</text>
+<line x1="30" y1="12.0" x2="690" y2="12.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="15.0" font-size="7.5" fill="#64748b">40%</text>
+<text x="8" y="93" font-size="7.5" fill="#64748b">0%</text>
+<polyline points="60,34.9 205,34.6 350,36.0 495,36.1 640,36.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="34.9" r="3.2" fill="#60a5fa"/><text x="60" y="27.9" text-anchor="middle" font-size="8" fill="#cbd5e1">28.3%</text>
+<circle cx="205" cy="34.6" r="3.2" fill="#60a5fa"/><text x="205" y="27.6" text-anchor="middle" font-size="8" fill="#cbd5e1">28.4%</text>
+<circle cx="350" cy="36.0" r="3.2" fill="#60a5fa"/><text x="350" y="29.0" text-anchor="middle" font-size="8" fill="#cbd5e1">27.7%</text>
+<circle cx="495" cy="36.1" r="3.2" fill="#60a5fa"/><text x="495" y="29.1" text-anchor="middle" font-size="8" fill="#cbd5e1">27.6%</text>
+<circle cx="640" cy="36.1" r="3.2" fill="#60a5fa"/><text x="640" y="29.1" text-anchor="middle" font-size="8" fill="#cbd5e1">27.6%</text>
+<polyline points="60,70.1 205,68.7 350,72.0 495,73.9 640,73.2" fill="none" stroke="#34d399" stroke-width="2.2"/>
+<circle cx="60" cy="70.1" r="3.2" fill="#34d399"/><text x="60" y="63.1" text-anchor="middle" font-size="8" fill="#cbd5e1">10.2%</text>
+<circle cx="205" cy="68.7" r="3.2" fill="#34d399"/><text x="205" y="61.7" text-anchor="middle" font-size="8" fill="#cbd5e1">10.9%</text>
+<circle cx="350" cy="72.0" r="3.2" fill="#34d399"/><text x="350" y="65.0" text-anchor="middle" font-size="8" fill="#cbd5e1">9.2%</text>
+<circle cx="495" cy="73.9" r="3.2" fill="#34d399"/><text x="495" y="66.9" text-anchor="middle" font-size="8" fill="#cbd5e1">8.3%</text>
+<circle cx="640" cy="73.2" r="3.2" fill="#34d399"/><text x="640" y="66.2" text-anchor="middle" font-size="8" fill="#cbd5e1">8.6%</text>
+<text x="60" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">FY2022</text>
+<text x="205" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">FY2023</text>
+<text x="350" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">FY2024</text>
+<text x="495" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">FY2025</text>
+<text x="640" y="102" text-anchor="middle" font-size="8" fill="#94a3b8">FY2026</text>
+</svg>
+  </div>
+
+<table class="datatable"><tr><th>FY (₹ crore)</th><th>Revenue</th><th>EBIT (derived)</th><th>EBIT margin</th><th>Gross margin</th><th>Net income</th><th>EPS (₹)</th><th>FCF</th><th>Capex</th><th>DPS (₹)</th></tr>
+<tr><td>FY2022 (Mar'22)</td><td>28,799</td><td>2,945</td><td>10.2%</td><td>28.3%</td><td>2,198</td><td>24.48</td><td>-940</td><td>216</td><td>7.5</td></tr>
+<tr><td>FY2023 (Mar'23)</td><td>40,575</td><td>4,441</td><td>10.9%</td><td>28.4%</td><td>3,274</td><td>36.61</td><td>950</td><td>420</td><td>10</td></tr>
+<tr><td>FY2024 (Mar'24)</td><td>51,084</td><td>4,708</td><td>9.2%</td><td>27.7%</td><td>3,496</td><td>39.38</td><td>1,024</td><td>671</td><td>11</td></tr>
+<tr><td>FY2025 (Mar'25)</td><td>60,456</td><td>5,001</td><td>8.3%</td><td>27.6%</td><td>3,337</td><td>37.59</td><td>-1,011</td><td>470</td><td>11</td></tr>
+<tr><td>FY2026 (Mar'26)</td><td>87,584</td><td>7,531</td><td>8.6%</td><td>27.6%</td><td>5,073</td><td>57.14</td><td>4,713</td><td>877</td><td>15</td></tr>
+<tr><td>TTM (Sep'26)</td><td>94,306</td><td>9,552</td><td>10.1%</td><td>30.3%</td><td>7,033</td><td>79.22</td><td>N/A</td><td>N/A</td><td>&mdash;</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:6px;">EBIT = operating profit (Screener, excludes other income) less depreciation; it is not Titan's reported segment EBIT (company-basis FY2026 EBIT ₹8,082 cr, 10.6% margin on ex-bullion income per a third-party summary). Net income FY2026 ₹5,073 cr. DPS for FY2022-25 is approximated from Screener's dividend-payout ratio; FY2026 ₹15 is the board's recommendation. Capex is derived as operating cash flow minus Screener's free cash flow. TTM EBIT, gross margin and EPS combine reported quarters; TTM includes the ₹671 cr put-option gain and duty gains. Gross margin for FY2022-26 uses Screener's material-cost line; Damas is consolidated only from Q4 FY2026.</div>
+  <div class="footer-note">Source: Screener.in (consolidated P&amp;L, balance sheet, cash flow and material-cost schedule as of Nov 2026); Titan Company FY26 results release (May 2026). All figures INR.</div>
+</div>
+
+<!-- ============ PAGE 3 — QUARTERLY TREND ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q2 FY2027, Sep 2026)</div></div>
+  <div class="sec-sub">Eight quarters from Q3 FY2025 (Dec 2024) to Q2 FY2027 (Sep 30, 2026), statutory consolidated, ₹ crore. Q2 FY2027 was reported on Nov 5, 2026. Q3 is the festive/wedding quarter, so sequential comparisons are seasonal.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Reported net profit more than doubled to ₹2,393 cr (statutory), but about ₹1,200 cr of the year-on-year jump is non-operating: a ₹671 cr non-cash credit on the Damas put option and a ₹536 cr customs-duty inventory gain. Titan's adjusted PAT was ₹1,722 cr (+54%), and a third-party estimate of fully normalised growth is ~16%. Titan's ex-bullion total income was ₹20,533 cr (+25%); jewellery grew 24% to ₹17,495 cr (India +21%, CaratLane +31%, international +105% with Damas), watches +27% to ₹1,881 cr at a 21.9% EBIT margin, EyeCare +28%. India jewellery EBIT margin was 13.1% reported but 10.7% excluding the duty gain, consistent with management's ~11% &ldquo;centre of gravity&rdquo;. Jewellery revenue fell ~6.7% sequentially as the festive season shifted into Q3, and the Oct 6 business update had already shown growth below some analyst forecasts. The weak spot was cash: third-party analysis shows H1 FY2027 operating cash flow of about &minus;₹11,177 cr on an ~₹8,065 cr inventory build, funded partly by a newly approved ₹2,500 cr NCD programme.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 8 Quarters (₹ crore, statutory)</div>
+    <div class="chart-sub">Includes bullion and digi-gold sales (Q2 FY2026 bullion ~₹2,300 cr, far less in FY2027), so the YoY slowdown to +10.1% in Q2 FY2027 is partly a bullion base effect; Titan's ex-bullion growth was +25%. Q4 FY2026 includes Damas for the first time.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, ₹ crore</span></div>
+<svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22" y="69.8" width="60" height="60.2" fill="#2dd4bf"/><text x="52.0" y="64.8" text-anchor="middle" font-size="9" fill="#cbd5e1">17,740</text><text x="52.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="105" y="79.4" width="60" height="50.6" fill="#2dd4bf"/><text x="135.0" y="74.4" text-anchor="middle" font-size="9" fill="#cbd5e1">14,916</text><text x="135.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="188" y="73.9" width="60" height="56.1" fill="#2dd4bf"/><text x="218.0" y="68.9" text-anchor="middle" font-size="9" fill="#cbd5e1">16,523</text><text x="218.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="271" y="66.5" width="60" height="63.5" fill="#2dd4bf"/><text x="301.0" y="61.5" text-anchor="middle" font-size="9" fill="#cbd5e1">18,725</text><text x="301.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="354" y="43.8" width="60" height="86.2" fill="#2dd4bf"/><text x="384.0" y="38.8" text-anchor="middle" font-size="9" fill="#cbd5e1">25,416</text><text x="384.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="437" y="38.7" width="60" height="91.3" fill="#2dd4bf"/><text x="467.0" y="33.7" text-anchor="middle" font-size="9" fill="#cbd5e1">26,920</text><text x="467.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="520" y="57.5" width="60" height="72.5" fill="#2dd4bf"/><text x="550.0" y="52.5" text-anchor="middle" font-size="9" fill="#cbd5e1">21,356</text><text x="550.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="603" y="60.1" width="60" height="69.9" fill="#2dd4bf"/><text x="633.0" y="55.1" text-anchor="middle" font-size="9" fill="#cbd5e1">20,614</text><text x="633.0" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operating Profit &amp; Net Profit &mdash; Last 8 Quarters (₹ crore)</div>
+    <div class="chart-sub">Operating profit excludes other income. Q4 FY2026 operating margin dipped to 7.2% on high gold prices and bullion mix; Q1&ndash;Q2 FY2027 margins of 13.5% and 14.5% include customs-duty inventory gains (₹407 cr and ₹536 cr). Q2 FY2027 net profit also includes the ₹671 cr put-option credit.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating profit</span><span><span class="dot" style="background:#2dd4bf;"></span>Net profit</span></div>
+<svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="22" y="80.3" width="28" height="49.7" fill="#60a5fa"/><text x="36" y="75.3" text-anchor="middle" font-size="8" fill="#cbd5e1">1,674</text>
+<rect x="53" y="98.9" width="28" height="31.1" fill="#2dd4bf"/><text x="67" y="93.9" text-anchor="middle" font-size="8" fill="#cbd5e1">1,047</text>
+<text x="52" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY25</text>
+<rect x="105" y="84.4" width="28" height="45.6" fill="#60a5fa"/><text x="119" y="79.4" text-anchor="middle" font-size="8" fill="#cbd5e1">1,537</text>
+<rect x="136" y="104.1" width="28" height="25.9" fill="#2dd4bf"/><text x="150" y="99.1" text-anchor="middle" font-size="8" fill="#cbd5e1">871</text>
+<text x="135" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="188" y="75.7" width="28" height="54.3" fill="#60a5fa"/><text x="202" y="70.7" text-anchor="middle" font-size="8" fill="#cbd5e1">1,830</text>
+<rect x="219" y="97.6" width="28" height="32.4" fill="#2dd4bf"/><text x="233" y="92.6" text-anchor="middle" font-size="8" fill="#cbd5e1">1,091</text>
+<text x="218" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="271" y="74.3" width="28" height="55.7" fill="#60a5fa"/><text x="285" y="69.3" text-anchor="middle" font-size="8" fill="#cbd5e1">1,875</text>
+<rect x="302" y="96.8" width="28" height="33.2" fill="#2dd4bf"/><text x="316" y="91.8" text-anchor="middle" font-size="8" fill="#cbd5e1">1,120</text>
+<text x="301" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="354" y="49.5" width="28" height="80.5" fill="#60a5fa"/><text x="368" y="44.5" text-anchor="middle" font-size="8" fill="#cbd5e1">2,713</text>
+<rect x="385" y="80.0" width="28" height="50.0" fill="#2dd4bf"/><text x="399" y="75.0" text-anchor="middle" font-size="8" fill="#cbd5e1">1,684</text>
+<text x="384" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="437" y="72.5" width="28" height="57.5" fill="#60a5fa"/><text x="451" y="67.5" text-anchor="middle" font-size="8" fill="#cbd5e1">1,938</text>
+<rect x="468" y="95.0" width="28" height="35.0" fill="#2dd4bf"/><text x="482" y="90.0" text-anchor="middle" font-size="8" fill="#cbd5e1">1,179</text>
+<text x="467" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="520" y="44.2" width="28" height="85.8" fill="#60a5fa"/><text x="534" y="39.2" text-anchor="middle" font-size="8" fill="#cbd5e1">2,890</text>
+<rect x="551" y="77.2" width="28" height="52.8" fill="#2dd4bf"/><text x="565" y="72.2" text-anchor="middle" font-size="8" fill="#cbd5e1">1,777</text>
+<text x="550" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="603" y="41.4" width="28" height="88.6" fill="#60a5fa"/><text x="617" y="36.4" text-anchor="middle" font-size="8" fill="#cbd5e1">2,983</text>
+<rect x="634" y="59.0" width="28" height="71.0" fill="#2dd4bf"/><text x="648" y="54.0" text-anchor="middle" font-size="8" fill="#cbd5e1">2,393</text>
+<text x="633" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+
+<table class="datatable" style="font-size:11px;"><tr><th>₹ crore</th><th>Q3 FY25</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th><th>Q2 FY27</th></tr>
+<tr><td>Revenue (statutory)</td><td>17,740</td><td>14,916</td><td>16,523</td><td>18,725</td><td>25,416</td><td>26,920</td><td>21,356</td><td>20,614</td></tr>
+<tr><td>YoY growth</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>+43.3%</td><td>+80.5%</td><td>+29.3%</td><td>+10.1%</td></tr>
+<tr><td>Operating profit</td><td>1,674</td><td>1,537</td><td>1,830</td><td>1,875</td><td>2,713</td><td>1,938</td><td>2,890</td><td>2,983</td></tr>
+<tr><td>Op. margin</td><td>9.4%</td><td>10.3%</td><td>11.1%</td><td>10.0%</td><td>10.7%</td><td>7.2%</td><td>13.5%</td><td>14.5%</td></tr>
+<tr><td>Gross margin</td><td>26.7%</td><td>29.2%</td><td>30.7%</td><td>29.4%</td><td>27.7%</td><td>24.5%</td><td>35.8%</td><td>35.4%</td></tr>
+<tr><td>Profit before tax</td><td>1,396</td><td>1,218</td><td>1,480</td><td>1,522</td><td>2,223</td><td>1,577</td><td>2,429</td><td>3,000</td></tr>
+<tr><td>Net profit</td><td>1,047</td><td>871</td><td>1,091</td><td>1,120</td><td>1,684</td><td>1,179</td><td>1,777</td><td>2,393</td></tr>
+<tr><td>EPS (₹)</td><td>11.79</td><td>9.81</td><td>12.29</td><td>12.62</td><td>18.97</td><td>13.28</td><td>20.02</td><td>26.95</td></tr>
+</table>
+  <div class="footer-note" style="margin-top:4px;">Q4 FY2026 revenue +80.5% YoY statutory (Titan's ex-bullion total income +46%). Gross margin = 1 &minus; material cost/revenue; it jumped to ~35% in Q1&ndash;Q2 FY2027 as bullion sales fell and duty gains were booked. Q2 FY2027 company-reported: total income ₹20,533 cr, PBT ₹2,329 cr (adjusted, ex-put-option gain; ₹1,793 cr excluding duty gain), adjusted PAT ₹1,722 cr; statutory PBT ₹3,000 cr and PAT ₹2,393 cr (EPS ₹26.95) are shown above.</div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Management guidance &amp; context:</b> jewellery revenue growth of 15&ndash;20% CAGR over a 3&ndash;5-year horizon; India jewellery EBIT margin around 11% (not assured at current coin/plain-gold mix); positive international EBIT for FY2027 (Q2: +₹20 cr, Damas core loss ₹24 cr, narrowed from ₹67 cr). Titan will cycle high bases of 40%, 45% and 38% jewellery growth in the Dec, Mar and Jun quarters (Nomura). No formal numeric profit guidance is issued.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Segments (Q2 FY2027):</b> Jewellery ₹17,495 cr, EBIT ₹2,300 cr (13.1%); Watches ₹1,881 cr, EBIT ₹412 cr (21.9%); EyeCare ₹281 cr, EBIT ₹23 cr (8.2%); emerging businesses ₹171 cr, loss ₹6 cr; TEAL ₹36 cr. CaratLane margin 9.8% reported, ~6.6% excluding duty gain (third-party). Prior-year comparatives are not shown because company growth rates are ex-bullion.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Valuation uses GAAP trailing P/E: March fiscal-year-end close divided by that fiscal year's reported EPS, versus today's price over trailing-12-month EPS. Titan has long traded at a high multiple, so the comparison is with its own history, not with other companies.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Trailing P/E (GAAP EPS) &mdash; FY-End (March) vs. Current</div>
+    <div class="chart-sub">Current P/E (~61.2x = ₹4,844.90 / TTM EPS ₹79.22) is 73% of the FY2022-26 average (~83.9x). TTM EPS includes the ₹671 cr non-cash put-option gain; excluding it, P/E is ~67.6x (81% of average). March year-end closes (₹2,536, ₹2,515, ₹3,802, ₹3,063, ₹3,951) are from StockPriceArchive; EPS ₹24.48, 36.61, 39.38, 37.59, 57.14 from Screener.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Trailing P/E (March year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Trailing P/E (current)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY22-26 average</span>
+    </div>
+<svg viewBox="0 0 700 140"><line x1="10" y1="110" x2="690" y2="110" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="35.4" width="70" height="74.6" fill="#60a5fa"/><text x="65" y="30.4" text-anchor="middle" font-size="9" fill="#cbd5e1">103.6x</text><text x="65" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="135" y="60.5" width="70" height="49.5" fill="#60a5fa"/><text x="170" y="55.5" text-anchor="middle" font-size="9" fill="#cbd5e1">68.7x</text><text x="170" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="240" y="40.5" width="70" height="69.5" fill="#60a5fa"/><text x="275" y="35.5" text-anchor="middle" font-size="9" fill="#cbd5e1">96.5x</text><text x="275" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="345" y="51.3" width="70" height="58.7" fill="#60a5fa"/><text x="380" y="46.3" text-anchor="middle" font-size="9" fill="#cbd5e1">81.5x</text><text x="380" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="450" y="60.2" width="70" height="49.8" fill="#60a5fa"/><text x="485" y="55.2" text-anchor="middle" font-size="9" fill="#cbd5e1">69.2x</text><text x="485" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="555" y="66.0" width="70" height="44.0" fill="#2dd4bf"/><text x="590" y="61.0" text-anchor="middle" font-size="9" fill="#cbd5e1">61.2x</text><text x="590" y="123" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+<line x1="10" y1="49.6" x2="690" y2="49.6" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="45.6" text-anchor="end" font-size="9" fill="#fbbf24">FY22-26 avg 83.9x</text>
+</svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Forward P/E &amp; PEG:</b> a reliable forward consensus EPS was not found, so forward P/E and PEG are shown as <b>N/A</b> rather than estimated. For context, Nomura (Oct 2026) expects FY2027 consolidated sales/EBIT growth of ~19%/23%; Titan's own jewellery growth guidance is 15&ndash;20% a year. The scorecard uses the trailing figure (ratio 0.73 = 4/5). The brokerage consensus target of ₹5,423 (Business Today, Oct 7, 2026, before Q2 results) implies roughly +12% from ₹4,844.90; individual targets cited: Nomura ₹5,425, Morgan Stanley ₹5,483, HSBC ₹5,510, Citi ₹5,700, MOFSL ₹6,000. These are third-party views, not recommendations.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (₹ crore) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex is derived (operating cash flow less Screener's free cash flow) and has been 0.8&ndash;1.3% of revenue every year. The real capital sink is inventory (inventory days 222 at March 2026; borrowings rose to ₹27.6k cr by Sep 2026 from ₹9.6k cr of financial debt a year earlier per one third-party summary).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (₹ crore, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+<svg viewBox="0 0 700 183"><line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="144.9" width="60" height="15.1" fill="#60a5fa"/><text x="60" y="139.9" text-anchor="middle" font-size="8" fill="#cbd5e1">216</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="170" y="130.6" width="60" height="29.4" fill="#60a5fa"/><text x="200" y="125.6" text-anchor="middle" font-size="8" fill="#cbd5e1">420</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="310" y="113.0" width="60" height="47.0" fill="#60a5fa"/><text x="340" y="108.0" text-anchor="middle" font-size="8" fill="#cbd5e1">671</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="450" y="127.1" width="60" height="32.9" fill="#60a5fa"/><text x="480" y="122.1" text-anchor="middle" font-size="8" fill="#cbd5e1">470</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="590" y="98.6" width="60" height="61.4" fill="#60a5fa"/><text x="620" y="93.6" text-anchor="middle" font-size="8" fill="#cbd5e1">877</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<polyline points="60,109.0 200,101.0 340,93.2 480,108.2 620,102.0" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="109.0" r="3" fill="#fbbf24"/><text x="60" y="100.0" text-anchor="middle" font-size="7.5" fill="#fde68a">0.75%</text>
+<circle cx="200" cy="101.0" r="3" fill="#fbbf24"/><text x="200" y="92.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.04%</text>
+<circle cx="340" cy="93.2" r="3" fill="#fbbf24"/><text x="340" y="84.2" text-anchor="middle" font-size="7.5" fill="#fde68a">1.31%</text>
+<circle cx="480" cy="108.2" r="3" fill="#fbbf24"/><text x="480" y="99.2" text-anchor="middle" font-size="7.5" fill="#fde68a">0.78%</text>
+<circle cx="620" cy="102.0" r="3" fill="#fbbf24"/><text x="620" y="93.0" text-anchor="middle" font-size="7.5" fill="#fde68a">1.00%</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership Structure (Sep 2026)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="166.2 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="51.4 314.16" stroke-dashoffset="-166.2" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="45.3 314.16" stroke-dashoffset="-217.6" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#475569" stroke-width="18" stroke-dasharray="51.2 314.16" stroke-dashoffset="-262.9" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">52.9%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Promoter group 52.90% (Tata Group ~25% incl. Tata Sons ~21%; TIDCO ~28%)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Foreign institutions (FPIs) 16.37%</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Domestic institutions 14.42%</div>
+          <div><span class="dot" style="background:#475569;"></span>Public &amp; other 16.31% (incl. Rekha Jhunjhunwala ~5.3% at Jun 2026)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Dividends</div>
+      <p>Equity capital has been ₹89 cr (₹1 face value, ~88.8 crore shares) throughout FY2022-26: no buybacks, no dilution. The board recommended a ₹15 per share dividend for FY2026 (~26% payout; yield ~0.3% at the current price). Promoter holding has been exactly 52.90% for the whole period.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; honest caveats:</b> Titan has no individual founder block. The promoter group is the Tata Group (with Tata Sons the largest) and TIDCO, the Tamil Nadu state development corporation, which together hold a controlling 52.9%; management (MD Ajoy Chawla) holds little. The scorecard treats this as a controlling, aligned stake but it is institutional, not founder-led. The Q2 FY2027 filing also announced the retirement of Noel Tata from the Board.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet &amp; cash flow:</b> Screener shows borrowings of ₹27,638 cr and investments of ₹2,672 cr at Sep 2026 (Mar 2026: ₹30,621 cr and ₹3,506 cr), against equity of about ₹18.3k cr; third-party summaries put financial borrowings at ₹24,265 cr and debt-to-equity at 1.51x versus 0.93x at March 2026, so definitions differ and the leverage figure here (~2.4x net debt/EBITDA) should be read as an approximate, conservative estimate. Titan fully redeemed ₹1,000 cr and ₹850 cr of commercial paper in November 2026, and has approved a ₹2,500 cr NCD programme to fund the festive inventory build. H1 FY2027 operating cash flow was negative (third-party figure), which makes FY2026's 63% FCF conversion a high-water mark rather than a trend.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. Growth CAGRs are 4-year (FY2022-26, March year-ends) on statutory consolidated figures. Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). FCF CAGR (#4) is N/A because the FY2022 base is negative. Criterion #14 compares FY2026 gross margin with FY2023's.</div>
+
+<table class="datatable criteria-table"><tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Titan Company</th><th>Status</th></tr>
+<tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+32.1% &mdash; ₹28,799 cr &rarr; ₹87,584 cr statutory (FY22 Mar'22 &rarr; FY26 Mar'26). Includes bullion/digi-gold sales and, from Q4 FY26, the consolidated Damas business; company-basis FY26 total income ex-bullion was ₹76,078 cr (+33%) (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+26.5% &mdash; derived EBIT (operating profit less depreciation) ₹2,945 cr &rarr; ₹7,531 cr; FY26 includes gold-price and customs-duty inventory effects (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>8.6% (FY26, derived on statutory revenue incl. bullion); company reports a ~10.6% EBIT margin on ex-bullion income. Structurally low: jewellery is a thin-margin, gold-pass-through business (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>N/A &mdash; FY2022 FCF was negative (&minus;₹940 cr), so a CAGR is mathematically undefined. FCF is lumpy with gold inventory: &minus;940 / 950 / 1,024 / &minus;1,011 / 4,713 (₹ cr). Excluded from the index denominator; scoring it 0/5 instead would give 63/100</td><td><span class="status-pill status-na">N/A</span></td></tr>
+<tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear #1 in Indian branded/organised jewellery (Tanishq, Mia, Zoya, CaratLane) and #1 in Indian analog watches. Total jewellery market is still majority unorganised, so a verified all-market share % is not shown (score 5/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; Indian jewellery retail is highly fragmented (family jewellers, regional chains and rivals such as Kalyan, Malabar, Joyalukkas, Senco); organised share is rising but Titan's share of the total market is a minority (score 1/5, judgment)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+<tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>Own estimate: NOPAT ₹5,648 cr (derived EBIT &times; 75%) on invested capital ~₹42.8k cr (equity + borrowings &minus; investments, Mar'26) = ~13.2% vs WACC assumed ~11.5% (INR cost of capital, estimate): spread ~+1.7pp. Screener ROCE 20.5% (pre-tax) is a different measure. No third-party ROIC/WACC found (score 1/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>~2.4x (Sep'26): borrowings ₹27,638 cr less investments ₹2,672 cr = ~₹24,966 cr over TTM operating profit ₹10,524 cr. Cash balances not separately sourced (so net debt is overstated), borrowings include leases and working-capital/gold funding and peaked for the festive build; third-party financial-debt figures differ (~₹24,265 cr). TTM EBITDA includes duty gains (score 2/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>62.6% (FY26: FCF ₹4,713 cr / EBIT ₹7,531 cr). Five-year path &minus;32% / 21% / 22% / &minus;22% / 63%; H1 FY27 operating cash flow was negative (third-party: about &minus;₹11,177 cr) on an inventory build, so the FY26 figure is likely a high-water mark (score 3/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+<tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>GAAP trailing P/E 61.2x (₹4,844.90 / TTM EPS ₹79.22) vs FY22-26 March-year-end average 83.9x = ratio 0.73. Excluding the ₹671 cr non-cash put-option gain, P/E is ~68x (ratio 0.81); both land in the 0.70-0.85 band (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>~88.8 crore shares (equity capital ₹89 cr at ₹1 face value) unchanged across FY22-26: roughly flat (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Promoter group 52.90%: Tata Group ~25% (Tata Sons ~21%) and Tamil Nadu Industrial Development Corp (TIDCO) ~28%. Institutional/state promoters rather than individual founders, but a controlling, aligned block >30% (score 5/5, judgment)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>~1.0% of revenue in FY26 (₹877 cr, derived as operating cash flow less FCF per Screener); 0.8-1.3% every year FY22-26. Inventory, not capex, is the capital sink (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+<tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Gross margin 28.41% (FY23) &rarr; 27.65% (FY26), -0.77pp. Basis: gross margin = (revenue less material cost incl. purchases and inventory change) / revenue, derived from Screener. Mix shifts (coins/plain gold, Damas) and duty gains blur the trend; EBIT margin moved 10.9% &rarr; 8.6% (score 3/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+</table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; (105 &minus; N/A weights) &times; 100):</b> #1 5&times;13=13.0 &middot; #2 5&times;11=11.0 &middot; #3 2&times;10=4.0 &middot; #5 5&times;7=7.0 &middot; #6 1&times;6=1.2 &middot; #7 1&times;10=2.0 &middot; #8 2&times;6=2.4 &middot; #9 3&times;8=4.8 &middot; #10 4&times;8=6.4 &middot; #11 3&times;4=2.4 &middot; #12 5&times;5=5.0 &middot; #13 5&times;4=4.0 &middot; #14 3&times;5=3.0 (each = points/5 &times; weight; #4 FCF CAGR N/A, weight 8 removed). Total 66.2 / 97 = <b>68/100</b>. Criteria met: <b>9/14</b> on the binary thresholds (4 not met, 1 N/A). <b>Judgment calls:</b> #5, #6 and #12 are qualitative; #7 is an own estimate (ROIC ~13.2% vs assumed WACC ~11.5%) and sits close to the line; #8 net debt is approximate; #14 uses gross margin derived from Screener's material-cost line; #4 N/A is a choice: scoring it 0/5 would lower the index to 63.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Titan has grown revenue ~32% a year for four years and EBIT ~26% a year, while share count is flat and capex is ~1% of revenue. It is the clear leader in Indian branded jewellery and watches, trusted brands and the Tata name help it take share from unorganised jewellers, and the store network reached 3,758 at Sep 2026. Q2 FY2027 showed broad growth (jewellery +24% ex-bullion, watches +27% with a 21.9% EBIT margin, EyeCare +28%), international is now positive at the EBIT line, and ROIC appears to be above the cost of capital. A controlling Tata/TIDCO owner provides stability, gross margin has held within about 1pp over three years, and the trailing P/E is below Titan's own five-year average.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The headline profit jump in Q2 FY2027 is mostly one-offs (₹536 cr duty gain, ₹671 cr put-option credit); normalised growth was ~16%, and a customs-duty cut would reverse the tailwind. EBIT margin is only ~8.6% on statutory revenue and jewellery margins are structurally thin. Cash conversion is weak: H1 FY2027 operating cash flow was negative, borrowings are up sharply and net debt/EBITDA is ~2.4x. The stock is still ~61x GAAP trailing earnings, so it needs 15&ndash;20% compounding to hold up. Growth faces very high bases in the Dec, Mar and Jun quarters, gold-price volatility affects demand and inventory, Damas is still loss-making at the core, and the market is fragmented. Not verified: all-market share %, forward consensus EPS, cash balances, and third-party ROIC/WACC.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Screener.in (consolidated P&amp;L, quarterly results, balance sheet, cash flow, shareholding, material-cost schedules); Titan Company FY26 results release (titancompany.in, May 2026); Titan Q2 FY2027 press release via Kotak Neo (Nov 6, 2026) and Cofacto/CompoundingAI Q2 FY27 analysis (Nov 5, 2026; third-party, includes H1 cash-flow and debt-to-equity figures); Business Today (Oct 7, 2026; brokerage targets); StockPriceArchive.com (year-end and March closes); Finology/Investing.com (Nov 13 close) and 5paisa (Nov 12 close and 52-week range). Year-end share prices are approximate aggregator data; ROIC/WACC, EBIT, gross margin, capex, net debt and DPS are own derivations from reported data and flagged as estimates. FY ends March 31. All figures INR. Price as of Nov 13, 2026 close; prepared Nov 17, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Titan Company Ltd &mdash; INR share price on the NSE. A steady re-rating through 2022-23, a 2024 pullback on slower jewellery growth and margin pressure, then a rally through 2025 and 2026 as gold-driven jewellery growth and the festive base lifted sentiment.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Titan Company &mdash; Year-End Close (NSE, calendar year-ends, approximate), INR</div>
+    <div class="chart-sub">Calendar year-end closing prices Dec 2021&ndash;Dec 2025 plus the Nov 13, 2026 close (latest verified), from StockPriceArchive.com (NSE data); treat as approximate rather than archived exchange quotes. These are calendar year-ends, not Titan's March fiscal year-ends, and are unadjusted (no splits or bonus issues in the period). The dashed line is the straight-line annualised price CAGR Dec 2021 to Now (computed over 5 years, though the true span is ~4.9 years), excluding dividends (₹15/share, ~0.3% yield). The 52-week range is ₹3,751 &ndash; 5,187.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,153.5 L 172.8,149.7 L 299.6,95.1 L 426.4,116.5 L 553.2,76.1 L 680.0,35.9 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="153.5" x2="680.0" y2="35.9" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="116.7" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21→Now): +13.9%*</text>
+<path d="M 46.0,153.5 L 172.8,149.7 L 299.6,95.1 L 426.4,116.5 L 553.2,76.1 L 680.0,35.9" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="153.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="141.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₹2,522.40</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 2021</text>
+<circle cx="172.8" cy="149.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="137.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₹2,597.50</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 2022</text>
+<circle cx="299.6" cy="95.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="83.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₹3,675.45</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 2023</text>
+<circle cx="426.4" cy="116.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="104.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₹3,253.15</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 2024</text>
+<circle cx="553.2" cy="76.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="64.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">₹4,051.50</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Dec 2025</text>
+<circle cx="680.0" cy="35.9" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="23.9" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">₹4,844.90</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *Price CAGR excludes dividends and starts from a Dec 2021 close already ~61% above Jan 2021, so it reflects a re-rated multiple more than the earnings path (EPS rose from ₹24.5 to ₹57.1 over FY2022-26). FY ends March 31; chart points are calendar year-ends. Currency: INR throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brilliant Earth Group, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/brilliant-earth.html">
+<meta property="og:title" content="Brilliant Earth Group, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brilliant Earth Group, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Brilliant Earth Group, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: BRLT</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: San Francisco, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Listed Sep 2021 (IPO at $20) &mdash; Short History; FY2025 GAAP Loss; ~94% Below IPO Price</div>
+  </div>
+
+  <div class="price">$1.16</div>
+  <div class="price-sub">Nov 16, 2026 Nasdaq close (latest verified quote) &middot; Market cap &asymp; $118M on 102.1M shares + exchangeable LLC units (public Class A float only ~17.3M shares, &asymp; $20M) &middot; 52-wk range $1.00 &ndash; $2.22 (intraday) &middot; 1-yr price change &asymp; -41% (vs $1.97 on Nov 17, 2025) &middot; Beta 1.42 &middot; Analyst consensus: Hold (5 analysts), avg PT $1.59 (+37%; StockAnalysis/S&amp;P, last refreshed before Q3 results, may be stale) &middot; Q3 2026 reported Nov 5, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> a direct-to-consumer, omnichannel ethically-sourced diamond and fine-jewellery brand with 43 US showrooms, founded 2005. Small against a very fragmented market (see Section 4), so market share and concentration are scored low.</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency, structure &amp; history note:</b> all figures are in US dollars. Brilliant Earth is an &ldquo;Up-C&rdquo;: the public company (Class A) owns only a minority of Brilliant Earth, LLC; the founders (Class C) and Mainsail (Class B) hold the rest as exchangeable LLC units, so consolidated net income is split with a large non-controlling interest and Class A EPS is not comparable year to year. &ldquo;Operating income / EBIT&rdquo; is GAAP; &ldquo;Adjusted EBITDA&rdquo; is the company's non-GAAP measure and is labelled as such. <b>Limited listing history:</b> the IPO was on Sep 23, 2021, so the price chart and the own-history valuation criterion (#10) cover well under five full years and #10 is marked N/A.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$437.5M</div>
+      <div class="sub green" style="color:#fbbf24;">+3.6% YoY &mdash; low growth</div>
+      <div class="note">FY2024 was -5.4%. 4-yr CAGR FY2021-25 is only +3.6%. Q3 2026 net sales $112.8M (+2.3% YoY); FY2026 guided to +2.75% to +4%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP)</div>
+      <div class="val" style="color:#f87171;">-1.23%</div>
+      <div class="sub">FY2025, down from 10.55% in FY2021</div>
+      <div class="note">Gross margin is healthy (57.5%) but marketing and G&amp;A absorb it. Q3 2026 GAAP operating income was +$1.9M (1.7% margin); 9M 2026 is -$6.5M.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">-19.8% vs ~9.5%</div>
+      <div class="sub">TTM, third-party (S&amp;P Global)</div>
+      <div class="note">Negative because operating income is below zero. Equity and invested capital are small (book equity about $74M), so the ratio is noisy.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">$76.2M cash, no borrowings (Sep 30, 2026)</div>
+      <div class="note">Excludes $42.7M of operating-lease liabilities. TTM EBITDA is about zero, so a ratio is not meaningful; the balance sheet is the strength.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">27/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">A debt-free, founder-controlled, asset-light brand with improving gross margin, but near-zero growth, GAAP losses and a tiny share of a fragmented market. 13 of 14 criteria scored; #10 is N/A.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="112.2 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="179.5 314.16" stroke-dashoffset="-112.2" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-291.7" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">5/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>5 criteria fully met</b> &mdash; net cash balance sheet, share count (roughly flat), founder ownership (~48% of units, 90% of votes), capex intensity (~1% of sales) and gross-margin stability (+4.2pp over 3 years)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>8 not met</b> &mdash; revenue CAGR, EBIT CAGR, EBIT margin, FCF CAGR, market share, market concentration (fragmented), ROIC vs WACC and FCF conversion</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>1 N/A</b> &mdash; entry multiple vs own history (GAAP loss and only ~5 years of listing history since the Sep 2021 IPO)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Brilliant Earth Group, Inc. designs and sells ethically sourced diamond engagement rings, wedding and anniversary bands and fine jewellery, directly to consumers through its website and, increasingly, through showrooms (43 in the US). It was founded in 2005 by Beth Gerstein (CEO) and Eric Grossberg (Executive Chairman), who still control about 90% of the votes through Class C shares, and it listed on Nasdaq on Sep 23, 2021 at $20; the stock closed at $1.16 on Nov 16, 2026. The model is asset-light: made-to-order inventory, leased showrooms and capex of about 1% of sales, with no borrowings and $76.2M of cash. The record, though, is a company whose gross margin has improved (49.3% in FY2021 to 57.5% in FY2025) while everything below it has deteriorated: revenue growth slowed to +3.6% in FY2025 after a -5.4% year, operating income went from +$40.1M in FY2021 to -$5.4M in FY2025, and FCF fell from $40.5M to $5.8M. 2026 so far is a mixed recovery: net sales grew +6.0%, +5.7% and +2.3% in Q1-Q3 and fine jewellery reached 16% of Q3 bookings, but operating income is still -$6.5M for the nine months. Q3 2026 beat the company's own guidance (net sales $112.8M, adjusted EBITDA $5.1M, gross margin 59.7%, up 210bps), yet the shares have fallen about 24% from the Nov 4 close ($1.53) to Nov 16 ($1.16). Read the low valuation with care: market cap is about $118M on a fully-exchanged basis, so small absolute dollars of profit move the picture a lot.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Short history</b> &mdash; listed since Sep 2021, so the &ldquo;5-year&rdquo; windows here are FY2021-25 (4 years of growth) and the own-history multiple (#10) is N/A. (2) <b>Up-C structure</b> &mdash; most of the equity and profit belongs to the founders and Mainsail via LLC units; the consolidated net loss attributable to public Class A holders differs from the group figure, and the public float is small and thinly traded. (3) <b>Non-GAAP vs GAAP</b> &mdash; the company's adjusted EBITDA ($13-15M guided for FY2026) excludes stock compensation and other items; GAAP operating income is lower and was negative for FY2025 and the first nine months of 2026.
+  </div>
+
+  <div class="bignum-corner">BRLT</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (calendar years), USD millions. Revenue is net sales; operating income is GAAP; Free Cash Flow = operating cash flow minus capex. FY2021 is the IPO year (listed Sep 2021), so FY2021 is the first public-company year.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (USD M)</div>
+    <div class="chart-sub">Revenue grew +15.7% in FY2022 and then stalled (+1.5%, -5.4%, +3.6%); GAAP operating income (EBIT) fell every year, to a loss in FY2025; FCF has been positive throughout but shrank from the FY2021 peak.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240.0" x2="840" y2="240.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="244.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="196.0" x2="840" y2="196.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="200.0" text-anchor="end" font-size="11" fill="#64748b">$100M</text>
+    <line x1="60" y1="152.0" x2="840" y2="152.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="156.0" text-anchor="end" font-size="11" fill="#64748b">$200M</text>
+    <line x1="60" y1="108.0" x2="840" y2="108.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="112.0" text-anchor="end" font-size="11" fill="#64748b">$300M</text>
+    <line x1="60" y1="64.0" x2="840" y2="64.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="68.0" text-anchor="end" font-size="11" fill="#64748b">$400M</text>
+    <line x1="60" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="24.0" text-anchor="end" font-size="11" fill="#64748b">$500M</text>
+    <line x1="60" y1="240" x2="840" y2="240" stroke="#475569" stroke-width="1.3"/>
+    <rect x="85.0" y="72.7" width="30" height="167.3" rx="2" fill="#2dd4bf"/>
+    <text x="100.0" y="67.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">380.2</text>
+    <rect x="123.0" y="222.3" width="30" height="17.7" rx="2" fill="#60a5fa"/>
+    <text x="138.0" y="217.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">40.1</text>
+    <rect x="161.0" y="222.2" width="30" height="17.8" rx="2" fill="#fbbf24"/>
+    <text x="176.0" y="217.2" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">40.5</text>
+    <text x="138.0" y="268" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+    <rect x="241.0" y="46.5" width="30" height="193.5" rx="2" fill="#2dd4bf"/>
+    <text x="256.0" y="41.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">439.9</text>
+    <rect x="279.0" y="229.7" width="30" height="10.3" rx="2" fill="#60a5fa"/>
+    <text x="294.0" y="224.7" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">23.3</text>
+    <rect x="317.0" y="237.6" width="30" height="2.4" rx="2" fill="#fbbf24"/>
+    <text x="332.0" y="232.6" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5.4</text>
+    <text x="294.0" y="268" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+    <rect x="397.0" y="43.6" width="30" height="196.4" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="38.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">446.4</text>
+    <rect x="435.0" y="238.0" width="30" height="2.0" rx="2" fill="#60a5fa"/>
+    <text x="450.0" y="233.0" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">4.5</text>
+    <rect x="473.0" y="233.7" width="30" height="6.3" rx="2" fill="#fbbf24"/>
+    <text x="488.0" y="228.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">14.3</text>
+    <text x="450.0" y="268" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+    <rect x="553.0" y="54.2" width="30" height="185.8" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="49.2" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">422.2</text>
+    <rect x="591.0" y="238.5" width="30" height="1.5" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="233.5" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">3.4</text>
+    <rect x="629.0" y="234.4" width="30" height="5.6" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="229.4" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">12.7</text>
+    <text x="606.0" y="268" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+    <rect x="709.0" y="47.5" width="30" height="192.5" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="42.5" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">437.5</text>
+    <rect x="747.0" y="240" width="30" height="2.4" rx="1" fill="#60a5fa"/>
+    <text x="762.0" y="255.4" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-5.4</text>
+    <rect x="785.0" y="237.5" width="30" height="2.5" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="232.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">5.8</text>
+    <text x="762.0" y="268" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">+3.6%</div>
+      <div class="sub">$380.2M &rarr; $437.5M &mdash; most of the growth came in FY2022</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT (FY21 &rarr; FY25)</div>
+      <div class="val" style="color:#f87171;">Sign flip</div>
+      <div class="sub">$40.1M &rarr; -$5.4M &mdash; CAGR undefined; scored as a decline</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (4yr, FY21-25)</div>
+      <div class="val" style="color:#f87171;">-38.6%</div>
+      <div class="sub">$40.5M &rarr; $5.8M &mdash; FY2021 included a working-capital tailwind</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin vs Operating (EBIT) Margin &mdash; FY2021-FY2025</div>
+    <div class="chart-sub">Gross margin (teal) rose about 8pp from FY2021 to FY2025 on mix, pricing and sourcing, but operating margin (amber) fell from 10.6% to -1.2% because marketing, showroom and G&amp;A costs grew far faster than sales (SG&amp;A $147M &rarr; $257M).</div>
+    <svg viewBox="0 0 700 140">
+      <line x1="30" y1="107.9" x2="690" y2="107.9" stroke="#263049" stroke-width="1"/><text x="4" y="110.9" font-size="7.5" fill="#64748b">0%</text>
+      <line x1="30" y1="65.0" x2="690" y2="65.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="4" y="68.0" font-size="7.5" fill="#64748b">30%</text>
+      <line x1="30" y1="22.1" x2="690" y2="22.1" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="4" y="25.1" font-size="7.5" fill="#64748b">60%</text>
+      <polyline points="60,37.4 205,31.8 350,25.6 495,21.8 640,25.7" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+      <polyline points="60,92.8 205,100.3 350,106.4 495,106.7 640,109.6" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <circle cx="60" cy="37.4" r="3.2" fill="#2dd4bf"/><text x="60" y="30.4" text-anchor="middle" font-size="8" fill="#cbd5e1">49.3%</text>
+      <circle cx="60" cy="92.8" r="3.2" fill="#fbbf24"/><text x="60" y="85.8" text-anchor="middle" font-size="8" fill="#fde68a">10.6%</text>
+      <text x="60" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+      <circle cx="205" cy="31.8" r="3.2" fill="#2dd4bf"/><text x="205" y="24.8" text-anchor="middle" font-size="8" fill="#cbd5e1">53.3%</text>
+      <circle cx="205" cy="100.3" r="3.2" fill="#fbbf24"/><text x="205" y="93.3" text-anchor="middle" font-size="8" fill="#fde68a">5.3%</text>
+      <text x="205" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+      <circle cx="350" cy="25.6" r="3.2" fill="#2dd4bf"/><text x="350" y="18.6" text-anchor="middle" font-size="8" fill="#cbd5e1">57.6%</text>
+      <circle cx="350" cy="106.4" r="3.2" fill="#fbbf24"/><text x="350" y="99.4" text-anchor="middle" font-size="8" fill="#fde68a">1.0%</text>
+      <text x="350" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+      <circle cx="495" cy="21.8" r="3.2" fill="#2dd4bf"/><text x="495" y="14.8" text-anchor="middle" font-size="8" fill="#cbd5e1">60.3%</text>
+      <circle cx="495" cy="106.7" r="3.2" fill="#fbbf24"/><text x="495" y="99.7" text-anchor="middle" font-size="8" fill="#fde68a">0.8%</text>
+      <text x="495" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+      <circle cx="640" cy="25.7" r="3.2" fill="#2dd4bf"/><text x="640" y="18.7" text-anchor="middle" font-size="8" fill="#cbd5e1">57.5%</text>
+      <circle cx="640" cy="109.6" r="3.2" fill="#fbbf24"/><text x="640" y="102.6" text-anchor="middle" font-size="8" fill="#fde68a">-1.2%</text>
+      <text x="640" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue</th><th>Gross margin</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income (consol.)</th><th>EPS (Class A)</th><th>Free Cash Flow</th><th>Capex</th><th>Cash*</th></tr>
+    <tr><td>FY2021</td><td>380.2</td><td>49.3%</td><td>40.1</td><td>10.6%</td><td>26.3</td><td>$0.10</td><td>40.5</td><td>5.6</td><td>172.9</td></tr>
+    <tr><td>FY2022</td><td>439.9</td><td>53.3%</td><td>23.3</td><td>5.3%</td><td>19.0</td><td>$0.15</td><td>5.4</td><td>9.1</td><td>154.7</td></tr>
+    <tr><td>FY2023</td><td>446.4</td><td>57.6%</td><td>4.5</td><td>1.0%</td><td>4.7</td><td>$0.04</td><td>14.3</td><td>11.9</td><td>155.8</td></tr>
+    <tr><td>FY2024</td><td>422.2</td><td>60.3%</td><td>3.4</td><td>0.8%</td><td>4.0</td><td>$0.03</td><td>12.7</td><td>4.9</td><td>161.9</td></tr>
+    <tr><td>FY2025</td><td>437.5</td><td>57.5%</td><td>-5.4</td><td>-1.2%</td><td>-6.4</td><td>$-0.25</td><td>5.8</td><td>4.0</td><td>79.1</td></tr>
+    <tr><td>TTM (Sep'26)</td><td>451.8</td><td>57.0%</td><td>-6.5</td><td>-1.4%</td><td>-6.6</td><td>n/m</td><td>n/a</td><td>n/a</td><td>76.2</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Net Income (consol.) is before the non-controlling interest (attributable to Class A holders: FY2021-24 +$1.5M, +$2.1M, +$0.6M, +$0.5M; FY2025 -$3.6M). EPS is GAAP diluted EPS on Class A shares only, so it is not comparable across years. Dividend per share: none paid. *Cash and investments; FY2021-24 also carried a term loan (total debt incl. leases $63.6M, $95.1M, $100.2M, $97.7M); by FY2025 total debt of $38.1M was operating leases only, so net cash excluding leases equals the cash shown. TTM revenue, gross margin, operating income and net income are sums of the four reported quarters Q4 2025-Q3 2026 (S&amp;P Global quarterly data, unaudited); TTM FCF/capex not computed.</div>
+  <div class="footer-note">Source: Brilliant Earth Group 10-K filings and quarterly releases as standardised by StockAnalysis.com (S&amp;P Global Market Intelligence); company Q3 2026 earnings release (SEC 8-K, Nov 5, 2026). FY2021-24 figures are third-party standardised and may differ slightly from company-reported rounding.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q3 2026)</div></div>
+  <div class="sec-sub">Reported on Nov 5, 2026. Eight quarters shown (Q4 2024 to Q3 2026) so the 2024 trough and the 2025-26 recovery are both visible.</div>
+
+  <div class="headline-box">
+    <div class="title">What moved the stock</div>
+    <p>Q3 2026 was a beat on the company's own guidance: net sales $112.8M (+2.3% YoY, above guidance), gross margin 59.7% (+210bps YoY), GAAP net income $2.4M against a $0.7M loss a year earlier and adjusted EBITDA $5.1M (guided $3-5M). Orders grew 5.6% but average order value fell 3.1% to $2,140. Even so, the shares closed at $1.53 on Nov 4, $1.47 on Nov 5 and $1.16 on Nov 16 (-24% from Nov 4). I did not verify the cause; third-party commentary pointed to the full-year net sales growth guide of +2.75% to +4%, which it read as a trim, with the unchanged $13-15M adjusted EBITDA target now leaning on gross margin rather than sales. Arithmetic on the guide (an estimate, not company guidance): nine-month sales were $327.4M, so the range implies Q4 net sales of roughly $122M to $128M versus $124.4M a year earlier, i.e. about -2% to +3%, and Q4 adjusted EBITDA of roughly $7M to $9M after $6.2M for the nine months. Q4 is the seasonally strongest quarter.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Sales &mdash; Last 8 Quarters (USD M)</div>
+    <div class="chart-sub">YoY: Q4'24 -3.9%, Q1'25 -3.6%, Q2'25 +3.3%, Q3'25 +10.4%, Q4'25 +4.1%, Q1'26 +6.0%, Q2'26 +5.7%, Q3'26 +2.3%. Q3'25 was the strongest comparison; Q3'26 growth slowed against it. Seasonality is pronounced (Q4 highest, Q1 lowest).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly net sales, USD M</span></div>
+    {q_rev_chart()}
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters (USD M)</div>
+    <div class="chart-sub">Operating income has been near break-even to negative in every quarter shown except Q4'24, Q2'26 and Q3'26; Q1 is seasonally the weakest (-$8.9M in Q1'26, which included a $1.8M IT write-off per the company). Q3'26 (+$1.9M) is the best quarter since Q4'24.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income (USD M)</span><span><span class="dot" style="background:#f87171;"></span>Operating loss</span></div>
+    {q_op_chart()}
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Net sales (USD m)</td>{"".join(f"<td>{v:,.1f}</td>" for v in qrev)}</tr>
+    <tr><td>YoY growth</td>{"".join(f"<td>{v:+.1f}%</td>" for v in qyoy)}</tr>
+    <tr><td>Gross margin</td>{"".join(f"<td>{v:.1f}%</td>" for v in qgm)}</tr>
+    <tr><td>Operating income (GAAP)</td>{"".join(f"<td>{v:,.1f}</td>" for v in qop)}</tr>
+    <tr><td>Free cash flow (derived)</td>{"".join(f"<td>{v:,.1f}</td>" for v in qfcf)}</tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures from S&amp;P Global data via StockAnalysis (Q3 2026 and Q3 2025 cross-checked to the company release). Q3'25 free cash flow is shown as 0.0 (reported as roughly zero by the data provider).</div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Metric (USD)</th><th>Q3 2025</th><th>Q3 2026</th><th>Change</th></tr>
+    <tr><td>Net sales</td><td>$110.3M</td><td>$112.8M</td><td>+2.3%</td></tr>
+    <tr><td>Total orders / AOV</td><td>49,910 / $2,209</td><td>52,720 / $2,140</td><td>+5.6% / -3.1%</td></tr>
+    <tr><td>Gross profit (margin)</td><td>$63.5M (57.6%)</td><td>$67.4M (59.7%)</td><td>+6.2% / +210bps</td></tr>
+    <tr><td>Operating income (GAAP)</td><td>-$0.6M</td><td>+$1.9M</td><td>swing to profit</td></tr>
+    <tr><td>Net income, consolidated (GAAP)</td><td>-$0.7M</td><td>+$2.4M</td><td>swing to profit</td></tr>
+    <tr><td>Adjusted EBITDA (non-GAAP)</td><td>$3.6M (3.2%)</td><td>$5.1M (4.5%)</td><td>+43.7%</td></tr>
+    <tr><td>Adjusted diluted EPS (non-GAAP)</td><td>$0.02</td><td>$0.03</td><td>+50%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, as of Nov 5, 2026):</b> net sales growth +2.75% to +4% (about $449M-455M on FY2025's $437.5M) and adjusted EBITDA $13-15M (non-GAAP). Assumes tariffs and metal prices as of Nov 3, 2026. Nine-month 2026: net sales $327.4M (+4.6%), adjusted EBITDA $6.2M (-20.9%).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Strategy signals:</b> fine jewellery reached 16% of Q3 bookings (beyond bridal heritage), the highest-ever quarter of wedding and anniversary band bookings, new collaborations (Elizabeth Taylor estate, Jane Goodall) and 43 showrooms including a first flagship in Beverly Hills. These are management statements, not yet visible as profit growth.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">GAAP trailing P/E is not usable: Brilliant Earth has a GAAP loss (FY2025 EPS -$0.25; TTM EPS -$0.29), and year-end GAAP P/Es (113x, 22x, 78x, 53x) rested on near-zero earnings. The chart therefore shows the forward P/E on non-GAAP adjusted EPS, a third-party figure, for context only.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Forward P/E (Non-GAAP Adjusted EPS) &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">FY2021-25 values are forward P/Es at each year-end per StockAnalysis (S&amp;P Global consensus); FY2021's 71.8x reflects the IPO-year price on tiny forward earnings. *Current 13.2x is my estimate: $1.16 divided by the ~$0.088 forward EPS implied by StockAnalysis's 17.2x reading on Oct 22 at $1.51; consensus has probably moved since Q3 results. Average of the five year-end points is {vavg:.1f}x ({vavg_ex:.1f}x excluding FY2021). Adjusted EPS excludes stock compensation, so it is well above GAAP EPS.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>Forward P/E (fiscal year-end)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Forward P/E (current, estimate)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY21-25 average</span>
+    </div>
+    {vsvg}
+  </div>
+
+  <div class="callout blue">
+    <b>Why criterion #10 is N/A:</b> a GAAP P/E needs positive earnings and a meaningful own-history average. Neither exists here: GAAP earnings are negative now (n/m), the only prior GAAP P/Es are four year-end readings on earnings of $0.5M-$2.1M, and the stock has been listed only since Sep 2021. For reference only, the forward-basis ratio would be ~13.2x / {vavg:.1f}x = ~{13.2/vavg:.2f} (or ~{13.2/vavg_ex:.2f} excluding the FY2021 outlier), but that is a non-GAAP, third-party measure and is <b>not</b> used in the score. Analyst consensus is Hold with an average target of $1.59 (5 analysts; pre-Q3 data, may be stale); consensus 2026 adjusted EPS was about $0.07 as of August.
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (USD M) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Asset-light is verified: capex was 0.9%-2.7% of revenue every year (the FY2023 peak of $11.9M funded showroom openings). Operating-lease liabilities ($42.7M at Sep 30, 2026) are additional.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (USD M, bars)</span><span><span class="dot" style="background:#fbbf24;"></span>Capex / Revenue % (line)</span></div>
+    {capex_chart()}
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership (economic interest, shares + LLC units)</div>
+      <div class="ownership-row">
+        {own_svg}
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Founders via Just Rocks, Inc. (Gerstein / Grossberg, Class C) &asymp; {fo:.0f}% of units; 90.4% of votes</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>Mainsail Partners (Class B) &asymp; {ma:.0f}% of units; 5.9% of votes</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Other holders &asymp; {ot:.0f}% (Class A public float ~17.3M shares; Capital World Investors 5.7% of Class A)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Dilution</div>
+      <p>About 102.1M shares and exchangeable units at Sep 30, 2026 (17.27M Class A, 35.74M Class B, 49.12M Class C), versus ~97M in FY2021 and 100.5M at Dec 2025. Class A rises as LLC units are exchanged and equity awards vest; stock-based compensation was $4.0M in the first nine months of 2026 (down from $7.0M). No buyback or dividend programme is in place.</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; control:</b> per the Apr 27, 2026 proxy (share counts as of Apr 22, 2026), Beth Gerstein and Eric Grossberg jointly own and control Just Rocks, Inc., which holds all 49.1M Class C shares (ten votes each): 90.4% of combined voting power. They are also CEO and Executive Chairman, each on a $600,000 base salary. Mainsail GP III holds 31.9M Class B shares (89% of Class B, 5.9% of votes; its partner Gavin Turner is a director). The Just Rocks holding rests on a 2023 Schedule 13G/A and the Mainsail figure on a May 2025 filing, so current exact stakes may differ slightly. This control means public Class A holders have little say, which cuts both ways for alignment.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet (Sep 30, 2026):</b> cash $76.2M (Dec 2025: $79.1M), inventory $50.3M, total assets $196.9M, total liabilities $122.8M (of which operating-lease liabilities $42.7M, deferred revenue $24.1M), total equity $74.2M (of which $61.6M is the non-controlling interest). No borrowings: the term loan was extinguished in Q3 2025, with a $0.6M loss on extinguishment. Cash fell by about $83M in FY2025 as the debt was repaid.
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. <b>Criterion #10 is N/A because of the short listing history</b> (IPO Sep 2021) and negative GAAP earnings; it is excluded from the Martinero denominator. Market concentration (#6) is scored 1&ndash;5 (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are 4-year (FY2021-25). Criterion #14 compares FY2025 gross margin with FY2022's (three fiscal years).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Brilliant Earth</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>+3.6% &mdash; $380.2M &rarr; $437.5M; growth was +15.7% in FY2022, then +1.5%, -5.4% and +3.6% (score 1/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>Operating income fell from +$40.1M (FY2021) to a -$5.4M loss (FY2025); a CAGR is undefined across a sign flip, so it is scored as a decline rather than N/A (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>-1.23% (FY2025 GAAP), down from 10.55% in FY2021; TTM to Sep 2026 is about -1.4% (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY21-25)</td><td>&ge;15%</td><td>-38.6% &mdash; FCF (operating cash flow minus capex) $40.5M &rarr; $5.8M; FY2021 was boosted by working capital (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Not a top-5 jewellery retailer: $437M of sales against a US jewellery market in the tens of billions; Signet, Costco and others are far larger. A leading online / ethically-sourced bridal brand, but no verified top-5 share in the overall category (score 0/5, judgment)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; jewellery retail is highly fragmented (independents, chains, department stores, online); no verified top-N share figure (score 1/5, judgment)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC about -19.8% (TTM) vs WACC ~9.5% (S&amp;P Global via StockAnalysis, third-party estimates); negative spread because operating income is below zero (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: $76.2M cash at Sep 30, 2026 and no borrowings (term loan extinguished in Q3 2025). Operating-lease liabilities of $42.7M are excluded; including them still leaves ~$33M net cash. TTM EBITDA is about zero, so the ratio itself is not meaningful (score 5/5 on net cash)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>FY2025 FCF +$5.75M against EBIT of -$5.38M, so the ratio is negative / not meaningful; scored 0 rather than N/A so the loss is not hidden (earlier years on thin EBIT: 101%, 23%, 319%, 379%) (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; GAAP earnings are negative (no trailing P/E), and the company has only ~5 years of listing history since the Sep 2021 IPO (GAAP year-end P/Es: 113x, 22x, 78x, 53x, n/m) on near-zero earnings, so no meaningful own-history average exists. Forward P/E (non-GAAP, third-party) is shown for context only</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Total shares + exchangeable LLC units ~97M (FY2021 diluted) &rarr; 100.5M (Dec 2025) &rarr; 102.1M (Sep 2026): about +3.6% to FY2025, +5% now. Class A grew faster (~10M &rarr; 17.3M) only because LLC units are exchanged into Class A, not through new capital raising (score 3/5; FY2021 base is approximate)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Founders Beth Gerstein and Eric Grossberg control Just Rocks, Inc.: 49.1M Class C units &asymp; 48% of the economic interest and 90.4% of combined voting power (10 votes per Class C share; Apr 2026 proxy). Mainsail holds a further ~31% of the units (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>0.9% of revenue in FY2025 ($4.0M); 0.9%-2.7% across FY21-25. Showrooms are leased; inventory is largely made-to-order (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (net sales less cost of sales). FY2022 53.26% &rarr; FY2025 57.49% = +4.23pp (score 5/5). The opposite story at EBIT level: operating margin fell from 5.3% to -1.2% as marketing and G&amp;A grew faster than sales</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; (105 &minus; N/A weights) &times; 100):</b> #1 1&times;13/5=2.6 &middot; #2 0 &middot; #3 0 &middot; #4 0 &middot; #5 0 &middot; #6 1&times;6/5=1.2 &middot; #7 0 &middot; #8 5&times;6/5=6.0 &middot; #9 0 &middot; #10 N/A (weight 8 removed) &middot; #11 3&times;4/5=2.4 &middot; #12 5&times;5/5=5.0 &middot; #13 5&times;4/5=4.0 &middot; #14 5&times;5/5=5.0. Total 26.2 / 97 = <b>27/100</b>. Criteria met: 5/14 on the binary thresholds (1 N/A). <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share data); #7 uses third-party ROIC/WACC; #2 and #9 are scored 0 rather than N/A even though the underlying ratios are mathematically awkward (sign flip, negative EBIT), so the loss is not removed from the denominator; #11's FY2021 share base is approximate.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A clean, debt-free balance sheet ($76.2M cash, no borrowings) in a business that needs almost no capex (about 1% of sales). Gross margin has risen from 49.3% to 57.5% over four years and reached 59.7% in Q3 2026, and nine-month 2026 net sales are up 4.6%. Q3 2026 returned to GAAP operating profit (+$1.9M) and beat the company's own sales and adjusted EBITDA guidance. Fine jewellery (16% of Q3 bookings) and showrooms are diversifying the business beyond bridal. The founders still run the company and control about 90% of the votes, a strong alignment with the long-term brand even if it limits outside influence.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>Growth is low (revenue CAGR +3.6%, FY2026 guided to +2.75-4%) and operating income has fallen every year since FY2021, to GAAP losses in FY2025 and the first nine months of 2026; adjusted EBITDA is only $13-15M guided on about $450M of sales. SG&amp;A has outgrown gross profit for four years. Average order value fell 3.1% in Q3, tariffs and metal and diamond prices are cost risks, and lab-grown diamond price deflation affects the category. The shares are down about 94% from the IPO price and about 24% since the Q3 beat, on a thin float (~17M Class A shares) and an Up-C structure with a tax receivable agreement. Several inputs are third-party or approximate: ROIC/WACC, forward P/E, the FY2021 share base and the analyst target.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Brilliant Earth Group, Inc. Q3 2026 earnings release (Form 8-K, Nov 5, 2026); Form 10-K for FY2025; DEF 14A proxy statement filed Apr 27, 2026 (beneficial ownership); StockAnalysis.com (S&amp;P Global Market Intelligence: annual and quarterly financials, historical prices, ratios, ROIC/WACC, forward P/E, analyst targets); Google Finance. Prices: Nasdaq closes, Nov 16, 2026 latest. Third-party figures (ROIC/WACC, forward P/E, analyst target, FY2021-24 standardised financials) are flagged as such. All figures USD. Prepared Nov 17, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Brilliant Earth Group (Nasdaq: BRLT), USD. Listed Sep 23, 2021 at $20 (first close $17.12), so this chart starts at the first year-end after the IPO (Dec 31, 2021) rather than five full years of history: a steep fall through 2022, a slow drift lower in 2023-25 and a further slide in 2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Brilliant Earth Group &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">Unadjusted year-end closes (Dec 31, 2021; Dec 30, 2022; Dec 29, 2023; Dec 31, 2024; Dec 31, 2025) and the Nov 16, 2026 close, from StockAnalysis (S&amp;P Global). The dashed line is the annualised price change from the Dec 2021 point to now, shown on a 5-year convention (the actual span is about 4.9 years), excluding dividends (none paid). Intra-period highs and lows are not shown: the 52-week range is $1.00 &ndash; $2.22.</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,32.0 L 172.8,136.1 L 299.6,140.6 L 426.4,152.9 L 553.2,155.5 L 680.0,160.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="32.0" x2="680.0" y2="160.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="84.0" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&#8594;Now): -42.3%*</text>
+<path d="M 46.0,32.0 L 172.8,136.1 L 299.6,140.6 L 426.4,152.9 L 553.2,155.5 L 680.0,160.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="32.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="21.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$18.06</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="136.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="125.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$4.31</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="140.6" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="129.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$3.72</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="152.9" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="141.9" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$2.10</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="155.5" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="144.5" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$1.75</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="160.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="149.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$1.16</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts shortly after the IPO and ends near the 52-week low, so the negative CAGR reflects the whole de-rating of a recent IPO, not only the last year. Over FY2021-25 the business kept a roughly flat revenue base, lost operating profit and repaid its debt. The stock also rallied sharply in Aug 2025 (close $1.38 on Aug 6 to $2.92 on Aug 29) before giving it back. Currency: USD throughout. No stock splits.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
