@@ -3897,6 +3897,24 @@ const COMPANIES = [
     file: "companies/pandora.html"
   },
 
+  {
+    slug: "krystal-biotech",
+    name: "Krystal Biotech, Inc.",
+    ticker: "Nasdaq: KRYS",
+    sector: "Healthcare",
+    industry: "Biopharmaceuticals",
+    subIndustry: "Gene Therapy / Rare-Disease Biotech",
+    tags: ["Gene Therapy","Rare Disease","Single Product","Founder-Led","Net Cash"],
+    dateFeatured: "2026-11-18",
+    price: "$298.55",
+    score: "9 / 14",
+    martinero: 86,
+    momentum: { status: "decelerating", recent: 33.9, prior: 473.0 },
+    quarterYoY: { period: "Q3 2026", growth: 30.2 },
+    blurb: "Pittsburgh-based commercial-stage gene-therapy company whose only product, Vyjuvek, treats dystrophic epidermolysis bullosa and is rolling out in Europe and Japan. FY2025 revenue was $389.1M (+33.9%) with a ~94% gross margin, 41% GAAP operating margin and $1.2B of cash. The pipeline spans dermatology, eye, respiratory and inhaled oncology, and a $400M buyback was authorised in Nov 2026. Four criteria are N/A because of the short commercial history, so the index is not directly comparable with fully scored companies; single-product concentration is the main risk.",
+    file: "companies/krystal-biotech.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
