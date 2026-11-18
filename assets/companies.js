@@ -63,12 +63,12 @@ const COMPANIES = [
     subIndustry: "AI Compute / GPU Design",
     tags: ["Magnificent Seven", "Geopolitically Critical"],
     dateFeatured: "2026-08-13",
-    price: "$217.55",
+    price: "$155.46",
     score: "12 / 14",
     martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 65.5, prior: 114.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2027", growth: 106.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Dominant AI accelerator GPU supplier — data-center AI/GPU now ~90% of revenue, up from ~41% five years ago. Growth, margin, ROIC and valuation-vs-history all clear the bar; misses are FCF conversion and thin insider ownership.",
+    quarterYoY: { period: "Q3 FY2027", growth: 103.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Dominant AI accelerator supplier: Data Center is about 93% of revenue. Q3 FY2027 revenue was a record $115.8B (+103% YoY) at a 74.8% GAAP gross margin and a 66.9% GAAP operating margin, with Q4 guided to $130B. Founder-CEO Jensen Huang has left, CFO Colette Kress is interim CEO, and the shares fell about 28% from August into the print. The trailing P/E is now about 17x against a roughly 63x five-year average; the misses remain FCF conversion and thin insider ownership.",
     file: "companies/nvidia.html"
   },
 
