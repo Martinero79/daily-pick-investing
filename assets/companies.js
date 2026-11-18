@@ -854,12 +854,12 @@ const COMPANIES = [
     subIndustry: "China E-Commerce, Logistics & Retail (1P Model)",
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
-    price: "$28.74",
+    price: "$27.91",
     score: "7 / 14",
-    martinero: 55,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 12.9, prior: 6.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: -2.9 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "China's largest retailer by revenue, running a first-party logistics model that leaves it with thin margins but a genuinely enormous net cash position ($22.78B, more than half the market cap). The weak score here is largely self-inflicted: JD launched an aggressive push into food delivery in February 2025, directly challenging Meituan, and the resulting subsidy war cost JD three straight quarterly operating losses (Q2-Q4 2025) before a modest recovery in Q1-Q2 2026. Revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC and entry multiple all miss; market share, net debt/EBITDA, FCF conversion, share count trend, insider ownership and capex intensity all clear. Unlike the rest of this batch's China/SE Asia names, no criteria needed N/A treatment — FY2021 was already a thin profit and positive-FCF year for JD, so every growth rate is directly computable, including the very poor ones.",
+    quarterYoY: { period: "Q3 2026", growth: 3.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "China's largest retailer by revenue, running a first-party logistics model with thin margins but a very large net cash position (about $22.8B at the Q2 balance sheet, more than half the market cap). Q3 2026 revenue was ¥309.6B (+3.5% YoY, the first rise of 2026) with GAAP operating income of ¥5.15B (1.7% margin), the third straight profitable quarter after the Q2-Q4 2025 food-delivery losses, and the CECONOMY acquisition closed. It still misses revenue CAGR, EBIT CAGR, operating margin, FCF CAGR, market concentration, ROIC/WACC and entry multiple, while market share, net cash, FCF conversion, share count, insider ownership and capex all clear (7/14).",
     file: "companies/jd.html",
     personalNote: "JD is the batch's best example of a company hurting itself on purpose. Alibaba and PDD are both dealing with pressure that's largely external — tariffs, a subsidy war Alibaba got pulled into. JD actually started this one: it chose to go after Meituan's food-delivery business in February 2025, and three quarters of real operating losses followed. I don't think that makes it a bad decision necessarily — JD is reportedly aiming for 30% food-delivery share by 2026, and the last two quarters show a real return to profit — but it's a choice, not something that happened to them, and that changes how I read the weak scorecard. What keeps me interested despite the 44 is the balance sheet: $22.78B of net cash against a $38.63B market cap is about as clean a margin of safety as this framework finds anywhere, and buybacks have already cut share count by 13% since 2021. I'd also flag a real contradiction I can't resolve from here: one source puts JD clearly at #2 in China e-commerce by GMV, but PDD's own dashboard on this site claims Pinduoduo has already passed JD domestically. Both can't be fully right, and I'm not going to pretend I know which one is."
   },
@@ -1098,12 +1098,12 @@ const COMPANIES = [
     subIndustry: "Container Shipping",
     tags: ["Cyclical", "Dividend Payer"],
     dateFeatured: "2026-09-02",
-    price: "NT$234.50",
+    price: "NT$257.50",
     score: "4 / 14",
-    martinero: 31,                    // Martinero Index (weighted 1-100 score, see About)
+    martinero: 33,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -18.23, prior: 67.53 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 21.60, note: "Snapped four straight quarters of double-digit YoY revenue declines (Q2'25-Q1'26)." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Evergreen Marine is Taiwan's flagship container carrier and the anchor of the Ocean Alliance, ranking #7 globally by fleet capacity (~5.5% share) behind MSC, Maersk, CMA CGM, COSCO and Hapag-Lloyd. The company posted some of the highest EPS in the world during the 2021-2022 COVID-era freight-rate supercycle (net income peaked at NT$334.2B in FY2022) before earnings normalized sharply in FY2023 and partially rebounded in FY2024 on Red Sea rerouting disruption. The Chang family and Evergreen Group affiliated entities hold a combined stake of roughly 21%, and the balance sheet carries very little net leverage despite a recent swing from net cash to a small net-debt position. TWSE-listed only, with no actively-traded U.S. ADR.",
+    quarterYoY: { period: "Q3 2026", growth: 51.44 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Evergreen Marine is Taiwan's flagship container carrier and the anchor of the Ocean Alliance, ranking #7 globally by fleet capacity (~5.5% share). Q3 2026 revenue jumped 51.4% YoY to NT$146.8B and net income more than doubled to NT$46.6B (EPS NT$21.53), taking nine-month EPS past full-year 2025 as peak-season demand and port congestion tightened effective capacity. The Chang family and Evergreen Group entities hold roughly 21%, net leverage is still small, and the trailing P/E (~7x) sits about 16% above its post-supercycle average. TWSE-listed only, with no actively-traded U.S. ADR.",
     file: "companies/evergreen-marine.html"
   },
 
@@ -2022,11 +2022,11 @@ const COMPANIES = [
     subIndustry: "Luxury Goods & Fashion",
     tags: ["Founder-Controlled"],
     dateFeatured: "2026-09-26",
-    price: "CHF 171.40",
+    price: "CHF 172.95",
     score: "8 / 14",
     martinero: 62,
-    quarterYoY: { period: "Q1 FY2027 (Jun 2026)", growth: 17.0 },
-    blurb: "The Swiss luxury conglomerate behind Cartier and Van Cleef & Arpels — the standout jewelry performer in global luxury, with a net-cash balance sheet (~€8.5-9.1B) and a dual-class structure that gives the Rupert family only ~10% of economic ownership but ~50.6% of voting control. Jewellery Maisons have carried the group; the Watchmakers division has been weaker and more cyclical, and a one-off FY2023 divestment charge (YNAP/Net-a-Porter) distorts that year's P/E.",
+    quarterYoY: { period: "H1 FY2027 (Apr-Sep 2026)", growth: 15.7 },
+    blurb: "The Swiss luxury conglomerate behind Cartier and Van Cleef & Arpels, with a net-cash balance sheet (EUR 7.7B at Sep 2026) and a dual-class structure that gives the Rupert family ~10% of economic ownership but ~50.6% of voting control. H1 FY2027 (six months to 30 Sep 2026) sales were EUR 12.3B, up 16% reported and 17% at constant rates, with Q2 +13% cc. Jewellery Maisons rose 19% cc and Watchmakers 10% cc. Operating profit rose 33% to EUR 3.1B (EUR 2.9B excluding one-time tariff items), and a one-off FY2023 YNAP charge still distorts that year's P/E.",
     file: "companies/richemont.html"
   },
 
@@ -2836,7 +2836,7 @@ const COMPANIES = [
     martinero: 21,
     momentum: { status: "decelerating", recent: -16.1, prior: -10.9 },
     quarterYoY: { period: "Q1 2026", growth: -18.9 },
-    blurb: "Sleep Number made adjustable-firmness smart beds with SleepIQ sleep tracking, sold mostly through about 600 company-owned stores. Sales fell from $2.19B in FY2021 to $1.41B in FY2025, with negative equity and going-concern doubt. The company filed Chapter 11 on 12 June 2026, was delisted from Nasdaq and agreed to sell its assets; it says common shares are expected to receive no recovery.",
+    blurb: "Sleep Number made adjustable-firmness smart beds with SleepIQ sleep tracking, sold mostly through about 600 company-owned stores. Sales fell from $2.19B in FY2021 to $1.41B in FY2025, with negative equity and going-concern doubt. The company filed Chapter 11 on 12 June 2026 and was delisted from Nasdaq. Its asset sale to Sleep Country Canada is listed as closed on 31 July 2026, and it says common shares are expected to receive no recovery. No Q2 or Q3 2026 results have been published; Q1 2026 (-18.9% YoY) is the last reported quarter.",
     file: "companies/sleep-number.html"
   },
   {
