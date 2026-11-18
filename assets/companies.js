@@ -1332,10 +1332,10 @@ const COMPANIES = [
     subIndustry: "Oral Care, Personal/Home Care & Pet Nutrition",
     tags: ["FMCG", "Dividend King"],
     dateFeatured: "2026-09-07",
-    price: "$88.77",
+    price: "$97.94",
     score: "9 / 14",
     martinero: 64,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: 1.40, prior: 3.31 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    momentum: { status: "decelerating", recent: 1.4, prior: 3.31 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 4.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "Long-standing #1 in global toothpaste (41.3% value share, still gaining) with a stable ~20% operating margin, low leverage and 63 straight years of dividend growth — plus a genuine second growth leg in Hill's Pet Nutrition (~23% of sales, up nearly 60% in five years). Growth is mature and low-single-digit against this framework's 15% bars, insider ownership is essentially zero (0.13%), and the stock trades roughly 14% above its own 5-year average P/E.",
     file: "companies/colgate-palmolive.html"
@@ -1350,12 +1350,12 @@ const COMPANIES = [
     subIndustry: "Household Hygiene, Health & Consumer Nutrition (FMCG)",
     tags: ["FMCG"],
     dateFeatured: "2026-09-07",
-    price: "5,114.00p",
+    price: "5,702.00p",
     score: "8 / 14",
     martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "flat", recent: 1.79, prior: 1.5 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    momentum: { status: "steady", recent: 1.79, prior: 1.5 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 3.3 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "A profitable, cash-generative FMCG operator (24.11% operating margin, 19.7% ROIC, low 1.75x net debt/EBITDA, cheap-looking 11.5x trailing P/E) held back by low-single-digit growth, weak FCF conversion (51.4%), essentially zero insider ownership, and an unresolved Mead Johnson/Enfamil NEC baby-formula litigation overhang with mixed 2026 bellwether verdicts and no settlement in sight.",
+    blurb: "A profitable, cash-generative FMCG operator (24.11% operating margin, 19.7% ROIC, 1.75x net debt/EBITDA, cheap-looking trailing P/E) held back by low-single-digit growth, weak FCF conversion (51.4%) and essentially zero insider ownership. The Q3 2026 update showed Core like-for-like growth of 3.3% (Emerging Markets +8.0%, North America -1.3% on Lysol supply constraints), but full-year growth guidance was trimmed to 3.5-4.5%. The Mead Johnson/Enfamil NEC baby-formula litigation overhang remains unresolved.",
     file: "companies/reckitt-benckiser.html"
   },
 
@@ -1368,12 +1368,12 @@ const COMPANIES = [
     subIndustry: "Personal Care, Tissue & Consumer Paper Products",
     tags: ["FMCG"],
     dateFeatured: "2026-09-07",
-    price: "$104.96",
+    price: "$111.93",
     score: "6 / 14",
     martinero: 52,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -2.1, prior: -2.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026 (prelim)", growth: -0.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Huggies is a durable global #2 in diapers, ROIC comfortably clears both the 15% bar and assumed WACC, net debt/EBITDA sits under 2x, and the current P/E is modestly below Kimberly-Clark's own five-year average. But reported revenue, EBIT and free cash flow all show negative 5-year CAGRs (heavily distorted by shifting the international tissue business into a new Suzano joint venture, but still real on a reported basis), operating margin has never cleared the framework's 20% bar in this window, FCF conversion slipped back below 80%, insider ownership is negligible, and capex runs hotter than typical CPG peers. Layered on top: a pending $48.7B acquisition of Kenvue (Tylenol, Band-Aid, Listerine, Neutrogena), shareholder-approved but still awaiting final regulatory clearance and expected to close in H2 2026 — not reflected anywhere in these figures.",
+    quarterYoY: { period: "Q3 2026", growth: -0.4 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
+    blurb: "Huggies is a durable global #2 in diapers, ROIC clears both the 15% bar and WACC, and standalone net debt/EBITDA sat under 2x before the deal. But reported revenue, EBIT and FCF show negative 5-year CAGRs (distorted by the Suzano tissue JV), margins have not cleared 20%, FCF conversion is below 80%, insider ownership is negligible and capex is heavy. Q3 2026 net sales fell 0.4% with organic -1.3% (China disruption), and the $48.7B Kenvue acquisition closed on Nov 2, so the figures shown remain standalone.",
     file: "companies/kimberly-clark.html"
   },
 
@@ -1386,7 +1386,7 @@ const COMPANIES = [
     subIndustry: "Packaged Foods & Soft Drinks",
     tags: ["Duopoly"],
     dateFeatured: "2026-09-07",
-    price: "$137.63",
+    price: "$145.44",
     score: "7 / 14",
     martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 2.25, prior: 0.42 },  // revenue growth, most recent FY vs prior FY (non-scored)
@@ -1422,12 +1422,12 @@ const COMPANIES = [
     subIndustry: "Electric Vehicles & Energy Storage",
     tags: ["Magnificent Seven"],
     dateFeatured: "2026-09-05",
-    price: "$347.70",
+    price: "$390.22",
     score: "6 / 14",
     martinero: 47,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -3.0, prior: 0.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: -0.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Revenue has genuinely compounded at over 15% a year for four years, and Tesla still commands roughly half the US EV market. But nearly everything downstream of the top line has weakened: operating margin has fallen every year since its FY2022 peak, EBIT has shrunk on net, ROIC now sits well below Tesla's cost of capital, gross margin has compressed 7.6pp over three years on price cuts and mix shift, and the stock trades at close to double its own 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses EBIT growth, margin, FCF growth, market concentration, ROIC/WACC, valuation-vs-history, share count trend and margin stability.",
+    blurb: "Revenue has compounded at over 15% a year for four years and Tesla still commands roughly half the US EV market, but Q3 2026 revenue was flat year over year (-0.2%) and GAAP operating margin was just 2.6% as AI/robotaxi/Optimus spend surged. Operating margin has fallen every year since FY2022, ROIC sits below the cost of capital and the stock trades near double its 5-year average P/E. Clears growth, market share, net debt/EBITDA, FCF conversion, founder ownership and capex intensity; misses the other eight criteria.",
     file: "companies/tesla.html",
     personalNote: "Tesla is the one on this list where I have to separate the story I want to believe from what the numbers actually say right now. Revenue growth is real, and the US EV dominance is real — roughly half the market, more some months. But margins have fallen every year since 2022, ROIC is now below Tesla's own cost of capital, and the stock is priced at close to double its own five-year average multiple. That combination — declining profitability plus a rich valuation — is exactly the setup I try to be careful about. Q2 2026's operating margin dropping to 1.4% while AI/robotaxi/Optimus spending ramps is the clearest sign yet that this is a real bet on a future business, not a business that's already there. I'm not writing Tesla off — Musk still owns a large, aligned stake, and the balance sheet is clean — but I'd want to see margins stabilize before this becomes more than a watch."
   },
@@ -1441,12 +1441,12 @@ const COMPANIES = [
     subIndustry: "Household & Personal Products",
     tags: ["FMCG"],
     dateFeatured: "2026-09-07",
-    price: "£47.82",
+    price: "£49.23",
     score: "6 / 14",
     martinero: 54,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: -3.77, prior: 1.55 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 6.7 },  // latest reported period revenue YoY (non-scored, separate from annual trend)
-    blurb: "The Dove/Persil/OMO consumer-goods giant delivers exactly what you'd expect from a 95-year-old FMCG portfolio: genuinely strong, stable ROIC (15.9%-17.8%) and steadily improving margins (20.05% operating margin in FY2025, a first for this window), paired with reported revenue, EBIT and free cash flow that are all essentially flat to negative over five years. Clears operating margin, market share, ROIC/WACC, share count trend, capex intensity and margin stability; misses revenue/EBIT/FCF growth, market concentration, net debt/EBITDA, FCF conversion, entry multiple and insider/founder ownership.",
+    blurb: "The Dove/Persil/OMO consumer-goods giant has strong, stable ROIC (15.9%-17.8%) and steadily improving margins (20.05% operating margin in FY2025), but reported revenue, EBIT and free cash flow are flat to negative over five years. Q3 2026 turnover rose 6.7% reported (5.2% underlying, 2.9% volume), and the 2026 volume and margin outlook was upgraded. Clears operating margin, market share, ROIC/WACC, share count trend, capex intensity and margin stability; misses revenue/EBIT/FCF growth, market concentration, net debt/EBITDA, FCF conversion, entry multiple and insider/founder ownership.",
     file: "companies/unilever.html",
     personalNote: "Unilever was one of my first 'safe' blue-chip buys — the kind of stock you own because it's boring, not despite it. And for a long stretch it really was: revenue and earnings barely moved for years, the share price spent most of a decade going sideways, and the whole thesis came down to a dependable, ever-so-slightly-growing dividend rather than any real growth story. That's exactly what the numbers here confirm — five-year revenue and EBIT CAGRs that are basically flat to negative, even as the dividend kept showing up like clockwork. The ROIC is genuinely good and the balance sheet is fine, so this was never a bad business, just a slow one. Eventually the lack of any growth narrative wore me down and I sold to put the money somewhere with more of a story — the 2024-2025 margin turnaround and ice cream demerger came after I'd already moved on, which feels about right for how these things usually go."
   },
@@ -1460,11 +1460,11 @@ const COMPANIES = [
     subIndustry: "AI Accelerators / Wafer-Scale Compute",
     tags: ["IPO Exception", "AI", "Fabless"],
     dateFeatured: "2026-09-08",
-    price: "$210.43",
+    price: "$108.72",
     score: "3 / 14",
     martinero: 54,                    // Martinero Index (weighted 1-100 score, see About) — N/A criteria treated as neutral (effective score 3)
     quarterYoY: { period: "Q3 2026", growth: 55.0 },
-    blurb: "Wafer-scale AI-chip challenger to Nvidia that IPO'd in May 2026 at $185/share (opened at $350, closed day one up 68%, then fell ~10% the next day). Real multi-year revenue ($78.7M FY23 to $510.3M FY25) and a fortress post-IPO balance sheet (~$8.6B cash, minimal debt), but still GAAP loss-making at the operating line, extremely customer-concentrated (G42/UAE, now layering on a vendor-financed OpenAI deal), and under 4 months of public trading history — 7 of 14 scorecard criteria are marked N/A as a result, the same honest treatment as SpaceX.",
+    blurb: "Wafer-scale AI-chip challenger to Nvidia that IPO'd in May 2026 at $185/share. Q3 2026 revenue was $210.8M GAAP (+55% YoY) and $230.9M on the company's core basis (+70%). Cloud services are now 67% of revenue, and full-year 2026 guidance was raised to $940-960M. The stock closed at $108.72 on Nov 13, about 41% below the IPO price. Real revenue growth and a roughly $8.6B post-IPO cash pile sit against a GAAP operating loss, extreme customer concentration and under 6 months of trading history, so 7 of 14 criteria are N/A and the 54/100 Martinero Index is provisional.",
     file: "companies/cerebras.html"
   },
 
@@ -1477,12 +1477,12 @@ const COMPANIES = [
     subIndustry: "Streaming Video & Entertainment",
     tags: ["Streaming"],
     dateFeatured: "2026-09-09",
-    price: "$76.77",
+    price: "$62.15",
     score: "10 / 14",
     martinero: 85,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 15.85, prior: 15.65 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 11.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The largest streaming service globally by both revenue and subscribers — operating margin has expanded from 17.82% to 29.49% since FY2022, free cash flow went from essentially breakeven to $9.46B, and net debt/EBITDA has fallen to roughly 0.58x. But the share price hasn't tracked that improvement: Netflix's own 5-year CAGR is just +4.97%, blue-chip territory rather than a growth stock's return, even with EBIT more than doubling over the same stretch. Most of that gap is a ~43% pullback from Netflix's June 2025 high (split-adjusted following a 10-for-1 forward split in Nov 2025), which is also why the entry multiple now sits well below its own five-year average. Clears EBIT growth, operating margin, FCF growth, market share, ROIC/WACC, net debt/EBITDA, entry multiple, share count trend, capex intensity and margin stability; misses revenue growth, market concentration, FCF conversion and insider/founder ownership (down to 0.58% company-wide as co-founder Reed Hastings has steadily sold down his stake).",
+    blurb: "The largest streaming service globally by revenue and subscribers. Q3 2026 revenue was $12.87B (+11.8% YoY), with a 34.6% operating margin, ahead of guidance on expense timing. Operating margin has expanded from 17.82% (FY2022) to 29.49% (FY2025) and free cash flow reached $9.46B in FY2025, with net debt/EBITDA around 0.58x. The stock closed at $62.15 on Nov 13, about 54% below its June 2025 high, putting trailing P/E near 18x, far under its roughly 40x five-year average, with the ad-revenue forecast cut a watch item.",
     file: "companies/netflix.html",
     personalNote: "Netflix is an interesting one for me because a few years back I took a CPA course specifically on how to analyze a public company's balance sheet to find inconsistencies — the kind of forensic-accounting lens that can build toward a short-selling case. The instructor used Netflix as an example at one point. He stopped well short of actually recommending a short, but he flagged that there could be some inflated items, or at least real inconsistencies, in both the financial and non-financial KPIs — not fraud, just areas where the numbers deserved more scrutiny than most investors gave them. Looking at it now, years later, the honest update is: Netflix just kept rising. Whatever those flagged inconsistencies were, they clearly weren't disqualifying, and margins, free cash flow and leverage have all genuinely improved since then — a useful reminder that accounting skepticism and share-price performance don't always move together. I can still see what he might have meant, though: the content amortization has always been judgment-heavy, and Netflix quietly stopped reporting subscriber counts in 2025 — right when that used to be the single most-watched non-financial KPI for the company — which is exactly the kind of disclosure change that would catch a forensic accountant's eye, even years after the fact."
   },
@@ -1496,12 +1496,12 @@ const COMPANIES = [
     subIndustry: "Hearing Aids",
     tags: [],
     dateFeatured: "2026-09-10",
-    price: "CHF 233.00",
+    price: "CHF 284.00",
     score: "10 / 14",
     martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: -0.2, prior: -0.4 },  // revenue growth, most recent FY vs prior FY (non-scored, reported CHF; local-currency growth was +5.9% recent vs. high-single-digit prior)
     quarterYoY: { period: "H1 FY2026/27 (Sep 2026) (LC)", growth: 7.5 },  // latest reported period revenue YoY, local currency (non-scored) — reported CHF growth was -0.2% on FX headwinds
-    blurb: "Global #1 hearing-aid maker (Phonak, Advanced Bionics) in a five-player oligopoly with Demant, WS Audiology, GN and Starkey. Reported-CHF growth looks flat on strong-franc FX headwinds, but balance-sheet quality (1.1x net debt/EBITDA, 19% ROCE) is well ahead of sector comparable Demant.",
+    blurb: "Global #1 hearing-aid maker (Phonak, Advanced Bionics) in a five-player oligopoly. H1 FY2026/27 sales were CHF 1,834.1m (+7.5% in local currencies, +6.7% in CHF), with the 11th straight quarter of Wholesale share gains. Core EBIT rose 22.9% to a 20.9% margin and full-year guidance was raised to 6-8% sales and 10-13% core EBIT growth. The share-price rebound has largely closed the valuation discount to its own history, and balance-sheet quality (1.1x net debt/EBITDA, 19% ROCE) remains well ahead of Demant.",
     file: "companies/sonova.html"
   },
 
@@ -1514,10 +1514,10 @@ const COMPANIES = [
     subIndustry: "Hearing Aid Retail & Distribution",
     tags: [],
     dateFeatured: "2026-09-10",
-    price: "€11.96",
+    price: "€12.84",
     score: "6 / 14",
     martinero: 49,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: -0.56, prior: 6.60 },  // revenue growth, most recent FY vs prior FY (non-scored)
+    momentum: { status: "decelerating", recent: -0.56, prior: 6.6 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 2.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
     blurb: "World's largest hearing-aid retail/distribution network (not a manufacturer) is about to become one too — a pending, not-yet-closed ~€2.3-2.5bn acquisition of GN Store Nord's hearing-aid manufacturing business would end that distinction, but standalone growth has stalled and ROIC doesn't clear even a conservative WACC.",
     file: "companies/amplifon.html"
@@ -1568,12 +1568,12 @@ const COMPANIES = [
     subIndustry: "Wholesale Clubs & E-Commerce",
     tags: [],
     dateFeatured: "2026-09-10",
-    price: "$902.60",
+    price: "$1,053.56",
     score: "7 / 14",
     martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 8.17, prior: 5.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q4 FY2026", growth: 11.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The standing counterexample to Walmart's thin-merchandise-margin model: Costco prices goods near cost to drive membership renewals, and its real profit engine is a separate, near-100%-margin membership-fee line that supplied roughly 51% of FY2025 operating income from just 1.9% of revenue. ROIC of 38.44% comfortably clears WACC, the balance sheet has carried net cash every year for five years, and capex runs a lean 2.0% of revenue. But the stock has never been cheap (45.40x trailing P/E, PEG 3.64), five-year revenue/EBIT/FCF CAGRs all miss this framework's 15% bars, and insider ownership has faded to just 0.17% since co-founder Jim Sinegal's 2012 retirement.",
+    blurb: "The standing counterexample to Walmart's thin-merchandise-margin model: Costco prices goods near cost to drive membership renewals, and its real profit engine is a separate, near-100%-margin membership-fee line (about 51% of FY2025 operating income from 1.9% of revenue). Q4 FY2026 net sales rose 11.2% to $93.9B and FY2026 net sales reached $297.2B. ROIC of 38.44% clears WACC and the balance sheet carries net cash. But the stock has never been cheap (~50.8x trailing P/E), and five-year revenue/EBIT/FCF CAGRs all miss this framework's 15% bars.",
     file: "companies/costco.html"
   },
 
@@ -1586,12 +1586,12 @@ const COMPANIES = [
     subIndustry: "Ride-Hailing & Delivery Platforms",
     tags: ["Autonomous Vehicles", "Platform/Marketplace"],
     dateFeatured: "2026-09-11",
-    price: "$72.56",
-    score: "7 / 14",
-    martinero: 67,                    // Martinero Index (weighted 1-100 score, see About)
+    price: "$69.69",
+    score: "6 / 14",
+    martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "steady", recent: 18.3, prior: 18.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 10.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
-    blurb: "Ride-hailing and delivery platform that has genuinely turned profitable, now betting on aggregating autonomous vehicles from Waymo, WeRide, Nuro and ~30 other partners rather than building its own — the opposite path from Tesla's vertically-integrated robotaxi bet, with an already-fraying Waymo relationship as the central risk.",
+    quarterYoY: { period: "Q3 2026", growth: 9.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); Gross Bookings grew 24% YoY the same quarter, a cleaner read on underlying demand
+    blurb: "Ride-hailing and delivery platform that has turned profitable, now betting on aggregating autonomous vehicles from Waymo, WeRide, Nuro and ~30 other partners rather than building its own, the opposite path from Tesla's vertically-integrated robotaxi bet. Q3 2026 gross bookings grew 20% to $59.8B while reported revenue rose 9.6% on business-model accounting changes. GAAP profit is noisy, and the trailing P/E now sits above its own short history. A fraying Waymo relationship remains the central risk.",
     file: "companies/uber.html"
   },
 
@@ -1604,12 +1604,12 @@ const COMPANIES = [
     subIndustry: "Electric Vehicles & Battery Manufacturing",
     tags: ["Geopolitically Critical"],
     dateFeatured: "2026-09-12",
-    price: "$10.13",
+    price: "$8.05",
     score: "8 / 14",
     martinero: 61,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 3.46, prior: 29.02 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 2026", growth: 13.6 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend); H1 2026 revenue fell 7.13% YoY
-    blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL: revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% (well under the 20% bar), free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge, and H1 2026 revenue actually fell 7.1% YoY as a brutal domestic price war bit into China sales. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
+    blurb: "World's largest EV/PHEV maker by volume (4.6M NEVs in 2025, overtaking Tesla) and its own Blade Battery supplier, but the scorecard reads very differently from fellow China battery-maker CATL. Revenue compounded near 39%/year since FY2021, yet consolidated operating margin is just 4.20% and free cash flow swung to -¥97.7B in FY2025 on an overseas capex surge. H1 2026 revenue fell 7.1% YoY in the domestic price war, then Q3 2026 revenue rebounded 13.6% on a 137% jump in exports, though it missed consensus. Clears growth, market share, ROIC/WACC, net cash, entry multiple, founder ownership and margin stability; misses operating margin, FCF growth/conversion, market concentration, share count trend and capex intensity.",
     file: "companies/byd.html"
   },
 
@@ -1622,12 +1622,12 @@ const COMPANIES = [
     subIndustry: "Diversified Industrials & Digital Systems",
     tags: [],
     dateFeatured: "2026-09-13",
-    price: "¥5,199",
+    price: "¥4,962",
     score: "7 / 14",
     martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 8.21, prior: 0.56 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027", growth: 15.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic) — up 35.8% over the past year to an all-time high in February 2026, with FY2026 revenue +8.21% and net income +30.31% YoY. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses are the flip side of years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR to near zero and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot anywhere and no founder or insider stake.",
+    blurb: "Diversified Japanese industrial-to-digital conglomerate spanning rail systems, power grid/nuclear equipment, industrial IoT (Lumada) and digital engineering (GlobalLogic). Q2 FY2027 revenue rose 15% YoY to ¥2,904B with record adjusted EBITA, and full-year guidance was raised again, yet the shares fell about 10% after the results and now sit about 18% below February's all-time high. FY2026 revenue grew 8.21% and net income 30.31%. Clears EBIT/FCF growth, net cash, FCF conversion, share count trend, capex intensity and margin stability; misses reflect years of deliberate divestiture (Hitachi Metals, Hitachi Astemo) that flatten the 5-year revenue CAGR and distort the P/E history, plus a fragmented competitive position with no #1/#2 spot and no founder or insider stake.",
     file: "companies/hitachi.html"
   },
 
@@ -1658,12 +1658,12 @@ const COMPANIES = [
     subIndustry: "Diversified Conglomerate (Energy, Retail & Telecom)",
     tags: ["Family-Controlled"],
     dateFeatured: "2026-09-15",
-    price: "₹1,257.50",
+    price: "₹1,190.00",
     score: "7 / 14",
     martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "accelerating", recent: 9.59, prior: 7.06 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 27.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "India's largest private-sector conglomerate — the Jamnagar O2C refining/petrochemicals engine, Reliance Retail (India's largest retailer) and Jio (India's #1 telecom carrier, ~49% wireless-broadband share) under one roof, with the Ambani family/promoter group holding roughly 50.5%. Clears net debt/EBITDA, valuation-vs-history, share count and insider ownership; misses are the growth and profitability criteria this framework weighs most heavily — revenue/EBIT CAGR near 11% and an 11.5% consolidated operating margin, both well under the bars, reflecting the low-margin refining business blended into the mix.",
+    blurb: "India's largest private-sector conglomerate: the Jamnagar O2C refining/petrochemicals engine, Reliance Retail (India's largest retailer) and Jio (India's #1 telecom carrier) under one roof, with the Ambani family/promoter group holding roughly 50.5%. Q2 FY2027 gross revenue hit a record ₹3.62 lakh crore (+27.8% YoY), driven by O2C, while Retail profit fell. Clears net debt/EBITDA, valuation-vs-history, share count and insider ownership; misses are the growth and profitability criteria this framework weighs most heavily, with revenue/EBIT CAGR near 11% and an 11.5% consolidated operating margin.",
     file: "companies/reliance-industries.html",
     personalNote: "Reliance is the first Indian company I've run through this checklist, and it's a good test of whether the framework travels outside the US and Europe. It's genuinely three or four businesses under one roof — the original Jamnagar refining and petrochemicals engine, India's largest retailer, and Jio, now India's dominant telecom carrier, on the verge of what would be India's biggest-ever IPO after Jio Platforms just got SEBI approval for a roughly ₹37,700 crore listing. The Ambani family and promoter entities control just over half the company (~50.5%, recently increased, not reduced), which is about as concentrated as insider ownership gets on this site — reassuring for alignment, though it's also one family effectively controlling a company that touches national telecom and energy infrastructure. The checklist is fairly unforgiving here: revenue and EBIT have both compounded around 11% a year, comfortably below my 15% growth bar, and the consolidated operating margin (11.5%) looks thin next to the software and pharma names on this site — though that's really an artifact of blending a low-margin refining business with much higher-margin retail and telecom units, something one number can't show. What I do like: the balance sheet is genuinely conservative for a company spending this much on capex (net debt/EBITDA under 1x), the share count is flat (the 2024 bonus issue was a split, not dilution), and the stock itself has gone essentially nowhere in five years even as earnings grew roughly 31% — either a value opportunity or a sign the market already suspects growth is slowing before the trailing numbers show it. I don't currently hold any India exposure myself."
   },
