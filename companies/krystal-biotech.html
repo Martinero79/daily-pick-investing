@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Krystal Biotech, Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/krystal-biotech.html">
+<meta property="og:title" content="Krystal Biotech, Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Krystal Biotech, Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+.status-na { background:#1a2030; color:#94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard</div>
+  <h1>Krystal Biotech, Inc.</h1>
+  <div class="badges">
+    <div class="badge">Nasdaq: KRYS</div>
+    <div class="badge">FY = Calendar Year</div>
+    <div class="badge">HQ: Pittsburgh, USA</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge warn">Commercial Since Q3 2023 &mdash; Short Track Record; Single-Product (VYJUVEK)</div>
+  </div>
+
+  <div class="price">$298.55</div>
+  <div class="price-sub">Nov 17, 2026 Nasdaq close (latest verified quote, S&amp;P Global via StockAnalysis) &middot; Market cap &asymp; $8.9B (estimate: ~29.7M shares) &middot; 52-wk range $183.26 &ndash; $382.54 (intraday, as of Oct 26; the low may since have rolled off) &middot; Nov 2 post-earnings close $295.90 (-10.95% on the day) &middot; Beta 0.50 &middot; Analyst consensus: Strong Buy (12 analysts), avg PT $395 (Oct 26, pre-Q3; several targets were trimmed after the print, e.g. RBC $375, TD Cowen $380, Citi $412) &middot; Q3 2026 reported Nov 2, 2026</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Market position:</b> a fully integrated, commercial-stage gene-therapy company. VYJUVEK (B-VEC), a topical, redosable HSV-1-vector gene therapy for dystrophic epidermolysis bullosa (DEB), is approved in the US, Europe and Japan and is the company's only commercial product. The pipeline spans dermatology, ophthalmology, respiratory (cystic fibrosis, alpha-1) and inhaled oncology (KB707).</div>
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Currency &amp; short-history note:</b> all figures are in US dollars; fiscal year is the calendar year. <b>Short commercial history:</b> VYJUVEK was approved in May 2023 and revenue began in Q3 2023 ($8.6M), so FY2021 and FY2022 have no revenue and large losses. The 5-year growth criteria (#1 revenue CAGR, #2 EBIT CAGR, #4 FCF CAGR) have no usable base and are scored <b>N/A</b>, as is the own-history valuation multiple (#10, only three year-end GAAP P/Es exist). They are excluded from the Martinero denominator (40 of 105 weight points), so the index rests on the criteria that can be tested honestly: margin, balance sheet, cash conversion, ROIC, insider ownership, capex, share count and gross-margin stability. Operating income is GAAP; no non-GAAP EBIT is used.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (FY2025)</div>
+      <div class="val">$389.1M</div>
+      <div class="sub green" style="color:#34d399;">+33.9% YoY</div>
+      <div class="note">FY2024 was $290.5M (off a $50.7M partial launch year in FY2023). Q3 2026 net product revenue $127.3M (+30.2% YoY); 9M 2026 $362.9M (+28.7%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">EBIT Margin (GAAP)</div>
+      <div class="val green">41.5%</div>
+      <div class="sub">FY2025, up from 35.5% in FY2024</div>
+      <div class="note">Gross margin about 94%. Q3 2026 GAAP operating income $71.1M (55.9% margin); TTM about 48%.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val green">~43% vs ~10%</div>
+      <div class="sub">S&amp;P ROIC (FY2025); WACC is my estimate</div>
+      <div class="note">ROIC excludes the $1.2B cash pile; on all capital it would be near 10%. Third-party figure.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val green">Net cash</div>
+      <div class="sub">$1,194M cash &amp; investments (Sep 30, 2026)</div>
+      <div class="note">Only about $9M of lease-type debt. A $400M buyback was authorised on Nov 2, 2026.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">86/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">High-margin, cash-rich, founder-led, but a single-product company with dilution history. 10 of 14 criteria scored; #1, #2, #4 and #10 are N/A because of the short history. Treat the index with caution: it is based on a smaller set of criteria.</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="202.0 314.16" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="22.4 314.16" stroke-dashoffset="-202.0" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="89.8 314.16" stroke-dashoffset="-224.4" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">9/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>9 criteria fully met</b> &mdash; EBIT margin (41%), market share (#1 in DEB), concentration (light competition), ROIC vs WACC, net cash, FCF conversion (117%), founder/insider ownership (~11-12%), capex intensity (3%) and gross-margin stability (provisional, 2-year window)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>1 not met</b> &mdash; share count (about +33% since Dec 2021; dilution is slowing and a buyback has just been authorised)</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>4 N/A</b> &mdash; revenue CAGR, EBIT CAGR and FCF CAGR (no revenue or only losses in FY2021-22), and entry multiple vs own history (too few positive-earnings years)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Krystal Biotech, Inc. was founded by Krish Krishnan (Chairman and CEO) and Suma Krishnan (President, R&amp;D), listed on Nasdaq in September 2017 and, until 2023, was a pre-revenue biotech burning $100M or more a year (FCF -$116M, -$154M and -$101M in FY2021-23). VYJUVEK changed that: net product revenue went from $50.7M in FY2023 to $290.5M in FY2024 and $389.1M in FY2025, with a gross margin of about 94%, a 41% GAAP operating margin in FY2025 and 48% over the last twelve months. The business now generates about $300M of annual free cash flow and sits on $1.2B of cash and investments with essentially no debt. Q3 2026 revenue was $127.3M (+30% YoY; $95.3M US, $32.0M international), with over 760 US reimbursement approvals and launches continuing in Germany, France and Japan, pricing completed in Germany and Italy (Italy launch early 2027) and a marketing application filed in Australia. Despite a beat on revenue and EPS ($2.05 vs about $1.84 consensus), the stock fell 10.95% on Nov 2 as several pipeline timelines slipped into 2027 (KB803 eye study, KB801 keratitis, KB407 cystic fibrosis interim data); it closed at $298.55 on Nov 17, about 22% below its 52-week high of $382.54. Read the numbers with care: this is a <b>single-product company</b> (all revenue is VYJUVEK, a rare-disease therapy for a small patient population), FY2025 net income included a tax benefit (a valuation-allowance release in Q3 2025), and the 5-year growth criteria cannot be scored because the company only began selling in late 2023.
+  </div>
+
+  <div class="callout">
+    <b>Three things to keep in mind:</b> (1) <b>Concentration</b> &mdash; 100% of product revenue comes from VYJUVEK; pricing, reimbursement, patient-finding and competition in DEB (and any safety or supply event) hit the whole company, and the pipeline (about 8 programmes) has not yet produced a second revenue source. (2) <b>Short history</b> &mdash; only three years of revenue (two full years), so growth rates are launch-ramp rates and valuation history is thin. (3) <b>Founder ownership</b> &mdash; the Krishnans hold roughly 11-12% (third-party / 13G-derived), a meaningful but not controlling stake, and they have sold some shares under 10b5-1 plans.
+  </div>
+
+  <div class="bignum-corner">KRYS</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory</div></div>
+  <div class="sec-sub">FY2021-FY2025 (calendar years), USD millions. Revenue is net product revenue; operating income is GAAP; Free Cash Flow = operating cash flow minus capex. <b>FY2021 and FY2022 had no revenue</b> (n/a) and FY2023 includes only two quarters of sales, so this five-year table shows a pre-revenue to profitable transition rather than five comparable years.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, EBIT &amp; Free Cash Flow &mdash; Annual (USD M)</div>
+    <div class="chart-sub">Losses and negative FCF through FY2023, then a swing to $103M EBIT / $119M FCF in FY2024 and $161M EBIT / $189M FCF in FY2025. FY2023 net income was positive only because of a $100M gain on the sale of a priority review voucher (in the data this appears as a $100M asset-sale gain; EBIT excludes it).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>EBIT (GAAP operating income)</span><span><span class="dot" style="background:#fbbf24;"></span>Free Cash Flow</span></div>
+    <svg viewBox="0 0 860 310" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="247.0" x2="840" y2="247.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="251.0" text-anchor="end" font-size="11" fill="#64748b">-$100M</text>
+    <line x1="60" y1="205.0" x2="840" y2="205.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="209.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+    <line x1="60" y1="163.0" x2="840" y2="163.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="167.0" text-anchor="end" font-size="11" fill="#64748b">$100M</text>
+    <line x1="60" y1="121.0" x2="840" y2="121.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="125.0" text-anchor="end" font-size="11" fill="#64748b">$200M</text>
+    <line x1="60" y1="79.0" x2="840" y2="79.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="83.0" text-anchor="end" font-size="11" fill="#64748b">$300M</text>
+    <line x1="60" y1="37.0" x2="840" y2="37.0" stroke="#1e293b" stroke-width="1"/><text x="50" y="41.0" text-anchor="end" font-size="11" fill="#64748b">$400M</text>
+    <line x1="60" y1="205" x2="840" y2="205" stroke="#475569" stroke-width="1.3"/>
+    <text x="100.0" y="199" text-anchor="middle" font-size="10" fill="#64748b">n/a</text>
+    <rect x="123.0" y="205" width="30" height="29.3" rx="1" fill="#60a5fa"/>
+    <text x="138.0" y="247.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-69.9</text>
+    <rect x="161.0" y="205" width="30" height="48.8" rx="1" fill="#fbbf24"/>
+    <text x="176.0" y="266.8" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-116.3</text>
+    <text x="138.0" y="302" text-anchor="middle" font-size="11" fill="#94a3b8">2021</text>
+    <text x="256.0" y="199" text-anchor="middle" font-size="10" fill="#64748b">n/a</text>
+    <rect x="279.0" y="205" width="30" height="50.9" rx="1" fill="#60a5fa"/>
+    <text x="294.0" y="268.9" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-121.3</text>
+    <rect x="317.0" y="205" width="30" height="64.5" rx="1" fill="#fbbf24"/>
+    <text x="332.0" y="282.5" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-153.6</text>
+    <text x="294.0" y="302" text-anchor="middle" font-size="11" fill="#94a3b8">2022</text>
+    <rect x="397.0" y="183.7" width="30" height="21.3" rx="2" fill="#2dd4bf"/>
+    <text x="412.0" y="178.7" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">50.7</text>
+    <rect x="435.0" y="205" width="30" height="40.8" rx="1" fill="#60a5fa"/>
+    <text x="450.0" y="258.8" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">-97.1</text>
+    <rect x="473.0" y="205" width="30" height="42.3" rx="1" fill="#fbbf24"/>
+    <text x="488.0" y="260.3" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">-100.6</text>
+    <text x="450.0" y="302" text-anchor="middle" font-size="11" fill="#94a3b8">2023</text>
+    <rect x="553.0" y="83.0" width="30" height="122.0" rx="2" fill="#2dd4bf"/>
+    <text x="568.0" y="78.0" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">290.5</text>
+    <rect x="591.0" y="161.6" width="30" height="43.4" rx="2" fill="#60a5fa"/>
+    <text x="606.0" y="156.6" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">103.2</text>
+    <rect x="629.0" y="154.9" width="30" height="50.1" rx="2" fill="#fbbf24"/>
+    <text x="644.0" y="149.9" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">119.2</text>
+    <text x="606.0" y="302" text-anchor="middle" font-size="11" fill="#94a3b8">2024</text>
+    <rect x="709.0" y="41.6" width="30" height="163.4" rx="2" fill="#2dd4bf"/>
+    <text x="724.0" y="36.6" text-anchor="middle" font-size="10" fill="#cbd5e1" font-weight="400">389.1</text>
+    <rect x="747.0" y="137.3" width="30" height="67.7" rx="2" fill="#60a5fa"/>
+    <text x="762.0" y="132.3" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="700">161.3</text>
+    <rect x="785.0" y="125.7" width="30" height="79.3" rx="2" fill="#fbbf24"/>
+    <text x="800.0" y="120.7" text-anchor="middle" font-size="10" fill="#fde68a" font-weight="400">188.9</text>
+    <text x="762.0" y="302" text-anchor="middle" font-size="11" fill="#f8fafc">2025</text>
+    </svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (5yr, FY21-25)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">No FY2021 revenue. FY23&rarr;FY25 (2-yr, reference only): +177% on a launch ramp</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">EBIT (FY21 &rarr; FY25)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">-$69.9M &rarr; +$161.3M &mdash; CAGR undefined from a loss base</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF (FY21 &rarr; FY25)</div>
+      <div class="val" style="color:#94a3b8;">N/A</div>
+      <div class="sub">-$116.3M &rarr; +$188.9M &mdash; CAGR undefined from a negative base</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Gross Margin vs Operating (EBIT) Margin &mdash; FY2021-FY2025</div>
+    <div class="chart-sub">Gross margin has held at 93-94% since launch (FY2023 93.9%, FY2024 93.1%, FY2025 94.1%). Operating margin rose from 35.5% to 41.5% as revenue scaled over a mostly fixed R&amp;D and SG&amp;A base. FY2023 operating margin (-191.6% on a partial year) and FY2021-22 are not meaningful and are not plotted.</div>
+    <svg viewBox="0 0 700 140">
+      <line x1="30" y1="110.0" x2="690" y2="110.0" stroke="#263049" stroke-width="1"/><text x="4" y="113.0" font-size="7.5" fill="#64748b">0%</text>
+      <line x1="30" y1="65.0" x2="690" y2="65.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="4" y="68.0" font-size="7.5" fill="#64748b">50%</text>
+      <line x1="30" y1="20.0" x2="690" y2="20.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="4" y="23.0" font-size="7.5" fill="#64748b">100%</text>
+      <polyline points="350,25.5 495,26.2 640,25.3" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+      <polyline points="495,78.0 640,72.7" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+      <text x="60" y="102.0" text-anchor="middle" font-size="8" fill="#64748b">no revenue</text>
+      <text x="60" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2021</text>
+      <text x="205" y="102.0" text-anchor="middle" font-size="8" fill="#64748b">no revenue</text>
+      <text x="205" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2022</text>
+      <circle cx="350" cy="25.5" r="3.2" fill="#2dd4bf"/><text x="350" y="18.5" text-anchor="middle" font-size="8" fill="#cbd5e1">93.9%</text>
+      <text x="350" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2023</text>
+      <circle cx="495" cy="26.2" r="3.2" fill="#2dd4bf"/><text x="495" y="19.2" text-anchor="middle" font-size="8" fill="#cbd5e1">93.1%</text>
+      <circle cx="495" cy="78.0" r="3.2" fill="#fbbf24"/><text x="495" y="71.0" text-anchor="middle" font-size="8" fill="#fde68a">35.5%</text>
+      <text x="495" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2024</text>
+      <circle cx="640" cy="25.3" r="3.2" fill="#2dd4bf"/><text x="640" y="18.3" text-anchor="middle" font-size="8" fill="#cbd5e1">94.1%</text>
+      <circle cx="640" cy="72.7" r="3.2" fill="#fbbf24"/><text x="640" y="65.7" text-anchor="middle" font-size="8" fill="#fde68a">41.5%</text>
+      <text x="640" y="134" text-anchor="middle" font-size="8" fill="#94a3b8">2025</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (USD m)</th><th>Revenue</th><th>Gross margin</th><th>Op. Income</th><th>Op. Margin</th><th>Net Income</th><th>EPS (diluted)</th><th>Free Cash Flow</th><th>Capex</th><th>Net cash*</th></tr>
+    <tr><td>FY2021</td><td>n/a</td><td>n/a</td><td>-69.9</td><td>n/m</td><td>-69.6</td><td>$-3.13</td><td>-116.3</td><td>68.3</td><td>494.4</td></tr>
+    <tr><td>FY2022</td><td>n/a</td><td>n/a</td><td>-121.3</td><td>n/m</td><td>-140.0</td><td>$-5.49</td><td>-153.6</td><td>53.0</td><td>374.9</td></tr>
+    <tr><td>FY2023</td><td>50.7</td><td>93.9%</td><td>-97.1</td><td>n/m (-191.6%)</td><td>10.9</td><td>$0.39</td><td>-100.6</td><td>11.8</td><td>586.0</td></tr>
+    <tr><td>FY2024</td><td>290.5</td><td>93.1%</td><td>103.3</td><td>35.5%</td><td>89.2</td><td>$3.00</td><td>119.2</td><td>4.2</td><td>742.4</td></tr>
+    <tr><td>FY2025</td><td>389.1</td><td>94.1%</td><td>161.3</td><td>41.5%</td><td>204.8</td><td>$6.84</td><td>188.9</td><td>12.0</td><td>946.5</td></tr>
+    <tr><td>TTM (Sep'26)</td><td>470.0</td><td>94.3%</td><td>227.5</td><td>48.4%</td><td>225.2</td><td>$7.37</td><td>310.1</td><td>n/a</td><td>1,185 (est.)</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:6px;">Dividend per share: none paid. *Net cash = cash and investments less total debt (S&amp;P Global); the TTM entry is the Sep 30, 2026 cash and investments of $1,194.2M (company release) less about $9M of debt, my estimate. FY2023 net income includes a $100M gain on sale (priority review voucher); FY2025 net income includes a tax benefit from a valuation-allowance release in Q3 2025 (Q3 2025 tax line was a $31.4M benefit), so FY2025 EPS of $6.84 is flattered versus a normal-tax run rate. TTM revenue, operating income, net income, EPS and FCF are sums of the four reported quarters Q4 2025-Q3 2026 (S&amp;P Global quarterly data, unaudited); TTM gross margin is 94.3% on the same basis.</div>
+  <div class="footer-note">Source: Krystal Biotech 10-K filings and quarterly releases as standardised by StockAnalysis.com (S&amp;P Global Market Intelligence); company Q3 2026 earnings release (SEC 8-K, Nov 2, 2026). Third-party standardised figures may differ slightly from company-reported rounding.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Quarterly Trend &amp; Latest Quarter (Q3 2026)</div></div>
+  <div class="sec-sub">Reported on Nov 2, 2026. Eight quarters shown (Q4 2024 to Q3 2026) so the 2025 growth air-pocket and the 2026 re-acceleration are both visible.</div>
+
+  <div class="headline-box">
+    <div class="title">What moved the stock</div>
+    <p>Q3 2026 was a modest beat: net product revenue $127.3M (+30% YoY; consensus about $126.8M), GAAP EPS $2.05 against about $1.84 expected, operating income $71.1M (55.9% margin) and cash and investments of $1.19B. The shares nevertheless fell 10.95% on Nov 2 to $295.90 (traded as low as $281.40), and several brokers trimmed targets in the following days. I did not verify the cause, but third-party coverage points to pipeline timing: the KB803 eye study's last patient visit moved to February 2027, the KB801 (neurotrophic keratitis) enrolment is slower than planned with top-line results now in 2027, and KB407 (cystic fibrosis) interim data moved to 1H 2027. The Q3 tax charge ($17.1M vs a $31.4M benefit a year earlier) also made net income fall 20.5% YoY. Offsetting positives: a $400M share-repurchase authorisation (over about two years, opportunistic), pricing completed in Germany and Italy, and positive KB113 proof-of-concept data in Gorlin syndrome (Oct 15). Earlier, the Q2 print (Aug 3) was a miss (revenue $119.2M vs about $121.0M, EPS $1.79 vs $1.91) and the stock fell about 8%.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Net Product Revenue &mdash; Last 8 Quarters (USD M)</div>
+    <div class="chart-sub">YoY: Q4'24 +116.3%, Q1'25 +94.9%, Q2'25 +36.7%, Q3'25 +16.7%, Q4'25 +17.5%, Q1'26 +32.0%, Q2'26 +24.1%, Q3'26 +30.2%. Growth is now measured off a full-year base; the 2025 slowdown to +17% (Q3'25, Q4'25) was followed by a re-acceleration in 2026, helped by international launches ($32.0M in Q3'26).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly net product revenue, USD M</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="63.4" width="55" height="66.6" fill="#2dd4bf"/><text x="57.5" y="58.4" text-anchor="middle" font-size="9" fill="#cbd5e1">91.1</text><text x="57.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="65.6" width="55" height="64.4" fill="#2dd4bf"/><text x="139.5" y="60.6" text-anchor="middle" font-size="9" fill="#cbd5e1">88.2</text><text x="139.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="59.8" width="55" height="70.2" fill="#2dd4bf"/><text x="221.5" y="54.8" text-anchor="middle" font-size="9" fill="#cbd5e1">96.0</text><text x="221.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="58.5" width="55" height="71.5" fill="#2dd4bf"/><text x="303.5" y="53.5" text-anchor="middle" font-size="9" fill="#cbd5e1">97.8</text><text x="303.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="51.7" width="55" height="78.3" fill="#2dd4bf"/><text x="385.5" y="46.7" text-anchor="middle" font-size="9" fill="#cbd5e1">107.1</text><text x="385.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="45.0" width="55" height="85.0" fill="#2dd4bf"/><text x="467.5" y="40.0" text-anchor="middle" font-size="9" fill="#cbd5e1">116.4</text><text x="467.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="42.9" width="55" height="87.1" fill="#2dd4bf"/><text x="549.5" y="37.9" text-anchor="middle" font-size="9" fill="#cbd5e1">119.2</text><text x="549.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="36.9" width="55" height="93.1" fill="#2dd4bf"/><text x="631.5" y="31.9" text-anchor="middle" font-size="9" fill="#cbd5e1">127.3</text><text x="631.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income &mdash; Last 8 Quarters (USD M)</div>
+    <div class="chart-sub">Operating income has risen in a nearly straight line, from $41.4M to $71.1M, as revenue grew while operating expenses stayed around $49-56M a quarter (Q3'26 opex was $48.6M excluding cost of goods, lowest in the period, as SG&amp;A fell to $33.7M).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Operating income (USD M)</span></div>
+    <svg viewBox="0 0 700 160">
+      <line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="77.6" width="55" height="52.4" fill="#60a5fa"/><text x="57.5" y="72.6" text-anchor="middle" font-size="9" fill="#cbd5e1">41.4</text><text x="57.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'24</text>
+      <rect x="112" y="84.1" width="55" height="45.9" fill="#60a5fa"/><text x="139.5" y="79.1" text-anchor="middle" font-size="9" fill="#cbd5e1">36.2</text><text x="139.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'25</text>
+      <rect x="194" y="80.1" width="55" height="49.9" fill="#60a5fa"/><text x="221.5" y="75.1" text-anchor="middle" font-size="9" fill="#cbd5e1">39.4</text><text x="221.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'25</text>
+      <rect x="276" y="77.6" width="55" height="52.4" fill="#60a5fa"/><text x="303.5" y="72.6" text-anchor="middle" font-size="9" fill="#cbd5e1">41.4</text><text x="303.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'25</text>
+      <rect x="358" y="73.9" width="55" height="56.1" fill="#60a5fa"/><text x="385.5" y="68.9" text-anchor="middle" font-size="9" fill="#cbd5e1">44.3</text><text x="385.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4'25</text>
+      <rect x="440" y="62.0" width="55" height="68.0" fill="#60a5fa"/><text x="467.5" y="57.0" text-anchor="middle" font-size="9" fill="#cbd5e1">53.7</text><text x="467.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1'26</text>
+      <rect x="522" y="56.0" width="55" height="74.0" fill="#60a5fa"/><text x="549.5" y="51.0" text-anchor="middle" font-size="9" fill="#cbd5e1">58.4</text><text x="549.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2'26</text>
+      <rect x="604" y="39.9" width="55" height="90.1" fill="#60a5fa"/><text x="631.5" y="34.9" text-anchor="middle" font-size="9" fill="#cbd5e1">71.2</text><text x="631.5" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3'26</text>
+    </svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>Metric</th><th>Q4'24</th><th>Q1'25</th><th>Q2'25</th><th>Q3'25</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Q3'26</th></tr>
+    <tr><td>Net product revenue (USD m)</td><td>91.1</td><td>88.2</td><td>96.0</td><td>97.8</td><td>107.1</td><td>116.4</td><td>119.2</td><td>127.3</td></tr>
+    <tr><td>YoY growth</td><td>+116.3%</td><td>+94.9%</td><td>+36.6%</td><td>+16.6%</td><td>+17.5%</td><td>+31.9%</td><td>+24.1%</td><td>+30.2%</td></tr>
+    <tr><td>Gross margin</td><td>94.6%</td><td>94.3%</td><td>92.5%</td><td>95.6%</td><td>93.8%</td><td>94.6%</td><td>94.6%</td><td>94.1%</td></tr>
+    <tr><td>Operating income (GAAP)</td><td>41.4</td><td>36.2</td><td>39.4</td><td>41.4</td><td>44.3</td><td>53.7</td><td>58.4</td><td>71.2</td></tr>
+    <tr><td>Free cash flow</td><td>52.0</td><td>24.8</td><td>50.8</td><td>38.0</td><td>75.4</td><td>73.2</td><td>71.2</td><td>90.2</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Quarterly figures from S&amp;P Global data via StockAnalysis (Q3 2026 and Q3 2025 cross-checked to the company release). Quarterly free cash flow is volatile because of working-capital timing.</div>
+
+  <table class="datatable" style="margin-top:8px;">
+    <tr><th>Metric (USD)</th><th>Q3 2025</th><th>Q3 2026</th><th>Change</th></tr>
+    <tr><td>Net product revenue</td><td>$97.8M</td><td>$127.3M</td><td>+30.2%</td></tr>
+    <tr><td>Gross margin</td><td>95.6%</td><td>94.1%</td><td>-1.6pp</td></tr>
+    <tr><td>R&amp;D expense</td><td>$14.6M</td><td>$14.9M</td><td>+2.1%</td></tr>
+    <tr><td>SG&amp;A expense</td><td>$37.6M</td><td>$33.7M</td><td>-10.2%</td></tr>
+    <tr><td>Operating income (GAAP)</td><td>$41.4M</td><td>$71.1M</td><td>+71.9%</td></tr>
+    <tr><td>Net income (GAAP)</td><td>$79.4M (tax benefit $31.4M)</td><td>$63.1M (tax charge $17.1M)</td><td>-20.5%</td></tr>
+    <tr><td>Diluted EPS (GAAP)</td><td>$2.66</td><td>$2.05</td><td>-22.9%</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (FY2026, as of Nov 2, 2026):</b> the company guides only to non-GAAP R&amp;D plus SG&amp;A expense of $155-165M (excludes stock compensation); no revenue guidance is given. Nine-month 2026 non-GAAP R&amp;D plus SG&amp;A was about $117.6M by my calculation (GAAP $159.4M less $41.7M stock compensation), implying roughly $37-47M for Q4 (my arithmetic, not company guidance).
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Strategy signals:</b> international rollout (Germany, France, Japan live; Italy early 2027; Spain pricing decision expected late 2026; Australia filing made; Switzerland filing planned), a $400M buyback, and 2027 catalysts: KB407 registrational study start, KB707 inhaled oncology combination data (31% ORR with pembrolizumab at ASCO 2026), KB111 (Hailey-Hailey) FDA meeting in 1Q 2027. These are management statements; no second product has yet been approved.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet &amp; Ownership</div></div>
+  <div class="sec-sub">Current trailing GAAP P/E is about 40.5x ($298.55 / TTM diluted EPS $7.37). Own-history valuation context is thin: FY2021-22 were losses, FY2023's 320x P/E rested on a $0.39 EPS lifted by a $100M one-off gain, so only FY2024 and FY2025 are usable. Criterion #10 is therefore N/A.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP P/E and Forward P/E &mdash; FY-End vs. Current</div>
+    <div class="chart-sub">FY2024-25 values are year-end ratios per StockAnalysis (S&amp;P Global; forward P/E uses consensus EPS). *Current forward P/E of 36.1x is my estimate: $298.55 divided by the roughly $8.27 forward EPS implied by StockAnalysis's 39.5x reading at $326.81 on Oct 7; consensus has probably moved since the Q3 print. Current GAAP P/E of 40.5x is my calculation from TTM EPS. The dashed line is the average of only two GAAP year-end values, shown for reference.</div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:#60a5fa;"></span>GAAP P/E (trailing)</span>
+      <span><span class="dot" style="background:#2dd4bf;"></span>Forward P/E</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>FY24-25 GAAP average</span>
+    </div>
+    <svg viewBox="0 0 700 150">
+      <line x1="10" y1="115" x2="690" y2="115" stroke="#263049" stroke-width="1"/>
+      <rect x="60" y="34.1" width="70" height="80.9" fill="#60a5fa"/><text x="95" y="29.1" text-anchor="middle" font-size="9" fill="#cbd5e1">50.5x</text>
+      <rect x="140" y="61.7" width="70" height="53.3" fill="#2dd4bf"/><text x="175" y="56.7" text-anchor="middle" font-size="9" fill="#cbd5e1">33.3x</text>
+      <text x="135" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+      <rect x="270" y="59.2" width="70" height="55.8" fill="#60a5fa"/><text x="305" y="54.2" text-anchor="middle" font-size="9" fill="#cbd5e1">34.9x</text>
+      <rect x="350" y="59.2" width="70" height="55.8" fill="#2dd4bf"/><text x="385" y="54.2" text-anchor="middle" font-size="9" fill="#cbd5e1">34.9x</text>
+      <text x="345" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+      <rect x="480" y="50.2" width="70" height="64.8" fill="#60a5fa"/><text x="515" y="45.2" text-anchor="middle" font-size="9" fill="#cbd5e1">40.5x</text>
+      <rect x="560" y="57.2" width="70" height="57.8" fill="#2dd4bf"/><text x="595" y="52.2" text-anchor="middle" font-size="9" fill="#cbd5e1">36.1x*</text>
+      <text x="555" y="130" text-anchor="middle" font-size="9" fill="#94a3b8">Current</text>
+      <line x1="10" y1="46.7" x2="690" y2="46.7" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5 4"/><text x="688" y="42.7" text-anchor="end" font-size="9" fill="#fbbf24">GAAP avg FY24-25 42.7x (2 points only)</text>
+    </svg>
+  </div>
+
+  <div class="callout blue">
+    <b>Why criterion #10 is N/A:</b> the site compares the current P/E with the company's own 5-year average. KRYS has positive GAAP earnings in only three year-ends (FY2023 320x on one-off gains, FY2024 50.5x, FY2025 34.9x) and none in FY2021-22, so no meaningful 5-year average exists. For reference only, the current trailing P/E of about 40.5x against the FY2024-25 average of 42.7x is a ratio of about 0.95, and the PEG ratio was 0.90 on Oct 7 (S&amp;P Global); neither is used in the score. Price/sales was about 22x on Oct 7 (S&amp;P Global).
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">CapEx (USD M) &amp; CapEx Intensity (% of Revenue)</div>
+    <div class="chart-sub">Capex was heavy while the Pittsburgh ASTRA manufacturing and R&amp;D campus was built ($68M in FY2021, $53M in FY2022) and is now small: $4.2M in FY2024 (1.5% of revenue) and $12.0M in FY2025 (3.1%). Percentages for FY2021-22 are not meaningful (no revenue).</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>Capex (USD M, bars)</span></div>
+    <svg viewBox="0 0 700 195">
+      <line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+      <rect x="30" y="37.0" width="60" height="123.0" fill="#60a5fa"/><text x="60" y="32.0" text-anchor="middle" font-size="9" fill="#cbd5e1">68.34</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2021</text>
+      <text x="60" y="187" text-anchor="middle" font-size="8.5" fill="#fde68a">n/m (no revenue)</text>
+      <rect x="170" y="64.6" width="60" height="95.4" fill="#60a5fa"/><text x="200" y="59.6" text-anchor="middle" font-size="9" fill="#cbd5e1">52.98</text><text x="200" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2022</text>
+      <text x="200" y="187" text-anchor="middle" font-size="8.5" fill="#fde68a">n/m (no revenue)</text>
+      <rect x="310" y="138.8" width="60" height="21.2" fill="#60a5fa"/><text x="340" y="133.8" text-anchor="middle" font-size="9" fill="#cbd5e1">11.80</text><text x="340" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2023</text>
+      <text x="340" y="187" text-anchor="middle" font-size="8.5" fill="#fde68a">23.3% of revenue</text>
+      <rect x="450" y="152.4" width="60" height="7.6" fill="#60a5fa"/><text x="480" y="147.4" text-anchor="middle" font-size="9" fill="#cbd5e1">4.24</text><text x="480" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2024</text>
+      <text x="480" y="187" text-anchor="middle" font-size="8.5" fill="#fde68a">1.5% of revenue</text>
+      <rect x="590" y="138.5" width="60" height="21.5" fill="#60a5fa"/><text x="620" y="133.5" text-anchor="middle" font-size="9" fill="#cbd5e1">11.95</text><text x="620" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">2025</text>
+      <text x="620" y="187" text-anchor="middle" font-size="8.5" fill="#fde68a">3.1% of revenue</text>
+    </svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership (approximate)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="36.1 278.0" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="278.0 36.1" stroke-dashoffset="-36.1" transform="rotate(-90 60 60)"/>
+          <text x="60" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~12%</text><text x="60" y="71" text-anchor="middle" font-size="7" fill="#7c8aa5">insiders</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Insiders &asymp; 11.5% (S&amp;P Global; Krish and Suma Krishnan hold about 3.4M shares between them per a Mar 2026 Schedule 13G amendment)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>Institutions and other holders &asymp; 88.5% (about 88% institutional per S&amp;P Global)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Share Count &amp; Buyback</div>
+      <p>About 29.6M basic and 30.8M diluted weighted shares in Q3 2026, versus about 22.2M at Dec 2021 (about +33%) after equity raises in 2021 ($356M) and 2023 ($204M) and option exercises. Share growth has slowed to +3.4% YoY (diluted). Stock compensation was $54.5M in FY2025 (14% of revenue). The $400M buyback (authorised Nov 2, 2026, over about two years, opportunistic, no obligation) is roughly 4-5% of market cap; repurchases to date were small ($14.0M in FY2025).</p>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Founders, insiders &amp; control:</b> Krish Krishnan is founder, Chairman and CEO; Suma Krishnan, co-founder, is President of R&amp;D. Their combined holding is roughly 11-12% of the shares (about 3.4M shares per a Schedule 13G amendment with a Mar 31, 2026 event date, mostly held via the Krishnan Family Trust; S&amp;P Global reports total insider ownership of 11.46%). Form 4 filings in 2026 show regular 10b5-1 sales by Krish Krishnan and option exercises by Suma Krishnan. Shares have one vote each (single class), so the stake is meaningful alignment but not control. The exact percentage is derived from third-party and 13G data, not the proxy table, which I could not retrieve.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Balance sheet (Sep 30, 2026):</b> cash and equivalents $462.8M, short-term investments $449.0M, long-term investments $282.3M (total $1,194.2M; Dec 2025: $955.9M); total assets $1,586.1M; total liabilities $150.5M; stockholders' equity $1,435.6M. Debt is limited to roughly $9M of lease-type obligations. Management said in 2026 that no new financing is needed to fund the pipeline (Cantor conference summary).
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist. <b>Criteria #1, #2, #4 (5-year CAGRs) and #10 (entry multiple vs own history) are N/A because commercial history only began in Q3 2023</b> and FY2021-22 had no revenue and losses; they are excluded from the Martinero denominator (weights 13+11+8+8 = 40, leaving 65). Market concentration (#6) is scored 1&ndash;5 (1&ndash;2 = Met, 3&ndash;5 = Not met).</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Krystal Biotech</th><th>Status</th></tr>
+    <tr><td>1</td><td>Revenue CAGR (5yr, FY21-25)</td><td>&ge;15%</td><td>N/A &mdash; no revenue in FY2021 or FY2022 (VYJUVEK launched Q3 2023), so a 5-year CAGR has no base. For reference only: FY2023 $50.7M &rarr; FY2025 $389.1M is a 2-year CAGR of +177%, but it is launch-ramp growth off a partial first year and is not scored</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (5yr, FY21-25)</td><td>&ge;15%</td><td>N/A &mdash; operating income was negative in FY2021 (-$69.9M), FY2022 (-$121.3M) and FY2023 (-$97.1M); a CAGR is undefined from a loss base. Operating income then swung to +$103.3M (FY2024) and +$161.3M (FY2025)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>41.45% (FY2025 GAAP operating income $161.3M on $389.1M revenue), up from 35.54% in FY2024; Q3 2026 was 55.9% and TTM to Sep 2026 about 48.4%. Note R&amp;D is expensed and stock compensation ($54.5M in FY2025) is included (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (5yr, FY21-25)</td><td>&ge;15%</td><td>N/A &mdash; FCF (operating cash flow minus capex) was negative in FY2021 (-$116.3M), FY2022 (-$153.6M) and FY2023 (-$100.6M), so there is no positive base. FCF turned to +$119.2M (FY2024) and +$188.9M (FY2025)</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Clear #1 by revenue among approved dystrophic epidermolysis bullosa (DEB) treatments: VYJUVEK is the first and, by revenue, by far the largest, with $1.1B of cumulative sales since launch; alternatives are a wound-care topical (Filsuvez) and an autologous cell-sheet therapy (Zevaskyn) for a subset of patients. The category is a rare-disease niche, so this is a judgment call with no verified share table (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 2 (light competition) &mdash; a handful of approved competitors in a very small patient population (US prevalence is on the order of a few thousand patients), but VYJUVEK holds the dominant position and the largest patient base; pricing and reimbursement rather than rivals are the main swing factors. Judgment (score 4/5)</td><td><span class="status-pill status-met">Met (score 2)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC about 40-43% (S&amp;P Global via StockAnalysis: 42.6% FY2025, 40.2% current) vs an assumed WACC of about 10% (my estimate for a profitable large-cap-leaning biotech; no company-stated WACC), a spread above 12 points (score 5/5). Caveat: S&amp;P's ROIC excludes the $1.2B cash pile; on total capital including cash the return would be about 10%, close to WACC</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: $1,194.2M of cash and investments at Sep 30, 2026 against about $9M of lease-type debt. FY2025 EBITDA was about $164M, so net debt/EBITDA is strongly negative (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>FY2025 FCF $188.9M / EBIT $161.3M = 117% (FY2024: 115%); TTM to Sep 2026 FCF about $310M on EBIT of $228M. Conversion exceeds 100% because stock compensation is non-cash and interest income is included in operating cash flow (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>N/A &mdash; GAAP P/E exists only for FY2023 (320x on a $0.39 EPS lifted by a one-off asset-sale gain), FY2024 (50.5x), FY2025 (34.9x) and now (about 40.5x trailing); FY2021-22 were losses. Three year-end points cannot form a meaningful 5-year average. For reference only: now vs the FY2024-25 average of 42.7x is about 0.95x, but this is not scored</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>Rising: about 22.2M shares at Dec 2021 (derived from S&amp;P net cash and net cash per share) to roughly 29.6M (basic weighted, Q3 2026), about +33%, mostly from equity raised before 2024 and option exercises. Dilution has slowed to about +3% a year (diluted +3.4% YoY in Q3 2026). A $400M buyback was authorised on Nov 2, 2026 but no material shares have been retired yet (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Founder-Chairman-CEO Krish Krishnan and his wife Suma Krishnan (President, R&amp;D), who co-founded the company, hold roughly 3.4M shares between them (about 11-12%; S&amp;P Global shows total insiders at 11.5%), partly through a family trust and partly via 10b5-1 sales plans. 5-15% bracket (score 3/5; the exact percentage is third-party / derived from a Schedule 13G, not the proxy table)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>3.1% of revenue in FY2025 ($12.0M); 1.5% in FY2024. Capex was far higher in FY2021-22 ($68M and $53M) while the Pittsburgh ASTRA manufacturing campus was built, so the current low intensity reflects a finished build-out (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp)</td><td>&Delta; &ge; -1.0pp</td><td>Basis: gross margin (net product revenue less cost of goods sold). A 3-year window from FY2022 is not possible (no revenue); the longest available window is FY2023 (93.90%) &rarr; FY2025 (94.08%) = +0.18pp over 2 years (score 4/5, near flat). Treat as provisional: FY2023 was a partial launch year and gross margin has ranged between 92.5% and 95.6% by quarter</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; (105 &minus; N/A weights) &times; 100):</b> #1, #2, #4, #10 N/A (weights 13+11+8+8 = 40 removed) &middot; #3 5&times;10/5=10.0 &middot; #5 5&times;7/5=7.0 &middot; #6 4&times;6/5=4.8 &middot; #7 5&times;10/5=10.0 &middot; #8 5&times;6/5=6.0 &middot; #9 5&times;8/5=8.0 &middot; #11 0 &middot; #12 3&times;5/5=3.0 &middot; #13 4&times;4/5=3.2 &middot; #14 4&times;5/5=4.0. Total 56.0 / 65 = <b>86/100</b>. Criteria met: 9/14 on the binary thresholds (4 N/A). <b>Judgment calls:</b> #5 and #6 are qualitative (no verified DEB market-share data); #7 uses a third-party ROIC that excludes cash plus my own WACC estimate; #12 uses a derived ~11-12% stake; #14 uses a 2-year window because the company had no revenue in FY2022. Because 40 of 105 weight points are N/A, including the three growth criteria that normally carry the most weight, this index is not directly comparable with companies scored on all 14 criteria.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>A rare example of a recently launched gene therapy that is already highly profitable: 94% gross margin, 41% GAAP operating margin in FY2025 (48% TTM), $189M of FY2025 FCF (117% of EBIT) and $1.19B of cash with no meaningful debt. Revenue grew 30% YoY in Q3 2026 with a re-acceleration through 2026, international sales reached $32M a quarter, and operating expenses have been flat while revenue scaled. The founders still lead the company, hold about 11-12% and have built a pipeline in dermatology, ophthalmology, respiratory and inhaled oncology funded entirely from VYJUVEK cash flow. A $400M buyback was authorised and the stock has pulled back about 22% from its 52-week high while earnings keep rising.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p><b>Single-product concentration:</b> all revenue is VYJUVEK for DEB, a small patient population, so growth depends on finding new patients, international pricing and reimbursement (Germany pricing was a drag in 2026 coverage; France not before 2027) and defending against competing DEB therapies. The pipeline has no second approved product and several readouts slipped into 2027, which is what the stock reacted to on Nov 2. Dilution of about 33% since 2021 (although slowing); stock compensation of $54.5M a year; FY2025 net income was flattered by a tax benefit and the tax rate is now rising (21% in Q3 2026). Valuation is not low (about 40x trailing GAAP and about 36x forward earnings, about 20x sales) and criteria scoring rests on a short track record. Several inputs are third-party or approximate: ROIC/WACC, the insider stake, forward P/E, the 52-week range and the analyst target.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Krystal Biotech Q3 2026 earnings release (Form 8-K, Nov 2, 2026); StockAnalysis.com (S&amp;P Global Market Intelligence: annual and quarterly financials, historical prices, ratios, ROIC, forward P/E, analyst targets, insider and institutional ownership); Form 4 and Schedule 13G amendment summaries (Mar-Jun 2026); TheFly/TipRanks and Finviz news summaries for analyst target changes and the Nov 2 price reaction. Prices: Nasdaq closes, Nov 17, 2026 latest. Third-party figures are flagged as such. All figures USD. Prepared Nov 18, 2026 &mdash; for personal portfolio research only. <b>Not investment advice, not for distribution.</b>
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Krystal Biotech (Nasdaq: KRYS), USD. The stock has been listed since September 2017, so the full five-year window is available. It rose about 4.3x from the Dec 2021 close (a pre-revenue biotech) as VYJUVEK launched and turned profitable, with a pullback of about 22% from the 52-week high in 2H 2026.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Krystal Biotech &mdash; Year-End Close (Nasdaq, USD)</div>
+    <div class="chart-sub">Unadjusted year-end closes (Dec 31, 2021 through Dec 31, 2025) and the Nov 17, 2026 close, from StockAnalysis (S&amp;P Global). The dashed line is the annualised price change from the Dec 2021 point to now, shown on a 5-year convention (the actual span is about 4.9 years), excluding dividends (none paid). Intra-period highs and lows are not shown: the 52-week range is $183.26 &ndash; $382.54 (as of Oct 26, 2026).</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4" stop-opacity="0.24"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="28.0" x2="680" y2="28.0" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="78.7" x2="680" y2="78.7" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="129.3" x2="680" y2="129.3" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180.0" x2="680" y2="180.0" stroke="#1a2236" stroke-width="1"/>
+<path d="M 46.0,160.0 L 172.8,154.8 L 299.6,129.7 L 426.4,111.4 L 553.2,61.1 L 680.0,32.0 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="160.0" x2="680.0" y2="32.0" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="363" y="70.0" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY21&#8594;Now): +33.7%*</text>
+<path d="M 46.0,160.0 L 172.8,154.8 L 299.6,129.7 L 426.4,111.4 L 553.2,61.1 L 680.0,32.0" fill="none" stroke="#5eead4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="160.0" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="46.0" y="149.0" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$69.95</text>
+<text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2021</text>
+<circle cx="172.8" cy="154.8" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="172.8" y="143.8" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$79.22</text>
+<text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2022</text>
+<circle cx="299.6" cy="129.7" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="299.6" y="118.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$124.06</text>
+<text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2023</text>
+<circle cx="426.4" cy="111.4" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="426.4" y="100.4" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$156.66</text>
+<text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2024</text>
+<circle cx="553.2" cy="61.1" r="3" fill="#0e1626" stroke="#5eead4" stroke-width="1.6"/>
+<text x="553.2" y="50.1" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$246.54</text>
+<text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">2025</text>
+<circle cx="680.0" cy="32.0" r="4" fill="#5eead4" stroke="#5eead4" stroke-width="1.6"/>
+<text x="678" y="21.0" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$298.55</text>
+<text x="680.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    *The window starts when Krystal had no revenue and ends after three years of commercial sales, so the CAGR mainly reflects the re-rating from clinical-stage biotech to profitable commercial company; it should not be read as a steady-state compounding rate. Currency: USD throughout. No stock splits.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
