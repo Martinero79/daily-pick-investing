@@ -154,12 +154,12 @@ const COMPANIES = [
     subIndustry: "Power Cables & Electrical Equipment",
     tags: [],
     dateFeatured: "2026-08-18",
-    price: "DKK 966.50",
+    price: "DKK 840.00",
     score: "6 / 14",
-    martinero: 63,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: 9.6, prior: 26.7 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 0.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Danish manufacturer of power cables for the subsea and land grid buildout tied to the energy transition. Margins have improved sharply from a low base, but the scorecard is still more miss than hit at this stage.",
+    martinero: 63,
+    momentum: { status: "decelerating", recent: 9.6, prior: 26.7 },
+    quarterYoY: { period: "Q3 2026", growth: 3.2 },
+    blurb: "Danish power-cable maker for the subsea and land grid buildout. Q3 2026 revenue was EUR 966m (+3.2% reported, -7% organic at standard metal prices) with operational EBITDA of EUR 111m, and NKT now expects the upper end of its EUR 400-430m 2026 range. Net cash is still EUR 471m, but free cash flow is deeply negative (-EUR 468m over Q1-Q3) as the capex programme continues. The scorecard stays more miss than hit.",
     file: "companies/nkt.html"
   },
 
@@ -626,12 +626,12 @@ const COMPANIES = [
     subIndustry: "Cybersecurity",
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
-    price: "$313.84",
+    price: "$343.32",
     score: "9 / 14",
-    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 24.5, prior: 14.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 34.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The strongest scorecard in this AI/SaaS batch (9/14 met), with real GAAP operating profit since FY2023. Q4 FY2026 revenue grew 34% to $3.41B and Next-Gen Security ARR grew 63% to $9.10B, but GAAP operating margin is only about 5% (6% for FY2026) after the $25B CyberArk deal. The stock has pulled back about 15% from its August close to $313.84, yet P/FCF is still about twice its own 5-year average and share count is up about 40%.",
+    martinero: 79,
+    momentum: { status: "accelerating", recent: 24.5, prior: 14.9 },
+    quarterYoY: { period: "Q1 FY2027", growth: 39.2 },
+    blurb: "The strongest scorecard in this AI/SaaS batch (9/14 met), with real GAAP operating profit since FY2023. Q1 FY2027 revenue grew 39% to $3.44B and Next-Gen Security ARR grew 66% to $9.73B, FY2027 revenue guidance was raised to $14.52-14.57B, and the company agreed to buy Applied Compute for $4.5B in stock. GAAP operating margin is only about 3% after the $25B CyberArk deal, the stock is $343.32, and P/FCF is still about twice its own 5-year average with share count up about 40%.",
     file: "companies/panw.html",
     personalNote: "Palo Alto Networks is the flip side of CrowdStrike in this batch — a real, mature GAAP earner rather than a pure cash-flow story, and it shows in the score: 8/13 versus CRWD's 4/13. What holds it back isn't business quality, it's price and dilution. The stock has essentially tripled since April on a mix of genuine AI-security demand and a broad cybersecurity re-rating, and CyberArk added 112 million new shares on top of ordinary stock comp. I like the direction of this business a lot — CEO Nikesh Arora has actually been buying shares in the open market rather than selling, which is the opposite signal from what I usually see — but I'd rather wait for the CyberArk integration dust to settle and the multiple to cool off than chase it at 2.6x its own historical valuation."
   },
@@ -778,12 +778,12 @@ const COMPANIES = [
     subIndustry: "China E-Commerce / Cloud Platform",
     tags: ["E-Commerce"],
     dateFeatured: "2026-08-30",
-    price: "$118.90",
+    price: "$81.08",
     score: "4 / 14",
-    martinero: 43,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: 2.8, prior: 5.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 9.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "One of the weaker scorecards on this site — 4/14 criteria met, Martinero Index 43 — but driven almost entirely by two live, real events rather than a broken business. First, Alibaba committed roughly ¥50B ($7B) to a quick-commerce subsidy war against Meituan and JD.com, taking GAAP operating margin from 15.22% (FY2025) to 6.15% (FY2026) and 4.56% TTM. Second, capex more than tripled to fund AI/cloud infrastructure, pushing free cash flow negative (-$11.38B TTM) for the first time in years. Set against that: Alibaba remains net cash ($17.5B), has cut its share count over 13% since FY2022, and trades at a PEG ratio of just 0.44. Taobao+Tmall remain China's largest combined e-commerce group (~40-46% GMV share) but the market has become genuinely four-way contested, unlike a decade ago.",
+    martinero: 43,
+    momentum: { status: "decelerating", recent: 2.8, prior: 5.8 },
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 9.6 },
+    blurb: "Alibaba still has a weak scorecard, 4/14 criteria met and Martinero Index 43, but the Sep 2026 quarter showed real improvement. Revenue rose 9.6% YoY, AI cloud grew 53%, and GAAP operating margin recovered to 10.7% from a 1.0% trough in March as quick-commerce losses narrowed. Capex jumped 60% (¥50.5B in the quarter), keeping TTM free cash flow negative (-$13.5B). Net cash is $23.9B, helped by an HK$80B share placing, and the shares are down about 49% over 52 weeks to $81.08 (PEG 0.35).",
     file: "companies/baba.html",
     personalNote: "Alibaba is the hardest scorecard I've had to sit with on this site, because the number (31) looks like a broken business and the reality is a lot messier than that. Two things are doing basically all the damage: a subsidy war Alibaba chose to fight, and an AI capex ramp every hyperscaler is running through right now. Neither is a sign the core business is failing — quarterly operating margin already bounced off its March 2026 low (1.01% to 7.29%) — but neither has fully resolved either, and I don't know yet whether management can dial the subsidy spend back without just handing share back to Meituan and JD. What keeps me interested despite the ugly number: net cash balance sheet, a shrinking share count even through this mess, and a PEG of 0.44 that says the market is pricing in less growth than analysts still expect. What keeps me cautious: real, multi-way competition in a market that used to be Alibaba's alone, plus the structural China-ADR considerations that don't apply to anything else in this batch. I'd want to see two more quarters of margin recovery before treating this as a value opportunity rather than a business genuinely losing ground."
   },
@@ -1062,12 +1062,12 @@ const COMPANIES = [
     subIndustry: "Container Shipping",
     tags: ["Pending Acquisition", "Highly Cyclical"],
     dateFeatured: "2026-09-02",
-    price: "$27.01",
+    price: "$29.32",
     score: "3 / 14",
-    martinero: 37,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: -18.07, prior: 63.25 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 8.87, note: "First quarter of renewed YoY growth after three straight quarters of double-digit declines." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "ZIM is a global container-shipping carrier and a much smaller direct competitor to Maersk, ranking roughly #10 globally by TEU capacity (~2.4% share). Its financials are sharply cyclical: EBIT swung from a $5.8B profit in FY2021 to a $2.7B net loss in FY2023 and back to modest FY2025 profitability, and it clears just 3 of 13 scorecard criteria (Martinero Index 37/100). ZIM is also a pending M&A target — it agreed in February 2026 to be acquired by Hapag-Lloyd (see that dashboard) for $35.00/share cash, shareholder-approved in May 2026 — and as of September 2026 trades near $27, a discount reflecting the deal's still-pending Israeli regulatory approval.",
+    martinero: 37,
+    momentum: { status: "decelerating", recent: -18.07, prior: 63.25 },
+    quarterYoY: { period: "Q3 2026", growth: 52.62 },
+    blurb: "ZIM is a global container carrier, roughly #10 by TEU capacity (~2.4% share) and a much smaller rival to Maersk. Its results are sharply cyclical: after two quarters of operating losses, Q3 2026 revenue rose 53% YoY to $2.71B and net income reached $830M on a $2,480/TEU average freight rate. Full-year guidance was raised again and a $2.01/share dividend was declared, but it still clears only 3 of 14 scorecard criteria (Martinero Index 37/100). The pending $35.00/share cash acquisition by Hapag-Lloyd now awaits a new Israeli Golden Share application, with closing targeted for Q1 2027, and the stock trades near $29, about 16% below the offer.",
     file: "companies/zim.html"
   },
 
@@ -1189,12 +1189,12 @@ const COMPANIES = [
     subIndustry: "China Internet Platform (Social, Gaming, Fintech, Cloud)",
     tags: ["Duopoly"],
     dateFeatured: "2026-09-04",
-    price: "$55.85",
-    score: "12 / 14",
-    martinero: 81,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 13.86, prior: 8.41 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 2026", growth: 11.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Tencent is China's dominant social/gaming/fintech platform — WeChat/Weixin's 1.43bn combined MAU underpins a business that is also the world's largest video-game publisher by revenue (Tencent + NetEase together take roughly 70% of the Chinese gaming market) and a close #2 in Chinese mobile payments behind Alipay. Margins have expanded sharply since the 2022 regulatory-crackdown trough (operating margin 32.67% FY2025, gross margin up 13.17pp since FY2022), the balance sheet sits net-cash, and buybacks have run for four straight years — but 5-year revenue and FCF CAGRs both miss this framework's 15% growth bar, and the statistically cheap-looking 14.33x trailing P/E carries a PEG north of 2 once slower forward growth is priced in.",
+    price: "$42.50",
+    score: "10 / 14",
+    martinero: 74,
+    momentum: { status: "accelerating", recent: 13.86, prior: 8.41 },
+    quarterYoY: { period: "Q3 2026", growth: 8.0 },
+    blurb: "Tencent is China's dominant social/gaming/fintech platform: WeChat's ~1.45bn MAU underpins the world's largest video-game publisher by revenue and a close #2 in Chinese mobile payments. Q3 2026 revenue rose 8% to RMB207.3B (a miss), but capex jumped to RMB81.4B (accrual basis), free cash flow was -RMB69.1B and the balance sheet swung to RMB13.7B net debt. Margins are well above the FY2022 trough, though trailing FCF conversion and capex intensity now fail the framework's bars. At a ~10.9x trailing P/E (estimate), the stock trades at a deep discount to its own history.",
     file: "companies/tencent.html"
   },
 
@@ -1550,12 +1550,12 @@ const COMPANIES = [
     subIndustry: "Grocery, E-Commerce & Retail Media",
     tags: ["Founder-Controlled", "Defensive"],
     dateFeatured: "2026-09-10",
-    price: "$107.14",
+    price: "$127.95",
     score: "6 / 14",
-    martinero: 56,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 5.6, prior: 6.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2027", growth: 4.8 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The world's largest retailer by revenue ($713B FY2026) with a fortress balance sheet (net debt/EBITDA just 1.31x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family ownership stake (~44%) about as aligned as it gets. Walmart Connect advertising grew 46% and e-commerce is up ~25% — genuine bright spots — but growth and margin criteria calibrated for higher-growth businesses were never going to clear here: revenue CAGR (+5.6%), EBIT CAGR (+3.5%), operating margin (4.18%) and FCF conversion (~50%) all miss their bars, structural to grocery-heavy retail rather than a company-specific flaw. At a trailing P/E of 39.29x versus its own 5-year average of 34.84x, the stock also trades above its own recent history.",
+    martinero: 56,
+    momentum: { status: "steady", recent: 5.6, prior: 6.0 },
+    quarterYoY: { period: "Q3 FY2027", growth: 5.2 },
+    blurb: "The world's largest retailer by revenue ($713B FY2026; $745B trailing twelve months) with a fortress balance sheet (net debt/EBITDA about 1.3-1.4x), an unrivaled #1 position in US grocery and total retail, five straight years of declining share count, and a Walton family stake of about 44%. Q3 FY2027 revenue grew 5.2% to $188.8B with global e-commerce +17% and global advertising +25%, and guidance was raised again. Growth, margin and FCF-conversion criteria still miss their bars (structural to grocery-heavy retail), and at a trailing P/E of 48.85x versus its own FY22-26 average of about 34.84x the stock trades well above its recent history.",
     file: "companies/walmart.html"
   },
 
@@ -3913,6 +3913,24 @@ const COMPANIES = [
     quarterYoY: { period: "Q3 2026", growth: 30.2 },
     blurb: "Pittsburgh-based commercial-stage gene-therapy company whose only product, Vyjuvek, treats dystrophic epidermolysis bullosa and is rolling out in Europe and Japan. FY2025 revenue was $389.1M (+33.9%) with a ~94% gross margin, 41% GAAP operating margin and $1.2B of cash. The pipeline spans dermatology, eye, respiratory and inhaled oncology, and a $400M buyback was authorised in Nov 2026. Four criteria are N/A because of the short commercial history, so the index is not directly comparable with fully scored companies; single-product concentration is the main risk.",
     file: "companies/krystal-biotech.html"
+  },
+
+  {
+    slug: "rocket-lab",
+    name: "Rocket Lab Corporation",
+    ticker: "Nasdaq: RKLB",
+    sector: "Industrials",
+    industry: "Aerospace & Defense",
+    subIndustry: "Space Launch & Spacecraft",
+    tags: ["Space", "Launch", "Aerospace & Defense", "Pre-profit", "High growth"],
+    dateFeatured: "2026-11-23",
+    price: "$45.42",
+    score: "4 / 14",
+    martinero: 36,
+    momentum: { status: "decelerating", recent: 38.0, prior: 78.3 },
+    quarterYoY: { period: "Q3 2026", growth: 72.7 },
+    blurb: "Rocket Lab is a US launch and space-systems company. It flies the Electron rocket (100 launches by Nov 2026) and builds spacecraft and components. Q3 2026 revenue was a record $267.8M (+72.7% YoY), with backlog of about $3.57B and net cash of about $4.70B. It is still loss-making (FY25 operating margin -38.0%) and the share count is up about 42% since FY21; it fails the tenbagger check on size (~$29B cap) and dilution.",
+    file: "companies/rocket-lab.html"
   },
 
   // Add the next company below this line, as a new {...} block ⬇
