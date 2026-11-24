@@ -3933,6 +3933,24 @@ const COMPANIES = [
     file: "companies/rocket-lab.html"
   },
 
+  {
+    slug: "zeta-global",
+    name: "Zeta Global Holdings Corp.",
+    ticker: "NYSE: ZETA",
+    sector: "Technology",
+    industry: "Software",
+    subIndustry: "Marketing Cloud / AI Marketing Software",
+    tags: ["Software", "AI", "Marketing Technology", "GAAP Profit Inflection", "Founder-led"],
+    dateFeatured: "2026-11-24",
+    price: "$32.43",
+    score: "5 / 14",
+    martinero: 44,
+    momentum: { status: "decelerating", recent: 29.7, prior: 38.0 },
+    quarterYoY: { period: "Q3 2026", growth: 46.1 },
+    blurb: "Zeta Global sells an AI-driven marketing cloud (Zeta Marketing Platform, first-party data and identity graph) to large enterprises, co-founded by David Steinberg and John Sculley. Q3 2026 revenue was $492.7M (+46.1% YoY, +30% excluding Marigold and political revenue), with GAAP operating margin of 9.3%, GAAP net income of $38.3M and free cash flow of $81.5M. FY2025 was the first year of positive GAAP operating income, while the share count is up about 23% since FY21.",
+    file: "companies/zeta-global.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
