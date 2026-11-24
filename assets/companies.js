@@ -68,7 +68,7 @@ const COMPANIES = [
     martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
     momentum: { status: "decelerating", recent: 65.5, prior: 114.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
     quarterYoY: { period: "Q3 FY2027", growth: 103.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Dominant AI accelerator supplier: Data Center is about 93% of revenue. Q3 FY2027 revenue was a record $115.8B (+103% YoY) at a 74.8% GAAP gross margin and a 66.9% GAAP operating margin, with Q4 guided to $130B. Founder-CEO Jensen Huang has left, CFO Colette Kress is interim CEO, and the shares fell about 28% from August into the print. The trailing P/E is now about 17x against a roughly 63x five-year average; the misses remain FCF conversion and thin insider ownership.",
+    blurb: "Dominant AI accelerator supplier: Data Center is about 93% of revenue. Q3 FY2027 revenue was a record $115.8B (+103% YoY) at a 74.8% GAAP gross margin and a 66.9% GAAP operating margin, with Q4 guided to $130B. Founder-CEO Jensen Huang resigned on 12 Nov and was reinstated on 23 Nov, with an independent investigation still to conclude; the shares fell about 28% from August into the print. The trailing P/E is now about 17x against a roughly 63x five-year average; the misses remain FCF conversion and thin insider ownership.",
     file: "companies/nvidia.html"
   },
 
