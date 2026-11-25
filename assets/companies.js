@@ -3951,6 +3951,24 @@ const COMPANIES = [
     file: "companies/zeta-global.html"
   },
 
+  {
+    slug: "transmedics",
+    name: "TransMedics Group, Inc.",
+    ticker: "Nasdaq: TMDX",
+    sector: "Healthcare",
+    industry: "Medical Devices & Services",
+    subIndustry: "Organ Transplant Perfusion & Logistics",
+    tags: ["Organ transplant", "Medical devices", "Logistics/aviation", "Founder-led", "Convertible debt", "Tenbagger test"],
+    dateFeatured: "2026-11-25",
+    price: "$93.42",
+    score: "4 / 14",
+    martinero: 59,
+    momentum: { status: "decelerating", recent: 37.1, prior: 82.7 },
+    quarterYoY: { period: "Q3 2026", growth: 41.1 },
+    blurb: "TransMedics makes the Organ Care System, a portable device that keeps donor hearts, lungs and livers warm and perfused. Through its National OCS Program it also sells procurement and air logistics on its own aircraft. Revenue grew from $30M in FY2021 to $605M in FY2025, and Q3 2026 revenue was a record $203.0M (+41%) with FY2026 guidance raised to $764-774M. The stock trades at about 4.5x sales, but returns on capital, dilution and gross margin trend weigh on the score.",
+    file: "companies/transmedics.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
