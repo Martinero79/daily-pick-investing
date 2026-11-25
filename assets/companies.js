@@ -26,12 +26,12 @@ const COMPANIES = [
     subIndustry: "Semiconductor IP & Design",
     tags: ["Near-Monopoly", "Geopolitically Critical"],
     dateFeatured: "2026-08-11",          // YYYY-MM-DD, the day you're posting this
-    price: "$274.58",
+    price: "$161.56",
     score: "9 / 14",
-    martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 22.8, prior: 23.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 27.1 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Near-monopoly architecture licensor behind 99% of smartphone CPUs, now pushing into AI datacenter compute.",
+    martinero: 69,
+    momentum: { status: "steady", recent: 22.8, prior: 23.9 },
+    quarterYoY: { period: "Q2 FY2027 (Sep 2026)", growth: 27.1 },
+    blurb: "Arm's Q2 FY2027 revenue rose 27% YoY to a record $1.44B. License revenue jumped 50% and data-center royalties doubled, but total royalties grew only 8%. The stock has fallen about 63% from its June high, so P/S of about 31.6x is now close to its own FY25-26 average. GAAP margins stay volatile and SoftBank owns about 87%, so the score holds at 9/14 (Martinero Index 69).",
     file: "companies/arm-holdings.html"   // path to the dashboard file you saved
   },
 
@@ -189,14 +189,15 @@ const COMPANIES = [
     subIndustry: "Payments Networks",
     tags: ["Duopoly"],
     dateFeatured: "2026-08-18",
-    price: "$362.82",
-    score: "9 / 14",
-    martinero: 72,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 11.3, prior: 10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q4 FY2026", growth: 13.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The toll-booth on global card payments, alongside Mastercard in a genuine duopoly. Margins, returns on capital and valuation all clear the bar; growth has simply slowed as card payment volumes mature.",
+    price: "$401.87",
+    score: "7 / 14",
+    martinero: 67,
+    momentum: { status: "accelerating", recent: 14.8, prior: 11.3 },
+    quarterYoY: { period: "Q4 FY2026", growth: 13.2 },
+    blurb: "The toll-booth on global card payments, alongside Mastercard in a genuine duopoly. FY2026 revenue grew 15% to $45.9B (Q4 +13%) and margins and returns on capital stay exceptional. Multi-year growth is still below the 15% bar, free-cash-flow conversion slipped just under 80%, and the shares now trade slightly above their own recent P/E average.",
     file: "companies/visa.html",
-    personalNote: "Visa caught my attention for the sub-sector — Visa and Mastercard run a genuine duopoly on card-payment rails, with Amex as a small, closed-loop niche player. Merchants have complained about the fees for years, and they just pass them on — we're all quietly overpaying on every card swipe. It used to feel like a pure blue-chip compounder. Now real-time rails like Pix, UPI and FedNow are built to cut Visa out entirely. Are Visa's golden days ending, or do I just hold and let it grow conservatively?"
+    personalNote: "Visa caught my attention for the sub-sector — Visa and Mastercard run a genuine duopoly on card-payment rails, with Amex as a small, closed-loop niche player. Merchants have complained about the fees for years, and they just pass them on — we're all quietly overpaying on every card swipe. It used to feel like a pure blue-chip compounder. Now real-time rails like Pix, UPI and FedNow are built to cut Visa out entirely. Are Visa's golden days ending, or do I just hold and let it grow conservatively?",
+    noteUpdate: "Q4 and full-year FY2026 are in: revenue $45.9B (+14.8%), with Q4 up 13%. Two criteria (FCF conversion and entry multiple) now fall just short, so the score is 7 of 14 (Martinero 67).",
   },
 
   {
@@ -227,14 +228,15 @@ const COMPANIES = [
     subIndustry: "Memory & Storage",
     tags: [],
     dateFeatured: "2026-08-21",
-    price: "$1,568.87",
+    price: "$79.24",
     score: "8 / 14",
-    martinero: 80,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 175.3, prior: 10.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q1 FY2027", growth: 378.0, note: "Extreme YoY reflects the 2026 NAND pricing supercycle against an unusually weak, depressed prior-year quarter shortly after the Feb 2025 spinoff — not an ongoing run-rate." },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The NAND flash memory maker behind SD cards and enterprise SSDs, spun off from Western Digital in Feb 2025 — up roughly 570% year-to-date on a structural memory shortage colliding with AI-datacenter demand, though the stock has been on a wild round trip: an all-time-high close of $2,335 on June 25, a 56% plunge to $1,015.89 by July 29, and a partial recovery since. Genuinely strong numbers on most criteria, but two can't be tested at all given the short standalone trading history.",
+    martinero: 80,
+    momentum: { status: "accelerating", recent: 175.3, prior: 10.0 },
+    quarterYoY: { period: "Q1 FY2027", growth: 378.0 },
+    blurb: "The NAND flash maker spun off from Western Digital in Feb 2025. Q1 FY2027 revenue was $11.03bn (+378% YoY, +23% QoQ) at an 85.1% non-GAAP gross margin, and Q2 is guided to $12.2-12.6bn. The stock is about 73% below its June peak after an 8-for-1 split and an AI/memory selloff, now trading near 5x trailing and 2.6x forward earnings. It clears growth, margin, ROIC and balance-sheet bars; misses are market share, share count, insider ownership and Kioxia-JV capex, and two criteria can't be tested given the short trading history.",
     file: "companies/sandisk.html",
-    personalNote: "I didn't see this one coming. To me, SanDisk was always just the name on the memory card in my old camera — not a stock I'd ever think to check. Then a friend mentioned it to me, already deep into a run I'd completely missed: from around $235 at the start of the year to a peak near $2,354 by late June, on a genuine shortage of the NAND flash memory that AI data centers need for storage. It's cooled off since — down to around $1,569 now, roughly a third off that peak, as the memory-chip trade caught some profit-taking. Still up something like 570% since January, though. I don't own it — I'm overwhelmingly overexposed to AI as it is. But I expect he serves me a good Malbec at our next asado."
+    personalNote: "I didn't see this one coming. To me, SanDisk was always just the name on the memory card in my old camera — not a stock I'd ever think to check. Then a friend mentioned it to me, already deep into a run I'd completely missed: from around $235 at the start of the year to a peak near $2,354 by late June, on a genuine shortage of the NAND flash memory that AI data centers need for storage. It's cooled off since — down to around $1,569 now, roughly a third off that peak, as the memory-chip trade caught some profit-taking. Still up something like 570% since January, though. I don't own it — I'm overwhelmingly overexposed to AI as it is. But I expect he serves me a good Malbec at our next asado.",
+    noteUpdate: "Q1 FY2027 is in: revenue $11.03B (+378%) at an 85.1% non-GAAP gross margin, with Q2 guided to $12.2-12.6B. Prices on this page are adjusted for the 8-for-1 split of 20 Nov, and the shares are far below their June peak. The score stays 8 of 14 (Martinero 80).",
   },
 
   {
@@ -664,14 +666,15 @@ const COMPANIES = [
     subIndustry: "Observability & Monitoring",
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
-    price: "$236.98",
+    price: "$156.67",
     score: "8 / 14",
-    martinero: 69,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 28.0, prior: 25.8 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 35.2 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The strongest market-position claim in this AI/SaaS batch — a Gartner Magic Quadrant Leader for Observability Platforms for six consecutive years, positioned highest in Ability to Execute in 2026 — paired with the messiest GAAP profitability path: operating income has flipped sign three times in five years, never building the clean trend seen at Palo Alto Networks or Zscaler. Free cash flow is the cleaner story, compounding at +37.9% CAGR with 22-35% margins every year. The stock is up +79.9% over the past year but fell -17% in a single day in August 2026 after management flagged a usage reduction from its largest customer, despite an otherwise beat-and-raise quarter. Insider ownership is thin at 5.48%, and share count is up 21% over five years. IMPORTANT: 'Met' on entry multiple means 72.6x P/FCF is a modest ~16% discount to Datadog's own 86x average — not a bargain — while growth has cooled from a faster earlier pace into the high-20s%.",
+    martinero: 71,
+    momentum: { status: "accelerating", recent: 28.0, prior: 25.8 },
+    quarterYoY: { period: "Q3 2026", growth: 35.2 },
+    blurb: "Datadog posted Q3 2026 revenue of $1.197B (+35% YoY, well above its $1.135-1.145B guide), GAAP operating income of $75M and free cash flow of $251M. It remains a six-time Gartner Magic Quadrant Leader in observability, with strong free cash flow (+37.9% CAGR) and a $3.9B net cash position. The stock sold off after the Nov 4 report on flat Q4 guidance and lower usage from its largest AI customer, and at $156.67 it is about 34% below late August and roughly 46x TTM free cash flow, well under its own 86x average. GAAP profitability is still thin and share dilution continues.",
     file: "companies/ddog.html",
-    personalNote: "Datadog is an interesting case because the market-position story is genuinely the best in this batch — six years running as the Gartner-recognized Observability leader is not a small thing — but the profit-and-loss statement refuses to settle into a trend. It's not deteriorating, it's just bouncing around zero year after year, which makes we wonder whether that's really a temporary phase or closer to where this business structurally sits given how competitive and price-sensitive observability tooling has become. The August drop on a single large customer trimming usage is the kind of thing I'd want to watch resolve over a couple more quarters before getting more constructive — not because the business is broken, but because it's a reminder that even a 33,000-customer SaaS company can still have concentration risk hiding in the guidance language."
+    personalNote: "Datadog is an interesting case because the market-position story is genuinely the best in this batch — six years running as the Gartner-recognized Observability leader is not a small thing — but the profit-and-loss statement refuses to settle into a trend. It's not deteriorating, it's just bouncing around zero year after year, which makes we wonder whether that's really a temporary phase or closer to where this business structurally sits given how competitive and price-sensitive observability tooling has become. The August drop on a single large customer trimming usage is the kind of thing I'd want to watch resolve over a couple more quarters before getting more constructive — not because the business is broken, but because it's a reminder that even a 33,000-customer SaaS company can still have concentration risk hiding in the guidance language.",
+    noteUpdate: "Q3 2026 is in: revenue $1.197B (+35%), well above guidance, with GAAP operating income of $75M and free cash flow of $251M. The shares fell after the 4 Nov report on flat Q4 guidance and lower usage from its largest AI customer. The Martinero Index is 71.",
   },
 
   {
@@ -683,14 +686,15 @@ const COMPANIES = [
     subIndustry: "Data Cloud & Analytics",
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
-    price: "$328.00",
+    price: "$254.82",
     score: "7 / 14",
-    martinero: 65,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 28.9, prior: 29.2 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q2 FY2027", growth: 35.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The lowest binary score in this site's AI/SaaS batch — 6/13 — driven by the widest GAAP gap of the group: revenue and free cash flow have both compounded at 40%+ annually, but operating margin remains deeply negative (-28.32% in FY2026, the worst in this batch, though improving from -58.64% in FY2022). The competitive picture has genuinely shifted too — private rival Databricks has overtaken Snowflake in ARR and is growing faster (65% vs. 29%), a real reversal from 2023. Insider ownership is the thinnest here at 2.64%, reflecting a diffuse ownership structure after multiple CEO transitions. Current valuation (97.2x P/FCF) sits within its recent multi-year trading range rather than at either extreme. IMPORTANT: the 'Met' on entry multiple is mostly mechanical — it only looks cheap against a history skewed by one extreme FY2022 outlier; excluding that, 97.2x sits at the expensive end of Snowflake's normal range.",
+    martinero: 65,
+    momentum: { status: "steady", recent: 28.9, prior: 29.2 },
+    quarterYoY: { period: "Q2 FY2027", growth: 35.1 },
+    blurb: "The lowest binary score in this site's AI/SaaS batch (7/14), driven by the widest GAAP gap of the group: revenue and free cash flow have both compounded at 40%+ annually, but operating margin is still deeply negative (-28.32% in FY2026), though the Q2 FY2027 quarter narrowed to -17.0% as revenue growth re-accelerated to +35% and management raised FY27 product revenue guidance to $6.07B. Private rival Databricks has overtaken Snowflake in ARR and is growing faster, a real reversal from 2023. After a roughly 22% pullback from late August, the stock trades at about 75x P/FCF, mid-range versus its own 59-97x band rather than cheap. Q3 FY2027 results are due 2 Dec.",
     file: "companies/snow.html",
-    personalNote: "Snowflake is the toughest read in this batch for me. The growth numbers are genuinely excellent — 40% revenue CAGR, 86% FCF CAGR — but the GAAP losses aren't shrinking in dollar terms even as the margin percentage improves, and Databricks overtaking it in ARR is the kind of competitive shift I don't want to wave away as noise. I don't think this is a broken business by any means, but between the deepest losses in this batch, the thinnest insider ownership, and a well-funded private competitor now growing faster, this is one I'd want to see the FY2027 numbers on before getting more constructive. The valuation isn't demanding me to rush in either way — it's sitting in the middle of its own recent range, not screaming cheap or expensive."
+    personalNote: "Snowflake is the toughest read in this batch for me. The growth numbers are genuinely excellent — 40% revenue CAGR, 86% FCF CAGR — but the GAAP losses aren't shrinking in dollar terms even as the margin percentage improves, and Databricks overtaking it in ARR is the kind of competitive shift I don't want to wave away as noise. I don't think this is a broken business by any means, but between the deepest losses in this batch, the thinnest insider ownership, and a well-funded private competitor now growing faster, this is one I'd want to see the FY2027 numbers on before getting more constructive. The valuation isn't demanding me to rush in either way — it's sitting in the middle of its own recent range, not screaming cheap or expensive.",
+    noteUpdate: "Q2 FY2027 is in: revenue $1.55B (+35%), GAAP operating margin -17.0%, and FY27 product revenue guidance raised to $6.07B. The stock is near $254.82, about 75x free cash flow. Q3 FY2027 results are due on 2 Dec.",
   },
 
   {
@@ -721,14 +725,15 @@ const COMPANIES = [
     subIndustry: "Mobile App-Install / AI Ad-Tech Platform",
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
-    price: "$317.76",
+    price: "$348.29",
     score: "13 / 14",
-    martinero: 90,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "decelerating", recent: 70.2, prior: 75.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 55.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The highest criteria-met tally on this entire site — 13/14 criteria met, Martinero Index 90 — but it comes with real context. AppLovin divested its legacy mobile-games/apps business (closed June 30, 2025) to become a pure AI ad-tech platform built around AXON, its ad-recommendation engine; what's left runs at 75.75% operating margin and 132.73% ROIC against 17.73% WACC, the widest capital-efficiency spread of any company covered here. Because the divestiture changed the business, only FY2023-25 are used as the comparable base for growth and valuation math. The stock has been rough despite the fundamentals: short-seller Muddy Waters alleged Terms-of-Service violations in March 2025 (-20% that day), and Q2 2026 earnings on Aug 5 — despite 53% revenue growth — sent shares down another 16-21% on concerns about the pace of AppLovin's newer e-commerce ad push. The stock is down 53% from its FY2025 close of $673.82. The lone scorecard miss is market concentration, in a genuinely crowded ad-tech field (Meta, Google, Unity, Digital Turbine, and others).",
+    martinero: 90,
+    momentum: { status: "decelerating", recent: 70.2, prior: 75.0 },
+    quarterYoY: { period: "Q3 2026", growth: 55.5 },
+    blurb: "AppLovin is a pure AI ad-tech platform (AXON) after divesting its apps business in June 2025, meeting 13 of 14 criteria (Martinero Index 90) with a 77.8% TTM operating margin and 138% ROIC against a 17.6% WACC. Q3 2026 revenue rose 55.5% to $2.18B and GAAP net income 72% to $1.44B, beating guidance, and the stock rebounded about 31% the day after the print. It still trades about 48% below its FY2025 close of $673.82, and the Muddy Waters allegations and the reported SEC inquiry remain unresolved. The lone scorecard miss is market concentration.",
     file: "companies/app.html",
-    personalNote: "AppLovin has one of the highest scores I've ever put on this site, and that number alone makes me want to slow down rather than get excited. This one genuinely could go both ways, and I think it's worth being honest about both sides rather than picking one. The bull case is real: a 53% drop from the FY2025 peak looks a lot more like sentiment and noise than a fundamentals problem — Q2 2026 EBITDA and net income both beat and grew 58% and 55% respectively, the stock fell mainly on the CEO's 'lumpy timing' comments rather than an actual miss, and today's valuation sits below AppLovin's own two-year average. If AXON's edge is real and durable, that's the kind of gap between price and business quality I'd normally want to lean into. But the bear case is just as real. The economics are extraordinary — software-platform margins on what used to be a lower-margin mobile ad business — but that's only true because AppLovin sold off half the company in mid-2025, so I'm judging a two-year-old version of this business against a 14-criteria framework built for companies with a much longer track record. The stock has round-tripped hard: up roughly 7x from its 2022 low to its 2025 peak, then down more than half from that peak into today. And the Muddy Waters allegations aren't resolved — if Foroughi's independent review finds real ToS violations with Meta, Google or TikTok, that's a risk to AXON's actual data pipeline, not just a PR headache. So: could be a fun, genuinely mispriced opportunity, could also be a value trap dressed up as one. I want to watch how the next couple of quarters land and how that independent review resolves before treating a 12/13 score as anything close to a sure thing."
+    personalNote: "AppLovin has one of the highest scores I've ever put on this site, and that number alone makes me want to slow down rather than get excited. This one genuinely could go both ways, and I think it's worth being honest about both sides rather than picking one. The bull case is real: a 53% drop from the FY2025 peak looks a lot more like sentiment and noise than a fundamentals problem — Q2 2026 EBITDA and net income both beat and grew 58% and 55% respectively, the stock fell mainly on the CEO's 'lumpy timing' comments rather than an actual miss, and today's valuation sits below AppLovin's own two-year average. If AXON's edge is real and durable, that's the kind of gap between price and business quality I'd normally want to lean into. But the bear case is just as real. The economics are extraordinary — software-platform margins on what used to be a lower-margin mobile ad business — but that's only true because AppLovin sold off half the company in mid-2025, so I'm judging a two-year-old version of this business against a 14-criteria framework built for companies with a much longer track record. The stock has round-tripped hard: up roughly 7x from its 2022 low to its 2025 peak, then down more than half from that peak into today. And the Muddy Waters allegations aren't resolved — if Foroughi's independent review finds real ToS violations with Meta, Google or TikTok, that's a risk to AXON's actual data pipeline, not just a PR headache. So: could be a fun, genuinely mispriced opportunity, could also be a value trap dressed up as one. I want to watch how the next couple of quarters land and how that independent review resolves before treating a 12/13 score as anything close to a sure thing.",
+    noteUpdate: "Q3 2026 is in: revenue $2.18B (+55.5%, about $100M above the top of guidance), GAAP net income $1.44B (+72%), adjusted EBITDA $1.84B (84% margin). Q4 guide is revenue $2.365-2.395B. The score is now 13 of 14 criteria (market concentration is the one miss), and the shares rose about 31% the day after the print. The Muddy Waters allegations and the reported SEC inquiry remain unresolved.",
   },
 
   {
@@ -759,14 +764,15 @@ const COMPANIES = [
     subIndustry: "IT Workflow / Core Enterprise SaaS",
     tags: ["AI/SaaS"],
     dateFeatured: "2026-08-29",
-    price: "$144.71",
+    price: "$87.61",
     score: "11 / 14",
-    martinero: 79,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 20.9, prior: 22.4 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 20.5 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The strongest scorecard of any core-enterprise-SaaS name on this site — 11/14 criteria met, Martinero Index 80 — built on genuinely rare growth durability: five straight years of 20%+ revenue growth that's now accelerating (Q2 2026 was +24.0% YoY, the fastest in two years) despite already being past $13B in revenue. ServiceNow holds roughly 44% of the global ITSM market, more than 2.5x its nearest rival, and its AI product line crossed $1B in annual contract value this quarter with agentic AI deployments up 9x in nine months. The balance sheet stayed conservatively levered (net debt/EBITDA 0.60x) even after the $7.75B Armis Security acquisition. What holds it back: GAAP operating margin (15.06%) is still below this framework's 20% bar and just had a sharp one-quarter compression tied to acquisition costs and stock comp; ROIC hasn't cleared 15%; and insider ownership is the thinnest on the site (0.14%) since CEO Bill McDermott is a professional hire, not a founder. The stock is down 18.5% over the past year despite the growth acceleration — a real disconnect between fundamentals and price. IMPORTANT: the 'Met' on entry multiple is only relative — 90.4x P/E is cheaper than ServiceNow's own extreme history, not cheap in absolute terms (PEG well above 4x). I own this stock and bought in without weighing that gap closely enough; I'm riding it out, not selling, but it's the clearest personal example on this site of financials likely staying strong while the share price is a separate, less certain bet.",
+    martinero: 77,
+    momentum: { status: "steady", recent: 20.9, prior: 22.4 },
+    quarterYoY: { period: "Q3 2026", growth: 20.5 },
+    blurb: "Dominant IT-workflow platform with about 44% of the ITSM market, 11/14 criteria met and a Martinero Index of 77. Q3 2026 revenue was a record $4.11B (+20.5% YoY), GAAP operating margin fell to 9.4% on acquisition amortization and stock comp, and ROIC is now below WACC. Full-year subscription guidance and the free-cash-flow margin target were raised. The shares fell 27% on Oct 29 on a slower Q4 cRPO guide (18.5%) and AI-disruption fears, and are down about 46% over 52 weeks at $87.61 (63x trailing P/E, 19.3x forward, PEG 0.79).",
     file: "companies/now.html",
-    personalNote: "ServiceNow is the one I actually own — and the one where I walked straight into the exact trap this dashboard now flags for everyone else. I bought in on the growth story: five years of 20%+ revenue growth, accelerating rather than decelerating, real booked AI contract value rather than a projection. All of that is still true and still good. What I didn't weigh carefully enough going in was valuation — the 'Met' checkmark on entry multiple here means 90.4x is cheaper than ServiceNow's own unusually rich history, not that it's cheap outright, and a PEG north of 4x on trailing growth says the same thing more bluntly. I'm not selling. I still believe in the business, and I'd rather ride out a multiple correction — if one comes — than sell a company I think is genuinely well run. But if you're scanning this dashboard and reading 'Met' as 'cheap,' don't — I made close to that exact mistake myself, and I'd rather you learn it from my dashboard than from your own portfolio."
+    personalNote: "ServiceNow is the one I actually own — and the one where I walked straight into the exact trap this dashboard now flags for everyone else. I bought in on the growth story: five years of 20%+ revenue growth, accelerating rather than decelerating, real booked AI contract value rather than a projection. All of that is still true and still good. What I didn't weigh carefully enough going in was valuation — the 'Met' checkmark on entry multiple here means 90.4x is cheaper than ServiceNow's own unusually rich history, not that it's cheap outright, and a PEG north of 4x on trailing growth says the same thing more bluntly. I'm not selling. I still believe in the business, and I'd rather ride out a multiple correction — if one comes — than sell a company I think is genuinely well run. But if you're scanning this dashboard and reading 'Met' as 'cheap,' don't — I made close to that exact mistake myself, and I'd rather you learn it from my dashboard than from your own portfolio.",
+    noteUpdate: "Q3 2026 is in: revenue $4.11B (+20.5%). The shares fell about 27% on 29 Oct on a slower Q4 cRPO guide (18.5%) and AI-disruption fears, and the stock now sits near $87.61 at about 63x trailing earnings and 19x forward (PEG about 0.8). ROIC (8.5%) is now below the cost of capital (9.0%), so the Martinero Index is 77, down from 79.",
   },
 
   {
@@ -1025,12 +1031,12 @@ const COMPANIES = [
     subIndustry: "Trapped-Ion Quantum Computing Hardware & Cloud Services",
     tags: ["Speculative Growth", "Pre-Profit", "Quantum Computing"],
     dateFeatured: "2026-09-01",
-    price: "$39.31",
+    price: "$20.72",
     score: "4 / 14",
-    martinero: 57,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "accelerating", recent: 201.6, prior: 95.9 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 336.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "The largest of four public quantum-computing pure-plays covered on this site by a wide margin (2025 revenue $130.02M vs. $24.59M, $7.09M and $0.68M for D-Wave, Rigetti and Quantum Computing Inc respectively), scored on the same standard 14-criterion scorecard as every other company here. Revenue is up 287% YoY in the latest quarter (fifth straight record) with backlog up 297% YoY, and the balance sheet carries $2.36B in net cash. Against the standard scorecard, though: operating margin is -487%, EBIT and FCF losses have both widened sharply, shares outstanding have roughly doubled since 2021, and capex intensity and market concentration both miss. Result: 4 of 14 criteria met, Martinero Index 57/100 — a highly speculative, high-risk/high-reward bet on a still-unproven, loss-making, R&D-heavy industry with large long-run potential in cryptography, drug discovery, materials science and optimization.",
+    martinero: 57,
+    momentum: { status: "accelerating", recent: 201.6, prior: 95.9 },
+    quarterYoY: { period: "Q3 2026", growth: 336.0 },
+    blurb: "The largest of four public quantum-computing pure-plays covered here (FY2025 revenue $130.02M), scored on the standard 14-criterion scorecard. Q3 2026 revenue was a record $173.8M (+336% YoY, partly from the SkyWater foundry acquired in August), remaining performance obligations reached $1.2B, and FY2026 revenue guidance was raised to $505-515M. Operating margin is still deeply negative, EBIT and FCF losses are widening and dilution is heavy, so it clears only 4 of 14 criteria (Martinero Index 57); the shares have fallen to about $20.7, down roughly 57% over 52 weeks.",
     file: "companies/ionq.html",
     personalNote: "IonQ is the one dashboard on this site I'd flag as genuinely high-risk, high-reward — a speculative bet, not a value pick. On the standard scorecard it only clears 4 of 14 criteria for a Martinero Index of 57: operating margin is -487%, both EBIT and FCF losses are widening, and shares outstanding have roughly doubled since 2021. But within that, IonQ is the strongest of the four public quantum-computing pure-plays I cover — by far the most revenue, the clearest realistic market position, and a $2.36B net-cash cushion that buys real runway. Quantum computing itself is still an early, unproven, deeply R&D-heavy industry — every public player here is loss-making, and nobody has yet demonstrated a commercial quantum advantage at meaningful scale — but the long-run promise (cryptography, drug discovery, materials science, optimization problems classical computers can't touch) is why serious capital keeps funding it despite the losses. I'd call this the most investable of the four on fundamentals, but 'most investable among speculative bets' and 'objectively strong' are different claims — this is a venture-stage wager on a technology that may take a decade or more to prove out, not a value pick."
   },
@@ -1404,12 +1410,12 @@ const COMPANIES = [
     subIndustry: "Payment Processing / Card Networks",
     tags: ["Duopoly"],
     dateFeatured: "2026-09-08",
-    price: "$579.21",
+    price: "$647.44",
     score: "12 / 14",
-    martinero: 83,                    // Martinero Index (weighted 1-100 score, see About)
-    momentum: { status: "steady", recent: 14.79, prior: 13.0 },  // revenue growth, most recent FY vs prior FY (non-scored)
-    quarterYoY: { period: "Q3 2026", growth: 14.0 },  // latest reported quarter revenue YoY (non-scored, separate from annual trend)
-    blurb: "Visa's direct duopoly rival and a genuine toll-booth business in its own right — a strong #2 globally by card volume, not the #1, but with cleaner growth (EBIT and FCF both still clear 15%/year) and a real discount to its own valuation history where Visa trades flat against its average.",
+    martinero: 83,
+    momentum: { status: "steady", recent: 14.79, prior: 13.0 },
+    quarterYoY: { period: "Q3 2026", growth: 14.0 },
+    blurb: "Visa's direct duopoly rival and a genuine toll-booth business in its own right: a strong #2 globally by card volume, not the #1, but with cleaner growth (EBIT and FCF both still clear 15%/year). Q3 2026 revenue grew 14% to $9.8B, with value-added services up 19%, and the shares still trade at a modest discount to their own FY21-25 average P/E.",
     file: "companies/mastercard.html"
   },
 
@@ -1829,14 +1835,15 @@ const COMPANIES = [
     subIndustry: "Music & Audio Streaming",
     tags: [],
     dateFeatured: "2026-09-21",
-    price: "$509.45",
+    price: "$599.74",
     score: "11 / 14",
     martinero: 86,
     momentum: { status: "decelerating", recent: 9.65, prior: 18.31 },
-    quarterYoY: { period: "Q3 2026", growth: 16.0 },
-    blurb: "The clear #1 global audio streaming platform (300M Premium subscribers, 777M MAU, ~31-32% global share), and one of the highest scores on the site at 86/100. Genuine, undistorted 15.5% revenue CAGR, net cash balance sheet, minimal capex, FCF conversion over 100%, and an entry multiple well below its own average. The eye-catching EBIT/FCF growth rates (+120%, +80%) are largely base-effect noise from a company that was barely profitable for most of its history — real profitability is only ~2 years old. Founders Daniel Ek and Martin Lorentzon still control ~70% of the vote despite owning only ~25% economically.",
+    quarterYoY: { period: "Q3 2026", growth: 16.3 },
+    blurb: "The clear #1 global audio streaming platform (306M Premium subscribers, 788M MAU, ~31-32% global share). Q3 2026 revenue was EUR 4.97B (+16% YoY, +14% constant currency), with a record Q3 gross margin of 33.0%, operating income of EUR 672M and free cash flow of EUR 735M. It scores 86/100 with 11 of 14 criteria met: net cash, minimal capex, FCF conversion above 100% and an entry multiple below its own short history. Buybacks of $1.1B this year now offset employee-equity dilution. The +120% EBIT and +80% FCF CAGRs are base-effect noise, because real profitability is only about two years old.",
     file: "companies/spotify.html",
-    personalNote: "I use Spotify every day — it's the soundtrack to basically everything I do, from commuting to working to falling asleep to a playlist. So when I say this is a 'fun' pick, I mean it: I picked this company because I love the product, not because I screened for a strong score first. What actually surprised me running the numbers is that the checklist likes it more than I expected — 86/100, 11 of 14 criteria met. But I don't want to oversell that. The two scariest-looking numbers on this dashboard (+120% EBIT CAGR, +80% FCF CAGR) are basically noise: Spotify was losing money or barely breaking even for most of the last five years, and those huge percentages are just what happens when you divide a real number by a number that used to be near zero. The actual story is simpler and, I think, more honest: Spotify spent years proving the subscription model could work at scale, and only in the last two years has it actually shown it can make real money doing it — healthy margins, strong free cash flow, a clean net-cash balance sheet. That's a good story. It's just a much shorter track record of actual profitability than the headline growth rates make it look like, and I'd rather be straight about that than let a two-year hot streak convince me this is a proven compounder yet. Daniel Ek and Martin Lorentzon still controlling roughly 70% of the vote gives me some comfort that the founders have skin in the game for the long haul, even though their economic ownership has been diluted down to about a quarter of the company. I'm not making a buy call here — I just like using the product, and it turns out the numbers aren't embarrassing either, which isn't always true when I pick a 'fun' one."
+    personalNote: "I use Spotify every day — it's the soundtrack to basically everything I do, from commuting to working to falling asleep to a playlist. So when I say this is a 'fun' pick, I mean it: I picked this company because I love the product, not because I screened for a strong score first. What actually surprised me running the numbers is that the checklist likes it more than I expected — 86/100, 11 of 14 criteria met. But I don't want to oversell that. The two scariest-looking numbers on this dashboard (+120% EBIT CAGR, +80% FCF CAGR) are basically noise: Spotify was losing money or barely breaking even for most of the last five years, and those huge percentages are just what happens when you divide a real number by a number that used to be near zero. The actual story is simpler and, I think, more honest: Spotify spent years proving the subscription model could work at scale, and only in the last two years has it actually shown it can make real money doing it — healthy margins, strong free cash flow, a clean net-cash balance sheet. That's a good story. It's just a much shorter track record of actual profitability than the headline growth rates make it look like, and I'd rather be straight about that than let a two-year hot streak convince me this is a proven compounder yet. Daniel Ek and Martin Lorentzon still controlling roughly 70% of the vote gives me some comfort that the founders have skin in the game for the long haul, even though their economic ownership has been diluted down to about a quarter of the company. I'm not making a buy call here — I just like using the product, and it turns out the numbers aren't embarrassing either, which isn't always true when I pick a 'fun' one.",
+    noteUpdate: "Q3 2026 is in: revenue EUR 4.97B (+16%), record Q3 gross margin of 33.0%, operating income of EUR 672M and free cash flow of EUR 735M, with 306M Premium subscribers. The score stays 11 of 14 (Martinero 86).",
   },
 
   {
@@ -1884,14 +1891,15 @@ const COMPANIES = [
     subIndustry: "Social Media & Community Platforms",
     tags: [],
     dateFeatured: "2026-09-22",
-    price: "$158.73",
+    price: "$90.34",
     score: "10 / 14",
     martinero: 71,
-    momentum: { status: "decelerating", recent: 61.0, prior: 69.0 },
+    momentum: { status: "decelerating", recent: 53.0, prior: 61.1 },
     quarterYoY: { period: "Q3 2026", growth: 53.0 },
-    blurb: "The clear #1 online forum/community discussion platform (~84% share of Google forum search results), two and a half years into life as a public company (IPO'd March 2024 at $34, now ~4.7x that despite a ~40% pullback from highs). Revenue has compounded at roughly 46%/year since FY2021, with FY2025 delivering Reddit's first full year of real GAAP profitability (20.1% operating margin) and a near-debt-free balance sheet ($2.45B net cash). AI licensing deals with Google and OpenAI add a differentiated revenue stream beyond advertising. Misses: still-rising share count (+5.9% in FY2025) and modest direct insider ownership (2.95% — CEO Steve Huffman's often-cited 24.8% SEC stake is mostly shared voting power, not personal economic ownership).",
+    blurb: "The clear #1 online forum/community discussion platform (~84% share of Google forum search results), about two and a half years into life as a public company (IPO'd March 2024 at $34, now ~2.7x that after a roughly two-thirds drop from its 52-week high). Q3 2026 revenue was $895M (+53% YoY, GAAP net income $283M, 45% Adj. EBITDA margin) and net cash is about $3.0B, but growth is decelerating (69% to 61% to 53%) and US daily users fell 2%. Q4 guidance of $1.00-1.03B in revenue and weaker search traffic sent the stock down about 29% on Oct 30; it trades at about 18x trailing earnings with a PEG near 0.5. Misses: rising share count (+5.9% in FY2025, partly offset by buybacks) and thin direct insider ownership (2.95%).",
     file: "companies/reddit.html",
-    personalNote: "I picked Reddit as a long-time user — I've been reading and posting on the site for years — and wanted to see what the checklist says now that it's two and a half years into life as a public company. The picture is genuinely strong. Revenue has compounded at roughly 46% a year since FY2021 ($484.9M → $2,203M), and FY2025 was Reddit's first full year of solid GAAP profitability: a 20.07% operating margin, up from deep losses every year before it. The one asterisk on the growth numbers is FY2024, when a one-time $534.7M stock-based comp charge tied to IPO vesting pushed operating income to -$560.6M even as revenue kept climbing — that single item is why EBIT and FCF CAGR both come out mathematically undefined ('n/m', a loss-to-profit sign flip) rather than a clean percentage. Strip that out and the underlying trend is a real, durable swing to profitability: free cash flow went from -$132.5M (FY2021) to $684.2M (FY2025), a 154.8% FCF-to-EBIT conversion rate. The balance sheet is close to debt-free ($2.45B net cash), capex is next to nothing (0.3% of revenue), and today's trailing P/E (37.0x) sits at roughly a 55% discount to the only comparable data point available, FY2025's 82.2x reading, with a PEG ratio around 0.59. Where the checklist pushes back: share count is still rising (+5.9% in FY2025 alone, from ongoing RSU issuance) and direct insider/officer ownership is a modest 2.95% — Steve Huffman's often-cited 24.8% SEC-reported stake is mostly shared voting power tied to a pre-IPO voting agreement with Advance Publications, not shares he personally owns. Net: 10 of 14 criteria met, Martinero Index 71/100 — a genuinely strong scorecard for a two-year-old public company, with dilution and ownership structure as the honest counterweights to an otherwise clean growth-and-margin story."
+    personalNote: "I picked Reddit as a long-time user — I've been reading and posting on the site for years — and wanted to see what the checklist says now that it's two and a half years into life as a public company. The picture is genuinely strong. Revenue has compounded at roughly 46% a year since FY2021 ($484.9M → $2,203M), and FY2025 was Reddit's first full year of solid GAAP profitability: a 20.07% operating margin, up from deep losses every year before it. The one asterisk on the growth numbers is FY2024, when a one-time $534.7M stock-based comp charge tied to IPO vesting pushed operating income to -$560.6M even as revenue kept climbing — that single item is why EBIT and FCF CAGR both come out mathematically undefined ('n/m', a loss-to-profit sign flip) rather than a clean percentage. Strip that out and the underlying trend is a real, durable swing to profitability: free cash flow went from -$132.5M (FY2021) to $684.2M (FY2025), a 154.8% FCF-to-EBIT conversion rate. The balance sheet is close to debt-free ($2.45B net cash), capex is next to nothing (0.3% of revenue), and today's trailing P/E (37.0x) sits at roughly a 55% discount to the only comparable data point available, FY2025's 82.2x reading, with a PEG ratio around 0.59. Where the checklist pushes back: share count is still rising (+5.9% in FY2025 alone, from ongoing RSU issuance) and direct insider/officer ownership is a modest 2.95% — Steve Huffman's often-cited 24.8% SEC-reported stake is mostly shared voting power tied to a pre-IPO voting agreement with Advance Publications, not shares he personally owns. Net: 10 of 14 criteria met, Martinero Index 71/100 — a genuinely strong scorecard for a two-year-old public company, with dilution and ownership structure as the honest counterweights to an otherwise clean growth-and-margin story.",
+    noteUpdate: "Q3 2026 is in: revenue $895M (+53%), GAAP net income $283M. Growth is decelerating, and Q4 guidance of $1.00-1.03B and weaker search traffic sent the shares down about 29% on 30 Oct. The score stays 10 of 14 (Martinero 71).",
   },
 
   {
@@ -2691,12 +2699,12 @@ const COMPANIES = [
     subIndustry: "Buy Now Pay Later / Consumer Installment Lending",
     tags: ["FinTech", "Founder-Controlled", "Turnaround"],
     dateFeatured: "2026-10-05",
-    price: "$69.23",
+    price: "$59.44",
     score: "8 / 14",
     martinero: 62,
     momentum: { status: "decelerating", recent: 32.2, prior: 38.8 },
     quarterYoY: { period: "Q1 FY2027 (Sep 2026)", growth: 35.2 },
-    blurb: "Largest US buy-now-pay-later network, with revenue compounding about 37% a year and GAAP operating profit only arriving in FY2026. Growth, liquidity and margin trend score well. Thin 9.8% margins, returns far below cost of capital, steady dilution and a funding-debt-financed loan book hold it back.",
+    blurb: "Largest US buy-now-pay-later network, with revenue compounding about 37% a year. Fiscal Q1 2027 revenue grew 35% to $1.26B and GAAP operating margin reached 14.8%, but credit provisions rose 59% and the stock is down about 34% from its August high. Growth, liquidity and margin trend score well. Thin margins, returns far below cost of capital, steady dilution and a funding-debt-financed loan book hold it back.",
     file: "companies/affirm.html"
   },
 
@@ -2709,12 +2717,12 @@ const COMPANIES = [
     subIndustry: "Payment Processing",
     tags: ["FinTech", "Founder-Led", "Net Cash"],
     dateFeatured: "2026-10-05",
-    price: "€881.50",
+    price: "€837.20",
     score: "10 / 14",
     martinero: 74,
     momentum: { status: "decelerating", recent: 18.4, prior: 22.8 },
     quarterYoY: { period: "Q3 2026", growth: 23.0 },
-    blurb: "Amsterdam-based global payments platform running online, in-store and embedded finance on one stack. Growth near 20%, 47% EBIT margins, almost no debt and high cash conversion; but the stock is down about 35% in a year on cooler guidance, a CFO exit and rising capex.",
+    blurb: "Amsterdam-based global payments platform running online, in-store and embedded finance on one stack. Q3 2026 net revenue grew 23% (+22% cc) to EUR 738M on volume up 30%, but the 2026 EBITDA margin target was cut to 50% to fund faster investment. Almost no debt and strong cash conversion; the stock is down about 39% since end-2025.",
     file: "companies/adyen.html"
   },
 
@@ -2779,12 +2787,12 @@ const COMPANIES = [
     subIndustry: "Electronic Manufacturing Services (ODM Networking Hardware)",
     tags: ["AI Infrastructure", "Networking", "Contract Manufacturing", "Customer Concentration"],
     dateFeatured: "2026-10-08",
-    price: "$371.57",
-    score: "8 / 14",
-    martinero: 66,
+    price: "$201.80",
+    score: "9 / 14",
+    martinero: 70,
     momentum: { status: "accelerating", recent: 28.5, prior: 21.2 },
-    quarterYoY: { period: "Q3 2026", growth: 83.0 },
-    blurb: "Toronto-based design and manufacturing partner that builds 800G/1.6T Ethernet switches, servers and storage for hyperscalers, with revenue up from $5.6B in FY2021 to $12.4B in FY2025 and +62% YoY in Q2 2026. Margins are thin (12.1% gross, 8.6% EBIT) but ROIC is about 37% with almost no net debt. The shares trade at about 39x trailing earnings versus a ~21x own average, and three customers were 58% of FY2025 revenue.",
+    quarterYoY: { period: "Q3 2026", growth: 82.5 },
+    blurb: "Toronto-based design and manufacturing partner that builds 800G/1.6T Ethernet switches, servers and storage for hyperscalers, with revenue up from $5.6B in FY2021 to $12.4B in FY2025 and +83% YoY in Q3 2026 (record 8.5% adjusted operating margin). Margins are thin (11% gross) but ROIC is high, and the company holds net cash after a $3.45B August equity raise. The shares fell about 57% from their 52-week high to ~19x trailing earnings, about its own average, and three customers were 58% of FY2025 revenue.",
     file: "companies/celestica.html"
   },
 
@@ -2865,12 +2873,12 @@ const COMPANIES = [
     subIndustry: "Sleep Apnea & Respiratory Devices",
     tags: ["Sleep Apnea", "CPAP", "Medical Devices", "Dividend & Buyback"],
     dateFeatured: "2026-10-21",
-    price: "$245.50",
+    price: "$235.63",
     score: "12 / 14",
     martinero: 82,
     momentum: { status: "steady", recent: 9.9, prior: 9.8 },
     quarterYoY: { period: "Q1 FY2027", growth: 5.9 },
-    blurb: "ResMed is the world's largest maker of CPAP machines and masks for obstructive sleep apnea. Sleep and Breathing Health was 88% of FY2026 revenue of $5.65B (+9.9%), with a 33.4% GAAP operating margin, net cash and $1.65B of free cash flow. The debate centres on GLP-1 drugs such as Zepbound and on Philips' US restrictions.",
+    blurb: "ResMed is the world's largest maker of CPAP machines and masks for obstructive sleep apnea. Sleep and Breathing Health was 88% of FY2026 revenue of $5.65B (+9.9%), and Q1 FY2027 revenue grew 5.9% (7% core constant currency) with FY2027 guidance unchanged. It has a 33.4% GAAP operating margin, net cash and $1.65B of free cash flow, and returned over $1.0B in Q1. The debate centres on GLP-1 drugs such as Zepbound and on Philips' US restrictions.",
     file: "companies/resmed.html"
   },
   {
