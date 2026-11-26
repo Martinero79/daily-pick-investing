@@ -3977,6 +3977,24 @@ const COMPANIES = [
     file: "companies/transmedics.html"
   },
 
+  {
+    slug: "samsara",
+    name: "Samsara Inc.",
+    ticker: "NYSE: IOT",
+    sector: "Technology",
+    industry: "Software",
+    subIndustry: "Connected Operations / Fleet Telematics & IoT Software",
+    tags: ["Software", "IoT", "Fleet telematics", "AI", "Founder-led", "Dual-class"],
+    dateFeatured: "2026-11-26",
+    price: "$39.43",
+    score: "7 / 14",
+    martinero: 60,
+    momentum: { status: "decelerating", recent: 29.6, prior: 33.3 },
+    quarterYoY: { period: "Q2 FY2027", growth: 29.9 },
+    blurb: "Samsara sells a subscription Connected Operations Platform (fleet telematics, AI dashcams and video safety, equipment and asset monitoring, IoT sensors) to transportation, construction, field services, utilities and other physical-operations customers. ARR reached $2.125B (+30%) in Q2 FY2027, and the company has been GAAP net profitable for four straight quarters, though GAAP operating margin is only about 1%. The founders control about 78% of votes through ten-vote Class B shares.",
+    file: "companies/samsara.html"
+  },
+
   // Add the next company below this line, as a new {...} block ⬇
 
 ];
