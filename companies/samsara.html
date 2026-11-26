@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Samsara Inc. — Investment Case Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Not Your Financial Advisor">
+<meta property="og:url" content="https://notyourfinancialadvisor.com/companies/samsara.html">
+<meta property="og:title" content="Samsara Inc. — Investment Case Dashboard">
+<meta property="og:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta property="og:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Samsara Inc. — Investment Case Dashboard">
+<meta name="twitter:description" content="Personal, fixed-checklist investment research dashboards covering 60+ companies. Not financial advice.">
+<meta name="twitter:image" content="https://notyourfinancialadvisor.com/assets/og-image.png">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; background:#0a0e1a; color:#e2e8f0; font-family: 'Segoe UI', Arial, sans-serif; }
+.page { width: 210mm; height: 297mm; padding: 11mm 13mm; background: #0a0e1a; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.page{ margin:0 auto; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+@media print{ .page{ width:210mm !important; margin:0 !important; } }
+.eyebrow { color:#2dd4bf; font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:6px; }
+h1 { color:#f8fafc; font-size:26px; margin:0 0 10px 0; font-weight:700; }
+.badges { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.badge { background:#141b2e; border:1px solid #263049; border-radius:6px; padding:4px 10px; font-size:12px; color:#cbd5e1; }
+.badge.warn { background:#2a2110; border:1px solid #6b4a10; color:#fbbf24; font-weight:600; }
+.price { font-size:30px; font-weight:700; color:#f8fafc; margin:2px 0 0 0; }
+.price-sub { color:#7c8aa5; font-size:12px; margin-bottom:14px; }
+.metrics-row { display:flex; gap:10px; margin-bottom:12px; }
+.mcard { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:12px 13px; }
+.mcard .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.mcard .val { font-size:20px; font-weight:700; color:#f8fafc; line-height:1.15; }
+.mcard .val.green { color:#34d399; } .mcard .val.red { color:#f87171; }
+.mcard .sub { font-size:11.5px; color:#7c8aa5; margin-top:4px; }
+.mcard .note { font-size:10.5px; color:#64748b; margin-top:6px; line-height:1.35; }
+.summary-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; align-items:center; gap:18px; }
+.summary-legend { flex:1; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+.dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+.narrative { font-size:13px; color:#cbd5e1; line-height:1.65; margin-bottom:10px; }
+.callout { border-left:3px solid #f59e0b; background:#1a1710; border-radius:6px; padding:10px 13px; font-size:12.5px; color:#d6d3c4; line-height:1.55; }
+.callout b { color:#fbbf24; }
+.callout.blue { border-left-color:#3b82f6; background:#0f1a2e; color:#cfe0f5; } .callout.blue b { color:#60a5fa; }
+.callout.gray { border-left-color:#475569; background:#12151f; color:#cbd5e1; }
+.bignum-corner { position:absolute; right:13mm; bottom:9mm; font-size:15px; font-weight:700; color:#1c2438; letter-spacing:1px; }
+.sec-head { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.sec-num { width:22px; height:22px; border-radius:50%; background:#2dd4bf; color:#052e2a; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.sec-title { font-size:18px; font-weight:700; color:#f8fafc; }
+.sec-sub { font-size:12px; color:#7c8aa5; margin:0 0 9px 31px; line-height:1.4; }
+.chart-card { background:#111827; border:1px solid #232c42; border-radius:10px; padding:10px 14px; margin-bottom:7px; }
+.chart-title { font-size:13.5px; font-weight:700; color:#f1f5f9; margin-bottom:2px; }
+.chart-sub { font-size:11.5px; color:#7c8aa5; margin-bottom:4px; line-height:1.35; }
+.legend-row { display:flex; gap:14px; margin-bottom:3px; font-size:11.5px; color:#94a3b8; flex-wrap:wrap; }
+.legend-row .dot { width:8px; height:8px; }
+.chart-card svg { width:100%; display:block; }
+.cagr-row { display:flex; gap:10px; margin-bottom:10px; }
+.cagr-card { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.cagr-card .label { font-size:11px; letter-spacing:0.8px; color:#7c8aa5; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.cagr-card .val { font-size:19px; font-weight:700; }
+.cagr-card .sub { font-size:11.5px; color:#7c8aa5; margin-top:3px; }
+table.datatable { width:100%; border-collapse:collapse; font-size:12px; }
+table.datatable th { text-align:left; color:#5eead4; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #263049; font-weight:700; }
+table.datatable td { padding:6px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+table.datatable tr:last-child td { border-bottom:none; }
+.criteria-table th, .criteria-table td { font-size:12px; }
+.status-pill { font-weight:700; font-size:10.5px; padding:2px 8px; border-radius:5px; display:inline-block; }
+.status-met { background:#0d2b20; color:#34d399; } .status-not { background:#301414; color:#f87171; } .status-score { background:#2a2110; color:#fbbf24; }
+.two-col { display:flex; gap:10px; margin-top:10px; }
+.info-box { flex:1; background:#111827; border:1px solid #232c42; border-radius:10px; padding:11px 13px; }
+.info-box .title { font-size:12.5px; font-weight:700; margin-bottom:6px; letter-spacing:0.4px; text-transform:uppercase; }
+.info-box.working .title { color:#34d399; } .info-box.watch .title { color:#f87171; }
+.info-box p { font-size:12px; color:#cbd5e1; line-height:1.55; margin:0; }
+.footer-note { font-size:10.5px; color:#5b6b85; line-height:1.5; margin-top:10px; text-align:center; } .footer-note b { color:#8a97ad; }
+.headline-box { background:#0f1a2e; border:1px solid #24406b; border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+.headline-box .title { color:#60a5fa; font-size:13.5px; font-weight:700; margin-bottom:5px; } .headline-box p { font-size:12px; color:#cfe0f5; line-height:1.6; margin:0; }
+.ownership-row { display:flex; align-items:center; gap:22px; }
+.ownership-legend div { font-size:12.5px; color:#cbd5e1; margin-bottom:8px; }
+@media screen{ .page{ width:min(1100px, 94vw); } }
+.personal-note { background:#151024; border:1px solid #3b2a5c; border-radius:10px; padding:12px 15px; margin-bottom:10px; }
+.personal-note .title { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:6px; }
+.personal-note p { font-size:12px; color:#dcd6ee; line-height:1.6; margin:0 0 7px 0; }
+.personal-note p:last-child { margin-bottom:0; }
+@media screen{ .page{ height:auto !important; overflow:visible !important; } }
+
+.callout.green { border-left-color:#22c55e; background:#0f1a10; color:#d4f5d8; } .callout.green b { color:#4ade80; }
+.callout.red { border-left-color:#ef4444; background:#1f0f0f; color:#f5d4d4; } .callout.red b { color:#f87171; }
+.badge.star { background:#241a05; border:1px solid #92650f; color:#fcd34d; font-weight:700; }
+.status-na { background:#1a2030; color:#94a3b8; }
+.status-part { background:#2a2110; color:#fbbf24; }
+.mini { width:100%; border-collapse:collapse; font-size:12px; margin-top:6px; }
+.mini th { text-align:left; color:#5eead4; font-size:11px; padding:5px 8px; border-bottom:1px solid #263049; text-transform:uppercase; letter-spacing:0.5px; }
+.mini td { padding:5px 8px; border-bottom:1px solid #1a2236; color:#dbe4f0; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER / SUMMARY ============ -->
+<div class="page">
+  <div class="eyebrow">Investment Case Dashboard &middot; Technology / Software</div>
+  <h1>Samsara Inc.</h1>
+  <div class="badges">
+    <div class="badge">NYSE: IOT</div>
+    <div class="badge">FY ends ~Jan 31 (FY2026 = year ended Jan 31, 2026)</div>
+    <div class="badge">HQ: San Francisco, California</div>
+    <div class="badge">Reports &amp; trades in USD</div>
+    <div class="badge">Founders: Sanjit Biswas (CEO) &amp; John Bicket</div>
+    <div class="badge">Dual-class: founders ~78% of votes</div>
+    <div class="badge star">Tenbagger-pitch test: profitability flip and P/S pass; starting size, growth acceleration and ROIC do not (see Section 6). Research only, not a recommendation.</div>
+  </div>
+
+  <div class="price">$39.43</div>
+  <div class="price-sub">Nov 25, 2026 close (NYSE, USD; latest verified close, Fox Business/FactSet) &middot; Market cap &asymp; $23.1B (585.6M shares &times; $39.43; one quote page shows $22.7B on a different share count) &middot; 52-wk range $23.38 &ndash; $47.47 &middot; 1-month change &asymp; -13.5% &middot; Analyst consensus: Buy (27 ratings), avg PT ~$51.5 (aggregators, $51.5&ndash;$52.1) &middot; Latest reported: Q2 FY2027 (quarter ended Aug 1, 2026), reported Sep 3, 2026. <b style="color:#fbbf24;">Q3 FY2027 is NOT yet out</b>: aggregators list it for about Thu Dec 3, 2026 after the close (estimated date; company confirmation not found).</div>
+  <div style="font-size:10.5px;color:#7c8aa5;margin-bottom:8px;"><b style="color:#94a3b8;">Main competitors (listed companies only):</b> Trimble (Nasdaq: TRMB), Verizon (NYSE: VZ, owner of Verizon Connect) and Powerfleet (Nasdaq: AIOT). Geotab, Motive and Lytx are private; CalAmp is gone. None of the listed names has a dashboard on this site yet, so there are no links. Details and the pitch test are in Section 4.</div>
+
+  <div class="callout gray" style="margin-bottom:12px;"><b style="color:#94a3b8;">Definition note:</b> all figures are US dollars from Samsara's own earnings releases (Q2 FY2027, Sep 3, 2026; Q4 FY2026, Mar 5, 2026), earnings-call transcript and SEC filings where possible, with S&amp;P Global/FactSet data via stockanalysis.com and Fox Business for older years and prices. Fiscal years end on the Saturday closest to Jan 31: FY2026 = year ended Jan 31, 2026; Q2 FY2027 = quarter ended Aug 1, 2026. &ldquo;Op. Income / EBIT&rdquo; is <b>GAAP income (loss) from operations</b>; non-GAAP excludes stock-based compensation charges (about 18-21% of revenue) and is shown separately. &ldquo;Free cash flow&rdquo; = operating cash flow minus purchases of property and equipment (Samsara's own FCF; FY2026 &ldquo;adjusted&rdquo; FCF of $208.7M adds back $1.2M). ARR is Samsara's own metric: annualised value of subscription contracts that have started revenue recognition.</div>
+
+  <div class="metrics-row">
+    <div class="mcard">
+      <div class="label">Revenue (Q2 FY2027)</div>
+      <div class="val">$508.4M</div>
+      <div class="sub green" style="color:#34d399;">+29.9% YoY &middot; ARR $2.125B, +30%</div>
+      <div class="note">FY2026 revenue $1,618.6M (+29.6%; FY2025 +33.3%). TTM $1,847.6M. Guidance: Q3 $514-516M (+24%), FY2027 $2.043-2.047B (+26%), raised from $1.965-1.975B in March. Net new ARR in Q2 $134.1M (+28%).</div>
+    </div>
+    <div class="mcard">
+      <div class="label">GAAP Operating Margin</div>
+      <div class="val" style="color:#fbbf24;">-3.2% (FY26)</div>
+      <div class="sub">Q2 FY27: +1.0% &middot; non-GAAP 21%</div>
+      <div class="note">GAAP operating income was $4.9M in Q2 (first positive quarter was Q4 FY26, $9.0M). TTM $19.4M (1.1%). Non-GAAP operating margin 17% in FY26, 21% in Q2; the gap is stock-based compensation.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">ROIC vs Est. WACC</div>
+      <div class="val" style="color:#f87171;">~2.1% vs ~11.7%</div>
+      <div class="sub">Third-party (S&amp;P Global), TTM</div>
+      <div class="note">Thin GAAP profit on a capital base that is mostly cash. Aggregator WACC is an estimate, not a company figure. Spread of about -9.5pp scores 0/5.</div>
+    </div>
+    <div class="mcard">
+      <div class="label">Net Debt / EBITDA</div>
+      <div class="val" style="color:#34d399;">Net cash</div>
+      <div class="sub">$1.33B cash &amp; investments, no borrowings</div>
+      <div class="note">Aug 1, 2026: cash $291M + short-term $538M + long-term investments $497M. Debt is only lease liabilities ($69.5M). TTM FCF $255.5M (13.8% margin) but SBC of ~$331M is larger than FCF.</div>
+    </div>
+    <div class="mcard" style="border-color:#4c1d95;">
+      <div class="label" style="color:#a78bfa;">Martinero Index</div>
+      <div class="val" style="color:#c4b5fd;">60/100</div>
+      <div class="sub">Weighted score (see About)</div>
+      <div class="note">Growth, gross-margin trend, net cash and founder control score high; GAAP margin, ROIC, concentration and dilution score low; 3 criteria are N/A (loss-making start years, no usable EBIT base).</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/><circle cx="60" cy="60" r="50" fill="none" stroke="#34d399" stroke-width="18" stroke-dasharray="157.1 157.08" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="50" fill="none" stroke="#f87171" stroke-width="18" stroke-dasharray="89.8 224.40" stroke-dashoffset="-157.1" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="50" fill="none" stroke="#64748b" stroke-width="18" stroke-dasharray="67.3 246.84" stroke-dashoffset="-246.8" transform="rotate(-90 60 60)"/>
+      <text x="60" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="#f8fafc">7/14</text>
+      <text x="60" y="72" text-anchor="middle" font-size="8" fill="#7c8aa5">fully met</text>
+    </svg>
+    <div class="summary-legend">
+      <div><span class="dot" style="background:#34d399;"></span><b>7 criteria met</b> &mdash; revenue CAGR (+39.4%), market position (#1/#2, contested), net cash, entry multiple vs own history (P/S), founder/insider ownership (~34% of shares, ~78% of votes), capex intensity (1.8%) and gross-margin trend (+4.7pp)</div>
+      <div><span class="dot" style="background:#f87171;"></span><b>4 not met</b> &mdash; GAAP operating margin (negative for FY2026), market concentration (fragmented), ROIC below WACC and share count (+13.9% since FY2023)</div>
+      <div><span class="dot" style="background:#64748b;"></span><b>3 N/A</b> &mdash; EBIT CAGR and FCF CAGR (both start from losses) and FCF conversion (FCF/EBIT is meaningless on a ~zero EBIT base)</div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    Samsara Inc. (San Francisco; founded 2015 by Sanjit Biswas, CEO, and John Bicket; NYSE IPO Dec 15, 2021; reincorporated from Delaware to Nevada in 2026) sells the Connected Operations Platform to organisations that run physical operations: fleet telematics, AI dashcams and video-based safety, equipment and asset monitoring, site visibility and IoT sensors, with workflow apps and AI agents on top. Customers span transportation, construction, field services, wholesale and retail, utilities, public sector and others. The model is subscription: hardware (gateways, cameras, sensors) is installed and customers pay a recurring fee, so ARR reached $2.125B at Aug 1, 2026, up 30% for the third straight quarter, and subscription is about 98% of revenue. Revenue grew from $428M in FY2022 to $1,619M in FY2026 (+39% a year), gross margin has risen from 70.9% to 76.7%, and the GAAP operating loss shrank from 82% of revenue to 3%. The company posted its first GAAP net profit in Q3 FY2026 and four straight profitable quarters through Q2 FY2027, but the margin is thin ($4.9M of GAAP operating income in Q2 against $12.7M of interest income), stock-based compensation was $315M in FY2026 (19.5% of revenue, more than FCF of $207M), and the stock sits at about 12.5x trailing sales with a market cap of $23.1B. Q3 FY2027 results are due around Dec 3, 2026 and are not in this page.
+  </div>
+
+  <div class="callout">
+    <b>The pitch, in one paragraph:</b> an &ldquo;undisputed market leader&rdquo; with &ldquo;churn virtually zero&rdquo;, a &ldquo;trillion data point dataset&rdquo; and four straight GAAP profitable quarters. Checked against the data: <b>What holds:</b> four straight quarters of positive GAAP net income and EPS (Q3 FY26 to Q2 FY27) is correct, and the data asset is real and larger than the pitch says (30+ trillion data points collected per year, company-reported). <b>What does not (or cannot be verified):</b> Samsara does not publish churn or gross retention, only a ~115% dollar-based net retention target for core customers, which is not &ldquo;virtually zero churn&rdquo;; &ldquo;undisputed leader&rdquo; is contested (Geotab reports 6M+ connected vehicle subscriptions, and no independent market-share figure was found); and the four profitable quarters are net income, not operating income (three quarters, and Q1 FY27 includes a one-off $30.3M arbitration gain). A tenbagger from $23.1B would need about $231B of market cap. Not a recommendation. See Sections 4 and 6.
+  </div>
+  <div class="bignum-corner">IOT</div>
+</div>
+
+<!-- ============ PAGE 2 — FIVE-YEAR ANNUAL FINANCIALS ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Five-Year Financial Trajectory (FY2022&ndash;FY2026 + TTM)</div></div>
+  <div class="sec-sub">US$ millions. Fiscal years end around Jan 31 (FY2022 = year ended Jan 29, 2022 ... FY2026 = year ended Jan 31, 2026). FY2025-26 and TTM are from Samsara's releases; FY2022-24 are S&amp;P Global/FactSet data (not re-checked against the 10-Ks). Op. income = GAAP income (loss) from operations. FCF = operating cash flow less purchases of property and equipment.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue, GAAP Operating Income &amp; Free Cash Flow &mdash; Annual (US$M)</div>
+    <div class="chart-sub">Revenue has grown every year (+71%, +52%, +44%, +33%, +30%) while the operating loss narrowed from -$352M to -$53M and FCF turned positive in FY2025. TTM = four quarters to Aug 1, 2026: revenue $1,847.6M, GAAP operating income +$19.4M, FCF $255.5M.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Revenue</span><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating income</span><span><span class="dot" style="background:#fbbf24;"></span>Free cash flow</span></div>
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="215.0" x2="840" y2="215.0" stroke="#1e293b" stroke-width="1"/><text x="52" y="219.0" text-anchor="end" font-size="11" fill="#64748b">0</text>
+<line x1="60" y1="160.6" x2="840" y2="160.6" stroke="#1e293b" stroke-width="1"/><text x="52" y="164.6" text-anchor="end" font-size="11" fill="#64748b">$500M</text>
+<line x1="60" y1="106.2" x2="840" y2="106.2" stroke="#1e293b" stroke-width="1"/><text x="52" y="110.2" text-anchor="end" font-size="11" fill="#64748b">$1,000M</text>
+<line x1="60" y1="51.8" x2="840" y2="51.8" stroke="#1e293b" stroke-width="1"/><text x="52" y="55.8" text-anchor="end" font-size="11" fill="#64748b">$1,500M</text>
+<line x1="60" y1="215.0" x2="840" y2="215.0" stroke="#475569" stroke-width="1.3"/>
+<rect x="70" y="168.4" width="30" height="46.6" rx="2" fill="#2dd4bf"/>
+<text x="85" y="163.4" text-anchor="middle" font-size="10" fill="#cbd5e1">428</text>
+<rect x="106" y="215.0" width="30" height="38.3" rx="2" fill="#60a5fa"/>
+<text x="121" y="266.3" text-anchor="middle" font-size="10" fill="#ffffff">-352</text>
+<rect x="142" y="215.0" width="30" height="20.8" rx="2" fill="#fbbf24"/>
+<text x="157" y="248.8" text-anchor="middle" font-size="10" fill="#fde68a">-191</text>
+<text x="115" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">FY2022</text>
+<rect x="200" y="144.0" width="30" height="71.0" rx="2" fill="#2dd4bf"/>
+<text x="215" y="139.0" text-anchor="middle" font-size="10" fill="#cbd5e1">653</text>
+<rect x="236" y="215.0" width="30" height="28.2" rx="2" fill="#60a5fa"/>
+<text x="251" y="256.2" text-anchor="middle" font-size="10" fill="#ffffff">-260</text>
+<rect x="272" y="215.0" width="30" height="14.8" rx="2" fill="#fbbf24"/>
+<text x="287" y="242.8" text-anchor="middle" font-size="10" fill="#fde68a">-136</text>
+<text x="245" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">FY2023</text>
+<rect x="330" y="113.0" width="30" height="102.0" rx="2" fill="#2dd4bf"/>
+<text x="345" y="108.0" text-anchor="middle" font-size="10" fill="#cbd5e1">937</text>
+<rect x="366" y="215.0" width="30" height="35.2" rx="2" fill="#60a5fa"/>
+<text x="381" y="263.2" text-anchor="middle" font-size="10" fill="#ffffff">-323</text>
+<rect x="402" y="215.0" width="30" height="2.5" rx="2" fill="#fbbf24"/>
+<text x="417" y="230.5" text-anchor="middle" font-size="10" fill="#fde68a">-23</text>
+<text x="375" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">FY2024</text>
+<rect x="460" y="79.1" width="30" height="135.9" rx="2" fill="#2dd4bf"/>
+<text x="475" y="74.1" text-anchor="middle" font-size="10" fill="#cbd5e1">1,249</text>
+<rect x="496" y="215.0" width="30" height="20.7" rx="2" fill="#60a5fa"/>
+<text x="511" y="248.7" text-anchor="middle" font-size="10" fill="#ffffff">-190</text>
+<rect x="532" y="202.9" width="30" height="12.1" rx="2" fill="#fbbf24"/>
+<text x="547" y="197.9" text-anchor="middle" font-size="10" fill="#fde68a">112</text>
+<text x="505" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">FY2025</text>
+<rect x="590" y="38.9" width="30" height="176.1" rx="2" fill="#2dd4bf"/>
+<text x="605" y="33.9" text-anchor="middle" font-size="10" fill="#cbd5e1">1,619</text>
+<rect x="626" y="215.0" width="30" height="5.7" rx="2" fill="#60a5fa"/>
+<text x="641" y="233.7" text-anchor="middle" font-size="10" fill="#ffffff">-53</text>
+<rect x="662" y="192.4" width="30" height="22.6" rx="2" fill="#fbbf24"/>
+<text x="677" y="187.4" text-anchor="middle" font-size="10" fill="#fde68a">207</text>
+<text x="635" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">FY2026</text>
+<rect x="720" y="13.9" width="30" height="201.1" rx="2" fill="#2dd4bf"/>
+<text x="735" y="8.9" text-anchor="middle" font-size="10" fill="#cbd5e1">1,848</text>
+<rect x="756" y="212.9" width="30" height="2.1" rx="2" fill="#60a5fa"/>
+<text x="771" y="207.9" text-anchor="middle" font-size="10" fill="#ffffff">19</text>
+<rect x="792" y="187.2" width="30" height="27.8" rx="2" fill="#fbbf24"/>
+<text x="807" y="182.2" text-anchor="middle" font-size="10" fill="#fde68a">256</text>
+<text x="765" y="290" text-anchor="middle" font-size="11" fill="#f8fafc">TTM</text>
+</svg>
+  </div>
+
+  <div class="cagr-row">
+    <div class="cagr-card">
+      <div class="label">Revenue CAGR (4yr, FY22-26)</div>
+      <div class="val" style="color:#34d399;">+39.4%</div>
+      <div class="sub">$428.4M &rarr; $1,618.6M; growth is slowing each year (+71% to +30%) as the base grows, and FY2027 is guided to +26%</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">GAAP EBIT CAGR (FY22-26)</div>
+      <div class="val" style="color:#94a3b8;">n.m.</div>
+      <div class="sub">Operating loss of $352M &rarr; $53M: growth rate undefined from a negative base; the loss has narrowed every year and TTM turned positive (+$19.4M)</div>
+    </div>
+    <div class="cagr-card">
+      <div class="label">FCF CAGR (FY22-26)</div>
+      <div class="val" style="color:#94a3b8;">n.m.</div>
+      <div class="sub">FCF -$190.8M &rarr; +$207.4M; undefined from a negative base. FCF margin 13% in FY2026 and 13.8% TTM; stock-based compensation exceeds FCF</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Margin vs Free Cash Flow Margin</div>
+    <div class="chart-sub">Both margins have improved every year. FCF margin turned positive in FY2025 and is far above GAAP operating margin because stock-based compensation ($315M in FY2026, 19.5% of revenue) is a non-cash charge and deferred revenue grows with billings in advance. Non-GAAP operating margin: ~0% (FY2024), 9% (FY2025), 17% (FY2026), 21% in Q2 FY2027.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#60a5fa;"></span>GAAP operating margin</span><span><span class="dot" style="background:#fbbf24;"></span>FCF margin</span></div>
+<svg viewBox="0 0 700 150">
+<line x1="30" y1="20.0" x2="690" y2="20.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="23.0" font-size="7.5" fill="#64748b">+20%</text>
+<line x1="30" y1="39.1" x2="690" y2="39.1" stroke="#263049" stroke-width="1" stroke-dasharray=""/><text x="2" y="42.1" font-size="7.5" fill="#64748b">0%</text>
+<line x1="30" y1="82.0" x2="690" y2="82.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="85.0" font-size="7.5" fill="#64748b">-45%</text>
+<line x1="30" y1="125.0" x2="690" y2="125.0" stroke="#1a2236" stroke-width="1" stroke-dasharray="3 3"/><text x="2" y="128.0" font-size="7.5" fill="#64748b">-90%</text>
+<polyline points="60,117.6 185,77.1 310,72.0 435,53.6 560,42.2 685,38.1" fill="none" stroke="#60a5fa" stroke-width="2.2"/>
+<circle cx="60" cy="117.6" r="3.2" fill="#60a5fa"/>
+<circle cx="185" cy="77.1" r="3.2" fill="#60a5fa"/>
+<circle cx="310" cy="72.0" r="3.2" fill="#60a5fa"/>
+<circle cx="435" cy="53.6" r="3.2" fill="#60a5fa"/>
+<circle cx="560" cy="42.2" r="3.2" fill="#60a5fa"/>
+<circle cx="685" cy="38.1" r="3.2" fill="#60a5fa"/>
+<polyline points="60,81.6 185,59.0 310,41.4 435,30.6 560,26.9 685,25.9" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+<circle cx="60" cy="81.6" r="3.2" fill="#fbbf24"/>
+<circle cx="185" cy="59.0" r="3.2" fill="#fbbf24"/>
+<circle cx="310" cy="41.4" r="3.2" fill="#fbbf24"/>
+<circle cx="435" cy="30.6" r="3.2" fill="#fbbf24"/>
+<circle cx="560" cy="26.9" r="3.2" fill="#fbbf24"/>
+<circle cx="685" cy="25.9" r="3.2" fill="#fbbf24"/>
+<text x="60" y="130.6" text-anchor="middle" font-size="8.5" fill="#bfdbfe">-82.2%</text>
+<text x="60" y="74.6" text-anchor="middle" font-size="8.5" fill="#fde68a">-44.5%</text>
+<text x="60" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2022</text>
+<text x="185" y="90.1" text-anchor="middle" font-size="8.5" fill="#bfdbfe">-39.8%</text>
+<text x="185" y="52.0" text-anchor="middle" font-size="8.5" fill="#fde68a">-20.9%</text>
+<text x="185" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2023</text>
+<text x="310" y="85.0" text-anchor="middle" font-size="8.5" fill="#bfdbfe">-34.5%</text>
+<text x="310" y="34.4" text-anchor="middle" font-size="8.5" fill="#fde68a">-2.4%</text>
+<text x="310" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2024</text>
+<text x="435" y="66.6" text-anchor="middle" font-size="8.5" fill="#bfdbfe">-15.2%</text>
+<text x="435" y="23.6" text-anchor="middle" font-size="8.5" fill="#fde68a">8.9%</text>
+<text x="435" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2025</text>
+<text x="560" y="55.2" text-anchor="middle" font-size="8.5" fill="#bfdbfe">-3.2%</text>
+<text x="560" y="19.9" text-anchor="middle" font-size="8.5" fill="#fde68a">12.8%</text>
+<text x="560" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">FY2026</text>
+<text x="685" y="51.1" text-anchor="middle" font-size="8.5" fill="#bfdbfe">1.1%</text>
+<text x="685" y="18.9" text-anchor="middle" font-size="8.5" fill="#fde68a">13.8%</text>
+<text x="685" y="146" text-anchor="middle" font-size="8.5" fill="#94a3b8">TTM</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>FY (US$M)</th><th>Revenue</th><th>Gross margin</th><th>GAAP op. income</th><th>GAAP op. margin</th><th>Non-GAAP op. margin</th><th>Net income</th><th>EPS</th><th>FCF</th><th>Capex</th></tr>
+    <tr><td>FY2022</td><td>428.4</td><td>70.9%</td><td>-352.3</td><td>-82.2%</td><td>n/a</td><td>-355.0</td><td>-1.28</td><td>-190.8</td><td>19.4</td></tr>
+    <tr><td>FY2023</td><td>652.5</td><td>72.1%</td><td>-259.5</td><td>-39.8%</td><td>n/a</td><td>-247.4</td><td>-0.48</td><td>-136.3</td><td>33.2</td></tr>
+    <tr><td>FY2024</td><td>937.4</td><td>73.7%</td><td>-323.4</td><td>-34.5%</td><td>~0%</td><td>-286.7</td><td>-0.54</td><td>-22.8</td><td>10.9</td></tr>
+    <tr><td>FY2025</td><td>1,249.2</td><td>76.1%</td><td>-190.0</td><td>-15.2%</td><td>9%</td><td>-154.9</td><td>-0.28</td><td>111.5</td><td>20.2</td></tr>
+    <tr><td>FY2026</td><td>1,618.6</td><td>76.7%</td><td>-52.6</td><td>-3.2%</td><td>17%</td><td>-9.1</td><td>-0.02</td><td>207.4</td><td>28.8</td></tr>
+    <tr><td>TTM (Aug 1, 2026)</td><td>1,847.6</td><td>76.4%</td><td>19.4</td><td>1.1%</td><td>20.0%</td><td>90.6</td><td>0.15</td><td>255.5</td><td>32.9</td></tr>
+    
+  </table>
+  <div class="footer-note" style="margin-top:6px;">FY2022-23 non-GAAP margins were not retrieved (n/a); FY2024 is Samsara's &ldquo;0%&rdquo; as quoted in later releases. FY2024 GAAP operating loss ($323.4M) is derived (pre-tax loss $283.4M less $40.0M non-operating income, FactSet via Fox Business); one aggregator shows -$249.9M, which does not reconcile to the reported net loss. FY2023 ($259.5M) is derived the same way; FY2022 ($352.3M) is an aggregator figure. Net income: FY2026 -$9.1M was a full-year loss even though Q3 and Q4 were profitable. TTM net income of $90.6M includes a $30.3M arbitration gain (Q1 FY27) and about $83.7M of interest and other income. FY2022 EPS reflects a Dec 2021 IPO year. No dividends, no stock splits.</div>
+  <div class="footer-note">Source: Samsara earnings releases Q4 FY2026 (Mar 5, 2026) and Q2 FY2027 (Sep 3, 2026, Form 8-K Ex. 99.1); S&amp;P Global Market Intelligence via stockanalysis.com (FY2022-24 and TTM cross-checks); FactSet via Fox Business.</div>
+</div>
+
+<!-- ============ PAGE 3 — LATEST QUARTER ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Latest Quarter (Q2 FY2027) &amp; the GAAP-Profit Test</div></div>
+  <div class="sec-sub">Quarter ended Aug 1, 2026, reported Sep 3, 2026. <b style="color:#fbbf24;">Q3 FY2027 (quarter ended Oct 31, 2026) is not yet reported</b>; aggregators list it for about Dec 3, 2026 after the close (estimated). Nothing on this page includes it.</div>
+
+  <div class="headline-box">
+    <div class="title">What the quarter actually showed</div>
+    <p>Revenue was $508.4M (+29.9%; +29% constant currency), ending ARR $2,124.7M (+30%) and net new ARR $134.1M (+28%; $485M over the last 12 months, +27% in constant currency). The big-customer engine is the story: 3,605 customers above $100K ARR (record +242 in the quarter) now represent $1.3B, or 63% of ARR (59% a year earlier), growing 38%; 210 customers above $1M ARR (+20, also a record) hold over $500M of ARR. Non-GAAP operating margin was 21% (+6pp YoY), GAAP operating income $4.9M (1.0%, from -$26.6M), GAAP EPS $0.03 and FCF $64.7M (13%). Management says &ldquo;emerging products&rdquo; (AI multicam, asset maintenance, site visibility and others) supplied more than 20% of net new ACV for a third quarter, and that multi-product use is rising (96% of $100K+ customers use two or more products; 72% use three or more). The stock opened at $44.90 on Sep 4, hit $45.12 intraday and closed at $40.20 (+3.7%); the 52-week high is $47.47 (date not checked) and the Nov 25 close of $39.43 is about 17% below it.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Revenue &mdash; Last 7 Quarters (US$M)</div>
+    <div class="chart-sub">Fiscal-quarter labels: Q4 FY25 = quarter ended Feb 1, 2025; Q2 FY27 = quarter ended Aug 1, 2026. Growth has held in a 28-31% band for seven quarters. Q3 FY25 is omitted because its exact revenue was not verified.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#2dd4bf;"></span>Quarterly revenue, US$M</span></div>
+<svg viewBox="0 0 700 160"><line x1="10" y1="130" x2="690" y2="130" stroke="#263049" stroke-width="1"/>
+<rect x="40" y="66.7" width="60" height="63.3" fill="#2dd4bf"/><text x="70" y="61.7" text-anchor="middle" font-size="9" fill="#cbd5e1">346.3</text><text x="70" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="130" y="63.0" width="60" height="67.0" fill="#2dd4bf"/><text x="160" y="58.0" text-anchor="middle" font-size="9" fill="#cbd5e1">366.9</text><text x="160" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="220" y="58.5" width="60" height="71.5" fill="#2dd4bf"/><text x="250" y="53.5" text-anchor="middle" font-size="9" fill="#cbd5e1">391.5</text><text x="250" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="310" y="54.0" width="60" height="76.0" fill="#2dd4bf"/><text x="340" y="49.0" text-anchor="middle" font-size="9" fill="#cbd5e1">416.0</text><text x="340" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="400" y="48.8" width="60" height="81.2" fill="#2dd4bf"/><text x="430" y="43.8" text-anchor="middle" font-size="9" fill="#cbd5e1">444.3</text><text x="430" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="490" y="42.5" width="60" height="87.5" fill="#2dd4bf"/><text x="520" y="37.5" text-anchor="middle" font-size="9" fill="#cbd5e1">478.8</text><text x="520" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="580" y="37.1" width="60" height="92.9" fill="#2dd4bf"/><text x="610" y="32.1" text-anchor="middle" font-size="9" fill="#cbd5e1">508.4</text><text x="610" y="145" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">GAAP Operating Income (Loss) &mdash; Last 7 Quarters (US$M)</div>
+    <div class="chart-sub">The loss narrowed from -$33.3M (Q1 FY26) to -$1.7M (Q3 FY26), turned positive in Q4 FY26 and has stayed small and positive ($9.0M, $7.2M, $4.9M). Q1 FY26 is derived from the six-month and Q2 figures.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#34d399;"></span>Operating income</span><span><span class="dot" style="background:#f87171;"></span>Operating loss</span></div>
+<svg viewBox="0 0 700 200"><line x1="10" y1="60" x2="690" y2="60" stroke="#475569" stroke-width="1.2"/>
+<rect x="40" y="60.0" width="60" height="40.5" fill="#f87171"/><text x="70" y="112.5" text-anchor="middle" font-size="9" fill="#cbd5e1">-18.4</text><text x="70" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY25</text>
+<rect x="130" y="60.0" width="60" height="73.3" fill="#f87171"/><text x="160" y="145.3" text-anchor="middle" font-size="9" fill="#cbd5e1">-33.3</text><text x="160" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY26</text>
+<rect x="220" y="60.0" width="60" height="58.5" fill="#f87171"/><text x="250" y="130.5" text-anchor="middle" font-size="9" fill="#cbd5e1">-26.6</text><text x="250" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY26</text>
+<rect x="310" y="60.0" width="60" height="3.7" fill="#f87171"/><text x="340" y="75.7" text-anchor="middle" font-size="9" fill="#cbd5e1">-1.7</text><text x="340" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q3 FY26</text>
+<rect x="400" y="40.2" width="60" height="19.8" fill="#34d399"/><text x="430" y="35.2" text-anchor="middle" font-size="9" fill="#cbd5e1">+9.0</text><text x="430" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q4 FY26</text>
+<rect x="490" y="44.2" width="60" height="15.8" fill="#34d399"/><text x="520" y="39.2" text-anchor="middle" font-size="9" fill="#cbd5e1">+7.2</text><text x="520" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q1 FY27</text>
+<rect x="580" y="49.2" width="60" height="10.8" fill="#34d399"/><text x="610" y="44.2" text-anchor="middle" font-size="9" fill="#cbd5e1">+4.9</text><text x="610" y="190" text-anchor="middle" font-size="9.5" fill="#94a3b8">Q2 FY27</text>
+</svg>
+  </div>
+
+  <table class="datatable">
+    <tr><th>US$M</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th><th>Q1 FY27</th><th>Q2 FY27</th></tr>
+    <tr><td>Revenue</td><td>346.3</td><td>366.9</td><td>391.5</td><td>416.0</td><td>444.3</td><td>478.8</td><td>508.4</td></tr>
+    <tr><td>Revenue YoY</td><td>+25%</td><td>+31%</td><td>+30%</td><td>+29%</td><td>+28%</td><td>+30.5%</td><td>+29.9%</td></tr>
+    <tr><td>ARR (period end)</td><td>1,457.9</td><td>n/a</td><td>1,640.1</td><td>1,745.1</td><td>1,889.9</td><td>1,990.6*</td><td>2,124.7</td></tr>
+    <tr><td>GAAP operating income</td><td>-18.4</td><td>-33.3</td><td>-26.6</td><td>-1.7</td><td>+9.0</td><td>+7.2</td><td>+4.9</td></tr>
+    <tr><td>GAAP operating margin</td><td>-5.3%</td><td>-9.1%</td><td>-6.8%</td><td>-0.4%</td><td>2.0%</td><td>1.5%</td><td>1.0%</td></tr>
+    <tr><td>Non-GAAP operating margin</td><td>16%</td><td>14%</td><td>15%</td><td>19%</td><td>21%</td><td>19%</td><td>21%</td></tr>
+    <tr><td>GAAP net income</td><td>-11.2</td><td>-22.1</td><td>-16.8</td><td>+7.8</td><td>+22.0</td><td>+44.5</td><td>+16.2</td></tr>
+    <tr><td>Free cash flow</td><td>48.5</td><td>45.7</td><td>44.2</td><td>55.8</td><td>61.7</td><td>73.2</td><td>64.7</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">*Q1 FY27 ARR is derived (Q2 ARR $2,124.7M less Q2 net new ARR $134.1M); Q1 FY26 ARR was not retrieved. Q1 FY26, Q3 FY26 and Q1 FY27 quarterly figures are derived from reported six-month, nine-month and full-year totals. Q1 FY27 net income includes a $30.3M gain from the arbitration award against Motive Technologies (ex-gain about $14.2M); the award is excluded from non-GAAP.</div>
+
+  <div class="callout green" style="margin-top:8px;">
+    <b>The &ldquo;four straight GAAP profitable quarters&rdquo; claim &mdash; HOLDS on net income, with caveats.</b> GAAP net income: Q3 FY26 +$7.8M (the first positive quarter), Q4 FY26 +$22.0M, Q1 FY27 +$44.5M, Q2 FY27 +$16.2M; GAAP EPS was positive in each (Samsara's own release calls Q2 &ldquo;the fourth consecutive quarter of GAAP profitability&rdquo;). Caveats: (1) GAAP <i>operating</i> income was positive in only three of those quarters (Q3 FY26 was -$1.7M); (2) interest and other income ($11-13M a quarter, TTM about $83.7M) exceeds operating income ($19.4M TTM), so profit is partly interest on $1.3B of cash; (3) Q1 FY27 includes the one-off $30.3M gain; (4) FY2026 as a whole was still a loss (-$9.1M), so &ldquo;profitable&rdquo; means the last four quarters, not a full year yet. Management guides to GAAP profit for Q3 and for FY2027.
+  </div>
+
+  <div class="two-col" style="margin-top:6px;">
+    <div class="callout blue" style="flex:1;">
+      <b>Guidance (given Sep 3, 2026):</b> Q3 FY27 revenue $514-516M (+24%; +23-24% constant currency), non-GAAP operating margin 21%, non-GAAP EPS $0.18-0.19, GAAP profitable. FY2027 revenue $2.043-2.047B (+26%), non-GAAP operating margin 21%, non-GAAP EPS $0.76-0.78, GAAP profitable for the year. In March the FY27 guide was $1.965-1.975B (+21-22%) with 19% margin, so it has been raised. The Q3 guide implies only about +1.3% sequential growth from $508.4M; management says guidance is &ldquo;de-risked&rdquo; and the Q2 revenue beat was about 5% versus consensus.
+    </div>
+    <div class="callout blue" style="flex:1;">
+      <b>Net retention &amp; churn:</b> Samsara says it achieved its &ldquo;target dollar-based net retention rate of approximately 115% for core customers&rdquo; (Q2 call). It does not report gross retention or a churn rate in the documents reviewed here; when an analyst asked about churn on the call, the CFO answered with the ARR mix of $100K+ customers (63%) rather than a churn figure. Net retention of ~115% nets expansion against churn and downgrades, so it cannot show churn is near zero.
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 — VALUATION / BALANCE SHEET / OWNERSHIP ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Valuation, Balance Sheet, Dilution &amp; Ownership</div></div>
+  <div class="sec-sub">GAAP P/E is not usable for most of this window (net losses in FY2022-26), so valuation is on price/sales. Net cash of about $1.3B and no borrowings mean the balance sheet is not a risk; stock-based compensation and founder control are the issues to read.</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Price/Sales &mdash; Fiscal Year-End vs. Current</div>
+    <div class="chart-sub">Current P/S of 12.5x (market cap $23.09B on TTM revenue of $1,847.6M; EV/sales about 11.8x after $1.33B of cash and investments) compares with a FY2022-26 year-end average of 16.5x (ratio 0.76, a discount of about 24%). Year-end ratios are S&amp;P Global (market cap at the fiscal-year-end close over fiscal-year revenue). On forward numbers: about 11.3x FY2027 guided revenue ($2.045B midpoint), about 10.9x ARR, and about 51x FY2027 guided non-GAAP EPS ($0.77 midpoint). The GAAP P/E on TTM EPS of ~$0.15 is roughly 250x and not meaningful.</div>
+    <div class="legend-row"><span><span class="dot" style="background:#a78bfa;"></span>Price/Sales (fiscal year-end, then current)</span><span><span class="dot" style="background:#64748b;"></span>FY22-FY26 average</span></div>
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="220.0" x2="840" y2="220.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="224.0" text-anchor="end" font-size="11" fill="#64748b">0x</text>
+<line x1="50" y1="153.3" x2="840" y2="153.3" stroke="#1e293b" stroke-width="1"/><text x="42" y="157.3" text-anchor="end" font-size="11" fill="#64748b">20x</text>
+<line x1="50" y1="86.7" x2="840" y2="86.7" stroke="#1e293b" stroke-width="1"/><text x="42" y="90.7" text-anchor="end" font-size="11" fill="#64748b">40x</text>
+<line x1="50" y1="20.0" x2="840" y2="20.0" stroke="#1e293b" stroke-width="1"/><text x="42" y="24.0" text-anchor="end" font-size="11" fill="#64748b">60x</text>
+<line x1="50" y1="53.3" x2="840" y2="53.3" stroke="#f87171" stroke-width="1" stroke-dasharray="3,4"/><text x="838" y="49.3" text-anchor="end" font-size="10" fill="#f87171">50x warning line (Tenbagger check)</text>
+<line x1="50" y1="165.1" x2="840" y2="165.1" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,5"/><text x="835" y="178.1" text-anchor="end" font-size="10" fill="#94a3b8">FY22-FY26 avg: 16.5x</text>
+<path d="M 70,154.7 L 218,183.5 L 366,157.5 L 514,142.9 L 662,186.7 L 810,178.3" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="70" cy="154.7" r="3" fill="#a78bfa"/><text x="70" y="144.7" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">19.6x</text><text x="70" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY2022</text>
+<circle cx="218" cy="183.5" r="3" fill="#a78bfa"/><text x="218" y="173.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.9x</text><text x="218" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY2023</text>
+<circle cx="366" cy="157.5" r="3" fill="#a78bfa"/><text x="366" y="147.5" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">18.7x</text><text x="366" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY2024</text>
+<circle cx="514" cy="142.9" r="3" fill="#a78bfa"/><text x="514" y="132.9" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">23.1x</text><text x="514" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY2025</text>
+<circle cx="662" cy="186.7" r="3" fill="#a78bfa"/><text x="662" y="176.7" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">10.0x</text><text x="662" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">FY2026</text>
+<circle cx="810" cy="178.3" r="3.5" fill="#a78bfa"/><text x="810" y="168.3" text-anchor="middle" font-size="10" fill="#e2e8f0" font-weight="700">12.5x</text><text x="810" y="238" text-anchor="middle" font-size="10.5" fill="#94a3b8">Now</text>
+</svg>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="chart-card" style="flex:1;margin-bottom:0;">
+      <div class="chart-title">Capex (US$M) &amp; Capex Intensity</div>
+      <div class="chart-sub">Asset-light by the numbers: capex was 4.5%, 5.1%, 1.2%, 1.6%, 1.8% of revenue in FY2022-26 and 1.8% TTM. But the &ldquo;connected device costs&rdquo; for gateways and cameras installed at customers ($155.7M current + $333.9M non-current on the balance sheet at Aug 1, 2026) are capitalised inside operating cash flow, not capex: a $49.2M cash outflow in H1 FY27 (versus $10.6M a year earlier).</div>
+<svg viewBox="0 0 700 183"><line x1="10" y1="160" x2="690" y2="160" stroke="#263049" stroke-width="1"/>
+<rect x="30" y="99.2" width="60" height="60.8" fill="#60a5fa"/><text x="60" y="94.2" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$19.4M</text><text x="60" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2022</text>
+<rect x="140" y="55.5" width="60" height="104.5" fill="#60a5fa"/><text x="170" y="50.5" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$33.2M</text><text x="170" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2023</text>
+<rect x="250" y="125.6" width="60" height="34.4" fill="#60a5fa"/><text x="280" y="120.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$10.9M</text><text x="280" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2024</text>
+<rect x="360" y="96.6" width="60" height="63.4" fill="#60a5fa"/><text x="390" y="91.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$20.2M</text><text x="390" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2025</text>
+<rect x="470" y="69.6" width="60" height="90.4" fill="#60a5fa"/><text x="500" y="64.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$28.8M</text><text x="500" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">FY2026</text>
+<rect x="580" y="56.6" width="60" height="103.4" fill="#60a5fa"/><text x="610" y="51.6" text-anchor="middle" font-size="8.5" fill="#cbd5e1">$32.9M</text><text x="610" y="173" text-anchor="middle" font-size="9" fill="#94a3b8">TTM</text>
+</svg>
+    </div>
+    <div class="info-box" style="flex:1;">
+      <div class="title" style="color:#60a5fa;">Balance Sheet (Aug 1, 2026)</div>
+      <p>Cash and equivalents $291.4M, short-term investments $537.5M, long-term investments $496.8M: <b>$1,325.7M</b> in total, no borrowings. Operating lease liabilities $69.5M. Deferred revenue $852.8M (customers pay ahead; it grew $38.3M in H1 FY27). Accounts receivable $337.8M; inventories $57.0M. Equity $1,602.0M with an accumulated deficit of $1,558.4M. Net cash after leases is about $1.26B, or about 5% of market cap.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:8px;">
+    <div class="info-box" style="flex:1.1;">
+      <div class="title" style="color:#60a5fa;">Ownership &amp; Voting (Apr 2026 information statement)</div>
+      <div class="ownership-row">
+        <svg width="100" height="100" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#1a2236" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="18" stroke-dasharray="124.4 189.75" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="120.6 193.52" stroke-dashoffset="-124.4" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#2dd4bf" stroke-width="18" stroke-dasharray="69.1 245.04" stroke-dashoffset="-245.0" transform="rotate(-90 60 60)"/>
+          <text x="60" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="#f8fafc">~78%</text>
+        </svg>
+        <div class="ownership-legend">
+          <div><span class="dot" style="background:#fbbf24;"></span>Sanjit Biswas (CEO, co-founder) 39.6% of votes (about 17% of shares incl. options)</div>
+          <div><span class="dot" style="background:#60a5fa;"></span>John Bicket (co-founder) 38.4% of votes (about 17% of shares incl. options)</div>
+          <div><span class="dot" style="background:#2dd4bf;"></span>All other holders ~22% of votes (Baillie Gifford 12.8% of Class A; Sands Capital 5.7%; BlackRock 5.4%)</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title" style="color:#60a5fa;">Dual-Class Control</div>
+      <p>Class A shares carry one vote and Class B shares ten votes (convertible one-for-one; no Class C outstanding). As of Apr 15, 2026 there were 371.0M Class A and 211.7M Class B shares. Directors and executive officers as a group held 90.3% of Class B and 77.5% of total votes; the two founders alone hold about 78%. Founders therefore control every shareholder vote regardless of the stock price. Aggregators put total insider ownership at ~33.8% of shares and institutions at ~70.6%. Sunset terms for the Class B shares were not checked.</p>
+    </div>
+  </div>
+
+  <div class="callout red" style="margin-top:8px;">
+    <b>Stock-based compensation &amp; dilution:</b> SBC was $277.9M in FY2025 (22.2% of revenue), $315.0M in FY2026 (19.5%) and $173.9M in H1 FY2027 (17.6%); TTM about $330.6M (17.9% of revenue). That is larger than FCF every year: FCF minus SBC was about -$166M (FY25), -$108M (FY26) and about -$75M (TTM). Weighted basic shares rose from 514.3M (FY2023) to 534.9M, 556.3M, 573.5M (FY2026) and 584.1M (Q2 FY27); the count outstanding is 585.6M (+3.1% in a year, +13.9% versus the FY2023 weighted average). There is no buyback in the filings reviewed; instead Samsara began paying cash taxes on net share settlement of equity awards ($70.4M in H1 FY27 versus none a year earlier), which is not included in FCF. FY2022 share data was not comparable (IPO year), so the five-year share change is not verified.
+  </div>
+  <div class="callout gray" style="margin-top:8px;">
+    <b>Insider selling:</b> Form 4 listings (Fox Business, Nov 25, 2026) show sales of about 4.0M shares (~$172M) by Biswas and about 1.4M shares (~$63M) by Bicket on Oct 30, 2026 at $41-45, plus about 1.7M shares (~$72M) by the CFO on Nov 5 and 145K shares by the chief accounting officer on Nov 20. Whether these were under pre-set 10b5-1 plans, tax-related or discretionary was not verified. The founders still hold about 100M and 96M shares respectively (April 2026 figures, including options).
+  </div>
+</div>
+
+<!-- ============ PAGE 5 — COMPETITION / PITCH TEST ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Competition &amp; Pitch Test</div></div>
+  <div class="sec-sub">Samsara is a leader by disclosed ARR in connected operations and video safety, in a fragmented market with large private rivals and no independent market-share figure. Three claims from the pitch are tested below. This is a test of the data, not a view on the stock.</div>
+
+  <table class="datatable">
+    <tr><th>Company</th><th>Listing</th><th>What was verified</th><th>Dashboard</th></tr>
+    <tr><td>Samsara</td><td>NYSE: IOT</td><td>ARR $2,124.7M (+30%); TTM revenue $1,847.6M; GAAP operating margin +1.0% in Q2 FY27</td><td>this page</td></tr>
+    <tr><td>Powerfleet</td><td>Nasdaq: AIOT</td><td>FY2026 (to Mar 31, 2026) revenue $443.8M, +22%; FCF -$9.5M; debt $280.0M vs cash $40.8M; Q2 FY27 (to Sep 2026) revenue $115.7M, +4% (company releases via aggregators)</td><td>none yet</td></tr>
+    <tr><td>Trimble</td><td>Nasdaq: TRMB</td><td>Diversified positioning and field-technology group; fleet/telematics is a small part and no comparable figure was retrieved</td><td>none yet</td></tr>
+    <tr><td>Verizon (Verizon Connect)</td><td>NYSE: VZ</td><td>Fleet telematics unit inside a telecom group, not separately reported here; Geotab says it integrated Verizon Connect's international commercial operations (May 2026)</td><td>none yet</td></tr>
+    <tr><td>Geotab (private)</td><td>not listed</td><td>Company-reported 6M+ connected vehicle subscriptions (May 2026), 5M in Sep 2025; processes 100B+ data points a day</td><td>n/a</td></tr>
+    <tr><td>Motive (private)</td><td>IPO withdrawn Sep 2026 (per Renaissance Capital)</td><td>Company-reported ARR above $600M, growth ~30%; S-1 showed 9M 2025 revenue of $327.3M and large losses; won $1.3B+ of growth financing; lost a $30.3M arbitration to Samsara (Feb 2026)</td><td>n/a</td></tr>
+    <tr><td>Lytx (private); CalAmp (gone)</td><td>not listed</td><td>Not researched here; CalAmp left the public market after a 2024 restructuring (per the pitch; not re-verified)</td><td>n/a</td></tr>
+  </table>
+  <div class="footer-note" style="margin-top:4px;">Only listed companies are linked to site dashboards; none exist yet for these names. Competitor numbers are company-reported or from third-party summaries and are not like-for-like (different metrics, fiscal years and scope).</div>
+
+  <div class="callout" style="margin-top:8px;">
+    <b>Claim 1: &ldquo;undisputed market leader&rdquo; &mdash; PARTLY HOLDS, &ldquo;undisputed&rdquo; does not.</b> Samsara has the largest disclosed recurring revenue of the telematics and video-safety names researched: ARR $2.125B against Motive's company-stated &gt;$600M (about 3.5x) and Powerfleet's $444M of annual revenue, and it is growing at 30% at that scale. But (a) Geotab, which is private, reports 6M+ connected vehicle subscriptions, and Samsara's own filings reviewed here give no vehicle count, so a lead by vehicles is not shown; (b) no independent market-share table was found; (c) Samsara's ARR is about 1.2% of the $175B total addressable market cited by one broker (Jefferies, third-party estimate), so it is a leader in a market where most of the opportunity is not yet digitised, not a dominant incumbent; (d) Motive is growing at a similar pace and its $100K+ cohort reportedly grew nearly 60%. Scored as a contested #1/#2 (4/5, judgment).
+  </div>
+  <div class="callout red" style="margin-top:8px;">
+    <b>Claim 2: &ldquo;churn virtually zero&rdquo; &mdash; DOES NOT HOLD AS STATED / UNVERIFIABLE.</b> No churn rate, gross retention or logo-churn figure was found in the Q2 FY27 release, transcript or Q4 FY26 release. What exists is a dollar-based net retention <i>target</i> of about 115% for core customers. Net retention above 100% means expansion outweighs losses, which is good, but it is a net figure and says nothing about the gross churn that sits underneath it. The fastest-growing part of ARR is $100K+ customers (63% of ARR, +38%) and the sub-$100K base grows more slowly, which is consistent with strong expansion but not with &ldquo;zero&rdquo;. A cohort-level gross retention figure is the data that would settle this.
+  </div>
+  <div class="callout green" style="margin-top:8px;">
+    <b>Claim 3: &ldquo;trillion data point dataset&rdquo; &mdash; HOLDS, and understates it, but data scale is not unique.</b> Samsara says it now collects more than 30 trillion data points a year (Q2 FY27, up more than 40%), up from more than 25 trillion in the March release, plus 105 billion miles driven and 340 million workflows digitised over the last year. These are company-stated, unaudited operating statistics; &ldquo;data points&rdquo; are not defined. Geotab says it processes more than 100 billion data points a day, which is about 36.5 trillion a year (100B &times; 365, site arithmetic), so the scale is comparable at the leaders. The data matters for AI features, but dataset size alone does not prove a moat.
+  </div>
+  <div class="callout blue" style="margin-top:8px;">
+    <b>Claim 4: &ldquo;four straight GAAP profitable quarters&rdquo; &mdash; HOLDS on net income and EPS (Q3 FY26 to Q2 FY27); three quarters on operating income.</b> See Section 2 for the quarter-by-quarter figures and caveats (interest income, one-off $30.3M gain, FY2026 full-year still a loss of $9.1M).
+  </div>
+</div>
+
+<!-- ============ PAGE 6 — SCORECARD ============ -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">5</div><div class="sec-title">14-Criterion Investment Scorecard</div></div>
+  <div class="sec-sub">Scored against this site's fixed checklist, applied mechanically. #2, #4 and #9 are N/A (EBIT and FCF start from losses; FCF/EBIT is meaningless on a near-zero EBIT), so their weights (11 + 8 + 8 = 27) are dropped from the Martinero denominator (105 &minus; 27 = 78). Market concentration (#6) is scored 1&ndash;5 and folded into the 14-item tally (1&ndash;2 = Met, 3&ndash;5 = Not met). Growth CAGRs are FY2022-26 (4 years). Criterion #14 compares FY2026 gross margin with FY2023's.</div>
+
+  <table class="datatable criteria-table">
+    <tr><th>#</th><th>Criterion</th><th>Threshold</th><th>Samsara (IOT)</th><th>Status</th></tr>
+        <tr><td>1</td><td>Revenue CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>+39.4% &mdash; $428.4M &rarr; $1,618.6M (FY2026 +29.6%, easing from +71% in FY2022); no acquisitions of note (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>2</td><td>EBIT CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>n.m. &mdash; GAAP operating loss of $352M (FY2022) to $53M (FY2026); growth rate undefined from a negative base. N/A, weight dropped</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>3</td><td>EBIT margin, latest FY</td><td>&ge;20%</td><td>-3.2% GAAP (FY2026); TTM +1.1%, Q2 FY27 +1.0%. Non-GAAP 17% (FY26) and 21% (Q2) excludes ~$335M of SBC charges and is not scored (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>4</td><td>FCF CAGR (4yr, FY22-26)</td><td>&ge;15%</td><td>n.m. &mdash; FCF -$190.8M (FY2022) to +$207.4M (FY2026); undefined from a negative base. N/A, weight dropped</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>5</td><td>Market share &mdash; #1 or #2 in category</td><td>#1 or #2</td><td>Largest disclosed ARR among telematics/video-safety peers ($2.125B vs Motive &gt;$600M, company-stated), but Geotab reports more connected vehicle subscriptions (6M+) and no independent share figure was found. Contested #1/#2, judgment (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>6</td><td>Market concentration &mdash; 1&ndash;2 = Met, 3&ndash;5 = Not met</td><td>1 (mono) &ndash; 5 (open)</td><td>Score 4 &mdash; fragmented: Samsara, Geotab, Motive, Verizon Connect, Trimble, Lytx, Powerfleet and many smaller vendors; Samsara's ARR is ~1.2% of a $175B broker-estimated TAM. No verified top-N share (score 1/5)</td><td><span class="status-pill status-not">Not met (score 4)</span></td></tr>
+    <tr><td>7</td><td>ROIC vs WACC</td><td>ROIC clears WACC</td><td>ROIC 2.1% vs est. WACC 11.65% (S&amp;P Global, TTM), a -9.5pp spread; GAAP profit is thin (score 0/5)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>8</td><td>Net debt/EBITDA</td><td>&lt;2x</td><td>Net cash: $1,325.7M of cash and investments, no borrowings (leases $69.5M). EBITDA is near zero, so a ratio is not meaningful, but net cash scores top band (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>9</td><td>FCF conversion (FCF/EBIT)</td><td>&ge;80%</td><td>n.m. &mdash; FY2026 GAAP EBIT is negative and TTM EBIT is only $19.4M, so FCF/EBIT (13x) is not informative. For context, TTM FCF is 69% of non-GAAP operating income ($368.6M) and is smaller than SBC. N/A, weight dropped</td><td><span class="status-pill status-na">N/A</span></td></tr>
+    <tr><td>10</td><td>Entry multiple vs. own history</td><td>at/below average</td><td>P/S 12.5x vs FY22-26 year-end average 16.5x (ratio 0.76); GAAP P/E not usable (losses in 4 of 5 years), so P/S is the stated proxy (score 4/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>11</td><td>Share count trend &mdash; flat/declining</td><td>flat/declining</td><td>585.6M outstanding vs 514.3M FY2023 weighted average = +13.9% (about +3.5% a year); no buybacks, SBC ~18-20% of revenue. FY2022 count not comparable (IPO year); if it were below ~500M the five-year rise would exceed 15% and the score would be 0/5 (score 1/5 on the FY2023 base)</td><td><span class="status-pill status-not">Not met</span></td></tr>
+    <tr><td>12</td><td>Insider/founder ownership &mdash; meaningful</td><td>meaningful</td><td>Founders Biswas and Bicket own ~34% of shares incl. options and ~78% of votes via ten-vote Class B shares; directors and officers as a group 77.5% of votes (Apr 2026). Above the 30% band (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>13</td><td>Capex intensity</td><td>low / asset-light</td><td>1.8% of revenue in FY2026 (TTM 1.8%; 1.2-5.1% over FY22-26). Device costs capitalised inside operating cash flow are extra (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+    <tr><td>14</td><td>Margin Stability &mdash; gross margin (&Delta; &ge; -1.0pp, 3-yr)</td><td>&Delta; &ge; -1.0pp (3-yr)</td><td>Basis: gross margin (revenue less cost of revenue). 72.06% (FY2023) &rarr; 76.74% (FY2026), +4.68pp; Q2 FY27 76.8% (score 5/5)</td><td><span class="status-pill status-met">Met</span></td></tr>
+  </table>
+
+  <div class="callout gray" style="margin-top:6px;">
+    <b>Score arithmetic (Martinero Index = &Sigma; points/5 &times; weight &divide; (105 &minus; N/A weights) &times; 100):</b> #1 5&times;13=13.0 &middot; #2 N/A &middot; #3 0 &middot; #4 N/A &middot; #5 4&times;7=5.6 &middot; #6 1&times;6=1.2 &middot; #7 0 &middot; #8 5&times;6=6.0 &middot; #9 N/A &middot; #10 4&times;8=6.4 &middot; #11 1&times;4=0.8 &middot; #12 5&times;5=5.0 &middot; #13 5&times;4=4.0 &middot; #14 5&times;5=5.0 (each = points/5 &times; weight). Total 47.0 / 78 = <b>60/100</b>. Criteria met: 7/14 on the binary thresholds (3 N/A). <b>Judgment calls:</b> #5 and #6 are qualitative (no verified market-share percentage); #7 uses third-party ROIC/WACC; #10 uses P/S because GAAP P/E is unusable; #11 depends on an unverified FY2022 share count; #3 scores GAAP margin, not the 21% non-GAAP margin.
+  </div>
+
+  <div class="two-col">
+    <div class="info-box working">
+      <div class="title">What's Working</div>
+      <p>Growth at scale: ARR of $2.125B is up 30% for three straight quarters and net new ARR is accelerating (+28%, $485M over 12 months). Large customers drive it: $100K+ customers are 63% of ARR and growing 38%, and $1M+ customers grew over 50%. Gross margin rose 4.7pp in three years to 76.7%, GAAP operating margin moved from -82% to about +1%, FCF has been positive since FY2025 (13.8% TTM margin) and the company has net cash of about $1.3B with no debt. Founders hold control and still own about a third of the shares, and FY2027 revenue guidance has been raised from +21% to +26%.</p>
+    </div>
+    <div class="info-box watch">
+      <div class="title">What to Watch</div>
+      <p>The profit is thin and partly financial: Q2 GAAP operating income was $4.9M against $12.7M of interest income, and FY2026 was still a loss. SBC is about 18-20% of revenue and larger than FCF, the share count has risen about 14% since FY2023 and ROIC (~2%) is far below the cost of capital. Revenue growth is guided to ease (Q3 +24%, FY +26%), the stock trades at 12.5x trailing sales and about 51x FY2027 non-GAAP EPS, and founders control about 78% of votes while selling shares. Churn and gross retention are undisclosed, the market share lead is contested by Geotab and Motive, and Q3 FY2027 results (about Dec 3) are still ahead.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>Sources:</b> Samsara Q2 FY2027 earnings release (Form 8-K Ex. 99.1, Sep 3, 2026) and Q2 FY2027 earnings-call transcript (FactSet CallStreet); Samsara Q4 FY2026 earnings release (Mar 5, 2026); Samsara Q3 FY2026 release summary (Dec 4, 2025); Samsara Schedule 14C information statement (Apr 2026, beneficial ownership and voting power, SEC EDGAR); S&amp;P Global Market Intelligence and FactSet via stockanalysis.com and Fox Business (financial history, ratios, price, share count, Form 4 listings, Nov 25, 2026); Google Finance (analyst targets, Sep 25 snapshot); Geotab press releases (subscriptions, data points); Renaissance Capital and Motive S-1 coverage; Powerfleet FY2026 and Q2 FY2027 releases (via aggregators); Jefferies initiation (via TheFly, TAM estimate). Third-party figures are labelled where used.
+  </div>
+</div>
+
+<!-- PAGE 7 — TENBAGGER -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Tenbagger check</div></div>
+  <div class="sec-sub">A six-point checklist for stocks that might multiply tenfold, tested against Samsara's numbers. Result: <b style="color:#34d399;">2 pass</b> (profitability flip; the P/S warning is not triggered), <b style="color:#fbbf24;">1 partial</b> (dilution), <b style="color:#f87171;">3 fail</b> (starting size, revenue acceleration, ROIC). These tests are separate from, and do not change, the 14-criterion scorecard.</div>
+
+  <div class="callout red">
+    <b>1. Small starting cap (under ~$5&ndash;10B) &mdash; FAIL.</b> Market cap is about $23.1B ($39.43 &times; 585.6M shares, Nov 25, 2026 close; a third-party page shows $22.7B), about two to four times the checklist ceiling. For context it was about $8.4B at the end of FY2022, $7.1B at FY2023, $17.6B at FY2024, $28.9B at FY2025 and $16.2B at FY2026 (S&amp;P Global, fiscal year-end); the stock is about 17% below its 52-week high of $47.47. A tenfold from here implies a cap near $231B (arithmetic below, not a forecast).
+  </div>
+
+  <div class="callout red">
+    <b>2. Revenue acceleration toward 40%+ &mdash; FAIL.</b> Year-on-year growth: FY2023 +52.3%, FY2024 +43.7%, FY2025 +33.3%, FY2026 +29.6%; by quarter Q4 FY25 +25%, Q1 FY26 +31%, Q2 FY26 +30%, Q3 FY26 +29%, Q4 FY26 +28%, Q1 FY27 +30.5%, Q2 FY27 +29.9%. ARR growth is steady at 30%. Growth is high and durable but flat, not accelerating, and below 40%; guidance is +24% for Q3 and +26% for FY2027. Positives that are not the same as acceleration: net new ARR growth of +28% and $100K+ ARR growth accelerating (38%).
+  </div>
+
+  <div class="callout green">
+    <b>3. Profitability flip (operating margin moving from negative toward positive, and when) &mdash; PASS (already happening, still thin).</b> GAAP operating margin was -82.2% (FY22), -39.8% (FY23), -34.5% (FY24), -15.2% (FY25), -3.2% (FY26), +1.1% TTM and +1.0% in Q2 FY27; GAAP operating income has been positive for three quarters (first in Q4 FY26) and GAAP net income for four. Non-GAAP operating margin is guided to 21% for Q3 and FY2027. Caveats: the GAAP margin is about 1%, net income relies on interest income and a one-off gain, and a full fiscal year of GAAP profit is only guided (FY2027), not reported.
+  </div>
+
+  <div class="callout red">
+    <b>4. ROIC trending toward ~20% &mdash; FAIL.</b> ROIC is about 2.1% (S&amp;P Global, TTM; an aggregator's FY2026 ROIC of 95% is distorted by near-zero invested capital and was not used) versus an estimated WACC of ~11.65%, and GAAP operating profit is only $19.4M TTM. Reaching 20% would need roughly ten times today's operating profit on the same capital. Management does not publish a ROIC target; it targets non-GAAP operating margin (21% guided for FY2027).
+  </div>
+
+  <div class="callout green">
+    <b>5. Warning: P/S above 50x &mdash; NOT TRIGGERED (pass).</b> P/S is about 12.5x on TTM revenue of $1,847.6M (about 11.3x FY2027 guided revenue; EV/sales 11.8x). Fiscal year-end P/S was 19.6x, 10.9x, 18.7x, 23.1x and 10.0x for FY2022-26, so it has never been near 50x. The valuation risk is of another kind: about 51x FY2027 guided non-GAAP EPS and about 90x TTM FCF (1.1% FCF yield), with SBC higher than FCF.
+  </div>
+
+  <div class="callout">
+    <b>6. Warning: dilution (share-count change over 3&ndash;5 years) &mdash; PARTIAL.</b> Weighted basic shares: 514.3M (FY23) &rarr; 534.9M (FY24) &rarr; 556.3M (FY25) &rarr; 573.5M (FY26); 585.6M outstanding now, +13.9% versus FY2023 (about +3.5% a year) and +3.1% in the last year. SBC of $278M, $315M and about $331M TTM (FY25, FY26, TTM) is 18-22% of revenue and there is no buyback. That is below Rocket Lab (+42%) and TransMedics (+25%) and inside the &lsquo;rising 5&ndash;15%&rsquo; band, but it is steady and SBC-driven; the FY2022 count (IPO year) could not be verified, so a five-year figure is not shown.
+  </div>
+
+  <div class="headline-box" style="margin-top:8px;">
+    <div class="title">What would have to be true for 2x, 5x and 10x in 5 years (arithmetic only, not a forecast)</div>
+    <p>Starting point: market cap $23.09B (Nov 25, 2026), TTM revenue $1,847.6M, P/S 12.5x. The table shows what a 2x ($46.2B), 5x ($115.5B) and 10x ($230.9B) market cap would require by about Nov 2031, holding the share count flat; it does not predict any outcome. The two multiples are: today's 12.5x, and 6x as an illustrative round number for a mature software multiple.</p>
+    <table class="mini">
+      <tr><th>Target</th><th>Required market cap</th><th>Revenue needed at 12.5x P/S</th><th>Implied 5-yr revenue CAGR</th><th>Revenue needed at 6x P/S</th><th>Implied 5-yr revenue CAGR</th></tr>
+      <tr><td>2x (+100%)</td><td>$46.2B</td><td>$3.70B (2.0x TTM)</td><td>+14.9% a year</td><td>$7.70B (4.2x TTM)</td><td>+33.0% a year</td></tr>
+      <tr><td>5x (+400%)</td><td>$115.5B</td><td>$9.24B (5.0x TTM)</td><td>+38.0% a year</td><td>$19.24B (10.4x TTM)</td><td>+59.8% a year</td></tr>
+      <tr><td>10x (+900%)</td><td>$230.9B</td><td>$18.48B (10.0x TTM)</td><td>+58.5% a year</td><td>$38.48B (20.8x TTM)</td><td>+83.5% a year</td></tr>
+    </table>
+    <p style="margin-top:8px;">How to read it: if the multiple stays at 12.5x, 2x needs revenue of about $3.7B (about +15% a year, below today's 30%); 5x needs about $9.2B (+38% a year) and 10x about $18.5B (+58% a year), against management's own FY2027 guide of +26% and an aggregator 3-year revenue growth forecast of about 22% a year. For comparison, if revenue compounded at 30% for five years it would reach about $6.9B; at today's multiple that is a market cap of about $85.7B (3.7x), and at 6x about $41.2B (1.8x). At 25% a year ($5.6B) the figures would be about $70.5B (3.1x) at 12.5x and $33.8B (1.5x) at 6x. If the share count keeps growing about 3.5% a year, the same per-share result needs a roughly 1.19x larger market cap, so every figure above would rise by about a fifth. This is a what-has-to-be-true calculation with round assumptions, not a price target or probability.</p>
+  </div>
+
+  <div class="callout blue">
+    <b>Caveat:</b> Checklists like this are built from the winners we remember (survivorship bias): many stocks that matched them did not multiply, and most that did looked risky and expensive at the time. This is research, not a recommendation.
+  </div>
+</div>
+
+<!-- PAGE: SHARE PRICE HISTORY -->
+<div class="page">
+  <div class="sec-head"><div class="sec-num">7</div><div class="sec-title">Share Price &mdash; Last 5 Years</div></div>
+  <div class="sec-sub">Samsara Inc. &mdash; NYSE, USD share price trend. Points are fiscal-year-end closes (last close before each Jan 31 year-end, unadjusted; no stock split) plus the Nov 25, 2026 close. IOT has traded only since its Dec 15, 2021 IPO, so the first point is Jan 2022 (about 4.8 years, not a full five).</div>
+
+  <div class="chart-card">
+    <div class="chart-title">Samsara Inc. &mdash; Year-End Close (NYSE, USD)</div>
+    <div class="chart-sub">A volatile path: $16.66 (Jan 2022) to $13.76 (Jan 2023), then +136% to $32.51 (Jan 2024), +58% to $51.50 (Jan 2025), -46% to $28.05 (Jan 2026), and +41% to $39.43 by Nov 25, 2026 (52-week range $23.38 &ndash; $47.47). Fiscal-year-end closes are S&amp;P Global data via stockanalysis.com and approximate. The dashed line is the annualised price CAGR over the 4.8 years, excluding dividends (none paid).</div>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient></defs>
+<line x1="46" y1="20" x2="680" y2="20" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="60" x2="680" y2="60" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="100" x2="680" y2="100" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="140" x2="680" y2="140" stroke="#1a2236" stroke-width="1"/>
+<line x1="46" y1="180" x2="680" y2="180" stroke="#1a2236" stroke-width="1"/>
+<text x="200" y="24" text-anchor="middle" font-size="10.5" fill="#fbbf24" font-weight="700">5-Yr CAGR (FY22&rarr;Now): +19.6%</text>
+<path d="M 46.0,135.6 L 172.8,143.3 L 299.6,93.3 L 426.4,42.7 L 553.2,105.2 L 680.0,74.9 L 680.0,180.0 L 46.0,180.0 Z" fill="url(#lg)" stroke="none"/>
+<line x1="46.0" y1="135.6" x2="680.0" y2="74.9" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M 46.0,135.6 L 172.8,143.3 L 299.6,93.3 L 426.4,42.7 L 553.2,105.2 L 680.0,74.9" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46.0" cy="135.6" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="46.0" y="125.6" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$16.66</text><text x="46.0" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY22</text>
+<circle cx="172.8" cy="143.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="172.8" y="133.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$13.76</text><text x="172.8" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY23</text>
+<circle cx="299.6" cy="93.3" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="299.6" y="83.3" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$32.51</text><text x="299.6" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY24</text>
+<circle cx="426.4" cy="42.7" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="426.4" y="32.7" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$51.50</text><text x="426.4" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY25</text>
+<circle cx="553.2" cy="105.2" r="3" fill="#0e1626" stroke="#2dd4bf" stroke-width="1.6"/><text x="553.2" y="121.2" font-size="10.5" fill="#e2e8f0" text-anchor="middle" font-weight="700">$28.05</text><text x="553.2" y="198.0" font-size="9.5" fill="#7c8aa5" text-anchor="middle">FY26</text>
+<circle cx="680.0" cy="74.9" r="4" fill="#2dd4bf" stroke="#2dd4bf" stroke-width="1.6"/><text x="678" y="64.9" font-size="10.5" fill="#e2e8f0" text-anchor="end" font-weight="700">$39.43</text><text x="680.0" y="198.0" font-size="9.5" fill="#e2e8f0" text-anchor="middle">Now</text>
+</svg>
+  </div>
+
+  <div class="footer-note">
+    The first point is the Jan 28, 2022 close, about six weeks after the $23 IPO, so the CAGR (+19.6% a year) is measured from a post-IPO base and is not a verdict on the business. Intra-year highs and lows are not shown. Currency: USD throughout.<br>
+    Not investment advice &mdash; for personal research only.
+  </div>
+</div>
+
+<script src="../assets/live.js" defer></script>
+</body>
+</html>
